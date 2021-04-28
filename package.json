@@ -1,0 +1,95 @@
+{
+  "name": "@sprucelabs/heartwood-view-controllers",
+  "description": "All the power of Heartwood in one, convenient package.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/[YOUR REPO PATH]",
+  "bugs": {
+    "url": "https://github.com/[YOUR REPO PATH]/issues"
+  },
+  "keywords": [],
+  "scripts": {
+    "boot": "node build/index",
+    "boot.local": "node -r ts-node/register -r tsconfig-paths/register ./src/index",
+    "build": "yarn build.dev",
+    "build.dev": "yarn build.tsc && yarn resolve-paths.lint",
+    "build.copy-files": "mkdir -p build && rsync -avzq --exclude='*.ts' ./src/ ./build/",
+    "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts'",
+    "build.tsc": "yarn build.copy-files && tsc",
+    "clean": "rm -rf build/",
+    "clean.all": "yarn clean && rm -f yarn.lock package-lock.json && rm -rf node_modules/",
+    "fix.lint": "eslint --fix '**/*.ts'",
+    "health": "yarn boot --health",
+    "health.local": "yarn boot.local --health",
+    "lint": "eslint '**/*.ts'",
+    "rebuild": "yarn clean.all && yarn && yarn build.dev",
+    "resolve-paths.lint": "yarn lint ; yarn build.resolve-paths",
+    "test": "jest",
+    "upgrade.packages": "yarn-upgrade-all && rm yarn.lock ; yarn ; yarn fix.lint | true",
+    "upgrade.packages.all": "yarn install && yarn upgrade.packages",
+    "upgrade.packages.test": "yarn upgrade.packages.all && yarn lint && yarn build.dev && yarn test",
+    "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
+    "watch.lint": "concurrently 'yarn lint' \"chokidar 'src/**/*' -c 'yarn lint.tsc'\"",
+    "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev",
+    "watch.tsc": "tsc -w"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-typescript": "^7.13.0",
+    "@sprucelabs/error": "^4.1.11",
+    "@sprucelabs/mercury-types": "^15.8.1",
+    "@sprucelabs/spruce-core-schemas": "^22.2.58",
+    "@sprucelabs/spruce-event-plugin": "^4.0.6",
+    "@sprucelabs/spruce-event-utils": "^13.3.8",
+    "@sprucelabs/spruce-skill-booter": "^4.0.6",
+    "@sprucelabs/spruce-skill-utils": "^18.4.28",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "globby": "^11.0.3",
+    "terser-webpack-plugin": "^5.1.1",
+    "webpack": "^5.36.1"
+  },
+  "devDependencies": {
+    "@sprucelabs/babel-plugin-schema": "^4.0.1",
+    "@sprucelabs/jest-json-reporter": "^5.1.21",
+    "@sprucelabs/spruce-test-fixtures": "^4.0.6",
+    "@sprucelabs/test": "^7.7.6",
+    "@sprucelabs/test-utils": "^3.0.43",
+    "@types/node": "^15.0.1",
+    "@types/terser-webpack-plugin": "^5.0.3",
+    "chokidar-cli": "^2.1.0",
+    "concurrently": "^6.0.2",
+    "eslint": "^7.25.0",
+    "eslint-config-spruce": "^10.10.2",
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": "12.x",
+    "yarn": "1.x"
+  },
+  "jest": {
+    "testRunner": "jest-circus/runner",
+    "maxWorkers": 4,
+    "testTimeout": 120000,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/tmp/",
+      "<rootDir>/src/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/__tests__/testDirsAndFiles/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+    }
+  }
+}
