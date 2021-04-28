@@ -73,7 +73,7 @@
     "@sprucelabs/babel-plugin-schema": "latest",
     "@sprucelabs/esm-postbuild": "latest",
     "@sprucelabs/jest-json-reporter": "latest",
-    "@sprucelabs/spruce-test-fixtures": "latestt",
+    "@sprucelabs/spruce-test-fixtures": "latest",
     "@sprucelabs/test": "^7.7.6",
     "@sprucelabs/test-utils": "^3.0.43",
     "@types/node": "^15.0.1",
