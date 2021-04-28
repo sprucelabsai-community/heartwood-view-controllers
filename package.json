@@ -38,6 +38,7 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
     "@sprucelabs/error": "^4.1.11",
+    "@sprucelabs/jest-sheets-reporter": "^1.2.23",
     "@sprucelabs/mercury-types": "^15.8.1",
     "@sprucelabs/spruce-core-schemas": "^22.2.58",
     "@sprucelabs/spruce-event-plugin": "^4.0.6",
@@ -90,6 +91,19 @@
     ],
     "moduleNameMapper": {
       "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-    }
+    },
+    "reporters": [
+      "default",
+      [
+        "@sprucelabs/jest-sheets-reporter",
+        {
+          "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
+          "worksheetId": 843037832,
+          "testMap": {
+            "packagerPackages": "I105"
+          }
+        }
+      ]
+    ]
   }
 }
