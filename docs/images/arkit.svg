@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="109px" preserveAspectRatio="none" style="width:251px;height:109px;" version="1.1" viewBox="0 0 251 109" width="251px" zoomAndPan="magnify"><defs/><g><!--MD5=[de0a5854406c459e5e497d079c08ce32]
+entity _Book_svc--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="81" x="28" y="8"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="38" y="30.0059">Book.svc</text><!--MD5=[e9e5b8f5a1ca94c4530b82bd1087ed42]
+entity _Book_vc--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="73" x="120" y="8"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="130" y="30.0059">Book.vc</text><ellipse cx="68.7284" cy="80.9457" fill="#F8F8F8" rx="62.7284" ry="14.9457" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="95" x="21.2284" y="84.6879">release.config</text><!--MD5=[b193370281563f99c6776349b0620c58]
+entity _SpruceError--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="98" x="142.5" y="64"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="78" x="152.5" y="86.0059">SpruceError</text><!--MD5=[13a706a20c64824037380596ff7968bb]
+link _Book_svc to _Book_vc--><!--MD5=[a4761bc7215865577f61ba5d176d9604]
+link _Book_svc to <b>release.config</b>--><!--MD5=[dc582009b0e75f0966e05ea65a2d8592]
+link <b>release.config</b> to _SpruceError--><script type="text/plantuml"><![CDATA[MD5=[1098eaaf9674b04703ccdb9c4175c445]
+@startuml
+
+scale max 1920 width
+top to bottom direction
+
+skinparam nodesep 11
+skinparam ranksep 22
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+rectangle "<b>Book.svc</b>" as _Book_svc
+rectangle "<b>Book.vc</b>" as _Book_vc
+(<b>release.config</b>)
+rectangle "<b>SpruceError</b>" as _SpruceError
+
+
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>
