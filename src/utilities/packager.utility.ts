@@ -4,7 +4,7 @@ import TerserPlugin from 'terser-webpack-plugin'
 import { Configuration, webpack, DefinePlugin } from 'webpack'
 import SpruceError from '../errors/SpruceError'
 
-export default const packagerUtil = {
+const packagerUtil = {
 	async package(options: { source: string; destination: string }) {
 		const missing: string[] = []
 		for (const key of ['source', 'destination']) {
@@ -127,3 +127,5 @@ export default const packagerUtil = {
 		})
 	},
 }
+
+export default packagerUtil
