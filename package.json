@@ -1,12 +1,27 @@
 {
   "name": "@sprucelabs/heartwood-view-controllers",
-  "description": "All the power of Heartwood in one, convenient package.",
+  "publishConfig": {
+		"access": "public"
+	},
   "version": "0.0.1",
-  "homepage": "https://github.com/[YOUR REPO PATH]",
+  "files": [
+		"build/**/*",
+		"tsconfig.json"
+	],
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
+	"module": "./build/esm/index.js",
+	"sideEffects": false,
+	"license": "MIT",
+  "description": "All the power of Heartwood in one, convenient package.",
+  "keywords": [
+		"node",
+		"sprucelabs"
+	],
+  "homepage": "https://github.com/sprucelabsai/heartwood-view-controllers",
   "bugs": {
-    "url": "https://github.com/[YOUR REPO PATH]/issues"
+    "url": "https://github.com/sprucelabsai/heartwood-view-controllers/issues"
   },
-  "keywords": [],
   "scripts": {
     "boot": "node build/index",
     "boot.local": "node -r ts-node/register -r tsconfig-paths/register ./src/index",
