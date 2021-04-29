@@ -2,6 +2,9 @@
   "name": "@sprucelabs/heartwood-view-controllers",
   "description": "All the power of Heartwood in one, convenient package.",
   "version": "0.0.1",
+  "skill": {
+    "namespace": "heartwood"
+  },
   "homepage": "https://github.com/[YOUR REPO PATH]",
   "bugs": {
     "url": "https://github.com/[YOUR REPO PATH]/issues"
@@ -19,6 +22,7 @@
     "clean.all": "yarn clean && rm -f yarn.lock package-lock.json && rm -rf node_modules/",
     "fix.lint": "eslint --fix '**/*.ts'",
     "health": "yarn boot --health",
+    "sync.schemas": "spruce sync.schemas --fetchCoreSchemas false",
     "health.local": "yarn boot.local --health",
     "lint": "eslint '**/*.ts'",
     "rebuild": "yarn clean.all && yarn && yarn build.dev",
@@ -40,6 +44,7 @@
     "@sprucelabs/error": "^4.1.11",
     "@sprucelabs/jest-sheets-reporter": "^1.2.23",
     "@sprucelabs/mercury-types": "^15.8.1",
+    "@sprucelabs/schema": "^20.1.9",
     "@sprucelabs/spruce-core-schemas": "^22.2.58",
     "@sprucelabs/spruce-event-plugin": "^4.0.6",
     "@sprucelabs/spruce-event-utils": "^13.3.8",

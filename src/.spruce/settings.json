@@ -1,6 +1,7 @@
 {
   "installed": [
     "skill",
-    "test"
+    "test",
+    "schema"
   ]
 }

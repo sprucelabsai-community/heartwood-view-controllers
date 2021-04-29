@@ -1,0 +1,182 @@
+import { MercuryClient } from '@sprucelabs/mercury-client'
+import { CoreEventContract, SpruceSchemas } from '@sprucelabs/mercury-types'
+import {
+	InvalidFieldError,
+	Schema,
+	SchemaFieldNames,
+	SchemaPartialValues,
+} from '@sprucelabs/schema'
+import React from 'react'
+import { Authenticator } from '../auth/Authenticator'
+import { fancyIcons, lineIcons } from '../constants'
+import BigFormViewControllerImpl, {
+	BigFormViewControllerOptions,
+} from '../viewControllers/BigForm.vc'
+import ButtonGroupViewController, {
+	ButtonGroupViewControllerOptions,
+} from '../viewControllers/ButtonGroup.vc'
+import CardViewControllerImpl, {
+	CardViewControllerOptions,
+} from '../viewControllers/Card.vc'
+import ConfirmViewController, {
+	ConfirmViewControllerOptions,
+} from '../viewControllers/Confirm.vc'
+import DialogViewController, {
+	DialogViewControllerOptions,
+} from '../viewControllers/Dialog.vc'
+import FormViewControllerImpl, {
+	FormViewControllerOptions,
+} from '../viewControllers/Form.vc'
+import LoginViewController, {
+	LoginViewControllerOptions,
+} from '../viewControllers/Login.vc'
+import SwipeViewController, {
+	SwipeViewControllerOptions,
+} from '../viewControllers/Swipe.vc'
+import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
+export type ErrorHandler = (message: string) => void
+
+export interface TypedInvalidFieldError<
+	S extends Schema,
+	N extends SchemaFieldNames<S> = SchemaFieldNames<S>
+> extends InvalidFieldError {
+	name: N
+	code: 'invalid_value' | 'missing_required'
+}
+
+export interface WithErrorHandler {
+	onError?: ErrorHandler
+}
+
+export type ReactNodeWithErrorHandler =
+	| React.ReactNode
+	| ((onError?: ErrorHandler) => React.ReactNode)
+
+export interface ChildrenWithErrorHandler {
+	children?: ReactNodeWithErrorHandler
+}
+
+export type LineIcon = typeof lineIcons[number]
+export type FancyIcon = typeof fancyIcons[number]
+
+export type FormErrorsByField<S extends Schema = Schema> = Record<
+	SchemaFieldNames<S>,
+	TypedInvalidFieldError<S>[]
+>
+
+export interface FormOnChangeOptions<S extends Schema = Schema> {
+	values: SchemaPartialValues<S>
+	controller: FormViewController<S>
+	errorsByField: FormErrorsByField<S>
+	isValid: boolean
+}
+
+export type FormOnSubmitOptions<
+	S extends Schema = Schema
+> = FormOnChangeOptions<S>
+
+type OnSubmitResponse = void | boolean
+export type SubmitHandler<
+	S extends Schema = Schema,
+	Extra extends Record<string, any> | undefined = undefined
+> = (
+	options: Extra extends undefined
+		? FormOnChangeOptions<S>
+		: FormOnChangeOptions<S> & Extra
+) => Promise<OnSubmitResponse> | OnSubmitResponse
+
+export interface SwipeController {
+	swipeTo(idx: number): void
+}
+
+export interface SkillViewControllerLoadOptions {
+	router: Router
+	args?: Record<string, any>
+	authenticator: Authenticator
+}
+
+export type CardViewController = CardViewControllerImpl
+export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
+export type BigFormViewController<
+	S extends Schema
+> = BigFormViewControllerImpl<S>
+
+export interface ViewController<ViewModel extends Record<string, any>> {
+	render(): ViewModel
+	triggerRender: () => void
+}
+
+export interface SkillViewController extends ViewController<SkillView> {
+	id: string
+	load(options: SkillViewControllerLoadOptions): Promise<void>
+}
+
+export type ImportedViewController = (new () =>
+	| ViewController<any>
+	| SkillViewController) & {
+	id: string
+}
+
+export interface Router {
+	redirect(id: string, args?: Record<string, any>): Promise<void>
+	back(): Promise<void>
+}
+
+export type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
+
+export interface ButtonController {
+	render(): SpruceSchemas.Heartwood.v2021_02_11.Button
+	triggerRender: () => void
+}
+
+export interface ViewControllerMap {
+	form: typeof FormViewControllerImpl
+	login: typeof LoginViewController
+	swipe: typeof SwipeViewController
+	buttonGroup: typeof ButtonGroupViewController
+	card: typeof CardViewControllerImpl
+	dialog: typeof DialogViewController
+	bigForm: typeof BigFormViewControllerImpl
+	confirm: typeof ConfirmViewController
+}
+
+export interface ViewControllerOptionsMap {
+	form: FormViewControllerOptions<any>
+	login: LoginViewControllerOptions
+	swipe: SwipeViewControllerOptions
+	buttonGroup: ButtonGroupViewControllerOptions
+	card: CardViewControllerOptions
+	dialog: DialogViewControllerOptions
+	bigForm: BigFormViewControllerOptions<Schema>
+	confirm: ConfirmViewControllerOptions
+}
+
+export type ControllerOptions<
+	N extends keyof ViewControllerMap,
+	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
+> = N extends keyof O ? O[N] : Record<string, never>
+
+export type Client = MercuryClient<CoreEventContract>
+
+export type OnRenderHandler = {
+	onRender?(): void
+}
+
+export type RenderInDialogHandler = (
+	options: DialogViewControllerOptions
+) => void
+
+export interface ConfirmOptions {
+	title?: string
+	subtitle?: string
+	message?: string
+}
+
+export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>
+
+export interface ViewControllerOptions {
+	vcFactory: ViewControllerFactory<any>
+	connectToApi: () => Promise<Client>
+	renderInDialogHandler: RenderInDialogHandler
+	confirmHandler: ConfirmHandler
+}
