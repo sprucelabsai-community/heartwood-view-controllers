@@ -1,21 +1,38 @@
 {
   "name": "@sprucelabs/heartwood-view-controllers",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "build/**/*",
+    "tsconfig.json"
+  ],
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "module": "./build/esm/index.js",
+  "sideEffects": false,
+  "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
   "version": "0.0.1",
   "skill": {
     "namespace": "heartwood"
   },
-  "homepage": "https://github.com/[YOUR REPO PATH]",
+  "keywords": [
+    "node",
+    "sprucelabs"
+  ],
+  "homepage": "https://github.com/sprucelabsai/heartwood-view-controllers",
   "bugs": {
-    "url": "https://github.com/[YOUR REPO PATH]/issues"
+    "url": "https://github.com/sprucelabsai/heartwood-view-controllers/issues"
   },
-  "keywords": [],
   "scripts": {
     "boot": "node build/index",
     "boot.local": "node -r ts-node/register -r tsconfig-paths/register ./src/index",
     "build": "yarn build.dev",
-    "build.dev": "yarn build.tsc && yarn resolve-paths.lint",
     "build.copy-files": "mkdir -p build && rsync -avzq --exclude='*.ts' ./src/ ./build/",
+    "build.dev": "yarn build.tsc && yarn resolve-paths.lint",
+    "build.dist": "yarn build.tsc && tsc --project tsconfig.dist.json && yarn build.resolve-paths && yarn build.esm-postbuild",
+    "build.esm-postbuild": "esm-postbuild --target build/esm --patterns '**/*.js'",
     "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts'",
     "build.tsc": "yarn build.copy-files && tsc",
     "clean": "rm -rf build/",
@@ -26,6 +43,7 @@
     "health.local": "yarn boot.local --health",
     "lint": "eslint '**/*.ts'",
     "rebuild": "yarn clean.all && yarn && yarn build.dev",
+    "release": "semantic-release",
     "resolve-paths.lint": "yarn lint ; yarn build.resolve-paths",
     "test": "jest",
     "upgrade.packages": "yarn-upgrade-all && rm yarn.lock ; yarn ; yarn fix.lint | true",
@@ -41,15 +59,15 @@
     "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
-    "@sprucelabs/error": "^4.1.11",
-    "@sprucelabs/jest-sheets-reporter": "^1.2.23",
-    "@sprucelabs/mercury-types": "^15.8.1",
-    "@sprucelabs/schema": "^20.1.9",
-    "@sprucelabs/spruce-core-schemas": "^22.2.58",
-    "@sprucelabs/spruce-event-plugin": "^4.0.6",
-    "@sprucelabs/spruce-event-utils": "^13.3.8",
-    "@sprucelabs/spruce-skill-booter": "^4.0.6",
-    "@sprucelabs/spruce-skill-utils": "^18.4.28",
+    "@sprucelabs/schema": "latest",
+    "@sprucelabs/error": "latest",
+    "@sprucelabs/jest-sheets-reporter": "latest",
+    "@sprucelabs/mercury-types": "latest",
+    "@sprucelabs/spruce-core-schemas": "latest",
+    "@sprucelabs/spruce-event-plugin": "latest",
+    "@sprucelabs/spruce-event-utils": "latest",
+    "@sprucelabs/spruce-skill-booter": "latest",
+    "@sprucelabs/spruce-skill-utils": "latest",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^8.2.0",
@@ -58,9 +76,11 @@
     "webpack": "^5.36.1"
   },
   "devDependencies": {
-    "@sprucelabs/babel-plugin-schema": "^4.0.1",
-    "@sprucelabs/jest-json-reporter": "^5.1.21",
-    "@sprucelabs/spruce-test-fixtures": "^4.0.6",
+    "@sprucelabs/babel-plugin-schema": "latest",
+    "@sprucelabs/esm-postbuild": "latest",
+    "@sprucelabs/jest-json-reporter": "latest",
+    "@sprucelabs/semantic-release": "latest",
+    "@sprucelabs/spruce-test-fixtures": "latest",
     "@sprucelabs/test": "^7.7.6",
     "@sprucelabs/test-utils": "^3.0.43",
     "@types/node": "^15.0.1",
@@ -68,7 +88,7 @@
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.0.2",
     "eslint": "^7.25.0",
-    "eslint-config-spruce": "^10.10.2",
+    "eslint-config-spruce": "latest",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "prettier": "^2.2.1",
@@ -109,6 +129,26 @@
           }
         }
       ]
+    ]
+  },
+  "yarn-upgrade-all": {
+    "ignore": [
+      "@sprucelabs/error",
+      "@sprucelabs/esm-postbuild",
+      "@sprucelabs/jest-json-reporter",
+      "@sprucelabs/resolve-path-aliases",
+      "@sprucelabs/schema",
+      "@sprucelabs/semantic-release",
+      "@sprucelabs/spruce-core-schemas",
+      "@sprucelabs/spruce-event-utils",
+      "@sprucelabs/spruce-skill-utils",
+      "@sprucelabs/test",
+      "@sprucelabs/test-utils",
+      "conventional-changelog-sprucelabs",
+      "eslint-config-spruce",
+      "@sprucelabs/mercury-client",
+      "@sprucelabs/mercury-types",
+      "@sprucelabs/schema"
     ]
   }
 }
