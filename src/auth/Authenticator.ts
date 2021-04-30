@@ -18,7 +18,7 @@ interface Payloads {
 	'did-logout': DidLogoutPayload
 }
 
-export class Authenticator {
+export default class Authenticator {
 	private static instance: Authenticator | null
 	private static storage: Storage | null
 

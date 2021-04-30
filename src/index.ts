@@ -15,3 +15,4 @@ export { default as ViewControllerExporter } from './viewControllers/ViewControl
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
 export { default as ViewControllerFactory } from './viewControllers/ViewControllerFactory'
 export { default as AbstractViewControllerTest } from './tests/AbstractViewControllerTest'
+export { default as Authenticator } from './auth/Authenticator'

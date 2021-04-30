@@ -1,6 +1,6 @@
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { Authenticator, Storage } from '../../auth/Authenticator'
+import Authenticator, { Storage } from '../../auth/Authenticator'
 
 class MockStorage implements Storage {
 	private items: Record<string, string> = {}

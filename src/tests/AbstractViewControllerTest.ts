@@ -1,5 +1,5 @@
 import AbstractSpruceTest from '@sprucelabs/test'
-import { Authenticator } from '../auth/Authenticator'
+import Authenticator from '../auth/Authenticator'
 import SpruceError from '../errors/SpruceError'
 import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
 import AbstractViewController from '../viewControllers/Abstract.vc'

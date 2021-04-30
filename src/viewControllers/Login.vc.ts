@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { buildSchema, Schema } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
-import { Authenticator } from '../auth/Authenticator'
+import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
 import {
 	BigFormViewController,
