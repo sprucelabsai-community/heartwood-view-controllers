@@ -4,7 +4,7 @@ import {
 	SkillViewController,
 	SkillViewControllerLoadOptions,
 } from '../types/heartwood.types'
-import AbstractViewController from './Abstract.vc'
+import AbstractViewController from '../viewControllers/Abstract.vc'
 
 type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
 

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import AbstractSkillViewController from '../../viewControllers/Abstract.svc'
+import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {

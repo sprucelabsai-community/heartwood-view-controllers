@@ -1,5 +1,5 @@
+import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import { SkillViewControllerLoadOptions } from '../../types/heartwood.types'
-import AbstractSkillViewController from '../../viewControllers/Abstract.svc'
 import DialogVc from '../../viewControllers/Dialog.vc'
 
 declare module '../../types/heartwood.types' {
