@@ -18,3 +18,6 @@ export { default as ViewControllerImporter } from './viewControllers/ViewControl
 export { default as ViewControllerFactory } from './viewControllers/ViewControllerFactory'
 export { default as AbstractViewControllerTest } from './tests/AbstractViewControllerTest'
 export { default as Authenticator } from './auth/Authenticator'
+export { default as buildBigForm } from './builders/buildBigForm'
+export { default as buildForm } from './builders/buildForm'
+export { default as buildSkillView } from './builders/buildSkillView'
