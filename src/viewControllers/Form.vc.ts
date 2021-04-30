@@ -80,7 +80,10 @@ export default class FormViewController<
 	}
 
 	public focusInput(named: string) {
-		console.log('Focus not overridden by view', named)
+		console.log(
+			"Focus not set on FormController by heartwood. Can't focus field named:",
+			named
+		)
 	}
 
 	public setValue<N extends SchemaFieldNames<S>>(name: N, value: any): void {
