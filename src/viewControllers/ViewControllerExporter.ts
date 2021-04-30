@@ -94,7 +94,7 @@ export default class ViewControllerExporter {
 							options: {
 								sourceMaps: false,
 								presets: [
-									['@babel/preset-env', { modules: false }],
+									['@babel/preset-env', { loose: true }],
 									'@babel/preset-typescript',
 								],
 								plugins: [
