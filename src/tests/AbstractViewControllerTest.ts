@@ -4,10 +4,6 @@ import SpruceError from '../errors/SpruceError'
 import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
-const dotenv = require('dotenv')
-dotenv.config()
-
-export const DEMO_NUMBER = process.env.DEMO_NUMBER ?? '**MISSING**'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any>

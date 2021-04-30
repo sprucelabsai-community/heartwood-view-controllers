@@ -1,9 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import buildBigForm from '../../builders/buildBigForm'
-import AbstractViewControllerTest, {
-	DEMO_NUMBER,
-} from '../../tests/AbstractViewControllerTest'
+import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { DEMO_NUMBER } from '../../tests/constants'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({

@@ -1,4 +1,8 @@
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
+const dotenv = require('dotenv')
+dotenv.config()
+
+export const DEMO_NUMBER = process.env.DEMO_NUMBER ?? '**MISSING**'
 
 export const importExportSource = diskUtil.resolvePath(
 	__dirname,
