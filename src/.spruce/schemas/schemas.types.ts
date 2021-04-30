@@ -222,53 +222,75 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface SkillViewsRegistration {
+		interface SprucebotTypedMessage {
 			
-				
-				'id': string
-				
-				'namespace': string
-				
-				'ids': string[]
-				
-				'source': string
+				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
+				/** Default avatar. How should Sprucebot be rendered by default */
+				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				/** Start delay. How long should I wait before starting to type? */
+				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				/** Loop. */
+				'shouldLoop'?: boolean| undefined | null
+				/** Size. */
+				'size'?: ("small" | "medium" | "large")| undefined | null
+				/** Paused. */
+				'isPaused'?: boolean| undefined | null
 		}
 
-		interface SkillViewsRegistrationSchema extends SpruceSchema.Schema {
-			id: 'skillViewsRegistration',
+		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
+			id: 'sprucebotTypedMessage',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
-			name: 'Skill views registration',
+			name: 'Sprucebot typed message',
 			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
+			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+			            'sentences': {
+			                label: 'Sentences',
+			                type: 'schema',
 			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'namespace': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'ids': {
-			                type: 'text',
-			                isRequired: true,
+			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
 			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
+			            },
+			            /** Default avatar. How should Sprucebot be rendered by default */
+			            'defaultAvatar': {
+			                label: 'Default avatar',
+			                type: 'schema',
+			                hint: 'How should Sprucebot be rendered by default',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
+			            },
+			            /** Start delay. How long should I wait before starting to type? */
+			            'startDelay': {
+			                label: 'Start delay',
+			                type: 'duration',
+			                hint: 'How long should I wait before starting to type?',
+			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
 			                options: undefined
 			            },
-			            /** . */
-			            'source': {
-			                type: 'text',
-			                isRequired: true,
+			            /** Loop. */
+			            'shouldLoop': {
+			                label: 'Loop',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                defaultValue: "small",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** Paused. */
+			            'isPaused': {
+			                label: 'Paused',
+			                type: 'boolean',
 			                options: undefined
 			            },
 			    }
 		}
 
-		type SkillViewsRegistrationEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SkillViewsRegistrationSchema>
+		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSchema>
 
 	}
 
@@ -1049,82 +1071,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type SprucebotTypedMessageSentenceEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface SprucebotTypedMessage {
-			
-				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
-				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
-				/** Start delay. How long should I wait before starting to type? */
-				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
-				/** Loop. */
-				'shouldLoop'?: boolean| undefined | null
-				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** Paused. */
-				'isPaused'?: boolean| undefined | null
-		}
-
-		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
-			id: 'sprucebotTypedMessage',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Sprucebot typed message',
-			    fields: {
-			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-			            'sentences': {
-			                label: 'Sentences',
-			                type: 'schema',
-			                isRequired: true,
-			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
-			            },
-			            /** Default avatar. How should Sprucebot be rendered by default */
-			            'defaultAvatar': {
-			                label: 'Default avatar',
-			                type: 'schema',
-			                hint: 'How should Sprucebot be rendered by default',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
-			            },
-			            /** Start delay. How long should I wait before starting to type? */
-			            'startDelay': {
-			                label: 'Start delay',
-			                type: 'duration',
-			                hint: 'How long should I wait before starting to type?',
-			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
-			                options: undefined
-			            },
-			            /** Loop. */
-			            'shouldLoop': {
-			                label: 'Loop',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                defaultValue: "small",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** Paused. */
-			            'isPaused': {
-			                label: 'Paused',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSchema>
 
 	}
 
