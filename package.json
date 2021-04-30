@@ -59,10 +59,10 @@
     "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
-    "@sprucelabs/schema": "latest",
-    "@sprucelabs/error": "latest",
+    "@sprucelabs/error": "^4.1.11",
     "@sprucelabs/jest-sheets-reporter": "latest",
     "@sprucelabs/mercury-types": "latest",
+    "@sprucelabs/schema": "latest",
     "@sprucelabs/spruce-core-schemas": "latest",
     "@sprucelabs/spruce-event-plugin": "latest",
     "@sprucelabs/spruce-event-utils": "latest",
@@ -125,7 +125,8 @@
           "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
           "worksheetId": 843037832,
           "testMap": {
-            "packagerPackages": "I105"
+            "packagerPackages": "I105",
+            "canGetVcFactory": "I106"
           }
         }
       ]

@@ -2,21 +2,35 @@ import SpruceError from '../errors/SpruceError'
 import { ImportedViewController } from '../types/heartwood.types'
 
 export default class ViewControllerImporter {
+	private constructor() {}
+	public static Importer() {
+		return new this()
+	}
+
 	public import(script: string): ImportedViewController[] {
 		try {
-			const exports = {}
+			let exports = {}
 			const globals = Object.keys(global)
 			const resets = globals.map((name) => `var ${name} = {};`).join('\n')
 
-			eval(`
+			const guargedScript = `
 ${resets}
 var global = {}
+var globalThis = {}
+function heartwood(vcs) {
+	exports = vcs
+}
 
-${script}`)
+${script}`
+
+			eval(guargedScript)
 
 			this.validateImported(exports)
 
-			return Object.values(exports) as any
+			return Object.values(exports).map((C: any) => {
+				C.__imported = true
+				return C
+			}) as any
 		} catch (err) {
 			throw new SpruceError({
 				code: 'INVALID_VIEW_CONTROLLER_SOURCE',
@@ -38,9 +52,5 @@ ${script}`)
 				throw new Error(`${key} needs \`public static readonly id = 'my-id'\``)
 			}
 		})
-	}
-
-	public static Importer() {
-		return new this()
 	}
 }

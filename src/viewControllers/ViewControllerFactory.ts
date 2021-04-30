@@ -119,12 +119,26 @@ export default class ViewControllerFactory<
 		}
 
 		//@ts-ignore
-		return new Class({
+		const isFunction = !!Class.__imported
+
+		const constructorOptions = {
 			...options,
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
 			connectToApi: this.connectToApi.bind(this),
-		}) as InstanceType<ControllerMap[N]>
+		}
+
+		//@ts-ignore
+		const instance = new Class(constructorOptions) as InstanceType<
+			ControllerMap[N]
+		>
+
+		if (isFunction) {
+			//@ts-ignore
+			return instance.__proto__ ?? instance
+		}
+
+		return instance
 	}
 }

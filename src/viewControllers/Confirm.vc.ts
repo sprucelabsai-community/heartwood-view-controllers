@@ -1,7 +1,6 @@
-import { DialogOptions } from '../components/dialogs/Dialog'
 import { ConfirmOptions, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
-import DialogViewController from './Dialog.vc'
+import DialogViewController, { DialogOptions } from './Dialog.vc'
 
 export type Dialog = DialogOptions
 export type ConfirmViewControllerOptions = ConfirmOptions & {

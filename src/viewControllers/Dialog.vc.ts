@@ -1,6 +1,10 @@
-import { DialogOptions } from '../components/dialogs/Dialog'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
+
+export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Dialog & {
+	closeHandler?: () => void
+}
 
 export type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>

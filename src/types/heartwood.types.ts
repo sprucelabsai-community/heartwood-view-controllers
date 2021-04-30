@@ -6,8 +6,6 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
-import React from 'react'
-import { Authenticator } from '../auth/Authenticator'
 import { fancyIcons, lineIcons } from '../constants'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
@@ -36,6 +34,29 @@ import SwipeViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export type ErrorHandler = (message: string) => void
 
+type Person = SpruceSchemas.Spruce.v2020_07_22.Person
+type DidLoginPayload = (payload: { token: string; person: Person }) => void
+type DidLogoutPayload = (payload: { person: Person }) => void
+interface Payloads {
+	'did-login': DidLoginPayload
+	'did-logout': DidLogoutPayload
+}
+
+export interface Authenticator {
+	setToken(token: string, person: Person): void
+	getToken(): string | null
+	isLoggedIn(): boolean
+	clearToken(): void
+	addEventListener<N extends 'did-login' | 'did-logout'>(
+		name: N,
+		cb: Payloads[N]
+	): void
+}
+
+export interface AuthenticatorStatic {
+	getInstance(): Authenticator
+}
+
 export interface TypedInvalidFieldError<
 	S extends Schema,
 	N extends SchemaFieldNames<S> = SchemaFieldNames<S>
@@ -46,14 +67,6 @@ export interface TypedInvalidFieldError<
 
 export interface WithErrorHandler {
 	onError?: ErrorHandler
-}
-
-export type ReactNodeWithErrorHandler =
-	| React.ReactNode
-	| ((onError?: ErrorHandler) => React.ReactNode)
-
-export interface ChildrenWithErrorHandler {
-	children?: ReactNodeWithErrorHandler
 }
 
 export type LineIcon = typeof lineIcons[number]

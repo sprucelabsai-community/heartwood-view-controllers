@@ -1,0 +1,119 @@
+import { buildSchema } from '@sprucelabs/schema'
+import { test, assert } from '@sprucelabs/test'
+import buildBigForm from '../../builders/buildBigForm'
+import AbstractViewControllerTest, {
+	DEMO_NUMBER,
+} from '../../tests/AbstractViewControllerTest'
+import BigFormViewController from '../../viewControllers/BigForm.vc'
+
+const testFormSchema = buildSchema({
+	id: 'bigFormTest',
+	fields: {
+		phone: {
+			type: 'phone',
+			isRequired: true,
+		},
+		pin: {
+			type: 'number',
+			isRequired: true,
+		},
+		optional: {
+			type: 'text',
+		},
+	},
+})
+
+type TestFormSchema = typeof testFormSchema
+
+export default class ControllingABigFormTest extends AbstractViewControllerTest {
+	protected static controllerMap = {}
+	private static vc: BigFormViewController<TestFormSchema>
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		this.vc = this.Controller(
+			'bigForm',
+			buildBigForm({
+				schema: testFormSchema,
+				sections: [
+					{
+						fields: ['phone'],
+					},
+					{
+						fields: ['pin'],
+					},
+					{
+						fields: ['optional'],
+					},
+				],
+			})
+		) as BigFormViewController<TestFormSchema>
+	}
+
+	@test()
+	protected static async canGetVc() {
+		assert.isTruthy(this.vc)
+	}
+
+	@test()
+	protected static requiredFieldMissingInvalid() {
+		const isValid = this.vc.isSlideValid(0)
+		assert.isFalse(isValid)
+	}
+
+	@test()
+	protected static failsWithInvalidPhoneNumber() {
+		this.vc.setValue('phone', '12341234')
+		const isValid = this.vc.isSlideValid(0)
+		assert.isFalse(isValid)
+	}
+
+	@test()
+	protected static passesWithValidNumber() {
+		this.vc.setValue('phone', DEMO_NUMBER)
+
+		const isValid = this.vc.isSlideValid(0)
+		assert.isTrue(isValid)
+
+		assert.isFalse(this.vc.isSlideValid(1))
+	}
+
+	@test()
+	protected static startsAtFirstSlide() {
+		assert.isEqual(this.vc.getCurrentSlide(), 0)
+	}
+
+	@test()
+	protected static async canSetCurrentSlide() {
+		await this.vc.setCurrentSlide(1)
+		assert.isEqual(this.vc.getCurrentSlide(), 1)
+	}
+
+	@test()
+	protected static async settingNegativeSlideGoesToZero() {
+		await this.vc.setCurrentSlide(-1)
+		assert.isEqual(this.vc.getCurrentSlide(), 0)
+	}
+
+	@test()
+	protected static async settingTooHighOfSlideSetsToLast() {
+		await this.vc.setCurrentSlide(9999)
+		assert.isEqual(this.vc.getCurrentSlide(), 2)
+	}
+
+	@test()
+	protected static async settingCurrentSlideReplaysThatSlidesTalkingSprucebot() {
+		let wasHit = false
+		let whatWasHit = -1
+
+		this.vc.replaySlideHeading = (idx) => {
+			wasHit = true
+			whatWasHit = idx
+		}
+
+		await this.vc.setCurrentSlide(2)
+
+		assert.isTrue(wasHit)
+		assert.isEqual(whatWasHit, 2)
+	}
+}
