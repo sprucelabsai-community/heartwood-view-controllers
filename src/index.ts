@@ -27,3 +27,4 @@ export { default as cardSchema } from '#spruce/schemas/heartwood/v2021_02_11/car
 export { default as layoutSchema } from '#spruce/schemas/heartwood/v2021_02_11/layout.schema'
 export { default as sprucebotAvatarSchema } from '#spruce/schemas/heartwood/v2021_02_11/sprucebotAvatar.schema'
 export { default as talkingSprucebotSchema } from '#spruce/schemas/heartwood/v2021_02_11/talkingSprucebot.schema'
+export { default as sprucebotTypedMessageSchema } from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessage.schema'
