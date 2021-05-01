@@ -1,7 +1,7 @@
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
-import { MockStorage } from './MockStorage'
+import { MockStorage } from '../../tests/MockStorage'
 
 export default class AuthenticatorTest extends AbstractSpruceTest {
 	private static storage: MockStorage
