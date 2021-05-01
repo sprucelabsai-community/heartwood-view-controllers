@@ -4,6 +4,7 @@ import SpruceError from '../errors/SpruceError'
 import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
+import { MockStorage } from './MockStorage'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any>
@@ -11,6 +12,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	protected static async beforeEach() {
 		await super.beforeEach()
 		Authenticator.reset()
+		Authenticator.setStorage(new MockStorage())
 	}
 
 	protected static Factory() {
