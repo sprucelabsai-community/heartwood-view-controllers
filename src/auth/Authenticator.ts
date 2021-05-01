@@ -1,6 +1,7 @@
 import EventEmitter from 'events'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import SpruceError from '../errors/SpruceError'
+import { Authenticator } from '../types/heartwood.types'
 
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 
@@ -18,7 +19,7 @@ interface Payloads {
 	'did-logout': DidLogoutPayload
 }
 
-export default class Authenticator {
+export default class AuthenticatorImpl implements Authenticator {
 	private static instance: Authenticator | null
 	private static storage: Storage | null
 
@@ -59,7 +60,7 @@ export default class Authenticator {
 	}
 
 	public getToken() {
-		return this.storage.getItem('token')
+		return this.storage.getItem('token') ?? null
 	}
 
 	public isLoggedIn(): boolean {
