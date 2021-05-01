@@ -11,7 +11,7 @@ type DidLogoutPayload = (payload: { person: Person }) => void
 export interface Storage {
 	removeItem(key: string): void
 	setItem(key: string, value: string): void
-	getItem(key: string): string | undefined
+	getItem(key: string): string | null
 }
 
 interface Payloads {
