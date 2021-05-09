@@ -15,8 +15,7 @@ export default buildSchema({
 		isComplete: {
 			type: 'boolean',
 			label: 'Complete',
-			hint:
-				'When being rendered as a slide, this will signify the step is complete.',
+			hint: 'When being rendered as a slide, this will signify the step is complete.',
 		},
 		controller: {
 			type: 'raw',

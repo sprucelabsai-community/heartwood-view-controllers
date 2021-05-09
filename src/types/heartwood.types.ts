@@ -84,9 +84,8 @@ export interface FormOnChangeOptions<S extends Schema = Schema> {
 	isValid: boolean
 }
 
-export type FormOnSubmitOptions<
-	S extends Schema = Schema
-> = FormOnChangeOptions<S>
+export type FormOnSubmitOptions<S extends Schema = Schema> =
+	FormOnChangeOptions<S>
 
 type OnSubmitResponse = void | boolean
 export type SubmitHandler<
@@ -110,9 +109,8 @@ export interface SkillViewControllerLoadOptions {
 
 export type CardViewController = CardViewControllerImpl
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
-export type BigFormViewController<
-	S extends Schema
-> = BigFormViewControllerImpl<S>
+export type BigFormViewController<S extends Schema> =
+	BigFormViewControllerImpl<S>
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel

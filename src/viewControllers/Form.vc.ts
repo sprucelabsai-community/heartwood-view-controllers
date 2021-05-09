@@ -39,7 +39,8 @@ export default class FormViewController<
 		V extends ViewModel<S> = ViewModel<S>
 	>
 	extends AbstractViewController<V>
-	implements ViewController<V> {
+	implements ViewController<V>
+{
 	protected viewModel: V & {
 		values: SchemaPartialValues<S>
 	}

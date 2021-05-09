@@ -67,8 +67,11 @@ export default class ViewControllerFactory<
 		renderInDialogHandler?: RenderInDialogHandler
 		confirmHandler?: ConfirmHandler
 	}) {
-		const { controllerMap = {}, renderInDialogHandler, confirmHandler } =
-			options ?? {}
+		const {
+			controllerMap = {},
+			renderInDialogHandler,
+			confirmHandler,
+		} = options ?? {}
 		return new this({
 			controllerMap,
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
