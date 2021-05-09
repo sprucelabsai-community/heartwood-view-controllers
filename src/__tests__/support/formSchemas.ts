@@ -45,8 +45,8 @@ export const profileFormSchema = buildSchema({
 	},
 })
 
-export const formWithEveryFieldTypeOptionalWithDefaultValuesSchema = buildSchema(
-	{
+export const formWithEveryFieldTypeOptionalWithDefaultValuesSchema =
+	buildSchema({
 		id: 'defaultValuesForm',
 		fields: {
 			firstName: {
@@ -78,5 +78,4 @@ export const formWithEveryFieldTypeOptionalWithDefaultValuesSchema = buildSchema
 				},
 			},
 		},
-	}
-)
+	})

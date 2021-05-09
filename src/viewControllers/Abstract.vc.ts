@@ -10,7 +10,8 @@ import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
 
 export default abstract class AbstractViewController<ViewModel>
-	implements ViewController<ViewModel> {
+	implements ViewController<ViewModel>
+{
 	protected vcFactory: ViewControllerFactory<any>
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler

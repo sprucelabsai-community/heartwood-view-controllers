@@ -47,8 +47,7 @@ export default buildSchema({
 		values: {
 			type: 'raw',
 			label: 'Values',
-			hint:
-				'The values you want the form to have. Control is given to the FormViewController after render.',
+			hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
 			options: {
 				valueType: 'SpruceSchema.SchemaPartialValues<S>',
 			},
@@ -124,8 +123,7 @@ export default buildSchema({
 							isArray: true,
 							label: 'Form fields',
 							isRequired: true,
-							hint:
-								'Put any fields from the schema you provided to be shown in this section.',
+							hint: 'Put any fields from the schema you provided to be shown in this section.',
 							options: {
 								valueType: 'SpruceSchema.SchemaFieldNames<S>',
 							},

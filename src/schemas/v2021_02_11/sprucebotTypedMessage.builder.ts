@@ -10,8 +10,7 @@ const sprucebotTypeMessageBuilder = buildSchema({
 			label: 'Sentences',
 			isRequired: true,
 			isArray: true,
-			hint:
-				'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
+			hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
 			options: {
 				schema: buildSchema({
 					id: 'sprucebotTypedMessageSentence',

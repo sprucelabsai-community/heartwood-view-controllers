@@ -11,9 +11,8 @@ import {
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
-type Section<
-	S extends Schema
-> = SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>
+type Section<S extends Schema> =
+	SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>
 
 type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 
@@ -28,8 +27,7 @@ const loginSchema = buildSchema({
 			type: 'phone',
 			isRequired: true,
 			label: 'Phone',
-			hint:
-				"I'm gonna send you a pin. Texting rates may apply. Legal speak below: 👇 🤓",
+			hint: "I'm gonna send you a pin. Texting rates may apply. Legal speak below: 👇 🤓",
 		},
 		code: {
 			type: 'text',
@@ -50,7 +48,8 @@ interface OnLoginOptions {
 
 export default class LoginViewController
 	extends AbstractViewController<ViewModel>
-	implements ViewController<ViewModel> {
+	implements ViewController<ViewModel>
+{
 	private sections: Section<LoginSchema>[]
 	private static id = 0
 	private id: string
@@ -109,9 +108,8 @@ export default class LoginViewController
 				},
 			})
 
-			const { challenge } = eventResponseUtil.getFirstResponseOrThrow(
-				pinResults
-			)
+			const { challenge } =
+				eventResponseUtil.getFirstResponseOrThrow(pinResults)
 
 			this.userChallenge = challenge
 		} catch (err) {
@@ -142,9 +140,8 @@ export default class LoginViewController
 		})
 
 		try {
-			const { person, token } = eventResponseUtil.getFirstResponseOrThrow(
-				confirmResults
-			)
+			const { person, token } =
+				eventResponseUtil.getFirstResponseOrThrow(confirmResults)
 
 			Authenticator.getInstance().setToken(token, person)
 

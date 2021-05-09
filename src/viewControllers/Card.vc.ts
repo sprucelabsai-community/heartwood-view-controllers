@@ -9,7 +9,8 @@ type Section = SpruceSchemas.Heartwood.v2021_02_11.CardSection
 
 export default class CardViewController
 	extends AbstractViewController<ViewModel>
-	implements ViewController<ViewModel> {
+	implements ViewController<ViewModel>
+{
 	private model: ViewModel
 	private triggerRenderFooter?: () => void
 	private triggerRenderHeader?: () => void

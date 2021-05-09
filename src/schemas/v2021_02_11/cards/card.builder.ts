@@ -34,8 +34,7 @@ export default buildSchema({
 		body: {
 			type: 'schema',
 			label: 'Body',
-			hint:
-				'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
 			options: {
 				schema: cardBodyBuilder,
 			},

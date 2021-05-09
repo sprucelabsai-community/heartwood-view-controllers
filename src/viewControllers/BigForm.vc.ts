@@ -7,15 +7,13 @@ import {
 import bigFormSchema from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
 import FormViewController, { FormViewControllerOptions } from './Form.vc'
 
-type ViewModel<
-	S extends Schema
-> = SpruceSchemas.Heartwood.v2021_02_11.BigForm<S>
+type ViewModel<S extends Schema> =
+	SpruceSchemas.Heartwood.v2021_02_11.BigForm<S>
 
-export type BigFormViewControllerOptions<
-	S extends Schema
-> = FormViewControllerOptions<S> & {
-	onSubmitSlide?: ViewModel<S>['onSubmitSlide']
-}
+export type BigFormViewControllerOptions<S extends Schema> =
+	FormViewControllerOptions<S> & {
+		onSubmitSlide?: ViewModel<S>['onSubmitSlide']
+	}
 
 export default class BigFormViewController<
 	S extends Schema,
