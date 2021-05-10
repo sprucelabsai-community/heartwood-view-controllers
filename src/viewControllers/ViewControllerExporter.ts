@@ -11,7 +11,10 @@ export default class ViewControllerExporter {
 		return new this()
 	}
 
-	public async export(options: { source: string; destination: string }) {
+	public async export(options: {
+		source: string
+		destination: string
+	}): Promise<void> {
 		this.assertValidExportOptions(options)
 
 		const { source, destination } = options
@@ -29,7 +32,7 @@ export default class ViewControllerExporter {
 			filename
 		)
 
-		return this.webpack(config)
+		await this.webpack(config)
 	}
 
 	private webpack(config: Configuration) {
