@@ -1,14 +1,20 @@
 import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
-import { Configuration, webpack, DefinePlugin } from 'webpack'
+import { Configuration, webpack } from 'webpack'
 import SpruceError from '../errors/SpruceError'
 
 export default class ViewControllerExporter {
-	private constructor() {}
+	private cwd: string
+	private constructor(cwd: string) {
+		this.cwd = cwd
+	}
 
-	public static Exporter() {
-		return new this()
+	public static Exporter(cwd: string) {
+		if (!cwd) {
+			throw new SpruceError({ code: 'MISSING_PARAMETERS', parameters: ['cwd'] })
+		}
+		return new this(cwd)
 	}
 
 	public async export(options: {
@@ -21,8 +27,7 @@ export default class ViewControllerExporter {
 
 		this.assertValidSource(source)
 
-		const dirname = pathUtil.dirname(destination)
-		const filename = pathUtil.basename(destination)
+		const { filename, dirname } = this.splitToFileAndDir(destination)
 
 		this.assertValidDestinationFilename(filename)
 
@@ -35,12 +40,31 @@ export default class ViewControllerExporter {
 		await this.webpack(config)
 	}
 
+	public getCwd(): string {
+		return this.cwd
+	}
+
+	private splitToFileAndDir(destination: string) {
+		const dirname = pathUtil.dirname(destination)
+		const filename = pathUtil.basename(destination)
+		return { filename, dirname }
+	}
+
 	private webpack(config: Configuration) {
 		return new Promise((resolve: any, reject) => {
 			webpack(config, (err, stats) => {
 				if (err) {
 					reject(err)
 					return
+				}
+
+				if (stats?.hasErrors()) {
+					reject(
+						new SpruceError({
+							code: 'EXPORT_FAILED',
+							originalError: stats?.compilation.errors[0],
+						})
+					)
 				}
 
 				if (!stats || stats?.compilation.emittedAssets.size === 0) {
@@ -60,11 +84,12 @@ export default class ViewControllerExporter {
 
 	private buildConfiguration(
 		entry: string,
-		dirname: string,
-		filename: string
+		destinationDirname: string,
+		destinationFilename: string
 	): Configuration {
 		return {
 			entry,
+			context: this.cwd,
 			resolve: {
 				extensions: ['.ts', '.js'],
 				fallback: {
@@ -83,9 +108,9 @@ export default class ViewControllerExporter {
 				},
 			},
 			output: {
-				path: dirname,
+				path: destinationDirname,
 				publicPath: '/',
-				filename,
+				filename: destinationFilename,
 			},
 			module: {
 				rules: [
@@ -97,12 +122,12 @@ export default class ViewControllerExporter {
 							options: {
 								sourceMaps: false,
 								presets: [
-									['@babel/preset-env', { loose: true }],
+									['@babel/preset-env', { loose: false }],
 									'@babel/preset-typescript',
 								],
 								plugins: [
 									'@babel/plugin-transform-runtime',
-									['@babel/plugin-proposal-class-properties', { loose: true }],
+									['@babel/plugin-proposal-class-properties', { loose: false }],
 									[
 										'module-resolver',
 										{
@@ -130,11 +155,6 @@ export default class ViewControllerExporter {
 					}),
 				],
 			},
-			plugins: [
-				new DefinePlugin({
-					'process.env.HOST': JSON.stringify(process.env.HOST),
-				}),
-			],
 		}
 	}
 
@@ -149,7 +169,9 @@ export default class ViewControllerExporter {
 	}
 
 	private assertValidSource(entry: string) {
-		if (!diskUtil.doesFileExist(entry)) {
+		const absolute = diskUtil.resolvePath(this.cwd, entry)
+
+		if (!diskUtil.doesFileExist(absolute)) {
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['source'],

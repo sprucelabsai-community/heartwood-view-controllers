@@ -13,7 +13,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 	public static async beforeAll() {
 		await super.beforeAll()
 
-		const exporter = ViewControllerExporter.Exporter()
+		const exporter = ViewControllerExporter.Exporter(constants.importExportCwd)
 
 		await exporter.export({
 			source: constants.importExportSource,

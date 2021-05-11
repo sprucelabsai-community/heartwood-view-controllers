@@ -1,22 +1,24 @@
+import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 const dotenv = require('dotenv')
 dotenv.config()
 
 export const DEMO_NUMBER = process.env.DEMO_NUMBER ?? '**MISSING**'
 
-export const importExportSource = diskUtil.resolvePath(
+export const importExportCwd = diskUtil.resolvePath(
 	__dirname,
 	'..',
 	'..',
 	'src',
 	'__tests__',
 	'testDirsAndFiles',
-	'skill',
-	'src',
-	'.spruce',
-	'views',
-	'views.ts'
+	'skill'
 )
+
+export const importExportSource =
+	'.' +
+	pathUtil.sep +
+	diskUtil.resolvePath('src', '.spruce', 'views', 'views.ts')
 
 export const importExportDestination = diskUtil.resolvePath(
 	diskUtil.createRandomTempDir(),

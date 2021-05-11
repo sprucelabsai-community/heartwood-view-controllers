@@ -1,8 +1,10 @@
 import fsUtil from 'fs'
+import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import {
+	importExportCwd,
 	importExportDestination,
 	importExportSource,
 	importExportSource_syntaxError,
@@ -11,18 +13,35 @@ import ViewControllerExporter from '../../viewControllers/ViewControllerExporter
 
 export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static readonly source = importExportSource
+	private static readonly buildCwd = importExportCwd
 	private static readonly destination = importExportDestination
 
 	private static exporter: ViewControllerExporter
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.exporter = ViewControllerExporter.Exporter()
+		this.exporter = ViewControllerExporter.Exporter(this.buildCwd)
+	}
+
+	@test()
+	protected static throwsWhenMissingCwd() {
+		//@ts-ignore
+		assert.doesThrow(() => ViewControllerExporter.Exporter())
 	}
 
 	@test()
 	protected static canGetPackager() {
 		assert.isTruthy(this.exporter)
+	}
+
+	@test()
+	protected static packagerCanGetCwd() {
+		assert.isEqual(this.exporter.getCwd(), this.buildCwd)
+	}
+
+	@test()
+	protected static packagerNeedsToBeAbsolutePath() {
+		assert.isTrue(this.exporter.getCwd()[0] === pathUtil.sep)
 	}
 
 	@test()
