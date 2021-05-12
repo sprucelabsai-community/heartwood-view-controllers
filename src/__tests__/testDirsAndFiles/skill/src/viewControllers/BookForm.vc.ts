@@ -1,7 +1,14 @@
-export default class BookFormViewController {
+import dotenv from 'dotenv'
+import AbstractSkillViewController from '../../../../../skillViewControllers/Abstract.svc'
+
+export default class BookFormViewController extends AbstractSkillViewController {
 	public static id = 'book-form'
 
+	//@ts-ignore
 	public render() {
+		//@ts-ignore
+		console.log = dotenv
+
 		//@ts-ignore
 		global.document = {
 			//@ts-ignore

@@ -105,6 +105,7 @@ export default class ViewControllerExporter {
 					crypto: false,
 					vm: false,
 					inspector: false,
+					worker_threads: false,
 				},
 			},
 			output: {
