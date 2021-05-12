@@ -1,3 +1,10 @@
+# [3.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v2.0.0...v3.0.0) (2021-05-12)
+
+
+### Breaking Changes
+
+* factory api changes ([a243ea8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a243ea8))
+
 # [2.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v1.1.19...v2.0.0) (2021-05-12)
 
 
