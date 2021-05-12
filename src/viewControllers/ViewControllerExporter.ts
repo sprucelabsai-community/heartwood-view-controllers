@@ -120,9 +120,10 @@ export default class ViewControllerExporter {
 						use: {
 							loader: `babel-loader`,
 							options: {
+								configFile: false,
 								sourceMaps: false,
 								presets: [
-									['@babel/preset-env', { loose: false }],
+									['@babel/preset-env', { modules: false, loose: false }],
 									'@babel/preset-typescript',
 								],
 								plugins: [
@@ -175,7 +176,7 @@ export default class ViewControllerExporter {
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['source'],
-				friendlyMessage: `Source file must exist. Could not find ${entry}.`,
+				friendlyMessage: `Source file must exist. Could not find ${absolute}.`,
 			})
 		}
 	}
