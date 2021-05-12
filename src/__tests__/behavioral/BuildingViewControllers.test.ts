@@ -82,4 +82,19 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		const vc = this.factory.Controller('test', {}) as TestViewController
 		assert.isTruthy(vc.constructorOptions.connectToApi)
 	}
+
+	@test()
+	protected static canMixinControllers() {
+		this.factory.mixinControllers({
+			test2: TestViewController,
+		})
+
+		//@ts-ignore
+		const vc = this.factory.Controller('test2', {}) as TestViewController
+		assert.isTruthy(vc)
+
+		//@ts-ignore
+		const vc2 = this.factory.Controller('test', {}) as TestViewController
+		assert.isTruthy(vc2)
+	}
 }

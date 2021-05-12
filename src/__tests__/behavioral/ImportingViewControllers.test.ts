@@ -93,7 +93,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		const controllers = this.importControllers()
 		const factory = this.Factory()
 
-		factory.setControllers(controllers)
+		factory.importControllers(controllers)
 
 		return factory
 	}

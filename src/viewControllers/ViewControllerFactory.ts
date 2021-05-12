@@ -104,7 +104,17 @@ export default class ViewControllerFactory<
 		this.controllerMap[name] = Class
 	}
 
-	public setControllers<Vc extends ImportedViewController>(Vcs: Vc[]) {
+	public mixinControllers<Vc extends ViewController<any>>(
+		map: Record<string, ViewControllerConstructor<Vc>>
+	) {
+		//@ts-ignore
+		this.controllerMap = {
+			...this.controllerMap,
+			...map,
+		}
+	}
+
+	public importControllers<Vc extends ImportedViewController>(Vcs: Vc[]) {
 		for (const Vc of Vcs) {
 			//@ts-ignore
 			this.controllerMap[Vc.id] = Vc
