@@ -12,7 +12,8 @@ export default abstract class AbstractSkillViewController
 	extends AbstractViewController<SkillView>
 	implements SkillViewController
 {
-	public abstract id: string
+	public static id: string
+
 	// eslint-disable-next-line no-unused-vars
 	public async load(options: SkillViewControllerLoadOptions) {}
 	public abstract render(): SkillView

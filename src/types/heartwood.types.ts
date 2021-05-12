@@ -118,7 +118,6 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 }
 
 export interface SkillViewController extends ViewController<SkillView> {
-	id: string
 	load(options: SkillViewControllerLoadOptions): Promise<void>
 }
 
