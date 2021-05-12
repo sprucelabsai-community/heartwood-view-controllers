@@ -1,5 +1,5 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { CoreEventContract, SpruceSchemas } from '@sprucelabs/mercury-types'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
 	InvalidFieldError,
 	Schema,
@@ -166,7 +166,7 @@ export type ControllerOptions<
 	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
-export type Client = MercuryClient<CoreEventContract>
+export type Client = MercuryClient
 
 export type OnRenderHandler = {
 	onRender?(): void

@@ -1,4 +1,4 @@
-import { MercuryClientFactory } from '@sprucelabs/mercury-client'
+import { MercuryClient } from '@sprucelabs/mercury-client'
 import SpruceError from '../errors/SpruceError'
 import {
 	ConfirmHandler,
@@ -35,23 +35,27 @@ type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions
 ) => Vc
 
+type ConnectToApi = () => Promise<MercuryClient>
+
 export default class ViewControllerFactory<
 	Map extends ControllerMap = ControllerMap
 > {
-	private client: any
 	private controllerMap: Map
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
+	private connectToApi: ConnectToApi
 
 	public constructor(options: {
 		controllerMap: Partial<Map>
 		renderInDialogHandler: RenderInDialogHandler
 		confirmHandler: ConfirmHandler
+		connectToApi: ConnectToApi
 	}) {
 		const { controllerMap, renderInDialogHandler, confirmHandler } = options
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP } as Map
 		this.renderInDialogHandler = renderInDialogHandler
 		this.confirmHandler = confirmHandler
+		this.connectToApi = options.connectToApi
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -62,34 +66,34 @@ export default class ViewControllerFactory<
 		this.confirmHandler = handler
 	}
 
-	public static Factory(options?: {
+	public static Factory(options: {
 		controllerMap?: Partial<ViewControllerMap>
 		renderInDialogHandler?: RenderInDialogHandler
 		confirmHandler?: ConfirmHandler
+		connectToApi: ConnectToApi
 	}) {
 		const {
 			controllerMap = {},
 			renderInDialogHandler,
 			confirmHandler,
+			connectToApi,
 		} = options ?? {}
+
+		if (!options?.connectToApi) {
+			throw new SpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: ['connectToApi'],
+			})
+		}
+
 		return new this({
 			controllerMap,
+			connectToApi,
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			renderInDialogHandler: renderInDialogHandler
 				? renderInDialogHandler
 				: () => {},
 		})
-	}
-
-	private async connectToApi() {
-		if (!this.client) {
-			this.client = MercuryClientFactory.Client({
-				host: process.env.HOST,
-				shouldReconnect: false,
-			})
-		}
-
-		return this.client
 	}
 
 	public setController<Vc extends ViewController<any>>(
@@ -129,7 +133,7 @@ export default class ViewControllerFactory<
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
-			connectToApi: this.connectToApi.bind(this),
+			connectToApi: this.connectToApi,
 		}
 
 		//@ts-ignore

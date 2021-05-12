@@ -1,4 +1,4 @@
-import AbstractSpruceTest from '@sprucelabs/test'
+import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import Authenticator from '../auth/Authenticator'
 import SpruceError from '../errors/SpruceError'
 import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
@@ -6,7 +6,7 @@ import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import { MockStorage } from './MockStorage'
 
-export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
+export default abstract class AbstractViewControllerTest extends AbstractSpruceFixtureTest {
 	protected static controllerMap: Record<string, any>
 
 	protected static async beforeEach() {
@@ -24,7 +24,15 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 				],
 			})
 		}
-		return ViewControllerFactory.Factory({ controllerMap: this.controllerMap })
+
+		const mercury = this.Fixture('mercury')
+
+		return ViewControllerFactory.Factory({
+			controllerMap: this.controllerMap,
+			connectToApi: () => {
+				return mercury.connectToApi()
+			},
+		})
 	}
 
 	public static Controller<N extends keyof ViewControllerMap>(

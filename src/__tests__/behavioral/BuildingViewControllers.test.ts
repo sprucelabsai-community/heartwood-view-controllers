@@ -1,5 +1,6 @@
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
@@ -26,21 +27,31 @@ declare module '../../types/heartwood.types' {
 	}
 }
 
-export default class BuildingViewControllersTest extends AbstractSpruceTest {
-	private static factory: ViewControllerFactory<any>
+export default class BuildingViewControllersTest extends AbstractViewControllerTest {
+	protected static controllerMap = {
+		test: TestViewController,
+	}
+	private static factory: ViewControllerFactory
 
 	public static async beforeEach() {
 		await super.beforeEach()
-		this.factory = ViewControllerFactory.Factory({
-			controllerMap: {
-				test: TestViewController,
-			},
-		})
+		this.factory = this.Factory()
 	}
 
 	@test()
 	protected static async canCreateBuildingViewControllers() {
 		assert.isTruthy(this.factory)
+	}
+
+	@test()
+	protected static async throwsWithoutSettingConnectToApiHandler() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			ViewControllerFactory.Factory()
+		)
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['connectToApi'],
+		})
 	}
 
 	@test()
@@ -54,7 +65,6 @@ export default class BuildingViewControllersTest extends AbstractSpruceTest {
 	protected static async getsVcFactoryInConstructorOptions() {
 		//@ts-ignore
 		const vc = this.factory.Controller('test', {}) as TestViewController
-
 		assert.isTruthy(vc.constructorOptions.vcFactory)
 	}
 
@@ -64,5 +74,12 @@ export default class BuildingViewControllersTest extends AbstractSpruceTest {
 		const vc = this.factory.Controller('test', {}) as TestViewController
 
 		assert.isTruthy(vc.getVcFactory())
+	}
+
+	@test()
+	protected static builtVcGetsConnectToApiHandler() {
+		//@ts-ignore
+		const vc = this.factory.Controller('test', {}) as TestViewController
+		assert.isTruthy(vc.constructorOptions.connectToApi)
 	}
 }
