@@ -1,3 +1,10 @@
+# [2.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v1.1.19...v2.0.0) (2021-05-12)
+
+
+### Breaking Changes
+
+* view controller factory needs connectToApi handler ([2533a1f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2533a1f))
+
 ## [1.1.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v1.1.18...v1.1.19) (2021-05-12)
 
 ## [1.1.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v1.1.17...v1.1.18) (2021-05-12)
