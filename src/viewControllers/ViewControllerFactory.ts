@@ -104,7 +104,9 @@ export default class ViewControllerFactory<
 		this.controllerMap[name] = Class
 	}
 
-	public mixinControllers(map: Record<string, ViewController<any>>) {
+	public mixinControllers(
+		map: Record<string, ViewControllerConstructor<ViewController<any>>>
+	) {
 		this.controllerMap = {
 			...this.controllerMap,
 			...map,
