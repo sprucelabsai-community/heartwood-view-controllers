@@ -104,10 +104,7 @@ export default class ViewControllerFactory<
 		this.controllerMap[name] = Class
 	}
 
-	public mixinControllers<Vc extends ViewController<any>>(
-		map: Record<string, ViewControllerConstructor<Vc>>
-	) {
-		//@ts-ignore
+	public mixinControllers(map: Record<string, ViewController<any>>) {
 		this.controllerMap = {
 			...this.controllerMap,
 			...map,
