@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.0.2...v3.1.0) (2021-05-13)
+
+
+### Features
+
+* vcFactory hasController check ([f0209ea](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f0209ea))
+
 ## [3.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.0.1...v3.0.2) (2021-05-12)
 
 ## [3.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.0.0...v3.0.1) (2021-05-12)
