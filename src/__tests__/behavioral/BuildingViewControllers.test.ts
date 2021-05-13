@@ -62,6 +62,16 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 	}
 
 	@test()
+	protected static hasController() {
+		assert.isTrue(this.factory.hasController('test'))
+	}
+
+	@test()
+	protected static doesNotHaveController() {
+		assert.isFalse(this.factory.hasController('test-not-found'))
+	}
+
+	@test()
 	protected static async getsVcFactoryInConstructorOptions() {
 		//@ts-ignore
 		const vc = this.factory.Controller('test', {}) as TestViewController

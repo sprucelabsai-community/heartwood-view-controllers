@@ -120,6 +120,11 @@ export default class ViewControllerFactory<
 		}
 	}
 
+	public hasController(name: string): boolean {
+		//@ts-ignore
+		return !!this.controllerMap[name]
+	}
+
 	public Controller<
 		N extends keyof ControllerMap,
 		O extends ControllerOptions<N> = ControllerOptions<N>
