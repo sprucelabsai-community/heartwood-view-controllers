@@ -51,8 +51,8 @@ export default class LoginViewController
 	implements ViewController<ViewModel>
 {
 	private sections: Section<LoginSchema>[]
-	private static id = 0
-	private id: string
+	private static _id = 0
+	private _id: string
 	private loginHandler?: LoginHandler
 	private currentSlide = 0
 	private loginForm: BigFormViewController<LoginSchema>
@@ -63,8 +63,8 @@ export default class LoginViewController
 	) {
 		super(options)
 
-		this.id = `${LoginViewController.id}`
-		LoginViewController.id++
+		this._id = `${LoginViewController._id}`
+		LoginViewController._id++
 
 		this.sections = [
 			{
@@ -92,7 +92,7 @@ export default class LoginViewController
 					return true
 				},
 				isBusy: false,
-				id: this.id,
+				id: this._id,
 				schema: loginSchema,
 				sections: this.sections,
 			})

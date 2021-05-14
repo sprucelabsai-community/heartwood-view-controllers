@@ -1,9 +1,11 @@
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import Authenticator from '../../auth/Authenticator'
+import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { MockStorage } from '../../tests/MockStorage'
 
-export default class AuthenticatorTest extends AbstractSpruceTest {
+export default class AuthenticatorTest extends AbstractViewControllerTest {
+	protected static controllerMap: Record<string, any> = {}
 	private static storage: MockStorage
 
 	private static readonly person = {
@@ -140,5 +142,12 @@ export default class AuthenticatorTest extends AbstractSpruceTest {
 		assert.isTrue(hit)
 
 		assert.isEqualDeep(p, this.person)
+	}
+
+	@test()
+	protected static canBuildLoginVc() {
+		const factory = this.Factory()
+		const login = factory.Controller('login', {})
+		assert.isTruthy(login)
 	}
 }
