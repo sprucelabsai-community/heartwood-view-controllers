@@ -1,5 +1,5 @@
-import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
