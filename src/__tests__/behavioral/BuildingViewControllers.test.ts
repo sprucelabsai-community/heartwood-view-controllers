@@ -5,7 +5,6 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import {
 	BuiltSkillViewController,
 	BuiltViewController,
-	SkillViewController,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
