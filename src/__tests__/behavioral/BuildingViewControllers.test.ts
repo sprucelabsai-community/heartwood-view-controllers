@@ -150,7 +150,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 	}
 
 	@test()
-	protected static skillViewControllerGetTypesed() {
+	protected static skillViewControllerGetTyped() {
 		const vc = this.factory.Controller('testSkillView', {})
 		assert.isExactType<
 			BuiltSkillViewController<TestSkillViewController>,
