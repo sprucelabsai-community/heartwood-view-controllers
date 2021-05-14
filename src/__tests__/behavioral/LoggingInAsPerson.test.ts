@@ -1,5 +1,5 @@
+import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { MockStorage } from '../../tests/MockStorage'
