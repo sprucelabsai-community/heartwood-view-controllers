@@ -9,8 +9,6 @@ declare module '../../types/heartwood.types' {
 }
 
 export default class DialogTestSkillViewController extends AbstractSkillViewController {
-	public id = 'dialogTest'
-
 	private readonly dialog = { header: { title: 'coming soon' } }
 	public loadInvocations: SkillViewControllerLoadOptions[] = []
 

@@ -151,15 +151,28 @@ export default class ViewControllerFactory<
 		}
 
 		//@ts-ignore
-		const instance = new Class(constructorOptions) as InstanceType<
+		let instance = new Class(constructorOptions) as InstanceType<
 			ControllerMap[N]
 		>
 
 		if (isFunction) {
 			//@ts-ignore
-			return instance.__proto__ ?? instance
+			instance = instance.__proto__ ?? instance
 		}
 
+		//@ts-ignore
+		if (instance.id) {
+			throw new SpruceError({
+				code: 'INVALID_SKILL_VIEW_CONTROLLER',
+				friendlyMessage: `Property \`id\` is reserved. Please rename it to \`_id\`.`,
+				id: name,
+			})
+		}
+
+		//@ts-ignore
+		instance.id = name
+
+		//@ts-ignorea
 		return instance
 	}
 }

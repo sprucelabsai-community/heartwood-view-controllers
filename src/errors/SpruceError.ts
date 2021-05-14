@@ -29,14 +29,14 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				}
 				break
 
+			case 'INVALID_SKILL_VIEW_CONTROLLER':
+				message = `Your \`${options.id}\` controller you created is not valid:\n\n${options.friendlyMessage}`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}
 
-		const fullMessage = options.friendlyMessage
-			? options.friendlyMessage
-			: message
-
-		return fullMessage
+		return message
 	}
 }

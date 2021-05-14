@@ -93,6 +93,35 @@ export declare namespace SpruceErrors.Heartwood {
 export declare namespace SpruceErrors.Heartwood {
 
 	
+	export interface InvalidSkillViewController {
+		
+			
+			'id': string
+	}
+
+	export interface InvalidSkillViewControllerSchema extends SpruceSchema.Schema {
+		id: 'invalidSkillViewController',
+		namespace: 'Heartwood',
+		name: 'Invalid skill view',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type InvalidSkillViewControllerEntity = SchemaEntity<SpruceErrors.Heartwood.InvalidSkillViewControllerSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.Heartwood {
+
+	
 	export interface ExportFailed {
 		
 	}

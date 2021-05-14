@@ -8,8 +8,6 @@ declare module '../../types/heartwood.types' {
 }
 
 export default class ConfirmTestSkillViewController extends AbstractSkillViewController {
-	public id = 'confirmTest'
-
 	public async confirmShouldSave() {
 		const confirm = await this.confirm({ message: 'You sure?' })
 		return confirm
