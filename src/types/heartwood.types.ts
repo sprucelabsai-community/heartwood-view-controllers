@@ -194,3 +194,7 @@ export interface ViewControllerOptions {
 export type BuiltViewController<Vc extends ViewController<any>> = {
 	id: string
 } & Vc
+
+export type BuiltSkillViewController<Vc extends SkillViewController> = {
+	id: string
+} & Vc
