@@ -124,7 +124,8 @@
           "worksheetId": 843037832,
           "testMap": {
             "packagerPackages": "I105",
-            "canGetVcFactory": "I106"
+            "canGetVcFactory": "I106",
+            "controllersGetIdsSet": "I124"
           }
         }
       ]
