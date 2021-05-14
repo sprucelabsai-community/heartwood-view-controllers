@@ -40,6 +40,7 @@ export class TestViewControllerWithId extends AbstractViewController<ViewModel> 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
 		test: typeof TestViewController
+		test2: typeof TestViewControllerWithId
 	}
 }
 
@@ -89,23 +90,20 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 	@test()
 	protected static async getsVcFactoryInConstructorOptions() {
-		//@ts-ignore
-		const vc = this.factory.Controller('test', {}) as TestViewController
+		const vc = this.factory.Controller('test', {})
 		assert.isTruthy(vc.constructorOptions.vcFactory)
 	}
 
 	@test()
 	protected static async canGetVcFactory() {
-		//@ts-ignore
-		const vc = this.factory.Controller('test', {}) as TestViewController
+		const vc = this.factory.Controller('test', {})
 
 		assert.isTruthy(vc.getVcFactory())
 	}
 
 	@test()
 	protected static builtVcGetsConnectToApiHandler() {
-		//@ts-ignore
-		const vc = this.factory.Controller('test', {}) as TestViewController
+		const vc = this.factory.Controller('test', {})
 		assert.isTruthy(vc.constructorOptions.connectToApi)
 	}
 
@@ -115,27 +113,19 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 			test2: TestViewController,
 		})
 
-		//@ts-ignore
-		const vc = this.factory.Controller('test2', {}) as TestViewController
+		const vc = this.factory.Controller('test2', {})
 		assert.isTruthy(vc)
 
-		//@ts-ignore
-		const vc2 = this.factory.Controller('test', {}) as TestViewController
+		const vc2 = this.factory.Controller('test', {})
 		assert.isTruthy(vc2)
 	}
 
 	@test()
 	protected static controllersGetIdsSet() {
-		this.factory.mixinControllers({
-			test2: TestViewController,
-		})
-
-		//@ts-ignore
-		const vc = this.factory.Controller('test2', {}) as TestViewController
+		const vc = this.factory.Controller('test', {})
 		assert.isTruthy(vc)
 
-		//@ts-ignore
-		assert.isEqual(vc.id, 'test2')
+		assert.isEqual(vc.id, 'test')
 	}
 
 	@test()

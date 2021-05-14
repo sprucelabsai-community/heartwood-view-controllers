@@ -1,6 +1,7 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import SpruceError from '../errors/SpruceError'
 import {
+	BuiltViewController,
 	ConfirmHandler,
 	ControllerOptions,
 	ImportedViewController,
@@ -128,7 +129,7 @@ export default class ViewControllerFactory<
 	public Controller<
 		N extends keyof ControllerMap,
 		O extends ControllerOptions<N> = ControllerOptions<N>
-	>(name: N, options: O): InstanceType<ControllerMap[N]> {
+	>(name: N, options: O): BuiltViewController<InstanceType<ControllerMap[N]>> {
 		const Class = this.controllerMap[name]
 
 		if (!Class) {

@@ -190,3 +190,7 @@ export interface ViewControllerOptions {
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler
 }
+
+export type BuiltViewController<Vc extends ViewController<any>> = {
+	id: string
+} & Vc
