@@ -61,6 +61,7 @@ declare module '../../types/heartwood.types' {
 export default class BuildingViewControllersTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		test: TestViewController,
+		testSkillView: TestSkillViewController,
 	}
 	private static factory: ViewControllerFactory
 
