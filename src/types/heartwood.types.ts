@@ -191,10 +191,14 @@ export interface ViewControllerOptions {
 	confirmHandler: ConfirmHandler
 }
 
-export type BuiltViewController<Vc extends ViewController<any>> = {
+export type BuiltViewController<
+	Vc extends ViewController<any> = ViewController<any>
+> = {
 	id: string
 } & Vc
 
-export type BuiltSkillViewController<Vc extends SkillViewController> = {
+export type BuiltSkillViewController<
+	Vc extends SkillViewController = SkillViewController
+> = {
 	id: string
 } & Vc
