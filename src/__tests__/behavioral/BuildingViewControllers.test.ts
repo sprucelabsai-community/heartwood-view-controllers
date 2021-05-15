@@ -1,5 +1,5 @@
-import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import {
