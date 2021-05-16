@@ -2,6 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { DEMO_NUMBER } from '../../tests/constants'
 import { MockStorage } from '../../tests/MockStorage'
 
 export default class AuthenticatorTest extends AbstractViewControllerTest {
@@ -149,5 +150,25 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const factory = this.Factory()
 		const login = factory.Controller('login', {})
 		assert.isTruthy(login)
+	}
+
+	@test()
+	protected static async loginVcClearsPinWhenSubmittingPhone() {
+		const factory = this.Factory()
+		const login = factory.Controller('login', {})
+
+		//@ts-ignore
+		const form = login.loginForm
+
+		form.setValue('code', '0123')
+		form.setValue('phone', DEMO_NUMBER)
+
+		await form.handleSubmit()
+
+		const slide = form.getCurrentSlide()
+		assert.isEqual(slide, 1)
+
+		const { code } = form.getValues()
+		assert.isFalsy(code)
 	}
 }
