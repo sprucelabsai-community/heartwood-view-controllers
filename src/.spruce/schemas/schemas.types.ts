@@ -1732,6 +1732,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isEnabled'?: boolean| undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
 				'shouldQueueShow'?: boolean| undefined | null
+				/** Show hint icon. */
+				'shouldShowHintIcon'?: boolean| undefined | null
+				/** Click handler for hint icon. */
+				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary")| undefined | null
 				/** Image. */
@@ -1778,6 +1782,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                hint: 'Fade in effect could change.',
 			                options: undefined
+			            },
+			            /** Show hint icon. */
+			            'shouldShowHintIcon': {
+			                label: 'Show hint icon',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Click handler for hint icon. */
+			            'onClickHintIcon': {
+			                label: 'Click handler for hint icon',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void> | void`,}
 			            },
 			            /** Type. */
 			            'type': {

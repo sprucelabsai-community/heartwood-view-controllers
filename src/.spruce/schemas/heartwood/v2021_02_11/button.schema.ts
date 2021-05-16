@@ -40,6 +40,18 @@ const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
 	                hint: 'Fade in effect could change.',
 	                options: undefined
 	            },
+	            /** Show hint icon. */
+	            'shouldShowHintIcon': {
+	                label: 'Show hint icon',
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** Click handler for hint icon. */
+	            'onClickHintIcon': {
+	                label: 'Click handler for hint icon',
+	                type: 'raw',
+	                options: {valueType: `() => Promise<void> | void`,}
+	            },
 	            /** Type. */
 	            'type': {
 	                label: 'Type',

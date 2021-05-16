@@ -29,6 +29,17 @@ export default buildSchema({
 			label: 'Add to fade-in queue.',
 			hint: 'Fade in effect could change.',
 		},
+		shouldShowHintIcon: {
+			type: 'boolean',
+			label: 'Show hint icon',
+		},
+		onClickHintIcon: {
+			type: 'raw',
+			label: 'Click handler for hint icon',
+			options: {
+				valueType: '() => Promise<void> | void',
+			},
+		},
 		type: {
 			type: 'select',
 			label: 'Type',
