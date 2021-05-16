@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.1.8...v3.2.0) (2021-05-16)
+
+
+### Features
+
+* hint icon on buttons ([4a68763](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4a68763))
+
 ## [3.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.1.7...v3.1.8) (2021-05-15)
 
 ## [3.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.1.6...v3.1.7) (2021-05-14)
