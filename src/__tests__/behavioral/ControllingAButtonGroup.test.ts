@@ -8,6 +8,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	private static onSelectInvocations: number[][]
 	private static multiSelectVc: ButtonGroupViewController
 	protected static controllerMap = {}
+	private static onClickHintInvocations: number[] = []
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -16,6 +17,9 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		this.singleSelectVc = this.Factory().Controller('buttonGroup', {
 			onSelectionChange: (selected) => {
 				this.onSelectInvocations.push(selected)
+			},
+			onClickHintIcon: (idx) => {
+				this.onClickHintInvocations.push(idx)
 			},
 			buttons: [
 				{
@@ -125,14 +129,6 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		assert.doesNotInclude(buttons, { isSelected: true })
 	}
 
-	private static assertFirstButtonSelected(
-		buttons: SpruceSchemas.Heartwood.v2021_02_11.Button[]
-	) {
-		assert.doesInclude(buttons, { isSelected: true })
-		assert.doesInclude(buttons[0], { isSelected: true })
-		assert.doesInclude(buttons[1], { isSelected: false })
-	}
-
 	@test()
 	protected static async clickingButtonSelectsOneButton() {
 		let buttons = this.render(this.singleSelectVc)
@@ -189,5 +185,26 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		this.render(this.singleSelectVc)
 		const buttons = this.render(this.singleSelectVc)
 		assert.isFalse(buttons[0].shouldQueueShow)
+	}
+
+	@test()
+	protected static async clickingHintIconTriggersHintCallback() {
+		let buttons = this.render(this.singleSelectVc)
+
+		await buttons[0].onClickHintIcon?.()
+
+		assert.isLength(this.onClickHintInvocations, 1)
+		assert.isEqual(this.onClickHintInvocations[0], 0)
+
+		await buttons[1].onClickHintIcon?.()
+		assert.isEqual(this.onClickHintInvocations[1], 1)
+	}
+
+	private static assertFirstButtonSelected(
+		buttons: SpruceSchemas.Heartwood.v2021_02_11.Button[]
+	) {
+		assert.doesInclude(buttons, { isSelected: true })
+		assert.doesInclude(buttons[0], { isSelected: true })
+		assert.doesInclude(buttons[1], { isSelected: false })
 	}
 }

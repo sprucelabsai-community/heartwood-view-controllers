@@ -9,10 +9,12 @@ type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
 type ViewModel = Button[]
 
 type SelectionChangeHandler = (selected: number[]) => void | Promise<void>
+type HintClickHandler = (selected: number) => void
 
 export interface ButtonGroupViewControllerOptions {
 	buttons: Button[]
 	onSelectionChange?: SelectionChangeHandler
+	onClickHintIcon?: HintClickHandler
 	shouldAllowMultiSelect?: boolean
 }
 
@@ -24,6 +26,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	private buttonTriggerRenderHandlers: (() => void)[] = []
 	private buttonControllers: { controller: ButtonController }[] = []
 	private hasBeenRendered: boolean[] = []
+	private clickHintHandler?: HintClickHandler
 
 	public constructor(
 		options: ButtonGroupViewControllerOptions & ViewControllerOptions
@@ -33,6 +36,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		this.buttons = options.buttons
 		this.selectionChangeHandler = options.onSelectionChange
 		this.shouldAllowMultiSelect = options.shouldAllowMultiSelect ?? false
+		this.clickHintHandler = options.onClickHintIcon
 
 		this.rebuildButtons()
 	}
@@ -111,6 +115,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 						}
 						controller.triggerRender()
 					},
+					onClickHintIcon: () => {
+						this.handleClickHintIcon(idx)
+					},
 				}
 
 				return options
@@ -118,6 +125,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 
 		return controller
+	}
+	private handleClickHintIcon(idx: number) {
+		this.clickHintHandler?.(idx)
 	}
 
 	public render(): ViewModel {
