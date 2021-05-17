@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.3.1...v3.4.0) (2021-05-17)
+
+
+### Features
+
+* header image sizing ([8de279a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8de279a))
+
 ## [3.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.3.0...v3.3.1) (2021-05-16)
 
 # [3.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.2.0...v3.3.0) (2021-05-16)
