@@ -169,6 +169,6 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isEqual(slide, 1)
 
 		const { code } = form.getValues()
-		assert.isFalsy(code)
+		assert.isNull(code)
 	}
 }

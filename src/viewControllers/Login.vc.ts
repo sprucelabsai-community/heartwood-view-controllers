@@ -101,7 +101,7 @@ export default class LoginViewController
 
 	private async handleSubmitPhone(phone: string) {
 		try {
-			this.loginForm.setValue('code', '')
+			this.loginForm.setValue('code', null)
 
 			const client = await this.connectToApi()
 			const pinResults = await client.emit('request-pin::v2020_12_25', {
