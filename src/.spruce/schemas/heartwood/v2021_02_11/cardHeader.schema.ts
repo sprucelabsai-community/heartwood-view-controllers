@@ -40,6 +40,14 @@ const cardHeaderSchema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema  = 
 	                hint: 'The absolute url to any image you want shown in the header.',
 	                options: undefined
 	            },
+	            /** Image size. How should the header image be rendered */
+	            'imageSize': {
+	                label: 'Image size',
+	                type: 'select',
+	                hint: 'How should the header image be rendered',
+	                defaultValue: "cover",
+	                options: {choices: [{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],}
+	            },
 	            /** Close handler. Meant for use inside React components directly. */
 	            'closeHandler': {
 	                label: 'Close handler',

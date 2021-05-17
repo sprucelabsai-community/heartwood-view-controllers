@@ -35,6 +35,24 @@ export default buildSchema({
 			label: 'Image',
 			hint: 'The absolute url to any image you want shown in the header.',
 		},
+		imageSize: {
+			type: 'select',
+			label: 'Image size',
+			hint: 'How should the header image be rendered',
+			defaultValue: 'cover',
+			options: {
+				choices: [
+					{
+						value: 'cover',
+						label: 'Cover',
+					},
+					{
+						value: 'contain',
+						label: 'Contain',
+					},
+				],
+			},
+		},
 		closeHandler: {
 			type: 'raw',
 			label: 'Close handler',
