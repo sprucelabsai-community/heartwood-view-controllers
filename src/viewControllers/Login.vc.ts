@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { buildSchema, Schema } from '@sprucelabs/schema'
+import { Schema } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
@@ -20,7 +20,7 @@ export interface LoginViewControllerOptions {
 	onLogin?: LoginHandler
 }
 
-const loginSchema = buildSchema({
+const loginSchema = {
 	id: 'loginSchema',
 	fields: {
 		phone: {
@@ -38,7 +38,7 @@ const loginSchema = buildSchema({
 			},
 		},
 	},
-})
+} as const
 
 type LoginSchema = typeof loginSchema
 
