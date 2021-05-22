@@ -15,7 +15,7 @@ export type SwipeViewControllerOptions = {
 } & Pick<ViewModel, 'footer'>
 
 export default class SwipeViewController extends AbstractViewController<ViewModel> {
-	private currentSlide = 0
+	private presentSlide = 0
 	private slides: Slide[]
 	private swipeController?: SwipeController
 	private footer?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter | null
@@ -31,14 +31,14 @@ export default class SwipeViewController extends AbstractViewController<ViewMode
 		this.slideChangeHandler = options.onSlideChange
 	}
 
-	public async swipeToSlide(slide: number) {
+	public async jumpToSlide(slide: number) {
 		this.swipeController?.swipeTo(slide)
 		await this.handleSlideChange(slide)
 	}
 
 	private async handleSlideChange(slide: number) {
-		if (this.currentSlide !== slide) {
-			this.currentSlide = slide
+		if (this.presentSlide !== slide) {
+			this.presentSlide = slide
 			await new Promise<void>((resolve) => {
 				setTimeout(() => {
 					this.slideChangeHandler?.(slide)
@@ -48,8 +48,8 @@ export default class SwipeViewController extends AbstractViewController<ViewMode
 		}
 	}
 
-	public getCurrentSlide() {
-		return this.currentSlide
+	public getPresentSlide() {
+		return this.presentSlide
 	}
 
 	public updateSlide(slideIdx: number, slide: Partial<Slide>) {
@@ -80,7 +80,7 @@ export default class SwipeViewController extends AbstractViewController<ViewMode
 		return {
 			body: {
 				swipeController: (controller) => (this.swipeController = controller),
-				onSelectSlideTitle: this.swipeToSlide.bind(this),
+				onSelectSlideTitle: this.jumpToSlide.bind(this),
 				onChangeSlide: this.handleSlideChange.bind(this),
 				sections: this.slides,
 				shouldEnableSectionSwiping: true,

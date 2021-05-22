@@ -80,25 +80,25 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static startsAtFirstSlide() {
-		assert.isEqual(this.vc.getCurrentSlide(), 0)
+		assert.isEqual(this.vc.getPresentSlide(), 0)
 	}
 
 	@test()
 	protected static async canSetCurrentSlide() {
-		await this.vc.setCurrentSlide(1)
-		assert.isEqual(this.vc.getCurrentSlide(), 1)
+		await this.vc.jumpToSlide(1)
+		assert.isEqual(this.vc.getPresentSlide(), 1)
 	}
 
 	@test()
 	protected static async settingNegativeSlideGoesToZero() {
-		await this.vc.setCurrentSlide(-1)
-		assert.isEqual(this.vc.getCurrentSlide(), 0)
+		await this.vc.jumpToSlide(-1)
+		assert.isEqual(this.vc.getPresentSlide(), 0)
 	}
 
 	@test()
 	protected static async settingTooHighOfSlideSetsToLast() {
-		await this.vc.setCurrentSlide(9999)
-		assert.isEqual(this.vc.getCurrentSlide(), 2)
+		await this.vc.jumpToSlide(9999)
+		assert.isEqual(this.vc.getPresentSlide(), 2)
 	}
 
 	@test()
@@ -111,7 +111,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 			whatWasHit = idx
 		}
 
-		await this.vc.setCurrentSlide(2)
+		await this.vc.jumpToSlide(2)
 
 		assert.isTrue(wasHit)
 		assert.isEqual(whatWasHit, 2)

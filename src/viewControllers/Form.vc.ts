@@ -88,8 +88,21 @@ export default class FormViewController<
 	}
 
 	public setValue<N extends SchemaFieldNames<S>>(name: N, value: any): void {
+		this._setValue<N>({ name, value })
+	}
+
+	private _setValue<N extends SchemaFieldNames<S>>(options: {
+		name: N
+		value: any
+		shouldSetIsDirty?: boolean
+	}) {
+		const { name, value, shouldSetIsDirty = true } = options
+
 		this.viewModel.values[name] = value
-		this.dirtyFields[name] = true
+		if (shouldSetIsDirty) {
+			this.dirtyFields[name] = true
+		}
+
 		const errorsByField = this.validateDirtyFields()
 
 		void this.viewModel.onChange?.({
@@ -226,6 +239,15 @@ export default class FormViewController<
 	public reset() {
 		this.setValues(this.originalValues)
 		this.setErrorsByField({})
+	}
+
+	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
+		delete this.dirtyFields[name]
+		this._setValue<N>({
+			name,
+			value: this.originalValues?.[name],
+			shouldSetIsDirty: false,
+		})
 	}
 
 	public setValues(values: SchemaPartialValues<S>) {

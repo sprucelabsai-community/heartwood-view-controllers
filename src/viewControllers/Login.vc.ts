@@ -5,6 +5,7 @@ import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
 import {
 	BigFormViewController,
+	FormOnChangeOptions,
 	ViewController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
@@ -12,7 +13,7 @@ import AbstractViewController from './Abstract.vc'
 
 type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Section<S extends Schema> =
-	SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>
+	SpruceSchemas.Heartwood.v2021_02_11.BigFormSection<S>
 
 type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 
@@ -27,7 +28,7 @@ const loginSchema = {
 			type: 'phone',
 			isRequired: true,
 			label: 'Phone',
-			hint: "I'm gonna send you a pin. Texting rates may apply. Legal speak below: 👇 🤓",
+			hint: "I'm gonna send you a pin. Texting rates may apply.",
 		},
 		code: {
 			type: 'text',
@@ -74,6 +75,7 @@ export default class LoginViewController
 			{
 				title: 'Now the pin! 👇',
 				fields: ['code'],
+				shouldShowSubmitButton: false,
 			},
 		]
 
@@ -81,10 +83,11 @@ export default class LoginViewController
 		this.loginForm = this.vcFactory.Controller(
 			'bigForm',
 			buildBigForm({
-				onSubmitSlide: async ({ values, currentSlide }) => {
-					if (currentSlide === 0 && values.phone) {
+				onChange: this.handleOnChange.bind(this),
+				onSubmitSlide: async ({ values, presentSlide }) => {
+					if (presentSlide === 0 && values.phone) {
 						void this.handleSubmitPhone(values.phone)
-					} else if (currentSlide === 1 && values.code) {
+					} else if (presentSlide === 1 && values.code) {
 						void this.handleSubmitPin(values.code)
 						return false
 					}
@@ -99,9 +102,15 @@ export default class LoginViewController
 		) as any
 	}
 
+	private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
+		if (options.values.code?.length === 4) {
+			await this.loginForm.handleSubmit()
+		}
+	}
+
 	private async handleSubmitPhone(phone: string) {
 		try {
-			this.loginForm.setValue('code', null)
+			this.loginForm.resetField('code')
 
 			const client = await this.connectToApi()
 			const pinResults = await client.emit('request-pin::v2020_12_25', {

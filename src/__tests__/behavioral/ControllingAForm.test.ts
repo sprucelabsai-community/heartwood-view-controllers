@@ -22,6 +22,9 @@ const testForm = buildForm({
 				type: 'text',
 				isRequired: true,
 			},
+			favoriteNumber: {
+				type: 'number',
+			},
 		},
 	},
 	sections: [
@@ -44,14 +47,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async canCreateUsingAFormViewController() {
+	protected static canCreateUsingAFormViewController() {
 		//@ts-ignore
 		const vc = this.Controller('form', {})
 		assert.isTruthy(vc)
 	}
 
 	@test()
-	protected static async throwsWhenRenderingInvalidForm() {
+	protected static throwsWhenRenderingInvalidForm() {
 		//@ts-ignore
 		const vc = this.Controller('form', {})
 		const err = assert.doesThrow(() => vc.render())
@@ -60,21 +63,21 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async rendersValidForm() {
+	protected static rendersValidForm() {
 		const view = this.vc.render()
 
 		validateSchemaValues(formSchema, view)
 	}
 
 	@test()
-	protected static async formIsNotBusyToStart() {
+	protected static formIsNotBusyToStart() {
 		assert.isFalsy(this.vc.getIsBusy())
 		const model = this.vc.render()
 		assert.isFalsy(model.isBusy)
 	}
 
 	@test()
-	protected static async canSetBusy() {
+	protected static canSetBusy() {
 		this.vc.setIsBusy(true)
 		assert.isTrue(this.vc.getIsBusy())
 		const model = this.vc.render()
@@ -82,14 +85,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async canGetValues() {
+	protected static canGetValues() {
 		const actual = this.vc.getValues()
 
 		assert.isEqualDeep(actual, {})
 	}
 
 	@test()
-	protected static async canSetValue() {
+	protected static canSetValue() {
 		this.vc.setValue('first', 'tay')
 		const actual = this.vc.getValues()
 
@@ -97,27 +100,27 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async errorsByFieldEmptyToStart() {
+	protected static errorsByFieldEmptyToStart() {
 		const errorsByField = this.vc.getErrorsByField()
 		assert.isLength(Object.keys(errorsByField), 0)
 		assert.isFalse(this.vc.hasErrors())
 	}
 
 	@test()
-	protected static async errorsByFieldShowsFirstDirtyFieldOnly() {
+	protected static errorsByFieldShowsFirstDirtyFieldOnly() {
 		const errorsByField = this.vc.getErrorsByField()
 		assert.isLength(Object.keys(errorsByField), 0)
 		assert.isFalse(this.vc.hasErrors())
 	}
 
 	@test()
-	protected static async validateShowsAllErrors() {
+	protected static validateShowsAllErrors() {
 		const errorsByField = this.vc.validate()
 		assert.isLength(Object.keys(errorsByField), 2)
 	}
 
 	@test()
-	protected static async errorsByFieldShowsFirstDirtyField() {
+	protected static errorsByFieldShowsFirstDirtyField() {
 		this.vc.setValue('first', 'Tay')
 		this.vc.setValue('first', '')
 
@@ -128,7 +131,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async fieldErrorsRendered() {
+	protected static fieldErrorsRendered() {
 		this.vc.setValue('first', 'Test')
 		let model = this.vc.render()
 
@@ -141,7 +144,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async settingErrorsSetsErrorsByField() {
+	protected static settingErrorsSetsErrorsByField() {
 		this.vc.setErrors([
 			{
 				code: 'invalid_value',
@@ -156,7 +159,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async settingErrorsOverwritesLastErrorsByField() {
+	protected static settingErrorsOverwritesLastErrorsByField() {
 		this.vc.setErrors([
 			{
 				code: 'invalid_value',
@@ -178,13 +181,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async submitControlsShowByDefault() {
+	protected static submitControlsShowByDefault() {
 		const model = this.vc.render()
 		assert.isTrue(model.shouldShowSubmitControls)
 	}
 
 	@test()
-	protected static async canHideAndShowSubmitControls() {
+	protected static canHideAndShowSubmitControls() {
 		this.vc.hideSubmitControls()
 		assert.isFalse(this.vc.render().shouldShowSubmitControls)
 		this.vc.showSubmitControls()
@@ -192,7 +195,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async onChangesReportAsExpected() {
+	protected static onChangesReportAsExpected() {
 		let lastIsValid: any
 		let lastErrorsByField: any
 
@@ -216,7 +219,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async resettingAFormClearsValuesAndErrors() {
+	protected static resettingAFormClearsValuesAndErrors() {
 		this.vc.setValue('first', 'Test')
 		const errors = this.vc.validate()
 		this.vc.setErrorsByField(errors)
@@ -229,7 +232,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async resettingFormCallsRender() {
+	protected static resettingFormCallsRender() {
 		//@ts-ignore
 		const count = this.vc.__triggerRenderCount
 		this.vc.reset()
@@ -238,10 +241,44 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static async resetValuesAreNotSetByRef() {
+	protected static resetValuesAreNotSetByRef() {
 		this.vc.reset()
 		this.vc.setValue('first', 'Tets')
 		//@ts-ignore
 		assert.isFalsy(this.vc.originalValues.first)
+	}
+
+	@test()
+	protected static canResetField() {
+		const vc: FormViewController<typeof testForm['schema']> = this.Controller(
+			'form',
+			buildForm({
+				...testForm,
+				values: {
+					first: 'tay',
+				},
+			})
+		) as any
+
+		vc.setValue('first', '2000')
+
+		assert.isEqual(vc.getValues().first, '2000')
+
+		vc.resetField('first')
+
+		assert.isEqual(vc.getValues().first, 'tay')
+	}
+
+	@test()
+	protected static resetFieldsClearsItsErrors() {
+		this.vc.setValue('favoriteNumber', 'aoeu')
+
+		let errs = this.vc.getErrorsByField()
+		assert.isTruthy(errs.favoriteNumber)
+
+		this.vc.resetField('favoriteNumber')
+
+		errs = this.vc.getErrorsByField()
+		assert.isFalsy(errs.favoriteNumber)
 	}
 }

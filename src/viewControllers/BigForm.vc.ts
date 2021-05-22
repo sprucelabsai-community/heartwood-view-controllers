@@ -35,12 +35,12 @@ export default class BigFormViewController<
 		return false
 	}
 
-	public getCurrentSlide(): number {
-		return this.viewModel.currentSlide ?? 0
+	public getPresentSlide(): number {
+		return this.viewModel.presentSlide ?? 0
 	}
 
-	public async setCurrentSlide(idx: number) {
-		this.viewModel.currentSlide = Math.min(
+	public async jumpToSlide(idx: number) {
+		this.viewModel.presentSlide = Math.min(
 			this.viewModel.sections.length - 1,
 			Math.max(0, idx)
 		)
@@ -52,7 +52,7 @@ export default class BigFormViewController<
 			this.focusInput(firstFieldOfSection)
 		}
 
-		this.replaySlideHeading(this.getCurrentSlide())
+		this.replaySlideHeading(this.getPresentSlide())
 	}
 
 	public replaySlideHeading(idx: number) {
@@ -60,18 +60,18 @@ export default class BigFormViewController<
 	}
 
 	public async goForward() {
-		await this.setCurrentSlide(this.getCurrentSlide() + 1)
+		await this.jumpToSlide(this.getPresentSlide() + 1)
 	}
 
 	public async goBack() {
-		await this.setCurrentSlide(this.getCurrentSlide() - 1)
+		await this.jumpToSlide(this.getPresentSlide() - 1)
 	}
 
 	public async handleSubmit() {
 		const errorsByField = this.validate()
 		const results = await this.viewModel.onSubmitSlide?.({
 			values: this.getValues(),
-			currentSlide: this.getCurrentSlide(),
+			presentSlide: this.getPresentSlide(),
 			errorsByField,
 			controller: this,
 			isValid: this.isValid(),
@@ -81,15 +81,15 @@ export default class BigFormViewController<
 			return
 		}
 
-		if (this.isCurrentSlideValid()) {
+		if (this.isPresentSlideValid()) {
 			await this.goForward()
 		} else {
 			this.setErrorsByField(errorsByField)
 		}
 	}
 
-	private isCurrentSlideValid() {
-		return this.isSlideValid(this.getCurrentSlide())
+	private isPresentSlideValid() {
+		return this.isSlideValid(this.getPresentSlide())
 	}
 
 	public render(): V {

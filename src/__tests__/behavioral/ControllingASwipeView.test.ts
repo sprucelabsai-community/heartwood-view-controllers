@@ -36,13 +36,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async startsAtFirstSlide() {
-		assert.isEqual(this.vc.getCurrentSlide(), 0)
+		assert.isEqual(this.vc.getPresentSlide(), 0)
 	}
 
 	@test()
 	protected static async canJumpToFutureSlide() {
-		await this.vc.swipeToSlide(1)
-		assert.isEqual(this.vc.getCurrentSlide(), 1)
+		await this.vc.jumpToSlide(1)
+		assert.isEqual(this.vc.getPresentSlide(), 1)
 	}
 
 	@test()
@@ -56,8 +56,8 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 			],
 		})
 
-		await vc.swipeToSlide(10)
-		assert.isEqual(this.vc.getCurrentSlide(), 0)
+		await vc.jumpToSlide(10)
+		assert.isEqual(this.vc.getPresentSlide(), 0)
 	}
 
 	@test()
@@ -177,15 +177,15 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 		assert.isEqual(onSlideChangeSlide, -1)
 
-		await vc.swipeToSlide(1)
+		await vc.jumpToSlide(1)
 		assert.isEqual(onSlideChangeSlide, 1)
 		assert.isEqual(changeHitCount, 1)
 
-		await vc.swipeToSlide(0)
+		await vc.jumpToSlide(0)
 		assert.isEqual(onSlideChangeSlide, 0)
 		assert.isEqual(changeHitCount, 2)
 
-		await vc.swipeToSlide(0)
+		await vc.jumpToSlide(0)
 		assert.isEqual(onSlideChangeSlide, 0)
 		assert.isEqual(changeHitCount, 2)
 	}

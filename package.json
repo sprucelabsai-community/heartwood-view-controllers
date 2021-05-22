@@ -15,7 +15,10 @@
   "description": "All the power of Heartwood in one, convenient package.",
   "version": "3.4.2",
   "skill": {
-    "namespace": "heartwood"
+    "namespace": "heartwood",
+    "commandOverrides": {
+      "sync.schemas": "--fetchCoreSchemas false"
+    }
   },
   "keywords": [
     "node",
@@ -39,7 +42,6 @@
     "clean.all": "yarn clean && rm -f yarn.lock package-lock.json && rm -rf node_modules/",
     "fix.lint": "eslint --fix '**/*.ts'",
     "health": "yarn boot --health",
-    "sync.schemas": "spruce sync.schemas --fetchCoreSchemas false",
     "health.local": "yarn boot.local --health",
     "lint": "eslint '**/*.ts'",
     "rebuild": "yarn clean.all && yarn && yarn build.dev",

@@ -153,6 +153,37 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async entering4DigitPinTriggersSubmit() {
+		const factory = this.Factory()
+		const login = factory.Controller('login', {})
+
+		//@ts-ignore
+		const form = login.loginForm
+		form.setValue('phone', DEMO_NUMBER)
+
+		await form.handleSubmit()
+
+		const slide = form.getPresentSlide()
+		assert.isEqual(slide, 1)
+
+		let wasHit = false
+
+		//@ts-ignore
+		form.handleSubmit = () => {
+			wasHit = true
+		}
+
+		form.setValue('code', '11')
+		assert.isFalse(wasHit)
+
+		form.setValue('code', '111')
+		assert.isFalse(wasHit)
+
+		form.setValue('code', '1111')
+		assert.isTrue(wasHit)
+	}
+
+	@test()
 	protected static async loginVcClearsPinWhenSubmittingPhone() {
 		const factory = this.Factory()
 		const login = factory.Controller('login', {})
@@ -160,15 +191,14 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		//@ts-ignore
 		const form = login.loginForm
 
-		form.setValue('code', '0123')
 		form.setValue('phone', DEMO_NUMBER)
-
-		await form.handleSubmit()
-
-		const slide = form.getCurrentSlide()
-		assert.isEqual(slide, 1)
+		form.setValue('code', '0123')
 
 		const { code } = form.getValues()
-		assert.isNull(code)
+		assert.isUndefined(code)
+
+		const errors = form.getErrorsByField()
+		//@ts-ignore
+		assert.isEqualDeep(errors, {})
 	}
 }

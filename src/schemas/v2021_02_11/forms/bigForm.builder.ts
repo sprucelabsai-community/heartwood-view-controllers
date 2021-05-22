@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { buildLocalFormImports } from '../../../utilities/buildLocalFormImports'
+import formSectionBuilder from '../formSection.builder'
 import formBuilder from './form.builder'
 
 export default buildSchema({
@@ -9,6 +10,22 @@ export default buildSchema({
 	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	fields: {
 		...formBuilder.fields,
+		sections: {
+			...formBuilder.fields.sections,
+			options: {
+				...formBuilder.fields.sections.options,
+				schema: {
+					...formSectionBuilder,
+					id: 'bigFormSection',
+					fields: {
+						...formSectionBuilder.fields,
+						shouldShowSubmitButton: {
+							type: 'boolean',
+						},
+					},
+				},
+			},
+		},
 		controller: {
 			type: 'raw',
 			label: 'Controller',
@@ -16,16 +33,17 @@ export default buildSchema({
 				valueType: 'HeartwoodTypes.BigFormViewController<S>',
 			},
 		},
-		currentSlide: {
+		presentSlide: {
 			type: 'number',
-			label: 'Current slide',
+			label: 'Present slide',
+			hint: 'The slide showing now!',
 			defaultValue: 0,
 		},
 		onSubmitSlide: {
 			type: 'raw',
 			label: 'Submit handler',
 			options: {
-				valueType: 'HeartwoodTypes.SubmitHandler<S, { currentSlide: number }>',
+				valueType: 'HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>',
 			},
 		},
 	},
