@@ -1,3 +1,10 @@
+# [4.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.4.2...v4.0.0) (2021-05-22)
+
+
+### Breaking Changes
+
+* currentSlide -> presentSlide, form sections can hide submit button ([3254207](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3254207))
+
 ## [3.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.4.1...v3.4.2) (2021-05-18)
 
 ## [3.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.4.0...v3.4.1) (2021-05-17)
