@@ -75,10 +75,10 @@
     "webpack": "^5.36.1"
   },
   "devDependencies": {
-    "@sprucelabs/jest-sheets-reporter": "latest",
-    "@sprucelabs/babel-plugin-schema": "latest",
     "@sprucelabs/esm-postbuild": "latest",
     "@sprucelabs/jest-json-reporter": "latest",
+    "@sprucelabs/jest-sheets-reporter": "latest",
+    "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
     "@sprucelabs/spruce-test-fixtures": "latest",
     "@sprucelabs/test": "^7.7.6",
