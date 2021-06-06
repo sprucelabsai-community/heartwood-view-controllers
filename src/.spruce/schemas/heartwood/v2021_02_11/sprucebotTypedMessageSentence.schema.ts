@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import sprucebotAvatarSchema from '#spruce/schemas/heartwood/v2021_02_11/sprucebotAvatar.schema'
+import sprucebotAvatarSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/sprucebotAvatar.schema'
 
 const sprucebotTypedMessageSentenceSchema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema  = {
 	id: 'sprucebotTypedMessageSentence',
@@ -13,7 +13,7 @@ const sprucebotTypedMessageSentenceSchema: SpruceSchemas.Heartwood.v2021_02_11.S
 	            'avatar': {
 	                type: 'schema',
 	                hint: 'A way to override the Sprucebot avatar for this sentence',
-	                options: {schema: sprucebotAvatarSchema,}
+	                options: {schema: sprucebotAvatarSchema_v2021_02_11,}
 	            },
 	            /** Words. The words being typed out */
 	            'words': {

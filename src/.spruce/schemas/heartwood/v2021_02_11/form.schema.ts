@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import formSectionSchema from '#spruce/schemas/heartwood/v2021_02_11/formSection.schema'
+import formSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/formSection.schema'
 
 const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	id: 'form',
@@ -92,7 +92,7 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	                type: 'schema',
 	                isRequired: true,
 	                isArray: true,
-	                options: {typeSuffix: `<S>`,schema: formSectionSchema,}
+	                options: {typeSuffix: `<S>`,schema: formSectionSchema_v2021_02_11,}
 	            },
 	    }
 }

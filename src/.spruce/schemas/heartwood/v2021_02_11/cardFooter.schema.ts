@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import buttonSchema from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
 
 const cardFooterSchema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema  = {
 	id: 'cardFooter',
@@ -20,7 +20,7 @@ const cardFooterSchema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema  = 
 	                label: 'Buttons',
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: buttonSchema,}
+	                options: {schema: buttonSchema_v2021_02_11,}
 	            },
 	            /** Loading. */
 	            'isLoading': {

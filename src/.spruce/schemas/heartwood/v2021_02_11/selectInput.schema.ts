@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import selectInputChoiceSchema from '#spruce/schemas/heartwood/v2021_02_11/selectInputChoice.schema'
+import selectInputChoiceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/selectInputChoice.schema'
 
 const selectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema  = {
 	id: 'selectInput',
@@ -49,7 +49,7 @@ const selectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema  
 	                type: 'schema',
 	                isRequired: true,
 	                isArray: true,
-	                options: {schema: selectInputChoiceSchema,}
+	                options: {schema: selectInputChoiceSchema_v2021_02_11,}
 	            },
 	    }
 }

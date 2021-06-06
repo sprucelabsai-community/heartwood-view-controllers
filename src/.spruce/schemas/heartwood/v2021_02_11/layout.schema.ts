@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
+import cardSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 
 const layoutSchema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema  = {
 	id: 'layout',
@@ -15,7 +15,7 @@ const layoutSchema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema  = {
 	                type: 'schema',
 	                hint: 'Will render a card in this section',
 	                isArray: true,
-	                options: {schema: cardSchema,}
+	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */
 	            'className': {

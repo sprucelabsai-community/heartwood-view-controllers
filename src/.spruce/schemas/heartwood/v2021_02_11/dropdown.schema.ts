@@ -1,7 +1,8 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import buttonSchema from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
+import cardSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 
 const dropdownSchema: SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema  = {
 	id: 'dropdown',
@@ -19,7 +20,12 @@ const dropdownSchema: SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema  = {
 	            'items': {
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: buttonSchema,}
+	                options: {schema: buttonSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'card': {
+	                type: 'schema',
+	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	    }
 }

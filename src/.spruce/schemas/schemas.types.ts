@@ -619,77 +619,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface Card {
-			
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
-				/** Header. */
-				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
-				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
-				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
-				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
-		}
-
-		interface CardSchema extends SpruceSchema.Schema {
-			id: 'card',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Card',
-			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.CardViewController`,}
-			            },
-			            /** Header. */
-			            'header': {
-			                label: 'Header',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
-			            },
-			            /** Fade in. */
-			            'shouldFadeIn': {
-			                label: 'Fade in',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-			            'body': {
-			                label: 'Body',
-			                type: 'schema',
-			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
-			            },
-			    }
-		}
-
-		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface Dialog {
 			
 				
@@ -989,6 +918,77 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type CardBodyEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface Card {
+			
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
+				/** Header. */
+				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
+				/** Fade in. */
+				'shouldFadeIn'?: boolean| undefined | null
+				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
+				/** Footer. */
+				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+		}
+
+		interface CardSchema extends SpruceSchema.Schema {
+			id: 'card',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Card',
+			    fields: {
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.CardViewController`,}
+			            },
+			            /** Header. */
+			            'header': {
+			                label: 'Header',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
+			            },
+			            /** Fade in. */
+			            'shouldFadeIn': {
+			                label: 'Fade in',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+			            'body': {
+			                label: 'Body',
+			                type: 'schema',
+			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			            },
+			    }
+		}
+
+		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
 
 	}
 
@@ -1773,6 +1773,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'position'?: ("bottom" | "top" | "right")| undefined | null
 				
 				'items'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
+				
+				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
 		}
 
 		interface DropdownSchema extends SpruceSchema.Schema {
@@ -1792,6 +1794,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
 			            },
 			    }
 		}

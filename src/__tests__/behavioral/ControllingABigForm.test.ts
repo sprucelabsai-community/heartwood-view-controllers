@@ -3,7 +3,6 @@ import { test, assert } from '@sprucelabs/test'
 import buildBigForm from '../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
-import { BuiltViewController } from '../../types/heartwood.types'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({
@@ -47,7 +46,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 					},
 				],
 			})
-		) as BuiltViewController<BigFormViewController<TestFormSchema>>
+		) as any
 	}
 
 	@test()
