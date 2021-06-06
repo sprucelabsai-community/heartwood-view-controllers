@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import layoutSchema from '#spruce/schemas/heartwood/v2021_02_11/layout.schema'
+import layoutSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/layout.schema'
 
 const skillViewSchema: SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema  = {
 	id: 'skillView',
@@ -28,7 +28,7 @@ const skillViewSchema: SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema  = {
 	                type: 'schema',
 	                isRequired: true,
 	                isArray: true,
-	                options: {schema: layoutSchema,}
+	                options: {schema: layoutSchema_v2021_02_11,}
 	            },
 	    }
 }

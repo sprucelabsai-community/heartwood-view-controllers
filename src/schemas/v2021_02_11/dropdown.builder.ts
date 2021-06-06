@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import buttonBuilder from './button.builder'
+import cardBuilder from './cards/card.builder'
 
 export default buildSchema({
 	id: 'dropdown',
@@ -31,6 +32,12 @@ export default buildSchema({
 			isArray: true,
 			options: {
 				schema: buttonBuilder,
+			},
+		},
+		card: {
+			type: 'schema',
+			options: {
+				schema: cardBuilder,
 			},
 		},
 	},

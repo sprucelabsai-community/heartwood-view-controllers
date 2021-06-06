@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import cardSectionSchema from '#spruce/schemas/heartwood/v2021_02_11/cardSection.schema'
+import cardSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardSection.schema'
 
 const cardBodySchema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema  = {
 	id: 'cardBody',
@@ -51,7 +51,7 @@ const cardBodySchema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema  = {
 	                label: 'Sections',
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: cardSectionSchema,}
+	                options: {schema: cardSectionSchema_v2021_02_11,}
 	            },
 	    }
 }

@@ -1,8 +1,8 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import sprucebotTypedMessageSentenceSchema from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageSentence.schema'
-import sprucebotTypedMessageAvatarSchema from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageAvatar.schema'
+import sprucebotTypedMessageSentenceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageSentence.schema'
+import sprucebotTypedMessageAvatarSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageAvatar.schema'
 
 const talkingSprucebotSchema: SpruceSchemas.Heartwood.v2021_02_11.TalkingSprucebotSchema  = {
 	id: 'talkingSprucebot',
@@ -17,14 +17,14 @@ const talkingSprucebotSchema: SpruceSchemas.Heartwood.v2021_02_11.TalkingSpruceb
 	                isRequired: true,
 	                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
 	                isArray: true,
-	                options: {schema: sprucebotTypedMessageSentenceSchema,}
+	                options: {schema: sprucebotTypedMessageSentenceSchema_v2021_02_11,}
 	            },
 	            /** Default avatar. How should Sprucebot be rendered by default */
 	            'defaultAvatar': {
 	                label: 'Default avatar',
 	                type: 'schema',
 	                hint: 'How should Sprucebot be rendered by default',
-	                options: {schema: sprucebotTypedMessageAvatarSchema,}
+	                options: {schema: sprucebotTypedMessageAvatarSchema_v2021_02_11,}
 	            },
 	            /** Start delay. How long should I wait before starting to type? */
 	            'startDelay': {

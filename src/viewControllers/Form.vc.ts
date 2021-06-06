@@ -2,6 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
 	areSchemaValuesValid,
 	defaultSchemaValues,
+	FieldErrorCodes,
 	InvalidFieldError,
 	InvalidParametersOptions,
 	MissingParametersOptions,
@@ -167,7 +168,7 @@ export default class FormViewController<
 							}
 
 							errors[param].push({
-								code: err.options.code.toLowerCase(),
+								code: err.options.code.toLowerCase() as FieldErrorCodes,
 								name: param,
 							})
 						}

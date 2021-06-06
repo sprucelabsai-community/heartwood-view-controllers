@@ -1,11 +1,11 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import textSchema from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
-import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
-import talkingSprucebotSchema from '#spruce/schemas/heartwood/v2021_02_11/talkingSprucebot.schema'
-import bigFormSchema from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
-import buttonSchema from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
+import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
+import formSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
+import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/talkingSprucebot.schema'
+import bigFormSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
 
 const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -51,7 +51,7 @@ const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  
 	            'text': {
 	                label: 'Card section item',
 	                type: 'schema',
-	                options: {schema: textSchema,}
+	                options: {schema: textSchema_v2021_02_11,}
 	            },
 	            /** Image. */
 	            'image': {
@@ -63,26 +63,26 @@ const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  
 	            'form': {
 	                label: 'Form',
 	                type: 'schema',
-	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: formSchema,}
+	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: formSchema_v2021_02_11,}
 	            },
 	            /** Talking Sprucebot. */
 	            'talkingSprucebot': {
 	                label: 'Talking Sprucebot',
 	                type: 'schema',
-	                options: {schema: talkingSprucebotSchema,}
+	                options: {schema: talkingSprucebotSchema_v2021_02_11,}
 	            },
 	            /** Big form. */
 	            'bigForm': {
 	                label: 'Big form',
 	                type: 'schema',
-	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: bigFormSchema,}
+	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: bigFormSchema_v2021_02_11,}
 	            },
 	            /** Buttons. */
 	            'buttons': {
 	                label: 'Buttons',
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: buttonSchema,}
+	                options: {schema: buttonSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {

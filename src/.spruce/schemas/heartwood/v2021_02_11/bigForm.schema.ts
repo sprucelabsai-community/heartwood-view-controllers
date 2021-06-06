@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import bigFormSectionSchema from '#spruce/schemas/heartwood/v2021_02_11/bigFormSection.schema'
+import bigFormSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/bigFormSection.schema'
 
 const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	id: 'bigForm',
@@ -92,7 +92,7 @@ const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	                type: 'schema',
 	                isRequired: true,
 	                isArray: true,
-	                options: {typeSuffix: `<S>`,schema: bigFormSectionSchema,}
+	                options: {typeSuffix: `<S>`,schema: bigFormSectionSchema_v2021_02_11,}
 	            },
 	            /** Present slide. The slide showing now! */
 	            'presentSlide': {

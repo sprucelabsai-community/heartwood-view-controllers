@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v4.0.0...v4.1.0) (2021-06-06)
+
+
+### Features
+
+* dropdown can hold a card ([b7da27c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b7da27c))
+
 # [4.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v3.4.2...v4.0.0) (2021-05-22)
 
 
