@@ -83,7 +83,7 @@
     "@sprucelabs/spruce-test-fixtures": "^4.6.18",
     "@sprucelabs/test": "^7.7.6",
     "@sprucelabs/test-utils": "^3.0.43",
-    "@types/node": "^15.12.1",
+    "@types/node": "^15.12.2",
     "@types/terser-webpack-plugin": "^5.0.3",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.2.0",
