@@ -36,6 +36,7 @@ const loginSchema = {
 			label: 'Pin',
 			options: {
 				autoComplete: 'one-time-code',
+				inputFilter: 'number',
 			},
 		},
 	},
