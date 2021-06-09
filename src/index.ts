@@ -34,3 +34,4 @@ export { default as sprucebotTypedMessageSchema } from '#spruce/schemas/heartwoo
 
 export { default as SkillViewExporter } from './viewControllers/ViewControllerExporter'
 export { default as SkillViewImporter } from './viewControllers/ViewControllerImporter'
+export { default as normalizeFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
