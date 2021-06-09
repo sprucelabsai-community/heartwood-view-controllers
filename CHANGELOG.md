@@ -1,3 +1,10 @@
+# [5.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v4.1.25...v5.0.0) (2021-06-09)
+
+
+### Breaking Changes
+
+* removed unused schema field from form section ([b7747ba](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b7747ba))
+
 ## [4.1.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v4.1.24...v4.1.25) (2021-06-09)
 
 ## [4.1.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v4.1.23...v4.1.24) (2021-06-08)
