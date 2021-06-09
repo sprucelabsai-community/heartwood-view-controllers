@@ -34,7 +34,7 @@ export default buildSchema({
 			hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			options: {
 				valueType:
-					'SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>',
+					'SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>',
 			},
 		},
 	},

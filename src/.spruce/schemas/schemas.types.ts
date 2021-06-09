@@ -1005,7 +1005,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields': (SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>)[]
+				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
 				
 				'shouldShowSubmitButton'?: boolean| undefined | null
 		}
@@ -1042,7 +1042,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>`,}
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			            /** . */
 			            'shouldShowSubmitButton': {
@@ -1433,7 +1433,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields': (SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>)[]
+				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
 		}
 
 		interface FormSectionSchema extends SpruceSchema.Schema {
@@ -1468,7 +1468,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>`,}
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			    }
 		}
