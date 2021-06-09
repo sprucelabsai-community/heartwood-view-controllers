@@ -9,13 +9,6 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	namespace: 'Heartwood',
 	name: '',
 	    fields: {
-	            /** . Do not use directly, set by parent form. */
-	            'schema': {
-	                type: 'raw',
-	                isPrivate: true,
-	                hint: 'Do not use directly, set by parent form.',
-	                options: {valueType: `S`,}
-	            },
 	            /** . */
 	            'className': {
 	                type: 'text',

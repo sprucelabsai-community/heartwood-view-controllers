@@ -998,8 +998,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
-				/** . Do not use directly, set by parent form. */
-				'schema'?: (S)| undefined | null
 				
 				'className'?: string| undefined | null
 				/** Initial values. */
@@ -1018,13 +1016,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
-			            /** . Do not use directly, set by parent form. */
-			            'schema': {
-			                type: 'raw',
-			                isPrivate: true,
-			                hint: 'Do not use directly, set by parent form.',
-			                options: {valueType: `S`,}
-			            },
 			            /** . */
 			            'className': {
 			                type: 'text',
@@ -1435,8 +1426,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
-				/** . Do not use directly, set by parent form. */
-				'schema'?: (S)| undefined | null
 				
 				'className'?: string| undefined | null
 				/** Initial values. */
@@ -1453,13 +1442,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
-			            /** . Do not use directly, set by parent form. */
-			            'schema': {
-			                type: 'raw',
-			                isPrivate: true,
-			                hint: 'Do not use directly, set by parent form.',
-			                options: {valueType: `S`,}
-			            },
 			            /** . */
 			            'className': {
 			                type: 'text',
