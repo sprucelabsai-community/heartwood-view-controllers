@@ -36,7 +36,6 @@ const loginSchema = {
 			label: 'Pin',
 			options: {
 				autoComplete: 'one-time-code',
-				inputFilter: 'number',
 			},
 		},
 	},
@@ -75,7 +74,7 @@ export default class LoginViewController
 			},
 			{
 				title: 'Now the pin! 👇',
-				fields: ['code'],
+				fields: [{ name: 'code', renderAs: 'number' }],
 				shouldShowSubmitButton: false,
 			},
 		]
