@@ -9,7 +9,7 @@ import { default as SchemaEntity } from '@sprucelabs/schema'
 
 import * as SpruceSchema from '@sprucelabs/schema'
 
-import * as HeartwoodTypes from "#spruce/../types/heartwood.types"
+import * as HeartwoodTypes from '../../'
 
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 

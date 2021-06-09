@@ -5,6 +5,7 @@ import {
 	validateSchemaValues,
 } from '@sprucelabs/schema'
 import bigFormSchema from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
+import normalizeFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './Form.vc'
 
 type ViewModel<S extends Schema> =
@@ -22,7 +23,7 @@ export default class BigFormViewController<
 	public isSlideValid(idx: number) {
 		const slide = this.viewModel.sections[idx]
 		if (slide) {
-			const fields = slide.fields
+			const fields = normalizeFieldNamesUtil.toNames(slide.fields)
 			return areSchemaValuesValid(
 				this.viewModel.schema,
 				this.viewModel.values,
@@ -47,7 +48,9 @@ export default class BigFormViewController<
 
 		this.triggerRender()
 
-		const firstFieldOfSection = this.viewModel.sections[idx]?.fields[0]
+		const firstFieldOfSection = normalizeFieldNamesUtil.toNames(
+			this.viewModel.sections[idx]?.fields ?? []
+		)[0]
 		if (firstFieldOfSection) {
 			this.focusInput(firstFieldOfSection)
 		}

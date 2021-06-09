@@ -1,5 +1,5 @@
 export function buildLocalTypesImport(): string[] {
-	return ['import * as HeartwoodTypes from "#spruce/../types/heartwood.types"']
+	return [`import * as HeartwoodTypes from '../../'`]
 }
 
 export function buildRemoteTypesImport(): string[] {
