@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v5.0.0...v5.1.0) (2021-06-09)
+
+
+### Features
+
+* form fields can be handle renders ([17034e8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/17034e8))
+
 # [5.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v4.1.25...v5.0.0) (2021-06-09)
 
 
