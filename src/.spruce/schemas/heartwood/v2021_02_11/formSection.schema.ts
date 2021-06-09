@@ -28,14 +28,14 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	                type: 'text',
 	                options: undefined
 	            },
-	            /** Form fields. Put any fields from the schema you provided to be shown in this section. */
+	            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 	            'fields': {
 	                label: 'Form fields',
 	                type: 'raw',
 	                isRequired: true,
-	                hint: 'Put any fields from the schema you provided to be shown in this section.',
+	                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 	                isArray: true,
-	                options: {valueType: `SpruceSchema.SchemaFieldNames<S>`,}
+	                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>`,}
 	            },
 	    }
 }

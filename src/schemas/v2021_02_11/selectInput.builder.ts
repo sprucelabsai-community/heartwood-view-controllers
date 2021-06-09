@@ -1,5 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { buildLocalFormImports } from '../../utilities/buildLocalFormImports'
+import {
+	buildLocalTypesImport,
+	buildRemoteTypesImport,
+} from '../../utilities/importBuilder'
 import inputBuilder from './forms/input.builder'
 
 export const type = 'string'
@@ -8,7 +11,8 @@ export default buildSchema({
 	id: 'selectInput',
 	name: 'Select input',
 	description: '',
-	importsWhenLocal: buildLocalFormImports(),
+	importsWhenLocal: buildLocalTypesImport(),
+	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
 		...inputBuilder.fields,
 		choices: {

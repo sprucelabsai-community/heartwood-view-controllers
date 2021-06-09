@@ -202,3 +202,11 @@ export type BuiltSkillViewController<
 > = {
 	id: string
 } & Vc
+
+export type RenderFieldOptions<S extends Schema> = {
+	name: SchemaFieldNames<S>
+	renderAs?: 'colorPicker' | 'number'
+	renderHintAs?: 'subtitle' | 'tooltip'
+	label?: string
+	hint?: string
+}

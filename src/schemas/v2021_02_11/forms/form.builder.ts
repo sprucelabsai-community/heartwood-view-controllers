@@ -1,11 +1,15 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { buildLocalFormImports } from '../../../utilities/buildLocalFormImports'
+import {
+	buildLocalTypesImport,
+	buildRemoteTypesImport,
+} from '../../../utilities/importBuilder'
 import formSectionBuilder from '../formSection.builder'
 
 export default buildSchema({
 	id: 'form',
 	name: 'Form',
-	importsWhenLocal: buildLocalFormImports(),
+	importsWhenLocal: buildLocalTypesImport(),
+	importsWhenRemote: buildRemoteTypesImport(),
 	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	fields: {
 		id: {

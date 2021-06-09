@@ -1,8 +1,14 @@
 import { buildSchema } from '@sprucelabs/schema'
+import {
+	buildLocalTypesImport,
+	buildRemoteTypesImport,
+} from '../../utilities/importBuilder'
 
 export default buildSchema({
 	id: 'formSection',
 	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
+	importsWhenLocal: buildLocalTypesImport(),
+	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
 		className: {
 			type: 'text',
@@ -25,9 +31,10 @@ export default buildSchema({
 			isArray: true,
 			label: 'Form fields',
 			isRequired: true,
-			hint: 'Put any fields from the schema you provided to be shown in this section.',
+			hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			options: {
-				valueType: 'SpruceSchema.SchemaFieldNames<S>',
+				valueType:
+					'SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>',
 			},
 		},
 	},

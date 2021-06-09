@@ -1004,8 +1004,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. */
-				'fields': (SpruceSchema.SchemaFieldNames<S>)[]
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields': (SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>)[]
 				
 				'shouldShowSubmitButton'?: boolean| undefined | null
 		}
@@ -1035,14 +1035,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. */
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 			            'fields': {
 			                label: 'Form fields',
 			                type: 'raw',
 			                isRequired: true,
-			                hint: 'Put any fields from the schema you provided to be shown in this section.',
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S>`,}
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>`,}
 			            },
 			            /** . */
 			            'shouldShowSubmitButton': {
@@ -1432,8 +1432,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. */
-				'fields': (SpruceSchema.SchemaFieldNames<S>)[]
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields': (SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>)[]
 		}
 
 		interface FormSectionSchema extends SpruceSchema.Schema {
@@ -1461,14 +1461,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. */
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 			            'fields': {
 			                label: 'Form fields',
 			                type: 'raw',
 			                isRequired: true,
-			                hint: 'Put any fields from the schema you provided to be shown in this section.',
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S>`,}
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | Heartwood.FieldRenderOptions<S>`,}
 			            },
 			    }
 		}
