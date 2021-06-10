@@ -1,3 +1,10 @@
+# [6.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v5.1.3...v6.0.0) (2021-06-10)
+
+
+### Breaking Changes
+
+* isGrid -> shouldRenderAsGrid on Lyout ([1e7091f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1e7091f))
+
 ## [5.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v5.1.2...v5.1.3) (2021-06-09)
 
 ## [5.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v5.1.1...v5.1.2) (2021-06-09)
