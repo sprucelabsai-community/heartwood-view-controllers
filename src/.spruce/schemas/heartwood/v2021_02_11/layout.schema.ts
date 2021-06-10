@@ -24,7 +24,7 @@ const layoutSchema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema  = {
 	                options: undefined
 	            },
 	            /** Grid. Will force cards to render as grid. */
-	            'isGrid': {
+	            'shouldRenderAsGrid': {
 	                label: 'Grid',
 	                type: 'boolean',
 	                hint: 'Will force cards to render as grid.',

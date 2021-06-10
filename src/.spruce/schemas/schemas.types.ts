@@ -467,7 +467,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string| undefined | null
 				/** Grid. Will force cards to render as grid. */
-				'isGrid'?: boolean| undefined | null
+				'shouldRenderAsGrid'?: boolean| undefined | null
 				/** Width. */
 				'width'?: ("wide" | "tight" | "full")| undefined | null
 		}
@@ -493,7 +493,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: undefined
 			            },
 			            /** Grid. Will force cards to render as grid. */
-			            'isGrid': {
+			            'shouldRenderAsGrid': {
 			                label: 'Grid',
 			                type: 'boolean',
 			                hint: 'Will force cards to render as grid.',

@@ -19,7 +19,7 @@ export default buildSchema({
 			type: 'text',
 			isPrivate: true,
 		},
-		isGrid: {
+		shouldRenderAsGrid: {
 			type: 'boolean',
 			label: 'Grid',
 			hint: 'Will force cards to render as grid.',
