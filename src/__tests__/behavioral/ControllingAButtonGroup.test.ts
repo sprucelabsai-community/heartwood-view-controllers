@@ -70,6 +70,12 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static noSelectedButtonsToStart() {
+		const selected = this.singleSelectVc.getSelectedButtons()
+		assert.isLength(selected, 0)
+	}
+
+	@test()
 	protected static isSelectedIsNullIfNothingSelectedAtFirst() {
 		const buttons = this.render(this.singleSelectVc)
 		assert.doesNotInclude(buttons, { isSelected: true })
@@ -198,6 +204,36 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 		await buttons[1].onClickHintIcon?.()
 		assert.isEqual(this.onClickHintInvocations[1], 1)
+	}
+
+	@test()
+	protected static async canSetSelectedButtonsToStart() {
+		const vc = this.Factory().Controller('buttonGroup', {
+			selected: [0, 1],
+			onSelectionChange: (selected) => {
+				this.onSelectInvocations.push(selected)
+			},
+			buttons: [
+				{
+					label: 'first',
+				},
+				{
+					label: 'second',
+				},
+				{
+					label: 'third',
+				},
+				{
+					label: 'founth',
+				},
+			],
+		})
+
+		const selected = vc.getSelectedButtons()
+		assert.isEqualDeep(selected, [0, 1])
+
+		const buttons = this.render(vc)
+		assert.doesInclude(buttons, { isSelected: true })
 	}
 
 	private static assertFirstButtonSelected(

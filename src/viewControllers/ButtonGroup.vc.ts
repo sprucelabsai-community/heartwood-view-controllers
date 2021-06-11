@@ -16,6 +16,7 @@ export interface ButtonGroupViewControllerOptions {
 	onSelectionChange?: SelectionChangeHandler
 	onClickHintIcon?: HintClickHandler
 	shouldAllowMultiSelect?: boolean
+	selected?: number[]
 }
 
 export default class ButtonGroupViewController extends AbstractViewController<ViewModel> {
@@ -39,12 +40,18 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		this.clickHintHandler = options.onClickHintIcon
 
 		this.rebuildButtons()
+
+		options.selected && this.selectButtons(options.selected)
 	}
 
 	public triggerRender() {
 		for (const handler of this.buttonTriggerRenderHandlers) {
 			handler()
 		}
+	}
+
+	public selectButtons(idxs: number[]) {
+		this.selectedButtons = idxs
 	}
 
 	public selectButton(idx: number) {
@@ -57,10 +64,14 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 
 		this.selectedButtons.push(idx)
+		this.didSelectHandler()
+	}
 
+	private didSelectHandler() {
 		this.rebuildAndTriggerRender()
 		void this.selectionChangeHandler?.([...this.selectedButtons])
 	}
+
 	private rebuildAndTriggerRender() {
 		this.rebuildButtons()
 		this.triggerRender()
@@ -132,5 +143,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 	public render(): ViewModel {
 		return this.buttonControllers
+	}
+
+	public getSelectedButtons() {
+		return this.selectedButtons
 	}
 }
