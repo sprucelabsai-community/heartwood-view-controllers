@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.1.0...v6.2.0) (2021-06-11)
+
+
+### Features
+
+* button supports line icon ([8f31426](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8f31426))
+
 # [6.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.0.0...v6.1.0) (2021-06-10)
 
 
