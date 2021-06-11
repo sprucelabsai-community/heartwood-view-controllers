@@ -1,3 +1,10 @@
+# [6.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.2.1...v6.3.0) (2021-06-11)
+
+
+### Features
+
+* can set selected buttons on button group instantiation ([b8b2776](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b8b2776))
+
 ## [6.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.2.0...v6.2.1) (2021-06-11)
 
 # [6.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.1.0...v6.2.0) (2021-06-11)
