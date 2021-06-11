@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.0.0...v6.1.0) (2021-06-10)
+
+
+### Features
+
+* line icon schema ([0cf756b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0cf756b))
+
 # [6.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v5.1.3...v6.0.0) (2021-06-10)
 
 
