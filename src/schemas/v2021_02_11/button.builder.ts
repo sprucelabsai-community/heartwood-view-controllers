@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import lineIconBuilder from './lineIcon.builder'
 
 export default buildSchema({
 	id: 'button',
@@ -60,6 +61,13 @@ export default buildSchema({
 		image: {
 			type: 'text',
 			label: 'Image',
+		},
+		lineIcon: {
+			type: 'select',
+			label: 'Line icon',
+			options: {
+				...lineIconBuilder.fields.name.options,
+			},
 		},
 		dropdown: {
 			type: 'schema',
