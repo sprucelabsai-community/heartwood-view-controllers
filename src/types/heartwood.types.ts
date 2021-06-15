@@ -162,7 +162,7 @@ export interface ViewControllerOptionsMap {
 }
 
 export type ControllerOptions<
-	N extends keyof ViewControllerMap,
+	N extends ViewControllerId,
 	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
@@ -211,4 +211,4 @@ export type FieldRenderOptions<S extends Schema> = {
 	hint?: string
 }
 
-export type ViewControllerName = keyof ViewControllerMap
+export type ViewControllerId = keyof ViewControllerMap

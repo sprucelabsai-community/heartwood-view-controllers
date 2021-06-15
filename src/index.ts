@@ -19,6 +19,7 @@ export { default as ViewControllerExporter } from './viewControllers/ViewControl
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
 export { default as ViewControllerFactory } from './viewControllers/ViewControllerFactory'
 export { default as AbstractViewControllerTest } from './tests/AbstractViewControllerTest'
+
 export { default as Authenticator } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
@@ -35,3 +36,4 @@ export { default as sprucebotTypedMessageSchema } from '#spruce/schemas/heartwoo
 export { default as SkillViewExporter } from './viewControllers/ViewControllerExporter'
 export { default as SkillViewImporter } from './viewControllers/ViewControllerImporter'
 export { default as normalizeFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
+export { default as MockStorage } from './tests/MockStorage'
