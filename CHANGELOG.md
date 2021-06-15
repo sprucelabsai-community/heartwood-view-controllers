@@ -1,3 +1,10 @@
+# [7.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.4.1...v7.0.0) (2021-06-15)
+
+
+### Breaking Changes
+
+* type rename and more exports ([a867d56](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a867d56))
+
 ## [6.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.4.0...v6.4.1) (2021-06-15)
 
 # [6.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.3.8...v6.4.0) (2021-06-15)
