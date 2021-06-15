@@ -234,10 +234,10 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static resettingFormCallsRender() {
 		//@ts-ignore
-		const count = this.vc.__triggerRenderCount
+		const count = this.vc.__renderInvocationCount
 		this.vc.reset()
 		//@ts-ignore
-		assert.isEqual(count + 1, this.vc.__triggerRenderCount)
+		assert.isEqual(count + 1, this.vc.__renderInvocationCount)
 	}
 
 	@test()

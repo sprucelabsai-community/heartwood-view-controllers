@@ -42,7 +42,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		const controller = this.Factory().Controller(name, options)
 
 		//@ts-ignore
-		controller.__triggerRenderCount = 0
+		controller.__renderInvocationCount = 0
 
 		if (
 			controller.triggerRender ===
@@ -50,7 +50,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		) {
 			controller.triggerRender = () => {
 				//@ts-ignore
-				controller.__triggerRenderCount++
+				controller.__renderInvocationCount++
 			}
 		}
 
