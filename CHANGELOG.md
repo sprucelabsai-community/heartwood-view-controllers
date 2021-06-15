@@ -1,3 +1,10 @@
+# [6.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.3.8...v6.4.0) (2021-06-15)
+
+
+### Features
+
+* view controller name export ([d4c971d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d4c971d))
+
 ## [6.3.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.3.7...v6.3.8) (2021-06-15)
 
 ## [6.3.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v6.3.6...v6.3.7) (2021-06-14)
