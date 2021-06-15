@@ -10,6 +10,7 @@ import {
 	SkillViewController,
 	ViewController,
 	ViewControllerMap,
+	ViewControllerName,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import BigFormViewController from './BigForm.vc'
@@ -135,7 +136,7 @@ export default class ViewControllerFactory<
 	}
 
 	public Controller<
-		N extends keyof ControllerMap,
+		N extends ViewControllerName,
 		O extends ControllerOptions<N> = ControllerOptions<N>
 	>(
 		name: N,

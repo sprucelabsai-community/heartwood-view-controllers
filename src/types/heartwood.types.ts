@@ -210,3 +210,5 @@ export type FieldRenderOptions<S extends Schema> = {
 	label?: string
 	hint?: string
 }
+
+export type ViewControllerName = keyof ViewControllerMap
