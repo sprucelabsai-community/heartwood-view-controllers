@@ -85,7 +85,7 @@
     "@sprucelabs/jest-sheets-reporter": "^1.2.48",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-test-fixtures": "^4.10.1",
+    "@sprucelabs/spruce-test-fixtures": "^4.10.2",
     "@sprucelabs/test": "^7.7.6",
     "@sprucelabs/test-utils": "^3.0.43",
     "@types/node": "^15.12.2",
@@ -99,7 +99,7 @@
     "prettier": "^2.3.1",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.3.3",
+    "typescript": "^4.3.4",
     "yarn-upgrade-all": "^0.5.4"
   },
   "engines": {
