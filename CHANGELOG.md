@@ -1,3 +1,10 @@
+# [8.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v7.1.0...v8.0.0) (2021-06-19)
+
+
+### Breaking Changes
+
+* redirect strictly typed ([c46ccfc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c46ccfc))
+
 # [7.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v7.0.20...v7.1.0) (2021-06-19)
 
 
