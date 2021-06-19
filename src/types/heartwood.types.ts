@@ -127,8 +127,11 @@ export type ImportedViewController = (new () =>
 	id: string
 }
 
+export type ViewControllerId = keyof ViewControllerMap
+export type SkillViewControllerId = keyof SkillViewControllerMap
+
 export interface Router {
-	redirect(id: string, args?: Record<string, any>): Promise<void>
+	redirect<Id extends SkillViewControllerId>(id: Id, args?: SkillViewControllerArgsMap[Id]): Promise<void>
 	back(): Promise<void>
 }
 
@@ -150,7 +153,7 @@ export interface ViewControllerMap {
 	confirm: typeof ConfirmViewController
 }
 
-export interface SkillViewControllerMap {}
+
 
 export interface ViewControllerOptionsMap {
 	form: FormViewControllerOptions<any>
@@ -163,12 +166,12 @@ export interface ViewControllerOptionsMap {
 	confirm: ConfirmViewControllerOptions
 }
 
-export interface SkillViewControllerOptionsMap {}
+export interface SkillViewControllerMap {}
+export interface SkillViewControllerArgsMap {}
 
 export type ControllerOptions<
 	N extends ViewControllerId,
-	O extends ViewControllerOptionsMap = ViewControllerOptionsMap &
-		SkillViewControllerOptionsMap
+	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
 export type Client = MercuryClient
@@ -216,4 +219,4 @@ export type FieldRenderOptions<S extends Schema> = {
 	hint?: string
 }
 
-export type ViewControllerId = keyof ViewControllerMap
+
