@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v7.0.20...v7.1.0) (2021-06-19)
+
+
+### Features
+
+* skill view controller types broken out ([e60b087](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e60b087))
+
 ## [7.0.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v7.0.19...v7.0.20) (2021-06-19)
 
 ## [7.0.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v7.0.18...v7.0.19) (2021-06-19)
