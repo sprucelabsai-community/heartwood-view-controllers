@@ -131,7 +131,10 @@ export type ViewControllerId = keyof ViewControllerMap
 export type SkillViewControllerId = keyof SkillViewControllerMap
 
 export interface Router {
-	redirect<Id extends SkillViewControllerId>(id: Id, args?: SkillViewControllerArgsMap[Id]): Promise<void>
+	redirect<Id extends SkillViewControllerId>(
+		id: Id,
+		args?: SkillViewControllerArgsMap[Id]
+	): Promise<void>
 	back(): Promise<void>
 }
 
@@ -152,8 +155,6 @@ export interface ViewControllerMap {
 	bigForm: typeof BigFormViewControllerImpl
 	confirm: typeof ConfirmViewController
 }
-
-
 
 export interface ViewControllerOptionsMap {
 	form: FormViewControllerOptions<any>
@@ -218,5 +219,3 @@ export type FieldRenderOptions<S extends Schema> = {
 	label?: string
 	hint?: string
 }
-
-
