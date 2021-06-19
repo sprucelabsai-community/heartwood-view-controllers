@@ -12,6 +12,7 @@ import {
 	ViewControllerMap,
 	ViewControllerId,
 	ViewControllerOptions,
+	SkillViewControllerMap,
 } from '../types/heartwood.types'
 import BigFormViewController from './BigForm.vc'
 import ButtonGroupViewController from './ButtonGroup.vc'
@@ -33,7 +34,7 @@ const CORE_CONTROLLER_MAP = {
 	confirm: ConfirmViewController,
 }
 
-type ControllerMap = ViewControllerMap
+type ControllerMap = ViewControllerMap & SkillViewControllerMap
 
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions

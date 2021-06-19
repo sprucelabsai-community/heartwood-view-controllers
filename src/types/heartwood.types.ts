@@ -150,6 +150,8 @@ export interface ViewControllerMap {
 	confirm: typeof ConfirmViewController
 }
 
+export interface SkillViewControllerMap {}
+
 export interface ViewControllerOptionsMap {
 	form: FormViewControllerOptions<any>
 	login: LoginViewControllerOptions
@@ -161,9 +163,12 @@ export interface ViewControllerOptionsMap {
 	confirm: ConfirmViewControllerOptions
 }
 
+export interface SkillViewControllerOptionsMap {}
+
 export type ControllerOptions<
 	N extends ViewControllerId,
-	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
+	O extends ViewControllerOptionsMap = ViewControllerOptionsMap &
+		SkillViewControllerOptionsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
 export type Client = MercuryClient
