@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.0.4...v8.1.0) (2021-06-20)
+
+
+### Features
+
+* abstract skill view controller args ([43725f0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/43725f0))
+
 ## [8.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.0.3...v8.0.4) (2021-06-20)
 
 ## [8.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.0.2...v8.0.3) (2021-06-20)
