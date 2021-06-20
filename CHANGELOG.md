@@ -1,3 +1,10 @@
+# [9.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.1.0...v9.0.0) (2021-06-20)
+
+
+### Breaking Changes
+
+* className removed from text schema ([1b9965e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1b9965e))
+
 # [8.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.0.4...v8.1.0) (2021-06-20)
 
 
