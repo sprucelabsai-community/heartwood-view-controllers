@@ -2,6 +2,7 @@ import { buildSchema } from '@sprucelabs/schema'
 import buttonBuilder from '../button.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
+import listBuilder from '../list.builder'
 import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import textBuilder from '../text.builder'
 
@@ -76,6 +77,13 @@ export default buildSchema({
 			isArray: true,
 			options: {
 				schema: buttonBuilder,
+			},
+		},
+		list: {
+			type: 'schema',
+			label: 'List',
+			options: {
+				schema: listBuilder,
 			},
 		},
 		shouldRenderContentsAsGrid: {

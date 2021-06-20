@@ -460,143 +460,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface ListCell {
-			
-				/** Text. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
-				/** Subtext. */
-				'subText'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
-				/** Image url. */
-				'image'?: string| undefined | null
-				/** Line icon. */
-				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump-t0" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
-		}
-
-		interface ListCellSchema extends SpruceSchema.Schema {
-			id: 'listCell',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'List Cell',
-			    fields: {
-			            /** Text. */
-			            'text': {
-			                label: 'Text',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
-			            },
-			            /** Subtext. */
-			            'subText': {
-			                label: 'Subtext',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
-			            },
-			            /** Image url. */
-			            'image': {
-			                label: 'Image url',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Line icon. */
-			            'lineIcon': {
-			                label: 'Line icon',
-			                type: 'select',
-			                options: {choices: [{"value":"sprucebot","label":"sprucebot"},{"value":"add-circle","label":"add-circle"},{"value":"chevron-left","label":"chevron-left"},{"value":"document-text","label":"document-text"},{"value":"link-angle","label":"link-angle"},{"value":"play-circle","label":"play-circle"},{"value":"star","label":"star"},{"value":"add-square","label":"add-square"},{"value":"chevron-right","label":"chevron-right"},{"value":"download-cloud","label":"download-cloud"},{"value":"link-flat","label":"link-flat"},{"value":"present","label":"present"},{"value":"sun","label":"sun"},{"value":"add","label":"add"},{"value":"chevron-up","label":"chevron-up"},{"value":"download","label":"download"},{"value":"loader","label":"loader"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"tag","label":"tag"},{"value":"alarm","label":"alarm"},{"value":"clipboard","label":"clipboard"},{"value":"edit-box","label":"edit-box"},{"value":"location-pin","label":"location-pin"},{"value":"refresh","label":"refresh"},{"value":"time","label":"time"},{"value":"arrow-back","label":"arrow-back"},{"value":"clock","label":"clock"},{"value":"edit-line","label":"edit-line"},{"value":"lock","label":"lock"},{"value":"repeat","label":"repeat"},{"value":"tool","label":"tool"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"close-circle","label":"close-circle"},{"value":"email","label":"email"},{"value":"map","label":"map"},{"value":"restricted","label":"restricted"},{"value":"trending-down","label":"trending-down"},{"value":"arrow-down","label":"arrow-down"},{"value":"close-square","label":"close-square"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"message-circle","label":"message-circle"},{"value":"rotate","label":"rotate"},{"value":"trending-up","label":"trending-up"},{"value":"arrow-next","label":"arrow-next"},{"value":"close","label":"close"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"message-square","label":"message-square"},{"value":"search-no","label":"search-no"},{"value":"triangle","label":"triangle"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"code","label":"code"},{"value":"external-link","label":"external-link"},{"value":"mic-off","label":"mic-off"},{"value":"search","label":"search"},{"value":"unlock","label":"unlock"},{"value":"arrow-up","label":"arrow-up"},{"value":"coffee","label":"coffee"},{"value":"fav-heart","label":"fav-heart"},{"value":"mic-on","label":"mic-on"},{"value":"selector-checked","label":"selector-checked"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"attachment","label":"attachment"},{"value":"command","label":"command"},{"value":"flag","label":"flag"},{"value":"minus-circle","label":"minus-circle"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"upload","label":"upload"},{"value":"award-badge","label":"award-badge"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"flip-01","label":"flip-01"},{"value":"minus-square","label":"minus-square"},{"value":"selector-circle","label":"selector-circle"},{"value":"user-add","label":"user-add"},{"value":"binoculars","label":"binoculars"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"flip-02","label":"flip-02"},{"value":"money-sign","label":"money-sign"},{"value":"send","label":"send"},{"value":"user-delete","label":"user-delete"},{"value":"bolt","label":"bolt"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"folder","label":"folder"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"settings-filled","label":"settings-filled"},{"value":"user","label":"user"},{"value":"book-open","label":"book-open"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"globe","label":"globe"},{"value":"more-vertical","label":"more-vertical"},{"value":"settings","label":"settings"},{"value":"users","label":"users"},{"value":"book","label":"book"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"hash-tag","label":"hash-tag"},{"value":"notification-off","label":"notification-off"},{"value":"share","label":"share"},{"value":"video-off","label":"video-off"},{"value":"bookmark","label":"bookmark"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"headphones","label":"headphones"},{"value":"notification-on","label":"notification-on"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"video","label":"video"},{"value":"calendar-add","label":"calendar-add"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"help-buoy","label":"help-buoy"},{"value":"object","label":"object"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"warning","label":"warning"},{"value":"calendar","label":"calendar"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"help-circle","label":"help-circle"},{"value":"pause-circle","label":"pause-circle"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"wifi","label":"wifi"},{"value":"camera","label":"camera"},{"value":"crop","label":"crop"},{"value":"home","label":"home"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"cellphone","label":"cellphone"},{"value":"delete","label":"delete"},{"value":"info","label":"info"},{"value":"phone","label":"phone"},{"value":"sound-off","label":"sound-off"},{"value":"zoom-out","label":"zoom-out"},{"value":"checkmark","label":"checkmark"},{"value":"document-blank","label":"document-blank"},{"value":"jump-t0","label":"jump-t0"},{"value":"photo","label":"photo"},{"value":"sound-on","label":"sound-on"},{"value":"chevron-down","label":"chevron-down"},{"value":"document-new","label":"document-new"},{"value":"layers","label":"layers"},{"value":"picked","label":"picked"},{"value":"star-filled","label":"star-filled"}],}
-			            },
-			    }
-		}
-
-		type ListCellEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface ListRow {
-			
-				/** Cells. */
-				'cells'?: SpruceSchemas.Heartwood.v2021_02_11.ListCell[]| undefined | null
-		}
-
-		interface ListRowSchema extends SpruceSchema.Schema {
-			id: 'listRow',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Cells. */
-			            'cells': {
-			                label: 'Cells',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema,}
-			            },
-			    }
-		}
-
-		type ListRowEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface List {
-			
-				/** Render row dividers. */
-				'shouldRenderRowDividers'?: boolean| undefined | null
-				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
-				/** Row height. */
-				'defaultRowHeight'?: ("standard" | "tall")| undefined | null
-				/** Rows. */
-				'rows'?: SpruceSchemas.Heartwood.v2021_02_11.ListRow| undefined | null
-		}
-
-		interface ListSchema extends SpruceSchema.Schema {
-			id: 'list',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'list',
-			    fields: {
-			            /** Render row dividers. */
-			            'shouldRenderRowDividers': {
-			                label: 'Render row dividers',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Column widths. */
-			            'columnWidths': {
-			                label: 'Column widths',
-			                type: 'raw',
-			                isArray: true,
-			                options: {valueType: `number | 'fill' | 'content'`,}
-			            },
-			            /** Row height. */
-			            'defaultRowHeight': {
-			                label: 'Row height',
-			                type: 'select',
-			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"}],}
-			            },
-			            /** Rows. */
-			            'rows': {
-			                label: 'Rows',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema,}
-			            },
-			    }
-		}
-
-		type ListEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface LineIcon {
 			
 				/** Name. */
@@ -786,12 +649,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface Dialog {
+		interface Card {
 			
 				
 				'className'?: string| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>)| undefined | null
+				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
 				/** Header. */
 				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
 				/** Fade in. */
@@ -800,19 +663,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
 				/** Footer. */
 				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
-				/** Visible. */
-				'isVisible'?: boolean| undefined | null
-				/** Show close button. */
-				'shouldShowCloseButton'?: boolean| undefined | null
-				/** Close callback. */
-				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
 		}
 
-		interface DialogSchema extends SpruceSchema.Schema {
-			id: 'dialog',
+		interface CardSchema extends SpruceSchema.Schema {
+			id: 'card',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
-			name: 'Dialog',
+			name: 'Card',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -824,7 +681,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>`,}
+			                options: {valueType: `HeartwoodTypes.CardViewController`,}
 			            },
 			            /** Header. */
 			            'header': {
@@ -852,28 +709,64 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
 			            },
-			            /** Visible. */
-			            'isVisible': {
-			                label: 'Visible',
+			    }
+		}
+
+		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface List {
+			
+				/** Render row dividers. */
+				'shouldRenderRowDividers'?: boolean| undefined | null
+				/** Column widths. */
+				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				/** Row height. */
+				'defaultRowHeight'?: ("standard" | "tall")| undefined | null
+				/** Rows. */
+				'rows'?: SpruceSchemas.Heartwood.v2021_02_11.ListRow| undefined | null
+		}
+
+		interface ListSchema extends SpruceSchema.Schema {
+			id: 'list',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'list',
+			    fields: {
+			            /** Render row dividers. */
+			            'shouldRenderRowDividers': {
+			                label: 'Render row dividers',
 			                type: 'boolean',
 			                options: undefined
 			            },
-			            /** Show close button. */
-			            'shouldShowCloseButton': {
-			                label: 'Show close button',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Close callback. */
-			            'onClose': {
-			                label: 'Close callback',
+			            /** Column widths. */
+			            'columnWidths': {
+			                label: 'Column widths',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
+			                isArray: true,
+			                options: {valueType: `number | 'fill' | 'content'`,}
+			            },
+			            /** Row height. */
+			            'defaultRowHeight': {
+			                label: 'Row height',
+			                type: 'select',
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"}],}
+			            },
+			            /** Rows. */
+			            'rows': {
+			                label: 'Rows',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema,}
 			            },
 			    }
 		}
 
-		type DialogEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DialogSchema>
+		type ListEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListSchema>
 
 	}
 
@@ -905,6 +798,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'bigForm'?: SpruceSchemas.Heartwood.v2021_02_11.BigForm<SpruceSchema.Schema>| undefined | null
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Alignment. */
@@ -987,6 +882,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderContentsAsGrid': {
@@ -1092,12 +993,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface Card {
+		interface Dialog {
 			
 				
 				'className'?: string| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>)| undefined | null
 				/** Header. */
 				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
 				/** Fade in. */
@@ -1106,13 +1007,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
 				/** Footer. */
 				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+				/** Visible. */
+				'isVisible'?: boolean| undefined | null
+				/** Show close button. */
+				'shouldShowCloseButton'?: boolean| undefined | null
+				/** Close callback. */
+				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
 		}
 
-		interface CardSchema extends SpruceSchema.Schema {
-			id: 'card',
+		interface DialogSchema extends SpruceSchema.Schema {
+			id: 'dialog',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
-			name: 'Card',
+			name: 'Dialog',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -1124,7 +1031,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.CardViewController`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>`,}
 			            },
 			            /** Header. */
 			            'header': {
@@ -1152,10 +1059,111 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
 			            },
+			            /** Visible. */
+			            'isVisible': {
+			                label: 'Visible',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Show close button. */
+			            'shouldShowCloseButton': {
+			                label: 'Show close button',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Close callback. */
+			            'onClose': {
+			                label: 'Close callback',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
+			            },
 			    }
 		}
 
-		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
+		type DialogEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DialogSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface ListCell {
+			
+				/** Text. */
+				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Subtext. */
+				'subText'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Image url. */
+				'image'?: string| undefined | null
+				/** Line icon. */
+				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump-t0" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
+		}
+
+		interface ListCellSchema extends SpruceSchema.Schema {
+			id: 'listCell',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'List Cell',
+			    fields: {
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Subtext. */
+			            'subText': {
+			                label: 'Subtext',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Image url. */
+			            'image': {
+			                label: 'Image url',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                options: {choices: [{"value":"sprucebot","label":"sprucebot"},{"value":"add-circle","label":"add-circle"},{"value":"chevron-left","label":"chevron-left"},{"value":"document-text","label":"document-text"},{"value":"link-angle","label":"link-angle"},{"value":"play-circle","label":"play-circle"},{"value":"star","label":"star"},{"value":"add-square","label":"add-square"},{"value":"chevron-right","label":"chevron-right"},{"value":"download-cloud","label":"download-cloud"},{"value":"link-flat","label":"link-flat"},{"value":"present","label":"present"},{"value":"sun","label":"sun"},{"value":"add","label":"add"},{"value":"chevron-up","label":"chevron-up"},{"value":"download","label":"download"},{"value":"loader","label":"loader"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"tag","label":"tag"},{"value":"alarm","label":"alarm"},{"value":"clipboard","label":"clipboard"},{"value":"edit-box","label":"edit-box"},{"value":"location-pin","label":"location-pin"},{"value":"refresh","label":"refresh"},{"value":"time","label":"time"},{"value":"arrow-back","label":"arrow-back"},{"value":"clock","label":"clock"},{"value":"edit-line","label":"edit-line"},{"value":"lock","label":"lock"},{"value":"repeat","label":"repeat"},{"value":"tool","label":"tool"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"close-circle","label":"close-circle"},{"value":"email","label":"email"},{"value":"map","label":"map"},{"value":"restricted","label":"restricted"},{"value":"trending-down","label":"trending-down"},{"value":"arrow-down","label":"arrow-down"},{"value":"close-square","label":"close-square"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"message-circle","label":"message-circle"},{"value":"rotate","label":"rotate"},{"value":"trending-up","label":"trending-up"},{"value":"arrow-next","label":"arrow-next"},{"value":"close","label":"close"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"message-square","label":"message-square"},{"value":"search-no","label":"search-no"},{"value":"triangle","label":"triangle"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"code","label":"code"},{"value":"external-link","label":"external-link"},{"value":"mic-off","label":"mic-off"},{"value":"search","label":"search"},{"value":"unlock","label":"unlock"},{"value":"arrow-up","label":"arrow-up"},{"value":"coffee","label":"coffee"},{"value":"fav-heart","label":"fav-heart"},{"value":"mic-on","label":"mic-on"},{"value":"selector-checked","label":"selector-checked"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"attachment","label":"attachment"},{"value":"command","label":"command"},{"value":"flag","label":"flag"},{"value":"minus-circle","label":"minus-circle"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"upload","label":"upload"},{"value":"award-badge","label":"award-badge"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"flip-01","label":"flip-01"},{"value":"minus-square","label":"minus-square"},{"value":"selector-circle","label":"selector-circle"},{"value":"user-add","label":"user-add"},{"value":"binoculars","label":"binoculars"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"flip-02","label":"flip-02"},{"value":"money-sign","label":"money-sign"},{"value":"send","label":"send"},{"value":"user-delete","label":"user-delete"},{"value":"bolt","label":"bolt"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"folder","label":"folder"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"settings-filled","label":"settings-filled"},{"value":"user","label":"user"},{"value":"book-open","label":"book-open"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"globe","label":"globe"},{"value":"more-vertical","label":"more-vertical"},{"value":"settings","label":"settings"},{"value":"users","label":"users"},{"value":"book","label":"book"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"hash-tag","label":"hash-tag"},{"value":"notification-off","label":"notification-off"},{"value":"share","label":"share"},{"value":"video-off","label":"video-off"},{"value":"bookmark","label":"bookmark"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"headphones","label":"headphones"},{"value":"notification-on","label":"notification-on"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"video","label":"video"},{"value":"calendar-add","label":"calendar-add"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"help-buoy","label":"help-buoy"},{"value":"object","label":"object"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"warning","label":"warning"},{"value":"calendar","label":"calendar"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"help-circle","label":"help-circle"},{"value":"pause-circle","label":"pause-circle"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"wifi","label":"wifi"},{"value":"camera","label":"camera"},{"value":"crop","label":"crop"},{"value":"home","label":"home"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"cellphone","label":"cellphone"},{"value":"delete","label":"delete"},{"value":"info","label":"info"},{"value":"phone","label":"phone"},{"value":"sound-off","label":"sound-off"},{"value":"zoom-out","label":"zoom-out"},{"value":"checkmark","label":"checkmark"},{"value":"document-blank","label":"document-blank"},{"value":"jump-t0","label":"jump-t0"},{"value":"photo","label":"photo"},{"value":"sound-on","label":"sound-on"},{"value":"chevron-down","label":"chevron-down"},{"value":"document-new","label":"document-new"},{"value":"layers","label":"layers"},{"value":"picked","label":"picked"},{"value":"star-filled","label":"star-filled"}],}
+			            },
+			    }
+		}
+
+		type ListCellEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface ListRow {
+			
+				/** Cells. */
+				'cells'?: SpruceSchemas.Heartwood.v2021_02_11.ListCell[]| undefined | null
+		}
+
+		interface ListRowSchema extends SpruceSchema.Schema {
+			id: 'listRow',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Cells. */
+			            'cells': {
+			                label: 'Cells',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema,}
+			            },
+			    }
+		}
+
+		type ListRowEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema>
 
 	}
 

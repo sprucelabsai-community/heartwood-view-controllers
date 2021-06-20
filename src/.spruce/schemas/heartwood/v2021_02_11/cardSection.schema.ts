@@ -6,6 +6,7 @@ import formSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/form.s
 import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/talkingSprucebot.schema'
 import bigFormSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
 import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
+import listSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/list.schema'
 
 const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -83,6 +84,12 @@ const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: buttonSchema_v2021_02_11,}
+	            },
+	            /** List. */
+	            'list': {
+	                label: 'List',
+	                type: 'schema',
+	                options: {schema: listSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {
