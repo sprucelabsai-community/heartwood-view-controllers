@@ -9,12 +9,6 @@ const textSchema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema  = {
 	namespace: 'Heartwood',
 	name: 'Text',
 	    fields: {
-	            /** . */
-	            'className': {
-	                type: 'text',
-	                isPrivate: true,
-	                options: undefined
-	            },
 	            /** Text. */
 	            'content': {
 	                label: 'Text',

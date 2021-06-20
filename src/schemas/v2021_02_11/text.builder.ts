@@ -5,10 +5,6 @@ export default buildSchema({
 	name: 'Text',
 	description: '',
 	fields: {
-		className: {
-			type: 'text',
-			isPrivate: true,
-		},
 		content: {
 			type: 'text',
 			label: 'Text',

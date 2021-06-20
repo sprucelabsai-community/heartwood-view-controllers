@@ -1645,8 +1645,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface Text {
 			
-				
-				'className'?: string| undefined | null
 				/** Text. */
 				'content'?: string| undefined | null
 				/** Html. */
@@ -1661,12 +1659,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: 'Text',
 			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
 			            /** Text. */
 			            'content': {
 			                label: 'Text',
