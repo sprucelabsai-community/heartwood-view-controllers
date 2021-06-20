@@ -1,3 +1,10 @@
+# [9.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v9.0.0...v9.1.0) (2021-06-20)
+
+
+### Features
+
+* list schema ([91997c0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/91997c0))
+
 # [9.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v8.1.0...v9.0.0) (2021-06-20)
 
 
