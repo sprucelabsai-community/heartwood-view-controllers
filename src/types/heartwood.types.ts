@@ -175,6 +175,11 @@ export type ControllerOptions<
 	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
+export type SkillViewControllerArgs<
+	N extends SkillViewControllerId,
+	O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap
+> = N extends keyof O ? O[N] : Record<string, never>
+
 export type Client = MercuryClient
 
 export type OnRenderHandler = {
