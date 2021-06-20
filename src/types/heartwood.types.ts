@@ -101,9 +101,11 @@ export interface SwipeController {
 	swipeTo(idx: number): void
 }
 
-export interface SkillViewControllerLoadOptions {
+export interface SkillViewControllerLoadOptions<
+	Args extends Record<string, any> = Record<string, any>
+> {
 	router: Router
-	args?: Record<string, any>
+	args: Args
 	authenticator: Authenticator
 }
 
@@ -117,8 +119,10 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 	triggerRender: () => void
 }
 
-export interface SkillViewController extends ViewController<SkillView> {
-	load(options: SkillViewControllerLoadOptions): Promise<void>
+export interface SkillViewController<
+	Args extends Record<string, any> = Record<string, any>
+> extends ViewController<SkillView> {
+	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 }
 
 export type ImportedViewController = (new () =>
@@ -133,7 +137,7 @@ export type SkillViewControllerId = keyof SkillViewControllerMap
 export interface Router {
 	redirect<Id extends SkillViewControllerId>(
 		id: Id,
-		args?: SkillViewControllerArgsMap[Id]
+		args?: SkillViewControllerArgs<Id>
 	): Promise<void>
 	back(): Promise<void>
 }
