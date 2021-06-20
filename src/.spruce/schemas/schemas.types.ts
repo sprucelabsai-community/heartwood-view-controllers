@@ -729,7 +729,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Row height. */
 				'defaultRowHeight'?: ("standard" | "tall")| undefined | null
 				/** Rows. */
-				'rows'?: SpruceSchemas.Heartwood.v2021_02_11.ListRow| undefined | null
+				'rows'?: SpruceSchemas.Heartwood.v2021_02_11.ListRow[]| undefined | null
 		}
 
 		interface ListSchema extends SpruceSchema.Schema {
@@ -761,6 +761,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'rows': {
 			                label: 'Rows',
 			                type: 'schema',
+			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema,}
 			            },
 			    }

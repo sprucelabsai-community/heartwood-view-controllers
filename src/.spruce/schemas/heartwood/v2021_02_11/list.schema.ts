@@ -32,6 +32,7 @@ const listSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema  = {
 	            'rows': {
 	                label: 'Rows',
 	                type: 'schema',
+	                isArray: true,
 	                options: {schema: listRowSchema_v2021_02_11,}
 	            },
 	    }
