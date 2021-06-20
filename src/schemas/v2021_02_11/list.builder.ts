@@ -31,6 +31,7 @@ export default buildSchema({
 		rows: {
 			type: 'schema',
 			label: 'Rows',
+			isArray: true,
 			options: {
 				schema: {
 					id: 'listRow',
