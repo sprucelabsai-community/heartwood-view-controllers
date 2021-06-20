@@ -8,13 +8,17 @@ import AbstractViewController from '../viewControllers/Abstract.vc'
 
 type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
 
-export default abstract class AbstractSkillViewController
+export default abstract class AbstractSkillViewController<
+		Args extends Record<string, any> = Record<string, any>
+	>
 	extends AbstractViewController<SkillView>
 	implements SkillViewController
 {
 	public static id: string
 
-	// eslint-disable-next-line no-unused-vars
-	public async load(options: SkillViewControllerLoadOptions) {}
+	public async load(
+		// eslint-disable-next-line no-unused-vars
+		options: SkillViewControllerLoadOptions<Args>
+	) {}
 	public abstract render(): SkillView
 }
