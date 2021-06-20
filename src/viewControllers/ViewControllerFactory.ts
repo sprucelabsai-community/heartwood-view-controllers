@@ -12,7 +12,6 @@ import {
 	ViewControllerMap,
 	ViewControllerId,
 	ViewControllerOptions,
-	SkillViewControllerMap,
 } from '../types/heartwood.types'
 import BigFormViewController from './BigForm.vc'
 import ButtonGroupViewController from './ButtonGroup.vc'
@@ -34,8 +33,6 @@ const CORE_CONTROLLER_MAP = {
 	confirm: ConfirmViewController,
 }
 
-type ControllerMap = ViewControllerMap & SkillViewControllerMap
-
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions
 ) => Vc
@@ -49,7 +46,7 @@ type BuiltViewControllerOrSkillViewController<
 	: BuiltViewController<Vc>
 
 export default class ViewControllerFactory<
-	Map extends ControllerMap = ControllerMap
+	Map extends ViewControllerMap = ViewControllerMap
 > {
 	private controllerMap: Map
 	private renderInDialogHandler: RenderInDialogHandler
@@ -136,13 +133,12 @@ export default class ViewControllerFactory<
 		return !!this.controllerMap[name]
 	}
 
-	public Controller<
-		N extends ViewControllerId,
-		O extends ControllerOptions<N> = ControllerOptions<N>
-	>(
+	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
-	): BuiltViewControllerOrSkillViewController<InstanceType<ControllerMap[N]>> {
+	): BuiltViewControllerOrSkillViewController<
+		InstanceType<ViewControllerMap[N]>
+	> {
 		const Class = this.controllerMap[name]
 
 		if (!Class) {
@@ -166,7 +162,7 @@ export default class ViewControllerFactory<
 
 		//@ts-ignore
 		let instance = new Class(constructorOptions) as InstanceType<
-			ControllerMap[N]
+			ViewControllerMap[N]
 		>
 
 		if (isFunction) {
