@@ -1,3 +1,10 @@
+# [10.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v9.1.1...v10.0.0) (2021-06-20)
+
+
+### Breaking Changes
+
+* made rows is arary ([6715f42](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6715f42))
+
 ## [9.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v9.1.0...v9.1.1) (2021-06-20)
 
 # [9.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v9.0.0...v9.1.0) (2021-06-20)
