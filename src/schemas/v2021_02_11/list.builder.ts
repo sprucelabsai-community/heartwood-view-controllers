@@ -32,6 +32,7 @@ export default buildSchema({
 			type: 'schema',
 			label: 'Rows',
 			isArray: true,
+			isRequired: true,
 			options: {
 				schema: {
 					id: 'listRow',
@@ -40,6 +41,7 @@ export default buildSchema({
 							type: 'schema',
 							label: 'Cells',
 							isArray: true,
+							isRequired: true,
 							options: {
 								schema: listCellBuilder,
 							},

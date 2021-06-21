@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import buttonBuilder from './button.builder'
 import lineIconBuilder from './lineIcon.builder'
 import textBuilder from './text.builder'
 
@@ -24,6 +25,13 @@ export default buildSchema({
 		image: {
 			type: 'text',
 			label: 'Image url',
+		},
+		button: {
+			type: 'schema',
+			label: 'Button',
+			options: {
+				schema: buttonBuilder,
+			},
 		},
 		lineIcon: {
 			type: 'select',

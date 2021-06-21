@@ -729,7 +729,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Row height. */
 				'defaultRowHeight'?: ("standard" | "tall")| undefined | null
 				/** Rows. */
-				'rows'?: SpruceSchemas.Heartwood.v2021_02_11.ListRow[]| undefined | null
+				'rows': SpruceSchemas.Heartwood.v2021_02_11.ListRow[]
 		}
 
 		interface ListSchema extends SpruceSchema.Schema {
@@ -761,6 +761,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'rows': {
 			                label: 'Rows',
 			                type: 'schema',
+			                isRequired: true,
 			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema,}
 			            },
@@ -1097,6 +1098,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'subText'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
 				/** Image url. */
 				'image'?: string| undefined | null
+				/** Button. */
+				'button'?: SpruceSchemas.Heartwood.v2021_02_11.Button| undefined | null
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump-t0" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 		}
@@ -1125,6 +1128,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
+			            /** Button. */
+			            'button': {
+			                label: 'Button',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Line icon. */
 			            'lineIcon': {
 			                label: 'Line icon',
@@ -1145,7 +1154,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListRow {
 			
 				/** Cells. */
-				'cells'?: SpruceSchemas.Heartwood.v2021_02_11.ListCell[]| undefined | null
+				'cells': SpruceSchemas.Heartwood.v2021_02_11.ListCell[]
 		}
 
 		interface ListRowSchema extends SpruceSchema.Schema {
@@ -1158,6 +1167,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'cells': {
 			                label: 'Cells',
 			                type: 'schema',
+			                isRequired: true,
 			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema,}
 			            },

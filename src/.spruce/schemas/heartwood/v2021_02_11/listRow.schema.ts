@@ -13,6 +13,7 @@ const listRowSchema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema  = {
 	            'cells': {
 	                label: 'Cells',
 	                type: 'schema',
+	                isRequired: true,
 	                isArray: true,
 	                options: {schema: listCellSchema_v2021_02_11,}
 	            },

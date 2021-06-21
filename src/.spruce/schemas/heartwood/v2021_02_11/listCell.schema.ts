@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
 
 const listCellSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema  = {
 	id: 'listCell',
@@ -26,6 +27,12 @@ const listCellSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema  = {
 	                label: 'Image url',
 	                type: 'text',
 	                options: undefined
+	            },
+	            /** Button. */
+	            'button': {
+	                label: 'Button',
+	                type: 'schema',
+	                options: {schema: buttonSchema_v2021_02_11,}
 	            },
 	            /** Line icon. */
 	            'lineIcon': {
