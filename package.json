@@ -85,7 +85,7 @@
     "@sprucelabs/jest-sheets-reporter": "^1.2.51",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-test-fixtures": "^4.13.3",
+    "@sprucelabs/spruce-test-fixtures": "^4.13.4",
     "@sprucelabs/test": "^7.7.6",
     "@sprucelabs/test-utils": "^3.0.43",
     "@types/node": "^15.12.4",
