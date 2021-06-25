@@ -1,3 +1,10 @@
+# [11.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.1.2...v11.2.0) (2021-06-25)
+
+
+### Features
+
+* can pass header config to form builder ([c08dae6](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c08dae6))
+
 ## [11.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.1.1...v11.1.2) (2021-06-25)
 
 ## [11.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.1.0...v11.1.1) (2021-06-25)
