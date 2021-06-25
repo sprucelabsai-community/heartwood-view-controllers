@@ -1,3 +1,10 @@
+# [11.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.0.0...v11.1.0) (2021-06-25)
+
+
+### Features
+
+* update footer on swipe vc ([5109eb3](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5109eb3))
+
 # [11.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v10.0.21...v11.0.0) (2021-06-25)
 
 
