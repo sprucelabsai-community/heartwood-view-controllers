@@ -1,3 +1,10 @@
+# [11.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v10.0.21...v11.0.0) (2021-06-25)
+
+
+### Breaking Changes
+
+* controlling a form builder, better validation on form and card operations ([0d3b0eb](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0d3b0eb))
+
 ## [10.0.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v10.0.20...v10.0.21) (2021-06-24)
 
 ## [10.0.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v10.0.19...v10.0.20) (2021-06-24)
