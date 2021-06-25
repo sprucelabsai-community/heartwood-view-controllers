@@ -9,7 +9,7 @@ import SwipeViewController from './Swipe.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 export interface FormBuilderViewControllerOptions {
-	header: Card['header']
+	header?: Card['header']
 }
 
 interface PageViewControllerEnhancements {
