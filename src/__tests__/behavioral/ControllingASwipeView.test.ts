@@ -190,4 +190,11 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		assert.isEqual(onSlideChangeSlide, 0)
 		assert.isEqual(changeHitCount, 2)
 	}
+
+	@test()
+	protected static canUpdateFooter() {
+		assert.isFalsy(this.render(this.vc).footer)
+		this.vc.updateFooter({ buttons: [{ label: 'Hey!' }] })
+		assert.doesInclude(this.render(this.vc).footer?.buttons, { label: 'Hey!' })
+	}
 }

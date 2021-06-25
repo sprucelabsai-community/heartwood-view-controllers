@@ -9,6 +9,7 @@ import CardViewController from './Card.vc'
 
 type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Slide = SpruceSchemas.Heartwood.v2021_02_11.CardSection
+type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
 
 export type SwipeViewControllerOptions = {
 	slides: Slide[]
@@ -116,6 +117,10 @@ export default class SwipeViewController
 
 	public getSlide(idx: number) {
 		return this.cardVc.getSection(idx)
+	}
+
+	public updateFooter(footer: Footer) {
+		this.cardVc.updateFooter(footer)
 	}
 
 	public render(): ViewModel {
