@@ -229,10 +229,18 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isEqual(this.vc.getTotalPages(), 2)
 	}
 
+	@test()
+	protected static formsShouldNotIncludeActionButtons() {
+		const pageVc = this.vc.getPageVc(0)
+		const model = this.render(pageVc)
+		assert.isFalse(model.shouldShowSubmitControls)
+	}
+
 	private static assertFirstFieldConfiguredCorrectly(
 		pageVc: PageViewController
 	) {
 		const model = this.render(pageVc)
+
 		assert.isTruthy(model.schema.fields)
 		assert.isLength(Object.keys(model.schema.fields), 1)
 		assert.doesInclude(model.schema.fields, { field1: { type: 'text' } })

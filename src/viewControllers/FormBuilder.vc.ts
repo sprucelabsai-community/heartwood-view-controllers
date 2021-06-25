@@ -50,6 +50,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	private renderNewForm(): SpruceSchemas.Heartwood.v2021_02_11.Form<Schema> {
 		return this.vcFactory
 			.Controller('form', {
+				shouldShowSubmitControls: false,
 				schema: {
 					id: 'tmp',
 					fields: {
