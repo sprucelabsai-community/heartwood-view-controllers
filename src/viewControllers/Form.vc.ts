@@ -12,7 +12,7 @@ import {
 	UnexpectedParametersOptions,
 	validateSchemaValues,
 } from '@sprucelabs/schema'
-import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
+import SpruceError from '../errors/SpruceError'
 import {
 	FormErrorsByField,
 	ViewController,
@@ -22,6 +22,7 @@ import {
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel<S extends Schema> = SpruceSchemas.Heartwood.v2021_02_11.Form<S>
+type Section = ViewModel<Schema>['sections'][number]
 
 export type FormViewControllerOptions<S extends Schema> = Pick<
 	ViewModel<S>,
@@ -42,7 +43,7 @@ export default class FormViewController<
 	extends AbstractViewController<V>
 	implements ViewController<V>
 {
-	protected viewModel: V & {
+	protected model: V & {
 		values: SchemaPartialValues<S>
 	}
 
@@ -65,7 +66,7 @@ export default class FormViewController<
 		//@ts-ignore
 		delete model.confirmHandler
 
-		this.viewModel = {
+		this.model = {
 			values: {
 				...(options.schema ? defaultSchemaValues(options.schema) : {}),
 			},
@@ -78,7 +79,7 @@ export default class FormViewController<
 		}
 
 		//@ts-ignore
-		this.originalValues = { ...(this.viewModel.values ?? {}) }
+		this.originalValues = { ...(this.model.values ?? {}) }
 	}
 
 	public focusInput(named: string) {
@@ -99,16 +100,16 @@ export default class FormViewController<
 	}) {
 		const { name, value, shouldSetIsDirty = true } = options
 
-		this.viewModel.values[name] = value
+		this.model.values[name] = value
 		if (shouldSetIsDirty) {
 			this.dirtyFields[name] = true
 		}
 
 		const errorsByField = this.validateDirtyFields()
 
-		void this.viewModel.onChange?.({
+		void this.model.onChange?.({
 			controller: this,
-			values: this.viewModel.values,
+			values: this.model.values,
 			errorsByField,
 			isValid: this.isValid(),
 		})
@@ -144,14 +145,14 @@ export default class FormViewController<
 	}
 
 	public setErrorsByField(errorsByField: any) {
-		this.viewModel.errorsByField = errorsByField
+		this.model.errorsByField = errorsByField
 		this.triggerRender()
 	}
 
 	public validate(): FormErrorsByField<S> {
 		const errors: Record<string, InvalidFieldError[]> = {}
 		try {
-			validateSchemaValues(this.viewModel.schema, this.viewModel.values)
+			validateSchemaValues(this.model.schema, this.model.values)
 		} catch (err) {
 			if (err.options?.code === 'VALIDATION_FAILED') {
 				err.options.errors?.forEach(
@@ -183,22 +184,22 @@ export default class FormViewController<
 	}
 
 	public isValid() {
-		return areSchemaValuesValid(this.viewModel.schema, this.viewModel.values)
+		return areSchemaValuesValid(this.model.schema, this.model.values)
 	}
 
 	public getIsBusy() {
-		return this.viewModel.isBusy
+		return this.model.isBusy
 	}
 
 	public setIsBusy(isBusy: boolean) {
-		this.viewModel.isBusy = isBusy
+		this.model.isBusy = isBusy
 		this.triggerRender()
 	}
 
 	public async handleSubmit() {
 		const errorsByField = this.validate()
-		const results = await this.viewModel.onSubmit?.({
-			values: this.viewModel.values,
+		const results = await this.model.onSubmit?.({
+			values: this.model.values,
 			errorsByField,
 			controller: this,
 			isValid: this.isValid(),
@@ -208,7 +209,7 @@ export default class FormViewController<
 			return
 		}
 
-		this.viewModel.errorsByField = errorsByField
+		this.model.errorsByField = errorsByField
 
 		const name = Object.keys(errorsByField)[0]
 		this.focusInput?.(name)
@@ -217,7 +218,7 @@ export default class FormViewController<
 	}
 
 	public getErrorsByField(): FormErrorsByField<S> {
-		return this.viewModel.errorsByField ?? ({} as FormErrorsByField<S>)
+		return this.model.errorsByField ?? ({} as FormErrorsByField<S>)
 	}
 
 	public hasErrors(): boolean {
@@ -225,21 +226,25 @@ export default class FormViewController<
 	}
 
 	public getValues() {
-		return this.viewModel.values
+		return this.model.values
 	}
 
 	public showSubmitControls() {
-		this.viewModel.shouldShowSubmitControls = true
+		this.model.shouldShowSubmitControls = true
 		this.triggerRender()
 	}
 	public hideSubmitControls() {
-		this.viewModel.shouldShowSubmitControls = false
+		this.model.shouldShowSubmitControls = false
 		this.triggerRender()
 	}
 
 	public reset() {
 		this.setValues(this.originalValues)
 		this.setErrorsByField({})
+	}
+
+	public addSection(section: Section) {
+		this.model.sections.push(section)
 	}
 
 	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
@@ -252,18 +257,36 @@ export default class FormViewController<
 	}
 
 	public setValues(values: SchemaPartialValues<S>) {
-		this.viewModel.values = { ...values }
+		this.model.values = { ...values }
+	}
+
+	public getSections() {
+		return this.model.sections
+	}
+
+	public getSection(idx: number) {
+		const section = this.model.sections[idx]
+
+		if (!section) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `There is no section ${idx}.`,
+				parameters: ['sectionIndex'],
+			})
+		}
+
+		return section
+	}
+
+	public getSchema() {
+		return this.model.schema
 	}
 
 	public render(): V {
 		const view: V = {
-			...this.viewModel,
+			...this.model,
 			onSubmit: this.handleSubmit.bind(this),
 		}
-
-		/* Develblock:start */
-		validateSchemaValues(formSchema, view)
-		/* Develblock:end */
 
 		return view
 	}

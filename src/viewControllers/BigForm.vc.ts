@@ -1,10 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import {
-	areSchemaValuesValid,
-	Schema,
-	validateSchemaValues,
-} from '@sprucelabs/schema'
-import bigFormSchema from '#spruce/schemas/heartwood/v2021_02_11/bigForm.schema'
+import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
 import normalizeFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './Form.vc'
 
@@ -21,35 +16,31 @@ export default class BigFormViewController<
 	V extends ViewModel<S> = ViewModel<S>
 > extends FormViewController<S, V> {
 	public isSlideValid(idx: number) {
-		const slide = this.viewModel.sections[idx]
+		const slide = this.model.sections[idx]
 		if (slide) {
 			const fields = normalizeFieldNamesUtil.toNames(slide.fields)
-			return areSchemaValuesValid(
-				this.viewModel.schema,
-				this.viewModel.values,
-				{
-					fields,
-				}
-			)
+			return areSchemaValuesValid(this.model.schema, this.model.values, {
+				fields,
+			})
 		}
 
 		return false
 	}
 
 	public getPresentSlide(): number {
-		return this.viewModel.presentSlide ?? 0
+		return this.model.presentSlide ?? 0
 	}
 
 	public async jumpToSlide(idx: number) {
-		this.viewModel.presentSlide = Math.min(
-			this.viewModel.sections.length - 1,
+		this.model.presentSlide = Math.min(
+			this.model.sections.length - 1,
 			Math.max(0, idx)
 		)
 
 		this.triggerRender()
 
 		const firstFieldOfSection = normalizeFieldNamesUtil.toNames(
-			this.viewModel.sections[idx]?.fields ?? []
+			this.model.sections[idx]?.fields ?? []
 		)[0]
 		if (firstFieldOfSection) {
 			this.focusInput(firstFieldOfSection)
@@ -72,7 +63,7 @@ export default class BigFormViewController<
 
 	public async handleSubmit() {
 		const errorsByField = this.validate()
-		const results = await this.viewModel.onSubmitSlide?.({
+		const results = await this.model.onSubmitSlide?.({
 			values: this.getValues(),
 			presentSlide: this.getPresentSlide(),
 			errorsByField,
@@ -97,12 +88,9 @@ export default class BigFormViewController<
 
 	public render(): V {
 		const view: V = {
-			...this.viewModel,
+			...this.model,
 			onSubmit: this.handleSubmit.bind(this),
 		}
-		/* Develblock:start */
-		validateSchemaValues(bigFormSchema, view)
-		/* Develblock:end */
 
 		return view
 	}

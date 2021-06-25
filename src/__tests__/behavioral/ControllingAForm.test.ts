@@ -54,15 +54,6 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static throwsWhenRenderingInvalidForm() {
-		//@ts-ignore
-		const vc = this.Controller('form', {})
-		const err = assert.doesThrow(() => vc.render())
-
-		errorAssertUtil.assertError(err, 'VALIDATION_FAILED')
-	}
-
-	@test()
 	protected static rendersValidForm() {
 		const view = this.vc.render()
 
@@ -280,5 +271,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		errs = this.vc.getErrorsByField()
 		assert.isFalsy(errs.favoriteNumber)
+	}
+
+	@test()
+	protected static throwsGettingBadSection() {
+		const err1 = assert.doesThrow(() => this.vc.getSection(-1))
+
+		errorAssertUtil.assertError(err1, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIndex'],
+		})
 	}
 }

@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import SpruceError from '../errors/SpruceError'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
@@ -11,7 +12,7 @@ export default class CardViewController
 	extends AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
 {
-	private model: ViewModel
+	protected model: ViewModel
 	private triggerRenderFooter?: () => void
 	private triggerRenderHeader?: () => void
 	private triggerRenderSections: (() => void)[] = []
@@ -149,10 +150,37 @@ export default class CardViewController
 		}
 	}
 
-	public updateSection(
-		idx: number,
-		section: SpruceSchemas.Heartwood.v2021_02_11.CardSection
-	) {
+	public getSection(idx: number) {
+		const section = this.getSections()?.[idx]
+		if (!section) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `There is no section at index ${idx}.`,
+				parameters: ['sectionIndex'],
+			})
+		}
+
+		return section
+	}
+
+	public updateSection(idx: number, section: Section) {
+		this.ensureSectionsExist()
+
+		if (!this.model.body?.sections?.[idx]) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't update section at index ${idx} because there isn't one.`,
+				parameters: ['sectionIndex'],
+			})
+		}
+
+		if (this.model.body?.sections) {
+			this.model.body.sections[idx] = section
+			this.triggerRenderSections[idx]?.()
+		}
+	}
+
+	private ensureSectionsExist() {
 		if (!this.model.body) {
 			this.model.body = {}
 		}
@@ -160,10 +188,6 @@ export default class CardViewController
 		if (!this.model.body.sections) {
 			this.model.body.sections = []
 		}
-
-		this.model.body.sections[idx] = section
-
-		this.triggerRenderSections[idx]?.()
 	}
 
 	public setHeaderSubtitle(subtitle: string) {
@@ -176,6 +200,33 @@ export default class CardViewController
 		}
 
 		this.triggerRenderHeader?.()
+	}
+
+	public addSection(section: Section) {
+		this.ensureSectionsExist()
+		const sections = this.model.body?.sections
+		if (sections) {
+			sections.push(section)
+		}
+	}
+
+	public getSections() {
+		return this.model.body?.sections
+	}
+
+	public removeSection(idx: number) {
+		this.model.body?.sections?.splice(idx, 1)
+	}
+
+	public addSectionAtIndex(idx: number, section: Section) {
+		const sections = this.getSections() ?? []
+		sections.splice(idx, 0, section)
+
+		this.ensureSectionsExist()
+
+		if (this.model.body?.sections) {
+			this.model.body.sections = sections
+		}
 	}
 
 	//monkey patched by view

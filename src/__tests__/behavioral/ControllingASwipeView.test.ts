@@ -62,7 +62,8 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async renders() {
-		const model = this.vc.render()
+		const model = this.render(this.vc)
+
 		assert.isLength(model.body?.sections, 3)
 		assert.isEqual(model.body?.sections?.[0].title, 'step 1')
 		assert.isEqual(model.body?.sections?.[1].title, 'step 2')
@@ -76,7 +77,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['slideIdx'],
+			parameters: ['slideIndex'],
 		})
 	}
 
@@ -97,7 +98,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 		vc.updateSlide(0, { text: { content: 'hey there updated' } })
 
-		const model = vc.render()
+		const model = this.render(vc)
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'hey there updated')
 	}
 
@@ -138,18 +139,18 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	protected static throwsWhenMarkingBadSlideAsComplete() {
 		const err = assert.doesThrow(() => this.vc.markSlideAsComplete(-10))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['slideIdx'],
+			parameters: ['slideIndex'],
 		})
 	}
 
 	@test()
 	protected static canMarkeSlideAsComplete() {
-		let model = this.vc.render()
+		let model = this.render(this.vc)
 		assert.isUndefined(model.body?.sections?.[0].isComplete)
 
 		this.vc.markSlideAsComplete(0)
 
-		model = this.vc.render()
+		model = this.render(this.vc)
 		assert.isTrue(model.body?.sections?.[0].isComplete)
 	}
 

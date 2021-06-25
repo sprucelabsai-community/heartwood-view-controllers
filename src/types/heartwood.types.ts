@@ -25,6 +25,9 @@ import DialogViewController, {
 import FormViewControllerImpl, {
 	FormViewControllerOptions,
 } from '../viewControllers/Form.vc'
+import FormBuilderViewController, {
+	FormBuilderViewControllerOptions,
+} from '../viewControllers/FormBuilder.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
@@ -158,6 +161,7 @@ export interface ViewControllerMap {
 	dialog: typeof DialogViewController
 	bigForm: typeof BigFormViewControllerImpl
 	confirm: typeof ConfirmViewController
+	formBuilder: typeof FormBuilderViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -169,6 +173,7 @@ export interface ViewControllerOptionsMap {
 	dialog: DialogViewControllerOptions
 	bigForm: BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
+	formBuilder: FormBuilderViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

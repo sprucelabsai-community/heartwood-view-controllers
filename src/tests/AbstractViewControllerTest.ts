@@ -2,6 +2,7 @@ import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import Authenticator from '../auth/Authenticator'
 import SpruceError from '../errors/SpruceError'
 import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
+import renderUtil from '../utilities/render.utility'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MockStorage from './MockStorage'
@@ -35,7 +36,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		})
 	}
 
-	public static Controller<N extends keyof ViewControllerMap>(
+	protected static Controller<N extends keyof ViewControllerMap>(
 		name: N,
 		options: ControllerOptions<N>
 	) {
@@ -55,5 +56,9 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		}
 
 		return controller
+	}
+
+	protected static render<Vc extends AbstractViewController<any>>(vc: Vc) {
+		return renderUtil.render(vc)
 	}
 }

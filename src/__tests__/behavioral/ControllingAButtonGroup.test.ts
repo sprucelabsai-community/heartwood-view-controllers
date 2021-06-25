@@ -82,13 +82,6 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		assert.doesNotInclude(buttons, { isSelected: false })
 	}
 
-	private static render(
-		vc: ButtonGroupViewController
-	): SpruceSchemas.Heartwood.v2021_02_11.Button[] {
-		const buttons = vc.render().map((b) => b.controller?.render())
-		return buttons as any
-	}
-
 	@test()
 	protected static canSelectButtonAndMarkRestAsDeselected() {
 		this.singleSelectVc.selectButton(0)

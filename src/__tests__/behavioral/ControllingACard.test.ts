@@ -1,6 +1,9 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
+import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import renderUtil from '../../utilities/render.utility'
 import CardViewController, {
 	CardViewControllerOptions,
 } from '../../viewControllers/Card.vc'
@@ -56,30 +59,17 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static renderVc() {
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isEqual(model.header?.title, 'A header')
 	}
 
-	private static render(
-		vc?: CardViewController
-	): SpruceSchemas.Heartwood.v2021_02_11.Card {
-		const thisVc = vc ?? this.vc
-		const model = thisVc.render()
-
-		const card = {
-			...model,
-			header: model.header?.controller?.render(),
-			footer: model.footer?.controller?.render(),
-			body: {
-				...model.body,
-				sections: model.body?.sections?.map((s) => s.controller?.render()),
-			},
-		}
+	protected static renderCard(vc = this.vc) {
+		const card = renderUtil.render(vc)
 
 		//@ts-ignore
-		if (!thisVc._isTracking) {
+		if (!vc._isTracking) {
 			//@ts-ignore
-			thisVc._isTracking = true
+			vc._isTracking = true
 			this.beginTrackingFooterRender()
 			this.beginTrackingHeaderRender()
 			this.beginTrackingSectionRender()
@@ -92,7 +82,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static canUpdateFooterAndDoesNotCauseFullRender() {
 		this.vc.updateFooter({ buttons: [{ label: 'Stop team!' }] })
 
-		const model = this.render()
+		const model = this.renderCard()
 
 		assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -101,11 +91,11 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static updatingFooterAfterRenderOnlyCallsRenderOnFooter() {
-		this.render()
+		this.renderCard()
 
 		this.vc.updateFooter({ buttons: [{ label: 'Stop team!' }] })
 
-		const model = this.render()
+		const model = this.renderCard()
 
 		assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -117,7 +107,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static canUpdateHeaderTitleBeforeRender() {
 		this.vc.setHeaderTitle('you got this')
 
-		const model = this.render()
+		const model = this.renderCard()
 
 		assert.isEqual(model.header?.title, 'you got this')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -126,11 +116,11 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canUpdateHeaderTitleAfterRender() {
-		this.render()
+		this.renderCard()
 
 		this.vc.setHeaderTitle('you got this')
 
-		const model = this.render()
+		const model = this.renderCard()
 
 		assert.isEqual(model.header?.title, 'you got this')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -141,34 +131,24 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static canClearTitle() {
 		this.vc.setHeaderTitle(null)
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isFalsy(model.header)
 	}
 
 	@test()
-	protected static updatingANewSectionAddsIt() {
-		const vc = this.Vc({ header: { title: 'go' } })
-
-		vc.updateSection(1, { text: { content: 'Goodbye world' } })
-
-		const model = this.render(vc)
-		assert.isEqual(model.body?.sections?.[1].text?.content, 'Goodbye world')
-	}
-
-	@test()
 	protected static canUpdateSectionBeforeRender() {
-		let model = this.render()
+		let model = this.renderCard()
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'Hello world')
 
 		this.vc.updateSection(0, { text: { content: 'Goodbye world' } })
 
-		model = this.render()
+		model = this.renderCard()
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'Goodbye world')
 	}
 
 	@test()
 	protected static onlyTriggersRenderInUpdatedSection() {
-		this.render()
+		this.renderCard()
 
 		this.vc.updateSection(0, { text: { content: 'Goodbye world' } })
 
@@ -189,14 +169,14 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static setHeaderSubtitle() {
 		this.vc.setHeaderSubtitle('Waka waka')
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isEqual(model.header?.subtitle, 'Waka waka')
 	}
 
 	@test()
 	protected static canSetHeaderImage() {
 		this.vc.setHeaderImage('test.jpg')
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isEqual(model.header?.image, 'test.jpg')
 	}
 
@@ -205,7 +185,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		this.vc.setHeaderTitle(null)
 		this.vc.setHeaderImage('test.jpg')
 		this.vc.setHeaderImage(null)
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isFalsy(model.header)
 	}
 
@@ -214,9 +194,40 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		this.vc.setHeaderSubtitle('Waka waka')
 		this.vc.setHeaderImage('test.jpg')
 		this.vc.setHeaderImage(null)
-		const model = this.render()
+		const model = this.renderCard()
 		assert.isTruthy(model.header)
 		assert.isEqual(model.header.subtitle, 'Waka waka')
+	}
+
+	@test()
+	protected static async viewModelValidates() {
+		const model = this.renderCard()
+
+		validateSchemaValues(cardSchema, model)
+	}
+
+	@test()
+	protected static canAddFirstSectionByIndex() {
+		const vc = this.Vc({
+			header: {
+				title: 'A header',
+			},
+		})
+
+		vc.addSectionAtIndex(0, {
+			title: 'Yes!',
+		})
+
+		const model = this.renderCard(vc)
+		assert.isEqual(model.body?.sections?.[0].title, 'Yes!')
+	}
+
+	@test()
+	protected static cantGetInvalidSection() {
+		const err = assert.doesThrow(() => this.vc.getSection(-1))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIndex'],
+		})
 	}
 
 	private static beginTrackingFooterRender() {

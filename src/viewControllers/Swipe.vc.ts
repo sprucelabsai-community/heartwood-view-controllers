@@ -5,6 +5,7 @@ import {
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
+import CardViewController from './Card.vc'
 
 type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Slide = SpruceSchemas.Heartwood.v2021_02_11.CardSection
@@ -12,23 +13,47 @@ type Slide = SpruceSchemas.Heartwood.v2021_02_11.CardSection
 export type SwipeViewControllerOptions = {
 	slides: Slide[]
 	onSlideChange?: (slide: number) => void
-} & Pick<ViewModel, 'footer'>
+} & Omit<ViewModel, 'body'>
 
-export default class SwipeViewController extends AbstractViewController<ViewModel> {
+const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
+
+type PassthroughMethods = {
+	[K in typeof PASSTHROUGH_METHODS[number]]: CardViewController[K]
+}
+
+//@ts-ignore
+export default class SwipeViewController
+	extends AbstractViewController<ViewModel>
+	implements PassthroughMethods
+{
 	private presentSlide = 0
-	private slides: Slide[]
 	private swipeController?: SwipeController
-	private footer?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter | null
 	private slideChangeHandler: ((slide: number) => void) | undefined
 	public static swipeDelay = 500
+	private cardVc: CardViewController
+
+	public setHeaderTitle!: CardViewController['setHeaderTitle']
 
 	public constructor(
 		options: SwipeViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
-		this.slides = options.slides
-		this.footer = options.footer
-		this.slideChangeHandler = options.onSlideChange
+
+		const { slides, onSlideChange, ...rest } = options
+
+		this.slideChangeHandler = onSlideChange
+		this.cardVc = this.vcFactory.Controller('card', {
+			...rest,
+			body: { sections: slides },
+		})
+
+		for (const method of PASSTHROUGH_METHODS) {
+			//@ts-ignore
+			this[method] = (...args: any[]) => {
+				//@ts-ignore
+				return this.cardVc[method](...args)
+			}
+		}
 	}
 
 	public async jumpToSlide(slide: number) {
@@ -53,39 +78,58 @@ export default class SwipeViewController extends AbstractViewController<ViewMode
 	}
 
 	public updateSlide(slideIdx: number, slide: Partial<Slide>) {
-		if (slideIdx < 0 || slideIdx > this.slides.length - 1) {
+		this.assertSlideAtIndex(slideIdx)
+		return this.cardVc.updateSection(slideIdx, slide)
+	}
+
+	private assertSlideAtIndex(slideIdx: number) {
+		if (!this.getSlides()?.[slideIdx]) {
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
-				parameters: ['slideIdx'],
+				parameters: ['slideIndex'],
+				friendlyMessage: `I couldn't update slide ${slideIdx} because it doesn't exist.`,
 			})
-		}
-
-		this.slides[slideIdx] = {
-			...this.slides[slideIdx],
-			...slide,
 		}
 	}
 
-	public markSlideAsComplete(idx: number) {
-		if (!this.slides[idx]) {
-			throw new SpruceError({
-				code: 'INVALID_PARAMETERS',
-				parameters: ['slideIdx'],
-			})
-		}
-		this.slides[idx].isComplete = true
+	public markSlideAsComplete(slideIdx: number) {
+		this.assertSlideAtIndex(slideIdx)
+		const section = this.cardVc.getSection(slideIdx)
+		section.isComplete = true
+	}
+
+	public getSlides() {
+		return this.cardVc.getSections()
+	}
+
+	public removeSlide(idx: number) {
+		return this.cardVc.removeSection(idx)
+	}
+
+	public addSlideAtIndex(idx: number, slide: Slide) {
+		return this.cardVc.addSectionAtIndex(idx, slide)
+	}
+
+	public addSlide(slide: Slide) {
+		return this.cardVc.addSection(slide)
+	}
+
+	public getSlide(idx: number) {
+		return this.cardVc.getSection(idx)
 	}
 
 	public render(): ViewModel {
+		const cardModel = this.cardVc.render()
+
 		return {
+			...cardModel,
 			body: {
+				...cardModel.body,
 				swipeController: (controller) => (this.swipeController = controller),
 				onSelectSlideTitle: this.jumpToSlide.bind(this),
 				onChangeSlide: this.handleSlideChange.bind(this),
-				sections: this.slides,
 				shouldEnableSectionSwiping: true,
 			},
-			footer: this.footer,
 		}
 	}
 }
