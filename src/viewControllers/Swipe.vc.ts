@@ -22,7 +22,7 @@ type PassthroughMethods = {
 	[K in typeof PASSTHROUGH_METHODS[number]]: CardViewController[K]
 }
 
-//@ts-ignore
+/** @ts-ignore */
 export default class SwipeViewController
 	extends AbstractViewController<ViewModel>
 	implements PassthroughMethods
