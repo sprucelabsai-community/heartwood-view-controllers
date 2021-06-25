@@ -8,7 +8,10 @@ import AbstractViewController from './Abstract.vc'
 import SwipeViewController from './Swipe.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
-export interface FormBuilderViewControllerOptions {}
+export interface FormBuilderViewControllerOptions {
+	header: Card['header']
+}
+
 interface PageViewControllerEnhancements {
 	addSection(): void
 	addField(sectionIdx: number): void
@@ -29,6 +32,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc = this.vcFactory.Controller('swipe', {
 			header: {
 				title: 'Building your form',
+				...options.header,
 			},
 			slides: [this.buildNewSlide()],
 			footer: {

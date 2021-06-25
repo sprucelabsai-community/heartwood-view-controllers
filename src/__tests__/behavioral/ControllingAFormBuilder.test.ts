@@ -236,6 +236,16 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isFalse(model.shouldShowSubmitControls)
 	}
 
+	@test()
+	protected static canSetHeaderDuringCostruction() {
+		const vc = this.Controller('formBuilder', {
+			header: { title: 'Hey', subtitle: 'Hey2' },
+		})
+		const model = this.render(vc)
+		assert.isEqual(model.header?.title, 'Hey')
+		assert.isEqual(model.header?.subtitle, 'Hey2')
+	}
+
 	private static assertFirstFieldConfiguredCorrectly(
 		pageVc: PageViewController
 	) {
