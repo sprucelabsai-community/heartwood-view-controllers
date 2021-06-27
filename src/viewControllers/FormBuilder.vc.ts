@@ -110,7 +110,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public async addPage(idx?: number) {
-		if (typeof idx !== 'undefined') {
+		if (typeof idx === 'number') {
 			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide())
 		} else {
 			this.swipeVc.addSlide(this.buildNewSlide())

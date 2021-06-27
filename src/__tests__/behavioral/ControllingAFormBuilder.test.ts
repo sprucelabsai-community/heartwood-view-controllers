@@ -236,6 +236,18 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async clickingAddPageInFooterAddsAPage() {
+		const model = this.render(this.vc)
+		const onClick = model.footer?.buttons?.[0].onClick
+		assert.isTruthy(onClick)
+
+		//@ts-ignore
+		await onClick({})
+
+		assert.isEqual(this.vc.getTotalPages(), 2)
+	}
+
+	@test()
 	protected static doesNotHaveRemovePageButtonInFooterToStart() {
 		const model = this.render(this.vc)
 		assert.isArray(model.footer?.buttons)
@@ -257,7 +269,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const model = this.render(this.vc)
 		const onClick = model.footer?.buttons?.[1].onClick
 		assert.isFunction(onClick)
-		await onClick()
+		//@ts-ignore
+		await onClick({})
 
 		assert.isEqual(this.vc.getTotalPages(), 1)
 
