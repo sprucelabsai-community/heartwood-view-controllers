@@ -1,3 +1,10 @@
+# [11.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.2.19...v11.3.0) (2021-06-27)
+
+
+### Features
+
+* getTotalSlides, getTotalSections ([1dcb7bf](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1dcb7bf))
+
 ## [11.2.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.2.18...v11.2.19) (2021-06-27)
 
 ## [11.2.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.2.17...v11.2.18) (2021-06-27)
