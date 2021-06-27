@@ -45,7 +45,13 @@ export default class SwipeViewController
 		this.slideChangeHandler = onSlideChange
 		this.cardVc = this.vcFactory.Controller('card', {
 			...rest,
-			body: { sections: slides },
+			body: {
+				sections: slides,
+				swipeController: (controller) => (this.swipeController = controller),
+				onSelectSlideTitle: this.jumpToSlide.bind(this),
+				onChangeSlide: this.handleSlideChange.bind(this),
+				shouldEnableSectionSwiping: true,
+			},
 		})
 
 		for (const method of PASSTHROUGH_METHODS) {
@@ -124,17 +130,6 @@ export default class SwipeViewController
 	}
 
 	public render(): ViewModel {
-		const cardModel = this.cardVc.render()
-
-		return {
-			...cardModel,
-			body: {
-				...cardModel.body,
-				swipeController: (controller) => (this.swipeController = controller),
-				onSelectSlideTitle: this.jumpToSlide.bind(this),
-				onChangeSlide: this.handleSlideChange.bind(this),
-				shouldEnableSectionSwiping: true,
-			},
-		}
+		return this.cardVc.render()
 	}
 }

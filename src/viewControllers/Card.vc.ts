@@ -208,6 +208,8 @@ export default class CardViewController
 		if (sections) {
 			sections.push(section)
 		}
+
+		this.triggerRender()
 	}
 
 	public getSections() {
@@ -216,6 +218,7 @@ export default class CardViewController
 
 	public removeSection(idx: number) {
 		this.model.body?.sections?.splice(idx, 1)
+		this.triggerRender()
 	}
 
 	public addSectionAtIndex(idx: number, section: Section) {

@@ -2,7 +2,7 @@ import { Schema, SchemaFieldNames } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { FieldRenderOptions } from '../types/heartwood.types'
 
-const normalizeFieldNamesUtil = {
+const normalizeFormSectionFieldNamesUtil = {
 	toObject<S extends Schema = Schema>(
 		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields']
 	) {
@@ -31,4 +31,4 @@ const normalizeFieldNamesUtil = {
 	},
 }
 
-export default normalizeFieldNamesUtil
+export default normalizeFormSectionFieldNamesUtil

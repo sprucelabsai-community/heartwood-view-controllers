@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
-import normalizeFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
+import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './Form.vc'
 
 type ViewModel<S extends Schema> =
@@ -18,7 +18,7 @@ export default class BigFormViewController<
 	public isSlideValid(idx: number) {
 		const slide = this.model.sections[idx]
 		if (slide) {
-			const fields = normalizeFieldNamesUtil.toNames(slide.fields)
+			const fields = normalizeFormSectionFieldNamesUtil.toNames(slide.fields)
 			return areSchemaValuesValid(this.model.schema, this.model.values, {
 				fields,
 			})
@@ -39,7 +39,7 @@ export default class BigFormViewController<
 
 		this.triggerRender()
 
-		const firstFieldOfSection = normalizeFieldNamesUtil.toNames(
+		const firstFieldOfSection = normalizeFormSectionFieldNamesUtil.toNames(
 			this.model.sections[idx]?.fields ?? []
 		)[0]
 		if (firstFieldOfSection) {

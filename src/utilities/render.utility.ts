@@ -1,10 +1,12 @@
-import cloneDeep from 'lodash/cloneDeep'
 import isObjectLike from 'lodash/isObjectLike'
+import vcAssertUtil from '../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 
 interface RenderOptions {
 	shouldReturnPrivateFields: boolean
 }
+
+const RENDER_ITEMS_IGNORE_KEYS = ['controller', 'schema']
 
 function renderItems(
 	item: Record<string, any> | any[] = {},
@@ -16,9 +18,14 @@ function renderItems(
 		: Object.keys(item)
 
 	for (const key of keys) {
-		//@ts-ignore
-		const thisItem = item[key]
-		rendered[key] = renderItem(thisItem, options)
+		if (RENDER_ITEMS_IGNORE_KEYS.indexOf(`${key}`) > -1) {
+			//@ts-ignore
+			rendered[key] = item[key]
+		} else {
+			//@ts-ignore
+			const thisItem = item[key]
+			rendered[key] = renderItem(thisItem, options)
+		}
 	}
 
 	if (!options?.shouldReturnPrivateFields) {
@@ -32,7 +39,9 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
 	if (Array.isArray(thisItem)) {
 		return thisItem.map((i) => renderItem(i, options))
 	} else if (thisItem?.controller) {
-		return thisItem.controller.render()
+		vcAssertUtil.attachTriggerRenderCounter(thisItem.controller)
+
+		return renderItems(thisItem.controller.render())
 	} else if (isObjectLike(thisItem)) {
 		return renderItems(thisItem, options)
 	} else {
@@ -45,8 +54,8 @@ const renderUtil = {
 		vc: VC,
 		options?: RenderOptions
 	): ReturnType<VC['render']> {
-		const model = cloneDeep(vc.render())
-		const rendered = renderItems(model, options)
+		const model = vc.render()
+		const rendered = renderItem(model, options)
 
 		return rendered as any
 	},

@@ -1,6 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import SwipeViewController, {
 	SwipeViewControllerOptions,
 } from '../../viewControllers/Swipe.vc'
@@ -26,7 +27,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	}
 
 	private static Vc(options: SwipeViewControllerOptions): SwipeViewController {
-		return this.Factory().Controller('swipe', options)
+		return this.Controller('swipe', options)
 	}
 
 	@test()
@@ -196,5 +197,26 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		assert.isFalsy(this.render(this.vc).footer)
 		this.vc.updateFooter({ buttons: [{ label: 'Hey!' }] })
 		assert.doesInclude(this.render(this.vc).footer?.buttons, { label: 'Hey!' })
+	}
+
+	@test()
+	protected static addingSlideTriggersRender() {
+		this.vc.addSlide({ title: 'Go!' })
+		//@ts-ignore
+		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 1)
+
+		this.vc.addSlide({ title: 'Go!' })
+
+		//@ts-ignore
+		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 2)
+	}
+
+	@test()
+	protected static removingSlideTrigersRender() {
+		this.vc.addSlide({ title: 'Go!' })
+		this.vc.removeSlide(1)
+
+		//@ts-ignore
+		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 2)
 	}
 }

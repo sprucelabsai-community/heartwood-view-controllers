@@ -35,7 +35,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async rendersValidModel() {
+	protected static rendersValidModel() {
 		validateSchemaValues(cardSchema, this.renderVc())
 	}
 
@@ -47,23 +47,34 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static startsAtPageZero() {
+		assert.isEqual(this.vc.getPresentPage(), 0)
+	}
+
+	@test()
 	protected static async canAddMorePages() {
 		assert.isEqual(this.vc.getTotalPages(), 1)
-		this.vc.addPage()
+		await this.vc.addPage()
+		assert.isEqual(this.vc.getPresentPage(), 1)
 		assert.isEqual(this.vc.getTotalPages(), 2)
 		assert.isEqual(this.renderVc().body?.sections?.[1].title, 'Page 2')
-		this.vc.addPage()
+		await this.vc.addPage()
+		assert.isEqual(this.vc.getPresentPage(), 2)
 		assert.isEqual(this.vc.getTotalPages(), 3)
 		assert.isEqual(this.renderVc().body?.sections?.[2].title, 'Page 3')
 	}
 
 	@test()
 	protected static async canRemovePages() {
-		this.vc.addPage() // 2 pages
-		this.vc.addPage() // 3 pages
-		this.vc.addPage() // 4 pages
+		await this.vc.addPage() // 2 pages
+		await this.vc.addPage() // 3 pages
+		await this.vc.addPage() // 4 pages
+
+		assert.isEqual(this.vc.getPresentPage(), 3)
 
 		this.vc.removePage(2)
+
+		assert.isEqual(this.vc.getPresentPage(), 1)
 
 		const model = this.renderVc()
 
@@ -75,14 +86,16 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canAddPageAtIndex() {
-		this.vc.addPage()
-		this.vc.addPage()
-		this.vc.addPage()
+	protected static async canAddPageAtIndex() {
+		await this.vc.addPage()
+		await this.vc.addPage()
+		await this.vc.addPage()
 
 		assert.isEqual(this.vc.getTotalPages(), 4)
 
-		this.vc.addPage(0)
+		await this.vc.addPage(0)
+
+		assert.isEqual(this.vc.getPresentPage(), 0)
 
 		const model = this.renderVc()
 
@@ -111,8 +124,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static newPagesCanBeGot() {
-		this.vc.addPage()
+	protected static async newPagesCanBeGot() {
+		await this.vc.addPage()
 
 		const pageVc = this.vc.getPageVc(1)
 		assert.isTruthy(pageVc)
@@ -166,8 +179,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static newPageAddsFieldsToStart() {
-		this.vc.addPage()
+	protected static async newPageAddsFieldsToStart() {
+		await this.vc.addPage()
 		const pageVc = this.vc.getPageVc(1)
 		this.assertFirstFieldConfiguredCorrectly(pageVc)
 	}
@@ -223,10 +236,55 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async clickingAddPageAddsAPage() {
+	protected static doesNotHaveRemovePageButtonInFooterToStart() {
 		const model = this.render(this.vc)
-		await model.footer?.buttons?.[0]?.onClick?.()
-		assert.isEqual(this.vc.getTotalPages(), 2)
+		assert.isArray(model.footer?.buttons)
+		assert.doesNotInclude(model.footer?.buttons, { label: 'Remove page' })
+	}
+
+	@test()
+	protected static async hasRemovePageButtonAfterPageHasBeenAdded() {
+		await this.vc.addPage()
+		const model = this.render(this.vc)
+		assert.isArray(model.footer?.buttons)
+		assert.doesInclude(model.footer?.buttons, { label: 'Remove page' })
+	}
+
+	@test()
+	protected static async hittingRemoveRemovesSecondPageAndSwipesToFirst() {
+		await this.vc.addPage()
+
+		const model = this.render(this.vc)
+		const onClick = model.footer?.buttons?.[1].onClick
+		assert.isFunction(onClick)
+		await onClick()
+
+		assert.isEqual(this.vc.getTotalPages(), 1)
+
+		const updatedModel = this.render(this.vc)
+		const sections = updatedModel.body?.sections
+
+		assert.isArray(sections)
+		assert.isLength(sections, 1)
+		assert.isEqual(sections[0].title, 'Page 1')
+		assert.isEqual(this.vc.getPresentPage(), 0)
+	}
+
+	@test()
+	protected static async canRemovePresentPageDirectly() {
+		await this.vc.addPage()
+		await this.vc.addPage()
+		await this.vc.addPage()
+		await this.vc.addPage()
+
+		await this.vc.removePresentPage()
+
+		assert.isEqual(this.vc.getPresentPage(), 3)
+
+		await this.vc.jumpToPage(0)
+		await this.vc.removePresentPage()
+
+		assert.isEqual(this.vc.getPresentPage(), 0)
 	}
 
 	@test()

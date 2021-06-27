@@ -8,6 +8,9 @@ import AbstractViewController from './Abstract.vc'
 import SwipeViewController from './Swipe.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
+type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
+
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
@@ -35,10 +38,25 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 				...options.header,
 			},
 			slides: [this.buildNewSlide()],
-			footer: {
-				buttons: [{ label: 'Add page', onClick: this.addPage.bind(this) }],
-			},
+			footer: this.buildFooter(),
 		})
+	}
+
+	private buildFooter(): Footer {
+		const buttons: Button[] = [
+			{ label: 'Add page', onClick: this.addPage.bind(this) },
+		]
+
+		if (this.getTotalPages() > 1) {
+			buttons.push({
+				label: 'Remove page',
+				onClick: this.removePresentPage.bind(this),
+			})
+		}
+
+		return {
+			buttons,
+		}
 	}
 
 	private buildNewSlide(): {
@@ -91,16 +109,26 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc.setHeaderTitle(title)
 	}
 
-	public addPage(idx?: number) {
+	public async addPage(idx?: number) {
 		if (typeof idx !== 'undefined') {
 			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide())
 		} else {
 			this.swipeVc.addSlide(this.buildNewSlide())
 		}
+
+		this.swipeVc.updateFooter(this.buildFooter())
+
+		await this.swipeVc.jumpToSlide(idx ?? this.getTotalPages() - 1)
 	}
 
-	public removePage(idx: number) {
+	public async removePage(idx: number) {
 		this.swipeVc.removeSlide(idx)
+		await this.swipeVc.jumpToSlide(Math.max(idx - 1, 0))
+	}
+
+	public async removePresentPage() {
+		const idx = this.getPresentPage()
+		await this.removePage(idx)
 	}
 
 	public render(): Card {
@@ -117,6 +145,14 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			formVc,
 			fieldBuilder: this.buildField.bind(this),
 		}) as any
+	}
+
+	public getPresentPage(): number {
+		return this.swipeVc.getPresentSlide()
+	}
+
+	public async jumpToPage(idx: number) {
+		await this.swipeVc.jumpToSlide(idx)
 	}
 }
 

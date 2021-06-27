@@ -30,6 +30,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 
 	protected static async beforeEach() {
 		await super.beforeEach()
+
 		this.vc = this.Controller(
 			'bigForm',
 			buildBigForm({

@@ -40,22 +40,12 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		name: N,
 		options: ControllerOptions<N>
 	) {
-		const controller = this.Factory().Controller(name, options)
+		const vc = this.Factory().Controller(name, options)
 
-		//@ts-ignore
-		controller.__renderInvocationCount = 0
+		//vc's have to be rendered once to attach counters
+		this.render(vc)
 
-		if (
-			controller.triggerRender ===
-			AbstractViewController.prototype.triggerRender
-		) {
-			controller.triggerRender = () => {
-				//@ts-ignore
-				controller.__renderInvocationCount++
-			}
-		}
-
-		return controller
+		return vc
 	}
 
 	protected static render<Vc extends AbstractViewController<any>>(vc: Vc) {
