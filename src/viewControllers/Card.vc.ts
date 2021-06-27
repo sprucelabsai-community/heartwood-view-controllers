@@ -232,6 +232,10 @@ export default class CardViewController
 		}
 	}
 
+	public getTotalSections(): number {
+		return this.model.body?.sections?.length ?? 0
+	}
+
 	//monkey patched by view
 	public payAttentionToMe() {}
 }

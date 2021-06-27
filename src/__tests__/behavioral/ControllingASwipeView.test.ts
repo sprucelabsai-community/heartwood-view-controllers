@@ -228,4 +228,20 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 			parameters: ['slideIndex'],
 		})
 	}
+
+	@test()
+	protected static canGetTotalSlides() {
+		const vc = this.Vc({
+			slides: [],
+		})
+
+		assert.isEqual(vc.getTotalSlides(), 0)
+	}
+
+	@test()
+	protected static tracksWhenAdding() {
+		assert.isEqual(this.vc.getTotalSlides(), 3)
+		this.vc.addSlide({ title: 'go' })
+		assert.isEqual(this.vc.getTotalSlides(), 4)
+	}
 }

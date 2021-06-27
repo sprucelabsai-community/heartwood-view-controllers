@@ -136,6 +136,10 @@ export default class SwipeViewController
 		this.cardVc.updateFooter(footer)
 	}
 
+	public getTotalSlides(): number {
+		return this.cardVc.getTotalSections()
+	}
+
 	public render(): ViewModel {
 		return this.cardVc.render()
 	}
