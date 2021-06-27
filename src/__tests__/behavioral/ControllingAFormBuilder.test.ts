@@ -72,7 +72,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		assert.isEqual(this.vc.getPresentPage(), 3)
 
-		this.vc.removePage(2)
+		await this.vc.removePage(2)
 
 		assert.isEqual(this.vc.getPresentPage(), 1)
 
