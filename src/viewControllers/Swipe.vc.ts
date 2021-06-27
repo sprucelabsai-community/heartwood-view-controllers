@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import SpruceError from '../errors/SpruceError'
+import { SpruceError } from '@sprucelabs/schema'
 import {
 	SwipeController,
 	ViewControllerOptions,
@@ -64,6 +64,13 @@ export default class SwipeViewController
 	}
 
 	public async jumpToSlide(slide: number) {
+		if (typeof slide !== 'number') {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['slideIndex'],
+			})
+		}
+
 		this.swipeController?.swipeTo(slide)
 		await this.handleSlideChange(slide)
 	}

@@ -110,15 +110,17 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public async addPage(idx?: number) {
+		let destination = idx
 		if (typeof idx === 'number') {
 			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide())
 		} else {
 			this.swipeVc.addSlide(this.buildNewSlide())
+			destination = this.getTotalPages() - 1
 		}
 
 		this.swipeVc.updateFooter(this.buildFooter())
 
-		await this.swipeVc.jumpToSlide(idx ?? this.getTotalPages() - 1)
+		await this.swipeVc.jumpToSlide(destination as number)
 	}
 
 	public async removePage(idx: number) {

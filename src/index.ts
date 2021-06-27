@@ -39,3 +39,4 @@ export { default as MockStorage } from './tests/MockStorage'
 
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
+export { default as interactionUtil } from './tests/utilities/interaction.utility'

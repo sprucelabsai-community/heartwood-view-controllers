@@ -238,11 +238,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static async clickingAddPageInFooterAddsAPage() {
 		const model = this.render(this.vc)
-		const onClick = model.footer?.buttons?.[0].onClick
-		assert.isTruthy(onClick)
 
-		//@ts-ignore
-		await onClick({})
+		await this.click(model.footer?.buttons?.[0].onClick)
 
 		assert.isEqual(this.vc.getTotalPages(), 2)
 	}
@@ -267,10 +264,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		await this.vc.addPage()
 
 		const model = this.render(this.vc)
-		const onClick = model.footer?.buttons?.[1].onClick
-		assert.isFunction(onClick)
-		//@ts-ignore
-		await onClick({})
+		await this.click(model.footer?.buttons?.[1].onClick)
 
 		assert.isEqual(this.vc.getTotalPages(), 1)
 

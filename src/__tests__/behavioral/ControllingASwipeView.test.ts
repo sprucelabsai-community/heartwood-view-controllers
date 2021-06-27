@@ -219,4 +219,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		//@ts-ignore
 		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 2)
 	}
+
+	@test()
+	protected static async cantJumpToSlideWithNonNumericIndex() {
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => this.vc.jumpToSlide('taco'))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['slideIndex'],
+		})
+	}
 }

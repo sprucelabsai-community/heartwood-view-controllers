@@ -6,6 +6,7 @@ import renderUtil from '../utilities/render.utility'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MockStorage from './MockStorage'
+import interactionUtil from './utilities/interaction.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceFixtureTest {
 	protected static controllerMap: Record<string, any>
@@ -50,5 +51,11 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 
 	protected static render<Vc extends AbstractViewController<any>>(vc: Vc) {
 		return renderUtil.render(vc)
+	}
+
+	protected static click(
+		onClick: (() => void | Promise<void>) | null | undefined
+	) {
+		return interactionUtil.click(onClick)
 	}
 }
