@@ -1,6 +1,8 @@
+import { fieldClassMap } from '@sprucelabs/schema'
 import isObjectLike from 'lodash/isObjectLike'
 import vcAssertUtil from '../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../viewControllers/Abstract.vc'
+import FormBuilderViewController from '../viewControllers/FormBuilder.vc'
 
 interface RenderOptions {
 	shouldReturnPrivateFields: boolean

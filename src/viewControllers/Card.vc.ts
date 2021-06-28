@@ -124,7 +124,7 @@ export default class CardViewController
 		this.triggerRenderHeader?.()
 	}
 
-	public setHeaderSubtitle(subtitle: string | string) {
+	public setHeaderSubtitle(subtitle: string | null) {
 		this.model = {
 			...this.model,
 			header: {
