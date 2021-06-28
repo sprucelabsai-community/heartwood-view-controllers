@@ -203,12 +203,12 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	protected static addingSlideTriggersRender() {
 		this.vc.addSlide({ title: 'Go!' })
 		//@ts-ignore
-		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 1)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 
 		this.vc.addSlide({ title: 'Go!' })
 
 		//@ts-ignore
-		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 2)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -217,7 +217,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		this.vc.removeSlide(1)
 
 		//@ts-ignore
-		vcAssertUtil.assertTriggerRenderCount(this.vc.cardVc, 2)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -243,5 +243,18 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		assert.isEqual(this.vc.getTotalSlides(), 3)
 		this.vc.addSlide({ title: 'go' })
 		assert.isEqual(this.vc.getTotalSlides(), 4)
+	}
+
+	@test()
+	protected static async callingTriggerRenderOnCardVcTriggersOnSwipeVc() {
+		let wasHit = false
+		this.vc.triggerRender = () => {
+			wasHit = true
+		}
+
+		//@ts-ignore
+		this.vc.cardVc.triggerRender()
+
+		assert.isTrue(wasHit)
 	}
 }

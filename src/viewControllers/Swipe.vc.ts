@@ -4,6 +4,7 @@ import {
 	SwipeController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
+import introspectionUtil from '../utilities/introspection.utility'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
@@ -54,12 +55,10 @@ export default class SwipeViewController
 			},
 		})
 
-		for (const method of PASSTHROUGH_METHODS) {
-			//@ts-ignore
-			this[method] = (...args: any[]) => {
-				//@ts-ignore
-				return this.cardVc[method](...args)
-			}
+		introspectionUtil.delegateFunctionCalls(this, this.cardVc)
+
+		this.cardVc.triggerRender = () => {
+			this.triggerRender()
 		}
 	}
 
@@ -141,6 +140,7 @@ export default class SwipeViewController
 	}
 
 	public render(): ViewModel {
-		return this.cardVc.render()
+		//@ts-ignore
+		return { ...this.cardVc.render(), controller: this }
 	}
 }

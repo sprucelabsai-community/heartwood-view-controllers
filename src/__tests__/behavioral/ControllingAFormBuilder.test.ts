@@ -3,6 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../utilities/introspection.utility'
 import renderUtil from '../../utilities/render.utility'
 import FormBuilderViewController, {
@@ -87,6 +88,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async removingPageTriggersRender() {
+		await this.vc.addPage()
+		await this.vc.removePage(0)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
 	protected static async canAddPageAtIndex() {
 		await this.vc.addPage()
 		await this.vc.addPage()
@@ -133,6 +141,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		const pageModel = this.render(pageVc)
 		validateSchemaValues(formSchema, pageModel)
+	}
+
+	@test()
+	protected static async addingPageTriggersRender() {
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 0)
+		await this.vc.addPage()
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()

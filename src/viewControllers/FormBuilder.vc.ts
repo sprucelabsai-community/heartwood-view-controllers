@@ -43,6 +43,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		})
 
 		introspectionUtil.delegateFunctionCalls(this, this.swipeVc)
+
+		this.swipeVc.triggerRender = () => {
+			this.triggerRender()
+		}
 	}
 
 	private buildFooter(): Footer {
