@@ -124,6 +124,14 @@ export default class CardViewController
 		this.triggerRenderHeader?.()
 	}
 
+	public getHeaderTitle(): string | undefined {
+		return this.model.header?.title ?? undefined
+	}
+
+	public getHeaderSubtitle(): string | undefined {
+		return this.model.header?.subtitle ?? undefined
+	}
+
 	public setHeaderImage(image: string | null) {
 		if (image === null) {
 			this.unsetHeaderField('image')

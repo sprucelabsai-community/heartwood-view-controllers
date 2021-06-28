@@ -230,6 +230,22 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static async canGetHeaderTitle() {
+		assert.isEqual(this.vc.getHeaderTitle(), 'A header')
+		this.vc.setHeaderTitle('A header again')
+		assert.isEqual(this.vc.getHeaderTitle(), 'A header again')
+		this.vc.setHeaderTitle(null)
+		assert.isEqual(this.vc.getHeaderTitle(), undefined)
+	}
+
+	@test()
+	protected static async canGetSubTitle() {
+		assert.isEqual(this.vc.getHeaderSubtitle(), undefined)
+		this.vc.setHeaderSubtitle('taco')
+		assert.isEqual(this.vc.getHeaderSubtitle(), 'taco')
+	}
+
 	private static beginTrackingFooterRender() {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
