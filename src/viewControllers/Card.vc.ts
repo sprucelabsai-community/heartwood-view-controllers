@@ -230,6 +230,8 @@ export default class CardViewController
 		if (this.model.body?.sections) {
 			this.model.body.sections = sections
 		}
+
+		this.triggerRender()
 	}
 
 	public getTotalSections(): number {

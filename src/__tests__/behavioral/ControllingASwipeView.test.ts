@@ -202,12 +202,10 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	@test()
 	protected static addingSlideTriggersRender() {
 		this.vc.addSlide({ title: 'Go!' })
-		//@ts-ignore
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 
 		this.vc.addSlide({ title: 'Go!' })
 
-		//@ts-ignore
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
 	}
 
@@ -216,8 +214,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		this.vc.addSlide({ title: 'Go!' })
 		this.vc.removeSlide(1)
 
-		//@ts-ignore
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static async addingSlideAtIndexTriggersRender() {
+		this.vc.addSlideAtIndex(0, { title: 'new' })
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
