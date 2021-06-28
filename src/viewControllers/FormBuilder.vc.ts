@@ -4,6 +4,7 @@ import {
 	FormViewController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
+import introspectionUtil from '../utilities/introspection.utility'
 import AbstractViewController from './Abstract.vc'
 import SwipeViewController from './Swipe.vc'
 
@@ -40,6 +41,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			slides: [this.buildNewSlide()],
 			footer: this.buildFooter(),
 		})
+
+		introspectionUtil.delegateFunctionCalls(this, this.swipeVc)
 	}
 
 	private buildFooter(): Footer {
@@ -120,6 +123,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 		this.swipeVc.updateFooter(this.buildFooter())
 
+		await this.waitForRender()
+
 		await this.swipeVc.jumpToSlide(destination as number)
 	}
 
@@ -131,10 +136,6 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	public async removePresentPage() {
 		const idx = this.getPresentPage()
 		await this.removePage(idx)
-	}
-
-	public render(): Card {
-		return this.swipeVc.render()
 	}
 
 	public getPageVc(idx: number): PageViewController {
@@ -156,6 +157,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	public async jumpToPage(idx: number) {
 		await this.swipeVc.jumpToSlide(idx)
 	}
+
+	public render(): Card {
+		return { ...this.swipeVc.render(), controller: this as any }
+	}
 }
 
 class PageViewContollerImpl implements PageViewControllerEnhancements {
@@ -170,18 +175,7 @@ class PageViewContollerImpl implements PageViewControllerEnhancements {
 
 		this.formVc = formVc
 		this.fieldBuilder = fieldBuilder
-
-		const props = getAllFuncs(this.formVc)
-		for (const prop of props) {
-			//@ts-ignore
-			if (!this[prop]) {
-				//@ts-ignore
-				this[prop] = (...args: []) => {
-					//@ts-ignore
-					return this.formVc[prop](...args)
-				}
-			}
-		}
+		introspectionUtil.delegateFunctionCalls(this, formVc)
 	}
 
 	public addField(sectionIdx: number): void {
@@ -212,16 +206,4 @@ class PageViewContollerImpl implements PageViewControllerEnhancements {
 			fields: [{ name: 'field1' }],
 		})
 	}
-}
-
-function getAllFuncs(toCheck: any) {
-	const props = []
-	let obj = toCheck
-	do {
-		props.push(...Object.getOwnPropertyNames(obj))
-	} while ((obj = Object.getPrototypeOf(obj)))
-
-	return props.sort().filter((e: any, i: any, arr: any) => {
-		return e != arr[i + 1] && typeof toCheck[e] == 'function'
-	})
 }

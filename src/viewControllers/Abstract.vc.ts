@@ -49,4 +49,8 @@ export default abstract class AbstractViewController<ViewModel>
 	protected async confirm(options: ConfirmOptions) {
 		return this.confirmHandler(options)
 	}
+
+	protected async waitForRender() {
+		await new Promise((resolve) => setTimeout(resolve, 0))
+	}
 }

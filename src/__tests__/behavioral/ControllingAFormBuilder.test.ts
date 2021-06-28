@@ -3,6 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import introspectionUtil from '../../utilities/introspection.utility'
 import renderUtil from '../../utilities/render.utility'
 import FormBuilderViewController, {
 	PageViewController,
@@ -295,6 +296,15 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async addingPageWaitsBeforChangingPresentPage() {
+		assert.isEqual(this.vc.getPresentPage(), 0)
+		const promise = this.vc.addPage()
+		assert.isEqual(this.vc.getPresentPage(), 0)
+		await promise
+		assert.isEqual(this.vc.getPresentPage(), 1)
+	}
+
+	@test()
 	protected static formsShouldNotIncludeActionButtons() {
 		const pageVc = this.vc.getPageVc(0)
 		const model = this.render(pageVc)
@@ -309,6 +319,49 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const model = this.render(vc)
 		assert.isEqual(model.header?.title, 'Hey')
 		assert.isEqual(model.header?.subtitle, 'Hey2')
+	}
+
+	@test()
+	protected static renderedFormBuilderReturnsFormBuilderAsController() {
+		const model = this.vc.render()
+		assert.isTrue(model.controller instanceof FormBuilderViewController)
+	}
+
+	@test()
+	protected static async formBuilderPassesCallsToSwipeVc() {
+		const { controller } = this.vc.render()
+		assert.isTruthy(controller)
+
+		//@ts-ignore
+		const swipeFunctions = introspectionUtil.getAllFuncs(this.vc.swipeVc)
+		const builderProtoFunctions = introspectionUtil.getAllFuncs(
+			//@ts-ignore
+			this.vc
+		)
+
+		for (const func of swipeFunctions) {
+			const shouldFuncHaveBeenDelegated =
+				builderProtoFunctions.indexOf(func) === -1
+
+			if (shouldFuncHaveBeenDelegated) {
+				let wasHit = false
+
+				//@ts-ignore
+				this.vc.swipeVc[func] = () => {
+					wasHit = true
+				}
+
+				assert.isFunction(
+					//@ts-ignore
+					this.vc[func],
+					`\`${func}\` never got setup as a delegate method in FormBuilder`
+				)
+
+				//@ts-ignore
+				await this.vc[func]()
+				assert.isTrue(wasHit, `\`${func}\` did not delegate it's call.`)
+			}
+		}
 	}
 
 	private static assertFirstFieldConfiguredCorrectly(
