@@ -55,7 +55,9 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		}
 
 		await this.transitionOut?.()
+
 		this.isVisible = false
+
 		this.closeResolver?.()
 		this.triggerRender()
 	}

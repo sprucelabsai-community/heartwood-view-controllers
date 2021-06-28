@@ -169,8 +169,11 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static setHeaderSubtitle() {
 		this.vc.setHeaderSubtitle('Waka waka')
-		const model = this.renderCard()
+		let model = this.renderCard()
 		assert.isEqual(model.header?.subtitle, 'Waka waka')
+		this.vc.setHeaderSubtitle(null)
+		model = this.renderCard()
+		assert.isNull(model.header?.subtitle)
 	}
 
 	@test()

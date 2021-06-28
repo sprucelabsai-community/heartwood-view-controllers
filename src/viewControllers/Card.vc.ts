@@ -124,6 +124,18 @@ export default class CardViewController
 		this.triggerRenderHeader?.()
 	}
 
+	public setHeaderSubtitle(subtitle: string | string) {
+		this.model = {
+			...this.model,
+			header: {
+				...this.model.header,
+				subtitle,
+			},
+		}
+
+		this.triggerRenderHeader?.()
+	}
+
 	public getHeaderTitle(): string | undefined {
 		return this.model.header?.title ?? undefined
 	}
@@ -196,18 +208,6 @@ export default class CardViewController
 		if (!this.model.body.sections) {
 			this.model.body.sections = []
 		}
-	}
-
-	public setHeaderSubtitle(subtitle: string) {
-		this.model = {
-			...this.model,
-			header: {
-				...this.model.header,
-				subtitle,
-			},
-		}
-
-		this.triggerRenderHeader?.()
 	}
 
 	public addSection(section: Section) {
