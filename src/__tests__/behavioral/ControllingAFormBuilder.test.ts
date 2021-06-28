@@ -90,6 +90,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static async removingPageTriggersRender() {
 		await this.vc.addPage()
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 		await this.vc.removePage(0)
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
 	}
@@ -273,6 +274,15 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const model = this.render(this.vc)
 		assert.isArray(model.footer?.buttons)
 		assert.doesInclude(model.footer?.buttons, { label: 'Remove page' })
+	}
+
+	@test()
+	protected static async removeButtonIsRemovedWhenDownToOnePage() {
+		await this.vc.addPage()
+		await this.vc.removePage(0)
+		const model = this.render(this.vc)
+		assert.isArray(model.footer?.buttons)
+		assert.isLength(model.footer?.buttons, 1)
 	}
 
 	@test()

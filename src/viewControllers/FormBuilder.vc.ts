@@ -135,6 +135,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	public async removePage(idx: number) {
 		this.swipeVc.removeSlide(idx)
 		await this.swipeVc.jumpToSlide(Math.max(idx - 1, 0))
+		this.swipeVc.updateFooter(this.buildFooter())
 	}
 
 	public async removePresentPage() {
