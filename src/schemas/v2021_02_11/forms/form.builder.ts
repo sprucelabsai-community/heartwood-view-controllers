@@ -41,6 +41,13 @@ export default buildSchema({
 				valueType: 'HeartwoodTypes.SubmitHandler<S>',
 			},
 		},
+		onCancel: {
+			type: 'raw',
+			label: 'Cancel handler',
+			options: {
+				valueType: '() => void | Promise<void>',
+			},
+		},
 		onChange: {
 			type: 'raw',
 			label: 'Change handler',

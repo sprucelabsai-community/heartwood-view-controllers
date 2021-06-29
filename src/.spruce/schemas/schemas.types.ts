@@ -1258,6 +1258,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'schema': (S)
 				/** Submit handler. */
 				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				/** Cancel handler. */
+				'onCancel'?: (() => void | Promise<void>)| undefined | null
 				/** Change handler. */
 				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
@@ -1315,6 +1317,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Submit handler',
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
+			            },
+			            /** Cancel handler. */
+			            'onCancel': {
+			                label: 'Cancel handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** Change handler. */
 			            'onChange': {
@@ -1679,6 +1687,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'schema': (S)
 				/** Submit handler. */
 				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				/** Cancel handler. */
+				'onCancel'?: (() => void | Promise<void>)| undefined | null
 				/** Change handler. */
 				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
@@ -1732,6 +1742,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Submit handler',
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
+			            },
+			            /** Cancel handler. */
+			            'onCancel': {
+			                label: 'Cancel handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** Change handler. */
 			            'onChange': {

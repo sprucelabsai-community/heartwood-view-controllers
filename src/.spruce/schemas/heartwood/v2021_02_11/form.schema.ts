@@ -39,6 +39,12 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
 	            },
+	            /** Cancel handler. */
+	            'onCancel': {
+	                label: 'Cancel handler',
+	                type: 'raw',
+	                options: {valueType: `() => void | Promise<void>`,}
+	            },
 	            /** Change handler. */
 	            'onChange': {
 	                label: 'Change handler',
