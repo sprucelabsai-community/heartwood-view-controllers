@@ -1,3 +1,10 @@
+# [12.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.4.6...v12.0.0) (2021-06-29)
+
+
+### Breaking Changes
+
+* form builder enhancements, formVc. handleSubmit -> submit, vc assert enhancements ([09b94ca](https://github.com/sprucelabsai/heartwood-view-controllers/commit/09b94ca))
+
 ## [11.4.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.4.5...v11.4.6) (2021-06-29)
 
 ## [11.4.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.4.4...v11.4.5) (2021-06-29)
