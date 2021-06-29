@@ -43,14 +43,14 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 			footer: {
 				buttons: [
 					{
-						type: 'primary',
-						label: 'Yes',
-						onClick: this.handleAccept.bind(this),
-					},
-					{
 						type: 'secondary',
 						label: 'No',
 						onClick: this.handleDecline.bind(this),
+					},
+					{
+						type: 'primary',
+						label: 'Yes',
+						onClick: this.handleAccept.bind(this),
 					},
 				],
 			},
