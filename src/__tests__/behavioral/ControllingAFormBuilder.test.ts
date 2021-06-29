@@ -6,7 +6,6 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../utilities/introspection.utility'
 import renderUtil from '../../utilities/render.utility'
-import CardViewController from '../../viewControllers/Card.vc'
 import FormBuilderViewController, {
 	PageViewController,
 } from '../../viewControllers/FormBuilder.vc'

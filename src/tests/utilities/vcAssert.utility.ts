@@ -4,7 +4,7 @@ import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import CardViewController from '../../viewControllers/Card.vc'
-import DialogViewController, { Dialog } from '../../viewControllers/Dialog.vc'
+import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
