@@ -1,3 +1,10 @@
+# [12.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v12.0.0...v12.1.0) (2021-06-29)
+
+
+### Features
+
+* form controller additions ([7ae28a0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7ae28a0))
+
 # [12.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v11.4.6...v12.0.0) (2021-06-29)
 
 
