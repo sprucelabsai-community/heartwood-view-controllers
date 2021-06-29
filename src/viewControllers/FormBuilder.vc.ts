@@ -232,6 +232,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 						fields: [{ name: 'title', placeholder: this.buildNextPageTitle() }],
 					},
 				],
+				shouldShowCancelButton: false,
 				onSubmit: async ({ values }) => {
 					if (values.title) {
 						void dialog.hide()

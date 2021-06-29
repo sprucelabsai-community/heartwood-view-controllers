@@ -281,4 +281,50 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			parameters: ['sectionIndex'],
 		})
 	}
+
+	@test()
+	protected static cancelButtonDefaultsToShowing() {
+		assert.isTrue(this.vc.shouldShowCancelButton())
+		assert.isTrue(this.render(this.vc).shouldShowCancelButton)
+	}
+
+	@test()
+	protected static canCheckIfCancelButtonIsShowing() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+			shouldShowCancelButton: false,
+		})
+
+		assert.isFalse(vc.shouldShowCancelButton())
+		const model = this.render(vc)
+
+		assert.isFalse(model.shouldShowCancelButton)
+	}
+
+	@test()
+	protected static cancelButtonIsNotShowingIfSubmitControlsAreNotShowing() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+			shouldShowSubmitControls: false,
+		})
+
+		assert.isFalse(vc.shouldShowCancelButton())
+	}
+
+	@test()
+	protected static defaultSubmitButtonLabel() {
+		assert.isEqual(this.vc.getSubmitButtonLabel(), 'Go!')
+		assert.isEqual(this.render(this.vc).submitButtonLabel, 'Go!')
+	}
+
+	@test()
+	protected static canSetSubmitButtonLabel() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+			submitButtonLabel: 'Waka',
+		})
+
+		assert.isEqual(vc.getSubmitButtonLabel(), 'Waka')
+		assert.isEqual(this.render(vc).submitButtonLabel, 'Waka')
+	}
 }

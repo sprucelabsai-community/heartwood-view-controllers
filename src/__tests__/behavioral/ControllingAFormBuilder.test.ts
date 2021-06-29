@@ -548,6 +548,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const formVc = vcAssertUtil.assertCardContainsForm(dialogVc)
 		const schema = formVc.getSchema()
 
+		assert.isFalse(formVc.shouldShowCancelButton())
 		assert.doesInclude(schema.fields.title, { type: 'text', isRequired: true })
 	}
 

@@ -582,3 +582,5 @@ export const fancyIcons = [
 	'zoom_out',
 	'loading',
 ] as const
+
+export const defaultSubmitButtonLabel = 'Go!'

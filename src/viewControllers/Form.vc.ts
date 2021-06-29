@@ -12,6 +12,7 @@ import {
 	UnexpectedParametersOptions,
 	validateSchemaValues,
 } from '@sprucelabs/schema'
+import { defaultSubmitButtonLabel } from '../constants'
 import SpruceError from '../errors/SpruceError'
 import {
 	FormErrorsByField,
@@ -32,6 +33,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'onChange'
 	| 'shouldShowCancelButton'
 	| 'shouldShowSubmitControls'
+	| 'submitButtonLabel'
 	| 'values'
 > &
 	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
@@ -71,6 +73,8 @@ export default class FormViewController<
 				...(options.schema ? defaultSchemaValues(options.schema) : {}),
 			},
 			shouldShowSubmitControls: true,
+			shouldShowCancelButton: true,
+			submitButtonLabel: defaultSubmitButtonLabel,
 			...(model as any),
 			id: id ?? `${new Date().getTime()}`,
 			errorsByField: {},
@@ -233,9 +237,25 @@ export default class FormViewController<
 		this.model.shouldShowSubmitControls = true
 		this.triggerRender()
 	}
+
 	public hideSubmitControls() {
 		this.model.shouldShowSubmitControls = false
 		this.triggerRender()
+	}
+
+	public shouldShowSubmitControls() {
+		return this.model.shouldShowSubmitControls ?? true
+	}
+
+	public shouldShowCancelButton() {
+		return (
+			(this.model.shouldShowCancelButton ?? true) &&
+			this.shouldShowSubmitControls()
+		)
+	}
+
+	public getSubmitButtonLabel() {
+		return this.model.submitButtonLabel as string
 	}
 
 	public reset() {

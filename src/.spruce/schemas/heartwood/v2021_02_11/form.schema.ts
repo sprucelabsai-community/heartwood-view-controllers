@@ -78,6 +78,13 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	                defaultValue: true,
 	                options: undefined
 	            },
+	            /** Submit button label. */
+	            'submitButtonLabel': {
+	                label: 'Submit button label',
+	                type: 'text',
+	                defaultValue: "Go!",
+	                options: undefined
+	            },
 	            /** Busy. */
 	            'isBusy': {
 	                label: 'Busy',
