@@ -1,5 +1,7 @@
+import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
+import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
@@ -69,7 +71,7 @@ const vcAssertUtil = {
 		}
 
 		async function run() {
-			void action()
+			await action()
 			await wait()
 			assert.isTrue(
 				wasHit,
@@ -98,20 +100,27 @@ const vcAssertUtil = {
 			return dialogVc
 		}
 
+		let dialogHandlerPromise: any
+
 		//@ts-ignore
-		vc.renderInDialogHandler = async () => {
+		vc.renderInDialogHandler = ({ controller }) => {
 			wasHit = true
 			//@ts-ignore
-			await dialogHandler?.(dialogVc as any)
+			setTimeout(() => {
+				dialogHandlerPromise = dialogHandler?.(controller)
+			}, 0)
 		}
 
 		async function run() {
-			void action()
+			await action()
 			await wait()
+
 			assert.isTrue(
 				wasHit,
 				'this.renderInDialog() was not invoked in your view controller.'
 			)
+
+			await dialogHandlerPromise
 
 			return {
 				dialogVc,
@@ -138,6 +147,11 @@ const vcAssertUtil = {
 
 	assertDialogWasClosed(vc: DialogViewController) {
 		assert.isFalse(vc.getIsVisible(), 'Dialog was not closed!')
+	},
+
+	assertRendersValidCard(vc: ViewController<any>) {
+		const model = renderUtil.render(vc)
+		validateSchemaValues(cardSchema, model)
 	},
 }
 

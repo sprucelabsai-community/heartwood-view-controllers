@@ -66,7 +66,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	private buildFooter(): Footer {
 		const buttons: Button[] = [
-			{ label: 'Add page', onClick: this.addPage.bind(this) },
+			{ label: 'Add page', onClick: this.handleClickAddPage.bind(this) },
 		]
 
 		if (this.getTotalPages() > 1) {

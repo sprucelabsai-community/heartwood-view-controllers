@@ -10,7 +10,7 @@ export type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
 
 export default class DialogViewController extends AbstractViewController<Dialog> {
-	private dialogModel: Dialog
+	private model: Dialog
 	private closeResolver?: () => void
 	private closePromise?: Promise<unknown>
 	private onClose?: Dialog['onClose']
@@ -21,18 +21,18 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		options: ViewControllerOptions & DialogViewControllerOptions
 	) {
 		super(options)
-		this.dialogModel = options
+		this.model = options
 		this.onClose = options.onClose
 		this.isVisible = !!options.isVisible
 	}
 
 	public render(): Dialog {
 		return {
-			...this.dialogModel,
+			...this.model,
 			controller: this,
 			isVisible: this.isVisible,
 			closeHandler:
-				this.dialogModel.shouldShowCloseButton !== false
+				this.model.shouldShowCloseButton !== false
 					? this.handleClose.bind(this)
 					: undefined,
 		}

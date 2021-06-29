@@ -322,9 +322,20 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async clickingAddPageInFooterAddsAPage() {
 		const model = this.render(this.vc)
 
-		await this.click(model.footer?.buttons?.[0].onClick)
+		await vcAssertUtil.assertRendersDialog(
+			this.vc,
+			() => this.click(model.footer?.buttons?.[0].onClick),
+			async (dialogVc) => {
+				const form = vcAssertUtil.assertCardContainsForm(dialogVc)
+
+				form.setValue('title', 'taco bell')
+				await form.submit()
+			}
+		)
 
 		assert.isEqual(this.vc.getTotalPages(), 2)
+
+		vcAssertUtil.assertRendersValidCard(this.vc)
 	}
 
 	@test()
