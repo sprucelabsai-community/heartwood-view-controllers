@@ -1,12 +1,16 @@
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import Authenticator from '../auth/Authenticator'
 import SpruceError from '../errors/SpruceError'
-import { ControllerOptions, ViewControllerMap } from '../types/heartwood.types'
+import {
+	ControllerOptions,
+	ViewController,
+	ViewControllerMap,
+} from '../types/heartwood.types'
 import renderUtil from '../utilities/render.utility'
-import AbstractViewController from '../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MockStorage from './MockStorage'
 import interactionUtil from './utilities/interaction.utility'
+import vcAssertUtil from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceFixtureTest {
 	protected static controllerMap: Record<string, any>
@@ -15,6 +19,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		await super.beforeEach()
 		Authenticator.reset()
 		Authenticator.setStorage(new MockStorage())
+		vcAssertUtil._setVcFactory(this.Factory())
 	}
 
 	protected static Factory() {
@@ -49,7 +54,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		return vc
 	}
 
-	protected static render<Vc extends AbstractViewController<any>>(vc: Vc) {
+	protected static render<Vc extends ViewController<any>>(vc: Vc) {
 		return renderUtil.render(vc)
 	}
 

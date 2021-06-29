@@ -1190,6 +1190,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
+				/** Text. */
+				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
 				
@@ -1221,6 +1223,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
 			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 			            'fields': {
 			                label: 'Form fields',
@@ -1228,6 +1236,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
+			                minArrayLength: 0,
 			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			            /** . */
@@ -1618,63 +1627,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'className'?: string| undefined | null
-				/** Initial values. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
-		}
-
-		interface FormSectionSchema extends SpruceSchema.Schema {
-			id: 'formSection',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Initial values. */
-			            'values': {
-			                label: 'Initial values',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-			            'fields': {
-			                label: 'Form fields',
-			                type: 'raw',
-			                isRequired: true,
-			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
-			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
-			            },
-			    }
-		}
-
-		type FormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface Form<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
@@ -1854,6 +1806,72 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type TextEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.TextSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'className'?: string| undefined | null
+				/** Initial values. */
+				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Text. */
+				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
+		}
+
+		interface FormSectionSchema extends SpruceSchema.Schema {
+			id: 'formSection',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Initial values. */
+			            'values': {
+			                label: 'Initial values',
+			                type: 'raw',
+			                isPrivate: true,
+			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+			            'fields': {
+			                label: 'Form fields',
+			                type: 'raw',
+			                isRequired: true,
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
+			            },
+			    }
+		}
+
+		type FormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema>
 
 	}
 

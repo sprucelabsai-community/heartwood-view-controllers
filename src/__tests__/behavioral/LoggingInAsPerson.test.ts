@@ -161,7 +161,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const form = login.loginForm
 		form.setValue('phone', DEMO_NUMBER)
 
-		await form.handleSubmit()
+		await form.submit()
 
 		const slide = form.getPresentSlide()
 		assert.isEqual(slide, 1)
@@ -169,7 +169,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		let wasHit = false
 
 		//@ts-ignore
-		form.handleSubmit = () => {
+		form.submit = () => {
 			wasHit = true
 		}
 

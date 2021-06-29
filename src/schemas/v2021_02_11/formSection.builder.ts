@@ -3,6 +3,7 @@ import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
+import textBuilder from './text.builder'
 
 export default buildSchema({
 	id: 'formSection',
@@ -26,11 +27,19 @@ export default buildSchema({
 			type: 'text',
 			label: 'Title',
 		},
+		text: {
+			type: 'schema',
+			label: 'Text',
+			options: {
+				schema: textBuilder,
+			},
+		},
 		fields: {
 			type: 'raw',
 			isArray: true,
 			label: 'Form fields',
 			isRequired: true,
+			minArrayLength: 0,
 			hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			options: {
 				valueType:

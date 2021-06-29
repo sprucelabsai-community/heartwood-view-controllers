@@ -1,6 +1,6 @@
 import isObjectLike from 'lodash/isObjectLike'
 import vcAssertUtil from '../tests/utilities/vcAssert.utility'
-import AbstractViewController from '../viewControllers/Abstract.vc'
+import { ViewController } from '../types/heartwood.types'
 
 interface RenderOptions {
 	shouldReturnPrivateFields: boolean
@@ -50,7 +50,7 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
 }
 
 const renderUtil = {
-	render<VC extends AbstractViewController<any>>(
+	render<VC extends ViewController<any>>(
 		vc: VC,
 		options?: RenderOptions
 	): ReturnType<VC['render']> {

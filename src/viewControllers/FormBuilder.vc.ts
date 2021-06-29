@@ -1,5 +1,6 @@
 import { Schema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import buildForm from '../builders/buildForm'
 import {
 	FormViewController,
 	ViewControllerOptions,
@@ -16,12 +17,26 @@ export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
 
-interface PageViewControllerEnhancements {
-	addSection(): void
-	addField(sectionIdx: number): void
+interface AddSectionOptions {
+	type?: 'text' | 'form'
+	title?: string
+	text?: {
+		content: string
+	}
 }
 
-export type PageViewController = FormViewController<Schema> &
+interface PageViewControllerEnhancements {
+	addSection(options?: AddSectionOptions): void
+	addField(sectionIdx: number): void
+	getIndex(): number
+	getTitle(): string
+	setTitle(string: string): void
+}
+
+export type PageViewController = Omit<
+	FormViewController<Schema>,
+	keyof PageViewControllerEnhancements
+> &
 	PageViewControllerEnhancements
 
 type FieldBuilder = FormBuilderViewController['buildField']
@@ -66,13 +81,14 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 	}
 
-	private buildNewSlide(): {
+	private buildNewSlide(options?: { title?: string }): {
 		title: string
 		form: SpruceSchemas.Heartwood.v2021_02_11.Form<Schema>
 	} {
 		return {
 			title: this.buildNextPageTitle(),
 			form: this.renderNewForm(),
+			...options,
 		}
 	}
 
@@ -116,12 +132,14 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc.setHeaderTitle(title)
 	}
 
-	public async addPage(idx?: number) {
+	public async addPage(options?: { atIndex?: number; title?: string }) {
+		const { atIndex: idx } = options ?? {}
+
 		let destination = idx
 		if (typeof idx === 'number') {
-			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide())
+			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide(options))
 		} else {
-			this.swipeVc.addSlide(this.buildNewSlide())
+			this.swipeVc.addSlide(this.buildNewSlide(options))
 			destination = this.getTotalPages() - 1
 		}
 
@@ -144,13 +162,20 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public getPageVc(idx: number): PageViewController {
-		const formVc = this.swipeVc.getSlide(idx).form?.controller
+		const slide = this.swipeVc.getSlide(idx)
+		const formVc = slide.form?.controller
+
 		if (!formVc) {
 			throw new Error(`Form not set for page ${idx}`)
 		}
 
 		return new PageViewContollerImpl({
 			formVc,
+			setTitleHandler: (title) => {
+				slide.title = title
+			},
+			title: slide.title ?? '**MISSING**',
+			index: idx,
 			fieldBuilder: this.buildField.bind(this),
 		}) as any
 	}
@@ -159,8 +184,69 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		return this.swipeVc.getPresentSlide()
 	}
 
+	public getPresentPageVc() {
+		return this.getPageVc(this.getPresentPage())
+	}
+
 	public async jumpToPage(idx: number) {
 		await this.swipeVc.jumpToSlide(idx)
+	}
+
+	public getPageVcs() {
+		return (
+			this.swipeVc.getSlides()?.map((_, idx) => {
+				return this.getPageVc(idx)
+			}) ?? []
+		)
+	}
+
+	public async handleClickDeletePage() {
+		const confirm = await this.confirm({
+			title: 'Are you sure?',
+			subtitle: `This cannot be undone!`,
+			message: `Delete ${this.getPresentPageVc().getTitle()}?`,
+		})
+
+		if (confirm) {
+			await this.removePresentPage()
+		}
+	}
+
+	public async handleClickAddPage() {
+		const addPageForm = this.vcFactory.Controller(
+			'form',
+			buildForm({
+				id: 'addPageForm',
+				schema: {
+					id: 'addPage',
+					fields: {
+						title: {
+							label: 'Page name',
+							type: 'text',
+							isRequired: true,
+						},
+					},
+				},
+				sections: [
+					{
+						fields: [{ name: 'title', placeholder: this.buildNextPageTitle() }],
+					},
+				],
+				onSubmit: async ({ values }) => {
+					if (values.title) {
+						void dialog.hide()
+						await this.addPage({
+							title: values.title,
+						})
+					}
+				},
+			})
+		)
+
+		const dialog = this.renderInDialog({
+			header: { title: 'Add page' },
+			body: { sections: [{ form: addPageForm.render() }] },
+		})
 	}
 
 	public render(): Card {
@@ -171,21 +257,41 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 class PageViewContollerImpl implements PageViewControllerEnhancements {
 	private formVc: FormViewController<Schema>
 	private fieldBuilder: FieldBuilder
+	public index: number
+	private title: string
+	private setTitleHandler: (title: string) => void
 
 	public constructor(options: {
 		formVc: FormViewController<Schema>
+		index: number
+		title: string
 		fieldBuilder: FieldBuilder
+		setTitleHandler: (title: string) => void
 	}) {
-		const { formVc, fieldBuilder } = options
+		const { formVc, fieldBuilder, index, setTitleHandler, title } = options
 
 		this.formVc = formVc
+		this.index = index
+		this.title = title
+		this.setTitleHandler = setTitleHandler
 		this.fieldBuilder = fieldBuilder
 		introspectionUtil.delegateFunctionCalls(this, formVc)
 	}
 
+	public getTitle() {
+		return this.title
+	}
+
+	public setTitle(title: string) {
+		this.title = title
+		this.setTitleHandler(title)
+	}
+
 	public addField(sectionIdx: number): void {
 		const section = this.formVc.getSection(sectionIdx)
-		const fieldName = this.buildNextFieldName(sectionIdx)
+		const totalFields = this.getTotalFields()
+
+		const fieldName = this.buildNextFieldName(totalFields)
 
 		// @ts-ignore
 		section.fields.push({ name: fieldName })
@@ -195,20 +301,33 @@ class PageViewContollerImpl implements PageViewControllerEnhancements {
 		//@ts-ignore
 		schema.fields = {
 			...schema.fields,
-			[fieldName]: this.fieldBuilder(section.fields.length - 1),
+			[fieldName]: this.fieldBuilder(totalFields),
 		}
 	}
 
-	private buildNextFieldName(sectionIdx: number): string {
-		return `field${this.formVc.getSections()[sectionIdx].fields.length + 1}`
+	public getIndex() {
+		return this.index
 	}
 
-	public addSection() {
-		const sectionTitle = `Section ${this.formVc.getSections().length + 1}`
-		return this.formVc.addSection({
+	private getTotalFields() {
+		return Object.keys(this.formVc.getSchema().fields ?? {}).length
+	}
+
+	private buildNextFieldName(totalFields: number): string {
+		return `field${totalFields + 1}`
+	}
+
+	public addSection(options?: AddSectionOptions) {
+		const sectionTitle = `Section ${this.formVc.getTotalSections() + 1}`
+
+		this.formVc.addSection({
 			title: sectionTitle,
-			//@ts-ignore
-			fields: [{ name: 'field1' }],
+			fields: [],
+			...options,
 		})
+
+		if (options?.type !== 'text') {
+			this.addField(this.formVc.getTotalSections() - 1)
+		}
 	}
 }

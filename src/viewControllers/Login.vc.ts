@@ -104,7 +104,7 @@ export default class LoginViewController
 
 	private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
 		if (options.values.code?.length === 4) {
-			await this.loginForm.handleSubmit()
+			await this.loginForm.submit()
 		}
 	}
 

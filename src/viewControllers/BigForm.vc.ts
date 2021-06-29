@@ -61,7 +61,7 @@ export default class BigFormViewController<
 		await this.jumpToSlide(this.getPresentSlide() - 1)
 	}
 
-	public async handleSubmit() {
+	public async submit() {
 		const errorsByField = this.validate()
 		const results = await this.model.onSubmitSlide?.({
 			values: this.getValues(),
@@ -89,7 +89,7 @@ export default class BigFormViewController<
 	public render(): V {
 		const view: V = {
 			...this.model,
-			onSubmit: this.handleSubmit.bind(this),
+			onSubmit: this.submit.bind(this),
 		}
 
 		return view

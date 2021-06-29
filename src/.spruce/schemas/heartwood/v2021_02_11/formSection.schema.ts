@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
 
 const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  = {
 	id: 'formSection',
@@ -28,6 +28,12 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Text. */
+	            'text': {
+	                label: 'Text',
+	                type: 'schema',
+	                options: {schema: textSchema_v2021_02_11,}
+	            },
 	            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 	            'fields': {
 	                label: 'Form fields',
@@ -35,6 +41,7 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	                isRequired: true,
 	                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 	            },
 	    }

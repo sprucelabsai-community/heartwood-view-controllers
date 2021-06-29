@@ -230,6 +230,7 @@ export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
 	renderAs?: 'colorPicker' | 'number'
 	renderHintAs?: 'subtitle' | 'tooltip'
+	placeholder?: string
 	label?: string
 	hint?: string
 }

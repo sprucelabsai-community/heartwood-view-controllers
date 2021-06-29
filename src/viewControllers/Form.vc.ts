@@ -196,7 +196,7 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public async handleSubmit() {
+	public async submit() {
 		const errorsByField = this.validate()
 		const results = await this.model.onSubmit?.({
 			values: this.model.values,
@@ -264,6 +264,10 @@ export default class FormViewController<
 		return this.model.sections
 	}
 
+	public getTotalSections(): number {
+		return this.model.sections.length ?? 0
+	}
+
 	public getSection(idx: number) {
 		const section = this.model.sections[idx]
 
@@ -285,7 +289,7 @@ export default class FormViewController<
 	public render(): V {
 		const view: V = {
 			...this.model,
-			onSubmit: this.handleSubmit.bind(this),
+			onSubmit: this.submit.bind(this),
 		}
 
 		return view

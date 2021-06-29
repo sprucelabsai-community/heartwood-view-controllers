@@ -47,6 +47,10 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		this.triggerRender()
 	}
 
+	public getIsVisible() {
+		return this.isVisible
+	}
+
 	public async hide() {
 		const results = await this.onClose?.()
 

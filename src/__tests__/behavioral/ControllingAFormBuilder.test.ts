@@ -6,6 +6,7 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../utilities/introspection.utility'
 import renderUtil from '../../utilities/render.utility'
+import CardViewController from '../../viewControllers/Card.vc'
 import FormBuilderViewController, {
 	PageViewController,
 } from '../../viewControllers/FormBuilder.vc'
@@ -42,10 +43,12 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static has1PageToStart() {
+	protected static has1FormPageToStart() {
 		const model = this.renderVc()
+
 		assert.isLength(model.body?.sections, 1)
 		assert.isEqual(model.body?.sections?.[0]?.title, 'Page 1')
+		assert.isTruthy(model.body?.sections?.[0]?.form)
 	}
 
 	@test()
@@ -56,11 +59,15 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canAddMorePages() {
 		assert.isEqual(this.vc.getTotalPages(), 1)
+
 		await this.vc.addPage()
+
 		assert.isEqual(this.vc.getPresentPage(), 1)
 		assert.isEqual(this.vc.getTotalPages(), 2)
 		assert.isEqual(this.renderVc().body?.sections?.[1].title, 'Page 2')
+
 		await this.vc.addPage()
+
 		assert.isEqual(this.vc.getPresentPage(), 2)
 		assert.isEqual(this.vc.getTotalPages(), 3)
 		assert.isEqual(this.renderVc().body?.sections?.[2].title, 'Page 3')
@@ -103,15 +110,27 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		assert.isEqual(this.vc.getTotalPages(), 4)
 
-		await this.vc.addPage(0)
+		await this.vc.addPage({ atIndex: 0 })
 
 		assert.isEqual(this.vc.getPresentPage(), 0)
 
-		const model = this.renderVc()
+		let model = this.renderVc()
 
 		assert.isEqual(model.body?.sections?.[0]?.title, 'Page 5')
-
 		assert.isEqual(this.vc.getTotalPages(), 5)
+
+		await this.vc.addPage({ atIndex: 2 })
+		assert.isEqual(this.vc.getTotalPages(), 6)
+
+		model = this.renderVc()
+		assert.isEqual(model.body?.sections?.[2]?.title, 'Page 6')
+	}
+
+	@test()
+	protected static async canAddPageAndPassTitle() {
+		await this.vc.addPage({ title: 'Page title' })
+		const model = this.renderVc()
+		assert.isEqual(model.body?.sections?.[1]?.title, 'Page title')
 	}
 
 	@test()
@@ -131,6 +150,25 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const pageModel = this.render(pageVc)
 
 		validateSchemaValues(formSchema, pageModel)
+	}
+
+	@test()
+	protected static async canGetTitleFromPageVc() {
+		const pageVc = this.vc.getPageVc(0)
+		assert.isEqual(pageVc.getTitle(), 'Page 1')
+
+		await this.vc.addPage()
+		assert.isEqual(this.vc.getPageVc(1).getTitle(), 'Page 2')
+	}
+
+	@test()
+	protected static async canSetTitle() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.setTitle('Page Waka')
+
+		assert.isEqual(pageVc.getTitle(), 'Page Waka')
+		const model = this.render(this.vc)
+		assert.isEqual(model.body?.sections?.[0].title, 'Page Waka')
 	}
 
 	@test()
@@ -162,6 +200,35 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static canSetTitleWhenAddingSection() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addSection({ title: 'Go team!' })
+
+		const model = this.render(pageVc)
+		assert.isEqual(model.sections[1].title, 'Go team!')
+	}
+
+	@test()
+	protected static addingSectionShouldAddTextField() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addSection()
+
+		let schema = pageVc.getSchema()
+
+		assert.isTruthy(schema.fields?.field2)
+		assert.isEqual(schema.fields?.field2.type, 'text')
+		assert.isEqual(schema.fields?.field2.label, 'Field 2')
+
+		pageVc.addSection()
+
+		pageVc.getSchema()
+
+		assert.isTruthy(schema.fields?.field3)
+		assert.isEqual(schema.fields?.field3.type, 'text')
+		assert.isEqual(schema.fields?.field3.label, 'Field 3')
+	}
+
+	@test()
 	protected static addingMultipleSectionsTitlesCorrectly() {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.addSection()
@@ -186,7 +253,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const section = pageVc.getSection(1)
 		assert.isLength(section.fields, 1)
 		//@ts-ignore
-		assert.isEqualDeep(section.fields, [{ name: 'field1' }])
+		assert.isEqualDeep(section.fields, [{ name: 'field2' }])
 	}
 
 	@test()
@@ -241,7 +308,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const model = this.render(pageVc)
 
 		//@ts-ignore
-		assert.isEqualDeep(model.sections[1].fields[1], { name: 'field2' })
+		assert.isEqualDeep(model.sections[1].fields[1], { name: 'field3' })
 	}
 
 	@test()
@@ -272,6 +339,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async hasRemovePageButtonAfterPageHasBeenAdded() {
 		await this.vc.addPage()
 		const model = this.render(this.vc)
+
 		assert.isArray(model.footer?.buttons)
 		assert.doesInclude(model.footer?.buttons, { label: 'Remove page' })
 	}
@@ -280,7 +348,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async removeButtonIsRemovedWhenDownToOnePage() {
 		await this.vc.addPage()
 		await this.vc.removePage(0)
+
 		const model = this.render(this.vc)
+
 		assert.isArray(model.footer?.buttons)
 		assert.isLength(model.footer?.buttons, 1)
 	}
@@ -321,11 +391,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async addingPageWaitsBeforChangingPresentPage() {
+	protected static async addingPageWaitsBeforeChangingPresentPage() {
 		assert.isEqual(this.vc.getPresentPage(), 0)
 		const promise = this.vc.addPage()
+
 		assert.isEqual(this.vc.getPresentPage(), 0)
+
 		await promise
+
 		assert.isEqual(this.vc.getPresentPage(), 1)
 	}
 
@@ -387,6 +460,112 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				assert.isTrue(wasHit, `\`${func}\` did not delegate it's call.`)
 			}
 		}
+	}
+
+	@test()
+	protected static canAddTextSection() {
+		const pageVc = this.vc.getPageVc(0)
+
+		pageVc.addSection({
+			type: 'text',
+			text: { content: 'What are you thinking?' },
+		})
+
+		const model = this.render(pageVc)
+
+		assert.isEqualDeep(model.sections[1].text, {
+			content: 'What are you thinking?',
+		})
+
+		assert.isLength(model.sections[1].fields, 0)
+	}
+
+	@test()
+	protected static async canGetCurrentPages() {
+		let pageVc = this.vc.getPresentPageVc()
+		assert.isEqual(pageVc.getIndex(), 0)
+
+		await this.vc.addPage()
+
+		pageVc = this.vc.getPresentPageVc()
+		assert.isEqual(pageVc.getIndex(), 1)
+	}
+
+	@test()
+	protected static async canGetAllPageVcs() {
+		let vcs = this.vc.getPageVcs()
+
+		assert.isArray(vcs)
+		assert.isLength(vcs, 1)
+
+		const vc = vcs[0]
+		const model = this.render(vc)
+
+		validateSchemaValues(formSchema, model)
+
+		await this.vc.addPage()
+
+		vcs = this.vc.getPageVcs()
+		assert.isLength(vcs, 2)
+	}
+
+	@test()
+	protected static async deletesPageWhenConfirmingOnClickDeletePage() {
+		assert.isFunction(this.vc.handleClickDeletePage)
+
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => this.vc.handleClickDeletePage(),
+			() => true
+		)
+
+		const model = this.render(this.vc)
+
+		assert.isLength(model.body?.sections, 0)
+	}
+
+	@test()
+	protected static async cancelsDeletingPageWhenConfirmingOnClickDeletePage() {
+		assert.isFunction(this.vc.handleClickDeletePage)
+
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => this.vc.handleClickDeletePage(),
+			() => false
+		)
+
+		const model = this.render(this.vc)
+		assert.isLength(model.body?.sections, 1)
+	}
+
+	@test()
+	protected static async showsAddDialogWhenHandlingClickAddPage() {
+		assert.isFunction(this.vc.handleClickAddPage)
+
+		const { dialogVc } = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+			this.vc.handleClickAddPage()
+		)
+
+		const formVc = vcAssertUtil.assertCardContainsForm(dialogVc)
+		const schema = formVc.getSchema()
+
+		assert.doesInclude(schema.fields.title, { type: 'text', isRequired: true })
+	}
+
+	@test()
+	protected static async submittingAddFormAddsPage() {
+		const { dialogVc } = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+			this.vc.handleClickAddPage()
+		)
+		const formVc = vcAssertUtil.assertCardContainsForm(dialogVc)
+		formVc.setValue('title', 'A new one!')
+
+		await formVc.submit()
+
+		const pageVc = this.vc.getPageVc(1)
+		assert.isEqual(pageVc.getTitle(), 'A new one!')
+
+		vcAssertUtil.assertDialogWasClosed(dialogVc)
 	}
 
 	private static assertFirstFieldConfiguredCorrectly(
