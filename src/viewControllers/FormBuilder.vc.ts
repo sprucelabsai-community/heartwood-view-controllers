@@ -233,6 +233,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 					},
 				],
 				shouldShowCancelButton: false,
+				submitButtonLabel: 'Add page',
 				onSubmit: async ({ values }) => {
 					if (values.title) {
 						void dialog.hide()
