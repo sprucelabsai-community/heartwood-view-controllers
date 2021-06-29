@@ -3,7 +3,7 @@ import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		confirmTest: typeof ConfirmTestSkillViewController
+		confirmTest: ConfirmTestSkillViewController
 	}
 }
 

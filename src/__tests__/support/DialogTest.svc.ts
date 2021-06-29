@@ -4,7 +4,7 @@ import DialogVc from '../../viewControllers/Dialog.vc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		dialogTest: typeof DialogTestSkillViewController
+		dialogTest: DialogTestSkillViewController
 	}
 }
 

@@ -50,7 +50,7 @@ type BuiltViewControllerOrSkillViewController<
 export default class ViewControllerFactory<
 	Map extends ViewControllerMap = ViewControllerMap
 > {
-	private controllerMap: Map
+	private controllerMap: Record<string, any>
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
@@ -62,7 +62,7 @@ export default class ViewControllerFactory<
 		connectToApi: ConnectToApi
 	}) {
 		const { controllerMap, renderInDialogHandler, confirmHandler } = options
-		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP } as Map
+		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
 		this.renderInDialogHandler = renderInDialogHandler
 		this.confirmHandler = confirmHandler
 		this.connectToApi = options.connectToApi
@@ -138,9 +138,7 @@ export default class ViewControllerFactory<
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
-	): BuiltViewControllerOrSkillViewController<
-		InstanceType<ViewControllerMap[N]>
-	> {
+	): BuiltViewControllerOrSkillViewController<ViewControllerMap[N]> {
 		const Class = this.controllerMap[name]
 
 		if (!Class) {
@@ -163,9 +161,7 @@ export default class ViewControllerFactory<
 		}
 
 		//@ts-ignore
-		let instance = new Class(constructorOptions) as InstanceType<
-			ViewControllerMap[N]
-		>
+		let instance = new Class(constructorOptions)
 
 		if (isFunction) {
 			//@ts-ignore

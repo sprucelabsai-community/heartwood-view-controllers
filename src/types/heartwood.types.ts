@@ -153,15 +153,15 @@ export interface ButtonController {
 }
 
 export interface ViewControllerMap {
-	form: typeof FormViewControllerImpl
-	login: typeof LoginViewController
-	swipe: typeof SwipeViewController
-	buttonGroup: typeof ButtonGroupViewController
-	card: typeof CardViewControllerImpl
-	dialog: typeof DialogViewController
-	bigForm: typeof BigFormViewControllerImpl
-	confirm: typeof ConfirmViewController
-	formBuilder: typeof FormBuilderViewController
+	form: FormViewControllerImpl<any>
+	login: LoginViewController
+	swipe: SwipeViewController
+	buttonGroup: ButtonGroupViewController
+	card: CardViewControllerImpl
+	dialog: DialogViewController
+	bigForm: BigFormViewControllerImpl<any>
+	confirm: ConfirmViewController
+	formBuilder: FormBuilderViewController
 }
 
 export interface ViewControllerOptionsMap {

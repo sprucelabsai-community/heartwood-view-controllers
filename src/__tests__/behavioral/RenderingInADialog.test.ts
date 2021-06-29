@@ -1,5 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import CardViewController from '../../viewControllers/Card.vc'
 import DialogTestSkillViewController from '../support/DialogTest.svc'
 
 export default class RenderingInADialogTest extends AbstractViewControllerTest {
@@ -62,5 +63,11 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 		await dialog.hide()
 
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static dialogExtendsViewController() {
+		const dialogVc = this.Controller('dialog', {})
+		assert.isTrue(dialogVc instanceof CardViewController)
 	}
 }

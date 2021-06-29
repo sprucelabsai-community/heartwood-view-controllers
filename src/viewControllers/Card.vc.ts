@@ -8,30 +8,28 @@ export type CardViewControllerOptions = ViewModel
 
 type Section = SpruceSchemas.Heartwood.v2021_02_11.CardSection
 
-export default class CardViewController
-	extends AbstractViewController<ViewModel>
-	implements ViewController<ViewModel>
+export default class CardViewController<V extends ViewModel = ViewModel>
+	extends AbstractViewController<V>
+	implements ViewController<V>
 {
-	protected model: ViewModel
+	protected model: V
 	private triggerRenderFooter?: () => void
 	private triggerRenderHeader?: () => void
 	private triggerRenderSections: (() => void)[] = []
 	private sectionVcs: ViewController<Section>[] = []
 
-	public constructor(
-		options: CardViewControllerOptions & ViewControllerOptions
-	) {
+	public constructor(options: V & ViewControllerOptions) {
 		super(options)
 		this.model = options
 	}
 
-	public updateFooter(footer: NonNullable<ViewModel['footer']>) {
+	public updateFooter(footer: NonNullable<V['footer']>) {
 		this.model.footer = footer
 		this.triggerRenderFooter?.()
 	}
 
-	public render(): ViewModel {
-		const model: ViewModel = {
+	public render(): V {
+		const model: V = {
 			...this.model,
 			controller: this,
 		}

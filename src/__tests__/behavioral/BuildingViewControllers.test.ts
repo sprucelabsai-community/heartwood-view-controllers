@@ -52,9 +52,9 @@ export class TestSkillViewController extends AbstractSkillViewController {
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		test: typeof TestViewController
-		test2: typeof TestViewControllerWithId
-		testSkillView: typeof TestSkillViewController
+		test: TestViewController
+		test2: TestViewControllerWithId
+		testSkillView: TestSkillViewController
 	}
 }
 

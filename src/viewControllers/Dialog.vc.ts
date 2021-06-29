@@ -1,32 +1,32 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { ViewControllerOptions } from '../types/heartwood.types'
-import AbstractViewController from './Abstract.vc'
+import CardViewController from './Card.vc'
 
-export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Dialog & {
-	closeHandler?: () => void
-}
+export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Card &
+	SpruceSchemas.Heartwood.v2021_02_11.Dialog & {
+		closeHandler?: () => void
+	}
 
 export type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
 
-export default class DialogViewController extends AbstractViewController<Dialog> {
-	private model: Dialog
+export default class DialogViewController<
+	D extends Dialog = Dialog
+> extends CardViewController<D> {
 	private closeResolver?: () => void
 	private closePromise?: Promise<unknown>
-	private onClose?: Dialog['onClose']
+	private onClose?: D['onClose']
 	private transitionOut?: () => Promise<void>
 	private isVisible = false
 
-	public constructor(
-		options: ViewControllerOptions & DialogViewControllerOptions
-	) {
+	public constructor(options: ViewControllerOptions & Omit<D, 'closeHandler'>) {
+		//@ts-ignore
 		super(options)
-		this.model = options
 		this.onClose = options.onClose
 		this.isVisible = !!options.isVisible
 	}
 
-	public render(): Dialog {
+	public render(): D {
 		return {
 			...this.model,
 			controller: this,
