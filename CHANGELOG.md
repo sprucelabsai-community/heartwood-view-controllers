@@ -1,3 +1,10 @@
+# [14.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.1.1...v14.2.0) (2021-06-30)
+
+
+### Features
+
+* can add section at index to form and form builder ([ab857ef](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ab857ef))
+
 ## [14.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.1.0...v14.1.1) (2021-06-30)
 
 # [14.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.0.1...v14.1.0) (2021-06-30)
