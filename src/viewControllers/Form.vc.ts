@@ -11,7 +11,9 @@ import {
 	SchemaPartialValues,
 	UnexpectedParametersOptions,
 	validateSchemaValues,
+	SchemaFieldsByName,
 } from '@sprucelabs/schema'
+import cloneDeep from 'lodash/cloneDeep'
 import { defaultSubmitButtonLabel } from '../constants'
 import SpruceError from '../errors/SpruceError'
 import {
@@ -75,7 +77,7 @@ export default class FormViewController<
 			shouldShowSubmitControls: true,
 			shouldShowCancelButton: true,
 			submitButtonLabel: defaultSubmitButtonLabel,
-			...(model as any),
+			...(cloneDeep(model) as any),
 			id: id ?? `${new Date().getTime()}`,
 			errorsByField: {},
 			controller: this,
@@ -265,6 +267,7 @@ export default class FormViewController<
 
 	public addSection(section: Section) {
 		this.model.sections.push(section)
+		this.triggerRender()
 	}
 
 	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
@@ -295,7 +298,7 @@ export default class FormViewController<
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `There is no section ${idx}.`,
-				parameters: ['sectionIndex'],
+				parameters: ['sectionIdx'],
 			})
 		}
 
@@ -304,6 +307,42 @@ export default class FormViewController<
 
 	public getSchema() {
 		return this.model.schema
+	}
+
+	public addFields(options: {
+		sectionIdx: number
+		fields: SchemaFieldsByName
+	}) {
+		const { sectionIdx, fields } = options
+
+		const missing: string[] = []
+
+		if (typeof sectionIdx === 'undefined') {
+			missing.push('sectionIdx')
+		}
+
+		if (!fields) {
+			missing.push('fields')
+		}
+
+		if (missing.length > 0) {
+			throw new SpruceError({ code: 'MISSING_PARAMETERS', parameters: missing })
+		}
+
+		const schema = this.getSchema()
+		schema.fields = {
+			...schema.fields,
+			...fields,
+		}
+
+		const section = this.getSection(sectionIdx)
+
+		for (const field of Object.keys(fields)) {
+			//@ts-ignore
+			section.fields.push({ name: field })
+		}
+
+		this.triggerRender()
 	}
 
 	public render(): V {

@@ -174,7 +174,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `There is no section at index ${idx}.`,
-				parameters: ['sectionIndex'],
+				parameters: ['sectionIdx'],
 			})
 		}
 
@@ -188,7 +188,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 			throw new SpruceError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `Can't update section at index ${idx} because there isn't one.`,
-				parameters: ['sectionIndex'],
+				parameters: ['sectionIdx'],
 			})
 		}
 

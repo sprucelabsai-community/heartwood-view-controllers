@@ -290,21 +290,16 @@ class PageViewContollerImpl implements PageViewControllerEnhancements {
 	}
 
 	public addField(sectionIdx: number): void {
-		const section = this.formVc.getSection(sectionIdx)
 		const totalFields = this.getTotalFields()
-
 		const fieldName = this.buildNextFieldName(totalFields)
 
-		// @ts-ignore
-		section.fields.push({ name: fieldName })
-
-		const schema = this.formVc.getSchema()
-
-		//@ts-ignore
-		schema.fields = {
-			...schema.fields,
-			[fieldName]: this.fieldBuilder(totalFields),
-		}
+		this.formVc.addFields({
+			sectionIdx,
+			//@ts-ignore
+			fields: {
+				[fieldName]: this.fieldBuilder(totalFields),
+			},
+		})
 	}
 
 	public getIndex() {

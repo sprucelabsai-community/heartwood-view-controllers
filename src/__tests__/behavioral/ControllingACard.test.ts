@@ -229,7 +229,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static cantGetInvalidSection() {
 		const err = assert.doesThrow(() => this.vc.getSection(-1))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIndex'],
+			parameters: ['sectionIdx'],
 		})
 	}
 

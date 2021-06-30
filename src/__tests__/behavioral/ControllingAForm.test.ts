@@ -4,6 +4,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 import buildForm from '../../builders/buildForm'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import { FormViewController } from '../../types/heartwood.types'
 
 const testForm = buildForm({
@@ -278,7 +279,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		const err1 = assert.doesThrow(() => this.vc.getSection(-1))
 
 		errorAssertUtil.assertError(err1, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIndex'],
+			parameters: ['sectionIdx'],
 		})
 	}
 
@@ -326,5 +327,136 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqual(vc.getSubmitButtonLabel(), 'Waka')
 		assert.isEqual(this.render(vc).submitButtonLabel, 'Waka')
+	}
+
+	@test()
+	protected static addingSectionShouldNotMutateModel() {
+		this.vc.addSection({ title: 'go!', fields: [] })
+		assert.isLength(testForm.sections, 1)
+	}
+
+	@test()
+	protected static addingSectionShouldTriggerRender() {
+		this.vc.addSection({ title: 'go!', fields: [] })
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static cantAddWithoutSpecifyingFieldAndSection() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.addFields({}))
+
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['sectionIdx', 'fields'],
+		})
+	}
+
+	@test()
+	protected static cantAddFieldToSectionThatDoesNotExist() {
+		const err = assert.doesThrow(() =>
+			this.vc.addFields({
+				sectionIdx: -1,
+				fields: {},
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIdx'],
+		})
+	}
+
+	@test()
+	protected static addingAFieldToSectionAddsToSchemaAndSection() {
+		this.vc.addFields({
+			sectionIdx: 0,
+			fields: {
+				phone: {
+					type: 'phone',
+				},
+			},
+		})
+
+		const schema = this.vc.getSchema()
+
+		//@ts-ignore
+		assert.isEqualDeep(schema.fields.phone, { type: 'phone' })
+
+		const section = this.vc.getSection(0)
+
+		//@ts-ignore
+		assert.isEqualDeep(section.fields, ['first', { name: 'phone' }])
+	}
+
+	@test()
+	protected static canAddMultipleFields() {
+		this.vc.addFields({
+			sectionIdx: 0,
+			fields: {
+				phone1: {
+					type: 'phone',
+				},
+				phone2: {
+					type: 'phone',
+					label: 'Backup phone',
+				},
+			},
+		})
+
+		this.vc.addFields({
+			sectionIdx: 0,
+			fields: {
+				phone3: {
+					type: 'phone',
+					label: 'Backup phone 3',
+				},
+			},
+		})
+
+		const schema = this.vc.getSchema()
+
+		//@ts-ignore
+		assert.isEqualDeep(schema.fields.phone1, { type: 'phone' })
+		//@ts-ignore
+		assert.isEqualDeep(schema.fields.phone2, {
+			type: 'phone',
+			label: 'Backup phone',
+		})
+
+		//@ts-ignore
+		assert.isEqualDeep(schema.fields.phone3, {
+			type: 'phone',
+			label: 'Backup phone 3',
+		})
+
+		const section = this.vc.getSection(0)
+
+		//@ts-ignore
+		assert.isEqualDeep(section.fields, [
+			'first',
+			//@ts-ignore
+			{ name: 'phone1' },
+			//@ts-ignore
+			{ name: 'phone2' },
+			//@ts-ignore
+			{ name: 'phone3' },
+		])
+	}
+
+	@test()
+	protected static addingFieldTriggersRender() {
+		this.vc.addFields({
+			sectionIdx: 0,
+			fields: {
+				phone1: {
+					type: 'phone',
+				},
+				phone2: {
+					type: 'phone',
+					label: 'Backup phone',
+				},
+			},
+		})
+
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
 }
