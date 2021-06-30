@@ -28,7 +28,7 @@ export default class DialogViewController<
 
 	public render(): D {
 		return {
-			...this.model,
+			...super.render(),
 			controller: this,
 			isVisible: this.isVisible,
 			closeHandler:

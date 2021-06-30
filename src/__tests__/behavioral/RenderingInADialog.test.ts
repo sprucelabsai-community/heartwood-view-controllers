@@ -1,6 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import CardViewController from '../../viewControllers/Card.vc'
+import DialogViewController from '../../viewControllers/Dialog.vc'
 import DialogTestSkillViewController from '../support/DialogTest.svc'
 
 export default class RenderingInADialogTest extends AbstractViewControllerTest {
@@ -67,7 +68,24 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static dialogExtendsViewController() {
-		const dialogVc = this.Controller('dialog', {})
-		assert.isTrue(dialogVc instanceof CardViewController)
+		const vc = this.Controller('dialog', {
+			body: {
+				sections: [
+					{
+						title: 'Go team!',
+					},
+				],
+			},
+		})
+		assert.isTrue(vc instanceof CardViewController)
+
+		this.assertSectionsHaveControllers(vc)
+	}
+
+	protected static assertSectionsHaveControllers(vc: DialogViewController) {
+		const model = this.render(vc)
+		for (const section of model.body?.sections ?? []) {
+			assert.isTruthy(section.controller)
+		}
 	}
 }
