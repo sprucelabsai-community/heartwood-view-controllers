@@ -47,16 +47,14 @@ type BuiltViewControllerOrSkillViewController<
 	? BuiltSkillViewController<Vc>
 	: BuiltViewController<Vc>
 
-export default class ViewControllerFactory<
-	Map extends ViewControllerMap = ViewControllerMap
-> {
+export default class ViewControllerFactory {
 	private controllerMap: Record<string, any>
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
 
 	public constructor(options: {
-		controllerMap: Partial<Map>
+		controllerMap: Record<string, any>
 		renderInDialogHandler: RenderInDialogHandler
 		confirmHandler: ConfirmHandler
 		connectToApi: ConnectToApi

@@ -208,7 +208,7 @@ export interface ConfirmOptions {
 export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>
 
 export interface ViewControllerOptions {
-	vcFactory: ViewControllerFactory<any>
+	vcFactory: ViewControllerFactory
 	connectToApi: () => Promise<Client>
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler

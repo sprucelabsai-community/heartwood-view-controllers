@@ -12,7 +12,7 @@ import ViewControllerFactory from './ViewControllerFactory'
 export default abstract class AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
 {
-	protected vcFactory: ViewControllerFactory<any>
+	protected vcFactory: ViewControllerFactory
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 
