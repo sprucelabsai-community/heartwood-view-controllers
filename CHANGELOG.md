@@ -1,3 +1,10 @@
+# [14.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.0.1...v14.1.0) (2021-06-30)
+
+
+### Features
+
+* addFields added to form vc for better support and renedring ([c7b3f81](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c7b3f81))
+
 ## [14.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.0.0...v14.0.1) (2021-06-30)
 
 # [14.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v13.0.1...v14.0.0) (2021-06-30)
