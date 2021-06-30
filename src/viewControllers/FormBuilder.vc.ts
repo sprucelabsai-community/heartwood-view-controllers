@@ -18,6 +18,7 @@ export interface FormBuilderViewControllerOptions {
 }
 
 interface AddSectionOptions {
+	atIndex?: number
 	type?: 'text' | 'form'
 	title?: string
 	text?: {

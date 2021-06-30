@@ -579,6 +579,26 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertDialogWasClosed(dialogVc)
 	}
 
+	@test()
+	protected static async canAddSectionToPageAtIndex() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addSection({ atIndex: 0, title: 'Now the first!' })
+
+		const model = this.render(pageVc)
+
+		assert.isEqual(model.sections[0].title, 'Now the first!')
+	}
+
+	@test()
+	protected static async addingSectionToIndexThatIsTooHighJustAddsToEnd() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addSection({ atIndex: 100, title: 'Now the last!' })
+
+		const model = this.render(pageVc)
+
+		assert.isEqual(model.sections[1].title, 'Now the last!')
+	}
+
 	private static assertFirstFieldConfiguredCorrectly(
 		pageVc: PageViewController
 	) {

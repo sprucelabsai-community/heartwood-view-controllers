@@ -265,8 +265,13 @@ export default class FormViewController<
 		this.setErrorsByField({})
 	}
 
-	public addSection(section: Section) {
-		this.model.sections.push(section)
+	public addSection(section: Section & { atIndex?: number }) {
+		const { atIndex, ...sec } = section
+		if (typeof atIndex === 'number') {
+			this.model.sections.splice(atIndex, 0, sec)
+		} else {
+			this.model.sections.push(sec)
+		}
 		this.triggerRender()
 	}
 
