@@ -1,3 +1,10 @@
+# [15.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.2.0...v15.0.0) (2021-06-30)
+
+
+### Breaking Changes
+
+* form makes fields optional, updateSection on form ([a234c3f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a234c3f))
+
 # [14.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v14.1.1...v14.2.0) (2021-06-30)
 
 
