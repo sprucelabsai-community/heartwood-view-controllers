@@ -1,3 +1,10 @@
+# [14.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v13.0.1...v14.0.0) (2021-06-30)
+
+
+### Breaking Changes
+
+* dialog utilizes card vc more effectviely ([64090ef](https://github.com/sprucelabsai/heartwood-view-controllers/commit/64090ef))
+
 ## [13.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v13.0.0...v13.0.1) (2021-06-30)
 
 # [13.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v12.1.5...v13.0.0) (2021-06-29)
