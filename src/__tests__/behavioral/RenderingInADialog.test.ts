@@ -67,7 +67,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static dialogExtendsViewController() {
+	protected static dialogProperlyUsesCardViewController() {
 		const vc = this.Controller('dialog', {
 			body: {
 				sections: [
@@ -77,9 +77,29 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 				],
 			},
 		})
-		assert.isTrue(vc instanceof CardViewController)
 
+		assert.isFalse(vc instanceof CardViewController)
+
+		const { cardController } = vc.render()
+
+		assert.isTrue(cardController instanceof CardViewController)
 		this.assertSectionsHaveControllers(vc)
+	}
+
+	@test()
+	protected static async canGetCardVcFromDialog() {
+		const vc = this.Controller('dialog', {
+			body: {
+				sections: [
+					{
+						title: 'Go team!',
+					},
+				],
+			},
+		})
+
+		const cardVc = vc.getCardVc()
+		assert.isTrue(cardVc instanceof CardViewController)
 	}
 
 	protected static assertSectionsHaveControllers(vc: DialogViewController) {
