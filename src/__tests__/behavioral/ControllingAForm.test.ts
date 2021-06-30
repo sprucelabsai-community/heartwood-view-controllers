@@ -459,4 +459,86 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
+
+	@test()
+	protected static hasUpdateSectionMethod() {
+		assert.isFunction(this.vc.updateSection)
+	}
+
+	@test()
+	protected static validatesUpdate() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.updateSection())
+
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['sectionIdx', 'newSection'],
+		})
+	}
+
+	@test()
+	protected static validatesUpdateForUpdates() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.updateSection(0))
+
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['newSection'],
+		})
+	}
+
+	@test()
+	protected static throwsWithbadSectionOnUpdate() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.updateSection(-1, {}))
+
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIdx'],
+		})
+	}
+
+	@test()
+	protected static canUpdateFirstSectionTitle() {
+		this.vc.updateSection(0, {
+			title: 'Hey gang!',
+		})
+
+		let model = this.render(this.vc)
+
+		assert.isEqual(model.sections[0].title, 'Hey gang!')
+		//@ts-ignore
+		this.vc.updateSection(0, { title: 'go again!', fields: ['cheesy'] })
+
+		model = this.render(this.vc)
+
+		assert.isEqual(model.sections[0].title, 'go again!')
+		//@ts-ignore
+		assert.isEqual(model.sections[0].fields[0], 'cheesy')
+	}
+
+	@test()
+	protected static udpateSectionUpdatesEverything() {
+		this.vc.updateSection(0, {
+			title: 'Hey gang!',
+			fields: ['first'],
+			text: {
+				content: 'Waka waka!',
+			},
+		})
+
+		assert.isEqualDeep(this.vc.getSection(0), {
+			title: 'Hey gang!',
+			fields: ['first'],
+			text: {
+				content: 'Waka waka!',
+			},
+		})
+	}
+
+	@test()
+	protected static updatesTriggerRender() {
+		this.vc.updateSection(0, {
+			title: 'doobey',
+		})
+
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
 }

@@ -1201,7 +1201,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Text. */
 				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
 				
 				'shouldShowSubmitButton'?: boolean| undefined | null
 		}
@@ -1241,10 +1241,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'fields': {
 			                label: 'Form fields',
 			                type: 'raw',
-			                isRequired: true,
 			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                minArrayLength: 0,
 			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			            /** . */
@@ -1850,7 +1848,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Text. */
 				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields': (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
 		}
 
 		interface FormSectionSchema extends SpruceSchema.Schema {
@@ -1888,10 +1886,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'fields': {
 			                label: 'Form fields',
 			                type: 'raw',
-			                isRequired: true,
 			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			                isArray: true,
-			                minArrayLength: 0,
 			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			    }

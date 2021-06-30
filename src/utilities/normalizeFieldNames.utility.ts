@@ -6,26 +6,28 @@ const normalizeFormSectionFieldNamesUtil = {
 	toObject<S extends Schema = Schema>(
 		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields']
 	) {
-		const normalized: FieldRenderOptions<S>[] = fields.map((field) => {
-			if (typeof field === 'string') {
-				return { name: field }
-			}
+		const normalized: FieldRenderOptions<S>[] =
+			fields?.map((field) => {
+				if (typeof field === 'string') {
+					return { name: field }
+				}
 
-			return field
-		})
+				return field
+			}) ?? []
 
 		return normalized
 	},
 	toNames<S extends Schema = Schema>(
 		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields']
 	) {
-		const normalized: SchemaFieldNames<S>[] = fields.map((field) => {
-			if (typeof field === 'string') {
-				return field
-			}
+		const normalized: SchemaFieldNames<S>[] =
+			fields?.map((field) => {
+				if (typeof field === 'string') {
+					return field
+				}
 
-			return field.name
-		})
+				return field.name
+			}) ?? []
 
 		return normalized
 	},

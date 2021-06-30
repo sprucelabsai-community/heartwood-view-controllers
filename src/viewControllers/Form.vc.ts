@@ -25,7 +25,7 @@ import {
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel<S extends Schema> = SpruceSchemas.Heartwood.v2021_02_11.Form<S>
-type Section = ViewModel<Schema>['sections'][number]
+type Section<S extends Schema = Schema> = ViewModel<S>['sections'][number]
 
 export type FormViewControllerOptions<S extends Schema> = Pick<
 	ViewModel<S>,
@@ -275,6 +275,30 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	public updateSection(sectionIdx: number, newSection: Section<S>) {
+		const missing: string[] = []
+
+		if (typeof sectionIdx !== 'number') {
+			missing.push('sectionIdx')
+		}
+
+		if (!newSection) {
+			missing.push('newSection')
+		}
+
+		if (missing.length) {
+			throw new SpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: missing,
+			})
+		}
+
+		this.assertValidSection(sectionIdx)
+		this.model.sections[sectionIdx] = newSection
+
+		this.triggerRender()
+	}
+
 	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
 		delete this.dirtyFields[name]
 		this._setValue<N>({
@@ -297,6 +321,11 @@ export default class FormViewController<
 	}
 
 	public getSection(idx: number) {
+		const section = this.assertValidSection(idx)
+		return section
+	}
+
+	private assertValidSection(idx: number) {
 		const section = this.model.sections[idx]
 
 		if (!section) {
@@ -306,7 +335,6 @@ export default class FormViewController<
 				parameters: ['sectionIdx'],
 			})
 		}
-
 		return section
 	}
 

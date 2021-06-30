@@ -38,8 +38,6 @@ export default buildSchema({
 			type: 'raw',
 			isArray: true,
 			label: 'Form fields',
-			isRequired: true,
-			minArrayLength: 0,
 			hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
 			options: {
 				valueType:
