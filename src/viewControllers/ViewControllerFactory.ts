@@ -75,7 +75,7 @@ export default class ViewControllerFactory {
 	}
 
 	public static Factory(options: {
-		controllerMap?: Partial<ViewControllerMap>
+		controllerMap?: Record<string, any>
 		renderInDialogHandler?: RenderInDialogHandler
 		confirmHandler?: ConfirmHandler
 		connectToApi: ConnectToApi
