@@ -1,3 +1,10 @@
+# [13.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v12.1.5...v13.0.0) (2021-06-29)
+
+
+### Breaking Changes
+
+* type map change, dialog extends card view controller ([af2c986](https://github.com/sprucelabsai/heartwood-view-controllers/commit/af2c986))
+
 ## [12.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v12.1.4...v12.1.5) (2021-06-29)
 
 ## [12.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v12.1.3...v12.1.4) (2021-06-29)
