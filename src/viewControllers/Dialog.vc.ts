@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { ViewControllerOptions } from '../types/heartwood.types'
+import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
 export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Card &
@@ -10,29 +11,36 @@ export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Card &
 export type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
 
-export default class DialogViewController<
-	D extends Dialog = Dialog
-> extends CardViewController<D> {
+export default class DialogViewController extends AbstractViewController<Dialog> {
 	private closeResolver?: () => void
 	private closePromise?: Promise<unknown>
-	private onClose?: D['onClose']
+	private onClose?: Dialog['onClose']
 	private transitionOut?: () => Promise<void>
 	private isVisible = false
+	private cardVc: CardViewController
+	private shouldShowCloseButton: boolean
 
-	public constructor(options: ViewControllerOptions & Omit<D, 'closeHandler'>) {
-		//@ts-ignore
+	public constructor(
+		options: ViewControllerOptions & Omit<Dialog, 'closeHandler'>
+	) {
 		super(options)
+
+		this.shouldShowCloseButton = options.shouldShowCloseButton !== false
+
+		this.cardVc = this.vcFactory.Controller('card', options)
 		this.onClose = options.onClose
 		this.isVisible = !!options.isVisible
 	}
 
-	public render(): D {
+	public render(): Dialog {
 		return {
-			...super.render(),
+			...this.cardVc.render(),
+			//@ts-ignore
 			controller: this,
+			cardController: this.cardVc,
 			isVisible: this.isVisible,
 			closeHandler:
-				this.model.shouldShowCloseButton !== false
+				this.shouldShowCloseButton !== false
 					? this.handleClose.bind(this)
 					: undefined,
 		}
@@ -64,6 +72,9 @@ export default class DialogViewController<
 
 		this.closeResolver?.()
 		this.triggerRender()
+	}
+	public getCardVc() {
+		return this.cardVc
 	}
 
 	public async wait() {

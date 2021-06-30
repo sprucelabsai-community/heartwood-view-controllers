@@ -1013,6 +1013,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isVisible'?: boolean| undefined | null
 				/** Show close button. */
 				'shouldShowCloseButton'?: boolean| undefined | null
+				/** Card controller. */
+				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>)| undefined | null
 				/** Close callback. */
 				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
 		}
@@ -1072,6 +1074,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Show close button',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** Card controller. */
+			            'cardController': {
+			                label: 'Card controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>`,}
 			            },
 			            /** Close callback. */
 			            'onClose': {

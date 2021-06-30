@@ -23,6 +23,14 @@ export default buildSchema({
 					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>',
 			},
 		},
+		cardController: {
+			type: 'raw',
+			label: 'Card controller',
+			options: {
+				valueType:
+					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>',
+			},
+		},
 		onClose: {
 			type: 'raw',
 			label: 'Close callback',

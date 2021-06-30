@@ -61,6 +61,12 @@ const dialogSchema: SpruceSchemas.Heartwood.v2021_02_11.DialogSchema  = {
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Card controller. */
+	            'cardController': {
+	                label: 'Card controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>`,}
+	            },
 	            /** Close callback. */
 	            'onClose': {
 	                label: 'Close callback',
