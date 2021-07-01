@@ -3,11 +3,13 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
+import ListViewController from '../../viewControllers/list/List.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
 type Vc = ViewController<any>
@@ -40,7 +42,7 @@ const vcAssertUtil = {
 
 		if (typeof actual === 'undefined') {
 			assert.fail(
-				'View controller was not instantiated using `this.Controller()`, so you must pass it through `vcAssertUtil.attachTriggerRenderCounter(vc)`'
+				'Make sure render() of your view controller returns a controller and that it was instantiated using `this.Controller()`, so you must pass it through `vcAssertUtil.attachTriggerRenderCounter(vc)`'
 			)
 		}
 
@@ -145,6 +147,38 @@ const vcAssertUtil = {
 		return form?.controller as FormViewController<any, any>
 	},
 
+	assertViewRendersList(
+		vc: ViewController<Card> | FormViewController<any>
+	): ListViewController {
+		const model = renderUtil.render(vc)
+
+		//@ts-ignore
+		const list = (model.body ?? model)?.sections
+			//@ts-ignore
+			?.map((s) => s.list)
+			//@ts-ignore
+			.find((l) => !!l)
+
+		assert.isTrue(
+			list?.controller instanceof ListViewController,
+			"Expected to find a list inside your CardViewController, but didn't find one!"
+		)
+
+		return list?.controller
+	},
+
+	assertViewDoesNotRenderList(
+		vc: ViewController<Card> | FormViewController<any>
+	) {
+		try {
+			this.assertViewRendersList(vc)
+		} catch {
+			return
+		}
+
+		assert.fail(`Your view controller renders a list and it shouldn't.`)
+	},
+
 	assertDialogWasClosed(vc: DialogViewController) {
 		assert.isFalse(vc.getIsVisible(), 'Dialog was not closed!')
 	},
@@ -152,6 +186,34 @@ const vcAssertUtil = {
 	assertRendersValidCard(vc: ViewController<any>) {
 		const model = renderUtil.render(vc)
 		validateSchemaValues(cardSchema, model)
+	},
+
+	assertFormRendersField(formVc: FormViewController<any>, fieldName: string) {
+		const model = renderUtil.render(formVc)
+
+		for (const section of model.sections) {
+			const fields = normalizeFormSectionFieldNamesUtil.toNames(section.fields)
+			if (fields.find((n) => n === fieldName)) {
+				return
+			}
+		}
+
+		assert.fail(
+			`Form does not render field named ${fieldName}. Make sure it's set in sections.fields.`
+		)
+	},
+
+	assertFormDoesNotRenderField(
+		formVc: FormViewController<any>,
+		fieldName: string
+	) {
+		try {
+			this.assertFormRendersField(formVc, fieldName)
+		} catch {
+			return
+		}
+
+		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
 	},
 }
 

@@ -12,8 +12,9 @@ import {
 	UnexpectedParametersOptions,
 	validateSchemaValues,
 	SchemaFieldsByName,
+	SchemaValues,
 } from '@sprucelabs/schema'
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeepWith from 'lodash/cloneDeepWith'
 import { defaultSubmitButtonLabel } from '../constants'
 import SpruceError from '../errors/SpruceError'
 import {
@@ -37,8 +38,17 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'shouldShowSubmitControls'
 	| 'submitButtonLabel'
 	| 'values'
+	| 'footer'
 > &
 	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
+
+const cloneExceptControllers = function (obj: Record<string, any>) {
+	return cloneDeepWith(obj, (value, key) => {
+		if (key === 'controller') {
+			return value
+		}
+	})
+}
 
 export default class FormViewController<
 		S extends Schema,
@@ -70,14 +80,17 @@ export default class FormViewController<
 		//@ts-ignore
 		delete model.confirmHandler
 
+		const modelCopy = cloneExceptControllers(model) as any
+
 		this.model = {
-			values: {
-				...(options.schema ? defaultSchemaValues(options.schema) : {}),
-			},
 			shouldShowSubmitControls: true,
 			shouldShowCancelButton: true,
 			submitButtonLabel: defaultSubmitButtonLabel,
-			...(cloneDeep(model) as any),
+			...modelCopy,
+			values: {
+				...(options.schema ? defaultSchemaValues(options.schema) : {}),
+				...modelCopy.values,
+			},
 			id: id ?? `${new Date().getTime()}`,
 			errorsByField: {},
 			controller: this,
@@ -105,6 +118,14 @@ export default class FormViewController<
 		shouldSetIsDirty?: boolean
 	}) {
 		const { name, value, shouldSetIsDirty = true } = options
+
+		if (!this.getSchema().fields?.[name]) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't set \`${name}\` field because it does not exist!`,
+				parameters: ['fieldName'],
+			})
+		}
 
 		this.model.values[name] = value
 		if (shouldSetIsDirty) {
@@ -299,6 +320,11 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	public updateSections(sections: Section<S>[]) {
+		this.model.sections = sections
+		this.triggerRender()
+	}
+
 	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
 		delete this.dirtyFields[name]
 		this._setValue<N>({
@@ -378,10 +404,29 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	public getValue<N extends SchemaFieldNames<S>>(named: N): SchemaValues<S>[N] {
+		//@ts-ignore
+		return this.getValues()[named]
+	}
+
+	public updateFooter(
+		footer?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter | null
+	) {
+		if (!footer) {
+			delete this.model.footer
+		} else {
+			this.model.footer = footer
+		}
+	}
+
 	public render(): V {
 		const view: V = {
 			...this.model,
 			onSubmit: this.submit.bind(this),
+		}
+
+		if (!this.shouldShowSubmitControls()) {
+			delete view.footer
 		}
 
 		return view

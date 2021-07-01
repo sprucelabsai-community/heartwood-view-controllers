@@ -19,7 +19,8 @@ import CardViewController from './Card.vc'
 import ConfirmViewController from './Confirm.vc'
 import DialogViewController from './Dialog.vc'
 import FormViewController from './Form.vc'
-import FormBuilderViewController from './FormBuilder.vc'
+import FormBuilderViewController from './formBuilder/FormBuilder.vc'
+import ListViewController from './list/List.vc'
 import LoginViewController from './Login.vc'
 import SwipeViewController from './Swipe.vc'
 
@@ -33,6 +34,7 @@ const CORE_CONTROLLER_MAP = {
 	bigForm: BigFormViewController,
 	confirm: ConfirmViewController,
 	formBuilder: FormBuilderViewController,
+	list: ListViewController,
 }
 
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (

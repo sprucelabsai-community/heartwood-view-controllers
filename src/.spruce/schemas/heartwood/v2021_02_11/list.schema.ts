@@ -9,6 +9,12 @@ const listSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema  = {
 	namespace: 'Heartwood',
 	name: 'list',
 	    fields: {
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ListViewController`,}
+	            },
 	            /** Render row dividers. */
 	            'shouldRenderRowDividers': {
 	                label: 'Render row dividers',
@@ -34,6 +40,7 @@ const listSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema  = {
 	                type: 'schema',
 	                isRequired: true,
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: listRowSchema_v2021_02_11,}
 	            },
 	    }

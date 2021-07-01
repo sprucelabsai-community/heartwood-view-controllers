@@ -3,6 +3,7 @@ import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
+import listBuilder from './list.builder'
 import textBuilder from './text.builder'
 
 export default buildSchema({
@@ -32,6 +33,13 @@ export default buildSchema({
 			label: 'Text',
 			options: {
 				schema: textBuilder,
+			},
+		},
+		list: {
+			type: 'schema',
+			label: 'List',
+			options: {
+				schema: listBuilder,
 			},
 		},
 		fields: {

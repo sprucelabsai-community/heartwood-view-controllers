@@ -2,13 +2,13 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import introspectionUtil from '../../utilities/introspection.utility'
-import renderUtil from '../../utilities/render.utility'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import introspectionUtil from '../../../utilities/introspection.utility'
+import renderUtil from '../../../utilities/render.utility'
 import FormBuilderViewController, {
-	PageViewController,
-} from '../../viewControllers/FormBuilder.vc'
+	FormBuilderPageViewController,
+} from '../../../viewControllers/formBuilder/FormBuilder.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -324,7 +324,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		await vcAssertUtil.assertRendersDialog(
 			this.vc,
-			() => this.click(model.footer?.buttons?.[0].onClick),
+			() => this.click(model.footer?.buttons?.[0]),
 			async (dialogVc) => {
 				const form = vcAssertUtil.assertCardContainsForm(dialogVc)
 
@@ -370,7 +370,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		await this.vc.addPage()
 
 		const model = this.render(this.vc)
-		await this.click(model.footer?.buttons?.[1].onClick)
+
+		await this.click(model.footer?.buttons?.[1])
 
 		assert.isEqual(this.vc.getTotalPages(), 1)
 
@@ -590,7 +591,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async addingSectionToIndexThatIsTooHighJustAddsToEnd() {
+	protected static addingSectionToIndexThatIsTooHighJustAddsToEnd() {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.addSection({ atIndex: 100, title: 'Now the last!' })
 
@@ -600,7 +601,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	private static assertFirstFieldConfiguredCorrectly(
-		pageVc: PageViewController
+		pageVc: FormBuilderPageViewController
 	) {
 		const model = this.render(pageVc)
 

@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import formSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/formSection.schema'
+import cardFooterSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardFooter.schema'
 
 const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	id: 'form',
@@ -106,6 +107,12 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	                isRequired: true,
 	                isArray: true,
 	                options: {typeSuffix: `<S>`,schema: formSectionSchema_v2021_02_11,}
+	            },
+	            /** Footer. */
+	            'footer': {
+	                label: 'Footer',
+	                type: 'schema',
+	                options: {schema: cardFooterSchema_v2021_02_11,}
 	            },
 	    }
 }

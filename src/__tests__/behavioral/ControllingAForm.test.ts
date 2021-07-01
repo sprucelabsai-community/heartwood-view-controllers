@@ -55,6 +55,16 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static badValuesDontMessAnythingUp() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+			values: undefined,
+		})
+
+		vc.setValue('first', true)
+	}
+
+	@test()
 	protected static rendersValidForm() {
 		const view = this.vc.render()
 
@@ -540,5 +550,57 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		})
 
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static canSetThenHideFooterButtons() {
+		this.vc.updateFooter({
+			buttons: [
+				{
+					label: 'What the?',
+				},
+			],
+		})
+
+		let model = this.render(this.vc)
+		assert.isEqual(model.footer?.buttons?.[0].label, 'What the?')
+
+		this.vc.hideSubmitControls()
+
+		model = this.render(this.vc)
+		assert.isFalsy(model.footer)
+	}
+
+	@test()
+	protected static canUpdateSectionsAndTriggerRender() {
+		this.vc.updateSections([
+			{
+				title: 'go team!',
+				fields: ['first', 'last'],
+			},
+		])
+
+		const section = this.vc.getSection(0)
+
+		assert.isEqual(section.title, 'go team!')
+		assert.isEqualDeep(section.fields, ['first', 'last'])
+
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static canUpdateFooter() {
+		this.vc.updateFooter({
+			buttons: [
+				{
+					label: 'What the?',
+				},
+			],
+		})
+
+		this.vc.updateFooter(null)
+
+		const model = this.render(this.vc)
+		assert.isFalse('footer' in model)
 	}
 }

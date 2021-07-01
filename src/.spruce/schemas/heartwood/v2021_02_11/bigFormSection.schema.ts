@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
+import listSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/list.schema'
 
 const bigFormSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema  = {
 	id: 'bigFormSection',
@@ -33,6 +34,12 @@ const bigFormSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSc
 	                label: 'Text',
 	                type: 'schema',
 	                options: {schema: textSchema_v2021_02_11,}
+	            },
+	            /** List. */
+	            'list': {
+	                label: 'List',
+	                type: 'schema',
+	                options: {schema: listSchema_v2021_02_11,}
 	            },
 	            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 	            'fields': {

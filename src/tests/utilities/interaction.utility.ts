@@ -2,7 +2,7 @@ import { assert } from '@sprucelabs/test'
 
 const interactionUtil = {
 	async click(onClick: (() => void | Promise<void>) | null | undefined) {
-		assert.isFunction(onClick, 'Click handler does not exist.')
+		assert.isFunction(onClick, 'Clicking failed because onClick is not set.')
 		//@ts-ignore
 		await onClick({
 			altKey: false,

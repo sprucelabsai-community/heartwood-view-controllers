@@ -6,6 +6,13 @@ export default buildSchema({
 	name: 'list',
 	description: '',
 	fields: {
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType: 'HeartwoodTypes.ListViewController',
+			},
+		},
 		shouldRenderRowDividers: {
 			type: 'boolean',
 			label: 'Render row dividers',
@@ -33,6 +40,7 @@ export default buildSchema({
 			label: 'Rows',
 			isArray: true,
 			isRequired: true,
+			minArrayLength: 0,
 			options: {
 				schema: {
 					id: 'listRow',

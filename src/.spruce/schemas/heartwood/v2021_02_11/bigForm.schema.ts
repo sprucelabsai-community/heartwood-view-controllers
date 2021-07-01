@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import bigFormSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/bigFormSection.schema'
+import cardFooterSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardFooter.schema'
 
 const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	id: 'bigForm',
@@ -106,6 +107,12 @@ const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	                isRequired: true,
 	                isArray: true,
 	                options: {typeSuffix: `<S>`,schema: bigFormSectionSchema_v2021_02_11,}
+	            },
+	            /** Footer. */
+	            'footer': {
+	                label: 'Footer',
+	                type: 'schema',
+	                options: {schema: cardFooterSchema_v2021_02_11,}
 	            },
 	            /** Present slide. The slide showing now! */
 	            'presentSlide': {

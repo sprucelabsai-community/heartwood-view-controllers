@@ -1,12 +1,13 @@
+import { SpruceError as SchemaSpruceError } from '@sprucelabs/schema'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import Authenticator from '../auth/Authenticator'
-import SpruceError from '../errors/SpruceError'
 import {
 	ControllerOptions,
 	ViewController,
 	ViewControllerMap,
 } from '../types/heartwood.types'
 import renderUtil from '../utilities/render.utility'
+import SwipeViewController from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MockStorage from './MockStorage'
 import interactionUtil from './utilities/interaction.utility'
@@ -20,12 +21,13 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		Authenticator.reset()
 		Authenticator.setStorage(new MockStorage())
 		vcAssertUtil._setVcFactory(this.Factory())
+		SwipeViewController.swipeDelay = 0
 	}
 
 	protected static Factory() {
 		if (!this.controllerMap) {
-			throw new SpruceError({
-				code: 'INVALID_PARAMETERS',
+			throw new SchemaSpruceError({
+				code: 'MISSING_PARAMETERS',
 				parameters: [
 					'protected static controllerMap = { dashboard: DashboardSkillViewController, profileForm: ProfileFormViewController }',
 				],
@@ -59,8 +61,10 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 	}
 
 	protected static click(
-		onClick: (() => void | Promise<void>) | null | undefined
+		button?: {
+			onClick?: (() => void | Promise<void>) | null | undefined
+		} | null
 	) {
-		return interactionUtil.click(onClick)
+		return interactionUtil.click(button?.onClick)
 	}
 }

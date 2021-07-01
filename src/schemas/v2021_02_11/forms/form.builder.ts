@@ -4,6 +4,7 @@ import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../../utilities/importBuilder'
+import cardFooterBuilder from '../cards/cardFooter.builder'
 import formSectionBuilder from '../formSection.builder'
 
 export default buildSchema({
@@ -109,6 +110,13 @@ export default buildSchema({
 			options: {
 				typeSuffix: '<S>',
 				schema: formSectionBuilder,
+			},
+		},
+		footer: {
+			type: 'schema',
+			label: 'Footer',
+			options: {
+				schema: cardFooterBuilder,
 			},
 		},
 	},

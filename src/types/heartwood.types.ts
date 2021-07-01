@@ -27,7 +27,10 @@ import FormViewControllerImpl, {
 } from '../viewControllers/Form.vc'
 import FormBuilderViewController, {
 	FormBuilderViewControllerOptions,
-} from '../viewControllers/FormBuilder.vc'
+} from '../viewControllers/formBuilder/FormBuilder.vc'
+import ListViewController, {
+	ListViewControllerOptions,
+} from '../viewControllers/list/List.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
@@ -162,6 +165,7 @@ export interface ViewControllerMap {
 	bigForm: BigFormViewControllerImpl<any>
 	confirm: ConfirmViewController
 	formBuilder: FormBuilderViewController
+	list: ListViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -174,6 +178,7 @@ export interface ViewControllerOptionsMap {
 	bigForm: BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
 	formBuilder: FormBuilderViewControllerOptions
+	list: ListViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
@@ -228,7 +233,7 @@ export type BuiltSkillViewController<
 
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
-	renderAs?: 'colorPicker' | 'number'
+	renderAs?: 'colorPicker' | 'number' | 'textarea'
 	renderHintAs?: 'subtitle' | 'tooltip'
 	placeholder?: string
 	label?: string

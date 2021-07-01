@@ -1,13 +1,15 @@
-import { Schema } from '@sprucelabs/schema'
+import { Schema, SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import buildForm from '../builders/buildForm'
+import buildForm from '../../builders/buildForm'
 import {
 	FormViewController,
 	ViewControllerOptions,
-} from '../types/heartwood.types'
-import introspectionUtil from '../utilities/introspection.utility'
-import AbstractViewController from './Abstract.vc'
-import SwipeViewController from './Swipe.vc'
+} from '../../types/heartwood.types'
+import introspectionUtil from '../../utilities/introspection.utility'
+import AbstractViewController from '../Abstract.vc'
+import SwipeViewController from '../Swipe.vc'
+import FormBuilderAddSectionViewController from './FormBuilderAddSection.vc'
+import { FormBuilderPageViewControllerImpl } from './FormBuilderPage.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
@@ -17,7 +19,7 @@ export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
 
-interface AddSectionOptions {
+export interface AddSectionOptions {
 	atIndex?: number
 	type?: 'text' | 'form'
 	title?: string
@@ -26,7 +28,7 @@ interface AddSectionOptions {
 	}
 }
 
-interface PageViewControllerEnhancements {
+export interface FormBuilderPageViewControllerEnhancements {
 	addSection(options?: AddSectionOptions): void
 	addField(sectionIdx: number): void
 	getIndex(): number
@@ -34,13 +36,13 @@ interface PageViewControllerEnhancements {
 	setTitle(string: string): void
 }
 
-export type PageViewController = Omit<
+export type FormBuilderPageViewController = Omit<
 	FormViewController<Schema>,
-	keyof PageViewControllerEnhancements
+	keyof FormBuilderPageViewControllerEnhancements
 > &
-	PageViewControllerEnhancements
+	FormBuilderPageViewControllerEnhancements
 
-type FieldBuilder = FormBuilderViewController['buildField']
+export type FieldBuilder = FormBuilderViewController['buildField']
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
@@ -63,6 +65,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc.triggerRender = () => {
 			this.triggerRender()
 		}
+
+		this.vcFactory.mixinControllers({
+			formBuilderAddSection: FormBuilderAddSectionViewController,
+		})
 	}
 
 	private buildFooter(): Footer {
@@ -162,7 +168,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		await this.removePage(idx)
 	}
 
-	public getPageVc(idx: number): PageViewController {
+	public getPageVc(idx: number): FormBuilderPageViewController {
 		const slide = this.swipeVc.getSlide(idx)
 		const formVc = slide.form?.controller
 
@@ -170,7 +176,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			throw new Error(`Form not set for page ${idx}`)
 		}
 
-		return new PageViewContollerImpl({
+		return new FormBuilderPageViewControllerImpl({
 			formVc,
 			setTitleHandler: (title) => {
 				slide.title = title
@@ -255,77 +261,21 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	public render(): Card {
 		return { ...this.swipeVc.render(), controller: this as any }
 	}
-}
 
-class PageViewContollerImpl implements PageViewControllerEnhancements {
-	private formVc: FormViewController<Schema>
-	private fieldBuilder: FieldBuilder
-	public index: number
-	private title: string
-	private setTitleHandler: (title: string) => void
-
-	public constructor(options: {
-		formVc: FormViewController<Schema>
-		index: number
-		title: string
-		fieldBuilder: FieldBuilder
-		setTitleHandler: (title: string) => void
-	}) {
-		const { formVc, fieldBuilder, index, setTitleHandler, title } = options
-
-		this.formVc = formVc
-		this.index = index
-		this.title = title
-		this.setTitleHandler = setTitleHandler
-		this.fieldBuilder = fieldBuilder
-		introspectionUtil.delegateFunctionCalls(this, formVc)
-	}
-
-	public getTitle() {
-		return this.title
-	}
-
-	public setTitle(title: string) {
-		this.title = title
-		this.setTitleHandler(title)
-	}
-
-	public addField(sectionIdx: number): void {
-		const totalFields = this.getTotalFields()
-		const fieldName = this.buildNextFieldName(totalFields)
-
-		this.formVc.addFields({
-			sectionIdx,
-			//@ts-ignore
-			fields: {
-				[fieldName]: this.fieldBuilder(totalFields),
-			},
-		})
-	}
-
-	public getIndex() {
-		return this.index
-	}
-
-	private getTotalFields() {
-		return Object.keys(this.formVc.getSchema().fields ?? {}).length
-	}
-
-	private buildNextFieldName(totalFields: number): string {
-		return `field${totalFields + 1}`
-	}
-
-	public addSection(options?: AddSectionOptions) {
-		const sectionTitle = `Section ${this.formVc.getTotalSections() + 1}`
-
-		this.formVc.addSection({
-			title: sectionTitle,
-			fields: [],
-			...options,
-		})
-
-		if (options?.type !== 'text') {
-			this.addField(this.formVc.getTotalSections() - 1)
+	public handleClickAddSection(sectionIdx: number) {
+		if (sectionIdx === -1) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't click on section \`${sectionIdx}\` beacuse it does not exist!`,
+				parameters: ['sectionIdx'],
+			})
 		}
+
+		const addSectionVc = this.vcFactory.Controller(
+			'formBuilderAddSection' as any,
+			{}
+		) as FormBuilderAddSectionViewController
+
+		this.renderInDialog(addSectionVc.render())
 	}
 }
