@@ -44,6 +44,12 @@ const textInputSchema: SpruceSchemas.Heartwood.v2021_02_11.TextInputSchema  = {
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Placeholder. */
+	            'placeholder': {
+	                label: 'Placeholder',
+	                type: 'text',
+	                options: undefined
+	            },
 	    }
 }
 

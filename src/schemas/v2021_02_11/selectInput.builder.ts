@@ -15,6 +15,10 @@ export default buildSchema({
 	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
 		...inputBuilder.fields,
+		placeholder: {
+			type: 'text',
+			label: 'Placeholder',
+		},
 		choices: {
 			type: 'schema',
 			isArray: true,

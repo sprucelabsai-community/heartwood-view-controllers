@@ -44,6 +44,12 @@ const listTextInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSche
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Placeholder. */
+	            'placeholder': {
+	                label: 'Placeholder',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** . */
 	            'setValue': {
 	                type: 'raw',

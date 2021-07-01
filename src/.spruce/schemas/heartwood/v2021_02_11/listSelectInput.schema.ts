@@ -44,6 +44,12 @@ const listSelectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSelectInput
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Placeholder. */
+	            'placeholder': {
+	                label: 'Placeholder',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** . */
 	            'choices': {
 	                type: 'schema',

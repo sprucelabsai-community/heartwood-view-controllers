@@ -11,5 +11,9 @@ export default buildSchema({
 			type: 'text',
 			isPrivate: true,
 		},
+		placeholder: {
+			type: 'text',
+			label: 'Placeholder',
+		},
 	},
 })

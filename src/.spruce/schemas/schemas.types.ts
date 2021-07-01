@@ -31,6 +31,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
 		}
 
 		interface TextInputSchema extends SpruceSchema.Schema {
@@ -72,6 +74,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'isRequired': {
 			                label: 'Required',
 			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
 			                options: undefined
 			            },
 			    }
@@ -284,6 +292,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
 				
 				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
 		}
@@ -327,6 +337,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'isRequired': {
 			                label: 'Required',
 			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
 			                options: undefined
 			            },
 			            /** . */
@@ -1717,6 +1733,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
 				
 				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
 				
@@ -1764,6 +1782,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
+			                options: undefined
+			            },
 			            /** . */
 			            'choices': {
 			                type: 'schema',
@@ -1802,6 +1826,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
 				
 				'setValue': ((name: string, value: any) => void)
 		}
@@ -1845,6 +1871,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'isRequired': {
 			                label: 'Required',
 			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
 			                options: undefined
 			            },
 			            /** . */
