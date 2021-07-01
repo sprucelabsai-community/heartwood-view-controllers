@@ -445,7 +445,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async canSetRowsDuringConstruction() {
+	protected static canSetRowsDuringConstruction() {
 		const vc = this.Controller('list', {
 			rows: [
 				{
@@ -459,5 +459,33 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		assert.isEqual(vc.getTotalRows(), 1)
+	}
+
+	@test()
+	protected static settingValueOnRowTriggersRender() {
+		this.vc.addRow({
+			cells: [
+				{
+					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
+				},
+				{
+					textInput: { name: 'lastName', label: 'row 1', value: 'Horse' },
+				},
+				{
+					selectInput: {
+						name: 'middleInitial',
+						label: 'row 1',
+						value: 'Green',
+						choices: [],
+					},
+				},
+			],
+		})
+
+		const rowVc = this.vc.getRowVc(0)
+		vcAssertUtil.assertTriggerRenderCount(rowVc, 0)
+
+		rowVc.setValue('firstName', 'Test')
+		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
 	}
 }

@@ -2,7 +2,7 @@ import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import { RowViewController } from './ListRow.vc'
+import ListRowViewController from './ListRow.vc'
 
 type List = Omit<SpruceSchemas.Heartwood.v2021_02_11.List, 'rows'> & {
 	rows: ListRow[]
@@ -36,7 +36,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	private model: List = {
 		rows: [],
 	}
-	private _rowVcs: RowViewController[] = []
+	private _rowVcs: ListRowViewController[] = []
 
 	public constructor(options: Partial<List> & ViewControllerOptions) {
 		super(options)
@@ -80,11 +80,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			if (!this.model.rows[rowIdx]?.cells) {
 				throw new SpruceError({
 					code: 'INVALID_PARAMETERS',
+					friendlyMessage: `Could not get view conroller ofr row ${rowIdx} because it does not exist.`,
 					parameters: ['rowIdx'],
 				})
 			}
 
-			this._rowVcs[rowIdx] = new RowViewController({
+			this._rowVcs[rowIdx] = new ListRowViewController({
 				setValueHandler: (name: string, value: any) => {
 					this.setValue({ rowIdx, name, value })
 				},

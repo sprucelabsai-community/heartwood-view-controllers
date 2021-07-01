@@ -45,6 +45,13 @@ export default buildSchema({
 				schema: {
 					id: 'listRow',
 					fields: {
+						controller: {
+							type: 'raw',
+							label: 'Controller',
+							options: {
+								valueType: 'HeartwoodTypes.ListRowViewController',
+							},
+						},
 						cells: {
 							type: 'schema',
 							label: 'Cells',

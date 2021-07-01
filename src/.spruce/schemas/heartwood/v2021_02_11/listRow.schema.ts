@@ -9,6 +9,12 @@ const listRowSchema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema  = {
 	namespace: 'Heartwood',
 	name: '',
 	    fields: {
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
+	            },
 	            /** Cells. */
 	            'cells': {
 	                label: 'Cells',

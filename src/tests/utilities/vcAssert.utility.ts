@@ -5,7 +5,6 @@ import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
-import AbstractViewController from '../../viewControllers/Abstract.vc'
 import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
@@ -29,7 +28,10 @@ const vcAssertUtil = {
 		//@ts-ignore
 		vc.__renderInvocationCount = 0
 
-		if (vc.triggerRender === AbstractViewController.prototype.triggerRender) {
+		//@ts-ignore
+		if (!vc._triggerRenderPatched) {
+			//@ts-ignore
+			vc._triggerRenderPatched = true
 			vc.triggerRender = () => {
 				//@ts-ignore
 				vc.__renderInvocationCount++
@@ -38,12 +40,11 @@ const vcAssertUtil = {
 	},
 	assertTriggerRenderCount(vc: Vc, expected: number) {
 		//@ts-ignore
-		const actual = vc.__renderInvocationCount
+		let actual = vc.__renderInvocationCount
 
 		if (typeof actual === 'undefined') {
-			assert.fail(
-				'Make sure render() of your view controller returns a controller and that it was instantiated using `this.Controller()`, so you must pass it through `vcAssertUtil.attachTriggerRenderCounter(vc)`'
-			)
+			this.attachTriggerRenderCounter(vc)
+			actual = 0
 		}
 
 		assert.isEqual(
@@ -51,7 +52,7 @@ const vcAssertUtil = {
 			expected,
 			`Expected triggerRender of \`${
 				//@ts-ignore
-				vc.id
+				vc.id ?? 'view controller'
 			}\` to be invoked \`${expected}\` time${
 				expected === 1 ? '' : 's'
 			}, but it was actually invoked \`${actual}\` time${

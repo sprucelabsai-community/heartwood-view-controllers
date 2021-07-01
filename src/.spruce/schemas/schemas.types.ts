@@ -1492,6 +1492,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ListRow {
 			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
 				/** Cells. */
 				'cells': SpruceSchemas.Heartwood.v2021_02_11.ListCell[]
 		}
@@ -1502,6 +1504,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
+			            },
 			            /** Cells. */
 			            'cells': {
 			                label: 'Cells',
