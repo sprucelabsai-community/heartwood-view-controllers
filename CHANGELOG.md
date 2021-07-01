@@ -1,3 +1,10 @@
+# [15.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.1.4...v15.2.0) (2021-07-01)
+
+
+### Features
+
+* text input and select placeholder ([9da9286](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9da9286))
+
 ## [15.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.1.3...v15.1.4) (2021-07-01)
 
 ## [15.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.1.2...v15.1.3) (2021-07-01)
