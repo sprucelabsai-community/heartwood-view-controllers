@@ -20,6 +20,7 @@ const addSectionSchema = buildSchema({
 			type: 'select',
 			label: 'Form or instructions',
 			defaultValue: 'form',
+			isRequired: true,
 			options: {
 				choices: [
 					{
@@ -53,7 +54,9 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 	private formVc: FormViewController<AddFormBuilderSectionSchema>
 	private fieldListVc: ListViewController
 
-	public constructor(options: ViewControllerOptions) {
+	public constructor(
+		options: ViewControllerOptions & { values: Partial<AddFormBuilder> }
+	) {
 		super(options)
 
 		this.fieldListVc = this.vcFactory.Controller('list', {
@@ -67,6 +70,9 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 		this.formVc = this.vcFactory.Controller(
 			'form',
 			buildForm({
+				values: {
+					...options.values,
+				},
 				schema: addSectionSchema,
 				shouldShowCancelButton: false,
 				submitButtonLabel: 'Done',
@@ -105,7 +111,7 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 		} else {
 			sections.push({
 				title: 'Instructions',
-				fields: [{ name: 'text' }],
+				fields: [{ name: 'text', renderAs: 'textarea' }],
 			})
 		}
 

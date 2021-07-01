@@ -271,11 +271,19 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			})
 		}
 
+		this.renderInDialog(this.AddSectionVc().render())
+	}
+
+	public AddSectionVc() {
 		const addSectionVc = this.vcFactory.Controller(
 			'formBuilderAddSection' as any,
-			{}
+			{
+				values: {
+					title: `Section ${this.getPresentPageVc().getTotalSections() + 1}`,
+				},
+			}
 		) as FormBuilderAddSectionViewController
 
-		this.renderInDialog(addSectionVc.render())
+		return addSectionVc
 	}
 }

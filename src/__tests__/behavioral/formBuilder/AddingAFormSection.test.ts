@@ -56,6 +56,8 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static formRendersExpectedFieldsAndSections() {
+		assert.isEqual(this.formVc.getValue('title'), 'Section 2')
+
 		this.formVc.setValue('title', 'My new section')
 
 		assert.isEqual(this.formVc.getValue('type'), 'form')
@@ -68,6 +70,16 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertFormRendersField(this.formVc, 'shouldRenderAsGrid')
 
 		assert.isEqual(this.fieldListVc.getTotalRows(), 1)
+	}
+
+	@test()
+	protected static async defaultSectionTitleIncrementsWithSectionInTheCurrentPage() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addSection()
+
+		const formVc = this.vc.AddSectionVc().getFormVc()
+
+		assert.isEqual(formVc.getValue('title'), 'Section 3')
 	}
 
 	@test()
