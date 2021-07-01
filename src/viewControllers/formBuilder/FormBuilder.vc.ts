@@ -67,6 +67,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 
 		this.vcFactory.mixinControllers({
+			//@ts-ignore
 			formBuilderAddSection: FormBuilderAddSectionViewController,
 		})
 	}
