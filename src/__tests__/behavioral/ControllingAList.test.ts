@@ -21,6 +21,13 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static mixesInOptionsToModel() {
+		//@ts-ignore
+		const model = this.render(this.Controller('list', { taco: 'bravo' }))
+		assert.doesInclude(model, { taco: 'bravo' })
+	}
+
+	@test()
 	protected static rendersValidModel() {
 		const model = this.render(this.vc)
 		validateSchemaValues(listSchema, model)

@@ -41,6 +41,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	public constructor(options: Partial<List> & ViewControllerOptions) {
 		super(options)
 		this.model = {
+			...options,
 			rows: options.rows ?? [],
 		}
 	}
