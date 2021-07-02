@@ -1,17 +1,13 @@
-import { SpruceError } from '@sprucelabs/schema'
-import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import {
-	CardViewController,
-	ViewControllerOptions,
-} from '../../types/heartwood.types'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
-import ListViewController, { ListRow } from '../../viewControllers/list/List.vc'
+import ManageSectionTitlesCardViewController, {
+	ManageSectionTitlesCardViewControllerOptions,
+} from '../../viewControllers/formBuilder/ManageSectionTitlesCard.vc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
@@ -23,128 +19,6 @@ declare module '../../types/heartwood.types' {
 	}
 }
 
-interface ManageSectionTitlesCardViewControllerOptions {
-	onDone(): void
-	onCancel(): void
-	formBuilderVc: FormBuilderViewController
-}
-
-class ManageSectionTitlesCardViewController extends AbstractViewController<SpruceSchemas.Heartwood.v2021_02_11.Card> {
-	private cardVc: CardViewController
-	private listVc: ListViewController
-	private formBuilderVc: FormBuilderViewController
-
-	public constructor(
-		options: ManageSectionTitlesCardViewControllerOptions &
-			ViewControllerOptions
-	) {
-		super(options)
-
-		const missing = []
-		if (!options.onDone) {
-			missing.push('onDone')
-		}
-
-		if (!options.onCancel) {
-			missing.push('onCancel')
-		}
-
-		if (!options.formBuilderVc) {
-			missing.push('formBuilderVc')
-		}
-
-		if (missing.length > 0) {
-			throw new SpruceError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
-
-		this.formBuilderVc = options.formBuilderVc
-
-		this.listVc = this.vcFactory.Controller('list', {
-			columnWidths: ['fill'],
-			rows: this.buildRows(),
-		})
-
-		this.cardVc = this.vcFactory.Controller('card', {
-			header: {
-				title: 'Manage sections',
-			},
-			body: {
-				sections: [
-					{
-						list: this.listVc.render(),
-					},
-				],
-			},
-			footer: {
-				buttons: [
-					{
-						type: 'primary',
-						label: 'Done',
-						onClick: () => {
-							options.onDone()
-						},
-					},
-					{
-						type: 'secondary',
-						label: 'Cancel',
-						onClick: () => {
-							options.onCancel()
-						},
-					},
-				],
-			},
-		})
-	}
-
-	private buildRows(): ListRow[] {
-		const pages = this.formBuilderVc.getPageVcs()
-		const rows: ListRow[] = []
-
-		for (const page of pages) {
-			rows.push({
-				cells: [
-					{
-						textInput: {
-							name: 'title',
-							value: page.getTitle(),
-							onChange: (value?: string) => {
-								if (value) {
-									page.setTitle(value)
-								}
-							},
-						},
-					},
-					{
-						button: {
-							lineIcon: 'delete',
-							type: 'destructive',
-							onClick: async () => {
-								await this.formBuilderVc.removePage(page.getIndex())
-								this.listVc.setRows(this.buildRows())
-							},
-						},
-					},
-				],
-			})
-		}
-
-		return rows
-	}
-
-	public getListVc() {
-		return this.listVc
-	}
-
-	public render() {
-		return {
-			...this.cardVc.render(),
-		}
-	}
-}
-
 export default class ManageSectionsViewControllerTest extends AbstractViewControllerTest {
 	private static _vc: ManageSectionTitlesCardViewController
 	private static get vc(): ManageSectionTitlesCardViewController {
@@ -153,9 +27,6 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 				onDone: () => {
 					this.wasOnDoneInvoked = true
 				},
-				onCancel: () => {
-					this.wasOnCancelInvoked = true
-				},
 				formBuilderVc: this.formBuilderVc,
 			})
 		}
@@ -163,14 +34,12 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 		return this._vc
 	}
 	private static wasOnDoneInvoked = false
-	private static wasOnCancelInvoked = false
 	private static formBuilderVc: FormBuilderViewController
 
 	protected static async beforeEach() {
 		//@ts-ignore
 		this._vc = null
 		this.wasOnDoneInvoked = false
-		this.wasOnCancelInvoked = false
 		this.formBuilderVc = this.Controller('formBuilder', {})
 	}
 
@@ -185,7 +54,7 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 			this.Controller('manageSectionTitles', {})
 		)
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['onDone', 'onCancel', 'formBuilderVc'],
+			parameters: ['onDone', 'formBuilderVc'],
 		})
 	}
 
@@ -206,12 +75,6 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 	protected static async clickingFooterPrimaryTriggersOnDone() {
 		await interactionUtil.clickPrimaryInFooter(this.vc)
 		assert.isTrue(this.wasOnDoneInvoked)
-	}
-
-	@test()
-	protected static async clickingSecondaryTriggersOnCancel() {
-		await interactionUtil.clickSecondaryInFooter(this.vc)
-		assert.isTrue(this.wasOnCancelInvoked)
 	}
 
 	@test()

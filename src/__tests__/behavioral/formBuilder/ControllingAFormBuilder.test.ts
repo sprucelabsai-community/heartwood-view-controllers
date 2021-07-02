@@ -3,12 +3,14 @@ import { test, assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../../utilities/introspection.utility'
 import renderUtil from '../../../utilities/render.utility'
 import FormBuilderViewController, {
 	FormBuilderPageViewController,
 } from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import ManageSectionTitlesCardViewController from '../../../viewControllers/formBuilder/ManageSectionTitlesCard.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -598,6 +600,25 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const model = this.render(pageVc)
 
 		assert.isEqual(model.sections[1].title, 'Now the last!')
+	}
+
+	@test()
+	protected static async handlesClickingPageTitles() {
+		assert.isFunction(this.vc.handleClickPageTitles)
+
+		await vcAssertUtil.assertRendersDialog(
+			this.vc,
+			async () => await this.vc.handleClickPageTitles(),
+			async (dialogVc) => {
+				assert.isTrue(
+					dialogVc.getCardVc() instanceof ManageSectionTitlesCardViewController
+				)
+
+				const vc = dialogVc.getCardVc() as ManageSectionTitlesCardViewController
+				await interactionUtil.clickPrimaryInFooter(vc)
+				vcAssertUtil.assertDialogWasClosed(dialogVc)
+			}
+		)
 	}
 
 	private static assertFirstFieldConfiguredCorrectly(

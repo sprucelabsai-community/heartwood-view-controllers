@@ -10,6 +10,7 @@ import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import FormBuilderAddSectionViewController from './FormBuilderAddSection.vc'
 import { FormBuilderPageViewControllerImpl } from './FormBuilderPage.vc'
+import ManageSectionTitlesCardViewController from './ManageSectionTitlesCard.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
@@ -69,6 +70,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.vcFactory.mixinControllers({
 			//@ts-ignore
 			formBuilderAddSection: FormBuilderAddSectionViewController,
+			//@ts-ignore
+			manageSectionTitles: ManageSectionTitlesCardViewController,
 		})
 	}
 
@@ -273,6 +276,17 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 
 		this.renderInDialog(this.AddSectionVc().render())
+	}
+
+	public handleClickPageTitles() {
+		const vc = this.vcFactory.Controller('manageSectionTitles', {
+			onDone: () => {
+				void dialog.hide()
+			},
+			formBuilderVc: this,
+		})
+
+		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
 	public AddSectionVc() {
