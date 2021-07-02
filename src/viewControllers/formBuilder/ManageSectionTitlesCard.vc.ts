@@ -55,6 +55,13 @@ export default class ManageSectionTitlesCardViewController extends CardViewContr
 			footer: {
 				buttons: [
 					{
+						type: 'secondary',
+						label: 'Add row',
+						onClick: () => {
+							void this.formBuilderVc.addPage()
+						},
+					},
+					{
 						type: 'primary',
 						label: 'Done',
 						onClick: () => {

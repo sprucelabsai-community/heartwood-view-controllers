@@ -184,9 +184,28 @@ const vcAssertUtil = {
 		assert.isFalse(vc.getIsVisible(), 'Dialog was not closed!')
 	},
 
-	assertRendersValidCard(vc: ViewController<any>) {
+	assertRendersValidCard(vc: ViewController<Card>) {
 		const model = renderUtil.render(vc)
 		validateSchemaValues(cardSchema, model)
+
+		if (model.footer?.buttons) {
+			this.assertPrimaryButtonIsLastInFooter(model.footer)
+		}
+	},
+
+	assertPrimaryButtonIsLastInFooter(
+		footer: SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+	) {
+		const primaryIdx = footer.buttons?.findIndex((b) => b.type === 'primary')
+
+		if (
+			footer.buttons &&
+			typeof primaryIdx === 'number' &&
+			primaryIdx > -1 &&
+			footer.buttons?.[footer.buttons.length - 1]?.type !== 'primary'
+		) {
+			assert.fail('Your primary button has to be last in your footer.')
+		}
 	},
 
 	assertFormRendersField(formVc: FormViewController<any>, fieldName: string) {

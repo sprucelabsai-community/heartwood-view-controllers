@@ -167,6 +167,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.setTitle('Page Waka')
 
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+
 		assert.isEqual(pageVc.getTitle(), 'Page Waka')
 		const model = this.render(this.vc)
 		assert.isEqual(model.body?.sections?.[0].title, 'Page Waka')
@@ -608,7 +610,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		await vcAssertUtil.assertRendersDialog(
 			this.vc,
-			async () => await this.vc.handleClickPageTitles(),
+			async () => this.vc.handleClickPageTitles(),
 			async (dialogVc) => {
 				assert.isTrue(
 					dialogVc.getCardVc() instanceof ManageSectionTitlesCardViewController

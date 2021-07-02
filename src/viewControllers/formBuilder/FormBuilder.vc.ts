@@ -184,6 +184,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			formVc,
 			setTitleHandler: (title) => {
 				slide.title = title
+				this.triggerRender()
 			},
 			title: slide.title ?? '**MISSING**',
 			index: idx,
