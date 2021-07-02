@@ -8,7 +8,7 @@ import {
 import introspectionUtil from '../../utilities/introspection.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
-import FormBuilderAddSectionViewController from './FormBuilderAddSection.vc'
+import EditBuilderSectionViewController from './EditBuilderSection.vc'
 import { FormBuilderPageViewControllerImpl } from './FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 
@@ -69,7 +69,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 		this.vcFactory.mixinControllers({
 			//@ts-ignore
-			formBuilderAddSection: FormBuilderAddSectionViewController,
+			formBuilderAddSection: EditBuilderSectionViewController,
 			//@ts-ignore
 			managePageTitles: ManagePageTitlesCardViewController,
 		})
@@ -276,7 +276,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			})
 		}
 
-		this.renderInDialog(this.AddSectionVc().render())
+		const vc = this.AddSectionVc(() => {})
+		this.renderInDialog(vc.render())
 	}
 
 	public handleClickPageTitles() {
@@ -290,15 +291,16 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
-	public AddSectionVc() {
+	public AddSectionVc(onDone: () => void) {
 		const addSectionVc = this.vcFactory.Controller(
 			'formBuilderAddSection' as any,
 			{
+				onDone,
 				values: {
 					title: `Section ${this.getPresentPageVc().getTotalSections() + 1}`,
 				},
 			}
-		) as FormBuilderAddSectionViewController
+		) as EditBuilderSectionViewController
 
 		return addSectionVc
 	}

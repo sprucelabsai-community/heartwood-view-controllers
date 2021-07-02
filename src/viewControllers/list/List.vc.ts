@@ -77,13 +77,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 	public getRowVc(rowIdx: number) {
 		if (!this._rowVcs[rowIdx]) {
-			if (!this.model.rows[rowIdx]?.cells) {
-				throw new SpruceError({
-					code: 'INVALID_PARAMETERS',
-					friendlyMessage: `Could not get view conroller for row ${rowIdx} because it does not exist.`,
-					parameters: ['rowIdx'],
-				})
-			}
+			this.assertValidRowIdx(rowIdx)
 
 			this._rowVcs[rowIdx] = new ListRowViewController({
 				setValueHandler: async (name: string, value: any) => {
@@ -96,6 +90,16 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			})
 		}
 		return this._rowVcs[rowIdx]
+	}
+
+	private assertValidRowIdx(rowIdx: number) {
+		if (!this.model.rows[rowIdx]?.cells) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Could not get view conroller for row ${rowIdx} because it does not exist.`,
+				parameters: ['rowIdx'],
+			})
+		}
 	}
 
 	public getTotalRows(): number {
@@ -154,6 +158,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 	public updateRows(rows: ListRow[]) {
 		this.model.rows = rows
+		this._rowVcs = []
+		this.triggerRender()
+	}
+
+	public deleteRow(rowIdx: number) {
+		this.assertValidRowIdx(rowIdx)
+		this.model.rows.splice(rowIdx, 1)
 		this._rowVcs = []
 		this.triggerRender()
 	}

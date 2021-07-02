@@ -1,38 +1,65 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import FormViewController from '../../../viewControllers/Form.vc'
+import EditBuilderSectionViewController, {
+	EditSectionSectionSchema,
+	EditBuilderSectionOptions,
+} from '../../../viewControllers/formBuilder/EditBuilderSection.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
-import FormBuilderAddSectionViewController, {
-	AddFormBuilderSectionSchema,
-} from '../../../viewControllers/formBuilder/FormBuilderAddSection.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
+declare module '../../../types/heartwood.types' {
+	interface ViewControllerMap {
+		editFormBuilderSection: EditBuilderSectionViewController
+	}
+
+	export interface ViewControllerOptionsMap {
+		editFormBuilderSection: EditBuilderSectionOptions
+	}
+}
+
 export default class AddingAFormSectionTest extends AbstractViewControllerTest {
-	protected static controllerMap = {}
-	private static vc: FormBuilderViewController
-	private static addSectionVc: FormBuilderAddSectionViewController
-	private static formVc: FormViewController<AddFormBuilderSectionSchema>
+	protected static controllerMap = {
+		editFormBuilderSection: EditBuilderSectionViewController,
+	}
+
+	private static formBuilderVc: FormBuilderViewController
+	private static vc: EditBuilderSectionViewController
+	private static formVc: FormViewController<EditSectionSectionSchema>
 	private static fieldListVc: ListViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('formBuilder', {})
-		this.addSectionVc = await this.showAddSection()
-		this.formVc = vcAssertUtil.assertCardContainsForm(this.addSectionVc)
+		this.formBuilderVc = this.Controller('formBuilder', {})
+		this.vc = await this.showAddSection()
+		this.formVc = vcAssertUtil.assertCardContainsForm(this.vc)
 		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
 	}
 
 	@test()
 	protected static handlesClickingAddSection() {
-		assert.isFunction(this.vc.handleClickAddSection)
+		assert.isFunction(this.formBuilderVc.handleClickAddSection)
+	}
+
+	@test()
+	protected static throwsWithMissinParams() {
+		const err = assert.doesThrow(() =>
+			//@ts-ignore
+			this.Controller('editFormBuilderSection', {})
+		)
+
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['onDone'],
+		})
 	}
 
 	@test()
 	protected static async cantClickBadSection() {
 		const err = await assert.doesThrowAsync(() =>
-			this.vc.handleClickAddSection(-1)
+			this.formBuilderVc.handleClickAddSection(-1)
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
@@ -42,15 +69,13 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async clickingAddSectionShowsAddSectionDialog() {
-		assert.isTruthy(this.addSectionVc)
-		assert.isTrue(
-			this.addSectionVc instanceof FormBuilderAddSectionViewController
-		)
+		assert.isTruthy(this.vc)
+		assert.isTrue(this.vc instanceof EditBuilderSectionViewController)
 	}
 
 	@test()
 	protected static addSectionHasHeaderTtile() {
-		const model = this.render(this.addSectionVc)
+		const model = this.render(this.vc)
 		assert.isString(model.header?.title)
 	}
 
@@ -73,11 +98,18 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async startsWithOneRowInFields() {
+		vcAssertUtil.assertListRendersRows(this.fieldListVc, 1)
+		await this.fieldListVc.getRowVc(0).setValue('fieldName', 'what!')
+		await this.fieldListVc.getRowVc(0).setValue('fieldType', 'text')
+	}
+
+	@test()
 	protected static async defaultSectionTitleIncrementsWithSectionInTheCurrentPage() {
-		const pageVc = this.vc.getPageVc(0)
+		const pageVc = this.formBuilderVc.getPageVc(0)
 		pageVc.addSection()
 
-		const formVc = this.vc.AddSectionVc().getFormVc()
+		const formVc = this.formBuilderVc.AddSectionVc(() => {}).getFormVc()
 
 		assert.isEqual(formVc.getValue('title'), 'Section 3')
 	}
@@ -101,7 +133,36 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 
 		assert.isEqual(listVc.getTotalRows(), 2)
 
-		await this.click(model.footer?.buttons?.[0])
+		await interactionUtil.clickSecondaryInFooter(this.formVc)
+
+		assert.isEqual(listVc.getTotalRows(), 3)
+	}
+
+	@test()
+	protected static async addingFieldsIncrementsNameAndDefaultsToText() {
+		this.vc.addField()
+		this.vc.addField()
+		this.vc.addField()
+
+		const listVc = this.vc.getFieldListVc()
+
+		for (let count = 0; count < listVc.getTotalRows(); count++) {
+			const rowVc = listVc.getRowVc(count)
+			assert.isEqual(rowVc.getValue('fieldName'), `Field ${count + 1}`)
+			assert.isEqual(rowVc.getValue('fieldType'), `text`)
+		}
+	}
+
+	@test()
+	protected static async clickingDestructiveInFieldListRemovesField() {
+		this.vc.addField()
+		this.vc.addField()
+		this.vc.addField()
+
+		const listVc = this.vc.getFieldListVc()
+		const rowVc = listVc.getRowVc(2)
+
+		await interactionUtil.clickOnDestructiveButton(rowVc)
 
 		assert.isEqual(listVc.getTotalRows(), 3)
 	}
@@ -119,15 +180,15 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	}
 
 	private static async showAddSection() {
-		let addSectionVc: FormBuilderAddSectionViewController | undefined
+		let addSectionVc: EditBuilderSectionViewController | undefined
 
 		await vcAssertUtil.assertRendersDialog(
-			this.vc,
-			() => this.vc.handleClickAddSection(0),
+			this.formBuilderVc,
+			() => this.formBuilderVc.handleClickAddSection(0),
 			(vc) => {
-				addSectionVc = vc.getCardVc() as FormBuilderAddSectionViewController
+				addSectionVc = vc.getCardVc() as EditBuilderSectionViewController
 			}
 		)
-		return addSectionVc as FormBuilderAddSectionViewController
+		return addSectionVc as EditBuilderSectionViewController
 	}
 }

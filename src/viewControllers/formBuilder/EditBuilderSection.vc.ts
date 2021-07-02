@@ -1,4 +1,4 @@
-import { buildSchema, SchemaValues } from '@sprucelabs/schema'
+import { buildSchema, SchemaValues, SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
 import {
@@ -44,27 +44,42 @@ const addSectionSchema = buildSchema({
 		},
 	},
 })
-export type AddFormBuilderSectionSchema = typeof addSectionSchema
-type AddFormBuilder = SchemaValues<AddFormBuilderSectionSchema>
+export type EditSectionSectionSchema = typeof addSectionSchema
+type AddFormBuilder = SchemaValues<EditSectionSectionSchema>
 
 type Section =
-	SpruceSchemas.Heartwood.v2021_02_11.FormSection<AddFormBuilderSectionSchema>
+	SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditSectionSectionSchema>
 
-export default class FormBuilderAddSectionViewController extends CardViewController {
-	private formVc: FormViewController<AddFormBuilderSectionSchema>
+const fieldTypes = {
+	text: 'Text',
+	number: 'Number',
+	phone: 'Phone',
+}
+
+export interface EditBuilderSectionOptions {
+	values: Partial<AddFormBuilder>
+	onDone: () => void | Promise<void>
+}
+
+export default class EditBuilderSectionViewController extends CardViewController {
+	private formVc: FormViewController<EditSectionSectionSchema>
 	private fieldListVc: ListViewController
 
 	public constructor(
-		options: ViewControllerOptions & { values: Partial<AddFormBuilder> }
+		options: ViewControllerOptions & EditBuilderSectionOptions
 	) {
 		super(options)
 
+		if (!options.onDone) {
+			throw new SpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: ['onDone'],
+			})
+		}
+
 		this.fieldListVc = this.vcFactory.Controller('list', {
-			rows: [
-				{
-					cells: [],
-				},
-			],
+			columnWidths: ['fill'],
+			rows: [this.buildFieldRow()],
 		})
 
 		this.formVc = this.vcFactory.Controller(
@@ -76,7 +91,7 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 				schema: addSectionSchema,
 				shouldShowCancelButton: false,
 				submitButtonLabel: 'Done',
-				sections: this.buildSections('form'),
+				sections: this.buildFormSections('form'),
 				footer: this.buildFooter('form'),
 				onChange: this.handleFormChange.bind(this),
 			})
@@ -88,7 +103,7 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 		}
 	}
 
-	private buildSections(forType?: AddFormBuilder['type']): Section[] {
+	private buildFormSections(forType?: AddFormBuilder['type']): Section[] {
 		const type = forType ?? this.formVc.getValue('type')
 
 		const sections: Section[] = [
@@ -131,6 +146,7 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 			buttons: [
 				{
 					label: 'Add field',
+					type: 'secondary',
 					onClick: () => {
 						this.addField()
 					},
@@ -143,18 +159,23 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 		return this.formVc
 	}
 
-	private addField() {
+	public getFieldListVc() {
+		return this.fieldListVc
+	}
+
+	public addField() {
 		this.fieldListVc.addRow(this.buildFieldRow())
 	}
 
 	private buildFieldRow(): ListRow {
+		const totalRows = this.fieldListVc?.getTotalRows()
 		return {
 			cells: [
 				{
 					textInput: {
 						name: 'fieldName',
 						isRequired: true,
-						value: 'New field',
+						value: `Field ${(totalRows ?? 0) + 1}`,
 					},
 				},
 				{
@@ -162,12 +183,20 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 						name: 'fieldType',
 						isRequired: true,
 						value: 'text',
-						choices: [
-							{
-								label: 'Text',
-								value: 'text',
-							},
-						],
+						choices: Object.keys(fieldTypes).map((key) => ({
+							//@ts-ignore
+							label: fieldTypes[key],
+							value: key,
+						})),
+					},
+				},
+				{
+					button: {
+						lineIcon: 'delete',
+						type: 'destructive',
+						onClick: () => {
+							this.fieldListVc.deleteRow(totalRows)
+						},
 					},
 				},
 			],
@@ -175,7 +204,7 @@ export default class FormBuilderAddSectionViewController extends CardViewControl
 	}
 
 	private handleFormChange() {
-		this.formVc.updateSections(this.buildSections())
+		this.formVc.updateSections(this.buildFormSections())
 		this.formVc.updateFooter(this.buildFooter())
 	}
 

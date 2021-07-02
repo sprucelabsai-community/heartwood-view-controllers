@@ -600,4 +600,48 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		assert.isEqual(model.cells[0].text?.content, 'yay 2')
 	}
+
+	@test()
+	protected static cantDeleteBadRow() {
+		const err = assert.doesThrow(() => this.vc.deleteRow(-1))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['rowIdx'],
+		})
+	}
+
+	@test()
+	protected static canDeleteRow() {
+		this.vc.addRow({
+			cells: [
+				{
+					text: {
+						content: 'Hey there!',
+					},
+				},
+			],
+		})
+		this.vc.addRow({
+			cells: [
+				{
+					text: {
+						content: 'Bye there!',
+					},
+				},
+			],
+		})
+
+		const rowVc1 = this.vc.getRowVc(0)
+		assert.doesInclude(this.render(rowVc1), {
+			'cells[0].text.content': 'Hey there!',
+		})
+
+		this.vc.deleteRow(0)
+		assert.isEqual(this.vc.getTotalRows(), 1)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 3)
+
+		const rowVc2 = this.vc.getRowVc(0)
+		assert.doesInclude(this.render(rowVc2), {
+			'cells[0].text.content': 'Bye there!',
+		})
+	}
 }
