@@ -148,7 +148,7 @@ const vcAssertUtil = {
 		return form?.controller as FormViewController<any, any>
 	},
 
-	assertViewRendersList(
+	assertCardRendersList(
 		vc: ViewController<Card> | FormViewController<any>
 	): ListViewController {
 		const model = renderUtil.render(vc)
@@ -168,11 +168,11 @@ const vcAssertUtil = {
 		return list?.controller
 	},
 
-	assertViewDoesNotRenderList(
+	assertCardDoesNotRenderList(
 		vc: ViewController<Card> | FormViewController<any>
 	) {
 		try {
-			this.assertViewRendersList(vc)
+			this.assertCardRendersList(vc)
 		} catch {
 			return
 		}
@@ -215,6 +215,39 @@ const vcAssertUtil = {
 		}
 
 		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
+	},
+
+	assertRendersCardHeader(
+		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
+	) {
+		const model = renderUtil.render(cardVc)
+		assert.isObject(model.header, `Your card did not render a header!`)
+	},
+
+	assertRendersCardFooter(
+		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
+	) {
+		const model = renderUtil.render(cardVc)
+		assert.isObject(model.footer, `Your card did not render a footer!`)
+	},
+
+	assertListRendersRows(
+		listVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.List>,
+		expectedTotalRows?: number
+	) {
+		const model = renderUtil.render(listVc)
+		assert.isTruthy(
+			model.rows,
+			`Your list should have rendered rows, it didn't render anything.`
+		)
+
+		if (typeof expectedTotalRows === 'number') {
+			assert.isLength(
+				model.rows,
+				expectedTotalRows,
+				`Your list was supposed to render ${expectedTotalRows} row(s), but it rendered ${model.rows.length}.`
+			)
+		}
 	},
 }
 

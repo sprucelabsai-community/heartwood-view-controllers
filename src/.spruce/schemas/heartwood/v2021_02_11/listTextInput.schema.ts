@@ -44,6 +44,12 @@ const listTextInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSche
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** On change handle. */
+	            'onChange': {
+	                label: 'On change handle',
+	                type: 'raw',
+	                options: {valueType: `(value?: string) => void | Promise<void>`,}
+	            },
 	            /** Placeholder. */
 	            'placeholder': {
 	                label: 'Placeholder',
@@ -53,7 +59,6 @@ const listTextInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSche
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                isRequired: true,
 	                options: {valueType: `(name: string, value: any) => void`,}
 	            },
 	    }

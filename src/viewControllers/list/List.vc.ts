@@ -80,14 +80,14 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			if (!this.model.rows[rowIdx]?.cells) {
 				throw new SpruceError({
 					code: 'INVALID_PARAMETERS',
-					friendlyMessage: `Could not get view conroller ofr row ${rowIdx} because it does not exist.`,
+					friendlyMessage: `Could not get view conroller for row ${rowIdx} because it does not exist.`,
 					parameters: ['rowIdx'],
 				})
 			}
 
 			this._rowVcs[rowIdx] = new ListRowViewController({
-				setValueHandler: (name: string, value: any) => {
-					this.setValue({ rowIdx, name, value })
+				setValueHandler: async (name: string, value: any) => {
+					await this.setValue({ rowIdx, name, value })
 				},
 				getValuesHandler: () => {
 					return this.getRowValues(rowIdx)
@@ -116,12 +116,17 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return values
 	}
 
-	private setValue(options: { rowIdx: number; name: string; value: any }) {
+	private async setValue(options: {
+		rowIdx: number
+		name: string
+		value: any
+	}) {
 		const { rowIdx, name, value } = options
 		for (const cell of this.model.rows[rowIdx].cells) {
 			const input = getInputFromCell(cell)
 			if (input?.name === name) {
 				input.value = value
+				await input.onChange?.(value)
 				return
 			}
 		}

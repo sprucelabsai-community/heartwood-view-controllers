@@ -1,4 +1,10 @@
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test'
+import { ViewController } from '../../types/heartwood.types'
+import renderUtil from '../../utilities/render.utility'
+import ListRowViewController from '../../viewControllers/list/ListRow.vc'
+
+type CardVc = ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
 
 const interactionUtil = {
 	async click(onClick: (() => void | Promise<void>) | null | undefined) {
@@ -37,6 +43,42 @@ const interactionUtil = {
 			type: 'click',
 			view: {},
 		})
+	},
+
+	async clickPrimaryInFooter(vc: CardVc) {
+		const model = renderUtil.render(vc)
+		const primary = model.footer?.buttons?.find((b) => b.type === 'primary')
+		assert.isTruthy(
+			primary,
+			`Your footer doesn't have a primary footer to click.`
+		)
+
+		return this.click(primary.onClick)
+	},
+
+	async clickSecondaryInFooter(vc: CardVc) {
+		const model = renderUtil.render(vc)
+		const secondary = model.footer?.buttons?.find((b) => b.type === 'secondary')
+		assert.isTruthy(
+			secondary,
+			`Your footer doesn't have a secondary footer to click.`
+		)
+
+		return this.click(secondary.onClick)
+	},
+
+	async clickOnDestructiveButton(vc: ListRowViewController) {
+		const model = renderUtil.render(vc)
+		const destructiveButton = model.cells
+			.map((c) => c.button)
+			.find((button) => button?.type === 'destructive')
+
+		assert.isTruthy(
+			destructiveButton,
+			`There is no destructive in this row to click!`
+		)
+
+		await this.click(destructiveButton.onClick)
 	},
 }
 

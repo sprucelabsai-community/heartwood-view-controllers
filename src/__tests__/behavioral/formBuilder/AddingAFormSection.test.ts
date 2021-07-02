@@ -21,7 +21,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		this.vc = this.Controller('formBuilder', {})
 		this.addSectionVc = await this.showAddSection()
 		this.formVc = vcAssertUtil.assertCardContainsForm(this.addSectionVc)
-		this.fieldListVc = vcAssertUtil.assertViewRendersList(this.formVc)
+		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
 	}
 
 	@test()
@@ -97,7 +97,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 
 		vcAssertUtil.assertTriggerRenderCount(this.fieldListVc, 1)
 
-		const listVc = vcAssertUtil.assertViewRendersList(this.formVc)
+		const listVc = vcAssertUtil.assertCardRendersList(this.formVc)
 
 		assert.isEqual(listVc.getTotalRows(), 2)
 
@@ -111,7 +111,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		this.formVc.setValue('type', 'text')
 
 		vcAssertUtil.assertFormDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
-		vcAssertUtil.assertViewDoesNotRenderList(this.formVc)
+		vcAssertUtil.assertCardDoesNotRenderList(this.formVc)
 		vcAssertUtil.assertFormRendersField(this.formVc, 'text')
 
 		const model = this.render(this.formVc)

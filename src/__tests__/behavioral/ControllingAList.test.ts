@@ -225,7 +225,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static cantSetValueOnRowFieldByNameDoesNotExist() {
+	protected static async cantSetValueOnRowFieldByNameDoesNotExist() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -236,7 +236,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		const rowVc = this.vc.getRowVc(0)
 
-		const err = assert.doesThrow(() => rowVc.setValue('taco', true))
+		const err = await assert.doesThrowAsync(() => rowVc.setValue('taco', true))
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['fieldName'],
@@ -258,7 +258,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canSetValueOnGoodFieldName() {
+	protected static async canSetValueOnGoodFieldName() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -280,11 +280,11 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		let rowVc = this.vc.getRowVc(1)
 
-		rowVc.setValue('firstName', 'cheapseats')
-		rowVc.setValue('lastName', 'cheapseats')
+		await rowVc.setValue('firstName', 'cheapseats')
+		await rowVc.setValue('lastName', 'cheapseats')
 
 		rowVc = this.vc.getRowVc(0)
-		rowVc.setValue('lastName', 'cheapseats')
+		await rowVc.setValue('lastName', 'cheapseats')
 	}
 
 	@test()
@@ -294,7 +294,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static settingValuesOnRowVcSetsValues() {
+	protected static async settingValuesOnRowVcSetsValues() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -306,12 +306,12 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const rowVc = this.vc.getRowVc(0)
 		assert.isEqualDeep(rowVc.getValues(), { lastName: 'Horse' })
 
-		rowVc.setValue('lastName', 'Taco')
+		await rowVc.setValue('lastName', 'Taco')
 		assert.isEqualDeep(rowVc.getValues(), { lastName: 'Taco' })
 	}
 
 	@test()
-	protected static settingValuesOnRowVcSetsValuesWithMultipleCells() {
+	protected static async settingValuesOnRowVcSetsValuesWithMultipleCells() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -329,7 +329,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			firstName: 'Mr.',
 		})
 
-		rowVc.setValue('lastName', 'Taco')
+		await rowVc.setValue('lastName', 'Taco')
 		assert.isEqualDeep(rowVc.getValues(), {
 			lastName: 'Taco',
 			firstName: 'Mr.',
@@ -337,7 +337,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canGetValuesOnList() {
+	protected static async canGetValuesOnList() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -366,8 +366,8 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const rowVc = this.vc.getRowVc(0)
-		rowVc.setValue('firstName', 'Ms.')
-		rowVc.setValue('middleInitial', 'Purple')
+		await rowVc.setValue('firstName', 'Ms.')
+		await rowVc.setValue('middleInitial', 'Purple')
 
 		values = this.vc.getValues()
 
@@ -379,7 +379,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static renderingRendersValueOnInputs() {
+	protected static async renderingRendersValueOnInputs() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -401,8 +401,8 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		const rowVc = this.vc.getRowVc(0)
 
-		rowVc.setValue('firstName', 'Ms.')
-		rowVc.setValue('middleInitial', 'Purple')
+		await rowVc.setValue('firstName', 'Ms.')
+		await rowVc.setValue('middleInitial', 'Purple')
 
 		const model = this.render(this.vc)
 
@@ -431,8 +431,8 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const model = this.render(this.vc)
-		model.rows[0].cells[0].textInput?.setValue('firstName', 'Trip')
-		model.rows[0].cells[2].selectInput?.setValue('middleInitial', 'Brown')
+		model.rows[0].cells[0].textInput?.setValue?.('firstName', 'Trip')
+		model.rows[0].cells[2].selectInput?.setValue?.('middleInitial', 'Brown')
 
 		const rowVc = this.vc.getRowVc(0)
 		const values = rowVc.getValues()
@@ -462,7 +462,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static settingValueOnRowTriggersRender() {
+	protected static async settingValueOnRowTriggersRender() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -485,7 +485,84 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const rowVc = this.vc.getRowVc(0)
 		vcAssertUtil.assertTriggerRenderCount(rowVc, 0)
 
-		rowVc.setValue('firstName', 'Test')
+		await rowVc.setValue('firstName', 'Test')
+
 		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
+	}
+
+	@test()
+	protected static async onChangeOnInputFiredWhenChanged() {
+		let onChangeInputValue: string | undefined
+		let onChangeSelectValue: string | undefined
+
+		this.vc.addRow({
+			cells: [
+				{
+					textInput: {
+						name: 'firstName',
+						label: 'row 1',
+						value: 'Mr.',
+						onChange: (value) => {
+							onChangeInputValue = value
+						},
+					},
+				},
+				{
+					selectInput: {
+						name: 'middleInitial',
+						label: 'row 1',
+						value: 'Green',
+						choices: [],
+						onChange: (value) => {
+							onChangeSelectValue = value
+						},
+					},
+				},
+			],
+		})
+
+		const rowVc = this.vc.getRowVc(0)
+
+		await rowVc.setValue('firstName', 'Test')
+		assert.isEqual(onChangeInputValue, 'Test')
+
+		await rowVc.setValue('firstName', 'Test2')
+		assert.isEqual(onChangeInputValue, 'Test2')
+
+		await rowVc.setValue('middleInitial', 'Test2')
+		assert.isEqual(onChangeSelectValue, 'Test2')
+	}
+
+	@test()
+	protected static gettingBadValueOnRowThrows() {
+		this.vc.addRow({
+			cells: [
+				{
+					textInput: {
+						name: 'firstName',
+						label: 'row 1',
+						value: 'Mr.',
+					},
+				},
+				{
+					selectInput: {
+						name: 'middleInitial',
+						label: 'row 1',
+						value: 'Green',
+						choices: [],
+					},
+				},
+			],
+		})
+
+		const rowVc = this.vc.getRowVc(0)
+		const err = assert.doesThrow(() => rowVc.getValue('waka'))
+
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['fieldName'],
+		})
+
+		assert.isEqual(rowVc.getValue('firstName'), 'Mr.')
+		assert.isEqual(rowVc.getValue('middleInitial'), 'Green')
 	}
 }

@@ -52,7 +52,6 @@ export default buildSchema({
 						...textInputBuilder.fields,
 						setValue: {
 							type: 'raw',
-							isRequired: true,
 							options: {
 								valueType: '(name: string, value: any) => void',
 							},
@@ -71,7 +70,6 @@ export default buildSchema({
 						...selectInputBuilder.fields,
 						setValue: {
 							type: 'raw',
-							isRequired: true,
 							options: {
 								valueType: '(name: string, value: any) => void',
 							},

@@ -32,5 +32,12 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Required',
 		},
+		onChange: {
+			type: 'raw',
+			label: 'On change handle',
+			options: {
+				valueType: '(value?: string) => void | Promise<void>',
+			},
+		},
 	},
 })

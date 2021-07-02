@@ -45,6 +45,12 @@ const inputSchema: SpruceSchemas.Heartwood.v2021_02_11.InputSchema  = {
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** On change handle. */
+	            'onChange': {
+	                label: 'On change handle',
+	                type: 'raw',
+	                options: {valueType: `(value?: string) => void | Promise<void>`,}
+	            },
 	    }
 }
 

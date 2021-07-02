@@ -55,6 +55,10 @@ export default buildSchema({
 						value: 'secondary',
 						label: 'Secondary',
 					},
+					{
+						value: 'destructive',
+						label: 'Destructive',
+					},
 				],
 			},
 		},

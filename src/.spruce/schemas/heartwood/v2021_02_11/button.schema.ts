@@ -57,7 +57,7 @@ const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
 	                label: 'Type',
 	                type: 'select',
 	                defaultValue: "secondary",
-	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"}],}
+	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
 	            },
 	            /** Image. */
 	            'image': {

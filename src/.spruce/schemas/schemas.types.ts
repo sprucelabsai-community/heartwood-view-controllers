@@ -31,6 +31,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -76,6 +78,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -107,6 +115,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -150,6 +160,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
+			            },
 			    }
 		}
 
@@ -175,6 +191,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -218,6 +236,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Required',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
 			            },
 			    }
 		}
@@ -292,6 +316,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -338,6 +364,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Required',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -1733,12 +1765,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
 				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
 				
-				'setValue': ((name: string, value: any) => void)
+				'setValue'?: ((name: string, value: any) => void)| undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -1782,6 +1816,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -1798,7 +1838,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                isRequired: true,
 			                options: {valueType: `(name: string, value: any) => void`,}
 			            },
 			    }
@@ -1826,10 +1865,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				/** On change handle. */
+				'onChange'?: ((value?: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'setValue': ((name: string, value: any) => void)
+				'setValue'?: ((name: string, value: any) => void)| undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -1873,6 +1914,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** On change handle. */
+			            'onChange': {
+			                label: 'On change handle',
+			                type: 'raw',
+			                options: {valueType: `(value?: string) => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -1882,7 +1929,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                isRequired: true,
 			                options: {valueType: `(name: string, value: any) => void`,}
 			            },
 			    }
@@ -2302,7 +2348,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Click handler for hint icon. */
 				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
 				'image'?: string| undefined | null
 				/** Line icon. */
@@ -2367,7 +2413,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {

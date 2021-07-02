@@ -1,17 +1,18 @@
+import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewController } from '../../types/heartwood.types'
-import { ListRow, getInputFromCell, ListCell } from './List.vc'
+import { ListRow, ListCell } from './List.vc'
 
 export default class ListRowViewController
 	implements ViewController<SpruceSchemas.Heartwood.v2021_02_11.ListRow>
 {
 	private model: ListRow
-	private setValueHandler: (name: string, value: any) => void
+	private setValueHandler: (name: string, value: any) => void | Promise<void>
 	private getValuesHandler: () => Record<string, any>
 
 	public constructor(
 		options: ListRow & {
-			setValueHandler: (name: string, value: any) => void
+			setValueHandler: (name: string, value: any) => void | Promise<void>
 			getValuesHandler: () => Record<string, any>
 		}
 	) {
@@ -21,18 +22,12 @@ export default class ListRowViewController
 
 		this.setValueHandler = setValueHandler
 		this.getValuesHandler = getValuesHandler
-
-		for (const cell of this.model.cells) {
-			const input = getInputFromCell(cell)
-			if (input?.value) {
-				this.setValue(input.name, input.value)
-			}
-		}
 	}
+
 	public triggerRender() {}
 
-	public setValue(name: string, value: any) {
-		this.setValueHandler(name, value)
+	public async setValue(name: string, value: any) {
+		await this.setValueHandler(name, value)
 		this.triggerRender()
 	}
 
@@ -72,5 +67,18 @@ export default class ListRowViewController
 		}
 
 		return listCell
+	}
+
+	public getValue(fieldName: string): any {
+		const values = this.getValues()
+
+		if (fieldName in values) {
+			return values[fieldName]
+		}
+
+		throw new SpruceError({
+			code: 'INVALID_PARAMETERS',
+			parameters: ['fieldName'],
+		})
 	}
 }
