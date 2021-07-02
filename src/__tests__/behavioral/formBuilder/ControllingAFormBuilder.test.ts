@@ -7,9 +7,8 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../../utilities/introspection.utility'
 import renderUtil from '../../../utilities/render.utility'
-import FormBuilderViewController, {
-	FormBuilderPageViewController,
-} from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import { FormBuilderPageViewController } from '../../../viewControllers/formBuilder/FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
@@ -483,7 +482,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		pageVc.addSection({
 			type: 'text',
-			text: { content: 'What are you thinking?' },
+			text: 'What are you thinking?',
 		})
 
 		const model = this.render(pageVc)
@@ -492,7 +491,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			content: 'What are you thinking?',
 		})
 
-		assert.isLength(model.sections[1].fields, 0)
+		assert.isUndefined(model.sections[1].fields)
 	}
 
 	@test()

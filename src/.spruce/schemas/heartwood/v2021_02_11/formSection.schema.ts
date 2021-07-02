@@ -35,6 +35,12 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	                type: 'schema',
 	                options: {schema: textSchema_v2021_02_11,}
 	            },
+	            /** Grid. */
+	            'shouldRenderAsGrid': {
+	                label: 'Grid',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** List. */
 	            'list': {
 	                label: 'List',

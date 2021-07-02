@@ -35,6 +35,10 @@ export default buildSchema({
 				schema: textBuilder,
 			},
 		},
+		shouldRenderAsGrid: {
+			type: 'boolean',
+			label: 'Grid',
+		},
 		list: {
 			type: 'schema',
 			label: 'List',

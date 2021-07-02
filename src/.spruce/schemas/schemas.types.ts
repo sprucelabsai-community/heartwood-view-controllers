@@ -783,6 +783,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'title'?: string| undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
 				/** List. */
 				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
@@ -821,6 +823,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Text',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** List. */
 			            'list': {
@@ -1652,6 +1660,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'title'?: string| undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
 				/** List. */
 				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
@@ -1688,6 +1698,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Text',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** List. */
 			            'list': {

@@ -1,15 +1,17 @@
 import { Schema, SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
-import {
-	FormViewController,
-	ViewControllerOptions,
-} from '../../types/heartwood.types'
+import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
-import EditBuilderSectionViewController from './EditBuilderSection.vc'
-import { FormBuilderPageViewControllerImpl } from './FormBuilderPage.vc'
+import EditBuilderSectionViewController, {
+	EditBuilderSectionOptions,
+} from './EditBuilderSection.vc'
+import {
+	FormBuilderPageViewController,
+	FormBuilderPageViewControllerImpl,
+} from './FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
@@ -19,31 +21,6 @@ type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
-
-export interface AddSectionOptions {
-	atIndex?: number
-	type?: 'text' | 'form'
-	title?: string
-	text?: {
-		content: string
-	}
-}
-
-export interface FormBuilderPageViewControllerEnhancements {
-	addSection(options?: AddSectionOptions): void
-	addField(sectionIdx: number): void
-	getIndex(): number
-	getTitle(): string
-	setTitle(string: string): void
-}
-
-export type FormBuilderPageViewController = Omit<
-	FormViewController<Schema>,
-	keyof FormBuilderPageViewControllerEnhancements
-> &
-	FormBuilderPageViewControllerEnhancements
-
-export type FieldBuilder = FormBuilderViewController['buildField']
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
@@ -276,8 +253,12 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			})
 		}
 
-		const vc = this.AddSectionVc(() => {})
-		this.renderInDialog(vc.render())
+		const vc = this.AddSectionVc(async (section) => {
+			void dialog.hide()
+			const pageVc = this.getPresentPageVc()
+			pageVc.addSection(section)
+		})
+		const dialog = this.renderInDialog(vc.render())
 	}
 
 	public handleClickPageTitles() {
@@ -291,7 +272,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
-	public AddSectionVc(onDone: () => void) {
+	public AddSectionVc(onDone: EditBuilderSectionOptions['onDone']) {
 		const addSectionVc = this.vcFactory.Controller(
 			'formBuilderAddSection' as any,
 			{

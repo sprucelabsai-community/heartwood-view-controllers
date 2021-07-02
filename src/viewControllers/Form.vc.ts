@@ -289,9 +289,9 @@ export default class FormViewController<
 	public addSection(section: Section & { atIndex?: number }) {
 		const { atIndex, ...sec } = section
 		if (typeof atIndex === 'number') {
-			this.model.sections.splice(atIndex, 0, sec)
+			this.model.sections.splice(atIndex, 0, { ...sec })
 		} else {
-			this.model.sections.push(sec)
+			this.model.sections.push({ ...sec })
 		}
 		this.triggerRender()
 	}
@@ -395,6 +395,10 @@ export default class FormViewController<
 		}
 
 		const section = this.getSection(sectionIdx)
+
+		if (!section.fields) {
+			section.fields = []
+		}
 
 		for (const field of Object.keys(fields)) {
 			//@ts-ignore

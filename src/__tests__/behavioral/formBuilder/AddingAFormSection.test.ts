@@ -3,6 +3,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import EditBuilderSectionViewController, {
 	EditSectionSectionSchema,
@@ -30,11 +31,14 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	private static vc: EditBuilderSectionViewController
 	private static formVc: FormViewController<EditSectionSectionSchema>
 	private static fieldListVc: ListViewController
+	private static dialogVc: DialogViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.formBuilderVc = this.Controller('formBuilder', {})
-		this.vc = await this.showAddSection()
+		const { dialogVc, builderSectionVc } = await this.showAddSection()
+		this.vc = builderSectionVc
+		this.dialogVc = dialogVc
 		this.formVc = vcAssertUtil.assertCardContainsForm(this.vc)
 		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
 	}
@@ -188,22 +192,159 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static clickingPrimaryInFooterGivesBackSection() {
+	protected static async clickingPrimaryInFooterGivesBackSection() {
 		this.formVc.setValue('title', 'My new section')
 		this.formVc.setValue('type', 'form')
+		this.formVc.setValue('shouldRenderAsGrid', true)
 		this.vc.addField()
+		this.vc.addField()
+
+		let wasOnDoneInvoked = false
+		let onDoneValues: any = {}
+
+		//@ts-ignore
+		this.vc.onDoneHandler = (values) => {
+			wasOnDoneInvoked = true
+			onDoneValues = values
+		}
+
+		await interactionUtil.submitForm(this.formVc)
+
+		assert.isTrue(wasOnDoneInvoked)
+		assert.isEqualDeep(onDoneValues, {
+			title: 'My new section',
+			type: 'form',
+			shouldRenderAsGrid: true,
+			text: undefined,
+			fields: [
+				{
+					fieldLabel: 'Field 1',
+					fieldType: 'text',
+				},
+				{
+					fieldLabel: 'Field 2',
+					fieldType: 'text',
+				},
+				{
+					fieldLabel: 'Field 3',
+					fieldType: 'text',
+				},
+			],
+		})
+
+		this.formVc.setValue('title', 'go again')
+		this.formVc.setValue('type', 'text')
+		this.formVc.setValue('text', 'how are you?')
+		this.formVc.setValue('shouldRenderAsGrid', false)
+
+		this.vc.addField()
+
+		await interactionUtil.submitForm(this.formVc)
+
+		assert.isEqualDeep(onDoneValues, {
+			title: 'go again',
+			type: 'text',
+			shouldRenderAsGrid: false,
+			text: 'how are you?',
+			fields: [
+				{
+					fieldLabel: 'Field 1',
+					fieldType: 'text',
+				},
+				{
+					fieldLabel: 'Field 2',
+					fieldType: 'text',
+				},
+				{
+					fieldLabel: 'Field 3',
+					fieldType: 'text',
+				},
+				{
+					fieldLabel: 'Field 4',
+					fieldType: 'text',
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async newSectionAddedToFormBuilder() {
+		this.formVc.setValue('title', 'My new section')
+		this.formVc.setValue('type', 'form')
+		this.formVc.setValue('shouldRenderAsGrid', true)
+		this.vc.addField()
+		this.vc.addField()
+
+		await interactionUtil.submitForm(this.formVc)
+
+		vcAssertUtil.assertDialogWasClosed(this.dialogVc)
+
+		assert.isEqual(this.formBuilderVc.getTotalPages(), 1)
+		const pageVc = this.formBuilderVc.getPresentPageVc()
+		assert.isEqual(pageVc.getTotalSections(), 2)
+
+		const newSection = pageVc.getSection(1)
+
+		assert.isEqualDeep(newSection, {
+			title: 'My new section',
+			shouldRenderAsGrid: true,
+			text: undefined,
+			fields: [
+				{
+					//@ts-ignore
+					name: 'field1',
+				},
+				{
+					//@ts-ignore
+					name: 'field2',
+				},
+				{
+					//@ts-ignore
+					name: 'field3',
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async differentSectionAddedToFormBuilder() {
+		this.formVc.setValue('title', 'My second section')
+		this.formVc.setValue('type', 'text')
+		this.formVc.setValue('text', 'What is up?')
+		this.formVc.setValue('shouldRenderAsGrid', true)
+
+		await interactionUtil.submitForm(this.formVc)
+
+		vcAssertUtil.assertDialogWasClosed(this.dialogVc)
+
+		assert.isEqual(this.formBuilderVc.getTotalPages(), 1)
+		const pageVc = this.formBuilderVc.getPresentPageVc()
+		assert.isEqual(pageVc.getTotalSections(), 2)
+
+		const newSection = pageVc.getSection(1)
+
+		assert.isEqualDeep(newSection, {
+			title: 'My second section',
+			shouldRenderAsGrid: true,
+			text: { content: 'What is up?' },
+		})
 	}
 
 	private static async showAddSection() {
-		let addSectionVc: EditBuilderSectionViewController | undefined
+		let builderSectionVc: EditBuilderSectionViewController | undefined
+		let dialogVc: DialogViewController | undefined
 
 		await vcAssertUtil.assertRendersDialog(
 			this.formBuilderVc,
 			() => this.formBuilderVc.handleClickAddSection(0),
 			(vc) => {
-				addSectionVc = vc.getCardVc() as EditBuilderSectionViewController
+				dialogVc = vc
+				builderSectionVc = vc.getCardVc() as EditBuilderSectionViewController
 			}
 		)
-		return addSectionVc as EditBuilderSectionViewController
+		return {
+			builderSectionVc: builderSectionVc as EditBuilderSectionViewController,
+			dialogVc: dialogVc as DialogViewController,
+		}
 	}
 }

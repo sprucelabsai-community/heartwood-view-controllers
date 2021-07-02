@@ -82,6 +82,10 @@ const interactionUtil = {
 
 		await this.click(destructiveButton.onClick)
 	},
+
+	async submitForm(vc: FormVc) {
+		await vc.submit()
+	},
 }
 
 export default interactionUtil

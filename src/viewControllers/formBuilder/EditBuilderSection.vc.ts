@@ -58,18 +58,28 @@ const fieldTypes = {
 
 export interface EditBuilderSectionOptions {
 	values: Partial<AddFormBuilder>
-	onDone: () => void | Promise<void>
+	onDone: (section: SimpleSection) => void | Promise<void>
 }
 
 interface SimpleRow {
-	fieldName: string
+	fieldLabel: string
 	fieldType: string
+}
+
+export interface SimpleSection {
+	title: string
+	subtitle?: string
+	shouldRenderAsGrid: boolean
+	type: 'text' | 'form'
+	text?: string
+	fields: SimpleRow[]
 }
 
 export default class EditBuilderSectionViewController extends CardViewController {
 	private formVc: FormViewController<EditSectionSectionSchema>
 	private fieldListVc: ListViewController
 	private rows: SimpleRow[] = []
+	private onDoneHandler: (values: SimpleSection) => void | Promise<void>
 
 	public constructor(
 		options: ViewControllerOptions & EditBuilderSectionOptions
@@ -82,6 +92,8 @@ export default class EditBuilderSectionViewController extends CardViewController
 				parameters: ['onDone'],
 			})
 		}
+
+		this.onDoneHandler = options.onDone
 
 		this.rows.push(this.buildNextSimpleRow())
 
@@ -102,6 +114,7 @@ export default class EditBuilderSectionViewController extends CardViewController
 				sections: this.buildFormSections('form'),
 				footer: this.buildFooter('form'),
 				onChange: this.handleFormChange.bind(this),
+				onSubmit: this.handleSubmit.bind(this),
 			})
 		)
 
@@ -111,9 +124,19 @@ export default class EditBuilderSectionViewController extends CardViewController
 		}
 	}
 
-	private buildNextSimpleRow(): { fieldName: string; fieldType: string } {
+	private async handleSubmit() {
+		await this.onDoneHandler({
+			title: this.formVc.getValue('title'),
+			type: this.formVc.getValue('type'),
+			text: this.formVc.getValue('text') ?? undefined,
+			shouldRenderAsGrid: this.formVc.getValue('shouldRenderAsGrid') ?? false,
+			fields: [...this.rows],
+		})
+	}
+
+	private buildNextSimpleRow(): SimpleRow {
 		return {
-			fieldName: `Field ${this.rows.length + 1}`,
+			fieldLabel: `Field ${this.rows.length + 1}`,
 			fieldType: 'text',
 		}
 	}
@@ -198,7 +221,7 @@ export default class EditBuilderSectionViewController extends CardViewController
 					textInput: {
 						name: 'fieldName',
 						isRequired: true,
-						value: options.fieldName,
+						value: options.fieldLabel,
 					},
 				},
 				{
