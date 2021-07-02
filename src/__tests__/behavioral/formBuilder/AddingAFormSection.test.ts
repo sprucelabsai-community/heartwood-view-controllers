@@ -160,11 +160,19 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		this.vc.addField()
 
 		const listVc = this.vc.getFieldListVc()
-		const rowVc = listVc.getRowVc(2)
+		let rowVc = listVc.getRowVc(2)
+		assert.isEqual(rowVc.getValue('fieldName'), 'Field 3')
 
 		await interactionUtil.clickOnDestructiveButton(rowVc)
 
+		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 4')
 		assert.isEqual(listVc.getTotalRows(), 3)
+
+		rowVc = listVc.getRowVc(2)
+
+		await interactionUtil.clickOnDestructiveButton(rowVc)
+
+		assert.isEqual(listVc.getTotalRows(), 2)
 	}
 
 	@test()
@@ -177,6 +185,13 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 
 		const model = this.render(this.formVc)
 		assert.isFalsy(model.footer)
+	}
+
+	@test()
+	protected static clickingPrimaryInFooterGivesBackSection() {
+		this.formVc.setValue('title', 'My new section')
+		this.formVc.setValue('type', 'form')
+		this.vc.addField()
 	}
 
 	private static async showAddSection() {

@@ -61,9 +61,15 @@ export interface EditBuilderSectionOptions {
 	onDone: () => void | Promise<void>
 }
 
+interface SimpleRow {
+	fieldName: string
+	fieldType: string
+}
+
 export default class EditBuilderSectionViewController extends CardViewController {
 	private formVc: FormViewController<EditSectionSectionSchema>
 	private fieldListVc: ListViewController
+	private rows: SimpleRow[] = []
 
 	public constructor(
 		options: ViewControllerOptions & EditBuilderSectionOptions
@@ -77,9 +83,11 @@ export default class EditBuilderSectionViewController extends CardViewController
 			})
 		}
 
+		this.rows.push(this.buildNextSimpleRow())
+
 		this.fieldListVc = this.vcFactory.Controller('list', {
 			columnWidths: ['fill'],
-			rows: [this.buildFieldRow()],
+			rows: this.buildRows(),
 		})
 
 		this.formVc = this.vcFactory.Controller(
@@ -100,6 +108,13 @@ export default class EditBuilderSectionViewController extends CardViewController
 		this.model.header = {
 			title: 'Add section',
 			...this.model.header,
+		}
+	}
+
+	private buildNextSimpleRow(): { fieldName: string; fieldType: string } {
+		return {
+			fieldName: `Field ${this.rows.length + 1}`,
+			fieldType: 'text',
 		}
 	}
 
@@ -164,25 +179,33 @@ export default class EditBuilderSectionViewController extends CardViewController
 	}
 
 	public addField() {
-		this.fieldListVc.addRow(this.buildFieldRow())
+		this.rows.push(this.buildNextSimpleRow())
+		this.rebuildList()
 	}
 
-	private buildFieldRow(): ListRow {
-		const totalRows = this.fieldListVc?.getTotalRows()
+	private rebuildList() {
+		this.fieldListVc.updateRows(this.buildRows())
+	}
+
+	private buildRows() {
+		return this.rows.map((row, idx) => this.buildFieldRow({ ...row, idx }))
+	}
+
+	private buildFieldRow(options: SimpleRow & { idx: number }): ListRow {
 		return {
 			cells: [
 				{
 					textInput: {
 						name: 'fieldName',
 						isRequired: true,
-						value: `Field ${(totalRows ?? 0) + 1}`,
+						value: options.fieldName,
 					},
 				},
 				{
 					selectInput: {
 						name: 'fieldType',
 						isRequired: true,
-						value: 'text',
+						value: options.fieldType,
 						choices: Object.keys(fieldTypes).map((key) => ({
 							//@ts-ignore
 							label: fieldTypes[key],
@@ -195,7 +218,8 @@ export default class EditBuilderSectionViewController extends CardViewController
 						lineIcon: 'delete',
 						type: 'destructive',
 						onClick: () => {
-							this.fieldListVc.deleteRow(totalRows)
+							this.rows.splice(options.idx, 1)
+							this.rebuildList()
 						},
 					},
 				},
