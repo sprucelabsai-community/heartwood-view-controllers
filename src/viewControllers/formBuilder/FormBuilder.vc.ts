@@ -10,7 +10,7 @@ import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import FormBuilderAddSectionViewController from './FormBuilderAddSection.vc'
 import { FormBuilderPageViewControllerImpl } from './FormBuilderPage.vc'
-import ManageSectionTitlesCardViewController from './ManageSectionTitlesCard.vc'
+import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
@@ -71,7 +71,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			//@ts-ignore
 			formBuilderAddSection: FormBuilderAddSectionViewController,
 			//@ts-ignore
-			manageSectionTitles: ManageSectionTitlesCardViewController,
+			managePageTitles: ManagePageTitlesCardViewController,
 		})
 	}
 
@@ -280,7 +280,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public handleClickPageTitles() {
-		const vc = this.vcFactory.Controller('manageSectionTitles', {
+		const vc = this.vcFactory.Controller('managePageTitles', {
 			onDone: () => {
 				void dialog.hide()
 			},

@@ -4,17 +4,16 @@ import CardViewController from '../Card.vc'
 import ListViewController, { ListRow } from '../list/List.vc'
 import FormBuilderViewController from './FormBuilder.vc'
 
-export interface ManageSectionTitlesCardViewControllerOptions {
+export interface ManagePageTitlesCardViewControllerOptions {
 	onDone(): void
 	formBuilderVc: FormBuilderViewController
 }
-export default class ManageSectionTitlesCardViewController extends CardViewController {
+export default class ManagePageTitlesCardViewController extends CardViewController {
 	private listVc: ListViewController
 	private formBuilderVc: FormBuilderViewController
 
 	public constructor(
-		options: ManageSectionTitlesCardViewControllerOptions &
-			ViewControllerOptions
+		options: ManagePageTitlesCardViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
 
@@ -43,7 +42,7 @@ export default class ManageSectionTitlesCardViewController extends CardViewContr
 
 		this.model = {
 			header: {
-				title: 'Manage sections',
+				title: 'Manage pages',
 			},
 			body: {
 				sections: [

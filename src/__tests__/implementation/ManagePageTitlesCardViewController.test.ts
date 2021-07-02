@@ -5,25 +5,25 @@ import interactionUtil from '../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
-import ManageSectionTitlesCardViewController, {
-	ManageSectionTitlesCardViewControllerOptions,
-} from '../../viewControllers/formBuilder/ManageSectionTitlesCard.vc'
+import ManagePageTitlesCardViewController, {
+	ManagePageTitlesCardViewControllerOptions,
+} from '../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		manageSectionTitles: ManageSectionTitlesCardViewController
+		managePageTitles: ManagePageTitlesCardViewController
 	}
 
 	export interface ViewControllerOptionsMap {
-		manageSectionTitles: ManageSectionTitlesCardViewControllerOptions
+		managePageTitles: ManagePageTitlesCardViewControllerOptions
 	}
 }
 
-export default class ManageSectionsViewControllerTest extends AbstractViewControllerTest {
-	private static _vc: ManageSectionTitlesCardViewController
-	private static get vc(): ManageSectionTitlesCardViewController {
+export default class ManagePageTitlesViewControllerTest extends AbstractViewControllerTest {
+	private static _vc: ManagePageTitlesCardViewController
+	private static get vc(): ManagePageTitlesCardViewController {
 		if (!this._vc) {
-			this._vc = this.Controller('manageSectionTitles', {
+			this._vc = this.Controller('managePageTitles', {
 				onDone: () => {
 					this.wasOnDoneInvoked = true
 				},
@@ -44,14 +44,14 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 	}
 
 	protected static controllerMap = {
-		manageSectionTitles: ManageSectionTitlesCardViewController,
+		managePageTitles: ManagePageTitlesCardViewController,
 	}
 
 	@test()
 	protected static needsRequiredParams() {
 		const err = assert.doesThrow(() =>
 			//@ts-ignore
-			this.Controller('manageSectionTitles', {})
+			this.Controller('managePageTitles', {})
 		)
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['onDone', 'formBuilderVc'],

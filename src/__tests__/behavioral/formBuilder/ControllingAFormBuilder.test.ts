@@ -10,7 +10,7 @@ import renderUtil from '../../../utilities/render.utility'
 import FormBuilderViewController, {
 	FormBuilderPageViewController,
 } from '../../../viewControllers/formBuilder/FormBuilder.vc'
-import ManageSectionTitlesCardViewController from '../../../viewControllers/formBuilder/ManageSectionTitlesCard.vc'
+import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -613,10 +613,10 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			async () => this.vc.handleClickPageTitles(),
 			async (dialogVc) => {
 				assert.isTrue(
-					dialogVc.getCardVc() instanceof ManageSectionTitlesCardViewController
+					dialogVc.getCardVc() instanceof ManagePageTitlesCardViewController
 				)
 
-				const vc = dialogVc.getCardVc() as ManageSectionTitlesCardViewController
+				const vc = dialogVc.getCardVc() as ManagePageTitlesCardViewController
 				await interactionUtil.clickPrimaryInFooter(vc)
 				vcAssertUtil.assertDialogWasClosed(dialogVc)
 			}
