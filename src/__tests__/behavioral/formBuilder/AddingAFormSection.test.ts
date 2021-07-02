@@ -158,6 +158,20 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async updatingFieldNameUpdatesInternalSimpleRows() {
+		await this.fieldListVc.getRowVc(0).setValue('fieldName', 'Waka')
+		await this.fieldListVc.getRowVc(0).setValue('fieldType', 'phone')
+
+		//@ts-ignore
+		assert.isEqualDeep(this.vc.rows, [
+			{
+				fieldLabel: 'Waka',
+				fieldType: 'phone',
+			},
+		])
+	}
+
+	@test()
 	protected static async clickingDestructiveInFieldListRemovesField() {
 		this.vc.addField()
 		this.vc.addField()

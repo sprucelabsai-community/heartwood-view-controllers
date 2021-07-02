@@ -222,6 +222,11 @@ export default class EditBuilderSectionViewController extends CardViewController
 						name: 'fieldName',
 						isRequired: true,
 						value: options.fieldLabel,
+						onChange: (value) => {
+							if (value) {
+								this.rows[options.idx].fieldLabel = value
+							}
+						},
 					},
 				},
 				{
@@ -234,6 +239,11 @@ export default class EditBuilderSectionViewController extends CardViewController
 							label: fieldTypes[key],
 							value: key,
 						})),
+						onChange: (value) => {
+							if (value) {
+								this.rows[options.idx].fieldType = value
+							}
+						},
 					},
 				},
 				{
