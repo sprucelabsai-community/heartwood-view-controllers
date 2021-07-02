@@ -1,3 +1,10 @@
+# [16.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.3.4...v16.0.0) (2021-07-02)
+
+
+### Breaking Changes
+
+* section titles -> page titles ([803cb0a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/803cb0a))
+
 ## [15.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.3.3...v15.3.4) (2021-07-02)
 
 ## [15.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v15.3.2...v15.3.3) (2021-07-02)
