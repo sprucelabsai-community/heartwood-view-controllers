@@ -565,4 +565,39 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqual(rowVc.getValue('firstName'), 'Mr.')
 		assert.isEqual(rowVc.getValue('middleInitial'), 'Green')
 	}
+
+	@test()
+	protected static canSetRowsDirectly() {
+		this.vc.setRows([
+			{
+				cells: [
+					{
+						text: { content: 'yay' },
+					},
+				],
+			},
+		])
+
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+
+		let rowVc = this.vc.getRowVc(0)
+		let model = this.render(rowVc)
+
+		assert.isEqual(model.cells[0].text?.content, 'yay')
+
+		this.vc.setRows([
+			{
+				cells: [
+					{
+						text: { content: 'yay 2' },
+					},
+				],
+			},
+		])
+
+		rowVc = this.vc.getRowVc(0)
+		model = this.render(rowVc)
+
+		assert.isEqual(model.cells[0].text?.content, 'yay 2')
+	}
 }

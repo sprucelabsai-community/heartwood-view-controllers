@@ -123,6 +123,7 @@ class ManageSectionTitlesCardViewController extends AbstractViewController<Spruc
 							type: 'destructive',
 							onClick: async () => {
 								await this.formBuilderVc.removePage(page.getIndex())
+								this.listVc.setRows(this.buildRows())
 							},
 						},
 					},
@@ -145,22 +146,29 @@ class ManageSectionTitlesCardViewController extends AbstractViewController<Spruc
 }
 
 export default class ManageSectionsViewControllerTest extends AbstractViewControllerTest {
+	private static _vc: ManageSectionTitlesCardViewController
 	private static get vc(): ManageSectionTitlesCardViewController {
-		return this.Controller('manageSectionTitles', {
-			onDone: () => {
-				this.wasOnDoneInvoked = true
-			},
-			onCancel: () => {
-				this.wasOnCancelInvoked = true
-			},
-			formBuilderVc: this.formBuilderVc,
-		})
+		if (!this._vc) {
+			this._vc = this.Controller('manageSectionTitles', {
+				onDone: () => {
+					this.wasOnDoneInvoked = true
+				},
+				onCancel: () => {
+					this.wasOnCancelInvoked = true
+				},
+				formBuilderVc: this.formBuilderVc,
+			})
+		}
+
+		return this._vc
 	}
 	private static wasOnDoneInvoked = false
 	private static wasOnCancelInvoked = false
 	private static formBuilderVc: FormBuilderViewController
 
 	protected static async beforeEach() {
+		//@ts-ignore
+		this._vc = null
 		this.wasOnDoneInvoked = false
 		this.wasOnCancelInvoked = false
 		this.formBuilderVc = this.Controller('formBuilder', {})
@@ -241,13 +249,17 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 		await this.formBuilderVc.addPage({ title: 'Page 3' })
 		await this.formBuilderVc.addPage({ title: 'Page 4' })
 
+		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
 		await interactionUtil.clickOnDestructiveButton(rowVc)
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 3)
+
 		rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 4')
+
+		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 3)
 	}
 }
