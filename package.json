@@ -93,7 +93,7 @@
     "@sprucelabs/test-utils": "latest",
     "@types/lodash": "^4.14.170",
     "@types/node": "^15.14.0",
-    "@types/terser-webpack-plugin": "^5.0.3",
+    "@types/terser-webpack-plugin": "^5.0.4",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.2.0",
     "eslint": "^7.29.0",
