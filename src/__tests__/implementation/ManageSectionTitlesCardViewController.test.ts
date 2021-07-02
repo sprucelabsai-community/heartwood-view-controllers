@@ -129,5 +129,9 @@ export default class ManageSectionsViewControllerTest extends AbstractViewContro
 	@test()
 	protected static async clickingSecondaryButtonInTheFooterAddsPage() {
 		await interactionUtil.clickSecondaryInFooter(this.vc)
+		assert.isEqual(this.formBuilderVc.getTotalPages(), 2)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+
+		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 2)
 	}
 }

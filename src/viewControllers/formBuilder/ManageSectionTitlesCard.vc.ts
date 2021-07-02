@@ -59,6 +59,8 @@ export default class ManageSectionTitlesCardViewController extends CardViewContr
 						label: 'Add row',
 						onClick: () => {
 							void this.formBuilderVc.addPage()
+							this.listVc.updateRows(this.buildRows())
+							this.triggerRender()
 						},
 					},
 					{
@@ -97,7 +99,7 @@ export default class ManageSectionTitlesCardViewController extends CardViewContr
 							type: 'destructive',
 							onClick: async () => {
 								await this.formBuilderVc.removePage(page.getIndex())
-								this.listVc.setRows(this.buildRows())
+								this.listVc.updateRows(this.buildRows())
 							},
 						},
 					},
