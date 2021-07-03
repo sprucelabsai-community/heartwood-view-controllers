@@ -1,3 +1,10 @@
+# [16.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.0.10...v16.1.0) (2021-07-03)
+
+
+### Features
+
+* confirmation can be marked as destructive ([e040772](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e040772))
+
 ## [16.0.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.0.9...v16.0.10) (2021-07-03)
 
 ## [16.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.0.8...v16.0.9) (2021-07-02)
