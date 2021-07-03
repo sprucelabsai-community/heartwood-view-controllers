@@ -33,13 +33,15 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 							subtitle: options.subtitle,
 					  }
 					: null,
-			body: {
-				sections: [
-					{
-						title: options.message,
-					},
-				],
-			},
+			body: options.message
+				? {
+						sections: [
+							{
+								title: options.message,
+							},
+						],
+				  }
+				: undefined,
 			footer: {
 				buttons: [
 					{
