@@ -208,6 +208,7 @@ export interface ConfirmOptions {
 	title?: string
 	subtitle?: string
 	message?: string
+	isDestructive?: boolean
 }
 
 export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>

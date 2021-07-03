@@ -50,8 +50,8 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 						onClick: this.handleDecline.bind(this),
 					},
 					{
-						type: 'primary',
 						label: 'Yes',
+						type: options.isDestructive ? 'destructive' : 'primary',
 						onClick: this.handleAccept.bind(this),
 					},
 				],

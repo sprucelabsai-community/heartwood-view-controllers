@@ -36,6 +36,22 @@ export default class ControllingAConfirmationDialogTest extends AbstractViewCont
 		assert.isEqual(model.body?.sections?.[0]?.title, 'Hey!')
 	}
 
+	@test()
+	protected static canSetAsDescructive() {
+		const vc = this.Confirm({ message: 'Hey!', isDestructive: true })
+		const model = this.render(vc)
+
+		assert.isEqual(model.footer?.buttons?.[1].type, 'destructive')
+	}
+
+	@test()
+	protected static actionButtonIsPrimaryByDefault() {
+		const vc = this.Confirm({ message: 'Hey!' })
+		const model = this.render(vc)
+
+		assert.isEqual(model.footer?.buttons?.[1].type, 'primary')
+	}
+
 	private static Confirm(options?: Partial<ConfirmViewControllerOptions>) {
 		return this.Controller('confirm', {
 			onAccept: () => {},
