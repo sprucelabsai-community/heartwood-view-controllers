@@ -1,11 +1,11 @@
-import { Schema, SpruceError } from '@sprucelabs/schema'
+import { Schema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
-import EditBuilderSectionViewController, {
+import EditFormBuilderSectionViewController, {
 	EditBuilderSectionOptions,
 } from './EditBuilderSection.vc'
 import {
@@ -46,7 +46,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 		this.vcFactory.mixinControllers({
 			//@ts-ignore
-			formBuilderAddSection: EditBuilderSectionViewController,
+			editFormBuilderSection: EditFormBuilderSectionViewController,
 			//@ts-ignore
 			managePageTitles: ManagePageTitlesCardViewController,
 		})
@@ -244,19 +244,31 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		return { ...this.swipeVc.render(), controller: this as any }
 	}
 
-	public handleClickAddSection(sectionIdx: number) {
-		if (sectionIdx === -1) {
-			throw new SpruceError({
-				code: 'INVALID_PARAMETERS',
-				friendlyMessage: `Can't click on section \`${sectionIdx}\` beacuse it does not exist!`,
-				parameters: ['sectionIdx'],
-			})
-		}
+	public handleClickAddSection(clickedSectionIdx: number) {
+		this.getPresentPageVc().getSection(clickedSectionIdx)
 
-		const vc = this.AddSectionVc(async (section) => {
-			void dialog.hide()
-			const pageVc = this.getPresentPageVc()
-			pageVc.addSection(section)
+		const vc = this.EditSectionVc({
+			onDone: async (section) => {
+				void dialog.hide()
+				const pageVc = this.getPresentPageVc()
+				pageVc.addSection({ ...section, atIndex: clickedSectionIdx + 1 })
+			},
+		})
+		const dialog = this.renderInDialog(vc.render())
+	}
+
+	public handleClickEditSection(clickedSectionIdx: number) {
+		const pageVc = this.getPresentPageVc()
+		const section = pageVc.getSection(clickedSectionIdx)
+
+		const vc = this.EditSectionVc({
+			editingSection: section,
+
+			onDone: async (section) => {
+				void dialog.hide()
+				const pageVc = this.getPresentPageVc()
+				pageVc.updateSection(clickedSectionIdx, section)
+			},
 		})
 		const dialog = this.renderInDialog(vc.render())
 	}
@@ -272,17 +284,24 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
-	public AddSectionVc(onDone: EditBuilderSectionOptions['onDone']) {
-		const addSectionVc = this.vcFactory.Controller(
-			'formBuilderAddSection' as any,
+	public EditSectionVc(options: {
+		onDone: EditBuilderSectionOptions['onDone']
+		editingSection?: SpruceSchemas.Heartwood.v2021_02_11.FormSection
+	}) {
+		const { onDone, editingSection } = options
+
+		const editSectionVc = this.vcFactory.Controller(
+			'editFormBuilderSection' as any,
 			{
 				onDone,
-				values: {
-					title: `Section ${this.getPresentPageVc().getTotalSections() + 1}`,
-				},
+				pageSchema: this.getPresentPageVc().getSchema(),
+				editSection: editingSection,
+				defaultTitle: `Section ${
+					this.getPresentPageVc().getTotalSections() + 1
+				}`,
 			}
-		) as EditBuilderSectionViewController
+		) as EditFormBuilderSectionViewController
 
-		return addSectionVc
+		return editSectionVc
 	}
 }

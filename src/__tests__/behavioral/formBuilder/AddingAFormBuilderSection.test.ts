@@ -5,7 +5,7 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
-import EditBuilderSectionViewController, {
+import EditFormBuilderSectionViewController, {
 	EditSectionSectionSchema,
 	EditBuilderSectionOptions,
 } from '../../../viewControllers/formBuilder/EditBuilderSection.vc'
@@ -14,7 +14,7 @@ import ListViewController from '../../../viewControllers/list/List.vc'
 
 declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
-		editFormBuilderSection: EditBuilderSectionViewController
+		editFormBuilderSection: EditFormBuilderSectionViewController
 	}
 
 	export interface ViewControllerOptionsMap {
@@ -22,13 +22,13 @@ declare module '../../../types/heartwood.types' {
 	}
 }
 
-export default class AddingAFormSectionTest extends AbstractViewControllerTest {
+export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditBuilderSectionViewController,
+		editFormBuilderSection: EditFormBuilderSectionViewController,
 	}
 
 	private static formBuilderVc: FormBuilderViewController
-	private static vc: EditBuilderSectionViewController
+	private static vc: EditFormBuilderSectionViewController
 	private static formVc: FormViewController<EditSectionSectionSchema>
 	private static fieldListVc: ListViewController
 	private static dialogVc: DialogViewController
@@ -36,7 +36,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.formBuilderVc = this.Controller('formBuilder', {})
-		const { dialogVc, builderSectionVc } = await this.showAddSection()
+		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
 		this.formVc = vcAssertUtil.assertCardContainsForm(this.vc)
@@ -60,10 +60,12 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		})
 	}
 
-	@test()
-	protected static async cantClickBadSection() {
+	@test('cant click bad section -1', -1)
+	@test('cant click bad section 1', 1)
+	@test('cant click bad section 2', 2)
+	protected static async cantClickBadSection(sectionIdx: number) {
 		const err = await assert.doesThrowAsync(() =>
-			this.formBuilderVc.handleClickAddSection(-1)
+			this.formBuilderVc.handleClickAddSection(sectionIdx)
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
@@ -74,7 +76,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	@test()
 	protected static async clickingAddSectionShowsAddSectionDialog() {
 		assert.isTruthy(this.vc)
-		assert.isTrue(this.vc instanceof EditBuilderSectionViewController)
+		assert.isTrue(this.vc instanceof EditFormBuilderSectionViewController)
 	}
 
 	@test()
@@ -113,7 +115,9 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		const pageVc = this.formBuilderVc.getPageVc(0)
 		pageVc.addSection()
 
-		const formVc = this.formBuilderVc.AddSectionVc(() => {}).getFormVc()
+		const formVc = this.formBuilderVc
+			.EditSectionVc({ onDone: () => {} })
+			.getFormVc()
 
 		assert.isEqual(formVc.getValue('title'), 'Section 3')
 	}
@@ -340,7 +344,7 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async differentSectionAddedToFormBuilder() {
+	protected static async differentSectionAddedToFormBuilderAtEnd() {
 		this.formVc.setValue('title', 'My second section')
 		this.formVc.setValue('type', 'text')
 		this.formVc.setValue('text', 'What is up?')
@@ -363,20 +367,41 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		})
 	}
 
-	private static async showAddSection() {
-		let builderSectionVc: EditBuilderSectionViewController | undefined
+	@test()
+	protected static async sectionAddedToFormBuilderAfterClickedIndex() {
+		this.formBuilderVc
+			.getPageVc(0)
+			.addSection({ title: 'A brand new section!' })
+		const { builderSectionVc } = await this.simulateAddSectionClick(0)
+
+		this.formVc = vcAssertUtil.assertCardContainsForm(builderSectionVc)
+
+		this.formVc.setValue('title', 'Now second section')
+		this.formVc.setValue('type', 'text')
+		this.formVc.setValue('text', 'What is up?')
+
+		await interactionUtil.submitForm(this.formVc)
+
+		const newSection = this.formBuilderVc.getPageVc(0).getSection(1)
+		assert.isEqual(newSection.title, 'Now second section')
+	}
+
+	private static async simulateAddSectionClick(clickedSectionIdx = 0) {
+		let builderSectionVc: EditFormBuilderSectionViewController | undefined
 		let dialogVc: DialogViewController | undefined
 
 		await vcAssertUtil.assertRendersDialog(
 			this.formBuilderVc,
-			() => this.formBuilderVc.handleClickAddSection(0),
+			() => this.formBuilderVc.handleClickAddSection(clickedSectionIdx),
 			(vc) => {
 				dialogVc = vc
-				builderSectionVc = vc.getCardVc() as EditBuilderSectionViewController
+				builderSectionVc =
+					vc.getCardVc() as EditFormBuilderSectionViewController
 			}
 		)
 		return {
-			builderSectionVc: builderSectionVc as EditBuilderSectionViewController,
+			builderSectionVc:
+				builderSectionVc as EditFormBuilderSectionViewController,
 			dialogVc: dialogVc as DialogViewController,
 		}
 	}

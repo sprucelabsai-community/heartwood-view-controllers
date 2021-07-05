@@ -5,7 +5,6 @@ import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
-import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
@@ -98,47 +97,52 @@ const vcAssertUtil = {
 		action: () => void | Promise<void>,
 		dialogHandler?: (dialogVc: DialogViewController) => void | Promise<void>
 	): Promise<{ dialogVc: DialogViewController }> {
-		let wasHit = false
-		let dialogVc: CardViewController | undefined
-
-		//@ts-ignore
-		const oldRenderInDialog = vc.renderInDialog.bind(vc)
-		//@ts-ignore
-		vc.renderInDialog = (...args: any[]) => {
-			dialogVc = oldRenderInDialog(...args)
-			return dialogVc
-		}
-
-		let dialogHandlerPromise: any
-
-		//@ts-ignore
-		vc.renderInDialogHandler = ({ controller }) => {
-			wasHit = true
-			//@ts-ignore
-			setTimeout(() => {
-				dialogHandlerPromise = dialogHandler?.(controller)
-			}, 0)
-		}
-
-		async function run() {
-			await action()
-			await wait()
-
-			assert.isTrue(
-				wasHit,
-				'this.renderInDialog() was not invoked in your view controller.'
-			)
-
-			await dialogHandlerPromise
-
-			return {
-				dialogVc,
-			}
-		}
-
 		return new Promise((resolve, reject) => {
+			let wasHit = false
+			let dialogVc: DialogViewController | undefined
+
 			//@ts-ignore
-			run().then(resolve).catch(reject)
+			const oldRenderInDialog = vc.renderInDialog.bind(vc)
+			//@ts-ignore
+			vc.renderInDialog = (...args: any[]) => {
+				dialogVc = oldRenderInDialog(...args)
+				return dialogVc
+			}
+
+			let dialogHandlerPromise: any
+
+			//@ts-ignore
+			vc.renderInDialogHandler = ({ controller }) => {
+				wasHit = true
+				//@ts-ignore
+				setTimeout(() => {
+					dialogHandlerPromise = dialogHandler?.(controller)
+				}, 0)
+			}
+
+			async function run() {
+				try {
+					await action()
+					await wait()
+
+					assert.isTrue(
+						wasHit,
+						'this.renderInDialog() was not invoked in your view controller.'
+					)
+
+					await dialogHandlerPromise
+
+					assert.isTruthy(dialogVc)
+
+					resolve({
+						dialogVc,
+					} as any)
+				} catch (err) {
+					reject(err)
+				}
+			}
+
+			void run()
 		})
 	},
 

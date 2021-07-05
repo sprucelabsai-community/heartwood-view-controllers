@@ -1,8 +1,9 @@
 import { Schema } from '@sprucelabs/schema'
+import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { FormViewController } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
-import { SimpleSection } from './EditBuilderSection.vc'
+import { SimpleRow, SimpleSection } from './EditBuilderSection.vc'
 import FormBuilderViewController from './FormBuilder.vc'
 
 export type FieldBuilder = FormBuilderViewController['buildField']
@@ -13,7 +14,11 @@ export type AddSectionOptions = Partial<SimpleSection> & {
 
 export interface FormBuilderPageViewControllerEnhancements {
 	addSection(options?: AddSectionOptions): void
-	addField(sectionIdx: number): void
+	updateSection(sectionIdx: number, section: AddSectionOptions): void
+	addField(
+		sectionIdx: number,
+		options?: { name?: string; type?: string; label?: string }
+	): void
 	getIndex(): number
 	getTitle(): string
 	setTitle(string: string): void
@@ -98,6 +103,22 @@ export class FormBuilderPageViewControllerImpl
 		return `field${totalFields + 1}`
 	}
 
+	public updateSection(sectionIdx: number, section: SimpleSection) {
+		const { title, fields, text, type, ...rest } = section
+
+		let updatedSection: SpruceSchemas.Heartwood.v2021_02_11.FormSection = {
+			title,
+			...rest,
+		}
+
+		if (text) {
+			updatedSection.text = { content: text }
+		}
+
+		this.formVc.updateSection(sectionIdx, updatedSection)
+		this.addFieldsToSection(sectionIdx, fields ?? [])
+	}
+
 	public addSection(options?: AddSectionOptions) {
 		let {
 			title = `Section ${this.formVc.getTotalSections() + 1}`,
@@ -119,24 +140,24 @@ export class FormBuilderPageViewControllerImpl
 			...rest,
 		})
 
-		{
-			for (const field of fields) {
-				//@ts-ignore
-				let fieldName = field.fieldLabel
-					? //@ts-ignore
-					  namesUtil.toCamel(field.fieldLabel)
-					: undefined
+		this.addFieldsToSection(this.formVc.getTotalSections() - 1, fields as any)
+	}
 
-				//@ts-ignore
-				let type = field.fieldType ?? 'text'
+	private addFieldsToSection(sectionIdx: number, fields: SimpleRow[]) {
+		for (const field of fields) {
+			let fieldName = field.fieldLabel
+				? namesUtil.toCamel(field.fieldLabel)
+				: undefined
 
-				this.addField(this.formVc.getTotalSections() - 1, {
-					name: fieldName,
-					type,
-					//@ts-ignore
-					label: field.fieldLabel,
-				})
-			}
+			//@ts-ignore
+			let type = field.fieldType ?? 'text'
+
+			this.addField(sectionIdx, {
+				name: fieldName,
+				type,
+				//@ts-ignore
+				label: field.fieldLabel,
+			})
 		}
 	}
 }

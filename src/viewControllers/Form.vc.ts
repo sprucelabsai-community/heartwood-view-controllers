@@ -13,6 +13,7 @@ import {
 	validateSchemaValues,
 	SchemaFieldsByName,
 	SchemaValues,
+	SpruceError as SchemaSpruceError,
 } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
 import { defaultSubmitButtonLabel } from '../constants'
@@ -296,6 +297,13 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	public updateSectionTitle(sectionIdx: number, title: string) {
+		this.updateSection(sectionIdx, {
+			...this.getSection(sectionIdx),
+			title,
+		})
+	}
+
 	public updateSection(sectionIdx: number, newSection: Section<S>) {
 		const missing: string[] = []
 
@@ -308,7 +316,7 @@ export default class FormViewController<
 		}
 
 		if (missing.length) {
-			throw new SpruceError({
+			throw new SchemaSpruceError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})
@@ -385,7 +393,10 @@ export default class FormViewController<
 		}
 
 		if (missing.length > 0) {
-			throw new SpruceError({ code: 'MISSING_PARAMETERS', parameters: missing })
+			throw new SchemaSpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: missing,
+			})
 		}
 
 		const schema = this.getSchema()

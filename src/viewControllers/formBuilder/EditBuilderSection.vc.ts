@@ -1,10 +1,16 @@
-import { buildSchema, SchemaValues, SpruceError } from '@sprucelabs/schema'
+import {
+	buildSchema,
+	SchemaValues,
+	SpruceError,
+	Schema,
+} from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
 import {
 	FormViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import CardViewController from '../Card.vc'
 import ListViewController, { ListRow } from '../list/List.vc'
 
@@ -57,11 +63,13 @@ const fieldTypes = {
 }
 
 export interface EditBuilderSectionOptions {
-	values: Partial<AddFormBuilder>
 	onDone: (section: SimpleSection) => void | Promise<void>
+	editSection?: SpruceSchemas.Heartwood.v2021_02_11.FormSection
+	pageSchema: Schema
+	defaultTitle: string
 }
 
-interface SimpleRow {
+export interface SimpleRow {
 	fieldLabel: string
 	fieldType: string
 }
@@ -75,7 +83,7 @@ export interface SimpleSection {
 	fields: SimpleRow[]
 }
 
-export default class EditBuilderSectionViewController extends CardViewController {
+export default class EditFormBuilderSectionViewController extends CardViewController {
 	private formVc: FormViewController<EditSectionSectionSchema>
 	private fieldListVc: ListViewController
 	private rows: SimpleRow[] = []
@@ -93,9 +101,35 @@ export default class EditBuilderSectionViewController extends CardViewController
 			})
 		}
 
-		this.onDoneHandler = options.onDone
+		const { onDone, editSection, defaultTitle, pageSchema } = options
 
-		this.rows.push(this.buildNextSimpleRow())
+		this.onDoneHandler = onDone
+
+		const values: Partial<AddFormBuilder> = {
+			title: defaultTitle,
+		}
+
+		if (editSection) {
+			values.title = editSection.title ?? 'My section title'
+			values.type = editSection.fields?.length ?? 0 > 0 ? 'form' : 'text'
+			if (editSection.text?.content) {
+				values.text = editSection.text?.content
+			}
+
+			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
+				editSection.fields ?? [],
+				pageSchema
+			)
+
+			for (const field of fields) {
+				this.rows.push({
+					fieldLabel: field.label ?? field.name,
+					fieldType: field.type,
+				})
+			}
+		} else {
+			this.rows.push(this.buildNextSimpleRow())
+		}
 
 		this.fieldListVc = this.vcFactory.Controller('list', {
 			columnWidths: ['fill'],
@@ -105,9 +139,7 @@ export default class EditBuilderSectionViewController extends CardViewController
 		this.formVc = this.vcFactory.Controller(
 			'form',
 			buildForm({
-				values: {
-					...options.values,
-				},
+				values,
 				schema: addSectionSchema,
 				shouldShowCancelButton: false,
 				submitButtonLabel: 'Done',
@@ -119,7 +151,7 @@ export default class EditBuilderSectionViewController extends CardViewController
 		)
 
 		this.model.header = {
-			title: 'Add section',
+			title: editSection?.title ?? 'Add section',
 			...this.model.header,
 		}
 	}
