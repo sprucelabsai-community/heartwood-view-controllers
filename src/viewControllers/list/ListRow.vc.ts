@@ -9,19 +9,22 @@ export default class ListRowViewController
 	private model: ListRow
 	private setValueHandler: (name: string, value: any) => void | Promise<void>
 	private getValuesHandler: () => Record<string, any>
+	private deleteRowHandler: () => void
 
 	public constructor(
 		options: ListRow & {
-			setValueHandler: (name: string, value: any) => void | Promise<void>
-			getValuesHandler: () => Record<string, any>
+			setValue: (name: string, value: any) => void | Promise<void>
+			getValues: () => Record<string, any>
+			deleteRow: () => void
 		}
 	) {
-		const { setValueHandler, getValuesHandler, ...model } = options
+		const { setValue, getValues, deleteRow, ...model } = options
 
 		this.model = model
 
-		this.setValueHandler = setValueHandler
-		this.getValuesHandler = getValuesHandler
+		this.setValueHandler = setValue
+		this.getValuesHandler = getValues
+		this.deleteRowHandler = deleteRow
 	}
 
 	public triggerRender() {}
@@ -80,5 +83,9 @@ export default class ListRowViewController
 			code: 'INVALID_PARAMETERS',
 			parameters: ['fieldName'],
 		})
+	}
+
+	public delete() {
+		this.deleteRowHandler()
 	}
 }

@@ -50,6 +50,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return this.model.rows
 	}
 
+	public addRows(rows: ListRow[]) {
+		for (const row of rows) {
+			this.addRow(row)
+		}
+	}
+
 	public addRow(row: ListRow & { atIndex?: number }): any {
 		if (!row) {
 			throw new SpruceError({
@@ -80,13 +86,16 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			this.assertValidRowIdx(rowIdx)
 
 			this._rowVcs[rowIdx] = new ListRowViewController({
-				setValueHandler: async (name: string, value: any) => {
+				setValue: async (name: string, value: any) => {
 					await this.setValue({ rowIdx, name, value })
 				},
-				getValuesHandler: () => {
+				getValues: () => {
 					return this.getRowValues(rowIdx)
 				},
 				...this.model.rows[rowIdx],
+				deleteRow: () => {
+					this.deleteRow(rowIdx)
+				},
 			})
 		}
 		return this._rowVcs[rowIdx]

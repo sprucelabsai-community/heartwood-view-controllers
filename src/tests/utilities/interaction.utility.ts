@@ -9,42 +9,47 @@ type CardVc = ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
 type FormVc = FormViewController<any>
 
 const interactionUtil = {
-	async click(onClick: (() => void | Promise<void>) | null | undefined) {
+	async click(
+		onClick: ((options?: any) => void | Promise<void>) | null | undefined,
+		options?: Record<string, any>
+	) {
 		assert.isFunction(onClick, 'Clicking failed because onClick is not set.')
 		//@ts-ignore
-		await onClick({
-			altKey: false,
-			bubbles: true,
-			button: 0,
-			buttons: 0,
-			cancelable: true,
-			clientX: 269,
-			clientY: 433,
-			ctrlKey: false,
-			currentTarget: `button.button.has_label`,
-			defaultPrevented: false,
-			detail: 9,
-			eventPhase: 3,
-			getModifierState: () => {},
-			isDefaultPrevented: () => {},
-			isPropagationStopped: () => {},
-			isTrusted: true,
-			metaKey: false,
-			movementX: 0,
-			movementY: 0,
-			nativeEvent: {},
-			pageX: 269,
-			pageY: 433,
-			relatedTarget: null,
-			screenX: 2317,
-			screenY: 612,
-			shiftKey: false,
-			target: `button.button.has_label`,
-			timeStamp: 19915.5,
-			title: 'Page 10',
-			type: 'click',
-			view: {},
-		})
+		await onClick(
+			options ?? {
+				altKey: false,
+				bubbles: true,
+				button: 0,
+				buttons: 0,
+				cancelable: true,
+				clientX: 269,
+				clientY: 433,
+				ctrlKey: false,
+				currentTarget: `button.button.has_label`,
+				defaultPrevented: false,
+				detail: 9,
+				eventPhase: 3,
+				getModifierState: () => {},
+				isDefaultPrevented: () => {},
+				isPropagationStopped: () => {},
+				isTrusted: true,
+				metaKey: false,
+				movementX: 0,
+				movementY: 0,
+				nativeEvent: {},
+				pageX: 269,
+				pageY: 433,
+				relatedTarget: null,
+				screenX: 2317,
+				screenY: 612,
+				shiftKey: false,
+				target: `button.button.has_label`,
+				timeStamp: 19915.5,
+				title: 'Page 10',
+				type: 'click',
+				view: {},
+			}
+		)
 	},
 
 	async clickPrimaryInFooter(vc: CardVc) {
@@ -80,7 +85,7 @@ const interactionUtil = {
 			`There is no button with type=destructive in this row to click!`
 		)
 
-		await this.click(destructiveButton.onClick)
+		await this.click(destructiveButton.onClick, { rowVc: vc })
 	},
 
 	async submitForm(vc: FormVc) {

@@ -644,4 +644,49 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			'cells[0].text.content': 'Bye there!',
 		})
 	}
+
+	@test()
+	protected static canDeletRow() {
+		this.add2Rows()
+
+		const rowVc1 = this.vc.getRowVc(0)
+		assert.doesInclude(this.render(rowVc1), {
+			'cells[0].text.content': 'Hey there!',
+		})
+
+		const rowVc2 = this.vc.getRowVc(1)
+		assert.doesInclude(this.render(rowVc2), {
+			'cells[0].text.content': 'Bye there!',
+		})
+
+		rowVc1.delete()
+
+		const newRow1 = this.vc.getRowVc(0)
+		assert.doesInclude(this.render(newRow1), {
+			'cells[0].text.content': 'Bye there!',
+		})
+	}
+
+	private static add2Rows() {
+		this.vc.addRows([
+			{
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			},
+			{
+				cells: [
+					{
+						text: {
+							content: 'Bye there!',
+						},
+					},
+				],
+			},
+		])
+	}
 }

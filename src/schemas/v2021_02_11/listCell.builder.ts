@@ -1,4 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
+import {
+	buildLocalTypesImport,
+	buildRemoteTypesImport,
+} from '../../utilities/importBuilder'
 import buttonBuilder from './button.builder'
 import textInputBuilder from './forms/textInput.builder'
 import lineIconBuilder from './lineIcon.builder'
@@ -9,6 +13,8 @@ export default buildSchema({
 	id: 'listCell',
 	name: 'List Cell',
 	description: '',
+	importsWhenLocal: buildLocalTypesImport(),
+	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
 		text: {
 			type: 'schema',
@@ -32,7 +38,28 @@ export default buildSchema({
 			type: 'schema',
 			label: 'Button',
 			options: {
-				schema: buttonBuilder,
+				schema: {
+					id: 'listCellButton',
+					fields: {
+						...buttonBuilder.fields,
+						onClick: {
+							type: 'raw',
+							label: 'Cell button click handler',
+							options: {
+								valueType:
+									'(options: { rowVc: HeartwoodTypes.ListRowViewController }) => void | Promise<void>',
+							},
+						},
+						onKeyDown: {
+							type: 'raw',
+							label: 'Cell button key down handler',
+							options: {
+								valueType:
+									'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => void | Promise<void>',
+							},
+						},
+					},
+				},
 			},
 		},
 		lineIcon: {
