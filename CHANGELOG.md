@@ -1,3 +1,10 @@
+# [16.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.3.0...v16.4.0) (2021-07-05)
+
+
+### Features
+
+* editing a form builder section ([5505207](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5505207))
+
 # [16.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.2.0...v16.3.0) (2021-07-05)
 
 
