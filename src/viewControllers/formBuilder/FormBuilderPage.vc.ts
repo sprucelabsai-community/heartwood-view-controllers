@@ -106,6 +106,9 @@ export class FormBuilderPageViewControllerImpl
 	public updateSection(sectionIdx: number, section: SimpleSection) {
 		const { title, fields, text, ...rest } = section
 
+		//@ts-ignore
+		delete rest.type
+
 		let updatedSection: SpruceSchemas.Heartwood.v2021_02_11.FormSection = {
 			title,
 			...rest,
