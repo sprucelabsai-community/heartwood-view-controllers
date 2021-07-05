@@ -1,3 +1,10 @@
+# [16.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.2.0...v16.3.0) (2021-07-05)
+
+
+### Features
+
+* confirm delete section field ([1e6ea13](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1e6ea13))
+
 # [16.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.1.0...v16.2.0) (2021-07-05)
 
 
