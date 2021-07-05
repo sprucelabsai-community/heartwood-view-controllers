@@ -1,3 +1,10 @@
+# [16.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.1.0...v16.2.0) (2021-07-05)
+
+
+### Features
+
+* enhanched row button click and keydown handling. rowVc.delete() ([f5420ac](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f5420ac))
+
 # [16.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.0.10...v16.1.0) (2021-07-03)
 
 
