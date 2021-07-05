@@ -10,21 +10,24 @@ export default class ListRowViewController
 	private setValueHandler: (name: string, value: any) => void | Promise<void>
 	private getValuesHandler: () => Record<string, any>
 	private deleteRowHandler: () => void
+	private _isLastRow: boolean
 
 	public constructor(
 		options: ListRow & {
 			setValue: (name: string, value: any) => void | Promise<void>
 			getValues: () => Record<string, any>
 			deleteRow: () => void
+			isLastRow: boolean
 		}
 	) {
-		const { setValue, getValues, deleteRow, ...model } = options
+		const { setValue, getValues, deleteRow, isLastRow, ...model } = options
 
 		this.model = model
 
 		this.setValueHandler = setValue
 		this.getValuesHandler = getValues
 		this.deleteRowHandler = deleteRow
+		this._isLastRow = isLastRow
 	}
 
 	public triggerRender() {}
@@ -83,6 +86,10 @@ export default class ListRowViewController
 			code: 'INVALID_PARAMETERS',
 			parameters: ['fieldName'],
 		})
+	}
+
+	public isLastRow(): boolean {
+		return this._isLastRow
 	}
 
 	public delete() {

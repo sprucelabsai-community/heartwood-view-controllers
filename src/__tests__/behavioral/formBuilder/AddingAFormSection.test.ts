@@ -178,19 +178,38 @@ export default class AddingAFormSectionTest extends AbstractViewControllerTest {
 		this.vc.addField()
 
 		const listVc = this.vc.getFieldListVc()
-		let rowVc = listVc.getRowVc(2)
-		assert.isEqual(rowVc.getValue('fieldName'), 'Field 3')
 
+		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 3')
+		assert.isEqual(listVc.getTotalRows(), 4)
+
+		let rowVc = listVc.getRowVc(2)
 		await interactionUtil.clickOnDestructiveButton(rowVc)
+
+		//clicking cancel on confirmation
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			({ isDestructive }) => {
+				assert.isTrue(isDestructive)
+
+				return false
+			}
+		)
+
+		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 3')
+		assert.isEqual(listVc.getTotalRows(), 4)
+
+		//clicking confirm on confirmation
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => {
+				return true
+			}
+		)
 
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 4')
 		assert.isEqual(listVc.getTotalRows(), 3)
-
-		rowVc = listVc.getRowVc(2)
-
-		await interactionUtil.clickOnDestructiveButton(rowVc)
-
-		assert.isEqual(listVc.getTotalRows(), 2)
 	}
 
 	@test()

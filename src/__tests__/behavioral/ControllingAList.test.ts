@@ -667,6 +667,13 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static rowsVcsKnowIfTheyAreTheLastRow() {
+		this.add2Rows()
+		assert.isFalse(this.vc.getRowVc(0).isLastRow())
+		assert.isTrue(this.vc.getRowVc(1).isLastRow())
+	}
+
 	private static add2Rows() {
 		this.vc.addRows([
 			{

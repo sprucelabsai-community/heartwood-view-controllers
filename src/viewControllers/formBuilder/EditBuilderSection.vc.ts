@@ -250,9 +250,14 @@ export default class EditBuilderSectionViewController extends CardViewController
 					button: {
 						lineIcon: 'delete',
 						type: 'destructive',
-						onClick: () => {
-							this.rows.splice(options.idx, 1)
-							this.rebuildList()
+						onClick: async ({ rowVc }) => {
+							const shouldDelete = await this.confirm({
+								title: 'Are you sure?',
+								isDestructive: true,
+							})
+							if (shouldDelete) {
+								rowVc.delete()
+							}
 						},
 					},
 				},

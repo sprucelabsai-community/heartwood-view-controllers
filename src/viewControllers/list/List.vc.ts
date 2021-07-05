@@ -92,10 +92,11 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 				getValues: () => {
 					return this.getRowValues(rowIdx)
 				},
-				...this.model.rows[rowIdx],
 				deleteRow: () => {
 					this.deleteRow(rowIdx)
 				},
+				isLastRow: rowIdx == this.getTotalRows() - 1,
+				...this.model.rows[rowIdx],
 			})
 		}
 		return this._rowVcs[rowIdx]

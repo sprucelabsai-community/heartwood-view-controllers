@@ -65,24 +65,30 @@ const vcAssertUtil = {
 		action: () => void | Promise<void>,
 		confirmHandler?: (options: ConfirmOptions) => boolean | Promise<boolean>
 	) {
-		let wasHit = false
-
-		//@ts-ignore
-		vc.confirm = async (options: ConfirmOptions) => {
-			wasHit = true
-			return confirmHandler?.(options) ?? true
-		}
-
-		async function run() {
-			await action()
-			await wait()
-			assert.isTrue(
-				wasHit,
-				'this.confirm() was not invoked in your view controller.'
-			)
-		}
-
 		return new Promise((resolve, reject) => {
+			let wasHit = false
+
+			//@ts-ignore
+			vc.confirm = async (options: ConfirmOptions) => {
+				try {
+					wasHit = true
+					const results = confirmHandler?.(options) ?? true
+
+					return results
+				} catch (err) {
+					reject(err)
+				}
+			}
+
+			async function run() {
+				await action()
+				await wait()
+				assert.isTrue(
+					wasHit,
+					'this.confirm() was not invoked in your view controller.'
+				)
+			}
+
 			run().then(resolve).catch(reject)
 		})
 	},
