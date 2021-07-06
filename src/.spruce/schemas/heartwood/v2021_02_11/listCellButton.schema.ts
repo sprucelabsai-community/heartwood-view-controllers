@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import dropdownSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/dropdown.schema'
+
 
 const listCellButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSchema  = {
 	id: 'listCellButton',
@@ -76,12 +76,6 @@ const listCellButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSc
 	                label: 'Cell button click handler',
 	                type: 'raw',
 	                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController }) => void | Promise<void>`,}
-	            },
-	            /** Dropdown. */
-	            'dropdown': {
-	                label: 'Dropdown',
-	                type: 'schema',
-	                options: {schema: dropdownSchema_v2021_02_11,}
 	            },
 	            /** Cell button key down handler. */
 	            'onKeyDown': {

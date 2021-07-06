@@ -1,10 +1,9 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { lineIconFields } from '../../constants'
+import { buttonFields, lineIconFields } from '../../constants'
 import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
-import buttonBuilder from './button.builder'
 import textInputBuilder from './forms/textInput.builder'
 import selectInputBuilder from './selectInput.builder'
 import textBuilder from './text.builder'
@@ -41,7 +40,7 @@ export default buildSchema({
 				schema: {
 					id: 'listCellButton',
 					fields: {
-						...buttonBuilder.fields,
+						...buttonFields,
 						onClick: {
 							type: 'raw',
 							label: 'Cell button click handler',
