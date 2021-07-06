@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -31,6 +31,6 @@ const textSchema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(textSchema)
+
 
 export default textSchema

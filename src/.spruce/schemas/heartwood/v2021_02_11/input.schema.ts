@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -54,6 +54,6 @@ const inputSchema: SpruceSchemas.Heartwood.v2021_02_11.InputSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(inputSchema)
+
 
 export default inputSchema

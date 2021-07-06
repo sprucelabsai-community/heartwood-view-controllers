@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -59,6 +59,6 @@ const cardHeaderSchema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema  = 
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(cardHeaderSchema)
+
 
 export default cardHeaderSchema

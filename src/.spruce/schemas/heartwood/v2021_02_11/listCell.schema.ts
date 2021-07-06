@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
@@ -57,6 +57,6 @@ const listCellSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(listCellSchema)
+
 
 export default listCellSchema

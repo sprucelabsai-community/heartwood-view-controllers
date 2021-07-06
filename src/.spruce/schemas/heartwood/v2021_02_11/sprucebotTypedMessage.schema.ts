@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import sprucebotTypedMessageSentenceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageSentence.schema'
@@ -56,6 +56,6 @@ const sprucebotTypedMessageSchema: SpruceSchemas.Heartwood.v2021_02_11.Sprucebot
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(sprucebotTypedMessageSchema)
+
 
 export default sprucebotTypedMessageSchema

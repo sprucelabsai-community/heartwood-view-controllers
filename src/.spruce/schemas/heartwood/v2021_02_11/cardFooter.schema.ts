@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/button.schema'
@@ -45,6 +45,6 @@ const cardFooterSchema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema  = 
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(cardFooterSchema)
+
 
 export default cardFooterSchema

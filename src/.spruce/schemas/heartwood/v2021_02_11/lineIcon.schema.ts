@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -19,6 +19,6 @@ const lineIconSchema: SpruceSchemas.Heartwood.v2021_02_11.LineIconSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(lineIconSchema)
+
 
 export default lineIconSchema

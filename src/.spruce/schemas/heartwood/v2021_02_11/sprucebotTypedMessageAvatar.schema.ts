@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -28,6 +28,6 @@ const sprucebotTypedMessageAvatarSchema: SpruceSchemas.Heartwood.v2021_02_11.Spr
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(sprucebotTypedMessageAvatarSchema)
+
 
 export default sprucebotTypedMessageAvatarSchema

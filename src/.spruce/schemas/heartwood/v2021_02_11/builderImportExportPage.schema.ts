@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import formSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/formSection.schema'
@@ -33,6 +33,6 @@ const builderImportExportPageSchema: SpruceSchemas.Heartwood.v2021_02_11.Builder
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(builderImportExportPageSchema)
+
 
 export default builderImportExportPageSchema

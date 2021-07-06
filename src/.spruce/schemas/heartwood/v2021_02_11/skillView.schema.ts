@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import layoutSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/layout.schema'
@@ -33,6 +33,6 @@ const skillViewSchema: SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(skillViewSchema)
+
 
 export default skillViewSchema

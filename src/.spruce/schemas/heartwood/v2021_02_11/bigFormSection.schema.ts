@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
@@ -63,6 +63,6 @@ const bigFormSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSc
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(bigFormSectionSchema)
+
 
 export default bigFormSectionSchema

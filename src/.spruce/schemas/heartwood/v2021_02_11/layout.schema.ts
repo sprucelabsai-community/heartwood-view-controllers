@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
@@ -40,6 +40,6 @@ const layoutSchema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema  = {
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(layoutSchema)
+
 
 export default layoutSchema

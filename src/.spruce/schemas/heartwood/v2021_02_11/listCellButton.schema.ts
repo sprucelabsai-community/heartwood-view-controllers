@@ -1,4 +1,4 @@
-import { SchemaRegistry } from '@sprucelabs/schema'
+
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -86,6 +86,6 @@ const listCellButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSc
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(listCellButtonSchema)
+
 
 export default listCellButtonSchema

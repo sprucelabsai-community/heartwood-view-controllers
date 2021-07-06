@@ -17,7 +17,7 @@
   "skill": {
     "namespace": "heartwood",
     "commandOverrides": {
-      "sync.schemas": "--fetchCoreSchemas false"
+      "sync.schemas": "--fetchCoreSchemas false --registerBuiltSchemas false"
     }
   },
   "keywords": [
