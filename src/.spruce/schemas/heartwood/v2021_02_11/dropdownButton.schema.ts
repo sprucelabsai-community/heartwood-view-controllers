@@ -1,13 +1,13 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import dropdownSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/dropdown.schema'
 
-const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
-	id: 'button',
+
+const dropdownButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema  = {
+	id: 'dropdownButton',
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
-	name: 'Button',
+	name: '',
 	    fields: {
 	            /** Label. */
 	            'label': {
@@ -77,15 +77,9 @@ const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
 	                type: 'raw',
 	                options: {valueType: `() => Promise<void> | void`,}
 	            },
-	            /** Dropdown. */
-	            'dropdown': {
-	                label: 'Dropdown',
-	                type: 'schema',
-	                options: {schema: dropdownSchema_v2021_02_11,}
-	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(buttonSchema)
+SchemaRegistry.getInstance().trackSchema(dropdownButtonSchema)
 
-export default buttonSchema
+export default dropdownButtonSchema

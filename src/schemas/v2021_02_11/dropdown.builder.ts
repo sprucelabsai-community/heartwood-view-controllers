@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { buttonFields } from '../../constants'
 
 export default buildSchema({
 	id: 'dropdown',
@@ -29,10 +30,11 @@ export default buildSchema({
 			type: 'schema',
 			isArray: true,
 			options: {
-				schemaId: {
-					id: 'button',
-					namespace: 'Heartwood',
-					version: 'v2021_02_11',
+				schema: {
+					id: 'dropdownButton',
+					fields: {
+						...buttonFields,
+					},
 				},
 			},
 		},

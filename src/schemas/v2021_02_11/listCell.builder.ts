@@ -1,11 +1,11 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { lineIconFields } from '../../constants'
 import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
 import buttonBuilder from './button.builder'
 import textInputBuilder from './forms/textInput.builder'
-import lineIconBuilder from './lineIcon.builder'
 import selectInputBuilder from './selectInput.builder'
 import textBuilder from './text.builder'
 
@@ -66,7 +66,7 @@ export default buildSchema({
 			type: 'select',
 			label: 'Line icon',
 			options: {
-				...lineIconBuilder.fields.name.options,
+				...(lineIconFields.name.options as any),
 			},
 		},
 		textInput: {

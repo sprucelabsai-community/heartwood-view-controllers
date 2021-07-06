@@ -1,3 +1,5 @@
+import { SchemaFieldsByName } from '@sprucelabs/schema'
+
 export const lineIcons = [
 	'sprucebot',
 	'add-circle',
@@ -584,3 +586,94 @@ export const fancyIcons = [
 ] as const
 
 export const defaultSubmitButtonLabel = 'Go!'
+
+export const lineIconFields: SchemaFieldsByName = {
+	name: {
+		type: 'select',
+		label: 'Name',
+		isRequired: true,
+		options: {
+			choices: lineIcons.map((i) => ({
+				value: i,
+				label: i,
+			})),
+		},
+	},
+}
+
+export const buttonFields: SchemaFieldsByName = {
+	label: {
+		type: 'text',
+		label: 'Label',
+	},
+	controller: {
+		type: 'raw',
+		options: {
+			valueType: 'HeartwoodTypes.ButtonController',
+		},
+	},
+	isSelected: {
+		type: 'boolean',
+		label: 'Selected',
+	},
+	isEnabled: {
+		type: 'boolean',
+		label: 'Selected',
+		defaultValue: true,
+	},
+	shouldQueueShow: {
+		type: 'boolean',
+		label: 'Add to fade-in queue.',
+		hint: 'Fade in effect could change.',
+	},
+	shouldShowHintIcon: {
+		type: 'boolean',
+		label: 'Show hint icon',
+	},
+	onClickHintIcon: {
+		type: 'raw',
+		label: 'Click handler for hint icon',
+		options: {
+			valueType: '() => Promise<void> | void',
+		},
+	},
+	type: {
+		type: 'select',
+		label: 'Type',
+		defaultValue: 'secondary',
+		options: {
+			choices: [
+				{
+					value: 'primary',
+					label: 'Primary',
+				},
+				{
+					value: 'secondary',
+					label: 'Secondary',
+				},
+				{
+					value: 'destructive',
+					label: 'Destructive',
+				},
+			],
+		},
+	},
+	image: {
+		type: 'text',
+		label: 'Image',
+	},
+	lineIcon: {
+		type: 'select',
+		label: 'Line icon',
+		options: {
+			...(lineIconFields.name.options as any),
+		},
+	},
+	onClick: {
+		type: 'raw',
+		label: 'Click handler',
+		options: {
+			valueType: '() => Promise<void> | void',
+		},
+	},
+}
