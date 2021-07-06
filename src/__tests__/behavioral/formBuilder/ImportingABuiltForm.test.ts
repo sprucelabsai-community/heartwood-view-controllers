@@ -2,9 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
-import FormBuilderViewController, {
-	FormBuilderImportExportObject,
-} from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
 
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
