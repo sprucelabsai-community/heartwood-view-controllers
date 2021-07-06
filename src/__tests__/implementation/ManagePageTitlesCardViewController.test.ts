@@ -116,7 +116,11 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
-		await interactionUtil.clickOnDestructiveButton(rowVc)
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => true
+		)
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 3)
 
@@ -124,6 +128,26 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		assert.isEqual(rowVc.getValue('title'), 'Page 4')
 
 		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 3)
+	}
+
+	@test()
+	protected static async clickingDestructiveButtonInRowAndCancellingDoesNothing() {
+		await this.formBuilderVc.addPage({ title: 'Page 2' })
+		await this.formBuilderVc.addPage({ title: 'Page 3' })
+		await this.formBuilderVc.addPage({ title: 'Page 4' })
+
+		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
+		let rowVc = this.vc.getListVc().getRowVc(2)
+		assert.isEqual(rowVc.getValue('title'), 'Page 3')
+
+		await vcAssertUtil.assertRendersConfirm(
+			this.vc,
+			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => false
+		)
+
+		assert.isEqual(this.formBuilderVc.getTotalPages(), 4)
+		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
 	}
 
 	@test()

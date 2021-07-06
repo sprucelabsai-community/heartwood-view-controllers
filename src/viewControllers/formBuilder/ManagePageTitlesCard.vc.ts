@@ -97,8 +97,15 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 							lineIcon: 'delete',
 							type: 'destructive',
 							onClick: async () => {
-								await this.formBuilderVc.removePage(page.getIndex())
-								this.listVc.updateRows(this.buildRows())
+								const didConfirm = await this.confirm({
+									isDestructive: true,
+									title: 'Are you sure?',
+								})
+
+								if (didConfirm) {
+									await this.formBuilderVc.removePage(page.getIndex())
+									this.listVc.updateRows(this.buildRows())
+								}
 							},
 						},
 					},

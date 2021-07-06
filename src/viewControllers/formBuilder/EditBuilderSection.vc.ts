@@ -1,16 +1,11 @@
-import {
-	buildSchema,
-	SchemaValues,
-	SpruceError,
-	Schema,
-} from '@sprucelabs/schema'
+import { buildSchema, SchemaValues, SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
 import {
 	FormViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
-import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import CardViewController from '../Card.vc'
 import ListViewController, { ListRow } from '../list/List.vc'
 
@@ -51,7 +46,8 @@ const addSectionSchema = buildSchema({
 	},
 })
 export type EditSectionSectionSchema = typeof addSectionSchema
-type AddFormBuilder = SchemaValues<EditSectionSectionSchema>
+export type EditFormBuilderSectionValues =
+	SchemaValues<EditSectionSectionSchema>
 
 type Section =
 	SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditSectionSectionSchema>
@@ -64,23 +60,18 @@ const fieldTypes = {
 
 export interface EditBuilderSectionOptions {
 	onDone: (section: SimpleSection) => void | Promise<void>
-	editSection?: SpruceSchemas.Heartwood.v2021_02_11.FormSection
-	pageSchema: Schema
+	editSection?: SimpleSection
 	defaultTitle: string
 }
 
 export interface SimpleRow {
-	fieldLabel: string
-	fieldType: string
+	label: string
+	type: string
+	name: string
 }
 
-export interface SimpleSection {
-	title: string
-	subtitle?: string
-	shouldRenderAsGrid: boolean
-	type: 'text' | 'form'
-	text?: string
-	fields: SimpleRow[]
+export type SimpleSection = EditFormBuilderSectionValues & {
+	fields?: SimpleRow[]
 }
 
 export default class EditFormBuilderSectionViewController extends CardViewController {
@@ -101,31 +92,28 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 			})
 		}
 
-		const { onDone, editSection, defaultTitle, pageSchema } = options
+		const { onDone, editSection, defaultTitle } = options
 
 		this.onDoneHandler = onDone
 
-		const values: Partial<AddFormBuilder> = {
+		const values: Partial<EditFormBuilderSectionValues> = {
 			title: defaultTitle,
 		}
 
 		if (editSection) {
 			values.title = editSection.title ?? 'My section title'
-			values.type = editSection.fields?.length ?? 0 > 0 ? 'form' : 'text'
-			if (editSection.text?.content) {
-				values.text = editSection.text?.content
+			values.type = editSection.type
+
+			if (values.type === 'form') {
+				values.shouldRenderAsGrid = editSection.shouldRenderAsGrid
 			}
 
-			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
-				editSection.fields ?? [],
-				pageSchema
-			)
+			if (editSection.text) {
+				values.text = editSection.text
+			}
 
-			for (const field of fields) {
-				this.rows.push({
-					fieldLabel: field.label ?? field.name,
-					fieldType: field.type,
-				})
+			for (const field of editSection.fields ?? []) {
+				this.rows.push(field)
 			}
 		} else {
 			this.rows.push(this.buildNextSimpleRow())
@@ -167,13 +155,17 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	}
 
 	private buildNextSimpleRow(): SimpleRow {
+		const label = `Field ${this.rows.length + 1}`
 		return {
-			fieldLabel: `Field ${this.rows.length + 1}`,
-			fieldType: 'text',
+			label,
+			type: 'text',
+			name: namesUtil.toCamel(label),
 		}
 	}
 
-	private buildFormSections(forType?: AddFormBuilder['type']): Section[] {
+	private buildFormSections(
+		forType?: EditFormBuilderSectionValues['type']
+	): Section[] {
 		const type = forType ?? this.formVc.getValue('type')
 
 		const sections: Section[] = [
@@ -204,7 +196,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	}
 
 	private buildFooter(
-		forType?: AddFormBuilder['type']
+		forType?: EditFormBuilderSectionValues['type']
 	): SpruceSchemas.Heartwood.v2021_02_11.CardFooter | undefined {
 		const type = forType ?? this.formVc.getValue('type')
 
@@ -253,10 +245,10 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 					textInput: {
 						name: 'fieldName',
 						isRequired: true,
-						value: options.fieldLabel,
+						value: options.label,
 						onChange: (value) => {
 							if (value) {
-								this.rows[options.idx].fieldLabel = value
+								this.rows[options.idx].label = value
 							}
 						},
 					},
@@ -265,7 +257,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 					selectInput: {
 						name: 'fieldType',
 						isRequired: true,
-						value: options.fieldType,
+						value: options.type,
 						choices: Object.keys(fieldTypes).map((key) => ({
 							//@ts-ignore
 							label: fieldTypes[key],
@@ -273,7 +265,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 						})),
 						onChange: (value) => {
 							if (value) {
-								this.rows[options.idx].fieldType = value
+								this.rows[options.idx].type = value
 							}
 						},
 					},

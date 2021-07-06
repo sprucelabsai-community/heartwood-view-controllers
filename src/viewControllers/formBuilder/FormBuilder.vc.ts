@@ -7,6 +7,7 @@ import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import EditFormBuilderSectionViewController, {
 	EditBuilderSectionOptions,
+	SimpleSection,
 } from './EditBuilderSection.vc'
 import {
 	FormBuilderPageViewController,
@@ -166,6 +167,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			title: slide.title ?? '**MISSING**',
 			index: idx,
 			fieldBuilder: this.buildField.bind(this),
+			schema: formVc.getSchema(),
 		}) as any
 	}
 
@@ -286,7 +288,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	public EditSectionVc(options: {
 		onDone: EditBuilderSectionOptions['onDone']
-		editingSection?: SpruceSchemas.Heartwood.v2021_02_11.FormSection
+		editingSection?: SimpleSection
 	}) {
 		const { onDone, editingSection } = options
 

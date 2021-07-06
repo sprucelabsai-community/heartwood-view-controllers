@@ -1,5 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -254,8 +255,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		const section = pageVc.getSection(1)
 		assert.isLength(section.fields, 1)
-		//@ts-ignore
-		assert.isEqualDeep(section.fields, [{ name: 'field2' }])
+		assert.isEqualDeep(section.fields, [
+			{ name: 'field2', label: 'Field 2', type: 'text' },
+		])
 	}
 
 	@test()
@@ -604,6 +606,32 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static gettingABadSectionFails() {
+		const err = assert.doesThrow(() => this.vc.getPageVc(0).getSection(-1))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIdx'],
+		})
+	}
+
+	@test()
+	protected static canGetSection() {
+		const section = this.vc.getPageVc(0).getSection(0)
+		assert.isTruthy(section)
+	}
+
+	@test()
+	protected static byDefaultSectionHasField1() {
+		const section = this.vc.getPageVc(0).getSection(0)
+
+		assert.isEqualDeep(section, {
+			title: 'Section 1',
+			shouldRenderAsGrid: false,
+			type: 'form',
+			fields: [{ name: 'field1', type: 'text', label: 'Field 1' }],
+		})
+	}
+
+	@test()
 	protected static async handlesClickingPageTitles() {
 		assert.isFunction(this.vc.handleClickPageTitles)
 
@@ -634,8 +662,10 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isEqual(model.schema.fields.field1.label, 'Field 1')
 
 		const section = pageVc.getSection(0)
-		//@ts-ignore
-		assert.isEqualDeep(section.fields, [{ name: 'field1' }])
+
+		assert.isEqualDeep(section.fields, [
+			{ name: 'field1', label: 'Field 1', type: 'text' },
+		])
 	}
 
 	private static renderVc() {

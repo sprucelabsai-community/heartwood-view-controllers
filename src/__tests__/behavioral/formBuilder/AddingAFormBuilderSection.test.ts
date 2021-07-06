@@ -169,8 +169,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		//@ts-ignore
 		assert.isEqualDeep(this.vc.rows, [
 			{
-				fieldLabel: 'Waka',
-				fieldType: 'phone',
+				label: 'Waka',
+				type: 'phone',
+				name: 'field1',
 			},
 		])
 	}
@@ -255,16 +256,19 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			text: undefined,
 			fields: [
 				{
-					fieldLabel: 'Field 1',
-					fieldType: 'text',
+					label: 'Field 1',
+					name: 'field1',
+					type: 'text',
 				},
 				{
-					fieldLabel: 'Field 2',
-					fieldType: 'text',
+					label: 'Field 2',
+					name: 'field2',
+					type: 'text',
 				},
 				{
-					fieldLabel: 'Field 3',
-					fieldType: 'text',
+					label: 'Field 3',
+					name: 'field3',
+					type: 'text',
 				},
 			],
 		})
@@ -285,20 +289,24 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			text: 'how are you?',
 			fields: [
 				{
-					fieldLabel: 'Field 1',
-					fieldType: 'text',
+					label: 'Field 1',
+					name: 'field1',
+					type: 'text',
 				},
 				{
-					fieldLabel: 'Field 2',
-					fieldType: 'text',
+					label: 'Field 2',
+					name: 'field2',
+					type: 'text',
 				},
 				{
-					fieldLabel: 'Field 3',
-					fieldType: 'text',
+					label: 'Field 3',
+					name: 'field3',
+					type: 'text',
 				},
 				{
-					fieldLabel: 'Field 4',
-					fieldType: 'text',
+					label: 'Field 4',
+					name: 'field4',
+					type: 'text',
 				},
 			],
 		})
@@ -325,19 +333,22 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqualDeep(newSection, {
 			title: 'My new section',
 			shouldRenderAsGrid: true,
-			text: undefined,
+			type: 'form',
 			fields: [
 				{
-					//@ts-ignore
 					name: 'field1',
+					label: 'Field 1',
+					type: 'text',
 				},
 				{
-					//@ts-ignore
 					name: 'field2',
+					label: 'Field 2',
+					type: 'text',
 				},
 				{
-					//@ts-ignore
 					name: 'field3',
+					label: 'Field 3',
+					type: 'text',
 				},
 			],
 		})
@@ -363,7 +374,8 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqualDeep(newSection, {
 			title: 'My second section',
 			shouldRenderAsGrid: true,
-			text: { content: 'What is up?' },
+			text: 'What is up?',
+			type: 'text',
 		})
 	}
 

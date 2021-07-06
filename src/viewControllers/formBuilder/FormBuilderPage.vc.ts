@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { FormViewController } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import { SimpleRow, SimpleSection } from './EditBuilderSection.vc'
 import FormBuilderViewController from './FormBuilder.vc'
 
@@ -14,7 +15,7 @@ export type AddSectionOptions = Partial<SimpleSection> & {
 
 export interface FormBuilderPageViewControllerEnhancements {
 	addSection(options?: AddSectionOptions): void
-	updateSection(sectionIdx: number, section: AddSectionOptions): void
+	updateSection(sectionIdx: number, section: SimpleSection): void
 	addField(
 		sectionIdx: number,
 		options?: { name?: string; type?: string; label?: string }
@@ -22,6 +23,7 @@ export interface FormBuilderPageViewControllerEnhancements {
 	getIndex(): number
 	getTitle(): string
 	setTitle(string: string): void
+	getSection(sectionIdx: number): SimpleSection
 }
 
 export type FormBuilderPageViewController = Omit<
@@ -38,6 +40,7 @@ export class FormBuilderPageViewControllerImpl
 	public index: number
 	private title: string
 	private setTitleHandler: (title: string) => void
+	private schema: Schema
 
 	public constructor(options: {
 		formVc: FormViewController<Schema>
@@ -45,12 +48,15 @@ export class FormBuilderPageViewControllerImpl
 		title: string
 		fieldBuilder: FieldBuilder
 		setTitleHandler: (title: string) => void
+		schema: Schema
 	}) {
-		const { formVc, fieldBuilder, index, setTitleHandler, title } = options
+		const { formVc, fieldBuilder, index, setTitleHandler, title, schema } =
+			options
 
 		this.formVc = formVc
 		this.index = index
 		this.title = title
+		this.schema = schema
 		this.setTitleHandler = setTitleHandler
 		this.fieldBuilder = fieldBuilder
 		introspectionUtil.delegateFunctionCalls(this, formVc)
@@ -146,20 +152,51 @@ export class FormBuilderPageViewControllerImpl
 		this.addFieldsToSection(this.formVc.getTotalSections() - 1, fields as any)
 	}
 
+	public getSection(sectionIdx: number): SimpleSection {
+		const section = this.formVc.getSection(sectionIdx)
+
+		const simpleSection: SimpleSection = {
+			title: section.title ?? 'MISSING TITLE',
+			type: section.text?.content ? 'text' : 'form',
+			shouldRenderAsGrid: section.shouldRenderAsGrid ?? false,
+		}
+
+		const fields = normalizeFormSectionFieldNamesUtil.toObjects(
+			section.fields ?? [],
+			this.schema
+		)
+
+		if (simpleSection.type === 'text') {
+			simpleSection.text = section.text?.content ?? ''
+		}
+
+		for (const field of fields) {
+			if (!simpleSection.fields) {
+				simpleSection.fields = []
+			}
+
+			simpleSection.fields.push({
+				name: field.name,
+				label: field.label ?? field.name,
+				type: field.type,
+			})
+		}
+
+		return simpleSection
+	}
+
 	private addFieldsToSection(sectionIdx: number, fields: SimpleRow[]) {
 		for (const field of fields) {
-			let fieldName = field.fieldLabel
-				? namesUtil.toCamel(field.fieldLabel)
-				: undefined
+			let fieldName = field.label ? namesUtil.toCamel(field.label) : undefined
 
 			//@ts-ignore
-			let type = field.fieldType ?? 'text'
+			let type = field.type ?? 'text'
 
 			this.addField(sectionIdx, {
 				name: fieldName,
 				type,
 				//@ts-ignore
-				label: field.fieldLabel,
+				label: field.label,
 			})
 		}
 	}

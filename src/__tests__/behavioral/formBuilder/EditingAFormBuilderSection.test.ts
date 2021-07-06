@@ -41,6 +41,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		pageVc.updateSection(0, {
 			title: 'My section title',
+			type: 'text',
 			text,
 		})
 
@@ -74,6 +75,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		assert.isEqualDeep(formVc.getValues(), {
 			title: 'My form section title',
 			type: 'form',
+			shouldRenderAsGrid: false,
 		})
 
 		const listVc = builderSectionVc.getFieldListVc()
@@ -101,6 +103,18 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	}
 
 	@test()
+	protected static async populatesRenderAsGrid() {
+		const pageVc = this.formBuilderVc.getPageVc(0)
+		const section = pageVc.getSection(0)
+		section.shouldRenderAsGrid = true
+		pageVc.updateSection(0, section)
+
+		const { formVc } = await this.simulateEditSectionClick(0)
+
+		assert.isTrue(formVc.getValue('shouldRenderAsGrid'))
+	}
+
+	@test()
 	protected static async savesChanges() {
 		const { formVc, dialogVc, builderSectionVc } =
 			await this.simulateEditSectionClick(0)
@@ -117,18 +131,24 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		assert.isEqualDeep(pageVc.getSection(0), {
 			title: 'updated section',
 			shouldRenderAsGrid: false,
+			type: 'form',
 			fields: [
 				{
-					//@ts-ignore
 					name: 'field1',
+					label: 'Field 1',
+					type: 'text',
 				},
 				{
-					//@ts-ignore
 					name: 'field2',
+					label: 'Field 2',
+					type: 'text',
 				},
 			],
 		})
 	}
+
+	@test()
+	protected static async hittingTabOnLastInputAddsRow() {}
 
 	private static async simulateEditSectionClick(clickedSectionIdx = 0) {
 		let builderSectionVc: EditFormBuilderSectionViewController | undefined
