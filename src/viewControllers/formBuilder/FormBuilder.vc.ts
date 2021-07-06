@@ -20,11 +20,9 @@ import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
 type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
-type FormBuilderImportExportObject =
+export type FormBuilderImportExportObject =
 	SpruceSchemas.Heartwood.v2021_02_11.FormBuilderImportExportObject
 type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
-
-type FormSection = SpruceSchemas.Heartwood.v2021_02_11.FormSection
 
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
