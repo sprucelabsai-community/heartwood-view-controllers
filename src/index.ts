@@ -28,6 +28,7 @@ export { default as dialogSchema } from '#spruce/schemas/heartwood/v2021_02_11/d
 export { default as formSchema } from '#spruce/schemas/heartwood/v2021_02_11/form.schema'
 export { default as cardSchema } from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 export { default as layoutSchema } from '#spruce/schemas/heartwood/v2021_02_11/layout.schema'
+export { default as formBuilderImportExportObjectSchema } from '#spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
 export { default as sprucebotAvatarSchema } from '#spruce/schemas/heartwood/v2021_02_11/sprucebotAvatar.schema'
 export { default as talkingSprucebotSchema } from '#spruce/schemas/heartwood/v2021_02_11/talkingSprucebot.schema'
 export { default as sprucebotTypedMessageSchema } from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessage.schema'
