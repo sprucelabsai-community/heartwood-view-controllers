@@ -1,3 +1,10 @@
+# [16.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.5.0...v16.6.0) (2021-07-06)
+
+
+### Features
+
+* export formbuilder ([9316912](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9316912))
+
 # [16.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.4.1...v16.5.0) (2021-07-06)
 
 
