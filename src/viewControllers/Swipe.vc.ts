@@ -35,6 +35,8 @@ export default class SwipeViewController
 	private cardVc: CardViewController
 
 	public setHeaderTitle!: CardViewController['setHeaderTitle']
+	public setHeaderSubtitle!: CardViewController['setHeaderSubtitle']
+	public updateSections!: CardViewController['updateSections']
 
 	public constructor(
 		options: SwipeViewControllerOptions & ViewControllerOptions

@@ -330,54 +330,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface SkillView {
-			
-				
-				'id'?: string| undefined | null
-				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
-				/** Layout. */
-				'layouts': SpruceSchemas.Heartwood.v2021_02_11.Layout[]
-		}
-
-		interface SkillViewSchema extends SpruceSchema.Schema {
-			id: 'skillView',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Skill view',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Center vertically. */
-			            'shouldCenterVertically': {
-			                label: 'Center vertically',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Layout. */
-			            'layouts': {
-			                label: 'Layout',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema,}
-			            },
-			    }
-		}
-
-		type SkillViewEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface SelectInput {
 			
 				
@@ -494,6 +446,207 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type LineIconEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LineIconSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface Layout {
+			
+				/** Card. Will render a card in this section */
+				'cards'?: SpruceSchemas.Heartwood.v2021_02_11.Card[]| undefined | null
+				
+				'className'?: string| undefined | null
+				/** Grid. Will force cards to render as grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
+				/** Width. */
+				'width'?: ("wide" | "tight" | "full")| undefined | null
+		}
+
+		interface LayoutSchema extends SpruceSchema.Schema {
+			id: 'layout',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Layout',
+			    fields: {
+			            /** Card. Will render a card in this section */
+			            'cards': {
+			                label: 'Card',
+			                type: 'schema',
+			                hint: 'Will render a card in this section',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Grid. Will force cards to render as grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                hint: 'Will force cards to render as grid.',
+			                options: undefined
+			            },
+			            /** Width. */
+			            'width': {
+			                label: 'Width',
+			                type: 'select',
+			                defaultValue: "tight",
+			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
+			            },
+			    }
+		}
+
+		type LayoutEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface SkillView {
+			
+				
+				'id'?: string| undefined | null
+				/** Center vertically. */
+				'shouldCenterVertically'?: boolean| undefined | null
+				/** Layout. */
+				'layouts': SpruceSchemas.Heartwood.v2021_02_11.Layout[]
+		}
+
+		interface SkillViewSchema extends SpruceSchema.Schema {
+			id: 'skillView',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Skill view',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Center vertically. */
+			            'shouldCenterVertically': {
+			                label: 'Center vertically',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Layout. */
+			            'layouts': {
+			                label: 'Layout',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema,}
+			            },
+			    }
+		}
+
+		type SkillViewEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface BuilderImportExportPage {
+			
+				/** Page title. */
+				'title': string
+				/** Schema. */
+				'schema': (SpruceSchema.Schema)
+				/** Sections. */
+				'sections': SpruceSchemas.Heartwood.v2021_02_11.FormSection
+		}
+
+		interface BuilderImportExportPageSchema extends SpruceSchema.Schema {
+			id: 'builderImportExportPage',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Page title. */
+			            'title': {
+			                label: 'Page title',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Schema. */
+			            'schema': {
+			                label: 'Schema',
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `SpruceSchema.Schema`,}
+			            },
+			            /** Sections. */
+			            'sections': {
+			                label: 'Sections',
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema,}
+			            },
+			    }
+		}
+
+		type BuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPageSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface FormBuilderImportExportObject {
+			
+				/** Title. */
+				'title': string
+				/** Subtitle. */
+				'subtitle'?: string| undefined | null
+				/** Pages. */
+				'pages': SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage[]
+		}
+
+		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
+			id: 'formBuilderImportExportObject',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'form builder import export object',
+			    fields: {
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Subtitle. */
+			            'subtitle': {
+			                label: 'Subtitle',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Pages. */
+			            'pages': {
+			                label: 'Pages',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPageSchema,}
+			            },
+			    }
+		}
+
+		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormBuilderImportExportObjectSchema>
 
 	}
 
@@ -682,63 +835,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface Layout {
-			
-				/** Card. Will render a card in this section */
-				'cards'?: SpruceSchemas.Heartwood.v2021_02_11.Card[]| undefined | null
-				
-				'className'?: string| undefined | null
-				/** Grid. Will force cards to render as grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
-				/** Width. */
-				'width'?: ("wide" | "tight" | "full")| undefined | null
-		}
-
-		interface LayoutSchema extends SpruceSchema.Schema {
-			id: 'layout',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Layout',
-			    fields: {
-			            /** Card. Will render a card in this section */
-			            'cards': {
-			                label: 'Card',
-			                type: 'schema',
-			                hint: 'Will render a card in this section',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Grid. Will force cards to render as grid. */
-			            'shouldRenderAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                hint: 'Will force cards to render as grid.',
-			                options: undefined
-			            },
-			            /** Width. */
-			            'width': {
-			                label: 'Width',
-			                type: 'select',
-			                defaultValue: "tight",
-			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
-			            },
-			    }
-		}
-
-		type LayoutEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema>
 
 	}
 

@@ -198,6 +198,13 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 	}
 
+	public updateSections(sections: Section[]) {
+		this.ensureSectionsExist()
+		if (this.model.body) {
+			this.model.body.sections = [...sections]
+		}
+	}
+
 	private ensureSectionsExist() {
 		if (!this.model.body) {
 			this.model.body = {}

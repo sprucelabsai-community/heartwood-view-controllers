@@ -1,5 +1,6 @@
-import { Schema } from '@sprucelabs/schema'
+import { Schema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import formBuilderImportExportObjectSchema from '#spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
@@ -19,20 +20,25 @@ import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
 type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
+type FormBuilderImportExportObject =
+	SpruceSchemas.Heartwood.v2021_02_11.FormBuilderImportExportObject
+type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
+
+type FormSection = SpruceSchemas.Heartwood.v2021_02_11.FormSection
 
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
 
-export interface FormBuilderImportExportObject {
-	title: string
-	subtitle: string | null | undefined
-	pages: {
-		title: string
-		schema: Schema
-		sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
-	}[]
-}
+// export interface FormBuilderImportExportObject {
+// 	title: string
+// 	subtitle?: string | null
+// 	pages: {
+// 		title: string
+// 		schema: Schema
+// 		sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
+// 	}[]
+// }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
@@ -46,7 +52,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 				title: 'Building your form',
 				...options.header,
 			},
-			slides: [this.buildNewSlide()],
+			slides: [this.buildSlideForNewPage()],
 			footer: this.buildFooter(),
 		})
 
@@ -81,28 +87,31 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 	}
 
-	private buildNewSlide(options?: { title?: string }): {
+	private buildSlideForNewPage(options?: Partial<Page>): {
 		title: string
 		form: SpruceSchemas.Heartwood.v2021_02_11.Form<Schema>
 	} {
 		return {
 			title: this.buildNextPageTitle(),
-			form: this.renderNewForm(),
+			form: this.renderNewForm(options),
 			...options,
 		}
 	}
 
-	private renderNewForm(): SpruceSchemas.Heartwood.v2021_02_11.Form<Schema> {
+	private renderNewForm(
+		options?: Partial<Page>
+	): SpruceSchemas.Heartwood.v2021_02_11.Form<Schema> {
 		return this.vcFactory
 			.Controller('form', {
 				shouldShowSubmitControls: false,
-				schema: {
+				schema: options?.schema ?? {
 					id: `formBuilder${this.getTotalPages() + 1}`,
 					fields: {
 						field1: this.buildField(0),
 					},
 				},
-				sections: [
+				//@ts-ignore
+				sections: options?.sections ?? [
 					{
 						title: 'Section 1',
 						fields: [{ name: 'field1' }],
@@ -132,14 +141,16 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc.setHeaderTitle(title)
 	}
 
-	public async addPage(options?: { atIndex?: number; title?: string }) {
+	public async addPage(
+		options?: { atIndex?: number; title?: string } & Partial<Page>
+	) {
 		const { atIndex: idx } = options ?? {}
 
 		let destination = idx
 		if (typeof idx === 'number') {
-			this.swipeVc.addSlideAtIndex(idx, this.buildNewSlide(options))
+			this.swipeVc.addSlideAtIndex(idx, this.buildSlideForNewPage(options))
 		} else {
-			this.swipeVc.addSlide(this.buildNewSlide(options))
+			this.swipeVc.addSlide(this.buildSlideForNewPage(options))
 			destination = this.getTotalPages() - 1
 		}
 
@@ -339,5 +350,14 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 	}
 
-	public importObject() {}
+	public async importObject(imported: FormBuilderImportExportObject) {
+		validateSchemaValues(formBuilderImportExportObjectSchema, imported)
+		this.swipeVc.setHeaderTitle(imported.title)
+		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
+		this.swipeVc.updateSections([])
+
+		for (const page of imported.pages) {
+			await this.addPage(page)
+		}
+	}
 }
