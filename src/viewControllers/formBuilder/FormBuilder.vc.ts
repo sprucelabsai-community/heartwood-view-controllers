@@ -24,6 +24,16 @@ export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
 
+export interface FormBuilderImportExportObject {
+	title: string
+	subtitle: string | null | undefined
+	pages: {
+		title: string
+		schema: Schema
+		sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
+	}[]
+}
+
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
 	public constructor(
@@ -308,15 +318,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		return editSectionVc
 	}
 
-	public toObject(): {
-		title: string
-		subtitle: string | null | undefined
-		pages: {
-			title: string
-			schema: Schema
-			sections: { title: string; fields: { name: string }[] }[]
-		}[]
-	} {
+	public toObject(): FormBuilderImportExportObject {
 		const object = renderUtil.render(this, {
 			shouldStripControllers: true,
 			shouldStripFunctions: true,
@@ -331,15 +333,11 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 					return {
 						title: s.title as string,
 						schema: s.form?.schema as Schema,
-						sections:
-							s.form?.sections.map((s) => {
-								return {
-									title: s.title as string,
-									fields: s.fields ?? [],
-								}
-							}) ?? [],
+						sections: s.form?.sections ?? [],
 					}
 				}) ?? [],
 		}
 	}
+
+	public importObject() {}
 }

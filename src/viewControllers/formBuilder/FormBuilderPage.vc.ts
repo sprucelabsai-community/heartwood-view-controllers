@@ -137,17 +137,17 @@ export class FormBuilderPageViewControllerImpl
 			...rest
 		} = options ?? {}
 
-		if (type === 'text') {
-			fields = []
-		} else {
-			text = undefined
+		const values: SpruceSchemas.Heartwood.v2021_02_11.FormSection = {
+			title,
+			...rest,
 		}
 
-		this.formVc.addSection({
-			title,
-			text: text ? { content: text } : undefined,
-			...rest,
-		})
+		if (type === 'text') {
+			fields = []
+			values.text = { content: text }
+		}
+
+		this.formVc.addSection(values)
 
 		this.addFieldsToSection(this.formVc.getTotalSections() - 1, fields as any)
 	}

@@ -54,6 +54,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 					sections: [
 						{
 							title: 'Section 1',
+							//@ts-ignore
 							fields: [{ name: 'field1' }],
 						},
 					],
@@ -82,6 +83,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 				sections: [
 					{
 						title: 'Section 1',
+						//@ts-ignore
 						fields: [{ name: 'field1' }],
 					},
 				],
@@ -100,6 +102,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 				sections: [
 					{
 						title: 'Section 1',
+						//@ts-ignore
 						fields: [{ name: 'field1' }],
 					},
 				],
@@ -133,10 +136,12 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 				sections: [
 					{
 						title: 'Section 1',
+						//@ts-ignore
 						fields: [{ name: 'field1' }],
 					},
 					{
 						title: 'Section 2',
+						//@ts-ignore
 						fields: [{ name: 'field2' }],
 					},
 				],

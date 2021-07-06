@@ -145,13 +145,19 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	}
 
 	private async handleSubmit() {
-		await this.onDoneHandler({
+		const values: SimpleSection = {
 			title: this.formVc.getValue('title'),
 			type: this.formVc.getValue('type'),
-			text: this.formVc.getValue('text') ?? undefined,
 			shouldRenderAsGrid: this.formVc.getValue('shouldRenderAsGrid') ?? false,
 			fields: [...this.rows],
-		})
+		}
+
+		const text = this.formVc.getValue('text')
+		if (text) {
+			values.text = text
+		}
+
+		await this.onDoneHandler(values)
 	}
 
 	private buildNextSimpleRow(): SimpleRow {

@@ -225,7 +225,6 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 					{ label: 'Field 4', type: 'text', name: 'field4' },
 				],
 				shouldRenderAsGrid: false,
-				text: undefined,
 				title: 'Section 2',
 				type: 'form',
 			})
@@ -271,7 +270,6 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			title: 'My new section',
 			type: 'form',
 			shouldRenderAsGrid: true,
-			text: undefined,
 			fields: [
 				{
 					label: 'Field 1',
