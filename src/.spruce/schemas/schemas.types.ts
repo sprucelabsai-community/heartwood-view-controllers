@@ -254,82 +254,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface SprucebotTypedMessage {
-			
-				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
-				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
-				/** Start delay. How long should I wait before starting to type? */
-				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
-				/** Loop. */
-				'shouldLoop'?: boolean| undefined | null
-				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** Paused. */
-				'isPaused'?: boolean| undefined | null
-		}
-
-		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
-			id: 'sprucebotTypedMessage',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Sprucebot typed message',
-			    fields: {
-			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-			            'sentences': {
-			                label: 'Sentences',
-			                type: 'schema',
-			                isRequired: true,
-			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
-			            },
-			            /** Default avatar. How should Sprucebot be rendered by default */
-			            'defaultAvatar': {
-			                label: 'Default avatar',
-			                type: 'schema',
-			                hint: 'How should Sprucebot be rendered by default',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
-			            },
-			            /** Start delay. How long should I wait before starting to type? */
-			            'startDelay': {
-			                label: 'Start delay',
-			                type: 'duration',
-			                hint: 'How long should I wait before starting to type?',
-			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
-			                options: undefined
-			            },
-			            /** Loop. */
-			            'shouldLoop': {
-			                label: 'Loop',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                defaultValue: "small",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** Paused. */
-			            'isPaused': {
-			                label: 'Paused',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface SelectInput {
 			
 				
@@ -446,6 +370,77 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type LineIconEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LineIconSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface Card {
+			
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
+				/** Header. */
+				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
+				/** Fade in. */
+				'shouldFadeIn'?: boolean| undefined | null
+				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
+				/** Footer. */
+				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+		}
+
+		interface CardSchema extends SpruceSchema.Schema {
+			id: 'card',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Card',
+			    fields: {
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.CardViewController`,}
+			            },
+			            /** Header. */
+			            'header': {
+			                label: 'Header',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
+			            },
+			            /** Fade in. */
+			            'shouldFadeIn': {
+			                label: 'Fade in',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+			            'body': {
+			                label: 'Body',
+			                type: 'schema',
+			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			            },
+			    }
+		}
+
+		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
 
 	}
 
@@ -771,77 +766,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface Card {
-			
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
-				/** Header. */
-				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
-				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
-				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
-				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
-		}
-
-		interface CardSchema extends SpruceSchema.Schema {
-			id: 'card',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Card',
-			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.CardViewController`,}
-			            },
-			            /** Header. */
-			            'header': {
-			                label: 'Header',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
-			            },
-			            /** Fade in. */
-			            'shouldFadeIn': {
-			                label: 'Fade in',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-			            'body': {
-			                label: 'Body',
-			                type: 'schema',
-			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
-			            },
-			    }
-		}
-
-		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface Dialog {
 			
 				
@@ -938,6 +862,268 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DialogEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DialogSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'className'?: string| undefined | null
+				/** Initial values. */
+				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Text. */
+				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				/** Grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
+				
+				'shouldShowSubmitButton'?: boolean| undefined | null
+		}
+
+		interface BigFormSectionSchema extends SpruceSchema.Schema {
+			id: 'bigFormSection',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Initial values. */
+			            'values': {
+			                label: 'Initial values',
+			                type: 'raw',
+			                isPrivate: true,
+			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
+			            },
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+			            'fields': {
+			                label: 'Form fields',
+			                type: 'raw',
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
+			                isArray: true,
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
+			            },
+			            /** . */
+			            'shouldShowSubmitButton': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'id': string
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
+				
+				'schema': (S)
+				/** Submit handler. */
+				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				/** Cancel handler. */
+				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				/** Change handler. */
+				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
+				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				/** Errors by field. */
+				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
+				/** Show submit controls. */
+				'shouldShowSubmitControls'?: boolean| undefined | null
+				/** Show cancel button. */
+				'shouldShowCancelButton'?: boolean| undefined | null
+				/** Submit button label. */
+				'submitButtonLabel'?: string| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Set value handler. */
+				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
+				/** Form sections. */
+				'sections': SpruceSchemas.Heartwood.v2021_02_11.BigFormSection<S>[]
+				/** Footer. */
+				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+				/** Present slide. The slide showing now! */
+				'presentSlide'?: number| undefined | null
+				/** Submit handler. */
+				'onSubmitSlide'?: (HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>)| undefined | null
+		}
+
+		interface BigFormSchema extends SpruceSchema.Schema {
+			id: 'bigForm',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Big form',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
+			            },
+			            /** . */
+			            'schema': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `S`,}
+			            },
+			            /** Submit handler. */
+			            'onSubmit': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
+			            },
+			            /** Cancel handler. */
+			            'onCancel': {
+			                label: 'Cancel handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Change handler. */
+			            'onChange': {
+			                label: 'Change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
+			            },
+			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+			            'values': {
+			                label: 'Values',
+			                type: 'raw',
+			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
+			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
+			            },
+			            /** Errors by field. */
+			            'errorsByField': {
+			                label: 'Errors by field',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
+			            },
+			            /** Show submit controls. */
+			            'shouldShowSubmitControls': {
+			                label: 'Show submit controls',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Show cancel button. */
+			            'shouldShowCancelButton': {
+			                label: 'Show cancel button',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Submit button label. */
+			            'submitButtonLabel': {
+			                label: 'Submit button label',
+			                type: 'text',
+			                defaultValue: "Go!",
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Set value handler. */
+			            'setValue': {
+			                label: 'Set value handler',
+			                type: 'raw',
+			                isPrivate: true,
+			                isRequired: true,
+			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
+			            },
+			            /** Form sections. */
+			            'sections': {
+			                label: 'Form sections',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** Present slide. The slide showing now! */
+			            'presentSlide': {
+			                label: 'Present slide',
+			                type: 'number',
+			                hint: 'The slide showing now!',
+			                defaultValue: 0,
+			                options: undefined
+			            },
+			            /** Submit handler. */
+			            'onSubmitSlide': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
+			            },
+			    }
+		}
+
+		type BigFormEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema>
 
 	}
 
@@ -1159,6 +1345,82 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface SprucebotTypedMessage {
+			
+				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
+				/** Default avatar. How should Sprucebot be rendered by default */
+				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				/** Start delay. How long should I wait before starting to type? */
+				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				/** Loop. */
+				'shouldLoop'?: boolean| undefined | null
+				/** Size. */
+				'size'?: ("small" | "medium" | "large")| undefined | null
+				/** Paused. */
+				'isPaused'?: boolean| undefined | null
+		}
+
+		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
+			id: 'sprucebotTypedMessage',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Sprucebot typed message',
+			    fields: {
+			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+			            'sentences': {
+			                label: 'Sentences',
+			                type: 'schema',
+			                isRequired: true,
+			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
+			            },
+			            /** Default avatar. How should Sprucebot be rendered by default */
+			            'defaultAvatar': {
+			                label: 'Default avatar',
+			                type: 'schema',
+			                hint: 'How should Sprucebot be rendered by default',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
+			            },
+			            /** Start delay. How long should I wait before starting to type? */
+			            'startDelay': {
+			                label: 'Start delay',
+			                type: 'duration',
+			                hint: 'How long should I wait before starting to type?',
+			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
+			                options: undefined
+			            },
+			            /** Loop. */
+			            'shouldLoop': {
+			                label: 'Loop',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                defaultValue: "small",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** Paused. */
+			            'isPaused': {
+			                label: 'Paused',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface CardFooter {
 			
 				/** Controller. */
@@ -1216,181 +1478,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type CardFooterEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'id': string
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
-				
-				'schema': (S)
-				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
-				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>)| undefined | null
-				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
-				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
-				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
-				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean| undefined | null
-				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean| undefined | null
-				/** Submit button label. */
-				'submitButtonLabel'?: string| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Set value handler. */
-				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
-				/** Form sections. */
-				'sections': SpruceSchemas.Heartwood.v2021_02_11.BigFormSection<S>[]
-				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
-				/** Present slide. The slide showing now! */
-				'presentSlide'?: number| undefined | null
-				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>)| undefined | null
-		}
-
-		interface BigFormSchema extends SpruceSchema.Schema {
-			id: 'bigForm',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Big form',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
-			            },
-			            /** . */
-			            'schema': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `S`,}
-			            },
-			            /** Submit handler. */
-			            'onSubmit': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
-			            },
-			            /** Cancel handler. */
-			            'onCancel': {
-			                label: 'Cancel handler',
-			                type: 'raw',
-			                options: {valueType: `() => void | Promise<void>`,}
-			            },
-			            /** Change handler. */
-			            'onChange': {
-			                label: 'Change handler',
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
-			            },
-			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-			            'values': {
-			                label: 'Values',
-			                type: 'raw',
-			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-			            },
-			            /** Errors by field. */
-			            'errorsByField': {
-			                label: 'Errors by field',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
-			            },
-			            /** Show submit controls. */
-			            'shouldShowSubmitControls': {
-			                label: 'Show submit controls',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Show cancel button. */
-			            'shouldShowCancelButton': {
-			                label: 'Show cancel button',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Submit button label. */
-			            'submitButtonLabel': {
-			                label: 'Submit button label',
-			                type: 'text',
-			                defaultValue: "Go!",
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Set value handler. */
-			            'setValue': {
-			                label: 'Set value handler',
-			                type: 'raw',
-			                isPrivate: true,
-			                isRequired: true,
-			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
-			            },
-			            /** Form sections. */
-			            'sections': {
-			                label: 'Form sections',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
-			            },
-			            /** Present slide. The slide showing now! */
-			            'presentSlide': {
-			                label: 'Present slide',
-			                type: 'number',
-			                hint: 'The slide showing now!',
-			                defaultValue: 0,
-			                options: undefined
-			            },
-			            /** Submit handler. */
-			            'onSubmitSlide': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
-			            },
-			    }
-		}
-
-		type BigFormEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema>
 
 	}
 
@@ -2280,93 +2367,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'className'?: string| undefined | null
-				/** Initial values. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Text. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
-				/** Grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
-				
-				'shouldShowSubmitButton'?: boolean| undefined | null
-		}
-
-		interface BigFormSectionSchema extends SpruceSchema.Schema {
-			id: 'bigFormSection',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Initial values. */
-			            'values': {
-			                label: 'Initial values',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Text. */
-			            'text': {
-			                label: 'Text',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
-			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-			            'fields': {
-			                label: 'Form fields',
-			                type: 'raw',
-			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
-			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
-			            },
-			            /** . */
-			            'shouldShowSubmitButton': {
-			                type: 'boolean',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface ListCell {
 			
 				/** Text. */
@@ -2526,43 +2526,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface Dropdown {
+		interface CardBuilder {
 			
-				/** Position. */
-				'position'?: ("bottom" | "top" | "right")| undefined | null
-				
-				'items'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
-				
-				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
 		}
 
-		interface DropdownSchema extends SpruceSchema.Schema {
-			id: 'dropdown',
+		interface CardBuilderSchema extends SpruceSchema.Schema {
+			id: 'cardBuilder',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
-			name: 'Dropdown',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
-			            },
-			    }
-		}
+			name: ''		}
 
-		type DropdownEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema>
+		type CardBuilderEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardBuilderSchema>
 
 	}
 
@@ -2682,6 +2656,50 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type ButtonEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface Dropdown {
+			
+				/** Position. */
+				'position'?: ("bottom" | "top" | "right")| undefined | null
+				
+				'items'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
+				
+				'card'?: SpruceSchemas.Heartwood.v2021_02_11.CardBuilder| undefined | null
+		}
+
+		interface DropdownSchema extends SpruceSchema.Schema {
+			id: 'dropdown',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Dropdown',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBuilderSchema,}
+			            },
+			    }
+		}
+
+		type DropdownEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema>
 
 	}
 

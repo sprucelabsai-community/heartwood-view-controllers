@@ -1,6 +1,4 @@
 import { buildSchema } from '@sprucelabs/schema'
-import buttonBuilder from './button.builder'
-import cardBuilder from './cards/card.builder'
 
 export default buildSchema({
 	id: 'dropdown',
@@ -31,13 +29,21 @@ export default buildSchema({
 			type: 'schema',
 			isArray: true,
 			options: {
-				schema: buttonBuilder,
+				schemaId: {
+					id: 'button',
+					namespace: 'Heartwood',
+					version: 'v2021_02_11',
+				},
 			},
 		},
 		card: {
 			type: 'schema',
 			options: {
-				schema: cardBuilder,
+				schemaId: {
+					id: 'cardBuilder',
+					namespace: 'Heartwood',
+					version: 'v2021_02_11',
+				},
 			},
 		},
 	},

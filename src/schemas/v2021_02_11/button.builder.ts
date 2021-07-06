@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import dropdownBuilder from './dropdown.builder'
 import lineIconBuilder from './lineIcon.builder'
 
 export default buildSchema({
@@ -77,7 +78,7 @@ export default buildSchema({
 			type: 'schema',
 			label: 'Dropdown',
 			options: {
-				schemaId: { id: 'dropdown' },
+				schema: dropdownBuilder,
 			},
 		},
 		onClick: {
