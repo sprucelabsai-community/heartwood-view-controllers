@@ -8,7 +8,7 @@ import SwipeViewController from '../Swipe.vc'
 import EditFormBuilderSectionViewController, {
 	EditBuilderSectionOptions,
 	SimpleSection,
-} from './EditBuilderSection.vc'
+} from './EditFormBuilderSection.vc'
 import {
 	FormBuilderPageViewController,
 	FormBuilderPageViewControllerImpl,

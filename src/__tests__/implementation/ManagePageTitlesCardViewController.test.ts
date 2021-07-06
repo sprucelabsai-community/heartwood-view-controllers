@@ -118,7 +118,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 		await vcAssertUtil.assertRendersConfirm(
 			this.vc,
-			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => interactionUtil.clickOnDestructiveButtonInRow(rowVc),
 			() => true
 		)
 
@@ -142,7 +142,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 		await vcAssertUtil.assertRendersConfirm(
 			this.vc,
-			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => interactionUtil.clickOnDestructiveButtonInRow(rowVc),
 			() => false
 		)
 

@@ -8,7 +8,7 @@ import FormViewController from '../../../viewControllers/Form.vc'
 import EditFormBuilderSectionViewController, {
 	EditSectionSectionSchema,
 	EditBuilderSectionOptions,
-} from '../../../viewControllers/formBuilder/EditBuilderSection.vc'
+} from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
@@ -188,12 +188,12 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqual(listVc.getTotalRows(), 4)
 
 		let rowVc = listVc.getRowVc(2)
-		await interactionUtil.clickOnDestructiveButton(rowVc)
+		await interactionUtil.clickOnDestructiveButtonInRow(rowVc)
 
 		//clicking cancel on confirmation
 		await vcAssertUtil.assertRendersConfirm(
 			this.vc,
-			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => interactionUtil.clickOnDestructiveButtonInRow(rowVc),
 			({ isDestructive }) => {
 				assert.isTrue(isDestructive)
 
@@ -207,7 +207,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		//clicking confirm on confirmation
 		await vcAssertUtil.assertRendersConfirm(
 			this.vc,
-			() => interactionUtil.clickOnDestructiveButton(rowVc),
+			() => interactionUtil.clickOnDestructiveButtonInRow(rowVc),
 			() => {
 				return true
 			}

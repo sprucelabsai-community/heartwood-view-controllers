@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test'
-import { ViewController } from '../../types/heartwood.types'
+import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
@@ -74,7 +74,7 @@ const interactionUtil = {
 		return this.click(secondary.onClick)
 	},
 
-	async clickOnDestructiveButton(vc: ListRowViewController) {
+	async clickOnDestructiveButtonInRow(vc: ListRowViewController) {
 		const model = renderUtil.render(vc)
 		const destructiveButton = model.cells
 			.map((c) => c.button)
@@ -90,6 +90,31 @@ const interactionUtil = {
 
 	async submitForm(vc: FormVc) {
 		await vc.submit()
+	},
+
+	async keyDownOnElementInRow(options: {
+		vc: ListRowViewController
+		key: KeyboardKey
+		cellIdx: number
+	}) {
+		const model = renderUtil.render(options.vc)
+		const cell = model.cells[options.cellIdx]
+		const element = cell.button || cell.selectInput || cell.textInput
+
+		if (!element) {
+			assert.fail(
+				`No button, selectInput, or textInput set cell ${options.cellIdx} does not have \`onKeyDown\` set.`
+			)
+		}
+		//@ts-ignore
+		if (!element.onKeyDown) {
+			assert.fail(
+				`Your element in cell ${options.cellIdx} does not have \`onKeyDown\` set.`
+			)
+		}
+
+		//@ts-ignore
+		await element.onKeyDown({ key: options.key, rowVc: options.vc })
 	},
 }
 

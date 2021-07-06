@@ -2,6 +2,7 @@ import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
+import listUtil from './list.utility'
 import ListRowViewController from './ListRow.vc'
 
 type List = Omit<SpruceSchemas.Heartwood.v2021_02_11.List, 'rows'> & {
@@ -56,7 +57,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 	}
 
-	public addRow(row: ListRow & { atIndex?: number }): any {
+	public addRow(row: ListRow & { atIndex?: number }): void {
 		if (!row) {
 			throw new SpruceError({
 				code: 'MISSING_PARAMETERS',
@@ -73,11 +74,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 
 		if (row.atIndex) {
-			return this.model.rows.splice(row.atIndex, 0, row)
+			this.model.rows.splice(row.atIndex, 0, row)
 		} else {
 			this.model.rows.push(row)
 		}
 
+		this._rowVcs = []
 		this.triggerRender()
 	}
 
@@ -121,7 +123,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		const values: Record<string, any> = {}
 
 		for (const cell of row.cells) {
-			const input = getInputFromCell(cell)
+			const input = listUtil.getInputFromCell(cell)
 			if (input) {
 				values[input.name] = input.value
 			}
@@ -137,7 +139,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	}) {
 		const { rowIdx, name, value } = options
 		for (const cell of this.model.rows[rowIdx].cells) {
-			const input = getInputFromCell(cell)
+			const input = listUtil.getInputFromCell(cell)
 			if (input?.name === name) {
 				input.value = value
 				await input.onChange?.(value)
@@ -186,8 +188,4 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			rows: this.getRowVcs().map((vc) => vc.render()),
 		}
 	}
-}
-
-export function getInputFromCell(cell: ListCell) {
-	return cell.textInput ?? cell.selectInput
 }

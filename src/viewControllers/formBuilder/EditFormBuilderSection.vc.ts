@@ -226,12 +226,15 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	}
 
 	public addField() {
-		this.rows.push(this.buildNextSimpleRow())
-		this.rebuildList()
-	}
+		const simpleRow = this.buildNextSimpleRow()
+		this.rows.push(simpleRow)
 
-	private rebuildList() {
-		this.fieldListVc.updateRows(this.buildRows())
+		this.fieldListVc.addRow(
+			this.buildFieldRow({
+				...simpleRow,
+				idx: this.rows.length - 1,
+			})
+		)
 	}
 
 	private buildRows() {
@@ -274,6 +277,12 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 					button: {
 						lineIcon: 'delete',
 						type: 'destructive',
+						onKeyDown: ({ key, rowVc }) => {
+							debugger
+							if (key === 'Tab' && rowVc.isLastRow()) {
+								this.addField()
+							}
+						},
 						onClick: async ({ rowVc }) => {
 							const shouldDelete = await this.confirm({
 								title: 'Are you sure?',

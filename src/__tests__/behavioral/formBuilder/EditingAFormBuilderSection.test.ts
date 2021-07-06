@@ -3,8 +3,9 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import { KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
-import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditBuilderSection.vc'
+import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
 
 export default class EditingAFormBuilderSectionTest extends AbstractViewControllerTest {
@@ -148,7 +149,53 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	}
 
 	@test()
-	protected static async hittingTabOnLastInputAddsRow() {}
+	protected static async hittingTabOnLastInputOnNotLastRowDoesNothing() {
+		const { builderSectionVc } = await this.simulateEditSectionClick(0)
+
+		const fieldList = builderSectionVc.getFieldListVc()
+
+		builderSectionVc.addField()
+
+		await interactionUtil.keyDownOnElementInRow({
+			vc: fieldList.getRowVc(0),
+			key: 'Tab',
+			cellIdx: 2,
+		})
+
+		assert.isEqual(fieldList.getTotalRows(), 2)
+	}
+
+	@test('hitting T on last row does nothing', 'T')
+	protected static async hittingNonTabOnLastInputAddsRowWhenOnLastRow(
+		char: KeyboardKey
+	) {
+		const { builderSectionVc } = await this.simulateEditSectionClick(0)
+
+		const fieldList = builderSectionVc.getFieldListVc()
+
+		await interactionUtil.keyDownOnElementInRow({
+			vc: fieldList.getRowVc(0),
+			key: char,
+			cellIdx: 2,
+		})
+
+		assert.isEqual(fieldList.getTotalRows(), 1)
+	}
+
+	@test()
+	protected static async hittingTabOnLastInputAddsRowWhenOnLastRow() {
+		const { builderSectionVc } = await this.simulateEditSectionClick(0)
+
+		const fieldList = builderSectionVc.getFieldListVc()
+
+		await interactionUtil.keyDownOnElementInRow({
+			vc: fieldList.getRowVc(0),
+			key: 'Tab',
+			cellIdx: 2,
+		})
+
+		assert.isEqual(fieldList.getTotalRows(), 2)
+	}
 
 	private static async simulateEditSectionClick(clickedSectionIdx = 0) {
 		let builderSectionVc: EditFormBuilderSectionViewController | undefined
