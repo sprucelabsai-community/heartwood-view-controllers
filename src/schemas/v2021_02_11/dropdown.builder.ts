@@ -40,7 +40,7 @@ export default buildSchema({
 			type: 'schema',
 			options: {
 				schemaId: {
-					id: 'cardBuilder',
+					id: 'card',
 					namespace: 'Heartwood',
 					version: 'v2021_02_11',
 				},
