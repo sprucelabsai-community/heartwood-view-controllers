@@ -215,6 +215,24 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 4')
 		assert.isEqual(listVc.getTotalRows(), 3)
+
+		//@ts-ignore
+		this.vc.onDoneHandler = async (values) => {
+			assert.isEqualDeep(values, {
+				fields: [
+					{ label: 'Field 1', type: 'text', name: 'field1' },
+					{ label: 'Field 2', type: 'text', name: 'field2' },
+					{ label: 'Field 4', type: 'text', name: 'field4' },
+				],
+				shouldRenderAsGrid: false,
+				text: undefined,
+				title: 'Section 2',
+				type: 'form',
+			})
+		}
+
+		//@ts-ignore
+		await this.vc.handleSubmit()
 	}
 
 	@test()

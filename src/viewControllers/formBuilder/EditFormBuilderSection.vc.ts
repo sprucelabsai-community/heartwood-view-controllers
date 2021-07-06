@@ -278,7 +278,6 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 						lineIcon: 'delete',
 						type: 'destructive',
 						onKeyDown: ({ key, rowVc }) => {
-							debugger
 							if (key === 'Tab' && rowVc.isLastRow()) {
 								this.addField()
 							}
@@ -290,6 +289,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 							})
 							if (shouldDelete) {
 								rowVc.delete()
+								this.rows.splice(options.idx, 1)
 							}
 						},
 					},
