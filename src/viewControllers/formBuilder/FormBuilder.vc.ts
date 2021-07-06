@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
+import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import EditFormBuilderSectionViewController, {
@@ -86,7 +87,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			.Controller('form', {
 				shouldShowSubmitControls: false,
 				schema: {
-					id: 'tmp',
+					id: `formBuilder${this.getTotalPages() + 1}`,
 					fields: {
 						field1: this.buildField(0),
 					},
@@ -305,5 +306,40 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		) as EditFormBuilderSectionViewController
 
 		return editSectionVc
+	}
+
+	public toObject(): {
+		title: string
+		subtitle: string | null | undefined
+		pages: {
+			title: string
+			schema: Schema
+			sections: { title: string; fields: { name: string }[] }[]
+		}[]
+	} {
+		const object = renderUtil.render(this, {
+			shouldStripControllers: true,
+			shouldStripFunctions: true,
+			shouldStripPrivateFields: true,
+		})
+
+		return {
+			title: object.header?.title ?? 'MISSING',
+			subtitle: object.header?.subtitle,
+			pages:
+				object.body?.sections?.map((s) => {
+					return {
+						title: s.title as string,
+						schema: s.form?.schema as Schema,
+						sections:
+							s.form?.sections.map((s) => {
+								return {
+									title: s.title as string,
+									fields: s.fields ?? [],
+								}
+							}) ?? [],
+					}
+				}) ?? [],
+		}
 	}
 }

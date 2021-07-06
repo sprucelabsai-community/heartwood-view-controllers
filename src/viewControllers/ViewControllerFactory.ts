@@ -1,13 +1,10 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import SpruceError from '../errors/SpruceError'
 import {
-	BuiltSkillViewController,
-	BuiltViewController,
 	ConfirmHandler,
 	ControllerOptions,
 	ImportedViewController,
 	RenderInDialogHandler,
-	SkillViewController,
 	ViewController,
 	ViewControllerMap,
 	ViewControllerId,
@@ -43,11 +40,11 @@ type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 
 type ConnectToApi = () => Promise<MercuryClient>
 
-type BuiltViewControllerOrSkillViewController<
-	Vc extends ViewController<any> | SkillViewController
-> = Vc extends SkillViewController
-	? BuiltSkillViewController<Vc>
-	: BuiltViewController<Vc>
+// type BuiltViewControllerOrSkillViewController<
+// 	Vc extends ViewController<any> | SkillViewController
+// > = Vc extends SkillViewController
+// 	? BuiltSkillViewController<Vc>
+// 	: BuiltViewController<Vc>
 
 export default class ViewControllerFactory {
 	private controllerMap: Record<string, any>
@@ -138,7 +135,7 @@ export default class ViewControllerFactory {
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
-	): BuiltViewControllerOrSkillViewController<ViewControllerMap[N]> {
+	): ViewControllerMap[N] {
 		const Class = this.controllerMap[name]
 
 		if (!Class) {
@@ -180,7 +177,7 @@ export default class ViewControllerFactory {
 		//@ts-ignore
 		instance.id = name
 
-		//@ts-ignorea
+		//@ts-ignore
 		return instance
 	}
 }

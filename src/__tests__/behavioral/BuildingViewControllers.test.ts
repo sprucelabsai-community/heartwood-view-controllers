@@ -2,10 +2,6 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import {
-	BuiltSkillViewController,
-	BuiltViewController,
-} from '../../types/heartwood.types'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
@@ -140,22 +136,20 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		const vc = this.factory.Controller('test', {})
 		assert.isTruthy(vc)
 
+		//@ts-ignore
 		assert.isEqual(vc.id, 'test')
 	}
 
 	@test()
 	protected static viewControllerGetTypesed() {
 		const vc = this.factory.Controller('test', {})
-		assert.isExactType<BuiltViewController<TestViewController>, typeof vc>(true)
+		assert.isExactType<TestViewController, typeof vc>(true)
 	}
 
 	@test()
 	protected static skillViewControllerGetTyped() {
 		const vc = this.factory.Controller('testSkillView', {})
-		assert.isExactType<
-			BuiltSkillViewController<TestSkillViewController>,
-			typeof vc
-		>(true)
+		assert.isExactType<TestSkillViewController, typeof vc>(true)
 	}
 
 	@test()

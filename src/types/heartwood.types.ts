@@ -220,18 +220,6 @@ export interface ViewControllerOptions {
 	confirmHandler: ConfirmHandler
 }
 
-export type BuiltViewController<
-	Vc extends ViewController<any> = ViewController<any>
-> = {
-	id: string
-} & Vc
-
-export type BuiltSkillViewController<
-	Vc extends SkillViewController = SkillViewController
-> = {
-	id: string
-} & Vc
-
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
 	renderAs?: 'colorPicker' | 'number' | 'textarea'

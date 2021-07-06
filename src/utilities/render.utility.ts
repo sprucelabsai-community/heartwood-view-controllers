@@ -3,7 +3,9 @@ import vcAssertUtil from '../tests/utilities/vcAssert.utility'
 import { ViewController } from '../types/heartwood.types'
 
 interface RenderOptions {
-	shouldReturnPrivateFields: boolean
+	shouldStripPrivateFields?: boolean
+	shouldStripControllers?: boolean
+	shouldStripFunctions?: boolean
 }
 
 const RENDER_ITEMS_IGNORE_KEYS = ['controller', 'schema']
@@ -24,11 +26,16 @@ function renderItems(
 		} else {
 			//@ts-ignore
 			const thisItem = item[key]
-			rendered[key] = renderItem(thisItem, options)
+
+			if (typeof thisItem === 'function' && options?.shouldStripFunctions) {
+				//skip
+			} else {
+				rendered[key] = renderItem(thisItem, options)
+			}
 		}
 	}
 
-	if (!options?.shouldReturnPrivateFields) {
+	if (options?.shouldStripPrivateFields !== false) {
 		removeHiddenFields(rendered)
 	}
 
@@ -41,7 +48,13 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
 	} else if (thisItem?.controller) {
 		vcAssertUtil.attachTriggerRenderCounter(thisItem.controller)
 
-		return renderItems(thisItem.controller.render())
+		const item = { ...renderItems(thisItem.controller.render(), options) }
+
+		if (options?.shouldStripControllers) {
+			delete item.controller
+		}
+
+		return item
 	} else if (isObjectLike(thisItem)) {
 		return renderItems(thisItem, options)
 	} else {
