@@ -760,6 +760,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		//@ts-ignore
 		const built = this.vc.buildFooter()
+
+		//@ts-ignore
 		assert.isEqualDeep(built, footer)
 	}
 
