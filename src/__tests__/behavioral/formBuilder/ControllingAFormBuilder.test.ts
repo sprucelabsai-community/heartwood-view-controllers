@@ -757,6 +757,10 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		//@ts-ignore
 		assert.isEqualDeep(model.footer, footer)
+
+		//@ts-ignore
+		const built = this.vc.buildFooter()
+		assert.isEqualDeep(built, footer)
 	}
 
 	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {

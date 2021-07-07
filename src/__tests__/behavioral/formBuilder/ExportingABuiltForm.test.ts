@@ -111,6 +111,11 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 	}
 
 	@test()
+	protected static doesNotExportFooter() {
+		const exported = this.vc.toObject()
+	}
+
+	@test()
 	protected static canExportNewSection() {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.addSection()
