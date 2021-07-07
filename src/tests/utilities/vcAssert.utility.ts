@@ -3,9 +3,14 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
-import { ConfirmOptions, ViewController } from '../../types/heartwood.types'
+import {
+	ConfirmOptions,
+	SkillViewController,
+	ViewController,
+} from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
+import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
@@ -294,6 +299,24 @@ const vcAssertUtil = {
 				`Your list was supposed to render ${expectedTotalRows} row(s), but it rendered ${model.rows.length}.`
 			)
 		}
+	},
+
+	assertSkillViewRendersCard(vc: SkillViewController): CardViewController {
+		const model = renderUtil.render(vc)
+
+		for (const layout of model?.layouts ?? []) {
+			//@ts-ignore
+			const card = layout.cards?.[0]
+
+			if (card) {
+				//@ts-ignore
+				return this.factory.Controller('card', card)
+			}
+		}
+
+		assert.fail('Expected your skill view to render a card, but it did not!')
+
+		return {} as any
 	},
 }
 
