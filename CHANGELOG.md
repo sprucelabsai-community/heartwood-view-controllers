@@ -1,3 +1,10 @@
+# [18.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.2.0...v18.0.0) (2021-07-07)
+
+
+### Breaking Changes
+
+* import export object type update ([445f325](https://github.com/sprucelabsai/heartwood-view-controllers/commit/445f325))
+
 # [17.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.1.3...v17.2.0) (2021-07-07)
 
 
