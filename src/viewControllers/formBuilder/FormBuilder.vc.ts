@@ -7,8 +7,9 @@ import introspectionUtil from '../../utilities/introspection.utility'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
+import { EditFormBuilderFieldViewController } from './EditFormBuilderField.vc'
 import EditFormBuilderSectionViewController, {
-	EditBuilderSectionOptions,
+	EditFormBuilderSectionOptions,
 	SimpleSection,
 } from './EditFormBuilderSection.vc'
 import {
@@ -27,16 +28,6 @@ type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 }
-
-// export interface FormBuilderImportExportObject {
-// 	title: string
-// 	subtitle?: string | null
-// 	pages: {
-// 		title: string
-// 		schema: Schema
-// 		sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
-// 	}[]
-// }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
@@ -65,6 +56,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			editFormBuilderSection: EditFormBuilderSectionViewController,
 			//@ts-ignore
 			managePageTitles: ManagePageTitlesCardViewController,
+			//@ts-ignore
+			editFormBuilderField: EditFormBuilderFieldViewController,
 		})
 	}
 
@@ -152,7 +145,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			destination = this.getTotalPages() - 1
 		}
 
-		this.swipeVc.updateFooter(this.buildFooter())
+		this.swipeVc.setFooter(this.buildFooter())
 
 		await this.waitForRender()
 
@@ -161,7 +154,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	public async removePage(idx: number) {
 		this.swipeVc.removeSlide(idx)
-		this.swipeVc.updateFooter(this.buildFooter())
+		this.swipeVc.setFooter(this.buildFooter())
 		await this.swipeVc.jumpToSlide(Math.max(idx - 1, 0))
 	}
 
@@ -289,7 +282,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			onDone: async (section) => {
 				void dialog.hide()
 				const pageVc = this.getPresentPageVc()
-				pageVc.updateSection(clickedSectionIdx, section)
+				pageVc.setSection(clickedSectionIdx, section)
 			},
 		})
 		const dialog = this.renderInDialog(vc.render())
@@ -307,7 +300,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public EditSectionVc(options: {
-		onDone: EditBuilderSectionOptions['onDone']
+		onDone: EditFormBuilderSectionOptions['onDone']
 		editingSection?: SimpleSection
 	}) {
 		const { onDone, editingSection } = options
@@ -325,6 +318,26 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		) as EditFormBuilderSectionViewController
 
 		return editSectionVc
+	}
+
+	public handleClickEditField(pageIdx: number, fieldName: string) {
+		const vc = this.vcFactory.Controller('editFormBuilderField', {
+			name: 'test',
+			type: 'text',
+			label: 'test',
+			options: {},
+			onDone: (options) => {
+				const { name, ...fieldDefinition } = options
+				void dialog.hide()
+				//@ts-ignore
+				this.getPageVc(pageIdx).setField(fieldName, {
+					newName: name,
+					fieldDefinition,
+				})
+			},
+		})
+
+		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
 	public toObject(): FormBuilderImportExportObject {
@@ -352,7 +365,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		validateSchemaValues(formBuilderImportExportObjectSchema, imported)
 		this.swipeVc.setHeaderTitle(imported.title)
 		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
-		this.swipeVc.updateSections([])
+		this.swipeVc.setSections([])
 
 		for (const page of imported.pages) {
 			await this.addPage(page)

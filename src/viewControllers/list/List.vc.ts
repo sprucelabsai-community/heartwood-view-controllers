@@ -168,7 +168,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return values
 	}
 
-	public updateRows(rows: ListRow[]) {
+	public setRows(rows: ListRow[]) {
 		this.model.rows = rows
 		this._rowVcs = []
 		this.triggerRender()

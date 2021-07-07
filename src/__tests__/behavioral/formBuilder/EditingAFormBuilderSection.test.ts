@@ -40,7 +40,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	protected static async setsInstructionsSettings(text: string) {
 		const pageVc = this.formBuilderVc.getPageVc(0)
 
-		pageVc.updateSection(0, {
+		pageVc.setSection(0, {
 			title: 'My section title',
 			type: 'text',
 			text,
@@ -60,7 +60,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	protected static async setsProperFormFieldsWhenEditClicked() {
 		const pageVc = this.formBuilderVc.getPageVc(0)
 
-		pageVc.updateSectionTitle(0, 'My form section title')
+		pageVc.setSectionTitle(0, 'My form section title')
 
 		pageVc.addField(0, { label: 'waka1' })
 		pageVc.addField(0, { label: 'waka2', type: 'select' })
@@ -108,7 +108,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		const pageVc = this.formBuilderVc.getPageVc(0)
 		const section = pageVc.getSection(0)
 		section.shouldRenderAsGrid = true
-		pageVc.updateSection(0, section)
+		pageVc.setSection(0, section)
 
 		const { formVc } = await this.simulateEditSectionClick(0)
 
@@ -215,7 +215,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			builderSectionVc:
 				builderSectionVc as EditFormBuilderSectionViewController,
 			dialogVc: dialogVc as DialogViewController,
-			formVc: vcAssertUtil.assertCardContainsForm(builderSectionVc as any),
+			formVc: vcAssertUtil.assertCardRendersForm(builderSectionVc as any),
 		}
 	}
 }

@@ -67,8 +67,8 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 	@test()
 	protected static rendersAValidCard() {
 		vcAssertUtil.assertRendersValidCard(this.vc)
-		vcAssertUtil.assertRendersCardHeader(this.vc)
-		vcAssertUtil.assertRendersCardFooter(this.vc)
+		vcAssertUtil.assertCardRendersHeader(this.vc)
+		vcAssertUtil.assertCardRendersFooter(this.vc)
 	}
 
 	@test()

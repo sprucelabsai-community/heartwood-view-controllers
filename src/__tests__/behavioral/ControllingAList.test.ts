@@ -568,7 +568,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canSetRowsDirectly() {
-		this.vc.updateRows([
+		this.vc.setRows([
 			{
 				cells: [
 					{
@@ -585,7 +585,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		assert.isEqual(model.cells[0].text?.content, 'yay')
 
-		this.vc.updateRows([
+		this.vc.setRows([
 			{
 				cells: [
 					{

@@ -6,7 +6,7 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
-import { fancyIcons, lineIcons } from '../constants'
+import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -327,3 +327,5 @@ export type KeyboardKey =
 	| 'Tab'
 	| 'Enter'
 	| 'Escape'
+
+export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes

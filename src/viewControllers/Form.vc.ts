@@ -13,6 +13,7 @@ import {
 	validateSchemaValues,
 	SchemaFieldsByName,
 	SchemaValues,
+	FieldDefinitions,
 	SpruceError as SchemaSpruceError,
 } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
@@ -23,7 +24,9 @@ import {
 	ViewController,
 	TypedInvalidFieldError,
 	ViewControllerOptions,
+	FieldRenderOptions,
 } from '../types/heartwood.types'
+import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel<S extends Schema> = SpruceSchemas.Heartwood.v2021_02_11.Form<S>
@@ -297,14 +300,101 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public updateSectionTitle(sectionIdx: number, title: string) {
-		this.updateSection(sectionIdx, {
+	public setSectionTitle(sectionIdx: number, title: string) {
+		this.setSection(sectionIdx, {
 			...this.getSection(sectionIdx),
 			title,
 		})
 	}
 
-	public updateSection(sectionIdx: number, newSection: Section<S>) {
+	public setField(
+		fieldName: SchemaFieldNames<S>,
+		updates: {
+			newName?: string
+			fieldDefinition?: FieldDefinitions
+			renderOptions?: Partial<FieldRenderOptions<Schema>>
+		}
+	) {
+		const { newName } = updates ?? {}
+		const missing: string[] = []
+		let passedFieldName = fieldName
+
+		if (!fieldName) {
+			missing.push('fieldName')
+		}
+
+		if (!updates) {
+			missing.push('updates')
+		}
+
+		if (missing.length) {
+			throw new SchemaSpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: missing,
+			})
+		}
+
+		const schema = this.getSchema()
+		const oldDefinition = schema.fields?.[passedFieldName]
+
+		if (!oldDefinition) {
+			throw new SchemaSpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `You can't update the field ${fieldName} because it does not exist.`,
+				parameters: ['fieldName'],
+			})
+		}
+
+		if (!schema.fields) {
+			schema.fields = {}
+		}
+
+		if (newName) {
+			schema.fields[newName] = schema.fields[passedFieldName]
+			delete schema.fields[passedFieldName]
+			passedFieldName = newName as any
+		}
+
+		if (updates.fieldDefinition) {
+			//@ts-ignore
+			schema.fields[passedFieldName] = updates.fieldDefinition
+		}
+
+		if (updates.renderOptions || newName) {
+			let { sectionIdx, fieldIdx } =
+				this.getSectionAndFieldForFieldNamed(fieldName)
+
+			const newFields = [...(this.getSection(sectionIdx).fields ?? [])]
+
+			newFields.splice(fieldIdx, 1, {
+				...updates.renderOptions,
+				name: passedFieldName,
+			})
+
+			this.setSection(sectionIdx, {
+				...this.getSection(sectionIdx),
+				fields: newFields,
+			})
+		}
+	}
+
+	private getSectionAndFieldForFieldNamed(fieldName: string) {
+		let fieldIdx = -1
+
+		const sectionIdx = this.getSections().findIndex((s) => {
+			const normalized = normalizeFormSectionFieldNamesUtil.toObjects(
+				s.fields ?? []
+			)
+
+			fieldIdx = normalized.findIndex((n) => n.name === fieldName)
+
+			return fieldIdx > -1
+		})
+
+		return { sectionIdx, fieldIdx }
+	}
+
+	public setSection(sectionIdx: number, newSection: Section<S>) {
 		const missing: string[] = []
 
 		if (typeof sectionIdx !== 'number') {
@@ -328,7 +418,7 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public updateSections(sections: Section<S>[]) {
+	public setSections(sections: Section<S>[]) {
 		this.model.sections = sections
 		this.triggerRender()
 	}
@@ -424,7 +514,7 @@ export default class FormViewController<
 		return this.getValues()[named]
 	}
 
-	public updateFooter(
+	public setFooter(
 		footer?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter | null
 	) {
 		if (!footer) {

@@ -1,0 +1,249 @@
+import { test, assert } from '@sprucelabs/test'
+import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { fieldTypeChoices } from '../../constants'
+import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import interactionUtil from '../../tests/utilities/interaction.utility'
+import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
+import { FormBuilderFieldType } from '../../types/heartwood.types'
+import FormViewController from '../../viewControllers/Form.vc'
+import {
+	EditFormBuilderFieldViewController,
+	EditFormBuilderFieldOptions,
+} from '../../viewControllers/formBuilder/EditFormBuilderField.vc'
+
+declare module '../../types/heartwood.types' {
+	interface ViewControllerMap {
+		editFormBuilderField: EditFormBuilderFieldViewController
+	}
+
+	export interface ViewControllerOptionsMap {
+		editFormBuilderField: EditFormBuilderFieldOptions
+	}
+}
+
+export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
+	protected static controllerMap = {
+		editFormBuilderField: EditFormBuilderFieldViewController,
+	}
+
+	@test('throws when missing everything', {}, [
+		'name',
+		'label',
+		'type',
+		'options',
+		'onDone',
+	])
+	@test('throws when supplied just name', { name: 'yay' }, [
+		'label',
+		'type',
+		'options',
+		'onDone',
+	])
+	@test(
+		'throws when supplied just name and label',
+		{ name: 'yay', label: 'go duck!' },
+		['type', 'options', 'onDone']
+	)
+	@test(
+		'throws when supplied just name, label, type',
+		{ name: 'yay', label: 'go duck!', type: 'text' },
+		['options', 'onDone']
+	)
+	@test(
+		'throws when supplied just name, label, type, options',
+		{ name: 'yay', label: 'go duck!', type: 'text', options: {} },
+		['onDone']
+	)
+	protected static async throwsWhenMissingParameters(
+		options: any,
+		expected: string[]
+	) {
+		const err = assert.doesThrow(() =>
+			this.Controller('editFormBuilderField', options)
+		)
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: expected,
+		})
+	}
+
+	@test('fails with type Jeepers', 'Jeepers')
+	@test('fails with type Creepers', 'Creepers')
+	@test('fails with type random', Math.random())
+	protected static throwsWhenPassedBadType(type: FormBuilderFieldType) {
+		const err = assert.doesThrow(() =>
+			this.Controller('editFormBuilderField', {
+				name: 'firstName',
+				label: 'First name',
+				onDone: () => {},
+				type,
+				options: {},
+			})
+		)
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['type'],
+		})
+	}
+
+	@test()
+	protected static canBuildWithGoodOptions() {
+		const vc = this.Vc()
+		assert.isTruthy(vc)
+	}
+
+	@test()
+	protected static shouldRenderFormAccessibleFromGetter() {
+		const vc = this.Vc()
+		const formVc = vcAssertUtil.assertCardRendersForm(vc)
+		assert.isEqual(formVc, vc.getFormVc())
+	}
+
+	@test()
+	protected static shouldRenderNameLabelAndTypeAtLeast() {
+		const formVc = this.Vc().getFormVc()
+		this.assertRendersExpectedFields(formVc)
+		vcAssertUtil.assertFormDoesNotRenderField(formVc, 'selectOptions')
+	}
+
+	@test()
+	protected static shouldRenderTextAreaForSelectOptionsWhenTypeIsDropdown() {
+		const formVc = this.Vc().getFormVc()
+
+		formVc.setValue('type', 'select')
+		this.assertRendersExpectedFields(formVc)
+		vcAssertUtil.assertFormRendersField(formVc, 'selectOptions')
+
+		formVc.setValue('type', 'text')
+		this.assertRendersExpectedFields(formVc)
+		vcAssertUtil.assertFormDoesNotRenderField(formVc, 'selectOptions')
+	}
+
+	@test()
+	protected static shouldShowSelectOptionsIfTheyArePassedByDefault() {
+		const formVc = this.Vc({
+			type: 'select',
+		}).getFormVc()
+
+		this.assertRendersExpectedFields(formVc)
+		vcAssertUtil.assertFormRendersField(formVc, 'selectOptions')
+	}
+
+	@test('values set at construction 1', {
+		name: 'firstName',
+		label: 'First name',
+		type: 'text',
+		options: {},
+	})
+	@test(
+		'values set at construction 2',
+		{
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'select',
+			options: {
+				choices: [
+					{ label: 'hey', value: 'hey' },
+					{ label: 'Hey too', value: 'heyToo' },
+				],
+			},
+		},
+		'hey\nHey too'
+	)
+	protected static async setsFieldsPassedToConstructorAndBackFromSubmit(
+		initialValues: any,
+		expectedSelectOptions: string
+	) {
+		let submittedResults: any
+		const formVc = this.Vc({
+			...initialValues,
+			onDone: (values) => {
+				submittedResults = values
+			},
+		}).getFormVc()
+
+		let expected = { ...initialValues }
+		delete expected.options
+		expected.selectOptions = expectedSelectOptions
+
+		assert.isEqualDeep(formVc.getValues(), expected)
+		await interactionUtil.submitForm(formVc)
+		assert.isEqualDeep(submittedResults, initialValues)
+	}
+
+	@test()
+	protected static async retainsOptionsNotSupported() {
+		let submittedResults: any
+		const formVc = this.Vc({
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'text',
+			options: {
+				//@ts-ignore
+				anythingGoes: true,
+			},
+			onDone: (values) => {
+				submittedResults = values
+			},
+		}).getFormVc()
+
+		await interactionUtil.submitForm(formVc)
+		assert.isEqualDeep(submittedResults, {
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'text',
+			options: {
+				anythingGoes: true,
+			},
+		})
+	}
+
+	@test()
+	protected static async retainsOptionsNotSupportedOnSelect() {
+		let submittedResults: any
+		const formVc = this.Vc({
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'select',
+			options: {
+				//@ts-ignore
+				anythingGoes: true,
+				choices: [{ value: 'one', label: 'One' }],
+			},
+			onDone: (values) => {
+				submittedResults = values
+			},
+		}).getFormVc()
+
+		await interactionUtil.submitForm(formVc)
+		assert.isEqualDeep(submittedResults, {
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'select',
+			options: {
+				anythingGoes: true,
+				choices: [{ value: 'one', label: 'One' }],
+			},
+		})
+	}
+
+	private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {
+		return this.Controller('editFormBuilderField', {
+			name: 'firstName',
+			label: 'First name',
+			type: 'text',
+			onDone: () => {},
+			options: {},
+			...options,
+		})
+	}
+
+	private static assertRendersExpectedFields(formVc: FormViewController<any>) {
+		vcAssertUtil.assertFormRendersField(formVc, 'name')
+		vcAssertUtil.assertFormRendersField(formVc, 'label')
+		vcAssertUtil.assertFormRendersField(formVc, 'type', {
+			type: 'select',
+			options: {
+				choices: fieldTypeChoices,
+			},
+		})
+	}
+}

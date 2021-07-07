@@ -2,6 +2,7 @@ import { buildSchema, SchemaValues, SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
+import { fieldTypeChoices } from '../../constants'
 import {
 	FormViewController,
 	ViewControllerOptions,
@@ -52,13 +53,7 @@ export type EditFormBuilderSectionValues =
 type Section =
 	SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditSectionSectionSchema>
 
-const fieldTypes = {
-	text: 'Text',
-	number: 'Number',
-	phone: 'Phone',
-}
-
-export interface EditBuilderSectionOptions {
+export interface EditFormBuilderSectionOptions {
 	onDone: (section: SimpleSection) => void | Promise<void>
 	editSection?: SimpleSection
 	defaultTitle: string
@@ -81,7 +76,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	private onDoneHandler: (values: SimpleSection) => void | Promise<void>
 
 	public constructor(
-		options: ViewControllerOptions & EditBuilderSectionOptions
+		options: ViewControllerOptions & EditFormBuilderSectionOptions
 	) {
 		super(options)
 
@@ -267,11 +262,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 						name: 'fieldType',
 						isRequired: true,
 						value: options.type,
-						choices: Object.keys(fieldTypes).map((key) => ({
-							//@ts-ignore
-							label: fieldTypes[key],
-							value: key,
-						})),
+						choices: fieldTypeChoices,
 						onChange: (value) => {
 							if (value) {
 								this.rows[options.idx].type = value
@@ -305,8 +296,8 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 	}
 
 	private handleFormChange() {
-		this.formVc.updateSections(this.buildFormSections())
-		this.formVc.updateFooter(this.buildFooter())
+		this.formVc.setSections(this.buildFormSections())
+		this.formVc.setFooter(this.buildFooter())
 	}
 
 	public render(): SpruceSchemas.Heartwood.v2021_02_11.Card {

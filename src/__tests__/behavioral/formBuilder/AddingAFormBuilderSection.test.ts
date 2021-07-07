@@ -7,7 +7,7 @@ import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import EditFormBuilderSectionViewController, {
 	EditSectionSectionSchema,
-	EditBuilderSectionOptions,
+	EditFormBuilderSectionOptions,
 } from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
@@ -18,7 +18,7 @@ declare module '../../../types/heartwood.types' {
 	}
 
 	export interface ViewControllerOptionsMap {
-		editFormBuilderSection: EditBuilderSectionOptions
+		editFormBuilderSection: EditFormBuilderSectionOptions
 	}
 }
 
@@ -39,7 +39,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
-		this.formVc = vcAssertUtil.assertCardContainsForm(this.vc)
+		this.formVc = vcAssertUtil.assertCardRendersForm(this.vc)
 		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
 	}
 
@@ -402,7 +402,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			.addSection({ title: 'A brand new section!' })
 		const { builderSectionVc } = await this.simulateAddSectionClick(0)
 
-		this.formVc = vcAssertUtil.assertCardContainsForm(builderSectionVc)
+		this.formVc = vcAssertUtil.assertCardRendersForm(builderSectionVc)
 
 		this.formVc.setValue('title', 'Now second section')
 		this.formVc.setValue('type', 'text')

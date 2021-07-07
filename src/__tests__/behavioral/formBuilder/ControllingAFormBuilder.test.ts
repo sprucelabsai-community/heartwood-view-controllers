@@ -1,4 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
+import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
@@ -8,6 +9,7 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import introspectionUtil from '../../../utilities/introspection.utility'
 import renderUtil from '../../../utilities/render.utility'
+import { EditFormBuilderFieldViewController } from '../../../viewControllers/formBuilder/EditFormBuilderField.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
 import { FormBuilderPageViewController } from '../../../viewControllers/formBuilder/FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
@@ -331,7 +333,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc,
 			() => this.click(model.footer?.buttons?.[0]),
 			async (dialogVc) => {
-				const form = vcAssertUtil.assertCardContainsForm(dialogVc)
+				const form = vcAssertUtil.assertCardRendersForm(dialogVc)
 
 				form.setValue('title', 'taco bell')
 				await form.submit()
@@ -562,7 +564,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc.handleClickAddPage()
 		)
 
-		const formVc = vcAssertUtil.assertCardContainsForm(dialogVc)
+		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)
 		const schema = formVc.getSchema()
 
 		assert.isFalse(formVc.shouldShowCancelButton())
@@ -574,7 +576,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const { dialogVc } = await vcAssertUtil.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
-		const formVc = vcAssertUtil.assertCardContainsForm(dialogVc)
+		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)
 		formVc.setValue('title', 'A new one!')
 
 		await formVc.submit()
@@ -648,6 +650,118 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				vcAssertUtil.assertDialogWasClosed(dialogVc)
 			}
 		)
+	}
+
+	@test()
+	protected static async throwsWhenPassingBadParamsToUpdateField() {
+		const pageVc = this.vc.getPageVc(0)
+		//@ts-ignore
+		const err = assert.doesThrow(() => pageVc.setField())
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['fieldName', 'updates'],
+		})
+	}
+
+	@test('rename field1 to taco', 'field1', 'taco', 0, 0, [
+		{ name: 'taco' },
+		{ name: 'field2' },
+	])
+	@test('rename field2 to taco2', 'field2', 'taco2', 0, 0, [
+		{ name: 'field1' },
+		{ name: 'taco2' },
+	])
+	@test('rename field3 (section 2) to taco', 'field3', 'taco2', 1, 0, [
+		{
+			name: 'taco2',
+		},
+	])
+	@test('rename field1 (of page 2) to taco', 'field1', 'taco3', 0, 1, [
+		{
+			name: 'taco3',
+		},
+	])
+	protected static async handlesClickingEditFieldAndClosing(
+		oldFieldName: string,
+		newFieldName: string,
+		sectionIdx = 0,
+		pageIdx = 0,
+		expectedFields: any
+	) {
+		assert.isFunction(this.vc.handleClickEditField)
+
+		const pageVc = this.vc.getPresentPageVc()
+		pageVc.addField(0)
+		pageVc.addSection()
+
+		await this.vc.addPage()
+
+		const model =
+			await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
+				oldFieldName,
+				newFieldName,
+				pageIdx,
+			})
+
+		assert.isEqualDeep(model.sections[sectionIdx].fields, expectedFields)
+	}
+
+	@test()
+	protected static async canUpdateSelectOptions() {
+		await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
+			oldFieldName: 'field1',
+			selectOptions: ['What', 'Is', 'Up?'],
+		})
+	}
+
+	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
+		oldFieldName: string
+		newFieldName?: string
+		selectOptions?: string[]
+		pageIdx?: number
+	}) {
+		const {
+			oldFieldName,
+			newFieldName,
+			selectOptions = ['Hey', 'There', 'Dude'],
+			pageIdx = 0,
+		} = options
+
+		await vcAssertUtil.assertRendersDialog(
+			this.vc,
+			async () => this.vc.handleClickEditField(pageIdx, oldFieldName),
+			async (dialogVc) => {
+				assert.isTrue(
+					dialogVc.getCardVc() instanceof EditFormBuilderFieldViewController
+				)
+
+				const vc = dialogVc.getCardVc() as EditFormBuilderFieldViewController
+				const formVc = vc.getFormVc()
+
+				formVc.setValue('name', newFieldName ?? oldFieldName)
+				formVc.setValue('label', 'Taco')
+				formVc.setValue('type', 'select')
+				formVc.setValue('selectOptions', selectOptions.join('\n'))
+
+				await interactionUtil.clickPrimaryInFooter(formVc)
+				vcAssertUtil.assertDialogWasClosed(dialogVc)
+			}
+		)
+
+		const pageVc = this.vc.getPageVc(pageIdx)
+		newFieldName &&
+			vcAssertUtil.assertFormRendersField(pageVc as any, newFieldName)
+		newFieldName &&
+			vcAssertUtil.assertFormDoesNotRenderField(pageVc as any, oldFieldName)
+
+		const model = this.render(pageVc)
+
+		assert.isEqualDeep(
+			//@ts-ignore
+			model.schema.fields[newFieldName ?? oldFieldName].options.choices,
+			selectOptions.map((o) => ({ label: o, value: namesUtil.toCamel(o) }))
+		)
+
+		return model
 	}
 
 	private static assertFirstFieldConfiguredCorrectly(

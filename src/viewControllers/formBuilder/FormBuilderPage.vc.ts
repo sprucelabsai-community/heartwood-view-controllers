@@ -15,7 +15,7 @@ export type AddSectionOptions = Partial<SimpleSection> & {
 
 export interface FormBuilderPageViewControllerEnhancements {
 	addSection(options?: AddSectionOptions): void
-	updateSection(sectionIdx: number, section: SimpleSection): void
+	setSection(sectionIdx: number, section: SimpleSection): void
 	addField(
 		sectionIdx: number,
 		options?: { name?: string; type?: string; label?: string }
@@ -109,7 +109,7 @@ export class FormBuilderPageViewControllerImpl
 		return `field${totalFields + 1}`
 	}
 
-	public updateSection(sectionIdx: number, section: SimpleSection) {
+	public setSection(sectionIdx: number, section: SimpleSection) {
 		const { title, fields, text, ...rest } = section
 
 		//@ts-ignore
@@ -124,7 +124,7 @@ export class FormBuilderPageViewControllerImpl
 			updatedSection.text = { content: text }
 		}
 
-		this.formVc.updateSection(sectionIdx, updatedSection)
+		this.formVc.setSection(sectionIdx, updatedSection)
 		this.addFieldsToSection(sectionIdx, fields ?? [])
 	}
 

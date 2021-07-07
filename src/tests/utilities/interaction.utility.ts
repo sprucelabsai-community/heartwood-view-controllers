@@ -52,9 +52,17 @@ const interactionUtil = {
 		)
 	},
 
-	async clickPrimaryInFooter(vc: CardVc) {
+	async clickPrimaryInFooter(vc: CardVc | FormVc) {
 		const model = renderUtil.render(vc)
 		const primary = model.footer?.buttons?.find((b) => b.type === 'primary')
+
+		//@ts-ignore
+		if (!primary && model.shouldShowSubmitControls) {
+			//@ts-ignore
+			await this.submitForm(vc)
+			return
+		}
+
 		assert.isTruthy(
 			primary,
 			`Your footer doesn't have button with type=primary to click.`

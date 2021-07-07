@@ -1,4 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
+import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
@@ -115,8 +116,10 @@ const vcAssertUtil = {
 			vc.renderInDialogHandler = ({ controller }) => {
 				wasHit = true
 				//@ts-ignore
-				setTimeout(() => {
-					dialogHandlerPromise = dialogHandler?.(controller)
+				setTimeout(async () => {
+					dialogHandlerPromise = dialogHandler?.(controller)?.catch?.((err) => {
+						reject(err)
+					})
 				}, 0)
 			}
 
@@ -146,7 +149,7 @@ const vcAssertUtil = {
 		})
 	},
 
-	assertCardContainsForm(vc: ViewController<Card> | DialogViewController) {
+	assertCardRendersForm(vc: ViewController<Card> | DialogViewController) {
 		const model = renderUtil.render(vc)
 		const form = model.body?.sections?.map((s) => s.form).find((s) => !!s)
 
@@ -218,18 +221,32 @@ const vcAssertUtil = {
 		}
 	},
 
-	assertFormRendersField(formVc: FormViewController<any>, fieldName: string) {
+	assertFormRendersField(
+		formVc: FormViewController<any>,
+		fieldName: string,
+		fieldDefinition?: Partial<FieldDefinitions>
+	) {
 		const model = renderUtil.render(formVc)
+		const schema = formVc.getSchema()
 
 		for (const section of model.sections) {
-			const fields = normalizeFormSectionFieldNamesUtil.toNames(section.fields)
-			if (fields.find((n) => n === fieldName)) {
+			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
+				section.fields,
+				schema
+			)
+			const match = fields.find((n) => n.name === fieldName)
+
+			if (match) {
+				if (fieldDefinition) {
+					assert.doesInclude(match, fieldDefinition)
+				}
+
 				return
 			}
 		}
 
 		assert.fail(
-			`Form does not render field named ${fieldName}. Make sure it's set in sections.fields.`
+			`Form does not render field named \`${fieldName}\`. Make sure it's in you form's schema and set in \`form.sections.fields\`.`
 		)
 	},
 
@@ -246,14 +263,14 @@ const vcAssertUtil = {
 		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
 	},
 
-	assertRendersCardHeader(
+	assertCardRendersHeader(
 		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
 	) {
 		const model = renderUtil.render(cardVc)
 		assert.isObject(model.header, `Your card did not render a header!`)
 	},
 
-	assertRendersCardFooter(
+	assertCardRendersFooter(
 		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
 	) {
 		const model = renderUtil.render(cardVc)

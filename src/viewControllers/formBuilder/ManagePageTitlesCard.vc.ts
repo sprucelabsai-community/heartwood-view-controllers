@@ -58,7 +58,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 						label: 'Add row',
 						onClick: () => {
 							void this.formBuilderVc.addPage()
-							this.listVc.updateRows(this.buildRows())
+							this.listVc.setRows(this.buildRows())
 							this.triggerRender()
 						},
 					},
@@ -104,7 +104,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 
 								if (didConfirm) {
 									await this.formBuilderVc.removePage(page.getIndex())
-									this.listVc.updateRows(this.buildRows())
+									this.listVc.setRows(this.buildRows())
 								}
 							},
 						},

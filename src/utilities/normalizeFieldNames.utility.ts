@@ -1,4 +1,9 @@
-import { Schema, SchemaFieldNames, FieldType } from '@sprucelabs/schema'
+import {
+	Schema,
+	SchemaFieldNames,
+	FieldDefinitions,
+	FieldType,
+} from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { FieldRenderOptions } from '../types/heartwood.types'
 
@@ -6,7 +11,8 @@ const normalizeFormSectionFieldNamesUtil = {
 	toObjects<S extends Schema = Schema>(
 		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields'],
 		schema?: Schema
-	): (FieldRenderOptions<S> & { type: FieldType })[] {
+	): (FieldRenderOptions<S> &
+		Partial<FieldDefinitions> & { type: FieldType })[] {
 		const normalized =
 			fields?.map((field) => {
 				let f = typeof field === 'string' ? { name: field } : field

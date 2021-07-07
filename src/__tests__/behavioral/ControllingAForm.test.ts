@@ -32,6 +32,12 @@ const testForm = buildForm({
 		{
 			fields: ['first'],
 		},
+		{
+			fields: ['last', 'nickname'],
+		},
+		{
+			fields: [{ name: 'favoriteNumber' }],
+		},
 	],
 })
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
@@ -342,7 +348,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static addingSectionShouldNotMutateModel() {
 		this.vc.addSection({ title: 'go!', fields: [] })
-		assert.isLength(testForm.sections, 1)
+		//test against original form schema to see if it was mutated
+		assert.isLength(testForm.sections, 3)
 	}
 
 	@test()
@@ -472,13 +479,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static hasUpdateSectionMethod() {
-		assert.isFunction(this.vc.updateSection)
+		assert.isFunction(this.vc.setSection)
 	}
 
 	@test()
 	protected static validatesUpdate() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.updateSection())
+		const err = assert.doesThrow(() => this.vc.setSection())
 
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['sectionIdx', 'newSection'],
@@ -488,7 +495,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static validatesUpdateForUpdates() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.updateSection(0))
+		const err = assert.doesThrow(() => this.vc.setSection(0))
 
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['newSection'],
@@ -498,7 +505,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static throwsWithbadSectionOnUpdate() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.updateSection(-1, {}))
+		const err = assert.doesThrow(() => this.vc.setSection(-1, {}))
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
@@ -507,7 +514,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateFirstSectionTitle() {
-		this.vc.updateSection(0, {
+		this.vc.setSection(0, {
 			title: 'Hey gang!',
 		})
 
@@ -515,7 +522,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqual(model.sections[0].title, 'Hey gang!')
 		//@ts-ignore
-		this.vc.updateSection(0, { title: 'go again!', fields: ['cheesy'] })
+		this.vc.setSection(0, { title: 'go again!', fields: ['cheesy'] })
 
 		model = this.render(this.vc)
 
@@ -526,7 +533,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static udpateSectionUpdatesEverything() {
-		this.vc.updateSection(0, {
+		this.vc.setSection(0, {
 			title: 'Hey gang!',
 			fields: ['first'],
 			text: {
@@ -545,7 +552,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static updatesTriggerRender() {
-		this.vc.updateSection(0, {
+		this.vc.setSection(0, {
 			title: 'doobey',
 		})
 
@@ -554,7 +561,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canSetThenHideFooterButtons() {
-		this.vc.updateFooter({
+		this.vc.setFooter({
 			buttons: [
 				{
 					label: 'What the?',
@@ -573,7 +580,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateSectionsAndTriggerRender() {
-		this.vc.updateSections([
+		this.vc.setSections([
 			{
 				title: 'go team!',
 				fields: ['first', 'last'],
@@ -590,7 +597,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateFooter() {
-		this.vc.updateFooter({
+		this.vc.setFooter({
 			buttons: [
 				{
 					label: 'What the?',
@@ -598,9 +605,141 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			],
 		})
 
-		this.vc.updateFooter(null)
+		this.vc.setFooter(null)
 
 		const model = this.render(this.vc)
 		assert.isFalse('footer' in model)
+	}
+
+	@test()
+	protected static cantUpdateWhenMissingEverything() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.setField())
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['fieldName', 'updates'],
+		})
+	}
+
+	@test()
+	protected static cantUpdateWithouSupplyingUpdates() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.setField('test'))
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['updates'],
+		})
+	}
+
+	@test('cant update field with bad name deli', 'deli')
+	@test('cant update field with bad name random', `${Math.random()}`)
+	protected static cantUpdateFieldThatDoesNotExist(name: any) {
+		const err = assert.doesThrow(() =>
+			this.vc.setField(name, {
+				//@ts-ignore
+				fieldDefinition: {},
+			})
+		)
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['fieldName'],
+		})
+	}
+
+	@test()
+	protected static canUpdateFieldLabelDirectly() {
+		this.vc.setField('first', {
+			fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
+		})
+
+		const model = this.render(this.vc)
+
+		assert.isEqualDeep(model.schema.fields.first, {
+			type: 'text',
+			//@ts-ignore
+			label: 'Cheesy burrito',
+		})
+
+		assert.isEqualDeep(model.sections[0].fields, ['first'])
+	}
+
+	@test()
+	protected static canUpdateFieldLabelWithRenderOptions() {
+		this.vc.setField('first', {
+			renderOptions: { label: 'Cheesy burrito' },
+		})
+
+		const model = this.render(this.vc)
+
+		assert.isEqualDeep(model.schema.fields.first, {
+			type: 'text',
+			isRequired: true,
+		})
+
+		assert.isEqualDeep(model.sections[0].fields, [
+			{ name: 'first', label: 'Cheesy burrito' },
+		])
+	}
+
+	@test()
+	protected static canUpdateLabelInFieldInNotFirstSection() {
+		this.vc.setField('nickname', {
+			renderOptions: { label: 'Cheesy burrito' },
+		})
+
+		const model = this.render(this.vc)
+
+		assert.isEqualDeep(model.sections[1].fields, [
+			'last',
+			{ name: 'nickname', label: 'Cheesy burrito' },
+		])
+	}
+
+	@test()
+	protected static canRenameField() {
+		this.vc.setField('favoriteNumber', {
+			newName: 'secondFavoriteNumber',
+		})
+
+		const model = this.render(this.vc)
+
+		//@ts-ignore
+		assert.isTruthy(model.schema.fields.secondFavoriteNumber)
+		assert.isFalsy(model.schema.fields.favoriteNumber)
+		assert.isTruthy(testForm.schema.fields.favoriteNumber)
+
+		vcAssertUtil.assertFormRendersField(this.vc, 'secondFavoriteNumber')
+	}
+
+	@test()
+	protected static canRenameWhileUpdatingDefinitionAndRenderOptions() {
+		this.vc.setField('favoriteNumber', {
+			newName: 'secondFavoriteNumber',
+			fieldDefinition: {
+				type: 'select',
+				options: {
+					choices: [
+						{
+							label: 'hey',
+							value: 'hey',
+						},
+					],
+				},
+			},
+			renderOptions: { label: 'Cheesy burrito' },
+		})
+
+		const model = this.render(this.vc)
+
+		//@ts-ignore
+		assert.isTruthy(model.schema.fields.secondFavoriteNumber)
+		assert.isEqualDeep(
+			//@ts-ignore
+			model.schema.fields.secondFavoriteNumber.options.choices,
+			[{ label: 'hey', value: 'hey' }]
+		)
+		assert.isFalsy(model.schema.fields.favoriteNumber)
+
+		assert.isEqualDeep(model.sections[2].fields, [
+			//@ts-ignore
+			{ name: 'secondFavoriteNumber', label: 'Cheesy burrito' },
+		])
 	}
 }

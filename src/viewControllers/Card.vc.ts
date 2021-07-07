@@ -23,7 +23,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.model = options
 	}
 
-	public updateFooter(footer: NonNullable<V['footer']>) {
+	public setFooter(footer: NonNullable<V['footer']>) {
 		this.model.footer = footer
 		this.triggerRenderFooter?.()
 	}
@@ -181,7 +181,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		return section
 	}
 
-	public updateSection(idx: number, section: Section) {
+	public setSection(idx: number, section: Section) {
 		this.ensureSectionsExist()
 
 		if (!this.model.body?.sections?.[idx]) {
@@ -198,7 +198,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 	}
 
-	public updateSections(sections: Section[]) {
+	public setSections(sections: Section[]) {
 		this.ensureSectionsExist()
 		if (this.model.body) {
 			this.model.body.sections = [...sections]

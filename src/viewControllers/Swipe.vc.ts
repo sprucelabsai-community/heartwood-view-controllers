@@ -36,7 +36,7 @@ export default class SwipeViewController
 
 	public setHeaderTitle!: CardViewController['setHeaderTitle']
 	public setHeaderSubtitle!: CardViewController['setHeaderSubtitle']
-	public updateSections!: CardViewController['updateSections']
+	public setSections!: CardViewController['setSections']
 
 	public constructor(
 		options: SwipeViewControllerOptions & ViewControllerOptions
@@ -92,9 +92,9 @@ export default class SwipeViewController
 		return this.presentSlide
 	}
 
-	public updateSlide(slideIdx: number, slide: Partial<Slide>) {
+	public setSlide(slideIdx: number, slide: Partial<Slide>) {
 		this.assertSlideAtIndex(slideIdx)
-		return this.cardVc.updateSection(slideIdx, slide)
+		return this.cardVc.setSection(slideIdx, slide)
 	}
 
 	private assertSlideAtIndex(slideIdx: number) {
@@ -133,8 +133,8 @@ export default class SwipeViewController
 		return this.cardVc.getSection(idx)
 	}
 
-	public updateFooter(footer: Footer) {
-		this.cardVc.updateFooter(footer)
+	public setFooter(footer: Footer) {
+		this.cardVc.setFooter(footer)
 	}
 
 	public getTotalSlides(): number {

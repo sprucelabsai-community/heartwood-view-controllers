@@ -80,7 +80,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canUpdateFooterAndDoesNotCauseFullRender() {
-		this.vc.updateFooter({ buttons: [{ label: 'Stop team!' }] })
+		this.vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
 
 		const model = this.renderCard()
 
@@ -93,7 +93,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static updatingFooterAfterRenderOnlyCallsRenderOnFooter() {
 		this.renderCard()
 
-		this.vc.updateFooter({ buttons: [{ label: 'Stop team!' }] })
+		this.vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
 
 		const model = this.renderCard()
 
@@ -140,7 +140,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		let model = this.renderCard()
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'Hello world')
 
-		this.vc.updateSection(0, { text: { content: 'Goodbye world' } })
+		this.vc.setSection(0, { text: { content: 'Goodbye world' } })
 
 		model = this.renderCard()
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'Goodbye world')
@@ -150,7 +150,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static onlyTriggersRenderInUpdatedSection() {
 		this.renderCard()
 
-		this.vc.updateSection(0, { text: { content: 'Goodbye world' } })
+		this.vc.setSection(0, { text: { content: 'Goodbye world' } })
 
 		assert.isEqual(this.cardTriggerRenderCount, 0)
 		assert.isEqual(this.footerTriggerRenderCount, 0)

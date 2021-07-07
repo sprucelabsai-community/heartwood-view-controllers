@@ -74,7 +74,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	@test()
 	protected static async updatingBadSectionThrows() {
 		const err = assert.doesThrow(() =>
-			this.vc.updateSlide(10, { text: { content: 'Hey' } })
+			this.vc.setSlide(10, { text: { content: 'Hey' } })
 		)
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
@@ -97,7 +97,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 			],
 		})
 
-		vc.updateSlide(0, { text: { content: 'hey there updated' } })
+		vc.setSlide(0, { text: { content: 'hey there updated' } })
 
 		const model = this.render(vc)
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'hey there updated')
@@ -195,7 +195,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	@test()
 	protected static canUpdateFooter() {
 		assert.isFalsy(this.render(this.vc).footer)
-		this.vc.updateFooter({ buttons: [{ label: 'Hey!' }] })
+		this.vc.setFooter({ buttons: [{ label: 'Hey!' }] })
 		assert.doesInclude(this.render(this.vc).footer?.buttons, { label: 'Hey!' })
 	}
 

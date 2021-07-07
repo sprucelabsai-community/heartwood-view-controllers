@@ -1,4 +1,4 @@
-import { SchemaFieldsByName } from '@sprucelabs/schema'
+import { SchemaFieldsByName, SelectChoice } from '@sprucelabs/schema'
 
 export const lineIcons = [
 	'sprucebot',
@@ -677,3 +677,17 @@ export const buttonFields: SchemaFieldsByName = {
 		},
 	},
 }
+
+export const formBuilderFieldTypes = {
+	text: 'Text',
+	boolean: 'Toggle',
+	select: 'Dropdown',
+}
+
+export const fieldTypeChoices: SelectChoice[] = Object.keys(
+	formBuilderFieldTypes
+).map((key) => ({
+	//@ts-ignore
+	label: formBuilderFieldTypes[key],
+	value: key,
+}))
