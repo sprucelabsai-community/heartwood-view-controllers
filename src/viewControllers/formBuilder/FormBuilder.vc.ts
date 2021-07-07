@@ -32,10 +32,16 @@ export interface FormBuilderViewControllerOptions {
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
+	private footerOverride?:
+		| SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+		| null
+		| undefined
 	public constructor(
 		options: FormBuilderViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
+
+		this.footerOverride = options.footer
 
 		this.swipeVc = this.vcFactory.Controller('swipe', {
 			header: {
@@ -43,7 +49,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 				...options.header,
 			},
 			slides: [this.buildSlideForNewPage()],
-			footer: options.footer ?? this.buildFooter(),
+			footer: this.buildFooter(),
 		})
 
 		introspectionUtil.delegateFunctionCalls(this, this.swipeVc)
@@ -63,6 +69,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	private buildFooter(): Footer {
+		if (this.footerOverride) {
+			return this.footerOverride
+		}
+
 		const buttons: Button[] = [
 			{ label: 'Add page', onClick: this.handleClickAddPage.bind(this) },
 		]
