@@ -131,6 +131,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		name: 'firstName',
 		label: 'First name',
 		type: 'text',
+		isRequired: undefined,
 		options: {},
 	})
 	@test(
@@ -139,6 +140,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			name: 'firstName2',
 			label: 'First name2',
 			type: 'select',
+			isRequired: undefined,
 			options: {
 				choices: [
 					{ label: 'hey', value: 'hey' },
@@ -190,6 +192,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			name: 'firstName2',
 			label: 'First name2',
 			type: 'text',
+			isRequired: undefined,
 			options: {
 				anythingGoes: true,
 			},
@@ -218,11 +221,37 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			name: 'firstName2',
 			label: 'First name2',
 			type: 'select',
+			isRequired: undefined,
 			options: {
 				anythingGoes: true,
 				choices: [{ value: 'one', label: 'One' }],
 			},
 		})
+	}
+
+	@test()
+	protected static async rendersRequiredField() {
+		let submittedResults: any
+		const formVc = this.Vc({
+			name: 'firstName2',
+			label: 'First name2',
+			type: 'select',
+			options: {
+				//@ts-ignore
+				anythingGoes: true,
+				choices: [{ value: 'one', label: 'One' }],
+			},
+			onDone: (values) => {
+				submittedResults = values
+			},
+		}).getFormVc()
+
+		vcAssertUtil.assertFormRendersField(formVc, 'isRequired')
+		formVc.setValue('isRequired', true)
+
+		await interactionUtil.submitForm(formVc)
+
+		assert.isTrue(submittedResults.isRequired)
 	}
 
 	private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {

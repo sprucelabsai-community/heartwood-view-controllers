@@ -41,6 +41,10 @@ const editFieldFormSchema = buildSchema({
 			// isRequired: true,
 			hint: 'This is what people will see when filling out the form.',
 		},
+		isRequired: {
+			type: 'boolean',
+			label: 'Required',
+		},
 		type: {
 			type: 'select',
 			label: 'Type',
@@ -192,7 +196,12 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 		const sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditFieldFormSchema>[] =
 			[
 				{
-					fields: [{ name: 'name' }, { name: 'label' }, { name: 'type' }],
+					fields: [
+						{ name: 'name' },
+						{ name: 'label' },
+						{ name: 'isRequired' },
+						{ name: 'type' },
+					],
 				},
 			]
 

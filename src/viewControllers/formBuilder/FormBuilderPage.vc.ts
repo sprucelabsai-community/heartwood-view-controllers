@@ -175,9 +175,12 @@ export class FormBuilderPageViewControllerImpl
 				simpleSection.fields = []
 			}
 
+			//@ts-ignore
 			simpleSection.fields.push({
+				//@ts-ignore
 				name: field.name,
 				label: field.label ?? field.name,
+				//@ts-ignore
 				type: field.type,
 			})
 		}
@@ -187,16 +190,15 @@ export class FormBuilderPageViewControllerImpl
 
 	private addFieldsToSection(sectionIdx: number, fields: SimpleRow[]) {
 		for (const field of fields) {
-			let fieldName = field.label ? namesUtil.toCamel(field.label) : undefined
+			let fieldName = field.label ? namesUtil.toCamel(field.label) : field.name
 
 			//@ts-ignore
 			let type = field.type ?? 'text'
 
 			this.addField(sectionIdx, {
-				name: fieldName,
+				...field,
 				type,
-				//@ts-ignore
-				label: field.label,
+				name: fieldName,
 			})
 		}
 	}

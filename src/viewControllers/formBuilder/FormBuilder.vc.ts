@@ -4,6 +4,7 @@ import formBuilderImportExportObjectSchema from '#spruce/schemas/heartwood/v2021
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
@@ -285,11 +286,17 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	public handleClickEditSection(clickedSectionIdx: number) {
 		const pageVc = this.getPresentPageVc()
-		const section = pageVc.getSection(clickedSectionIdx)
+		const section = { ...pageVc.getSection(clickedSectionIdx) }
+
+		const fields = normalizeFormSectionFieldNamesUtil
+			.toNames(section.fields ?? [])
+			.map((f) => pageVc.getField(f).compiledOptions)
+
+		//@ts-ignore
+		section.fields = fields
 
 		const vc = this.EditSectionVc({
 			editingSection: section,
-
 			onDone: async (section) => {
 				void dialog.hide()
 				const pageVc = this.getPresentPageVc()

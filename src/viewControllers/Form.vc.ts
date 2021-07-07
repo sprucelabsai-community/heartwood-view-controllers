@@ -382,6 +382,14 @@ export default class FormViewController<
 		const { sectionIdx, fieldIdx } =
 			this.getSectionAndFieldForFieldNamed(fieldName)
 
+		if (sectionIdx === -1) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['fieldName'],
+				friendlyMessage: `I could not find a field being renderd called \`${fieldName}\``,
+			})
+		}
+
 		const schema = this.getSchema()
 		const fieldDefinition = schema.fields?.[fieldName]
 		const renderOptions = normalizeFormSectionFieldNamesUtil.toObjects(

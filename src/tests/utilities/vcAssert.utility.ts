@@ -251,7 +251,7 @@ const vcAssertUtil = {
 		}
 
 		assert.fail(
-			`Form does not render field named \`${fieldName}\`. Make sure it's in you form's schema and set in \`form.sections.fields\`.`
+			`Form does not render field named \`${fieldName}\`. Make sure it's in your form's schema and set in \`form.sections.fields\`.`
 		)
 	},
 

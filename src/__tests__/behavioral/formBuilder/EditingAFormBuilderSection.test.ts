@@ -135,11 +135,13 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			type: 'form',
 			fields: [
 				{
+					//@ts-ignore
 					name: 'field1',
 					label: 'Field 1',
 					type: 'text',
 				},
 				{
+					//@ts-ignore
 					name: 'field2',
 					label: 'Field 2',
 					type: 'text',
@@ -195,6 +197,40 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		})
 
 		assert.isEqual(fieldList.getTotalRows(), 2)
+	}
+
+	@test()
+	protected static async showingEditSectionDoesNotLoseFieldOptions() {
+		const pageVc = this.formBuilderVc.getPageVc(0)
+		//@ts-ignore
+		pageVc.setField('field1', {
+			fieldDefinition: {
+				label: 'Field 1',
+				type: 'select',
+				options: {
+					choices: [{ value: 'one', label: 'One' }],
+				},
+			},
+		})
+
+		const { formVc } = await this.simulateEditSectionClick()
+
+		await interactionUtil.submitForm(formVc)
+
+		const { compiledOptions } = this.formBuilderVc
+			.getPageVc(0)
+			//@ts-ignore
+			.getField('field1')
+
+		assert.isEqualDeep(compiledOptions, {
+			type: 'select',
+			//@ts-ignore
+			name: 'field1',
+			label: 'Field 1',
+			options: {
+				choices: [{ value: 'one', label: 'One' }],
+			},
+		})
 	}
 
 	private static async simulateEditSectionClick(clickedSectionIdx = 0) {

@@ -1,4 +1,10 @@
-import { buildSchema, SchemaValues, SpruceError } from '@sprucelabs/schema'
+import {
+	buildSchema,
+	FieldDefinitions,
+	SchemaValues,
+	SpruceError,
+	Schema,
+} from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
@@ -6,6 +12,7 @@ import { fieldTypeChoices } from '../../constants'
 import {
 	FormViewController,
 	ViewControllerOptions,
+	FieldRenderOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../Card.vc'
 import ListViewController, { ListRow } from '../list/List.vc'
@@ -59,11 +66,7 @@ export interface EditFormBuilderSectionOptions {
 	defaultTitle: string
 }
 
-export interface SimpleRow {
-	label: string
-	type: string
-	name: string
-}
+export type SimpleRow = FieldDefinitions & FieldRenderOptions<Schema>
 
 export type SimpleSection = EditFormBuilderSectionValues & {
 	fields?: SimpleRow[]
@@ -160,6 +163,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 		return {
 			label,
 			type: 'text',
+			//@ts-ignore
 			name: namesUtil.toCamel(label),
 		}
 	}
@@ -265,6 +269,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 						choices: fieldTypeChoices,
 						onChange: (value) => {
 							if (value) {
+								//@ts-ignore
 								this.rows[options.idx].type = value
 							}
 						},

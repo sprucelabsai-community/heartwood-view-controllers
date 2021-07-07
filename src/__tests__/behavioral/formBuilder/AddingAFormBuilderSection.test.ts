@@ -171,6 +171,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			{
 				label: 'Waka',
 				type: 'phone',
+				//@ts-ignore
 				name: 'field1',
 			},
 		])
@@ -220,8 +221,11 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		this.vc.onDoneHandler = async (values) => {
 			assert.isEqualDeep(values, {
 				fields: [
+					//@ts-ignore
 					{ label: 'Field 1', type: 'text', name: 'field1' },
+					//@ts-ignore
 					{ label: 'Field 2', type: 'text', name: 'field2' },
+					//@ts-ignore
 					{ label: 'Field 4', type: 'text', name: 'field4' },
 				],
 				shouldRenderAsGrid: false,
@@ -352,16 +356,19 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			type: 'form',
 			fields: [
 				{
+					//@ts-ignore
 					name: 'field1',
 					label: 'Field 1',
 					type: 'text',
 				},
 				{
+					//@ts-ignore
 					name: 'field2',
 					label: 'Field 2',
 					type: 'text',
 				},
 				{
+					//@ts-ignore
 					name: 'field3',
 					label: 'Field 3',
 					type: 'text',

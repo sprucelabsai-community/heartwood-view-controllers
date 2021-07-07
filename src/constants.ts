@@ -682,6 +682,8 @@ export const formBuilderFieldTypes = {
 	text: 'Text',
 	boolean: 'Toggle',
 	select: 'Dropdown',
+	phone: 'Phone',
+	number: 'Number',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(

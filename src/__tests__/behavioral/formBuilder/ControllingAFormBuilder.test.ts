@@ -258,6 +258,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const section = pageVc.getSection(1)
 		assert.isLength(section.fields, 1)
 		assert.isEqualDeep(section.fields, [
+			//@ts-ignore
 			{ name: 'field2', label: 'Field 2', type: 'text' },
 		])
 	}
@@ -629,6 +630,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			title: 'Section 1',
 			shouldRenderAsGrid: false,
 			type: 'form',
+			//@ts-ignore
 			fields: [{ name: 'field1', type: 'text', label: 'Field 1' }],
 		})
 	}
@@ -843,6 +845,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const section = pageVc.getSection(0)
 
 		assert.isEqualDeep(section.fields, [
+			//@ts-ignore
 			{ name: 'field1', label: 'Field 1', type: 'text' },
 		])
 	}
