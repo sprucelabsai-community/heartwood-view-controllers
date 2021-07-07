@@ -320,17 +320,23 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		return editSectionVc
 	}
 
-	public handleClickEditField(pageIdx: number, fieldName: string) {
+	public handleClickEditField(fieldName: string) {
+		const pageVc = this.getPresentPageVc()
+
+		//@ts-ignore
+		const { compiledOptions } = pageVc.getField(fieldName)
+
 		const vc = this.vcFactory.Controller('editFormBuilderField', {
-			name: 'test',
-			type: 'text',
-			label: 'test',
-			options: {},
+			...compiledOptions,
+			//@ts-ignore
+			options: {
+				...compiledOptions.options,
+			},
 			onDone: (options) => {
 				const { name, ...fieldDefinition } = options
 				void dialog.hide()
 				//@ts-ignore
-				this.getPageVc(pageIdx).setField(fieldName, {
+				pageVc.setField(fieldName, {
 					newName: name,
 					fieldDefinition,
 				})

@@ -707,28 +707,53 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canUpdateSelectOptions() {
+		const pageVc = this.vc.getPageVc(0)
+		pageVc.addField(0)
+		pageVc.addField(0)
+
 		await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
 			oldFieldName: 'field1',
 			selectOptions: ['What', 'Is', 'Up?'],
+			expectedFormValues: {
+				name: 'field1',
+				label: 'Field 1',
+				type: 'text',
+				selectOptions: undefined,
+			},
+		})
+
+		await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
+			oldFieldName: 'field1',
+			selectOptions: null,
+			expectedFormValues: {
+				name: 'field1',
+				label: 'Taco',
+				type: 'select',
+				selectOptions: `What\nIs\nUp?`,
+			},
 		})
 	}
 
 	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
 		oldFieldName: string
 		newFieldName?: string
-		selectOptions?: string[]
+		selectOptions?: string[] | null
 		pageIdx?: number
+		expectedFormValues?: Record<string, any>
 	}) {
 		const {
 			oldFieldName,
 			newFieldName,
 			selectOptions = ['Hey', 'There', 'Dude'],
 			pageIdx = 0,
+			expectedFormValues,
 		} = options
+
+		await this.vc.jumpToPage(pageIdx)
 
 		await vcAssertUtil.assertRendersDialog(
 			this.vc,
-			async () => this.vc.handleClickEditField(pageIdx, oldFieldName),
+			async () => this.vc.handleClickEditField(oldFieldName),
 			async (dialogVc) => {
 				assert.isTrue(
 					dialogVc.getCardVc() instanceof EditFormBuilderFieldViewController
@@ -737,10 +762,17 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				const vc = dialogVc.getCardVc() as EditFormBuilderFieldViewController
 				const formVc = vc.getFormVc()
 
+				if (expectedFormValues) {
+					assert.isEqualDeep(formVc.getValues(), expectedFormValues)
+				}
+
 				formVc.setValue('name', newFieldName ?? oldFieldName)
 				formVc.setValue('label', 'Taco')
-				formVc.setValue('type', 'select')
-				formVc.setValue('selectOptions', selectOptions.join('\n'))
+				formVc.setValue('type', selectOptions ? 'select' : 'text')
+				formVc.setValue(
+					'selectOptions',
+					selectOptions && selectOptions.join('\n')
+				)
 
 				await interactionUtil.clickPrimaryInFooter(formVc)
 				vcAssertUtil.assertDialogWasClosed(dialogVc)
@@ -755,11 +787,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		const model = this.render(pageVc)
 
-		assert.isEqualDeep(
-			//@ts-ignore
-			model.schema.fields[newFieldName ?? oldFieldName].options.choices,
-			selectOptions.map((o) => ({ label: o, value: namesUtil.toCamel(o) }))
-		)
+		if (selectOptions) {
+			assert.isEqualDeep(
+				//@ts-ignore
+				model.schema.fields[newFieldName ?? oldFieldName].options.choices,
+				selectOptions.map((o) => ({ label: o, value: namesUtil.toCamel(o) }))
+			)
+		}
 
 		return model
 	}

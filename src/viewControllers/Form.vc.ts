@@ -378,6 +378,24 @@ export default class FormViewController<
 		}
 	}
 
+	public getField(fieldName: SchemaFieldNames<S>) {
+		const { sectionIdx, fieldIdx } =
+			this.getSectionAndFieldForFieldNamed(fieldName)
+
+		const schema = this.getSchema()
+		const fieldDefinition = schema.fields?.[fieldName]
+		const renderOptions = normalizeFormSectionFieldNamesUtil.toObjects(
+			this.getSection(sectionIdx).fields ?? []
+		)?.[fieldIdx]
+
+		return {
+			compiledOptions: {
+				...fieldDefinition,
+				...renderOptions,
+			},
+		}
+	}
+
 	private getSectionAndFieldForFieldNamed(fieldName: string) {
 		let fieldIdx = -1
 

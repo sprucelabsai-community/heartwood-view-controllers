@@ -32,19 +32,19 @@ const editFieldFormSchema = buildSchema({
 		name: {
 			type: 'text',
 			label: 'Name',
-			isRequired: true,
+			// isRequired: true,
 			hint: 'This is how the name is saved in the database, you can usually ignore this.',
 		},
 		label: {
 			type: 'text',
 			label: 'Label',
-			isRequired: true,
+			// isRequired: true,
 			hint: 'This is what people will see when filling out the form.',
 		},
 		type: {
 			type: 'select',
 			label: 'Type',
-			isRequired: true,
+			// isRequired: true,
 			options: {
 				choices: fieldTypeChoices,
 			},
@@ -52,7 +52,7 @@ const editFieldFormSchema = buildSchema({
 		selectOptions: {
 			type: 'text',
 			label: 'Dropdown options',
-			isRequired: true,
+			// isRequired: true,
 			hint: 'Render 1 per',
 		},
 	},
@@ -78,6 +78,8 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 			buildForm({
 				schema: editFieldFormSchema,
 				onChange: this.handleFormChange.bind(this),
+				shouldShowCancelButton: false,
+				submitButtonLabel: 'Save',
 				values,
 				onSubmit: async ({ values }) => {
 					this.formValuesToOptions(values, options)
@@ -216,6 +218,9 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 	public render(): SpruceSchemas.Heartwood.v2021_02_11.Card {
 		return {
 			...super.model,
+			header: {
+				title: 'Edit field',
+			},
 			controller: this,
 			body: {
 				sections: [
