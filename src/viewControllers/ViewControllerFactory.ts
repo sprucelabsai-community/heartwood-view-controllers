@@ -162,7 +162,7 @@ export default class ViewControllerFactory {
 
 		if (isFunction) {
 			//@ts-ignore
-			instance = instance.__proto__ ?? instance
+			// instance = instance.__proto__ ?? instance
 		}
 
 		//@ts-ignore

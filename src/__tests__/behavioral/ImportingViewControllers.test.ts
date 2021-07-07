@@ -119,6 +119,17 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		this.importAndRenderVc()
 	}
 
+	@test()
+	protected static constructorIsInvoked() {
+		const factory = this.importAndGetFactory()
+
+		//@ts-ignore
+		const vc = factory.Controller('book', {})
+
+		//@ts-ignore
+		assert.isEqual(vc.getValueSetInConstructor(), 'set!')
+	}
+
 	private static importAndGetFactory() {
 		const controllers = this.importControllers()
 		const factory = this.Factory()
