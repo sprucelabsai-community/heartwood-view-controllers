@@ -1,3 +1,10 @@
+# [17.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.9.4...v17.0.0) (2021-07-07)
+
+
+### Breaking Changes
+
+* update -> set renames, edit form builder field ([70e7cae](https://github.com/sprucelabsai/heartwood-view-controllers/commit/70e7cae))
+
 ## [16.9.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.9.3...v16.9.4) (2021-07-06)
 
 ## [16.9.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.9.2...v16.9.3) (2021-07-06)
