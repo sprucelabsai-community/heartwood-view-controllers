@@ -720,6 +720,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				name: 'field1',
 				label: 'Field 1',
 				type: 'text',
+				isRequired: undefined,
 				selectOptions: undefined,
 			},
 		})
@@ -731,6 +732,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				name: 'field1',
 				label: 'Taco',
 				type: 'select',
+				isRequired: undefined,
 				selectOptions: `What\nIs\nUp?`,
 			},
 		})
