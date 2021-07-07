@@ -204,6 +204,8 @@ const vcAssertUtil = {
 
 	assertRendersValidCard(vc: ViewController<Card>) {
 		const model = renderUtil.render(vc)
+		//@ts-ignore TODO make shouldAllowEditing part of formBuilderSchema
+		delete model.shouldAllowEditing
 		validateSchemaValues(cardSchema, model)
 
 		if (model.footer?.buttons) {

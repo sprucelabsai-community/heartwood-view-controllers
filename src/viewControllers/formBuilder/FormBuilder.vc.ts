@@ -19,7 +19,9 @@ import {
 } from './FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 
-type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
+type Card = SpruceSchemas.Heartwood.v2021_02_11.Card & {
+	shouldAllowEditing?: boolean
+}
 type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
 type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
 export type FormBuilderImportExportObject =
@@ -29,6 +31,7 @@ type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 	footer?: Card['footer']
+	shouldAllowEditing?: boolean
 }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
@@ -37,12 +40,16 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		| SpruceSchemas.Heartwood.v2021_02_11.CardFooter
 		| null
 		| undefined
+
+	private shouldAllowEditing?: boolean
+
 	public constructor(
 		options: FormBuilderViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
 
 		this.footerOverride = options.footer
+		this.shouldAllowEditing = options.shouldAllowEditing ?? true
 
 		this.swipeVc = this.vcFactory.Controller('swipe', {
 			header: {
@@ -268,7 +275,11 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public render(): Card {
-		return { ...this.swipeVc.render(), controller: this as any }
+		return {
+			...this.swipeVc.render(),
+			controller: this as any,
+			shouldAllowEditing: this.shouldAllowEditing,
+		}
 	}
 
 	public handleClickAddSection(clickedSectionIdx: number) {

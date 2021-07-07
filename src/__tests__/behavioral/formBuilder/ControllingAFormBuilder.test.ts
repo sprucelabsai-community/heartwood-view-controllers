@@ -41,8 +41,37 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static canSetShouldAllowEditing() {
+		this.vc = this.Controller('formBuilder', {
+			shouldAllowEditing: true,
+		})
+
+		const model = this.render(this.vc)
+		assert.isTrue(model.shouldAllowEditing)
+	}
+
+	@test()
+	protected static shouldAllowEditingTrueByDefault() {
+		const model = this.render(this.vc)
+		assert.isTrue(model.shouldAllowEditing)
+	}
+
+	@test()
+	protected static canDisableFormEditing() {
+		this.vc = this.Controller('formBuilder', {
+			shouldAllowEditing: false,
+		})
+
+		const model = this.render(this.vc)
+		assert.isFalse(model.shouldAllowEditing)
+	}
+
+	@test()
 	protected static rendersValidModel() {
-		validateSchemaValues(cardSchema, this.renderVc())
+		//TODO make a form builder like card but with shouldAllowEditing
+		const model = this.renderVc()
+		delete model.shouldAllowEditing
+		validateSchemaValues(cardSchema, model)
 	}
 
 	@test()
