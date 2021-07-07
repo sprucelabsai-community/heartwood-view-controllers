@@ -1,3 +1,10 @@
+# [17.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.1.3...v17.2.0) (2021-07-07)
+
+
+### Features
+
+* form builder can have custom footer ([f1f5c79](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f1f5c79))
+
 ## [17.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.1.2...v17.1.3) (2021-07-07)
 
 ## [17.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.1.1...v17.1.2) (2021-07-07)
