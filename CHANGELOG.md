@@ -1,3 +1,10 @@
+# [18.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.0.2...v18.1.0) (2021-07-07)
+
+
+### Features
+
+* shouldAllowEditing ([958c6f4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/958c6f4))
+
 ## [18.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.0.1...v18.0.2) (2021-07-07)
 
 ## [18.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.0.0...v18.0.1) (2021-07-07)
