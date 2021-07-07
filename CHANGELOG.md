@@ -1,3 +1,10 @@
+# [17.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.0.1...v17.1.0) (2021-07-07)
+
+
+### Features
+
+* assert skill view renders card ([7d5c1d4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7d5c1d4))
+
 ## [17.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v17.0.0...v17.0.1) (2021-07-07)
 
 # [17.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v16.9.4...v17.0.0) (2021-07-07)
