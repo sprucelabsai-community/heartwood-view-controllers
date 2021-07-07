@@ -41,6 +41,7 @@ export default buildSchema({
 							type: 'schema',
 							label: 'Sections',
 							isRequired: true,
+							isArray: true,
 							options: {
 								schema: formSectionBuilder,
 							},

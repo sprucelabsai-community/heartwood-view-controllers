@@ -28,6 +28,7 @@ const builderImportExportPageSchema: SpruceSchemas.Heartwood.v2021_02_11.Builder
 	                label: 'Sections',
 	                type: 'schema',
 	                isRequired: true,
+	                isArray: true,
 	                options: {schema: formSectionSchema_v2021_02_11,}
 	            },
 	    }

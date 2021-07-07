@@ -489,7 +489,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Schema. */
 				'schema': (SpruceSchema.Schema)
 				/** Sections. */
-				'sections': SpruceSchemas.Heartwood.v2021_02_11.FormSection
+				'sections': SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
 		}
 
 		interface BuilderImportExportPageSchema extends SpruceSchema.Schema {
@@ -517,6 +517,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Sections',
 			                type: 'schema',
 			                isRequired: true,
+			                isArray: true,
 			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema,}
 			            },
 			    }
