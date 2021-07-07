@@ -295,6 +295,13 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const dialog = this.renderInDialog(vc.render())
 	}
 
+	public setShouldAllowEditing(shouldAllow: boolean) {
+		this.shouldAllowEditing = shouldAllow
+	}
+	public getShouldAllowEditing() {
+		return this.shouldAllowEditing ?? true
+	}
+
 	public handleClickEditSection(clickedSectionIdx: number) {
 		const pageVc = this.getPresentPageVc()
 		const section = { ...pageVc.getSection(clickedSectionIdx) }

@@ -54,6 +54,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static shouldAllowEditingTrueByDefault() {
 		const model = this.render(this.vc)
 		assert.isTrue(model.shouldAllowEditing)
+		assert.isTrue(this.vc.getShouldAllowEditing())
+		this.vc.setShouldAllowEditing(false)
+		assert.isTrue(this.vc.getShouldAllowEditing())
 	}
 
 	@test()
