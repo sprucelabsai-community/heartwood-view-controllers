@@ -734,6 +734,31 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static canCustomizeFooterButtons() {
+		const footer = {
+			footer: {
+				buttons: [
+					{
+						label: 'Hey there!',
+					},
+				],
+			},
+		}
+
+		//@ts-ignore
+		this.vc = this.Controller('formBuilder', { footer })
+
+		const model = this.render(this.vc, {
+			shouldStripControllers: true,
+			shouldStripFunctions: true,
+			shouldStripPrivateFields: true,
+		})
+
+		//@ts-ignore
+		assert.isEqualDeep(model.footer, footer)
+	}
+
 	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
 		oldFieldName: string
 		newFieldName?: string

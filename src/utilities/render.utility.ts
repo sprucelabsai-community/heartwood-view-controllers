@@ -2,7 +2,7 @@ import isObjectLike from 'lodash/isObjectLike'
 import vcAssertUtil from '../tests/utilities/vcAssert.utility'
 import { ViewController } from '../types/heartwood.types'
 
-interface RenderOptions {
+export interface RenderOptions {
 	shouldStripPrivateFields?: boolean
 	shouldStripControllers?: boolean
 	shouldStripFunctions?: boolean

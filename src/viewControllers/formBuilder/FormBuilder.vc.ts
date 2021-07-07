@@ -27,6 +27,7 @@ type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
 
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
+	footer?: Card['footer']
 }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
@@ -42,7 +43,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 				...options.header,
 			},
 			slides: [this.buildSlideForNewPage()],
-			footer: this.buildFooter(),
+			footer: options.footer ?? this.buildFooter(),
 		})
 
 		introspectionUtil.delegateFunctionCalls(this, this.swipeVc)

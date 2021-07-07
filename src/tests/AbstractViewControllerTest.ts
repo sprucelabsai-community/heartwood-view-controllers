@@ -6,7 +6,7 @@ import {
 	ViewController,
 	ViewControllerMap,
 } from '../types/heartwood.types'
-import renderUtil from '../utilities/render.utility'
+import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeViewController from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MockStorage from './MockStorage'
@@ -56,8 +56,11 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 		return vc
 	}
 
-	protected static render<Vc extends ViewController<any>>(vc: Vc) {
-		return renderUtil.render(vc)
+	protected static render<Vc extends ViewController<any>>(
+		vc: Vc,
+		options?: RenderOptions
+	) {
+		return renderUtil.render(vc, options)
 	}
 
 	protected static click(
