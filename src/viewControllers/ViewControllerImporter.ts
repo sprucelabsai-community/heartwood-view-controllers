@@ -11,7 +11,10 @@ export default class ViewControllerImporter {
 		try {
 			let exports = {}
 			const globals = Object.keys(global)
-			const resets = globals.map((name) => `var ${name} = {};`).join('\n')
+			const resets = globals
+				.filter((name) => name.search(/[^0-9a-zA-Z_]/) === -1)
+				.map((name) => `var ${name} = {};`)
+				.join('\n')
 
 			const guargedScript = `
 ${resets}

@@ -89,24 +89,6 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		assert.isEqual(vc2.render().msg, 'what the?')
 	}
 
-	private static importAndGetFactory() {
-		const controllers = this.importControllers()
-		const factory = this.Factory()
-
-		factory.importControllers(controllers)
-
-		return factory
-	}
-
-	private static importAndRenderVc() {
-		const factory = this.importAndGetFactory()
-
-		//@ts-ignore
-		const vc = factory.Controller('book', {})
-		const model = vc.render()
-		return model
-	}
-
 	@test()
 	protected static cantMessWithGlobalWindow() {
 		this.importAndRenderVc()
@@ -128,5 +110,30 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		const model = this.importAndRenderVc()
 		//@ts-ignore
 		assert.isFalsy(model.globalHack2Value)
+	}
+
+	@test()
+	protected static hyphenedVarsCantCrashIt() {
+		//@ts-ignore
+		global['oh-no'] = true
+		this.importAndRenderVc()
+	}
+
+	private static importAndGetFactory() {
+		const controllers = this.importControllers()
+		const factory = this.Factory()
+
+		factory.importControllers(controllers)
+
+		return factory
+	}
+
+	private static importAndRenderVc() {
+		const factory = this.importAndGetFactory()
+
+		//@ts-ignore
+		const vc = factory.Controller('book', {})
+		const model = vc.render()
+		return model
 	}
 }
