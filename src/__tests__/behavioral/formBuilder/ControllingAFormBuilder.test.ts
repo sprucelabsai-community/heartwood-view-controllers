@@ -56,7 +56,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isTrue(model.shouldAllowEditing)
 		assert.isTrue(this.vc.getShouldAllowEditing())
 		this.vc.setShouldAllowEditing(false)
-		assert.isTrue(this.vc.getShouldAllowEditing())
+		assert.isFalse(this.vc.getShouldAllowEditing())
 	}
 
 	@test()
