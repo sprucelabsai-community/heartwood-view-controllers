@@ -44,7 +44,7 @@ const editFieldFormSchema = buildSchema({
 		type: {
 			type: 'select',
 			label: 'Type',
-			// isRequired: true,
+			isRequired: true,
 			options: {
 				choices: fieldTypeChoices,
 			},
