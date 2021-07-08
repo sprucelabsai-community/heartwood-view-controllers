@@ -19,7 +19,7 @@ import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 type Vc = ViewController<any>
 
 async function wait() {
-	return new Promise((resolve) => setTimeout(resolve, 0))
+	return new Promise<void>((resolve) => setTimeout(resolve, 0))
 }
 
 type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
