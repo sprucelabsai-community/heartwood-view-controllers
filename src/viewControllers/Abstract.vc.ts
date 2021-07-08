@@ -51,6 +51,6 @@ export default abstract class AbstractViewController<ViewModel>
 	}
 
 	protected async waitForRender() {
-		await new Promise((resolve) => setTimeout(resolve, 0))
+		await new Promise<void>((resolve) => setTimeout(resolve, 0))
 	}
 }
