@@ -699,6 +699,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			wasDeletRowHandleHit = true
 		}
 		rowVc.transitionOutHandler = async () => {
+			//@ts-ignore
 			await new Promise((resolve) => setTimeout(resolve, 20))
 			wasTransitionOutHite = true
 		}
