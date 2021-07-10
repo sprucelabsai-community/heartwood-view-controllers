@@ -86,7 +86,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		const model = this.render(this.vc)
 		assert.isLength(model.rows, 1)
-		assert.isEqualDeep(model.rows[0].cells[0], {
+		assert.doesInclude(model.rows[0].cells[0], {
 			text: {
 				content: 'I wanna!',
 			},
