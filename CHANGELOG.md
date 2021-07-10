@@ -1,3 +1,10 @@
+# [19.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.2.7...v19.0.0) (2021-07-10)
+
+
+### Breaking Changes
+
+* list cells now need to use controllers ([21310b1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/21310b1))
+
 ## [18.2.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.2.6...v18.2.7) (2021-07-10)
 
 ## [18.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.2.5...v18.2.6) (2021-07-09)
