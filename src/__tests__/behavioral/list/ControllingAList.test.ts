@@ -410,7 +410,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canSetValueOnSetValueOfField() {
+	protected static async canSetValueOnSetValueOfField() {
 		this.vc.addRow({
 			cells: [
 				{
@@ -431,8 +431,11 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const model = this.render(this.vc)
-		model.rows[0].cells[0].textInput?.setValue?.('firstName', 'Trip')
-		model.rows[0].cells[2].selectInput?.setValue?.('middleInitial', 'Brown')
+		await model.rows[0].cells[0].textInput?.setValue?.('firstName', 'Trip')
+		await model.rows[0].cells[2].selectInput?.setValue?.(
+			'middleInitial',
+			'Brown'
+		)
 
 		const rowVc = this.vc.getRowVc(0)
 		const values = rowVc.getValues()
