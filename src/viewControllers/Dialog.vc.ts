@@ -14,8 +14,8 @@ export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
 export default class DialogViewController extends AbstractViewController<Dialog> {
 	private closeResolver?: () => void
 	private closePromise?: Promise<unknown>
-	private onClose?: Dialog['onClose']
-	private transitionOut?: () => Promise<void>
+	private onCloseHandler?: Dialog['onClose']
+	private transitionOutHandler?: () => Promise<void>
 	private isVisible = false
 	private cardVc: CardViewController
 	private shouldShowCloseButton: boolean
@@ -29,7 +29,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 
 		this.cardVc =
 			options.controller ?? this.vcFactory.Controller('card', options)
-		this.onClose = options.onClose
+		this.onCloseHandler = options.onClose
 		this.isVisible = !!options.isVisible
 	}
 
@@ -61,13 +61,13 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 	}
 
 	public async hide() {
-		const results = await this.onClose?.()
+		const results = await this.onCloseHandler?.()
 
 		if (results === false) {
 			return
 		}
 
-		await this.transitionOut?.()
+		await this.transitionOutHandler?.()
 
 		this.isVisible = false
 

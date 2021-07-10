@@ -235,7 +235,6 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const rowVc = this.vc.getRowVc(0)
-
 		const err = await assert.doesThrowAsync(() => rowVc.setValue('taco', true))
 
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
