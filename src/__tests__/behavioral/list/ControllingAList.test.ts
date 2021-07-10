@@ -648,7 +648,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canDeletRow() {
+	protected static async canDeleteRow2() {
 		this.add2Rows()
 
 		const rowVc1 = this.vc.getRowVc(0)
@@ -661,7 +661,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			'cells[0].text.content': 'Bye there!',
 		})
 
-		rowVc1.delete()
+		await rowVc1.delete()
 
 		const newRow1 = this.vc.getRowVc(0)
 		assert.doesInclude(this.render(newRow1), {
@@ -685,6 +685,30 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		assert.isFalse(this.vc.getRowVc(0).isLastRow())
 		assert.isTrue(this.vc.getRowVc(2).isLastRow())
+	}
+
+	@test()
+	protected static async rowsCallAndWaitForTransitionOutHandlerOnDelete() {
+		this.add2Rows()
+		const rowVc = this.vc.getRowVc(0)
+		let wasTransitionOutHite = false
+		let wasDeletRowHandleHit = false
+
+		//@ts-ignore
+		rowVc.deleteRowHandler = async () => {
+			wasDeletRowHandleHit = true
+		}
+		rowVc.transitionOutHandler = async () => {
+			await new Promise((resolve) => setTimeout(resolve, 20))
+			wasTransitionOutHite = true
+		}
+
+		const promise = rowVc.delete()
+		assert.isFalse(wasDeletRowHandleHit)
+		assert.isFalse(wasTransitionOutHite)
+		await promise
+		assert.isTrue(wasTransitionOutHite)
+		assert.isTrue(wasDeletRowHandleHit)
 	}
 
 	private static add2Rows() {

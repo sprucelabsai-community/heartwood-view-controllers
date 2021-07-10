@@ -290,7 +290,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 								isDestructive: true,
 							})
 							if (shouldDelete) {
-								rowVc.delete()
+								await rowVc.delete()
 								this.rows.splice(options.idx, 1)
 							}
 						},
