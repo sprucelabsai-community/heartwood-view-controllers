@@ -1,3 +1,10 @@
+# [20.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v19.0.0...v20.0.0) (2021-07-10)
+
+
+### Breaking Changes
+
+* dialog handle rename ([659a820](https://github.com/sprucelabsai/heartwood-view-controllers/commit/659a820))
+
 # [19.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v18.2.7...v19.0.0) (2021-07-10)
 
 
