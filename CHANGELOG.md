@@ -1,3 +1,10 @@
+# [20.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v20.0.0...v20.1.0) (2021-07-10)
+
+
+### Features
+
+* row vc transition out ([15359a5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/15359a5))
+
 # [20.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v19.0.0...v20.0.0) (2021-07-10)
 
 
