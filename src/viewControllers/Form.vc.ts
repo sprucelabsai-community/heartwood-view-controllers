@@ -46,7 +46,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 > &
 	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
 
-const cloneExceptControllers = function (obj: Record<string, any>) {
+const cloneAndRetainControllers = function (obj: Record<string, any>) {
 	return cloneDeepWith(obj, (value, key) => {
 		if (key === 'controller') {
 			return value
@@ -84,7 +84,7 @@ export default class FormViewController<
 		//@ts-ignore
 		delete model.confirmHandler
 
-		const modelCopy = cloneExceptControllers(model) as any
+		const modelCopy = cloneAndRetainControllers(model) as any
 
 		this.model = {
 			shouldShowSubmitControls: true,

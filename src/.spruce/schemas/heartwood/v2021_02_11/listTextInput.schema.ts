@@ -59,7 +59,7 @@ const listTextInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSche
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => void`,}
+	                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
 	            },
 	    }
 }

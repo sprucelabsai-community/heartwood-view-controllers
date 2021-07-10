@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import listUtil from './list.utility'
+import { ListCellModel } from './ListCell.vc'
 import ListRowViewController from './ListRow.vc'
 
 type List = Omit<SpruceSchemas.Heartwood.v2021_02_11.List, 'rows'> & {
@@ -12,24 +13,8 @@ export type ListRow = Omit<
 	SpruceSchemas.Heartwood.v2021_02_11.ListRow,
 	'cells'
 > & {
-	cells: ListCell[]
+	cells: ListCellModel[]
 }
-export type ListCell = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListCell,
-	'textInput' | 'selectInput'
-> & {
-	textInput?: ListTextInput
-	selectInput?: ListSelectInput
-}
-
-type ListTextInput = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListTextInput,
-	'setValue'
->
-type ListSelectInput = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListSelectInput,
-	'setValue'
->
 
 export type ListViewControllerOptions = Partial<List>
 

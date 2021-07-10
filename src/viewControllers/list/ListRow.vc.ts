@@ -1,7 +1,8 @@
 import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewController } from '../../types/heartwood.types'
-import { ListRow, ListCell } from './List.vc'
+import { ListRow } from './List.vc'
+import ListCellViewController from './ListCell.vc'
 
 export default class ListRowViewController
 	implements ViewController<SpruceSchemas.Heartwood.v2021_02_11.ListRow>
@@ -33,8 +34,12 @@ export default class ListRowViewController
 	public triggerRender() {}
 
 	public async setValue(name: string, value: any) {
-		await this.setValueHandler(name, value)
+		await this._setValue(name, value)
 		this.triggerRender()
+	}
+
+	private async _setValue(name: string, value: any) {
+		await this.setValueHandler(name, value)
 	}
 
 	public getValues(): Record<string, any> {
@@ -45,34 +50,10 @@ export default class ListRowViewController
 		return {
 			...this.model,
 			controller: this,
-			cells: this.model.cells.map((cell) => this.renderCell(cell)),
+			cells: this.model.cells.map((cell, idx) => ({
+				...this.getCellVc(idx).render(),
+			})),
 		}
-	}
-
-	private renderCell(
-		cell: ListCell
-	): SpruceSchemas.Heartwood.v2021_02_11.ListCell {
-		const { textInput, selectInput, ...rest } = cell
-
-		const listCell: SpruceSchemas.Heartwood.v2021_02_11.ListCell = {
-			...rest,
-		}
-
-		if (textInput) {
-			listCell.textInput = {
-				...textInput,
-				setValue: this.setValue.bind(this),
-			}
-		}
-
-		if (selectInput) {
-			listCell.selectInput = {
-				...selectInput,
-				setValue: this.setValue.bind(this),
-			}
-		}
-
-		return listCell
 	}
 
 	public getValue(fieldName: string): any {
@@ -94,5 +75,21 @@ export default class ListRowViewController
 
 	public delete() {
 		this.deleteRowHandler()
+	}
+
+	public getCellVc(idx: number) {
+		const cell = this.model.cells[idx]
+
+		if (!cell) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['cellIdx'],
+			})
+		}
+
+		return new ListCellViewController({
+			...cell,
+			setValue: this._setValue.bind(this),
+		})
 	}
 }

@@ -2,9 +2,9 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwood/v2021_02_11/list.schema'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import ListViewController from '../../viewControllers/list/List.vc'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import ListViewController from '../../../viewControllers/list/List.vc'
 
 export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}

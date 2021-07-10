@@ -1,10 +1,10 @@
-import { ListCell } from './List.vc'
+import { ListCellModel } from './ListCell.vc'
 
 const listUtil = {
-	getInputFromCell(cell: ListCell) {
+	getInputFromCell(cell: ListCellModel) {
 		return cell.textInput ?? cell.selectInput
 	},
-	getElementFromCell(cell: ListCell) {
+	getElementFromCell(cell: ListCellModel) {
 		return this.getInputFromCell(cell) ?? cell.button
 	},
 }

@@ -15,6 +15,13 @@ export default buildSchema({
 	importsWhenLocal: buildLocalTypesImport(),
 	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType: 'HeartwoodTypes.ListCellViewController',
+			},
+		},
 		text: {
 			type: 'schema',
 			label: 'Text',
@@ -79,7 +86,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => void',
+								valueType: '(name: string, value: any) => Promise<void> | void',
 							},
 						},
 					},
@@ -97,7 +104,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => void',
+								valueType: '(name: string, value: any) => Promise<void> | void',
 							},
 						},
 					},

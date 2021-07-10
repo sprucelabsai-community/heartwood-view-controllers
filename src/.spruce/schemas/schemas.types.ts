@@ -1915,7 +1915,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
 				
-				'setValue'?: ((name: string, value: any) => void)| undefined | null
+				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -1981,7 +1981,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => void`,}
+			                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
 			            },
 			    }
 		}
@@ -2013,7 +2013,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => void)| undefined | null
+				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -2072,7 +2072,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => void`,}
+			                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
 			            },
 			    }
 		}
@@ -2252,6 +2252,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ListCell {
 			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ListCellViewController)| undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
 				/** Subtext. */
@@ -2274,6 +2276,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: 'List Cell',
 			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ListCellViewController`,}
+			            },
 			            /** Text. */
 			            'text': {
 			                label: 'Text',

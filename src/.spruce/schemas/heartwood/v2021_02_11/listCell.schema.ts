@@ -12,6 +12,12 @@ const listCellSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema  = {
 	namespace: 'Heartwood',
 	name: 'List Cell',
 	    fields: {
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ListCellViewController`,}
+	            },
 	            /** Text. */
 	            'text': {
 	                label: 'Text',
