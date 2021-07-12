@@ -16,7 +16,9 @@ export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 			const schemaFileName = builderFileName.replace('.builder.ts', '.schema')
 			const schemaName = builderFileName.replace('.builder.ts', 'Schema')
 
-			const importStatement = `export { default as ${schemaName} } from '#spruce/schemas/heartwood/v2021_02_11/${schemaFileName}'`
+			const importStatement =
+				`export { default as ${schemaName} } from '#spruce` +
+				`/schemas/heartwood/v2021_02_11/${schemaFileName}'`
 
 			if (!indexContents.includes(importStatement)) {
 				missingImports.push(importStatement)
