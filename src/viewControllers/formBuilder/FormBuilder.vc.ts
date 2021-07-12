@@ -403,6 +403,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public async importObject(imported: FormBuilderImportExportObject) {
+		//@ts-ignore
 		const { default: formBuilderImportExportObjectSchema } = await import(
 			'#spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
 		)
