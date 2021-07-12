@@ -73,4 +73,5 @@ export { default as normalizeFormSectionFieldNamesUtil } from './utilities/norma
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as renderUtil } from './utilities/render.utility'
+export * from './utilities/render.utility'
 export { default as listUtil } from './viewControllers/list/list.utility'
