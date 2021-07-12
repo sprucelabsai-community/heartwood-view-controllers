@@ -1,3 +1,10 @@
+# [21.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.3.0...v21.4.0) (2021-07-12)
+
+
+### Features
+
+* more expotrs ([a980406](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a980406))
+
 # [21.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.2.0...v21.3.0) (2021-07-12)
 
 
