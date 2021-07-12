@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/text.schema'
@@ -13,6 +13,7 @@ const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Title. */
 	            'title': {
@@ -108,6 +109,6 @@ const cardSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema  
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(cardSectionSchema)
 
 export default cardSectionSchema

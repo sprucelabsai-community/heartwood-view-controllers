@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -8,6 +8,7 @@ const fancyIconSchema: SpruceSchemas.Heartwood.v2021_02_11.FancyIconSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Fancy icon',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Name. */
 	            'name': {
@@ -25,6 +26,6 @@ const fancyIconSchema: SpruceSchemas.Heartwood.v2021_02_11.FancyIconSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(fancyIconSchema)
 
 export default fancyIconSchema

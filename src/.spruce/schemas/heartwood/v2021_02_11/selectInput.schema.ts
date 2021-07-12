@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import selectInputChoiceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/selectInputChoice.schema'
@@ -8,6 +8,7 @@ const selectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema  
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Select input',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -66,6 +67,6 @@ const selectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema  
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(selectInputSchema)
 
 export default selectInputSchema

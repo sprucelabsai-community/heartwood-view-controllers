@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -80,6 +80,6 @@ const dropdownButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSc
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(dropdownButtonSchema)
 
 export default dropdownButtonSchema

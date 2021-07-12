@@ -42,6 +42,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Text input',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -124,6 +125,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Phone input',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -200,6 +202,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Input wrapper',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			description: 'Wraps all inputs in form with things like labels, hints, and error messages.',
 			    fields: {
 			            /** . */
@@ -269,6 +272,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Skill view',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -329,6 +333,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Select input',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -406,6 +411,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Line icon',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Name. */
 			            'name': {
@@ -442,6 +448,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Layout',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Card. Will render a card in this section */
 			            'cards': {
@@ -546,6 +553,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'form builder import export object',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Title. */
 			            'title': {
@@ -592,6 +600,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Fancy icon',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Name. */
 			            'name': {
@@ -646,6 +655,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Dialog',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -852,6 +862,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Big form',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -1019,6 +1030,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Title. */
 			            'title': {
@@ -1145,6 +1157,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Show section separators. This will make each section render with a border. */
 			            'shouldShowSectionSeparators': {
@@ -1265,6 +1278,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Talking sprucebot',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 			            'sentences': {
@@ -1339,6 +1353,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Sprucebot avatar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Size. */
 			            'size': {
@@ -1436,6 +1451,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Sprucebot typed message',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 			            'sentences': {
@@ -1510,6 +1526,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Controller. */
 			            'controller': {
@@ -1596,6 +1613,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Form',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -1731,6 +1749,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'list',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Controller. */
 			            'controller': {
@@ -1800,6 +1819,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -2219,6 +2239,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Text',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Text. */
 			            'content': {
@@ -2275,6 +2296,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'List Cell',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Controller. */
 			            'controller': {
@@ -2397,6 +2419,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Title. */
 			            'title': {
@@ -2489,6 +2512,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Button',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Label. */
 			            'label': {
@@ -2596,6 +2620,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Card',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -2772,6 +2797,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Dropdown',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Position. */
 			            'position': {

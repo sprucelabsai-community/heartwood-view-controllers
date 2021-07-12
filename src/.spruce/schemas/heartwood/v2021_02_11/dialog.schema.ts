@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardHeaderSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardHeader.schema'
@@ -10,6 +10,7 @@ const dialogSchema: SpruceSchemas.Heartwood.v2021_02_11.DialogSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Dialog',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'className': {
@@ -76,6 +77,6 @@ const dialogSchema: SpruceSchemas.Heartwood.v2021_02_11.DialogSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(dialogSchema)
 
 export default dialogSchema

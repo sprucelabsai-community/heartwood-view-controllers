@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import sprucebotTypedMessageSentenceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/sprucebotTypedMessageSentence.schema'
@@ -9,6 +9,7 @@ const sprucebotTypedMessageSchema: SpruceSchemas.Heartwood.v2021_02_11.Sprucebot
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Sprucebot typed message',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 	            'sentences': {
@@ -56,6 +57,6 @@ const sprucebotTypedMessageSchema: SpruceSchemas.Heartwood.v2021_02_11.Sprucebot
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(sprucebotTypedMessageSchema)
 
 export default sprucebotTypedMessageSchema

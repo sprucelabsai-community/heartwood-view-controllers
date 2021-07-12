@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import dropdownSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/dropdown.schema'
@@ -8,6 +8,7 @@ const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Button',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Label. */
 	            'label': {
@@ -86,6 +87,6 @@ const buttonSchema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(buttonSchema)
 
 export default buttonSchema

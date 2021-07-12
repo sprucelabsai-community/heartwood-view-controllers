@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -64,6 +64,6 @@ const listTextInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSche
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(listTextInputSchema)
 
 export default listTextInputSchema

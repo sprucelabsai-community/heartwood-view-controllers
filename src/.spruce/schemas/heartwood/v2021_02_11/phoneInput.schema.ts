@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -8,6 +8,7 @@ const phoneInputSchema: SpruceSchemas.Heartwood.v2021_02_11.PhoneInputSchema  = 
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Phone input',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -53,6 +54,6 @@ const phoneInputSchema: SpruceSchemas.Heartwood.v2021_02_11.PhoneInputSchema  = 
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(phoneInputSchema)
 
 export default phoneInputSchema

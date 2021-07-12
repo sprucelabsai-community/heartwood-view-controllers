@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import formSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/formSection.schema'
@@ -9,6 +9,7 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Form',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -117,6 +118,6 @@ const formSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(formSchema)
 
 export default formSchema

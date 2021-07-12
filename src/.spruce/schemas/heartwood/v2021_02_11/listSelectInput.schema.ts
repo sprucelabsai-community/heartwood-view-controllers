@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import selectInputChoiceSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/selectInputChoice.schema'
@@ -71,6 +71,6 @@ const listSelectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSelectInput
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(listSelectInputSchema)
 
 export default listSelectInputSchema

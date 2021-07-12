@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -8,6 +8,7 @@ const sprucebotAvatarSchema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotAvatar
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Sprucebot avatar',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Size. */
 	            'size': {
@@ -28,6 +29,6 @@ const sprucebotAvatarSchema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotAvatar
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(sprucebotAvatarSchema)
 
 export default sprucebotAvatarSchema

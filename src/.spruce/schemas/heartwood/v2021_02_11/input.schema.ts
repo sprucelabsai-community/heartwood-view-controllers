@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -8,6 +8,7 @@ const inputSchema: SpruceSchemas.Heartwood.v2021_02_11.InputSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Input wrapper',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	description: 'Wraps all inputs in form with things like labels, hints, and error messages.',
 	    fields: {
 	            /** . */
@@ -54,6 +55,6 @@ const inputSchema: SpruceSchemas.Heartwood.v2021_02_11.InputSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(inputSchema)
 
 export default inputSchema

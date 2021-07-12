@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import bigFormSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/bigFormSection.schema'
@@ -9,6 +9,7 @@ const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Big form',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -131,6 +132,6 @@ const bigFormSchema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(bigFormSchema)
 
 export default bigFormSchema

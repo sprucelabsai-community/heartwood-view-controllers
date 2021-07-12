@@ -17,7 +17,7 @@
   "skill": {
     "namespace": "heartwood",
     "commandOverrides": {
-      "sync.schemas": "--fetchCoreSchemas false --registerBuiltSchemas false"
+      "sync.schemas": "--shouldFetchCoreSchemas false --moduleToImportFromWhenRemote @sprucelabs/heartwood-view-controllers"
     }
   },
   "keywords": [

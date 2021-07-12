@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 
@@ -8,6 +8,7 @@ const textSchema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Text',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Text. */
 	            'content': {
@@ -31,6 +32,6 @@ const textSchema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(textSchema)
 
 export default textSchema

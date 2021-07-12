@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardHeaderSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardHeader.schema'
@@ -10,6 +10,7 @@ const cardSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Card',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'className': {
@@ -52,6 +53,6 @@ const cardSchema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(cardSchema)
 
 export default cardSchema

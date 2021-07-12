@@ -1,4 +1,4 @@
-
+import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardSectionSchema_v2021_02_11 from '#spruce/schemas/heartwood/v2021_02_11/cardSection.schema'
@@ -8,6 +8,7 @@ const cardBodySchema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Show section separators. This will make each section render with a border. */
 	            'shouldShowSectionSeparators': {
@@ -56,6 +57,6 @@ const cardBodySchema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema  = {
 	    }
 }
 
-
+SchemaRegistry.getInstance().trackSchema(cardBodySchema)
 
 export default cardBodySchema
