@@ -1,6 +1,5 @@
 import { Schema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import formBuilderImportExportObjectSchema from '#spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
@@ -404,7 +403,11 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public async importObject(imported: FormBuilderImportExportObject) {
-		validateSchemaValues(formBuilderImportExportObjectSchema, imported)
+		const { default: formBuilderImportExportObjectSchema } = await import(
+			'#spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
+		)
+
+		validateSchemaValues(formBuilderImportExportObjectSchema as any, imported)
 		this.swipeVc.setHeaderTitle(imported.title)
 		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
 		this.swipeVc.setSections([])
