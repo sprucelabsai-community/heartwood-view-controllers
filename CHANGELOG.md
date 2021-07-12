@@ -1,3 +1,10 @@
+# [21.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.2.0...v21.3.0) (2021-07-12)
+
+
+### Features
+
+* all schemas exported ([5368736](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5368736))
+
 # [21.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.1.0...v21.2.0) (2021-07-12)
 
 
