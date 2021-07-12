@@ -1,3 +1,10 @@
+# [21.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v20.1.0...v21.0.0) (2021-07-12)
+
+
+### Breaking Changes
+
+* switch to moduleToImportFromWhenRemote ([6f899b1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6f899b1))
+
 # [20.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v20.0.0...v20.1.0) (2021-07-10)
 
 
