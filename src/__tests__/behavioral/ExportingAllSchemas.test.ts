@@ -1,20 +1,24 @@
 import pathUtil from 'path'
-import { diskUtil } from '@sprucelabs/spruce-skill-utils'
+import { diskUtil, HASH_SPRUCE_DIR } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import globby from 'globby'
 
 export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 	@test()
 	protected static async exportsAllSchemas() {
-		const builderPattern = this.resolvePath('src', 'schemas', '**/*.builder.ts')
+		const builderPattern = this.resolvePath(
+			HASH_SPRUCE_DIR,
+			'schemas',
+			'**/*.schema.ts'
+		)
 		const schemas = await globby(builderPattern)
 
 		const indexContents = diskUtil.readFile(this.resolvePath('src', 'index.ts'))
 		const missingImports: string[] = []
 		for (const schema of schemas) {
 			const builderFileName = pathUtil.basename(schema)
-			const schemaFileName = builderFileName.replace('.builder.ts', '.schema')
-			const schemaName = builderFileName.replace('.builder.ts', 'Schema')
+			const schemaFileName = builderFileName.replace('.schema.ts', '.schema')
+			const schemaName = builderFileName.replace('.schema.ts', 'Schema')
 
 			const importStatement =
 				`export { default as ${schemaName} } from '#spruce` +
