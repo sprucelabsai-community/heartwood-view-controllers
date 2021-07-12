@@ -1,3 +1,10 @@
+# [21.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.1.0...v21.2.0) (2021-07-12)
+
+
+### Features
+
+* exported list row schema ([ee90d8e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ee90d8e))
+
 # [21.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.0.0...v21.1.0) (2021-07-12)
 
 
