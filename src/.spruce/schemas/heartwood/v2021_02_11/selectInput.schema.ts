@@ -8,6 +8,7 @@ const selectInputSchema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema  
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Select input',
+	importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */

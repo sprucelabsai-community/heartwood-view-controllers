@@ -11,6 +11,7 @@ const listCellSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'List Cell',
+	importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Controller. */

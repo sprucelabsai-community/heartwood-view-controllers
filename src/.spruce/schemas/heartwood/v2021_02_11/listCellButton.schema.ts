@@ -8,6 +8,7 @@ const listCellButtonSchema: SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSc
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Label. */
 	            'label': {

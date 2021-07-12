@@ -8,6 +8,7 @@ const listRowSchema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema  = {
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Controller. */
 	            'controller': {

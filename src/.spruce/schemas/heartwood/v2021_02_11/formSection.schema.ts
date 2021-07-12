@@ -9,6 +9,7 @@ const formSectionSchema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema  
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */

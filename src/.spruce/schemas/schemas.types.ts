@@ -333,6 +333,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Select input',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -504,6 +505,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Page title. */
 			            'title': {
@@ -755,6 +757,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -862,6 +866,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Big form',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -1227,6 +1232,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Typed message avatar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			description: 'Avatar that makes size optional for use with the Sprucebot Typed Message component',
 			    fields: {
 			            /** Size. */
@@ -1397,6 +1403,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Sprucebot Typed sentence',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . A way to override the Sprucebot avatar for this sentence */
 			            'avatar': {
@@ -1613,6 +1620,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'Form',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -1819,6 +1827,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -1890,6 +1899,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'value': {
@@ -1943,6 +1953,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -2041,6 +2052,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -2138,6 +2150,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Label. */
 			            'label': {
@@ -2296,6 +2309,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: 'List Cell',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Controller. */
@@ -2370,6 +2384,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Controller. */
 			            'controller': {
@@ -2472,6 +2487,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type CardHeaderEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface Dropdown {
+			
+				/** Position. */
+				'position'?: ("bottom" | "top" | "right")| undefined | null
+				
+				'items'?: SpruceSchemas.Heartwood.v2021_02_11.DropdownButton[]| undefined | null
+				
+				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
+		}
+
+		interface DropdownSchema extends SpruceSchema.Schema {
+			id: 'dropdown',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: 'Dropdown',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
+			            },
+			    }
+		}
+
+		type DropdownEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema>
 
 	}
 
@@ -2702,6 +2762,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** Label. */
 			            'label': {
@@ -2775,51 +2836,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DropdownButtonEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface Dropdown {
-			
-				/** Position. */
-				'position'?: ("bottom" | "top" | "right")| undefined | null
-				
-				'items'?: SpruceSchemas.Heartwood.v2021_02_11.DropdownButton[]| undefined | null
-				
-				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
-		}
-
-		interface DropdownSchema extends SpruceSchema.Schema {
-			id: 'dropdown',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Dropdown',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
-			            },
-			    }
-		}
-
-		type DropdownEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema>
 
 	}
 

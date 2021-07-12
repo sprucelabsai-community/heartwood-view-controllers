@@ -8,6 +8,7 @@ const sprucebotTypedMessageAvatarSchema: SpruceSchemas.Heartwood.v2021_02_11.Spr
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Typed message avatar',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	description: 'Avatar that makes size optional for use with the Sprucebot Typed Message component',
 	    fields: {
 	            /** Size. */

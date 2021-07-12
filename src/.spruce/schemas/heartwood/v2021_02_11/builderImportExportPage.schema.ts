@@ -8,6 +8,7 @@ const builderImportExportPageSchema: SpruceSchemas.Heartwood.v2021_02_11.Builder
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: '',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Page title. */
 	            'title': {

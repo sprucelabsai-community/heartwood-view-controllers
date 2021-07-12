@@ -8,6 +8,7 @@ const sprucebotTypedMessageSentenceSchema: SpruceSchemas.Heartwood.v2021_02_11.S
 	version: 'v2021_02_11',
 	namespace: 'Heartwood',
 	name: 'Sprucebot Typed sentence',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . A way to override the Sprucebot avatar for this sentence */
 	            'avatar': {
