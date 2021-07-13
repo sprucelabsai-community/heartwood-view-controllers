@@ -78,6 +78,21 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		assert.isEqual(cardVc.getHeaderTitle(), 'go2!')
 	}
 
+	@test()
+	protected static assertingIfCardBodyIsLoading() {
+		const vc = this.Controller('card', {
+			body: {},
+		})
+
+		assert.doesThrow(() => vcAssertUtil.assertCardBodyIsLoading(vc))
+		vcAssertUtil.assertCardBodyIsNotLoading(vc)
+
+		vc.setIsBodyLoading(true)
+
+		vcAssertUtil.assertCardBodyIsLoading(vc)
+		assert.doesThrow(() => vcAssertUtil.assertCardBodyIsNotLoading(vc))
+	}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController
