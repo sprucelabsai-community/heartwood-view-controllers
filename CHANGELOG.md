@@ -1,3 +1,10 @@
+# [23.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v22.0.0...v23.0.0) (2021-07-13)
+
+
+### Breaking Changes
+
+* router redirect and back return vc's ([fc10e6d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fc10e6d))
+
 # [22.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.5.1...v22.0.0) (2021-07-13)
 
 
