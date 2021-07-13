@@ -1,3 +1,10 @@
+# [22.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.5.1...v22.0.0) (2021-07-13)
+
+
+### Breaking Changes
+
+* no export of abstract view controller test (use view-plugin) ([a80de57](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a80de57))
+
 ## [21.5.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.5.0...v21.5.1) (2021-07-13)
 
 # [21.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.4.0...v21.5.0) (2021-07-12)
