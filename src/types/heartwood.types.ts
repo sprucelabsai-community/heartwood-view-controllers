@@ -145,7 +145,7 @@ export interface Router {
 		id: Id,
 		args?: SkillViewControllerArgs<Id>
 	): Promise<SkillViewControllerMap[Id]>
-	back(): Promise<SkillViewController>
+	back(): Promise<SkillViewController | undefined>
 }
 
 export type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
