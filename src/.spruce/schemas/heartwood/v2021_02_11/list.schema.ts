@@ -33,7 +33,7 @@ const listSchema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema  = {
 	            'defaultRowHeight': {
 	                label: 'Row height',
 	                type: 'select',
-	                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"}],}
+	                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
 	            },
 	            /** Rows. */
 	            'rows': {

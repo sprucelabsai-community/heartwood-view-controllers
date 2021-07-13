@@ -32,6 +32,7 @@ export default buildSchema({
 				choices: [
 					{ label: 'Standard', value: 'standard' },
 					{ label: 'Tall', value: 'tall' },
+					{ label: 'Content', value: 'content' },
 				],
 			},
 		},

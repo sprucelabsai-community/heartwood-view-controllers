@@ -1747,7 +1747,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Column widths. */
 				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
 				/** Row height. */
-				'defaultRowHeight'?: ("standard" | "tall")| undefined | null
+				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
 				/** Rows. */
 				'rows': SpruceSchemas.Heartwood.v2021_02_11.ListRow[]
 		}
@@ -1782,7 +1782,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'defaultRowHeight': {
 			                label: 'Row height',
 			                type: 'select',
-			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"}],}
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
 			            },
 			            /** Rows. */
 			            'rows': {
