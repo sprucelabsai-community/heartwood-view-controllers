@@ -1,3 +1,10 @@
+# [23.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.1.2...v23.2.0) (2021-07-13)
+
+
+### Features
+
+* can assert rendering of cards ([e922807](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e922807))
+
 ## [23.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.1.1...v23.1.2) (2021-07-13)
 
 ## [23.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.1.0...v23.1.1) (2021-07-13)
