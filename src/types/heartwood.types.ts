@@ -144,8 +144,8 @@ export interface Router {
 	redirect<Id extends SkillViewControllerId>(
 		id: Id,
 		args?: SkillViewControllerArgs<Id>
-	): Promise<void>
-	back(): Promise<void>
+	): Promise<SkillViewControllerMap[Id]>
+	back(): Promise<SkillViewController>
 }
 
 export type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
