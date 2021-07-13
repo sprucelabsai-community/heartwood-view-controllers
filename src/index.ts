@@ -66,7 +66,6 @@ export { default as ViewControllerExporter } from './viewControllers/ViewControl
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
 export { default as ViewControllerFactory } from './viewControllers/ViewControllerFactory'
 
-export { default as AbstractViewControllerTest } from './tests/AbstractViewControllerTest'
 export { default as MockStorage } from './tests/MockStorage'
 
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
