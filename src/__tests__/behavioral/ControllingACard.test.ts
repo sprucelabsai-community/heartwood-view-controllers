@@ -3,6 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../utilities/render.utility'
 import CardViewController, {
 	CardViewControllerOptions,
@@ -247,6 +248,22 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isEqual(this.vc.getHeaderSubtitle(), undefined)
 		this.vc.setHeaderSubtitle('taco')
 		assert.isEqual(this.vc.getHeaderSubtitle(), 'taco')
+	}
+
+	@test()
+	protected static isLoadingOnCardBodyIsFalsyByDefault() {
+		assert.isFalse(this.vc.isBodyLoading())
+		const model = this.render(this.vc)
+		assert.isFalsy(model.body?.isLoading)
+	}
+
+	@test()
+	protected static canSetLoadingOnBody() {
+		this.vc.setIsBodyLoading(true)
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+		assert.isTrue(this.vc.isBodyLoading())
+		const model = this.render(this.vc)
+		assert.isTrue(model.body?.isLoading)
 	}
 
 	private static beginTrackingFooterRender() {

@@ -17,9 +17,9 @@ const cardBodySchema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema  = {
 	                hint: 'This will make each section render with a border.',
 	                options: undefined
 	            },
-	            /** Disable. */
-	            'shouldDisable': {
-	                label: 'Disable',
+	            /** Loading. */
+	            'isLoading': {
+	                label: 'Loading',
 	                type: 'boolean',
 	                options: undefined
 	            },
