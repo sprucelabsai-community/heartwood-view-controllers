@@ -321,6 +321,30 @@ const vcAssertUtil = {
 		return {} as any
 	},
 
+	assertSkillViewRendersCards(
+		vc: SkillViewController,
+		expectedCount?: number
+	): CardViewController[] {
+		const model = renderUtil.render(vc)
+		const cards: CardViewController[] = []
+
+		for (const layout of model?.layouts ?? []) {
+			//@ts-ignore
+			const card = layout.cards?.[0]
+
+			if (card) {
+				//@ts-ignore
+				cards.push(card.controller ?? this.factory.Controller('card', card))
+			}
+		}
+
+		if (cards.length !== expectedCount) {
+			assert.fail('Expected your skill view to render a card, but it did not!')
+		}
+
+		return cards
+	},
+
 	assertCardBodyIsLoading(vc: CardViewController) {
 		if (!vc.isBodyLoading()) {
 			assert.fail(

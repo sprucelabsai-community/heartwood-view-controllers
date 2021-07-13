@@ -26,11 +26,62 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async knowsIfNotRenderingCard() {
+	protected static knowsIfNotRenderingCard() {
 		assert.isFunction(vcAssertUtil.assertSkillViewRendersCard)
 		const vc = this.BadController()
 		//@ts-ignore
 		assert.doesThrow(() => vcAssertUtil.assertSkillViewRendersCard(vc))
+		//@ts-ignore
+		assert.doesThrow(() => vcAssertUtil.assertSkillViewRendersCards(vc))
+	}
+
+	@test()
+	protected static canAssertNumberOfCards() {
+		const vc = this.BadController()
+		//@ts-ignore
+		let cardVcs = vcAssertUtil.assertSkillViewRendersCards(vc, 0)
+		assert.isLength(cardVcs, 0)
+
+		const goodVc = this.GoodController({
+			layouts: [
+				{
+					cards: [
+						{
+							header: { title: 'hey!' },
+						},
+					],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			//@ts-ignore
+			vcAssertUtil.assertSkillViewRendersCards(goodVc, 0)
+		)
+
+		//@ts-ignore
+		cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
+		assert.isLength(cardVcs, 1)
+	}
+
+	@test()
+	protected static maintainsCardVcsInRendersCard() {
+		const cardVc = this.Controller('card', {
+			header: { title: 'test' },
+		})
+
+		const goodVc = this.GoodController({
+			layouts: [
+				{
+					cards: [cardVc.render()],
+				},
+			],
+		})
+
+		//@ts-ignore
+		const cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
+
+		assert.isEqual(cardVcs[0], cardVc)
 	}
 
 	@test()
