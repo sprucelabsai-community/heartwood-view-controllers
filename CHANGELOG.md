@@ -1,3 +1,10 @@
+# [21.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.4.0...v21.5.0) (2021-07-12)
+
+
+### Features
+
+* renderUtil options exported ([8cae346](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8cae346))
+
 # [21.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v21.3.0...v21.4.0) (2021-07-12)
 
 
