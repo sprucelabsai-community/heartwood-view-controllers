@@ -62,6 +62,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		//@ts-ignore
 		cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
 		assert.isLength(cardVcs, 1)
+
+		//@ts-ignore
+		cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc)
+		assert.isLength(cardVcs, 1)
 	}
 
 	@test()

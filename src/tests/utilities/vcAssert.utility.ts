@@ -338,7 +338,13 @@ const vcAssertUtil = {
 			}
 		}
 
-		if (cards.length !== expectedCount) {
+		if (typeof expectedCount === 'number' && cards.length !== expectedCount) {
+			assert.fail(
+				`Expected your skill view to render ${expectedCount} card${
+					expectedCount === 1 ? '' : 's'
+				}, but it got ${cards.length}.`
+			)
+		} else if (typeof expectedCount === 'undefined' && cards.length === 0) {
 			assert.fail('Expected your skill view to render a card, but it did not!')
 		}
 
