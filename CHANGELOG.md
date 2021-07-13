@@ -1,3 +1,12 @@
+# [23.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.0.1...v23.1.0) (2021-07-13)
+
+
+### Features
+
+* assert is card body loading ([3aecca1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3aecca1))
+* isLoading on card body ([a9517db](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a9517db))
+* row height content ([0f06c0f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0f06c0f))
+
 ## [23.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.0.0...v23.0.1) (2021-07-13)
 
 # [23.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v22.0.0...v23.0.0) (2021-07-13)
