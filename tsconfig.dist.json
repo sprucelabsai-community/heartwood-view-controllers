@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "module": "es2015",
+        "module": "es2020",
         "target": "es6",
         "lib": [
-            "es2015",
+            "es2020",
             "dom"
         ],
         "esModuleInterop": true,
@@ -19,9 +19,11 @@
         "outDir": "./build/esm",
         "baseUrl": "src",
         "experimentalDecorators": true,
-		"paths": {
-			"#spruce/*": [".spruce/*"]
-		}
+        "paths": {
+            "#spruce/*": [
+                ".spruce/*"
+            ]
+        }
     },
     "include": [
         "./src/*.ts",
