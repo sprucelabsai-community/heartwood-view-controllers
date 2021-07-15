@@ -410,7 +410,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		}
 	}
 
-	public getValues(): any {
+	public getValues() {
 		return this.getPageVcs().map((vc) => vc.getValues())
 	}
 
