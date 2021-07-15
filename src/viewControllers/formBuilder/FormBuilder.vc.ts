@@ -219,8 +219,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	public async handleClickDeletePage() {
 		const confirm = await this.confirm({
 			title: 'Are you sure?',
-			subtitle: `This cannot be undone!`,
-			message: `Delete ${this.getPresentPageVc().getTitle()}?`,
+			isDestructive: true,
 		})
 
 		if (confirm) {
