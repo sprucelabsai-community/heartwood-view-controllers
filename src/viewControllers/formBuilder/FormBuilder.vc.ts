@@ -1,4 +1,4 @@
-import { Schema, validateSchemaValues } from '@sprucelabs/schema'
+import { Schema, SpruceError, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
@@ -414,6 +414,24 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 		for (const page of imported.pages) {
 			await this.addPage(page)
+		}
+	}
+
+	public getValues(): any {
+		return this.getPageVcs().map((vc) => vc.getValues())
+	}
+
+	public setValues(values: Record<string, any>[]): any {
+		if (!Array.isArray(values)) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['values'],
+				friendlyMessage: 'Values must be an array!',
+			})
+		}
+
+		for (let idx = 0; idx < values.length; idx++) {
+			this.getPageVc(idx).setValues(values[idx])
 		}
 	}
 }

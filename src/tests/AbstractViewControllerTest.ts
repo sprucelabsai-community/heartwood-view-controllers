@@ -1,5 +1,5 @@
 import { SpruceError as SchemaSpruceError } from '@sprucelabs/schema'
-import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
+import { AbstractSkillTest } from '@sprucelabs/spruce-skill-booter'
 import Authenticator from '../auth/Authenticator'
 import {
 	ControllerOptions,
@@ -9,11 +9,12 @@ import {
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeViewController from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
+import MercuryFixture from './fixtures/MercuryFixture'
 import MockStorage from './MockStorage'
 import interactionUtil from './utilities/interaction.utility'
 import vcAssertUtil from './utilities/vcAssert.utility'
 
-export default abstract class AbstractViewControllerTest extends AbstractSpruceFixtureTest {
+export default abstract class AbstractViewControllerTest extends AbstractSkillTest {
 	protected static controllerMap: Record<string, any>
 
 	protected static async beforeEach() {
@@ -34,7 +35,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceF
 			})
 		}
 
-		const mercury = this.Fixture('mercury')
+		const mercury = new MercuryFixture(this.cwd)
 
 		return ViewControllerFactory.Factory({
 			controllerMap: this.controllerMap,
