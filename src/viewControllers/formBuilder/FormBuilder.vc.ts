@@ -155,19 +155,13 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	) {
 		const { atIndex: idx } = options ?? {}
 
-		let destination = idx
 		if (typeof idx === 'number') {
 			this.swipeVc.addSlideAtIndex(idx, this.buildSlideForNewPage(options))
 		} else {
 			this.swipeVc.addSlide(this.buildSlideForNewPage(options))
-			destination = this.getTotalPages() - 1
 		}
 
 		this.swipeVc.setFooter(this.buildFooter())
-
-		await this.waitForRender()
-
-		await this.swipeVc.jumpToSlide(destination as number)
 	}
 
 	public async removePage(idx: number) {

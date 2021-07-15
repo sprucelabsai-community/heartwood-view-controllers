@@ -97,13 +97,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		await this.vc.addPage()
 
-		assert.isEqual(this.vc.getPresentPage(), 1)
+		assert.isEqual(this.vc.getPresentPage(), 0)
 		assert.isEqual(this.vc.getTotalPages(), 2)
 		assert.isEqual(this.renderVc().body?.sections?.[1].title, 'Page 2')
 
 		await this.vc.addPage()
 
-		assert.isEqual(this.vc.getPresentPage(), 2)
+		assert.isEqual(this.vc.getPresentPage(), 0)
 		assert.isEqual(this.vc.getTotalPages(), 3)
 		assert.isEqual(this.renderVc().body?.sections?.[2].title, 'Page 3')
 	}
@@ -114,8 +114,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		await this.vc.addPage() // 3 pages
 		await this.vc.addPage() // 4 pages
 
-		assert.isEqual(this.vc.getPresentPage(), 3)
+		assert.isEqual(this.vc.getPresentPage(), 0)
 
+		await this.vc.jumpToPage(3)
 		await this.vc.removePage(2)
 
 		assert.isEqual(this.vc.getPresentPage(), 1)
@@ -420,7 +421,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		assert.isArray(sections)
 		assert.isLength(sections, 1)
-		assert.isEqual(sections[0].title, 'Page 1')
+		assert.isEqual(sections[0].title, 'Page 2')
 		assert.isEqual(this.vc.getPresentPage(), 0)
 	}
 
@@ -431,6 +432,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		await this.vc.addPage()
 		await this.vc.addPage()
 
+		await this.vc.jumpToPage(4)
 		await this.vc.removePresentPage()
 
 		assert.isEqual(this.vc.getPresentPage(), 3)
@@ -439,18 +441,6 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		await this.vc.removePresentPage()
 
 		assert.isEqual(this.vc.getPresentPage(), 0)
-	}
-
-	@test()
-	protected static async addingPageWaitsBeforeChangingPresentPage() {
-		assert.isEqual(this.vc.getPresentPage(), 0)
-		const promise = this.vc.addPage()
-
-		assert.isEqual(this.vc.getPresentPage(), 0)
-
-		await promise
-
-		assert.isEqual(this.vc.getPresentPage(), 1)
 	}
 
 	@test()
@@ -537,6 +527,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isEqual(pageVc.getIndex(), 0)
 
 		await this.vc.addPage()
+		await this.vc.jumpToPage(1)
 
 		pageVc = this.vc.getPresentPageVc()
 		assert.isEqual(pageVc.getIndex(), 1)
