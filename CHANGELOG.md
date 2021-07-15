@@ -1,3 +1,10 @@
+# [23.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.2.4...v23.3.0) (2021-07-15)
+
+
+### Features
+
+* form builder can set and get values ([377d167](https://github.com/sprucelabsai/heartwood-view-controllers/commit/377d167))
+
 ## [23.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.2.3...v23.2.4) (2021-07-14)
 
 ## [23.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.2.2...v23.2.3) (2021-07-14)
