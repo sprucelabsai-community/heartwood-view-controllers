@@ -1,3 +1,10 @@
+# [24.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.4.0...v24.0.0) (2021-07-16)
+
+
+### Breaking Changes
+
+* namespace from Heartwood -> Heartwoof view controllers ([2ae5824](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2ae5824))
+
 # [23.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.3.5...v23.4.0) (2021-07-16)
 
 
