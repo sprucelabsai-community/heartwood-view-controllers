@@ -14,7 +14,7 @@ import * as HeartwoodTypes from '../../'
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface TextInput {
@@ -40,7 +40,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface TextInputSchema extends SpruceSchema.Schema {
 			id: 'textInput',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Text input',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -94,12 +94,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TextInputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.TextInputSchema>
+		type TextInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextInputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface PhoneInput {
@@ -123,7 +123,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PhoneInputSchema extends SpruceSchema.Schema {
 			id: 'phoneInput',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Phone input',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -171,12 +171,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type PhoneInputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.PhoneInputSchema>
+		type PhoneInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PhoneInputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		/** Wraps all inputs in form with things like labels, hints, and error messages. */
 		interface Input {
@@ -200,7 +200,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface InputSchema extends SpruceSchema.Schema {
 			id: 'input',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Input wrapper',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			description: 'Wraps all inputs in form with things like labels, hints, and error messages.',
@@ -249,61 +249,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type InputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.InputSchema>
+		type InputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface SkillView {
-			
-				
-				'id'?: string| undefined | null
-				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
-				/** Layout. */
-				'layouts': SpruceSchemas.Heartwood.v2021_02_11.Layout[]
-		}
-
-		interface SkillViewSchema extends SpruceSchema.Schema {
-			id: 'skillView',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Skill view',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Center vertically. */
-			            'shouldCenterVertically': {
-			                label: 'Center vertically',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Layout. */
-			            'layouts': {
-			                label: 'Layout',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema,}
-			            },
-			    }
-		}
-
-		type SkillViewEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SkillViewSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface SelectInput {
@@ -325,13 +276,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
+				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 		}
 
 		interface SelectInputSchema extends SpruceSchema.Schema {
 			id: 'selectInput',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Select input',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -388,17 +339,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoiceSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema,}
 			            },
 			    }
 		}
 
-		type SelectInputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SelectInputSchema>
+		type SelectInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface LineIcon {
@@ -410,7 +361,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface LineIconSchema extends SpruceSchema.Schema {
 			id: 'lineIcon',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Line icon',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -424,18 +375,90 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type LineIconEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LineIconSchema>
+		type LineIconEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineIconSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Card {
+			
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
+				/** Header. */
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
+				/** Fade in. */
+				'shouldFadeIn'?: boolean| undefined | null
+				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
+				/** Footer. */
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+		}
+
+		interface CardSchema extends SpruceSchema.Schema {
+			id: 'card',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Card',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.CardViewController`,}
+			            },
+			            /** Header. */
+			            'header': {
+			                label: 'Header',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
+			            },
+			            /** Fade in. */
+			            'shouldFadeIn': {
+			                label: 'Fade in',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+			            'body': {
+			                label: 'Body',
+			                type: 'schema',
+			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			    }
+		}
+
+		type CardEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface Layout {
 			
 				/** Card. Will render a card in this section */
-				'cards'?: SpruceSchemas.Heartwood.v2021_02_11.Card[]| undefined | null
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
 				'className'?: string| undefined | null
 				/** Grid. Will force cards to render as grid. */
@@ -447,7 +470,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface LayoutSchema extends SpruceSchema.Schema {
 			id: 'layout',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Layout',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -457,7 +480,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                hint: 'Will render a card in this section',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */
 			            'className': {
@@ -482,12 +505,61 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type LayoutEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.LayoutSchema>
+		type LayoutEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface SkillView {
+			
+				
+				'id'?: string| undefined | null
+				/** Center vertically. */
+				'shouldCenterVertically'?: boolean| undefined | null
+				/** Layout. */
+				'layouts': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]
+		}
+
+		interface SkillViewSchema extends SpruceSchema.Schema {
+			id: 'skillView',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Skill view',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Center vertically. */
+			            'shouldCenterVertically': {
+			                label: 'Center vertically',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Layout. */
+			            'layouts': {
+			                label: 'Layout',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
+			            },
+			    }
+		}
+
+		type SkillViewEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface BuilderImportExportPage {
@@ -497,13 +569,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Schema. */
 				'schema': (SpruceSchema.Schema)
 				/** Sections. */
-				'sections': SpruceSchemas.Heartwood.v2021_02_11.FormSection[]
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection[]
 		}
 
 		interface BuilderImportExportPageSchema extends SpruceSchema.Schema {
 			id: 'builderImportExportPage',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -527,17 +599,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema,}
 			            },
 			    }
 		}
 
-		type BuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPageSchema>
+		type BuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface FormBuilderImportExportObject {
@@ -547,13 +619,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Subtitle. */
 				'subtitle'?: string| undefined | null
 				/** Pages. */
-				'pages': SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage[]
+				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
 		}
 
 		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
 			id: 'formBuilderImportExportObject',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'form builder import export object',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -576,17 +648,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPageSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
 			            },
 			    }
 		}
 
-		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormBuilderImportExportObjectSchema>
+		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface FancyIcon {
@@ -600,7 +672,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface FancyIconSchema extends SpruceSchema.Schema {
 			id: 'fancyIcon',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Fancy icon',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -620,12 +692,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FancyIconEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FancyIconSchema>
+		type FancyIconEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface Dialog {
@@ -635,13 +707,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>)| undefined | null
 				/** Header. */
-				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
 				/** Fade in. */
 				'shouldFadeIn'?: boolean| undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
 				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
 				/** Visible. */
 				'isVisible'?: boolean| undefined | null
 				/** Show close button. */
@@ -655,7 +727,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface DialogSchema extends SpruceSchema.Schema {
 			id: 'dialog',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Dialog',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -675,7 +747,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'header': {
 			                label: 'Header',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
 			            },
 			            /** Fade in. */
 			            'shouldFadeIn': {
@@ -689,13 +761,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Body',
 			                type: 'schema',
 			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
 			            },
 			            /** Footer. */
 			            'footer': {
 			                label: 'Footer',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
 			            },
 			            /** Visible. */
 			            'isVisible': {
@@ -724,12 +796,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type DialogEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DialogSchema>
+		type DialogEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
@@ -741,11 +813,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Grid. */
 				'shouldRenderAsGrid'?: boolean| undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
 				
@@ -755,7 +827,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BigFormSectionSchema extends SpruceSchema.Schema {
 			id: 'bigFormSection',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -783,7 +855,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'text': {
 			                label: 'Text',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderAsGrid': {
@@ -795,7 +867,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'list': {
 			                label: 'List',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
 			            },
 			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 			            'fields': {
@@ -813,12 +885,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema>
+		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
@@ -852,9 +924,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
-				'sections': SpruceSchemas.Heartwood.v2021_02_11.BigFormSection<S>[]
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
 				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number| undefined | null
 				/** Submit handler. */
@@ -864,7 +936,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BigFormSchema extends SpruceSchema.Schema {
 			id: 'bigForm',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Big form',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -965,13 +1037,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSectionSchema,}
+			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema,}
 			            },
 			            /** Footer. */
 			            'footer': {
 			                label: 'Footer',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
 			            },
 			            /** Present slide. The slide showing now! */
 			            'presentSlide': {
@@ -990,12 +1062,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type BigFormEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema>
+		type BigFormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface CardSection {
@@ -1011,19 +1083,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Center content. */
 				'shouldContentBeCentered'?: boolean| undefined | null
 				/** Card section item. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Image. */
 				'image'?: string| undefined | null
 				/** Form. */
-				'form'?: SpruceSchemas.Heartwood.v2021_02_11.Form<SpruceSchema.Schema>| undefined | null
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<SpruceSchema.Schema>| undefined | null
 				/** Talking Sprucebot. */
-				'talkingSprucebot'?: SpruceSchemas.Heartwood.v2021_02_11.TalkingSprucebot| undefined | null
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
 				/** Big form. */
-				'bigForm'?: SpruceSchemas.Heartwood.v2021_02_11.BigForm<SpruceSchema.Schema>| undefined | null
+				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<SpruceSchema.Schema>| undefined | null
 				/** Buttons. */
-				'buttons'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Alignment. */
@@ -1033,7 +1105,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardSectionSchema extends SpruceSchema.Schema {
 			id: 'cardSection',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1075,7 +1147,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'text': {
 			                label: 'Card section item',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
 			            },
 			            /** Image. */
 			            'image': {
@@ -1087,32 +1159,32 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'form': {
 			                label: 'Form',
 			                type: 'schema',
-			                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: SpruceSchemas.Heartwood.v2021_02_11.FormSchema,}
+			                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
 			            },
 			            /** Talking Sprucebot. */
 			            'talkingSprucebot': {
 			                label: 'Talking Sprucebot',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TalkingSprucebotSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
 			            },
 			            /** Big form. */
 			            'bigForm': {
 			                label: 'Big form',
 			                type: 'schema',
-			                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: SpruceSchemas.Heartwood.v2021_02_11.BigFormSchema,}
+			                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
 			            },
 			            /** Buttons. */
 			            'buttons': {
 			                label: 'Buttons',
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			            /** List. */
 			            'list': {
 			                label: 'List',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderContentsAsGrid': {
@@ -1131,12 +1203,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema>
+		type CardSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface CardBody {
@@ -1154,13 +1226,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Slide change callback. */
 				'onChangeSlide'?: ((slide: number) => void)| undefined | null
 				/** Sections. */
-				'sections'?: SpruceSchemas.Heartwood.v2021_02_11.CardSection[]| undefined | null
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
 		}
 
 		interface CardBodySchema extends SpruceSchema.Schema {
 			id: 'cardBody',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1206,17 +1278,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Sections',
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSectionSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
 			            },
 			    }
 		}
 
-		type CardBodyEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema>
+		type CardBodyEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		/** Avatar that makes size optional for use with the Sprucebot Typed Message component */
 		interface SprucebotTypedMessageAvatar {
@@ -1230,7 +1302,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotTypedMessageAvatarSchema extends SpruceSchema.Schema {
 			id: 'sprucebotTypedMessageAvatar',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Typed message avatar',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			description: 'Avatar that makes size optional for use with the Sprucebot Typed Message component',
@@ -1253,20 +1325,20 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageAvatarEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema>
+		type SprucebotTypedMessageAvatarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface TalkingSprucebot {
 			
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
+				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'defaultAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
 				/** Start delay. How long should I wait before starting to type? */
 				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
 				/** Loop. */
@@ -1282,7 +1354,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
 			id: 'talkingSprucebot',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Talking sprucebot',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1293,14 +1365,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
 			            },
 			            /** Default avatar. How should Sprucebot be rendered by default */
 			            'defaultAvatar': {
 			                label: 'Default avatar',
 			                type: 'schema',
 			                hint: 'How should Sprucebot be rendered by default',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
 			            },
 			            /** Start delay. How long should I wait before starting to type? */
 			            'startDelay': {
@@ -1338,12 +1410,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TalkingSprucebotEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.TalkingSprucebotSchema>
+		type TalkingSprucebotEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface SprucebotAvatar {
@@ -1357,7 +1429,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotAvatarSchema extends SpruceSchema.Schema {
 			id: 'sprucebotAvatar',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Sprucebot avatar',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1380,18 +1452,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotAvatarEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotAvatarSchema>
+		type SprucebotAvatarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface SprucebotTypedMessageSentence {
 			
 				/** . A way to override the Sprucebot avatar for this sentence */
-				'avatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
 				/** Words. The words being typed out */
 				'words': string
 				/** End delay. How long should I hold on this sentence after it's typed? */
@@ -1401,7 +1473,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotTypedMessageSentenceSchema extends SpruceSchema.Schema {
 			id: 'sprucebotTypedMessageSentence',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Sprucebot Typed sentence',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1409,7 +1481,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'avatar': {
 			                type: 'schema',
 			                hint: 'A way to override the Sprucebot avatar for this sentence',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotAvatarSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
 			            },
 			            /** Words. The words being typed out */
 			            'words': {
@@ -1429,20 +1501,20 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageSentenceEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema>
+		type SprucebotTypedMessageSentenceEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface SprucebotTypedMessage {
 			
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-				'sentences': SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentence[]
+				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'defaultAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
 				/** Start delay. How long should I wait before starting to type? */
 				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
 				/** Loop. */
@@ -1456,7 +1528,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
 			id: 'sprucebotTypedMessage',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Sprucebot typed message',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1467,14 +1539,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
 			            },
 			            /** Default avatar. How should Sprucebot be rendered by default */
 			            'defaultAvatar': {
 			                label: 'Default avatar',
 			                type: 'schema',
 			                hint: 'How should Sprucebot be rendered by default',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
 			            },
 			            /** Start delay. How long should I wait before starting to type? */
 			            'startDelay': {
@@ -1506,12 +1578,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SprucebotTypedMessageSchema>
+		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface CardFooter {
@@ -1519,7 +1591,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardFooter>)| undefined | null
 				/** Buttons. */
-				'buttons'?: SpruceSchemas.Heartwood.v2021_02_11.Button[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Loading. */
 				'isLoading'?: boolean| undefined | null
 				/** Loading. */
@@ -1531,7 +1603,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardFooterSchema extends SpruceSchema.Schema {
 			id: 'cardFooter',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1546,7 +1618,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Buttons',
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			            /** Loading. */
 			            'isLoading': {
@@ -1571,12 +1643,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardFooterEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema>
+		type CardFooterEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface Form<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
@@ -1610,15 +1682,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
-				'sections': SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>[]
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>[]
 				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
 		}
 
 		interface FormSchema extends SpruceSchema.Schema {
 			id: 'form',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Form',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -1719,23 +1791,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema,}
+			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema,}
 			            },
 			            /** Footer. */
 			            'footer': {
 			                label: 'Footer',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
 			            },
 			    }
 		}
 
-		type FormEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormSchema>
+		type FormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface List {
@@ -1749,13 +1821,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Row height. */
 				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
 				/** Rows. */
-				'rows': SpruceSchemas.Heartwood.v2021_02_11.ListRow[]
+				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
 		}
 
 		interface ListSchema extends SpruceSchema.Schema {
 			id: 'list',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'list',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1791,17 +1863,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                isArray: true,
 			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema,}
 			            },
 			    }
 		}
 
-		type ListEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListSchema>
+		type ListEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
@@ -1813,11 +1885,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Grid. */
 				'shouldRenderAsGrid'?: boolean| undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.Heartwood.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
 		}
@@ -1825,7 +1897,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface FormSectionSchema extends SpruceSchema.Schema {
 			id: 'formSection',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -1853,7 +1925,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'text': {
 			                label: 'Text',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderAsGrid': {
@@ -1865,7 +1937,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'list': {
 			                label: 'List',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
 			            },
 			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 			            'fields': {
@@ -1878,12 +1950,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FormSectionEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.FormSectionSchema>
+		type FormSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface SelectInputChoice {
@@ -1897,7 +1969,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SelectInputChoiceSchema extends SpruceSchema.Schema {
 			id: 'selectInputChoice',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -1916,12 +1988,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SelectInputChoiceEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoiceSchema>
+		type SelectInputChoiceEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface ListSelectInput {
@@ -1943,7 +2015,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'choices': SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoice[]
+				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				
 				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
 		}
@@ -1951,7 +2023,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
 			id: 'listSelectInput',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2007,7 +2079,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SelectInputChoiceSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema,}
 			            },
 			            /** . */
 			            'setValue': {
@@ -2017,12 +2089,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListSelectInputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListSelectInputSchema>
+		type ListSelectInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface ListTextInput {
@@ -2050,7 +2122,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListTextInputSchema extends SpruceSchema.Schema {
 			id: 'listTextInput',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2109,12 +2181,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListTextInputEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSchema>
+		type ListTextInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface ListCellButton {
@@ -2148,7 +2220,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListCellButtonSchema extends SpruceSchema.Schema {
 			id: 'listCellButton',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2229,12 +2301,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListCellButtonEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSchema>
+		type ListCellButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButtonSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface Text {
@@ -2250,7 +2322,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface TextSchema extends SpruceSchema.Schema {
 			id: 'text',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Text',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2276,12 +2348,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TextEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.TextSchema>
+		type TextEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface ListCell {
@@ -2289,25 +2361,25 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListCellViewController)| undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Subtext. */
-				'subText'?: SpruceSchemas.Heartwood.v2021_02_11.Text| undefined | null
+				'subText'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Image url. */
 				'image'?: string| undefined | null
 				/** Button. */
-				'button'?: SpruceSchemas.Heartwood.v2021_02_11.ListCellButton| undefined | null
+				'button'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButton| undefined | null
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump-t0" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 				/** Text input. */
-				'textInput'?: SpruceSchemas.Heartwood.v2021_02_11.ListTextInput| undefined | null
+				'textInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput| undefined | null
 				/** Select input. */
-				'selectInput'?: SpruceSchemas.Heartwood.v2021_02_11.ListSelectInput| undefined | null
+				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput| undefined | null
 		}
 
 		interface ListCellSchema extends SpruceSchema.Schema {
 			id: 'listCell',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'List Cell',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
@@ -2322,13 +2394,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'text': {
 			                label: 'Text',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
 			            },
 			            /** Subtext. */
 			            'subText': {
 			                label: 'Subtext',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.TextSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
 			            },
 			            /** Image url. */
 			            'image': {
@@ -2340,7 +2412,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'button': {
 			                label: 'Button',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListCellButtonSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButtonSchema,}
 			            },
 			            /** Line icon. */
 			            'lineIcon': {
@@ -2352,23 +2424,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'textInput': {
 			                label: 'Text input',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListTextInputSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema,}
 			            },
 			            /** Select input. */
 			            'selectInput': {
 			                label: 'Select input',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListSelectInputSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInputSchema,}
 			            },
 			    }
 		}
 
-		type ListCellEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema>
+		type ListCellEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface ListRow {
@@ -2376,13 +2448,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
 				/** Cells. */
-				'cells': SpruceSchemas.Heartwood.v2021_02_11.ListCell[]
+				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
 		}
 
 		interface ListRowSchema extends SpruceSchema.Schema {
 			id: 'listRow',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2398,17 +2470,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.ListCellSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema,}
 			            },
 			    }
 		}
 
-		type ListRowEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ListRowSchema>
+		type ListRowEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface CardHeader {
@@ -2432,7 +2504,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardHeaderSchema extends SpruceSchema.Schema {
 			id: 'cardHeader',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2486,57 +2558,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardHeaderEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema>
+		type CardHeaderEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface Dropdown {
-			
-				/** Position. */
-				'position'?: ("bottom" | "top" | "right")| undefined | null
-				
-				'items'?: SpruceSchemas.Heartwood.v2021_02_11.DropdownButton[]| undefined | null
-				
-				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
-		}
-
-		interface DropdownSchema extends SpruceSchema.Schema {
-			id: 'dropdown',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: 'Dropdown',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
-			            },
-			    }
-		}
-
-		type DropdownEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface Button {
@@ -2564,13 +2591,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Click handler. */
 				'onClick'?: (() => Promise<void> | void)| undefined | null
 				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.Heartwood.v2021_02_11.Dropdown| undefined | null
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown| undefined | null
 		}
 
 		interface ButtonSchema extends SpruceSchema.Schema {
 			id: 'button',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: 'Button',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2646,12 +2673,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'dropdown': {
 			                label: 'Dropdown',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DropdownSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema,}
 			            },
 			    }
 		}
 
-		type ButtonEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.ButtonSchema>
+		type ButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema>
 
 	}
 
@@ -2661,74 +2688,20 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface Card {
 			
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
-				/** Header. */
-				'header'?: SpruceSchemas.Heartwood.v2021_02_11.CardHeader| undefined | null
-				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
-				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.Heartwood.v2021_02_11.CardBody| undefined | null
-				/** Footer. */
-				'footer'?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter| undefined | null
 		}
 
 		interface CardSchema extends SpruceSchema.Schema {
 			id: 'card',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
-			name: 'Card',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.CardViewController`,}
-			            },
-			            /** Header. */
-			            'header': {
-			                label: 'Header',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardHeaderSchema,}
-			            },
-			            /** Fade in. */
-			            'shouldFadeIn': {
-			                label: 'Fade in',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-			            'body': {
-			                label: 'Body',
-			                type: 'schema',
-			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardBodySchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardFooterSchema,}
-			            },
-			    }
-		}
+			name: '',		}
 
 		type CardEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.CardSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
 		interface DropdownButton {
@@ -2760,7 +2733,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface DropdownButtonSchema extends SpruceSchema.Schema {
 			id: 'dropdownButton',
 			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
@@ -2835,7 +2808,52 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type DropdownButtonEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DropdownButtonSchema>
+		type DropdownButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Dropdown {
+			
+				/** Position. */
+				'position'?: ("bottom" | "top" | "right")| undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
+				
+				'card'?: SpruceSchemas.Heartwood.v2021_02_11.Card| undefined | null
+		}
+
+		interface DropdownSchema extends SpruceSchema.Schema {
+			id: 'dropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Dropdown',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.CardSchema,}
+			            },
+			    }
+		}
+
+		type DropdownEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema>
 
 	}
 

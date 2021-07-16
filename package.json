@@ -15,7 +15,7 @@
   "description": "All the power of Heartwood in one, convenient package.",
   "version": "23.3.5",
   "skill": {
-    "namespace": "heartwood",
+    "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
       "sync.schemas": "--shouldFetchCoreSchemas false --moduleToImportFromWhenRemote @sprucelabs/heartwood-view-controllers"
     }
