@@ -148,10 +148,11 @@ export interface Router {
 	back(): Promise<SkillViewController | undefined>
 }
 
-export type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
+export type SkillView =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
 export interface ButtonController {
-	render(): SpruceSchemas.Heartwood.v2021_02_11.Button
+	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 	triggerRender: () => void
 }
 

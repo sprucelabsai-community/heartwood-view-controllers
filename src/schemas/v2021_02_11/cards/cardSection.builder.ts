@@ -24,7 +24,7 @@ export default buildSchema({
 			isPrivate: true,
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardSection>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>',
 			},
 		},
 		shouldBePadded: {

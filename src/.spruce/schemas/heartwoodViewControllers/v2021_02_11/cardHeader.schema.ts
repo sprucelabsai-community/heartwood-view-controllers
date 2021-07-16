@@ -20,7 +20,7 @@ const cardHeaderSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardH
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardHeader>`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>`,}
 	            },
 	            /** Subtitle. */
 	            'subtitle': {

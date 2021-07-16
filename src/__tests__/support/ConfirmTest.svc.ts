@@ -13,7 +13,7 @@ export default class ConfirmTestSkillViewController extends AbstractSkillViewCon
 		return confirm
 	}
 
-	public render(): SpruceSchemas.Heartwood.v2021_02_11.SkillView {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
 		return {
 			layouts: [],
 		}

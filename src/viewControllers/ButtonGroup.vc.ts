@@ -5,7 +5,7 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
+type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type ViewModel = Button[]
 
 type SelectionChangeHandler = (selected: number[]) => void | Promise<void>
@@ -101,7 +101,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	}
 
 	private buildButtonController(
-		button: SpruceSchemas.Heartwood.v2021_02_11.Button,
+		button: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button,
 		idx: number
 	): ButtonController {
 		const controller: ButtonController = {

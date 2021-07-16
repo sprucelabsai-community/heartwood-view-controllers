@@ -230,7 +230,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	private static assertFirstButtonSelected(
-		buttons: SpruceSchemas.Heartwood.v2021_02_11.Button[]
+		buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 	) {
 		assert.doesInclude(buttons, { isSelected: true })
 		assert.doesInclude(buttons[0], { isSelected: true })

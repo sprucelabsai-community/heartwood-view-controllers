@@ -705,7 +705,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
 				/** Header. */
 				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
 				/** Fade in. */
@@ -719,7 +719,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show close button. */
 				'shouldShowCloseButton'?: boolean| undefined | null
 				/** Card controller. */
-				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>)| undefined | null
+				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
 				/** Close callback. */
 				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
 		}
@@ -741,7 +741,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
 			            },
 			            /** Header. */
 			            'header': {
@@ -785,7 +785,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'cardController': {
 			                label: 'Card controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
 			            },
 			            /** Close callback. */
 			            'onClose': {
@@ -1077,7 +1077,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Complete. When being rendered as a slide, this will signify the step is complete. */
 				'isComplete'?: boolean| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardSection>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
 				/** Padding. */
 				'shouldBePadded'?: boolean| undefined | null
 				/** Center content. */
@@ -1127,7 +1127,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Controller',
 			                type: 'raw',
 			                isPrivate: true,
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardSection>`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
 			            },
 			            /** Padding. */
 			            'shouldBePadded': {
@@ -1589,7 +1589,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardFooter {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardFooter>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>)| undefined | null
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Loading. */
@@ -1611,7 +1611,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardFooter>`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>`,}
 			            },
 			            /** Buttons. */
 			            'buttons': {
@@ -2488,7 +2488,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardHeader>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>)| undefined | null
 				/** Subtitle. */
 				'subtitle'?: string| undefined | null
 				/** Icon. */
@@ -2518,7 +2518,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardHeader>`,}
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>`,}
 			            },
 			            /** Subtitle. */
 			            'subtitle': {

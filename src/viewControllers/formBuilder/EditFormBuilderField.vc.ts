@@ -193,7 +193,7 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 	}
 
 	private buildSections(forType: EditFormBuilderFieldOptions['type']) {
-		const sections: SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditFieldFormSchema>[] =
+		const sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<EditFieldFormSchema>[] =
 			[
 				{
 					fields: [
@@ -224,7 +224,7 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 		return this.formVc
 	}
 
-	public render(): SpruceSchemas.Heartwood.v2021_02_11.Card {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
 		return {
 			...super.model,
 			header: {

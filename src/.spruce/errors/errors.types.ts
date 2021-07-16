@@ -8,7 +8,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
-export declare namespace SpruceErrors.Heartwood {
+export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
 	export interface MissingStorage {
@@ -17,19 +17,20 @@ export declare namespace SpruceErrors.Heartwood {
 
 	export interface MissingStorageSchema extends SpruceSchema.Schema {
 		id: 'missingStorage',
-		namespace: 'Heartwood',
+		namespace: 'HeartwoodViewControllers',
 		name: 'Missing storage',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 		    fields: {
 		    }
 	}
 
-	export type MissingStorageEntity = SchemaEntity<SpruceErrors.Heartwood.MissingStorageSchema>
+	export type MissingStorageEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.MissingStorageSchema>
 
 }
 
 
 
-export declare namespace SpruceErrors.Heartwood {
+export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
 	export interface InvalidViewControllerSource {
@@ -38,19 +39,20 @@ export declare namespace SpruceErrors.Heartwood {
 
 	export interface InvalidViewControllerSourceSchema extends SpruceSchema.Schema {
 		id: 'invalidViewControllerSource',
-		namespace: 'Heartwood',
+		namespace: 'HeartwoodViewControllers',
 		name: 'Invalid view controller source',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 		    fields: {
 		    }
 	}
 
-	export type InvalidViewControllerSourceEntity = SchemaEntity<SpruceErrors.Heartwood.InvalidViewControllerSourceSchema>
+	export type InvalidViewControllerSourceEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidViewControllerSourceSchema>
 
 }
 
 
 
-export declare namespace SpruceErrors.Heartwood {
+export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
 	export interface InvalidViewControllerName {
@@ -63,8 +65,9 @@ export declare namespace SpruceErrors.Heartwood {
 
 	export interface InvalidViewControllerNameSchema extends SpruceSchema.Schema {
 		id: 'invalidViewControllerName',
-		namespace: 'Heartwood',
+		namespace: 'HeartwoodViewControllers',
 		name: 'Invalid view controller name',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 		    fields: {
 		            /** Supplied name. */
 		            'name': {
@@ -84,13 +87,13 @@ export declare namespace SpruceErrors.Heartwood {
 		    }
 	}
 
-	export type InvalidViewControllerNameEntity = SchemaEntity<SpruceErrors.Heartwood.InvalidViewControllerNameSchema>
+	export type InvalidViewControllerNameEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidViewControllerNameSchema>
 
 }
 
 
 
-export declare namespace SpruceErrors.Heartwood {
+export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
 	export interface InvalidSkillViewController {
@@ -101,8 +104,9 @@ export declare namespace SpruceErrors.Heartwood {
 
 	export interface InvalidSkillViewControllerSchema extends SpruceSchema.Schema {
 		id: 'invalidSkillViewController',
-		namespace: 'Heartwood',
+		namespace: 'HeartwoodViewControllers',
 		name: 'Invalid skill view',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 		    fields: {
 		            /** . */
 		            'id': {
@@ -113,13 +117,13 @@ export declare namespace SpruceErrors.Heartwood {
 		    }
 	}
 
-	export type InvalidSkillViewControllerEntity = SchemaEntity<SpruceErrors.Heartwood.InvalidSkillViewControllerSchema>
+	export type InvalidSkillViewControllerEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidSkillViewControllerSchema>
 
 }
 
 
 
-export declare namespace SpruceErrors.Heartwood {
+export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
 	export interface ExportFailed {
@@ -128,13 +132,14 @@ export declare namespace SpruceErrors.Heartwood {
 
 	export interface ExportFailedSchema extends SpruceSchema.Schema {
 		id: 'exportFailed',
-		namespace: 'Heartwood',
+		namespace: 'HeartwoodViewControllers',
 		name: 'Export failed',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 		    fields: {
 		    }
 	}
 
-	export type ExportFailedEntity = SchemaEntity<SpruceErrors.Heartwood.ExportFailedSchema>
+	export type ExportFailedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.ExportFailedSchema>
 
 }
 

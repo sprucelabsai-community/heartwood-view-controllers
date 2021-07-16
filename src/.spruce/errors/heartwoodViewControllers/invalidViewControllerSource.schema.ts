@@ -3,10 +3,11 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const invalidViewControllerSourceSchema: SpruceErrors.Heartwood.InvalidViewControllerSourceSchema  = {
+const invalidViewControllerSourceSchema: SpruceErrors.HeartwoodViewControllers.InvalidViewControllerSourceSchema  = {
 	id: 'invalidViewControllerSource',
-	namespace: 'Heartwood',
+	namespace: 'HeartwoodViewControllers',
 	name: 'Invalid view controller source',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	    }
 }

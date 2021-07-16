@@ -115,10 +115,11 @@ export class FormBuilderPageViewControllerImpl
 		//@ts-ignore
 		delete rest.type
 
-		let updatedSection: SpruceSchemas.Heartwood.v2021_02_11.FormSection = {
-			title,
-			...rest,
-		}
+		let updatedSection: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection =
+			{
+				title,
+				...rest,
+			}
 
 		if (text) {
 			updatedSection.text = { content: text }
@@ -137,10 +138,11 @@ export class FormBuilderPageViewControllerImpl
 			...rest
 		} = options ?? {}
 
-		const values: SpruceSchemas.Heartwood.v2021_02_11.FormSection = {
-			title,
-			...rest,
-		}
+		const values: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection =
+			{
+				title,
+				...rest,
+			}
 
 		if (type === 'text') {
 			fields = []

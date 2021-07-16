@@ -14,7 +14,7 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardFooter>`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>`,}
 	            },
 	            /** Buttons. */
 	            'buttons': {

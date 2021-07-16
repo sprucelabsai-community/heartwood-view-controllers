@@ -9,7 +9,7 @@ export default buildSchema({
 			label: 'Controller',
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardFooter>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>',
 			},
 		},
 		buttons: {

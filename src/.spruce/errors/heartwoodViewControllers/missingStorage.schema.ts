@@ -3,10 +3,11 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const missingStorageSchema: SpruceErrors.Heartwood.MissingStorageSchema  = {
+const missingStorageSchema: SpruceErrors.HeartwoodViewControllers.MissingStorageSchema  = {
 	id: 'missingStorage',
-	namespace: 'Heartwood',
+	namespace: 'HeartwoodViewControllers',
 	name: 'Missing storage',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	    }
 }

@@ -5,7 +5,8 @@ import renderUtil from '../../utilities/render.utility'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 
-type CardVc = ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
+type CardVc =
+	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
 type FormVc = FormViewController<any>
 
 const interactionUtil = {

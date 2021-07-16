@@ -9,7 +9,7 @@ import { FieldRenderOptions } from '../types/heartwood.types'
 
 const normalizeFormSectionFieldNamesUtil = {
 	toObjects<S extends Schema = Schema>(
-		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields'],
+		fields: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>['fields'],
 		schema?: Schema
 	): (FieldRenderOptions<S> &
 		Partial<FieldDefinitions> & { type: FieldType })[] {
@@ -30,7 +30,7 @@ const normalizeFormSectionFieldNamesUtil = {
 		return normalized as any
 	},
 	toNames<S extends Schema = Schema>(
-		fields: SpruceSchemas.Heartwood.v2021_02_11.FormSection<S>['fields']
+		fields: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>['fields']
 	) {
 		const normalized: SchemaFieldNames<S>[] =
 			fields?.map((field) => {

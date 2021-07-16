@@ -18,14 +18,15 @@ import {
 } from './FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 
-type Card = SpruceSchemas.Heartwood.v2021_02_11.Card & {
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card & {
 	shouldAllowEditing?: boolean
 }
-type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
-type Button = SpruceSchemas.Heartwood.v2021_02_11.Button
+type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
+type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type FormBuilderImportExportObject =
-	SpruceSchemas.Heartwood.v2021_02_11.FormBuilderImportExportObject
-type Page = SpruceSchemas.Heartwood.v2021_02_11.BuilderImportExportPage
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
+type Page =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage
 
 export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
@@ -36,7 +37,7 @@ export interface FormBuilderViewControllerOptions {
 export default class FormBuilderViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
 	private footerOverride?:
-		| SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 		| null
 		| undefined
 
@@ -98,7 +99,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	private buildSlideForNewPage(options?: Partial<Page>): {
 		title: string
-		form: SpruceSchemas.Heartwood.v2021_02_11.Form<Schema>
+		form: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema>
 	} {
 		return {
 			title: this.buildNextPageTitle(),
@@ -109,7 +110,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	private renderNewForm(
 		options?: Partial<Page>
-	): SpruceSchemas.Heartwood.v2021_02_11.Form<Schema> {
+	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema> {
 		return this.vcFactory
 			.Controller('form', {
 				shouldShowSubmitControls: false,
@@ -397,7 +398,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	public async importObject(imported: FormBuilderImportExportObject) {
 		const { default: formBuilderImportExportObjectSchema } = await import(
-			'../../.spruce/schemas/heartwood/v2021_02_11/formBuilderImportExportObject.schema'
+			'../../.spruce/schemas/heartwoodViewControllers/v2021_02_11/formBuilderImportExportObject.schema'
 		)
 
 		validateSchemaValues(formBuilderImportExportObjectSchema as any, imported)

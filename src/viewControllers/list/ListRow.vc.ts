@@ -5,7 +5,8 @@ import { ListRow } from './List.vc'
 import ListCellViewController from './ListCell.vc'
 
 export default class ListRowViewController
-	implements ViewController<SpruceSchemas.Heartwood.v2021_02_11.ListRow>
+	implements
+		ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow>
 {
 	private model: ListRow
 	private setValueHandler: (name: string, value: any) => void | Promise<void>
@@ -47,7 +48,7 @@ export default class ListRowViewController
 		return this.getValuesHandler()
 	}
 
-	public render(): SpruceSchemas.Heartwood.v2021_02_11.ListRow {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow {
 		return {
 			...this.model,
 			controller: this,

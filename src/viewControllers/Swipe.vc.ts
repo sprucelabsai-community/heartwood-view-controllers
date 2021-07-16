@@ -8,9 +8,9 @@ import introspectionUtil from '../utilities/introspection.utility'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
-type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
-type Slide = SpruceSchemas.Heartwood.v2021_02_11.CardSection
-type Footer = SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+type Slide = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 
 export type SwipeViewControllerOptions = {
 	slides: Slide[]

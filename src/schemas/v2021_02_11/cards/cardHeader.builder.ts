@@ -13,7 +13,7 @@ export default buildSchema({
 			label: 'Controller',
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.CardHeader>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>',
 			},
 		},
 		subtitle: {

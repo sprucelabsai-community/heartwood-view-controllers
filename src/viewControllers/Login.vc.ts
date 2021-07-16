@@ -11,9 +11,9 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Section<S extends Schema> =
-	SpruceSchemas.Heartwood.v2021_02_11.BigFormSection<S>
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>
 
 type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 

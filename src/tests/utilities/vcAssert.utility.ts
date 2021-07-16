@@ -2,7 +2,7 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
-import cardSchema from '#spruce/schemas/heartwood/v2021_02_11/card.schema'
+import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import {
 	ConfirmOptions,
 	SkillViewController,
@@ -23,7 +23,7 @@ async function wait() {
 	return new Promise<void>((resolve) => setTimeout(resolve, 0))
 }
 
-type Card = SpruceSchemas.Heartwood.v2021_02_11.Card
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 const vcAssertUtil = {
 	_setVcFactory(factory: ViewControllerFactory) {
@@ -215,7 +215,7 @@ const vcAssertUtil = {
 	},
 
 	assertPrimaryButtonIsLastInFooter(
-		footer: SpruceSchemas.Heartwood.v2021_02_11.CardFooter
+		footer: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 	) {
 		const primaryIdx = footer.buttons?.findIndex((b) => b.type === 'primary')
 
@@ -272,21 +272,21 @@ const vcAssertUtil = {
 	},
 
 	assertCardRendersHeader(
-		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
+		cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
 	) {
 		const model = renderUtil.render(cardVc)
 		assert.isObject(model.header, `Your card did not render a header!`)
 	},
 
 	assertCardRendersFooter(
-		cardVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>
+		cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
 	) {
 		const model = renderUtil.render(cardVc)
 		assert.isObject(model.footer, `Your card did not render a footer!`)
 	},
 
 	assertListRendersRows(
-		listVc: ViewController<SpruceSchemas.Heartwood.v2021_02_11.List>,
+		listVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List>,
 		expectedTotalRows?: number
 	) {
 		const model = renderUtil.render(listVc)

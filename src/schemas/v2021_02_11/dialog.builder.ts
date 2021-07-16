@@ -20,7 +20,7 @@ export default buildSchema({
 			label: 'Controller',
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>',
 			},
 		},
 		cardController: {
@@ -28,7 +28,7 @@ export default buildSchema({
 			label: 'Card controller',
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>',
 			},
 		},
 		onClose: {

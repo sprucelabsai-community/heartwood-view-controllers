@@ -6,11 +6,14 @@ import listUtil from './list.utility'
 import { ListCellModel } from './ListCell.vc'
 import ListRowViewController from './ListRow.vc'
 
-type List = Omit<SpruceSchemas.Heartwood.v2021_02_11.List, 'rows'> & {
+type List = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List,
+	'rows'
+> & {
 	rows: ListRow[]
 }
 export type ListRow = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListRow,
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow,
 	'cells'
 > & {
 	cells: ListCellModel[]
@@ -18,7 +21,7 @@ export type ListRow = Omit<
 
 export type ListViewControllerOptions = Partial<List>
 
-export default class ListViewController extends AbstractViewController<SpruceSchemas.Heartwood.v2021_02_11.List> {
+export default class ListViewController extends AbstractViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List> {
 	private model: List = {
 		rows: [],
 	}
@@ -166,7 +169,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		this.triggerRender()
 	}
 
-	public render(): SpruceSchemas.Heartwood.v2021_02_11.List {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {
 		return {
 			...this.model,
 			controller: this,

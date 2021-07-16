@@ -3,10 +3,11 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const exportFailedSchema: SpruceErrors.Heartwood.ExportFailedSchema  = {
+const exportFailedSchema: SpruceErrors.HeartwoodViewControllers.ExportFailedSchema  = {
 	id: 'exportFailed',
-	namespace: 'Heartwood',
+	namespace: 'HeartwoodViewControllers',
 	name: 'Export failed',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	    }
 }

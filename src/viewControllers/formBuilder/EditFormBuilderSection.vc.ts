@@ -58,7 +58,7 @@ export type EditFormBuilderSectionValues =
 	SchemaValues<EditSectionSectionSchema>
 
 type Section =
-	SpruceSchemas.Heartwood.v2021_02_11.FormSection<EditSectionSectionSchema>
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<EditSectionSectionSchema>
 
 export interface EditFormBuilderSectionOptions {
 	onDone: (section: SimpleSection) => void | Promise<void>
@@ -202,7 +202,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 
 	private buildFooter(
 		forType?: EditFormBuilderSectionValues['type']
-	): SpruceSchemas.Heartwood.v2021_02_11.CardFooter | undefined {
+	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | undefined {
 		const type = forType ?? this.formVc.getValue('type')
 
 		if (type === 'text') {
@@ -305,7 +305,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 		this.formVc.setFooter(this.buildFooter())
 	}
 
-	public render(): SpruceSchemas.Heartwood.v2021_02_11.Card {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
 		const model = super.render()
 
 		model.body = {

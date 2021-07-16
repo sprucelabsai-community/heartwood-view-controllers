@@ -6,7 +6,7 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from '../viewControllers/Abstract.vc'
 
-type SkillView = SpruceSchemas.Heartwood.v2021_02_11.SkillView
+type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
 export default abstract class AbstractSkillViewController<
 		Args extends Record<string, any> = Record<string, any>

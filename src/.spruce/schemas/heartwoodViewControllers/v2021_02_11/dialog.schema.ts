@@ -22,7 +22,7 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Dialog>`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
 	            },
 	            /** Header. */
 	            'header': {
@@ -66,7 +66,7 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	            'cardController': {
 	                label: 'Card controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Heartwood.v2021_02_11.Card>`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
 	            },
 	            /** Close callback. */
 	            'onClose': {

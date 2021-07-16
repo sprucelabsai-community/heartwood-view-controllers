@@ -1,7 +1,7 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import listCellSchema from '#spruce/schemas/heartwood/v2021_02_11/listCell.schema'
+import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import ListCellViewController, {

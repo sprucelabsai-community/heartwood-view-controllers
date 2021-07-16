@@ -3,10 +3,10 @@ import SpruceError from '../errors/SpruceError'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type ViewModel = SpruceSchemas.Heartwood.v2021_02_11.Card
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardViewControllerOptions = ViewModel
 
-type Section = SpruceSchemas.Heartwood.v2021_02_11.CardSection
+type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 
 export default class CardViewController<V extends ViewModel = ViewModel>
 	extends AbstractViewController<V>

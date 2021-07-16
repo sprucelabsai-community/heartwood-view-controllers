@@ -3,10 +3,11 @@ import { ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
-export type DialogOptions = SpruceSchemas.Heartwood.v2021_02_11.Card &
-	SpruceSchemas.Heartwood.v2021_02_11.Dialog & {
-		closeHandler?: () => void
-	}
+export type DialogOptions =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
+		SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog & {
+			closeHandler?: () => void
+		}
 
 export type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>

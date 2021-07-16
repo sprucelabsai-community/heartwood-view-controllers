@@ -12,8 +12,10 @@ class BadSkillViewController {
 }
 
 class GoodSkillViewController {
-	private model: SpruceSchemas.Heartwood.v2021_02_11.SkillView
-	public constructor(model: SpruceSchemas.Heartwood.v2021_02_11.SkillView) {
+	private model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+	public constructor(
+		model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+	) {
 		this.model = model
 	}
 	public render() {
@@ -245,7 +247,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	private static GoodController(
-		model: SpruceSchemas.Heartwood.v2021_02_11.SkillView
+		model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 	) {
 		//@ts-ignore
 		return this.Controller('good', model) as BadSkillViewController

@@ -29,7 +29,8 @@ import {
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import AbstractViewController from './Abstract.vc'
 
-type ViewModel<S extends Schema> = SpruceSchemas.Heartwood.v2021_02_11.Form<S>
+type ViewModel<S extends Schema> =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 type Section<S extends Schema = Schema> = ViewModel<S>['sections'][number]
 
 export type FormViewControllerOptions<S extends Schema> = Pick<
@@ -541,7 +542,7 @@ export default class FormViewController<
 	}
 
 	public setFooter(
-		footer?: SpruceSchemas.Heartwood.v2021_02_11.CardFooter | null
+		footer?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | null
 	) {
 		if (!footer) {
 			delete this.model.footer

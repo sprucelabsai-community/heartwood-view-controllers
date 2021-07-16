@@ -4,7 +4,7 @@ import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames
 import FormViewController, { FormViewControllerOptions } from './Form.vc'
 
 type ViewModel<S extends Schema> =
-	SpruceSchemas.Heartwood.v2021_02_11.BigForm<S>
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
 
 export type BigFormViewControllerOptions<S extends Schema> =
 	FormViewControllerOptions<S> & {

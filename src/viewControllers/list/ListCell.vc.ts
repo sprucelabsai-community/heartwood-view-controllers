@@ -1,10 +1,10 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewController } from '../../types/heartwood.types'
 
-type Model = SpruceSchemas.Heartwood.v2021_02_11.ListCell
+type Model = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 
 export type ListCellModel = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListCell,
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell,
 	'textInput' | 'selectInput'
 > & {
 	textInput?: ListTextInput
@@ -12,12 +12,12 @@ export type ListCellModel = Omit<
 }
 
 type ListTextInput = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListTextInput,
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput,
 	'setValue'
 >
 
 type ListSelectInput = Omit<
-	SpruceSchemas.Heartwood.v2021_02_11.ListSelectInput,
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput,
 	'setValue'
 >
 

@@ -3,10 +3,11 @@ import { SpruceErrors } from '../errors.types'
 
 
 
-const invalidSkillViewControllerSchema: SpruceErrors.Heartwood.InvalidSkillViewControllerSchema  = {
+const invalidSkillViewControllerSchema: SpruceErrors.HeartwoodViewControllers.InvalidSkillViewControllerSchema  = {
 	id: 'invalidSkillViewController',
-	namespace: 'Heartwood',
+	namespace: 'HeartwoodViewControllers',
 	name: 'Invalid skill view',
+	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
 	            'id': {

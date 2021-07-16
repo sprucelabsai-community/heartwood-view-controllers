@@ -22,7 +22,7 @@ export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 
 			const importStatement =
 				`export { default as ${schemaName} } from '#spruce` +
-				`/schemas/heartwood/v2021_02_11/${schemaFileName}'`
+				`/schemas/heartwoodViewControllers/v2021_02_11/${schemaFileName}'`
 
 			if (!indexContents.includes(importStatement)) {
 				missingImports.push(importStatement)
