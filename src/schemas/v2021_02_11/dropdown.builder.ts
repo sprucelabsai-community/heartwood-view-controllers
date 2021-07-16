@@ -43,7 +43,7 @@ export default buildSchema({
 			options: {
 				schemaId: {
 					id: 'card',
-					namespace: 'Heartwood',
+					namespace: 'HeartwoodViewControllers',
 					version: 'v2021_02_11',
 				},
 			},
