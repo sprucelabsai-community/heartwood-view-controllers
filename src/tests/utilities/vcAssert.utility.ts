@@ -14,6 +14,7 @@ import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
+import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
 type Vc = ViewController<any>
@@ -365,6 +366,25 @@ const vcAssertUtil = {
 				`Expected your card body to have \`isLoading=false\`, but it wasn't. Try \`this.setBodyIsLoading(false)\`.`
 			)
 		}
+	},
+
+	assertRowRendersContent(vc: ListRowViewController, content: string) {
+		const model = renderUtil.render(vc)
+
+		for (const cell of model.cells) {
+			const value = `${cell.subText?.content ?? ''} 
+				${cell.subText?.html ?? ''}
+				${cell.text?.content ?? ''}
+				${cell.text?.html ?? ''}
+			${cell.button?.label ?? ''}`
+
+			if (value?.toLowerCase().includes(content.toLowerCase())) {
+				return
+			}
+		}
+		assert.fail(
+			`Expected a row to render content \`${content}\`, but it did not.`
+		)
 	},
 }
 
