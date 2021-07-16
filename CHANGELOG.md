@@ -1,3 +1,10 @@
+# [23.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.3.5...v23.4.0) (2021-07-16)
+
+
+### Features
+
+* assertRowRendersContent ([d657dca](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d657dca))
+
 ## [23.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.3.4...v23.3.5) (2021-07-16)
 
 ## [23.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v23.3.3...v23.3.4) (2021-07-15)
