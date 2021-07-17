@@ -52,6 +52,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSkillTe
 		const vc = this.Factory().Controller(name, options)
 
 		//vc's have to be rendered once to attach counters
+		//@ts-ignore
 		this.render(vc)
 
 		return vc
