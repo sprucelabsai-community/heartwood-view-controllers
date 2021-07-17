@@ -87,6 +87,26 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		//@ts-ignore
+		const matchVc = vcAssertUtil.assertSkillViewRendersCard(goodVc)
+
+		assert.isEqual(matchVc, cardVc)
+	}
+
+	@test()
+	protected static maintainsCardVcsInRendersCards() {
+		const cardVc = this.Controller('card', {
+			header: { title: 'test' },
+		})
+
+		const goodVc = this.GoodController({
+			layouts: [
+				{
+					cards: [cardVc.render()],
+				},
+			],
+		})
+
+		//@ts-ignore
 		const cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
 
 		assert.isEqual(cardVcs[0], cardVc)

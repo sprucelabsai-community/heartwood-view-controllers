@@ -305,21 +305,7 @@ const vcAssertUtil = {
 	},
 
 	assertSkillViewRendersCard(vc: SkillViewController): CardViewController {
-		const model = renderUtil.render(vc)
-
-		for (const layout of model?.layouts ?? []) {
-			//@ts-ignore
-			const card = layout.cards?.[0]
-
-			if (card) {
-				//@ts-ignore
-				return this.factory.Controller('card', card)
-			}
-		}
-
-		assert.fail('Expected your skill view to render a card, but it did not!')
-
-		return {} as any
+		return this.assertSkillViewRendersCards(vc)[0]
 	},
 
 	assertSkillViewRendersCards(
