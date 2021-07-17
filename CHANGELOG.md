@@ -1,3 +1,10 @@
+# [24.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.0.4...v24.1.0) (2021-07-17)
+
+
+### Features
+
+* knows if skill view renders view controller ([26ea44e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/26ea44e))
+
 ## [24.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.0.3...v24.0.4) (2021-07-17)
 
 ## [24.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.0.2...v24.0.3) (2021-07-17)
