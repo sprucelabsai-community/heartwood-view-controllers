@@ -21,7 +21,7 @@ import ListViewController from './list/List.vc'
 import LoginViewController from './Login.vc'
 import SwipeViewController from './Swipe.vc'
 
-const CORE_CONTROLLER_MAP = {
+export const CORE_CONTROLLER_MAP = {
 	form: FormViewController,
 	login: LoginViewController,
 	swipe: SwipeViewController,
@@ -39,12 +39,6 @@ type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 ) => Vc
 
 type ConnectToApi = () => Promise<MercuryClient>
-
-// type BuiltViewControllerOrSkillViewController<
-// 	Vc extends ViewController<any> | SkillViewController
-// > = Vc extends SkillViewController
-// 	? BuiltSkillViewController<Vc>
-// 	: BuiltViewController<Vc>
 
 export default class ViewControllerFactory {
 	private controllerMap: Record<string, any>

@@ -1,9 +1,29 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
+import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import { ListRow } from '../../viewControllers/list/List.vc'
+import { SkillViewController } from '../../types/heartwood.types'
+import CardViewController from '../../viewControllers/Card.vc'
+import FormViewController from '../../viewControllers/Form.vc'
+import ListViewController, { ListRow } from '../../viewControllers/list/List.vc'
 import { ListCellModel } from '../../viewControllers/list/ListCell.vc'
+
+type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+
+declare module '../../types/heartwood.types' {
+	interface ViewControllerMap {
+		good: GoodSkillViewController
+		bad: BadSkillViewController
+		newCard: NewTestingCardViewController
+	}
+	interface ViewControllerOptionsMap {
+		good: SkillView
+		bad: any
+	}
+}
 
 class BadSkillViewController {
 	public render() {
@@ -11,22 +31,27 @@ class BadSkillViewController {
 	}
 }
 
-class GoodSkillViewController {
-	private model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
-	public constructor(
-		model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
-	) {
+class GoodSkillViewController implements SkillViewController {
+	private model: SkillView
+	public constructor(model: SkillView) {
 		this.model = model
 	}
+
+	public async load() {}
+	public triggerRender() {}
+
 	public render() {
 		return this.model
 	}
 }
 
+class NewTestingCardViewController extends CardViewController {}
+
 export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		bad: BadSkillViewController,
 		good: GoodSkillViewController,
+		newCard: NewTestingCardViewController,
 	}
 
 	@test()
@@ -261,15 +286,181 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertRowRendersContent(vc.getRowVc(0), search)
 	}
 
+	@test()
+	protected static knowsIfSkillViewDoesNotRenderViewController() {
+		const model: SkillView = {
+			layouts: [{}],
+		}
+
+		const vc = this.Controller('good', model)
+		validateSchemaValues(skillViewSchema, this.render(vc))
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewRendersViewController(vc, FormViewController)
+		)
+	}
+
+	@test('knows if form rendered in first layout, first card, first section', {
+		VcClass: FormViewController,
+		layoutIdx: 0,
+		cardIdx: 0,
+		sectionIdx: 0,
+		bodyGenerator: () => ({
+			form: VcAssertUtilTest.renderEmptyForm(),
+		}),
+	})
+	@test('knows if form rendered in random layout, first card, first section', {
+		VcClass: FormViewController,
+		cardIdx: 0,
+		sectionIdx: 0,
+		bodyGenerator: () => ({
+			form: VcAssertUtilTest.renderEmptyForm(),
+		}),
+	})
+	@test('knows if form rendered in random layout, random card, first section', {
+		VcClass: FormViewController,
+		bodyGenerator: () => ({
+			form: VcAssertUtilTest.renderEmptyForm(),
+		}),
+	})
+	@test(
+		'knows if form rendered in random layout, random card, random section',
+		{
+			VcClass: FormViewController,
+			bodyGenerator: () => ({
+				form: VcAssertUtilTest.renderEmptyForm(),
+			}),
+		}
+	)
+	@test('knows if list is renderd', {
+		VcClass: ListViewController,
+		bodyGenerator: () => ({
+			list: VcAssertUtilTest.renderEmptyList(),
+		}),
+	})
+	@test('knows if list is not renderd', {
+		VcClass: ListViewController,
+		layoutIdx: 0,
+		cardIdx: 0,
+		sectionIdx: 0,
+		shouldPass: false,
+		bodyGenerator: () => ({
+			form: VcAssertUtilTest.renderEmptyForm(),
+		}),
+	})
+	protected static knowsIfSkillViewRendersViewController(options: {
+		layoutIdx?: number
+		cardIdx?: number
+		sectionIdx?: number
+		shouldPass?: boolean
+		bodyGenerator: () => SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+		VcClass: any
+	}) {
+		const {
+			layoutIdx = Math.round(Math.random() * 10),
+			cardIdx = Math.round(Math.random() * 10),
+			sectionIdx = Math.round(Math.random() * 10),
+			shouldPass = true,
+			VcClass,
+			bodyGenerator,
+		} = options
+
+		const bodyModel = { ...bodyGenerator() }
+
+		const model: SkillView = {
+			layouts: [],
+		}
+
+		while (model.layouts.length <= layoutIdx) {
+			model.layouts.push({
+				cards: [],
+			})
+		}
+
+		while (model.layouts[layoutIdx].cards!.length <= cardIdx) {
+			model.layouts[layoutIdx].cards!.push({
+				body: {
+					sections: [],
+				},
+			})
+		}
+
+		while (
+			//@ts-ignore
+			model.layouts[layoutIdx].cards[cardIdx].body.sections.length <= sectionIdx
+		) {
+			//@ts-ignore
+			model.layouts[layoutIdx].cards[cardIdx].body.sections!.push({})
+		}
+
+		//@ts-ignore
+		model.layouts[layoutIdx]!.cards[cardIdx].body.sections[sectionIdx] =
+			bodyModel
+
+		const vc = this.Controller('good', model)
+
+		if (shouldPass) {
+			vcAssertUtil.assertSkillViewRendersViewController(vc, VcClass)
+		} else {
+			assert.doesThrow(() =>
+				vcAssertUtil.assertSkillViewRendersViewController(vc, VcClass)
+			)
+		}
+	}
+
+	@test()
+	protected static knowsIfCardIsOfType() {
+		const vc = this.Controller('good', {
+			layouts: [
+				{
+					cards: [this.Controller('newCard', {}).render()],
+				},
+			],
+		})
+
+		vcAssertUtil.assertSkillViewRendersViewController(
+			vc,
+			NewTestingCardViewController
+		)
+	}
+
+	@test()
+	protected static knowsIfCardIsNotOfType() {
+		const vc = this.Controller('good', {
+			layouts: [
+				{
+					cards: [this.Controller('newCard', {}).render()],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewRendersViewController(vc, ListViewController)
+		)
+	}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController
 	}
 
-	private static GoodController(
-		model: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
-	) {
+	private static GoodController(model: SkillView) {
 		//@ts-ignore
 		return this.Controller('good', model) as BadSkillViewController
+	}
+
+	private static renderEmptyForm() {
+		return this.Controller('form', {
+			schema: {
+				fields: {},
+			},
+			sections: [],
+		}).render()
+	}
+
+	private static renderEmptyList() {
+		return this.Controller('list', {
+			rows: [],
+		}).render()
 	}
 }

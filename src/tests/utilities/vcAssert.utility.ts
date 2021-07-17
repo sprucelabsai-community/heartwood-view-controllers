@@ -15,7 +15,9 @@ import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
-import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
+import ViewControllerFactory, {
+	CORE_CONTROLLER_MAP,
+} from '../../viewControllers/ViewControllerFactory'
 
 type Vc = ViewController<any>
 
@@ -372,6 +374,44 @@ const vcAssertUtil = {
 			`Expected a row to render content \`${content}\`, but it did not.`
 		)
 	},
+
+	assertSkillViewRendersViewController(vc: SkillViewController, VcClass: any) {
+		const model = renderUtil.render(vc)
+		const fieldsToCheck = Object.keys(CORE_CONTROLLER_MAP)
+
+		for (const layout of model.layouts ?? []) {
+			for (const card of layout.cards ?? []) {
+				if (doesModelHaveController(VcClass, card)) {
+					return
+				}
+				for (const section of card.body?.sections ?? []) {
+					for (const f of fieldsToCheck) {
+						//@ts-ignore
+						const m = section[f]
+						if (doesModelHaveController(VcClass, m)) {
+							return
+						}
+					}
+				}
+			}
+		}
+
+		assert.fail(
+			`Expected a ${
+				VcClass.name ?? 'UknownViewController'
+			} to be rendered in your skill view, but it wasn't!`
+		)
+	},
 }
 
 export default vcAssertUtil
+function doesModelHaveController(VcClass: any, model: any) {
+	if (model?.controller instanceof VcClass) {
+		return true
+	}
+
+	return VcClass.name.toLowerCase().includes(
+		//@ts-ignore
+		model?.controller?.id?.toLowerCase() ?? '******nope'
+	)
+}
