@@ -1,3 +1,10 @@
+# [24.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.1.3...v24.2.0) (2021-07-18)
+
+
+### Features
+
+* submitLoginForm interactionUtil ([42b7774](https://github.com/sprucelabsai/heartwood-view-controllers/commit/42b7774))
+
 ## [24.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.1.2...v24.1.3) (2021-07-18)
 
 ## [24.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.1.1...v24.1.2) (2021-07-17)
