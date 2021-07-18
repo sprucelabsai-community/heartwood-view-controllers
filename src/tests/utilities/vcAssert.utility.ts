@@ -381,10 +381,10 @@ const vcAssertUtil = {
 	) {
 		try {
 			this.assertSkillViewRendersViewController(vc, VcClass)
-			//@ts-ignore
-			assert.fail(`Expected not to find a ${VcClass.name} inside ${vc.id}`)
-			// eslint-disable-next-line no-empty
-		} catch {}
+		} catch {
+			return
+		}
+		assert.fail(`Expected not to find a ${VcClass.name} inside ${vc.id}`)
 	},
 
 	assertSkillViewRendersViewController(vc: SkillViewController, VcClass: any) {
