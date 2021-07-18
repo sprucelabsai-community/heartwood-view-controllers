@@ -1,3 +1,10 @@
+# [24.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.3.4...v24.4.0) (2021-07-18)
+
+
+### Features
+
+* assert does not render dialog ([04b9c4b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/04b9c4b))
+
 ## [24.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.3.3...v24.3.4) (2021-07-18)
 
 ## [24.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.3.2...v24.3.3) (2021-07-18)
