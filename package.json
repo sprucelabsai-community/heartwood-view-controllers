@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "24.0.4",
+  "version": "24.1.3",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -83,11 +83,11 @@
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "latest",
     "@sprucelabs/jest-json-reporter": "latest",
-    "@sprucelabs/jest-sheets-reporter": "^1.2.56",
+    "@sprucelabs/jest-sheets-reporter": "^1.2.57",
     "@sprucelabs/mercury-client": "latest",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-skill-booter": "^4.17.12",
+    "@sprucelabs/spruce-skill-booter": "^4.17.13",
     "@sprucelabs/test": "latest",
     "@sprucelabs/test-utils": "latest",
     "@types/lodash": "^4.14.171",
@@ -95,7 +95,7 @@
     "@types/terser-webpack-plugin": "^5.0.4",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.2.0",
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "eslint-config-spruce": "latest",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
