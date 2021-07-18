@@ -154,7 +154,6 @@ export default class ViewControllerFactory {
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
 			connectToApi: async (...args: any[]) => {
-				debugger
 				//@ts-ignore
 				const client = await this.connectToApi(...args)
 				if (!client.isAuthenticated() && this.auth.isLoggedIn()) {
