@@ -101,59 +101,81 @@ const vcAssertUtil = {
 		})
 	},
 
+	async assertDoesNotRenderDialog(
+		vc: ViewController<any>,
+		action: () => void | Promise<void>
+	) {
+		try {
+			await this.assertRendersDialog(vc, action)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`Your view controller rendered a dialog and it should not have!`
+		)
+	},
+
 	async assertRendersDialog(
 		vc: ViewController<any>,
 		action: () => void | Promise<void>,
 		dialogHandler?: (dialogVc: DialogViewController) => void | Promise<void>
 	): Promise<{ dialogVc: DialogViewController }> {
+		let run = () => {}
 		return new Promise((resolve, reject) => {
-			let wasHit = false
-			let dialogVc: DialogViewController | undefined
+			try {
+				let wasHit = false
+				let dialogVc: DialogViewController | undefined
 
-			//@ts-ignore
-			const oldRenderInDialog = vc.renderInDialog.bind(vc)
-			//@ts-ignore
-			vc.renderInDialog = (...args: any[]) => {
-				dialogVc = oldRenderInDialog(...args)
-				return dialogVc
-			}
-
-			let dialogHandlerPromise: any
-
-			//@ts-ignore
-			vc.renderInDialogHandler = ({ controller }) => {
-				wasHit = true
 				//@ts-ignore
-				setTimeout(async () => {
-					dialogHandlerPromise = dialogHandler?.(controller)?.catch?.((err) => {
-						reject(err)
-					})
-				}, 0)
-			}
-
-			async function run() {
-				try {
-					await action()
-					await wait()
-
-					assert.isTrue(
-						wasHit,
-						'this.renderInDialog() was not invoked in your view controller.'
-					)
-
-					await dialogHandlerPromise
-
-					assert.isTruthy(dialogVc)
-
-					resolve({
-						dialogVc,
-					} as any)
-				} catch (err) {
-					reject(err)
+				const oldRenderInDialog = vc.renderInDialog?.bind(vc) ?? function () {}
+				//@ts-ignore
+				vc.renderInDialog = (...args: any[]) => {
+					dialogVc = oldRenderInDialog(...args)
+					return dialogVc
 				}
-			}
 
-			void run()
+				let dialogHandlerPromise: any
+
+				//@ts-ignore
+				vc.renderInDialogHandler = ({ controller }) => {
+					wasHit = true
+					//@ts-ignore
+					setTimeout(async () => {
+						dialogHandlerPromise = dialogHandler?.(controller)?.catch?.(
+							(err) => {
+								reject(err)
+							}
+						)
+					}, 0)
+				}
+
+				run = async () => {
+					try {
+						await action()
+						await wait()
+
+						assert.isTrue(
+							wasHit,
+							'this.renderInDialog() was not invoked in your view controller.'
+						)
+
+						await dialogHandlerPromise
+
+						assert.isTruthy(dialogVc)
+
+						resolve({
+							dialogVc,
+						} as any)
+					} catch (err) {
+						reject(err)
+					}
+				}
+
+				void run()
+			} catch (err) {
+				reject(err)
+			}
 		})
 	},
 

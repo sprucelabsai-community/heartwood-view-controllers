@@ -3,6 +3,7 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
+import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import { SkillViewController } from '../../types/heartwood.types'
@@ -18,6 +19,7 @@ declare module '../../types/heartwood.types' {
 		good: GoodSkillViewController
 		bad: BadSkillViewController
 		newCard: NewTestingCardViewController
+		goodWithDialog: GoodWithDialogSkillViewController
 	}
 	interface ViewControllerOptionsMap {
 		good: SkillView
@@ -45,12 +47,33 @@ class GoodSkillViewController implements SkillViewController {
 	}
 }
 
+class GoodWithDialogSkillViewController extends AbstractSkillViewController {
+	private model: SkillView
+
+	//@ts-ignore
+	public constructor(model: SkillView) {
+		//@ts-ignore
+		super(model)
+		this.model = model
+	}
+
+	public async load() {
+		//@ts-ignore
+		await this.renderInDialog({})
+	}
+
+	public render() {
+		return this.model
+	}
+}
+
 class NewTestingCardViewController extends CardViewController {}
 
 export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		bad: BadSkillViewController,
 		good: GoodSkillViewController,
+		goodWithDialog: GoodWithDialogSkillViewController,
 		newCard: NewTestingCardViewController,
 	}
 
@@ -436,7 +459,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static knowsIfCardIsNotOfType() {
+	protected static async knowsIfCardIsNotOfType() {
 		const vc = this.Controller('good', {
 			layouts: [
 				{
@@ -445,13 +468,37 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		assert.doesThrow(() =>
+		await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertSkillViewRendersViewController(vc, ListViewController)
 		)
 
 		vcAssertUtil.assertSkillViewDoesNotRenderViewController(
 			vc,
 			ListViewController
+		)
+	}
+
+	@test()
+	protected static async knowsIfRenderingDialog() {
+		const vc = this.Controller('goodWithDialog', {})
+
+		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+		)
+	}
+
+	@test()
+	protected static async knowsIfNotRenderingDialog() {
+		const vc = this.Controller('good', {
+			layouts: [],
+		})
+
+		await vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertRendersDialog(vc, () => vc.load())
 		)
 	}
 
