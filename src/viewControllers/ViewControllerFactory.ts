@@ -1,4 +1,5 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
+import AuthenticatorImpl from '../auth/Authenticator'
 import SpruceError from '../errors/SpruceError'
 import {
 	ConfirmHandler,
@@ -9,6 +10,7 @@ import {
 	ViewControllerMap,
 	ViewControllerId,
 	ViewControllerOptions,
+	Authenticator,
 } from '../types/heartwood.types'
 import BigFormViewController from './BigForm.vc'
 import ButtonGroupViewController from './ButtonGroup.vc'
@@ -45,18 +47,21 @@ export default class ViewControllerFactory {
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
+	private auth: Authenticator
 
 	public constructor(options: {
 		controllerMap: Record<string, any>
 		renderInDialogHandler: RenderInDialogHandler
 		confirmHandler: ConfirmHandler
 		connectToApi: ConnectToApi
+		auth: Authenticator
 	}) {
 		const { controllerMap, renderInDialogHandler, confirmHandler } = options
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
 		this.renderInDialogHandler = renderInDialogHandler
 		this.confirmHandler = confirmHandler
 		this.connectToApi = options.connectToApi
+		this.auth = options.auth
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -72,12 +77,14 @@ export default class ViewControllerFactory {
 		renderInDialogHandler?: RenderInDialogHandler
 		confirmHandler?: ConfirmHandler
 		connectToApi: ConnectToApi
+		auth?: Authenticator
 	}) {
 		const {
 			controllerMap = {},
 			renderInDialogHandler,
 			confirmHandler,
 			connectToApi,
+			auth,
 		} = options ?? {}
 
 		if (!options?.connectToApi) {
@@ -90,6 +97,7 @@ export default class ViewControllerFactory {
 		return new this({
 			controllerMap,
 			connectToApi,
+			auth: auth ?? AuthenticatorImpl.getInstance(),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			renderInDialogHandler: renderInDialogHandler
 				? renderInDialogHandler
@@ -140,24 +148,24 @@ export default class ViewControllerFactory {
 			})
 		}
 
-		//@ts-ignore
-		const isFunction = !!Class.__imported
-
 		const constructorOptions = {
 			...options,
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
-			connectToApi: this.connectToApi,
+			connectToApi: async (...args: any[]) => {
+				debugger
+				//@ts-ignore
+				const client = await this.connectToApi(...args)
+				if (!client.isAuthenticated() && this.auth.isLoggedIn()) {
+					await client.authenticate({ token: this.auth.getToken() as string })
+				}
+				return client
+			},
 		}
 
 		//@ts-ignore
 		let instance = new Class(constructorOptions)
-
-		if (isFunction) {
-			//@ts-ignore
-			// instance = instance.__proto__ ?? instance
-		}
 
 		//@ts-ignore
 		if (instance.id) {

@@ -118,6 +118,7 @@ export default class MercuryFixture {
 	public async loginAsDemoPerson(phone: string = DEMO_NUMBER): Promise<{
 		person: SpruceSchemas.Spruce.v2020_07_22.Person
 		client: MercuryClient
+		token: string
 	}> {
 		if (!phone || phone.length === 0) {
 			throw new SpruceError({
@@ -140,12 +141,12 @@ export default class MercuryFixture {
 			payload: { challenge, pin },
 		})
 
-		const { person } =
+		const { person, token } =
 			eventResponseUtil.getFirstResponseOrThrow(confirmPinResults)
 
 		//@ts-ignore
 		client.auth = { person }
 
-		return { person, client }
+		return { person, client, token }
 	}
 }

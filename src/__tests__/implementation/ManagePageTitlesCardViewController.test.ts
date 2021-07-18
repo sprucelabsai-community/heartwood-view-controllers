@@ -37,6 +37,8 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 	private static formBuilderVc: FormBuilderViewController
 
 	protected static async beforeEach() {
+		await super.beforeEach()
+
 		//@ts-ignore
 		this._vc = null
 		this.wasOnDoneInvoked = false
