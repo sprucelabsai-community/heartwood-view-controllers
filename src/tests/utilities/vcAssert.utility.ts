@@ -384,7 +384,8 @@ const vcAssertUtil = {
 		} catch {
 			return
 		}
-		assert.fail(`Expected not to find a ${VcClass.name} inside ${vc.id}`)
+		//@ts-ignore
+		assert.fail(`Expected not to find a ${VcClass.name} inside ${vc.id}!`)
 	},
 
 	assertSkillViewRendersViewController(vc: SkillViewController, VcClass: any) {
