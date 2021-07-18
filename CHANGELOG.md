@@ -1,3 +1,10 @@
+# [24.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.2.1...v24.3.0) (2021-07-18)
+
+
+### Features
+
+* assert does not render view controller ([1d7e9fd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1d7e9fd))
+
 ## [24.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.2.0...v24.2.1) (2021-07-18)
 
 # [24.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.1.3...v24.2.0) (2021-07-18)
