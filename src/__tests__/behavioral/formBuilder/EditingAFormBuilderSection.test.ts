@@ -3,7 +3,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
-import { KeyboardKey } from '../../../types/heartwood.types'
+import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
@@ -48,7 +48,10 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const { formVc, dialogVc } = await this.simulateEditSectionClick(0)
 
-		assert.isEqual(dialogVc.getCardVc().getHeaderTitle(), 'My section title')
+		assert.isEqual(
+			(dialogVc.getCardVc() as CardViewController).getHeaderTitle(),
+			'My section title'
+		)
 		assert.isEqualDeep(formVc.getValues(), {
 			title: 'My section title',
 			type: 'text',
@@ -70,7 +73,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			await this.simulateEditSectionClick(0)
 
 		assert.isEqual(
-			dialogVc.getCardVc().getHeaderTitle(),
+			(dialogVc.getCardVc() as CardViewController).getHeaderTitle(),
 			'My form section title'
 		)
 		assert.isEqualDeep(formVc.getValues(), {

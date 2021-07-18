@@ -1,7 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { ViewControllerOptions } from '../types/heartwood.types'
+import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
-import CardViewController from './Card.vc'
 
 export type DialogOptions =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
@@ -18,7 +17,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 	private onCloseHandler?: Dialog['onClose']
 	private transitionOutHandler?: () => Promise<void>
 	private isVisible = false
-	private cardVc: CardViewController
+	private cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
 	private shouldShowCloseButton: boolean
 
 	public constructor(
