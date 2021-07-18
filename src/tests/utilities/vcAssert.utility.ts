@@ -375,6 +375,18 @@ const vcAssertUtil = {
 		)
 	},
 
+	assertSkillViewDoesNotRenderViewController(
+		vc: SkillViewController,
+		VcClass: any
+	) {
+		assert.doesThrow(
+			() => this.assertSkillViewRendersViewController(vc, VcClass),
+			undefined,
+			//@ts-ignore
+			`Expected not to find a ${VcClass.name} inside ${vc.id}`
+		)
+	},
+
 	assertSkillViewRendersViewController(vc: SkillViewController, VcClass: any) {
 		const model = renderUtil.render(vc)
 		const fieldsToCheck = Object.keys(CORE_CONTROLLER_MAP)

@@ -426,6 +426,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			vc,
 			NewTestingCardViewController
 		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewDoesNotRenderViewController(
+				vc,
+				NewTestingCardViewController
+			)
+		)
 	}
 
 	@test()
@@ -440,6 +447,11 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.doesThrow(() =>
 			vcAssertUtil.assertSkillViewRendersViewController(vc, ListViewController)
+		)
+
+		vcAssertUtil.assertSkillViewDoesNotRenderViewController(
+			vc,
+			ListViewController
 		)
 	}
 
