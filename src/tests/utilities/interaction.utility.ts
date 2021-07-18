@@ -104,25 +104,33 @@ const interactionUtil = {
 	},
 
 	async submitLoginForm(vc: LoginViewController, demoNumber: string) {
-		if (demoNumber === DEMO_NUMBER) {
+		if (demoNumber) {
 			const formVc = vc.getLoginForm()
 
 			//@ts-ignore
 			const oldHandler = vc.loginHandler
-			const promise = new Promise((resolve) => {
+			const promise = new Promise((resolve, reject) => {
 				//@ts-ignore
 				vc.loginHandler = async () => {
 					//@ts-ignore
 					await oldHandler?.()
+
 					//@ts-ignore
 					resolve()
 				}
+				//@ts-ignore
+
+				vc.loginFailedHandler = (err) => {
+					reject(err)
+				}
 			})
 
-			formVc.setValue('phone', DEMO_NUMBER)
+			formVc.setValue('phone', demoNumber)
+
 			await formVc.submit()
 
-			formVc.setValue('code', DEMO_NUMBER.substr(DEMO_NUMBER.length - 4))
+			formVc.setValue('code', demoNumber.substr(demoNumber.length - 4))
+
 			await promise
 
 			return

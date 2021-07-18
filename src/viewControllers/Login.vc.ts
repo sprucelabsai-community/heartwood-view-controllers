@@ -19,6 +19,7 @@ type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 
 export interface LoginViewControllerOptions {
 	onLogin?: LoginHandler
+	onLoginFailed?: (err: Error) => void
 }
 
 const loginSchema = {
@@ -58,6 +59,7 @@ export default class LoginViewController
 	private currentSlide = 0
 	private loginForm: BigFormViewController<LoginSchema>
 	private userChallenge?: string
+	private loginFailedHandler?: (err: Error) => void
 
 	public constructor(
 		options: LoginViewControllerOptions & ViewControllerOptions
@@ -80,6 +82,7 @@ export default class LoginViewController
 		]
 
 		this.loginHandler = options.onLogin
+		this.loginFailedHandler = options.onLoginFailed
 		this.loginForm = this.vcFactory.Controller(
 			'bigForm',
 			buildBigForm({
@@ -165,6 +168,8 @@ export default class LoginViewController
 					friendlyMessage: "That pin doesn't look right, try again!",
 				},
 			])
+
+			this.loginFailedHandler?.(err)
 		}
 
 		this.setIsBusy(false)

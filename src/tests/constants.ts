@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 export const DEMO_NUMBER = process.env.DEMO_NUMBER ?? '**MISSING**'
+export const DEMO_NUMBER2 = process.env.DEMO_NUMBER2 ?? '**MISSING**'
 
 export const importExportCwd = diskUtil.resolvePath(
 	__dirname,

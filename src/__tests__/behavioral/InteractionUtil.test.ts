@@ -2,7 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { Authenticator } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { DEMO_NUMBER } from '../../tests/constants'
+import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../tests/constants'
 import interactionUtil from '../../tests/utilities/interaction.utility'
 import { SkillViewController } from '../../types/heartwood.types'
 
@@ -35,7 +35,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 	@test()
 	protected static async loginFailsWithBadNumber() {
 		await assert.doesThrowAsync(() =>
-			interactionUtil.submitLoginForm(this.LoginVc(), 'Taco')
+			interactionUtil.submitLoginForm(this.LoginVc(), '666-000-0000')
 		)
 	}
 
@@ -43,8 +43,9 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		return this.Controller('login', {})
 	}
 
-	@test()
-	protected static async loginPassesWithGoodDemoNumber() {
+	@test(`can login with ${DEMO_NUMBER}`, DEMO_NUMBER)
+	@test(`can login with ${DEMO_NUMBER2}`, DEMO_NUMBER2)
+	protected static async loginPassesWithGoodDemoNumber(phone: string) {
 		let loggedInPersonId: string | undefined
 		const auth = Authenticator.getInstance()
 
@@ -52,9 +53,9 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			loggedInPersonId = person.id
 		})
 
-		const { person } = await this.MercuryFixture().loginAsDemoPerson()
+		const { person } = await this.MercuryFixture().loginAsDemoPerson(phone)
 
-		await interactionUtil.submitLoginForm(this.LoginVc(), DEMO_NUMBER)
+		await interactionUtil.submitLoginForm(this.LoginVc(), phone)
 
 		assert.isTrue(auth.isLoggedIn())
 		assert.isEqual(loggedInPersonId, person.id)
