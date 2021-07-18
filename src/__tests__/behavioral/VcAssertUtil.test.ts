@@ -400,7 +400,11 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		const vc = this.Controller('good', model)
 
 		if (shouldPass) {
-			vcAssertUtil.assertSkillViewRendersViewController(vc, VcClass)
+			const match = vcAssertUtil.assertSkillViewRendersViewController(
+				vc,
+				VcClass
+			)
+			assert.isTrue(match instanceof VcClass)
 		} else {
 			assert.doesThrow(() =>
 				vcAssertUtil.assertSkillViewRendersViewController(vc, VcClass)

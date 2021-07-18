@@ -72,4 +72,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSkillTe
 	) {
 		return interactionUtil.click(button?.onClick)
 	}
+
+	protected static MercuryFixture() {
+		return new MercuryFixture(this.cwd)
+	}
 }

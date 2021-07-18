@@ -86,9 +86,9 @@ export default class LoginViewController
 				onChange: this.handleOnChange.bind(this),
 				onSubmitSlide: async ({ values, presentSlide }) => {
 					if (presentSlide === 0 && values.phone) {
-						void this.handleSubmitPhone(values.phone)
+						await this.handleSubmitPhone(values.phone)
 					} else if (presentSlide === 1 && values.code) {
-						void this.handleSubmitPin(values.code)
+						await this.handleSubmitPin(values.code)
 						return false
 					}
 
@@ -191,5 +191,9 @@ export default class LoginViewController
 				],
 			},
 		}
+	}
+
+	public getLoginForm() {
+		return this.loginForm
 	}
 }

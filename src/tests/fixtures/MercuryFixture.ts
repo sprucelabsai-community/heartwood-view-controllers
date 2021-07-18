@@ -1,11 +1,13 @@
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
-import { coreEventContracts } from '@sprucelabs/mercury-types'
+import { coreEventContracts, SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SpruceError } from '@sprucelabs/schema'
 import {
 	eventContractUtil,
 	eventDiskUtil,
+	eventResponseUtil,
 } from '@sprucelabs/spruce-event-utils'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
+import { DEMO_NUMBER } from '../constants'
 const env = require('dotenv')
 env.config()
 
@@ -111,5 +113,39 @@ export default class MercuryFixture {
 
 		//@ts-ignore
 		MercuryClientFactory.setDefaultContract(coreEventContracts[0])
+	}
+
+	public async loginAsDemoPerson(phone: string = DEMO_NUMBER): Promise<{
+		person: SpruceSchemas.Spruce.v2020_07_22.Person
+		client: MercuryClient
+	}> {
+		if (!phone || phone.length === 0) {
+			throw new SpruceError({
+				code: 'MISSING_PARAMETERS',
+				parameters: ['env.DEMO_NUMBER'],
+			})
+		}
+
+		const client = await this.connectToApi()
+
+		const requestPinResults = await client.emit('request-pin::v2020_12_25', {
+			payload: { phone },
+		})
+
+		const { challenge } =
+			eventResponseUtil.getFirstResponseOrThrow(requestPinResults)
+
+		const pin = phone.substr(-4)
+		const confirmPinResults = await client.emit('confirm-pin::v2020_12_25', {
+			payload: { challenge, pin },
+		})
+
+		const { person } =
+			eventResponseUtil.getFirstResponseOrThrow(confirmPinResults)
+
+		//@ts-ignore
+		client.auth = { person }
+
+		return { person, client }
 	}
 }

@@ -4,6 +4,8 @@ import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
+import LoginViewController from '../../viewControllers/Login.vc'
+import { DEMO_NUMBER } from '../constants'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
@@ -99,6 +101,33 @@ const interactionUtil = {
 
 	async submitForm(vc: FormVc) {
 		await vc.submit()
+	},
+
+	async submitLoginForm(vc: LoginViewController, demoNumber: string) {
+		if (demoNumber === DEMO_NUMBER) {
+			const formVc = vc.getLoginForm()
+
+			//@ts-ignore
+			const oldHandler = vc.loginHandler
+			const promise = new Promise((resolve) => {
+				//@ts-ignore
+				vc.loginHandler = async () => {
+					//@ts-ignore
+					await oldHandler?.()
+					//@ts-ignore
+					resolve()
+				}
+			})
+
+			formVc.setValue('phone', DEMO_NUMBER)
+			await formVc.submit()
+
+			formVc.setValue('code', DEMO_NUMBER.substr(DEMO_NUMBER.length - 4))
+			await promise
+
+			return
+		}
+		assert.fail('Expected a LoginFormController')
 	},
 
 	async keyDownOnElementInRow(options: {

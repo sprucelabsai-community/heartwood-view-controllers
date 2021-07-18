@@ -381,15 +381,17 @@ const vcAssertUtil = {
 
 		for (const layout of model.layouts ?? []) {
 			for (const card of layout.cards ?? []) {
-				if (doesModelHaveController(VcClass, card)) {
-					return
+				const vc = findControllerInModel(VcClass, card)
+				if (vc) {
+					return vc
 				}
 				for (const section of card.body?.sections ?? []) {
 					for (const f of fieldsToCheck) {
 						//@ts-ignore
 						const m = section[f]
-						if (doesModelHaveController(VcClass, m)) {
-							return
+						const vc = findControllerInModel(VcClass, m)
+						if (vc) {
+							return vc
 						}
 					}
 				}
@@ -405,13 +407,20 @@ const vcAssertUtil = {
 }
 
 export default vcAssertUtil
-function doesModelHaveController(VcClass: any, model: any) {
+
+function findControllerInModel(VcClass: any, model: any) {
 	if (model?.controller instanceof VcClass) {
-		return true
+		return model?.controller
 	}
 
-	return VcClass.name.toLowerCase().includes(
-		//@ts-ignore
-		model?.controller?.id?.toLowerCase() ?? '******nope'
-	)
+	if (
+		VcClass.name.toLowerCase().includes(
+			//@ts-ignore
+			model?.controller?.id?.toLowerCase() ?? '******nope'
+		)
+	) {
+		return model?.controller
+	}
+
+	return null
 }
