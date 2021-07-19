@@ -87,7 +87,7 @@
     "@sprucelabs/mercury-client": "latest",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-skill-booter": "^4.18.1",
+    "@sprucelabs/spruce-skill-booter": "^4.19.0",
     "@sprucelabs/test": "latest",
     "@sprucelabs/test-utils": "latest",
     "@types/lodash": "^4.14.171",
