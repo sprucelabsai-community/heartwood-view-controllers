@@ -378,6 +378,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const { default: renderUtil } = await import(
 			'../../utilities/render.utility'
 		)
+
 		const object = renderUtil.render(this, {
 			shouldStripControllers: true,
 			shouldStripFunctions: true,

@@ -1,6 +1,6 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import AuthenticatorImpl from '../auth/Authenticator'
-import { CORE_CONTROLLER_MAP } from '../constants'
+import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
 import {
 	ConfirmHandler,

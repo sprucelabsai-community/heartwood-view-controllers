@@ -720,12 +720,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		await this.vc.addPage()
 
-		const model =
-			await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
-				oldFieldName,
-				newFieldName,
-				pageIdx,
-			})
+		const model = await this.updateFieldThroughEditFieldVcAndRenderPage({
+			oldFieldName,
+			newFieldName,
+			pageIdx,
+		})
 
 		assert.isEqualDeep(model.sections[sectionIdx].fields, expectedFields)
 	}
@@ -736,7 +735,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		pageVc.addField(0)
 		pageVc.addField(0)
 
-		await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
+		await this.updateFieldThroughEditFieldVcAndRenderPage({
 			oldFieldName: 'field1',
 			selectOptions: ['What', 'Is', 'Up?'],
 			expectedFormValues: {
@@ -748,7 +747,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			},
 		})
 
-		await BuildingAFormTest.updateFieldThroughEditFieldVcAndRenderPage({
+		await this.updateFieldThroughEditFieldVcAndRenderPage({
 			oldFieldName: 'field1',
 			selectOptions: null,
 			expectedFormValues: {
