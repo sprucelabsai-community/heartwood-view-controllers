@@ -4,7 +4,6 @@ import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import introspectionUtil from '../../utilities/introspection.utility'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
-import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import { EditFormBuilderFieldViewController } from './EditFormBuilderField.vc'
@@ -375,7 +374,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
-	public toObject(): FormBuilderImportExportObject {
+	public async toObject(): Promise<FormBuilderImportExportObject> {
+		const { default: renderUtil } = await import(
+			'../../utilities/render.utility'
+		)
 		const object = renderUtil.render(this, {
 			shouldStripControllers: true,
 			shouldStripFunctions: true,

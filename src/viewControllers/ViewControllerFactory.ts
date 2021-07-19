@@ -1,5 +1,6 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import AuthenticatorImpl from '../auth/Authenticator'
+import { CORE_CONTROLLER_MAP } from '../constants'
 import SpruceError from '../errors/SpruceError'
 import {
 	ConfirmHandler,
@@ -12,29 +13,6 @@ import {
 	ViewControllerOptions,
 	Authenticator,
 } from '../types/heartwood.types'
-import BigFormViewController from './BigForm.vc'
-import ButtonGroupViewController from './ButtonGroup.vc'
-import CardViewController from './Card.vc'
-import ConfirmViewController from './Confirm.vc'
-import DialogViewController from './Dialog.vc'
-import FormViewController from './Form.vc'
-import FormBuilderViewController from './formBuilder/FormBuilder.vc'
-import ListViewController from './list/List.vc'
-import LoginViewController from './Login.vc'
-import SwipeViewController from './Swipe.vc'
-
-export const CORE_CONTROLLER_MAP = {
-	form: FormViewController,
-	login: LoginViewController,
-	swipe: SwipeViewController,
-	buttonGroup: ButtonGroupViewController,
-	card: CardViewController,
-	dialog: DialogViewController,
-	bigForm: BigFormViewController,
-	confirm: ConfirmViewController,
-	formBuilder: FormBuilderViewController,
-	list: ListViewController,
-}
 
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions

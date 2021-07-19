@@ -135,6 +135,6 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
 
 		await this.vc.importObject(simpleImport)
 
-		assert.isEqualDeep(this.vc.toObject(), simpleImport)
+		assert.isEqualDeep(await this.vc.toObject(), simpleImport)
 	}
 }

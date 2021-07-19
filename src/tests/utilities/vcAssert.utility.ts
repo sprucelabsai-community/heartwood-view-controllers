@@ -3,6 +3,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
+import { CORE_CONTROLLER_MAP } from '../../constants'
 import {
 	ConfirmOptions,
 	SkillViewController,
@@ -15,9 +16,7 @@ import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
-import ViewControllerFactory, {
-	CORE_CONTROLLER_MAP,
-} from '../../viewControllers/ViewControllerFactory'
+import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
 type Vc = ViewController<any>
 

@@ -27,7 +27,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 
 	@test('header title set 1', 'My title', 'why now?')
 	@test('header title set 1', 'My title!', 'why not?')
-	protected static exportsBasicToStart(title: string, subtitle: string) {
+	protected static async exportsBasicToStart(title: string, subtitle: string) {
 		this.vc = this.Controller('formBuilder', {
 			header: {
 				title,
@@ -35,7 +35,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 			},
 		})
 
-		const exported = this.vc.toObject()
+		const exported = await this.vc.toObject()
 		assert.isEqualDeep(exported, {
 			title,
 			subtitle,
@@ -66,7 +66,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 	@test()
 	protected static async canExportNewPage() {
 		await this.vc.addPage()
-		const exported = this.vc.toObject()
+		const exported = await this.vc.toObject()
 
 		assert.isEqualDeep(exported.pages, [
 			{
@@ -111,11 +111,11 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 	}
 
 	@test()
-	protected static canExportNewSection() {
+	protected static async canExportNewSection() {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.addSection()
 
-		const exported = this.vc.toObject()
+		const exported = await this.vc.toObject()
 
 		assert.isEqualDeep(exported.pages, [
 			{
