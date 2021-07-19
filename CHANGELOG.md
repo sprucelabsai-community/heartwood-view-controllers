@@ -1,3 +1,10 @@
+# [25.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.4.2...v25.0.0) (2021-07-19)
+
+
+### Breaking Changes
+
+* form builder toObject is now async ([5fad46f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5fad46f))
+
 ## [24.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.4.1...v24.4.2) (2021-07-19)
 
 ## [24.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v24.4.0...v24.4.1) (2021-07-19)
