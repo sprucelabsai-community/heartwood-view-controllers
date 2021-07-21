@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "24.4.2",
+  "version": "25.0.4",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -61,10 +61,10 @@
     "watch.tsc": "tsc -w"
   },
   "dependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.14.8",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
     "@babel/preset-typescript": "^7.14.5",
     "@sprucelabs/error": "latest",
     "@sprucelabs/mercury-types": "latest",
@@ -87,11 +87,11 @@
     "@sprucelabs/mercury-client": "latest",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-skill-booter": "^4.19.0",
+    "@sprucelabs/spruce-skill-booter": "^4.20.1",
     "@sprucelabs/test": "latest",
     "@sprucelabs/test-utils": "latest",
     "@types/lodash": "^4.14.171",
-    "@types/node": "^16.3.3",
+    "@types/node": "^16.4.0",
     "@types/terser-webpack-plugin": "^5.0.4",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.2.0",
