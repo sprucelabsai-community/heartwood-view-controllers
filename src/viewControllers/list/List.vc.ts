@@ -10,9 +10,9 @@ type List = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List,
 	'rows'
 > & {
-	rows: ListRow[]
+	rows: ListRowModel[]
 }
-export type ListRow = Omit<
+export type ListRowModel = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow,
 	'cells'
 > & {
@@ -39,13 +39,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return this.model.rows
 	}
 
-	public addRows(rows: ListRow[]) {
+	public addRows(rows: ListRowModel[]) {
 		for (const row of rows) {
 			this.addRow(row)
 		}
 	}
 
-	public addRow(row: ListRow & { atIndex?: number }): void {
+	public addRow(row: ListRowModel & { atIndex?: number }): void {
 		if (!row) {
 			throw new SpruceError({
 				code: 'MISSING_PARAMETERS',
@@ -156,7 +156,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return values
 	}
 
-	public setRows(rows: ListRow[]) {
+	public setRows(rows: ListRowModel[]) {
 		this.model.rows = rows
 		this._rowVcs = []
 		this.triggerRender()

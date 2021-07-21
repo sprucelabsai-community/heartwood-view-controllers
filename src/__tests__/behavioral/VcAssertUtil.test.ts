@@ -6,10 +6,12 @@ import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_1
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import { SkillViewController } from '../../types/heartwood.types'
+import { LineIcon, SkillViewController } from '../../types/heartwood.types'
 import CardViewController from '../../viewControllers/Card.vc'
 import FormViewController from '../../viewControllers/Form.vc'
-import ListViewController, { ListRow } from '../../viewControllers/list/List.vc'
+import ListViewController, {
+	ListRowModel,
+} from '../../viewControllers/list/List.vc'
 import { ListCellModel } from '../../viewControllers/list/ListCell.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
@@ -301,7 +303,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		{ cells: [{ button: { label: 'Waka' } }] },
 		'Waka'
 	)
-	protected static knowsIfRowRendersContent(row: ListRow, search: string) {
+	protected static knowsIfRowRendersContent(row: ListRowModel, search: string) {
 		const vc = this.Controller('list', {
 			rows: [row],
 		})
@@ -500,6 +502,75 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertRendersDialog(vc, () => vc.load())
 		)
+	}
+
+	@test('throws if not rendering button with icon', {
+		rowIdx: 0,
+		cellIdx: 0,
+		iconToCheck: 'location-pin',
+		shouldPass: false,
+	})
+	@test('knows when rendering button with icon in first row and cell', {
+		rowIdx: 0,
+		cellIdx: 0,
+		icon: 'location-pin',
+		iconToCheck: 'location-pin',
+		shouldPass: true,
+	})
+	@test('throws if button does not render proper icon', {
+		rowIdx: 0,
+		cellIdx: 0,
+		icon: 'location-pin',
+		iconToCheck: 'taco',
+		shouldPass: false,
+	})
+	@test('knows if button with icon in random row and cell', {
+		rowIdx: Math.round(Math.random() * 10),
+		cellIdx: Math.round(Math.random() * 10),
+		icon: 'close',
+		iconToCheck: 'close',
+		shouldPass: true,
+	})
+	protected static async knowsIfRowRendersButtonWithIcon(options: {
+		rowIdx: number
+		cellIdx: number
+		icon?: LineIcon
+		iconToCheck: LineIcon
+		shouldPass?: boolean
+	}) {
+		let rows: ListRowModel[] = []
+
+		while (rows.length <= options.rowIdx) {
+			const cells: ListCellModel[] = []
+
+			while (cells.length <= options.cellIdx) {
+				cells.push({ text: { content: `empty row` } })
+			}
+
+			rows.push({ cells })
+		}
+
+		rows[options.rowIdx].cells[options.cellIdx].button = {
+			lineIcon: options.icon,
+		}
+
+		const listVc = this.Controller('list', {
+			rows,
+		})
+
+		if (options.shouldPass) {
+			vcAssertUtil.assertRowRendersButtonWithIcon(
+				listVc.getRowVc(options.rowIdx),
+				options.iconToCheck
+			)
+		} else {
+			assert.doesThrow(() =>
+				vcAssertUtil.assertRowRendersButtonWithIcon(
+					listVc.getRowVc(options.rowIdx),
+					options.iconToCheck
+				)
+			)
+		}
 	}
 
 	private static BadController() {

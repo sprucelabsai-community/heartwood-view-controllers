@@ -15,7 +15,7 @@ import {
 	FieldRenderOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../Card.vc'
-import ListViewController, { ListRow } from '../list/List.vc'
+import ListViewController, { ListRowModel } from '../list/List.vc'
 
 const addSectionSchema = buildSchema({
 	id: 'addSection',
@@ -246,7 +246,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 		return this.rows.map((row, idx) => this.buildFieldRow({ ...row, idx }))
 	}
 
-	private buildFieldRow(options: SimpleRow & { idx: number }): ListRow {
+	private buildFieldRow(options: SimpleRow & { idx: number }): ListRowModel {
 		return {
 			cells: [
 				{

@@ -1,21 +1,21 @@
 import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewController } from '../../types/heartwood.types'
-import { ListRow } from './List.vc'
+import { ListRowModel } from './List.vc'
 import ListCellViewController from './ListCell.vc'
 
 export default class ListRowViewController
 	implements
 		ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow>
 {
-	private model: ListRow
+	private model: ListRowModel
 	private setValueHandler: (name: string, value: any) => void | Promise<void>
 	private getValuesHandler: () => Record<string, any>
 	private deleteRowHandler: () => void
 	private _isLastRow: boolean
 
 	public constructor(
-		options: ListRow & {
+		options: ListRowModel & {
 			setValue: (name: string, value: any) => void | Promise<void>
 			getValues: () => Record<string, any>
 			deleteRow: () => void

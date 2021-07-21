@@ -1,7 +1,7 @@
 import { SpruceError } from '@sprucelabs/schema'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import CardViewController from '../Card.vc'
-import ListViewController, { ListRow } from '../list/List.vc'
+import ListViewController, { ListRowModel } from '../list/List.vc'
 import FormBuilderViewController from './FormBuilder.vc'
 
 export interface ManagePageTitlesCardViewControllerOptions {
@@ -74,9 +74,9 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 		}
 	}
 
-	private buildRows(): ListRow[] {
+	private buildRows(): ListRowModel[] {
 		const pages = this.formBuilderVc.getPageVcs()
-		const rows: ListRow[] = []
+		const rows: ListRowModel[] = []
 
 		for (const page of pages) {
 			rows.push({

@@ -6,6 +6,7 @@ import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/car
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
+	LineIcon,
 	SkillViewController,
 	ViewController,
 } from '../../types/heartwood.types'
@@ -437,6 +438,18 @@ const vcAssertUtil = {
 				VcClass.name ?? 'UknownViewController'
 			} to be rendered in your skill view, but it wasn't!`
 		)
+	},
+
+	assertRowRendersButtonWithIcon(vc: ListRowViewController, icon: LineIcon) {
+		const model = renderUtil.render(vc)
+
+		for (const cell of model?.cells ?? []) {
+			if (cell.button?.lineIcon === icon) {
+				return
+			}
+		}
+
+		assert.fail(`Could not find button with \`lineIcon='${icon}'\` in row!`)
 	},
 }
 
