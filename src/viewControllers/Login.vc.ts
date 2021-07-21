@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { Schema } from '@sprucelabs/schema'
+import { Schema, SchemaPartialValues } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
@@ -87,22 +87,35 @@ export default class LoginViewController
 			'bigForm',
 			buildBigForm({
 				onChange: this.handleOnChange.bind(this),
-				onSubmitSlide: async ({ values, presentSlide }) => {
-					if (presentSlide === 0 && values.phone) {
-						await this.handleSubmitPhone(values.phone)
-					} else if (presentSlide === 1 && values.code) {
-						await this.handleSubmitPin(values.code)
-						return false
-					}
-
-					return true
-				},
+				onSubmitSlide: this.handleSubmitSlide.bind(this),
 				isBusy: false,
 				id: this._id,
 				schema: loginSchema,
 				sections: this.sections,
 			})
 		) as any
+	}
+
+	private async handleSubmitSlide({
+		values,
+		presentSlide,
+	}: {
+		values: SchemaPartialValues<LoginSchema>
+		presentSlide: number
+	}) {
+		this.loginForm.setIsBusy(true)
+		let response = true
+
+		if (presentSlide === 0 && values.phone) {
+			await this.handleSubmitPhone(values.phone)
+		} else if (presentSlide === 1 && values.code) {
+			await this.handleSubmitPin(values.code)
+			response = false
+		}
+
+		this.loginForm.setIsBusy(false)
+
+		return response
 	}
 
 	private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {

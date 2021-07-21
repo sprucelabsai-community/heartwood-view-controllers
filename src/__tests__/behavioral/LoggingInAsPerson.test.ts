@@ -185,11 +185,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async loginVcClearsPinWhenSubmittingPhone() {
-		const factory = this.Factory()
-		const login = factory.Controller('login', {})
+		const login = this.LoginVc()
 
-		//@ts-ignore
-		const form = login.loginForm
+		const form = login.getLoginForm()
 
 		form.setValue('phone', DEMO_NUMBER)
 		form.setValue('code', '0123')
@@ -200,6 +198,34 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const errors = form.getErrorsByField()
 		//@ts-ignore
 		assert.isEqualDeep(errors, {})
+	}
+
+	@test()
+	protected static async loginShowsAsBusyWhileSubmitting() {
+		const loginVc = this.LoginVc()
+
+		//@ts-ignore
+		loginVc.handleSubmitPin = async () => {}
+
+		const formVc = loginVc.getLoginForm()
+
+		formVc.setValue('phone', DEMO_NUMBER)
+
+		let promise = formVc.submit()
+
+		assert.isTrue(loginVc.getIsBusy())
+
+		await promise
+
+		assert.isFalse(loginVc.getIsBusy())
+
+		formVc.setValue('code', '1111')
+
+		assert.isTrue(loginVc.getIsBusy())
+
+		await this.wait(1)
+
+		assert.isFalse(loginVc.getIsBusy())
 	}
 
 	@test()
@@ -223,5 +249,11 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isTruthy(client.auth.person.id)
 		//@ts-ignore
 		assert.isEqual(client.auth.person.id, person.id)
+	}
+
+	private static LoginVc() {
+		const factory = this.Factory()
+		const login = factory.Controller('login', {})
+		return login
 	}
 }
