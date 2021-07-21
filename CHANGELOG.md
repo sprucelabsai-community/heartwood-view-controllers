@@ -1,3 +1,10 @@
+# [25.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.0.5...v25.1.0) (2021-07-21)
+
+
+### Features
+
+* vcAssertUtil.assertRowRendersButtonWithIcon ([fb212f0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fb212f0))
+
 ## [25.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.0.4...v25.0.5) (2021-07-21)
 
 ## [25.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.0.3...v25.0.4) (2021-07-21)
