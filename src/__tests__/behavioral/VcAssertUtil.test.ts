@@ -586,11 +586,14 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertCardRendersForms(cardVc, 1)
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 2))
 
+		const formVc = this.buildEmptyForm()
+
 		cardVc.addSection({
 			title: 'hey!',
-			form: this.renderEmptyForm(),
+			form: formVc.render(),
 		})
-		vcAssertUtil.assertCardRendersForms(cardVc, 2)
+		const forms = vcAssertUtil.assertCardRendersForms(cardVc, 2)
+		assert.isEqual(forms[1], formVc)
 	}
 
 	private static BadController() {
@@ -604,12 +607,16 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	private static renderEmptyForm() {
+		return this.buildEmptyForm().render()
+	}
+
+	private static buildEmptyForm() {
 		return this.Controller('form', {
 			schema: {
 				fields: {},
 			},
 			sections: [],
-		}).render()
+		})
 	}
 
 	private static renderEmptyList() {

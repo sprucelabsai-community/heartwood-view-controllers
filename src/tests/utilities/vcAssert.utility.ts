@@ -455,7 +455,8 @@ const vcAssertUtil = {
 	assertCardRendersForms(vc: CardViewController, count: number) {
 		const model = renderUtil.render(vc)
 		const forms =
-			model.body?.sections?.map((s) => s.form).filter((s) => !!s) ?? []
+			model.body?.sections?.map((s) => s.form?.controller).filter((s) => !!s) ??
+			[]
 
 		if (forms.length !== count) {
 			assert.fail(
@@ -464,6 +465,8 @@ const vcAssertUtil = {
 				}, but I found ${forms.length === 0 ? 'none' : forms.length}!`
 			)
 		}
+
+		return forms
 	},
 }
 
