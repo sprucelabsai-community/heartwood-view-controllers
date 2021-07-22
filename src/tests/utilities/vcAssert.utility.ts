@@ -466,7 +466,7 @@ const vcAssertUtil = {
 			)
 		}
 
-		return forms
+		return forms as FormViewController<any>[]
 	},
 }
 
