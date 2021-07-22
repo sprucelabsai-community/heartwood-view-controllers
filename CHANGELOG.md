@@ -1,3 +1,10 @@
+# [25.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.1.2...v25.2.0) (2021-07-22)
+
+
+### Features
+
+* assertCardRendersForms ([b3576fc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b3576fc))
+
 ## [25.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.1.1...v25.1.2) (2021-07-21)
 
 ## [25.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.1.0...v25.1.1) (2021-07-21)
