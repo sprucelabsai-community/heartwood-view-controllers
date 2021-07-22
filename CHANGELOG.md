@@ -1,3 +1,10 @@
+# [25.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.2.0...v25.3.0) (2021-07-22)
+
+
+### Features
+
+* assertFors returns form vcs ([1539c24](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1539c24))
+
 # [25.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.1.2...v25.2.0) (2021-07-22)
 
 
