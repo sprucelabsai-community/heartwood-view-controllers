@@ -573,6 +573,26 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		}
 	}
 
+	@test()
+	protected static knowsHowManyFormsBeingRendered() {
+		const cardVc = this.Controller('card', {})
+		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 1))
+
+		cardVc.addSection({
+			title: 'hey!',
+			form: this.renderEmptyForm(),
+		})
+
+		vcAssertUtil.assertCardRendersForms(cardVc, 1)
+		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 2))
+
+		cardVc.addSection({
+			title: 'hey!',
+			form: this.renderEmptyForm(),
+		})
+		vcAssertUtil.assertCardRendersForms(cardVc, 2)
+	}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController

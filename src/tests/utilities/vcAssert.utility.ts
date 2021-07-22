@@ -451,6 +451,20 @@ const vcAssertUtil = {
 
 		assert.fail(`Could not find button with \`lineIcon='${icon}'\` in row!`)
 	},
+
+	assertCardRendersForms(vc: CardViewController, count: number) {
+		const model = renderUtil.render(vc)
+		const forms =
+			model.body?.sections?.map((s) => s.form).filter((s) => !!s) ?? []
+
+		if (forms.length !== count) {
+			assert.fail(
+				`Expected your card to render ${count} form${
+					count === 1 ? '' : 's'
+				}, but I found ${forms.length === 0 ? 'none' : forms.length}!`
+			)
+		}
+	},
 }
 
 export default vcAssertUtil
