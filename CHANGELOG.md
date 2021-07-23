@@ -1,3 +1,10 @@
+# [25.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.3.1...v25.4.0) (2021-07-23)
+
+
+### Features
+
+* critical error support in cards, assert utilities around critical errors ([ddc9517](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ddc9517))
+
 ## [25.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.3.0...v25.3.1) (2021-07-22)
 
 # [25.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.2.0...v25.3.0) (2021-07-22)
