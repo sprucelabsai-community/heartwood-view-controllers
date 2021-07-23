@@ -475,6 +475,13 @@ const vcAssertUtil = {
 			'Your card did not have a critical error set.'
 		)
 	},
+
+	assertCardDoesNotRenderCriticalError(vc: CardViewController) {
+		assert.isFalse(
+			vc.getHasCriticalError(),
+			'Your card was not supposed to render a critical error!'
+		)
+	},
 }
 
 export default vcAssertUtil

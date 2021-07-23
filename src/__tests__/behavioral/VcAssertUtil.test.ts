@@ -603,6 +603,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		let wasSecondaryHit = false
 
 		const cardVc = this.Controller('card', {})
+		vcAssertUtil.assertCardDoesNotRenderCriticalError(cardVc)
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersCriticalError(cardVc))
 		cardVc.setCriticalError({
 			title: 'Oh my!',
@@ -623,6 +624,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		vcAssertUtil.assertCardRendersCriticalError(cardVc)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardDoesNotRenderCriticalError(cardVc)
+		)
 
 		await interactionUtil.clickPrimaryInFooter(cardVc)
 		await interactionUtil.clickSecondaryInFooter(cardVc)
