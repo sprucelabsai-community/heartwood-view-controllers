@@ -1,4 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
+import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
@@ -263,6 +264,42 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isTrue(this.vc.isBodyLoading())
 		const model = this.render(this.vc)
 		assert.isTrue(model.body?.isLoading)
+	}
+
+	@test()
+	protected static canGetAndSetCriticalError() {
+		assert.isFalse(this.vc.getHasCriticalError())
+
+		this.vc.setCriticalError({
+			title: 'Hey there',
+			message: 'Why is this happening?',
+			buttons: [],
+		})
+
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+		assert.isTrue(this.vc.getHasCriticalError())
+
+		this.vc.clearCriticalError()
+
+		assert.isEqual(this.cardTriggerRenderCount, 2)
+		assert.isFalse(this.vc.getHasCriticalError())
+	}
+
+	@test('can set critical error 1', { title: 'hey', message: 'oh no!' })
+	@test('can set critical error 2', { title: 'hey2', message: 'oh no!222' })
+	protected static criticalErrorCanBeSetToStartAndRenders(
+		criticalError: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
+	) {
+		const vc = this.Vc({ criticalError })
+		assert.isTrue(vc.getHasCriticalError())
+
+		let model = this.render(vc)
+
+		assert.isEqualDeep(model.criticalError, criticalError)
+		vc.clearCriticalError()
+
+		model = this.render(vc)
+		assert.isFalsy(model.criticalError)
 	}
 
 	private static beginTrackingFooterRender() {

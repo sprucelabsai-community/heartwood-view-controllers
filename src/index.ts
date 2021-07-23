@@ -61,6 +61,7 @@ export { default as listTextInputSchema } from '#spruce/schemas/heartwoodViewCon
 export { default as selectInputChoiceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/selectInputChoice.schema'
 export { default as sprucebotTypedMessageAvatarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotTypedMessageAvatar.schema'
 export { default as sprucebotTypedMessageSentenceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotTypedMessageSentence.schema'
+export { default as criticalErrorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/criticalError.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

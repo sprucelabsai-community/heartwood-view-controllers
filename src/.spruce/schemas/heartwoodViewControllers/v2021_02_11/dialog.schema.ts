@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardHeaderSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardHeader.schema'
+import criticalErrorSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/criticalError.schema'
 import cardBodySchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardBody.schema'
 import cardFooterSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardFooter.schema'
 
@@ -29,6 +30,12 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	                label: 'Header',
 	                type: 'schema',
 	                options: {schema: cardHeaderSchema_v2021_02_11,}
+	            },
+	            /** Critical error. */
+	            'criticalError': {
+	                label: 'Critical error',
+	                type: 'schema',
+	                options: {schema: criticalErrorSchema_v2021_02_11,}
 	            },
 	            /** Fade in. */
 	            'shouldFadeIn': {

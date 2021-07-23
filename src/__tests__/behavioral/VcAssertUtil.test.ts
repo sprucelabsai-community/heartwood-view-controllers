@@ -5,6 +5,7 @@ import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import interactionUtil from '../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import { LineIcon, SkillViewController } from '../../types/heartwood.types'
 import CardViewController from '../../viewControllers/Card.vc'
@@ -594,6 +595,40 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 		const forms = vcAssertUtil.assertCardRendersForms(cardVc, 2)
 		assert.isEqual(forms[1], formVc)
+	}
+
+	@test()
+	protected static async assertCardRendersCriticalError() {
+		let wasPrimaryHit = false
+		let wasSecondaryHit = false
+
+		const cardVc = this.Controller('card', {})
+		assert.doesThrow(() => vcAssertUtil.assertCardRendersCriticalError(cardVc))
+		cardVc.setCriticalError({
+			title: 'Oh my!',
+			buttons: [
+				{
+					type: 'secondary',
+					onClick: () => {
+						wasSecondaryHit = true
+					},
+				},
+				{
+					type: 'primary',
+					onClick: () => {
+						wasPrimaryHit = true
+					},
+				},
+			],
+		})
+
+		vcAssertUtil.assertCardRendersCriticalError(cardVc)
+
+		await interactionUtil.clickPrimaryInFooter(cardVc)
+		await interactionUtil.clickSecondaryInFooter(cardVc)
+
+		assert.isTrue(wasPrimaryHit)
+		assert.isTrue(wasSecondaryHit)
 	}
 
 	private static BadController() {

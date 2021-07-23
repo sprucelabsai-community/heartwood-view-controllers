@@ -70,7 +70,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSkillTe
 			onClick?: (() => void | Promise<void>) | null | undefined
 		} | null
 	) {
-		return interactionUtil.click(button?.onClick)
+		return interactionUtil.click(button)
 	}
 
 	protected static MercuryFixture() {

@@ -28,29 +28,18 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.triggerRenderFooter?.()
 	}
 
-	public render(): V {
-		const model: V = {
-			...this.model,
-			controller: this,
-		}
+	public getHasCriticalError() {
+		return !!this.model.criticalError
+	}
 
-		if (this.model.body) {
-			model.body = { ...this.model.body }
-		}
+	public setCriticalError(criticalError: ViewModel['criticalError']) {
+		this.model.criticalError = criticalError
+		this.triggerRender()
+	}
 
-		if (model.footer) {
-			model.footer = this.buildFooterVc()
-		}
-
-		if (model.header) {
-			model.header = this.buildHeaderVc()
-		}
-
-		if (model.body?.sections) {
-			model.body.sections = this.buildSectionVcs()
-		}
-
-		return model
+	public clearCriticalError() {
+		delete this.model.criticalError
+		this.triggerRender()
 	}
 
 	private buildSectionVcs(): Section[] {
@@ -267,4 +256,29 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	//monkey patched by view
 	public payAttentionToMe() {}
+
+	public render(): V {
+		const model: V = {
+			...this.model,
+			controller: this,
+		}
+
+		if (this.model.body) {
+			model.body = { ...this.model.body }
+		}
+
+		if (model.footer) {
+			model.footer = this.buildFooterVc()
+		}
+
+		if (model.header) {
+			model.header = this.buildHeaderVc()
+		}
+
+		if (model.body?.sections) {
+			model.body.sections = this.buildSectionVcs()
+		}
+
+		return model
+	}
 }

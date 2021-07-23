@@ -468,6 +468,13 @@ const vcAssertUtil = {
 
 		return forms as FormViewController<any>[]
 	},
+
+	assertCardRendersCriticalError(vc: CardViewController) {
+		assert.isTrue(
+			vc.getHasCriticalError(),
+			'Your card did not have a critical error set.'
+		)
+	},
 }
 
 export default vcAssertUtil

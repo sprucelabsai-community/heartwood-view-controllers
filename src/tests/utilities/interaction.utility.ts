@@ -12,10 +12,18 @@ type FormVc = FormViewController<any>
 
 const interactionUtil = {
 	async click(
-		onClick: ((options?: any) => void | Promise<void>) | null | undefined,
+		button?: {
+			onClick?: ((options?: any) => void | Promise<void>) | null | undefined
+		} | null,
 		options?: Record<string, any>
 	) {
-		assert.isFunction(onClick, 'Clicking failed because onClick is not set.')
+		//@ts-ignore
+		const { onClick } = button ?? {}
+
+		assert.isFunction(
+			onClick,
+			'Clicking failed because button does not have onClick set.'
+		)
 		//@ts-ignore
 		await onClick(
 			options ?? {
@@ -56,7 +64,7 @@ const interactionUtil = {
 
 	async clickPrimaryInFooter(vc: CardVc | FormVc) {
 		const model = renderUtil.render(vc)
-		const primary = model.footer?.buttons?.find((b) => b.type === 'primary')
+		const primary = pluckButtons(model).find((b) => b.type === 'primary')
 
 		//@ts-ignore
 		if (!primary && model.shouldShowSubmitControls) {
@@ -70,18 +78,18 @@ const interactionUtil = {
 			`Your footer doesn't have button with type=primary to click.`
 		)
 
-		return this.click(primary.onClick)
+		return this.click(primary)
 	},
 
 	async clickSecondaryInFooter(vc: CardVc | FormVc) {
 		const model = renderUtil.render(vc)
-		const secondary = model.footer?.buttons?.find((b) => b.type === 'secondary')
+		const secondary = pluckButtons(model).find((b) => b.type === 'secondary')
 		assert.isTruthy(
 			secondary,
 			`Your footer doesn't button with type=secondary footer to click.`
 		)
 
-		return this.click(secondary.onClick)
+		return this.click(secondary)
 	},
 
 	async clickOnDestructiveButtonInRow(vc: ListRowViewController) {
@@ -95,7 +103,7 @@ const interactionUtil = {
 			`There is no button with type=destructive in this row to click!`
 		)
 
-		await this.click(destructiveButton.onClick, { rowVc: vc })
+		await this.click(destructiveButton, { rowVc: vc })
 	},
 
 	async submitForm(vc: FormVc) {
@@ -164,3 +172,14 @@ const interactionUtil = {
 }
 
 export default interactionUtil
+
+function pluckButtons(
+	model:
+		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>
+) {
+	//@ts-ignore
+	return (model.criticalError?.buttons ??
+		model.footer?.buttons ??
+		[]) as SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+}
