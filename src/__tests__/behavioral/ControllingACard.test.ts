@@ -311,7 +311,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static canSetBody(body: any) {
 		const vc = this.Vc({})
 		vc.setBody(body)
-
+		assert.isEqual(this.cardTriggerRenderCount, 1)
 		const rendered = this.render(vc)
 		assert.isEqualDeep(rendered.body, body)
 	}
