@@ -302,6 +302,20 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isFalsy(model.criticalError)
 	}
 
+	@test('setting body 1', {
+		shouldEnableSectionSwiping: true,
+	})
+	@test('setting body 2', {
+		sections: [],
+	})
+	protected static canSetBody(body: any) {
+		const vc = this.Vc({})
+		vc.setBody(body)
+
+		const rendered = this.render(vc)
+		assert.isEqualDeep(rendered.body, body)
+	}
+
 	private static beginTrackingFooterRender() {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore

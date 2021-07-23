@@ -7,6 +7,7 @@ type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardViewControllerOptions = ViewModel
 
 type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+type Body = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 
 export default class CardViewController<V extends ViewModel = ViewModel>
 	extends AbstractViewController<V>
@@ -252,6 +253,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.model.body.isLoading = isLoading
 
 		this.triggerRender()
+	}
+
+	public setBody(body: Body) {
+		this.model.body = { ...body }
 	}
 
 	//monkey patched by view
