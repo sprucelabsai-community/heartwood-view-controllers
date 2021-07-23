@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
-import { Authenticator } from '../..'
+import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../tests/constants'
 import interactionUtil from '../../tests/utilities/interaction.utility'
