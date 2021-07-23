@@ -1,3 +1,10 @@
+# [25.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.4.0...v25.5.0) (2021-07-23)
+
+
+### Features
+
+* assertcard dos not render critical error ([45bf595](https://github.com/sprucelabsai/heartwood-view-controllers/commit/45bf595))
+
 # [25.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.3.1...v25.4.0) (2021-07-23)
 
 
