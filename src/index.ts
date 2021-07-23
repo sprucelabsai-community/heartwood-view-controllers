@@ -20,7 +20,7 @@ export { default as FormBuilderViewController } from './viewControllers/formBuil
 export { default as SwipeViewController } from './viewControllers/Swipe.vc'
 export * from './viewControllers/Swipe.vc'
 
-export { default as Authenticator } from './auth/Authenticator'
+export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
