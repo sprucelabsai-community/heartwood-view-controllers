@@ -60,4 +60,33 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		assert.isTrue(auth.isLoggedIn())
 		assert.isEqual(loggedInPersonId, person.id)
 	}
+
+	@test()
+	protected static async cantClickFooterActionInFormWithoutOne() {
+		const formVc = this.Controller('form', {
+			shouldShowSubmitControls: false,
+			schema: {
+				id: 'test',
+				fields: {},
+			},
+			sections: [],
+		})
+
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickPrimaryInFooter(formVc)
+		)
+	}
+
+	@test()
+	protected static async submitsFormIfThereIsASubmitButton() {
+		const formVc = this.Controller('form', {
+			schema: {
+				id: 'test',
+				fields: {},
+			},
+			sections: [],
+		})
+
+		await interactionUtil.clickPrimaryInFooter(formVc)
+	}
 }

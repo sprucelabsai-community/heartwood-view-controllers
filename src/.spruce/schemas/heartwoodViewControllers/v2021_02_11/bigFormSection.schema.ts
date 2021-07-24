@@ -18,13 +18,6 @@ const bigFormSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.B
 	                isPrivate: true,
 	                options: undefined
 	            },
-	            /** Initial values. */
-	            'values': {
-	                label: 'Initial values',
-	                type: 'raw',
-	                isPrivate: true,
-	                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-	            },
 	            /** Title. */
 	            'title': {
 	                label: 'Title',

@@ -16,14 +16,6 @@ export default buildSchema({
 			type: 'text',
 			isPrivate: true,
 		},
-		values: {
-			type: 'raw',
-			label: 'Initial values',
-			isPrivate: true,
-			options: {
-				valueType: 'SpruceSchema.SchemaPartialValues<S>',
-			},
-		},
 		title: {
 			type: 'text',
 			label: 'Title',

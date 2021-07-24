@@ -1042,8 +1042,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'className'?: string| undefined | null
-				/** Initial values. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Text. */
@@ -1071,13 +1069,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                isPrivate: true,
 			                options: undefined
-			            },
-			            /** Initial values. */
-			            'values': {
-			                label: 'Initial values',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
 			            },
 			            /** Title. */
 			            'title': {
@@ -1591,8 +1582,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'className'?: string| undefined | null
-				/** Initial values. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Text. */
@@ -1618,13 +1607,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                isPrivate: true,
 			                options: undefined
-			            },
-			            /** Initial values. */
-			            'values': {
-			                label: 'Initial values',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
 			            },
 			            /** Title. */
 			            'title': {
