@@ -159,7 +159,8 @@
       "eslint-config-spruce",
       "@sprucelabs/mercury-client",
       "@sprucelabs/mercury-types",
-      "@sprucelabs/schema"
+      "@sprucelabs/schema",
+      "globby"
     ]
   }
 }
