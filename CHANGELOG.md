@@ -1,3 +1,10 @@
+# [26.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v26.0.0...v26.1.0) (2021-07-23)
+
+
+### Features
+
+* can set card body ([3a8bead](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3a8bead))
+
 # [26.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v25.5.1...v26.0.0) (2021-07-23)
 
 
