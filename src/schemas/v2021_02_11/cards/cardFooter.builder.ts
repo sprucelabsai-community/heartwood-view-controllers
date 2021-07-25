@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import buttonBuilder from '../button.builder'
+import { buttonFields } from '../../../constants'
 
 export default buildSchema({
 	id: 'cardFooter',
@@ -17,7 +17,12 @@ export default buildSchema({
 			label: 'Buttons',
 			isArray: true,
 			options: {
-				schema: buttonBuilder,
+				schema: {
+					id: 'cardFooterButton',
+					fields: {
+						...buttonFields,
+					},
+				},
 			},
 		},
 		isLoading: {
