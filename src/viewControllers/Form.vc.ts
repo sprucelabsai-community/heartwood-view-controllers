@@ -27,6 +27,7 @@ import {
 	FieldRenderOptions,
 } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
+import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel<S extends Schema> =
@@ -76,14 +77,7 @@ export default class FormViewController<
 
 		const { id, ...model } = { ...options }
 
-		//@ts-ignore
-		delete model.vcFactory
-		//@ts-ignore
-		delete model.renderInDialogHandler
-		//@ts-ignore
-		delete model.connectToApi
-		//@ts-ignore
-		delete model.confirmHandler
+		removeUniversalViewOptions(model)
 
 		const modelCopy = cloneAndRetainControllers(model) as any
 

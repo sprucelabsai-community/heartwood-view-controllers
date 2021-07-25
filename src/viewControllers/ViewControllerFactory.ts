@@ -131,6 +131,8 @@ export default class ViewControllerFactory {
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
+			setTimeout,
+			clearTimeout,
 			connectToApi: async (...args: any[]) => {
 				//@ts-ignore
 				const client = await this.connectToApi(...args)

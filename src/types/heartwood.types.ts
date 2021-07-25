@@ -232,6 +232,8 @@ export interface ViewControllerOptions {
 	connectToApi: () => Promise<Client>
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler
+	setTimeout: (cb: () => Promise<void> | void, delayMs: number) => number
+	clearTimeout: (timeoutId: number) => void
 }
 
 export type FieldRenderOptions<S extends Schema> = {

@@ -1,6 +1,7 @@
 import isObjectLike from 'lodash/isObjectLike'
 import vcAssertUtil from '../tests/utilities/vcAssert.utility'
 import { ViewController } from '../types/heartwood.types'
+import removeUniversalViewOptions from './removeUniversalViewOptions'
 
 export interface RenderOptions {
 	shouldStripPrivateFields?: boolean
@@ -36,7 +37,7 @@ function renderItems(
 	}
 
 	if (options?.shouldStripPrivateFields !== false) {
-		removeHiddenFields(rendered)
+		removeUniversalViewOptions(rendered)
 	}
 
 	return rendered
@@ -72,13 +73,6 @@ const renderUtil = {
 
 		return rendered as any
 	},
-}
-
-function removeHiddenFields(rendered: any) {
-	delete rendered.vcFactory
-	delete rendered.renderInDialogHandler
-	delete rendered.confirmHandler
-	delete rendered.connectToApi
 }
 
 export default renderUtil
