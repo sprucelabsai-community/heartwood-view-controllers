@@ -1,3 +1,10 @@
+# [27.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v26.1.3...v27.0.0) (2021-07-25)
+
+
+### Breaking Changes
+
+* type update ([6a8f842](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6a8f842))
+
 ## [26.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v26.1.2...v26.1.3) (2021-07-24)
 
 ## [26.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v26.1.1...v26.1.2) (2021-07-24)
