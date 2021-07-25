@@ -1,5 +1,6 @@
 import { SpruceError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import ControllerSpruceError from '../../errors/SpruceError'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import listUtil from './list.utility'
@@ -58,6 +59,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 				code: 'INVALID_PARAMETERS',
 				parameters: ['cells'],
 				friendlyMessage: `You tried to add a bad row to this list!`,
+			})
+		}
+
+		if (row.id && this.doesIdExist(row.id)) {
+			throw new ControllerSpruceError({
+				code: 'DUPLICATE_ROW_ID',
+				rowId: row.id,
 			})
 		}
 
@@ -167,6 +175,42 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		this.model.rows.splice(rowIdx, 1)
 		this._rowVcs = []
 		this.triggerRender()
+	}
+
+	public getRowVcById(id: string) {
+		const idx = this.getIdxForId(id)
+		if (idx === -1) {
+			throw new SpruceError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't find a row with the id \`${id}\`.`,
+				parameters: ['rowId'],
+			})
+		}
+		return this.getRowVc(idx)
+	}
+
+	private getIdxForId(id: string) {
+		return this.model.rows.findIndex((r) => r.id === id)
+	}
+
+	public upsertRowById(id: string, row: ListRowModel) {
+		const idx = this.getIdxForId(id)
+		if (idx === -1) {
+			this.addRow({ ...row })
+		} else {
+			this.model.rows[idx] = { ...row }
+			this._rowVcs = []
+		}
+	}
+
+	public doesIdExist(id: string) {
+		const match = this.model.rows.find((r) => r.id === id)
+		return !!match
+	}
+
+	public async deleteRowById(id: string) {
+		const vc = this.getRowVcById(id)
+		await vc.delete()
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {

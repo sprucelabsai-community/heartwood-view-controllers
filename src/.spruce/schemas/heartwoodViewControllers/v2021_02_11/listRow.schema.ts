@@ -16,6 +16,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
 	            },
+	            /** Id. */
+	            'id': {
+	                label: 'Id',
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Cells. */
 	            'cells': {
 	                label: 'Cells',

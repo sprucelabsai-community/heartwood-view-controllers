@@ -145,4 +145,34 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 
 
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface DuplicateRowId {
+		
+			
+			'rowId': string
+	}
+
+	export interface DuplicateRowIdSchema extends SpruceSchema.Schema {
+		id: 'duplicateRowId',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Duplicate row id',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'rowId': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type DuplicateRowIdEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DuplicateRowIdSchema>
+
+}
+
+
+
 

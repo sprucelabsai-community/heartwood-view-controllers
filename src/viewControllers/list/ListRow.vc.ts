@@ -80,6 +80,10 @@ export default class ListRowViewController
 		this.deleteRowHandler()
 	}
 
+	public getId(): any {
+		return this.model.id
+	}
+
 	public getCellVc(idx: number) {
 		const cell = this.model.cells[idx]
 

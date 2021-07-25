@@ -712,6 +712,235 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isTrue(wasDeletRowHandleHit)
 	}
 
+	@test()
+	protected static cantGetRowByIdThatIsntFound() {
+		const err = assert.doesThrow(() => this.vc.getRowVcById('test'))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['rowId'],
+		})
+	}
+
+	@test()
+	protected static cantAddRowsWithIdsThatExist() {
+		const err = assert.doesThrow(() =>
+			this.vc.addRows([
+				{
+					id: 'test',
+					cells: [
+						{
+							text: {
+								content: 'Hey there!',
+							},
+						},
+					],
+				},
+				{
+					id: 'test',
+					cells: [
+						{
+							text: {
+								content: 'Hey there!',
+							},
+						},
+					],
+				},
+			])
+		)
+
+		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+			rowId: 'test',
+		})
+	}
+
+	@test()
+	protected static blocksDuplicateRowsWhenAddingRowsOneAtATime() {
+		this.vc.addRows([
+			{
+				id: 'test',
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			},
+		])
+
+		const err = assert.doesThrow(() =>
+			this.vc.addRow({
+				id: 'test',
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+			rowId: 'test',
+		})
+
+		this.vc.addRow({ id: 'unique', cells: [{ text: { content: 'oh boy!' } }] })
+	}
+
+	@test()
+	protected static canGetRowsById() {
+		this.vc.addRows([
+			{
+				id: 'test',
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			},
+			{
+				id: 'test2',
+				cells: [
+					{
+						text: {
+							content: 'Hey there! taco breath',
+						},
+					},
+				],
+			},
+		])
+
+		const rowVc = this.vc.getRowVcById('test')
+		const model = this.render(rowVc)
+
+		assert.isEqual(rowVc.getId(), 'test')
+		assert.doesInclude(model, {
+			id: 'test',
+			cells: [
+				{
+					text: {
+						content: 'Hey there!',
+					},
+				},
+			],
+		})
+
+		const rowVc2 = this.vc.getRowVcById('test2')
+		assert.isEqual(rowVc2.getId(), 'test2')
+
+		const err = assert.doesThrow(() => this.vc.getRowVcById('aoeu'))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['rowId'],
+		})
+	}
+
+	@test()
+	protected static canUpsertRowByIdToUpdate() {
+		this.vc.addRows([
+			{
+				id: 'test1',
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			},
+			{
+				id: 'test2',
+				cells: [
+					{
+						text: {
+							content: 'Hey there! taco breath',
+						},
+					},
+				],
+			},
+		])
+
+		this.vc.upsertRowById('test1', {
+			cells: [{ text: { content: 'updated!' } }],
+		})
+
+		let model = this.render(this.vc)
+		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'updated!')
+
+		this.vc.upsertRowById('test2', {
+			cells: [{ text: { content: 'updated 2!' } }],
+		})
+
+		model = this.render(this.vc)
+		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'updated 2!')
+
+		this.vc.upsertRowById('does-not-exist', {
+			cells: [{ text: { content: 'totally new!' } }],
+		})
+
+		assert.isEqual(this.vc.getTotalRows(), 3)
+		model = this.render(this.vc)
+		assert.isEqual(model.rows[2]?.cells[0]?.text?.content, 'totally new!')
+	}
+
+	@test()
+	protected static async cantDeleteRowByIdIfNoIdFound() {
+		const err = await assert.doesThrowAsync(() =>
+			this.vc.deleteRowById('aoeuaoeuaoeuaoeu')
+		)
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['rowId'],
+		})
+	}
+
+	@test()
+	protected static async canRemoveRowById() {
+		this.vc.addRows([
+			{
+				id: 'test1',
+				cells: [
+					{
+						text: {
+							content: 'Hey there!',
+						},
+					},
+				],
+			},
+			{
+				id: 'test2',
+				cells: [
+					{
+						text: {
+							content: 'Hey there! 2',
+						},
+					},
+				],
+			},
+			{
+				id: 'test3',
+				cells: [
+					{
+						text: {
+							content: 'Hey there! 3',
+						},
+					},
+				],
+			},
+		])
+
+		await this.vc.deleteRowById('test2')
+		assert.isEqual(this.vc.getTotalRows(), 2)
+
+		let model = this.render(this.vc)
+		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there!')
+		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'Hey there! 3')
+
+		await this.vc.deleteRowById('test1')
+		model = this.render(this.vc)
+		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there! 3')
+	}
+
 	private static add2Rows() {
 		this.vc.addRows([
 			{

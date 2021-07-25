@@ -53,6 +53,10 @@ export default buildSchema({
 								valueType: 'HeartwoodTypes.ListRowViewController',
 							},
 						},
+						id: {
+							type: 'id',
+							label: 'Id',
+						},
 						cells: {
 							type: 'schema',
 							label: 'Cells',
