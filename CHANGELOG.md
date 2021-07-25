@@ -1,3 +1,10 @@
+# [28.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.1.0...v28.2.0) (2021-07-25)
+
+
+### Features
+
+* let setTimout and clearTimeout through ([9c7c224](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9c7c224))
+
 # [28.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.0.1...v28.1.0) (2021-07-25)
 
 
