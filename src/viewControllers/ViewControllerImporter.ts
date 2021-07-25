@@ -33,7 +33,6 @@ function heartwood(vcs) {
 
 ${script}`
 
-			debugger
 			eval(guargedScript)
 
 			this.validateImported(exports)
