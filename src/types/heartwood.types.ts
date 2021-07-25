@@ -25,7 +25,7 @@ import DialogViewController, {
 import FormViewControllerImpl, {
 	FormViewControllerOptions,
 } from '../viewControllers/Form.vc'
-import FormBuilderViewController, {
+import FormBuilderPageViewControllerImpl, {
 	FormBuilderViewControllerOptions,
 } from '../viewControllers/formBuilder/FormBuilder.vc'
 import ListViewController, {
@@ -34,7 +34,7 @@ import ListViewController, {
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
-import SwipeViewController, {
+import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
@@ -116,6 +116,15 @@ export interface SkillViewControllerLoadOptions<
 }
 
 export type CardViewController = CardViewControllerImpl
+
+type CardUniversals = Pick<
+	CardViewController,
+	'setCriticalError' | 'getHasCriticalError' | 'clearCriticalError'
+>
+
+export type FormBuilderViewController = FormBuilderPageViewControllerImpl &
+	CardUniversals
+export type SwipeViewController = SwipeViewControllerImpl & CardUniversals
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
 export type BigFormViewController<S extends Schema> =
 	BigFormViewControllerImpl<S>
@@ -157,13 +166,13 @@ export interface ButtonController {
 }
 
 export interface ViewControllerMap {
-	form: FormViewControllerImpl<any>
+	form: FormViewController<any>
 	login: LoginViewController
 	swipe: SwipeViewController
 	buttonGroup: ButtonGroupViewController
-	card: CardViewControllerImpl
+	card: CardViewController
 	dialog: DialogViewController
-	bigForm: BigFormViewControllerImpl<any>
+	bigForm: BigFormViewController<any>
 	confirm: ConfirmViewController
 	formBuilder: FormBuilderViewController
 	list: ListViewController
