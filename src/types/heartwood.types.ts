@@ -119,7 +119,11 @@ export type CardViewController = CardViewControllerImpl
 
 type CardUniversals = Pick<
 	CardViewController,
-	'setCriticalError' | 'getHasCriticalError' | 'clearCriticalError'
+	| 'setCriticalError'
+	| 'getHasCriticalError'
+	| 'clearCriticalError'
+	| 'setIsBodyLoading'
+	| 'isBodyLoading'
 >
 
 export type FormBuilderViewController = FormBuilderPageViewControllerImpl &
