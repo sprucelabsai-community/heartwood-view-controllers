@@ -1,3 +1,10 @@
+# [28.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.2.1...v28.3.0) (2021-07-25)
+
+
+### Features
+
+* manage list rows by id ([5d41593](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5d41593))
+
 ## [28.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.2.0...v28.2.1) (2021-07-25)
 
 # [28.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.1.0...v28.2.0) (2021-07-25)
