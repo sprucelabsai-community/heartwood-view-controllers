@@ -1,3 +1,10 @@
+# [28.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v27.0.0...v28.0.0) (2021-07-25)
+
+
+### Breaking Changes
+
+* class renames to imlp ([4853d7e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4853d7e))
+
 # [27.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v26.1.3...v27.0.0) (2021-07-25)
 
 
