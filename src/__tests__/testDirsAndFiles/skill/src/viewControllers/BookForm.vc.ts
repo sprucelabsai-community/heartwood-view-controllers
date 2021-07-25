@@ -25,6 +25,8 @@ export default class BookFormViewController extends AbstractSkillViewController 
 			msg: 'what the?',
 			//@ts-ignore
 			globalHack2Value: global.__hack2,
+			setTimeout,
+			clearTimeout,
 		}
 	}
 }

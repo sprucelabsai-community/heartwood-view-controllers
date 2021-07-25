@@ -113,6 +113,16 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 	}
 
 	@test()
+	protected static canGetTimeoutFunctions() {
+		const model = this.importAndRenderVc()
+
+		//@ts-ignore
+		assert.isEqual(model.setTimeout, setTimeout)
+		//@ts-ignore
+		assert.isEqual(model.clearTimeout, clearTimeout)
+	}
+
+	@test()
 	protected static hyphenedVarsCantCrashIt() {
 		//@ts-ignore
 		global['oh-no'] = true
@@ -143,7 +153,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		const factory = this.importAndGetFactory()
 
 		//@ts-ignore
-		const vc = factory.Controller('book', {})
+		const vc = factory.Controller('book-form', {})
 		const model = vc.render()
 		return model
 	}

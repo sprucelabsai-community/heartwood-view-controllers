@@ -163,11 +163,4 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 		errorAssertUtil.assertError(err, 'INVALID_SKILL_VIEW_CONTROLLER')
 	}
-
-	@test()
-	protected static getsTimeoutFunctions() {
-		const testVc = this.Controller('test', {})
-		assert.isEqual(testVc.constructorOptions.setTimeout, setTimeout)
-		assert.isEqual(testVc.constructorOptions.clearTimeout, clearTimeout)
-	}
 }

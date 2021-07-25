@@ -12,20 +12,28 @@ export default class ViewControllerImporter {
 			let exports = {}
 			const globals = Object.keys(global)
 			const resets = globals
+				.filter((name) => ['setTimeout', 'clearTimeout'].indexOf(name) === -1)
 				.filter((name) => name.search(/[^0-9a-zA-Z_]/) === -1)
 				.map((name) => `var ${name} = {};`)
 				.join('\n')
 
 			const guargedScript = `
+
 ${resets}
+var utils = {
+	setTimeout,
+	clearTimeout
+}
 var global = {}
 var globalThis = {}
 function heartwood(vcs) {
 	exports = vcs
 }
 
+
 ${script}`
 
+			debugger
 			eval(guargedScript)
 
 			this.validateImported(exports)
