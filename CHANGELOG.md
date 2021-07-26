@@ -1,3 +1,12 @@
+## [29.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.0.0...v29.0.1) (2021-07-26)
+
+# [29.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.3.2...v29.0.0) (2021-07-26)
+
+
+### Breaking Changes
+
+* authenticate type now has get peron ([8999535](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8999535))
+
 ## [28.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.3.1...v28.3.2) (2021-07-26)
 
 ## [28.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v28.3.0...v28.3.1) (2021-07-26)
