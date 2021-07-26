@@ -63,6 +63,12 @@ export default class AuthenticatorImpl implements Authenticator {
 		return this.storage.getItem('token') ?? null
 	}
 
+	public getPerson() {
+		const person = this.storage.getItem('person')
+
+		return person ? JSON.parse(person) : null
+	}
+
 	public isLoggedIn(): boolean {
 		return !!this.getToken()
 	}

@@ -53,8 +53,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async tokenEmptyToStart() {
+	protected static async tokenAndPersonEmptyToStart() {
 		assert.isFalsy(this.Auth().getToken())
+		assert.isFalsy(this.Auth().getPerson())
 	}
 
 	@test()
@@ -66,6 +67,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const token = auth.getToken()
 
 		assert.isEqual(token, '1234abc')
+		assert.isEqualDeep(this.person, auth.getPerson())
 	}
 
 	@test()

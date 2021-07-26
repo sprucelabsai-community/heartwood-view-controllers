@@ -49,6 +49,7 @@ interface Payloads {
 }
 
 export interface Authenticator {
+	getPerson(): any
 	setToken(token: string, person: Person): void
 	getToken(): string | null
 	isLoggedIn(): boolean
