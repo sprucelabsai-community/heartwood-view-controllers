@@ -5,11 +5,6 @@ export default buildSchema({
 	name: 'Theme',
 	description: '',
 	fields: {
-		namespace: {
-			type: 'text',
-			isRequired: true,
-			label: 'Namespace',
-		},
 		props: {
 			type: 'schema',
 			isRequired: true,
