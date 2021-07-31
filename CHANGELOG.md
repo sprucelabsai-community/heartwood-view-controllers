@@ -1,3 +1,10 @@
+# [29.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.0.21...v29.1.0) (2021-07-31)
+
+
+### Features
+
+* theme schema ([1f29c7b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1f29c7b))
+
 ## [29.0.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.0.20...v29.0.21) (2021-07-31)
 
 ## [29.0.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.0.19...v29.0.20) (2021-07-31)
