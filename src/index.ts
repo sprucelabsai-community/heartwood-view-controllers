@@ -62,6 +62,8 @@ export { default as sprucebotTypedMessageAvatarSchema } from '#spruce/schemas/he
 export { default as sprucebotTypedMessageSentenceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotTypedMessageSentence.schema'
 export { default as criticalErrorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/criticalError.schema'
 export { default as cardFooterButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardFooterButton.schema'
+export { default as themeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/theme.schema'
+export { default as themePropsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/themeProps.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

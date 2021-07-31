@@ -11,6 +11,7 @@ const formSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form
 	name: '',
 	importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	    fields: {
 	            /** . */
 	            'className': {

@@ -257,6 +257,229 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface ThemeProps {
+			
+				/** Color 1. Used to color anything overlayed on the background (color1Inverse or color1InverseGradient). */
+				'color1'?: string| undefined | null
+				/** Color 1 (inverse). Background color of the view if color1InverseGradient is not set */
+				'color1Inverse'?: string| undefined | null
+				/** Color 1 Gradient (inverse). Background griedent applied to view. */
+				'color1InverseGradient'?: string| undefined | null
+				/** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
+				'color2'?: string| undefined | null
+				/** Color 2. The color of overlays ontop of a card. */
+				'color2Transparent'?: string| undefined | null
+				/** Color. Background color of cards. */
+				'color2Inverse'?: string| undefined | null
+				/** Color 2 (inverse with transparency). Background color used when some transparency is needed for context. */
+				'color2InverseTransparent'?: string| undefined | null
+				/** Color 3. Titles of cards. */
+				'color3'?: string| undefined | null
+				/** Color 3 (compliment). Subtitles of cards. */
+				'color3Compliment'?: string| undefined | null
+				/** Color 3 (inverse). Background for headers of cards. */
+				'color3Inverse'?: string| undefined | null
+				/** Color 4. Foreground for buttons and menu items. */
+				'color4'?: string| undefined | null
+				/** Color 4 (compliment). Border, outlines and highlights */
+				'color4Compliment'?: string| undefined | null
+				/** Color 4 (inverse). Background for buttons and menu items. */
+				'color4Inverse'?: string| undefined | null
+				/** Color (inverse, compliment). Background for buttons and menu items */
+				'color4InverseCompliment'?: string| undefined | null
+				/** Color. The foreground color of the control bar. */
+				'controlBarColor1'?: string| undefined | null
+				/** Color. The background color of the control bar. */
+				'controlBarColor2'?: string| undefined | null
+				/** Color. Errors overlayed on a background colored with errorColor1Inverse. */
+				'errorColor1'?: string| undefined | null
+				/** Color. The background used when rendering errors. */
+				'errorColor1Inverse'?: string| undefined | null
+		}
+
+		interface ThemePropsSchema extends SpruceSchema.Schema {
+			id: 'themeProps',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Color 1. Used to color anything overlayed on the background (color1Inverse or color1InverseGradient). */
+			            'color1': {
+			                label: 'Color 1',
+			                type: 'text',
+			                hint: 'Used to color anything overlayed on the background (color1Inverse or color1InverseGradient).',
+			                options: undefined
+			            },
+			            /** Color 1 (inverse). Background color of the view if color1InverseGradient is not set */
+			            'color1Inverse': {
+			                label: 'Color 1 (inverse)',
+			                type: 'text',
+			                hint: 'Background color of the view if color1InverseGradient is not set',
+			                options: undefined
+			            },
+			            /** Color 1 Gradient (inverse). Background griedent applied to view. */
+			            'color1InverseGradient': {
+			                label: 'Color 1 Gradient (inverse)',
+			                type: 'text',
+			                hint: 'Background griedent applied to view.',
+			                options: undefined
+			            },
+			            /** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
+			            'color2': {
+			                label: 'Color 2',
+			                type: 'text',
+			                hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
+			                options: undefined
+			            },
+			            /** Color 2. The color of overlays ontop of a card. */
+			            'color2Transparent': {
+			                label: 'Color 2',
+			                type: 'text',
+			                hint: 'The color of overlays ontop of a card.',
+			                options: undefined
+			            },
+			            /** Color. Background color of cards. */
+			            'color2Inverse': {
+			                label: 'Color',
+			                type: 'text',
+			                hint: 'Background color of cards.',
+			                options: undefined
+			            },
+			            /** Color 2 (inverse with transparency). Background color used when some transparency is needed for context. */
+			            'color2InverseTransparent': {
+			                label: 'Color 2 (inverse with transparency)',
+			                type: 'text',
+			                hint: 'Background color used when some transparency is needed for context.',
+			                options: undefined
+			            },
+			            /** Color 3. Titles of cards. */
+			            'color3': {
+			                label: 'Color 3',
+			                type: 'text',
+			                hint: 'Titles of cards.',
+			                options: undefined
+			            },
+			            /** Color 3 (compliment). Subtitles of cards. */
+			            'color3Compliment': {
+			                label: 'Color 3 (compliment)',
+			                type: 'text',
+			                hint: 'Subtitles of cards.',
+			                options: undefined
+			            },
+			            /** Color 3 (inverse). Background for headers of cards. */
+			            'color3Inverse': {
+			                label: 'Color 3 (inverse)',
+			                type: 'text',
+			                hint: 'Background for headers of cards.',
+			                options: undefined
+			            },
+			            /** Color 4. Foreground for buttons and menu items. */
+			            'color4': {
+			                label: 'Color 4',
+			                type: 'text',
+			                hint: 'Foreground for buttons and menu items.',
+			                options: undefined
+			            },
+			            /** Color 4 (compliment). Border, outlines and highlights */
+			            'color4Compliment': {
+			                label: 'Color 4 (compliment)',
+			                type: 'text',
+			                hint: 'Border, outlines and highlights',
+			                options: undefined
+			            },
+			            /** Color 4 (inverse). Background for buttons and menu items. */
+			            'color4Inverse': {
+			                label: 'Color 4 (inverse)',
+			                type: 'text',
+			                hint: 'Background for buttons and menu items.',
+			                options: undefined
+			            },
+			            /** Color (inverse, compliment). Background for buttons and menu items */
+			            'color4InverseCompliment': {
+			                label: 'Color (inverse, compliment)',
+			                type: 'text',
+			                hint: 'Background for buttons and menu items',
+			                options: undefined
+			            },
+			            /** Color. The foreground color of the control bar. */
+			            'controlBarColor1': {
+			                label: 'Color',
+			                type: 'text',
+			                hint: 'The foreground color of the control bar.',
+			                options: undefined
+			            },
+			            /** Color. The background color of the control bar. */
+			            'controlBarColor2': {
+			                label: 'Color',
+			                type: 'text',
+			                hint: 'The background color of the control bar.',
+			                options: undefined
+			            },
+			            /** Color. Errors overlayed on a background colored with errorColor1Inverse. */
+			            'errorColor1': {
+			                label: 'Color',
+			                type: 'text',
+			                hint: 'Errors overlayed on a background colored with errorColor1Inverse.',
+			                options: undefined
+			            },
+			            /** Color. The background used when rendering errors. */
+			            'errorColor1Inverse': {
+			                label: 'Color',
+			                type: 'text',
+			                hint: 'The background used when rendering errors.',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type ThemePropsEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Theme {
+			
+				/** Namespace. */
+				'namespace': string
+				
+				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
+		}
+
+		interface ThemeSchema extends SpruceSchema.Schema {
+			id: 'theme',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Theme',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Namespace. */
+			            'namespace': {
+			                label: 'Namespace',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'props': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema,}
+			            },
+			    }
+		}
+
+		type ThemeEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface SprucebotTypedMessage {
 			
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
@@ -1063,6 +1286,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -1165,6 +1389,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Big form',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** . */
 			            'id': {
@@ -1713,6 +1938,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** . */
 			            'className': {
@@ -1806,6 +2032,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Form',
 			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** . */
 			            'id': {

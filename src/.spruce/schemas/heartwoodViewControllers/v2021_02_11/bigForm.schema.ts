@@ -11,6 +11,7 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	name: 'Big form',
 	importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	    fields: {
 	            /** . */
 	            'id': {
