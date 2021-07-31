@@ -1,3 +1,10 @@
+# [30.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.1.0...v30.0.0) (2021-07-31)
+
+
+### Breaking Changes
+
+* removed namespace field from theme ([62c61df](https://github.com/sprucelabsai/heartwood-view-controllers/commit/62c61df))
+
 # [29.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v29.0.21...v29.1.0) (2021-07-31)
 
 
