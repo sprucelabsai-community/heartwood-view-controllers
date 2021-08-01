@@ -47,6 +47,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 	protected static controllerMap = {
 		managePageTitles: ManagePageTitlesCardViewController,
+		formBuilder: FormBuilderViewController,
 	}
 
 	@test()
