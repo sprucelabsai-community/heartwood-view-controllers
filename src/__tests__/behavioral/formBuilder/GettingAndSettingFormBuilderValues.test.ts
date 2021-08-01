@@ -1,13 +1,15 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import {
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import FormBuilderViewController, {
 	FormBuilderImportExportObject,
 	FormBuilderViewControllerOptions,
-} from '../../viewControllers/formBuilder/FormBuilder.vc'
+} from '../../../viewControllers/formBuilder/FormBuilder.vc'
 
 export default class GettingFormBuilderValuesTest extends AbstractViewControllerTest {
-	protected static controllerMap: Record<string, any> = {}
+	protected static controllerMap: Record<string, any> = {
+		formBuilder: FormBuilderViewController,
+	}
 
 	private static readonly singlePageForm: FormBuilderImportExportObject = {
 		title: 'Building your form',
