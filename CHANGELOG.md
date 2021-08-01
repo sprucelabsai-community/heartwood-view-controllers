@@ -1,3 +1,10 @@
+# [31.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v30.0.3...v31.0.0) (2021-08-01)
+
+
+### Breaking Changes
+
+* no longer ships with form builder as part of the contrloler map ([773d070](https://github.com/sprucelabsai/heartwood-view-controllers/commit/773d070))
+
 ## [30.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v30.0.2...v30.0.3) (2021-08-01)
 
 ## [30.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v30.0.1...v30.0.2) (2021-08-01)
