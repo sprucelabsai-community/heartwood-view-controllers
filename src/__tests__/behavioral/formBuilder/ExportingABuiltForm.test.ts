@@ -6,6 +6,7 @@ import FormBuilderViewController from '../../../viewControllers/formBuilder/Form
 export default class ExportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
+		formBuilder: FormBuilderViewController,
 	}
 	private static vc: FormBuilderViewController
 

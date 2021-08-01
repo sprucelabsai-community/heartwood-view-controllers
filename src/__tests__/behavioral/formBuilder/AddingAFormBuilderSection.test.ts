@@ -25,6 +25,7 @@ declare module '../../../types/heartwood.types' {
 export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
+		formBuilder: FormBuilderViewController,
 	}
 
 	private static formBuilderVc: FormBuilderViewController

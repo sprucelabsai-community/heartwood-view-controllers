@@ -12,6 +12,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	private static formBuilderVc: FormBuilderViewController
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
+		formBuilder: FormBuilderViewController,
 	}
 
 	protected static async beforeEach() {

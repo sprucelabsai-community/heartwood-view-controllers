@@ -9,6 +9,7 @@ import FormBuilderViewController, {
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
+		formBuilder: FormBuilderViewController,
 	}
 	private static vc: FormBuilderViewController
 

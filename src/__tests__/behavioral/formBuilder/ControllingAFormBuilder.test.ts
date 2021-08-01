@@ -15,7 +15,9 @@ import { FormBuilderPageViewController } from '../../../viewControllers/formBuil
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
-	protected static controllerMap = {}
+	protected static controllerMap = {
+		formBuilder: FormBuilderViewController,
+	}
 	private static vc: FormBuilderViewController
 
 	protected static async beforeEach() {
