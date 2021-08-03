@@ -1,3 +1,10 @@
+# [32.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v31.0.9...v32.0.0) (2021-08-03)
+
+
+### Breaking Changes
+
+* auth proxy token storage and method renames ([ddf5c7a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ddf5c7a))
+
 ## [31.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v31.0.8...v31.0.9) (2021-08-03)
 
 ## [31.0.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v31.0.7...v31.0.8) (2021-08-03)
