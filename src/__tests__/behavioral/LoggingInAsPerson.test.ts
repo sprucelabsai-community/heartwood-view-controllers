@@ -54,7 +54,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async tokenAndPersonEmptyToStart() {
-		assert.isFalsy(this.Auth().getToken())
+		assert.isFalsy(this.Auth().getSessionToken())
 		assert.isFalsy(this.Auth().getPerson())
 	}
 
@@ -62,9 +62,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	protected static async canSetToken() {
 		const auth = this.Auth()
 
-		auth.setToken('1234abc', this.person)
+		auth.setSessionToken('1234abc', this.person)
 
-		const token = auth.getToken()
+		const token = auth.getSessionToken()
 
 		assert.isEqual(token, '1234abc')
 		assert.isEqualDeep(this.person, auth.getPerson())
@@ -73,9 +73,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	@test()
 	protected static async setsLocalStorage() {
 		const auth = this.Auth()
-		auth.setToken('123abc', this.person)
+		auth.setSessionToken('123abc', this.person)
 
-		const token = this.storage.getItem('token')
+		const token = this.storage.getItem('sessionToken')
 		assert.isEqual(token, '123abc')
 	}
 
@@ -87,7 +87,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	@test()
 	protected static isLoggedInIsTrueAfterTokenSet() {
 		const auth = this.Auth()
-		auth.setToken('abc123', this.person)
+		auth.setSessionToken('abc123', this.person)
 
 		assert.isTrue(auth.isLoggedIn())
 	}
@@ -96,13 +96,14 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	protected static canClearToken() {
 		const auth = this.Auth()
 
-		auth.setToken('123abc', this.person)
+		auth.setSessionToken('123abc', this.person)
 
 		assert.isTrue(auth.isLoggedIn())
 
-		auth.clearToken()
+		auth.clearSession()
 
 		assert.isFalse(auth.isLoggedIn())
+		assert.isFalsy(auth.getPerson())
 	}
 
 	@test()
@@ -119,7 +120,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 			p = person
 		})
 
-		auth.setToken('123abc', this.person)
+		auth.setSessionToken('123abc', this.person)
 
 		assert.isTrue(hit)
 		assert.isEqual(t, '123abc')
@@ -137,10 +138,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 			p = person
 		})
 
-		auth.setToken('123abc', this.person)
+		auth.setSessionToken('123abc', this.person)
 		assert.isFalse(hit)
 
-		auth.clearToken()
+		auth.clearSession()
 
 		assert.isTrue(hit)
 
@@ -235,7 +236,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const { person, token } = await this.MercuryFixture().loginAsDemoPerson()
 		const auth = this.Auth()
 
-		auth.setToken(token, person)
+		auth.setSessionToken(token, person)
 
 		const factory = this.Factory()
 		const loginVc = factory.Controller('login', {})
@@ -251,6 +252,34 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isTruthy(client.auth.person.id)
 		//@ts-ignore
 		assert.isEqual(client.auth.person.id, person.id)
+	}
+
+	@test()
+	protected static async noProxyTokenToStart() {
+		const auth = this.Auth()
+		assert.isFalsy(auth.getProxyToken())
+	}
+
+	@test()
+	protected static async canSetProxyToken() {
+		const token = `${Math.random()}`
+		const auth = this.Auth()
+
+		auth.setProxyToken(token)
+		assert.isEqual(auth.getProxyToken(), token)
+
+		const match = this.storage.getItem('proxyToken')
+		assert.isEqual(match, token)
+	}
+
+	@test()
+	protected static async loggingOutClearsProxy() {
+		const auth = this.Auth()
+
+		auth.setProxyToken('aoeu')
+		auth.clearSession()
+
+		assert.isFalsy(auth.getProxyToken())
 	}
 
 	private static LoginVc() {

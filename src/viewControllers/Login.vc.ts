@@ -170,7 +170,7 @@ export default class LoginViewController
 			const { person, token } =
 				eventResponseUtil.getFirstResponseOrThrow(confirmResults)
 
-			Authenticator.getInstance().setToken(token, person)
+			Authenticator.getInstance().setSessionToken(token, person)
 
 			await this.loginHandler?.({ person })
 		} catch (err) {

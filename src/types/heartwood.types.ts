@@ -49,11 +49,13 @@ interface Payloads {
 }
 
 export interface Authenticator {
+	setProxyToken(token: string): void
+	getProxyToken(): string | null
 	getPerson(): Person | null
-	setToken(token: string, person: Person): void
-	getToken(): string | null
+	setSessionToken(token: string, person: Person): void
+	getSessionToken(): string | null
 	isLoggedIn(): boolean
-	clearToken(): void
+	clearSession(): void
 	addEventListener<N extends 'did-login' | 'did-logout'>(
 		name: N,
 		cb: Payloads[N]

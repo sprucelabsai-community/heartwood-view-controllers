@@ -135,7 +135,9 @@ export default class ViewControllerFactory {
 				//@ts-ignore
 				const client = await this.connectToApi(...args)
 				if (!client.isAuthenticated() && this.auth.isLoggedIn()) {
-					await client.authenticate({ token: this.auth.getToken() as string })
+					await client.authenticate({
+						token: this.auth.getSessionToken() as string,
+					})
 				}
 				return client
 			},
