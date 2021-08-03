@@ -58,7 +58,7 @@
     "watch.build.dev": "concurrently 'yarn build.dev' 'yarn watch.tsc' \"chokidar 'src/**/*' --ignore '.*/tmp/.*' -c 'yarn build.copy-files && yarn build.resolve-paths'\"",
     "watch.lint": "concurrently 'yarn lint' \"chokidar 'src/**/*' -c 'yarn lint.tsc'\"",
     "watch.rebuild": "yarn clean.all && yarn && yarn watch.build.dev",
-    "watch.tsc": "tsc -w"
+    "watch.tsc": "tsc -w --sourceMap"
   },
   "dependencies": {
     "@babel/core": "^7.14.8",
