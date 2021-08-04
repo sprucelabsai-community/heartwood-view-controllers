@@ -61,11 +61,11 @@
     "watch.tsc": "tsc -w --sourceMap"
   },
   "dependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.9",
-    "@babel/preset-typescript": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
     "@sprucelabs/error": "latest",
     "@sprucelabs/mercury-types": "latest",
     "@sprucelabs/schema": "latest",
