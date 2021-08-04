@@ -1,10 +1,10 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SpruceError } from '@sprucelabs/schema'
+import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import {
 	SwipeController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
-import introspectionUtil from '../utilities/introspection.utility'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
@@ -57,7 +57,7 @@ export default class SwipeViewController
 			},
 		})
 
-		introspectionUtil.delegateFunctionCalls(this, this.cardVc)
+		functionDelegationUtil.delegateFunctionCalls(this, this.cardVc)
 
 		this.cardVc.triggerRender = () => {
 			this.triggerRender()

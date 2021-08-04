@@ -1,8 +1,10 @@
 import { Schema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { namesUtil } from '@sprucelabs/spruce-skill-utils'
+import {
+	functionDelegationUtil,
+	namesUtil,
+} from '@sprucelabs/spruce-skill-utils'
 import { FormViewController } from '../../types/heartwood.types'
-import introspectionUtil from '../../utilities/introspection.utility'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import { SimpleRow, SimpleSection } from './EditFormBuilderSection.vc'
 import FormBuilderViewController from './FormBuilder.vc'
@@ -59,7 +61,7 @@ export class FormBuilderPageViewControllerImpl
 		this.schema = schema
 		this.setTitleHandler = setTitleHandler
 		this.fieldBuilder = fieldBuilder
-		introspectionUtil.delegateFunctionCalls(this, formVc)
+		functionDelegationUtil.delegateFunctionCalls(this, formVc)
 	}
 
 	public getTitle() {

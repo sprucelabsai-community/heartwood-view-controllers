@@ -1,5 +1,8 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { namesUtil } from '@sprucelabs/spruce-skill-utils'
+import {
+	functionDelegationUtil,
+	namesUtil,
+} from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
@@ -7,7 +10,6 @@ import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/for
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
-import introspectionUtil from '../../../utilities/introspection.utility'
 import renderUtil from '../../../utilities/render.utility'
 import { EditFormBuilderFieldViewController } from '../../../viewControllers/formBuilder/EditFormBuilderField.vc'
 import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
@@ -474,8 +476,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isTruthy(controller)
 
 		//@ts-ignore
-		const swipeFunctions = introspectionUtil.getAllFuncs(this.vc.swipeVc)
-		const builderProtoFunctions = introspectionUtil.getAllFuncs(
+		const swipeFunctions = functionDelegationUtil.getAllFuncs(this.vc.swipeVc)
+		const builderProtoFunctions = functionDelegationUtil.getAllFuncs(
 			//@ts-ignore
 			this.vc
 		)

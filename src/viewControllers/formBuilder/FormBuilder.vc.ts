@@ -1,8 +1,8 @@
 import { Schema, SpruceError, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
-import introspectionUtil from '../../utilities/introspection.utility'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
@@ -59,7 +59,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			footer: this.buildFooter(),
 		})
 
-		introspectionUtil.delegateFunctionCalls(this, this.swipeVc)
+		functionDelegationUtil.delegateFunctionCalls(this, this.swipeVc)
 
 		this.swipeVc.triggerRender = () => {
 			this.triggerRender()
