@@ -254,34 +254,6 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isEqual(client.auth.person.id, person.id)
 	}
 
-	@test()
-	protected static async noProxyTokenToStart() {
-		const auth = this.Auth()
-		assert.isFalsy(auth.getProxyToken())
-	}
-
-	@test()
-	protected static async canSetProxyToken() {
-		const token = `${Math.random()}`
-		const auth = this.Auth()
-
-		auth.setProxyToken(token)
-		assert.isEqual(auth.getProxyToken(), token)
-
-		const match = this.storage.getItem('proxyToken')
-		assert.isEqual(match, token)
-	}
-
-	@test()
-	protected static async loggingOutClearsProxy() {
-		const auth = this.Auth()
-
-		auth.setProxyToken('aoeu')
-		auth.clearSession()
-
-		assert.isFalsy(auth.getProxyToken())
-	}
-
 	private static LoginVc() {
 		const factory = this.Factory()
 		const login = factory.Controller('login', {})

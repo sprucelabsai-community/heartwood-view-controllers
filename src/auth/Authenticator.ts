@@ -62,14 +62,6 @@ export default class AuthenticatorImpl implements Authenticator {
 		return this.storage.getItem('sessionToken') ?? null
 	}
 
-	public getProxyToken(): string | null {
-		return this.storage.getItem('proxyToken') ?? null
-	}
-
-	public setProxyToken(token: string) {
-		this.storage.setItem('proxyToken', token)
-	}
-
 	public getPerson() {
 		const person = this.storage.getItem('person')
 		return person ? JSON.parse(person) : null
@@ -84,7 +76,6 @@ export default class AuthenticatorImpl implements Authenticator {
 
 		this.storage.removeItem('sessionToken')
 		this.storage.removeItem('person')
-		this.storage.removeItem('proxyToken')
 
 		this.eventEmitter.emit('did-logout', { person })
 	}

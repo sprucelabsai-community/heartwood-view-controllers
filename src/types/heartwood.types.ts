@@ -49,8 +49,6 @@ interface Payloads {
 }
 
 export interface Authenticator {
-	setProxyToken(token: string): void
-	getProxyToken(): string | null
 	getPerson(): Person | null
 	setSessionToken(token: string, person: Person): void
 	getSessionToken(): string | null
