@@ -1,3 +1,10 @@
+# [33.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v32.0.7...v33.0.0) (2021-08-05)
+
+
+### Breaking Changes
+
+* no more proxy token (just leaked, not needed) ([855f5d8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/855f5d8))
+
 ## [32.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v32.0.6...v32.0.7) (2021-08-05)
 
 ## [32.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v32.0.5...v32.0.6) (2021-08-05)
