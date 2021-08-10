@@ -78,7 +78,7 @@
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.1.4",
-    "webpack": "^5.49.0"
+    "webpack": "^5.50.0"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "latest",
@@ -87,7 +87,7 @@
     "@sprucelabs/mercury-client": "latest",
     "@sprucelabs/resolve-path-aliases": "latest",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-skill-booter": "^5.4.7",
+    "@sprucelabs/spruce-skill-booter": "^5.4.8",
     "@sprucelabs/test": "latest",
     "@sprucelabs/test-utils": "latest",
     "@types/lodash": "^4.14.172",
