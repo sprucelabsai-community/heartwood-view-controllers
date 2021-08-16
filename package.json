@@ -18,7 +18,10 @@
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
       "sync.schemas": "--shouldFetchCoreSchemas false --moduleToImportFromWhenRemote @sprucelabs/heartwood-view-controllers"
-    }
+    },
+    "upgradeIgnoreList": [
+      "globby"
+    ]
   },
   "keywords": [
     "node",
@@ -70,7 +73,7 @@
     "@sprucelabs/mercury-types": "^25.0.0",
     "@sprucelabs/schema": "^21.4.8",
     "@sprucelabs/spruce-core-schemas": "^22.5.22",
-    "@sprucelabs/spruce-event-plugin": "^5.4.14",
+    "@sprucelabs/spruce-event-plugin": "^5.4.15",
     "@sprucelabs/spruce-event-utils": "^15.2.7",
     "@sprucelabs/spruce-skill-utils": "^20.5.4",
     "babel-loader": "^8.2.2",
@@ -86,10 +89,10 @@
     "@sprucelabs/jest-json-reporter": "^6.0.25",
     "@sprucelabs/jest-sheets-reporter": "^1.2.59",
     "@sprucelabs/mercury-client": "latest",
-    "@sprucelabs/resolve-path-aliases": "^1.0.59",
+    "@sprucelabs/resolve-path-aliases": "^1.0.60",
     "@sprucelabs/semantic-release": "latest",
-    "@sprucelabs/spruce-skill-booter": "^5.4.14",
-    "@sprucelabs/spruce-test-fixtures": "^5.4.14",
+    "@sprucelabs/spruce-skill-booter": "^5.4.15",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.15",
     "@sprucelabs/test": "^7.7.53",
     "@sprucelabs/test-utils": "^3.0.53",
     "@types/lodash": "^4.14.172",
@@ -98,7 +101,7 @@
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.2.1",
     "eslint": "^7.32.0",
-    "eslint-config-spruce": "latest",
+    "eslint-config-spruce": "^10.10.10",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
     "prettier": "^2.3.2",
