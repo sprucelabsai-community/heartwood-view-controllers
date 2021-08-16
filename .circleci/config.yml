@@ -103,6 +103,16 @@ jobs:
               circleci-agent step halt
             fi
       - run:
+          name: "Check for only newline diff"
+          command: |
+            if [[ $(git status --porcelain | awk '{print $2}' | wc -l) -eq 1 ]]; then
+              if [[ $(git status --porcelain | awk '{print $2}' | grep package.json | wc -l ) -eq 1 ]]; then
+                if [[ $(git diff -w package.json | wc -l) -eq 0 ]]; then
+                  circleci-agent step halt
+                fi
+              fi
+            fi
+      - run:
           name: "Create PR"
           command: |
             git commit -a -m "chore(auto-upgrade): upgraded packages [upgrade-all]"
