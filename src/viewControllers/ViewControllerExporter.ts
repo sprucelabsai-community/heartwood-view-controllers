@@ -1,4 +1,5 @@
 import pathUtil from 'path'
+import { SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
 import { Configuration, webpack } from 'webpack'
@@ -12,7 +13,7 @@ export default class ViewControllerExporter {
 
 	public static Exporter(cwd: string) {
 		if (!cwd) {
-			throw new SpruceError({ code: 'MISSING_PARAMETERS', parameters: ['cwd'] })
+			throw new SchemaError({ code: 'MISSING_PARAMETERS', parameters: ['cwd'] })
 		}
 		return new this(cwd)
 	}
@@ -174,7 +175,7 @@ export default class ViewControllerExporter {
 
 	private assertValidDestinationFilename(filename: string) {
 		if (filename.substr(-3) !== '.js') {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['destination'],
 				friendlyMessage: `Destination must be a javascript file (ending in .js).`,
@@ -186,7 +187,7 @@ export default class ViewControllerExporter {
 		const absolute = diskUtil.resolvePath(this.cwd, entry)
 
 		if (!diskUtil.doesFileExist(absolute)) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['source'],
 				friendlyMessage: `Source file must exist. Could not find ${absolute}.`,
@@ -207,7 +208,7 @@ export default class ViewControllerExporter {
 		}
 
 		if (missing.length > 0) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})

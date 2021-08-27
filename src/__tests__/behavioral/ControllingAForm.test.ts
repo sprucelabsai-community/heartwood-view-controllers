@@ -155,7 +155,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static settingErrorsSetsErrorsByField() {
 		this.vc.setErrors([
 			{
-				code: 'invalid_value',
+				code: 'INVALID_PARAMETER',
 				name: 'first',
 			},
 		])
@@ -170,14 +170,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static settingErrorsOverwritesLastErrorsByField() {
 		this.vc.setErrors([
 			{
-				code: 'invalid_value',
+				code: 'INVALID_PARAMETER',
 				name: 'first',
 			},
 		])
 
 		this.vc.setErrors([
 			{
-				code: 'invalid_value',
+				code: 'INVALID_PARAMETER',
 				name: 'last',
 			},
 		])

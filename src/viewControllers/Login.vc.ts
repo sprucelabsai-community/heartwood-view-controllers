@@ -142,7 +142,7 @@ export default class LoginViewController
 		} catch (err) {
 			this.loginForm.setErrors([
 				{
-					code: 'invalid_value',
+					code: 'INVALID_PARAMETER',
 					name: 'phone',
 					friendlyMessage: err.message,
 				},
@@ -176,7 +176,7 @@ export default class LoginViewController
 		} catch (err) {
 			this.loginForm.setErrors([
 				{
-					code: 'invalid_value',
+					code: 'INVALID_PARAMETER',
 					name: 'code',
 					friendlyMessage: "That pin doesn't look right, try again!",
 				},

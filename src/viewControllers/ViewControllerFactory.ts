@@ -1,4 +1,5 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
+import { SchemaError } from '@sprucelabs/schema'
 import AuthenticatorImpl from '../auth/Authenticator'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
@@ -66,7 +67,7 @@ export default class ViewControllerFactory {
 		} = options ?? {}
 
 		if (!options?.connectToApi) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['connectToApi'],
 			})

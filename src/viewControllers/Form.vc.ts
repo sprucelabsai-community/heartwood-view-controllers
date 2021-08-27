@@ -2,27 +2,23 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
 	areSchemaValuesValid,
 	defaultSchemaValues,
-	FieldErrorCodes,
-	InvalidFieldError,
-	InvalidParametersOptions,
-	MissingParametersOptions,
+	FieldError,
 	Schema,
 	SchemaFieldNames,
 	SchemaPartialValues,
-	UnexpectedParametersOptions,
 	validateSchemaValues,
 	SchemaFieldsByName,
 	SchemaValues,
 	FieldDefinitions,
-	SpruceError as SchemaSpruceError,
+	SchemaError as SchemaSpruceError,
+	SchemaError,
 } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
 import { defaultSubmitButtonLabel } from '../constants'
-import SpruceError from '../errors/SpruceError'
 import {
 	FormErrorsByField,
 	ViewController,
-	TypedInvalidFieldError,
+	TypedFieldError,
 	ViewControllerOptions,
 	FieldRenderOptions,
 } from '../types/heartwood.types'
@@ -119,7 +115,7 @@ export default class FormViewController<
 		const { name, value, shouldSetIsDirty = true } = options
 
 		if (!this.getSchema().fields?.[name]) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `Can't set \`${name}\` field because it does not exist!`,
 				parameters: ['fieldName'],
@@ -158,7 +154,7 @@ export default class FormViewController<
 		return dirty as any
 	}
 
-	public setErrors(errors: TypedInvalidFieldError<S>[]): void {
+	public setErrors(errors: TypedFieldError<S>[]): void {
 		const errorsByField = {} as any
 		for (const error of errors) {
 			if (!errorsByField[error.name]) {
@@ -176,37 +172,24 @@ export default class FormViewController<
 	}
 
 	public validate(): FormErrorsByField<S> {
-		const errors: Record<string, InvalidFieldError[]> = {}
+		const errorsByField: Record<string, FieldError[]> = {}
 		try {
 			validateSchemaValues(this.model.schema, this.model.values)
 		} catch (err) {
 			if (err.options?.code === 'VALIDATION_FAILED') {
-				err.options.errors?.forEach(
-					(err: {
-						options:
-							| MissingParametersOptions
-							| InvalidParametersOptions
-							| UnexpectedParametersOptions
-					}) => {
-						const parameters = err.options.parameters
-						for (const param of parameters) {
-							if (!errors[param]) {
-								errors[param] = []
-							}
-
-							errors[param].push({
-								code: err.options.code.toLowerCase() as FieldErrorCodes,
-								name: param,
-							})
-						}
+				err.options.errors?.forEach((err) => {
+					if (!errorsByField[err.name]) {
+						errorsByField[err.name] = []
 					}
-				)
+
+					errorsByField[err.name].push(err)
+				})
 			} else {
 				// this.viewModel.onError?.(err.friendMessage ?? err.message)
 			}
 		}
 
-		return errors as FormErrorsByField<S>
+		return errorsByField as FormErrorsByField<S>
 	}
 
 	public isValid() {
@@ -378,7 +361,7 @@ export default class FormViewController<
 			this.getSectionAndFieldForFieldNamed(fieldName)
 
 		if (sectionIdx === -1) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['fieldName'],
 				friendlyMessage: `I could not find a field being renderd called \`${fieldName}\``,
@@ -474,7 +457,7 @@ export default class FormViewController<
 		const section = this.model.sections[idx]
 
 		if (!section) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `There is no section ${idx}.`,
 				parameters: ['sectionIdx'],

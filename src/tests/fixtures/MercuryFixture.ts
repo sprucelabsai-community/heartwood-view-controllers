@@ -1,6 +1,6 @@
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
 import { coreEventContracts, SpruceSchemas } from '@sprucelabs/mercury-types'
-import { SpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import {
 	eventContractUtil,
 	eventDiskUtil,
@@ -23,7 +23,7 @@ export default class MercuryFixture {
 	public constructor(cwd: string) {
 		this.cwd = cwd
 		if (!this.cwd) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				friendlyMessage: 'Mercury fixture needs cwd.',
 				parameters: ['options.cwd'],
@@ -38,7 +38,7 @@ export default class MercuryFixture {
 		}
 
 		if (!TEST_HOST) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['env.HOST'],
 				friendlyMessage: `Oops! Before you can do any tests that involve Mercury you need to run \`spruce set.remote\` to point to an environment of your choosing.`,
@@ -121,7 +121,7 @@ export default class MercuryFixture {
 		token: string
 	}> {
 		if (!phone || phone.length === 0) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['env.DEMO_NUMBER'],
 			})

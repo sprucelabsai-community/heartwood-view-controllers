@@ -1,6 +1,6 @@
-import { SpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import ControllerSpruceError from '../../errors/SpruceError'
+import SpruceError from '../../errors/SpruceError'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import listUtil from './list.utility'
@@ -48,14 +48,14 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 	public addRow(row: ListRowModel & { atIndex?: number }): void {
 		if (!row) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['cells'],
 			})
 		}
 
 		if (!Array.isArray(row.cells)) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['cells'],
 				friendlyMessage: `You tried to add a bad row to this list!`,
@@ -63,7 +63,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 
 		if (row.id && this.doesIdExist(row.id)) {
-			throw new ControllerSpruceError({
+			throw new SpruceError({
 				code: 'DUPLICATE_ROW_ID',
 				rowId: row.id,
 			})
@@ -102,7 +102,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 	private assertValidRowIdx(rowIdx: number) {
 		if (!this.model.rows[rowIdx]?.cells) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `Could not get view conroller for row ${rowIdx} because it does not exist.`,
 				parameters: ['rowIdx'],
@@ -143,7 +143,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			}
 		}
 
-		throw new SpruceError({
+		throw new SchemaError({
 			code: 'INVALID_PARAMETERS',
 			friendlyMessage: `A field named \`${name}\` does not exist in row ${rowIdx}`,
 			parameters: ['fieldName'],
@@ -180,7 +180,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	public getRowVcById(id: string) {
 		const idx = this.getIdxForId(id)
 		if (idx === -1) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `Can't find a row with the id \`${id}\`.`,
 				parameters: ['rowId'],

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import SpruceError from '../errors/SpruceError'
+import { SchemaError } from '@sprucelabs/schema'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
@@ -161,7 +161,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	public getSection(idx: number) {
 		const section = this.getSections()?.[idx]
 		if (!section) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `There is no section at index ${idx}.`,
 				parameters: ['sectionIdx'],
@@ -175,7 +175,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.ensureSectionsExist()
 
 		if (!this.model.body?.sections?.[idx]) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `Can't update section at index ${idx} because there isn't one.`,
 				parameters: ['sectionIdx'],

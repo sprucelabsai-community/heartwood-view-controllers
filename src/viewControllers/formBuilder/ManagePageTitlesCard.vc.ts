@@ -1,4 +1,4 @@
-import { SpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import CardViewController from '../Card.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
@@ -27,7 +27,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 		}
 
 		if (missing.length > 0) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})

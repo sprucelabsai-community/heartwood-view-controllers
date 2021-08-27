@@ -1,6 +1,5 @@
 {
   "installed": [
-    "skill",
     "test",
     "schema",
     "error"
@@ -12,5 +11,8 @@
   },
   "scriptUpdater": {
     "skips": []
-  }
+  },
+  "skipped": [
+    "skill"
+  ]
 }

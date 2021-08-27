@@ -1,7 +1,7 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
-	InvalidFieldError,
+	FieldError,
 	Schema,
 	SchemaFieldNames,
 	SchemaPartialValues,
@@ -64,12 +64,12 @@ export interface AuthenticatorStatic {
 	getInstance(): Authenticator
 }
 
-export interface TypedInvalidFieldError<
+export interface TypedFieldError<
 	S extends Schema,
 	N extends SchemaFieldNames<S> = SchemaFieldNames<S>
-> extends InvalidFieldError {
+> extends FieldError {
 	name: N
-	code: 'invalid_value' | 'missing_required'
+	code: 'INVALID_PARAMETER' | 'MISSING_PARAMETER'
 }
 
 export interface WithErrorHandler {
@@ -81,7 +81,7 @@ export type FancyIcon = typeof fancyIcons[number]
 
 export type FormErrorsByField<S extends Schema = Schema> = Record<
 	SchemaFieldNames<S>,
-	TypedInvalidFieldError<S>[]
+	TypedFieldError<S>[]
 >
 
 export interface FormOnChangeOptions<S extends Schema = Schema> {

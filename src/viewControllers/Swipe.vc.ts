@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { SpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import {
 	SwipeController,
@@ -66,7 +66,7 @@ export default class SwipeViewController
 
 	public async jumpToSlide(slide: number) {
 		if (typeof slide !== 'number') {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['slideIndex'],
 			})
@@ -99,7 +99,7 @@ export default class SwipeViewController
 
 	private assertSlideAtIndex(slideIdx: number) {
 		if (!this.getSlides()?.[slideIdx]) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['slideIndex'],
 				friendlyMessage: `I couldn't update slide ${slideIdx} because it doesn't exist.`,

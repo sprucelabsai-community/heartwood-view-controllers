@@ -1,4 +1,4 @@
-import { SpruceError as SchemaSpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import { AbstractSkillTest } from '@sprucelabs/spruce-skill-booter'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -27,7 +27,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSkillTe
 
 	protected static Factory() {
 		if (!this.controllerMap) {
-			throw new SchemaSpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: [
 					'protected static controllerMap = { dashboard: DashboardSkillViewController, profileForm: ProfileFormViewController }',

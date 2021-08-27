@@ -1,4 +1,4 @@
-import { Schema, SpruceError, validateSchemaValues } from '@sprucelabs/schema'
+import { Schema, SchemaError, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
@@ -420,7 +420,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 	public setValues(values: Record<string, any>[]): any {
 		if (!Array.isArray(values)) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['values'],
 				friendlyMessage: 'Values must be an array!',

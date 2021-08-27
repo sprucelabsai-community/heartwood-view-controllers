@@ -1,4 +1,4 @@
-import { SpruceError } from '@sprucelabs/schema'
+import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { ViewController } from '../../types/heartwood.types'
 import { ListRowModel } from './List.vc'
@@ -65,7 +65,7 @@ export default class ListRowViewController
 			return values[fieldName]
 		}
 
-		throw new SpruceError({
+		throw new SchemaError({
 			code: 'INVALID_PARAMETERS',
 			parameters: ['fieldName'],
 		})
@@ -88,7 +88,7 @@ export default class ListRowViewController
 		const cell = this.model.cells[idx]
 
 		if (!cell) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['cellIdx'],
 			})

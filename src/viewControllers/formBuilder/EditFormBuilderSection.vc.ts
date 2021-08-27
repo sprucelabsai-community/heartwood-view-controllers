@@ -2,7 +2,7 @@ import {
 	buildSchema,
 	FieldDefinitions,
 	SchemaValues,
-	SpruceError,
+	SchemaError,
 	Schema,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
@@ -84,7 +84,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 		super(options)
 
 		if (!options.onDone) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['onDone'],
 			})

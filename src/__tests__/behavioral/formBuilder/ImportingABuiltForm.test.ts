@@ -1,5 +1,5 @@
+import { validationErrorAssertUtil } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
 import FormBuilderViewController, {
@@ -33,15 +33,9 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
 	protected static async throwsWhenMissingFields() {
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => this.vc.importObject())
-		errorAssertUtil.assertError(err, 'VALIDATION_FAILED', {
-			errors: [
-				{
-					options: {
-						code: 'MISSING_PARAMETERS',
-						parameters: ['title', 'pages'],
-					},
-				},
-			],
+
+		validationErrorAssertUtil.assertError(err, {
+			missing: ['title', 'pages'],
 		})
 	}
 
@@ -53,15 +47,8 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
 			//@ts-ignore
 			this.vc.importObject({ title: 'go team', pages })
 		)
-		errorAssertUtil.assertError(err, 'VALIDATION_FAILED', {
-			errors: [
-				{
-					options: {
-						code: 'INVALID_PARAMETERS',
-						parameters: ['pages'],
-					},
-				},
-			],
+		validationErrorAssertUtil.assertError(err, {
+			invalid: ['pages'],
 		})
 	}
 
@@ -71,33 +58,21 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
 			//@ts-ignore
 			this.vc.importObject({ title: 'go team', pages: [{ title: 'yay' }] })
 		)
-		errorAssertUtil.assertError(err, 'VALIDATION_FAILED', {
-			errors: [
-				{
-					options: {
-						code: 'MISSING_PARAMETERS',
-						parameters: ['pages.schema', 'pages.sections'],
-					},
-				},
-			],
+
+		validationErrorAssertUtil.assertError(err, {
+			missing: ['pages.schema'],
 		})
 	}
 
 	@test(`bad pages '[{}]'`, [{}])
-	protected static async throwsMoreSPecificERrorsPassedBadPages(pages: any) {
+	protected static async throwsMoreSPecificErrorsPassedBadPages(pages: any) {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			this.vc.importObject({ title: 'go team', pages })
 		)
-		errorAssertUtil.assertError(err, 'VALIDATION_FAILED', {
-			errors: [
-				{
-					options: {
-						code: 'MISSING_PARAMETERS',
-						parameters: ['pages.title', 'pages.schema', 'pages.sections'],
-					},
-				},
-			],
+
+		validationErrorAssertUtil.assertError(err, {
+			missing: ['pages.title', 'pages.schema', 'pages.sections'],
 		})
 	}
 

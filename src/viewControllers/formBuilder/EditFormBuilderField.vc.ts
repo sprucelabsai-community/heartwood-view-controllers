@@ -2,7 +2,7 @@ import {
 	Schema,
 	buildSchema,
 	FieldDefinitions,
-	SpruceError,
+	SchemaError,
 	SchemaValues,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
@@ -144,7 +144,7 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 		const types = Object.keys(formBuilderFieldTypes)
 
 		if (!types.includes(options.type)) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['type'],
 				friendlyMessage: `Field type must be one of the following:\n\n${types.join(
@@ -180,7 +180,7 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 		}
 
 		if (missing.length > 0) {
-			throw new SpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})
