@@ -41,7 +41,7 @@ ${script}`
 				C.__imported = true
 				return C
 			}) as any
-		} catch (err) {
+		} catch (err: any) {
 			throw new SpruceError({
 				code: 'INVALID_VIEW_CONTROLLER_SOURCE',
 				originalError: err,

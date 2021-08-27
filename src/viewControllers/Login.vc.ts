@@ -139,7 +139,7 @@ export default class LoginViewController
 				eventResponseUtil.getFirstResponseOrThrow(pinResults)
 
 			this.userChallenge = challenge
-		} catch (err) {
+		} catch (err: any) {
 			this.loginForm.setErrors([
 				{
 					code: 'INVALID_PARAMETER',
@@ -173,7 +173,7 @@ export default class LoginViewController
 			Authenticator.getInstance().setSessionToken(token, person)
 
 			await this.loginHandler?.({ person })
-		} catch (err) {
+		} catch (err: any) {
 			this.loginForm.setErrors([
 				{
 					code: 'INVALID_PARAMETER',

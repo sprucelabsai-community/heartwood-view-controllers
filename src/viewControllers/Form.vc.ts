@@ -175,8 +175,11 @@ export default class FormViewController<
 		const errorsByField: Record<string, FieldError[]> = {}
 		try {
 			validateSchemaValues(this.model.schema, this.model.values)
-		} catch (err) {
-			if (err.options?.code === 'VALIDATION_FAILED') {
+		} catch (err: any) {
+			if (
+				err instanceof SchemaError &&
+				err.options?.code === 'VALIDATION_FAILED'
+			) {
 				err.options.errors?.forEach((err) => {
 					if (!errorsByField[err.name]) {
 						errorsByField[err.name] = []
