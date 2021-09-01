@@ -20,7 +20,8 @@
       "sync.schemas": "--shouldFetchCoreSchemas false --moduleToImportFromWhenRemote @sprucelabs/heartwood-view-controllers"
     },
     "upgradeIgnoreList": [
-      "globby"
+      "globby",
+      "terser-webpack-plugin"
     ]
   },
   "keywords": [
@@ -82,7 +83,7 @@
     "dotenv": "^10.0.0",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
-    "terser-webpack-plugin": "^5.1.4",
+    "terser-webpack-plugin": "5.1.4",
     "webpack": "^5.51.1"
   },
   "devDependencies": {
@@ -111,6 +112,9 @@
     "tsconfig-paths": "^3.11.0",
     "typescript": "^4.3.5",
     "yarn-upgrade-all": "^0.5.4"
+  },
+  "resolutions": { 
+    "terser-webpack-plugin": "5.1.4"
   },
   "engines": {
     "node": ">=12.x",
