@@ -75,7 +75,6 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static rendersValidModel() {
-		//TODO make a form builder like card but with shouldAllowEditing
 		const model = this.renderVc()
 		delete model.shouldAllowEditing
 		validateSchemaValues(cardSchema, model)
