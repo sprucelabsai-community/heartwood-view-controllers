@@ -32,6 +32,7 @@
     "url": "https://github.com/sprucelabsai/heartwood-view-controllers/issues"
   },
   "scripts": {
+    "preinstall": "git config core.hooksPath .githooks",
     "boot": "node build/index",
     "boot.local": "node -r ts-node/register -r tsconfig-paths/register ./src/index",
     "build": "yarn build.dev",
