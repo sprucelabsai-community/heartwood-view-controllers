@@ -160,15 +160,7 @@ export default class ViewControllerExporter {
 			},
 			optimization: {
 				minimize: true,
-				minimizer: [
-					new TerserPlugin({
-						terserOptions: {
-							output: {
-								ascii_only: true,
-							},
-						},
-					}),
-				],
+				minimizer: [new TerserPlugin()],
 			},
 		}
 	}
