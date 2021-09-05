@@ -10,7 +10,7 @@
     ]
   },
   "scriptUpdater": {
-    "skips": []
+    "skipped": []
   },
   "skipped": [
     "skill"
