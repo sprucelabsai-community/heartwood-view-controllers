@@ -119,7 +119,7 @@ export default class ViewControllerExporter {
 					buffer: false,
 					assert: false,
 					'mongodb-client-encryption': false,
-					tty: false
+					tty: false,
 				},
 			},
 			output: {
