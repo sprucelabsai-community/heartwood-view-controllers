@@ -93,7 +93,7 @@
     "@sprucelabs/esm-postbuild": "^1.0.35",
     "@sprucelabs/jest-json-reporter": "^6.0.29",
     "@sprucelabs/jest-sheets-reporter": "^1.2.62",
-    "@sprucelabs/mercury-client": "^16.10.21",
+    "@sprucelabs/mercury-client": "^16.10.22",
     "@sprucelabs/resolve-path-aliases": "^1.0.69",
     "@sprucelabs/semantic-release": "^4.0.6",
     "@sprucelabs/spruce-skill-booter": "^5.4.36",
