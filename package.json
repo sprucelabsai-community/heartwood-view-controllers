@@ -75,7 +75,7 @@
     "@sprucelabs/mercury-types": "^25.0.16",
     "@sprucelabs/schema": "^25.1.7",
     "@sprucelabs/spruce-core-schemas": "^22.5.44",
-    "@sprucelabs/spruce-event-plugin": "^5.4.35",
+    "@sprucelabs/spruce-event-plugin": "^5.4.36",
     "@sprucelabs/spruce-event-utils": "^15.2.69",
     "@sprucelabs/spruce-skill-utils": "^20.5.45",
     "@swc/core": "^1.2.84",
@@ -86,7 +86,7 @@
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.2.3",
-    "uglify-js": "^3.14.1",
+    "uglify-js": "^3.14.2",
     "webpack": "^5.52.0"
   },
   "devDependencies": {
@@ -96,8 +96,8 @@
     "@sprucelabs/mercury-client": "^16.10.21",
     "@sprucelabs/resolve-path-aliases": "^1.0.69",
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/spruce-skill-booter": "^5.4.35",
-    "@sprucelabs/spruce-test-fixtures": "^5.4.35",
+    "@sprucelabs/spruce-skill-booter": "^5.4.36",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.36",
     "@sprucelabs/test": "^7.7.56",
     "@sprucelabs/test-utils": "^3.0.54",
     "@types/lodash": "^4.14.172",
