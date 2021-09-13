@@ -72,7 +72,6 @@
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-typescript": "^7.15.0",
     "@sprucelabs/error": "^5.0.3",
-    "@sprucelabs/mercury-core-events": "^1.1.0",
     "@sprucelabs/mercury-types": "^26.1.0",
     "@sprucelabs/schema": "^25.3.1",
     "@sprucelabs/spruce-core-schemas": "^22.5.48",
@@ -91,6 +90,7 @@
     "webpack": "^5.52.1"
   },
   "devDependencies": {
+    "@sprucelabs/mercury-core-events": "^1.1.0",
     "@sprucelabs/esm-postbuild": "^1.0.40",
     "@sprucelabs/jest-json-reporter": "^6.0.33",
     "@sprucelabs/jest-sheets-reporter": "^1.2.66",
