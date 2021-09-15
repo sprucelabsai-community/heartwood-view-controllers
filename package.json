@@ -91,12 +91,12 @@
     "webpack": "^5.52.1"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.41",
+    "@sprucelabs/esm-postbuild": "^1.0.42",
     "@sprucelabs/jest-json-reporter": "^6.0.36",
     "@sprucelabs/jest-sheets-reporter": "^1.2.69",
     "@sprucelabs/mercury-client": "^16.10.49",
     "@sprucelabs/mercury-core-events": "^1.2.5",
-    "@sprucelabs/resolve-path-aliases": "^1.0.75",
+    "@sprucelabs/resolve-path-aliases": "^1.0.76",
     "@sprucelabs/semantic-release": "^4.0.6",
     "@sprucelabs/spruce-skill-booter": "^5.4.52",
     "@sprucelabs/test": "^7.7.60",
