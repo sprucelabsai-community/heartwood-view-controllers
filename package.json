@@ -75,7 +75,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@sprucelabs/error": "^5.0.18",
     "@sprucelabs/mercury-types": "^26.1.36",
-    "@sprucelabs/schema": "^25.3.23",
+    "@sprucelabs/schema": "^25.3.24",
     "@sprucelabs/spruce-core-schemas": "^22.5.85",
     "@sprucelabs/spruce-event-utils": "^16.0.61",
     "@sprucelabs/spruce-skill-utils": "^20.5.101",
@@ -91,11 +91,11 @@
     "webpack": "^5.53.0"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.62",
+    "@sprucelabs/esm-postbuild": "^1.0.63",
     "@sprucelabs/jest-json-reporter": "^6.0.43",
     "@sprucelabs/jest-sheets-reporter": "^1.2.75",
     "@sprucelabs/mercury-client": "^16.10.50",
-    "@sprucelabs/mercury-core-events": "^1.2.44",
+    "@sprucelabs/mercury-core-events": "^1.2.45",
     "@sprucelabs/resolve-path-aliases": "^1.0.80",
     "@sprucelabs/semantic-release": "^4.0.6",
     "@sprucelabs/spruce-skill-booter": "^5.4.63",
