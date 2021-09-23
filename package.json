@@ -77,7 +77,7 @@
     "@sprucelabs/mercury-types": "^26.1.99",
     "@sprucelabs/schema": "^25.3.66",
     "@sprucelabs/spruce-core-schemas": "^22.5.133",
-    "@sprucelabs/spruce-event-utils": "^16.0.128",
+    "@sprucelabs/spruce-event-utils": "^16.0.129",
     "@sprucelabs/spruce-skill-utils": "^20.5.149",
     "@swc/core": "^1.2.89",
     "babel-loader": "^8.2.2",
