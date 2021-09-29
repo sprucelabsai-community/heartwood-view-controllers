@@ -1,3 +1,5 @@
+## [33.0.346](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.345...v33.0.346) (2021-09-29)
+
 ## [33.0.345](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.344...v33.0.345) (2021-09-29)
 
 ## [33.0.344](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.343...v33.0.344) (2021-09-29)
