@@ -95,7 +95,7 @@
     "@sprucelabs/jest-json-reporter": "^6.0.187",
     "@sprucelabs/jest-sheets-reporter": "^1.2.196",
     "@sprucelabs/mercury-client": "^16.10.168",
-    "@sprucelabs/mercury-core-events": "^1.2.368",
+    "@sprucelabs/mercury-core-events": "^1.2.369",
     "@sprucelabs/resolve-path-aliases": "^1.0.208",
     "@sprucelabs/semantic-release": "^4.0.7",
     "@sprucelabs/spruce-skill-booter": "^5.4.129",
