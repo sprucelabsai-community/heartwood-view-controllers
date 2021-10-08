@@ -126,8 +126,24 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		assert.doesInclude(contents, 'go-team')
 	}
 
-	@test()
+	@test.only()
 	protected static async canExportViewThatImportsSomethingFromNodeModules() {
+		const destination = diskUtil.resolvePath(
+			__dirname,
+			'..',
+			'..',
+			'..',
+			'src',
+			'__tests__',
+			'testDirsAndFiles',
+			'skill_import_from_node_module',
+			'node_modules',
+			'test.ts'
+		)
+		const contents = `export type Test = 'test'`
+
+		diskUtil.writeFile(destination, contents)
+
 		this.exporter = ViewControllerExporter.Exporter(buildCwd_nodeModulesImport)
 
 		await this.exporter.export({
