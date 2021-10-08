@@ -21,11 +21,6 @@ export const importExportSource =
 	pathUtil.sep +
 	diskUtil.resolvePath('src', '.spruce', 'views', 'views.ts')
 
-export const importExportDestination = diskUtil.resolvePath(
-	diskUtil.createRandomTempDir(),
-	'bundle.js'
-)
-
 export const importExportSource_noIds = diskUtil.resolvePath(
 	__dirname,
 	'..',
@@ -53,6 +48,24 @@ export const importExportSource_syntaxError = diskUtil.resolvePath(
 	'__tests__',
 	'testDirsAndFiles',
 	'skill_syntax_error',
+	'src',
+	'.spruce',
+	'views',
+	'views.ts'
+)
+
+export const buildCwd_nodeModulesImport = diskUtil.resolvePath(
+	__dirname,
+	'..',
+	'..',
+	'src',
+	'__tests__',
+	'testDirsAndFiles',
+	'skill_import_from_node_module'
+)
+
+export const importExportSource_nodeModulesImport = diskUtil.resolvePath(
+	buildCwd_nodeModulesImport,
 	'src',
 	'.spruce',
 	'views',

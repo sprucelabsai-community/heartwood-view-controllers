@@ -26,6 +26,8 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 
 				if (options.originalError) {
 					message += ' Original error:\n\n' + options.originalError.stack
+				} else {
+					message += ' No webpack error was provided!'
 				}
 				break
 

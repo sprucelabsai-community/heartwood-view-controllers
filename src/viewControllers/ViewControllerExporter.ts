@@ -131,7 +131,7 @@ export default class ViewControllerExporter {
 				rules: [
 					{
 						test: /\.ts$/,
-						exclude: /node_modules/,
+						// exclude: /node_modules/, // **/node_modules/*.d.ts files are being imported downstream once this package is exported. Started 10/5/2021
 						use: {
 							loader: `babel-loader`,
 							options: {

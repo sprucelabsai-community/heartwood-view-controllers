@@ -4,9 +4,10 @@ import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import {
+	buildCwd_nodeModulesImport,
 	importExportCwd,
-	importExportDestination,
 	importExportSource,
+	importExportSource_nodeModulesImport,
 	importExportSource_syntaxError,
 } from '../../tests/constants'
 import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
@@ -14,12 +15,18 @@ import ViewControllerExporter from '../../viewControllers/ViewControllerExporter
 export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static readonly source = importExportSource
 	private static readonly buildCwd = importExportCwd
-	private static readonly destination = importExportDestination
+	private static destination: string
 
 	private static exporter: ViewControllerExporter
 
 	protected static async beforeEach() {
 		await super.beforeEach()
+
+		this.destination = diskUtil.resolvePath(
+			diskUtil.createRandomTempDir(),
+			'bundle.js'
+		)
+
 		this.exporter = ViewControllerExporter.Exporter(this.buildCwd)
 	}
 
@@ -117,5 +124,15 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
 		const contents = diskUtil.readFile(this.destination)
 		assert.doesInclude(contents, 'go-team')
+	}
+
+	@test()
+	protected static async canExportViewThatImportsSomethingFromNodeModules() {
+		this.exporter = ViewControllerExporter.Exporter(buildCwd_nodeModulesImport)
+
+		await this.exporter.export({
+			source: importExportSource_nodeModulesImport,
+			destination: this.destination,
+		})
 	}
 }
