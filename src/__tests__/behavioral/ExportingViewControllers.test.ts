@@ -126,7 +126,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		assert.doesInclude(contents, 'go-team')
 	}
 
-	@test.only()
+	@test()
 	protected static async canExportViewThatImportsSomethingFromNodeModules() {
 		const destination = diskUtil.resolvePath(
 			__dirname,
