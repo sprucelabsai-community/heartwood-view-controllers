@@ -6,11 +6,6 @@ import * as constants from '../../tests/constants'
 import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
 import ViewControllerImporter from '../../viewControllers/ViewControllerImporter'
 
-const importExportDestination = diskUtil.resolvePath(
-	diskUtil.createRandomTempDir(),
-	'bundle.js'
-)
-
 export default class ViewControllerImporterTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {}
 	private static importer: ViewControllerImporter
@@ -22,7 +17,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
 		await exporter.export({
 			source: constants.importExportSource,
-			destination: importExportDestination,
+			destination: constants.importExportDestination,
 		})
 
 		await exporter.export({

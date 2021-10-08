@@ -54,6 +54,11 @@ export const importExportSource_syntaxError = diskUtil.resolvePath(
 	'views.ts'
 )
 
+export const importExportDestination = diskUtil.resolvePath(
+	diskUtil.createRandomTempDir(),
+	'bundle.js'
+)
+
 export const buildCwd_nodeModulesImport = diskUtil.resolvePath(
 	__dirname,
 	'..',
