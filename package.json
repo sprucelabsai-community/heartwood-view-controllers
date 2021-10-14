@@ -92,10 +92,10 @@
     "webpack": "^5.58.2"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.262",
+    "@sprucelabs/esm-postbuild": "^1.0.263",
     "@sprucelabs/jest-json-reporter": "^6.0.204",
     "@sprucelabs/jest-sheets-reporter": "^1.2.213",
-    "@sprucelabs/mercury-client": "^16.13.10",
+    "@sprucelabs/mercury-client": "^16.13.11",
     "@sprucelabs/mercury-core-events": "^1.2.455",
     "@sprucelabs/resolve-path-aliases": "^1.0.213",
     "@sprucelabs/semantic-release": "^4.0.7",
@@ -103,7 +103,7 @@
     "@sprucelabs/test": "^7.7.192",
     "@sprucelabs/test-utils": "^3.0.200",
     "@types/lodash": "^4.14.175",
-    "@types/node": "^16.10.9",
+    "@types/node": "^16.11.0",
     "@types/terser-webpack-plugin": "^5.2.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
