@@ -99,7 +99,7 @@
     "@sprucelabs/mercury-core-events": "^1.2.492",
     "@sprucelabs/resolve-path-aliases": "^1.0.213",
     "@sprucelabs/semantic-release": "^4.0.7",
-    "@sprucelabs/spruce-skill-booter": "^5.4.152",
+    "@sprucelabs/spruce-skill-booter": "^5.4.153",
     "@sprucelabs/test": "^7.7.194",
     "@sprucelabs/test-utils": "^3.0.203",
     "@types/lodash": "^4.14.175",
