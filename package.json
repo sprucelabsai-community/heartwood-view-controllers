@@ -80,7 +80,7 @@
     "@sprucelabs/spruce-core-schemas": "^22.5.414",
     "@sprucelabs/spruce-event-utils": "^16.0.437",
     "@sprucelabs/spruce-skill-utils": "^20.6.267",
-    "@swc/core": "^1.2.98",
+    "@swc/core": "^1.2.99",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^10.0.0",
