@@ -1,3 +1,10 @@
+# [33.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.666...v33.1.0) (2021-10-18)
+
+
+### Features
+
+* color 4 compliment transparent ([05b9b42](https://github.com/sprucelabsai/heartwood-view-controllers/commit/05b9b42))
+
 ## [33.0.666](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.665...v33.0.666) (2021-10-18)
 
 ## [33.0.665](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.0.664...v33.0.665) (2021-10-18)
