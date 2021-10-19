@@ -94,6 +94,13 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Border, outlines and highlights',
 	                options: undefined
 	            },
+	            /** Color 4 (compliment, transparent). Lighter version of borbers, outlines, and highlights */
+	            'color4ComplimentTransparent': {
+	                label: 'Color 4 (compliment, transparent)',
+	                type: 'text',
+	                hint: 'Lighter version of borbers, outlines, and highlights',
+	                options: undefined
+	            },
 	            /** Color 4 (inverse). Background for buttons and menu items. */
 	            'color4Inverse': {
 	                label: 'Color 4 (inverse)',

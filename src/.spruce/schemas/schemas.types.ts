@@ -283,6 +283,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color4'?: string| undefined | null
 				/** Color 4 (compliment). Border, outlines and highlights */
 				'color4Compliment'?: string| undefined | null
+				/** Color 4 (compliment, transparent). Lighter version of borbers, outlines, and highlights */
+				'color4ComplimentTransparent'?: string| undefined | null
 				/** Color 4 (inverse). Background for buttons and menu items. */
 				'color4Inverse'?: string| undefined | null
 				/** Color (inverse, compliment). Background for buttons and menu items */
@@ -386,6 +388,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Color 4 (compliment)',
 			                type: 'text',
 			                hint: 'Border, outlines and highlights',
+			                options: undefined
+			            },
+			            /** Color 4 (compliment, transparent). Lighter version of borbers, outlines, and highlights */
+			            'color4ComplimentTransparent': {
+			                label: 'Color 4 (compliment, transparent)',
+			                type: 'text',
+			                hint: 'Lighter version of borbers, outlines, and highlights',
 			                options: undefined
 			            },
 			            /** Color 4 (inverse). Background for buttons and menu items. */
