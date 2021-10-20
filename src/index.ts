@@ -64,6 +64,9 @@ export { default as criticalErrorSchema } from '#spruce/schemas/heartwoodViewCon
 export { default as cardFooterButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardFooterButton.schema'
 export { default as themeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/theme.schema'
 export { default as themePropsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/themeProps.schema'
+export { default as calendarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
+export { default as calendarPersonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarPerson.schema'
+export { default as calendarTimeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
