@@ -1,3 +1,10 @@
+# [33.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.1.61...v33.2.0) (2021-10-20)
+
+
+### Features
+
+* calendar builder and skill view full screen ([9440ee0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9440ee0))
+
 ## [33.1.61](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.1.60...v33.1.61) (2021-10-20)
 
 ## [33.1.60](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.1.59...v33.1.60) (2021-10-20)
