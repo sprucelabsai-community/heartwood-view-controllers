@@ -2895,6 +2895,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'hour': number
+				
+				'minute': number
 		}
 
 		interface CalendarTimeSchema extends SpruceSchema.Schema {
@@ -2906,6 +2908,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    fields: {
 			            /** . */
 			            'hour': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'minute': {
 			                type: 'number',
 			                isRequired: true,
 			                options: undefined

@@ -7,6 +7,10 @@ const timeSchema = buildSchema({
 			type: 'number',
 			isRequired: true,
 		},
+		minute: {
+			type: 'number',
+			isRequired: true,
+		},
 	},
 })
 

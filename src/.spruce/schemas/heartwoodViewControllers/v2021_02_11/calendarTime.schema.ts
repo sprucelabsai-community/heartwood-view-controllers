@@ -16,6 +16,12 @@ const calendarTimeSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Cal
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'minute': {
+	                type: 'number',
+	                isRequired: true,
+	                options: undefined
+	            },
 	    }
 }
 
