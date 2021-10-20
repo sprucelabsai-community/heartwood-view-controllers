@@ -87,18 +87,18 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Foreground for buttons and menu items.',
 	                options: undefined
 	            },
-	            /** Color 4 (compliment). Border, outlines and highlights */
+	            /** Color 4 (compliment). Borders for buttons and menu items. */
 	            'color4Compliment': {
 	                label: 'Color 4 (compliment)',
 	                type: 'text',
-	                hint: 'Border, outlines and highlights',
+	                hint: 'Borders for buttons and menu items.',
 	                options: undefined
 	            },
-	            /** Color 4 (compliment, transparent). Lighter version of borbers, outlines, and highlights */
+	            /** Color 4 (compliment, transparent). Lighter version of borders, outlines, and highlights */
 	            'color4ComplimentTransparent': {
 	                label: 'Color 4 (compliment, transparent)',
 	                type: 'text',
-	                hint: 'Lighter version of borbers, outlines, and highlights',
+	                hint: 'Lighter version of borders, outlines, and highlights',
 	                options: undefined
 	            },
 	            /** Color 4 (inverse). Background for buttons and menu items. */

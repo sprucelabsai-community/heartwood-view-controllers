@@ -15,6 +15,10 @@ export default buildSchema({
 			label: 'Center vertically',
 			defaultValue: false,
 		},
+		isFullScreen: {
+			type: 'boolean',
+			label: 'Full screen',
+		},
 		layouts: {
 			type: 'schema',
 			label: 'Layout',

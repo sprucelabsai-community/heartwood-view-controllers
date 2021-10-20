@@ -70,12 +70,12 @@ export default buildSchema({
 						color4Compliment: {
 							type: 'text',
 							label: 'Color 4 (compliment)',
-							hint: 'Border, outlines and highlights',
+							hint: 'Borders for buttons and menu items.',
 						},
 						color4ComplimentTransparent: {
 							type: 'text',
 							label: 'Color 4 (compliment, transparent)',
-							hint: 'Lighter version of borbers, outlines, and highlights',
+							hint: 'Lighter version of borders, outlines, and highlights',
 						},
 						color4Inverse: {
 							type: 'text',

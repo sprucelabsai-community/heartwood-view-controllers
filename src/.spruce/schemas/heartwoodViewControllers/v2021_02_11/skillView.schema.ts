@@ -23,6 +23,12 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                defaultValue: false,
 	                options: undefined
 	            },
+	            /** Full screen. */
+	            'isFullScreen': {
+	                label: 'Full screen',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Layout. */
 	            'layouts': {
 	                label: 'Layout',
