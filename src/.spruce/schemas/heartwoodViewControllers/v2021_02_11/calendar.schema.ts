@@ -11,6 +11,12 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	name: 'Calendar',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>`,}
+	            },
 	            /** People. */
 	            'people': {
 	                label: 'People',

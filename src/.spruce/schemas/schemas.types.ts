@@ -1074,6 +1074,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** List. */
 				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Calendar. */
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Alignment. */
@@ -1163,6 +1165,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'List',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Calendar. */
+			            'calendar': {
+			                label: 'Calendar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderContentsAsGrid': {
@@ -2953,6 +2961,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface Calendar {
 			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>)| undefined | null
 				/** People. */
 				'people': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]
 				/** Minimum time. The earliest time to show in the calendar. */
@@ -2974,6 +2984,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Calendar',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>`,}
+			            },
 			            /** People. */
 			            'people': {
 			                label: 'People',

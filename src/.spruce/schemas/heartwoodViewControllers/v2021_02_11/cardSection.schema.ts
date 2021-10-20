@@ -7,6 +7,7 @@ import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewCon
 import bigFormSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
 import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/button.schema'
 import listSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
+import calendarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 
 const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -91,6 +92,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                label: 'List',
 	                type: 'schema',
 	                options: {schema: listSchema_v2021_02_11,}
+	            },
+	            /** Calendar. */
+	            'calendar': {
+	                label: 'Calendar',
+	                type: 'schema',
+	                options: {schema: calendarSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {

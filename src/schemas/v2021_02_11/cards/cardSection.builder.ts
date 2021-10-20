@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { calendarSchema } from '../../..'
 import buttonBuilder from '../button.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
@@ -84,6 +85,13 @@ export default buildSchema({
 			label: 'List',
 			options: {
 				schema: listBuilder,
+			},
+		},
+		calendar: {
+			type: 'schema',
+			label: 'Calendar',
+			options: {
+				schema: calendarSchema,
 			},
 		},
 		shouldRenderContentsAsGrid: {

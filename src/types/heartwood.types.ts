@@ -38,6 +38,7 @@ import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
+import '@sprucelabs/mercury-core-events'
 export type ErrorHandler = (message: string) => void
 
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person

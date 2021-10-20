@@ -317,7 +317,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public handleClickPageTitles() {
-		const vc = this.vcFactory.Controller('managePageTitles', {
+		const vc = this.vcFactory.Controller('managePageTitles' as any, {
 			onDone: () => {
 				void dialog.hide()
 			},
@@ -354,13 +354,13 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		//@ts-ignore
 		const { compiledOptions } = pageVc.getField(fieldName)
 
-		const vc = this.vcFactory.Controller('editFormBuilderField', {
+		const vc = this.vcFactory.Controller('editFormBuilderField' as any, {
 			...compiledOptions,
 			//@ts-ignore
 			options: {
 				...compiledOptions.options,
 			},
-			onDone: (options) => {
+			onDone: (options: any) => {
 				const { name, ...fieldDefinition } = options
 				void dialog.hide()
 				//@ts-ignore

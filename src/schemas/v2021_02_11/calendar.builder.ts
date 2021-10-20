@@ -14,6 +14,14 @@ export default buildSchema({
 	id: 'calendar',
 	name: 'Calendar',
 	fields: {
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType:
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>',
+			},
+		},
 		people: {
 			type: 'schema',
 			label: 'People',
