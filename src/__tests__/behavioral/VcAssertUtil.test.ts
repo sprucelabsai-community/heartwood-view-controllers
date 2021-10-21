@@ -23,10 +23,12 @@ declare module '../../types/heartwood.types' {
 		bad: BadSkillViewController
 		newCard: NewTestingCardViewController
 		goodWithDialog: GoodWithDialogSkillViewController
+		toolBeltSvc: ToolBeltSkillViewController
 	}
 	interface ViewControllerOptionsMap {
 		good: SkillView
 		bad: any
+		toolBeltSvc: { toolBelt?: ToolBelt | null }
 	}
 }
 
@@ -47,6 +49,24 @@ class GoodSkillViewController implements SkillViewController {
 
 	public render() {
 		return this.model
+	}
+}
+
+type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+
+class ToolBeltSkillViewController implements SkillViewController {
+	private toolBelt?: ToolBelt | null
+	public constructor(options: { toolBelt: ToolBelt | null } | null) {
+		this.toolBelt = options?.toolBelt
+	}
+	public async load() {}
+	public triggerRender() {}
+
+	public render(): SkillView {
+		return {
+			toolBelt: this.toolBelt,
+			layouts: [],
+		}
 	}
 }
 
@@ -78,6 +98,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		good: GoodSkillViewController,
 		goodWithDialog: GoodWithDialogSkillViewController,
 		newCard: NewTestingCardViewController,
+		toolBeltSvc: ToolBeltSkillViewController,
 	}
 
 	@test()
@@ -633,6 +654,42 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.isTrue(wasPrimaryHit)
 		assert.isTrue(wasSecondaryHit)
+	}
+
+	@test()
+	protected static hasASsertRendersPowerTools() {
+		assert.isFunction(vcAssertUtil.assertRendersPowerTools)
+	}
+
+	@test('throws if given nothing', null)
+	@test('throws if given no tools', { tools: [] })
+	protected static throwsIfSkillViewControllerDoesNotRenderPowerTools(
+		toolBelt: ToolBelt | null
+	) {
+		const vc = this.Controller('toolBeltSvc', { toolBelt })
+
+		assert.doesThrow(() => vcAssertUtil.assertRendersPowerTools(vc as any))
+		vcAssertUtil.assertDoesNotRenderPowerTools(vc as any)
+	}
+
+	@test()
+	protected static knowsIfGivenPowerTools() {
+		const vc = this.Controller('toolBeltSvc', {
+			toolBelt: {
+				tools: [
+					{
+						id: 'add',
+						lineIcon: 'add',
+						card: {} as any,
+					},
+				],
+			},
+		})
+
+		vcAssertUtil.assertRendersPowerTools(vc as any)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertDoesNotRenderPowerTools(vc as any)
+		)
 	}
 
 	private static BadController() {

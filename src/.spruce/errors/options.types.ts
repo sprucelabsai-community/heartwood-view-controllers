@@ -16,10 +16,13 @@ export interface InvalidSkillViewControllerErrorOptions extends SpruceErrors.Hea
 export interface ExportFailedErrorOptions extends SpruceErrors.HeartwoodViewControllers.ExportFailed, ISpruceErrorOptions {
 	code: 'EXPORT_FAILED'
 }
+export interface DuplicateToolIdErrorOptions extends SpruceErrors.HeartwoodViewControllers.DuplicateToolId, ISpruceErrorOptions {
+	code: 'DUPLICATE_TOOL_ID'
+}
 export interface DuplicateRowIdErrorOptions extends SpruceErrors.HeartwoodViewControllers.DuplicateRowId, ISpruceErrorOptions {
 	code: 'DUPLICATE_ROW_ID'
 }
 
-type ErrorOptions =  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | DuplicateRowIdErrorOptions 
+type ErrorOptions =  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions 
 
 export default ErrorOptions

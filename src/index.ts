@@ -67,6 +67,8 @@ export { default as themePropsSchema } from '#spruce/schemas/heartwoodViewContro
 export { default as calendarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 export { default as calendarPersonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarPerson.schema'
 export { default as calendarTimeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
+export { default as toolBeltSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toolBelt.schema'
+export { default as toolBeltToolSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toolBeltTool.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

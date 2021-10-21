@@ -6,6 +6,6 @@ export default buildSchema({
 	name: 'Line icon',
 	description: '',
 	fields: {
-		...lineIconFields,
+		...(lineIconFields as any),
 	},
 })

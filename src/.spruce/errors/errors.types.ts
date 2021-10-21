@@ -148,6 +148,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface DuplicateToolId {
+		
+			
+			'id': string
+	}
+
+	export interface DuplicateToolIdSchema extends SpruceSchema.Schema {
+		id: 'duplicateToolId',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Dulicate tool id',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type DuplicateToolIdEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DuplicateToolIdSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface DuplicateRowId {
 		
 			

@@ -482,6 +482,25 @@ const vcAssertUtil = {
 			'Your card was not supposed to render a critical error!'
 		)
 	},
+
+	assertRendersPowerTools(svc: SkillViewController) {
+		const model = renderUtil.render(svc)
+
+		assert.isTrue(
+			(model.toolBelt?.tools?.length ?? 0) > 0,
+			'Your skill view does not render a tool belt with any tools!'
+		)
+	},
+
+	assertDoesNotRenderPowerTools(svc: SkillViewController) {
+		try {
+			this.assertRendersPowerTools(svc)
+		} catch {
+			return
+		}
+
+		assert.fail(`Your skill view should not be rendering a toolbelt with tools`)
+	},
 }
 
 export default vcAssertUtil

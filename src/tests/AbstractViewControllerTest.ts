@@ -55,6 +55,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSkillTe
 		//@ts-ignore
 		this.render(vc)
 
+		vcAssertUtil.attachTriggerRenderCounter(vc)
+
 		return vc
 	}
 

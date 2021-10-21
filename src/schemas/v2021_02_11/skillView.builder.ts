@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import layoutBuilder from './layout.builder'
+import toolBeltBuilder from './toolBelt.builder'
 
 export default buildSchema({
 	id: 'skillView',
@@ -26,6 +27,13 @@ export default buildSchema({
 			isArray: true,
 			options: {
 				schema: layoutBuilder,
+			},
+		},
+		toolBelt: {
+			type: 'schema',
+			label: 'Tool belt',
+			options: {
+				schema: toolBeltBuilder,
 			},
 		},
 	},

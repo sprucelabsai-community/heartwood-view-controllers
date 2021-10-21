@@ -587,16 +587,18 @@ export const fancyIcons = [
 
 export const defaultSubmitButtonLabel = 'Go!'
 
+export const lineIconChoices = lineIcons.map((i) => ({
+	value: i,
+	label: i,
+}))
+
 export const lineIconFields: SchemaFieldsByName = {
 	name: {
 		type: 'select',
 		label: 'Name',
 		isRequired: true,
 		options: {
-			choices: lineIcons.map((i) => ({
-				value: i,
-				label: i,
-			})),
+			choices: lineIconChoices,
 		},
 	},
 }

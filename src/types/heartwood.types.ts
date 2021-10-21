@@ -39,6 +39,10 @@ import SwipeViewControllerImpl, {
 } from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
+import {
+	ToolBeltViewController,
+	ToolBeltViewControllerOptions,
+} from '../viewControllers/ToolBelt.vc'
 export type ErrorHandler = (message: string) => void
 
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
@@ -182,6 +186,7 @@ export interface ViewControllerMap {
 	confirm: ConfirmViewController
 	formBuilder: FormBuilderViewController
 	list: ListViewController
+	toolBelt: ToolBeltViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -195,6 +200,7 @@ export interface ViewControllerOptionsMap {
 	confirm: ConfirmViewControllerOptions
 	formBuilder: FormBuilderViewControllerOptions
 	list: ListViewControllerOptions
+	toolBelt: ToolBeltViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
