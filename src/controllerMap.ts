@@ -7,7 +7,7 @@ import FormViewController from './viewControllers/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
 import SwipeViewController from './viewControllers/Swipe.vc'
-import { ToolBeltViewController } from './viewControllers/ToolBelt.vc'
+import ToolBeltViewController from './viewControllers/ToolBelt.vc'
 
 export const CORE_CONTROLLER_MAP = {
 	form: FormViewController,

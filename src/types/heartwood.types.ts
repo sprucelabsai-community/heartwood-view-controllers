@@ -37,8 +37,7 @@ import LoginViewController, {
 import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'
-import {
-	ToolBeltViewController,
+import ToolBeltViewController, {
 	ToolBeltViewControllerOptions,
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'

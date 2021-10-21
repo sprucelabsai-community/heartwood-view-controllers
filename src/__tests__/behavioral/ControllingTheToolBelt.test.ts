@@ -3,7 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { renderUtil, vcAssertUtil } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { ToolBeltViewController } from '../../viewControllers/ToolBelt.vc'
+import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 
 type ToolBeltTool =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool

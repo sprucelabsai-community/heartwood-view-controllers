@@ -5,13 +5,12 @@ import {
 	ViewControllerOptions,
 } from '..'
 import SpruceError from '../errors/SpruceError'
-// import SpruceError from '../errors/SpruceError'
 
 type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 type Tool = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
 export type ToolBeltViewControllerOptions = Partial<ViewModel>
 
-export class ToolBeltViewController extends AbstractViewController<ViewModel> {
+export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
 	public constructor(
 		options: ToolBeltViewControllerOptions & ViewControllerOptions
