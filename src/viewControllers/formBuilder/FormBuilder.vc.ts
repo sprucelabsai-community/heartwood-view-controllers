@@ -41,6 +41,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		| undefined
 
 	private shouldAllowEditing?: boolean
+	//@ts-ignore
 	private __isFormBuilder = true
 
 	public constructor(
