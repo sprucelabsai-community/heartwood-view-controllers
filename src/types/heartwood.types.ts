@@ -13,6 +13,9 @@ import BigFormViewControllerImpl, {
 import ButtonGroupViewController, {
 	ButtonGroupViewControllerOptions,
 } from '../viewControllers/ButtonGroup.vc'
+import CalendarViewController, {
+	CalendarViewControllerOptions,
+} from '../viewControllers/Calendar.vc'
 import CardViewControllerImpl, {
 	CardViewControllerOptions,
 } from '../viewControllers/Card.vc'
@@ -187,6 +190,7 @@ export interface ViewControllerMap {
 	formBuilder: FormBuilderViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
+	calendar: CalendarViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -201,6 +205,7 @@ export interface ViewControllerOptionsMap {
 	formBuilder: FormBuilderViewControllerOptions
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions
+	calendar: CalendarViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

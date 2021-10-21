@@ -1,5 +1,6 @@
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
+import CalendarViewController from './viewControllers/Calendar.vc'
 import CardViewController from './viewControllers/Card.vc'
 import ConfirmViewController from './viewControllers/Confirm.vc'
 import DialogViewController from './viewControllers/Dialog.vc'
@@ -20,4 +21,5 @@ export const CORE_CONTROLLER_MAP = {
 	confirm: ConfirmViewController,
 	list: ListViewController,
 	toolBelt: ToolBeltViewController,
+	calendar: CalendarViewController,
 }

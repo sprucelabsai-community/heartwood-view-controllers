@@ -19,6 +19,7 @@ export { default as LoginViewController } from './viewControllers/Login.vc'
 export { default as FormBuilderViewControllerImpl } from './viewControllers/formBuilder/FormBuilder.vc'
 export { default as SwipeViewControllerImpl } from './viewControllers/Swipe.vc'
 export * from './viewControllers/Swipe.vc'
+export { default as CalendarViewController } from './viewControllers/Calendar.vc'
 
 export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
