@@ -1,3 +1,10 @@
+# [33.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.2.10...v33.3.0) (2021-10-21)
+
+
+### Features
+
+* tool belt vc ([d8a343a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d8a343a))
+
 ## [33.2.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.2.9...v33.2.10) (2021-10-21)
 
 ## [33.2.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.2.8...v33.2.9) (2021-10-21)
