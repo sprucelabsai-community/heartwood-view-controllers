@@ -30,6 +30,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static canBuildFormBuilder() {
 		assert.isTruthy(this.vc)
+		//@ts-ignore
+		assert.isTrue(this.vc.__isFormBuilder)
 	}
 
 	@test()
