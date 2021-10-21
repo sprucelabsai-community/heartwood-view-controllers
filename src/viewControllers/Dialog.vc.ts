@@ -1,4 +1,3 @@
-
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
