@@ -54,8 +54,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			],
 		}
 		const vc = this.Controller('calendar', model)
+		const actual = this.render(vc)
 
-		assert.isEqualDeep(this.render(vc), model)
+		assert.isTrue(actual.controller === vc)
+		delete actual.controller
+
+		assert.isEqualDeep(actual, model)
 	}
 
 	@test(
@@ -122,7 +126,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static canSetTimezoneOffset(time: number) {
 		this.vc.setTimezoneOffsetMs(time)
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
-
 		assert.isEqualDeep(this.render(this.vc).timezoneOffsetMs, time)
 	}
 }

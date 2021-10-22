@@ -76,6 +76,7 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar {
 		return {
 			...this.model,
+			controller: this,
 		}
 	}
 }
