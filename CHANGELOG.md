@@ -1,3 +1,10 @@
+# [34.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.4.2...v34.0.0) (2021-10-22)
+
+
+### Breaking Changes
+
+* toolbelt moved to getter on svc vs view model ([ae3799e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ae3799e))
+
 ## [33.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.4.1...v33.4.2) (2021-10-21)
 
 ## [33.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v33.4.0...v33.4.1) (2021-10-21)
