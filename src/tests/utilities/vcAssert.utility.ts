@@ -521,9 +521,8 @@ const vcAssertUtil = {
 	assertDoesNotRenderCalendar(svc: SkillViewController) {
 		try {
 			this.assertRendersCalendar(svc)
-			return
 		} catch {
-			//@ts-ignore
+			return
 		}
 
 		assert.fail('Your skill view should not be rendering a calendar right now!')
