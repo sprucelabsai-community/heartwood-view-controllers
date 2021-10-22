@@ -1,3 +1,10 @@
+# [34.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.1.23...v34.2.0) (2021-10-22)
+
+
+### Features
+
+* calendar assertions ([4ac3207](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4ac3207))
+
 ## [34.1.23](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.1.22...v34.1.23) (2021-10-22)
 
 ## [34.1.22](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.1.21...v34.1.22) (2021-10-22)
