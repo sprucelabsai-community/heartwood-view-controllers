@@ -61,7 +61,7 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 	}
 
 	public setTimezoneOffsetMs(offsetMs: number): any {
-		if (offsetMs < 0 || offsetMs > 86400000) {
+		if (offsetMs < -12 * 60 * 60 * 1000 || offsetMs > 14 * 60 * 60 * 1000) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['timezoneOffsetMs'],
@@ -69,8 +69,8 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 			})
 		}
 
-		this.triggerRender()
 		this.model.timezoneOffsetMs = offsetMs
+		this.triggerRender()
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar {

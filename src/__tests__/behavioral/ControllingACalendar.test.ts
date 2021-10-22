@@ -108,8 +108,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isEqualDeep(this.render(this.vc).maxTime, time)
 	}
 
-	@test("can't set bad timezone 1", -1)
-	@test("can't set bad timezone 2", 864000001)
+	@test("can't set bad timezone 1", -12 * 60 * 60 * 1001)
+	@test("can't set bad timezone 2", 14 * 60 * 60 * 1001)
 	protected static mustSetValidTimezoneOffset(offset: number) {
 		const err = assert.doesThrow(() => this.vc.setTimezoneOffsetMs(offset))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
@@ -117,8 +117,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		})
 	}
 
-	@test('can set timezoneOffset 1', new Date().getTimezoneOffset() * 60 * 1000)
-	@test('can set timezoneOffset 2', Math.random() * 24 * 60 * 60 * 1000)
+	@test('can set timezoneOffset 1', -12 * 60 * 60 * 1000)
+	@test('can set timezoneOffset 2', 14 * 60 * 60 * 1000)
 	protected static canSetTimezoneOffset(time: number) {
 		this.vc.setTimezoneOffsetMs(time)
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
