@@ -697,6 +697,67 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc as any))
 	}
 
+	@test()
+	protected static async knowsWhenNotRenderingCalendar() {
+		assert.isFunction(vcAssertUtil.assertRendersCalendar)
+
+		const svc = this.Controller('good', {
+			layouts: [{}],
+		})
+
+		assert.doesThrow(() => vcAssertUtil.assertRendersCalendar(svc))
+		vcAssertUtil.assertDoesNotRenderCalendar(svc)
+	}
+
+	@test('knows when rendering in layouts[0] cards[0] sections[0]')
+	protected static knowsWhenRenderingCalendar() {
+		const svc = this.Controller('good', {
+			layouts: [
+				{
+					cards: [
+						{
+							body: {
+								sections: [
+									{
+										calendar: {
+											people: [],
+										},
+									},
+								],
+							},
+						},
+					],
+				},
+			],
+		})
+
+		vcAssertUtil.assertRendersCalendar(svc)
+		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderCalendar(svc))
+	}
+
+	@test()
+	protected static knowsWhenRenderingCalendarInRandomPlaces() {
+		const section = {
+			calendar: {
+				people: [],
+			},
+		}
+		const card = {
+			body: {
+				sections: [...new Array(Math.round(Math.random() * 100)), section],
+			},
+		}
+		const layout = {
+			cards: [...new Array(Math.round(Math.random() * 100)), card],
+		}
+
+		const svc = this.Controller('good', {
+			layouts: [...new Array(Math.round(Math.random() * 100)), layout],
+		})
+
+		vcAssertUtil.assertRendersCalendar(svc)
+	}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController

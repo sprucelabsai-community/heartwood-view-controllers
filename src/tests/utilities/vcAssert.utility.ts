@@ -501,6 +501,33 @@ const vcAssertUtil = {
 
 		assert.fail(`Your skill view should not be rendering a toolbelt with tools`)
 	},
+
+	assertRendersCalendar(svc: SkillViewController) {
+		const model = renderUtil.render(svc)
+
+		for (const layout of model.layouts ?? []) {
+			for (const card of layout?.cards ?? []) {
+				for (const section of card?.body?.sections ?? []) {
+					if (section?.calendar) {
+						return
+					}
+				}
+			}
+		}
+
+		assert.fail('Your skill view does not render a calendar!')
+	},
+
+	assertDoesNotRenderCalendar(svc: SkillViewController) {
+		try {
+			this.assertRendersCalendar(svc)
+			assert.fail(
+				'Your skill view should not be rendering a calendar right now!'
+			)
+		} catch {
+			//@ts-ignore
+		}
+	},
 }
 
 export default vcAssertUtil
