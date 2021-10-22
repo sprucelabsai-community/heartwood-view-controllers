@@ -709,7 +709,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertDoesNotRenderCalendar(svc)
 	}
 
-	@test.only('knows when rendering in layouts[0] cards[0] sections[0]')
+	@test('knows when rendering in layouts[0] cards[0] sections[0]')
 	protected static knowsWhenRenderingCalendar() {
 		const svc = this.Controller('good', {
 			layouts: [
