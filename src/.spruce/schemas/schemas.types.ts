@@ -386,10 +386,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color4Inverse'?: string| undefined | null
 				/** Color (inverse, compliment). Background for buttons and menu items */
 				'color4InverseCompliment'?: string| undefined | null
-				/** Color. The foreground color of the control bar. */
+				/** Control bar color 1. The foreground color of the control bar. */
 				'controlBarColor1'?: string| undefined | null
-				/** Color. The background color of the control bar. */
+				/** Control bar color 2. The background color of the control bar. */
 				'controlBarColor2'?: string| undefined | null
+				/** Tool belt color 2. The background color of the tool belts. */
+				'toolBeltColor2'?: string| undefined | null
 				/** Color. Errors overlayed on a background colored with errorColor1Inverse. */
 				'errorColor1'?: string| undefined | null
 				/** Color. The background used when rendering errors. */
@@ -508,18 +510,25 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'Background for buttons and menu items',
 			                options: undefined
 			            },
-			            /** Color. The foreground color of the control bar. */
+			            /** Control bar color 1. The foreground color of the control bar. */
 			            'controlBarColor1': {
-			                label: 'Color',
+			                label: 'Control bar color 1',
 			                type: 'text',
 			                hint: 'The foreground color of the control bar.',
 			                options: undefined
 			            },
-			            /** Color. The background color of the control bar. */
+			            /** Control bar color 2. The background color of the control bar. */
 			            'controlBarColor2': {
-			                label: 'Color',
+			                label: 'Control bar color 2',
 			                type: 'text',
 			                hint: 'The background color of the control bar.',
+			                options: undefined
+			            },
+			            /** Tool belt color 2. The background color of the tool belts. */
+			            'toolBeltColor2': {
+			                label: 'Tool belt color 2',
+			                type: 'text',
+			                hint: 'The background color of the tool belts.',
 			                options: undefined
 			            },
 			            /** Color. Errors overlayed on a background colored with errorColor1Inverse. */

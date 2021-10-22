@@ -89,13 +89,18 @@ export default buildSchema({
 						},
 						controlBarColor1: {
 							type: 'text',
-							label: 'Color',
+							label: 'Control bar color 1',
 							hint: 'The foreground color of the control bar.',
 						},
 						controlBarColor2: {
 							type: 'text',
-							label: 'Color',
+							label: 'Control bar color 2',
 							hint: 'The background color of the control bar.',
+						},
+						toolBeltColor2: {
+							type: 'text',
+							label: 'Tool belt color 2',
+							hint: 'The background color of the tool belts.',
 						},
 						errorColor1: {
 							type: 'text',

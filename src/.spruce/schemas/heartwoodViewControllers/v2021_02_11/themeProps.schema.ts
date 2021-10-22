@@ -115,18 +115,25 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Background for buttons and menu items',
 	                options: undefined
 	            },
-	            /** Color. The foreground color of the control bar. */
+	            /** Control bar color 1. The foreground color of the control bar. */
 	            'controlBarColor1': {
-	                label: 'Color',
+	                label: 'Control bar color 1',
 	                type: 'text',
 	                hint: 'The foreground color of the control bar.',
 	                options: undefined
 	            },
-	            /** Color. The background color of the control bar. */
+	            /** Control bar color 2. The background color of the control bar. */
 	            'controlBarColor2': {
-	                label: 'Color',
+	                label: 'Control bar color 2',
 	                type: 'text',
 	                hint: 'The background color of the control bar.',
+	                options: undefined
+	            },
+	            /** Tool belt color 2. The background color of the tool belts. */
+	            'toolBeltColor2': {
+	                label: 'Tool belt color 2',
+	                type: 'text',
+	                hint: 'The background color of the tool belts.',
 	                options: undefined
 	            },
 	            /** Color. Errors overlayed on a background colored with errorColor1Inverse. */
