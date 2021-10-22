@@ -483,18 +483,18 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertRendersPowerTools(svc: SkillViewController) {
-		const model = renderUtil.render(svc)
+	assertRendersToolBelt(svc: SkillViewController) {
+		const toolBelt = svc.renderToolBelt()
 
 		assert.isTrue(
-			(model.toolBelt?.tools?.length ?? 0) > 0,
+			(toolBelt?.tools?.length ?? 0) > 0,
 			'Your skill view does not render a tool belt with any tools!'
 		)
 	},
 
-	assertDoesNotRenderPowerTools(svc: SkillViewController) {
+	assertDoesNotRenderToolBelt(svc: SkillViewController) {
 		try {
-			this.assertRendersPowerTools(svc)
+			this.assertRendersToolBelt(svc)
 		} catch {
 			return
 		}

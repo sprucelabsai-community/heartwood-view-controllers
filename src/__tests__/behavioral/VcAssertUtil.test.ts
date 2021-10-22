@@ -47,6 +47,10 @@ class GoodSkillViewController implements SkillViewController {
 	public async load() {}
 	public triggerRender() {}
 
+	public renderToolBelt() {
+		return null
+	}
+
 	public render() {
 		return this.model
 	}
@@ -55,16 +59,19 @@ class GoodSkillViewController implements SkillViewController {
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 
 class ToolBeltSkillViewController implements SkillViewController {
-	private toolBelt?: ToolBelt | null
+	private toolBelt: ToolBelt | null
 	public constructor(options: { toolBelt: ToolBelt | null } | null) {
-		this.toolBelt = options?.toolBelt
+		this.toolBelt = options?.toolBelt ?? null
 	}
 	public async load() {}
 	public triggerRender() {}
 
+	public renderToolBelt() {
+		return this.toolBelt
+	}
+
 	public render(): SkillView {
 		return {
-			toolBelt: this.toolBelt,
 			layouts: [],
 		}
 	}
@@ -658,7 +665,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static hasASsertRendersPowerTools() {
-		assert.isFunction(vcAssertUtil.assertRendersPowerTools)
+		assert.isFunction(vcAssertUtil.assertRendersToolBelt)
 	}
 
 	@test('throws if given nothing', null)
@@ -668,8 +675,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	) {
 		const vc = this.Controller('toolBeltSvc', { toolBelt })
 
-		assert.doesThrow(() => vcAssertUtil.assertRendersPowerTools(vc as any))
-		vcAssertUtil.assertDoesNotRenderPowerTools(vc as any)
+		assert.doesThrow(() => vcAssertUtil.assertRendersToolBelt(vc as any))
+		vcAssertUtil.assertDoesNotRenderToolBelt(vc as any)
 	}
 
 	@test()
@@ -686,10 +693,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertRendersPowerTools(vc as any)
-		assert.doesThrow(() =>
-			vcAssertUtil.assertDoesNotRenderPowerTools(vc as any)
-		)
+		vcAssertUtil.assertRendersToolBelt(vc as any)
+		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc as any))
 	}
 
 	private static BadController() {

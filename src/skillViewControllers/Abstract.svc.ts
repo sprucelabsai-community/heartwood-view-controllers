@@ -7,6 +7,7 @@ import {
 import AbstractViewController from '../viewControllers/Abstract.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 
 export default abstract class AbstractSkillViewController<
 		Args extends Record<string, any> = Record<string, any>
@@ -20,5 +21,10 @@ export default abstract class AbstractSkillViewController<
 		// eslint-disable-next-line no-unused-vars
 		options: SkillViewControllerLoadOptions<Args>
 	) {}
+
 	public abstract render(): SkillView
+
+	public renderToolBelt(): ToolBelt | null {
+		return null
+	}
 }

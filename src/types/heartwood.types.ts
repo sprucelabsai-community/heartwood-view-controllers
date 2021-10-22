@@ -151,6 +151,7 @@ export interface SkillViewController<
 	Args extends Record<string, any> = Record<string, any>
 > extends ViewController<SkillView> {
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
+	renderToolBelt(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
 }
 
 export type ImportedViewController = (new () =>

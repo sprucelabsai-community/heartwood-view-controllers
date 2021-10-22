@@ -14,6 +14,10 @@ class GoodSkillViewController implements SkillViewController {
 		this.model = model
 	}
 
+	public renderToolBelt() {
+		return null
+	}
+
 	public async load() {}
 	public triggerRender() {}
 

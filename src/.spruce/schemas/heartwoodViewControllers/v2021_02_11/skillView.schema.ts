@@ -2,7 +2,6 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import layoutSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/layout.schema'
-import toolBeltSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toolBelt.schema'
 
 const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema  = {
 	id: 'skillView',
@@ -37,12 +36,6 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                isRequired: true,
 	                isArray: true,
 	                options: {schema: layoutSchema_v2021_02_11,}
-	            },
-	            /** Tool belt. */
-	            'toolBelt': {
-	                label: 'Tool belt',
-	                type: 'schema',
-	                options: {schema: toolBeltSchema_v2021_02_11,}
 	            },
 	    }
 }
