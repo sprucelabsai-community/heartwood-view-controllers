@@ -1,3 +1,10 @@
+# [34.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.3.12...v34.4.0) (2021-10-23)
+
+
+### Features
+
+* toolBeltAssertion returns tool belt view controller ([3cd8b46](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3cd8b46))
+
 ## [34.3.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.3.11...v34.3.12) (2021-10-23)
 
 ## [34.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.3.10...v34.3.11) (2021-10-23)
