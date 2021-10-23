@@ -1066,6 +1066,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<SpruceSchema.Schema>| undefined | null
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				/** Button bar. */
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar[]| undefined | null
 				/** List. */
 				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
 				/** Calendar. */
@@ -1153,6 +1155,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			            /** Button bar. */
+			            'buttonBar': {
+			                label: 'Button bar',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
 			            },
 			            /** List. */
 			            'list': {

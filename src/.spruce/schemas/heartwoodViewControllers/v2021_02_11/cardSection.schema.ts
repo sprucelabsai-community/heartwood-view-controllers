@@ -6,6 +6,7 @@ import formSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v20
 import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 import bigFormSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
 import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/button.schema'
+import buttonBarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/buttonBar.schema'
 import listSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 import calendarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 
@@ -86,6 +87,13 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: buttonSchema_v2021_02_11,}
+	            },
+	            /** Button bar. */
+	            'buttonBar': {
+	                label: 'Button bar',
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: buttonBarSchema_v2021_02_11,}
 	            },
 	            /** List. */
 	            'list': {
