@@ -92,7 +92,6 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	            'buttonBar': {
 	                label: 'Button bar',
 	                type: 'schema',
-	                isArray: true,
 	                options: {schema: buttonBarSchema_v2021_02_11,}
 	            },
 	            /** List. */
