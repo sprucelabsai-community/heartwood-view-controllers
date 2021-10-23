@@ -84,7 +84,6 @@ export default buildSchema({
 		buttonBar: {
 			type: 'schema',
 			label: 'Button bar',
-			isArray: true,
 			options: {
 				schema: buttonBarBuilder,
 			},
