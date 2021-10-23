@@ -85,8 +85,11 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		assert.isEqual(renderedButtons[0].label, 'what the?')
 		assert.isEqual(renderedButtons[1].label, 'what the 2')
 
+		//@ts-ignore
 		assert.isEqual(buttonGroupVc.selectionChangeHandler, selectionHandler)
+		//@ts-ignore
 		assert.isEqual(buttonGroupVc.clickHintHandler, clickHandler)
+		//@ts-ignore
 		assert.isTrue(buttonGroupVc.shouldAllowMultiSelect)
 	}
 }
