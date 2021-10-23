@@ -163,4 +163,29 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 		const model = this.render(this.vc)
 		assert.isTrue(model.controller === this.vc)
 	}
+
+	@test()
+	protected static allToolsIsEmptyToStart() {
+		const tools = this.vc.getTools()
+		assert.isLength(tools, 0)
+	}
+
+	@test()
+	protected static getsBackTools() {
+		this.vc.addTool({
+			id: 'maps_2',
+			lineIcon: 'map',
+			card: {} as any,
+		})
+
+		const tools = this.vc.getTools()
+
+		assert.isEqualDeep(tools, [
+			{
+				id: 'maps_2',
+				lineIcon: 'map',
+				card: {} as any,
+			},
+		])
+	}
 }
