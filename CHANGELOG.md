@@ -1,3 +1,10 @@
+# [34.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.4.2...v34.5.0) (2021-10-23)
+
+
+### Features
+
+* button bar ([11524a6](https://github.com/sprucelabsai/heartwood-view-controllers/commit/11524a6))
+
 ## [34.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.4.1...v34.4.2) (2021-10-23)
 
 ## [34.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.4.0...v34.4.1) (2021-10-23)
