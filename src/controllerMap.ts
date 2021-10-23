@@ -1,3 +1,4 @@
+import { ButtonBarViewController } from '.'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
 import CalendarViewController from './viewControllers/Calendar.vc'
@@ -22,4 +23,5 @@ export const CORE_CONTROLLER_MAP = {
 	list: ListViewController,
 	toolBelt: ToolBeltViewController,
 	calendar: CalendarViewController,
+	buttonBar: ButtonBarViewController,
 }

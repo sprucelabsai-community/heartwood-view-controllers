@@ -115,7 +115,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 				const options = {
 					...button,
-					controller: this,
+					controller,
 					isSelected: this.isSelected(idx),
 					shouldQueueShow,
 					onClick: () => {

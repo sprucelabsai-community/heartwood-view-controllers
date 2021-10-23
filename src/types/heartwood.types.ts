@@ -10,6 +10,9 @@ import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
+import ButtonBarViewController, {
+	ButtonBarViewControllerOptions,
+} from '../viewControllers/ButtonBar.vc'
 import ButtonGroupViewController, {
 	ButtonGroupViewControllerOptions,
 } from '../viewControllers/ButtonGroup.vc'
@@ -192,6 +195,7 @@ export interface ViewControllerMap {
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
+	buttonBar: ButtonBarViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -207,6 +211,7 @@ export interface ViewControllerOptionsMap {
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions
 	calendar: CalendarViewControllerOptions
+	buttonBar: ButtonBarViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
