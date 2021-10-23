@@ -1,3 +1,10 @@
+# [34.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.2.5...v34.3.0) (2021-10-23)
+
+
+### Features
+
+* Tool belt view controller has getTools ([b4a201a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b4a201a))
+
 ## [34.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.2.4...v34.2.5) (2021-10-23)
 
 ## [34.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.2.3...v34.2.4) (2021-10-23)
