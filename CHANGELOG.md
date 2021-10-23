@@ -1,3 +1,10 @@
+# [34.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.5.0...v34.6.0) (2021-10-23)
+
+
+### Features
+
+* card section has button bar field ([9c13d4e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9c13d4e))
+
 # [34.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.4.2...v34.5.0) (2021-10-23)
 
 
