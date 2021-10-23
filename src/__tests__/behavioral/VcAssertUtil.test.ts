@@ -714,6 +714,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
+		//@ts-ignore
 		assert.isEqual(toolBeltVc, 'waka')
 	}
 
