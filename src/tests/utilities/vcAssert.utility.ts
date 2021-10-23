@@ -490,6 +490,8 @@ const vcAssertUtil = {
 			(toolBelt?.tools?.length ?? 0) > 0,
 			'Your skill view does not render a tool belt with any tools!'
 		)
+
+		return toolBelt?.controller
 	},
 
 	assertDoesNotRenderToolBelt(svc: SkillViewController) {

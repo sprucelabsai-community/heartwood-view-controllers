@@ -664,7 +664,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static hasASsertRendersPowerTools() {
+	protected static hasAssertRendersPowerTools() {
 		assert.isFunction(vcAssertUtil.assertRendersToolBelt)
 	}
 
@@ -693,8 +693,28 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertRendersToolBelt(vc as any)
-		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc as any))
+		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
+		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc))
+		assert.isFalsy(toolBeltVc)
+	}
+
+	@test()
+	protected static async passesBackToolBeltVcIfOneExists() {
+		const vc = this.Controller('toolBeltSvc', {
+			toolBelt: {
+				controller: 'waka' as any,
+				tools: [
+					{
+						id: 'add',
+						lineIcon: 'add',
+						card: {} as any,
+					},
+				],
+			},
+		})
+
+		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
+		assert.isEqual(toolBeltVc, 'waka')
 	}
 
 	@test()
