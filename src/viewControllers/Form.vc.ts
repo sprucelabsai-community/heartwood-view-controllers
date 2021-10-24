@@ -71,9 +71,7 @@ export default class FormViewController<
 	) {
 		super(options)
 
-		const { id, ...model } = { ...options }
-
-		removeUniversalViewOptions(model)
+		const { id, ...model } = removeUniversalViewOptions(options)
 
 		const modelCopy = cloneAndRetainControllers(model) as any
 

@@ -52,6 +52,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			timezoneOffsetMs: new Date().getTimezoneOffset() * 1000,
 			minTime: { hour: 3, minute: 0 },
 			maxTime: { hour: 10, minute: 0 },
+			[`${new Date().getTime()}`]: Math.random(),
 			view: 'day',
 			people: [
 				{

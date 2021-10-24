@@ -63,7 +63,15 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'view': {
 	                label: 'View',
 	                type: 'select',
+	                defaultValue: "day",
 	                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
+	            },
+	            /** Render header. */
+	            'shouldRenderHeader': {
+	                label: 'Render header',
+	                type: 'boolean',
+	                defaultValue: true,
+	                options: undefined
 	            },
 	    }
 }

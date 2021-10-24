@@ -1,6 +1,10 @@
 export default function removeUniversalViewOptions(rendered: any) {
-	delete rendered.vcFactory
-	delete rendered.renderInDialogHandler
-	delete rendered.confirmHandler
-	delete rendered.connectToApi
+	const { ...options } = rendered
+
+	delete options.vcFactory
+	delete options.renderInDialogHandler
+	delete options.confirmHandler
+	delete options.connectToApi
+
+	return options
 }

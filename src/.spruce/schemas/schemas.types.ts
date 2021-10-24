@@ -3099,6 +3099,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'timezoneOffsetMs'?: number| undefined | null
 				/** View. */
 				'view'?: ("day" | "month")| undefined | null
+				/** Render header. */
+				'shouldRenderHeader'?: boolean| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -3160,7 +3162,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'view': {
 			                label: 'View',
 			                type: 'select',
+			                defaultValue: "day",
 			                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
+			            },
+			            /** Render header. */
+			            'shouldRenderHeader': {
+			                label: 'Render header',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
 			            },
 			    }
 		}

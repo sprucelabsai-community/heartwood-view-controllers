@@ -86,6 +86,7 @@ export default buildSchema({
 		view: {
 			type: 'select',
 			label: 'View',
+			defaultValue: 'day',
 			options: {
 				choices: [
 					{
@@ -98,6 +99,11 @@ export default buildSchema({
 					},
 				],
 			},
+		},
+		shouldRenderHeader: {
+			type: 'boolean',
+			label: 'Render header',
+			defaultValue: true,
 		},
 	},
 })

@@ -1,6 +1,7 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import { ViewControllerOptions } from '../types/heartwood.types'
+import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
 type ViewModel = Omit<
@@ -46,10 +47,7 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 		}
 
 		this.model = {
-			people: options.people,
-			timezoneOffsetMs: options.timezoneOffsetMs,
-			minTime: options.minTime,
-			maxTime: options.maxTime,
+			...removeUniversalViewOptions(options),
 			view,
 		}
 	}

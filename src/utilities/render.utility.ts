@@ -37,7 +37,7 @@ function renderItems(
 	}
 
 	if (options?.shouldStripPrivateFields !== false) {
-		removeUniversalViewOptions(rendered)
+		rendered = removeUniversalViewOptions(rendered)
 	}
 
 	return rendered
