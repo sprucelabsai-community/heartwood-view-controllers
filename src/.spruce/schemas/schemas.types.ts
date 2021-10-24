@@ -1067,7 +1067,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Button bar. */
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar[]| undefined | null
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
 				/** List. */
 				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
 				/** Calendar. */
@@ -1160,7 +1160,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'buttonBar': {
 			                label: 'Button bar',
 			                type: 'schema',
-			                isArray: true,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
 			            },
 			            /** List. */
