@@ -130,7 +130,7 @@ export const lineIcons = [
 	'zoom-out',
 	'checkmark',
 	'document-blank',
-	'jump-t0',
+	'jump',
 	'photo',
 	'sound-on',
 	'chevron-down',
