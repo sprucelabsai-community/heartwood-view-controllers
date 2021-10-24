@@ -9,6 +9,7 @@ type ViewModel = Omit<
 >
 type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
 export type CalendarViewControllerOptions = ViewModel
+export type CalendarView = NonNullable<ViewModel['view']>
 
 export default class CalendarViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
@@ -47,6 +48,7 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 			timezoneOffsetMs: options.timezoneOffsetMs,
 			minTime: options.minTime,
 			maxTime: options.maxTime,
+			view: options.view ?? 'day',
 		}
 	}
 
@@ -70,6 +72,15 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 		}
 
 		this.model.timezoneOffsetMs = offsetMs
+		this.triggerRender()
+	}
+
+	public getView() {
+		return this.model.view
+	}
+
+	public setView(view: CalendarView) {
+		this.model.view = view
 		this.triggerRender()
 	}
 

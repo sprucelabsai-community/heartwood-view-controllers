@@ -60,6 +60,12 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                hint: 'In milliseconds',
 	                options: undefined
 	            },
+	            /** View. */
+	            'view': {
+	                label: 'View',
+	                type: 'select',
+	                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
+	            },
 	    }
 }
 

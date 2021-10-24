@@ -3097,6 +3097,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'defaultEndTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** Timezone offset. In milliseconds */
 				'timezoneOffsetMs'?: number| undefined | null
+				/** View. */
+				'view'?: ("day" | "month")| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -3154,6 +3156,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'number',
 			                hint: 'In milliseconds',
 			                options: undefined
+			            },
+			            /** View. */
+			            'view': {
+			                label: 'View',
+			                type: 'select',
+			                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
 			            },
 			    }
 		}

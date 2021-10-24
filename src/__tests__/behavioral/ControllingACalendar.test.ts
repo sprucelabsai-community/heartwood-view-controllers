@@ -46,6 +46,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			timezoneOffsetMs: new Date().getTimezoneOffset() * 1000,
 			minTime: { hour: 3, minute: 0 },
 			maxTime: { hour: 10, minute: 0 },
+			view: 'day',
 			people: [
 				{
 					id: `${new Date().getTime()}`,
@@ -127,5 +128,34 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.setTimezoneOffsetMs(time)
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 		assert.isEqualDeep(this.render(this.vc).timezoneOffsetMs, time)
+	}
+
+	@test()
+	protected static defaultsToDayView() {
+		assert.isEqual(this.vc.getView(), 'day')
+		assert.isEqual(this.render(this.vc).view, 'day')
+	}
+
+	@test()
+	protected static canSetStartDay() {
+		const vc = this.Controller('calendar', {
+			view: 'month',
+			people: [
+				{
+					id: `${new Date().getTime()}`,
+					casualName: 'Tay',
+				},
+			],
+		})
+
+		assert.isEqual(vc.getView(), 'month')
+		assert.isEqual(this.render(vc).view, 'month')
+	}
+
+	@test()
+	protected static canSetView() {
+		this.vc.setView('month')
+		assert.isEqual(this.vc.getView(), 'month')
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
 }

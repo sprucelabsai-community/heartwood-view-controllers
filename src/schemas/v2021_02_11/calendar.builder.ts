@@ -84,5 +84,21 @@ export default buildSchema({
 			label: 'Timezone offset',
 			hint: 'In milliseconds',
 		},
+		view: {
+			type: 'select',
+			label: 'View',
+			options: {
+				choices: [
+					{
+						label: 'Day',
+						value: 'day',
+					},
+					{
+						label: 'Month',
+						value: 'month',
+					},
+				],
+			},
+		},
 	},
 })
