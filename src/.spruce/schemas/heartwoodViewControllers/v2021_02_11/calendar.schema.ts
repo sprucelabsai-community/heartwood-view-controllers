@@ -21,7 +21,6 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'people': {
 	                label: 'People',
 	                type: 'schema',
-	                isRequired: true,
 	                isArray: true,
 	                options: {schema: calendarPersonSchema_v2021_02_11,}
 	            },
