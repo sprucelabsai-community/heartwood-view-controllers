@@ -1,3 +1,10 @@
+# [34.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.7.1...v34.8.0) (2021-10-24)
+
+
+### Features
+
+* select button passthroughs from button bar to button group ([9300c31](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9300c31))
+
 ## [34.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.7.0...v34.7.1) (2021-10-24)
 
 # [34.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.6.7...v34.7.0) (2021-10-24)
