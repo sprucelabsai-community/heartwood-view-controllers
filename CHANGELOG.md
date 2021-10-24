@@ -1,3 +1,10 @@
+# [34.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.2...v34.9.0) (2021-10-24)
+
+
+### Features
+
+* can hide calendar header ([b77b2df](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b77b2df))
+
 ## [34.8.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.1...v34.8.2) (2021-10-24)
 
 ## [34.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.0...v34.8.1) (2021-10-24)
