@@ -86,11 +86,10 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 	public deselectButton(idx: number) {
 		const match = this.selectedButtons.indexOf(idx)
+
 		if (match > -1) {
 			this.selectedButtons.splice(match, 1)
-			this.rebuildAndTriggerRender()
-
-			void this.selectionChangeHandler?.([...this.selectedButtons])
+			this.didSelectHandler()
 		}
 	}
 
@@ -137,15 +136,16 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		return controller
 	}
+
 	private handleClickHintIcon(idx: number) {
 		this.clickHintHandler?.(idx)
 	}
 
-	public render(): ViewModel {
-		return this.buttonControllers
-	}
-
 	public getSelectedButtons() {
 		return this.selectedButtons
+	}
+
+	public render(): ViewModel {
+		return this.buttonControllers
 	}
 }
