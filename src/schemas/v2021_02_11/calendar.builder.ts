@@ -29,7 +29,6 @@ export default buildSchema({
 		people: {
 			type: 'schema',
 			label: 'People',
-			isRequired: true,
 			isArray: true,
 			options: {
 				schema: {

@@ -17,7 +17,9 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 	public constructor(options: ViewModel & ViewControllerOptions) {
 		super(options)
 
-		if (!options.people) {
+		const view = options.view ?? 'day'
+
+		if (view === 'day' && !options.people) {
 			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: ['people'],
@@ -48,7 +50,7 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 			timezoneOffsetMs: options.timezoneOffsetMs,
 			minTime: options.minTime,
 			maxTime: options.maxTime,
-			view: options.view ?? 'day',
+			view,
 		}
 	}
 
