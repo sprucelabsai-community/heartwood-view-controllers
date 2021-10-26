@@ -99,7 +99,7 @@
     "@sprucelabs/mercury-client": "^16.13.166",
     "@sprucelabs/resolve-path-aliases": "^1.0.220",
     "@sprucelabs/semantic-release": "^4.0.8",
-    "@sprucelabs/spruce-skill-booter": "^5.5.40",
+    "@sprucelabs/spruce-skill-booter": "^5.5.41",
     "@sprucelabs/test": "^7.7.212",
     "@sprucelabs/test-utils": "^3.0.237",
     "@types/lodash": "^4.14.176",
