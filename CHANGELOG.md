@@ -1,3 +1,154 @@
+## [34.9.72](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.71...v34.9.72) (2021-10-27)
+
+## [34.9.71](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.70...v34.9.71) (2021-10-27)
+
+## [34.9.70](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.69...v34.9.70) (2021-10-27)
+
+## [34.9.69](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.68...v34.9.69) (2021-10-27)
+
+## [34.9.68](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.67...v34.9.68) (2021-10-27)
+
+## [34.9.67](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.66...v34.9.67) (2021-10-27)
+
+## [34.9.66](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.65...v34.9.66) (2021-10-27)
+
+## [34.9.65](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.64...v34.9.65) (2021-10-27)
+
+## [34.9.64](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.63...v34.9.64) (2021-10-27)
+
+## [34.9.63](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.62...v34.9.63) (2021-10-27)
+
+## [34.9.62](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.61...v34.9.62) (2021-10-27)
+
+## [34.9.61](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.60...v34.9.61) (2021-10-27)
+
+## [34.9.60](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.59...v34.9.60) (2021-10-27)
+
+## [34.9.59](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.58...v34.9.59) (2021-10-27)
+
+## [34.9.58](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.57...v34.9.58) (2021-10-27)
+
+## [34.9.57](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.56...v34.9.57) (2021-10-27)
+
+## [34.9.56](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.55...v34.9.56) (2021-10-27)
+
+## [34.9.55](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.54...v34.9.55) (2021-10-26)
+
+## [34.9.54](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.53...v34.9.54) (2021-10-26)
+
+## [34.9.53](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.52...v34.9.53) (2021-10-26)
+
+## [34.9.52](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.51...v34.9.52) (2021-10-26)
+
+## [34.9.51](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.50...v34.9.51) (2021-10-26)
+
+## [34.9.50](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.49...v34.9.50) (2021-10-26)
+
+## [34.9.49](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.48...v34.9.49) (2021-10-26)
+
+## [34.9.48](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.47...v34.9.48) (2021-10-26)
+
+## [34.9.47](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.46...v34.9.47) (2021-10-26)
+
+## [34.9.46](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.45...v34.9.46) (2021-10-26)
+
+## [34.9.45](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.44...v34.9.45) (2021-10-26)
+
+## [34.9.44](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.43...v34.9.44) (2021-10-26)
+
+## [34.9.43](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.42...v34.9.43) (2021-10-26)
+
+## [34.9.42](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.41...v34.9.42) (2021-10-26)
+
+## [34.9.41](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.40...v34.9.41) (2021-10-26)
+
+## [34.9.40](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.39...v34.9.40) (2021-10-26)
+
+## [34.9.39](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.38...v34.9.39) (2021-10-26)
+
+## [34.9.38](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.37...v34.9.38) (2021-10-26)
+
+## [34.9.37](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.36...v34.9.37) (2021-10-26)
+
+## [34.9.36](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.35...v34.9.36) (2021-10-26)
+
+## [34.9.35](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.34...v34.9.35) (2021-10-26)
+
+## [34.9.34](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.33...v34.9.34) (2021-10-26)
+
+## [34.9.33](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.32...v34.9.33) (2021-10-25)
+
+## [34.9.32](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.31...v34.9.32) (2021-10-25)
+
+## [34.9.31](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.30...v34.9.31) (2021-10-25)
+
+## [34.9.30](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.29...v34.9.30) (2021-10-25)
+
+## [34.9.29](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.28...v34.9.29) (2021-10-25)
+
+## [34.9.28](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.27...v34.9.28) (2021-10-25)
+
+## [34.9.27](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.26...v34.9.27) (2021-10-25)
+
+## [34.9.26](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.25...v34.9.26) (2021-10-25)
+
+## [34.9.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.24...v34.9.25) (2021-10-25)
+
+## [34.9.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.23...v34.9.24) (2021-10-25)
+
+## [34.9.23](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.22...v34.9.23) (2021-10-25)
+
+## [34.9.22](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.21...v34.9.22) (2021-10-25)
+
+## [34.9.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.20...v34.9.21) (2021-10-25)
+
+## [34.9.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.19...v34.9.20) (2021-10-25)
+
+## [34.9.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.18...v34.9.19) (2021-10-25)
+
+## [34.9.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.17...v34.9.18) (2021-10-25)
+
+## [34.9.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.16...v34.9.17) (2021-10-25)
+
+## [34.9.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.15...v34.9.16) (2021-10-25)
+
+## [34.9.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.14...v34.9.15) (2021-10-25)
+
+## [34.9.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.13...v34.9.14) (2021-10-25)
+
+## [34.9.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.12...v34.9.13) (2021-10-24)
+
+## [34.9.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.11...v34.9.12) (2021-10-24)
+
+## [34.9.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.10...v34.9.11) (2021-10-24)
+
+## [34.9.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.9...v34.9.10) (2021-10-24)
+
+## [34.9.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.8...v34.9.9) (2021-10-24)
+
+## [34.9.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.7...v34.9.8) (2021-10-24)
+
+## [34.9.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.6...v34.9.7) (2021-10-24)
+
+## [34.9.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.5...v34.9.6) (2021-10-24)
+
+## [34.9.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.4...v34.9.5) (2021-10-24)
+
+## [34.9.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.3...v34.9.4) (2021-10-24)
+
+## [34.9.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.2...v34.9.3) (2021-10-24)
+
+## [34.9.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.1...v34.9.2) (2021-10-24)
+
+## [34.9.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.0...v34.9.1) (2021-10-24)
+
+# [34.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.2...v34.9.0) (2021-10-24)
+
+
+### Features
+
+* can hide calendar header ([b77b2df](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b77b2df))
+
 ## [34.8.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.1...v34.8.2) (2021-10-24)
 
 ## [34.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.8.0...v34.8.1) (2021-10-24)

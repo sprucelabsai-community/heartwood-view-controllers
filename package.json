@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "34.8.2",
+  "version": "34.9.72",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -22,7 +22,8 @@
     "upgradeIgnoreList": [
       "globby",
       "@sprucelabs/spruce-test-fixtures",
-      "@sprucelabs/spruce-event-plugin"
+      "@sprucelabs/spruce-event-plugin",
+      "@swc/core"
     ]
   },
   "keywords": [
@@ -74,14 +75,14 @@
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
-    "@sprucelabs/error": "^5.0.258",
-    "@sprucelabs/mercury-core-events": "^1.2.648",
-    "@sprucelabs/mercury-types": "^26.1.554",
-    "@sprucelabs/schema": "^25.3.386",
-    "@sprucelabs/spruce-core-schemas": "^22.5.510",
-    "@sprucelabs/spruce-event-utils": "^16.0.567",
-    "@sprucelabs/spruce-skill-utils": "^20.6.334",
-    "@swc/core": "^1.2.102",
+    "@sprucelabs/error": "^5.0.262",
+    "@sprucelabs/mercury-core-events": "^1.3.26",
+    "@sprucelabs/mercury-types": "^26.1.609",
+    "@sprucelabs/schema": "^25.3.409",
+    "@sprucelabs/spruce-core-schemas": "^22.5.551",
+    "@sprucelabs/spruce-event-utils": "^16.0.627",
+    "@sprucelabs/spruce-skill-utils": "^20.6.360",
+    "@swc/core": "1.2.103",
     "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^10.0.0",
@@ -90,20 +91,20 @@
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.2.4",
     "uglify-js": "^3.14.2",
-    "webpack": "^5.59.1"
+    "webpack": "^5.60.0"
   },
   "devDependencies": {
-    "@sprucelabs/esm-postbuild": "^1.0.274",
-    "@sprucelabs/jest-json-reporter": "^6.0.222",
-    "@sprucelabs/jest-sheets-reporter": "^1.2.227",
-    "@sprucelabs/mercury-client": "^16.13.141",
+    "@sprucelabs/esm-postbuild": "^1.0.276",
+    "@sprucelabs/jest-json-reporter": "^6.0.225",
+    "@sprucelabs/jest-sheets-reporter": "^1.2.230",
+    "@sprucelabs/mercury-client": "^16.13.181",
     "@sprucelabs/resolve-path-aliases": "^1.0.220",
     "@sprucelabs/semantic-release": "^4.0.8",
-    "@sprucelabs/spruce-skill-booter": "^5.5.30",
-    "@sprucelabs/test": "^7.7.210",
-    "@sprucelabs/test-utils": "^3.0.232",
+    "@sprucelabs/spruce-skill-booter": "^5.5.47",
+    "@sprucelabs/test": "^7.7.212",
+    "@sprucelabs/test-utils": "^3.0.237",
     "@types/lodash": "^4.14.176",
-    "@types/node": "^16.11.4",
+    "@types/node": "^16.11.6",
     "@types/terser-webpack-plugin": "^5.2.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
