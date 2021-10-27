@@ -9,10 +9,10 @@ import {
 	LineIcon,
 	SkillViewController,
 	ViewController,
+	CardViewController,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
-import CardViewController from '../../viewControllers/Card.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
