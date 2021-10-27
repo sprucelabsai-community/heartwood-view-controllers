@@ -1,3 +1,10 @@
+# [35.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.79...v35.0.0) (2021-10-27)
+
+
+### Breaking Changes
+
+* assert renders dialog signature change ([1762845](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1762845))
+
 ## [34.9.79](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.78...v34.9.79) (2021-10-27)
 
 ## [34.9.78](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v34.9.77...v34.9.78) (2021-10-27)
