@@ -589,7 +589,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async showsAddDialogWhenHandlingClickAddPage() {
 		assert.isFunction(this.vc.handleClickAddPage)
 
-		const { dialogVc } = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dialogVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
 
@@ -602,7 +602,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async submittingAddFormAddsPage() {
-		const { dialogVc } = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dialogVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
 		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)

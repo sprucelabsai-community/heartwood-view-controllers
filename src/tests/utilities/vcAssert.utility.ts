@@ -138,7 +138,7 @@ const vcAssertUtil = {
 		vc: ViewController<any>,
 		action: () => void | Promise<void>,
 		dialogHandler?: (dialogVc: DialogViewController) => void | Promise<void>
-	): Promise<{ dialogVc: DialogViewController }> {
+	): Promise<DialogViewController> {
 		let run = () => {}
 		return new Promise((resolve, reject) => {
 			try {
@@ -181,9 +181,7 @@ const vcAssertUtil = {
 
 						assert.isTruthy(dialogVc)
 
-						resolve({
-							dialogVc,
-						} as any)
+						resolve(dialogVc)
 					} catch (err) {
 						reject(err)
 					}
