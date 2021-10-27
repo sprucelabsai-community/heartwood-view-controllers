@@ -23,6 +23,7 @@ declare module '../../types/heartwood.types' {
 		bad: BadSkillViewController
 		newCard: NewTestingCardViewController
 		goodWithDialog: GoodWithDialogSkillViewController
+		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
 		toolBeltSvc: ToolBeltSkillViewController
 	}
 	interface ViewControllerOptionsMap {
@@ -89,7 +90,28 @@ class GoodWithDialogSkillViewController extends AbstractSkillViewController {
 
 	public async load() {
 		//@ts-ignore
-		await this.renderInDialog({})
+		this.renderInDialog({})
+	}
+
+	public render() {
+		return this.model
+	}
+}
+
+class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewController {
+	private model: SkillView
+
+	//@ts-ignore
+	public constructor(model: SkillView) {
+		//@ts-ignore
+		super(model)
+		this.model = model
+	}
+
+	public async load() {
+		await new Promise((resolve) => setTimeout(resolve, 100))
+		//@ts-ignore
+		await this.renderInDialog({}).wait()
 	}
 
 	public render() {
@@ -104,6 +126,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		bad: BadSkillViewController,
 		good: GoodSkillViewController,
 		goodWithDialog: GoodWithDialogSkillViewController,
+		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController,
 		newCard: NewTestingCardViewController,
 		toolBeltSvc: ToolBeltSkillViewController,
 	}
@@ -512,6 +535,17 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	@test()
 	protected static async knowsIfRenderingDialog() {
 		const vc = this.Controller('goodWithDialog', {})
+
+		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+		)
+	}
+
+	@test()
+	protected static async knowsIfRenderingDialogThatWaits() {
+		const vc = this.Controller('goodWithDialogThatWaits', {})
 
 		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
 

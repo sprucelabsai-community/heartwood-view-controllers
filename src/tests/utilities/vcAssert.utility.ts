@@ -19,10 +19,29 @@ import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
+const WAIT_TIMEOUT = 250
 type Vc = ViewController<any>
 
-async function wait() {
-	return new Promise<void>((resolve) => setTimeout(resolve, 0))
+async function wait(promise?: Promise<any> | void) {
+	return new Promise<void>((resolve) => {
+		let isDone = false
+
+		const done = () => {
+			if (!isDone) {
+				isDone = true
+
+				setTimeout(() => {
+					clearTimeout(timeout)
+					resolve()
+				}, 0)
+			}
+
+			isDone = true
+		}
+
+		const timeout = setTimeout(done, WAIT_TIMEOUT)
+		promise?.then(done)
+	})
 }
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
@@ -89,11 +108,10 @@ const vcAssertUtil = {
 			}
 
 			async function run() {
-				await action()
-				await wait()
+				await wait(action())
 				assert.isTrue(
 					wasHit,
-					'this.confirm() was not invoked in your view controller.'
+					`this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
 				)
 			}
 
@@ -152,12 +170,11 @@ const vcAssertUtil = {
 
 				run = async () => {
 					try {
-						await action()
-						await wait()
+						await wait(action())
 
 						assert.isTrue(
 							wasHit,
-							'this.renderInDialog() was not invoked in your view controller.'
+							`this.renderInDialog() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
 						)
 
 						await dialogHandlerPromise
