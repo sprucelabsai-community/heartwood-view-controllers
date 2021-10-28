@@ -214,9 +214,7 @@ export interface ViewControllerOptionsMap {
 	buttonBar: ButtonBarViewControllerOptions
 }
 
-export interface SkillViewControllerMap {
-	'heartwood.root': SkillViewController
-}
+export interface SkillViewControllerMap {}
 export interface SkillViewControllerArgsMap {}
 
 export type ControllerOptions<
