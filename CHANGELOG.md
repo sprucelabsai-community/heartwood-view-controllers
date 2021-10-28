@@ -1,3 +1,10 @@
+# [35.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.0.3...v35.1.0) (2021-10-28)
+
+
+### Features
+
+* heartwood.root controller baked in ([f284747](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f284747))
+
 ## [35.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.0.2...v35.0.3) (2021-10-28)
 
 ## [35.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.0.1...v35.0.2) (2021-10-28)
