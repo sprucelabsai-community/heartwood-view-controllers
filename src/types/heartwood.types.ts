@@ -164,7 +164,8 @@ export type ImportedViewController = (new () =>
 }
 
 export type ViewControllerId = keyof ViewControllerMap
-export type SkillViewControllerId = keyof SkillViewControllerMap
+export type SkillViewControllerId = keyof SkillViewControllerMap &
+	'heartwood.root'
 
 export interface Router {
 	redirect<Id extends SkillViewControllerId>(
