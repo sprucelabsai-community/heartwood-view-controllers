@@ -164,8 +164,7 @@ export type ImportedViewController = (new () =>
 }
 
 export type ViewControllerId = keyof ViewControllerMap
-export type SkillViewControllerId = keyof SkillViewControllerMap &
-	'heartwood.root'
+export type SkillViewControllerId = keyof SkillViewControllerMap
 
 export interface Router {
 	redirect<Id extends SkillViewControllerId>(
@@ -215,7 +214,9 @@ export interface ViewControllerOptionsMap {
 	buttonBar: ButtonBarViewControllerOptions
 }
 
-export interface SkillViewControllerMap {}
+export interface SkillViewControllerMap {
+	'heartwood.root': SkillViewController
+}
 export interface SkillViewControllerArgsMap {}
 
 export type ControllerOptions<
