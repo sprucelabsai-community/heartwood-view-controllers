@@ -19,7 +19,7 @@ import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
-const WAIT_TIMEOUT = 250
+const WAIT_TIMEOUT = 5000
 type Vc = ViewController<any>
 
 async function wait(promise?: Promise<any> | void) {
