@@ -636,24 +636,25 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		}
 	}
 
-	@test()
-	protected static knowsHowManyFormsBeingRendered() {
+	@test('can assert rending forms', 'form')
+	@test('can assert rending bigForms', 'bigForm')
+	protected static knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
 		const cardVc = this.Controller('card', {})
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 1))
 
 		cardVc.addSection({
 			title: 'hey!',
-			form: this.renderEmptyForm(),
+			[vcId]: this.renderEmptyForm(vcId),
 		})
 
 		vcAssertUtil.assertCardRendersForms(cardVc, 1)
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 2))
 
-		const formVc = this.buildEmptyForm()
+		const formVc = this.buildEmptyForm(vcId)
 
 		cardVc.addSection({
 			title: 'hey!',
-			form: formVc.render(),
+			[vcId]: formVc.render(),
 		})
 		const forms = vcAssertUtil.assertCardRendersForms(cardVc, 2)
 		assert.isEqual(forms[1], formVc)
@@ -823,12 +824,12 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		return this.Controller('good', model) as BadSkillViewController
 	}
 
-	private static renderEmptyForm() {
-		return this.buildEmptyForm().render()
+	private static renderEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+		return this.buildEmptyForm(vcId).render()
 	}
 
-	private static buildEmptyForm() {
-		return this.Controller('form', {
+	private static buildEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+		return this.Controller(vcId, {
 			schema: {
 				fields: {},
 			},
