@@ -641,13 +641,18 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	protected static knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
 		const cardVc = this.Controller('card', {})
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 1))
+		assert.doesThrow(() => vcAssertUtil.assertCardRendersForm(cardVc))
+
+		const formVc1 = this.buildEmptyForm(vcId)
 
 		cardVc.addSection({
 			title: 'hey!',
-			[vcId]: this.renderEmptyForm(vcId),
+			[vcId]: formVc1.render(),
 		})
 
 		vcAssertUtil.assertCardRendersForms(cardVc, 1)
+		assert.isEqual(formVc1, vcAssertUtil.assertCardRendersForm(cardVc))
+
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 2))
 
 		const formVc = this.buildEmptyForm(vcId)

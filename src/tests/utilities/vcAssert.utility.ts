@@ -196,7 +196,9 @@ const vcAssertUtil = {
 
 	assertCardRendersForm(vc: ViewController<Card> | DialogViewController) {
 		const model = renderUtil.render(vc)
-		const form = model.body?.sections?.map((s) => s.form).find((s) => !!s)
+		const form = model.body?.sections
+			?.map((s) => s.form ?? s.bigForm)
+			.find((s) => !!s)
 
 		assert.isTrue(
 			form?.controller instanceof FormViewController,
