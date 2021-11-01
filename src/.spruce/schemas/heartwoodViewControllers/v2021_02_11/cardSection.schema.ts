@@ -67,7 +67,7 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	            'form': {
 	                label: 'Form',
 	                type: 'schema',
-	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: formSchema_v2021_02_11,}
+	                options: {typeSuffix: `<any>`,schema: formSchema_v2021_02_11,}
 	            },
 	            /** Talking Sprucebot. */
 	            'talkingSprucebot': {
@@ -79,7 +79,7 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	            'bigForm': {
 	                label: 'Big form',
 	                type: 'schema',
-	                options: {typeSuffix: `<SpruceSchema.Schema>`,schema: bigFormSchema_v2021_02_11,}
+	                options: {typeSuffix: `<any>`,schema: bigFormSchema_v2021_02_11,}
 	            },
 	            /** Buttons. */
 	            'buttons': {

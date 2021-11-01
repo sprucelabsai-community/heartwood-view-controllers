@@ -54,7 +54,7 @@ export default buildSchema({
 			type: 'schema',
 			label: 'Form',
 			options: {
-				typeSuffix: '<SpruceSchema.Schema>',
+				typeSuffix: '<any>',
 				schema: formBuilder,
 			},
 		},
@@ -69,7 +69,7 @@ export default buildSchema({
 			type: 'schema',
 			label: 'Big form',
 			options: {
-				typeSuffix: '<SpruceSchema.Schema>',
+				typeSuffix: '<any>',
 				schema: bigFormBuilder,
 			},
 		},
