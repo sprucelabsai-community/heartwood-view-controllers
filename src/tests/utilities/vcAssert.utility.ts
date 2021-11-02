@@ -13,6 +13,7 @@ import {
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
+import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
@@ -205,7 +206,9 @@ const vcAssertUtil = {
 			"Expected to find a form inside your CardViewController, but didn't find one!"
 		)
 
-		return form?.controller as FormViewController<any, any>
+		return form?.controller as
+			| FormViewController<any>
+			| BigFormViewController<any>
 	},
 
 	assertCardRendersList(
@@ -484,7 +487,7 @@ const vcAssertUtil = {
 			)
 		}
 
-		return forms as FormViewController<any>[]
+		return forms as FormViewController<any>[] | BigFormViewController<any>[]
 	},
 
 	assertCardRendersCriticalError(vc: CardViewController) {

@@ -40,7 +40,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
-		this.formVc = vcAssertUtil.assertCardRendersForm(this.vc)
+		this.formVc = vcAssertUtil.assertCardRendersForm(this.vc) as any
 		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
 	}
 
@@ -410,7 +410,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			.addSection({ title: 'A brand new section!' })
 		const { builderSectionVc } = await this.simulateAddSectionClick(0)
 
-		this.formVc = vcAssertUtil.assertCardRendersForm(builderSectionVc)
+		this.formVc = vcAssertUtil.assertCardRendersForm(builderSectionVc) as any
 
 		this.formVc.setValue('title', 'Now second section')
 		this.formVc.setValue('type', 'text')
