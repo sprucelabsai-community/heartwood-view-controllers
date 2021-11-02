@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { validateSchemaValues } from '@sprucelabs/schema'
+import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
+import buildForm from '../../builders/buildForm'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../tests/utilities/interaction.utility'
@@ -544,17 +545,6 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async knowsIfRenderingDialogThatWaits() {
-		const vc = this.Controller('goodWithDialogThatWaits', {})
-
-		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
-
-		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
-		)
-	}
-
-	@test()
 	protected static async knowsIfNotRenderingDialog() {
 		const vc = this.Controller('good', {
 			layouts: [],
@@ -817,6 +807,65 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		vcAssertUtil.assertRendersCalendar(svc)
+	}
+
+	@test()
+	protected static knowsIfFieldsBeingRendered() {
+		const formVc = this.Controller(
+			'form',
+			buildForm({
+				schema: buildSchema({
+					id: 'test',
+					fields: {
+						one: {
+							type: 'text',
+						},
+						two: {
+							type: 'text',
+						},
+						three: {
+							type: 'text',
+						},
+						four: {
+							type: 'text',
+						},
+						five: {
+							type: 'text',
+						},
+						six: {
+							type: 'text',
+						},
+					},
+				}),
+				sections: [
+					{
+						fields: ['four', 'five'],
+					},
+					{
+						fields: ['six'],
+					},
+				],
+			})
+		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertFormRendersFields(formVc, ['one', 'two', 'three'])
+		)
+
+		vcAssertUtil.assertFormRendersFields(formVc, ['four'])
+		vcAssertUtil.assertFormRendersFields(formVc, ['four', 'five'])
+		vcAssertUtil.assertFormRendersFields(formVc, ['four', 'five', 'six'])
+	}
+
+	@test()
+	protected static async knowsIfRenderingDialogThatWaits() {
+		const vc = this.Controller('goodWithDialogThatWaits', {})
+
+		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+		)
 	}
 
 	private static BadController() {

@@ -1,4 +1,4 @@
-import { validateSchemaValues } from '@sprucelabs/schema'
+import { makeFieldsOptional, validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
@@ -274,7 +274,7 @@ const vcAssertUtil = {
 	},
 
 	assertFormRendersField(
-		formVc: FormViewController<any>,
+		formVc: FormViewController<any> | BigFormViewController<any>,
 		fieldName: string,
 		fieldDefinition?: Partial<FieldDefinitions>
 	) {
@@ -313,6 +313,15 @@ const vcAssertUtil = {
 		}
 
 		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
+	},
+
+	assertFormRendersFields(
+		formVc: FormViewController<any> | BigFormViewController<any>,
+		fields: string[]
+	) {
+		for (const field of fields) {
+			this.assertFormRendersField(formVc, field)
+		}
 	},
 
 	assertCardRendersHeader(
