@@ -76,7 +76,7 @@ const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.D
 	            'onClick': {
 	                label: 'Click handler',
 	                type: 'raw',
-	                options: {valueType: `() => Promise<void> | void`,}
+	                options: {valueType: `(dropdown: { hide: () => void, show: () => void }) => Promise<void> | void`,}
 	            },
 	    }
 }

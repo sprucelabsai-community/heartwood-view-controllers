@@ -34,6 +34,14 @@ export default buildSchema({
 					id: 'dropdownButton',
 					fields: {
 						...buttonFields,
+						onClick: {
+							type: 'raw',
+							label: 'Click handler',
+							options: {
+								valueType:
+									'(dropdown: { hide: () => void, show: () => void }) => Promise<void> | void',
+							},
+						},
 					},
 				},
 			},
