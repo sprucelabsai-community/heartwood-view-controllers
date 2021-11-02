@@ -1,3 +1,10 @@
+# [35.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.1.87...v35.2.0) (2021-11-02)
+
+
+### Features
+
+* assertFormRendersFields allows you to check many fields at once. ([5451266](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5451266))
+
 ## [35.1.87](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.1.86...v35.1.87) (2021-11-02)
 
 ## [35.1.86](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.1.85...v35.1.86) (2021-11-01)
