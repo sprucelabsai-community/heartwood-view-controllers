@@ -75,6 +75,7 @@ export { default as toolBeltSchema } from '#spruce/schemas/heartwoodViewControll
 export { default as toolBeltToolSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toolBeltTool.schema'
 export { default as buttonBarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/buttonBar.schema'
 export { default as buttonBarButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/buttonBarButton.schema'
+export { default as addressInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/addressInput.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
