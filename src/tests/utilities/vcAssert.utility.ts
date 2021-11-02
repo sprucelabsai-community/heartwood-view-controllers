@@ -1,4 +1,4 @@
-import { makeFieldsOptional, validateSchemaValues } from '@sprucelabs/schema'
+import { validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
