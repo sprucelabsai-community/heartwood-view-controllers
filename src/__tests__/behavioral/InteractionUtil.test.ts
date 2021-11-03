@@ -96,8 +96,26 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		await interactionUtil.clickPrimaryInFooter(formVc)
 	}
 
-	@test()
-	protected static async canSubmitBigFormAllAtOnce() {
+	@test('can submit big form with 2 sections', [
+		{
+			fields: ['first'],
+		},
+		{
+			fields: ['second'],
+		},
+	])
+	@test('can submit big form with 3 sections', [
+		{
+			fields: ['first'],
+		},
+		{
+			fields: ['second'],
+		},
+		{
+			fields: ['third'],
+		},
+	])
+	protected static async canSubmitBigFormAllAtOnce(sections: any) {
 		let wasHit = false
 
 		const bigFormVc = this.Controller(
@@ -115,16 +133,12 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 						second: {
 							type: 'text',
 						},
+						third: {
+							type: 'text',
+						},
 					},
 				}),
-				sections: [
-					{
-						fields: ['first'],
-					},
-					{
-						fields: ['second'],
-					},
-				],
+				sections,
 			})
 		)
 
