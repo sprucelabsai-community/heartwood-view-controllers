@@ -24,6 +24,7 @@ declare module '../../types/heartwood.types' {
 		bad: BadSkillViewController
 		newCard: NewTestingCardViewController
 		goodWithDialog: GoodWithDialogSkillViewController
+		goodWithAlert: GoodWithAlertSkillViewController
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
 		toolBeltSvc: ToolBeltSkillViewController
 	}
@@ -99,6 +100,29 @@ class GoodWithDialogSkillViewController extends AbstractSkillViewController {
 	}
 }
 
+class GoodWithAlertSkillViewController extends AbstractSkillViewController {
+	public afterAlert = false
+
+	//@ts-ignore
+	public constructor(model: any) {
+		//@ts-ignore
+		super(model)
+	}
+
+	public async showAlert() {
+		await this.alert({ message: 'go team!' })
+		this.afterAlert = true
+	}
+
+	public async load() {}
+
+	public render() {
+		return {
+			layouts: [],
+		}
+	}
+}
+
 class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewController {
 	private model: SkillView
 
@@ -127,6 +151,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		bad: BadSkillViewController,
 		good: GoodSkillViewController,
 		goodWithDialog: GoodWithDialogSkillViewController,
+		goodWithAlert: GoodWithAlertSkillViewController,
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController,
 		newCard: NewTestingCardViewController,
 		toolBeltSvc: ToolBeltSkillViewController,
@@ -866,6 +891,68 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
 		)
+	}
+
+	@test()
+	protected static async knowsIfCardFooterIsRenderingButton() {
+		const vc = this.Controller('card', {})
+		const emptyButtonsVc = this.Controller('card', {
+			footer: {
+				buttons: [],
+			},
+		})
+
+		assert.doesThrow(() => vcAssertUtil.assertCardFooterRendersButton(vc))
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardFooterRendersButton(emptyButtonsVc)
+		)
+
+		const vc2 = this.Controller('card', {
+			footer: {
+				buttons: [
+					{
+						label: 'hey!',
+					},
+					{
+						label: 'go',
+						type: 'destructive',
+					},
+				],
+			},
+		})
+
+		vcAssertUtil.assertCardFooterRendersButton(vc2)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardFooterRendersButton(vc2, 'primary')
+		)
+
+		vcAssertUtil.assertCardFooterRendersButton(vc2, 'destructive')
+	}
+
+	@test()
+	protected static async knowsIfRenderingAlert() {
+		const vc = this.Controller('goodWithAlert', {})
+		const vc2 = this.Controller('goodWithDialog', {})
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertRendersAlert(vc, () => vc.load())
+		)
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertRendersAlert(vc2, () => vc2.load())
+		)
+
+		const alertVc = await vcAssertUtil.assertRendersAlert(vc, () =>
+			vc.showAlert()
+		)
+
+		assert.isFalse(vc.afterAlert)
+
+		alertVc.hide()
+
+		await this.wait(0)
+
+		assert.isTrue(vc.afterAlert)
 	}
 
 	private static BadController() {

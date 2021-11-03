@@ -46,6 +46,40 @@ export default abstract class AbstractViewController<ViewModel>
 		await this.activeDialog?.hide()
 	}
 
+	protected async alert(options: { title?: string; message: string }) {
+		const header = options.title
+			? {
+					title: options.title,
+			  }
+			: undefined
+
+		const dlg = this.renderInDialog({
+			header,
+			body: {
+				sections: [
+					{
+						text: {
+							content: options.message,
+						},
+					},
+				],
+			},
+			footer: {
+				buttons: [
+					{
+						label: 'Ok',
+						type: 'destructive',
+						onClick: () => {
+							void dlg.hide()
+						},
+					},
+				],
+			},
+		})
+
+		await dlg.wait()
+	}
+
 	protected async confirm(options: ConfirmOptions) {
 		return this.confirmHandler(options)
 	}

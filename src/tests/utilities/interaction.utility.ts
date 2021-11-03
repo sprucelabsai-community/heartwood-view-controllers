@@ -63,9 +63,12 @@ const interactionUtil = {
 		)
 	},
 
-	async clickPrimaryInFooter(vc: CardVc | FormVc) {
+	async clickInFooter(
+		vc: CardVc | FormVc,
+		type: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button['type']
+	) {
 		const model = renderUtil.render(vc)
-		const primary = pluckButtons(model).find((b) => b.type === 'primary')
+		const primary = pluckButtons(model).find((b) => b.type === type)
 
 		//@ts-ignore
 		if (!primary && model.shouldShowSubmitControls) {
@@ -76,21 +79,22 @@ const interactionUtil = {
 
 		assert.isTruthy(
 			primary,
-			`Your footer doesn't have button with type=primary to click.`
+			`Your footer doesn't have button with type=${type} to click.`
 		)
 
 		return this.click(primary)
 	},
 
-	async clickSecondaryInFooter(vc: CardVc | FormVc) {
-		const model = renderUtil.render(vc)
-		const secondary = pluckButtons(model).find((b) => b.type === 'secondary')
-		assert.isTruthy(
-			secondary,
-			`Your footer doesn't button with type=secondary footer to click.`
-		)
+	async clickPrimaryInFooter(vc: CardVc | FormVc) {
+		return this.clickInFooter(vc, 'primary')
+	},
 
-		return this.click(secondary)
+	async clickSecondaryInFooter(vc: CardVc | FormVc) {
+		return this.clickInFooter(vc, 'secondary')
+	},
+
+	async clickDestructiveInFooter(vc: CardVc | FormVc) {
+		return this.clickInFooter(vc, 'destructive')
 	},
 
 	async clickOnDestructiveButtonInRow(vc: ListRowViewController) {

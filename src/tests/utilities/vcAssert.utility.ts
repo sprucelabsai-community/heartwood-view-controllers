@@ -22,8 +22,12 @@ import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
 const WAIT_TIMEOUT = 5000
 type Vc = ViewController<any>
+type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 
-async function wait(promise?: Promise<any> | void) {
+async function wait(
+	promise: Promise<any> | void | undefined,
+	showDialogPromise: Promise<any>
+) {
 	return new Promise<void>((resolve) => {
 		let isDone = false
 
@@ -42,6 +46,7 @@ async function wait(promise?: Promise<any> | void) {
 
 		const timeout = setTimeout(done, WAIT_TIMEOUT)
 		promise?.then(done)
+		showDialogPromise?.then(done)
 	})
 }
 
@@ -96,20 +101,22 @@ const vcAssertUtil = {
 		return new Promise((resolve, reject) => {
 			let wasHit = false
 
-			//@ts-ignore
-			vc.confirm = async (options: ConfirmOptions) => {
-				try {
-					wasHit = true
-					const results = confirmHandler?.(options) ?? true
-
-					return results
-				} catch (err) {
-					reject(err)
+			let confirmPromise = new Promise((resolve) => {
+				//@ts-ignore
+				vc.confirm = async (options: ConfirmOptions) => {
+					try {
+						wasHit = true
+						const results = confirmHandler?.(options) ?? true
+						resolve(undefined)
+						return results
+					} catch (err) {
+						reject(err)
+					}
 				}
-			}
+			})
 
 			async function run() {
-				await wait(action())
+				await wait(action(), confirmPromise)
 				assert.isTrue(
 					wasHit,
 					`this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
@@ -135,6 +142,39 @@ const vcAssertUtil = {
 		)
 	},
 
+	async assertRendersAlert(
+		vc: ViewController<any>,
+		action: () => void | Promise<void>
+	) {
+		let wasAlertTriggered = false
+
+		//@ts-ignore
+		let oldAlert = vc.alert.bind(vc)
+
+		//@ts-ignore
+		vc.alert = (options: any) => {
+			wasAlertTriggered = true
+			return oldAlert(options)
+		}
+
+		let dlgVc: DialogViewController | undefined
+
+		try {
+			dlgVc = await vcAssertUtil.assertRendersDialog(vc, action)
+		} catch {
+			assert.fail(
+				`Expected this.alert() to be called in your view and it wasn't.`
+			)
+		}
+
+		assert.isTrue(
+			wasAlertTriggered,
+			`Expected this.alert() to be called in your view and it wasn't.`
+		)
+
+		return dlgVc as DialogViewController
+	},
+
 	async assertRendersDialog(
 		vc: ViewController<any>,
 		action: () => void | Promise<void>,
@@ -145,14 +185,17 @@ const vcAssertUtil = {
 			try {
 				let wasHit = false
 				let dialogVc: DialogViewController | undefined
-
 				//@ts-ignore
 				const oldRenderInDialog = vc.renderInDialog?.bind(vc) ?? function () {}
-				//@ts-ignore
-				vc.renderInDialog = (...args: any[]) => {
-					dialogVc = oldRenderInDialog(...args)
-					return dialogVc
-				}
+
+				let dialogPromise = new Promise((resolve) => {
+					//@ts-ignore
+					vc.renderInDialog = (...args: any[]) => {
+						dialogVc = oldRenderInDialog(...args)
+						resolve(undefined)
+						return dialogVc
+					}
+				})
 
 				let dialogHandlerPromise: any
 
@@ -171,7 +214,7 @@ const vcAssertUtil = {
 
 				run = async () => {
 					try {
-						await wait(action())
+						await wait(action(), dialogPromise)
 
 						assert.isTrue(
 							wasHit,
@@ -254,13 +297,15 @@ const vcAssertUtil = {
 		validateSchemaValues(cardSchema, model)
 
 		if (model.footer?.buttons) {
-			this.assertPrimaryButtonIsLastInFooter(model.footer)
+			this.assertLastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(vc)
 		}
 	},
 
-	assertPrimaryButtonIsLastInFooter(
-		footer: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
+	assertLastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(
+		vc: ViewController<Card>
 	) {
+		const model = renderUtil.render(vc)
+		const footer = model.footer ?? {}
 		const primaryIdx = footer.buttons?.findIndex((b) => b.type === 'primary')
 
 		if (
@@ -497,6 +542,26 @@ const vcAssertUtil = {
 		}
 
 		return forms as FormViewController<any>[] | BigFormViewController<any>[]
+	},
+
+	assertCardFooterRendersButton(
+		vc: ViewController<Card>,
+		type?: Button['type']
+	) {
+		const model = renderUtil.render(vc)
+		const buttons = model.footer?.buttons
+
+		if (
+			!buttons ||
+			buttons.length === 0 ||
+			(type && !buttons.find((b) => b.type === type))
+		) {
+			assert.fail(
+				`The footer of your card is supposed to render a${
+					type ? ` ${type}` : ''
+				} button but it doesn't!`
+			)
+		}
 	},
 
 	assertCardRendersCriticalError(vc: CardViewController) {

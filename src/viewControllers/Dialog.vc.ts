@@ -74,6 +74,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		this.closeResolver?.()
 		this.triggerRender()
 	}
+
 	public getCardVc() {
 		return this.cardVc
 	}
