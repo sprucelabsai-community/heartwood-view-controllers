@@ -1,3 +1,10 @@
+# [35.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.4.1...v35.5.0) (2021-11-03)
+
+
+### Features
+
+* interactionUtil.submitForm submits bigForm regardless of total slides ([31d4b89](https://github.com/sprucelabsai/heartwood-view-controllers/commit/31d4b89))
+
 ## [35.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.4.0...v35.4.1) (2021-11-03)
 
 # [35.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.3.2...v35.4.0) (2021-11-02)
