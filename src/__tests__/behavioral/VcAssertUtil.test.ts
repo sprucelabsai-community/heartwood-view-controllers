@@ -948,7 +948,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.isFalse(vc.afterAlert)
 
-		alertVc.hide()
+		await alertVc.hide()
 
 		await this.wait(0)
 
