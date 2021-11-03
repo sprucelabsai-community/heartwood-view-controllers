@@ -2,20 +2,21 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test'
 import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
+import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
-type FormVc = FormViewController<any>
+type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactionUtil = {
 	async click(
 		button?: {
 			onClick?: ((options?: any) => void | Promise<void>) | null | undefined
 		} | null,
-		options?: Record<string, any>
+		onClickOptions?: Record<string, any>
 	) {
 		//@ts-ignore
 		const { onClick } = button ?? {}
@@ -26,7 +27,7 @@ const interactionUtil = {
 		)
 		//@ts-ignore
 		await onClick(
-			options ?? {
+			onClickOptions ?? {
 				altKey: false,
 				bubbles: true,
 				button: 0,
