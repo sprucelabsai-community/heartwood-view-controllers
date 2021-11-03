@@ -181,6 +181,7 @@ const vcAssertUtil = {
 		dialogHandler?: (dialogVc: DialogViewController) => void | Promise<void>
 	): Promise<DialogViewController> {
 		let run = () => {}
+
 		return new Promise((resolve, reject) => {
 			try {
 				let wasHit = false
