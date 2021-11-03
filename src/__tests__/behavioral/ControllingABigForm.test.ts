@@ -116,4 +116,73 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 		assert.isTrue(wasHit)
 		assert.isEqual(whatWasHit, 2)
 	}
+
+	@test()
+	protected static async submittingLastSlideInvokesOnSubmitCallback() {
+		let onSubmitSlideCount = 0
+		let onSubmitCount = 0
+		let onSubmitSlideOptions: any | undefined
+		let onSubmitOptions: any | undefined
+
+		this.vc.setOnSubmitSlide((options) => {
+			onSubmitSlideCount++
+			onSubmitSlideOptions = options
+		})
+
+		this.vc.setOnSubmit((options) => {
+			onSubmitCount++
+			onSubmitOptions = options
+		})
+
+		this.vc.setValues({
+			optional: 'yay',
+			phone: '555-555-5555',
+			pin: 123,
+		})
+
+		await this.vc.submit()
+
+		assert.isEqual(onSubmitSlideCount, 1)
+		assert.isEqual(onSubmitCount, 0)
+
+		await this.vc.submit()
+
+		assert.isEqual(onSubmitSlideCount, 2)
+		assert.isEqual(onSubmitCount, 0)
+
+		await this.vc.submit()
+
+		assert.isEqual(onSubmitSlideCount, 3)
+		assert.isEqual(onSubmitCount, 1)
+
+		assert.isEqual(onSubmitSlideOptions, onSubmitOptions)
+	}
+
+	@test()
+	protected static async canCancelSubmitByReturningFalseFromSubmitSlide() {
+		this.vc.setOnSubmitSlide(() => {
+			if (this.vc.getIsLastSlide()) {
+				return false
+			}
+
+			return
+		})
+
+		let wasHit = false
+		this.vc.setOnSubmit(() => {
+			wasHit = true
+		})
+
+		this.vc.setValues({
+			optional: 'yay',
+			phone: '555-555-5555',
+			pin: 123,
+		})
+
+		await this.vc.submit()
+		await this.vc.submit()
+		await this.vc.submit()
+
+		assert.isFalse(wasHit)
+	}
 }

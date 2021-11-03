@@ -1,6 +1,8 @@
+import { buildSchema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import Authenticator from '../../auth/Authenticator'
+import buildBigForm from '../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../tests/constants'
 import interactionUtil from '../../tests/utilities/interaction.utility'
@@ -92,5 +94,42 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		})
 
 		await interactionUtil.clickPrimaryInFooter(formVc)
+	}
+
+	@test()
+	protected static async canSubmitBigFormAllAtOnce() {
+		let wasHit = false
+
+		const bigFormVc = this.Controller(
+			'bigForm',
+			buildBigForm({
+				onSubmit: () => {
+					wasHit = true
+				},
+				schema: buildSchema({
+					id: 'test',
+					fields: {
+						first: {
+							type: 'text',
+						},
+						second: {
+							type: 'text',
+						},
+					},
+				}),
+				sections: [
+					{
+						fields: ['first'],
+					},
+					{
+						fields: ['second'],
+					},
+				],
+			})
+		)
+
+		await interactionUtil.submitForm(bigFormVc)
+
+		assert.isTrue(wasHit)
 	}
 }

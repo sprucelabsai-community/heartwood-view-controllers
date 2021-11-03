@@ -108,6 +108,10 @@ const interactionUtil = {
 	},
 
 	async submitForm(vc: FormVc) {
+		if ((vc as BigFormViewController<any>).getTotalSlides) {
+			const bigFormVc = vc as BigFormViewController<any>
+			await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)
+		}
 		await vc.submit()
 	},
 

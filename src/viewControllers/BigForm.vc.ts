@@ -27,13 +27,21 @@ export default class BigFormViewController<
 		return false
 	}
 
+	public setOnSubmit(cb: V['onSubmit']) {
+		this.model.onSubmit = cb
+	}
+
+	public setOnSubmitSlide(cb: V['onSubmitSlide']) {
+		this.model.onSubmitSlide = cb
+	}
+
 	public getPresentSlide(): number {
 		return this.model.presentSlide ?? 0
 	}
 
 	public async jumpToSlide(idx: number) {
 		this.model.presentSlide = Math.min(
-			this.model.sections.length - 1,
+			this.getTotalSlides() - 1,
 			Math.max(0, idx)
 		)
 
@@ -47,6 +55,10 @@ export default class BigFormViewController<
 		}
 
 		this.replaySlideHeading(this.getPresentSlide())
+	}
+
+	public getTotalSlides() {
+		return this.model.sections.length
 	}
 
 	public replaySlideHeading(idx: number) {
@@ -63,16 +75,22 @@ export default class BigFormViewController<
 
 	public async submit() {
 		const errorsByField = this.validate()
-		const results = await this.model.onSubmitSlide?.({
+		const options = {
 			values: this.getValues(),
 			presentSlide: this.getPresentSlide(),
 			errorsByField,
 			controller: this,
 			isValid: this.isValid(),
-		})
+		}
+
+		const results = await this.model.onSubmitSlide?.(options)
 
 		if (results === false) {
 			return
+		}
+
+		if (this.getIsLastSlide()) {
+			await this.model.onSubmit?.(options)
 		}
 
 		if (this.isPresentSlideValid()) {
@@ -80,6 +98,10 @@ export default class BigFormViewController<
 		} else {
 			this.setErrorsByField(errorsByField)
 		}
+	}
+
+	public getIsLastSlide() {
+		return this.getPresentSlide() === this.getTotalSlides() - 1
 	}
 
 	private isPresentSlideValid() {
