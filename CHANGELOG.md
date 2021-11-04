@@ -1,3 +1,10 @@
+# [35.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.10.8...v35.11.0) (2021-11-04)
+
+
+### Features
+
+* Developers can ensure there are to talking sprucebot in a card ([87951e5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/87951e5))
+
 ## [35.10.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.10.7...v35.10.8) (2021-11-04)
 
 ## [35.10.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.10.6...v35.10.7) (2021-11-04)
