@@ -19,6 +19,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 			parameters: ['sentences'],
 		})
 
+		//@ts-ignore
 		assert.doesThrow(() => this.Controller('talkingSprucebot', {}))
 	}
 

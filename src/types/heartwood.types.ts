@@ -43,12 +43,14 @@ import LoginViewController, {
 import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'
+import TalkingSprucebotViewController, {
+	TalkingSprucebotViewControllerOptions,
+} from '../viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController, {
 	ToolBeltViewControllerOptions,
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
-import TalkingSprucebotViewController from '../viewControllers/TalkingSprucebot.vc'
 
 export type ErrorHandler = (message: string) => void
 

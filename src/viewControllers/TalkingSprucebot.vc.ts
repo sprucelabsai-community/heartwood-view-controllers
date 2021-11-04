@@ -6,7 +6,7 @@ import AbstractViewController from './Abstract.vc'
 type ViewModel =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
 
-interface TalkingSprucebotViewControllerOptions extends ViewModel {}
+export interface TalkingSprucebotViewControllerOptions extends ViewModel {}
 
 export default class TalkingSprucebotViewController
 	extends AbstractViewController<ViewModel>
