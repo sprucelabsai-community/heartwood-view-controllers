@@ -1,3 +1,10 @@
+# [35.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.6.10...v35.7.0) (2021-11-04)
+
+
+### Features
+
+* talking sprucebot view conttroller ([8bacb34](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8bacb34))
+
 ## [35.6.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.6.9...v35.6.10) (2021-11-04)
 
 ## [35.6.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.6.8...v35.6.9) (2021-11-04)
