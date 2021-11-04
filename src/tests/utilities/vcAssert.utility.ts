@@ -447,7 +447,7 @@ const vcAssertUtil = {
 	assertCardBodyIsLoading(vc: CardViewController) {
 		if (!vc.isBodyLoading()) {
 			assert.fail(
-				`Expected your card body to have \`isLoading=true\`, but it wasn't.`
+				`Expected your card body to have \`isLoading=true\`, but it didn't.`
 			)
 		}
 	},
@@ -455,7 +455,7 @@ const vcAssertUtil = {
 	assertCardBodyIsNotLoading(vc: CardViewController) {
 		if (vc.isBodyLoading()) {
 			assert.fail(
-				`Expected your card body to have \`isLoading=false\`, but it wasn't. Try \`this.setBodyIsLoading(false)\`.`
+				`Expected your card body to have \`isLoading=false\`, but it didn't. Try \`this.setBodyIsLoading(false)\`.`
 			)
 		}
 	},
