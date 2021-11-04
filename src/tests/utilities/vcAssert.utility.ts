@@ -28,7 +28,7 @@ type CardSection =
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 function pluckAllFromCard(v: Card, key: keyof CardSection) {
-	return v.body?.sections?.map((s) => s[key]).filter((k) => !!k) ?? []
+	return v.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
 function pluckFirstFromCard(v: Card, key: keyof CardSection) {
