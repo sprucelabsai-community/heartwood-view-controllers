@@ -56,6 +56,10 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		return this.model.tools
 	}
 
+	public getTool(id: string) {
+		return this.model.tools.find((t) => t.id === id)
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
 		return { ...this.model, controller: this }
 	}

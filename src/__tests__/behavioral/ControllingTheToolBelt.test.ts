@@ -188,4 +188,31 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 			},
 		])
 	}
+
+	@test()
+	protected static canGetButtonBackById() {
+		this.vc.addTool({
+			id: 'maps_2',
+			lineIcon: 'map',
+			card: {} as any,
+		})
+
+		assert.isEqualDeep(this.vc.getTool('maps_2'), {
+			id: 'maps_2',
+			lineIcon: 'map',
+			card: {} as any,
+		})
+
+		this.vc.addTool({
+			id: 'maps_4',
+			lineIcon: 'map4',
+			card: {} as any,
+		})
+
+		assert.isEqualDeep(this.vc.getTool('maps_4'), {
+			id: 'maps_4',
+			lineIcon: 'map4',
+			card: {} as any,
+		})
+	}
 }
