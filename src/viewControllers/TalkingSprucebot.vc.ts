@@ -42,7 +42,7 @@ export default class TalkingSprucebotViewController
 		this.playResolver?.()
 	}
 
-	public async play() {
+	public async play(): Promise<void> {
 		this.playHandler()
 		return new Promise((resolve) => {
 			this.playResolver = resolve as any
