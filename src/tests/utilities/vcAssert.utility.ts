@@ -23,6 +23,17 @@ import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 const WAIT_TIMEOUT = 5000
 type Vc = ViewController<any>
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+type CardSection =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+
+function pluckAllFromCard(v: Card, key: keyof CardSection) {
+	return v.body?.sections?.map((s) => s[key]).filter((k) => !!k) ?? []
+}
+
+function pluckFirstFromCard(v: Card, key: keyof CardSection) {
+	return pluckAllFromCard(v, key)[0] as any
+}
 
 async function wait(
 	promise: Promise<any> | void | undefined,
@@ -49,8 +60,6 @@ async function wait(
 		showDialogPromise?.then(done)
 	})
 }
-
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 const vcAssertUtil = {
 	_setVcFactory(factory: ViewControllerFactory) {
@@ -241,9 +250,9 @@ const vcAssertUtil = {
 
 	assertCardRendersForm(vc: ViewController<Card> | DialogViewController) {
 		const model = renderUtil.render(vc)
-		const form = model.body?.sections
-			?.map((s) => s.form ?? s.bigForm)
-			.find((s) => !!s)
+
+		const form =
+			pluckFirstFromCard(model, 'bigForm') || pluckFirstFromCard(model, 'form')
 
 		assert.isTrue(
 			form?.controller instanceof FormViewController,
@@ -259,13 +268,11 @@ const vcAssertUtil = {
 		vc: ViewController<Card> | FormViewController<any>
 	): ListViewController {
 		const model = renderUtil.render(vc)
-
-		//@ts-ignore
-		const list = (model.body ?? model)?.sections
+		const list = pluckFirstFromCard(
 			//@ts-ignore
-			?.map((s) => s.list)
-			//@ts-ignore
-			.find((l) => !!l)
+			model.body ? model : { body: model },
+			'list'
+		)
 
 		assert.isTrue(
 			list?.controller instanceof ListViewController,
@@ -605,10 +612,9 @@ const vcAssertUtil = {
 
 		for (const layout of model.layouts ?? []) {
 			for (const card of layout?.cards ?? []) {
-				for (const section of card?.body?.sections ?? []) {
-					if (section?.calendar) {
-						return
-					}
+				const calendar = pluckFirstFromCard(card ?? {}, 'calendar')
+				if (calendar) {
+					return
 				}
 			}
 		}
@@ -624,6 +630,18 @@ const vcAssertUtil = {
 		}
 
 		assert.fail('Your skill view should not be rendering a calendar right now!')
+	},
+
+	assertCardRendersTalkingSprucebot(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		const sprucebot = pluckFirstFromCard(model, 'talkingSprucebot')
+
+		if (!sprucebot) {
+			assert.fail('Your card does not render a talking sprucebot!')
+		}
+
+		//@ts-ignore
+		return sprucebot.controller
 	},
 }
 
