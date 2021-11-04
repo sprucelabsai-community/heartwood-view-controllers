@@ -1,3 +1,10 @@
+# [36.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.11.0...v36.0.0) (2021-11-04)
+
+
+### Breaking Changes
+
+* Renamed a developer option to make it easier to use. ([b0fe78b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b0fe78b))
+
 # [35.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.10.8...v35.11.0) (2021-11-04)
 
 
