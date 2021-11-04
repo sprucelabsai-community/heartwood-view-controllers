@@ -1,3 +1,10 @@
+# [35.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.8.1...v35.9.0) (2021-11-04)
+
+
+### Features
+
+* missed export ([9891353](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9891353))
+
 ## [35.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.8.0...v35.8.1) (2021-11-04)
 
 # [35.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.7.0...v35.8.0) (2021-11-04)
