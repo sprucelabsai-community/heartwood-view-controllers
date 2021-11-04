@@ -205,13 +205,13 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 		this.vc.addTool({
 			id: 'maps_4',
-			lineIcon: 'map4',
+			lineIcon: 'add',
 			card: {} as any,
 		})
 
 		assert.isEqualDeep(this.vc.getTool('maps_4'), {
 			id: 'maps_4',
-			lineIcon: 'map4',
+			lineIcon: 'add',
 			card: {} as any,
 		})
 	}
