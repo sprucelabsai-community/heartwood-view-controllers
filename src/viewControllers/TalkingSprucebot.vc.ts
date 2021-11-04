@@ -57,6 +57,7 @@ export default class TalkingSprucebotViewController
 	}
 
 	public render(): ViewModel {
-		return this.model
+		//@ts-ignore
+		return { ...this.model, controller: this }
 	}
 }

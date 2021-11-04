@@ -3,6 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import talkingSprucebotSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import TalkingSprucebotViewController from '../../viewControllers/TalkingSprucebot.vc'
 
 export default class ControllingATalkingSprucebotTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -42,6 +43,13 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 	protected static canCreateControllingATalkingSprucebot() {
 		const vc = this.TalkingSprucebot()
 		const model = this.render(vc)
+
+		//@ts-ignore
+		assert.isTrue(model.controller instanceof TalkingSprucebotViewController)
+
+		//@ts-ignore
+		delete model.controller
+
 		validateSchemaValues(talkingSprucebotSchema, model)
 	}
 
