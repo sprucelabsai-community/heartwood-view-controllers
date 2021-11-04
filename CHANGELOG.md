@@ -1,3 +1,10 @@
+# [36.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.0.0...v36.1.0) (2021-11-04)
+
+
+### Features
+
+* Developers can get buttons of the toolbelt by id ([e4a6b55](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e4a6b55))
+
 # [36.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.11.0...v36.0.0) (2021-11-04)
 
 
