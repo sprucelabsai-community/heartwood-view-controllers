@@ -1,3 +1,10 @@
+# [35.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.9.5...v35.10.0) (2021-11-04)
+
+
+### Features
+
+* sasert renders talking sprucebot ([e7eb38b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e7eb38b))
+
 ## [35.9.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.9.4...v35.9.5) (2021-11-04)
 
 ## [35.9.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v35.9.3...v35.9.4) (2021-11-04)
