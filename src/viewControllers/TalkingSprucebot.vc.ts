@@ -28,6 +28,7 @@ export default class TalkingSprucebotViewController
 		}
 
 		this.model = {
+			size: 'medium',
 			...options,
 		}
 	}

@@ -152,6 +152,26 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 		assert.isTrue(wasHit)
 	}
 
+	@test()
+	protected static defaultSizeIsMedium() {
+		const model = this.render(this.TalkingSprucebot())
+		assert.isEqual(model.size, 'medium')
+	}
+
+	@test()
+	protected static canSetSize() {
+		const vc = this.Controller('talkingSprucebot', {
+			size: 'small',
+			sentences: [
+				{
+					words: 'how in the world are you?',
+				},
+			],
+		})
+		const model = this.render(vc)
+		assert.isEqual(model.size, 'small')
+	}
+
 	private static TalkingSprucebot() {
 		return this.Controller('talkingSprucebot', {
 			sentences: [
