@@ -643,6 +643,18 @@ const vcAssertUtil = {
 		//@ts-ignore
 		return sprucebot.controller
 	},
+
+	assertCardDoesNotRenderTalkingSprucebot(vc: ViewController<Card>) {
+		try {
+			this.assertCardRendersTalkingSprucebot(vc)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`Your Card wasn't supposed to render a talking sprucebot, but it is!`
+		)
+	},
 }
 
 export default vcAssertUtil

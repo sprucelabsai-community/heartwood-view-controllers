@@ -958,10 +958,12 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	@test()
 	protected static async knowsIfNotRenderingTalkingSprucebot() {
 		assert.isFunction(vcAssertUtil.assertCardRendersTalkingSprucebot)
+		assert.isFunction(vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot)
 
 		const vc = this.Controller('card', {})
 
 		assert.doesThrow(() => vcAssertUtil.assertCardRendersTalkingSprucebot(vc))
+		vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot(vc)
 	}
 
 	@test()
@@ -984,6 +986,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot(vc)
+		)
 		const actual = vcAssertUtil.assertCardRendersTalkingSprucebot(vc)
 
 		assert.isEqual(actual, expected)
