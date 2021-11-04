@@ -38,7 +38,7 @@ const sprucebotTypeMessageBuilder = buildSchema({
 				}),
 			},
 		},
-		defaultAvatar: {
+		avatar: {
 			type: 'schema',
 			label: 'Default avatar',
 			hint: 'How should Sprucebot be rendered by default',

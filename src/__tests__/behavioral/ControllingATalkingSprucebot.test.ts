@@ -172,6 +172,35 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 		assert.isEqual(model.size, 'small')
 	}
 
+	@test()
+	protected static defaultAvatarChilling() {
+		const model = this.render(this.TalkingSprucebot())
+		assert.isEqualDeep(model.avatar, {
+			stateOfMind: 'chill',
+		})
+	}
+
+	@test()
+	protected static canSetAvatar() {
+		const vc = this.Controller('talkingSprucebot', {
+			size: 'small',
+			avatar: {
+				size: 'large',
+				stateOfMind: 'accomplished',
+			},
+			sentences: [
+				{
+					words: 'how in the world are you?',
+				},
+			],
+		})
+		const model = this.render(vc)
+		assert.isEqualDeep(model.avatar, {
+			size: 'large',
+			stateOfMind: 'accomplished',
+		})
+	}
+
 	private static TalkingSprucebot() {
 		return this.Controller('talkingSprucebot', {
 			sentences: [

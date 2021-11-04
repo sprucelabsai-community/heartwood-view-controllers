@@ -591,7 +591,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
 				/** Start delay. How long should I wait before starting to type? */
 				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
 				/** Loop. */
@@ -619,7 +619,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
 			            },
 			            /** Default avatar. How should Sprucebot be rendered by default */
-			            'defaultAvatar': {
+			            'avatar': {
 			                label: 'Default avatar',
 			                type: 'schema',
 			                hint: 'How should Sprucebot be rendered by default',
@@ -1631,7 +1631,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'defaultAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
 				/** Start delay. How long should I wait before starting to type? */
 				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
 				/** Loop. */
@@ -1661,7 +1661,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
 			            },
 			            /** Default avatar. How should Sprucebot be rendered by default */
-			            'defaultAvatar': {
+			            'avatar': {
 			                label: 'Default avatar',
 			                type: 'schema',
 			                hint: 'How should Sprucebot be rendered by default',

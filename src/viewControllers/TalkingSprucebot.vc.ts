@@ -28,6 +28,9 @@ export default class TalkingSprucebotViewController
 		}
 
 		this.model = {
+			avatar: {
+				stateOfMind: 'chill',
+			},
 			size: 'medium',
 			...options,
 		}

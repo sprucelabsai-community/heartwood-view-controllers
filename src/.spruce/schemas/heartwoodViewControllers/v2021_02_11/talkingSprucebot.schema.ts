@@ -21,7 +21,7 @@ const talkingSprucebotSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                options: {schema: sprucebotTypedMessageSentenceSchema_v2021_02_11,}
 	            },
 	            /** Default avatar. How should Sprucebot be rendered by default */
-	            'defaultAvatar': {
+	            'avatar': {
 	                label: 'Default avatar',
 	                type: 'schema',
 	                hint: 'How should Sprucebot be rendered by default',
