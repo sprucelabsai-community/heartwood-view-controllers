@@ -955,6 +955,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		assert.isTrue(vc.afterAlert)
 	}
 
+	@test()
+	protected static async knowsIfRenderingTalkingSprucebot() {}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController

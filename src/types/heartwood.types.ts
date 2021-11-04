@@ -48,6 +48,7 @@ import ToolBeltViewController, {
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
+import TalkingSprucebotViewController from '../viewControllers/TalkingSprucebot.vc'
 
 export type ErrorHandler = (message: string) => void
 
@@ -196,6 +197,7 @@ export interface ViewControllerMap {
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
 	buttonBar: ButtonBarViewController
+	talkingSprucebot: TalkingSprucebotViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -212,6 +214,7 @@ export interface ViewControllerOptionsMap {
 	toolBelt: ToolBeltViewControllerOptions
 	calendar: CalendarViewControllerOptions
 	buttonBar: ButtonBarViewControllerOptions
+	talkingSprucebot: TalkingSprucebotViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

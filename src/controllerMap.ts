@@ -9,6 +9,7 @@ import FormViewController from './viewControllers/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
 import SwipeViewController from './viewControllers/Swipe.vc'
+import TalkingSprucebotViewController from './viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from './viewControllers/ToolBelt.vc'
 
 export const CORE_CONTROLLER_MAP = {
@@ -24,4 +25,5 @@ export const CORE_CONTROLLER_MAP = {
 	toolBelt: ToolBeltViewController,
 	calendar: CalendarViewController,
 	buttonBar: ButtonBarViewController,
+	talkingSprucebot: TalkingSprucebotViewController,
 }
