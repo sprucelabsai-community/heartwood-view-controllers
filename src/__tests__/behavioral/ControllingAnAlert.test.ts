@@ -94,7 +94,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
-		vcAssertUtil.assertCardFooterRendersButtonWithType(dlgVc, 'destructive')
+		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'destructive')
 	}
 
 	@test()
@@ -110,5 +110,19 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 		await this.wait(0)
 
 		assert.isTrue(this.vc.afterAlert)
+	}
+
+	@test()
+	protected static async alertsCanReceiveTypeOfButton() {
+		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+			//@ts-ignore
+			this.vc.alert({
+				title: 'hey',
+				message: 'hey',
+				style: 'info',
+			})
+		)
+
+		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'primary')
 	}
 }

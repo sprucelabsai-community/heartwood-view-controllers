@@ -555,7 +555,7 @@ const vcAssertUtil = {
 		return forms as FormViewController<any>[] | BigFormViewController<any>[]
 	},
 
-	assertCardFooterRendersButtonWithType(
+	assertFooterRendersButtonWithType(
 		vc: ViewController<Card>,
 		type?: Button['type']
 	) {
@@ -568,7 +568,7 @@ const vcAssertUtil = {
 			(type && !buttons.find((b) => b.type === type))
 		) {
 			assert.fail(
-				`The footer of your card is supposed to render a${
+				`Your footer is supposed to render a${
 					type ? ` ${type}` : ''
 				} button but it doesn't!`
 			)

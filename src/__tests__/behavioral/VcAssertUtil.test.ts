@@ -902,11 +902,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
+		assert.doesThrow(() => vcAssertUtil.assertFooterRendersButtonWithType(vc))
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardFooterRendersButtonWithType(vc)
-		)
-		assert.doesThrow(() =>
-			vcAssertUtil.assertCardFooterRendersButtonWithType(emptyButtonsVc)
+			vcAssertUtil.assertFooterRendersButtonWithType(emptyButtonsVc)
 		)
 		assert.doesThrow(() =>
 			vcAssertUtil.assertCardRendersButtons(emptyButtonsVc, ['button-one'])
@@ -934,7 +932,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardFooterRendersButtonWithType(vc2)
+		vcAssertUtil.assertFooterRendersButtonWithType(vc2)
 
 		vcAssertUtil.assertCardRendersButtons(vc2, [button1Id])
 		vcAssertUtil.assertCardRendersButtons(vc2, [button2Id])
@@ -945,7 +943,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertCardRendersButton(vc2, button2Id)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardFooterRendersButtonWithType(vc2, 'primary')
+			vcAssertUtil.assertFooterRendersButtonWithType(vc2, 'primary')
 		)
 		assert.doesThrow(() =>
 			vcAssertUtil.assertCardRendersButtons(vc2, [button1Id, 'bad-id'])
@@ -954,7 +952,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			vcAssertUtil.assertCardRendersButton(vc2, 'button-one')
 		)
 
-		vcAssertUtil.assertCardFooterRendersButtonWithType(vc2, 'destructive')
+		vcAssertUtil.assertFooterRendersButtonWithType(vc2, 'destructive')
 	}
 
 	@test('knows if rendering button as first section in body', [])

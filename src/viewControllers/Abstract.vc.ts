@@ -56,7 +56,11 @@ export default abstract class AbstractViewController<ViewModel>
 		await this.activeDialog?.hide()
 	}
 
-	protected async alert(options: { title?: string; message: string }) {
+	protected async alert(options: {
+		title?: string
+		message: string
+		style?: 'info' | 'error'
+	}) {
 		const header = options.title
 			? {
 					title: options.title,
@@ -78,7 +82,7 @@ export default abstract class AbstractViewController<ViewModel>
 				buttons: [
 					{
 						label: 'Ok',
-						type: 'destructive',
+						type: options.style === 'info' ? 'primary' : 'destructive',
 						onClick: () => {
 							void dlg.hide()
 						},
