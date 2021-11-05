@@ -658,29 +658,29 @@ const vcAssertUtil = {
 
 	assertFormIsDisabled(vc: FormViewController<any>) {
 		assert.isFalse(
-			renderUtil.render(vc).footer?.isEnabled,
-			'Your footer is not disabled! Try this.formVc.disableFooter()'
+			vc.isEnabled(),
+			'Your form is enabled and it should not be! Try this.formVc.disable()'
 		)
 	},
 
 	assertFormIsEnabled(vc: FormViewController<any>) {
 		assert.isTrue(
-			renderUtil.render(vc).footer?.isEnabled,
-			'Your footer is not enabled! Try this.formVc.enableFooter()'
+			vc.isEnabled(),
+			'Your form is not yet enabled! Try this.formVc.enable()'
 		)
 	},
 
 	assertFormIsBusy(vc: FormViewController<any>) {
 		assert.isTrue(
 			vc.getIsBusy(),
-			'Your footer is not loading and should be! Try this.formVc.startLoading().'
+			'Your form is not busy and should be! Try this.formVc.setIsBusy(true).'
 		)
 	},
 
 	assertFormIsNotBusy(vc: FormViewController<any>) {
 		assert.isFalse(
-			!vc.getIsBusy(),
-			'Your footer is still loading. Try this.formVc.stopLoading() to stop it!'
+			vc.getIsBusy(),
+			'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
 		)
 	},
 }

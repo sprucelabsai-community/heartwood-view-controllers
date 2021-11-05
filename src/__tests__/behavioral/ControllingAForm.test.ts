@@ -745,19 +745,23 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static canDisableFooter() {
-		this.vc.setFooter({ isLoading: false })
+	protected static canDisableForm() {
+		this.vc.setIsBusy(false)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+
 		this.vc.disable()
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
 
 		vcAssertUtil.assertFormIsDisabled(this.vc)
 		vcAssertUtil.assertFormIsNotBusy(this.vc)
 
-		this.vc.setFooter({ isLoading: true })
+		this.vc.setIsBusy(true)
 		this.vc.disable()
 
 		vcAssertUtil.assertFormIsBusy(this.vc)
 
 		this.vc.enable()
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 5)
 
 		vcAssertUtil.assertFormIsBusy(this.vc)
 		vcAssertUtil.assertFormIsEnabled(this.vc)
@@ -822,6 +826,28 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		vc.enable()
 		await interactionUtil.submitForm(vc)
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static canStartOffDisabled() {
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				isEnabled: false,
+				schema: buildSchema({
+					id: 'changeForm',
+					fields: {
+						firstName: {
+							type: 'text',
+						},
+					},
+				}),
+				sections: [{}],
+			})
+		)
+
+		vcAssertUtil.assertFormIsDisabled(vc)
 	}
 
 	private static FormWithOnChange(onChange: (options: any) => void) {

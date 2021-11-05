@@ -95,6 +95,12 @@ const formSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema 
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Enabled. */
+	            'isEnabled': {
+	                label: 'Enabled',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Set value handler. */
 	            'setValue': {
 	                label: 'Set value handler',

@@ -1343,6 +1343,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'submitButtonLabel'?: string| undefined | null
 				/** Busy. */
 				'isBusy'?: boolean| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
@@ -1443,6 +1445,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Busy. */
 			            'isBusy': {
 			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -1739,6 +1747,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'submitButtonLabel'?: string| undefined | null
 				/** Busy. */
 				'isBusy'?: boolean| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
@@ -1835,6 +1845,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Busy. */
 			            'isBusy': {
 			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
 			                type: 'boolean',
 			                options: undefined
 			            },

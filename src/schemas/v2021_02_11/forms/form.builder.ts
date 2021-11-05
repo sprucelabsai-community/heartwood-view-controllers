@@ -92,6 +92,10 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Busy',
 		},
+		isEnabled: {
+			type: 'boolean',
+			label: 'Enabled',
+		},
 		setValue: {
 			type: 'raw',
 			label: 'Set value handler',

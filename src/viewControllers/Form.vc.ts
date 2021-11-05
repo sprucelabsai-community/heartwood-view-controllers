@@ -41,6 +41,8 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'submitButtonLabel'
 	| 'values'
 	| 'footer'
+	| 'isBusy'
+	| 'isEnabled'
 > &
 	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
 
@@ -92,6 +94,13 @@ export default class FormViewController<
 
 		//@ts-ignore
 		this.originalValues = { ...(this.model.values ?? {}) }
+
+		if (options.isEnabled === false) {
+			this.model.footer = {
+				...this.model.footer,
+				isEnabled: false,
+			}
+		}
 	}
 
 	public focusInput(named: string) {
@@ -213,6 +222,7 @@ export default class FormViewController<
 			...this.model.footer,
 			isEnabled: false,
 		}
+		this.triggerRender()
 	}
 
 	public enable() {
@@ -220,6 +230,7 @@ export default class FormViewController<
 			...this.model.footer,
 			isEnabled: true,
 		}
+		this.triggerRender()
 	}
 
 	public getIsBusy() {
