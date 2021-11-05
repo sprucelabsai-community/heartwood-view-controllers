@@ -245,16 +245,16 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		return this.model.body?.sections?.length ?? 0
 	}
 
-	public isLoading(): boolean {
-		return this.model.body?.isLoading ?? false
+	public isBusy(): boolean {
+		return this.model.body?.isBusy ?? false
 	}
 
-	public setIsLoading(isLoading: boolean) {
+	public setIsBusy(isBusy: boolean) {
 		if (!this.model.body) {
 			this.model.body = {}
 		}
 
-		this.model.body.isLoading = isLoading
+		this.model.body.isBusy = isBusy
 
 		this.triggerRender()
 	}

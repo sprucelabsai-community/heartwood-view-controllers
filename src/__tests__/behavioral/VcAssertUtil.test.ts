@@ -294,7 +294,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(vc))
 		vcAssertUtil.assertCardIsNotBusy(vc)
 
-		vc.setIsLoading(true)
+		vc.setIsBusy(true)
 
 		vcAssertUtil.assertCardIsBusy(vc)
 		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(vc))

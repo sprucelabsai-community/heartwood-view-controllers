@@ -445,7 +445,7 @@ const vcAssertUtil = {
 	},
 
 	assertCardIsBusy(vc: CardViewController) {
-		if (!vc.isLoading()) {
+		if (!vc.isBusy()) {
 			assert.fail(
 				`Expected your card body to be busy. Try \`this.setIsBus(true)\``
 			)
@@ -453,7 +453,7 @@ const vcAssertUtil = {
 	},
 
 	assertCardIsNotBusy(vc: CardViewController) {
-		if (vc.isLoading()) {
+		if (vc.isBusy()) {
 			assert.fail(
 				`Expected your card body to not be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)
