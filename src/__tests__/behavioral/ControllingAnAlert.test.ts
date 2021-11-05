@@ -94,7 +94,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
-		vcAssertUtil.assertCardFooterRendersButton(dlgVc, 'destructive')
+		vcAssertUtil.assertCardFooterRendersButtonWithType(dlgVc, 'destructive')
 	}
 
 	@test()

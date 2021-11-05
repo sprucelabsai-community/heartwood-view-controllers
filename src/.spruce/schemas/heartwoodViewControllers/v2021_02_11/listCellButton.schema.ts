@@ -10,6 +10,11 @@ const listCellButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.L
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Label. */
 	            'label': {
 	                label: 'Label',

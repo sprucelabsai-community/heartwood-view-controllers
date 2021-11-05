@@ -1889,6 +1889,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface CardFooterButton {
 			
+				
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				
@@ -1920,6 +1922,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Label. */
 			            'label': {
 			                label: 'Label',
@@ -2642,6 +2649,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ListCellButton {
 			
+				
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				
@@ -2675,6 +2684,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Label. */
 			            'label': {
 			                label: 'Label',
@@ -3201,6 +3215,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ButtonBarButton {
 			
+				
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				
@@ -3232,6 +3248,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Label. */
 			            'label': {
 			                label: 'Label',
@@ -3353,6 +3374,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface Button {
 			
+				
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				
@@ -3386,6 +3409,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Button',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Label. */
 			            'label': {
 			                label: 'Label',
@@ -3553,6 +3581,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface DropdownButton {
 			
+				
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				
@@ -3584,6 +3614,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Label. */
 			            'label': {
 			                label: 'Label',

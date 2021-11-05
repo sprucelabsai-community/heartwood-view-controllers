@@ -604,6 +604,9 @@ export const lineIconFields: SchemaFieldsByName = {
 }
 
 export const buttonFields: SchemaFieldsByName = {
+	id: {
+		type: 'id',
+	},
 	label: {
 		type: 'text',
 		label: 'Label',

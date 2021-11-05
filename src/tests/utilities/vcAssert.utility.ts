@@ -27,6 +27,18 @@ type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
+function flattenSections(v: Card): CardSection[] {
+	//@ts-ignore
+	return (
+		//@ts-ignore
+		v.body?.sections?.reduce((prev: CardSection, sections: CardSection[]) => {
+			sections.push(prev)
+
+			return sections
+		}, []) ?? []
+	)
+}
+
 function pluckAllFromCard(v: Card, key: keyof CardSection) {
 	return v.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
@@ -552,7 +564,7 @@ const vcAssertUtil = {
 		return forms as FormViewController<any>[] | BigFormViewController<any>[]
 	},
 
-	assertCardFooterRendersButton(
+	assertCardFooterRendersButtonWithType(
 		vc: ViewController<Card>,
 		type?: Button['type']
 	) {
@@ -570,6 +582,35 @@ const vcAssertUtil = {
 				} button but it doesn't!`
 			)
 		}
+	},
+
+	assertCardRendersButtons(vc: ViewController<Card>, ids: string[]) {
+		const model = renderUtil.render(vc)
+		const buttons = [
+			...(model.footer?.buttons ?? []),
+			...flattenSections(model).map((s) => s.buttons),
+		]
+
+		const missing: string[] = []
+
+		for (const id of ids) {
+			const match = buttons.find((b) => b?.id === id)
+			if (!match) {
+				missing.push(id)
+			}
+		}
+
+		if (missing.length > 0) {
+			assert.fail(
+				`Your card is missing buttons with the following ids: ${missing.join(
+					', '
+				)}`
+			)
+		}
+	},
+
+	assertCardRendersButton(vc: ViewController<Card>, id: string) {
+		this.assertCardRendersButtons(vc, [id])
 	},
 
 	assertCardRendersCriticalError(vc: CardViewController) {

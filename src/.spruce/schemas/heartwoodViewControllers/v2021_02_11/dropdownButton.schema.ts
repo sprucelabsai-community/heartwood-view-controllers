@@ -10,6 +10,11 @@ const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.D
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Label. */
 	            'label': {
 	                label: 'Label',

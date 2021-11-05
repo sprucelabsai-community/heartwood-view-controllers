@@ -894,7 +894,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async knowsIfCardFooterIsRenderingButton() {
+	protected static async knowsIfCardFooterIsRenderingButtons() {
 		const vc = this.Controller('card', {})
 		const emptyButtonsVc = this.Controller('card', {
 			footer: {
@@ -902,31 +902,108 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		assert.doesThrow(() => vcAssertUtil.assertCardFooterRendersButton(vc))
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardFooterRendersButton(emptyButtonsVc)
+			vcAssertUtil.assertCardFooterRendersButtonWithType(vc)
 		)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardFooterRendersButtonWithType(emptyButtonsVc)
+		)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardRendersButtons(emptyButtonsVc, ['button-one'])
+		)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardRendersButton(emptyButtonsVc, 'button-one')
+		)
+
+		const button1Id = `${Math.random()}`
+		const button2Id = `${Math.random()}`
 
 		const vc2 = this.Controller('card', {
 			footer: {
 				buttons: [
 					{
 						label: 'hey!',
+						id: button1Id,
 					},
 					{
 						label: 'go',
 						type: 'destructive',
+						id: button2Id,
 					},
 				],
 			},
 		})
 
-		vcAssertUtil.assertCardFooterRendersButton(vc2)
+		vcAssertUtil.assertCardFooterRendersButtonWithType(vc2)
+
+		vcAssertUtil.assertCardRendersButtons(vc2, [button1Id])
+		vcAssertUtil.assertCardRendersButtons(vc2, [button2Id])
+		vcAssertUtil.assertCardRendersButtons(vc2, [button1Id, button2Id])
+		vcAssertUtil.assertCardRendersButtons(vc2, [button2Id, button1Id])
+
+		vcAssertUtil.assertCardRendersButton(vc2, button1Id)
+		vcAssertUtil.assertCardRendersButton(vc2, button2Id)
+
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardFooterRendersButton(vc2, 'primary')
+			vcAssertUtil.assertCardFooterRendersButtonWithType(vc2, 'primary')
+		)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardRendersButtons(vc2, [button1Id, 'bad-id'])
+		)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertCardRendersButton(vc2, 'button-one')
 		)
 
-		vcAssertUtil.assertCardFooterRendersButton(vc2, 'destructive')
+		vcAssertUtil.assertCardFooterRendersButtonWithType(vc2, 'destructive')
+	}
+
+	@test('knows if rendering button as first section in body', [])
+	@test('knows if rendering button as second section in body', [{}, {}])
+	protected static knowsIfRenderingButtonsInBody(emptySections: any[] = []) {
+		const button1Id = `${Math.random()}`
+		const button2Id = `${Math.random()}`
+		const button3Id = `${Math.random()}`
+		const button4Id = `${Math.random()}`
+
+		const vc = this.Controller('card', {
+			body: {
+				sections: [
+					...emptySections,
+					{
+						buttons: [
+							{
+								label: 'hey!',
+								id: button1Id,
+							},
+							{
+								label: 'go',
+								type: 'destructive',
+								id: button2Id,
+							},
+						],
+					},
+				],
+			},
+			footer: {
+				buttons: [
+					{
+						label: 'hey!',
+						id: button3Id,
+					},
+					{
+						label: 'go',
+						type: 'destructive',
+						id: button4Id,
+					},
+				],
+			},
+		})
+
+		vcAssertUtil.assertCardRendersButton(vc, button1Id)
+		vcAssertUtil.assertCardRendersButtons(vc, [button3Id, button4Id, button1Id])
+		vcAssertUtil.assertCardRendersButton(vc, button4Id)
+		vcAssertUtil.assertCardRendersButtons(vc, [button3Id, button4Id])
+		vcAssertUtil.assertCardRendersButton(vc, button4Id)
 	}
 
 	@test()
