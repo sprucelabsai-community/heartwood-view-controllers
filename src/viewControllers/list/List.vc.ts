@@ -104,7 +104,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		if (!this.model.rows[rowIdx]?.cells) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
-				friendlyMessage: `Could not get view conroller for row ${rowIdx} because it does not exist.`,
+				friendlyMessage: `Could not get view controller for row ${rowIdx} because it does not exist.`,
 				parameters: ['rowIdx'],
 			})
 		}

@@ -1084,6 +1084,45 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertCardRendersTalkingSprucebot(vc2)
 	}
 
+	@test()
+	protected static knowsIfRowsWithIdRender() {
+		const newId = `${new Date().getTime()}`
+		const list1 = this.Controller('list', {
+			rows: [
+				{
+					id: 'good-one',
+					cells: [],
+				},
+				{
+					id: newId,
+					cells: [],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertListRendersRow(list1, 'not-found-' + newId)
+		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertListRendersRows(list1, ['not-found-' + newId])
+		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertListDoesNotRenderRow(list1, newId)
+		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertListRendersRows(list1, ['not-found-' + newId, newId])
+		)
+
+		vcAssertUtil.assertListDoesNotRenderRow(list1, 'not-found-' + newId)
+		vcAssertUtil.assertListRendersRow(list1, 'good-one')
+		vcAssertUtil.assertListRendersRow(list1, newId)
+		vcAssertUtil.assertListRendersRows(list1, ['good-one'])
+		vcAssertUtil.assertListRendersRows(list1, ['good-one', newId])
+	}
+
 	private static BadController() {
 		//@ts-ignore
 		return this.Controller('bad') as BadSkillViewController

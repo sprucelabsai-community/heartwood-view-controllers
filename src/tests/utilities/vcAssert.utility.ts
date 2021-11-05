@@ -26,6 +26,7 @@ type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 
 function pluckAllFromCard<K extends keyof CardSection>(
 	v: Card,
@@ -395,8 +396,8 @@ const vcAssertUtil = {
 	},
 
 	assertListRendersRows(
-		listVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List>,
-		expectedTotalRows?: number
+		listVc: ViewController<List>,
+		expectedRows?: number | string[]
 	) {
 		const model = renderUtil.render(listVc)
 		assert.isTruthy(
@@ -404,13 +405,35 @@ const vcAssertUtil = {
 			`Your list should have rendered rows, it didn't render anything.`
 		)
 
-		if (typeof expectedTotalRows === 'number') {
+		if (typeof expectedRows === 'number') {
 			assert.isLength(
 				model.rows,
-				expectedTotalRows,
-				`Your list was supposed to render ${expectedTotalRows} row(s), but it rendered ${model.rows.length}.`
+				expectedRows,
+				`Your list was supposed to render ${expectedRows} row(s), but it rendered ${model.rows.length}.`
 			)
+		} else if (Array.isArray(expectedRows)) {
+			for (const id of expectedRows) {
+				this.assertListRendersRow(listVc, id)
+			}
 		}
+	},
+
+	assertListRendersRow(listVc: ViewController<List>, id: string) {
+		const model = renderUtil.render(listVc)
+		const match = model.rows.find((r) => r.id === id)
+
+		if (!match) {
+			assert.fail(`Your list does not render a row with the id of ${id}!`)
+		}
+	},
+
+	assertListDoesNotRenderRow(listVc: ViewController<List>, id: string) {
+		try {
+			this.assertListRendersRow(listVc, id)
+		} catch {
+			return
+		}
+		assert.fail(`I found a row with the id ${id} and I didn't expect to!`)
 	},
 
 	assertSkillViewRendersCard(vc: SkillViewController): CardViewController {
