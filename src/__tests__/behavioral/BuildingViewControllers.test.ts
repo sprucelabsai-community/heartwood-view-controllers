@@ -163,4 +163,19 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 		errorAssertUtil.assertError(err, 'INVALID_SKILL_VIEW_CONTROLLER')
 	}
+
+	@test()
+	protected static controllerFactoryMethod() {
+		const vc = this.Controller('testSkillView', {})
+		let wasHit = false
+
+		//@ts-ignore
+		vc.vcFactory.Controller = () => {
+			wasHit = true
+		}
+
+		vc.Controller('card', {})
+
+		assert.isTrue(wasHit)
+	}
 }

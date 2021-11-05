@@ -5,6 +5,9 @@ import {
 	ViewController,
 	ViewControllerOptions,
 	ConfirmOptions,
+	ViewControllerId,
+	ViewControllerMap,
+	ControllerOptions,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -28,6 +31,13 @@ export default abstract class AbstractViewController<ViewModel>
 
 	public abstract render(): ViewModel
 	public triggerRender() {}
+
+	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
+		name: N,
+		options: O
+	): ViewControllerMap[N] {
+		return this.vcFactory.Controller(name, options)
+	}
 
 	protected renderInDialog(dialog: DialogViewControllerOptions) {
 		const controller = this.vcFactory.Controller('dialog', {

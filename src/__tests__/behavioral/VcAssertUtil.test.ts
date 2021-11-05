@@ -719,13 +719,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static hasAssertRendersPowerTools() {
+	protected static hasAssertRendersToolBelt() {
 		assert.isFunction(vcAssertUtil.assertRendersToolBelt)
 	}
 
 	@test('throws if given nothing', null)
 	@test('throws if given no tools', { tools: [] })
-	protected static throwsIfSkillViewControllerDoesNotRenderPowerTools(
+	protected static throwsIfSkillViewControllerDoesNotRenderToolBelt(
 		toolBelt: ToolBelt | null
 	) {
 		const vc = this.Controller('toolBeltSvc', { toolBelt })
@@ -735,7 +735,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static knowsIfGivenPowerTools() {
+	protected static knowsIfGivenToolBelt() {
 		const vc = this.Controller('toolBeltSvc', {
 			toolBelt: {
 				tools: [
