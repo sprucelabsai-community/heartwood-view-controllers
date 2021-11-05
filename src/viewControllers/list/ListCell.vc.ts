@@ -7,8 +7,8 @@ export type ListCellModel = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell,
 	'textInput' | 'selectInput'
 > & {
-	textInput?: ListTextInput
-	selectInput?: ListSelectInput
+	textInput?: ListTextInput | null
+	selectInput?: ListSelectInput | null
 }
 
 type ListTextInput = Omit<
