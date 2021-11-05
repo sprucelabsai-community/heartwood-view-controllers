@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
+import { vcAssertUtil } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import renderUtil from '../../utilities/render.utility'
 import CardViewController, {
@@ -324,7 +325,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 		this.vc.setFooter(null)
 
-		assert.isEqual(this.render(this.vc).footer, null)
+		assert.isEqual(this.cardTriggerRenderCount, 1)
 	}
 
 	private static beginTrackingFooterRender() {

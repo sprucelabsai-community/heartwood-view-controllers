@@ -26,7 +26,11 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	public setFooter(footer: V['footer']) {
 		this.model.footer = footer
-		this.triggerRenderFooter?.()
+		if (!footer) {
+			this.triggerRender()
+		} else {
+			this.triggerRenderFooter?.()
+		}
 	}
 
 	public getHasCriticalError() {
