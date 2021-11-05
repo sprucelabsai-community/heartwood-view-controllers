@@ -1,3 +1,10 @@
+# [37.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.1.3...v37.2.0) (2021-11-05)
+
+
+### Features
+
+* Developers can better test the right rows are rendering in lists! ([c266fb5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c266fb5))
+
 ## [37.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.1.2...v37.1.3) (2021-11-05)
 
 ## [37.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.1.1...v37.1.2) (2021-11-05)
