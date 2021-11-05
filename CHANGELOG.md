@@ -1,3 +1,10 @@
+# [37.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.0.0...v37.1.0) (2021-11-05)
+
+
+### Features
+
+* Alerts can now render in 2 styles, information or error. ([6b4ef6d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6b4ef6d))
+
 # [37.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.4.2...v37.0.0) (2021-11-05)
 
 
