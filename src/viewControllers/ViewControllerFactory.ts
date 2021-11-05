@@ -14,6 +14,7 @@ import {
 	ViewControllerOptions,
 	Authenticator,
 } from '../types/heartwood.types'
+import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions
@@ -113,10 +114,10 @@ export default class ViewControllerFactory {
 		return !!this.controllerMap[name]
 	}
 
-	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
-		name: N,
-		options: O
-	): ViewControllerMap[N] {
+	public Controller<
+		N extends ViewControllerId,
+		O extends Omit<ControllerOptions<N>, UniversalViewOptionFields>
+	>(name: N, options: O): ViewControllerMap[N] {
 		const Class = this.controllerMap[name]
 
 		if (!Class) {
