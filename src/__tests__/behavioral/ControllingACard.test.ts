@@ -316,6 +316,17 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(rendered.body, body)
 	}
 
+	@test()
+	protected static canSetFooterToNull() {
+		this.vc.setFooter({
+			buttons: [],
+		})
+
+		this.vc.setFooter(null)
+
+		assert.isEqual(this.render(this.vc).footer, null)
+	}
+
 	private static beginTrackingFooterRender() {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
