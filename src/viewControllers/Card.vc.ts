@@ -24,7 +24,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.model = options
 	}
 
-	public patchsetFooter(footer: V['footer']) {
+	public setFooter(footer: V['footer']) {
 		this.model.footer = footer
 		this.triggerRenderFooter?.()
 	}
