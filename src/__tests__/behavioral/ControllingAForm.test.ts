@@ -2,6 +2,7 @@ import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
+import { interactionUtil } from '../..'
 import buildForm from '../../builders/buildForm'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
@@ -746,17 +747,17 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static canDisableFooter() {
 		this.vc.setFooter({ isLoading: false })
-		this.vc.disableFooter()
+		this.vc.disable()
 
 		vcAssertUtil.assertFooterIsDisabled(this.vc)
 		vcAssertUtil.assertFooterIsNotLoading(this.vc)
 
 		this.vc.setFooter({ isLoading: true })
-		this.vc.disableFooter()
+		this.vc.disable()
 
 		vcAssertUtil.assertFooterIsLoading(this.vc)
 
-		this.vc.enableFooter()
+		this.vc.enable()
 
 		vcAssertUtil.assertFooterIsLoading(this.vc)
 		vcAssertUtil.assertFooterIsEnabled(this.vc)
@@ -789,6 +790,38 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.doesInclude(changeOptions[0], changeOptions[1])
 		assert.doesInclude(changeOptions[1], changeOptions[0])
+	}
+
+	@test()
+	protected static async cantSubmitIfNotEnabled() {
+		let wasHit = false
+
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				schema: buildSchema({
+					id: 'changeForm',
+					fields: {
+						firstName: {
+							type: 'text',
+						},
+					},
+				}),
+				onSubmit: () => {
+					wasHit = true
+				},
+				sections: [{}],
+			})
+		)
+
+		vc.disable()
+		interactionUtil.submitForm(vc)
+		assert.isFalse(wasHit)
+
+		vc.enable()
+		interactionUtil.submitForm(vc)
+		assert.isTrue(wasHit)
 	}
 
 	private static FormWithOnChange(onChange: (options: any) => void) {

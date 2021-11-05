@@ -208,14 +208,14 @@ export default class FormViewController<
 		return areSchemaValuesValid(this.model.schema, this.model.values)
 	}
 
-	public disableFooter() {
+	public disable() {
 		this.model.footer = {
 			...this.model.footer,
 			isEnabled: false,
 		}
 	}
 
-	public enableFooter() {
+	public enable() {
 		this.model.footer = {
 			...this.model.footer,
 			isEnabled: true,
@@ -550,10 +550,18 @@ export default class FormViewController<
 		}
 	}
 
+	public isEnabled() {
+		return this.model.footer?.isEnabled !== false
+	}
+
 	public render(): V {
 		const view: V = {
 			...this.model,
-			onSubmit: this.submit.bind(this),
+			onSubmit: async () => {
+				if (this.isEnabled()) {
+					await this.submit()
+				}
+			},
 		}
 
 		if (!this.shouldShowSubmitControls()) {

@@ -116,7 +116,9 @@ const interactionUtil = {
 			const bigFormVc = vc as BigFormViewController<any>
 			await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)
 		}
-		await vc.submit()
+
+		//@ts-ignore
+		await renderUtil.render(vc).onSubmit?.()
 	},
 
 	async submitLoginForm(vc: LoginViewController, demoNumber: string) {
