@@ -1,3 +1,10 @@
+# [36.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.2.6...v36.3.0) (2021-11-05)
+
+
+### Features
+
+*  A developer can more easily check if form footers are enabled/disabled or loading. ([06acd60](https://github.com/sprucelabsai/heartwood-view-controllers/commit/06acd60))
+
 ## [36.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.2.5...v36.2.6) (2021-11-05)
 
 ## [36.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.2.4...v36.2.5) (2021-11-05)
