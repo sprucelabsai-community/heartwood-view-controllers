@@ -444,18 +444,18 @@ const vcAssertUtil = {
 		return cards
 	},
 
-	assertCardBodyIsLoading(vc: CardViewController) {
-		if (!vc.isBodyLoading()) {
+	assertCardIsBusy(vc: CardViewController) {
+		if (!vc.isLoading()) {
 			assert.fail(
-				`Expected your card body to have \`isLoading=true\`, but it didn't.`
+				`Expected your card body to be busy. Try \`this.setIsBus(true)\``
 			)
 		}
 	},
 
-	assertCardBodyIsNotLoading(vc: CardViewController) {
-		if (vc.isBodyLoading()) {
+	assertCardIsNotBusy(vc: CardViewController) {
+		if (vc.isLoading()) {
 			assert.fail(
-				`Expected your card body to have \`isLoading=false\`, but it didn't. Try \`this.setBodyIsLoading(false)\`.`
+				`Expected your card body to not be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)
 		}
 	},
@@ -656,30 +656,30 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertFooterIsDisabled(vc: FormViewController<any>) {
+	assertFormIsDisabled(vc: FormViewController<any>) {
 		assert.isFalse(
 			renderUtil.render(vc).footer?.isEnabled,
 			'Your footer is not disabled! Try this.formVc.disableFooter()'
 		)
 	},
 
-	assertFooterIsEnabled(vc: FormViewController<any>) {
+	assertFormIsEnabled(vc: FormViewController<any>) {
 		assert.isTrue(
 			renderUtil.render(vc).footer?.isEnabled,
 			'Your footer is not enabled! Try this.formVc.enableFooter()'
 		)
 	},
 
-	assertFooterIsLoading(vc: FormViewController<any>) {
+	assertFormIsBusy(vc: FormViewController<any>) {
 		assert.isTrue(
-			renderUtil.render(vc).footer?.isLoading,
+			vc.getIsBusy(),
 			'Your footer is not loading and should be! Try this.formVc.startLoading().'
 		)
 	},
 
-	assertFooterIsNotLoading(vc: FormViewController<any>) {
+	assertFormIsNotBusy(vc: FormViewController<any>) {
 		assert.isFalse(
-			renderUtil.render(vc).footer?.isLoading,
+			!vc.getIsBusy(),
 			'Your footer is still loading. Try this.formVc.stopLoading() to stop it!'
 		)
 	},

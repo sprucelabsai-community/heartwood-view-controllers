@@ -749,18 +749,18 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.setFooter({ isLoading: false })
 		this.vc.disable()
 
-		vcAssertUtil.assertFooterIsDisabled(this.vc)
-		vcAssertUtil.assertFooterIsNotLoading(this.vc)
+		vcAssertUtil.assertFormIsDisabled(this.vc)
+		vcAssertUtil.assertFormIsNotBusy(this.vc)
 
 		this.vc.setFooter({ isLoading: true })
 		this.vc.disable()
 
-		vcAssertUtil.assertFooterIsLoading(this.vc)
+		vcAssertUtil.assertFormIsBusy(this.vc)
 
 		this.vc.enable()
 
-		vcAssertUtil.assertFooterIsLoading(this.vc)
-		vcAssertUtil.assertFooterIsEnabled(this.vc)
+		vcAssertUtil.assertFormIsBusy(this.vc)
+		vcAssertUtil.assertFormIsEnabled(this.vc)
 	}
 
 	@test()

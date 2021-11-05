@@ -291,13 +291,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			body: {},
 		})
 
-		assert.doesThrow(() => vcAssertUtil.assertCardBodyIsLoading(vc))
-		vcAssertUtil.assertCardBodyIsNotLoading(vc)
+		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(vc))
+		vcAssertUtil.assertCardIsNotBusy(vc)
 
-		vc.setIsBodyLoading(true)
+		vc.setIsLoading(true)
 
-		vcAssertUtil.assertCardBodyIsLoading(vc)
-		assert.doesThrow(() => vcAssertUtil.assertCardBodyIsNotLoading(vc))
+		vcAssertUtil.assertCardIsBusy(vc)
+		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(vc))
 	}
 
 	@test('fails with empty cells', [])

@@ -1046,8 +1046,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Show section separators. This will make each section render with a border. */
 				'shouldShowSectionSeparators'?: boolean| undefined | null
-				/** Loading. */
-				'isLoading'?: boolean| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
 				/** Swipe controller. */
 				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
 				/** Swipe. */
@@ -1074,9 +1074,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'This will make each section render with a border.',
 			                options: undefined
 			            },
-			            /** Loading. */
-			            'isLoading': {
-			                label: 'Loading',
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
 			                type: 'boolean',
 			                options: undefined
 			            },

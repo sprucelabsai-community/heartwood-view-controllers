@@ -17,9 +17,9 @@ const cardBodySchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBod
 	                hint: 'This will make each section render with a border.',
 	                options: undefined
 	            },
-	            /** Loading. */
-	            'isLoading': {
-	                label: 'Loading',
+	            /** Busy. */
+	            'isBusy': {
+	                label: 'Busy',
 	                type: 'boolean',
 	                options: undefined
 	            },

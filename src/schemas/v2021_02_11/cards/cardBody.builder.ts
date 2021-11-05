@@ -9,9 +9,9 @@ export default buildSchema({
 			label: 'Show section separators',
 			hint: 'This will make each section render with a border.',
 		},
-		isLoading: {
+		isBusy: {
 			type: 'boolean',
-			label: 'Loading',
+			label: 'Busy',
 		},
 		swipeController: {
 			type: 'raw',

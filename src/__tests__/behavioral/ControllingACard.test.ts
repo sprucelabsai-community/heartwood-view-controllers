@@ -252,16 +252,16 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static isLoadingOnCardBodyIsFalsyByDefault() {
-		assert.isFalse(this.vc.isBodyLoading())
+		assert.isFalse(this.vc.isLoading())
 		const model = this.render(this.vc)
 		assert.isFalsy(model.body?.isLoading)
 	}
 
 	@test()
 	protected static canSetLoadingOnBody() {
-		this.vc.setIsBodyLoading(true)
+		this.vc.setIsLoading(true)
 		assert.isEqual(this.cardTriggerRenderCount, 1)
-		assert.isTrue(this.vc.isBodyLoading())
+		assert.isTrue(this.vc.isLoading())
 		const model = this.render(this.vc)
 		assert.isTrue(model.body?.isLoading)
 	}
