@@ -1,3 +1,10 @@
+# [36.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.3.6...v36.4.0) (2021-11-05)
+
+
+### Features
+
+* Forms is Heartwood now trigger on change events when the developer sets values. ([b19ec96](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b19ec96))
+
 ## [36.3.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.3.5...v36.3.6) (2021-11-05)
 
 ## [36.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v36.3.4...v36.3.5) (2021-11-05)
