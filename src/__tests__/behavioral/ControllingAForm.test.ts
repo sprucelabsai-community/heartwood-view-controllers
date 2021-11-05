@@ -1,4 +1,4 @@
-import { validateSchemaValues } from '@sprucelabs/schema'
+import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
@@ -760,5 +760,53 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		vcAssertUtil.assertFooterIsLoading(this.vc)
 		vcAssertUtil.assertFooterIsEnabled(this.vc)
+	}
+
+	@test()
+	protected static settingValuesTriggersOnChange() {
+		let wasHit = false
+
+		const onChange = () => {
+			wasHit = true
+		}
+		const vc = this.FormWithOnChange(onChange)
+
+		vc.setValues({})
+
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async settingValuesOnChangePassesExpectedPayload() {
+		const changeOptions: any[] = []
+
+		const vc = this.FormWithOnChange((options) => {
+			changeOptions.push(options)
+		})
+
+		vc.setValue('firstName', 'tay')
+		vc.setValues({ firstName: 'tay' })
+
+		assert.doesInclude(changeOptions[0], changeOptions[1])
+		assert.doesInclude(changeOptions[1], changeOptions[0])
+	}
+
+	private static FormWithOnChange(onChange: (options: any) => void) {
+		return this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				schema: buildSchema({
+					id: 'changeForm',
+					fields: {
+						firstName: {
+							type: 'text',
+						},
+					},
+				}),
+				onChange,
+				sections: [{}],
+			})
+		)
 	}
 }

@@ -127,14 +127,25 @@ export default class FormViewController<
 
 		const errorsByField = this.validateDirtyFields()
 
+		this.emitOnChange(errorsByField)
+
+		this.setErrorsByField(errorsByField)
+	}
+
+	private emitOnChange(errorsByField: any) {
 		void this.model.onChange?.({
 			controller: this,
 			values: this.model.values,
 			errorsByField,
 			isValid: this.isValid(),
 		})
+	}
 
-		this.setErrorsByField(errorsByField)
+	public setValues(values: SchemaPartialValues<S>) {
+		this.model.values = { ...values }
+		const errorsByField = this.validateDirtyFields()
+
+		void this.emitOnChange(errorsByField)
 	}
 
 	private validateDirtyFields() {
@@ -149,7 +160,7 @@ export default class FormViewController<
 			}
 		}
 
-		return dirty as any
+		return dirty as FormErrorsByField<S>
 	}
 
 	public setErrors(errors: TypedFieldError<S>[]): void {
@@ -449,10 +460,6 @@ export default class FormViewController<
 			value: this.originalValues?.[name],
 			shouldSetIsDirty: false,
 		})
-	}
-
-	public setValues(values: SchemaPartialValues<S>) {
-		this.model.values = { ...values }
 	}
 
 	public getSections() {
