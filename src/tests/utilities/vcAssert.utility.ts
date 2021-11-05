@@ -655,6 +655,34 @@ const vcAssertUtil = {
 			`Your Card wasn't supposed to render a talking sprucebot, but it is!`
 		)
 	},
+
+	assertFooterIsDisabled(vc: FormViewController<any>) {
+		assert.isFalse(
+			renderUtil.render(vc).footer?.isEnabled,
+			'Your footer is not disabled! Try this.formVc.disableFooter()'
+		)
+	},
+
+	assertFooterIsEnabled(vc: FormViewController<any>) {
+		assert.isTrue(
+			renderUtil.render(vc).footer?.isEnabled,
+			'Your footer is not enabled! Try this.formVc.enableFooter()'
+		)
+	},
+
+	assertFooterIsLoading(vc: FormViewController<any>) {
+		assert.isTrue(
+			renderUtil.render(vc).footer?.isLoading,
+			'Your footer is not loading and should be! Try this.formVc.startLoading().'
+		)
+	},
+
+	assertFooterIsNotLoading(vc: FormViewController<any>) {
+		assert.isFalse(
+			renderUtil.render(vc).footer?.isLoading,
+			'Your footer is still loading. Try this.formVc.stopLoading() to stop it!'
+		)
+	},
 }
 
 export default vcAssertUtil

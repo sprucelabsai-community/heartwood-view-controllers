@@ -742,4 +742,23 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			{ name: 'secondFavoriteNumber', label: 'Cheesy burrito' },
 		])
 	}
+
+	@test()
+	protected static canDisableFooter() {
+		this.vc.setFooter({ isLoading: false })
+		this.vc.disableFooter()
+
+		vcAssertUtil.assertFooterIsDisabled(this.vc)
+		vcAssertUtil.assertFooterIsNotLoading(this.vc)
+
+		this.vc.setFooter({ isLoading: true })
+		this.vc.disableFooter()
+
+		vcAssertUtil.assertFooterIsLoading(this.vc)
+
+		this.vc.enableFooter()
+
+		vcAssertUtil.assertFooterIsLoading(this.vc)
+		vcAssertUtil.assertFooterIsEnabled(this.vc)
+	}
 }

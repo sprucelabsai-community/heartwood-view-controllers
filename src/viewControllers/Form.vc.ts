@@ -197,6 +197,20 @@ export default class FormViewController<
 		return areSchemaValuesValid(this.model.schema, this.model.values)
 	}
 
+	public disableFooter() {
+		this.model.footer = {
+			...this.model.footer,
+			isEnabled: false,
+		}
+	}
+
+	public enableFooter() {
+		this.model.footer = {
+			...this.model.footer,
+			isEnabled: true,
+		}
+	}
+
 	public getIsBusy() {
 		return this.model.isBusy
 	}
