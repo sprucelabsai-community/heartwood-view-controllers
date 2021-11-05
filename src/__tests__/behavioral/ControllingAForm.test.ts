@@ -816,11 +816,11 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 
 		vc.disable()
-		interactionUtil.submitForm(vc)
+		await interactionUtil.submitForm(vc)
 		assert.isFalse(wasHit)
 
 		vc.enable()
-		interactionUtil.submitForm(vc)
+		await interactionUtil.submitForm(vc)
 		assert.isTrue(wasHit)
 	}
 
