@@ -3,7 +3,6 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { vcAssertUtil } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import renderUtil from '../../utilities/render.utility'
 import CardViewController, {
