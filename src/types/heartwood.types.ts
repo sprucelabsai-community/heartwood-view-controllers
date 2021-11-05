@@ -7,6 +7,7 @@ import {
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
+import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -225,7 +226,10 @@ export interface SkillViewControllerArgsMap {}
 export type ControllerOptions<
 	N extends ViewControllerId,
 	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
-> = N extends keyof O ? O[N] : Record<string, never>
+> = Omit<
+	N extends keyof O ? O[N] : Record<string, never>,
+	UniversalViewOptionFields
+>
 
 export type SkillViewControllerArgs<
 	N extends SkillViewControllerId,
