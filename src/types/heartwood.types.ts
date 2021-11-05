@@ -137,8 +137,8 @@ type CardUniversals = Pick<
 	| 'setCriticalError'
 	| 'getHasCriticalError'
 	| 'clearCriticalError'
-	| 'setIsBodyLoading'
-	| 'isBodyLoading'
+	| 'setIsBusy'
+	| 'isBusy'
 >
 
 export type FormBuilderViewController = FormBuilderPageViewControllerImpl &

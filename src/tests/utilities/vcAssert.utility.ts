@@ -27,19 +27,10 @@ type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
-function flattenSections(v: Card): CardSection[] {
-	//@ts-ignore
-	return (
-		//@ts-ignore
-		v.body?.sections?.reduce((prev: CardSection, sections: CardSection[]) => {
-			sections.push(prev)
-
-			return sections
-		}, []) ?? []
-	)
-}
-
-function pluckAllFromCard(v: Card, key: keyof CardSection) {
+function pluckAllFromCard<K extends keyof CardSection>(
+	v: Card,
+	key: K
+): CardSection[K][] {
 	return v.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
@@ -586,10 +577,13 @@ const vcAssertUtil = {
 
 	assertCardRendersButtons(vc: ViewController<Card>, ids: string[]) {
 		const model = renderUtil.render(vc)
-		const buttons = [
-			...(model.footer?.buttons ?? []),
-			...flattenSections(model).map((s) => s.buttons),
-		]
+		const buttons = [...(model.footer?.buttons ?? [])]
+
+		pluckAllFromCard(model, 'buttons').forEach((b) => {
+			if (b) {
+				buttons.push(...b)
+			}
+		})
 
 		const missing: string[] = []
 
