@@ -1,3 +1,10 @@
+# [39.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v38.0.7...v39.0.0) (2021-11-06)
+
+
+### Breaking Changes
+
+* Developers can more easily test around confirmations, making development even faster! ([ec9f447](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ec9f447))
+
 ## [38.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v38.0.6...v38.0.7) (2021-11-06)
 
 ## [38.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v38.0.5...v38.0.6) (2021-11-06)
