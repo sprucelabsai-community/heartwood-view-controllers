@@ -1,4 +1,4 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { SchemaError, SchemaRegistry } from '@sprucelabs/schema'
 import AbstractSpruceTest from '@sprucelabs/test'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -22,6 +22,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		Authenticator.reset()
 		Authenticator.setStorage(new MockStorage())
 		vcAssertUtil._setVcFactory(this.Factory())
+		SchemaRegistry.getInstance().forgetAllSchemas()
+
 		SwipeViewController.swipeDelay = 0
 	}
 
