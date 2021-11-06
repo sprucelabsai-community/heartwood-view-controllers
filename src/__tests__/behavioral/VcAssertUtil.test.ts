@@ -286,6 +286,51 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static knowsIfCardRendersById() {
+		const id = `${new Date().getTime()}`
+		const id2 = `${new Date().getTime() * Math.random()}`
+
+		const vc = this.GoodController({
+			layouts: [
+				{},
+				{
+					cards: [
+						{
+							id,
+							header: {
+								title: 'go2!',
+							},
+						},
+					],
+				},
+				{
+					cards: [
+						{},
+						{
+							id: id2,
+							header: {
+								title: 'go!',
+							},
+						},
+					],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewRendersCard(vc, 'not-found')
+		)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewRendersCards(vc, [id2, 'not-found'])
+		)
+
+		vcAssertUtil.assertSkillViewRendersCard(vc, id)
+		vcAssertUtil.assertSkillViewRendersCard(vc, id2)
+		vcAssertUtil.assertSkillViewRendersCards(vc, [id2, id])
+	}
+
+	@test()
 	protected static assertingIfCardBodyIsLoading() {
 		const vc = this.Controller('card', {
 			body: {},
@@ -1124,13 +1169,11 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	private static BadController() {
-		//@ts-ignore
-		return this.Controller('bad') as BadSkillViewController
+		return this.Controller('bad', {}) as BadSkillViewController
 	}
 
 	private static GoodController(model: SkillView) {
-		//@ts-ignore
-		return this.Controller('good', model) as BadSkillViewController
+		return this.Controller('good', model) as GoodSkillViewController
 	}
 
 	private static renderEmptyForm(vcId: 'form' | 'bigForm' = 'form') {

@@ -9,6 +9,9 @@ export default buildSchema({
 	name: 'Card',
 	description: '',
 	fields: {
+		id: {
+			type: 'id',
+		},
 		className: {
 			type: 'text',
 			isPrivate: true,

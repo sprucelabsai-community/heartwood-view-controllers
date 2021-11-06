@@ -436,34 +436,43 @@ const vcAssertUtil = {
 		assert.fail(`I found a row with the id ${id} and I didn't expect to!`)
 	},
 
-	assertSkillViewRendersCard(vc: SkillViewController): CardViewController {
-		return this.assertSkillViewRendersCards(vc)[0]
+	assertSkillViewRendersCard(
+		vc: SkillViewController,
+		id?: string
+	): CardViewController {
+		return this.assertSkillViewRendersCards(vc, id ? [id] : undefined)[0]
 	},
 
 	assertSkillViewRendersCards(
 		vc: SkillViewController,
-		expectedCount?: number
+		expected?: number | string[]
 	): CardViewController[] {
 		const model = renderUtil.render(vc)
 		const cards: CardViewController[] = []
 
 		for (const layout of model?.layouts ?? []) {
-			//@ts-ignore
-			const card = layout.cards?.[0]
-
-			if (card) {
-				//@ts-ignore
-				cards.push(card.controller ?? this.factory.Controller('card', card))
+			for (const card of layout.cards ?? []) {
+				if (card) {
+					//@ts-ignore
+					cards.push(card.controller ?? this.factory.Controller('card', card))
+				}
 			}
 		}
 
-		if (typeof expectedCount === 'number' && cards.length !== expectedCount) {
+		if (Array.isArray(expected)) {
+			for (const id of expected) {
+				const match = cards.find((c) => renderUtil.render(c).id === id)
+				if (!match) {
+					assert.fail(`I could not find a card with the id of ${id}!`)
+				}
+			}
+		} else if (typeof expected === 'number' && cards.length !== expected) {
 			assert.fail(
-				`Expected your skill view to render ${expectedCount} card${
-					expectedCount === 1 ? '' : 's'
+				`Expected your skill view to render ${expected} card${
+					expected === 1 ? '' : 's'
 				}, but it got ${cards.length}.`
 			)
-		} else if (typeof expectedCount === 'undefined' && cards.length === 0) {
+		} else if (typeof expected === 'undefined' && cards.length === 0) {
 			assert.fail('Expected your skill view to render a card, but it did not!')
 		}
 
@@ -490,7 +499,7 @@ const vcAssertUtil = {
 		const model = renderUtil.render(vc)
 
 		for (const cell of model.cells) {
-			const value = `${cell.subText?.content ?? ''} 
+			const value = `${cell.subText?.content ?? ''}
 				${cell.subText?.html ?? ''}
 				${cell.text?.content ?? ''}
 				${cell.text?.html ?? ''}

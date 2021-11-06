@@ -14,6 +14,11 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
+	            /** . */
 	            'className': {
 	                type: 'text',
 	                isPrivate: true,

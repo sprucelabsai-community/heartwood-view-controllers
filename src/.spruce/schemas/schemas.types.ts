@@ -1125,6 +1125,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Dialog {
 			
 				
+				'id'?: string| undefined | null
+				
 				'className'?: string| undefined | null
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
@@ -1155,6 +1157,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Dialog',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'className': {
 			                type: 'text',
@@ -3502,6 +3509,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Card {
 			
 				
+				'id'?: string| undefined | null
+				
 				'className'?: string| undefined | null
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
@@ -3524,6 +3533,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Card',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'className': {
 			                type: 'text',
