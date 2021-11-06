@@ -357,6 +357,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		const vc = this.Controller('list', {
 			rows: [
 				{
+					id: 'main',
 					cells,
 				},
 			],
@@ -364,10 +365,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.isFunction(vcAssertUtil.assertRowRendersContent)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersContent(vc.getRowVc(0), 'waka')
+			vcAssertUtil.assertRowRendersContent(vc, 'main', 'waka')
 		)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersContent(vc.getRowVc(0), 'undefined')
+			vcAssertUtil.assertRowRendersContent(vc, 'main', 'undefined')
 		)
 	}
 
@@ -428,10 +429,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	)
 	protected static knowsIfRowRendersContent(row: ListRowModel, search: string) {
 		const vc = this.Controller('list', {
-			rows: [row],
+			rows: [{ ...row, id: 'first' }],
 		})
 
-		vcAssertUtil.assertRowRendersContent(vc.getRowVc(0), search)
+		vcAssertUtil.assertRowRendersContent(vc, 'first', search)
 	}
 
 	@test()

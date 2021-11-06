@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test'
+import { ListViewController } from '../..'
 import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
@@ -97,7 +98,13 @@ const interactionUtil = {
 		return this.clickInFooter(vc, 'destructive')
 	},
 
-	async clickOnDestructiveButtonInRow(vc: ListRowViewController) {
+	async clickOnDestructiveButtonInRow(
+		listVc: ListViewController,
+		row: number | 'string'
+	) {
+		const vc =
+			typeof row === 'number' ? listVc.getRowVc(row) : listVc.getRowVcById(row)
+
 		const model = renderUtil.render(vc)
 		const destructiveButton = model.cells
 			.map((c) => c.button)

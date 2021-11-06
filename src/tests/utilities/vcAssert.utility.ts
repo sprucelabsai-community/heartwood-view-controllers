@@ -26,7 +26,6 @@ type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 
 function pluckAllFromCard<K extends keyof CardSection>(
 	v: Card,
@@ -396,7 +395,7 @@ const vcAssertUtil = {
 	},
 
 	assertListRendersRows(
-		listVc: ViewController<List>,
+		listVc: ListViewController,
 		expectedRows?: number | string[]
 	) {
 		const model = renderUtil.render(listVc)
@@ -418,22 +417,20 @@ const vcAssertUtil = {
 		}
 	},
 
-	assertListRendersRow(listVc: ViewController<List>, id: string) {
-		const model = renderUtil.render(listVc)
-		const match = model.rows.find((r) => r.id === id)
-
-		if (!match) {
-			assert.fail(`Your list does not render a row with the id of ${id}!`)
+	assertListRendersRow(listVc: ListViewController, row: string | number) {
+		if (typeof row === 'number') {
+			return listVc.getRowVc(row)
 		}
+		return listVc.getRowVcById(row)
 	},
 
-	assertListDoesNotRenderRow(listVc: ViewController<List>, id: string) {
+	assertListDoesNotRenderRow(listVc: ListViewController, row: string | number) {
 		try {
-			this.assertListRendersRow(listVc, id)
+			this.assertListRendersRow(listVc, row)
 		} catch {
 			return
 		}
-		assert.fail(`I found a row with the id ${id} and I didn't expect to!`)
+		assert.fail(`I found a row ${row} and I didn't expect to!`)
 	},
 
 	assertSkillViewRendersCard(
@@ -495,8 +492,13 @@ const vcAssertUtil = {
 		}
 	},
 
-	assertRowRendersContent(vc: ListRowViewController, content: string) {
-		const model = renderUtil.render(vc)
+	assertRowRendersContent(
+		vc: ListViewController,
+		row: string | number,
+		content: string
+	) {
+		const rowVc = this.assertListRendersRow(vc, row)
+		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells) {
 			const value = `${cell.subText?.content ?? ''}
