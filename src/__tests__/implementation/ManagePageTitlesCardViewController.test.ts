@@ -119,12 +119,11 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() =>
-				interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2),
-			() => true
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2)
 		)
+
+		await confirmVc.accept()
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 3)
 
@@ -144,12 +143,11 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() =>
-				interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2),
-			() => false
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2)
 		)
+
+		await confirmVc.decline()
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 4)
 		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)

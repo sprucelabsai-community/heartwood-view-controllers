@@ -560,12 +560,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async deletesPageWhenConfirmingOnClickDeletePage() {
 		assert.isFunction(this.vc.handleClickDeletePage)
 
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() => this.vc.handleClickDeletePage(),
-			() => true
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			this.vc.handleClickDeletePage()
 		)
 
+		await confirmVc.accept()
 		const model = this.render(this.vc)
 
 		assert.isLength(model.body?.sections, 0)
@@ -575,11 +574,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async cancelsDeletingPageWhenConfirmingOnClickDeletePage() {
 		assert.isFunction(this.vc.handleClickDeletePage)
 
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() => this.vc.handleClickDeletePage(),
-			() => false
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			this.vc.handleClickDeletePage()
 		)
+
+		await confirmVc.decline()
 
 		const model = this.render(this.vc)
 		assert.isLength(model.body?.sections, 1)

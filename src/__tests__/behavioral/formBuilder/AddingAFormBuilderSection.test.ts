@@ -191,28 +191,23 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		await interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
 
-		//clicking cancel on confirmation
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() => interactionUtil.clickOnDestructiveButtonInRow(listVc, 2),
-			({ isDestructive }) => {
-				assert.isTrue(isDestructive)
-
-				return false
-			}
+		let confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
 		)
+
+		assert.isTrue(confirmVc.options.isDestructive)
+
+		await confirmVc.decline()
 
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 3')
 		assert.isEqual(listVc.getTotalRows(), 4)
 
 		//clicking confirm on confirmation
-		await vcAssertUtil.assertRendersConfirm(
-			this.vc,
-			() => interactionUtil.clickOnDestructiveButtonInRow(listVc, 2),
-			() => {
-				return true
-			}
+		confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
 		)
+
+		await confirmVc.accept()
 
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 4')
 		assert.isEqual(listVc.getTotalRows(), 3)

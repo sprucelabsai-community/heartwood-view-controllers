@@ -26,6 +26,11 @@ type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+interface ConfirmViewController {
+	accept: () => void | Promise<void>
+	decline: () => void | Promise<void>
+	options: ConfirmOptions
+}
 
 function pluckAllFromCard<K extends keyof CardSection>(
 	v: Card,
@@ -107,36 +112,49 @@ const vcAssertUtil = {
 	},
 	async assertRendersConfirm(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>,
-		confirmHandler?: (options: ConfirmOptions) => boolean | Promise<boolean>
+		action: () => void | Promise<void>
 	) {
-		return new Promise((resolve, reject) => {
-			let wasHit = false
+		let confirmVc: ConfirmViewController = {
+			accept: async () => {},
+			options: {},
+			decline: async () => {},
+		}
 
-			let confirmPromise = new Promise((resolve) => {
+		let wasHit = false
+
+		const confirmPromise = new Promise((confirmResolve) => {
+			//@ts-ignore
+			vc.confirm = async (options: ConfirmOptions) => {
+				wasHit = true
+
 				//@ts-ignore
-				vc.confirm = async (options: ConfirmOptions) => {
-					try {
-						wasHit = true
-						const results = confirmHandler?.(options) ?? true
-						resolve(undefined)
-						return results
-					} catch (err) {
-						reject(err)
+				confirmResolve()
+
+				confirmVc.options = options
+
+				return new Promise((resolve) => {
+					confirmVc.accept = async () => {
+						resolve(true)
+						await actionPromise
 					}
-				}
-			})
-
-			async function run() {
-				await wait(action(), confirmPromise)
-				assert.isTrue(
-					wasHit,
-					`this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
-				)
+					confirmVc.decline = async () => {
+						resolve(false)
+						await actionPromise
+					}
+				})
 			}
-
-			run().then(resolve).catch(reject)
 		})
+
+		const actionPromise = action()
+
+		await wait(actionPromise, confirmPromise)
+
+		assert.isTrue(
+			wasHit,
+			`this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
+		)
+
+		return confirmVc
 	},
 
 	async assertDoesNotRenderDialog(

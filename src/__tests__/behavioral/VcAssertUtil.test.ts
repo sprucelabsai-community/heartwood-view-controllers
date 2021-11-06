@@ -8,7 +8,11 @@ import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
-import { LineIcon, SkillViewController } from '../../types/heartwood.types'
+import {
+	LineIcon,
+	SkillViewController,
+	ConfirmOptions,
+} from '../../types/heartwood.types'
 import CardViewController from '../../viewControllers/Card.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController, {
@@ -27,6 +31,7 @@ declare module '../../types/heartwood.types' {
 		goodWithAlert: GoodWithAlertSkillViewController
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
 		toolBeltSvc: ToolBeltSkillViewController
+		goodWithConfirm: GoodWithConfirm
 	}
 	interface ViewControllerOptionsMap {
 		good: SkillView
@@ -123,6 +128,27 @@ class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 	}
 }
 
+class GoodWithConfirm extends AbstractSkillViewController {
+	public confirmResults?: boolean
+
+	//@ts-ignore
+	public constructor(model: any) {
+		//@ts-ignore
+		super(model)
+	}
+
+	public async showConfirm(options: ConfirmOptions = {}) {
+		const results = await this.confirm(options)
+		this.confirmResults = results
+	}
+
+	public render() {
+		return {
+			layouts: [],
+		}
+	}
+}
+
 class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewController {
 	private model: SkillView
 
@@ -155,6 +181,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController,
 		newCard: NewTestingCardViewController,
 		toolBeltSvc: ToolBeltSkillViewController,
+		goodWithConfirm: GoodWithConfirm,
 	}
 
 	@test()
@@ -628,6 +655,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static async holdsUntilDialogIsClosed() {}
+
 	@test('throws if not rendering button with icon', {
 		rowIdx: 0,
 		cellIdx: 0,
@@ -778,6 +808,47 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.doesThrow(() => vcAssertUtil.assertRendersToolBelt(vc as any))
 		vcAssertUtil.assertDoesNotRenderToolBelt(vc as any)
+	}
+
+	@test()
+	protected static async assertConfirmHoldsOnConfirmUntilClosed() {
+		const vc = this.Controller('goodWithConfirm', {})
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+			vc.showConfirm()
+		)
+
+		assert.isUndefined(vc.confirmResults)
+
+		await confirmVc.accept()
+
+		assert.isTrue(vc.confirmResults)
+	}
+
+	@test()
+	protected static async canDeclineConfirm() {
+		const vc = this.Controller('goodWithConfirm', {})
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+			vc.showConfirm()
+		)
+
+		await confirmVc.decline()
+
+		assert.isFalse(vc.confirmResults)
+	}
+
+	@test()
+	protected static async assertConfirmVcGetsOptions() {
+		const options = {
+			[`${new Date().getTime()}`]: true,
+			hello: 'world',
+		}
+
+		const vc = this.Controller('goodWithConfirm', {})
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+			vc.showConfirm(options as any)
+		)
+
+		assert.isEqualDeep(confirmVc.options, options as any)
 	}
 
 	@test()
