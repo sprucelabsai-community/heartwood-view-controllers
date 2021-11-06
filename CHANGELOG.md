@@ -1,3 +1,10 @@
+# [38.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.3.12...v38.0.0) (2021-11-06)
+
+
+### Breaking Changes
+
+* Improved consisntency on test tools ([32bb6f2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/32bb6f2))
+
 ## [37.3.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.3.11...v37.3.12) (2021-11-06)
 
 ## [37.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.3.10...v37.3.11) (2021-11-06)
