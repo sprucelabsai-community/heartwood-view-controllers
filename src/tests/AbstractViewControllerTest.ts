@@ -1,5 +1,5 @@
 import { SchemaError } from '@sprucelabs/schema'
-import { AbstractSkillTest } from '@sprucelabs/spruce-skill-booter'
+import AbstractSpruceTest from '@sprucelabs/test'
 import Authenticator from '../auth/Authenticator'
 import {
 	ControllerOptions,
@@ -14,7 +14,7 @@ import MockStorage from './MockStorage'
 import interactionUtil from './utilities/interaction.utility'
 import vcAssertUtil from './utilities/vcAssert.utility'
 
-export default abstract class AbstractViewControllerTest extends AbstractSkillTest {
+export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any>
 
 	protected static async beforeEach() {
