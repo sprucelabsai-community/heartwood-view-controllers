@@ -100,7 +100,7 @@ const interactionUtil = {
 
 	async clickOnDestructiveButtonInRow(
 		listVc: ListViewController,
-		row: number | 'string'
+		row: number | string
 	) {
 		const vc =
 			typeof row === 'number' ? listVc.getRowVc(row) : listVc.getRowVcById(row)
