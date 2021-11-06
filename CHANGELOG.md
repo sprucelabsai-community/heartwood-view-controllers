@@ -1,3 +1,10 @@
+# [37.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.2.7...v37.3.0) (2021-11-06)
+
+
+### Features
+
+* Developers can verify a card is rendering by its id. ([ea3ddea](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ea3ddea))
+
 ## [37.2.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.2.6...v37.2.7) (2021-11-06)
 
 ## [37.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v37.2.5...v37.2.6) (2021-11-06)
