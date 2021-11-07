@@ -157,6 +157,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 						{
 							button: {
 								id: 'edit',
+								onClick: () => {},
 							},
 						},
 					],
@@ -167,11 +168,13 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 						{
 							button: {
 								id: 'stamp',
+								onClick: () => {},
 							},
 						},
 						{
 							button: {
 								id: 'champ',
+								onClick: () => {},
 							},
 						},
 					],
