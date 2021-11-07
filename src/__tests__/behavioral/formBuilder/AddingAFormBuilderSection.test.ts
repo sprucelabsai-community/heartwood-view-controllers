@@ -189,10 +189,10 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 3')
 		assert.isEqual(listVc.getTotalRows(), 4)
 
-		await interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
+		await interactionUtil.clickDestructiveInRow(listVc, 2)
 
 		let confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
+			interactionUtil.clickDestructiveInRow(listVc, 2)
 		)
 
 		assert.isTrue(confirmVc.options.isDestructive)
@@ -204,7 +204,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		//clicking confirm on confirmation
 		confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickOnDestructiveButtonInRow(listVc, 2)
+			interactionUtil.clickDestructiveInRow(listVc, 2)
 		)
 
 		await confirmVc.accept()

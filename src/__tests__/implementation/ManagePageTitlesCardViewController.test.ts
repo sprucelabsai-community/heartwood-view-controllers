@@ -120,7 +120,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
 		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2)
+			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
 		await confirmVc.accept()
@@ -144,7 +144,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
 		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickOnDestructiveButtonInRow(this.vc.getListVc(), 2)
+			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
 		await confirmVc.decline()

@@ -146,4 +146,82 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 
 		assert.isTrue(wasHit)
 	}
+
+	@test()
+	protected static async canClickButtonInRow() {
+		const vc = this.Controller('list', {
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							button: {
+								id: 'edit',
+							},
+						},
+					],
+				},
+				{
+					id: 'second',
+					cells: [
+						{
+							button: {
+								id: 'stamp',
+							},
+						},
+						{
+							button: {
+								id: 'champ',
+							},
+						},
+					],
+				},
+			],
+		})
+
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickButtonInRow(vc, 5, 'edit')
+		)
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickButtonInRow(vc, 0, 'stamp')
+		)
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickButtonInRow(vc, 0, 'champ')
+		)
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickButtonInRow(vc, 'first', 'champ')
+		)
+
+		await interactionUtil.clickButtonInRow(vc, 0, 'edit')
+		await interactionUtil.clickButtonInRow(vc, 'first', 'edit')
+		await interactionUtil.clickButtonInRow(vc, 1, 'stamp')
+		await interactionUtil.clickButtonInRow(vc, 1, 'champ')
+		await interactionUtil.clickButtonInRow(vc, 'second', 'champ')
+	}
+
+	@test()
+	protected static async clickingButtonInRowTriggersCallback() {
+		let wasHit = false
+		const vc = this.Controller('list', {
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							button: {
+								id: 'edit',
+								onClick: () => {
+									wasHit = true
+								},
+							},
+						},
+					],
+				},
+			],
+		})
+
+		await interactionUtil.clickButtonInRow(vc, 'first', 'edit')
+
+		assert.isTrue(wasHit)
+	}
 }

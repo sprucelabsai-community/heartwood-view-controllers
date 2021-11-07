@@ -98,7 +98,7 @@ const interactionUtil = {
 		return this.clickInFooter(vc, 'destructive')
 	},
 
-	async clickOnDestructiveButtonInRow(
+	async clickDestructiveInRow(
 		listVc: ListViewController,
 		row: number | string
 	) {
@@ -161,6 +161,29 @@ const interactionUtil = {
 			return
 		}
 		assert.fail('Expected a LoginFormController')
+	},
+
+	async clickButtonInRow(
+		vc: ListViewController,
+		rowIdxOrId: number | string,
+		buttonId: string
+	) {
+		const rowVc =
+			typeof rowIdxOrId === 'string'
+				? vc.getRowVcById(rowIdxOrId)
+				: vc.getRowVc(rowIdxOrId)
+
+		if (!rowVc) {
+			assert.fail(`I could not find row ${rowIdxOrId}!`)
+		}
+		const rowModel = renderUtil.render(rowVc)
+		const button = rowModel.cells.find((c) => c.button?.id === buttonId)?.button
+		assert.isTruthy(
+			button,
+			`I could not find a button with the id of ${buttonId} to click!`
+		)
+
+		await this.click(button)
 	},
 
 	async keyDownOnElementInRow(options: {
