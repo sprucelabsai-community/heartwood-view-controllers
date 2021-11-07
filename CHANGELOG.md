@@ -1,3 +1,10 @@
+# [40.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.0.10...v40.1.0) (2021-11-07)
+
+
+### Features
+
+* Developers can show and test UI for asking people to login and even vote on features! ([1189e2f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1189e2f))
+
 ## [40.0.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.0.9...v40.0.10) (2021-11-07)
 
 ## [40.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.0.8...v40.0.9) (2021-11-07)
