@@ -24,7 +24,7 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	                options: {schema: cardFooterButtonSchema_v2021_02_11,}
 	            },
 	            /** Loading. */
-	            'isLoading': {
+	            'isBusy': {
 	                label: 'Loading',
 	                type: 'boolean',
 	                options: undefined

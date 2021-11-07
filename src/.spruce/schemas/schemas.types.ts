@@ -2020,7 +2020,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButton[]| undefined | null
 				/** Loading. */
-				'isLoading'?: boolean| undefined | null
+				'isBusy'?: boolean| undefined | null
 				/** Loading. */
 				'isEnabled'?: boolean| undefined | null
 				/** Show border. */
@@ -2048,7 +2048,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButtonSchema,}
 			            },
 			            /** Loading. */
-			            'isLoading': {
+			            'isBusy': {
 			                label: 'Loading',
 			                type: 'boolean',
 			                options: undefined

@@ -25,7 +25,7 @@ export default buildSchema({
 				},
 			},
 		},
-		isLoading: {
+		isBusy: {
 			type: 'boolean',
 			label: 'Loading',
 		},
