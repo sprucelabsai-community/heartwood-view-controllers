@@ -16,6 +16,7 @@ export default function removeUniversalViewOptions<
 	delete options.renderInDialogHandler
 	delete options.confirmHandler
 	delete options.connectToApi
+	delete options.voteHandler
 
 	return options
 }
