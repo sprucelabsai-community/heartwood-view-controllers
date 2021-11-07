@@ -15,6 +15,10 @@ export default buildSchema({
 			label: 'Center vertically',
 			defaultValue: false,
 		},
+		isLoginRequired: {
+			type: 'boolean',
+			label: 'Require login',
+		},
 		isFullScreen: {
 			type: 'boolean',
 			label: 'Full screen',

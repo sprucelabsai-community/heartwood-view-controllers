@@ -43,10 +43,7 @@ function pluckFirstFromCard(v: Card, key: keyof CardSection) {
 	return pluckAllFromCard(v, key)[0] as any
 }
 
-async function wait(
-	promise: Promise<any> | void | undefined,
-	showDialogPromise: Promise<any>
-) {
+async function wait(...promises: (Promise<any> | undefined | void)[]) {
 	return new Promise<void>((resolve) => {
 		let isDone = false
 
@@ -64,8 +61,10 @@ async function wait(
 		}
 
 		const timeout = setTimeout(done, WAIT_TIMEOUT)
-		promise?.then(done)
-		showDialogPromise?.then(done)
+
+		for (const promise of promises) {
+			promise?.then?.(done)
+		}
 	})
 }
 
@@ -203,6 +202,39 @@ const vcAssertUtil = {
 		)
 
 		return dlgVc as DialogViewController
+	},
+
+	async assertAsksForAVote(
+		vc: ViewController<any>,
+		action: () => Promise<void>
+	) {
+		let wasHit = false
+		const voteVc = {
+			castVote: async () => {},
+		}
+
+		let votePromise = new Promise((resolve: any) => {
+			//@ts-ignores
+			vc.voteHandler = async () => {
+				wasHit = true
+				resolve()
+				await new Promise((resolve: any) => {
+					voteVc.castVote = async () => {
+						await resolve()
+						await new Promise((resolve) => setTimeout(resolve, 0))
+					}
+				})
+			}
+		})
+
+		await wait(action(), votePromise)
+
+		assert.isTrue(
+			wasHit,
+			"I totally expected you to `await this.askForAVote()`, but you didn't."
+		)
+
+		return voteVc
 	},
 
 	async assertRendersDialog(
@@ -768,6 +800,48 @@ const vcAssertUtil = {
 		assert.isFalse(
 			vc.getIsBusy(),
 			'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
+		)
+	},
+
+	assertIsFullScreen(vc: SkillViewController) {
+		const model = renderUtil.render(vc)
+
+		assert.isTrue(
+			model.isFullScreen,
+			'Your skill view is not being rendered full screen. Try setting `isFullScreen:true` in your view model.'
+		)
+	},
+
+	assertIsNotFullScreen(vc: SkillViewController) {
+		try {
+			this.assertIsFullScreen(vc)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			'Your skill view is being rendered full screen. Try setting `isFullScreen:false` in your view model.'
+		)
+	},
+
+	assertLoginIsRequired(vc: SkillViewController) {
+		const model = renderUtil.render(vc)
+
+		assert.isTrue(
+			model.isLoginRequired,
+			`Your skill view does not require login and it should! try setting \`isLoginRequired: true\` in your view model.`
+		)
+	},
+
+	assertLoginIsNotRequired(vc: SkillViewController) {
+		try {
+			this.assertLoginIsRequired(vc)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			"Your skill view is requiring login when it shouldn't. Try setting `isLoginRequired:false` in your view model."
 		)
 	},
 }

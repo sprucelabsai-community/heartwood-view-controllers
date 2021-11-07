@@ -1240,6 +1240,45 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertListRendersRows(list1, ['good-one', newId])
 	}
 
+	@test()
+	protected static knowsIfRenderingFullScreen() {
+		const vc = this.Controller('good', {
+			isFullScreen: false,
+			layouts: [],
+		})
+		assert.doesThrow(() => vcAssertUtil.assertIsFullScreen(vc))
+		vcAssertUtil.assertIsNotFullScreen(vc)
+
+		const vcIsFullScreen = this.Controller('good', {
+			isFullScreen: true,
+			layouts: [],
+		})
+
+		vcAssertUtil.assertIsFullScreen(vcIsFullScreen)
+		assert.doesThrow(() => vcAssertUtil.assertIsNotFullScreen(vcIsFullScreen))
+	}
+
+	@test()
+	protected static knowsIfRequiresLogin() {
+		const vc = this.Controller('good', {
+			isLoginRequired: false,
+			layouts: [],
+		})
+
+		assert.doesThrow(() => vcAssertUtil.assertLoginIsRequired(vc))
+		vcAssertUtil.assertLoginIsNotRequired(vc)
+
+		const vcRequiresLogin = this.Controller('good', {
+			isLoginRequired: true,
+			layouts: [],
+		})
+
+		vcAssertUtil.assertLoginIsRequired(vcRequiresLogin)
+		assert.doesThrow(() =>
+			vcAssertUtil.assertLoginIsNotRequired(vcRequiresLogin)
+		)
+	}
+
 	private static BadController() {
 		return this.Controller('bad', {}) as BadSkillViewController
 	}

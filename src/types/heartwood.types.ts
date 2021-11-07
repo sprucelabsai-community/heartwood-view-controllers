@@ -254,12 +254,19 @@ export interface ConfirmOptions {
 }
 
 export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>
+export type VoteOptions =
+	SpruceSchemas.Mercury.v2020_12_25.VoteForFeatureEmitPayload & {
+		howCoolWouldItBeIf: string
+	}
+
+export type VoteHandler = (options: VoteOptions) => Promise<void>
 
 export interface ViewControllerOptions {
 	vcFactory: ViewControllerFactory
 	connectToApi: () => Promise<Client>
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler
+	voteHandler: VoteHandler
 }
 
 export type FieldRenderOptions<S extends Schema> = {

@@ -8,6 +8,8 @@ import {
 	ViewControllerId,
 	ViewControllerMap,
 	ControllerOptions,
+	VoteHandler,
+	VoteOptions,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -21,12 +23,14 @@ export default abstract class AbstractViewController<ViewModel>
 
 	private activeDialog?: any
 	protected connectToApi: () => Promise<Client>
+	private voteHandler: VoteHandler
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
 		this.renderInDialogHandler = options.renderInDialogHandler
 		this.confirmHandler = options.confirmHandler
 		this.connectToApi = options.connectToApi
+		this.voteHandler = options.voteHandler
 	}
 
 	public abstract render(): ViewModel
@@ -54,6 +58,10 @@ export default abstract class AbstractViewController<ViewModel>
 
 	protected async hideDialog() {
 		await this.activeDialog?.hide()
+	}
+
+	protected async askForAVote(options: VoteOptions) {
+		await this.voteHandler(options)
 	}
 
 	protected async alert(options: {

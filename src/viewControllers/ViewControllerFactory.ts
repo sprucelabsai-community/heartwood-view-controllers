@@ -13,6 +13,7 @@ import {
 	ViewControllerId,
 	ViewControllerOptions,
 	Authenticator,
+	VoteHandler,
 } from '../types/heartwood.types'
 
 type ViewControllerConstructor<Vc extends ViewController<any>> = new (
@@ -27,12 +28,14 @@ export default class ViewControllerFactory {
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
 	private auth: Authenticator
+	private voteHandler: VoteHandler
 
 	public constructor(options: {
 		controllerMap: Record<string, any>
 		renderInDialogHandler: RenderInDialogHandler
 		confirmHandler: ConfirmHandler
 		connectToApi: ConnectToApi
+		voteHandler: VoteHandler
 		auth: Authenticator
 	}) {
 		const { controllerMap, renderInDialogHandler, confirmHandler } = options
@@ -40,6 +43,7 @@ export default class ViewControllerFactory {
 		this.renderInDialogHandler = renderInDialogHandler
 		this.confirmHandler = confirmHandler
 		this.connectToApi = options.connectToApi
+		this.voteHandler = options.voteHandler
 		this.auth = options.auth
 	}
 
@@ -54,6 +58,7 @@ export default class ViewControllerFactory {
 	public static Factory(options: {
 		controllerMap?: Record<string, any>
 		renderInDialogHandler?: RenderInDialogHandler
+		voteHandler?: VoteHandler
 		confirmHandler?: ConfirmHandler
 		connectToApi: ConnectToApi
 		auth?: Authenticator
@@ -63,6 +68,7 @@ export default class ViewControllerFactory {
 			renderInDialogHandler,
 			confirmHandler,
 			connectToApi,
+			voteHandler,
 			auth,
 		} = options ?? {}
 
@@ -78,6 +84,7 @@ export default class ViewControllerFactory {
 			connectToApi,
 			auth: auth ?? AuthenticatorImpl.getInstance(),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
+			voteHandler: voteHandler ? voteHandler : async () => {},
 			renderInDialogHandler: renderInDialogHandler
 				? renderInDialogHandler
 				: () => {},
@@ -132,6 +139,7 @@ export default class ViewControllerFactory {
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
+			voteHandler: options.voteHandler ?? this.voteHandler,
 			connectToApi: async (...args: any[]) => {
 				//@ts-ignore
 				const client = await this.connectToApi(...args)

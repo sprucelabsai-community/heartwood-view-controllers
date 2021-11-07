@@ -669,6 +669,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'id'?: string| undefined | null
 				/** Center vertically. */
 				'shouldCenterVertically'?: boolean| undefined | null
+				/** Require login. */
+				'isLoginRequired'?: boolean| undefined | null
 				/** Full screen. */
 				'isFullScreen'?: boolean| undefined | null
 				/** Layout. */
@@ -693,6 +695,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Center vertically',
 			                type: 'boolean',
 			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Require login. */
+			            'isLoginRequired': {
+			                label: 'Require login',
+			                type: 'boolean',
 			                options: undefined
 			            },
 			            /** Full screen. */

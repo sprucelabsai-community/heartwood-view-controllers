@@ -100,10 +100,16 @@ const interactionUtil = {
 
 	async clickDestructiveInRow(
 		listVc: ListViewController,
-		row: number | string
+		rowIdxOrId: number | string
 	) {
 		const vc =
-			typeof row === 'number' ? listVc.getRowVc(row) : listVc.getRowVcById(row)
+			typeof rowIdxOrId === 'number'
+				? listVc.getRowVc(rowIdxOrId)
+				: listVc.getRowVcById(rowIdxOrId)
+
+		if (!vc) {
+			assert.fail(`I could not find row ${rowIdxOrId}!`)
+		}
 
 		const model = renderUtil.render(vc)
 		const destructiveButton = model.cells
