@@ -2,6 +2,7 @@ export const universalViewOptionFields = [
 	'vcFactory',
 	'renderInDialogHandler',
 	'confirmHandler',
+	'voteHandler',
 	'connectToApi',
 ] as const
 
