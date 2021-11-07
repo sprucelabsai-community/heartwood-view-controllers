@@ -157,6 +157,7 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 export interface SkillViewController<
 	Args extends Record<string, any> = Record<string, any>
 > extends ViewController<SkillView> {
+	getIsLoginRequired?(): Promise<boolean>
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 	renderToolBelt(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
 }

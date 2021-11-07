@@ -34,7 +34,7 @@ declare module '../../types/heartwood.types' {
 		goodWithConfirm: GoodWithConfirm
 	}
 	interface ViewControllerOptionsMap {
-		good: SkillView
+		good: SkillView & { isLoginRequired?: boolean }
 		bad: any
 		toolBeltSvc: { toolBelt?: ToolBelt | null }
 	}
@@ -48,8 +48,16 @@ class BadSkillViewController {
 
 class GoodSkillViewController implements SkillViewController {
 	private model: SkillView
+	private isLoginRequired = false
+
 	public constructor(model: SkillView) {
 		this.model = model
+		//@ts-ignore
+		this.isLoginRequired = model.isLoginRequired
+	}
+
+	public async getIsLoginRequired() {
+		return this.isLoginRequired
 	}
 
 	public async load() {}
@@ -1259,22 +1267,22 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static knowsIfRequiresLogin() {
+	protected static async knowsIfRequiresLogin() {
 		const vc = this.Controller('good', {
 			isLoginRequired: false,
 			layouts: [],
 		})
 
-		assert.doesThrow(() => vcAssertUtil.assertLoginIsRequired(vc))
-		vcAssertUtil.assertLoginIsNotRequired(vc)
+		await assert.doesThrowAsync(() => vcAssertUtil.assertLoginIsRequired(vc))
+		await vcAssertUtil.assertLoginIsNotRequired(vc)
 
 		const vcRequiresLogin = this.Controller('good', {
 			isLoginRequired: true,
 			layouts: [],
 		})
 
-		vcAssertUtil.assertLoginIsRequired(vcRequiresLogin)
-		assert.doesThrow(() =>
+		await vcAssertUtil.assertLoginIsRequired(vcRequiresLogin)
+		await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertLoginIsNotRequired(vcRequiresLogin)
 		)
 	}

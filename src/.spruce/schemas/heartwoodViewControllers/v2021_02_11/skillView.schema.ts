@@ -23,12 +23,6 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                defaultValue: false,
 	                options: undefined
 	            },
-	            /** Require login. */
-	            'isLoginRequired': {
-	                label: 'Require login',
-	                type: 'boolean',
-	                options: undefined
-	            },
 	            /** Full screen. */
 	            'isFullScreen': {
 	                label: 'Full screen',

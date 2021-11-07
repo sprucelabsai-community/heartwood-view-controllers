@@ -824,24 +824,23 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertLoginIsRequired(vc: SkillViewController) {
-		const model = renderUtil.render(vc)
-
+	async assertLoginIsRequired(vc: SkillViewController) {
+		const isRequired = await vc.getIsLoginRequired?.()
 		assert.isTrue(
-			model.isLoginRequired,
-			`Your skill view does not require login and it should! try setting \`isLoginRequired: true\` in your view model.`
+			isRequired,
+			`Your skill view does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
 		)
 	},
 
-	assertLoginIsNotRequired(vc: SkillViewController) {
+	async assertLoginIsNotRequired(vc: SkillViewController) {
 		try {
-			this.assertLoginIsRequired(vc)
+			await this.assertLoginIsRequired(vc)
 		} catch {
 			return
 		}
 
 		assert.fail(
-			"Your skill view is requiring login when it shouldn't. Try setting `isLoginRequired:false` in your view model."
+			`Your skill view does not require login and it should! Make sure \`getIsLoginRequired\` returns false in your SkillViewController.`
 		)
 	},
 }
