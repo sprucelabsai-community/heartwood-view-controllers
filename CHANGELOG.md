@@ -1,3 +1,10 @@
+# [41.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.1.1...v41.2.0) (2021-11-07)
+
+
+### Features
+
+* Vote handler type miss ([cdb8515](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cdb8515))
+
 ## [41.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.1.0...v41.1.1) (2021-11-07)
 
 # [41.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.0.1...v41.1.0) (2021-11-07)
