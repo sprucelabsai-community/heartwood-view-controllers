@@ -1,3 +1,10 @@
+# [41.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.1.0...v41.0.0) (2021-11-07)
+
+
+### Breaking Changes
+
+* Even better way to deal with logins ([5265ebd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5265ebd))
+
 # [40.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.0.10...v40.1.0) (2021-11-07)
 
 
