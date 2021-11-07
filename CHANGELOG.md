@@ -1,3 +1,10 @@
+# [41.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.0.1...v41.1.0) (2021-11-07)
+
+
+### Features
+
+* can set vote handler on vcfactory ([eab13bd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/eab13bd))
+
 ## [41.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.0.0...v41.0.1) (2021-11-07)
 
 # [41.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.1.0...v41.0.0) (2021-11-07)
