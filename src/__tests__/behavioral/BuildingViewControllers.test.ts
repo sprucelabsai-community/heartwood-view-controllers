@@ -178,4 +178,17 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 		assert.isTrue(wasHit)
 	}
+
+	@test()
+	protected static canSetVoteHandler() {
+		const handler = () => {}
+
+		//@ts-ignore
+		this.factory.setVoteHandler(handler)
+
+		const vc = this.factory.Controller('testSkillView', {})
+
+		//@ts-ignore
+		assert.isEqual(vc.voteHandler, handler)
+	}
 }

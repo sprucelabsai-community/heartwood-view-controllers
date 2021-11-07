@@ -55,6 +55,10 @@ export default class ViewControllerFactory {
 		this.confirmHandler = handler
 	}
 
+	public setVoteHandler(handler: VoteHandler) {
+		this.voteHandler = handler
+	}
+
 	public static Factory(options: {
 		controllerMap?: Record<string, any>
 		renderInDialogHandler?: RenderInDialogHandler
