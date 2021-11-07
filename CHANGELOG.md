@@ -1,3 +1,10 @@
+## [40.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v40.0.0...v40.0.1) (2021-11-07)
+
+
+### Breaking Changes
+
+* Simulating clicks and taps on buttons in rows just got a whole lot easier! ([fa10cb9](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fa10cb9))
+
 # [40.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v39.0.1...v40.0.0) (2021-11-07)
 
 
