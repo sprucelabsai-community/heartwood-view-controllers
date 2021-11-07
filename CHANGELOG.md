@@ -1,3 +1,10 @@
+# [40.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v39.0.1...v40.0.0) (2021-11-07)
+
+
+### Breaking Changes
+
+* Card footer loading renamed to busy to be consistent with other visual elements ([46173b8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/46173b8))
+
 ## [39.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v39.0.0...v39.0.1) (2021-11-06)
 
 # [39.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v38.0.7...v39.0.0) (2021-11-06)
