@@ -139,7 +139,7 @@ export default class ViewControllerFactory {
 			vcFactory: this,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
-			voteHandler: options.voteHandler ?? this.voteHandler,
+			voteHandler: options?.voteHandler ?? this.voteHandler,
 			connectToApi: async (...args: any[]) => {
 				//@ts-ignore
 				const client = await this.connectToApi(...args)
