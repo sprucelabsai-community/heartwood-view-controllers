@@ -526,16 +526,18 @@ const vcAssertUtil = {
 		return cards
 	},
 
-	assertCardIsBusy(vc: CardViewController) {
-		if (!vc.isBusy()) {
+	assertCardIsBusy(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		if (!model.body?.isBusy) {
 			assert.fail(
 				`Expected your card body to be busy. Try \`this.setIsBus(true)\``
 			)
 		}
 	},
 
-	assertCardIsNotBusy(vc: CardViewController) {
-		if (vc.isBusy()) {
+	assertCardIsNotBusy(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		if (model.body?.isBusy) {
 			assert.fail(
 				`Expected your card body to not be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)

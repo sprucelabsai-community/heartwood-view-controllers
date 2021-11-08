@@ -3,6 +3,7 @@ import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
+import { AbstractViewController } from '../..'
 import buildForm from '../../builders/buildForm'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
@@ -21,6 +22,7 @@ import ListViewController, {
 import { ListCellModel } from '../../viewControllers/list/ListCell.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
@@ -32,11 +34,23 @@ declare module '../../types/heartwood.types' {
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
 		toolBeltSvc: ToolBeltSkillViewController
 		goodWithConfirm: GoodWithConfirm
+		cardVc: CardVc
 	}
 	interface ViewControllerOptionsMap {
 		good: SkillView & { isLoginRequired?: boolean }
 		bad: any
 		toolBeltSvc: { toolBelt?: ToolBelt | null }
+	}
+}
+
+class CardVc extends AbstractViewController<Card> {
+	public isBusy = false
+	public render(): Card {
+		return {
+			body: {
+				isBusy: this.isBusy,
+			},
+		}
 	}
 }
 
@@ -190,6 +204,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		newCard: NewTestingCardViewController,
 		toolBeltSvc: ToolBeltSkillViewController,
 		goodWithConfirm: GoodWithConfirm,
+		cardVc: CardVc,
 	}
 
 	@test()
@@ -366,18 +381,25 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static assertingIfCardBodyIsLoading() {
+	protected static assertingIfCardBodyIsBusy() {
 		const vc = this.Controller('card', {
 			body: {},
 		})
 
+		const cardVc = this.Controller('cardVc', {})
+
 		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(vc))
+		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(cardVc))
 		vcAssertUtil.assertCardIsNotBusy(vc)
+		vcAssertUtil.assertCardIsNotBusy(cardVc)
 
 		vc.setIsBusy(true)
+		cardVc.isBusy = true
 
 		vcAssertUtil.assertCardIsBusy(vc)
+		vcAssertUtil.assertCardIsBusy(cardVc)
 		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(vc))
+		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(cardVc))
 	}
 
 	@test('fails with empty cells', [])
