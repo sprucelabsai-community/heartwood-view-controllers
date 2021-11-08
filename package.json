@@ -90,7 +90,7 @@
     "esbuild": "^0.13.12",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
-    "terser-webpack-plugin": "^5.2.4",
+    "terser-webpack-plugin": "^5.2.5",
     "uglify-js": "^3.14.3",
     "webpack": "^5.62.1"
   },
