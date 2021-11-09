@@ -92,7 +92,7 @@
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.2.5",
     "uglify-js": "^3.14.3",
-    "webpack": "^5.62.1"
+    "webpack": "^5.62.2"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.280",
