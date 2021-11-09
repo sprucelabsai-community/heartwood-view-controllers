@@ -1,3 +1,10 @@
+# [42.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.2.21...v42.0.0) (2021-11-09)
+
+
+### Breaking Changes
+
+* clickButtonInFooter renamed to clickButtonInFooterWithType to be more accurate. New "clickButton" to click button by id in body or footer of cards and forms ([80c3822](https://github.com/sprucelabsai/heartwood-view-controllers/commit/80c3822))
+
 ## [41.2.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.2.20...v41.2.21) (2021-11-09)
 
 ## [41.2.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v41.2.19...v41.2.20) (2021-11-09)
