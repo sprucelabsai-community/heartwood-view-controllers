@@ -2,6 +2,7 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
+import { isArray } from 'lodash'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
@@ -32,14 +33,14 @@ interface ConfirmViewController {
 	options: ConfirmOptions
 }
 
-function pluckAllFromCard<K extends keyof CardSection>(
+export function pluckAllFromCard<K extends keyof CardSection>(
 	v: Card,
 	key: K
 ): CardSection[K][] {
 	return v.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
-function pluckFirstFromCard(v: Card, key: keyof CardSection) {
+export function pluckFirstFromCard(v: Card, key: keyof CardSection) {
 	return pluckAllFromCard(v, key)[0] as any
 }
 

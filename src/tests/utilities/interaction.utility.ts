@@ -7,6 +7,7 @@ import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
+import { pluckAllFromCard } from './vcAssert.utility'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
@@ -64,7 +65,21 @@ const interactionUtil = {
 		)
 	},
 
-	async clickInFooter(
+	async clickButton(vc: CardVc | FormVc, buttonId: string) {
+		const model = renderUtil.render(vc) as any
+		const buttons: any[] = [...(model.footer?.buttons ?? [])]
+
+		pluckAllFromCard(model, 'buttons').map((b) => b && buttons.push(...b))
+		const match = buttons.find((b) => b.id === buttonId)
+
+		if (!match) {
+			assert.fail(`Could not find a button `)
+		}
+
+		await this.click(match)
+	},
+
+	async clickInFooterWithType(
 		vc: CardVc | FormVc,
 		type: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button['type']
 	) {
@@ -87,15 +102,15 @@ const interactionUtil = {
 	},
 
 	async clickPrimaryInFooter(vc: CardVc | FormVc) {
-		return this.clickInFooter(vc, 'primary')
+		return this.clickInFooterWithType(vc, 'primary')
 	},
 
 	async clickSecondaryInFooter(vc: CardVc | FormVc) {
-		return this.clickInFooter(vc, 'secondary')
+		return this.clickInFooterWithType(vc, 'secondary')
 	},
 
 	async clickDestructiveInFooter(vc: CardVc | FormVc) {
-		return this.clickInFooter(vc, 'destructive')
+		return this.clickInFooterWithType(vc, 'destructive')
 	},
 
 	async clickDestructiveInRow(
@@ -166,6 +181,7 @@ const interactionUtil = {
 
 			return
 		}
+
 		assert.fail('Expected a LoginFormController')
 	},
 

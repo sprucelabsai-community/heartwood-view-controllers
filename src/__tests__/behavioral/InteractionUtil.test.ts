@@ -45,10 +45,6 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		)
 	}
 
-	private static LoginVc() {
-		return this.Controller('login', {})
-	}
-
 	@test(`can login with ${DEMO_NUMBER}`, DEMO_NUMBER)
 	@test(`can login with ${DEMO_NUMBER2}`, DEMO_NUMBER2)
 	protected static async loginPassesWithGoodDemoNumber(phone: string) {
@@ -226,5 +222,97 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		await interactionUtil.clickButtonInRow(vc, 'first', 'edit')
 
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async canClickButtonsInCard() {
+		const badButton = `${new Date().getTime() * Math.random()}`
+		const button1Id = `${new Date().getTime() * Math.random()}`
+		const button2Id = `${new Date().getTime() * Math.random()}`
+		const button3Id = `${new Date().getTime() * Math.random()}`
+		const button4Id = `${new Date().getTime() * Math.random()}`
+
+		const vc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [
+							{
+								id: button1Id,
+								onClick: () => {},
+							},
+							{
+								id: button2Id,
+								onClick: () => {},
+							},
+						],
+					},
+					{
+						buttons: [
+							{
+								id: button3Id,
+								onClick: () => {},
+							},
+						],
+					},
+				],
+			},
+
+			footer: {
+				buttons: [
+					{
+						id: button4Id,
+						onClick: () => {},
+					},
+				],
+			},
+		})
+
+		await assert.doesThrowAsync(() =>
+			interactionUtil.clickButton(vc, badButton)
+		)
+
+		await interactionUtil.clickButton(vc, button1Id)
+		await interactionUtil.clickButton(vc, button2Id)
+		await interactionUtil.clickButton(vc, button3Id)
+		await interactionUtil.clickButton(vc, button4Id)
+	}
+
+	@test()
+	protected static async clickingButtonWaitsUntilFinished() {
+		const button1Id = `${new Date().getTime() * Math.random()}`
+		let wasHit = false
+		let lateHit = false
+
+		const vc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [
+							{
+								id: button1Id,
+								onClick: async () => {
+									wasHit = true
+									await new Promise((resolve) => setTimeout(resolve, 10))
+									lateHit = true
+								},
+							},
+						],
+					},
+				],
+			},
+		})
+
+		const promise = interactionUtil.clickButton(vc, button1Id)
+		assert.isFalse(lateHit)
+		assert.isTrue(wasHit)
+
+		await promise
+
+		assert.isTrue(lateHit)
+	}
+
+	private static LoginVc() {
+		return this.Controller('login', {})
 	}
 }
