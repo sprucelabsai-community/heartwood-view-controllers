@@ -2,7 +2,6 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
-import { isArray } from 'lodash'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
