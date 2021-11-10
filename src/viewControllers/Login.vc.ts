@@ -83,7 +83,7 @@ export default class LoginViewController
 
 		this.loginHandler = options.onLogin
 		this.loginFailedHandler = options.onLoginFailed
-		this.loginForm = this.vcFactory.Controller(
+		this.loginForm = this.Controller(
 			'bigForm',
 			buildBigForm({
 				onChange: this.handleOnChange.bind(this),

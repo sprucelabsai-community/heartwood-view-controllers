@@ -23,7 +23,7 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 		this.acceptHandler = options.onAccept
 		this.declineHandler = options.onDecline
 
-		this.dialogVc = this.vcFactory.Controller('dialog', {
+		this.dialogVc = this.Controller('dialog', {
 			isVisible: true,
 			shouldShowCloseButton: false,
 			header:

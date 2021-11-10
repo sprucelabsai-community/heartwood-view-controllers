@@ -46,7 +46,7 @@ export default class SwipeViewController
 		const { slides, onSlideChange, ...rest } = options
 
 		this.slideChangeHandler = onSlideChange
-		this.cardVc = this.vcFactory.Controller('card', {
+		this.cardVc = this.Controller('card', {
 			...rest,
 			body: {
 				sections: slides,

@@ -1,6 +1,9 @@
 import { SpruceErrors } from "#spruce/errors/errors.types"
 import { ErrorOptions as ISpruceErrorOptions} from "@sprucelabs/error"
 
+export interface ViewAlreadyDestroyedErrorOptions extends SpruceErrors.HeartwoodViewControllers.ViewAlreadyDestroyed, ISpruceErrorOptions {
+	code: 'VIEW_ALREADY_DESTROYED'
+}
 export interface MissingStorageErrorOptions extends SpruceErrors.HeartwoodViewControllers.MissingStorage, ISpruceErrorOptions {
 	code: 'MISSING_STORAGE'
 }
@@ -23,6 +26,6 @@ export interface DuplicateRowIdErrorOptions extends SpruceErrors.HeartwoodViewCo
 	code: 'DUPLICATE_ROW_ID'
 }
 
-type ErrorOptions =  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions 
 
 export default ErrorOptions

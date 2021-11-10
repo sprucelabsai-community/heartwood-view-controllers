@@ -11,6 +11,36 @@ import * as SpruceSchema from '@sprucelabs/schema'
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface ViewAlreadyDestroyed {
+		
+			
+			'viewId': string
+	}
+
+	export interface ViewAlreadyDestroyedSchema extends SpruceSchema.Schema {
+		id: 'viewAlreadyDestroyed',
+		namespace: 'HeartwoodViewControllers',
+		name: 'View already destroyed',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'viewId': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type ViewAlreadyDestroyedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.ViewAlreadyDestroyedSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface MissingStorage {
 		
 	}

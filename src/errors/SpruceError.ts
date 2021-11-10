@@ -43,6 +43,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `A tool with the id \`${options.id}\` already exists!`
 				break
 
+			case 'VIEW_ALREADY_DESTROYED':
+				message = 'A View already destroyed just happened!'
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

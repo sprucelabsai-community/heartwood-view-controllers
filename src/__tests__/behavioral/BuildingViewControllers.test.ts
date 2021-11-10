@@ -15,6 +15,7 @@ export class TestViewController extends AbstractViewController<ViewModel> {
 		this.constructorOptions = options
 	}
 	public getVcFactory() {
+		//@ts-ignore
 		return this.vcFactory
 	}
 	public render() {
@@ -31,6 +32,7 @@ export class TestViewControllerWithId extends AbstractViewController<ViewModel> 
 		this.constructorOptions = options
 	}
 	public getVcFactory() {
+		//@ts-ignore
 		return this.vcFactory
 	}
 	public render() {

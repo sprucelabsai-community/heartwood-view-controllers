@@ -22,9 +22,12 @@ export default abstract class AbstractSkillViewController<
 		options: SkillViewControllerLoadOptions<Args>
 	) {}
 
-	public abstract render(): SkillView
+	public async focus(): Promise<void> {}
+	public async blur(): Promise<void> {}
 
 	public renderToolBelt(): ToolBelt | null {
 		return null
 	}
+
+	public abstract render(): SkillView
 }

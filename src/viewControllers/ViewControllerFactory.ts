@@ -16,7 +16,7 @@ import {
 	VoteHandler,
 } from '../types/heartwood.types'
 
-type ViewControllerConstructor<Vc extends ViewController<any>> = new (
+export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: ViewControllerOptions
 ) => Vc
 
@@ -156,8 +156,12 @@ export default class ViewControllerFactory {
 			},
 		}
 
+		const oldController = Class.prototype.Controller
+
 		//@ts-ignore
 		let instance = new Class(constructorOptions)
+
+		Class.prototype.Controller = oldController
 
 		//@ts-ignore
 		if (instance.id) {

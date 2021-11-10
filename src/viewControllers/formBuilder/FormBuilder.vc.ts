@@ -52,7 +52,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.footerOverride = options.footer
 		this.shouldAllowEditing = options.shouldAllowEditing ?? true
 
-		this.swipeVc = this.vcFactory.Controller('swipe', {
+		this.swipeVc = this.Controller('swipe', {
 			header: {
 				title: 'Building your form',
 				...options.header,
@@ -67,7 +67,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			this.triggerRender()
 		}
 
-		this.vcFactory.mixinControllers({
+		this.mixinControllers({
 			//@ts-ignore
 			editFormBuilderSection: EditFormBuilderSectionViewController,
 			//@ts-ignore
@@ -112,24 +112,22 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	private renderNewForm(
 		options?: Partial<Page>
 	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema> {
-		return this.vcFactory
-			.Controller('form', {
-				shouldShowSubmitControls: false,
-				schema: options?.schema ?? {
-					id: `formBuilder${this.getTotalPages() + 1}`,
-					fields: {
-						field1: this.buildField(0),
-					},
+		return this.Controller('form', {
+			shouldShowSubmitControls: false,
+			schema: options?.schema ?? {
+				id: `formBuilder${this.getTotalPages() + 1}`,
+				fields: {
+					field1: this.buildField(0),
 				},
-				//@ts-ignore
-				sections: options?.sections ?? [
-					{
-						title: 'Section 1',
-						fields: [{ name: 'field1' }],
-					},
-				],
-			})
-			.render()
+			},
+			//@ts-ignore
+			sections: options?.sections ?? [
+				{
+					title: 'Section 1',
+					fields: [{ name: 'field1' }],
+				},
+			],
+		}).render()
 	}
 
 	public buildField(fieldIdx: number) {
@@ -230,7 +228,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public async handleClickAddPage() {
-		const addPageForm = this.vcFactory.Controller(
+		const addPageForm = this.Controller(
 			'form',
 			buildForm({
 				id: 'addPageForm',
@@ -319,7 +317,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}
 
 	public handleClickPageTitles() {
-		const vc = this.vcFactory.Controller('managePageTitles' as any, {
+		const vc = this.Controller('managePageTitles' as any, {
 			onDone: () => {
 				void dialog.hide()
 			},
@@ -335,17 +333,12 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	}) {
 		const { onDone, editingSection } = options
 
-		const editSectionVc = this.vcFactory.Controller(
-			'editFormBuilderSection' as any,
-			{
-				onDone,
-				pageSchema: this.getPresentPageVc().getSchema(),
-				editSection: editingSection,
-				defaultTitle: `Section ${
-					this.getPresentPageVc().getTotalSections() + 1
-				}`,
-			}
-		) as EditFormBuilderSectionViewController
+		const editSectionVc = this.Controller('editFormBuilderSection' as any, {
+			onDone,
+			pageSchema: this.getPresentPageVc().getSchema(),
+			editSection: editingSection,
+			defaultTitle: `Section ${this.getPresentPageVc().getTotalSections() + 1}`,
+		}) as EditFormBuilderSectionViewController
 
 		return editSectionVc
 	}
@@ -356,7 +349,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		//@ts-ignore
 		const { compiledOptions } = pageVc.getField(fieldName)
 
-		const vc = this.vcFactory.Controller('editFormBuilderField' as any, {
+		const vc = this.Controller('editFormBuilderField' as any, {
 			...compiledOptions,
 			//@ts-ignore
 			options: {

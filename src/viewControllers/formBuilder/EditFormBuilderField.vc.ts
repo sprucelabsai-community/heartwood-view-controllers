@@ -77,7 +77,7 @@ export class EditFormBuilderFieldViewController extends CardViewController {
 		const values: Partial<SchemaValues<EditFieldFormSchema>> =
 			this.optionsToFormValues(options)
 
-		this.formVc = this.vcFactory.Controller(
+		this.formVc = this.Controller(
 			'form',
 			buildForm({
 				schema: editFieldFormSchema,

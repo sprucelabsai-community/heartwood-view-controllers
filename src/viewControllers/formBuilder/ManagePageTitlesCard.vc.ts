@@ -35,7 +35,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 
 		this.formBuilderVc = options.formBuilderVc
 
-		this.listVc = this.vcFactory.Controller('list', {
+		this.listVc = this.Controller('list', {
 			columnWidths: ['fill'],
 			rows: this.buildRows(),
 		})

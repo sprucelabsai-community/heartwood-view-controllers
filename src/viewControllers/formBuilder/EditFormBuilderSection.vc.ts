@@ -117,12 +117,12 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 			this.rows.push(this.buildNextSimpleRow())
 		}
 
-		this.fieldListVc = this.vcFactory.Controller('list', {
+		this.fieldListVc = this.Controller('list', {
 			columnWidths: ['fill'],
 			rows: this.buildRows(),
 		})
 
-		this.formVc = this.vcFactory.Controller(
+		this.formVc = this.Controller(
 			'form',
 			buildForm({
 				values,

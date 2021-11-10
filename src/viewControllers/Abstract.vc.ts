@@ -1,3 +1,4 @@
+import SpruceError from '../errors/SpruceError'
 import {
 	Client,
 	ConfirmHandler,
@@ -12,18 +13,22 @@ import {
 	VoteOptions,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
-import ViewControllerFactory from './ViewControllerFactory'
+import ViewControllerFactory, {
+	ViewControllerConstructor,
+} from './ViewControllerFactory'
 
 export default abstract class AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
 {
-	protected vcFactory: ViewControllerFactory
+	private vcFactory: ViewControllerFactory
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
+	private wasDestroyed = false
 
 	private activeDialog?: any
 	protected connectToApi: () => Promise<Client>
 	private voteHandler: VoteHandler
+	private children: ViewController<any>[] = []
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -36,11 +41,20 @@ export default abstract class AbstractViewController<ViewModel>
 	public abstract render(): ViewModel
 	public triggerRender() {}
 
+	public mixinControllers(
+		map: Record<string, () => ViewControllerConstructor<any>>
+	) {
+		this.vcFactory.mixinControllers(map as any)
+	}
+
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
 	): ViewControllerMap[N] {
-		return this.vcFactory.Controller(name, options)
+		const vc = this.vcFactory.Controller(name, options)
+		this.children.push(vc as any)
+
+		return vc
 	}
 
 	protected renderInDialog(dialog: DialogViewControllerOptions) {
@@ -62,6 +76,15 @@ export default abstract class AbstractViewController<ViewModel>
 
 	protected async askForAVote(options: VoteOptions) {
 		await this.voteHandler(options)
+	}
+
+	public async destroy() {
+		if (this.wasDestroyed) {
+			//@ts-ignore
+			throw new SpruceError({ code: 'VIEW_ALREADY_DESTROYED', viewId: this.id })
+		}
+		await Promise.all(this.children.map((c) => c.destroy?.()))
+		this.wasDestroyed = true
 	}
 
 	protected async alert(options: {
