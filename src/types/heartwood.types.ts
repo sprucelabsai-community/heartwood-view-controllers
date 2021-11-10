@@ -123,12 +123,23 @@ export interface SwipeController {
 	swipeTo(idx: number): void
 }
 
+type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
+type Location = SpruceSchemas.Spruce.v2020_07_22.Location
+
+export interface Scope {
+	getCurrentOrganization(): Promise<Organization | null>
+	getCurrentOrganization(): Promise<Organization | null>
+	setCurrentOrganization(): Promise<Organization | null>
+	getCurrentLocation(): Promise<Location | null>
+}
+
 export interface SkillViewControllerLoadOptions<
 	Args extends Record<string, any> = Record<string, any>
 > {
 	router: Router
 	args: Args
 	authenticator: Authenticator
+	scope: Scope
 }
 
 export type CardViewController = CardViewControllerImpl
