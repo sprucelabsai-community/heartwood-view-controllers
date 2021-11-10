@@ -1,3 +1,10 @@
+# [44.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v43.0.1...v44.0.0) (2021-11-10)
+
+
+### Breaking Changes
+
+* Scopes now with loading() ([61c20ec](https://github.com/sprucelabsai/heartwood-view-controllers/commit/61c20ec))
+
 ## [43.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v43.0.0...v43.0.1) (2021-11-10)
 
 # [43.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v42.0.14...v43.0.0) (2021-11-10)
