@@ -128,9 +128,9 @@ type Location = SpruceSchemas.Spruce.v2020_07_22.Location
 
 export interface Scope {
 	getCurrentOrganization(): Promise<Organization | null>
-	getCurrentOrganization(): Promise<Organization | null>
-	setCurrentOrganization(): Promise<Organization | null>
+	setCurrentOrganization(id: string): Promise<void>
 	getCurrentLocation(): Promise<Location | null>
+	setCurrentLocation(id: string): Promise<string | null>
 }
 
 export interface SkillViewControllerLoadOptions<
