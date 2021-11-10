@@ -1,3 +1,10 @@
+# [43.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v42.0.14...v43.0.0) (2021-11-10)
+
+
+### Breaking Changes
+
+* vcFactory hidden from skill views. Skill views can be destroyed to cleanup. Skill views how have "focus" and "blur" placeholders ([c94acbc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c94acbc))
+
 ## [42.0.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v42.0.13...v42.0.14) (2021-11-10)
 
 ## [42.0.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v42.0.12...v42.0.13) (2021-11-10)
