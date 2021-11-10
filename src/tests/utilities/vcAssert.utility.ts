@@ -830,7 +830,8 @@ const vcAssertUtil = {
 		const isRequired = await vc.getIsLoginRequired?.()
 		assert.isTrue(
 			isRequired,
-			`Your skill view does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
+			//@ts-ignore
+			`Your skill view ${vc.id} does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
 		)
 	},
 
