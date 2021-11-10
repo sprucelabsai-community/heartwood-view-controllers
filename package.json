@@ -79,7 +79,7 @@
     "@sprucelabs/error": "^5.0.274",
     "@sprucelabs/mercury-core-events": "^1.5.9",
     "@sprucelabs/mercury-types": "^26.1.754",
-    "@sprucelabs/schema": "^25.3.475",
+    "@sprucelabs/schema": "^25.3.476",
     "@sprucelabs/spruce-core-schemas": "^22.6.56",
     "@sprucelabs/spruce-event-utils": "^17.1.7",
     "@sprucelabs/spruce-skill-utils": "^22.0.48",
