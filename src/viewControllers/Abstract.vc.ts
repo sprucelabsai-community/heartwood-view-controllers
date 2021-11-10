@@ -13,9 +13,7 @@ import {
 	VoteOptions,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
-import ViewControllerFactory, {
-	ViewControllerConstructor,
-} from './ViewControllerFactory'
+import ViewControllerFactory from './ViewControllerFactory'
 
 export default abstract class AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
