@@ -1,3 +1,10 @@
+# [45.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v44.0.0...v45.0.0) (2021-11-10)
+
+
+### Breaking Changes
+
+* missed parameters in get/set of current location/org in scope ([593eb15](https://github.com/sprucelabsai/heartwood-view-controllers/commit/593eb15))
+
 # [44.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v43.0.1...v44.0.0) (2021-11-10)
 
 
