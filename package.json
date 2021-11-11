@@ -79,7 +79,7 @@
     "@sprucelabs/error": "^5.0.274",
     "@sprucelabs/mercury-core-events": "^1.5.21",
     "@sprucelabs/mercury-types": "^26.1.765",
-    "@sprucelabs/schema": "^25.3.480",
+    "@sprucelabs/schema": "^25.3.481",
     "@sprucelabs/spruce-core-schemas": "^22.6.65",
     "@sprucelabs/spruce-event-utils": "^17.1.18",
     "@sprucelabs/spruce-skill-utils": "^22.0.53",
@@ -92,7 +92,7 @@
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.2.5",
     "uglify-js": "^3.14.3",
-    "webpack": "^5.63.0"
+    "webpack": "^5.64.0"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^1.0.280",
