@@ -686,7 +686,36 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async holdsUntilDialogIsClosed() {}
+	protected static getsDialogById() {
+		const card = this.Controller('card', {
+			id: 'test-3',
+			header: {
+				title: 'test',
+			},
+		})
+		const vc = this.Controller('good', {
+			layouts: [
+				{
+					cards: [
+						{
+							id: 'test-1',
+						},
+					],
+				},
+				{
+					cards: [{}, card.render()],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertSkillViewRendersCard(vc, 'test-2')
+		)
+
+		const actual = vcAssertUtil.assertSkillViewRendersCard(vc, 'test-3')
+
+		assert.isEqual(actual, card)
+	}
 
 	@test('throws if not rendering button with icon', {
 		rowIdx: 0,

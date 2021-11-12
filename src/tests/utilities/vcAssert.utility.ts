@@ -496,6 +496,7 @@ const vcAssertUtil = {
 	): CardViewController[] {
 		const model = renderUtil.render(vc)
 		const cards: CardViewController[] = []
+		let matches: CardViewController[] = []
 
 		for (const layout of model?.layouts ?? []) {
 			for (const card of layout.cards ?? []) {
@@ -511,6 +512,8 @@ const vcAssertUtil = {
 				const match = cards.find((c) => renderUtil.render(c).id === id)
 				if (!match) {
 					assert.fail(`I could not find a card with the id of ${id}!`)
+				} else {
+					matches.push(match)
 				}
 			}
 		} else if (typeof expected === 'number' && cards.length !== expected) {
@@ -521,9 +524,11 @@ const vcAssertUtil = {
 			)
 		} else if (typeof expected === 'undefined' && cards.length === 0) {
 			assert.fail('Expected your skill view to render a card, but it did not!')
+		} else {
+			matches = cards
 		}
 
-		return cards
+		return matches
 	},
 
 	assertCardIsBusy(vc: ViewController<Card>) {
