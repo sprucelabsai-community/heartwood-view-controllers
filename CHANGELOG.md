@@ -1,3 +1,10 @@
+# [45.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.0.49...v45.1.0) (2021-11-12)
+
+
+### Features
+
+* Devs can now check that their views don't pop up alerts! ([d744fad](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d744fad))
+
 ## [45.0.49](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.0.48...v45.0.49) (2021-11-12)
 
 ## [45.0.48](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.0.47...v45.0.48) (2021-11-12)
