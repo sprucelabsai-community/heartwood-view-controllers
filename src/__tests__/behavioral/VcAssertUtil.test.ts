@@ -1189,7 +1189,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			vcAssertUtil.assertRendersAlert(vc, () => vc.load())
 		)
 
-		vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.load())
+		await vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.load())
 
 		await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertRendersAlert(vc2, () => vc2.load())
