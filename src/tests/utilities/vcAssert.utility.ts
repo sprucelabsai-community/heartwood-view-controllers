@@ -204,6 +204,19 @@ const vcAssertUtil = {
 		return dlgVc as DialogViewController
 	},
 
+	async assertDoesNotRenderAlert(
+		vc: ViewController<any>,
+		action: () => void | Promise<void>
+	) {
+		try {
+			await this.assertRendersAlert(vc, action)
+		} catch {
+			return
+		}
+
+		assert.fail(`Didn't expect your controller to render an alert, but it did!`)
+	},
+
 	async assertAsksForAVote(
 		vc: ViewController<any>,
 		action: () => Promise<void>
