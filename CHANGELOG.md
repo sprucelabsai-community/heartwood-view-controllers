@@ -1,3 +1,10 @@
+# [45.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.1.15...v45.2.0) (2021-11-13)
+
+
+### Features
+
+* Can test if a toolbelt renders a specific tool and get back the controllers for even better testing ([405d675](https://github.com/sprucelabsai/heartwood-view-controllers/commit/405d675))
+
 ## [45.1.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.1.14...v45.1.15) (2021-11-13)
 
 ## [45.1.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v45.1.13...v45.1.14) (2021-11-13)
