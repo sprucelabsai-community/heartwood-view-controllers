@@ -748,7 +748,7 @@ const vcAssertUtil = {
 
 		return {
 			tool,
-			cardVc: tool.card.controller,
+			cardVc: tool.card.controller as ViewController<Card>,
 			toolBeltVc,
 		}
 	},
