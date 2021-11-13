@@ -3,6 +3,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
+import { ToolBeltViewController } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -733,7 +734,23 @@ const vcAssertUtil = {
 			'Your skill view does not render a tool belt with any tools!'
 		)
 
-		return toolBelt?.controller
+		return toolBelt?.controller as ToolBeltViewController | undefined
+	},
+
+	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
+		const toolBeltVc = this.assertRendersToolBelt(svc)
+
+		const tool = toolBeltVc?.getTool?.(toolId)
+		assert.isTruthy(
+			tool,
+			`I could not find a tool with the id of ${toolId} in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
+		)
+
+		return {
+			tool,
+			cardVc: tool.card.controller,
+			toolBeltVc,
+		}
 	},
 
 	assertDoesNotRenderToolBelt(svc: SkillViewController) {
