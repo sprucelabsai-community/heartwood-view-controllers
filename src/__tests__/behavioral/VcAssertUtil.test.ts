@@ -1022,6 +1022,60 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertDoesNotRenderCalendar(svc)
 	}
 
+	@test()
+	protected static async knowsIfRowRenderingButton() {
+		const rowVc = this.Controller('list', {
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							button: {
+								id: 'edit',
+							},
+						},
+					],
+				},
+				{
+					id: 'second',
+					cells: [
+						{
+							button: {
+								id: 'delete',
+							},
+						},
+						{
+							button: {
+								id: 'waka',
+							},
+						},
+						{
+							button: {
+								id: 'taco',
+							},
+						},
+					],
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertRowRendersButton(rowVc, 'test', 'edit')
+		)
+		vcAssertUtil.assertRowRendersButton(rowVc, 'first', 'edit')
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertRowRendersButton(rowVc, 'test', 'bad')
+		)
+
+		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'delete')
+		assert.doesThrow(() =>
+			vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'create')
+		)
+		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'taco')
+		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'waka')
+	}
+
 	@test('knows when rendering in layouts[0] cards[0] sections[0]')
 	protected static knowsWhenRenderingCalendar() {
 		const svc = this.Controller('good', {

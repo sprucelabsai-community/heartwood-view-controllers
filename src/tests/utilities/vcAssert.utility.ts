@@ -488,6 +488,25 @@ const vcAssertUtil = {
 		return listVc.getRowVcById(row)
 	},
 
+	assertRowRendersButton(
+		listVc: ListViewController,
+		row: string | number,
+		buttonId: string
+	) {
+		const rowVc = this.assertListRendersRow(listVc, row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (cell.button?.id === buttonId) {
+				return
+			}
+		}
+
+		assert.fail(
+			`Your list does not render a button with the id of '${buttonId}' in row '${row}''`
+		)
+	},
+
 	assertListDoesNotRenderRow(listVc: ListViewController, row: string | number) {
 		try {
 			this.assertListRendersRow(listVc, row)
