@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "45.2.1",
+  "version": "45.3.1",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -98,7 +98,7 @@
     "@sprucelabs/esm-postbuild": "^1.0.281",
     "@sprucelabs/jest-json-reporter": "^6.0.236",
     "@sprucelabs/jest-sheets-reporter": "^1.2.241",
-    "@sprucelabs/mercury-client": "^17.1.1",
+    "@sprucelabs/mercury-client": "^17.1.2",
     "@sprucelabs/resolve-path-aliases": "^1.0.224",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/test": "^7.7.220",
