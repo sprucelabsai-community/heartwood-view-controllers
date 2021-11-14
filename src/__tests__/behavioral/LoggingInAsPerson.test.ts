@@ -231,29 +231,6 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isFalse(loginVc.getIsBusy())
 	}
 
-	@test()
-	protected static async canAuthenticateClient() {
-		const { person, token } = await this.MercuryFixture().loginAsDemoPerson()
-		const auth = this.Auth()
-
-		auth.setSessionToken(token, person)
-
-		const factory = this.Factory()
-		const loginVc = factory.Controller('login', {})
-
-		//@ts-ignore
-		const client = await loginVc.connectToApi()
-
-		//@ts-ignore
-		assert.isTruthy(client.auth)
-		//@ts-ignore
-		assert.isTruthy(client.auth.person)
-		//@ts-ignore
-		assert.isTruthy(client.auth.person.id)
-		//@ts-ignore
-		assert.isEqual(client.auth.person.id, person.id)
-	}
-
 	private static LoginVc() {
 		const factory = this.Factory()
 		const login = factory.Controller('login', {})

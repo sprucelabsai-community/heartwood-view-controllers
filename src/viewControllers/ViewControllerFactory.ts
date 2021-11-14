@@ -1,6 +1,5 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SchemaError } from '@sprucelabs/schema'
-import AuthenticatorImpl from '../auth/Authenticator'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
 import {
@@ -12,7 +11,6 @@ import {
 	ViewControllerMap,
 	ViewControllerId,
 	ViewControllerOptions,
-	Authenticator,
 	VoteHandler,
 } from '../types/heartwood.types'
 
@@ -27,7 +25,6 @@ export default class ViewControllerFactory {
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
-	private auth: Authenticator
 	private voteHandler: VoteHandler
 
 	public constructor(options: {
@@ -36,7 +33,6 @@ export default class ViewControllerFactory {
 		confirmHandler: ConfirmHandler
 		connectToApi: ConnectToApi
 		voteHandler: VoteHandler
-		auth: Authenticator
 	}) {
 		const { controllerMap, renderInDialogHandler, confirmHandler } = options
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
@@ -44,7 +40,6 @@ export default class ViewControllerFactory {
 		this.confirmHandler = confirmHandler
 		this.connectToApi = options.connectToApi
 		this.voteHandler = options.voteHandler
-		this.auth = options.auth
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -65,7 +60,6 @@ export default class ViewControllerFactory {
 		voteHandler?: VoteHandler
 		confirmHandler?: ConfirmHandler
 		connectToApi: ConnectToApi
-		auth?: Authenticator
 	}) {
 		const {
 			controllerMap = {},
@@ -73,7 +67,6 @@ export default class ViewControllerFactory {
 			confirmHandler,
 			connectToApi,
 			voteHandler,
-			auth,
 		} = options ?? {}
 
 		if (!options?.connectToApi) {
@@ -86,7 +79,6 @@ export default class ViewControllerFactory {
 		return new this({
 			controllerMap,
 			connectToApi,
-			auth: auth ?? AuthenticatorImpl.getInstance(),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
 			renderInDialogHandler: renderInDialogHandler
@@ -144,16 +136,7 @@ export default class ViewControllerFactory {
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
 			voteHandler: options?.voteHandler ?? this.voteHandler,
-			connectToApi: async (...args: any[]) => {
-				//@ts-ignore
-				const client = await this.connectToApi(...args)
-				if (!client.isAuthenticated() && this.auth.isLoggedIn()) {
-					await client.authenticate({
-						token: this.auth.getSessionToken() as string,
-					})
-				}
-				return client
-			},
+			connectToApi: this.connectToApi,
 		}
 
 		const oldController = Class.prototype.Controller
