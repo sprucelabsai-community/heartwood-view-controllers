@@ -1,3 +1,10 @@
+# [46.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.0.8...v46.1.0) (2021-11-15)
+
+
+### Features
+
+* Devs can assert a card is not being rendered! ([6ef1998](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6ef1998))
+
 ## [46.0.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.0.7...v46.0.8) (2021-11-15)
 
 ## [46.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.0.6...v46.0.7) (2021-11-15)
