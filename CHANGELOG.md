@@ -1,3 +1,10 @@
+# [47.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.1.5...v47.0.0) (2021-11-15)
+
+
+### Breaking Changes
+
+* forms only validate, return, and submit visible fields ([c2d3412](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c2d3412))
+
 ## [46.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.1.4...v46.1.5) (2021-11-15)
 
 ## [46.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v46.1.3...v46.1.4) (2021-11-15)
