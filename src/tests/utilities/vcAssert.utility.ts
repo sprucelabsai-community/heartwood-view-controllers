@@ -523,6 +523,29 @@ const vcAssertUtil = {
 		return this.assertSkillViewRendersCards(vc, id ? [id] : undefined)[0]
 	},
 
+	assertSkillViewDoesNotRenderCards(
+		vc: SkillViewController,
+		expected?: number | string[]
+	) {
+		try {
+			this.assertSkillViewRendersCards(vc, expected)
+		} catch {
+			return
+		}
+
+		assert.fail(`I didn't expect to find cards`)
+	},
+
+	assertSkillViewDoesNotRenderCard(vc: SkillViewController, id: string) {
+		try {
+			this.assertSkillViewRendersCard(vc, id)
+		} catch {
+			return
+		}
+
+		assert.fail(`I didn't expect to find a card with the id ${id}`)
+	},
+
 	assertSkillViewRendersCards(
 		vc: SkillViewController,
 		expected?: number | string[]
