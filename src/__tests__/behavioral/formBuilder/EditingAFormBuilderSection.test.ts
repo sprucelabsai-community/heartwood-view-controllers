@@ -53,6 +53,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			(dialogVc.getCardVc() as CardViewController).getHeaderTitle(),
 			'My section title'
 		)
+
 		assert.isEqualDeep(formVc.getValues(), {
 			title: 'My section title',
 			type: 'text',
@@ -238,18 +239,13 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	}
 
 	private static async simulateEditSectionClick(clickedSectionIdx = 0) {
-		let builderSectionVc: EditFormBuilderSectionViewController | undefined
-		let dialogVc: DialogViewController | undefined
-
-		await vcAssertUtil.assertRendersDialog(
+		const dialogVc = await vcAssertUtil.assertRendersDialog(
 			this.formBuilderVc,
-			() => this.formBuilderVc.handleClickEditSection(clickedSectionIdx),
-			(vc) => {
-				dialogVc = vc
-				builderSectionVc =
-					vc.getCardVc() as EditFormBuilderSectionViewController
-			}
+			() => this.formBuilderVc.handleClickEditSection(clickedSectionIdx)
 		)
+
+		const builderSectionVc =
+			dialogVc.getCardVc() as EditFormBuilderSectionViewController
 
 		return {
 			builderSectionVc:

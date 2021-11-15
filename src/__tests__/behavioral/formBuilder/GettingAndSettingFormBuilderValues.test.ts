@@ -160,7 +160,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 	@test()
 	protected static getsGoodStartingValues() {
 		const values = this.Vc().getValues()
-		assert.isEqualDeep(values, [{}])
+		assert.isEqualDeep(values, [{ field1: undefined }])
 	}
 
 	@test()
@@ -197,7 +197,9 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		const vc = this.Vc()
 		await vc.importObject(this.singlePageForm)
 
-		const expected = [{ firstName: 'tay' }]
+		const expected = [
+			{ firstName: 'tay', email: undefined, lastName: undefined },
+		]
 		vc.setValues(expected)
 
 		const values = vc.getValues()
@@ -213,7 +215,10 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		vc.setValues(expected)
 
 		const values = vc.getValues()
-		assert.isEqualDeep(values, expected)
+		assert.isEqualDeep(values, [
+			{ firstName: 'tay', email: undefined, lastName: undefined },
+			{ firstName: 'tayayay', email: undefined, lastName: undefined },
+		])
 	}
 
 	@test()

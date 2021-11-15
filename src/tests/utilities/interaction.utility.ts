@@ -140,6 +140,10 @@ const interactionUtil = {
 	},
 
 	async submitForm(vc: FormVc) {
+		if (!vc.isEnabled()) {
+			assert.fail(`You can't submit a form that is disabled!`)
+		}
+
 		if ((vc as BigFormViewController<any>).getTotalSlides) {
 			const bigFormVc = vc as BigFormViewController<any>
 			await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)

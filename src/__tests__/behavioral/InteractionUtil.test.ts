@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import Authenticator from '../../auth/Authenticator'
 import buildBigForm from '../../builders/buildBigForm'
+import buildForm from '../../builders/buildForm'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../tests/constants'
 import interactionUtil from '../../tests/utilities/interaction.utility'
@@ -310,6 +311,24 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		await promise
 
 		assert.isTrue(lateHit)
+	}
+
+	@test()
+	protected static async submittingFormThatIsDisabledThrows() {
+		const formVc = this.Controller(
+			'form',
+			buildForm({
+				shouldShowSubmitControls: false,
+				isEnabled: false,
+				schema: {
+					id: 'test',
+					fields: {},
+				},
+				sections: [],
+			})
+		)
+
+		await assert.doesThrowAsync(() => interactionUtil.submitForm(formVc))
 	}
 
 	private static LoginVc() {

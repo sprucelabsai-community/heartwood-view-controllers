@@ -1,4 +1,5 @@
 import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
+import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
@@ -97,7 +98,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static canGetValues() {
 		const actual = this.vc.getValues()
 
-		assert.isEqualDeep(actual, {})
+		assert.isEqualDeep(actual, {
+			last: undefined,
+			first: undefined,
+			nickname: undefined,
+			favoriteNumber: undefined,
+		})
 	}
 
 	@test()
@@ -105,7 +111,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.setValue('first', 'tay')
 		const actual = this.vc.getValues()
 
-		assert.isEqualDeep(actual, { first: 'tay' })
+		assert.isEqualDeep(actual, {
+			first: 'tay',
+			last: undefined,
+			nickname: undefined,
+			favoriteNumber: undefined,
+		})
 	}
 
 	@test()
@@ -116,7 +127,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static errorsByFieldShowsFirstDirtyFieldOnly() {
+	protected static errorsByFieldShowsFirstDirtyFiel() {
 		const errorsByField = this.vc.getErrorsByField()
 		assert.isLength(Object.keys(errorsByField), 0)
 		assert.isFalse(this.vc.hasErrors())
@@ -820,7 +831,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 
 		vc.disable()
-		await interactionUtil.submitForm(vc)
+		await assert.doesThrowAsync(() => interactionUtil.submitForm(vc))
 		assert.isFalse(wasHit)
 
 		vc.enable()
@@ -848,6 +859,111 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 
 		vcAssertUtil.assertFormIsDisabled(vc)
+	}
+
+	@test('is valid if required field is set', { name: 'test' }, [['name']], true)
+	@test('si valid if optional field is not set', {}, [['num']], true)
+	@test(
+		'is valid if required field is second in section and set',
+		{ name: 'hey!' },
+		[['num', 'name']],
+		true
+	)
+	@test(
+		'is valid if required field is first in second section and set',
+		{ name: 'hey!' },
+		[['num'], ['name']],
+		true
+	)
+	@test(
+		'is not valid if required field is first in second section and not set',
+		{ num: '5' },
+		[['num'], ['name']],
+		false
+	)
+	@test(
+		'is not valid if required field is second in first seciton as render as and not set',
+		{ num: '5' },
+		[['num'], [{ name: 'name' }]],
+		false
+	)
+	@test(
+		'is valid if valid field is set in renderAs object and set',
+		{ name: '5' },
+		[['num'], [{ name: 'name' }]],
+		true
+	)
+	protected static onlyValidatesFieldsThatAreVisible(
+		values: any,
+		fields: string[][],
+		expected: boolean
+	) {
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				isEnabled: false,
+				values,
+				schema: locationSchema,
+				sections: [
+					{
+						fields: fields[0] as any,
+					},
+					{
+						fields: fields[1] as any,
+					},
+				],
+			})
+		)
+
+		assert.isEqual(vc.isValid(), expected)
+
+		const errorsByField = vc.validate()
+
+		if (expected === false) {
+			assert.isAbove(Object.keys(errorsByField).length, 0)
+		} else {
+			assert.isLength(Object.keys(errorsByField), 0)
+		}
+	}
+
+	@test('on submit passes only name', { name: 'hey', num: '5' }, [['name']], {
+		name: 'hey',
+	})
+	protected static async onSubmitOnlyReturnsVisibleValues(
+		values: any,
+		fields: any,
+		expected: any
+	) {
+		let submittedValues: any
+
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				values,
+				onSubmit: ({ values }) => {
+					submittedValues = values
+				},
+				schema: locationSchema,
+				sections: [
+					{
+						fields: fields[0] as any,
+					},
+					{
+						fields: fields[1] as any,
+					},
+				],
+			})
+		)
+
+		const actual = vc.getValues()
+
+		assert.isEqualDeep(actual, expected)
+
+		await interactionUtil.submitForm(vc)
+
+		assert.isEqualDeep(actual, submittedValues)
 	}
 
 	private static FormWithOnChange(onChange: (options: any) => void) {

@@ -96,11 +96,12 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 
 		const values: Partial<EditFormBuilderSectionValues> = {
 			title: defaultTitle,
+			type: 'form',
 		}
 
 		if (editSection) {
 			values.title = editSection.title ?? 'My section title'
-			values.type = editSection.type
+			values.type = editSection.type ?? 'form'
 
 			if (values.type === 'form') {
 				values.shouldRenderAsGrid = editSection.shouldRenderAsGrid
@@ -129,8 +130,8 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 				schema: addSectionSchema,
 				shouldShowCancelButton: false,
 				submitButtonLabel: 'Done',
-				sections: this.buildFormSections('form'),
-				footer: this.buildFooter('form'),
+				sections: this.buildFormSections(values.type),
+				footer: this.buildFooter(values.type),
 				onChange: this.handleFormChange.bind(this),
 				onSubmit: this.handleSubmit.bind(this),
 			})

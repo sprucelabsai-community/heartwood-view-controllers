@@ -192,7 +192,9 @@ export default class FormViewController<
 	public validate(): FormErrorsByField<S> {
 		const errorsByField: Record<string, FieldError[]> = {}
 		try {
-			validateSchemaValues(this.model.schema, this.model.values)
+			validateSchemaValues(this.model.schema, this.model.values, {
+				fields: this.getVisibleFields(),
+			})
 		} catch (err: any) {
 			if (
 				err instanceof SchemaError &&
@@ -214,7 +216,22 @@ export default class FormViewController<
 	}
 
 	public isValid() {
-		return areSchemaValuesValid(this.model.schema, this.model.values)
+		return areSchemaValuesValid(this.model.schema, this.model.values, {
+			fields: this.getVisibleFields(),
+		})
+	}
+
+	private getVisibleFields(): SchemaFieldNames<S>[] {
+		const fields = []
+
+		for (const section of this.model.sections) {
+			if (section.fields) {
+				//@ts-ignore
+				fields.push(...section.fields.map((f) => f.name || f))
+			}
+		}
+
+		return fields as any
 	}
 
 	public disable() {
@@ -245,7 +262,7 @@ export default class FormViewController<
 	public async submit() {
 		const errorsByField = this.validate()
 		const results = await this.model.onSubmit?.({
-			values: this.model.values,
+			values: this.getValues(),
 			errorsByField,
 			controller: this,
 			isValid: this.isValid(),
@@ -272,7 +289,15 @@ export default class FormViewController<
 	}
 
 	public getValues() {
-		return this.model.values
+		const visibleFields = this.getVisibleFields()
+		const values = {}
+
+		for (const field of visibleFields) {
+			//@ts-ignore
+			values[field] = this.model.values[field]
+		}
+
+		return values as SchemaPartialValues<S>
 	}
 
 	public showSubmitControls() {

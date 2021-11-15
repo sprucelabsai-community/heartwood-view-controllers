@@ -377,6 +377,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		this.formVc.setValue('title', 'My second section')
 		this.formVc.setValue('type', 'text')
 		this.formVc.setValue('text', 'What is up?')
+		// will have no effect because type is text
 		this.formVc.setValue('shouldRenderAsGrid', true)
 
 		await interactionUtil.submitForm(this.formVc)
@@ -391,9 +392,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		assert.isEqualDeep(newSection, {
 			title: 'My second section',
-			shouldRenderAsGrid: true,
 			text: 'What is up?',
 			type: 'text',
+			shouldRenderAsGrid: false,
 		})
 	}
 

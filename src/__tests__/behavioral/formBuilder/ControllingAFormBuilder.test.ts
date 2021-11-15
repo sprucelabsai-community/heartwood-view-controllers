@@ -747,7 +747,6 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				label: 'Field 1',
 				type: 'text',
 				isRequired: undefined,
-				selectOptions: undefined,
 			},
 		})
 
@@ -824,6 +823,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				const formVc = vc.getFormVc()
 
 				if (expectedFormValues) {
+					formVc.setValue('type', expectedFormValues.type)
 					assert.isEqualDeep(formVc.getValues(), expectedFormValues)
 				}
 

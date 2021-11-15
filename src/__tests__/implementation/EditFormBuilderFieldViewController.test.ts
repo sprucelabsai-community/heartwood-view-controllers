@@ -166,9 +166,14 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 
 		let expected = { ...initialValues }
 		delete expected.options
-		expected.selectOptions = expectedSelectOptions
 
-		assert.isEqualDeep(formVc.getValues(), expected)
+		if (expectedSelectOptions) {
+			expected.selectOptions = expectedSelectOptions
+		}
+
+		const actual = formVc.getValues()
+
+		assert.isEqualDeep(actual, expected)
 		await interactionUtil.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, initialValues)
 	}
