@@ -134,7 +134,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 			onSubmitOptions = options
 		})
 
-		this.vc.setValues({
+		await this.vc.setValues({
 			optional: 'yay',
 			phone: '555-555-5555',
 			pin: 123,
@@ -173,7 +173,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 			wasHit = true
 		})
 
-		this.vc.setValues({
+		await this.vc.setValues({
 			optional: 'yay',
 			phone: '555-555-5555',
 			pin: 123,

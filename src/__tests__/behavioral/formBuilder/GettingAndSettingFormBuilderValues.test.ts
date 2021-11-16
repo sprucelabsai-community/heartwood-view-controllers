@@ -174,7 +174,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 			email: 'whatever@whatever.com',
 		}
 
-		vc.getPageVc(0).setValues(expected)
+		await vc.getPageVc(0).setValues(expected)
 
 		const values = vc.getValues()
 
@@ -237,8 +237,8 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 			email: 'whatever@whaaoeutever.com',
 		}
 
-		vc.getPageVc(0).setValues(expected1)
-		vc.getPageVc(1).setValues(expected2)
+		await vc.getPageVc(0).setValues(expected1)
+		await vc.getPageVc(1).setValues(expected2)
 
 		const values = vc.getValues()
 
