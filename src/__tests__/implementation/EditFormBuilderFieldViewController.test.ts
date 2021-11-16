@@ -107,14 +107,14 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	}
 
 	@test()
-	protected static shouldRenderTextAreaForSelectOptionsWhenTypeIsDropdown() {
+	protected static async shouldRenderTextAreaForSelectOptionsWhenTypeIsDropdown() {
 		const formVc = this.Vc().getFormVc()
 
-		formVc.setValue('type', 'select')
+		await formVc.setValue('type', 'select')
 		this.assertRendersExpectedFields(formVc)
 		vcAssertUtil.assertFormRendersField(formVc, 'selectOptions')
 
-		formVc.setValue('type', 'text')
+		await formVc.setValue('type', 'text')
 		this.assertRendersExpectedFields(formVc)
 		vcAssertUtil.assertFormDoesNotRenderField(formVc, 'selectOptions')
 	}
@@ -254,7 +254,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		}).getFormVc()
 
 		vcAssertUtil.assertFormRendersField(formVc, 'isRequired')
-		formVc.setValue('isRequired', true)
+		await formVc.setValue('isRequired', true)
 
 		await interactionUtil.submitForm(formVc)
 

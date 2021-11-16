@@ -87,15 +87,15 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	}
 
 	@test()
-	protected static formRendersExpectedFieldsAndSections() {
+	protected static async formRendersExpectedFieldsAndSections() {
 		assert.isEqual(this.formVc.getValue('title'), 'Section 2')
 
-		this.formVc.setValue('title', 'My new section')
+		await this.formVc.setValue('title', 'My new section')
 
 		assert.isEqual(this.formVc.getValue('type'), 'form')
 
-		this.formVc.setValue('type', 'form')
-		this.formVc.setValue('shouldRenderAsGrid', true)
+		await this.formVc.setValue('type', 'form')
+		await this.formVc.setValue('shouldRenderAsGrid', true)
 
 		vcAssertUtil.assertFormRendersField(this.formVc, 'title')
 		vcAssertUtil.assertFormRendersField(this.formVc, 'type')
@@ -234,8 +234,8 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	}
 
 	@test()
-	protected static switchingSectionToInstructionsHidesFormRelatedFields() {
-		this.formVc.setValue('type', 'text')
+	protected static async switchingSectionToInstructionsHidesFormRelatedFields() {
+		await this.formVc.setValue('type', 'text')
 
 		vcAssertUtil.assertFormDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
 		vcAssertUtil.assertCardDoesNotRenderList(this.formVc)
@@ -247,9 +247,10 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 	@test()
 	protected static async clickingPrimaryInFooterGivesBackSection() {
-		this.formVc.setValue('title', 'My new section')
-		this.formVc.setValue('type', 'form')
-		this.formVc.setValue('shouldRenderAsGrid', true)
+		await this.formVc.setValue('title', 'My new section')
+		await this.formVc.setValue('type', 'form')
+		await this.formVc.setValue('shouldRenderAsGrid', true)
+
 		this.vc.addField()
 		this.vc.addField()
 
@@ -288,10 +289,10 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			],
 		})
 
-		this.formVc.setValue('title', 'go again')
-		this.formVc.setValue('type', 'text')
-		this.formVc.setValue('text', 'how are you?')
-		this.formVc.setValue('shouldRenderAsGrid', false)
+		await this.formVc.setValue('title', 'go again')
+		await this.formVc.setValue('type', 'text')
+		await this.formVc.setValue('text', 'how are you?')
+		await this.formVc.setValue('shouldRenderAsGrid', false)
 
 		this.vc.addField()
 
@@ -329,9 +330,10 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 	@test()
 	protected static async newSectionAddedToFormBuilder() {
-		this.formVc.setValue('title', 'My new section')
-		this.formVc.setValue('type', 'form')
-		this.formVc.setValue('shouldRenderAsGrid', true)
+		await this.formVc.setValue('title', 'My new section')
+		await this.formVc.setValue('type', 'form')
+		await this.formVc.setValue('shouldRenderAsGrid', true)
+
 		this.vc.addField()
 		this.vc.addField()
 
@@ -374,11 +376,11 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 	@test()
 	protected static async differentSectionAddedToFormBuilderAtEnd() {
-		this.formVc.setValue('title', 'My second section')
-		this.formVc.setValue('type', 'text')
-		this.formVc.setValue('text', 'What is up?')
+		await this.formVc.setValue('title', 'My second section')
+		await this.formVc.setValue('type', 'text')
+		await this.formVc.setValue('text', 'What is up?')
 		// will have no effect because type is text
-		this.formVc.setValue('shouldRenderAsGrid', true)
+		await this.formVc.setValue('shouldRenderAsGrid', true)
 
 		await interactionUtil.submitForm(this.formVc)
 
@@ -407,9 +409,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		this.formVc = vcAssertUtil.assertCardRendersForm(builderSectionVc) as any
 
-		this.formVc.setValue('title', 'Now second section')
-		this.formVc.setValue('type', 'text')
-		this.formVc.setValue('text', 'What is up?')
+		await this.formVc.setValue('title', 'Now second section')
+		await this.formVc.setValue('type', 'text')
+		await this.formVc.setValue('text', 'What is up?')
 
 		await interactionUtil.submitForm(this.formVc)
 

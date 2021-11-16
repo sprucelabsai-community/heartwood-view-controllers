@@ -374,7 +374,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			async (dialogVc) => {
 				const form = vcAssertUtil.assertCardRendersForm(dialogVc)
 
-				form.setValue('title', 'taco bell')
+				await form.setValue('title', 'taco bell')
 				await form.submit()
 			}
 		)
@@ -605,8 +605,8 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc.handleClickAddPage()
 		)
 		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)
-		formVc.setValue('title', 'A new one!')
 
+		await formVc.setValue('title', 'A new one!')
 		await formVc.submit()
 
 		const pageVc = this.vc.getPageVc(1)
@@ -823,14 +823,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				const formVc = vc.getFormVc()
 
 				if (expectedFormValues) {
-					formVc.setValue('type', expectedFormValues.type)
+					await formVc.setValue('type', expectedFormValues.type)
 					assert.isEqualDeep(formVc.getValues(), expectedFormValues)
 				}
 
-				formVc.setValue('name', newFieldName ?? oldFieldName)
-				formVc.setValue('label', 'Taco')
-				formVc.setValue('type', selectOptions ? 'select' : 'text')
-				formVc.setValue(
+				await formVc.setValue('name', newFieldName ?? oldFieldName)
+				await formVc.setValue('label', 'Taco')
+				await formVc.setValue('type', selectOptions ? 'select' : 'text')
+				await formVc.setValue(
 					'selectOptions',
 					selectOptions && selectOptions.join('\n')
 				)

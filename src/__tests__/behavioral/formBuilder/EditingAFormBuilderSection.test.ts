@@ -125,7 +125,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		const { formVc, dialogVc, builderSectionVc } =
 			await this.simulateEditSectionClick(0)
 
-		formVc.setValue('title', 'updated section')
+		await formVc.setValue('title', 'updated section')
 
 		builderSectionVc.addField()
 

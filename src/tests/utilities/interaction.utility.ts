@@ -175,11 +175,11 @@ const interactionUtil = {
 				}
 			})
 
-			formVc.setValue('phone', demoNumber)
+			await formVc.setValue('phone', demoNumber)
 
 			await formVc.submit()
 
-			formVc.setValue('code', demoNumber.substr(demoNumber.length - 4))
+			await formVc.setValue('code', demoNumber.substr(demoNumber.length - 4))
 
 			await promise
 

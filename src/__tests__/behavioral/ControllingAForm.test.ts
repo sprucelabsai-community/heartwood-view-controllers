@@ -63,13 +63,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static badValuesDontMessAnythingUp() {
+	protected static async badValuesDontMessAnythingUp() {
 		const vc = this.Controller('form', {
 			...this.testForm,
 			values: undefined,
 		})
 
-		vc.setValue('first', true)
+		await vc.setValue('first', true)
 	}
 
 	@test()
@@ -140,9 +140,9 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static errorsByFieldShowsFirstDirtyField() {
-		this.vc.setValue('first', 'Tay')
-		this.vc.setValue('first', '')
+	protected static async errorsByFieldShowsFirstDirtyField() {
+		await this.vc.setValue('first', 'Tay')
+		await this.vc.setValue('first', '')
 
 		const errorsByField = this.vc.getErrorsByField()
 		assert.isLength(Object.keys(errorsByField), 1)
@@ -151,13 +151,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static fieldErrorsRendered() {
-		this.vc.setValue('first', 'Test')
+	protected static async fieldErrorsRendered() {
+		await this.vc.setValue('first', 'Test')
+
 		let model = this.vc.render()
 
 		assert.isLength(Object.keys(model.errorsByField ?? {}), 0)
 
-		this.vc.setValue('first', '')
+		await this.vc.setValue('first', '')
 
 		model = this.vc.render()
 		assert.isLength(Object.keys(model.errorsByField ?? {}), 1)
@@ -215,7 +216,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static onChangesReportAsExpected() {
+	protected static async onChangesReportAsExpected() {
 		let lastIsValid: any
 		let lastErrorsByField: any
 
@@ -227,21 +228,23 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			},
 		}) as any
 
-		this.vc.setValue('first', 'Tay')
+		await this.vc.setValue('first', 'Tay')
 
 		assert.isFalse(lastIsValid)
 		assert.isLength(Object.keys(lastErrorsByField), 0)
 
-		this.vc.setValue('first', '')
+		await this.vc.setValue('first', '')
 
 		assert.isFalse(lastIsValid)
 		assert.isArray(lastErrorsByField.first)
 	}
 
 	@test()
-	protected static resettingAFormClearsValuesAndErrors() {
-		this.vc.setValue('first', 'Test')
+	protected static async resettingAFormClearsValuesAndErrors() {
+		await this.vc.setValue('first', 'Test')
+
 		const errors = this.vc.validate()
+
 		this.vc.setErrorsByField(errors)
 		assert.isTrue(this.vc.hasErrors())
 
@@ -261,15 +264,15 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static resetValuesAreNotSetByRef() {
+	protected static async resetValuesAreNotSetByRef() {
 		this.vc.reset()
-		this.vc.setValue('first', 'Tets')
+		await this.vc.setValue('first', 'Tets')
 		//@ts-ignore
 		assert.isFalsy(this.vc.originalValues.first)
 	}
 
 	@test()
-	protected static canResetField() {
+	protected static async canResetField() {
 		const vc: FormViewController<typeof testForm['schema']> = this.Controller(
 			'form',
 			buildForm({
@@ -280,7 +283,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		) as any
 
-		vc.setValue('first', '2000')
+		await vc.setValue('first', '2000')
 
 		assert.isEqual(vc.getValues().first, '2000')
 
@@ -290,8 +293,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static resetFieldsClearsItsErrors() {
-		this.vc.setValue('favoriteNumber', 'aoeu')
+	protected static async resetFieldsClearsItsErrors() {
+		await this.vc.setValue('favoriteNumber', 'aoeu')
 
 		let errs = this.vc.getErrorsByField()
 		assert.isTruthy(errs.favoriteNumber)
@@ -779,7 +782,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static settingValuesTriggersOnChange() {
+	protected static async settingValuesTriggersOnChange() {
 		let wasHit = false
 
 		const onChange = () => {
@@ -787,7 +790,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		}
 		const vc = this.FormWithOnChange(onChange)
 
-		vc.setValues({})
+		await vc.setValues({})
 
 		assert.isTrue(wasHit)
 	}
@@ -986,7 +989,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		vc.setValue('name', 'Tay')
+		await vc.setValue('name', 'Tay')
 
 		assert.isEqual(vc.getValue('name'), 'test')
 	}
@@ -1020,7 +1023,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		vc.setValue('name', 'Tay')
+		await vc.setValue('name', 'Tay')
 		assert.isEqual(vc.getValue('name'), 'Tay')
 
 		assert.isEqualDeep(willChangeOptions, {

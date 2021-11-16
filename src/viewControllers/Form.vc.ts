@@ -508,9 +508,9 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public resetField<N extends SchemaFieldNames<S>>(name: N): void {
+	public async resetField<N extends SchemaFieldNames<S>>(name: N): void {
 		delete this.dirtyFields[name]
-		this._setValue<N>({
+		await this._setValue<N>({
 			name,
 			value: this.originalValues?.[name],
 			shouldSetIsDirty: false,
