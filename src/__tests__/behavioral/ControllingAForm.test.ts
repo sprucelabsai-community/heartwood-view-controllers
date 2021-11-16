@@ -287,7 +287,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqual(vc.getValues().first, '2000')
 
-		vc.resetField('first')
+		await vc.resetField('first')
 
 		assert.isEqual(vc.getValues().first, 'tay')
 	}
@@ -299,7 +299,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		let errs = this.vc.getErrorsByField()
 		assert.isTruthy(errs.favoriteNumber)
 
-		this.vc.resetField('favoriteNumber')
+		await this.vc.resetField('favoriteNumber')
 
 		errs = this.vc.getErrorsByField()
 		assert.isFalsy(errs.favoriteNumber)
@@ -1003,7 +1003,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			'form',
 			buildForm({
 				id: 'onChangeForm',
-				values: { name: 'test' },
+				values: { name: 'test', num: 'test' },
 				onWillChange: async (options) => {
 					willChangeOptions = options
 					return true
@@ -1017,7 +1017,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 						fields: ['name'],
 					},
 					{
-						fields: ['address'],
+						fields: ['num'],
 					},
 				],
 			})
@@ -1026,9 +1026,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		await vc.setValue('name', 'Tay')
 		assert.isEqual(vc.getValue('name'), 'Tay')
 
+		await vc.submit()
+
+		delete willChangeOptions.controller
+		delete didChangeOptions.controller
+
 		assert.isEqualDeep(willChangeOptions, {
 			...didChangeOptions,
-			name: 'test',
+			values: { ...didChangeOptions.values, name: 'test' },
 		})
 	}
 

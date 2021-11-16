@@ -145,6 +145,7 @@ export default class FormViewController<
 		}
 
 		this.model.values[name] = value
+
 		if (shouldSetIsDirty) {
 			this.dirtyFields[name] = true
 		}
@@ -163,7 +164,7 @@ export default class FormViewController<
 	private buildChangeOptions(errorsByField: any): FormOnChangeOptions<S> {
 		return {
 			controller: this,
-			values: this.model.values,
+			values: this.getValues(),
 			errorsByField,
 			isValid: this.isValid(),
 		}
@@ -508,7 +509,7 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public async resetField<N extends SchemaFieldNames<S>>(name: N): void {
+	public async resetField<N extends SchemaFieldNames<S>>(name: N) {
 		delete this.dirtyFields[name]
 		await this._setValue<N>({
 			name,
