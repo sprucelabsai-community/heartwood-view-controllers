@@ -945,13 +945,17 @@ const vcAssertUtil = {
 				wasHit = true
 
 				if (destination?.id && destination.id !== id) {
-					reject(`I expected to be redirected to ${destination.id}.`)
+					reject(`I expected to be redirected to ${destination.id} but wasn't.`)
 					return
 				}
 
 				if (destination?.args) {
 					try {
-						assert.isEqualDeep(args, destination.args)
+						assert.isEqualDeep(
+							args,
+							destination.args,
+							`The args you passed to your redirect are not what I expected!`
+						)
 					} catch (err: any) {
 						reject(err.message)
 						return
