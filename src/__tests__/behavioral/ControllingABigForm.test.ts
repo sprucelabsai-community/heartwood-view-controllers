@@ -62,15 +62,15 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
 	}
 
 	@test()
-	protected static failsWithInvalidPhoneNumber() {
-		this.vc.setValue('phone', '12341234')
+	protected static async failsWithInvalidPhoneNumber() {
+		await this.vc.setValue('phone', '12341234')
 		const isValid = this.vc.isSlideValid(0)
 		assert.isFalse(isValid)
 	}
 
 	@test()
-	protected static passesWithValidNumber() {
-		this.vc.setValue('phone', DEMO_NUMBER)
+	protected static async passesWithValidNumber() {
+		await this.vc.setValue('phone', DEMO_NUMBER)
 
 		const isValid = this.vc.isSlideValid(0)
 		assert.isTrue(isValid)

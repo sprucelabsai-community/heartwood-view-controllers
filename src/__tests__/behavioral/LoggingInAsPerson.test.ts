@@ -162,7 +162,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		//@ts-ignore
 		const form = login.loginForm
-		form.setValue('phone', DEMO_NUMBER)
+		await form.setValue('phone', DEMO_NUMBER)
 
 		await form.submit()
 
@@ -176,13 +176,13 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 			wasHit = true
 		}
 
-		form.setValue('code', '11')
+		await form.setValue('code', '11')
 		assert.isFalse(wasHit)
 
-		form.setValue('code', '111')
+		await form.setValue('code', '111')
 		assert.isFalse(wasHit)
 
-		form.setValue('code', '1111')
+		await form.setValue('code', '1111')
 		assert.isTrue(wasHit)
 	}
 
@@ -192,8 +192,8 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		const form = login.getLoginForm()
 
-		form.setValue('phone', DEMO_NUMBER)
-		form.setValue('code', '0123')
+		await form.setValue('phone', DEMO_NUMBER)
+		await form.setValue('code', '0123')
 
 		const { code } = form.getValues()
 		assert.isUndefined(code)
@@ -212,7 +212,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		const formVc = loginVc.getLoginForm()
 
-		formVc.setValue('phone', DEMO_NUMBER)
+		await formVc.setValue('phone', DEMO_NUMBER)
 
 		let promise = formVc.submit()
 
@@ -222,7 +222,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		assert.isFalse(loginVc.getIsBusy())
 
-		formVc.setValue('code', '1111')
+		await formVc.setValue('code', '1111')
 
 		assert.isTrue(loginVc.getIsBusy())
 

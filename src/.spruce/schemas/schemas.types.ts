@@ -1336,6 +1336,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
 				/** Cancel handler. */
 				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				/** Will change handler. */
+				'onWillChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
 				/** Change handler. */
 				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
@@ -1408,6 +1410,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Cancel handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Will change handler. */
+			            'onWillChange': {
+			                label: 'Will change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
 			            },
 			            /** Change handler. */
 			            'onChange': {
@@ -1740,6 +1748,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
 				/** Cancel handler. */
 				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				/** Will change handler. */
+				'onWillChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
 				/** Change handler. */
 				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
@@ -1808,6 +1818,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Cancel handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Will change handler. */
+			            'onWillChange': {
+			                label: 'Will change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
 			            },
 			            /** Change handler. */
 			            'onChange': {

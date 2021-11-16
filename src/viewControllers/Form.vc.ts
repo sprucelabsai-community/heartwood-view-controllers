@@ -21,6 +21,7 @@ import {
 	TypedFieldError,
 	ViewControllerOptions,
 	FieldRenderOptions,
+	FormOnChangeOptions,
 } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
@@ -36,6 +37,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'sections'
 	| 'onSubmit'
 	| 'onChange'
+	| 'onWillChange'
 	| 'shouldShowCancelButton'
 	| 'shouldShowSubmitControls'
 	| 'submitButtonLabel'
@@ -67,15 +69,20 @@ export default class FormViewController<
 
 	private dirtyFields: Record<string, boolean> = {}
 	private originalValues: SchemaPartialValues<S>
+	private willChangeHandler?: (
+		options: FormOnChangeOptions<S>
+	) => Promise<boolean | void | undefined> | boolean | void | undefined
 
 	public constructor(
 		options: FormViewControllerOptions<S> & ViewControllerOptions
 	) {
 		super(options)
 
-		const { id, ...model } = removeUniversalViewOptions(options)
+		const { id, onWillChange, ...model } = removeUniversalViewOptions(options)
 
 		const modelCopy = cloneAndRetainControllers(model) as any
+
+		this.willChangeHandler = onWillChange ?? undefined
 
 		this.model = {
 			shouldShowSubmitControls: true,
@@ -110,11 +117,11 @@ export default class FormViewController<
 		)
 	}
 
-	public setValue<N extends SchemaFieldNames<S>>(name: N, value: any): void {
-		this._setValue<N>({ name, value })
+	public async setValue<N extends SchemaFieldNames<S>>(name: N, value: any) {
+		return this._setValue<N>({ name, value })
 	}
 
-	private _setValue<N extends SchemaFieldNames<S>>(options: {
+	private async _setValue<N extends SchemaFieldNames<S>>(options: {
 		name: N
 		value: any
 		shouldSetIsDirty?: boolean
@@ -127,6 +134,14 @@ export default class FormViewController<
 				friendlyMessage: `Can't set \`${name}\` field because it does not exist!`,
 				parameters: ['fieldName'],
 			})
+		}
+
+		const shouldBail = await this.willChangeHandler?.(
+			this.buildChangeOptions({})
+		)
+
+		if (shouldBail === false) {
+			return
 		}
 
 		this.model.values[name] = value
@@ -142,12 +157,16 @@ export default class FormViewController<
 	}
 
 	private emitOnChange(errorsByField: any) {
-		void this.model.onChange?.({
+		void this.model.onChange?.(this.buildChangeOptions(errorsByField))
+	}
+
+	private buildChangeOptions(errorsByField: any): FormOnChangeOptions<S> {
+		return {
 			controller: this,
 			values: this.model.values,
 			errorsByField,
 			isValid: this.isValid(),
-		})
+		}
 	}
 
 	public setValues(values: SchemaPartialValues<S>) {

@@ -107,8 +107,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static canSetValue() {
-		this.vc.setValue('first', 'tay')
+	protected static async canSetValue() {
+		await this.vc.setValue('first', 'tay')
 		const actual = this.vc.getValues()
 
 		assert.isEqualDeep(actual, {
@@ -800,8 +800,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			changeOptions.push(options)
 		})
 
-		vc.setValue('firstName', 'tay')
-		vc.setValues({ firstName: 'tay' })
+		await vc.setValue('firstName', 'tay')
+		await vc.setValues({ firstName: 'tay' })
 
 		assert.doesInclude(changeOptions[0], changeOptions[1])
 		assert.doesInclude(changeOptions[1], changeOptions[0])
@@ -964,6 +964,69 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		await interactionUtil.submitForm(vc)
 
 		assert.isEqualDeep(actual, submittedValues)
+	}
+
+	@test()
+	protected static async canCancelChangeWithOnChangeReturningFalse() {
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				values: { name: 'test' },
+				onWillChange: async () => false,
+				schema: locationSchema,
+				sections: [
+					{
+						fields: ['name'],
+					},
+					{
+						fields: ['address'],
+					},
+				],
+			})
+		)
+
+		vc.setValue('name', 'Tay')
+
+		assert.isEqual(vc.getValue('name'), 'test')
+	}
+
+	@test()
+	protected static async canKeepChangeWithOnChangeReturningFalse() {
+		let willChangeOptions: any
+		let didChangeOptions: any
+
+		const vc = this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				values: { name: 'test' },
+				onWillChange: async (options) => {
+					willChangeOptions = options
+					return true
+				},
+				onSubmit: async (options) => {
+					didChangeOptions = options
+				},
+				schema: locationSchema,
+				sections: [
+					{
+						fields: ['name'],
+					},
+					{
+						fields: ['address'],
+					},
+				],
+			})
+		)
+
+		vc.setValue('name', 'Tay')
+		assert.isEqual(vc.getValue('name'), 'Tay')
+
+		assert.isEqualDeep(willChangeOptions, {
+			...didChangeOptions,
+			name: 'test',
+		})
 	}
 
 	private static FormWithOnChange(onChange: (options: any) => void) {

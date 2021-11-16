@@ -50,6 +50,14 @@ export default buildSchema({
 				valueType: '() => void | Promise<void>',
 			},
 		},
+		onWillChange: {
+			type: 'raw',
+			label: 'Will change handler',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined',
+			},
+		},
 		onChange: {
 			type: 'raw',
 			label: 'Change handler',
