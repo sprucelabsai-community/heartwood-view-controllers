@@ -3,13 +3,13 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ToolBeltViewController } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
 	LineIcon,
 	SkillViewController,
 	ViewController,
+	Router,
 	CardViewController,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
@@ -19,6 +19,7 @@ import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
+import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 
 const WAIT_TIMEOUT = 5000
@@ -45,7 +46,7 @@ export function pluckFirstFromCard(v: Card, key: keyof CardSection) {
 }
 
 async function wait(...promises: (Promise<any> | undefined | void)[]) {
-	return new Promise<void>((resolve) => {
+	return new Promise<void>((resolve, reject) => {
 		let isDone = false
 
 		const done = () => {
@@ -64,7 +65,7 @@ async function wait(...promises: (Promise<any> | undefined | void)[]) {
 		const timeout = setTimeout(done, WAIT_TIMEOUT)
 
 		for (const promise of promises) {
-			promise?.then?.(done)
+			promise?.then?.(done)?.catch?.(reject)
 		}
 	})
 }
@@ -922,6 +923,51 @@ const vcAssertUtil = {
 		assert.fail(
 			`Your skill view does not require login and it should! Make sure \`getIsLoginRequired\` returns false in your SkillViewController.`
 		)
+	},
+
+	async assertActionRedirects(options: {
+		router: Router
+		action: () => Promise<void> | void
+		destination?: {
+			id?: string
+			args?: Record<string, any>
+		}
+	}) {
+		const { router, action, destination } = options
+
+		const oldRedirect = router.redirect.bind(router)
+
+		let wasHit = false
+
+		const redirectPromise = new Promise((resolve: any, reject: any) => {
+			//@ts-ignore
+			router.redirect = async (id: any, args: any) => {
+				wasHit = true
+
+				if (destination?.id && destination.id !== id) {
+					reject(`I expected to be redirected to ${destination.id}.`)
+					return
+				}
+
+				if (destination?.args) {
+					try {
+						assert.isEqualDeep(args, destination.args)
+					} catch (err: any) {
+						reject(err.message)
+						return
+					}
+				}
+
+				//@ts-ignore
+				oldRedirect(id, args)
+
+				resolve()
+			}
+		})
+
+		await wait(action(), redirectPromise)
+
+		assert.isTrue(wasHit, `I expected to be redirected, but was not!`)
 	},
 }
 
