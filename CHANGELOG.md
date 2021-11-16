@@ -1,3 +1,10 @@
+# [48.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v47.0.2...v48.0.0) (2021-11-16)
+
+
+### Breaking Changes
+
+* can cancel changes with will submit. setting values on form is now async ([1f63907](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1f63907))
+
 ## [47.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v47.0.1...v47.0.2) (2021-11-15)
 
 ## [47.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v47.0.0...v47.0.1) (2021-11-15)
