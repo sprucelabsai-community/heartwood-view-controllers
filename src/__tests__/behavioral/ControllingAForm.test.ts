@@ -248,24 +248,26 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.setErrorsByField(errors)
 		assert.isTrue(this.vc.hasErrors())
 
-		this.vc.reset()
+		await this.vc.reset()
 
 		assert.isFalsy(this.vc.getValues().first)
 		assert.isFalse(this.vc.hasErrors())
 	}
 
 	@test()
-	protected static resettingFormCallsRender() {
+	protected static async resettingFormCallsRender() {
 		//@ts-ignore
 		const count = this.vc.__renderInvocationCount
-		this.vc.reset()
+
+		await this.vc.reset()
+
 		//@ts-ignore
 		assert.isEqual(count + 1, this.vc.__renderInvocationCount)
 	}
 
 	@test()
 	protected static async resetValuesAreNotSetByRef() {
-		this.vc.reset()
+		await this.vc.reset()
 		await this.vc.setValue('first', 'Tets')
 		//@ts-ignore
 		assert.isFalsy(this.vc.originalValues.first)

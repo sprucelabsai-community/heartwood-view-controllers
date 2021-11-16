@@ -345,8 +345,8 @@ export default class FormViewController<
 		return this.model.submitButtonLabel as string
 	}
 
-	public reset() {
-		this.setValues(this.originalValues)
+	public async reset() {
+		await this.setValues(this.originalValues)
 		this.setErrorsByField({})
 	}
 
