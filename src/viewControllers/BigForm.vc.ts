@@ -83,7 +83,6 @@ export default class BigFormViewController<
 			isValid: this.isValid(),
 		}
 
-		debugger
 		const results = await this.model.onSubmitSlide?.(options)
 
 		if (results === false) {

@@ -152,13 +152,13 @@ export default class FormViewController<
 
 		const errorsByField = this.validateDirtyFields()
 
-		this.emitOnChange(errorsByField)
+		await this.emitOnChange(errorsByField)
 
 		this.setErrorsByField(errorsByField)
 	}
 
-	private emitOnChange(errorsByField: any) {
-		void this.model.onChange?.(this.buildChangeOptions(errorsByField))
+	private async emitOnChange(errorsByField: any) {
+		return this.model.onChange?.(this.buildChangeOptions(errorsByField))
 	}
 
 	private buildChangeOptions(errorsByField: any): FormOnChangeOptions<S> {
@@ -170,11 +170,11 @@ export default class FormViewController<
 		}
 	}
 
-	public setValues(values: SchemaPartialValues<S>) {
+	public async setValues(values: SchemaPartialValues<S>) {
 		this.model.values = { ...values }
 		const errorsByField = this.validateDirtyFields()
 
-		void this.emitOnChange(errorsByField)
+		await this.emitOnChange(errorsByField)
 	}
 
 	private validateDirtyFields() {

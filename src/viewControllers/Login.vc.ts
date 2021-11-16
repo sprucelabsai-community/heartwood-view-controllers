@@ -104,6 +104,7 @@ export default class LoginViewController
 		presentSlide: number
 	}) {
 		this.loginForm.setIsBusy(true)
+
 		let response = true
 
 		if (presentSlide === 0 && values.phone) {
@@ -119,7 +120,6 @@ export default class LoginViewController
 	}
 
 	private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
-		debugger
 		if (options.values.code?.length === 4) {
 			await this.loginForm.submit()
 		}
