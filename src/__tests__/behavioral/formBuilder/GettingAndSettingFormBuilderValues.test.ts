@@ -186,7 +186,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		const vc = this.Vc()
 		await vc.importObject(this.singlePageForm)
 
-		const err = assert.doesThrow(() => vc.setValues(expected))
+		const err = await assert.doesThrowAsync(() => vc.setValues(expected))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['values'],
 		})
@@ -200,7 +200,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		const expected = [
 			{ firstName: 'tay', email: undefined, lastName: undefined },
 		]
-		vc.setValues(expected)
+		await vc.setValues(expected)
 
 		const values = vc.getValues()
 		assert.isEqualDeep(values, expected)
@@ -212,7 +212,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		await vc.importObject(this.multiPageForm)
 
 		const expected = [{ firstName: 'tay' }, { firstName: 'tayayay' }]
-		vc.setValues(expected)
+		await vc.setValues(expected)
 
 		const values = vc.getValues()
 		assert.isEqualDeep(values, [
