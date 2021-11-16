@@ -1,3 +1,10 @@
+# [48.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.0.7...v48.1.0) (2021-11-16)
+
+
+### Features
+
+* Devs can now check for redirects with 1 line of code! ([8bfc685](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8bfc685))
+
 ## [48.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.0.6...v48.0.7) (2021-11-16)
 
 ## [48.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.0.5...v48.0.6) (2021-11-16)
