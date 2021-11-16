@@ -151,7 +151,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	protected static async matchesArgs() {
 		const router = new MockRouter()
 
-		vcAssertUtil.assertActionRedirects({
+		await vcAssertUtil.assertActionRedirects({
 			router,
 			action: async () => {
 				//@ts-ignore

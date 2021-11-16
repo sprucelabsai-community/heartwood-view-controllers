@@ -959,7 +959,7 @@ const vcAssertUtil = {
 				}
 
 				//@ts-ignore
-				oldRedirect(id, args)
+				await oldRedirect(id, args)
 
 				resolve()
 			}
