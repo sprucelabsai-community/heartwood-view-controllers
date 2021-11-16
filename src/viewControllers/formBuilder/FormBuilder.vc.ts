@@ -413,7 +413,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		return this.getPageVcs().map((vc) => vc.getValues())
 	}
 
-	public setValues(values: Record<string, any>[]): any {
+	public async setValues(values: Record<string, any>[]) {
 		if (!Array.isArray(values)) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
@@ -422,8 +422,8 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 			})
 		}
 
-		for (let idx = 0; idx < values.length; idx++) {
-			this.getPageVc(idx).setValues(values[idx])
-		}
+		await Promise.all(
+			values.map((values, idx) => this.getPageVc(idx).setValues(values))
+		)
 	}
 }
