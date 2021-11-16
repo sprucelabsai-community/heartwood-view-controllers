@@ -203,7 +203,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(errors, {})
 	}
 
-	@test()
+	@test.only()
 	protected static async loginShowsAsBusyWhileSubmitting() {
 		const loginVc = this.LoginVc()
 
@@ -224,9 +224,13 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		await formVc.setValue('code', '1111')
 
+		debugger
+
 		assert.isTrue(loginVc.getIsBusy())
 
 		await this.wait(1)
+
+		debugger
 
 		assert.isFalse(loginVc.getIsBusy())
 	}

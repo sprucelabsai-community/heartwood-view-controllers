@@ -119,6 +119,7 @@ export default class LoginViewController
 	}
 
 	private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
+		debugger
 		if (options.values.code?.length === 4) {
 			await this.loginForm.submit()
 		}
@@ -126,7 +127,7 @@ export default class LoginViewController
 
 	private async handleSubmitPhone(phone: string) {
 		try {
-			this.loginForm.resetField('code')
+			await this.loginForm.resetField('code')
 
 			const client = await this.connectToApi()
 			const pinResults = await client.emit('request-pin::v2020_12_25', {
