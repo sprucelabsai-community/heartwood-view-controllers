@@ -77,12 +77,12 @@ const vcAssertUtil = {
 	},
 	attachTriggerRenderCounter(vc: Vc) {
 		//@ts-ignore
-		vc.__renderInvocationCount = 0
-
-		//@ts-ignore
-		if (!vc._triggerRenderPatched) {
+		if (!vc.__triggerRenderPatched) {
 			//@ts-ignore
-			vc._triggerRenderPatched = true
+			vc.__renderInvocationCount = 0
+
+			//@ts-ignore
+			vc.__triggerRenderPatched = true
 			vc.triggerRender = () => {
 				//@ts-ignore
 				vc.__renderInvocationCount++
