@@ -84,7 +84,7 @@ const vcAssertUtil = {
 			//@ts-ignore
 			vc.__triggerRenderPatched = true
 
-			const oldRender = vc.triggerRender.bind(vc)
+			const oldRender = vc.triggerRender?.bind(vc)
 
 			vc.triggerRender = () => {
 				//@ts-ignore
