@@ -1,3 +1,10 @@
+# [48.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.8...v48.2.0) (2021-11-17)
+
+
+### Features
+
+* Login view controller can now be passed an id for targeting by polish tests and other front end automations ([2cc6ff1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2cc6ff1))
+
 ## [48.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.7...v48.1.8) (2021-11-17)
 
 ## [48.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.6...v48.1.7) (2021-11-17)
