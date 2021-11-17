@@ -20,6 +20,7 @@ type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 export interface LoginViewControllerOptions {
 	onLogin?: LoginHandler
 	onLoginFailed?: (err: Error) => void
+	id?: string | null
 }
 
 const loginSchema = {
@@ -66,7 +67,7 @@ export default class LoginViewController
 	) {
 		super(options)
 
-		this._id = `${LoginViewController._id}`
+		this._id = options.id ?? `${LoginViewController._id}`
 		LoginViewController._id++
 
 		this.sections = [
