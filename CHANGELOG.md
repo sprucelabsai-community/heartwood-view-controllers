@@ -1,3 +1,19 @@
+## [48.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.7...v48.1.8) (2021-11-17)
+
+## [48.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.6...v48.1.7) (2021-11-17)
+
+## [48.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.5...v48.1.6) (2021-11-16)
+
+## [48.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.4...v48.1.5) (2021-11-16)
+
+## [48.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.3...v48.1.4) (2021-11-16)
+
+## [48.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.2...v48.1.3) (2021-11-16)
+
+## [48.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.1...v48.1.2) (2021-11-16)
+
+## [48.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.1.0...v48.1.1) (2021-11-16)
+
 # [48.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.0.7...v48.1.0) (2021-11-16)
 
 
