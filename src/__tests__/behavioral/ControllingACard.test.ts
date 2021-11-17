@@ -71,9 +71,9 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		if (!vc._isTracking) {
 			//@ts-ignore
 			vc._isTracking = true
-			this.beginTrackingFooterRender()
-			this.beginTrackingHeaderRender()
-			this.beginTrackingSectionRender()
+			this.beginTrackingFooterRender(vc)
+			this.beginTrackingHeaderRender(vc)
+			this.beginTrackingSectionRender(vc)
 		}
 
 		return card as any
@@ -81,9 +81,10 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canUpdateFooterAndDoesNotCauseFullRender() {
-		this.vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
+		const vc = this.Vc({ footer: { buttons: [{ label: 'hey' }] } })
+		vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
 
-		const model = this.renderCard()
+		const model = this.renderCard(vc)
 
 		assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -92,11 +93,12 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static updatingFooterAfterRenderOnlyCallsRenderOnFooter() {
-		this.renderCard()
+		const vc = this.Vc({ footer: { buttons: [{ label: 'hey' }] } })
+		this.renderCard(vc)
 
-		this.vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
+		vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
 
-		const model = this.renderCard()
+		const model = this.renderCard(vc)
 
 		assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -318,42 +320,50 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canSetFooterToNull() {
-		this.vc.setFooter({
+		const vc = this.Vc({ footer: { buttons: [] } })
+		vc.setFooter({
 			buttons: [],
 		})
 
-		this.vc.setFooter(null)
+		vc.setFooter(null)
 
 		assert.isEqual(this.cardTriggerRenderCount, 1)
 	}
 
-	private static beginTrackingFooterRender() {
+	@test()
+	protected static settingFooterToSomethingFromNothingTriggersRenderForTheWholeCard() {
+		const vc = this.Vc({})
+		vc.setFooter({ buttons: [{ label: 'hey!' }] })
+
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+		assert.isEqual(this.footerTriggerRenderCount, 0)
+	}
+
+	private static beginTrackingFooterRender(vc = this.vc) {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
-		this.vc.triggerRenderFooter = () => {
+		vc.triggerRenderFooter = () => {
 			this.footerTriggerRenderCount++
 		}
 	}
 
-	private static beginTrackingHeaderRender() {
+	private static beginTrackingHeaderRender(vc = this.vc) {
 		this.headerTriggerRenderCount = 0
 		//@ts-ignore
-		this.vc.triggerRenderHeader = () => {
+		vc.triggerRenderHeader = () => {
 			this.headerTriggerRenderCount++
 		}
 	}
 
-	private static beginTrackingSectionRender() {
+	private static beginTrackingSectionRender(vc = this.vc) {
 		//@ts-ignore
-		this.vc.triggerRenderSections = this.vc.triggerRenderSections.map(
-			(_, idx) => {
-				return () => {
-					if (!this.sectionTriggerRenderCounts[idx]) {
-						this.sectionTriggerRenderCounts[idx] = 0
-					}
-					this.sectionTriggerRenderCounts[idx]++
+		vc.triggerRenderSections = this.vc.triggerRenderSections.map((_, idx) => {
+			return () => {
+				if (!this.sectionTriggerRenderCounts[idx]) {
+					this.sectionTriggerRenderCounts[idx] = 0
 				}
+				this.sectionTriggerRenderCounts[idx]++
 			}
-		)
+		})
 	}
 }
