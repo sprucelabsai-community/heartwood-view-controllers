@@ -5,6 +5,7 @@ import {
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
 import textInputBuilder from './forms/textInput.builder'
+import toggleInputBuilder from './forms/toggleInput.builder'
 import selectInputBuilder from './selectInput.builder'
 import textBuilder from './text.builder'
 
@@ -101,6 +102,24 @@ export default buildSchema({
 					id: 'listSelectInput',
 					fields: {
 						...selectInputBuilder.fields,
+						setValue: {
+							type: 'raw',
+							options: {
+								valueType: '(name: string, value: any) => Promise<void> | void',
+							},
+						},
+					},
+				},
+			},
+		},
+		toggleInput: {
+			type: 'schema',
+			label: 'Toggle input',
+			options: {
+				schema: {
+					id: 'listToggleInput',
+					fields: {
+						...toggleInputBuilder.fields,
 						setValue: {
 							type: 'raw',
 							options: {

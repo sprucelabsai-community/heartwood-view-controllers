@@ -977,6 +977,46 @@ const vcAssertUtil = {
 
 		assert.isTrue(wasHit, `I expected to be redirected, but was not!`)
 	},
+	assertRowRendersToggle(
+		listVc: ListViewController,
+		row: string | number,
+		toggleName?: string
+	) {
+		const rowVc = this.assertListRendersRow(listVc, row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (toggleName && cell.toggleInput?.name === toggleName) {
+				return
+			} else if (!toggleName && cell.toggleInput) {
+				return
+			}
+		}
+
+		assert.fail(
+			`Could not find a toggle${
+				toggleName ? ` named '${toggleName}'` : ''
+			} in row '${row}' in your list!`
+		)
+	},
+
+	assertRowDoesNotRenderToggle(
+		listVc: ListViewController,
+		row: string | number,
+		toggleName?: string
+	) {
+		try {
+			this.assertRowRendersToggle(listVc, row, toggleName)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found a toggle${
+				toggleName ? ` named '${toggleName}'` : ''
+			} in row ${row} and I didn't expect to.`
+		)
+	},
 }
 
 export default vcAssertUtil

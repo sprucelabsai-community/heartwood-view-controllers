@@ -5,6 +5,7 @@ import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v20
 import listCellButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCellButton.schema'
 import listTextInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listTextInput.schema'
 import listSelectInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
+import listToggleInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listToggleInput.schema'
 
 const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema  = {
 	id: 'listCell',
@@ -61,6 +62,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                label: 'Select input',
 	                type: 'schema',
 	                options: {schema: listSelectInputSchema_v2021_02_11,}
+	            },
+	            /** Toggle input. */
+	            'toggleInput': {
+	                label: 'Toggle input',
+	                type: 'schema',
+	                options: {schema: listToggleInputSchema_v2021_02_11,}
 	            },
 	    }
 }

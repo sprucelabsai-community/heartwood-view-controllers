@@ -1,13 +1,13 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../..'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import {
 	Router,
 	SkillViewController,
 	SkillViewControllerArgs,
 	SkillViewControllerArgsMap,
 	SkillViewControllerMap,
-} from '../../types/heartwood.types'
+} from '../../../types/heartwood.types'
 
 class MockRouter implements Router {
 	public lastRedirect?: {

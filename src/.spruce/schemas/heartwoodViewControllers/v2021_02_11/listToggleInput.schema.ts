@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PhoneInputSchema  = {
-	id: 'phoneInput',
+const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema  = {
+	id: 'listToggleInput',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: 'Phone input',
+	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -23,9 +23,9 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	            },
 	            /** . */
 	            'value': {
-	                type: 'raw',
+	                type: 'boolean',
 	                isPrivate: true,
-	                options: {valueType: `any`,}
+	                options: undefined
 	            },
 	            /** Label. */
 	            'label': {
@@ -49,11 +49,16 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: string) => void | Promise<void>`,}
+	                options: {valueType: `(value?: boolean) => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'setValue': {
+	                type: 'raw',
+	                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
 	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(phoneInputSchema)
+SchemaRegistry.getInstance().trackSchema(listToggleInputSchema)
 
-export default phoneInputSchema
+export default listToggleInputSchema

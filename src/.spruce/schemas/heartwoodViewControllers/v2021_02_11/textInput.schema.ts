@@ -45,9 +45,9 @@ const textInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextIn
 	                type: 'boolean',
 	                options: undefined
 	            },
-	            /** On change handle. */
+	            /** On change handler. */
 	            'onChange': {
-	                label: 'On change handle',
+	                label: 'On change handler',
 	                type: 'raw',
 	                options: {valueType: `(value?: string) => void | Promise<void>`,}
 	            },

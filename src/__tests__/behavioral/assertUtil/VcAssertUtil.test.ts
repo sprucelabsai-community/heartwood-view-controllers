@@ -3,29 +3,29 @@ import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
-import { AbstractViewController, ToolBeltViewController } from '../..'
-import buildForm from '../../builders/buildForm'
-import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
+import { AbstractViewController, ToolBeltViewController } from '../../..'
+import buildForm from '../../../builders/buildForm'
+import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactionUtil from '../../../tests/utilities/interaction.utility'
+import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import {
 	LineIcon,
 	SkillViewController,
 	ConfirmOptions,
 	ViewControllerOptions,
-} from '../../types/heartwood.types'
-import CardViewController from '../../viewControllers/Card.vc'
-import FormViewController from '../../viewControllers/Form.vc'
+} from '../../../types/heartwood.types'
+import CardViewController from '../../../viewControllers/Card.vc'
+import FormViewController from '../../../viewControllers/Form.vc'
 import ListViewController, {
 	ListRowModel,
-} from '../../viewControllers/list/List.vc'
-import { ListCellModel } from '../../viewControllers/list/ListCell.vc'
+} from '../../../viewControllers/list/List.vc'
+import { ListCellModel } from '../../../viewControllers/list/ListCell.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
-declare module '../../types/heartwood.types' {
+declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
 		good: GoodSkillViewController
 		bad: BadSkillViewController

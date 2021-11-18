@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractViewController, vcAssertUtil } from '../..'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { AbstractViewController, vcAssertUtil } from '../../..'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 

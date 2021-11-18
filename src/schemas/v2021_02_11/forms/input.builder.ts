@@ -34,7 +34,7 @@ export default buildSchema({
 		},
 		onChange: {
 			type: 'raw',
-			label: 'On change handle',
+			label: 'On change handler',
 			options: {
 				valueType: '(value?: string) => void | Promise<void>',
 			},
