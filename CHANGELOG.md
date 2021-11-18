@@ -1,3 +1,10 @@
+# [48.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.2.20...v48.3.0) (2021-11-18)
+
+
+### Features
+
+* Devs can now check if rows in their lists render toggles ([9fd1201](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9fd1201))
+
 ## [48.2.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.2.19...v48.2.20) (2021-11-18)
 
 ## [48.2.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.2.18...v48.2.19) (2021-11-18)
