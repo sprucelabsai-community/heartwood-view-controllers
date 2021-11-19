@@ -1,3 +1,10 @@
+# [48.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.3.9...v48.4.0) (2021-11-19)
+
+
+### Features
+
+* New active record card!! ([1a4a8cc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1a4a8cc))
+
 ## [48.3.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.3.8...v48.3.9) (2021-11-19)
 
 ## [48.3.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.3.7...v48.3.8) (2021-11-19)
