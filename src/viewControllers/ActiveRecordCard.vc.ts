@@ -1,11 +1,5 @@
-import {
-	EventContract,
-	EventNames,
-	EventSignature,
-	SkillEventContract,
-	SpruceSchemas,
-} from '@sprucelabs/mercury-types'
-import { assertOptions, Schema, SchemaValues } from '@sprucelabs/schema'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { assertOptions } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import {
 	CardViewController,
@@ -15,8 +9,8 @@ import AbstractViewController from './Abstract.vc'
 import '@sprucelabs/mercury-core-events'
 import ListViewController from './list/List.vc'
 
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+export type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
 export interface ActiveRecordCardViewControllerOptions {
 	eventName: string
@@ -28,40 +22,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	header?: Card['header']
 	footer?: Card['footer']
 	id?: string
-}
-
-interface ActiveRecordCardBuilder<Contract extends EventContract> {
-	<
-		EventName extends EventNames<Contract> = EventNames<Contract>,
-		IEventSignature extends EventSignature = Contract['eventSignatures'][EventName],
-		EmitSchema extends Schema = IEventSignature['emitPayloadSchema'] extends Schema
-			? IEventSignature['emitPayloadSchema']
-			: never,
-		ResponseSchema extends Schema = IEventSignature['responsePayloadSchema'] extends Schema
-			? IEventSignature['responsePayloadSchema']
-			: never,
-		Response extends SchemaValues<ResponseSchema> = SchemaValues<ResponseSchema>,
-		ResponseKey extends keyof Response = keyof Response
-	>(options: {
-		id?: string
-		eventName: EventName
-		responseKey: ResponseKey
-		rowTransformer: (record: Response[ResponseKey][number]) => Row
-		noResultsRow?: Row
-		/** @ts-ignore */
-		payload?: SchemaValues<EmitSchema>['payload']
-		/** @ts-ignore */
-		target?: SchemaValues<EmitSchema>['target']
-		header?: Card['header']
-		footer?: Card['footer']
-	}): ActiveRecordCardViewControllerOptions
-}
-
-/** @ts-ignore */
-export const buildActiveRecord: ActiveRecordCardBuilder<SkillEventContract> = (
-	options
-) => {
-	return options
+	columnWidths?: string[]
 }
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
@@ -88,7 +49,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.emitPayload = options.payload
 		this.emitTarget = options.target
 
-		this.listVc = this.Controller('list', {})
+		this.listVc = this.Controller('list', {
+			columnWidths: options.columnWidths,
+			shouldRenderRowDividers: options.shouldRenderRowDividers,
+		})
 		this.cardVc = this.Controller('card', {
 			id: options.id,
 			header: options.header,

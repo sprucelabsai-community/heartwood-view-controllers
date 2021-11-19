@@ -28,6 +28,7 @@ export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
+export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 
 export { default as bigFormSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
 export { default as skillViewSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'

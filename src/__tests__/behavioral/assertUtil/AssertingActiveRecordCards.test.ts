@@ -1,11 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { vcAssertUtil } from '../../..'
+import buildActiveRecord from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ViewControllerOptions } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
-import { buildActiveRecord } from '../../../viewControllers/ActiveRecordCard.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 

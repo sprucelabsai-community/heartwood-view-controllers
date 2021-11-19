@@ -3,12 +3,12 @@ import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import buildActiveRecord from '../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER_ACTIVE_RECORD } from '../../tests/constants'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
-	buildActiveRecord,
 } from '../../viewControllers/ActiveRecordCard.vc'
 
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
@@ -257,6 +257,36 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 				organizationId: '2345',
 			},
 		})
+	}
+
+	@test('can set column widths 1', ['fill', 'content'])
+	@test('can set column widths 2', ['content', 'fill'])
+	protected static async passesThroughListProps(columnWidths: string[]) {
+		const vc = this.Vc({
+			columnWidths,
+		})
+
+		const listVc = vc.getListVc()
+
+		const model = this.render(listVc)
+
+		assert.isEqualDeep(model.columnWidths, columnWidths)
+	}
+
+	@test('can set render dividers 1', true)
+	@test('can set render dividers 2', false)
+	protected static async passesThroughShouldRenderDividers(
+		shouldRenderRowDividers
+	) {
+		const vc = this.Vc({
+			shouldRenderRowDividers,
+		})
+
+		const listVc = vc.getListVc()
+
+		const model = this.render(listVc)
+
+		assert.isEqualDeep(model.shouldRenderRowDividers, shouldRenderRowDividers)
 	}
 
 	private static async seedOrganization() {
