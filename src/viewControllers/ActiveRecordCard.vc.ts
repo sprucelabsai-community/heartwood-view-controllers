@@ -48,16 +48,16 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 		responseKey: ResponseKey
 		rowTransformer: (record: Response[ResponseKey][number]) => Row
 		noResultsRow?: Row
-		//@ts-ignore
+		/** @ts-ignore */
 		payload?: SchemaValues<EmitSchema>['payload']
-		//@ts-ignore
+		/** @ts-ignore */
 		target?: SchemaValues<EmitSchema>['target']
 		header?: Card['header']
 		footer?: Card['footer']
 	}): ActiveRecordCardViewControllerOptions
 }
 
-//@ts-ignore
+/** @ts-ignore */
 export const buildActiveRecord: ActiveRecordCardBuilder<SkillEventContract> = (
 	options
 ) => {
