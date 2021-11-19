@@ -688,31 +688,6 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async rowsCallAndWaitForTransitionOutHandlerOnDelete() {
-		this.add2Rows()
-		const rowVc = this.vc.getRowVc(0)
-		let wasTransitionOutHite = false
-		let wasDeletRowHandleHit = false
-
-		//@ts-ignore
-		rowVc.deleteRowHandler = async () => {
-			wasDeletRowHandleHit = true
-		}
-		rowVc.transitionOutHandler = async () => {
-			//@ts-ignore
-			await new Promise((resolve) => setTimeout(resolve, 20))
-			wasTransitionOutHite = true
-		}
-
-		const promise = rowVc.delete()
-		assert.isFalse(wasDeletRowHandleHit)
-		assert.isFalse(wasTransitionOutHite)
-		await promise
-		assert.isTrue(wasTransitionOutHite)
-		assert.isTrue(wasDeletRowHandleHit)
-	}
-
-	@test()
 	protected static cantGetRowByIdThatIsntFound() {
 		const err = assert.doesThrow(() => this.vc.getRowVcById('test'))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
@@ -885,9 +860,9 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async cantDeleteRowByIdIfNoIdFound() {
+	protected static async cantdeleteRowIfNoIdFound() {
 		const err = await assert.doesThrowAsync(() =>
-			this.vc.deleteRowById('aoeuaoeuaoeuaoeu')
+			this.vc.deleteRow('aoeuaoeuaoeuaoeu')
 		)
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
@@ -929,14 +904,14 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 
-		await this.vc.deleteRowById('test2')
+		this.vc.deleteRow('test2')
 		assert.isEqual(this.vc.getTotalRows(), 2)
 
 		let model = this.render(this.vc)
 		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there!')
 		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'Hey there! 3')
 
-		await this.vc.deleteRowById('test1')
+		this.vc.deleteRow('test1')
 		model = this.render(this.vc)
 		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there! 3')
 	}

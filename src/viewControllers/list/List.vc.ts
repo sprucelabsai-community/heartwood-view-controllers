@@ -170,11 +170,15 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		this.triggerRender()
 	}
 
-	public deleteRow(rowIdx: number) {
-		this.assertValidRowIdx(rowIdx)
-		this.model.rows.splice(rowIdx, 1)
-		this._rowVcs = []
-		this.triggerRender()
+	public deleteRow(rowIdx: number | string) {
+		if (typeof rowIdx === 'string') {
+			this.deleteRowById(rowIdx)
+		} else {
+			this.assertValidRowIdx(rowIdx)
+			this.model.rows.splice(rowIdx, 1)
+			this._rowVcs = []
+			this.triggerRender()
+		}
 	}
 
 	public getRowVcById(id: string) {
@@ -208,9 +212,9 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return !!match
 	}
 
-	public async deleteRowById(id: string) {
+	private deleteRowById(id: string) {
 		const vc = this.getRowVcById(id)
-		await vc.delete()
+		vc.delete()
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {

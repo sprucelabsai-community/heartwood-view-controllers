@@ -143,6 +143,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return targetAndPayload
 	}
 
+	public deleteRow(id: string | number) {
+		this.listVc.deleteRow(id)
+	}
+
+	public setIsBusy(isBusy: boolean) {
+		this.cardVc.setIsBusy(isBusy)
+	}
+
 	public getCardVc() {
 		return this.cardVc
 	}

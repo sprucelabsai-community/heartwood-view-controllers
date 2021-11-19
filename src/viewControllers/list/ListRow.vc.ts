@@ -32,7 +32,6 @@ export default class ListRowViewController
 		this._isLastRow = isLastRow
 	}
 
-	public async transitionOutHandler() {}
 	public triggerRender() {}
 
 	public async setValue(name: string, value: any) {
@@ -75,8 +74,7 @@ export default class ListRowViewController
 		return this._isLastRow
 	}
 
-	public async delete() {
-		await this.transitionOutHandler()
+	public delete() {
 		this.deleteRowHandler()
 	}
 

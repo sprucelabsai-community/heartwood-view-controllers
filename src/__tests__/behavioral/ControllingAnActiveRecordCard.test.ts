@@ -105,6 +105,25 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	@test()
+	protected static async canSetIsBusyOnCard() {
+		const vc = this.Vc({})
+
+		await vc.start()
+
+		const cardVc = vc.getCardVc()
+
+		assert.isFalse(cardVc.isBusy())
+
+		vc.setIsBusy(true)
+
+		assert.isTrue(cardVc.isBusy())
+
+		vc.setIsBusy(false)
+
+		assert.isFalse(cardVc.isBusy())
+	}
+
+	@test()
 	protected static async rendersNoResultsWhenNoResultsReturned() {
 		const vc = await this.NoResultsVc({
 			payload: {
@@ -161,13 +180,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async listsMyOrganizations() {
-		const organizations = []
-
-		for (let c = 0; c < 5; c++) {
-			const organization = await this.seedOrganization()
-
-			organizations.push(organization)
-		}
+		const organizations = await this.seedOrganizations()
 
 		const vc = this.Vc({
 			payload: {
@@ -183,6 +196,25 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			vcAssertUtil.assertListRendersRow(vc.getListVc(), org.id)
 			vcAssertUtil.assertRowRendersContent(vc.getListVc(), org.id, org.name)
 		}
+	}
+
+	@test('can delete row for org 0', 0)
+	@test('can delete row for org 1', 1)
+	protected static async canDeleteRow(idx: number) {
+		const organizations = await this.seedOrganizations()
+		const organization = organizations[idx]
+
+		const vc = this.Vc({
+			payload: {
+				showMineOnly: true,
+			},
+		})
+
+		await vc.start()
+
+		vc.deleteRow(organization.id)
+
+		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organization.id)
 	}
 
 	@test()
@@ -287,6 +319,16 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		const model = this.render(listVc)
 
 		assert.isEqualDeep(model.shouldRenderRowDividers, shouldRenderRowDividers)
+	}
+
+	private static async seedOrganizations() {
+		const organizations = []
+
+		for (let c = 0; c < 5; c++) {
+			const organization = await this.seedOrganization()
+			organizations.push(organization)
+		}
+		return organizations
 	}
 
 	private static async seedOrganization() {
