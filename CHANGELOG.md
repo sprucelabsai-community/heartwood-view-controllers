@@ -1,3 +1,10 @@
+# [49.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.6.0...v49.0.0) (2021-11-19)
+
+
+### Breaking Changes
+
+* Devs can delete rows in lists by id or index using 1 line of code, making dev even FASTER! ([c93d859](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c93d859))
+
 # [48.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.5.4...v48.6.0) (2021-11-19)
 
 
