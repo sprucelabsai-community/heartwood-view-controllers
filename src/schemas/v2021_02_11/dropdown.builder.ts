@@ -39,7 +39,7 @@ export default buildSchema({
 							label: 'Click handler',
 							options: {
 								valueType:
-									'(dropdown: { hide: () => void, show: () => void }) => Promise<void> | void',
+									'(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void',
 							},
 						},
 					},

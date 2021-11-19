@@ -298,6 +298,11 @@ export type FieldRenderOptions<S extends Schema> = {
 	hint?: string
 }
 
+export interface DropdownController {
+	hide: () => void
+	show: () => void
+}
+
 export type KeyboardKey =
 	| ' '
 	| '!'
