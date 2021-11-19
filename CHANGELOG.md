@@ -1,3 +1,10 @@
+# [48.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.4.8...v48.5.0) (2021-11-19)
+
+
+### Features
+
+* Devs can now test that active record cards on on screen! ([d571d1d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d571d1d))
+
 ## [48.4.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.4.7...v48.4.8) (2021-11-19)
 
 ## [48.4.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.4.6...v48.4.7) (2021-11-19)
