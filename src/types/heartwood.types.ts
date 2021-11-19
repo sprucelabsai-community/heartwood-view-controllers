@@ -8,6 +8,9 @@ import {
 } from '@sprucelabs/schema'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
+import ActiveRecordCardViewController, {
+	ActiveRecordCardViewControllerOptions,
+} from '../viewControllers/ActiveRecordCard.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -211,6 +214,7 @@ export interface ViewControllerMap {
 	bigForm: BigFormViewController<any>
 	confirm: ConfirmViewController
 	formBuilder: FormBuilderViewController
+	activeRecordCard: ActiveRecordCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
@@ -233,6 +237,7 @@ export interface ViewControllerOptionsMap {
 	calendar: CalendarViewControllerOptions
 	buttonBar: ButtonBarViewControllerOptions
 	talkingSprucebot: TalkingSprucebotViewControllerOptions
+	activeRecordCard: ActiveRecordCardViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

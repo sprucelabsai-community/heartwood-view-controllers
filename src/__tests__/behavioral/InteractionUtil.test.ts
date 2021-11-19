@@ -56,7 +56,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			loggedInPersonId = person.id
 		})
 
-		const { person } = await this.MercuryFixture().loginAsDemoPerson(phone)
+		const { person } = await this.getMercuryFixture().loginAsDemoPerson(phone)
 
 		await interactionUtil.submitLoginForm(this.LoginVc(), phone)
 

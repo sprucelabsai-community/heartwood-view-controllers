@@ -16,7 +16,6 @@ const TEST_HOST = process.env.TEST_HOST ?? process.env.HOST
 
 export default class MercuryFixture {
 	private clientPromise?: Promise<MercuryClient>
-	private static originalHost: string | undefined
 	private cwd: string
 
 	public static shouldAutoImportContracts = true
@@ -89,31 +88,12 @@ export default class MercuryFixture {
 	}
 
 	public async destroy() {
+		debugger
 		if (this.clientPromise) {
 			const client = await this.clientPromise
 			await client.disconnect()
 			this.clientPromise = undefined
 		}
-	}
-
-	public static beforeAll() {
-		this.originalHost = process.env.TEST_HOST ?? process.env.HOST ?? TEST_HOST
-	}
-
-	public static beforeEach() {
-		MercuryFixture.shouldAutoImportContracts = true
-
-		if (this.originalHost) {
-			process.env.HOST = this.originalHost
-		} else {
-			delete process.env.HOST
-		}
-
-		MercuryClientFactory.resetTestClient()
-		MercuryClientFactory.setIsTestMode(true)
-
-		//@ts-ignore
-		MercuryClientFactory.setDefaultContract(coreEventContracts[0])
 	}
 
 	public async loginAsDemoPerson(phone: string = DEMO_NUMBER): Promise<{

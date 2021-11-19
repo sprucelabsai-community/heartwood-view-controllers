@@ -16,6 +16,7 @@ import vcAssertUtil from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any>
+	private static mercuryFixture?: MercuryFixture
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -23,8 +24,13 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		Authenticator.setStorage(new MockStorage())
 		vcAssertUtil._setVcFactory(this.Factory())
 		SchemaRegistry.getInstance().forgetAllSchemas()
-
+		this.mercuryFixture = undefined
 		SwipeViewController.swipeDelay = 0
+	}
+
+	protected static async afterEach() {
+		await super.afterEach()
+		this.mercuryFixture?.destroy()
 	}
 
 	protected static Factory() {
@@ -37,7 +43,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 			})
 		}
 
-		const mercury = new MercuryFixture(this.cwd)
+		const mercury = this.getMercuryFixture()
 
 		return ViewControllerFactory.Factory({
 			controllerMap: this.controllerMap,
@@ -77,7 +83,11 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		return interactionUtil.click(button)
 	}
 
-	protected static MercuryFixture() {
-		return new MercuryFixture(this.cwd)
+	protected static getMercuryFixture() {
+		if (!this.mercuryFixture) {
+			this.mercuryFixture = new MercuryFixture(this.cwd)
+		}
+
+		return this.mercuryFixture
 	}
 }
