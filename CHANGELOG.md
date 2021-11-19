@@ -1,3 +1,10 @@
+# [48.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.5.4...v48.6.0) (2021-11-19)
+
+
+### Features
+
+* devs can now build active record cards with full typing (missed export) ([b419893](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b419893))
+
 ## [48.5.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.5.3...v48.5.4) (2021-11-19)
 
 ## [48.5.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v48.5.2...v48.5.3) (2021-11-19)
