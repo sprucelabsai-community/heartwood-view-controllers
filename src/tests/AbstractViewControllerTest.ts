@@ -26,6 +26,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
 		SwipeViewController.swipeDelay = 0
+		await MercuryFixture.beforeEach()
 	}
 
 	protected static async afterEach() {

@@ -20,6 +20,12 @@ export default class MercuryFixture {
 
 	public static shouldAutoImportContracts = true
 
+	public static async beforeEach() {
+		MercuryClientFactory.resetTestClient()
+		//@ts-ignore
+		MercuryClientFactory.setDefaultContract(coreEventContracts[0])
+	}
+
 	public constructor(cwd: string) {
 		this.cwd = cwd
 		if (!this.cwd) {
@@ -88,7 +94,6 @@ export default class MercuryFixture {
 	}
 
 	public async destroy() {
-		debugger
 		if (this.clientPromise) {
 			const client = await this.clientPromise
 			await client.disconnect()
