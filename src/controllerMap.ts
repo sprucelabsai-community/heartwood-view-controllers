@@ -1,4 +1,5 @@
 import { ButtonBarViewController } from '.'
+import ActiveRecordCardViewController from './viewControllers/ActiveRecordCard.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
 import CalendarViewController from './viewControllers/Calendar.vc'
@@ -26,4 +27,5 @@ export const CORE_CONTROLLER_MAP = {
 	calendar: CalendarViewController,
 	buttonBar: ButtonBarViewController,
 	talkingSprucebot: TalkingSprucebotViewController,
+	activeRecordCard: ActiveRecordCardViewController,
 }

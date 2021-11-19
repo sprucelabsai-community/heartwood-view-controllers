@@ -27,6 +27,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	target?: Record<string, any>
 	header?: Card['header']
 	footer?: Card['footer']
+	id?: string
 }
 
 interface ActiveRecordCardBuilder<Contract extends EventContract> {
@@ -42,6 +43,7 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 		Response extends SchemaValues<ResponseSchema> = SchemaValues<ResponseSchema>,
 		ResponseKey extends keyof Response = keyof Response
 	>(options: {
+		id?: string
 		eventName: EventName
 		responseKey: ResponseKey
 		rowTransformer: (record: Response[ResponseKey][number]) => Row
@@ -88,6 +90,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 		this.listVc = this.Controller('list', {})
 		this.cardVc = this.Controller('card', {
+			id: options.id,
 			header: options.header,
 			footer: options.footer,
 			body: {
@@ -99,6 +102,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 				],
 			},
 		})
+
+		//@ts-ignore
+		this.cardVc.__isActiveRecord = true
 	}
 
 	public async start() {

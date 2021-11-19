@@ -1017,6 +1017,19 @@ const vcAssertUtil = {
 			} in row ${row} and I didn't expect to.`
 		)
 	},
+
+	assertSkillViewRendersActiveRecordCard(
+		svc: SkillViewController,
+		id?: string
+	) {
+		const cardVc = this.assertSkillViewRendersCard(svc, id)
+
+		assert.isTruthy(
+			//@ts-ignore
+			cardVc.__isActiveRecord,
+			`I expected to find an active record card with the id of ${id}, but I didn't!`
+		)
+	},
 }
 
 export default vcAssertUtil
