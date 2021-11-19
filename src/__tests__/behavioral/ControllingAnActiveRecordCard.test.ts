@@ -261,7 +261,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test('can set column widths 1', ['fill', 'content'])
 	@test('can set column widths 2', ['content', 'fill'])
-	protected static async passesThroughListProps(columnWidths: string[]) {
+	protected static async passesThroughListProps(columnWidths: any[]) {
 		const vc = this.Vc({
 			columnWidths,
 		})
@@ -276,7 +276,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	@test('can set render dividers 1', true)
 	@test('can set render dividers 2', false)
 	protected static async passesThroughShouldRenderDividers(
-		shouldRenderRowDividers
+		shouldRenderRowDividers: boolean
 	) {
 		const vc = this.Vc({
 			shouldRenderRowDividers,

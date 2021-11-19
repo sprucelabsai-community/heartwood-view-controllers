@@ -23,6 +23,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	footer?: Card['footer']
 	id?: string
 	columnWidths?: string[]
+	shouldRenderRowDividers?: boolean
 }
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
@@ -50,7 +51,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.emitTarget = options.target
 
 		this.listVc = this.Controller('list', {
-			columnWidths: options.columnWidths,
+			columnWidths: options.columnWidths as any,
 			shouldRenderRowDividers: options.shouldRenderRowDividers,
 		})
 		this.cardVc = this.Controller('card', {
