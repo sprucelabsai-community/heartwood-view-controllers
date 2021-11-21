@@ -1,3 +1,12 @@
+## [49.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.3.0...v49.3.1) (2021-11-21)
+
+# [49.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.2.1...v49.3.0) (2021-11-21)
+
+
+### Features
+
+* Devs can now simulation clicking and selecting choices from dropdowns ([eb63d90](https://github.com/sprucelabsai/heartwood-view-controllers/commit/eb63d90))
+
 ## [49.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.2.0...v49.2.1) (2021-11-21)
 
 # [49.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.1.8...v49.2.0) (2021-11-21)
