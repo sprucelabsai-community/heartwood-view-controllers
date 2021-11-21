@@ -244,8 +244,8 @@ const interactionUtil = {
 		for (const cell of model.cells) {
 			if (cell.toggleInput) {
 				const current = cell.toggleInput.value ?? false
-				rowVc.setValue(cell.toggleInput.name, !current)
-				return cell.toggleInput.onChange?.(!current)
+				await rowVc.setValue(cell.toggleInput.name, !current)
+				return
 			}
 		}
 
