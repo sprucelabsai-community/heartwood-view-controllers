@@ -1,3 +1,10 @@
+# [49.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.1.8...v49.2.0) (2021-11-21)
+
+
+### Features
+
+* Devs can now check for selects inside of the rows of a list!!! ([00c79e2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/00c79e2))
+
 ## [49.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.1.7...v49.1.8) (2021-11-21)
 
 ## [49.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.1.6...v49.1.7) (2021-11-21)
