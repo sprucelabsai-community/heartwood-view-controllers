@@ -1,3 +1,10 @@
+# [49.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.0.18...v49.1.0) (2021-11-21)
+
+
+### Features
+
+* Devs can now simulate clicks on toggles in tests! ([8697c72](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8697c72))
+
 ## [49.0.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.0.17...v49.0.18) (2021-11-21)
 
 ## [49.0.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.0.16...v49.0.17) (2021-11-20)
