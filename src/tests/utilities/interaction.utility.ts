@@ -120,7 +120,7 @@ const interactionUtil = {
 		const vc =
 			typeof rowIdxOrId === 'number'
 				? listVc.getRowVc(rowIdxOrId)
-				: listVc.getRowVcById(rowIdxOrId)
+				: listVc.getRowVc(rowIdxOrId)
 
 		if (!vc) {
 			assert.fail(`I could not find row ${rowIdxOrId}!`)
@@ -196,7 +196,7 @@ const interactionUtil = {
 	) {
 		const rowVc =
 			typeof rowIdxOrId === 'string'
-				? vc.getRowVcById(rowIdxOrId)
+				? vc.getRowVc(rowIdxOrId)
 				: vc.getRowVc(rowIdxOrId)
 
 		if (!rowVc) {
@@ -223,18 +223,33 @@ const interactionUtil = {
 
 		if (!element) {
 			assert.fail(
-				`No button, selectInput, or textInput set cell ${options.cellIdx} does not have \`onKeyDown\` set.`
+				`No button, selectInput, or textInput set cell '${options.cellIdx}' does not have \`onKeyDown\` set.`
 			)
 		}
 		//@ts-ignore
 		if (!element.onKeyDown) {
 			assert.fail(
-				`Your element in cell ${options.cellIdx} does not have \`onKeyDown\` set.`
+				`Your element in cell '${options.cellIdx}' does not have \`onKeyDown\` set.`
 			)
 		}
 
 		//@ts-ignore
 		await element.onKeyDown({ key: options.key, rowVc: options.vc })
+	},
+
+	async clickToggleInRow(vc: ListViewController, row: string | number) {
+		const rowVc = vc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells) {
+			if (cell.toggleInput) {
+				const current = cell.toggleInput.value ?? false
+				rowVc.setValue(cell.toggleInput.name, !current)
+				return cell.toggleInput.onChange?.(!current)
+			}
+		}
+
+		assert.fail(`I could not find a toggle in row '${row}' to click.`)
 	},
 }
 

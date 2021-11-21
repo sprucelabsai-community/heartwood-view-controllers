@@ -79,25 +79,29 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		this.triggerRender()
 	}
 
-	public getRowVc(rowIdx: number) {
-		if (!this._rowVcs[rowIdx]) {
-			this.assertValidRowIdx(rowIdx)
+	public getRowVc(row: number | string): ListRowViewController {
+		if (typeof row === 'string') {
+			return this.getRowVcById(row)
+		}
 
-			this._rowVcs[rowIdx] = new ListRowViewController({
+		if (!this._rowVcs[row]) {
+			this.assertValidRowIdx(row)
+
+			this._rowVcs[row] = new ListRowViewController({
 				setValue: async (name: string, value: any) => {
-					await this.setValue({ rowIdx, name, value })
+					await this.setValue({ rowIdx: row, name, value })
 				},
 				getValues: () => {
-					return this.getRowValues(rowIdx)
+					return this.getRowValues(row)
 				},
 				deleteRow: () => {
-					this.deleteRow(rowIdx)
+					this.deleteRow(row)
 				},
-				isLastRow: rowIdx == this.getTotalRows() - 1,
-				...this.model.rows[rowIdx],
+				isLastRow: row == this.getTotalRows() - 1,
+				...this.model.rows[row],
 			})
 		}
-		return this._rowVcs[rowIdx]
+		return this._rowVcs[row]
 	}
 
 	private assertValidRowIdx(rowIdx: number) {
@@ -181,7 +185,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 	}
 
-	public getRowVcById(id: string) {
+	private getRowVcById(id: string) {
 		const idx = this.getIdxForId(id)
 		if (idx === -1) {
 			throw new SchemaError({
@@ -190,6 +194,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 				parameters: ['rowId'],
 			})
 		}
+
 		return this.getRowVc(idx)
 	}
 
@@ -213,7 +218,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	}
 
 	private deleteRowById(id: string) {
-		const vc = this.getRowVcById(id)
+		const vc = this.getRowVc(id)
 		vc.delete()
 	}
 

@@ -490,7 +490,7 @@ const vcAssertUtil = {
 		if (typeof row === 'number') {
 			return listVc.getRowVc(row)
 		}
-		return listVc.getRowVcById(row)
+		return listVc.getRowVc(row)
 	},
 
 	assertRowRendersButton(

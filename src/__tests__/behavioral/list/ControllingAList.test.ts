@@ -689,7 +689,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static cantGetRowByIdThatIsntFound() {
-		const err = assert.doesThrow(() => this.vc.getRowVcById('test'))
+		const err = assert.doesThrow(() => this.vc.getRowVc('test'))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
 		})
@@ -787,7 +787,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 
-		const rowVc = this.vc.getRowVcById('test')
+		const rowVc = this.vc.getRowVc('test')
 		const model = this.render(rowVc)
 
 		assert.isEqual(rowVc.getId(), 'test')
@@ -802,10 +802,10 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 
-		const rowVc2 = this.vc.getRowVcById('test2')
+		const rowVc2 = this.vc.getRowVc('test2')
 		assert.isEqual(rowVc2.getId(), 'test2')
 
-		const err = assert.doesThrow(() => this.vc.getRowVcById('aoeu'))
+		const err = assert.doesThrow(() => this.vc.getRowVc('aoeu'))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
 		})
