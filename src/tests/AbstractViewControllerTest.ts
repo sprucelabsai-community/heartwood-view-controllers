@@ -1,4 +1,4 @@
-import { SchemaError, SchemaRegistry } from '@sprucelabs/schema'
+import { SchemaRegistry } from '@sprucelabs/schema'
 import AbstractSpruceTest from '@sprucelabs/test'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -15,7 +15,7 @@ import interactionUtil from './utilities/interaction.utility'
 import vcAssertUtil from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
-	protected static controllerMap: Record<string, any>
+	protected static controllerMap: Record<string, any> = {}
 	private static mercuryFixture?: MercuryFixture
 
 	protected static async beforeEach() {
@@ -35,15 +35,6 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	}
 
 	protected static Factory() {
-		if (!this.controllerMap) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: [
-					'protected static controllerMap = { dashboard: DashboardSkillViewController, profileForm: ProfileFormViewController }',
-				],
-			})
-		}
-
 		const mercury = this.getMercuryFixture()
 
 		return ViewControllerFactory.Factory({

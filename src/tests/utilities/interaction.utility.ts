@@ -251,6 +251,36 @@ const interactionUtil = {
 
 		assert.fail(`I could not find a toggle in row '${row}' to click.`)
 	},
+
+	async selectChoiceInRow(options: {
+		vc: ListViewController
+		row: string | number
+		newChoice: string
+	}) {
+		const { vc, row, newChoice } = options
+
+		const rowVc = vc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (cell.selectInput) {
+				const choices = cell.selectInput.choices.filter(
+					(c) => c.value === newChoice
+				)
+
+				assert.isAbove(
+					choices.length,
+					0,
+					`The select in row '${row}' didn't have a choice for '${newChoice}' so I couldn't select it.`
+				)
+
+				await rowVc.setValue(cell.selectInput.name, newChoice)
+				return
+			}
+		}
+
+		assert.fail(`I could not find a select in row '${row}' to make a choice!`)
+	},
 }
 
 export default interactionUtil

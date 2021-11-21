@@ -1,4 +1,4 @@
-import { validateSchemaValues } from '@sprucelabs/schema'
+import { SelectChoice, validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
@@ -68,6 +68,11 @@ async function wait(...promises: (Promise<any> | undefined | void)[]) {
 			promise?.then?.(done)?.catch?.(reject)
 		}
 	})
+}
+
+interface SelectViewController {
+	getChoices: () => SelectChoice[]
+	getIsRequired: () => boolean
 }
 
 const vcAssertUtil = {
@@ -1019,19 +1024,31 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertRowRendersSelect(listVc: ListViewController, row: string | number) {
+	assertRowRendersSelect(
+		listVc: ListViewController,
+		row: string | number
+	): SelectViewController {
 		const rowVc = listVc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
 			if (cell.selectInput) {
-				return
+				return {
+					getChoices() {
+						return cell.selectInput?.choices ?? []
+					},
+					getIsRequired() {
+						return !!cell.selectInput?.isRequired
+					},
+				}
 			}
 		}
 
 		assert.fail(
 			`Could not find select in row ${row} and I totally expected to!`
 		)
+
+		return {} as any
 	},
 
 	assertSkillViewRendersActiveRecordCard(

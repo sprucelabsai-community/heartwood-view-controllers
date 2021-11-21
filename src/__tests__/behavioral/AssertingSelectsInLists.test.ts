@@ -1,3 +1,4 @@
+import { selectAssertUtil } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { vcAssertUtil } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
@@ -34,12 +35,68 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 	}
 
 	@test()
-	protected static async canFindSelectInCellAfterFirst() {
+	protected static canFindSelectInCellAfterFirst() {
 		const vc = this.ListVc({})
 		vcAssertUtil.assertRowRendersSelect(vc, 'middle')
 	}
 
-	private static ListVc(options?: { row1Id?: string; row2Id?: string }) {
+	@test()
+	protected static returnsASelectViewController() {
+		const vc = this.ListVc({})
+		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+
+		assert.isTruthy(selectVc)
+		assert.isFunction(selectVc.getChoices)
+		assert.isArray(selectVc.getChoices())
+
+		assert.isFunction(selectVc.getIsRequired)
+		assert.isFalse(selectVc.getIsRequired())
+	}
+
+	@test()
+	protected static selectVcKnowsIfRequired() {
+		const vc = this.ListVc({
+			isMiddleRequired: true,
+		})
+
+		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+		assert.isTrue(selectVc.getIsRequired())
+	}
+
+	@test()
+	protected static selectVcKnowsOptions() {
+		const vc = this.ListVc({
+			isMiddleRequired: true,
+		})
+
+		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+
+		selectAssertUtil.assertSelectChoicesMatch(selectVc?.getChoices(), [
+			'foo',
+			'taco',
+		])
+	}
+
+	@test()
+	protected static selectVcKnowsOptionsInDifferntRow() {
+		const vc = this.ListVc({
+			isMiddleRequired: true,
+		})
+
+		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'first')
+
+		selectAssertUtil.assertSelectChoicesMatch(selectVc?.getChoices(), [
+			'red',
+			'green',
+			'blue',
+		])
+	}
+
+	private static ListVc(options?: {
+		row1Id?: string
+		row2Id?: string
+		isMiddleRequired?: boolean
+	}) {
 		return this.Controller('list', {
 			rows: [
 				{
@@ -47,8 +104,13 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 					cells: [
 						{
 							selectInput: {
+								isRequired: true,
 								name: 'favoriteColor',
-								choices: [],
+								choices: [
+									{ value: 'red', label: 'red' },
+									{ value: 'green', label: 'green' },
+									{ value: 'blue', label: 'blue' },
+								],
 							},
 						},
 					],
@@ -60,8 +122,18 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 						{},
 						{
 							selectInput: {
+								isRequired: !!options?.isMiddleRequired,
 								name: 'state',
-								choices: [],
+								choices: [
+									{
+										value: 'foo',
+										label: 'bar',
+									},
+									{
+										value: 'taco',
+										label: 'bell',
+									},
+								],
 							},
 						},
 					],
