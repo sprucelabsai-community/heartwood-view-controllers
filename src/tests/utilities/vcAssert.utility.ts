@@ -977,6 +977,7 @@ const vcAssertUtil = {
 
 		assert.isTrue(wasHit, `I expected to be redirected, but was not!`)
 	},
+
 	assertRowRendersToggle(
 		listVc: ListViewController,
 		row: string | number,
@@ -1015,6 +1016,21 @@ const vcAssertUtil = {
 			`I found a toggle${
 				toggleName ? ` named '${toggleName}'` : ''
 			} in row ${row} and I didn't expect to.`
+		)
+	},
+
+	assertRowRendersSelect(listVc: ListViewController, row: string | number) {
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (cell.selectInput) {
+				return
+			}
+		}
+
+		assert.fail(
+			`Could not find select in row ${row} and I totally expected to!`
 		)
 	},
 
