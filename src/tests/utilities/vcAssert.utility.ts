@@ -17,6 +17,7 @@ import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
+import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
@@ -524,6 +525,31 @@ const vcAssertUtil = {
 			return
 		}
 		assert.fail(`I found a row ${row} and I didn't expect to!`)
+	},
+
+	assertSkillViewRendersFormBuilder(
+		vc: SkillViewController,
+		id?: string
+	): FormBuilderViewController {
+		const model = renderUtil.render(vc)
+
+		for (const layout of model.layouts) {
+			for (const card of layout.cards ?? []) {
+				const vc = card?.controller
+				//@ts-ignore
+				if (vc && vc.__isFormBuilder && (!id || card.id === id)) {
+					return vc as any
+				}
+			}
+		}
+
+		assert.fail(
+			`Could not find a form builder${
+				id ? ` with the id ${id}` : ''
+			} in your skill view!`
+		)
+
+		return {} as any
 	},
 
 	assertSkillViewRendersCard(

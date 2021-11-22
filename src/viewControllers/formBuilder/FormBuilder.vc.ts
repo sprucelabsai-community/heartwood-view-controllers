@@ -31,6 +31,7 @@ export interface FormBuilderViewControllerOptions {
 	header?: Card['header']
 	footer?: Card['footer']
 	shouldAllowEditing?: boolean
+	id?: string
 }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
@@ -53,6 +54,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.shouldAllowEditing = options.shouldAllowEditing ?? true
 
 		this.swipeVc = this.Controller('swipe', {
+			id: options.id,
 			header: {
 				title: 'Building your form',
 				...options.header,
@@ -266,14 +268,6 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		})
 	}
 
-	public render(): Card {
-		return {
-			...this.swipeVc.render(),
-			controller: this as any,
-			shouldAllowEditing: this.shouldAllowEditing,
-		}
-	}
-
 	public handleClickAddSection(clickedSectionIdx: number) {
 		this.getPresentPageVc().getSection(clickedSectionIdx)
 
@@ -425,5 +419,13 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		await Promise.all(
 			values.map((values, idx) => this.getPageVc(idx).setValues(values))
 		)
+	}
+
+	public render(): Card {
+		return {
+			...this.swipeVc.render(),
+			controller: this as any,
+			shouldAllowEditing: this.shouldAllowEditing,
+		}
 	}
 }
