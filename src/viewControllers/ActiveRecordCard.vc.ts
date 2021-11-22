@@ -35,6 +35,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private responseKey: string
 	private emitPayload?: Record<string, any>
 	private emitTarget?: Record<string, any>
+	private isLoaded = false
 
 	public constructor(
 		options: ViewControllerOptions & ActiveRecordCardViewControllerOptions
@@ -72,7 +73,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.cardVc.__isActiveRecord = true
 	}
 
-	public async start() {
+	public async load() {
 		let responseKeyError: any
 
 		try {
@@ -122,10 +123,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		}
 
 		if (responseKeyError) {
-			throw new Error('oops')
+			throw new Error(
+				`The key '${responseKeyError}' was not found in response!`
+			)
 		}
 
+		this.isLoaded = true
 		this.cardVc.setIsBusy(false)
+	}
+
+	public getIsLoaded() {
+		return this.isLoaded
 	}
 
 	private buildTargetAndPayload() {

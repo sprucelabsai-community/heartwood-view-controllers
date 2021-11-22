@@ -108,7 +108,11 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static async canSetIsBusyOnCard() {
 		const vc = this.Vc({})
 
-		await vc.start()
+		assert.isFalse(vc.getIsLoaded())
+
+		await vc.load()
+
+		assert.isTrue(vc.getIsLoaded())
 
 		const cardVc = vc.getCardVc()
 
@@ -188,7 +192,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		await vc.start()
+		await vc.load()
 
 		vcAssertUtil.assertListRendersRows(vc.getListVc(), organizations.length)
 
@@ -210,7 +214,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		await vc.start()
+		await vc.load()
 
 		vc.deleteRow(organization.id)
 
@@ -239,7 +243,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		await vc.start()
+		await vc.load()
 
 		vcAssertUtil.assertRowRendersContent(
 			vc.getListVc(),
@@ -267,7 +271,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		await assert.doesThrowAsync(() => vc.start())
+		await assert.doesThrowAsync(() => vc.load())
 	}
 
 	@test()
@@ -388,7 +392,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const vc = this.Vc(options)
 
-		await vc.start()
+		await vc.load()
 		return vc
 	}
 }
