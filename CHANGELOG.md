@@ -1,3 +1,10 @@
+# [49.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.3.6...v49.4.0) (2021-11-22)
+
+
+### Features
+
+* Devs can now test for form builders in their skill view! ([dde4c35](https://github.com/sprucelabsai/heartwood-view-controllers/commit/dde4c35))
+
 ## [49.3.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.3.5...v49.3.6) (2021-11-22)
 
 ## [49.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.3.4...v49.3.5) (2021-11-21)
