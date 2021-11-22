@@ -1,3 +1,10 @@
+# [49.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.4.0...v49.5.0) (2021-11-22)
+
+
+### Features
+
+* isBusy passthrough for card and swipe ([3a7298f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3a7298f))
+
 # [49.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.3.6...v49.4.0) (2021-11-22)
 
 
