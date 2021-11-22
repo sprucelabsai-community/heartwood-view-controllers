@@ -32,6 +32,7 @@ export interface FormBuilderViewControllerOptions {
 	footer?: Card['footer']
 	shouldAllowEditing?: boolean
 	id?: string
+	isBusy?: boolean
 }
 
 export default class FormBuilderViewController extends AbstractViewController<Card> {
@@ -55,6 +56,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 
 		this.swipeVc = this.Controller('swipe', {
 			id: options.id,
+			isBusy: options.isBusy,
 			header: {
 				title: 'Building your form',
 				...options.header,

@@ -794,6 +794,20 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(built, footer)
 	}
 
+	@test()
+	protected static canStartIsBusy() {
+		this.vc = this.Controller('formBuilder', {
+			isBusy: true,
+		})
+
+		vcAssertUtil.assertCardIsBusy(this.vc)
+	}
+
+	@test()
+	protected static startsNotBusy() {
+		vcAssertUtil.assertCardIsNotBusy(this.vc)
+	}
+
 	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
 		oldFieldName: string
 		newFieldName?: string

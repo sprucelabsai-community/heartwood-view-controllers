@@ -15,6 +15,7 @@ type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 export type SwipeViewControllerOptions = {
 	slides: Slide[]
 	onSlideChange?: (slide: number) => void
+	isBusy?: boolean
 } & Omit<ViewModel, 'body'>
 
 const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
@@ -43,12 +44,13 @@ export default class SwipeViewController
 	) {
 		super(options)
 
-		const { slides, onSlideChange, ...rest } = options
+		const { slides, onSlideChange, isBusy, ...rest } = options
 
 		this.slideChangeHandler = onSlideChange
 		this.cardVc = this.Controller('card', {
 			...rest,
 			body: {
+				isBusy,
 				sections: slides,
 				swipeController: (controller) => (this.swipeController = controller),
 				onSelectSlideTitle: this.jumpToSlide.bind(this),
