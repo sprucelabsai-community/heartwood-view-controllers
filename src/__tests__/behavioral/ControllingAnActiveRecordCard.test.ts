@@ -272,6 +272,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		})
 
 		await assert.doesThrowAsync(() => vc.load())
+		assert.isEqualDeep(vc.getTarget(), {
+			organizationId: organization.id,
+		})
 	}
 
 	@test()
@@ -323,6 +326,32 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		const model = this.render(listVc)
 
 		assert.isEqualDeep(model.shouldRenderRowDividers, shouldRenderRowDividers)
+	}
+
+	@test()
+	protected static canGetTarget() {
+		const vc1 = this.Vc({
+			target: {
+				hello: 'world',
+			},
+		})
+
+		assert.isEqualDeep(vc1.getTarget(), { hello: 'world' })
+	}
+
+	@test()
+	protected static canSetTarget() {
+		const vc1 = this.Vc({
+			target: {
+				hello: 'world',
+			},
+		})
+
+		vc1.setTarget({ goodbye: 'world' })
+		assert.isEqualDeep(vc1.getTarget(), { goodbye: 'world' })
+
+		vc1.setTarget({ once: 'twice' })
+		assert.isEqualDeep(vc1.getTarget(), { once: 'twice' })
 	}
 
 	private static async seedOrganizations() {

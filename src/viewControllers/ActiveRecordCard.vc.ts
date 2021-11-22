@@ -71,6 +71,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 		//@ts-ignore
 		this.cardVc.__isActiveRecord = true
+		//@ts-ignore
+		this.cardVc.__activeRecordParent = this
 	}
 
 	public async load() {
@@ -149,6 +151,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			targetAndPayload.payload = this.emitPayload
 		}
 		return targetAndPayload
+	}
+
+	public getTarget() {
+		return this.emitTarget
+	}
+
+	public setTarget(target?: Record<string, any>) {
+		this.emitTarget = target
 	}
 
 	public deleteRow(id: string | number) {

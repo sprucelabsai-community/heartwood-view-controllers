@@ -3,6 +3,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
+import { ActiveRecordCardViewController } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -1087,6 +1088,17 @@ const vcAssertUtil = {
 			//@ts-ignore
 			cardVc.__isActiveRecord,
 			`I expected to find an active record card with the id of ${id}, but I didn't!`
+		)
+
+		//@ts-ignore
+		return cardVc.__activeRecordParent
+	},
+
+	assertIsActiveRecordCard(vc: ViewController<Card>) {
+		assert.isTruthy(
+			//@ts-ignore
+			vc instanceof ActiveRecordCardViewController,
+			`The card you sent was not an active record card!`
 		)
 	},
 }

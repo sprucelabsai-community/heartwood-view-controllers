@@ -38,7 +38,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 	}
 
 	@test()
-	protected static async throwsIfNoActiveRecord() {
+	protected static throwsIfNoActiveRecord() {
 		const vc = this.Controller('genericSkillView', {
 			layouts: [],
 		})
@@ -49,7 +49,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 	}
 
 	@test()
-	protected static async canTellIfHasActiveRecord() {
+	protected static canTellIfHasActiveRecord() {
 		const vc = this.Controller('genericSkillView', {
 			layouts: [
 				{
@@ -71,11 +71,12 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 	}
 
 	@test()
-	protected static async canTellIfPlainCardPassed() {
+	protected static canTellIfPlainCardPassed() {
+		const cardVc = this.Controller('card', {})
 		const vc = this.Controller('genericSkillView', {
 			layouts: [
 				{
-					cards: [this.Controller('card', {}).render()],
+					cards: [cardVc.render()],
 				},
 			],
 		})
@@ -83,11 +84,32 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 		assert.doesThrow(() =>
 			vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
 		)
+		assert.doesThrow(() => vcAssertUtil.assertIsActiveRecordCard(cardVc))
+	}
+
+	@test()
+	protected static returnsActiveCardControllerInstance() {
+		const active = this.ActiveRecordCard()
+		const vc = this.Controller('genericSkillView', {
+			layouts: [
+				{
+					cards: [active.render()],
+				},
+			],
+		})
+
+		const match = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+		assert.isEqual(active, match)
+		vcAssertUtil.assertIsActiveRecordCard(match)
 	}
 
 	private static renderActiveRecordCard(
 		id?: string
 	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
+		return this.ActiveRecordCard(id).render()
+	}
+
+	private static ActiveRecordCard(id?: string) {
 		return this.Controller(
 			'activeRecordCard',
 			buildActiveRecord({
@@ -96,6 +118,6 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 				responseKey: 'organizations',
 				rowTransformer: () => ({ cells: [] }),
 			})
-		).render()
+		)
 	}
 }
