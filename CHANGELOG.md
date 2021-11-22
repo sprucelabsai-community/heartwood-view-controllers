@@ -1,3 +1,10 @@
+# [50.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.5.0...v50.0.0) (2021-11-22)
+
+
+### Breaking Changes
+
+* Active record card start -> load and new getIsLoaded method for better testing ([bd579a5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/bd579a5))
+
 # [49.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v49.4.0...v49.5.0) (2021-11-22)
 
 
