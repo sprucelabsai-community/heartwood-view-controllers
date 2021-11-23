@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
+import { AbstractViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import {
@@ -12,10 +13,12 @@ import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
 		toolBeltSvc: ToolBeltSkillViewController
+		fancy: FancyCard
 	}
 	interface ViewControllerOptionsMap {
 		toolBeltSvc: { toolBelt?: ToolBelt | null }
@@ -76,10 +79,17 @@ class ToolBeltSkillViewController implements SkillViewController {
 	}
 }
 
+class FancyCard extends AbstractViewController<Card> {
+	public render(): Card {
+		return this.Controller('card', {}).render()
+	}
+}
+
 export default class AssertingToolsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		toolBeltSvc: ToolBeltSkillViewController,
 		good: GoodSkillViewController,
+		fancy: FancyCard,
 	}
 
 	@test()
@@ -202,6 +212,16 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static canTellToolInstanceOfSubClass() {
+		vcAssertUtil.assertToolInstanceOf(
+			//@ts-ignore
+			this.ToolBeltSvc().getToolBeltVc(),
+			'fancy',
+			FancyCard
+		)
+	}
+
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
 		return this.Controller('toolBeltSvc', {
 			toolBelt: {
@@ -217,6 +237,11 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 						id: options?.tool2Id ?? 'edit',
 						lineIcon: 'calendar',
 						card: this.Controller('card', {}).render(),
+					},
+					{
+						id: 'fancy',
+						lineIcon: 'calendar',
+						card: this.Controller('fancy', {}).render(),
 					},
 				],
 			},

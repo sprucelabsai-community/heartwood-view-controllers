@@ -817,12 +817,15 @@ const vcAssertUtil = {
 	},
 
 	assertToolInstanceOf(vc: ToolBeltViewController, toolId: string, Class: any) {
-		const tool = vc.getTool(toolId)
-
-		assert.isTrue(
-			tool?.card?.controller instanceof Class,
-			`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
-		)
+		try {
+			const tool = vc.getTool(toolId)
+			//@ts-ignore
+			this.assertControllerInstanceOf(tool?.card?.controller, Class)
+		} catch {
+			assert.fail(
+				`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
+			)
+		}
 	},
 
 	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
@@ -1108,6 +1111,16 @@ const vcAssertUtil = {
 			//@ts-ignore
 			vc instanceof ActiveRecordCardViewController || vc.__activeRecordParent,
 			`The card you sent was not an active record card!`
+		)
+	},
+
+	assertControllerInstanceOf(vc: ViewController<any>, Class: any) {
+		assert.isTrue(
+			//@ts-ignore
+			vc instanceof Class || vc._parent instanceof Class,
+			`Expected your ${
+				Object.getPrototypeOf(vc)?.constructor?.name ?? 'view controller'
+			} to be an instance of ${Class.name}, but it wasn't!`
 		)
 	},
 }

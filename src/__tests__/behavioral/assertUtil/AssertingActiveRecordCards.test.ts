@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { ActiveRecordCardViewController, vcAssertUtil } from '../../..'
 import buildActiveRecord from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -101,6 +101,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 		const match = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
 		assert.isEqual(active, match)
 
+		assert.isTrue(match instanceof ActiveRecordCardViewController)
 		vcAssertUtil.assertIsActiveRecordCard(match)
 		vcAssertUtil.assertIsActiveRecordCard(match.getCardVc())
 	}
