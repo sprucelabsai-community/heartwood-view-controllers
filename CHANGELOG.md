@@ -1,3 +1,10 @@
+# [50.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.2.2...v50.3.0) (2021-11-23)
+
+
+### Features
+
+* Devs can now check if a toolbelt is rendering a card based on a specific implimentation. ([8bc4e22](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8bc4e22))
+
 ## [50.2.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.2.1...v50.2.2) (2021-11-23)
 
 ## [50.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.2.0...v50.2.1) (2021-11-23)
