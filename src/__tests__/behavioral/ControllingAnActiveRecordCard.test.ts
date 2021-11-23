@@ -31,7 +31,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const results = await client.emit('list-organizations::v2020_12_25', {
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
@@ -131,7 +131,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static async rendersNoResultsWhenNoResultsReturned() {
 		const vc = await this.NoResultsVc({
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
@@ -149,7 +149,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static async canCustomizeEmptyRow() {
 		const vc = await this.NoResultsVc({
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 			noResultsRow: {
 				cells: [
@@ -188,7 +188,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const vc = this.Vc({
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
@@ -210,7 +210,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const vc = this.Vc({
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
@@ -227,7 +227,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const vc = this.Vc({
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 			rowTransformer: (organization: any) => {
 				return {
@@ -285,7 +285,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			rowTransformer: (_org) => ({ cells: [] }),
 			filter: (_org) => true,
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
@@ -364,7 +364,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 				return organization.id !== organizations[0].id
 			},
 			payload: {
-				showMineOnly: true,
+				shouldOnlyShowMine: true,
 			},
 		})
 
