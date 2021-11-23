@@ -1,3 +1,10 @@
+# [50.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.4.0...v50.5.0) (2021-11-23)
+
+
+### Features
+
+* Devs can now specificy if dividers should be rendered ([0b3202e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0b3202e))
+
 # [50.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.3.3...v50.4.0) (2021-11-23)
 
 
