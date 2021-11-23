@@ -39,6 +39,7 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 		header?: Card['header']
 		footer?: Card['footer']
 		columnWidths?: List['columnWidths']
+		shouldRenderRowDividers?: boolean
 		filter?: (record: Response[ResponseKey][number]) => boolean
 	}): ActiveRecordCardViewControllerOptions
 }
