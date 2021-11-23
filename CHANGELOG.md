@@ -1,3 +1,10 @@
+# [50.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.3.3...v50.4.0) (2021-11-23)
+
+
+### Features
+
+* Devs can now tell if their view controllers are derived from a specific parent or are rendered by a parent with the specific parent! ([a846b6c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a846b6c))
+
 ## [50.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.3.2...v50.3.3) (2021-11-23)
 
 ## [50.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.3.1...v50.3.2) (2021-11-23)
