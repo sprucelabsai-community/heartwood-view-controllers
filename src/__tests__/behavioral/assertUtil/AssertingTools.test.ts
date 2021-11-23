@@ -7,6 +7,7 @@ import {
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/Card.vc'
+import SwipeViewController from '../../../viewControllers/Swipe.vc'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
@@ -175,29 +176,18 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
 	}
 
-	@test.only()
+	@test()
 	protected static canCheckInstanceOfTool() {
 		let vc = this.ToolBeltSvc()
+		const toolBeltVc = vc.getToolBeltVc()
+		assert.isTruthy(toolBeltVc)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertToolInstanceOf(
-				vc.getToolBeltVc(),
-				'add',
-				CardViewController
-			)
+			vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', CardViewController)
 		)
 
-		vcAssertUtil.assertToolInstanceOf(
-			vc.getToolBeltVc(),
-			'edit',
-			CardViewController
-		)
-
-		vcAssertUtil.assertToolInstanceOf(
-			vc.getToolBeltVc(),
-			'edit',
-			CardViewController
-		)
+		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', SwipeViewController)
+		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'edit', CardViewController)
 
 		const randomId = `${new Date().getTime()}`
 
@@ -206,7 +196,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		})
 
 		vcAssertUtil.assertToolInstanceOf(
-			vc.getToolBeltVc(),
+			vc.getToolBeltVc() as any,
 			randomId,
 			CardViewController
 		)
@@ -220,11 +210,12 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 					{
 						id: 'add',
 						lineIcon: 'add',
-						card: {} as any,
+						//@ts-ignore
+						card: this.Controller('swipe', {}).render(),
 					},
 					{
 						id: options?.tool2Id ?? 'edit',
-						lineIcon: 'edit',
+						lineIcon: 'calendar',
 						card: this.Controller('card', {}).render(),
 					},
 				],

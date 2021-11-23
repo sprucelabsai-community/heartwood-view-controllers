@@ -8,7 +8,7 @@ import {
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './Card.vc'
 
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Slide = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 
@@ -16,7 +16,7 @@ export type SwipeViewControllerOptions = {
 	slides: Slide[]
 	onSlideChange?: (slide: number) => void
 	isBusy?: boolean
-} & Omit<ViewModel, 'body'>
+} & Omit<Card, 'body'>
 
 const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
 
@@ -26,7 +26,7 @@ type PassthroughMethods = {
 
 /** @ts-ignore */
 export default class SwipeViewController
-	extends AbstractViewController<ViewModel>
+	extends AbstractViewController<Card>
 	implements PassthroughMethods
 {
 	private presentSlide = 0
@@ -143,7 +143,7 @@ export default class SwipeViewController
 		return this.cardVc.getTotalSections()
 	}
 
-	public render(): ViewModel {
+	public render(): Card {
 		//@ts-ignore
 		return { ...this.cardVc.render(), controller: this }
 	}
