@@ -283,6 +283,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			eventName: 'list-organizations::v2020_12_25',
 			responseKey: 'organizations',
 			rowTransformer: (_org) => ({ cells: [] }),
+			filter: (_org) => true,
 			payload: {
 				showMineOnly: true,
 			},
@@ -354,13 +355,29 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isEqualDeep(vc1.getTarget(), { once: 'twice' })
 	}
 
-	private static async seedOrganizations() {
-		const organizations = []
+	@test()
+	protected static async canFilterResults() {
+		const organizations = await this.seedOrganizations()
 
-		for (let c = 0; c < 5; c++) {
-			const organization = await this.seedOrganization()
-			organizations.push(organization)
-		}
+		const vc = this.Vc({
+			filter: (organization) => {
+				return organization.id !== organizations[0].id
+			},
+			payload: {
+				showMineOnly: true,
+			},
+		})
+
+		await vc.load()
+
+		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organizations[0].id)
+	}
+
+	private static async seedOrganizations() {
+		const organizations = await Promise.all(
+			new Array(5).fill(0).map(() => this.seedOrganization())
+		)
+
 		return organizations
 	}
 

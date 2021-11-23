@@ -24,6 +24,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	id?: string
 	columnWidths?: string[]
 	shouldRenderRowDividers?: boolean
+	filter?: (record: Record<string, any>) => boolean
 }
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
@@ -36,6 +37,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private emitPayload?: Record<string, any>
 	private emitTarget?: Record<string, any>
 	private isLoaded = false
+	private filter?: (record: Record<string, any>) => boolean
 
 	public constructor(
 		options: ViewControllerOptions & ActiveRecordCardViewControllerOptions
@@ -50,11 +52,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.responseKey = options.responseKey
 		this.emitPayload = options.payload
 		this.emitTarget = options.target
+		this.filter = options.filter
 
 		this.listVc = this.Controller('list', {
 			columnWidths: options.columnWidths as any,
 			shouldRenderRowDividers: options.shouldRenderRowDividers,
 		})
+
 		this.cardVc = this.Controller('card', {
 			id: options.id,
 			header: options.header,
@@ -106,7 +110,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 					})
 				} else {
 					for (const record of records) {
-						this.listVc.addRow(this.rowTransformer(record))
+						if (!this.filter || this.filter?.(record)) {
+							this.listVc.addRow(this.rowTransformer(record))
+						}
 					}
 				}
 			}
