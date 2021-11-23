@@ -3,7 +3,7 @@ import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
-import { AbstractViewController, ToolBeltViewController } from '../../..'
+import { AbstractViewController } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -13,7 +13,6 @@ import {
 	LineIcon,
 	SkillViewController,
 	ConfirmOptions,
-	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
@@ -33,14 +32,12 @@ declare module '../../../types/heartwood.types' {
 		goodWithDialog: GoodWithDialogSkillViewController
 		goodWithAlert: GoodWithAlertSkillViewController
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
-		toolBeltSvc: ToolBeltSkillViewController
 		goodWithConfirm: GoodWithConfirm
 		cardVc: CardVc
 	}
 	interface ViewControllerOptionsMap {
 		good: SkillView & { isLoginRequired?: boolean }
 		bad: any
-		toolBeltSvc: { toolBelt?: ToolBelt | null }
 	}
 }
 
@@ -84,32 +81,6 @@ class GoodSkillViewController implements SkillViewController {
 
 	public render() {
 		return this.model
-	}
-}
-
-type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
-
-class ToolBeltSkillViewController implements SkillViewController {
-	private toolBelt?: ToolBeltViewController | undefined
-	public constructor(
-		options: { toolBelt: ToolBelt | null } & ViewControllerOptions
-	) {
-		this.toolBelt = options?.toolBelt
-			? options.vcFactory.Controller('toolBelt', options.toolBelt)
-			: undefined
-	}
-
-	public async load() {}
-	public triggerRender() {}
-
-	public renderToolBelt() {
-		return this.toolBelt?.render() ?? null
-	}
-
-	public render(): SkillView {
-		return {
-			layouts: [],
-		}
 	}
 }
 
@@ -208,7 +179,6 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		goodWithAlert: GoodWithAlertSkillViewController,
 		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController,
 		newCard: NewTestingCardViewController,
-		toolBeltSvc: ToolBeltSkillViewController,
 		goodWithConfirm: GoodWithConfirm,
 		cardVc: CardVc,
 	}
@@ -878,22 +848,6 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static hasAssertRendersToolBelt() {
-		assert.isFunction(vcAssertUtil.assertRendersToolBelt)
-	}
-
-	@test('throws if given nothing', null)
-	@test('throws if given no tools', { tools: [] })
-	protected static throwsIfSkillViewControllerDoesNotRenderToolBelt(
-		toolBelt: ToolBelt | null
-	) {
-		const vc = this.Controller('toolBeltSvc', { toolBelt })
-
-		assert.doesThrow(() => vcAssertUtil.assertRendersToolBelt(vc as any))
-		vcAssertUtil.assertDoesNotRenderToolBelt(vc as any)
-	}
-
-	@test()
 	protected static async assertConfirmHoldsOnConfirmUntilClosed() {
 		const vc = this.Controller('goodWithConfirm', {})
 		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
@@ -932,100 +886,6 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		)
 
 		assert.isEqualDeep(confirmVc.options, options as any)
-	}
-
-	@test()
-	protected static knowsIfGivenToolBelt() {
-		const vc = this.Controller('toolBeltSvc', {
-			toolBelt: {
-				tools: [
-					{
-						id: 'add',
-						lineIcon: 'add',
-						card: {} as any,
-					},
-				],
-			},
-		})
-
-		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
-		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc))
-		assert.isTrue(toolBeltVc instanceof ToolBeltViewController)
-	}
-
-	@test()
-	protected static async knowsWhenASpecificToolIsRendered() {
-		const randomId = `${new Date().getTime() * Math.random()}`
-		const vc = this.Controller('toolBeltSvc', {
-			toolBelt: {
-				controller: 'waka' as any,
-				tools: [
-					{
-						id: 'add',
-						lineIcon: 'add',
-						card: {} as any,
-					},
-					{
-						id: randomId,
-						lineIcon: 'add',
-						card: {} as any,
-					},
-				],
-			},
-		})
-
-		const vc2 = this.Controller('good', {
-			layouts: [],
-		})
-
-		vcAssertUtil.assertToolBeltRendersTool(vc, 'add')
-		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc2, 'add'))
-		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc, 'taco'))
-		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
-	}
-
-	@test()
-	protected static async passeBackToolWhenCheckingForTool() {
-		const randomId = `${new Date().getTime() * Math.random()}`
-
-		const card1 = this.Controller('card', {
-			header: {
-				title: 'hey!',
-			},
-		})
-
-		const vc = this.Controller('toolBeltSvc', {
-			toolBelt: {
-				controller: 'waka' as any,
-				tools: [
-					{
-						id: 'taco',
-						lineIcon: 'add',
-						card: card1.render(),
-					},
-					{
-						id: randomId,
-						lineIcon: 'alarm',
-						card: {} as any,
-					},
-				],
-			},
-		})
-
-		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
-
-		const {
-			tool,
-			cardVc,
-			toolBeltVc: toolBeltVc1,
-		} = vcAssertUtil.assertToolBeltRendersTool(vc, 'taco')
-		assert.isEqual(tool.id, 'taco')
-		assert.isEqualDeep(tool.lineIcon, 'add')
-		assert.isEqual(cardVc, card1)
-		assert.isEqual(toolBeltVc, toolBeltVc1)
-
-		const { tool: tool2 } = vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
-		assert.isEqual(tool2.id, randomId)
 	}
 
 	@test()

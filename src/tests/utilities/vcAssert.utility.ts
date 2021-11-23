@@ -816,13 +816,22 @@ const vcAssertUtil = {
 		return toolBelt?.controller as ToolBeltViewController | undefined
 	},
 
+	assertToolInstanceOf(vc: ToolBeltViewController, toolId: string, Class: any) {
+		const tool = vc.getTool(toolId)
+
+		assert.isTrue(
+			tool?.card?.controller instanceof Class,
+			`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
+		)
+	},
+
 	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
 		const toolBeltVc = this.assertRendersToolBelt(svc)
 
 		const tool = toolBeltVc?.getTool?.(toolId)
 		assert.isTruthy(
 			tool,
-			`I could not find a tool with the id of ${toolId} in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
+			`I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
 		)
 
 		return {
