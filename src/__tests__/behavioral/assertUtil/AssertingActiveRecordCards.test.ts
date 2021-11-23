@@ -100,7 +100,9 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 
 		const match = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
 		assert.isEqual(active, match)
+
 		vcAssertUtil.assertIsActiveRecordCard(match)
+		vcAssertUtil.assertIsActiveRecordCard(match.getCardVc())
 	}
 
 	private static renderActiveRecordCard(

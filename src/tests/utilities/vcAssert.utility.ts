@@ -1097,7 +1097,7 @@ const vcAssertUtil = {
 	assertIsActiveRecordCard(vc: ViewController<Card>) {
 		assert.isTruthy(
 			//@ts-ignore
-			vc instanceof ActiveRecordCardViewController,
+			vc instanceof ActiveRecordCardViewController || vc.__activeRecordParent,
 			`The card you sent was not an active record card!`
 		)
 	},
