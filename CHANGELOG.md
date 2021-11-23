@@ -1,3 +1,10 @@
+# [50.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.1.9...v50.2.0) (2021-11-23)
+
+
+### Features
+
+* Devs can now filter results in an active record card. This makes doing an extra round of filtering of results possible. ([197445b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/197445b))
+
 ## [50.1.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.1.8...v50.1.9) (2021-11-23)
 
 ## [50.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.1.7...v50.1.8) (2021-11-23)
