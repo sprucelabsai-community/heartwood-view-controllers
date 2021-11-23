@@ -20,9 +20,16 @@ declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
 		toolBeltSvc: ToolBeltSkillViewController
 		fancy: FancyCard
+		tool: FancyTool
 	}
 	interface ViewControllerOptionsMap {
 		toolBeltSvc: { toolBelt?: ToolBelt | null }
+	}
+}
+
+class FancyTool extends AbstractViewController<Card> {
+	public render() {
+		return this.Controller('fancy', {}).render()
 	}
 }
 
@@ -91,6 +98,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		toolBeltSvc: ToolBeltSkillViewController,
 		good: GoodSkillViewController,
 		fancy: FancyCard,
+		tool: FancyTool,
 	}
 
 	@test()
@@ -223,6 +231,16 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static canTellParentMostClass() {
+		vcAssertUtil.assertToolInstanceOf(
+			//@ts-ignore
+			this.ToolBeltSvc().getToolBeltVc(),
+			'tool',
+			FancyTool
+		)
+	}
+
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
 		return this.Controller('toolBeltSvc', {
 			toolBelt: {
@@ -243,6 +261,11 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 						id: 'fancy',
 						lineIcon: 'calendar',
 						card: this.Controller('fancy', {}).render(),
+					},
+					{
+						id: 'tool',
+						lineIcon: 'calendar',
+						card: this.Controller('tool', {}).render(),
 					},
 				],
 			},

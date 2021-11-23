@@ -53,6 +53,9 @@ export default abstract class AbstractViewController<ViewModel>
 			//@ts-ignore
 			vc.isInstanceOf = (Class: any) =>
 				vc instanceof Class || this instanceof Class
+
+			//@ts-ignore
+			vc.getParent = () => this
 		}
 
 		this.children.push(vc as any)
