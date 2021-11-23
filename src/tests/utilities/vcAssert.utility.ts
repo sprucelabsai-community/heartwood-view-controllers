@@ -1123,6 +1123,25 @@ const vcAssertUtil = {
 			} to be an instance of ${Class.name}, but it wasn't!`
 		)
 	},
+
+	assertRendersAsInstanceOf(vc: ViewController<any>, Class: any) {
+		try {
+			const model = renderUtil.render(vc)
+			assert.isTruthy(
+				model.controller,
+				`Your view controller does not return a controllor. Make sure you return 'controller:this' from rende() or that you're rending a built in skill view.`
+			)
+			this.assertControllerInstanceOf(model.controller, Class)
+		} catch {
+			assert.fail(
+				`Expected your ${
+					Object.getPrototypeOf(vc)?.constructor?.name ?? 'view controller'
+				} to render a controller that is an instance of ${
+					Class.name
+				}, but it didn't!`
+			)
+		}
+	},
 }
 
 export default vcAssertUtil
