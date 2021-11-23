@@ -1157,7 +1157,7 @@ const vcAssertUtil = {
 
 export default vcAssertUtil
 
-function isVcInstanceOf(vc?: any, Class: any): boolean | null | undefined {
+function isVcInstanceOf(vc: any, Class: any): boolean | null | undefined {
 	return vc && (vc instanceof Class || vc?.isInstanceOf?.(Class))
 }
 
