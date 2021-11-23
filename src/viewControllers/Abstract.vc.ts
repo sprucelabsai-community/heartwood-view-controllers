@@ -49,8 +49,12 @@ export default abstract class AbstractViewController<ViewModel>
 	): ViewControllerMap[N] {
 		const vc = this.vcFactory.Controller(name, options)
 
-		//@ts-ignore
-		vc._parent = this
+		if (vc) {
+			//@ts-ignore
+			vc.isInstanceOf = (Class: any) =>
+				vc instanceof Class || this instanceof Class
+		}
+
 		this.children.push(vc as any)
 
 		return vc

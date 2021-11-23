@@ -8,6 +8,7 @@ import {
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/Card.vc'
+import FormViewController from '../../../viewControllers/Form.vc'
 import SwipeViewController from '../../../viewControllers/Swipe.vc'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
@@ -193,7 +194,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		assert.isTruthy(toolBeltVc)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', CardViewController)
+			vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', FormViewController)
 		)
 
 		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', SwipeViewController)

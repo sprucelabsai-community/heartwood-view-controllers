@@ -1117,7 +1117,7 @@ const vcAssertUtil = {
 	assertControllerInstanceOf(vc: ViewController<any>, Class: any) {
 		assert.isTrue(
 			//@ts-ignore
-			vc instanceof Class || vc._parent instanceof Class,
+			vc instanceof Class || vc.isInstanceOf?.(Class),
 			`Expected your ${
 				Object.getPrototypeOf(vc)?.constructor?.name ?? 'view controller'
 			} to be an instance of ${Class.name}, but it wasn't!`
