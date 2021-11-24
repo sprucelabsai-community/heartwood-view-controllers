@@ -2,6 +2,7 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
+import { interactionUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import ListViewController from '../../../viewControllers/list/List.vc'
@@ -899,6 +900,27 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		//@ts-ignore
 		assert.isLength(this.vc._rowVcs, 0)
+	}
+
+	@test()
+	protected static async returningFalseFromOnChangeStopsItFromChangingValues() {
+		this.vc.addRow({
+			id: 'my-row',
+			cells: [
+				{
+					toggleInput: {
+						name: 'isEnabled',
+						value: false,
+						onChange: () => false,
+					},
+				},
+			],
+		})
+
+		interactionUtil.clickToggleInRow(this.vc, 'my-row')
+
+		const values = this.vc.getValues()
+		assert.isFalse(values[0].isEnabled)
 	}
 
 	private static add3Rows() {
