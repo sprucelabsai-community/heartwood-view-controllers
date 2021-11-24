@@ -40,10 +40,18 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		assert.isString(viewModel.header?.title)
 	}
 
-	@test()
-	protected static async canSetHeaderTitle() {
-		this.vc.setHeaderTitle('go team')
-		assert.isEqual(this.renderVc().header?.title, 'go team')
+	@test('set title once', 'go team')
+	@test('set title twice', 'go again')
+	protected static async canSetHeaderTitle(title: string) {
+		this.vc.setHeaderTitle(title)
+		assert.isEqual(this.renderVc().header?.title, title)
+	}
+
+	@test('set title subtitle', 'oh boy')
+	@test('set title subtitle again', 'get dooooown!')
+	protected static async canSetHeaderSubtitle(title: string) {
+		this.vc.setHeaderSubtitle(title)
+		assert.isEqual(this.renderVc().header?.subtitle, title)
 	}
 
 	@test()

@@ -154,6 +154,10 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 		this.swipeVc.setHeaderTitle(title)
 	}
 
+	public setHeaderSubtitle(title: string) {
+		this.swipeVc.setHeaderSubtitle(title)
+	}
+
 	public async addPage(
 		options?: { atIndex?: number; title?: string } & Partial<Page>
 	) {
