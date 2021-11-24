@@ -1,3 +1,10 @@
+# [50.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.8.10...v50.9.0) (2021-11-24)
+
+
+### Features
+
+* list can delete all rows! ([4b212fe](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4b212fe))
+
 ## [50.8.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.8.9...v50.8.10) (2021-11-24)
 
 ## [50.8.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.8.8...v50.8.9) (2021-11-24)
