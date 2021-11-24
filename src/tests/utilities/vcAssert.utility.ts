@@ -221,13 +221,26 @@ const vcAssertUtil = {
 		vc: ViewController<any>,
 		action: () => void | Promise<void>
 	) {
+		//@ts-ignore
+		let oldAlert = vc.alert?.bind(vc)
+
+		let message = ''
+
+		//@ts-ignore
+		vc.alert = (options: any) => {
+			message = options.messsage
+			return oldAlert(options)
+		}
+
 		try {
 			await this.assertRendersAlert(vc, action)
 		} catch {
 			return
 		}
 
-		assert.fail(`Didn't expect your controller to render an alert, but it did!`)
+		assert.fail(
+			`Didn't expect your controller to render an alert, but it did! It reads:\n\n${message}`
+		)
 	},
 
 	async assertAsksForAVote(
