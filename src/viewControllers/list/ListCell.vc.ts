@@ -44,7 +44,7 @@ export default class ListCellViewController implements ViewController<Model> {
 	}
 
 	public render(): Model {
-		const { textInput, selectInput, ...rest } = this.model
+		const { textInput, selectInput, toggleInput, ...rest } = this.model
 
 		if (textInput) {
 			//@ts-ignore
@@ -58,6 +58,16 @@ export default class ListCellViewController implements ViewController<Model> {
 			//@ts-ignore
 			rest.selectInput = {
 				...selectInput,
+				setValue: this.setValue.bind(this),
+			}
+		}
+
+		debugger
+
+		if (toggleInput) {
+			//@ts-ignore
+			rest.toggleInput = {
+				...toggleInput,
 				setValue: this.setValue.bind(this),
 			}
 		}

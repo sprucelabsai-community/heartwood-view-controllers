@@ -64,7 +64,8 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 			textInput: {
 				name: 'firstName',
 			},
-		}
+		},
+		'Tay'
 	)
 	@test(
 		'setting select input value on cell sets value on list and triggers render in on the right places',
@@ -73,23 +74,48 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 				name: 'firstName',
 				choices: [{ value: 'heyThere', label: 'hey there!' }],
 			},
-		}
+		},
+		'heyThere'
+	)
+	@test(
+		'setting toggle cell sets value on list and triggers render in on the right places',
+		{
+			toggleInput: {
+				name: 'firstName',
+			},
+		},
+		true
+	)
+	@test(
+		'setting toggle cell sets value on list and triggers render in on the right places',
+		{
+			toggleInput: {
+				name: 'firstName',
+				value: false,
+			},
+		},
+		false
 	)
 	protected static async settingValueOnInputSetsValueOnListAndTriggersRender(
-		cellModel: ListCellModel
+		cellModel: ListCellModel,
+		value: any
 	) {
 		const listVc = this.ListVc(cellModel)
 
 		const rowVc = listVc.getRowVc(0)
 		const cellVc = rowVc.getCellVc(0)
 		const model = this.render(cellVc)
+		const key = Object.keys(cellModel)[0]
 
 		//@ts-ignore
-		await model[Object.keys(cellModel)[0]]?.setValue?.('firstName', 'heyThere')
+		assert.isFunction(model[key]?.setValue, `setValue set on ${key}`)
+
+		//@ts-ignore
+		await model[key]?.setValue?.('firstName', value)
 
 		const values = listVc.getValues()
 
-		assert.isEqual(values[0].firstName, 'heyThere')
+		assert.isEqual(values[0].firstName, value)
 
 		vcAssertUtil.assertTriggerRenderCount(rowVc, 0)
 		vcAssertUtil.assertTriggerRenderCount(cellVc, 1)
