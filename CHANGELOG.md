@@ -1,3 +1,22 @@
+## [50.7.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.5...v50.7.6) (2021-11-24)
+
+## [50.7.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.4...v50.7.5) (2021-11-24)
+
+## [50.7.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.3...v50.7.4) (2021-11-24)
+
+## [50.7.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.2...v50.7.3) (2021-11-24)
+
+## [50.7.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.1...v50.7.2) (2021-11-24)
+
+## [50.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.0...v50.7.1) (2021-11-24)
+
+# [50.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.6.7...v50.7.0) (2021-11-24)
+
+
+### Features
+
+* instanceOf checks now return the instance they find that extend the passed class ([a55cf7b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a55cf7b))
+
 ## [50.6.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.6.6...v50.6.7) (2021-11-23)
 
 ## [50.6.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.6.5...v50.6.6) (2021-11-23)
