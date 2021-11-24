@@ -8,8 +8,14 @@ import FormViewController from '../../viewControllers/Form.vc'
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class FancyCardViewController extends AbstractViewController<Card> {
+	public cardVc: any
+	public constructor(options: any) {
+		super(options)
+		this.cardVc = this.Controller('card', {})
+	}
+
 	public render(): Card {
-		return this.Controller('card', {}).render()
+		return this.cardVc.render()
 	}
 }
 
@@ -64,6 +70,19 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 			vcAssertUtil.assertRendersAsInstanceOf(vc, FormViewController)
 		)
 
-		vcAssertUtil.assertRendersAsInstanceOf(vc, CardViewController)
+		const match1 = vcAssertUtil.assertRendersAsInstanceOf(
+			vc,
+			CardViewController
+		)
+
+		//@ts-ignore
+		assert.isEqual(match1, vc.cardVc)
+
+		const match2 = vcAssertUtil.assertRendersAsInstanceOf(
+			vc,
+			FancyCardViewController
+		)
+
+		assert.isEqual(match2, vc)
 	}
 }

@@ -94,6 +94,9 @@ class FancyCard extends AbstractViewController<Card> {
 }
 
 export default class AssertingToolsTest extends AbstractViewControllerTest {
+	private static swipeVc: SwipeViewController
+	private static fancyTool: FancyTool
+
 	protected static controllerMap = {
 		toolBeltSvc: ToolBeltSkillViewController,
 		good: GoodSkillViewController,
@@ -205,7 +208,14 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', FormViewController)
 		)
 
-		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', SwipeViewController)
+		const swipeVc = vcAssertUtil.assertToolInstanceOf(
+			toolBeltVc,
+			'add',
+			SwipeViewController
+		)
+
+		assert.isEqual(swipeVc, this.swipeVc)
+
 		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'edit', CardViewController)
 
 		const randomId = `${new Date().getTime()}`
@@ -233,15 +243,21 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canTellParentMostClass() {
-		vcAssertUtil.assertToolInstanceOf(
+		const toolVc = vcAssertUtil.assertToolInstanceOf(
 			//@ts-ignore
 			this.ToolBeltSvc().getToolBeltVc(),
 			'tool',
 			FancyTool
 		)
+
+		assert.isEqual(toolVc, this.fancyTool)
 	}
 
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
+		//@ts-ignore
+		this.swipeVc = this.Controller('swipe', {})
+		this.fancyTool = this.Controller('tool', {})
+
 		return this.Controller('toolBeltSvc', {
 			toolBelt: {
 				controller: 'waka' as any,
@@ -249,8 +265,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 					{
 						id: 'add',
 						lineIcon: 'add',
-						//@ts-ignore
-						card: this.Controller('swipe', {}).render(),
+						card: this.swipeVc.render(),
 					},
 					{
 						id: options?.tool2Id ?? 'edit',
@@ -265,7 +280,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 					{
 						id: 'tool',
 						lineIcon: 'calendar',
-						card: this.Controller('tool', {}).render(),
+						card: this.fancyTool.render(),
 					},
 				],
 			},

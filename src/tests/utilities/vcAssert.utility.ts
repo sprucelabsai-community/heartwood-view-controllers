@@ -831,12 +831,15 @@ const vcAssertUtil = {
 				`Your tool wasn't properly rendered. Make sure you are returning { controller: this } from render().`
 			)
 
-			if (isVcInstanceOf(check, Class)) {
-				return
+			const match = isVcInstanceOf(check, Class)
+			if (match) {
+				return match
 			}
 		}
 
 		assert.fail(`The tool '${toolId}' wasn't an instance of a '${Class.name}'`)
+
+		return null
 	},
 
 	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
@@ -1126,13 +1129,16 @@ const vcAssertUtil = {
 	},
 
 	assertControllerInstanceOf(vc: ViewController<any>, Class: any) {
-		assert.isTrue(
-			//@ts-ignore
-			isVcInstanceOf(vc, Class),
+		const match = isVcInstanceOf(vc, Class)
+
+		assert.isTruthy(
+			match,
 			`Expected your ${
 				Object.getPrototypeOf(vc)?.constructor?.name ?? 'view controller'
 			} to be an instance of ${Class.name}, but it wasn't!`
 		)
+
+		return match
 	},
 
 	assertRendersAsInstanceOf(vc: ViewController<any>, Class: any) {
@@ -1142,7 +1148,7 @@ const vcAssertUtil = {
 				model.controller,
 				`Your view controller does not return a controllor. Make sure you return 'controller:this' from rende() or that you're rending a built in skill view.`
 			)
-			this.assertControllerInstanceOf(model.controller, Class)
+			return this.assertControllerInstanceOf(model.controller, Class)
 		} catch {
 			assert.fail(
 				`Expected your ${
@@ -1157,8 +1163,16 @@ const vcAssertUtil = {
 
 export default vcAssertUtil
 
-function isVcInstanceOf(vc: any, Class: any): boolean | null | undefined {
-	return vc && (vc instanceof Class || vc?.isInstanceOf?.(Class))
+function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
+	if (vc) {
+		if (vc instanceof Class) {
+			return vc
+		} else if (vc?.getParent?.() instanceof Class) {
+			return vc.getParent()
+		}
+	}
+
+	return false
 }
 
 function findControllerInModel(VcClass: any, model: any) {
