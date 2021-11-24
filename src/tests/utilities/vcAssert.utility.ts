@@ -228,7 +228,7 @@ const vcAssertUtil = {
 
 		//@ts-ignore
 		vc.alert = (options: any) => {
-			message = options.messsage
+			message = options.message
 			return oldAlert(options)
 		}
 
