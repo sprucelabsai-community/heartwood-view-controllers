@@ -1,4 +1,5 @@
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
@@ -11,6 +12,7 @@ import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../viewControllers/ActiveRecordCard.vc'
 
+type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		activeRecordCard: ActiveRecordCardViewController,
@@ -128,6 +130,19 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	@test()
+	protected static async cantLoadTwice() {
+		const vc = this.Vc({})
+		await vc.load()
+		await assert.doesThrowAsync(() => vc.load())
+	}
+
+	@test()
+	protected static async cantRefreshUntilLoaded() {
+		const vc = this.Vc({})
+		await assert.doesThrowAsync(() => vc.refresh())
+	}
+
+	@test()
 	protected static async rendersNoResultsWhenNoResultsReturned() {
 		const vc = await this.NoResultsVc({
 			payload: {
@@ -199,6 +214,58 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		for (const org of organizations) {
 			vcAssertUtil.assertListRendersRow(vc.getListVc(), org.id)
 			vcAssertUtil.assertRowRendersContent(vc.getListVc(), org.id, org.name)
+		}
+	}
+
+	@test()
+	protected static async canRefreshToGetNewRecords() {
+		const organizations: Organization[] = []
+		const vc = await this.MockResultsVc(async () => ({
+			organizations,
+		}))
+
+		const listVc = vc.getListVc()
+		vcAssertUtil.assertListRendersRows(listVc, 1)
+
+		organizations.push({
+			id: 'aoeuaou',
+			name: 'new org',
+			slug: 'my-org',
+			dateCreated: new Date().getTime(),
+		})
+
+		organizations.push({
+			id: 'aoeuaoeuaoteu',
+			name: 'new org',
+			slug: 'my-org',
+			dateCreated: new Date().getTime(),
+		})
+
+		await vc.refresh()
+
+		vcAssertUtil.assertListDoesNotRenderRow(listVc, 'not-found')
+
+		vcAssertUtil.assertListRendersRows(
+			listVc,
+			organizations.map((o) => o.id)
+		)
+
+		const oldOrgs = [...organizations]
+
+		organizations.pop()
+		organizations.pop()
+
+		organizations.push({
+			id: 'thnatoehu',
+			name: 'new org',
+			slug: 'my-org',
+			dateCreated: new Date().getTime(),
+		})
+
+		await vc.refresh()
+
+		for (const org of oldOrgs) {
+			vcAssertUtil.assertListDoesNotRenderRow(listVc, org.id)
 		}
 	}
 
@@ -429,7 +496,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	private static async MockResultsVc(
-		cb: () => Promise<{ organizations: never[] }>,
+		cb: () => Promise<{ organizations: any[] }>,
 		options?: Partial<ActiveRecordCardViewControllerOptions>
 	) {
 		const client = await this.getMercuryFixture().connectToApi()

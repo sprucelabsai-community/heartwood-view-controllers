@@ -871,6 +871,37 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canRemoveRowById() {
+		this.add3Rows()
+
+		this.vc.deleteRow('test2')
+		assert.isEqual(this.vc.getTotalRows(), 2)
+
+		let model = this.render(this.vc)
+		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there!')
+		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'Hey there! 3')
+
+		this.vc.deleteRow('test1')
+		model = this.render(this.vc)
+		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there! 3')
+	}
+
+	@test()
+	protected static async deletingAllRowsTriggersRenderAndResetsRowVcs() {
+		this.add3Rows()
+		const startingRenderCount = 3
+
+		this.vc.getRowVc(0)
+
+		this.vc.deleteAllRows()
+
+		assert.isEqual(this.vc.getTotalRows(), 0)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1 + startingRenderCount)
+
+		//@ts-ignore
+		assert.isLength(this.vc._rowVcs, 0)
+	}
+
+	private static add3Rows() {
 		this.vc.addRows([
 			{
 				id: 'test1',
@@ -903,17 +934,6 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 				],
 			},
 		])
-
-		this.vc.deleteRow('test2')
-		assert.isEqual(this.vc.getTotalRows(), 2)
-
-		let model = this.render(this.vc)
-		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there!')
-		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'Hey there! 3')
-
-		this.vc.deleteRow('test1')
-		model = this.render(this.vc)
-		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'Hey there! 3')
 	}
 
 	private static add2Rows() {

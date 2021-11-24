@@ -80,6 +80,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	}
 
 	public async load() {
+		if (this.isLoaded) {
+			throw new Error(`You can't load your active record card twice!`)
+		}
+
+		await this.fetchResults()
+	}
+
+	private async fetchResults() {
 		let responseKeyError: any
 
 		try {
@@ -177,6 +185,18 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 	public getCardVc() {
 		return this.cardVc
+	}
+
+	public async refresh() {
+		if (!this.isLoaded) {
+			throw new Error(
+				`You can't refresh your active record card until it's been loaded.`
+			)
+		}
+
+		this.listVc.deleteAllRows()
+
+		await this.fetchResults()
 	}
 
 	public getListVc() {

@@ -222,6 +222,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		vc.delete()
 	}
 
+	public deleteAllRows() {
+		this.model.rows = []
+		this.triggerRender()
+		this._rowVcs = []
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {
 		return {
 			...this.model,
