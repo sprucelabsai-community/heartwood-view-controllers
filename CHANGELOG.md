@@ -1,3 +1,12 @@
+## [50.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.8.0...v50.8.1) (2021-11-24)
+
+# [50.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.6...v50.8.0) (2021-11-24)
+
+
+### Features
+
+* Devs can now set form builder subtitl ([b9b3f5f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b9b3f5f))
+
 ## [50.7.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.5...v50.7.6) (2021-11-24)
 
 ## [50.7.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.7.4...v50.7.5) (2021-11-24)
