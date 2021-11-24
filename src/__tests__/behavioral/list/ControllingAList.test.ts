@@ -917,7 +917,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 
-		interactionUtil.clickToggleInRow(this.vc, 'my-row')
+		await interactionUtil.clickToggleInRow(this.vc, 'my-row')
 
 		const values = this.vc.getValues()
 		assert.isFalse(values[0].isEnabled)
