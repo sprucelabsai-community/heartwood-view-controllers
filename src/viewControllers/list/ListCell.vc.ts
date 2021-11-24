@@ -62,8 +62,6 @@ export default class ListCellViewController implements ViewController<Model> {
 			}
 		}
 
-		debugger
-
 		if (toggleInput) {
 			//@ts-ignore
 			rest.toggleInput = {
