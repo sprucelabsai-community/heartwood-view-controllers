@@ -1,3 +1,10 @@
+# [51.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.10.17...v51.0.0) (2021-11-25)
+
+
+### Breaking Changes
+
+* New reporting controller called Stats that shows stats side-by-side and is rendered inside a card's body.  Oh, and Form Builder renamed Form Builder Card! ([fea8495](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fea8495))
+
 ## [50.10.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.10.16...v50.10.17) (2021-11-25)
 
 ## [50.10.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v50.10.15...v50.10.16) (2021-11-25)
