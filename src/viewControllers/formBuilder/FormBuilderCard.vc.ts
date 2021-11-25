@@ -27,7 +27,7 @@ export type FormBuilderImportExportObject =
 type Page =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage
 
-export interface FormBuilderViewControllerOptions {
+export interface FormBuilderCardViewControllerOptions {
 	header?: Card['header']
 	footer?: Card['footer']
 	shouldAllowEditing?: boolean
@@ -35,7 +35,7 @@ export interface FormBuilderViewControllerOptions {
 	isBusy?: boolean
 }
 
-export default class FormBuilderViewController extends AbstractViewController<Card> {
+export default class FormBuilderCardViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeViewController
 	private footerOverride?:
 		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
@@ -47,7 +47,7 @@ export default class FormBuilderViewController extends AbstractViewController<Ca
 	private __isFormBuilder = true
 
 	public constructor(
-		options: FormBuilderViewControllerOptions & ViewControllerOptions
+		options: FormBuilderCardViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
 

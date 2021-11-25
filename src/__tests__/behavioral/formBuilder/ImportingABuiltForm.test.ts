@@ -2,21 +2,21 @@ import { validationErrorAssertUtil } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
-import FormBuilderViewController, {
+import FormBuilderCardViewController, {
 	FormBuilderImportExportObject,
-} from '../../../viewControllers/formBuilder/FormBuilder.vc'
+} from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
-	private static vc: FormBuilderViewController
+	private static vc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.vc = this.Controller('formBuilder', {
+		this.vc = this.Controller('formBuilderCard', {
 			header: {
 				title: 'My title',
 				subtitle: 'why now?',

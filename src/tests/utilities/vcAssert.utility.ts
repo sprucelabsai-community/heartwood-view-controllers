@@ -18,7 +18,7 @@ import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
-import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
@@ -544,7 +544,7 @@ const vcAssertUtil = {
 	assertSkillViewRendersFormBuilder(
 		vc: SkillViewController,
 		id?: string
-	): FormBuilderViewController {
+	): FormBuilderCardViewController {
 		const model = renderUtil.render(vc)
 
 		for (const layout of model.layouts) {

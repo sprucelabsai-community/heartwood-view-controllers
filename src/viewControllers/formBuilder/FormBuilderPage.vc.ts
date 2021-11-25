@@ -7,9 +7,9 @@ import {
 import { FormViewController } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import { SimpleRow, SimpleSection } from './EditFormBuilderSection.vc'
-import FormBuilderViewController from './FormBuilder.vc'
+import FormBuilderCardViewController from './FormBuilderCard.vc'
 
-export type FieldBuilder = FormBuilderViewController['buildField']
+export type FieldBuilder = FormBuilderCardViewController['buildField']
 
 export type AddSectionOptions = Partial<SimpleSection> & {
 	atIndex?: number

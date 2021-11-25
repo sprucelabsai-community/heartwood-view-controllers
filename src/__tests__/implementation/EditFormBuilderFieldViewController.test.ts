@@ -10,7 +10,7 @@ import {
 	EditFormBuilderFieldViewController,
 	EditFormBuilderFieldOptions,
 } from '../../viewControllers/formBuilder/EditFormBuilderField.vc'
-import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
@@ -25,7 +25,7 @@ declare module '../../types/heartwood.types' {
 export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderField: EditFormBuilderFieldViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	@test('throws when missing everything', {}, [

@@ -6,18 +6,18 @@ import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
-import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class EditingAFormBuilderSectionTest extends AbstractViewControllerTest {
-	private static formBuilderVc: FormBuilderViewController
+	private static formBuilderVc: FormBuilderCardViewController
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.formBuilderVc = this.Controller('formBuilder', {})
+		this.formBuilderVc = this.Controller('formBuilderCard', {})
 	}
 
 	@test()

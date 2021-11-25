@@ -2,15 +2,15 @@ import { SchemaError } from '@sprucelabs/schema'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import CardViewController from '../Card.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
-import FormBuilderViewController from './FormBuilder.vc'
+import FormBuilderCardViewController from './FormBuilderCard.vc'
 
 export interface ManagePageTitlesCardViewControllerOptions {
 	onDone(): void
-	formBuilderVc: FormBuilderViewController
+	formBuilderVc: FormBuilderCardViewController
 }
 export default class ManagePageTitlesCardViewController extends CardViewController {
 	private listVc: ListViewController
-	private formBuilderVc: FormBuilderViewController
+	private formBuilderVc: FormBuilderCardViewController
 
 	public constructor(
 		options: ManagePageTitlesCardViewControllerOptions & ViewControllerOptions

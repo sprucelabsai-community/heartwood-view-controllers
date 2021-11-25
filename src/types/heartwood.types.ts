@@ -36,14 +36,17 @@ import FormViewControllerImpl, {
 	FormViewControllerOptions,
 } from '../viewControllers/Form.vc'
 import FormBuilderPageViewControllerImpl, {
-	FormBuilderViewControllerOptions,
-} from '../viewControllers/formBuilder/FormBuilder.vc'
+	FormBuilderCardViewControllerOptions,
+} from '../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController, {
 	ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
+import StatsViewController, {
+	StatsViewControllerOptions,
+} from '../viewControllers/reporting/Stats.vt'
 import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'
@@ -156,7 +159,7 @@ type CardUniversals = Pick<
 	| 'isBusy'
 >
 
-export type FormBuilderViewController = FormBuilderPageViewControllerImpl &
+export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
 	CardUniversals
 export type SwipeViewController = SwipeViewControllerImpl & CardUniversals
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
@@ -213,13 +216,14 @@ export interface ViewControllerMap {
 	dialog: DialogViewController
 	bigForm: BigFormViewController<any>
 	confirm: ConfirmViewController
-	formBuilder: FormBuilderViewController
+	formBuilderCard: FormBuilderCardViewController
 	activeRecordCard: ActiveRecordCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
 	buttonBar: ButtonBarViewController
 	talkingSprucebot: TalkingSprucebotViewController
+	stats: StatsViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -231,13 +235,14 @@ export interface ViewControllerOptionsMap {
 	dialog: DialogViewControllerOptions
 	bigForm: BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
-	formBuilder: FormBuilderViewControllerOptions
+	formBuilderCard: FormBuilderCardViewControllerOptions
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions
 	calendar: CalendarViewControllerOptions
 	buttonBar: ButtonBarViewControllerOptions
 	talkingSprucebot: TalkingSprucebotViewControllerOptions
 	activeRecordCard: ActiveRecordCardViewControllerOptions
+	stats: StatsViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

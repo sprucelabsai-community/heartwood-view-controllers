@@ -5,6 +5,7 @@ import calendarBuilder from '../calendar.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
+import statsBuilder from '../stats.builder'
 import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import textBuilder from '../text.builder'
 
@@ -100,6 +101,13 @@ export default buildSchema({
 			label: 'Calendar',
 			options: {
 				schema: calendarBuilder,
+			},
+		},
+		stats: {
+			type: 'schema',
+			label: 'Stats',
+			options: {
+				schema: statsBuilder,
 			},
 		},
 		shouldRenderContentsAsGrid: {

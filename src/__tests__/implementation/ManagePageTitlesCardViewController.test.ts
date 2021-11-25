@@ -4,7 +4,7 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
-import FormBuilderViewController from '../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ManagePageTitlesCardViewController, {
 	ManagePageTitlesCardViewControllerOptions,
 } from '../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
@@ -34,7 +34,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		return this._vc
 	}
 	private static wasOnDoneInvoked = false
-	private static formBuilderVc: FormBuilderViewController
+	private static formBuilderVc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -42,12 +42,12 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		//@ts-ignore
 		this._vc = null
 		this.wasOnDoneInvoked = false
-		this.formBuilderVc = this.Controller('formBuilder', {})
+		this.formBuilderVc = this.Controller('formBuilderCard', {})
 	}
 
 	protected static controllerMap = {
 		managePageTitles: ManagePageTitlesCardViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	@test()

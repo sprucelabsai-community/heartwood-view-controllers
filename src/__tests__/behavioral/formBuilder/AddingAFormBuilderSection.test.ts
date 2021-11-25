@@ -9,7 +9,7 @@ import EditFormBuilderSectionViewController, {
 	EditSectionSectionSchema,
 	EditFormBuilderSectionOptions,
 } from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
-import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 declare module '../../../types/heartwood.types' {
@@ -25,10 +25,10 @@ declare module '../../../types/heartwood.types' {
 export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
-	private static formBuilderVc: FormBuilderViewController
+	private static formBuilderVc: FormBuilderCardViewController
 	private static vc: EditFormBuilderSectionViewController
 	private static formVc: FormViewController<EditSectionSectionSchema>
 	private static fieldListVc: ListViewController
@@ -36,7 +36,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.formBuilderVc = this.Controller('formBuilder', {})
+		this.formBuilderVc = this.Controller('formBuilderCard', {})
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc

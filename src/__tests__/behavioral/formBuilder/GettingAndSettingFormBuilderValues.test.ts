@@ -1,14 +1,14 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import FormBuilderViewController, {
+import FormBuilderCardViewController, {
 	FormBuilderImportExportObject,
-	FormBuilderViewControllerOptions,
-} from '../../../viewControllers/formBuilder/FormBuilder.vc'
+	FormBuilderCardViewControllerOptions,
+} from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class GettingFormBuilderValuesTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	private static readonly singlePageForm: FormBuilderImportExportObject = {
@@ -245,7 +245,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		assert.isEqualDeep(values, [expected1, expected2])
 	}
 
-	private static Vc(options?: FormBuilderViewControllerOptions) {
-		return this.Controller('formBuilder', { ...options })
+	private static Vc(options?: FormBuilderCardViewControllerOptions) {
+		return this.Controller('formBuilderCard', { ...options })
 	}
 }

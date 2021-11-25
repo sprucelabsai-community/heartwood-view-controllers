@@ -1,19 +1,19 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
-import FormBuilderViewController from '../../../viewControllers/formBuilder/FormBuilder.vc'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class ExportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderSection: EditFormBuilderSectionViewController,
-		formBuilder: FormBuilderViewController,
+		formBuilderCard: FormBuilderCardViewController,
 	}
-	private static vc: FormBuilderViewController
+	private static vc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.vc = this.Controller('formBuilder', {
+		this.vc = this.Controller('formBuilderCard', {
 			header: {
 				title: 'My title',
 				subtitle: 'why now?',
@@ -29,7 +29,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 	@test('header title set 1', 'My title', 'why now?')
 	@test('header title set 1', 'My title!', 'why not?')
 	protected static async exportsBasicToStart(title: string, subtitle: string) {
-		this.vc = this.Controller('formBuilder', {
+		this.vc = this.Controller('formBuilderCard', {
 			header: {
 				title,
 				subtitle,
