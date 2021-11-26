@@ -23,6 +23,7 @@ export default class StatsViewController extends AbstractViewController<Stats> {
 	}
 
 	public render(): Stats {
-		return this.model
+		//@ts-ignore
+		return { ...this.model, controller: this }
 	}
 }

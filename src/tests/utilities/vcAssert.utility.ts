@@ -1172,6 +1172,17 @@ const vcAssertUtil = {
 			)
 		}
 	},
+
+	assertCardRendersStats(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		const match = pluckFirstFromCard(model, 'stats')
+		assert.isTruthy(
+			match,
+			`Your card did not render stats and I expected it to!`
+		)
+
+		return match.controller
+	},
 }
 
 export default vcAssertUtil
