@@ -1,3 +1,10 @@
+# [51.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.0.4...v51.1.0) (2021-11-26)
+
+
+### Features
+
+* devs can now test for stats being rendered inside a card! ([9ebf34d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9ebf34d))
+
 ## [51.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.0.3...v51.0.4) (2021-11-25)
 
 ## [51.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.0.2...v51.0.3) (2021-11-25)
