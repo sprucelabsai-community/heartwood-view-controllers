@@ -1,3 +1,5 @@
+## [51.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.1.3...v51.1.4) (2021-11-26)
+
 ## [51.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.1.2...v51.1.3) (2021-11-26)
 
 ## [51.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.1.1...v51.1.2) (2021-11-26)
