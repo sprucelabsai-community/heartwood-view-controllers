@@ -23,9 +23,10 @@ import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
+import { attachTriggerRenderCounter } from './attachTriggerRenderCounter.utility'
 
 const WAIT_TIMEOUT = 5000
-type Vc = ViewController<any>
+export type Vc = ViewController<any>
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
@@ -84,21 +85,7 @@ const vcAssertUtil = {
 	},
 	attachTriggerRenderCounter(vc: Vc) {
 		//@ts-ignore
-		if (!vc.__triggerRenderPatched) {
-			//@ts-ignore
-			vc.__renderInvocationCount = 0
-
-			//@ts-ignore
-			vc.__triggerRenderPatched = true
-
-			const oldRender = vc.triggerRender?.bind(vc)
-
-			vc.triggerRender = () => {
-				//@ts-ignore
-				vc.__renderInvocationCount++
-				oldRender?.()
-			}
-		}
+		attachTriggerRenderCounter(vc)
 	},
 	assertTriggerRenderCount(vc: Vc, expected: number) {
 		//@ts-ignore

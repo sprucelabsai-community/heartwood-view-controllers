@@ -1,5 +1,5 @@
 import isObjectLike from 'lodash/isObjectLike'
-import vcAssertUtil from '../tests/utilities/vcAssert.utility'
+import { attachTriggerRenderCounter } from '../tests/utilities/attachTriggerRenderCounter.utility'
 import { ViewController } from '../types/heartwood.types'
 import removeUniversalViewOptions from './removeUniversalViewOptions'
 
@@ -47,7 +47,7 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
 	if (Array.isArray(thisItem)) {
 		return thisItem.map((i) => renderItem(i, options))
 	} else if (thisItem?.controller) {
-		vcAssertUtil.attachTriggerRenderCounter(thisItem.controller)
+		attachTriggerRenderCounter(thisItem.controller)
 
 		const item = { ...renderItems(thisItem.controller.render(), options) }
 
