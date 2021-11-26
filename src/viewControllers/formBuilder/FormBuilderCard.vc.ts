@@ -1,9 +1,10 @@
-import { Schema, SchemaError, validateSchemaValues } from '@sprucelabs/schema'
+import { Schema, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
+import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
 import { EditFormBuilderFieldViewController } from './EditFormBuilderField.vc'
@@ -370,10 +371,6 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	public async toObject(): Promise<FormBuilderImportExportObject> {
-		const { default: renderUtil } = await import(
-			'../../utilities/render.utility'
-		)
-
 		const object = renderUtil.render(this, {
 			shouldStripControllers: true,
 			shouldStripFunctions: true,
@@ -395,11 +392,6 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	public async importObject(imported: FormBuilderImportExportObject) {
-		const { default: formBuilderImportExportObjectSchema } = await import(
-			'../../.spruce/schemas/heartwoodViewControllers/v2021_02_11/formBuilderImportExportObject.schema'
-		)
-
-		validateSchemaValues(formBuilderImportExportObjectSchema as any, imported)
 		this.swipeVc.setHeaderTitle(imported.title)
 		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
 		this.swipeVc.setSections([])
