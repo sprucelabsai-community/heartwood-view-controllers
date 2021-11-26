@@ -8,6 +8,7 @@ export type CardViewControllerOptions = ViewModel
 
 type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Body = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
+type Header = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 
 export default class CardViewController<V extends ViewModel = ViewModel>
 	extends AbstractViewController<V>
@@ -267,6 +268,17 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	//monkey patched by view
 	public payAttentionToMe() {}
+
+	public setHeader(header: Header | null) {
+		const oldHeader = this.model.header
+		this.model.header = header
+
+		if (header && oldHeader) {
+			this.triggerRenderHeader?.()
+		} else {
+			this.triggerRender()
+		}
+	}
 
 	public render(): V {
 		const model: V = {

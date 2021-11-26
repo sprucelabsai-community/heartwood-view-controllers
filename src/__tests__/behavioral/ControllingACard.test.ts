@@ -339,6 +339,69 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isEqual(this.footerTriggerRenderCount, 0)
 	}
 
+	@test('can set header 1', {
+		title: 'hey!',
+		subtitle: 'there!',
+	})
+	@test('can set header 2', {
+		title: 'whaat!?',
+		subtitle: 'the!!!!',
+	})
+	protected static canSetHeader(newHeader: any) {
+		const vc = this.Vc({})
+
+		vc.setHeader(newHeader)
+
+		const model = this.renderCard(vc)
+
+		delete model.header?.controller
+		assert.isEqualDeep(model.header, newHeader)
+	}
+
+	@test()
+	protected static updatingHeaderTriggersHeaderRender() {
+		const vc = this.Vc({
+			header: {
+				title: 'hey',
+			},
+		})
+
+		this.renderCard(vc)
+
+		vc.setHeader({ title: 'whaaaa!?' })
+
+		assert.isEqual(this.headerTriggerRenderCount, 1)
+		assert.isEqual(this.cardTriggerRenderCount, 0)
+	}
+
+	@test()
+	protected static settingHeaderToNullTriggersRenderOnCard() {
+		const vc = this.Vc({
+			header: {
+				title: 'hey',
+			},
+		})
+
+		this.renderCard(vc)
+		vc.setHeader(null)
+
+		assert.isEqual(this.headerTriggerRenderCount, 0)
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+	}
+
+	@test()
+	protected static addingAHeaderTriggersBodyRender() {
+		const vc = this.Vc({})
+
+		this.renderCard(vc)
+		vc.setHeader({
+			title: 'hey',
+		})
+
+		assert.isEqual(this.headerTriggerRenderCount, 0)
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+	}
+
 	private static beginTrackingFooterRender(vc = this.vc) {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
