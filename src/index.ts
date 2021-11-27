@@ -24,6 +24,7 @@ export * from './viewControllers/Calendar.vc'
 export { default as ButtonBarViewController } from './viewControllers/ButtonBar.vc'
 export { default as TalkingSprucebotViewController } from './viewControllers/TalkingSprucebot.vc'
 export { default as ActiveRecordCardViewController } from './viewControllers/ActiveRecordCard.vc'
+export { default as StatsViewController } from './viewControllers/reporting/Stats.vc'
 
 export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'

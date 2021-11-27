@@ -46,7 +46,7 @@ import LoginViewController, {
 } from '../viewControllers/Login.vc'
 import StatsViewController, {
 	StatsViewControllerOptions,
-} from '../viewControllers/reporting/Stats.vt'
+} from '../viewControllers/reporting/Stats.vc'
 import SwipeViewControllerImpl, {
 	SwipeViewControllerOptions,
 } from '../viewControllers/Swipe.vc'

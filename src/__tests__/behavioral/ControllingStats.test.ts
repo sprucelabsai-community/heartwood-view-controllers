@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { StatsViewControllerOptions } from '../../viewControllers/reporting/Stats.vt'
+import { StatsViewControllerOptions } from '../../viewControllers/reporting/Stats.vc'
 
 export default class ControllingStatsTest extends AbstractViewControllerTest {
 	@test()
