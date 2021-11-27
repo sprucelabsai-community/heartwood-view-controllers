@@ -1,3 +1,10 @@
+# [51.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.2.4...v51.3.0) (2021-11-27)
+
+
+### Features
+
+* exporting of StatsViewController ([86e5766](https://github.com/sprucelabsai/heartwood-view-controllers/commit/86e5766))
+
 ## [51.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.2.3...v51.2.4) (2021-11-27)
 
 ## [51.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.2.2...v51.2.3) (2021-11-27)
