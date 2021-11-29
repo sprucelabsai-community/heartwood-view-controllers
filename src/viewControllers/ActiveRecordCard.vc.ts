@@ -125,17 +125,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 				}
 			}
 		} catch (err: any) {
-			this.listVc.addRow({
-				id: 'error',
-				cells: [
-					{
-						text: {
-							content: err.message,
-						},
-					},
-				],
-				...this.noResultsRow,
-			})
+			this.listVc.addRow(this.buildErrorRow(err))
 		}
 
 		if (responseKeyError) {
@@ -146,6 +136,23 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 		this.isLoaded = true
 		this.cardVc.setIsBusy(false)
+	}
+
+	private buildErrorRow(err: any): Row {
+		return {
+			id: 'error',
+			cells: [
+				{
+					text: {
+						content: 'Oh no! Something went wrong!',
+					},
+					subText: {
+						content: err.message,
+					},
+				},
+			],
+			...this.noResultsRow,
+		}
 	}
 
 	public getIsLoaded() {
