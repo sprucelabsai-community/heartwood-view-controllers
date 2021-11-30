@@ -1,3 +1,10 @@
+# [51.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.4.3...v51.5.0) (2021-11-30)
+
+
+### Features
+
+* Devs can now test if for alerts and redirects in 1 command! Perfect for handling errors! ([70b3999](https://github.com/sprucelabsai/heartwood-view-controllers/commit/70b3999))
+
 ## [51.4.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.4.2...v51.4.3) (2021-11-30)
 
 ## [51.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.4.1...v51.4.2) (2021-11-30)
