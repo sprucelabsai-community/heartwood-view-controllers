@@ -2427,6 +2427,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
+				/** Row height. */
+				'height'?: ("standard" | "tall" | "content")| undefined | null
 				/** Id. */
 				'id'?: string| undefined | null
 				/** Cells. */
@@ -2445,6 +2447,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Controller',
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
+			            },
+			            /** Row height. */
+			            'height': {
+			                label: 'Row height',
+			                type: 'select',
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
 			            },
 			            /** Id. */
 			            'id': {

@@ -24,6 +24,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	id?: string
 	columnWidths?: string[]
 	shouldRenderRowDividers?: boolean
+	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
 	filter?: (record: Record<string, any>) => boolean
 }
 
@@ -56,6 +57,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 		this.listVc = this.Controller('list', {
 			columnWidths: options.columnWidths as any,
+			defaultRowHeight: options.defaultRowHeight,
 			shouldRenderRowDividers: options.shouldRenderRowDividers,
 		})
 

@@ -1,6 +1,11 @@
 import { buildSchema } from '@sprucelabs/schema'
 import listCellBuilder from './listCell.builder'
 
+const heightChoices = [
+	{ label: 'Standard', value: 'standard' },
+	{ label: 'Tall', value: 'tall' },
+	{ label: 'Content', value: 'content' },
+]
 export default buildSchema({
 	id: 'list',
 	name: 'list',
@@ -29,11 +34,7 @@ export default buildSchema({
 			type: 'select',
 			label: 'Row height',
 			options: {
-				choices: [
-					{ label: 'Standard', value: 'standard' },
-					{ label: 'Tall', value: 'tall' },
-					{ label: 'Content', value: 'content' },
-				],
+				choices: heightChoices,
 			},
 		},
 		rows: {
@@ -51,6 +52,13 @@ export default buildSchema({
 							label: 'Controller',
 							options: {
 								valueType: 'HeartwoodTypes.ListRowViewController',
+							},
+						},
+						height: {
+							type: 'select',
+							label: 'Row height',
+							options: {
+								choices: heightChoices,
 							},
 						},
 						id: {

@@ -41,6 +41,7 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 		columnWidths?: List['columnWidths']
 		shouldRenderRowDividers?: boolean
 		filter?: (record: Response[ResponseKey][number]) => boolean
+		defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
 	}): ActiveRecordCardViewControllerOptions
 }
 

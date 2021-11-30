@@ -440,6 +440,18 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organizations[0].id)
 	}
 
+	@test.only('can set to tall', 'tall')
+	@test.only('can set to standard', 'standard')
+	protected static canSetDefaultRowHeight(height: any) {
+		const vc = this.Vc({
+			defaultRowHeight: height,
+		})
+
+		const listVc = vc.getListVc()
+
+		assert.isEqual(this.render(listVc).defaultRowHeight, height)
+	}
+
 	private static async seedOrganizations() {
 		const organizations = await Promise.all(
 			new Array(5).fill(0).map(() => this.seedOrganization())

@@ -923,6 +923,25 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isFalse(values[0].isEnabled)
 	}
 
+	@test()
+	protected static canSetRowHeight() {
+		this.vc.addRow({
+			id: 'my-row',
+			height: 'content',
+			cells: [
+				{
+					toggleInput: {
+						name: 'isEnabled',
+						value: false,
+						onChange: () => false,
+					},
+				},
+			],
+		})
+
+		assert.isEqual(this.render(this.vc).rows[0].height, 'content')
+	}
+
 	private static add3Rows() {
 		this.vc.addRows([
 			{

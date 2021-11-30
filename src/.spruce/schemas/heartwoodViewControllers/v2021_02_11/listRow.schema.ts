@@ -16,6 +16,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
 	            },
+	            /** Row height. */
+	            'height': {
+	                label: 'Row height',
+	                type: 'select',
+	                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
+	            },
 	            /** Id. */
 	            'id': {
 	                label: 'Id',
