@@ -1,37 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import MockRouter from '../../../tests/MockRouter'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
-import {
-	Router,
-	SkillViewController,
-	SkillViewControllerArgs,
-	SkillViewControllerArgsMap,
-	SkillViewControllerMap,
-} from '../../../types/heartwood.types'
-
-class MockRouter implements Router {
-	public lastRedirect?: {
-		id: string
-		args: any
-	}
-	public async redirect<Id extends never>(
-		id: Id,
-		args?: SkillViewControllerArgs<Id, SkillViewControllerArgsMap>
-	): Promise<SkillViewControllerMap[Id]> {
-		this.lastRedirect = {
-			id,
-			args,
-		}
-
-		return {} as any
-	}
-
-	public async back(): Promise<
-		SkillViewController<Record<string, any>> | undefined
-	> {
-		return undefined
-	}
-}
 
 export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}

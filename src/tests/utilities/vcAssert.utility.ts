@@ -78,6 +78,15 @@ interface SelectViewController {
 	getIsRequired: () => boolean
 }
 
+interface AssertRedirectOptions {
+	router: Router
+	action: () => Promise<any> | any
+	destination?: {
+		id?: string
+		args?: Record<string, any>
+	}
+}
+
 const vcAssertUtil = {
 	_setVcFactory(factory: ViewControllerFactory) {
 		//@ts-ignore
@@ -987,14 +996,7 @@ const vcAssertUtil = {
 		)
 	},
 
-	async assertActionRedirects(options: {
-		router: Router
-		action: () => Promise<void> | void
-		destination?: {
-			id?: string
-			args?: Record<string, any>
-		}
-	}) {
+	async assertActionRedirects(options: AssertRedirectOptions) {
 		const { router, action, destination } = options
 
 		const oldRedirect = router.redirect.bind(router)
@@ -1169,6 +1171,21 @@ const vcAssertUtil = {
 		)
 
 		return match.controller
+	},
+
+	async assertRendersAlertThenRedirects(
+		options: AssertRedirectOptions & { vc: ViewController<any> }
+	) {
+		await this.assertActionRedirects({
+			...options,
+			action: async () => {
+				const alertVc = await this.assertRendersAlert(
+					options.vc,
+					options.action
+				)
+				await alertVc.hide()
+			},
+		})
 	},
 }
 
