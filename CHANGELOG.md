@@ -1,3 +1,10 @@
+# [51.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.3.9...v51.4.0) (2021-11-30)
+
+
+### Features
+
+* Lists can now have dynamic heights per row and active record cards can have a default row height! ([0b4709d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0b4709d))
+
 ## [51.3.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.3.8...v51.3.9) (2021-11-29)
 
 ## [51.3.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.3.7...v51.3.8) (2021-11-29)
