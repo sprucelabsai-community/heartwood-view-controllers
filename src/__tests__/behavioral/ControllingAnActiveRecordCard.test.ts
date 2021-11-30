@@ -440,8 +440,8 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organizations[0].id)
 	}
 
-	@test.only('can set to tall', 'tall')
-	@test.only('can set to standard', 'standard')
+	@test('can set to tall', 'tall')
+	@test('can set to standard', 'standard')
 	protected static canSetDefaultRowHeight(height: any) {
 		const vc = this.Vc({
 			defaultRowHeight: height,
