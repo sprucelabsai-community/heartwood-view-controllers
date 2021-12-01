@@ -46,10 +46,10 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 }
 
 /** @ts-ignore */
-const buildActiveRecord: ActiveRecordCardBuilder<SkillEventContract> = (
+const buildActiveRecordCard: ActiveRecordCardBuilder<SkillEventContract> = (
 	options
 ) => {
 	return options
 }
 
-export default buildActiveRecord
+export default buildActiveRecordCard

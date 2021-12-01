@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { ActiveRecordCardViewController, vcAssertUtil } from '../../..'
-import buildActiveRecord from '../../../builders/buildActiveRecordCard'
+import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ViewControllerOptions } from '../../../types/heartwood.types'
@@ -115,7 +115,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 	private static ActiveRecordCard(id?: string) {
 		return this.Controller(
 			'activeRecordCard',
-			buildActiveRecord({
+			buildActiveRecordCard({
 				id,
 				eventName: 'list-organizations::v2020_12_25',
 				responseKey: 'organizations',

@@ -1197,6 +1197,8 @@ function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
 			return vc
 		} else if (vc?.getParent?.() instanceof Class) {
 			return vc.getParent()
+		} else if (vc?.getParent?.()?.getParent?.() instanceof Class) {
+			return vc?.getParent?.()?.getParent?.()
 		}
 	}
 

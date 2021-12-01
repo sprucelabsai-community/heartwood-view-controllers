@@ -1,6 +1,12 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractViewController, vcAssertUtil } from '../..'
+import {
+	AbstractSkillViewController,
+	AbstractViewController,
+	ActiveRecordCardViewController,
+	vcAssertUtil,
+} from '../..'
+import buildActiveRecordCard from '../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import CardViewController from '../../viewControllers/Card.vc'
 import FormViewController from '../../viewControllers/Form.vc'
@@ -19,9 +25,52 @@ class FancyCardViewController extends AbstractViewController<Card> {
 	}
 }
 
+class ActiveCard extends AbstractViewController<Card> {
+	private activeRecordVc: ActiveRecordCardViewController
+	public constructor(options: any) {
+		super(options)
+
+		this.activeRecordVc = this.Controller(
+			'activeRecordCard',
+			buildActiveRecordCard({
+				id: 'active',
+				eventName: 'list-skills::v2020_12_25',
+				responseKey: 'skills',
+				rowTransformer: () => ({
+					cells: [],
+				}),
+			})
+		)
+	}
+
+	public render() {
+		return this.activeRecordVc.render()
+	}
+}
+
+class ActiveRecordSkillViewController extends AbstractSkillViewController {
+	private activeCardVc: ActiveCard
+	public constructor(options: any) {
+		super(options)
+		this.activeCardVc = this.Controller('activeCard', {})
+	}
+
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
+		return {
+			layouts: [
+				{
+					cards: [this.activeCardVc.render()],
+				},
+			],
+		}
+	}
+}
+
 export default class AssertingInstanceOfTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		fancy: FancyCardViewController,
+		activeSvc: ActiveRecordSkillViewController,
+		activeCard: ActiveCard,
 	}
 
 	@test()
@@ -84,5 +133,12 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		)
 
 		assert.isEqual(match2, vc)
+	}
+
+	@test()
+	protected static canGetCardFromSkillView() {
+		const svc = this.Controller('activeSvc', {})
+		const match = vcAssertUtil.assertSkillViewRendersCard(svc, 'active')
+		vcAssertUtil.assertRendersAsInstanceOf(match, ActiveCard)
 	}
 }

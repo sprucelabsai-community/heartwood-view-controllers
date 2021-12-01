@@ -4,7 +4,7 @@ import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import buildActiveRecord from '../../builders/buildActiveRecordCard'
+import buildActiveRecordCard from '../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER_ACTIVE_RECORD } from '../../tests/constants'
 import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
@@ -346,7 +346,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async typesEverything() {
-		buildActiveRecord({
+		buildActiveRecordCard({
 			eventName: 'list-organizations::v2020_12_25',
 			responseKey: 'organizations',
 			rowTransformer: (_org) => ({ cells: [] }),
@@ -356,7 +356,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		buildActiveRecord({
+		buildActiveRecordCard({
 			eventName: 'list-locations::v2020_12_25',
 			responseKey: 'locations',
 			rowTransformer: (_loc) => ({ cells: [] }),
@@ -474,7 +474,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	private static Vc(options?: Partial<ActiveRecordCardViewControllerOptions>) {
 		return this.Controller('activeRecordCard', {
-			...buildActiveRecord({
+			...buildActiveRecordCard({
 				eventName: 'list-organizations::v2020_12_25',
 				responseKey: 'organizations',
 				rowTransformer: (organization) => {
