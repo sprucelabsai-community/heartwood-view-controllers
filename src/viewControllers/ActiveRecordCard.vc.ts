@@ -40,6 +40,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private isLoaded = false
 	private filter?: (record: Record<string, any>) => boolean
 
+	private static shouldThrowOnResponseError = false
+
+	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
+		this.shouldThrowOnResponseError = shouldThrow
+	}
+
 	public constructor(
 		options: ViewControllerOptions & ActiveRecordCardViewControllerOptions
 	) {
@@ -127,6 +133,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 				}
 			}
 		} catch (err: any) {
+			if (ActiveRecordCardViewController.shouldThrowOnResponseError) {
+				throw err
+			}
 			this.listVc.addRow(this.buildErrorRow(err))
 		}
 
@@ -143,6 +152,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private buildErrorRow(err: any): Row {
 		return {
 			id: 'error',
+			height: 'content',
 			cells: [
 				{
 					text: {

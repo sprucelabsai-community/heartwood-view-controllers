@@ -185,7 +185,23 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	@test()
+	protected static async canBeSetToThrow() {
+		ActiveRecordCardViewController.setShouldThrowOnResponseError(true)
+
+		await assert.doesThrowAsync(() =>
+			this.MockResultsVc(() => {
+				throw new SchemaError({
+					code: 'NOT_IMPLEMENTED',
+					instructions: 'gonna make it work',
+				})
+			})
+		)
+	}
+
+	@test()
 	protected static async showsAnErrorRowOnError() {
+		ActiveRecordCardViewController.setShouldThrowOnResponseError(false)
+
 		const vc = await this.MockResultsVc(() => {
 			throw new SchemaError({
 				code: 'NOT_IMPLEMENTED',
