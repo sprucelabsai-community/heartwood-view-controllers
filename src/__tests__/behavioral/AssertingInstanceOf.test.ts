@@ -52,6 +52,7 @@ class ActiveRecordSkillViewController extends AbstractSkillViewController {
 	private activeCardVc: ActiveCard
 	public constructor(options: any) {
 		super(options)
+		//@ts-ignore
 		this.activeCardVc = this.Controller('activeCard', {})
 	}
 
@@ -137,7 +138,9 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static canGetCardFromSkillView() {
+		//@ts-ignore
 		const svc = this.Controller('activeSvc', {})
+		//@ts-ignore
 		const match = vcAssertUtil.assertSkillViewRendersCard(svc, 'active')
 		vcAssertUtil.assertRendersAsInstanceOf(match, ActiveCard)
 	}
