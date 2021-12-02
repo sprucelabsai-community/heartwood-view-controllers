@@ -235,6 +235,9 @@ const vcAssertUtil = {
 			return
 		}
 
+		//@ts-ignore
+		await new Promise((r) => setTimeout(r, 0))
+
 		assert.fail(
 			`Didn't expect your controller to render an alert, but it did! It reads:\n\n${message}`
 		)
