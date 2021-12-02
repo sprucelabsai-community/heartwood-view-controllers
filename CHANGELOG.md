@@ -1,3 +1,22 @@
+## [51.6.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.5...v51.6.6) (2021-12-02)
+
+## [51.6.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.4...v51.6.5) (2021-12-02)
+
+## [51.6.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.3...v51.6.4) (2021-12-02)
+
+## [51.6.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.2...v51.6.3) (2021-12-02)
+
+## [51.6.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.1...v51.6.2) (2021-12-02)
+
+## [51.6.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.0...v51.6.1) (2021-12-02)
+
+# [51.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.5.20...v51.6.0) (2021-12-02)
+
+
+### Features
+
+* Devs can patch view controllers to throw errors when they render alerts to make deving even easier! ([94ef2b5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/94ef2b5))
+
 ## [51.5.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.5.19...v51.5.20) (2021-12-01)
 
 ## [51.5.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.5.18...v51.5.19) (2021-12-01)
