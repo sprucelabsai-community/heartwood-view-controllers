@@ -1178,31 +1178,20 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		const vc = this.Controller('goodWithAlert', {})
 		const vc2 = this.Controller('goodWithDialog', {})
 
-		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersAlert(vc, () => vc.load())
-		)
+		await this.assertAlerts(vc, vc2)
+	}
 
-		await vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.load())
+	@test()
+	protected static async patchingAlertsToThrowDoesntAffectAlertAssertionBehavior() {
+		const vc = this.Controller('goodWithAlert', {})
+		const vc2 = this.Controller('goodWithDialog', {})
 
-		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersAlert(vc2, () => vc2.load())
-		)
+		vcAssertUtil.patchAlertToThrow(vc)
+		vcAssertUtil.patchAlertToThrow(vc2)
 
-		const alertVc = await vcAssertUtil.assertRendersAlert(vc, () =>
-			vc.showAlert()
-		)
+		await assert.doesThrowAsync(() => vc.showAlert())
 
-		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert())
-		)
-
-		assert.isFalse(vc.afterAlert)
-
-		await alertVc.hide()
-
-		await this.wait(0)
-
-		assert.isTrue(vc.afterAlert)
+		await this.assertAlerts(vc, vc2)
 	}
 
 	@test()
@@ -1362,5 +1351,36 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		return this.Controller('list', {
 			rows: [],
 		}).render()
+	}
+
+	private static async assertAlerts(
+		vc: GoodWithAlertSkillViewController,
+		vc2: GoodWithDialogSkillViewController
+	) {
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertRendersAlert(vc, () => vc.load())
+		)
+
+		await vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.load())
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertRendersAlert(vc2, () => vc2.load())
+		)
+
+		const alertVc = await vcAssertUtil.assertRendersAlert(vc, () =>
+			vc.showAlert()
+		)
+
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert())
+		)
+
+		assert.isFalse(vc.afterAlert)
+
+		await alertVc.hide()
+
+		await this.wait(0)
+
+		assert.isTrue(vc.afterAlert)
 	}
 }

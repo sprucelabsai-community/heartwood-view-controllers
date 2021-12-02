@@ -40,6 +40,14 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async invokingAlertThrowsByDefault() {
+		vcAssertUtil.patchAlertToThrow(this.vc)
+		await assert.doesThrowAsync(() => this.vc.showAnAlert())
+		//@ts-ignore
+		await assert.doesThrowAsync(() => this.vc.alert())
+	}
+
+	@test()
 	protected static async alertRendersDialog() {
 		const title = `${new Date().getTime()}`
 		const message = `${new Date().getTime() * Math.random()}`

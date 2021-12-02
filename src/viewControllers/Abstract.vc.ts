@@ -15,6 +15,12 @@ import {
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
 
+export interface AlertOptions {
+	title?: string
+	message: string
+	style?: 'info' | 'error'
+}
+
 export default abstract class AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
 {
@@ -89,11 +95,7 @@ export default abstract class AbstractViewController<ViewModel>
 		this.wasDestroyed = true
 	}
 
-	protected async alert(options: {
-		title?: string
-		message: string
-		style?: 'info' | 'error'
-	}) {
+	protected async alert(options: AlertOptions) {
 		const header = options.title
 			? {
 					title: options.title,

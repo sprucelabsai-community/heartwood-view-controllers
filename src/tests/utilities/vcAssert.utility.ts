@@ -15,6 +15,7 @@ import {
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
+import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
@@ -187,7 +188,7 @@ const vcAssertUtil = {
 		let wasAlertTriggered = false
 
 		//@ts-ignore
-		let oldAlert = vc.alert.bind(vc)
+		let oldAlert = vc._originalAlert ? vc._originalAlert : vc.alert.bind(vc)
 
 		//@ts-ignore
 		vc.alert = (options: any) => {
@@ -1186,6 +1187,19 @@ const vcAssertUtil = {
 				await alertVc.hide()
 			},
 		})
+	},
+
+	patchAlertToThrow(vc: ViewController<any>) {
+		//@ts-ignore
+		vc._originalAlert = vc.alert.bind(vc)
+
+		//@ts-ignore
+		vc.alert = async (options: AlertOptions) => {
+			assert.fail(
+				//@ts-ignore
+				`Skill view '${vc.id}' unexpectedly rendered an alert. It reads:\n\n${options.message}`
+			)
+		}
 	},
 }
 
