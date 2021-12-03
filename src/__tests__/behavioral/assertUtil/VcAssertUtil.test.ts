@@ -118,6 +118,11 @@ class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 		this.afterAlert = true
 	}
 
+	public async showAlert2() {
+		await this.alert({ message: 'moar team' })
+		this.afterAlert = true
+	}
+
 	public async load() {}
 
 	public render() {
@@ -1371,9 +1376,17 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			vc.showAlert()
 		)
 
-		await assert.doesThrowAsync(() =>
+		const msg = await assert.doesThrowAsync(() =>
 			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert())
 		)
+
+		assert.doesInclude(msg.message, 'go team')
+
+		const msg2 = await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert2())
+		)
+
+		assert.doesInclude(msg2.message, 'moar team')
 
 		assert.isFalse(vc.afterAlert)
 

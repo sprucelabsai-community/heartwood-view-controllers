@@ -219,12 +219,16 @@ const vcAssertUtil = {
 		action: () => void | Promise<void>
 	) {
 		//@ts-ignore
-		let oldAlert = vc.alert?.bind(vc)
+		let oldAlert = vc._originalAlert
+			? //@ts-ignore
+			  vc._originalAlert.bind(vc)
+			: //@ts-ignore
+			  vc.alert?.bind(vc)
 
 		let message = ''
 
 		//@ts-ignore
-		vc.alert = (options: any) => {
+		vc._originalAlert = (options: any) => {
 			message = options.message
 			return oldAlert(options)
 		}
@@ -234,9 +238,6 @@ const vcAssertUtil = {
 		} catch {
 			return
 		}
-
-		//@ts-ignore
-		await new Promise((r) => setTimeout(r, 0))
 
 		assert.fail(
 			`Didn't expect your controller to render an alert, but it did! It reads:\n\n${message}`
