@@ -204,7 +204,7 @@ export default class FormViewController<
 		this.setErrorsByField(errorsByField)
 	}
 
-	public setErrorsByField(errorsByField: any) {
+	public setErrorsByField(errorsByField: FormErrorsByField<S>) {
 		this.model.errorsByField = errorsByField
 		this.triggerRender()
 	}
