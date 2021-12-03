@@ -163,7 +163,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 					},
 				},
 			],
-			...this.noResultsRow,
 		}
 	}
 
