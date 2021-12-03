@@ -2256,7 +2256,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean| undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
@@ -2264,7 +2264,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<void> | void)| undefined | null
+				'onClick'?: (() => Promise<any> | any)| undefined | null
 		}
 
 		interface CardFooterButtonSchema extends SpruceSchema.Schema {
@@ -2320,7 +2320,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickHintIcon': {
 			                label: 'Click handler for hint icon',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Type. */
 			            'type': {
@@ -2345,7 +2345,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClick': {
 			                label: 'Click handler',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -2951,7 +2951,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean| undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
@@ -3017,7 +3017,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickHintIcon': {
 			                label: 'Click handler for hint icon',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Type. */
 			            'type': {
@@ -3525,7 +3525,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean| undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
@@ -3533,7 +3533,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<void> | void)| undefined | null
+				'onClick'?: (() => Promise<any> | any)| undefined | null
 		}
 
 		interface ButtonBarButtonSchema extends SpruceSchema.Schema {
@@ -3589,7 +3589,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickHintIcon': {
 			                label: 'Click handler for hint icon',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Type. */
 			            'type': {
@@ -3614,7 +3614,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClick': {
 			                label: 'Click handler',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -3684,7 +3684,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean| undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
@@ -3692,7 +3692,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<void> | void)| undefined | null
+				'onClick'?: (() => Promise<any> | any)| undefined | null
 				/** Dropdown. */
 				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown| undefined | null
 		}
@@ -3750,7 +3750,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickHintIcon': {
 			                label: 'Click handler for hint icon',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Type. */
 			            'type': {
@@ -3775,7 +3775,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClick': {
 			                label: 'Click handler',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Dropdown. */
 			            'dropdown': {
@@ -3898,7 +3898,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean| undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<void> | void)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
 				/** Type. */
 				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
 				/** Image. */
@@ -3962,7 +3962,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickHintIcon': {
 			                label: 'Click handler for hint icon',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Type. */
 			            'type': {

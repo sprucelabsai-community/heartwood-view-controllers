@@ -56,7 +56,7 @@ const buttonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSch
 	            'onClickHintIcon': {
 	                label: 'Click handler for hint icon',
 	                type: 'raw',
-	                options: {valueType: `() => Promise<void> | void`,}
+	                options: {valueType: `() => Promise<any> | any`,}
 	            },
 	            /** Type. */
 	            'type': {
@@ -81,7 +81,7 @@ const buttonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSch
 	            'onClick': {
 	                label: 'Click handler',
 	                type: 'raw',
-	                options: {valueType: `() => Promise<void> | void`,}
+	                options: {valueType: `() => Promise<any> | any`,}
 	            },
 	            /** Dropdown. */
 	            'dropdown': {

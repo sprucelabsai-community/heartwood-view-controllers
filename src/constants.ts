@@ -639,7 +639,7 @@ export const buttonFields: SchemaFieldsByName = {
 		type: 'raw',
 		label: 'Click handler for hint icon',
 		options: {
-			valueType: '() => Promise<void> | void',
+			valueType: '() => Promise<any> | any',
 		},
 	},
 	type: {
@@ -678,7 +678,7 @@ export const buttonFields: SchemaFieldsByName = {
 		type: 'raw',
 		label: 'Click handler',
 		options: {
-			valueType: '() => Promise<void> | void',
+			valueType: '() => Promise<any> | any',
 		},
 	},
 }
