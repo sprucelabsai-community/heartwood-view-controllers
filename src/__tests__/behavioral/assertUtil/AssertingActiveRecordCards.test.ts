@@ -9,6 +9,29 @@ import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOp
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
+declare module '../../../types/heartwood.types' {
+	interface ViewControllerMap {
+		genericSkillView: GenericSkillView
+	}
+
+	interface ViewControllerOptionsMap {
+		genericSkillView: SkillView
+	}
+}
+
+class GenericSkillView extends AbstractSkillViewController {
+	private model: SkillView
+
+	public constructor(options: ViewControllerOptions & SkillView) {
+		super(options)
+		this.model = removeUniversalViewOptions(options)
+	}
+
+	public render(): SkillView {
+		return this.model
+	}
+}
+
 export default class AssertingActiveRecordCardsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		genericSkillView: GenericSkillView,
@@ -99,28 +122,5 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 				rowTransformer: () => ({ cells: [] }),
 			})
 		)
-	}
-}
-
-declare module '../../../types/heartwood.types' {
-	interface ViewControllerMap {
-		genericSkillView: GenericSkillView
-	}
-
-	interface ViewControllerOptionsMap {
-		genericSkillView: SkillView
-	}
-}
-
-class GenericSkillView extends AbstractSkillViewController {
-	private model: SkillView
-
-	public constructor(options: ViewControllerOptions & SkillView) {
-		super(options)
-		this.model = removeUniversalViewOptions(options)
-	}
-
-	public render(): SkillView {
-		return this.model
 	}
 }
