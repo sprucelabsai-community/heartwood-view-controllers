@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "51.6.93",
+  "version": "51.6.95",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -77,11 +77,11 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
     "@sprucelabs/error": "^5.0.323",
-    "@sprucelabs/mercury-core-events": "^1.6.259",
-    "@sprucelabs/mercury-types": "^26.1.1026",
+    "@sprucelabs/mercury-core-events": "^1.6.260",
+    "@sprucelabs/mercury-types": "^26.1.1027",
     "@sprucelabs/schema": "^25.4.88",
     "@sprucelabs/spruce-core-schemas": "^22.6.280",
-    "@sprucelabs/spruce-event-utils": "^17.1.312",
+    "@sprucelabs/spruce-event-utils": "^17.1.313",
     "@sprucelabs/spruce-skill-utils": "^22.1.73",
     "@swc/core": "1.2.103",
     "babel-loader": "^8.2.3",
