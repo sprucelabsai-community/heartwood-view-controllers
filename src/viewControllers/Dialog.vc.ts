@@ -26,7 +26,6 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		super(options)
 
 		this.shouldShowCloseButton = options.shouldShowCloseButton !== false
-
 		this.cardVc = options.controller ?? this.Controller('card', options)
 		this.onCloseHandler = options.onClose
 		this.isVisible = !!options.isVisible

@@ -66,7 +66,7 @@ export default abstract class AbstractViewController<ViewModel>
 	}
 
 	protected renderInDialog(dialog: DialogViewControllerOptions) {
-		const controller = this.vcFactory.Controller('dialog', {
+		const controller = this.Controller('dialog', {
 			...dialog,
 			isVisible: true,
 		})

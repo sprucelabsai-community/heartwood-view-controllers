@@ -295,6 +295,12 @@ const vcAssertUtil = {
 					//@ts-ignore
 					vc.renderInDialog = (...args: any[]) => {
 						dialogVc = oldRenderInDialog(...args)
+						//@ts-ignore
+						dialogVc.getParent = () => {
+							//@ts-ignore
+							return dialogVc?.getCardVc().getParent()
+						}
+
 						resolve(undefined)
 						return dialogVc
 					}

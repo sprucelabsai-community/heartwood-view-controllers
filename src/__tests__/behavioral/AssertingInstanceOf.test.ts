@@ -67,11 +67,50 @@ class ActiveRecordSkillViewController extends AbstractSkillViewController {
 	}
 }
 
+class DialogSkillViewController extends AbstractSkillViewController {
+	private dialogCardVc: DialogCardViewController
+	public constructor(options: any) {
+		super(options)
+		//@ts-ignore
+		this.dialogCardVc = this.Controller('dialogCard', {}) as any
+	}
+
+	public async showDialog() {
+		this.renderInDialog({
+			...this.dialogCardVc.render(),
+		})
+	}
+
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
+		return {
+			layouts: [
+				{
+					cards: [],
+				},
+			],
+		}
+	}
+}
+
+class DialogCardViewController extends AbstractViewController<Card> {
+	private cardVc: CardViewController
+	public constructor(options: any) {
+		super(options)
+		this.cardVc = this.Controller('card', {})
+	}
+
+	public render(): Card {
+		return this.cardVc.render()
+	}
+}
+
 export default class AssertingInstanceOfTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		fancy: FancyCardViewController,
 		activeSvc: ActiveRecordSkillViewController,
 		activeCard: ActiveCard,
+		dialogSvc: DialogSkillViewController,
+		dialogCard: DialogCardViewController,
 	}
 
 	@test()
@@ -143,5 +182,16 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		const match = vcAssertUtil.assertSkillViewRendersCard(svc, 'active')
 		vcAssertUtil.assertRendersAsInstanceOf(match, ActiveCard)
+	}
+
+	@test.only()
+	protected static async canAssertDialogRendersAsInstanceOf() {
+		//@ts-ignore
+		const svc = this.Controller('dialogSvc', {}) as DialogSkillViewController
+		const dialogVc = await vcAssertUtil.assertRendersDialog(svc, () =>
+			svc.showDialog()
+		)
+
+		vcAssertUtil.assertRendersAsInstanceOf(dialogVc, DialogCardViewController)
 	}
 }
