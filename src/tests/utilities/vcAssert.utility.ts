@@ -1141,7 +1141,10 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertControllerInstanceOf(vc: ViewController<any>, Class: any) {
+	assertControllerInstanceOf<Controller extends ViewController<any>>(
+		vc: ViewController<any>,
+		Class: new (...arg: any[]) => Controller
+	): Controller {
 		const match = isVcInstanceOf(vc, Class)
 
 		assert.isTruthy(
@@ -1151,17 +1154,23 @@ const vcAssertUtil = {
 			} to be an instance of ${Class.name}, but it wasn't!`
 		)
 
-		return match
+		return match as unknown as Controller
 	},
 
-	assertRendersAsInstanceOf(vc: ViewController<any>, Class: any) {
+	assertRendersAsInstanceOf<Controller extends ViewController<any>>(
+		vc: ViewController<any>,
+		Class: new (...args: any[]) => Controller
+	): Controller {
 		try {
 			const model = renderUtil.render(vc)
 			assert.isTruthy(
 				model.controller,
 				`Your view controller does not return a controllor. Make sure you return 'controller:this' from rende() or that you're rending a built in skill view.`
 			)
-			return this.assertControllerInstanceOf(model.controller, Class)
+			return this.assertControllerInstanceOf<Controller>(
+				model.controller,
+				Class
+			)
 		} catch {
 			assert.fail(
 				`Expected your ${
@@ -1171,6 +1180,8 @@ const vcAssertUtil = {
 				}, but it didn't!`
 			)
 		}
+
+		return {} as Controller
 	},
 
 	assertCardRendersStats(vc: ViewController<Card>) {

@@ -153,7 +153,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static canCheckIfRendersAsInstanceOf() {
-		const vc = this.Controller('fancy', {})
+		const vc = this.Controller('fancy', {}) as FancyCardViewController
 
 		assert.doesThrow(() =>
 			vcAssertUtil.assertRendersAsInstanceOf(vc, FormViewController)
