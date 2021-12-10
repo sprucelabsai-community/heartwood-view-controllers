@@ -1,9 +1,17 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { vcAssertUtil } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { StatsViewControllerOptions } from '../../viewControllers/reporting/Stats.vc'
+import StatsViewController, {
+	StatsViewControllerOptions,
+} from '../../viewControllers/reporting/Stats.vc'
 
 export default class ControllingStatsTest extends AbstractViewControllerTest {
+	private static vc: StatsViewController
+	protected static async beforeEach() {
+		await super.beforeEach()
+		this.vc = this.Vc()
+	}
 	@test()
 	protected static throwsIfMissingStats() {
 		//@ts-ignore
@@ -36,7 +44,8 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 		},
 	])
 	protected static canRenderStats(stats: any) {
-		const model = this.renderStats({ stats })
+		this.vc = this.Vc({ stats })
+		const model = this.renderStats()
 		assert.isEqualDeep(model.stats, stats)
 	}
 
@@ -48,8 +57,35 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canDisableFormatting() {
-		const model = this.renderStats({ shouldFormatValues: false })
+		this.vc = this.Vc({ shouldFormatValues: false })
+		const model = this.renderStats()
 		assert.isFalse(model.shouldFormatValues)
+	}
+
+	@test()
+	protected static cantSetValueForBadIndex() {
+		assert.doesThrow(() => this.vc.setValue(-1, 0))
+		this.vc.setValue(0, 0)
+		assert.doesThrow(() => this.vc.setValue(4, 0))
+		this.vc.setValue(1, 0)
+		this.vc.setValue(2, 0)
+	}
+
+	@test('can set idx 0', 0, 100)
+	@test('can set idx 2', 2, 100)
+	@test('can set idx 2b', 2, 75)
+	protected static canHaveNoStatToStart(idx: number, value: number) {
+		const vc = this.Vc({
+			stats: [
+				{
+					label: 'coming soon',
+				},
+			],
+		})
+
+		vc.setValue(idx, value)
+
+		vcAssertUtil.assertStatsRendersValue(vc, idx, value)
 	}
 
 	private static Vc(options?: Partial<StatsViewControllerOptions>) {
@@ -64,9 +100,8 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 		})
 	}
 
-	private static renderStats(options?: Partial<StatsViewControllerOptions>) {
-		const vc = this.Vc(options)
-		const model = this.render(vc)
+	private static renderStats() {
+		const model = this.render(this.vc)
 		return model
 	}
 }

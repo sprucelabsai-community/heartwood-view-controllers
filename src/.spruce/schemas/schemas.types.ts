@@ -1321,7 +1321,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface StatsStat {
 			
 				
-				'value': number
+				'value'?: number| undefined | null
 				
 				'label'?: string| undefined | null
 		}
@@ -1336,7 +1336,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'number',
-			                isRequired: true,
 			                options: undefined
 			            },
 			            /** . */

@@ -25,7 +25,6 @@ export default buildSchema({
 					fields: {
 						value: {
 							type: 'number',
-							isRequired: true,
 						},
 						label: {
 							type: 'text',

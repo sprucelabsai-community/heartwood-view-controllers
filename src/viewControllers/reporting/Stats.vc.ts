@@ -1,4 +1,4 @@
-import { assertOptions } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
@@ -20,6 +20,23 @@ export default class StatsViewController extends AbstractViewController<Stats> {
 			shouldFormatValues: true,
 			...options,
 		}
+	}
+
+	public setValue(idx: number, value: number) {
+		if (idx < 0 || idx > 2) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['idx'],
+				friendlyMessage:
+					'You can only set values on stats at index 0, 1, or 2.',
+			})
+		}
+
+		if (!this.model.stats[idx]) {
+			this.model.stats[idx] = {}
+		}
+
+		this.model.stats[idx].value = value
 	}
 
 	public render(): Stats {

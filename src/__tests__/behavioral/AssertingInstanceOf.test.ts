@@ -184,7 +184,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		vcAssertUtil.assertRendersAsInstanceOf(match, ActiveCard)
 	}
 
-	@test.only()
+	@test()
 	protected static async canAssertDialogRendersAsInstanceOf() {
 		//@ts-ignore
 		const svc = this.Controller('dialogSvc', {}) as DialogSkillViewController

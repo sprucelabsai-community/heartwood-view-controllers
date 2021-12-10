@@ -3,7 +3,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ActiveRecordCardViewController } from '../..'
+import { ActiveRecordCardViewController, StatsViewController } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -1193,6 +1193,18 @@ const vcAssertUtil = {
 		)
 
 		return match.controller
+	},
+
+	assertStatsRendersValue(vc: StatsViewController, idx: number, value: number) {
+		const model = renderUtil.render(vc)
+		const expected = model.stats[idx]?.value
+		assert.isEqual(
+			expected,
+			value,
+			`Expected stats to render '${value}' at index '${idx}', but found '${
+				expected ?? 'nothing'
+			}'.`
+		)
 	},
 
 	async assertRendersAlertThenRedirects(

@@ -13,7 +13,6 @@ const statsStatSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsS
 	            /** . */
 	            'value': {
 	                type: 'number',
-	                isRequired: true,
 	                options: undefined
 	            },
 	            /** . */
