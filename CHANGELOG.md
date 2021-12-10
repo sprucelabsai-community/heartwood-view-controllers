@@ -1,3 +1,10 @@
+# [51.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.9.0...v51.10.0) (2021-12-10)
+
+
+### Features
+
+* missed exporting split into layouts ([fc0804b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fc0804b))
+
 # [51.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.8.0...v51.9.0) (2021-12-10)
 
 
