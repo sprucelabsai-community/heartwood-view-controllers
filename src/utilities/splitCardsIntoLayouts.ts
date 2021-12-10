@@ -7,7 +7,7 @@ export function splitCardsIntoLayouts(
 	cardModels: Card[],
 	totalLayouts: number
 ) {
-	if (totalLayouts < 0 || totalLayouts > 3) {
+	if (totalLayouts < 1 || totalLayouts > 3) {
 		throw new Error('Splitting cards into layouts requires 1-3 layouts.')
 	}
 
