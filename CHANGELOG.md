@@ -1,3 +1,10 @@
+# [51.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.117...v51.7.0) (2021-12-10)
+
+
+### Features
+
+* Statistics can now start empty and be set late, creating an improved loading experince ([2932c76](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2932c76))
+
 ## [51.6.117](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.116...v51.6.117) (2021-12-10)
 
 ## [51.6.116](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.6.115...v51.6.116) (2021-12-10)
