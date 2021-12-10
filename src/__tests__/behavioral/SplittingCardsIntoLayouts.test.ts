@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { splitCardsIntoLayouts } from '../../utilities/splitCardsIntoLayouts'
+import splitCardsIntoLayouts from '../../utilities/splitCardsIntoLayouts'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout

@@ -3,7 +3,7 @@ import { SpruceSchemas } from '..'
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
 
-export function splitCardsIntoLayouts(
+export default function splitCardsIntoLayouts(
 	cardModels: Card[],
 	totalLayouts: number
 ) {
