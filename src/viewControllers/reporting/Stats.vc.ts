@@ -37,6 +37,8 @@ export default class StatsViewController extends AbstractViewController<Stats> {
 		}
 
 		this.model.stats[idx].value = value
+
+		this.triggerRender()
 	}
 
 	public render(): Stats {

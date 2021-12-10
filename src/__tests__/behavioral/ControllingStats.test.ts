@@ -88,6 +88,12 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertStatsRendersValue(vc, idx, value)
 	}
 
+	@test()
+	protected static settingValueTriggersRender() {
+		this.vc.setValue(0, 0)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
 	private static Vc(options?: Partial<StatsViewControllerOptions>) {
 		return this.Controller('stats', {
 			stats: [
