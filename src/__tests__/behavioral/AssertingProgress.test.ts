@@ -75,6 +75,7 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 	) {
 		const vc = this.ProgressVc({ percentComplete })
 		vcAssertUtil.assertCardRendersProgress(vc, percentComplete)
+		vcAssertUtil.assertCardRendersProgress(vc)
 	}
 
 	private static ProgressVc(options?: ProgressViewControllerOptions) {

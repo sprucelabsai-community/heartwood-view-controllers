@@ -1255,8 +1255,10 @@ const vcAssertUtil = {
 			controller ?? { render: () => ({}) }
 		)
 
-		if (expectedPercentComplete !== progressModel.percentComplete) {
-			assert.fail(
+		if (typeof expectedPercentComplete === 'number') {
+			assert.isEqual(
+				expectedPercentComplete,
+				progressModel.percentComplete,
 				`Expected progress to be at '${expectedPercentComplete}', but found '${
 					progressModel.percentComplete ?? 'nothing'
 				}'`
