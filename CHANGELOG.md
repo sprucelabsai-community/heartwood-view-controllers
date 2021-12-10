@@ -1,3 +1,10 @@
+# [51.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.8.0...v51.9.0) (2021-12-10)
+
+
+### Features
+
+* Devs can now easily distribute cards across layouts on a skill view! ([4c9aebe](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4c9aebe))
+
 # [51.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.7.2...v51.8.0) (2021-12-10)
 
 
