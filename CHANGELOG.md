@@ -1,3 +1,10 @@
+# [51.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.7.2...v51.8.0) (2021-12-10)
+
+
+### Features
+
+* Devs can now render progress views and test them easily! ([8225fad](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8225fad))
+
 ## [51.7.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.7.1...v51.7.2) (2021-12-10)
 
 ## [51.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.7.0...v51.7.1) (2021-12-10)
