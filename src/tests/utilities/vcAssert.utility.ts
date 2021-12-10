@@ -22,6 +22,7 @@ import FormViewController from '../../viewControllers/Form.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
+import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter.utility'
@@ -39,14 +40,14 @@ interface ConfirmViewController {
 }
 
 export function pluckAllFromCard<K extends keyof CardSection>(
-	v: Card,
+	model: Card,
 	key: K
 ): CardSection[K][] {
-	return v.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
+	return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
-export function pluckFirstFromCard(v: Card, key: keyof CardSection) {
-	return pluckAllFromCard(v, key)[0] as any
+export function pluckFirstFromCard(model: Card, key: keyof CardSection) {
+	return pluckAllFromCard(model, key)[0] as any
 }
 
 async function wait(...promises: (Promise<any> | undefined | void)[]) {
@@ -1233,6 +1234,37 @@ const vcAssertUtil = {
 				`Skill view '${vc.id}' unexpectedly rendered an alert. It reads:\n\n${options.message}`
 			)
 		}
+	},
+
+	assertCardRendersProgress(
+		vc: ViewController<Card>,
+		expectedPercentComplete?: number
+	): ProgressViewController {
+		const model = renderUtil.render(vc)
+
+		const progress = pluckFirstFromCard(model, 'progress')
+		assert.isTruthy(
+			progress,
+			`I expected your card to render progress view, but it didn't!`
+		)
+
+		//!ts-ignore
+		const controller = progress.controller
+
+		const progressModel = renderUtil.render(
+			controller ?? { render: () => ({}) }
+		)
+
+		if (expectedPercentComplete !== progressModel.percentComplete) {
+			assert.fail(
+				`Expected progress to be at '${expectedPercentComplete}', but found '${
+					progressModel.percentComplete ?? 'nothing'
+				}'`
+			)
+		}
+
+		//@ts-ignore
+		return controller
 	},
 }
 

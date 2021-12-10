@@ -58,6 +58,9 @@ import ToolBeltViewController, {
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
+import ProgressViewController, {
+	ProgressViewControllerOptions,
+} from '../viewControllers/reporting/Progress.vc'
 
 export type ErrorHandler = (message: string) => void
 
@@ -223,6 +226,7 @@ export interface ViewControllerMap {
 	buttonBar: ButtonBarViewController
 	talkingSprucebot: TalkingSprucebotViewController
 	stats: StatsViewController
+	progress: ProgressViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -242,6 +246,7 @@ export interface ViewControllerOptionsMap {
 	talkingSprucebot: TalkingSprucebotViewControllerOptions
 	activeRecordCard: ActiveRecordCardViewControllerOptions
 	stats: StatsViewControllerOptions
+	progress: ProgressViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

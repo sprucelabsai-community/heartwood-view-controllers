@@ -9,6 +9,7 @@ import DialogViewController from './viewControllers/Dialog.vc'
 import FormViewController from './viewControllers/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
+import ProgressViewController from './viewControllers/reporting/Progress.vc'
 import StatsViewController from './viewControllers/reporting/Stats.vc'
 import SwipeViewController from './viewControllers/Swipe.vc'
 import TalkingSprucebotViewController from './viewControllers/TalkingSprucebot.vc'
@@ -30,4 +31,5 @@ export const CORE_CONTROLLER_MAP = {
 	talkingSprucebot: TalkingSprucebotViewController,
 	activeRecordCard: ActiveRecordCardViewController,
 	stats: StatsViewController,
+	progress: ProgressViewController,
 }
