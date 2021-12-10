@@ -44,6 +44,9 @@ import ListViewController, {
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
+import ProgressViewController, {
+	ProgressViewControllerOptions,
+} from '../viewControllers/reporting/Progress.vc'
 import StatsViewController, {
 	StatsViewControllerOptions,
 } from '../viewControllers/reporting/Stats.vc'
@@ -58,9 +61,6 @@ import ToolBeltViewController, {
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
-import ProgressViewController, {
-	ProgressViewControllerOptions,
-} from '../viewControllers/reporting/Progress.vc'
 
 export type ErrorHandler = (message: string) => void
 

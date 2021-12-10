@@ -1248,7 +1248,7 @@ const vcAssertUtil = {
 			`I expected your card to render progress view, but it didn't!`
 		)
 
-		//!ts-ignore
+		//@ts-ignore
 		const controller = progress.controller
 
 		const progressModel = renderUtil.render(
