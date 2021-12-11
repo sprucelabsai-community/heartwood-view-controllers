@@ -1,3 +1,10 @@
+# [51.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.10.0...v51.11.0) (2021-12-11)
+
+
+### Features
+
+* Devs can now control and test the Ratings Views inside cards! ([336ebe5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/336ebe5))
+
 # [51.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.9.0...v51.10.0) (2021-12-10)
 
 
