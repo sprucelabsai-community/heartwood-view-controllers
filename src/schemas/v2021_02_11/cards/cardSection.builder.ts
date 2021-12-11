@@ -6,6 +6,7 @@ import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
 import progressBuilder from '../progress.builder'
+import ratingsBuilder from '../ratings.builder'
 import statsBuilder from '../stats.builder'
 import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import textBuilder from '../text.builder'
@@ -116,6 +117,13 @@ export default buildSchema({
 			label: 'Progress',
 			options: {
 				schema: progressBuilder,
+			},
+		},
+		ratings: {
+			type: 'schema',
+			label: 'Ratings',
+			options: {
+				schema: ratingsBuilder,
 			},
 		},
 		shouldRenderContentsAsGrid: {

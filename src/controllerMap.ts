@@ -9,6 +9,7 @@ import DialogViewController from './viewControllers/Dialog.vc'
 import FormViewController from './viewControllers/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
+import RatingsViewController from './viewControllers/Ratings.vc'
 import ProgressViewController from './viewControllers/reporting/Progress.vc'
 import StatsViewController from './viewControllers/reporting/Stats.vc'
 import SwipeViewController from './viewControllers/Swipe.vc'
@@ -32,4 +33,5 @@ export const CORE_CONTROLLER_MAP = {
 	activeRecordCard: ActiveRecordCardViewController,
 	stats: StatsViewController,
 	progress: ProgressViewController,
+	ratings: RatingsViewController,
 }

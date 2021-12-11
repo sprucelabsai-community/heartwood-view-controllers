@@ -11,6 +11,7 @@ import listSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v20
 import calendarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import statsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/stats.schema'
 import progressSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progress.schema'
+import ratingsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
 
 const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -119,6 +120,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                label: 'Progress',
 	                type: 'schema',
 	                options: {schema: progressSchema_v2021_02_11,}
+	            },
+	            /** Ratings. */
+	            'ratings': {
+	                label: 'Ratings',
+	                type: 'schema',
+	                options: {schema: ratingsSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {

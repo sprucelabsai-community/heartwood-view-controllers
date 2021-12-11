@@ -1268,6 +1268,18 @@ const vcAssertUtil = {
 		//@ts-ignore
 		return controller
 	},
+
+	assertCardRendersRatings(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		const progress = pluckFirstFromCard(model, 'ratings')
+
+		assert.isTruthy(
+			progress,
+			`Expected to find a ratings view inside your card, but I didn't!`
+		)
+
+		return progress.controller
+	},
 }
 
 export default vcAssertUtil
