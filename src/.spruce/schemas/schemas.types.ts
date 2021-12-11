@@ -179,6 +179,91 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface RatingsInput {
+			
+				
+				'id'?: string| undefined | null
+				
+				'name': string
+				
+				'value'?: number| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				/** Hint. */
+				'hint'?: string| undefined | null
+				/** Required. */
+				'isRequired'?: boolean| undefined | null
+				/** On change handler. */
+				'onChange'?: ((value?: boolean) => any | Promise<any>)| undefined | null
+				/** Stars or Smilies. */
+				'renderAs'?: ("stars" | "smilies")| undefined | null
+		}
+
+		interface RatingsInputSchema extends SpruceSchema.Schema {
+			id: 'ratingsInput',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'ratings input',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'value': {
+			                type: 'number',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Hint. */
+			            'hint': {
+			                label: 'Hint',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Required. */
+			            'isRequired': {
+			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** On change handler. */
+			            'onChange': {
+			                label: 'On change handler',
+			                type: 'raw',
+			                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
+			            },
+			            /** Stars or Smilies. */
+			            'renderAs': {
+			                label: 'Stars or Smilies',
+			                type: 'select',
+			                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
+			            },
+			    }
+		}
+
+		type RatingsInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsInputSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface PhoneInput {
 			
 				
@@ -981,55 +1066,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface FormBuilderImportExportObject {
-			
-				/** Title. */
-				'title': string
-				/** Subtitle. */
-				'subtitle'?: string| undefined | null
-				/** Pages. */
-				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
-		}
-
-		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
-			id: 'formBuilderImportExportObject',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'form builder import export object',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Subtitle. */
-			            'subtitle': {
-			                label: 'Subtitle',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Pages. */
-			            'pages': {
-			                label: 'Pages',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
-			            },
-			    }
-		}
-
-		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface FancyIcon {
 			
 				/** Name. */
@@ -1515,381 +1551,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'id': string
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
-				
-				'schema': (S)
-				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
-				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>)| undefined | null
-				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
-				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
-				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
-				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
-				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean| undefined | null
-				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean| undefined | null
-				/** Submit button label. */
-				'submitButtonLabel'?: string| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
-				/** Set value handler. */
-				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
-				/** Form sections. */
-				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
-				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
-				/** Present slide. The slide showing now! */
-				'presentSlide'?: number| undefined | null
-				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>)| undefined | null
-		}
-
-		interface BigFormSchema extends SpruceSchema.Schema {
-			id: 'bigForm',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Big form',
-			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
-			            },
-			            /** . */
-			            'schema': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `S`,}
-			            },
-			            /** Submit handler. */
-			            'onSubmit': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
-			            },
-			            /** Cancel handler. */
-			            'onCancel': {
-			                label: 'Cancel handler',
-			                type: 'raw',
-			                options: {valueType: `() => void | Promise<void>`,}
-			            },
-			            /** Will change handler. */
-			            'onWillChange': {
-			                label: 'Will change handler',
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
-			            },
-			            /** Change handler. */
-			            'onChange': {
-			                label: 'Change handler',
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
-			            },
-			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-			            'values': {
-			                label: 'Values',
-			                type: 'raw',
-			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-			            },
-			            /** Errors by field. */
-			            'errorsByField': {
-			                label: 'Errors by field',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
-			            },
-			            /** Show submit controls. */
-			            'shouldShowSubmitControls': {
-			                label: 'Show submit controls',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Show cancel button. */
-			            'shouldShowCancelButton': {
-			                label: 'Show cancel button',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Submit button label. */
-			            'submitButtonLabel': {
-			                label: 'Submit button label',
-			                type: 'text',
-			                defaultValue: "Go!",
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Enabled. */
-			            'isEnabled': {
-			                label: 'Enabled',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Set value handler. */
-			            'setValue': {
-			                label: 'Set value handler',
-			                type: 'raw',
-			                isPrivate: true,
-			                isRequired: true,
-			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
-			            },
-			            /** Form sections. */
-			            'sections': {
-			                label: 'Form sections',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
-			            },
-			            /** Present slide. The slide showing now! */
-			            'presentSlide': {
-			                label: 'Present slide',
-			                type: 'number',
-			                hint: 'The slide showing now!',
-			                defaultValue: 0,
-			                options: undefined
-			            },
-			            /** Submit handler. */
-			            'onSubmitSlide': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
-			            },
-			    }
-		}
-
-		type BigFormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface CardSection {
-			
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Complete. When being rendered as a slide, this will signify the step is complete. */
-				'isComplete'?: boolean| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
-				/** Padding. */
-				'shouldBePadded'?: boolean| undefined | null
-				/** Center content. */
-				'shouldContentBeCentered'?: boolean| undefined | null
-				/** Card section item. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Image. */
-				'image'?: string| undefined | null
-				/** Form. */
-				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
-				/** Talking Sprucebot. */
-				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
-				/** Big form. */
-				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
-				/** Buttons. */
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
-				/** Button bar. */
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
-				/** Calendar. */
-				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
-				/** Stats. */
-				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
-				/** Progress. */
-				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
-				/** Ratings. */
-				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
-				/** Grid. */
-				'shouldRenderContentsAsGrid'?: boolean| undefined | null
-				/** Alignment. */
-				'alignment'?: ("left" | "center" | "right")| undefined | null
-		}
-
-		interface CardSectionSchema extends SpruceSchema.Schema {
-			id: 'cardSection',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
-			            'isComplete': {
-			                label: 'Complete',
-			                type: 'boolean',
-			                hint: 'When being rendered as a slide, this will signify the step is complete.',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
-			            },
-			            /** Padding. */
-			            'shouldBePadded': {
-			                label: 'Padding',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Center content. */
-			            'shouldContentBeCentered': {
-			                label: 'Center content',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Card section item. */
-			            'text': {
-			                label: 'Card section item',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Form. */
-			            'form': {
-			                label: 'Form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
-			            },
-			            /** Talking Sprucebot. */
-			            'talkingSprucebot': {
-			                label: 'Talking Sprucebot',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
-			            },
-			            /** Big form. */
-			            'bigForm': {
-			                label: 'Big form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
-			            },
-			            /** Buttons. */
-			            'buttons': {
-			                label: 'Buttons',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
-			            },
-			            /** Button bar. */
-			            'buttonBar': {
-			                label: 'Button bar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
-			            },
-			            /** Calendar. */
-			            'calendar': {
-			                label: 'Calendar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
-			            },
-			            /** Stats. */
-			            'stats': {
-			                label: 'Stats',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
-			            },
-			            /** Progress. */
-			            'progress': {
-			                label: 'Progress',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
-			            },
-			            /** Ratings. */
-			            'ratings': {
-			                label: 'Ratings',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderContentsAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Alignment. */
-			            'alignment': {
-			                label: 'Alignment',
-			                type: 'select',
-			                defaultValue: "left",
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
-			            },
-			    }
-		}
-
-		type CardSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema>
 
 	}
 
@@ -2475,6 +2136,200 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'id': string
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
+				
+				'schema': (S)
+				/** Submit handler. */
+				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				/** Cancel handler. */
+				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				/** Will change handler. */
+				'onWillChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
+				/** Change handler. */
+				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
+				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				/** Errors by field. */
+				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
+				/** Show submit controls. */
+				'shouldShowSubmitControls'?: boolean| undefined | null
+				/** Show cancel button. */
+				'shouldShowCancelButton'?: boolean| undefined | null
+				/** Submit button label. */
+				'submitButtonLabel'?: string| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
+				/** Set value handler. */
+				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
+				/** Form sections. */
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
+				/** Footer. */
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				/** Present slide. The slide showing now! */
+				'presentSlide'?: number| undefined | null
+				/** Submit handler. */
+				'onSubmitSlide'?: (HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>)| undefined | null
+		}
+
+		interface BigFormSchema extends SpruceSchema.Schema {
+			id: 'bigForm',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Big form',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
+			            },
+			            /** . */
+			            'schema': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `S`,}
+			            },
+			            /** Submit handler. */
+			            'onSubmit': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
+			            },
+			            /** Cancel handler. */
+			            'onCancel': {
+			                label: 'Cancel handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Will change handler. */
+			            'onWillChange': {
+			                label: 'Will change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
+			            },
+			            /** Change handler. */
+			            'onChange': {
+			                label: 'Change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
+			            },
+			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+			            'values': {
+			                label: 'Values',
+			                type: 'raw',
+			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
+			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
+			            },
+			            /** Errors by field. */
+			            'errorsByField': {
+			                label: 'Errors by field',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
+			            },
+			            /** Show submit controls. */
+			            'shouldShowSubmitControls': {
+			                label: 'Show submit controls',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Show cancel button. */
+			            'shouldShowCancelButton': {
+			                label: 'Show cancel button',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Submit button label. */
+			            'submitButtonLabel': {
+			                label: 'Submit button label',
+			                type: 'text',
+			                defaultValue: "Go!",
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Set value handler. */
+			            'setValue': {
+			                label: 'Set value handler',
+			                type: 'raw',
+			                isPrivate: true,
+			                isRequired: true,
+			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
+			            },
+			            /** Form sections. */
+			            'sections': {
+			                label: 'Form sections',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** Present slide. The slide showing now! */
+			            'presentSlide': {
+			                label: 'Present slide',
+			                type: 'number',
+			                hint: 'The slide showing now!',
+			                defaultValue: 0,
+			                options: undefined
+			            },
+			            /** Submit handler. */
+			            'onSubmitSlide': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
+			            },
+			    }
+		}
+
+		type BigFormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ListRow {
 			
 				/** Controller. */
@@ -2590,6 +2445,187 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type ListEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardSection {
+			
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Complete. When being rendered as a slide, this will signify the step is complete. */
+				'isComplete'?: boolean| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
+				/** Padding. */
+				'shouldBePadded'?: boolean| undefined | null
+				/** Center content. */
+				'shouldContentBeCentered'?: boolean| undefined | null
+				/** Card section item. */
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Image. */
+				'image'?: string| undefined | null
+				/** Form. */
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
+				/** Talking Sprucebot. */
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				/** Big form. */
+				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
+				/** Buttons. */
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				/** Button bar. */
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Calendar. */
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
+				/** Stats. */
+				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
+				/** Progress. */
+				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
+				/** Ratings. */
+				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
+				/** Grid. */
+				'shouldRenderContentsAsGrid'?: boolean| undefined | null
+				/** Alignment. */
+				'alignment'?: ("left" | "center" | "right")| undefined | null
+		}
+
+		interface CardSectionSchema extends SpruceSchema.Schema {
+			id: 'cardSection',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
+			            'isComplete': {
+			                label: 'Complete',
+			                type: 'boolean',
+			                hint: 'When being rendered as a slide, this will signify the step is complete.',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                isPrivate: true,
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
+			            },
+			            /** Padding. */
+			            'shouldBePadded': {
+			                label: 'Padding',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Center content. */
+			            'shouldContentBeCentered': {
+			                label: 'Center content',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Card section item. */
+			            'text': {
+			                label: 'Card section item',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Form. */
+			            'form': {
+			                label: 'Form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
+			            },
+			            /** Talking Sprucebot. */
+			            'talkingSprucebot': {
+			                label: 'Talking Sprucebot',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
+			            },
+			            /** Big form. */
+			            'bigForm': {
+			                label: 'Big form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
+			            },
+			            /** Buttons. */
+			            'buttons': {
+			                label: 'Buttons',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			            /** Button bar. */
+			            'buttonBar': {
+			                label: 'Button bar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Calendar. */
+			            'calendar': {
+			                label: 'Calendar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
+			            },
+			            /** Stats. */
+			            'stats': {
+			                label: 'Stats',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
+			            },
+			            /** Progress. */
+			            'progress': {
+			                label: 'Progress',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
+			            },
+			            /** Ratings. */
+			            'ratings': {
+			                label: 'Ratings',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderContentsAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Alignment. */
+			            'alignment': {
+			                label: 'Alignment',
+			                type: 'select',
+			                defaultValue: "left",
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+			            },
+			    }
+		}
+
+		type CardSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema>
 
 	}
 
@@ -2721,6 +2757,147 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface FormBuilderImportExportObject {
+			
+				/** Title. */
+				'title': string
+				/** Subtitle. */
+				'subtitle'?: string| undefined | null
+				/** Pages. */
+				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
+		}
+
+		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
+			id: 'formBuilderImportExportObject',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'form builder import export object',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Subtitle. */
+			            'subtitle': {
+			                label: 'Subtitle',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Pages. */
+			            'pages': {
+			                label: 'Pages',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
+			            },
+			    }
+		}
+
+		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ListRatingsInput {
+			
+				
+				'id'?: string| undefined | null
+				
+				'name': string
+				
+				'value'?: number| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				/** Hint. */
+				'hint'?: string| undefined | null
+				/** Required. */
+				'isRequired'?: boolean| undefined | null
+				/** On change handler. */
+				'onChange'?: ((value?: boolean) => any | Promise<any>)| undefined | null
+				/** Stars or Smilies. */
+				'renderAs'?: ("stars" | "smilies")| undefined | null
+				
+				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
+		}
+
+		interface ListRatingsInputSchema extends SpruceSchema.Schema {
+			id: 'listRatingsInput',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'value': {
+			                type: 'number',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Hint. */
+			            'hint': {
+			                label: 'Hint',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Required. */
+			            'isRequired': {
+			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** On change handler. */
+			            'onChange': {
+			                label: 'On change handler',
+			                type: 'raw',
+			                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
+			            },
+			            /** Stars or Smilies. */
+			            'renderAs': {
+			                label: 'Stars or Smilies',
+			                type: 'select',
+			                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
+			            },
+			            /** . */
+			            'setValue': {
+			                type: 'raw',
+			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+			            },
+			    }
+		}
+
+		type ListRatingsInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ListToggleInput {
 			
 				
@@ -2738,7 +2915,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** On change handler. */
 				'onChange'?: ((value?: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
+				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListToggleInputSchema extends SpruceSchema.Schema {
@@ -2792,7 +2969,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
+			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -2864,7 +3041,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				
-				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
+				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -2931,7 +3108,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
+			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -2963,7 +3140,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => Promise<void> | void)| undefined | null
+				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -3023,7 +3200,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
+			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -3061,9 +3238,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
 				/** Cell button click handler. */
-				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => void | Promise<void>)| undefined | null
+				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>)| undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => void | Promise<void>)| undefined | null
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 		}
 
 		interface ListCellButtonSchema extends SpruceSchema.Schema {
@@ -3144,13 +3321,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClick': {
 			                label: 'Cell button click handler',
 			                type: 'raw',
-			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController }) => void | Promise<void>`,}
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>`,}
 			            },
 			            /** Cell button key down handler. */
 			            'onKeyDown': {
 			                label: 'Cell button key down handler',
 			                type: 'raw',
-			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => void | Promise<void>`,}
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
 			            },
 			    }
 		}
@@ -3230,6 +3407,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput| undefined | null
 				/** Toggle input. */
 				'toggleInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput| undefined | null
+				/** Ratings input. */
+				'ratingsInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput| undefined | null
 		}
 
 		interface ListCellSchema extends SpruceSchema.Schema {
@@ -3293,6 +3472,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Toggle input',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema,}
+			            },
+			            /** Ratings input. */
+			            'ratingsInput': {
+			                label: 'Ratings input',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema,}
 			            },
 			    }
 		}

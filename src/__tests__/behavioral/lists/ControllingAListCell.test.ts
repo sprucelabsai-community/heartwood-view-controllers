@@ -59,7 +59,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 	}
 
 	@test(
-		'setting text input value on cell sets value on list and triggers render in on the right places',
+		'setting text input value on cell sets value on list and triggers render in all the right places',
 		{
 			textInput: {
 				name: 'firstName',
@@ -68,7 +68,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		'Tay'
 	)
 	@test(
-		'setting select input value on cell sets value on list and triggers render in on the right places',
+		'setting select input value on cell sets value on list and triggers render in all the right places',
 		{
 			selectInput: {
 				name: 'firstName',
@@ -78,7 +78,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		'heyThere'
 	)
 	@test(
-		'setting toggle cell sets value on list and triggers render in on the right places',
+		'setting toggle cell sets value on list and triggers render in all the right places',
 		{
 			toggleInput: {
 				name: 'firstName',
@@ -87,7 +87,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		true
 	)
 	@test(
-		'setting toggle cell sets value on list and triggers render in on the right places',
+		'setting toggle cell sets value on list and triggers render in all the right places',
 		{
 			toggleInput: {
 				name: 'firstName',
@@ -95,6 +95,25 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 			},
 		},
 		false
+	)
+	@test(
+		'setting ratings cell sets value on list and triggers render in all the right places',
+		{
+			ratingsInput: {
+				name: 'firstName',
+			},
+		},
+		undefined
+	)
+	@test(
+		'setting ratings cell sets value on list and triggers render in all the right places',
+		{
+			ratingsInput: {
+				name: 'firstName',
+				value: 0.3,
+			},
+		},
+		0.3
 	)
 	protected static async settingValueOnInputSetsValueOnListAndTriggersRender(
 		cellModel: ListCellModel,

@@ -4,6 +4,7 @@ import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
+import ratingsInputBuilder from './forms/ratingsInput.builder'
 import textInputBuilder from './forms/textInput.builder'
 import toggleInputBuilder from './forms/toggleInput.builder'
 import selectInputBuilder from './selectInput.builder'
@@ -54,7 +55,7 @@ export default buildSchema({
 							label: 'Cell button click handler',
 							options: {
 								valueType:
-									'(options: { rowVc: HeartwoodTypes.ListRowViewController }) => void | Promise<void>',
+									'(options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>',
 							},
 						},
 						onKeyDown: {
@@ -62,7 +63,7 @@ export default buildSchema({
 							label: 'Cell button key down handler',
 							options: {
 								valueType:
-									'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => void | Promise<void>',
+									'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>',
 							},
 						},
 					},
@@ -87,7 +88,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<void> | void',
+								valueType: '(name: string, value: any) => Promise<any> | any',
 							},
 						},
 					},
@@ -105,7 +106,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<void> | void',
+								valueType: '(name: string, value: any) => Promise<any> | any',
 							},
 						},
 					},
@@ -123,7 +124,25 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<void> | void',
+								valueType: '(name: string, value: any) => Promise<any> | any',
+							},
+						},
+					},
+				},
+			},
+		},
+		ratingsInput: {
+			type: 'schema',
+			label: 'Ratings input',
+			options: {
+				schema: {
+					id: 'listRatingsInput',
+					fields: {
+						...ratingsInputBuilder.fields,
+						setValue: {
+							type: 'raw',
+							options: {
+								valueType: '(name: string, value: any) => Promise<any> | any',
 							},
 						},
 					},

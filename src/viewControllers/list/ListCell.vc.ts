@@ -9,6 +9,7 @@ export type ListCellModel = Omit<
 > & {
 	textInput?: ListTextInput | null
 	selectInput?: ListSelectInput | null
+	ratingsInput?: ListRatingsInput | null
 }
 
 type ListTextInput = Omit<
@@ -18,6 +19,11 @@ type ListTextInput = Omit<
 
 type ListSelectInput = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput,
+	'setValue'
+>
+
+type ListRatingsInput = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput,
 	'setValue'
 >
 
@@ -44,29 +50,22 @@ export default class ListCellViewController implements ViewController<Model> {
 	}
 
 	public render(): Model {
-		const { textInput, selectInput, toggleInput, ...rest } = this.model
+		const { textInput, selectInput, toggleInput, ratingsInput, ...rest } =
+			this.model
 
-		if (textInput) {
-			//@ts-ignore
-			rest.textInput = {
-				...textInput,
-				setValue: this.setValue.bind(this),
-			}
-		}
-
-		if (selectInput) {
-			//@ts-ignore
-			rest.selectInput = {
-				...selectInput,
-				setValue: this.setValue.bind(this),
-			}
-		}
-
-		if (toggleInput) {
-			//@ts-ignore
-			rest.toggleInput = {
-				...toggleInput,
-				setValue: this.setValue.bind(this),
+		for (const item of [
+			{ name: 'textInput', input: textInput },
+			{ name: 'selectInput', input: selectInput },
+			{ name: 'toggleInput', input: toggleInput },
+			{ name: 'ratingsInput', input: ratingsInput },
+		]) {
+			const { name, input } = item
+			if (input) {
+				//@ts-ignore
+				rest[name] = {
+					...input,
+					setValue: this.setValue.bind(this),
+				}
 			}
 		}
 

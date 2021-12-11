@@ -3,8 +3,8 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema  = {
-	id: 'listTextInput',
+const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema  = {
+	id: 'listRatingsInput',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
 	name: '',
@@ -23,7 +23,7 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            },
 	            /** . */
 	            'value': {
-	                type: 'text',
+	                type: 'number',
 	                isPrivate: true,
 	                options: undefined
 	            },
@@ -49,13 +49,13 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+	                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
 	            },
-	            /** Placeholder. */
-	            'placeholder': {
-	                label: 'Placeholder',
-	                type: 'text',
-	                options: undefined
+	            /** Stars or Smilies. */
+	            'renderAs': {
+	                label: 'Stars or Smilies',
+	                type: 'select',
+	                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
 	            },
 	            /** . */
 	            'setValue': {
@@ -65,6 +65,6 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(listTextInputSchema)
+SchemaRegistry.getInstance().trackSchema(listRatingsInputSchema)
 
-export default listTextInputSchema
+export default listRatingsInputSchema

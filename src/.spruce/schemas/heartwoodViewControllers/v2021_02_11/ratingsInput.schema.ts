@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema  = {
-	id: 'listTextInput',
+const ratingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsInputSchema  = {
+	id: 'ratingsInput',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: '',
+	name: 'ratings input',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -23,7 +23,7 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            },
 	            /** . */
 	            'value': {
-	                type: 'text',
+	                type: 'number',
 	                isPrivate: true,
 	                options: undefined
 	            },
@@ -49,22 +49,17 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+	                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
 	            },
-	            /** Placeholder. */
-	            'placeholder': {
-	                label: 'Placeholder',
-	                type: 'text',
-	                options: undefined
-	            },
-	            /** . */
-	            'setValue': {
-	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+	            /** Stars or Smilies. */
+	            'renderAs': {
+	                label: 'Stars or Smilies',
+	                type: 'select',
+	                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
 	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(listTextInputSchema)
+SchemaRegistry.getInstance().trackSchema(ratingsInputSchema)
 
-export default listTextInputSchema
+export default ratingsInputSchema

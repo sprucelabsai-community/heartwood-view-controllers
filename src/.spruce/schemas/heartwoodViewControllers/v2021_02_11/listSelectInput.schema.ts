@@ -67,7 +67,7 @@ const listSelectInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => Promise<void> | void`,}
+	                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
 	            },
 	    }
 }

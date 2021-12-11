@@ -88,6 +88,8 @@ export { default as statsSchema } from '#spruce/schemas/heartwoodViewControllers
 export { default as statsStatSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statsStat.schema'
 export { default as progressSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progress.schema'
 export { default as ratingsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
+export { default as listRatingsInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listRatingsInput.schema'
+export { default as ratingsInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratingsInput.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

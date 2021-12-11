@@ -546,7 +546,7 @@ const vcAssertUtil = {
 		} catch {
 			return
 		}
-		assert.fail(`I found a row ${row} and I didn't expect to!`)
+		assert.fail(`I found a row '${row}' and I didn't expect to!`)
 	},
 
 	assertSkillViewRendersFormBuilder(
@@ -1087,7 +1087,7 @@ const vcAssertUtil = {
 		assert.fail(
 			`I found a toggle${
 				toggleName ? ` named '${toggleName}'` : ''
-			} in row ${row} and I didn't expect to.`
+			} in row '${row}' and I didn't expect to.`
 		)
 	},
 
@@ -1112,10 +1112,26 @@ const vcAssertUtil = {
 		}
 
 		assert.fail(
-			`Could not find select in row ${row} and I totally expected to!`
+			`Could not find select in row '${row}' and I totally expected to!`
 		)
 
 		return {} as any
+	},
+
+	assertRowRendersRatings(listVc: ListViewController, row: string | number) {
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (cell.ratingsInput) {
+				return
+			}
+		}
+
+		assert.isTruthy(
+			model.cells?.[0]?.ratingsInput,
+			`I couldn't find a ratingsInput in row '${row}'!`
+		)
 	},
 
 	assertSkillViewRendersActiveRecordCard(

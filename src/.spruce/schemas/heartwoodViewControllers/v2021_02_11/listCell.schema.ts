@@ -6,6 +6,7 @@ import listCellButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewContr
 import listTextInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listTextInput.schema'
 import listSelectInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
 import listToggleInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listToggleInput.schema'
+import listRatingsInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listRatingsInput.schema'
 
 const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema  = {
 	id: 'listCell',
@@ -68,6 +69,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                label: 'Toggle input',
 	                type: 'schema',
 	                options: {schema: listToggleInputSchema_v2021_02_11,}
+	            },
+	            /** Ratings input. */
+	            'ratingsInput': {
+	                label: 'Ratings input',
+	                type: 'schema',
+	                options: {schema: listRatingsInputSchema_v2021_02_11,}
 	            },
 	    }
 }
