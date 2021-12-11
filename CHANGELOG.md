@@ -1,3 +1,10 @@
+# [51.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.11.0...v51.12.0) (2021-12-11)
+
+
+### Features
+
+* Devs can now render and test ratings in lists! This should make reviewing ratings easy peasy! ([ad49f6a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ad49f6a))
+
 # [51.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.10.0...v51.11.0) (2021-12-11)
 
 
