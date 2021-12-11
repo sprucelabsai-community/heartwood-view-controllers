@@ -801,9 +801,9 @@ const vcAssertUtil = {
 
 		if (missing.length > 0) {
 			assert.fail(
-				`Your card is missing buttons with the following ids: ${missing.join(
-					', '
-				)}`
+				`Your card '${getVcName(
+					vc
+				)}' is missing buttons with the following ids: ${missing.join(', ')}`
 			)
 		}
 	},
@@ -992,7 +992,9 @@ const vcAssertUtil = {
 		assert.isTrue(
 			isRequired,
 			//@ts-ignore
-			`Your skill view ${vc.id} does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
+			`Your skill view ${getVcName(
+				vc
+			)} does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
 		)
 	},
 
@@ -1299,6 +1301,13 @@ const vcAssertUtil = {
 }
 
 export default vcAssertUtil
+
+function getVcName(vc: ViewController<any>) {
+	return (
+		//@ts-ignore
+		vc.id ?? Object.getPrototypeOf(vc)?.constructor?.name ?? `view controller`
+	)
+}
 
 function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
 	if (vc) {
