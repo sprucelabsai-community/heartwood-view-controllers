@@ -2,8 +2,7 @@
   "installed": [
     "test",
     "schema",
-    "error",
-    "event"
+    "error"
   ],
   "writer": {
     "skips": [
