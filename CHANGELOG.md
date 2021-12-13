@@ -1,3 +1,10 @@
+# [51.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.12.10...v51.13.0) (2021-12-13)
+
+
+### Features
+
+* Devs can now respond to clicks on rows! Plus, a ratings view can enable/disable interaction. ([caa98f9](https://github.com/sprucelabsai/heartwood-view-controllers/commit/caa98f9))
+
 ## [51.12.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.12.9...v51.12.10) (2021-12-13)
 
 ## [51.12.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.12.8...v51.12.9) (2021-12-12)
