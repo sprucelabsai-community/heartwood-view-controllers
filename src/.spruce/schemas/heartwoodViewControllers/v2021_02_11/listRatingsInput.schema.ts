@@ -51,6 +51,12 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
 	            },
+	            /** Can be changed. */
+	            'canBeChanged': {
+	                label: 'Can be changed',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Stars or Smilies. */
 	            'renderAs': {
 	                label: 'Stars or Smilies',

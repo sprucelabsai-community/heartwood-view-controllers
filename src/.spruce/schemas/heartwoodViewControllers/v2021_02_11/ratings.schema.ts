@@ -17,6 +17,12 @@ const ratingsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsS
 	                hint: 'A number between 0-1.',
 	                options: undefined
 	            },
+	            /** Can be changed. */
+	            'canBeChanged': {
+	                label: 'Can be changed',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Callback. */
 	            'onChange': {
 	                label: 'Callback',

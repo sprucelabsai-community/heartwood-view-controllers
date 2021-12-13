@@ -11,7 +11,7 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = ControllingARatingsViewTest.Vc()
+		this.vc = this.Vc()
 	}
 
 	@test()
@@ -106,6 +106,29 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 		this.vc.setRenderAs(renderAs)
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 		assert.isEqual(this.render(this.vc).renderAs, renderAs)
+	}
+
+	@test()
+	protected static canControlEditableStatus() {
+		assert.isFalse(this.vc.getCanBeChanged())
+		assert.isFalse(this.render(this.vc).canBeChanged)
+
+		this.vc.setCanBeChanged(true)
+		assert.isTrue(this.render(this.vc).canBeChanged)
+		assert.isTrue(this.vc.getCanBeChanged())
+
+		this.vc.setCanBeChanged(false)
+		assert.isFalse(this.vc.getCanBeChanged())
+		assert.isFalse(this.render(this.vc).canBeChanged)
+	}
+
+	@test()
+	protected static canPassAndRenderEditableStatus() {
+		this.vc = this.Vc({
+			canBeChanged: true,
+		})
+
+		assert.isTrue(this.vc.getCanBeChanged())
 	}
 
 	private static Vc(

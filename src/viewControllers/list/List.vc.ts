@@ -58,7 +58,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['cells'],
-				friendlyMessage: `You tried to add a bad row to this list!`,
+				friendlyMessage: `Your row needs some cells.`,
 			})
 		}
 

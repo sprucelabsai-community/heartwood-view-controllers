@@ -281,6 +281,12 @@ const interactionUtil = {
 
 		assert.fail(`I could not find a select in row '${row}' to make a choice!`)
 	},
+
+	async clickRow(listVc: ListViewController, row: number | string) {
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+		await model.onClick?.()
+	},
 }
 
 export default interactionUtil

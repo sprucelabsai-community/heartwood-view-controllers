@@ -18,9 +18,8 @@ export default class RatingsViewController extends AbstractViewController<Rating
 		this.assertValueInRange(value)
 
 		this.model = {
-			onChange: options.onChange,
-			value: options.value,
-			renderAs: options.renderAs,
+			canBeChanged: false,
+			...options,
 		}
 	}
 
@@ -52,6 +51,14 @@ export default class RatingsViewController extends AbstractViewController<Rating
 
 	public getRenderAs() {
 		return this.model.renderAs
+	}
+
+	public setCanBeChanged(canBeChanged: boolean) {
+		this.model.canBeChanged = canBeChanged
+	}
+
+	public getCanBeChanged(): boolean {
+		return this.model.canBeChanged ?? false
 	}
 
 	public setValue(value: number) {

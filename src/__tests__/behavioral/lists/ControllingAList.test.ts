@@ -942,6 +942,23 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqual(this.render(this.vc).rows[0].height, 'content')
 	}
 
+	@test()
+	protected static async canClickOnRow() {
+		let wasHit = false
+
+		this.vc.addRow({
+			cells: [],
+			onClick: () => {
+				wasHit = true
+			},
+		})
+
+		const listVc = this.vc
+		await interactionUtil.clickRow(listVc, 0)
+
+		assert.isTrue(wasHit)
+	}
+
 	private static add3Rows() {
 		this.vc.addRows([
 			{

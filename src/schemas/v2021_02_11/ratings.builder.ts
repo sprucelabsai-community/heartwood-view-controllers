@@ -9,6 +9,10 @@ export default buildSchema({
 			label: 'Value',
 			hint: 'A number between 0-1.',
 		},
+		canBeChanged: {
+			type: 'boolean',
+			label: 'Can be changed',
+		},
 		onChange: {
 			type: 'raw',
 			label: 'Callback',

@@ -28,6 +28,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                type: 'id',
 	                options: undefined
 	            },
+	            /** Click handler. */
+	            'onClick': {
+	                label: 'Click handler',
+	                type: 'raw',
+	                options: {valueType: `() => Promise<any> | any`,}
+	            },
 	            /** Cells. */
 	            'cells': {
 	                label: 'Cells',

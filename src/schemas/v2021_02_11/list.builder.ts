@@ -65,6 +65,13 @@ export default buildSchema({
 							type: 'id',
 							label: 'Id',
 						},
+						onClick: {
+							type: 'raw',
+							label: 'Click handler',
+							options: {
+								valueType: '() => Promise<any> | any',
+							},
+						},
 						cells: {
 							type: 'schema',
 							label: 'Cells',

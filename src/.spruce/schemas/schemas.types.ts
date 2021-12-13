@@ -195,6 +195,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value?: boolean) => any | Promise<any>)| undefined | null
+				/** Can be changed. */
+				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 		}
@@ -246,6 +248,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On change handler',
 			                type: 'raw',
 			                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
+			            },
+			            /** Can be changed. */
+			            'canBeChanged': {
+			                label: 'Can be changed',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Stars or Smilies. */
 			            'renderAs': {
@@ -1308,6 +1316,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Value. A number between 0-1. */
 				'value'?: number| undefined | null
+				/** Can be changed. */
+				'canBeChanged'?: boolean| undefined | null
 				/** Callback. */
 				'onChange'?: ((value: number) => any)| undefined | null
 				/** Stars or Smilies. */
@@ -1326,6 +1336,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Value',
 			                type: 'number',
 			                hint: 'A number between 0-1.',
+			                options: undefined
+			            },
+			            /** Can be changed. */
+			            'canBeChanged': {
+			                label: 'Can be changed',
+			                type: 'boolean',
 			                options: undefined
 			            },
 			            /** Callback. */
@@ -2338,6 +2354,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'height'?: ("standard" | "tall" | "content")| undefined | null
 				/** Id. */
 				'id'?: string| undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any)| undefined | null
 				/** Cells. */
 				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
 		}
@@ -2366,6 +2384,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Id',
 			                type: 'id',
 			                options: undefined
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Cells. */
 			            'cells': {
@@ -2822,6 +2846,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value?: boolean) => any | Promise<any>)| undefined | null
+				/** Can be changed. */
+				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 				
@@ -2875,6 +2901,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On change handler',
 			                type: 'raw',
 			                options: {valueType: `(value?: boolean) => any | Promise<any>`,}
+			            },
+			            /** Can be changed. */
+			            'canBeChanged': {
+			                label: 'Can be changed',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Stars or Smilies. */
 			            'renderAs': {
