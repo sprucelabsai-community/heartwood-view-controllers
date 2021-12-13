@@ -1,3 +1,10 @@
+# [51.14.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.13.0...v51.14.0) (2021-12-13)
+
+
+### Features
+
+* A dev can now tell heartwood to render a ratings view in a form ([ac1746d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ac1746d))
+
 # [51.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.12.10...v51.13.0) (2021-12-13)
 
 
