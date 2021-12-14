@@ -21,7 +21,7 @@ export default class MercuryFixture {
 	public static shouldAutoImportContracts = true
 
 	public static async beforeEach() {
-		MercuryClientFactory.resetTestClient()
+		MercuryClientFactory.reset()
 		//@ts-ignore
 		MercuryClientFactory.setDefaultContract(coreEventContracts[0])
 	}
