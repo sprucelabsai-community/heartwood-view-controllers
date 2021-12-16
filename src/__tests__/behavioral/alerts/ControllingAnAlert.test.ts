@@ -48,6 +48,21 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async doesNotThrowWithOtherStylesAlert() {
+		vcAssertUtil.patchAlertToThrow(this.vc)
+		//@ts-ignore
+		await this.vc.alert({
+			style: 'info',
+			message: 'should not have been called',
+		})
+		//@ts-ignore
+		await this.vc.alert({
+			style: 'success',
+			message: 'should not have been called',
+		})
+	}
+
+	@test()
 	protected static async alertRendersDialog() {
 		const title = `${new Date().getTime()}`
 		const message = `${new Date().getTime() * Math.random()}`

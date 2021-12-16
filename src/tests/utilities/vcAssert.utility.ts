@@ -224,9 +224,10 @@ const vcAssertUtil = {
 
 		//@ts-ignore
 		dlgVc.alertOptions = alertOptions
+		const passedStyle = alertOptions.style ?? 'error'
 
 		assert.isEqual(
-			alertOptions.style,
+			passedStyle,
 			style,
 			`I expected this.alert({ type: '${style}' }) to be called in ${getVcName(
 				vc
@@ -1266,14 +1267,22 @@ const vcAssertUtil = {
 
 	patchAlertToThrow(vc: ViewController<any>) {
 		//@ts-ignore
-		vc._originalAlert = vc.alert.bind(vc)
+		if (!vc._originalAlert) {
+			//@ts-ignore
+			vc._originalAlert = vc.alert.bind(vc)
+		}
 
 		//@ts-ignore
 		vc.alert = async (options: AlertOptions) => {
-			assert.fail(
-				//@ts-ignore
-				`Skill view '${vc.id}' unexpectedly rendered an alert. It reads:\n\n${options.message}`
-			)
+			if (!options.style || options.style === 'error') {
+				assert.fail(
+					`Skill view '${getVcName(
+						vc
+					)}' unexpectedly rendered an error alert. It reads:\n\n${
+						options.message
+					}`
+				)
+			}
 		}
 	},
 
