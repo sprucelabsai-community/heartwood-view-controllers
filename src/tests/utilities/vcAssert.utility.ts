@@ -182,18 +182,28 @@ const vcAssertUtil = {
 		)
 	},
 
+	async assertRendersSuccessAlert(
+		vc: ViewController<any>,
+		action: () => any | Promise<any>
+	) {
+		await this.assertRendersAlert(vc, action, 'success')
+	},
+
 	async assertRendersAlert(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>
+		action: () => void | Promise<void>,
+		style: AlertOptions['style'] = 'error'
 	) {
 		let wasAlertTriggered = false
 
 		//@ts-ignore
 		let oldAlert = vc._originalAlert ? vc._originalAlert : vc.alert.bind(vc)
+		let alertOptions: any
 
 		//@ts-ignore
 		vc.alert = (options: any) => {
 			wasAlertTriggered = true
+			alertOptions = options
 			return oldAlert(options)
 		}
 
@@ -212,7 +222,20 @@ const vcAssertUtil = {
 			`Expected this.alert() to be called in your view and it wasn't.`
 		)
 
-		return dlgVc as DialogViewController
+		//@ts-ignore
+		dlgVc.alertOptions = alertOptions
+
+		assert.isEqual(
+			alertOptions.style,
+			style,
+			`I expected this.alert({ type: '${style}' }) to be called in ${getVcName(
+				vc
+			)}, but it wasn't!`
+		)
+
+		return dlgVc as DialogViewController & {
+			alertOptions: AlertOptions
+		}
 	},
 
 	async assertDoesNotRenderAlert(

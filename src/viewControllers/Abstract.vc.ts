@@ -18,7 +18,7 @@ import ViewControllerFactory from './ViewControllerFactory'
 export interface AlertOptions {
 	title?: string
 	message: string
-	style?: 'info' | 'error'
+	style?: 'info' | 'error' | 'success'
 }
 
 export default abstract class AbstractViewController<ViewModel>
