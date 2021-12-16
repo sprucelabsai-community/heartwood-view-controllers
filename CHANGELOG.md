@@ -1,3 +1,10 @@
+# [51.15.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.14.25...v51.15.0) (2021-12-16)
+
+
+### Features
+
+* Devs can now render success alerts that can be seperatly teste from error alerts! Great for lettle people know the form they submitted saved! ([985ef1b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/985ef1b))
+
 ## [51.14.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.14.24...v51.14.25) (2021-12-16)
 
 ## [51.14.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.14.23...v51.14.24) (2021-12-16)
