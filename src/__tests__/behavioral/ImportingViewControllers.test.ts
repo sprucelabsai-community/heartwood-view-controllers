@@ -119,7 +119,11 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		//@ts-ignore
 		assert.isEqual(model.setTimeout, setTimeout)
 		//@ts-ignore
+		assert.isEqual(model.setInterval, setInterval)
+		//@ts-ignore
 		assert.isEqual(model.clearTimeout, clearTimeout)
+		//@ts-ignore
+		assert.isEqual(model.clearInterval, clearInterval)
 	}
 
 	@test()

@@ -12,7 +12,15 @@ export default class ViewControllerImporter {
 			let exports = {}
 			const globals = Object.keys(global)
 			const resets = globals
-				.filter((name) => ['setTimeout', 'clearTimeout'].indexOf(name) === -1)
+				.filter(
+					(name) =>
+						[
+							'setTimeout',
+							'clearTimeout',
+							'setInterval',
+							'clearInterval',
+						].indexOf(name) === -1
+				)
 				.filter((name) => name.search(/[^0-9a-zA-Z_]/) === -1)
 				.map((name) => `var ${name} = {};`)
 				.join('\n')

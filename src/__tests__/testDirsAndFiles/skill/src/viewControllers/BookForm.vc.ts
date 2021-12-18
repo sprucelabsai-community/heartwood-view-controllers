@@ -27,6 +27,8 @@ export default class BookFormViewController extends AbstractSkillViewController 
 			globalHack2Value: global.__hack2,
 			setTimeout,
 			clearTimeout,
+			setInterval,
+			clearInterval,
 		}
 	}
 }
