@@ -140,6 +140,8 @@ const interactionUtil = {
 	},
 
 	async submitForm(vc: FormVc) {
+		assert.isTruthy(vc, `You have to pass a view controller to submit a form.`)
+
 		if (!vc.isEnabled()) {
 			assert.fail(`You can't submit a form that is disabled!`)
 		}
