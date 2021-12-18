@@ -1,3 +1,10 @@
+# [51.19.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.18.0...v51.19.0) (2021-12-18)
+
+
+### Features
+
+* Devs can now test if a redirect does NOT occur, making it possible to test even better experiences ([f2d727c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f2d727c))
+
 # [51.18.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.17.1...v51.18.0) (2021-12-18)
 
 
