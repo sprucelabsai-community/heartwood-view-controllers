@@ -1,3 +1,10 @@
+# [51.17.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.16.0...v51.17.0) (2021-12-18)
+
+
+### Features
+
+* Devs can now update rows in an ActiveRecord card, giving them the power to update rows based on real time updates!! ([738b1e7](https://github.com/sprucelabsai/heartwood-view-controllers/commit/738b1e7))
+
 # [51.16.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.15.13...v51.16.0) (2021-12-18)
 
 
