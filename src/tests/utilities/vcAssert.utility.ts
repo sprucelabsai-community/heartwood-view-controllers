@@ -1034,7 +1034,9 @@ const vcAssertUtil = {
 		)
 	},
 
-	async assertActionDoesNotRedirect(options: AssertRedirectOptions) {
+	async assertActionDoesNotRedirect(
+		options: Omit<AssertRedirectOptions, 'destination'>
+	) {
 		try {
 			await this.assertActionRedirects(options)
 		} catch {
