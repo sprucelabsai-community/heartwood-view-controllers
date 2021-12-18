@@ -1286,6 +1286,15 @@ const vcAssertUtil = {
 		}
 	},
 
+	patchSubmitToThrow() {
+		FormViewController.prototype._originalSubmit =
+			FormViewController.prototype.submit
+		FormViewController.prototype.submit = () =>
+			assert.fail(
+				`You can't submit a form directly! You gotta use 'interactionUtil.submitForm()' instead!`
+			)
+	},
+
 	assertCardRendersProgress(
 		vc: ViewController<Card>,
 		expectedPercentComplete?: number

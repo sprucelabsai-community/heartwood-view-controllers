@@ -1039,6 +1039,17 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		})
 	}
 
+	@test()
+	protected static async formsCanBeSetToThrowOnSubmit() {
+		vcAssertUtil.patchSubmitToThrow()
+		this.vc = this.Controller('form', {
+			...this.testForm,
+		}) as any
+		await assert.doesThrowAsync(() => this.vc.submit())
+		await interactionUtil.submitForm(this.vc)
+		await assert.doesThrowAsync(() => this.vc.submit())
+	}
+
 	private static FormWithOnChange(onChange: (options: any) => void) {
 		return this.Controller(
 			'form',
