@@ -1287,9 +1287,12 @@ const vcAssertUtil = {
 	},
 
 	patchSubmitToThrow() {
+		//@ts-ignore
 		FormViewController.prototype._originalSubmit =
 			FormViewController.prototype.submit
-		FormViewController.prototype.submit = () =>
+
+		//@ts-ignore
+		FormViewController.prototype.submit = async () =>
 			assert.fail(
 				`You can't submit a form directly! You gotta use 'interactionUtil.submitForm()' instead!`
 			)
