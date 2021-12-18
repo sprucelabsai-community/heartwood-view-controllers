@@ -204,7 +204,14 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return this.model.rows.findIndex((r) => r.id === id)
 	}
 
+	/**
+	 * @deprecated Use upsertRow() instead.
+	 */
 	public upsertRowById(id: string, row: ListRowModel) {
+		return this.upsertRow(id, row)
+	}
+
+	public upsertRow(id: string, row: ListRowModel) {
 		const idx = this.getIdxForId(id)
 		if (idx === -1) {
 			this.addRow({ ...row })

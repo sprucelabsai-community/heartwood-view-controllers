@@ -7,7 +7,7 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 import '@sprucelabs/mercury-core-events'
-import ListViewController from './list/List.vc'
+import ListViewController, { ListRowModel } from './list/List.vc'
 
 export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
@@ -41,6 +41,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private filter?: (record: Record<string, any>) => boolean
 
 	private static shouldThrowOnResponseError = false
+	private records: any[] = []
 
 	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
 		this.shouldThrowOnResponseError = shouldThrow
@@ -112,6 +113,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			if (!records) {
 				responseKeyError = true
 			} else {
+				this.records = records
 				if (records.length === 0) {
 					this.listVc.addRow({
 						id: 'no-results',
@@ -170,6 +172,24 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.isLoaded
 	}
 
+	public getRecords() {
+		if (!this.isLoaded) {
+			throw new Error(
+				`You have to load your activeRecordCard before you can get records from it.`
+			)
+		}
+		return this.records
+	}
+
+	public upsertRow(id: string, row: ListRowModel) {
+		if (!this.isLoaded) {
+			throw new Error(
+				`You have to load your activeRecordCard before you can upsert a row.`
+			)
+		}
+
+		this.listVc.upsertRow(id, { ...row })
+	}
 	private buildTargetAndPayload() {
 		const targetAndPayload: Record<string, any> = {}
 

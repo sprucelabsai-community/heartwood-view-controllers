@@ -468,10 +468,62 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isEqual(this.render(listVc).defaultRowHeight, height)
 	}
 
+	@test()
+	protected static async canGetRecordsBackAfterLoad() {
+		const { vc, organizations } = await this.seedAndGetVc()
+
+		assert.doesThrow(() => vc.getRecords())
+
+		await vc.load()
+
+		const records = vc.getRecords()
+
+		assert.isEqualDeep(records, organizations)
+	}
+
+	@test()
+	protected static async canUpdateRowDirectly() {
+		const { vc, organizations } = await this.seedAndGetVc()
+
+		assert.doesThrow(() => vc.upsertRow(organizations[0].id, { cells: [] }))
+
+		let passedId: any
+		let passedRow: any
+
+		vc.getListVc().upsertRow = (id: any, row: any) => {
+			passedId = id
+			passedRow = row
+		}
+
+		await vc.load()
+
+		vc.upsertRow(organizations[0].id, { cells: [] })
+		assert.isEqual(passedId, organizations[0].id)
+		assert.isEqualDeep(passedRow, { cells: [] })
+
+		vc.upsertRow(organizations[0].id, { cells: [{ lineIcon: 'info' }] })
+		assert.isEqualDeep(passedRow, { cells: [{ lineIcon: 'info' }] })
+	}
+
+	private static async seedAndGetVc() {
+		const organizations = await this.seedOrganizations()
+
+		const vc = this.Vc({
+			payload: {
+				shouldOnlyShowMine: true,
+			},
+		})
+		return { vc, organizations }
+	}
+
 	private static async seedOrganizations() {
-		const organizations = await Promise.all(
+		let organizations = await Promise.all(
 			new Array(5).fill(0).map(() => this.seedOrganization())
 		)
+
+		organizations = organizations.sort((a, b) => {
+			return a.dateCreated > b.dateCreated ? 1 : -1
+		})
 
 		return organizations
 	}
