@@ -1034,6 +1034,16 @@ const vcAssertUtil = {
 		)
 	},
 
+	async assertActionDoesNotRedirect(options: AssertRedirectOptions) {
+		try {
+			await this.assertActionRedirects(options)
+		} catch {
+			return
+		}
+
+		assert.fail(`You redirected and should not have!`)
+	},
+
 	async assertActionRedirects(options: AssertRedirectOptions) {
 		const { router, action, destination } = options
 

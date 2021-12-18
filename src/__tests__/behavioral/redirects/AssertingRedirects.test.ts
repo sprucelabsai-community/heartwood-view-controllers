@@ -20,13 +20,17 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async knowsWhenRedirecting() {
 		const router = new MockRouter()
-		await vcAssertUtil.assertActionRedirects({
+		const options = {
 			router,
 			action: async () => {
 				//@ts-ignore
 				await router.redirect('hey')
 			},
-		})
+		}
+		await vcAssertUtil.assertActionRedirects(options)
+		await assert.doesThrowAsync(() =>
+			vcAssertUtil.assertActionDoesNotRedirect(options)
+		)
 	}
 
 	@test()
@@ -67,18 +71,21 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async throwsWithMissmatchOnDestinationId() {
 		const router = new MockRouter()
+		const options = {
+			router,
+			action: async () => {
+				//@ts-ignore
+				return router.redirect('taco')
+			},
+			destination: {
+				id: 'tester',
+			},
+		}
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionRedirects({
-				router,
-				action: async () => {
-					//@ts-ignore
-					return router.redirect('taco')
-				},
-				destination: {
-					id: 'tester',
-				},
-			})
+			vcAssertUtil.assertActionRedirects(options)
 		)
+
+		await vcAssertUtil.assertActionDoesNotRedirect(options)
 	}
 
 	@test()
