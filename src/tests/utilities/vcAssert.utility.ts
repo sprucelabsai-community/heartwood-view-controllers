@@ -1060,7 +1060,9 @@ const vcAssertUtil = {
 				wasHit = true
 
 				if (destination?.id && destination.id !== id) {
-					reject(`I expected to be redirected to ${destination.id} but wasn't.`)
+					reject(
+						`I expected to be redirected to '${destination.id}' but I was sent to '${id}'.`
+					)
 					return
 				}
 
