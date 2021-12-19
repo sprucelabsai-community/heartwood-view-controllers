@@ -57,7 +57,7 @@ const editFieldFormSchema = buildSchema({
 			type: 'text',
 			label: 'Dropdown options',
 			// isRequired: true,
-			hint: 'Render 1 per',
+			hint: "Put each choice on it's own line!",
 		},
 	},
 })
