@@ -26,6 +26,7 @@ import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter.utility'
+import formTestUtil from './formTest.utility'
 
 const WAIT_TIMEOUT = 5000
 export type Vc = ViewController<any>
@@ -1298,16 +1299,11 @@ const vcAssertUtil = {
 		}
 	},
 
+	/**
+	 * @deprecated use formTestUtil.patchSubmitToThrow() instead
+	 */
 	patchSubmitToThrow() {
-		//@ts-ignore
-		FormViewController.prototype._originalSubmit =
-			FormViewController.prototype.submit
-
-		//@ts-ignore
-		FormViewController.prototype.submit = async () =>
-			assert.fail(
-				`You can't submit a form directly! You gotta use 'interactionUtil.submitForm()' instead!`
-			)
+		formTestUtil.patchSubmitToThrow()
 	},
 
 	assertCardRendersProgress(
