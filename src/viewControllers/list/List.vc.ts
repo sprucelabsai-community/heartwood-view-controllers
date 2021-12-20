@@ -273,6 +273,15 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return rowVc.getIsSelected()
 	}
 
+	public setSelectedRows(rows: (string | number)[]) {
+		for (const selected of this.getSelectedRows()) {
+			this.getRowVc(selected).setIsSelected(false)
+		}
+		for (const row of rows) {
+			this.getRowVc(row).setIsSelected(true)
+		}
+	}
+
 	public deleteAllRows() {
 		this.model.rows = []
 		this.triggerRender()

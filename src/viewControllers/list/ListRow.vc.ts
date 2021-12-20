@@ -36,6 +36,7 @@ export default class ListRowViewController
 
 	public setIsSelected(isSelected: boolean) {
 		this.model.isSelected = isSelected
+		this.triggerRender()
 	}
 
 	public async setValue(name: string, value: any) {

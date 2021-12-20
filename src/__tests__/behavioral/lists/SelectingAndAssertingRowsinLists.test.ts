@@ -109,6 +109,56 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		vcAssertUtil.assertRowIsNotSelected(vc, 'more')
 	}
 
+	@test()
+	protected static canSetManySelectedAtOnce() {
+		const vc = this.Vc([
+			{
+				id: 'test',
+				cells: [],
+			},
+			{
+				id: 'more',
+				cells: [],
+			},
+			{
+				id: 'middle',
+				cells: [],
+			},
+			{
+				id: 'end',
+				cells: [],
+			},
+		])
+
+		vc.setSelectedRows(['test'])
+		vcAssertUtil.assertRowsAreSelected(vc, ['test'])
+
+		vc.setSelectedRows(['middle'])
+		vcAssertUtil.assertRowIsNotSelected(vc, 'test')
+
+		vc.setSelectedRows(['more', 'end'])
+		vcAssertUtil.assertRowsAreSelected(vc, ['more', 'end'])
+		vcAssertUtil.assertRowIsNotSelected(vc, 'middle')
+	}
+
+	@test()
+	protected static settingSelectedOnRowTriggersRender() {
+		const vc = this.Vc([
+			{
+				id: 'test',
+				cells: [],
+			},
+		])
+
+		const rowVc = vc.getRowVc(0)
+
+		vcAssertUtil.attachTriggerRenderCounter(rowVc)
+
+		rowVc.setIsSelected(true)
+
+		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
+	}
+
 	private static Vc(
 		rows: ListRowModel[] = [
 			{
