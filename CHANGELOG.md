@@ -1,3 +1,10 @@
+# [52.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.20.15...v52.0.0) (2021-12-20)
+
+
+### Breaking Changes
+
+* Rows in lists now require rows! Also, it is possible to mark a row as selected and test against it, making the list experience even BETTER! ([3c5cd2b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3c5cd2b))
+
 ## [51.20.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.20.14...v51.20.15) (2021-12-20)
 
 ## [51.20.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.20.13...v51.20.14) (2021-12-20)
