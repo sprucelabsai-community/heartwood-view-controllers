@@ -117,7 +117,7 @@ export default abstract class AbstractViewController<ViewModel>
 				buttons: [
 					{
 						label: 'Ok',
-						type: options.style === 'info' ? 'primary' : 'destructive',
+						type: this.styleToButtonType(options.style),
 						onClick: () => {
 							void dlg.hide()
 						},
@@ -127,6 +127,20 @@ export default abstract class AbstractViewController<ViewModel>
 		})
 
 		await dlg.wait()
+	}
+
+	private styleToButtonType(
+		style: AlertOptions['style']
+	): 'primary' | 'secondary' | 'destructive' {
+		switch (style) {
+			case 'error':
+			case undefined:
+				return 'destructive'
+			case 'success':
+				return 'primary'
+			default:
+				return 'secondary'
+		}
 	}
 
 	protected async confirm(options: ConfirmOptions) {

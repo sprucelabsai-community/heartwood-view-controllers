@@ -146,6 +146,20 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
+		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'secondary')
+	}
+
+	@test()
+	protected static async successRendersPrimaryButton() {
+		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+			//@ts-ignore
+			this.vc.alert({
+				title: 'hey',
+				message: 'hey',
+				style: 'success',
+			})
+		)
+
 		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'primary')
 	}
 }
