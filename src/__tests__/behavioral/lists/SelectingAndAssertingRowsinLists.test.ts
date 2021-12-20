@@ -159,6 +159,30 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
 	}
 
+	@test()
+	protected static selectedRowsArePersistedBetweenListChanges() {
+		const vc = this.Vc([
+			{
+				id: 'happy',
+				cells: [],
+			},
+			{
+				id: 'day',
+				cells: [],
+			},
+		])
+
+		const rowVc = vc.getRowVc('happy')
+		rowVc.setIsSelected(true)
+
+		vc.addRow({
+			id: 'taco',
+			cells: [],
+		})
+
+		vcAssertUtil.assertRowIsSelected(vc, 'happy')
+	}
+
 	private static Vc(
 		rows: ListRowModel[] = [
 			{

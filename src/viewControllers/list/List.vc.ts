@@ -101,6 +101,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			this.assertValidRowIdx(row)
 
 			this._rowVcs[row] = new ListRowViewController({
+				getIsSelected: () => {
+					return this.model.rows[row].isSelected ?? false
+				},
+				setIsSelected: (is) => {
+					this.model.rows[row].isSelected = is
+				},
 				setValue: async (name: string, value: any) => {
 					await this.setValue({ rowIdx: row, name, value })
 				},

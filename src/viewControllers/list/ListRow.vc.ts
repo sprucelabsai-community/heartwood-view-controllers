@@ -13,31 +13,41 @@ export default class ListRowViewController
 	private getValuesHandler: () => Record<string, any>
 	private deleteRowHandler: () => void
 	private _isLastRow: boolean
+	private getIsSelectedHandler: () => boolean
+	private setIsSelectedHandler: (isSelected: boolean) => void
 
 	public constructor(
 		options: ListRowModel & {
 			setValue: (name: string, value: any) => void | Promise<void>
 			getValues: () => Record<string, any>
 			deleteRow: () => void
+			getIsSelected: () => boolean
+			setIsSelected: (isSelected: boolean) => void
 			isLastRow: boolean
 		}
 	) {
-		const { setValue, getValues, deleteRow, isLastRow, ...model } = options
+		const {
+			setValue,
+			getValues,
+			deleteRow,
+			getIsSelected,
+			setIsSelected,
+			isLastRow,
+			...model
+		} = options
 
 		this.model = model
 
 		this.setValueHandler = setValue
 		this.getValuesHandler = getValues
 		this.deleteRowHandler = deleteRow
+		this.getIsSelectedHandler = getIsSelected
+		this.setIsSelectedHandler = setIsSelected
+
 		this._isLastRow = isLastRow
 	}
 
 	public triggerRender() {}
-
-	public setIsSelected(isSelected: boolean) {
-		this.model.isSelected = isSelected
-		this.triggerRender()
-	}
 
 	public async setValue(name: string, value: any) {
 		await this._setValue(name, value)
@@ -89,7 +99,12 @@ export default class ListRowViewController
 	}
 
 	public getIsSelected(): boolean {
-		return this.model.isSelected ?? false
+		return this.getIsSelectedHandler()
+	}
+
+	public setIsSelected(isSelected: boolean) {
+		this.setIsSelectedHandler(isSelected)
+		this.triggerRender()
 	}
 
 	public getCellVc(idx: number) {
