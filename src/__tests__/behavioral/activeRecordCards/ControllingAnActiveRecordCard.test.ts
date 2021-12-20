@@ -365,7 +365,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		buildActiveRecordCard({
 			eventName: 'list-organizations::v2020_12_25',
 			responseKey: 'organizations',
-			rowTransformer: (_org) => ({ cells: [] }),
+			rowTransformer: (o) => ({ id: o.id, cells: [] }),
 			filter: (_org) => true,
 			payload: {
 				shouldOnlyShowMine: true,
@@ -375,7 +375,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		buildActiveRecordCard({
 			eventName: 'list-locations::v2020_12_25',
 			responseKey: 'locations',
-			rowTransformer: (_loc) => ({ cells: [] }),
+			rowTransformer: (l) => ({ id: l.id, cells: [] }),
 			target: {
 				organizationId: '2345',
 			},

@@ -68,6 +68,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddRow() {
 		this.vc.addRow({
+			id: 'can-add',
 			cells: [
 				{
 					text: {
@@ -99,6 +100,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static addingRowTriggersRender() {
 		this.vc.addRow({
+			id: 'add-triggers',
 			cells: [
 				{
 					text: {
@@ -114,6 +116,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddRowAtIndex() {
 		this.vc.addRow({
+			id: 'can-add-at-index-1',
 			cells: [
 				{
 					text: {
@@ -124,6 +127,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		this.vc.addRow({
+			id: 'can-add-at-index-2',
 			cells: [
 				{
 					text: {
@@ -134,6 +138,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		this.vc.addRow({
+			id: 'can-add-at-index-3',
 			atIndex: 1,
 			cells: [
 				{
@@ -149,6 +154,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqual(rows[1]?.cells[0]?.text?.content, 'I wanna!')
 
 		this.vc.addRow({
+			id: 'can-add-at-index-4',
 			atIndex: 2,
 			cells: [
 				{
@@ -167,6 +173,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddATextInputToARow() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: {
@@ -181,6 +188,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddASelectinputToARow() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					selectInput: {
@@ -214,6 +222,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canGetGoodRowVc() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -228,6 +237,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async cantSetValueOnRowFieldByNameDoesNotExist() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -246,6 +256,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	public static rowVcHasNoValuesToStart() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -260,6 +271,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetValueOnGoodFieldName() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'lastName', label: 'row 1' },
@@ -268,6 +280,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 2' },
@@ -296,6 +309,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async settingValuesOnRowVcSetsValues() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'lastName', label: 'row 1', value: 'Horse' },
@@ -313,6 +327,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async settingValuesOnRowVcSetsValuesWithMultipleCells() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -339,6 +354,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canGetValuesOnList() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -381,6 +397,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async renderingRendersValueOnInputs() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -412,6 +429,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetValueOnSetValueOfField() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -452,6 +470,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const vc = this.Controller('list', {
 			rows: [
 				{
+					id: generateRandomId(),
 					cells: [
 						{
 							text: { content: 'go team!' },
@@ -467,6 +486,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async settingValueOnRowTriggersRender() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -499,6 +519,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		let onChangeSelectValue: string | undefined
 
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: {
@@ -539,6 +560,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static gettingBadValueOnRowThrows() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					textInput: {
@@ -573,6 +595,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static canSetRowsDirectly() {
 		this.vc.setRows([
 			{
+				id: generateRandomId(),
 				cells: [
 					{
 						text: { content: 'yay' },
@@ -590,6 +613,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		this.vc.setRows([
 			{
+				id: generateRandomId(),
 				cells: [
 					{
 						text: { content: 'yay 2' },
@@ -615,6 +639,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canDeleteRow() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: {
@@ -624,6 +649,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: {
@@ -673,6 +699,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static rowsVcsKnowIfTheyAreTheLastRow() {
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [
 				{
 					text: {
@@ -693,6 +720,84 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const err = assert.doesThrow(() => this.vc.getRowVc('test'))
 		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
+		})
+	}
+
+	@test()
+	protected static throwsWhenInstantiatingVcWithDuplicateRowIds() {
+		const err = assert.doesThrow(() =>
+			this.Controller('list', {
+				rows: [
+					{
+						id: 'test',
+						cells: [
+							{
+								text: {
+									content: 'Hey there!',
+								},
+							},
+						],
+					},
+					{
+						id: 'test',
+						cells: [
+							{
+								text: {
+									content: 'Hey there!',
+								},
+							},
+						],
+					},
+				],
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+			rowId: 'test',
+		})
+	}
+
+	@test()
+	protected static throwsWhenInstantiatingVcWithDuplicateRowIds2() {
+		const err = assert.doesThrow(() =>
+			this.Controller('list', {
+				rows: [
+					{
+						id: 'first',
+						cells: [
+							{
+								text: {
+									content: 'Hey there!',
+								},
+							},
+						],
+					},
+					{
+						id: 'second',
+						cells: [
+							{
+								text: {
+									content: 'Hey there!',
+								},
+							},
+						],
+					},
+					{
+						id: 'first',
+						cells: [
+							{
+								text: {
+									content: 'Hey there!',
+								},
+							},
+						],
+					},
+				],
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+			rowId: 'first',
 		})
 	}
 
@@ -813,7 +918,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canUpsertRowByIdToUpdate() {
+	protected static canupsertRowToUpdate() {
 		this.vc.addRows([
 			{
 				id: 'test1',
@@ -837,21 +942,21 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 
-		this.vc.upsertRowById('test1', {
+		this.vc.upsertRow('test1', {
 			cells: [{ text: { content: 'updated!' } }],
 		})
 
 		let model = this.render(this.vc)
 		assert.isEqual(model.rows[0]?.cells[0]?.text?.content, 'updated!')
 
-		this.vc.upsertRowById('test2', {
+		this.vc.upsertRow('test2', {
 			cells: [{ text: { content: 'updated 2!' } }],
 		})
 
 		model = this.render(this.vc)
 		assert.isEqual(model.rows[1]?.cells[0]?.text?.content, 'updated 2!')
 
-		this.vc.upsertRowById('does-not-exist', {
+		this.vc.upsertRow('does-not-exist', {
 			cells: [{ text: { content: 'totally new!' } }],
 		})
 
@@ -947,6 +1052,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		let wasHit = false
 
 		this.vc.addRow({
+			id: generateRandomId(),
 			cells: [],
 			onClick: () => {
 				wasHit = true
@@ -997,6 +1103,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	private static add2Rows() {
 		this.vc.addRows([
 			{
+				id: generateRandomId(),
 				cells: [
 					{
 						text: {
@@ -1006,6 +1113,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 				],
 			},
 			{
+				id: generateRandomId(),
 				cells: [
 					{
 						text: {
@@ -1016,4 +1124,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 	}
+}
+function generateRandomId(): string {
+	return `${Math.random() * new Date().getTime()}`
 }

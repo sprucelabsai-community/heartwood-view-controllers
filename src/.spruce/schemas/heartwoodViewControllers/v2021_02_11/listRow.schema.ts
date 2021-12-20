@@ -26,6 +26,7 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	            'id': {
 	                label: 'Id',
 	                type: 'id',
+	                isRequired: true,
 	                options: undefined
 	            },
 	            /** Click handler. */
@@ -33,6 +34,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                label: 'Click handler',
 	                type: 'raw',
 	                options: {valueType: `() => Promise<any> | any`,}
+	            },
+	            /** Selected. */
+	            'isSelected': {
+	                label: 'Selected',
+	                type: 'boolean',
+	                options: undefined
 	            },
 	            /** Cells. */
 	            'cells': {

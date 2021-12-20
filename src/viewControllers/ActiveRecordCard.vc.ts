@@ -16,7 +16,7 @@ export interface ActiveRecordCardViewControllerOptions {
 	eventName: string
 	responseKey: string
 	rowTransformer: (record: Record<string, any>) => Row
-	noResultsRow?: Row
+	noResultsRow?: Omit<Row, 'id'>
 	payload?: Record<string, any>
 	target?: Record<string, any>
 	header?: Card['header']
@@ -31,7 +31,7 @@ export interface ActiveRecordCardViewControllerOptions {
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
 	private cardVc: CardViewController
 	private listVc: ListViewController
-	private noResultsRow?: Row
+	private noResultsRow?: Omit<Row, 'id'>
 	private rowTransformer: (record: Record<string, any>) => Row
 	private eventName: string
 	private responseKey: string
@@ -181,7 +181,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.records
 	}
 
-	public upsertRow(id: string, row: ListRowModel) {
+	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
 		if (!this.isLoaded) {
 			throw new Error(
 				`You have to load your activeRecordCard before you can upsert a row.`

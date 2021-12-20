@@ -64,6 +64,7 @@ export default buildSchema({
 						id: {
 							type: 'id',
 							label: 'Id',
+							isRequired: true,
 						},
 						onClick: {
 							type: 'raw',
@@ -71,6 +72,10 @@ export default buildSchema({
 							options: {
 								valueType: '() => Promise<any> | any',
 							},
+						},
+						isSelected: {
+							type: 'boolean',
+							label: 'Selected',
 						},
 						cells: {
 							type: 'schema',

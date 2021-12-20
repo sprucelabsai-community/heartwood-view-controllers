@@ -119,7 +119,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 				id,
 				eventName: 'list-organizations::v2020_12_25',
 				responseKey: 'organizations',
-				rowTransformer: () => ({ cells: [] }),
+				rowTransformer: (o) => ({ id: o.id, cells: [] }),
 			})
 		)
 	}

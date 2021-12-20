@@ -249,6 +249,7 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 
 	private buildFieldRow(options: SimpleRow & { idx: number }): ListRowModel {
 		return {
+			id: options.name,
 			cells: [
 				{
 					textInput: {

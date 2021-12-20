@@ -34,6 +34,10 @@ export default class ListRowViewController
 
 	public triggerRender() {}
 
+	public setIsSelected(isSelected: boolean) {
+		this.model.isSelected = isSelected
+	}
+
 	public async setValue(name: string, value: any) {
 		await this._setValue(name, value)
 		this.triggerRender()
@@ -79,8 +83,12 @@ export default class ListRowViewController
 		this.deleteRowHandler()
 	}
 
-	public getId(): any {
+	public getId() {
 		return this.model.id
+	}
+
+	public getIsSelected(): boolean {
+		return this.model.isSelected ?? false
 	}
 
 	public getCellVc(idx: number) {

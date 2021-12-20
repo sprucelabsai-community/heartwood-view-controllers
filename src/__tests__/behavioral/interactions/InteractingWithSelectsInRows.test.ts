@@ -124,7 +124,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 					cells: [],
 				},
 				{
-					id: options?.firstRowId ?? 'last',
+					id: 'last',
 					cells: [
 						{},
 						{},

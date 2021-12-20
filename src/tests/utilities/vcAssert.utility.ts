@@ -1114,6 +1114,30 @@ const vcAssertUtil = {
 		)
 	},
 
+	assertRowIsSelected(listVc: ListViewController, row: string | number) {
+		this.assertRowsAreSelected(listVc, [row])
+	},
+
+	assertRowIsNotSelected(listVc: ListViewController, row: string | number) {
+		try {
+			this.assertRowIsSelected(listVc, row)
+		} catch {
+			return
+		}
+
+		assert.fail(`I didn't expect row '${row}' to be selected, but it was!`)
+	},
+
+	assertRowsAreSelected(listVc: ListViewController, rows: (string | number)[]) {
+		for (const row of rows) {
+			const rowVc = listVc.getRowVc(row)
+
+			if (!rowVc.getIsSelected()) {
+				assert.fail(`I expected row '${row}' to be selected, but it wasn't!!`)
+			}
+		}
+	},
+
 	assertRowDoesNotRenderToggle(
 		listVc: ListViewController,
 		row: string | number,

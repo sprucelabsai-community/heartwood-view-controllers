@@ -2353,9 +2353,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Row height. */
 				'height'?: ("standard" | "tall" | "content")| undefined | null
 				/** Id. */
-				'id'?: string| undefined | null
+				'id': string
 				/** Click handler. */
 				'onClick'?: (() => Promise<any> | any)| undefined | null
+				/** Selected. */
+				'isSelected'?: boolean| undefined | null
 				/** Cells. */
 				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
 		}
@@ -2383,6 +2385,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'id': {
 			                label: 'Id',
 			                type: 'id',
+			                isRequired: true,
 			                options: undefined
 			            },
 			            /** Click handler. */
@@ -2390,6 +2393,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Click handler',
 			                type: 'raw',
 			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** Selected. */
+			            'isSelected': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Cells. */
 			            'cells': {

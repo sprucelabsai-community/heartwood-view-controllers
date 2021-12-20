@@ -6,6 +6,7 @@ import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc
 function buildRows(total: number, rowIdxForRatings?: number, cellIdx?: number) {
 	const cIdx = cellIdx ?? 0
 	return new Array(total).fill(0).map((_, rowIdx) => ({
+		id: `${new Date().getTime() * Math.random()}`,
 		cells: new Array(cIdx + 1).fill(0).map((_, _idx) => ({
 			ratingsInput:
 				rowIdx === rowIdxForRatings && cIdx === _idx

@@ -80,6 +80,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 
 		for (const page of pages) {
 			rows.push({
+				id: page.getId(),
 				cells: [
 					{
 						textInput: {

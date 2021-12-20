@@ -25,6 +25,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 		const listVc = this.ListVc({
 			rows: [
 				{
+					id: 'clicking-toggle',
 					cells: [],
 				},
 				{
@@ -63,6 +64,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 		const listVc = this.ListVc({
 			rows: [
 				{
+					id: 'first',
 					cells: [],
 				},
 				{

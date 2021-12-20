@@ -10,9 +10,11 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
 		const vc = this.ListVc({
 			rows: [
 				{
+					id: 'first',
 					cells: [],
 				},
 				{
+					id: 'second',
 					onClick: () => {
 						wasHit = true
 					},
@@ -21,6 +23,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
 			],
 		})
 
+		assert.isFalse(wasHit)
 		await interactionUtil.clickRow(vc, 1)
 		assert.isTrue(wasHit)
 	}

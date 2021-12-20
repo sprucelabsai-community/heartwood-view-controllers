@@ -30,6 +30,19 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 	public constructor(options: Partial<List> & ViewControllerOptions) {
 		super(options)
+
+		if (options.rows) {
+			for (const row of options.rows) {
+				const matches = options.rows?.filter((r) => r.id === row.id) ?? []
+				if (matches.length > 1) {
+					throw new SpruceError({
+						code: 'DUPLICATE_ROW_ID',
+						rowId: row.id,
+					})
+				}
+			}
+		}
+
 		this.model = {
 			...options,
 			rows: options.rows ?? [],
@@ -207,28 +220,57 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	/**
 	 * @deprecated Use upsertRow() instead.
 	 */
-	public upsertRowById(id: string, row: ListRowModel) {
+	public upsertRowById(id: string, row: Omit<ListRowModel, 'id'>) {
 		return this.upsertRow(id, row)
 	}
 
-	public upsertRow(id: string, row: ListRowModel) {
+	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
 		const idx = this.getIdxForId(id)
 		if (idx === -1) {
-			this.addRow({ ...row })
+			this.addRow({ id, ...row })
 		} else {
-			this.model.rows[idx] = { ...row }
+			this.model.rows[idx] = { id, ...row }
 			this._rowVcs = []
 		}
 	}
 
 	public doesIdExist(id: string) {
-		const match = this.model.rows.find((r) => r.id === id)
+		const model = this.model
+		const match = this.doesRowIdExistInModel(model, id)
 		return !!match
+	}
+
+	private doesRowIdExistInModel(model: List, id: string) {
+		return model.rows.find((r) => r.id === id)
 	}
 
 	private deleteRowById(id: string) {
 		const vc = this.getRowVc(id)
 		vc.delete()
+	}
+
+	public getSelectedRows(): string[] {
+		const selected: string[] = []
+		for (const rowVc of this.getRowVcs()) {
+			if (rowVc.getIsSelected()) {
+				selected.push(rowVc.getId() ?? 0)
+			}
+		}
+
+		return selected
+	}
+
+	public selectRow(id: string | number) {
+		this.getRowVc(id).setIsSelected(true)
+	}
+
+	public deselectRow(id: string | number) {
+		this.getRowVc(id).setIsSelected(false)
+	}
+
+	public isRowSelected(row: string | number): boolean {
+		const rowVc = this.getRowVc(row)
+		return rowVc.getIsSelected()
 	}
 
 	public deleteAllRows() {

@@ -759,7 +759,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 				cells.push({ text: { content: `empty row` } })
 			}
 
-			rows.push({ cells })
+			rows.push({ id: `${new Date().getTime() * Math.random()}`, cells })
 		}
 
 		rows[options.rowIdx].cells[options.cellIdx].button = {

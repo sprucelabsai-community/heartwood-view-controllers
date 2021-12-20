@@ -16,6 +16,7 @@ export type AddSectionOptions = Partial<SimpleSection> & {
 }
 
 export interface FormBuilderPageViewControllerEnhancements {
+	getId(): string
 	addSection(options?: AddSectionOptions): void
 	setSection(sectionIdx: number, section: SimpleSection): void
 	addField(
@@ -66,6 +67,10 @@ export class FormBuilderPageViewControllerImpl
 
 	public getTitle() {
 		return this.title
+	}
+
+	public getId() {
+		return namesUtil.toKebab(this.title)
 	}
 
 	public setTitle(title: string) {

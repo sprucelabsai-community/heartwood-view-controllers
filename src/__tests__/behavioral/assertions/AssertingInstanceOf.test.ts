@@ -36,7 +36,8 @@ class ActiveCard extends AbstractViewController<Card> {
 				id: 'active',
 				eventName: 'list-skills::v2020_12_25',
 				responseKey: 'skills',
-				rowTransformer: () => ({
+				rowTransformer: (s) => ({
+					id: s.id,
 					cells: [],
 				}),
 			})

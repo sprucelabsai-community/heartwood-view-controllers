@@ -155,6 +155,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		return this.Controller('list', {
 			rows: [
 				{
+					id: 'random',
 					cells: [cellModel],
 				},
 			],
