@@ -1,3 +1,10 @@
+# [52.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.0.0...v52.1.0) (2021-12-20)
+
+
+### Features
+
+* Devs can now set all the selected rows of a list at once, making working with lists even EASIER! Also, updating a rows selected status triggers a render, making it even BETTER! ([dd2ec2d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/dd2ec2d))
+
 # [52.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v51.20.15...v52.0.0) (2021-12-20)
 
 
