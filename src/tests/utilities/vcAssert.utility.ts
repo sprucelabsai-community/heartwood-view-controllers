@@ -3,7 +3,11 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ActiveRecordCardViewController, StatsViewController } from '../..'
+import {
+	ActiveRecordCardViewController,
+	StatsViewController,
+	TalkingSprucebotViewController,
+} from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -939,7 +943,9 @@ const vcAssertUtil = {
 		assert.fail('Your skill view should not be rendering a calendar right now!')
 	},
 
-	assertCardRendersTalkingSprucebot(vc: ViewController<Card>) {
+	assertCardRendersTalkingSprucebot(
+		vc: ViewController<Card>
+	): TalkingSprucebotViewController {
 		const model = renderUtil.render(vc)
 		const sprucebot = pluckFirstFromCard(model, 'talkingSprucebot')
 
