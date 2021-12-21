@@ -285,6 +285,7 @@ export interface ConfirmOptions {
 	subtitle?: string
 	message?: string
 	isDestructive?: boolean
+	body?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 }
 
 export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>
