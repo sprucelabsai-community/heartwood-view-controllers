@@ -1,3 +1,10 @@
+# [52.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.1.11...v52.2.0) (2021-12-21)
+
+
+### Features
+
+* Types in place to allow of unlimited customization of confirmation dialogs, allow people to be more informed on what their are accepting when they tap "i agree" ([538040f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/538040f))
+
 ## [52.1.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.1.10...v52.1.11) (2021-12-21)
 
 ## [52.1.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.1.9...v52.1.10) (2021-12-21)
