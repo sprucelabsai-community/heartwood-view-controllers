@@ -77,7 +77,7 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
     "@sprucelabs/error": "^5.0.353",
-    "@sprucelabs/mercury-core-events": "^1.6.341",
+    "@sprucelabs/mercury-core-events": "^1.6.342",
     "@sprucelabs/mercury-types": "^26.1.1101",
     "@sprucelabs/schema": "^25.4.150",
     "@sprucelabs/spruce-core-schemas": "^22.6.347",
