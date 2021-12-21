@@ -17,6 +17,7 @@ export { default as ToolBeltViewController } from './viewControllers/ToolBelt.vc
 export * from './viewControllers/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
+export { FormBuilderImportExportObject } from './viewControllers/formBuilder/FormBuilderCard.vc'
 export { default as SwipeViewControllerImpl } from './viewControllers/Swipe.vc'
 export * from './viewControllers/Swipe.vc'
 export { default as CalendarViewController } from './viewControllers/Calendar.vc'
