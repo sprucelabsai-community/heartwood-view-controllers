@@ -31,7 +31,7 @@ interface ActiveRecordCardBuilder<Contract extends EventContract> {
 		eventName: EventName
 		responseKey: ResponseKey
 		rowTransformer: (record: Response[ResponseKey][number]) => Row
-		noResultsRow?: Row
+		noResultsRow?: Omit<Row, 'id'>
 		/** @ts-ignore */
 		payload?: SchemaValues<EmitSchema>['payload']
 		/** @ts-ignore */
