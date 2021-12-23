@@ -1,3 +1,10 @@
+# [52.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.2.12...v52.3.0) (2021-12-23)
+
+
+### Features
+
+* devs can now directly set the footer of a card to busy, making beautiful ui updates even EASIER ([21674bc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/21674bc))
+
 ## [52.2.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.2.11...v52.2.12) (2021-12-23)
 
 ## [52.2.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.2.10...v52.2.11) (2021-12-23)
