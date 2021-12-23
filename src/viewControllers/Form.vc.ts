@@ -37,6 +37,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'sections'
 	| 'onSubmit'
 	| 'onChange'
+	| 'onCancel'
 	| 'onWillChange'
 	| 'shouldShowCancelButton'
 	| 'shouldShowSubmitControls'

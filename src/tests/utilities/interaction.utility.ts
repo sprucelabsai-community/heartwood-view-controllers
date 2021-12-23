@@ -139,6 +139,17 @@ const interactionUtil = {
 		await this.click(destructiveButton, { rowVc: vc })
 	},
 
+	async cancelForm(vc: FormVc) {
+		const onCancel = renderUtil.render(vc).onCancel
+
+		assert.isFunction(
+			onCancel,
+			`You don't have a cancel handler set. Try { onCancel: () => {} } in your form!`
+		)
+
+		await onCancel()
+	},
+
 	async submitForm(vc: FormVc) {
 		assert.isTruthy(vc, `You have to pass a view controller to submit a form.`)
 

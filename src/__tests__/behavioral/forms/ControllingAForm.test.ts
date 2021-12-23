@@ -9,45 +9,13 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import formTestUtil from '../../../tests/utilities/formTest.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import { FormViewController } from '../../../types/heartwood.types'
+import { testFormOptions } from './testFormOptions'
 
-const testForm = buildForm({
-	id: 'testForm',
-	schema: {
-		id: 'test',
-		fields: {
-			first: {
-				type: 'text',
-				isRequired: true,
-			},
-			last: {
-				type: 'text',
-			},
-			nickname: {
-				type: 'text',
-				isRequired: true,
-			},
-			favoriteNumber: {
-				type: 'number',
-			},
-		},
-	},
-	sections: [
-		{
-			fields: ['first'],
-		},
-		{
-			fields: ['last', 'nickname'],
-		},
-		{
-			fields: [{ name: 'favoriteNumber' }],
-		},
-	],
-})
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
-	private static vc: FormViewController<typeof testForm['schema']>
+	private static vc: FormViewController<typeof testFormOptions['schema']>
 
-	private static readonly testForm = testForm
+	private static readonly testForm = testFormOptions
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -276,15 +244,16 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async canResetField() {
-		const vc: FormViewController<typeof testForm['schema']> = this.Controller(
-			'form',
-			buildForm({
-				...testForm,
-				values: {
-					first: 'tay',
-				},
-			})
-		) as any
+		const vc: FormViewController<typeof testFormOptions['schema']> =
+			this.Controller(
+				'form',
+				buildForm({
+					...testFormOptions,
+					values: {
+						first: 'tay',
+					},
+				})
+			) as any
 
 		await vc.setValue('first', '2000')
 
@@ -367,7 +336,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static addingSectionShouldNotMutateModel() {
 		this.vc.addSection({ title: 'go!', fields: [] })
 		//test against original form schema to see if it was mutated
-		assert.isLength(testForm.sections, 3)
+		assert.isLength(testFormOptions.sections, 3)
 	}
 
 	@test()
@@ -721,7 +690,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		//@ts-ignore
 		assert.isTruthy(model.schema.fields.secondFavoriteNumber)
 		assert.isFalsy(model.schema.fields.favoriteNumber)
-		assert.isTruthy(testForm.schema.fields.favoriteNumber)
+		assert.isTruthy(testFormOptions.schema.fields.favoriteNumber)
 
 		vcAssertUtil.assertFormRendersField(this.vc, 'secondFavoriteNumber')
 	}
@@ -1059,6 +1028,22 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			...this.testForm,
 		}) as any
 		await this.vc.submit()
+	}
+
+	@test()
+	protected static async formsHaveOnCancel() {
+		let wasHit = false
+		const vc = this.Controller('form', {
+			...this.testForm,
+			onCancel: () => {
+				wasHit = true
+			},
+		})
+
+		const model = this.render(vc)
+		model.onCancel?.()
+
+		assert.isTrue(wasHit)
 	}
 
 	private static FormWithOnChange(onChange: (options: any) => void) {
