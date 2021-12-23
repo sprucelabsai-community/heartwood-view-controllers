@@ -1,3 +1,10 @@
+# [52.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.3.5...v52.4.0) (2021-12-23)
+
+
+### Features
+
+* Devs can now simulate people trying to cancel out of forms, making the UX even more powerful and customizable. ([ac7d8c7](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ac7d8c7))
+
 ## [52.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.3.4...v52.3.5) (2021-12-23)
 
 ## [52.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.3.3...v52.3.4) (2021-12-23)
