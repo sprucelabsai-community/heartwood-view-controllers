@@ -402,6 +402,17 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isEqual(this.cardTriggerRenderCount, 1)
 	}
 
+	@test()
+	protected static async canSetFooterAsBusy() {
+		const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
+
+		vc.setFooterIsBusy(true)
+		assert.isTrue(this.render(vc).footer?.isBusy)
+
+		vc.setFooterIsBusy(false)
+		assert.isFalse(this.render(vc).footer?.isBusy)
+	}
+
 	private static beginTrackingFooterRender(vc = this.vc) {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
