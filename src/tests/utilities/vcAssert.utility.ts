@@ -94,6 +94,8 @@ interface AssertRedirectOptions {
 	}
 }
 
+type FormVc = FormViewController<any> | BigFormViewController<any>
+
 const vcAssertUtil = {
 	_setVcFactory(factory: ViewControllerFactory) {
 		//@ts-ignore
@@ -216,9 +218,9 @@ const vcAssertUtil = {
 
 		try {
 			dlgVc = await vcAssertUtil.assertRendersDialog(vc, action)
-		} catch {
+		} catch (err: any) {
 			assert.fail(
-				`Expected this.alert() to be called in your view and it wasn't.`
+				`Expected this.alert() to be called in your view and it wasn't. This was the specific error:\n\${err.stack}`
 			)
 		}
 
@@ -456,7 +458,7 @@ const vcAssertUtil = {
 	},
 
 	assertFormRendersField(
-		formVc: FormViewController<any> | BigFormViewController<any>,
+		formVc: FormVc,
 		fieldName: string,
 		fieldDefinition?: Partial<FieldDefinitions>
 	) {
@@ -484,10 +486,7 @@ const vcAssertUtil = {
 		)
 	},
 
-	assertFormDoesNotRenderField(
-		formVc: FormViewController<any>,
-		fieldName: string
-	) {
+	assertFormDoesNotRenderField(formVc: FormVc, fieldName: string) {
 		try {
 			this.assertFormRendersField(formVc, fieldName)
 		} catch {
@@ -497,10 +496,7 @@ const vcAssertUtil = {
 		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
 	},
 
-	assertFormRendersFields(
-		formVc: FormViewController<any> | BigFormViewController<any>,
-		fields: string[]
-	) {
+	assertFormRendersFields(formVc: FormVc, fields: string[]) {
 		for (const field of fields) {
 			this.assertFormRendersField(formVc, field)
 		}
