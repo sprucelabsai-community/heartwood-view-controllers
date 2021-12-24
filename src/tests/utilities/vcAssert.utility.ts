@@ -220,7 +220,7 @@ const vcAssertUtil = {
 			dlgVc = await vcAssertUtil.assertRendersDialog(vc, action)
 		} catch (err: any) {
 			assert.fail(
-				`Expected this.alert() to be called in your view and it wasn't. This was the specific error:\n\${err.stack}`
+				`Expected this.alert() to be called in your view and it wasn't. This was the specific error:\n\n${err.stack}`
 			)
 		}
 
