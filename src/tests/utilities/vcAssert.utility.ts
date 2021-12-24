@@ -132,6 +132,8 @@ const vcAssertUtil = {
 		action: () => void | Promise<void>
 	) {
 		let confirmVc: ConfirmViewController = {
+			//@ts-ignore
+			id: 'confirm',
 			accept: async () => {},
 			options: {},
 			decline: async () => {},
