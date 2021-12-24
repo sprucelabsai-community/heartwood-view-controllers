@@ -264,6 +264,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	public setFooterIsBusy(isBusy: boolean) {
 		if (this.model.footer) {
 			this.model.footer.isBusy = isBusy
+			this.triggerRender()
 		}
 	}
 
