@@ -126,7 +126,7 @@
   },
   "jest": {
     "testRunner": "jest-circus/runner",
-    "maxWorkers": 4,
+    "maxWorkers": 6,
     "testTimeout": 120000,
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
