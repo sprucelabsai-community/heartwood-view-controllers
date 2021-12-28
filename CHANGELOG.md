@@ -1,3 +1,12 @@
+## [52.5.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.5.0...v52.5.1) (2021-12-28)
+
+# [52.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.25...v52.5.0) (2021-12-28)
+
+
+### Features
+
+* removeUniversalViewOptions made available to devs of 3rd party view controllers! ([e7a36d8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e7a36d8))
+
 ## [52.4.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.24...v52.4.25) (2021-12-28)
 
 ## [52.4.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.23...v52.4.24) (2021-12-28)
