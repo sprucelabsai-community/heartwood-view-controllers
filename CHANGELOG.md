@@ -1,3 +1,29 @@
+## [52.4.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.24...v52.4.25) (2021-12-28)
+
+## [52.4.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.23...v52.4.24) (2021-12-28)
+
+## [52.4.23](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.22...v52.4.23) (2021-12-27)
+
+## [52.4.22](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.21...v52.4.22) (2021-12-27)
+
+## [52.4.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.20...v52.4.21) (2021-12-27)
+
+## [52.4.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.19...v52.4.20) (2021-12-26)
+
+## [52.4.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.18...v52.4.19) (2021-12-26)
+
+## [52.4.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.17...v52.4.18) (2021-12-26)
+
+## [52.4.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.16...v52.4.17) (2021-12-26)
+
+## [52.4.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.15...v52.4.16) (2021-12-25)
+
+## [52.4.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.14...v52.4.15) (2021-12-25)
+
+## [52.4.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.13...v52.4.14) (2021-12-25)
+
+## [52.4.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.12...v52.4.13) (2021-12-24)
+
 ## [52.4.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.11...v52.4.12) (2021-12-24)
 
 ## [52.4.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.4.10...v52.4.11) (2021-12-24)
