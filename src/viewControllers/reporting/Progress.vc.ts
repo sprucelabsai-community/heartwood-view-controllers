@@ -3,9 +3,8 @@ import { SpruceSchemas, ViewControllerOptions } from '../..'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../Abstract.vc'
 
-export interface ProgressViewControllerOptions {}
-
 type Progress = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
+export type ProgressViewControllerOptions = Progress
 
 export default class ProgressViewController extends AbstractViewController<Progress> {
 	private model: Progress
