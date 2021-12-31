@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractSkillViewController, vcAssertUtil } from '../..'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { AbstractSkillViewController, vcAssertUtil } from '../../..'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 class SuccessAlertSkillViewController extends AbstractSkillViewController {
 	public async renderSuccess() {

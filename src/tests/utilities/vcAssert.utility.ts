@@ -72,10 +72,19 @@ async function wait(...promises: (Promise<any> | undefined | void)[]) {
 			isDone = true
 		}
 
+		const catcher = (err: any) => {
+			if (!isDone) {
+				isDone = true
+				reject(err)
+			} else {
+				throw err
+			}
+		}
+
 		const timeout = setTimeout(done, WAIT_TIMEOUT)
 
 		for (const promise of promises) {
-			promise?.then?.(done)?.catch?.(reject)
+			promise?.catch?.(catcher)?.then?.(done)
 		}
 	})
 }
@@ -1061,42 +1070,47 @@ const vcAssertUtil = {
 		const oldRedirect = router.redirect.bind(router)
 
 		let wasHit = false
+		let failMessage: string | undefined
 
-		const redirectPromise = new Promise((resolve: any, reject: any) => {
+		const redirectPromise = new Promise((resolve: any) => {
 			//@ts-ignore
 			router.redirect = async (id: any, args: any) => {
-				wasHit = true
+				try {
+					wasHit = true
 
-				if (destination?.id && destination.id !== id) {
-					reject(
-						`I expected to be redirected to '${destination.id}' but I was sent to '${id}'.`
-					)
-					return
-				}
+					if (destination?.id && destination.id !== id) {
+						assert.fail(
+							`I expected to be redirected to '${destination.id}' but I was sent to '${id}'.`
+						)
+						return
+					}
 
-				if (destination?.args) {
-					try {
+					if (destination?.args) {
 						assert.isEqualDeep(
 							args,
 							destination.args,
 							`The args you passed to your redirect are not what I expected!`
 						)
-					} catch (err: any) {
-						reject(err.message)
-						return
 					}
+
+					//@ts-ignore
+					await oldRedirect(id, args)
+				} catch (err: any) {
+					failMessage = err.message
 				}
-
-				//@ts-ignore
-				await oldRedirect(id, args)
-
 				resolve()
 			}
 		})
 
-		await wait(action(), redirectPromise)
+		await wait(action())
 
 		assert.isTrue(wasHit, `I expected to be redirected, but was not!`)
+
+		await redirectPromise
+
+		if (failMessage) {
+			assert.fail(failMessage)
+		}
 	},
 
 	assertRowRendersToggle(
@@ -1307,6 +1321,7 @@ const vcAssertUtil = {
 					options.vc,
 					options.action
 				)
+
 				await alertVc.hide()
 			},
 		})
