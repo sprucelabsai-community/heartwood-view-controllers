@@ -142,6 +142,7 @@ export interface Scope {
 	setCurrentOrganization(id: string): void
 	getCurrentLocation(): Promise<Location | null>
 	setCurrentLocation(id: string): void
+	clearSession(): void
 }
 
 export interface SkillViewControllerLoadOptions<
