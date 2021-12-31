@@ -1,3 +1,10 @@
+# [53.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.5.14...v53.0.0) (2021-12-31)
+
+
+### Breaking Changes
+
+* scope now has clearSession to make logging out logout even HARDER! ([032546e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/032546e))
+
 ## [52.5.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.5.13...v52.5.14) (2021-12-31)
 
 ## [52.5.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v52.5.12...v52.5.13) (2021-12-30)
