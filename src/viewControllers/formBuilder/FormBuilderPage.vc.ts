@@ -6,7 +6,7 @@ import {
 } from '@sprucelabs/spruce-skill-utils'
 import { FormViewController } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
-import { SimpleRow, SimpleSection } from './EditFormBuilderSection.vc'
+import { SimpleRow, SimpleSection } from './EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from './FormBuilderCard.vc'
 
 export type FieldBuilder = FormBuilderCardViewController['buildField']

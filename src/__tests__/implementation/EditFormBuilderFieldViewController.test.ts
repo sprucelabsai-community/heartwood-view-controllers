@@ -7,14 +7,14 @@ import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
 import { FormBuilderFieldType } from '../../types/heartwood.types'
 import FormViewController from '../../viewControllers/Form.vc'
 import {
-	EditFormBuilderFieldViewController,
+	EditFormBuilderFieldCardViewController,
 	EditFormBuilderFieldOptions,
-} from '../../viewControllers/formBuilder/EditFormBuilderField.vc'
+} from '../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		editFormBuilderField: EditFormBuilderFieldViewController
+		editFormBuilderField: EditFormBuilderFieldCardViewController
 	}
 
 	export interface ViewControllerOptionsMap {
@@ -24,7 +24,7 @@ declare module '../../types/heartwood.types' {
 
 export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderField: EditFormBuilderFieldViewController,
+		editFormBuilderField: EditFormBuilderFieldCardViewController,
 		formBuilderCard: FormBuilderCardViewController,
 	}
 

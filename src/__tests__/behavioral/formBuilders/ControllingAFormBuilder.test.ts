@@ -11,7 +11,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../../utilities/render.utility'
-import { EditFormBuilderFieldViewController } from '../../../viewControllers/formBuilder/EditFormBuilderField.vc'
+import { EditFormBuilderFieldCardViewController } from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 import { FormBuilderPageViewController } from '../../../viewControllers/formBuilder/FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
@@ -838,10 +838,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			async () => this.vc.handleClickEditField(oldFieldName),
 			async (dialogVc) => {
 				assert.isTrue(
-					dialogVc.getCardVc() instanceof EditFormBuilderFieldViewController
+					dialogVc.getCardVc() instanceof EditFormBuilderFieldCardViewController
 				)
 
-				const vc = dialogVc.getCardVc() as EditFormBuilderFieldViewController
+				const vc =
+					dialogVc.getCardVc() as EditFormBuilderFieldCardViewController
 				const formVc = vc.getFormVc()
 
 				if (expectedFormValues) {

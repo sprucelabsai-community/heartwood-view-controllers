@@ -5,13 +5,13 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
-import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
+import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class EditingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	private static formBuilderVc: FormBuilderCardViewController
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionViewController,
+		editFormBuilderSection: EditFormBuilderSectionCardViewController,
 		formBuilderCard: FormBuilderCardViewController,
 	}
 
@@ -245,11 +245,11 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		)
 
 		const builderSectionVc =
-			dialogVc.getCardVc() as EditFormBuilderSectionViewController
+			dialogVc.getCardVc() as EditFormBuilderSectionCardViewController
 
 		return {
 			builderSectionVc:
-				builderSectionVc as EditFormBuilderSectionViewController,
+				builderSectionVc as EditFormBuilderSectionCardViewController,
 			dialogVc: dialogVc as DialogViewController,
 			formVc: vcAssertUtil.assertCardRendersForm(builderSectionVc as any),
 		}

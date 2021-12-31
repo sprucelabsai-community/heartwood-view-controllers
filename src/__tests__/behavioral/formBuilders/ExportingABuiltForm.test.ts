@@ -1,11 +1,11 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import EditFormBuilderSectionViewController from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
+import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class ExportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionViewController,
+		editFormBuilderSection: EditFormBuilderSectionCardViewController,
 		formBuilderCard: FormBuilderCardViewController,
 	}
 	private static vc: FormBuilderCardViewController

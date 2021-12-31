@@ -64,7 +64,7 @@ const editFieldFormSchema = buildSchema({
 
 type EditFieldFormSchema = typeof editFieldFormSchema
 
-export class EditFormBuilderFieldViewController extends CardViewController {
+export class EditFormBuilderFieldCardViewController extends CardViewController {
 	private formVc: FormViewController<EditFieldFormSchema>
 	public constructor(
 		options: ViewControllerOptions & EditFormBuilderFieldOptions

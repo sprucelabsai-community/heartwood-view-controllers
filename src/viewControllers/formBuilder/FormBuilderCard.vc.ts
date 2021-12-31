@@ -7,11 +7,11 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeViewController from '../Swipe.vc'
-import { EditFormBuilderFieldViewController } from './EditFormBuilderField.vc'
-import EditFormBuilderSectionViewController, {
+import { EditFormBuilderFieldCardViewController } from './EditFormBuilderFieldCard.vc'
+import EditFormBuilderSectionCardViewController, {
 	EditFormBuilderSectionOptions,
 	SimpleSection,
-} from './EditFormBuilderSection.vc'
+} from './EditFormBuilderSectionCard.vc'
 import {
 	FormBuilderPageViewController,
 	FormBuilderPageViewControllerImpl,
@@ -74,11 +74,11 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 
 		this.mixinControllers({
 			//@ts-ignore
-			editFormBuilderSection: EditFormBuilderSectionViewController,
+			editFormBuilderSection: EditFormBuilderSectionCardViewController,
 			//@ts-ignore
 			managePageTitles: ManagePageTitlesCardViewController,
 			//@ts-ignore
-			editFormBuilderField: EditFormBuilderFieldViewController,
+			editFormBuilderField: EditFormBuilderFieldCardViewController,
 		})
 	}
 
@@ -339,7 +339,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 			pageSchema: this.getPresentPageVc().getSchema(),
 			editSection: editingSection,
 			defaultTitle: `Section ${this.getPresentPageVc().getTotalSections() + 1}`,
-		}) as EditFormBuilderSectionViewController
+		}) as EditFormBuilderSectionCardViewController
 
 		return editSectionVc
 	}

@@ -72,7 +72,7 @@ export type SimpleSection = EditFormBuilderSectionValues & {
 	fields?: SimpleRow[]
 }
 
-export default class EditFormBuilderSectionViewController extends CardViewController {
+export default class EditFormBuilderSectionCardViewController extends CardViewController {
 	private formVc: FormViewController<EditSectionSectionSchema>
 	private fieldListVc: ListViewController
 	private rows: SimpleRow[] = []
@@ -154,6 +154,12 @@ export default class EditFormBuilderSectionViewController extends CardViewContro
 		const text = this.formVc.getValue('text')
 		if (text) {
 			values.text = text
+		}
+
+		for (const field of values.fields ?? []) {
+			if (!field.options && field.type === 'select') {
+				field.options = { choices: [] }
+			}
 		}
 
 		await this.onDoneHandler(values)

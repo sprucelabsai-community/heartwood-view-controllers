@@ -5,16 +5,16 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
-import EditFormBuilderSectionViewController, {
+import EditFormBuilderSectionCardViewController, {
 	EditSectionSectionSchema,
 	EditFormBuilderSectionOptions,
-} from '../../../viewControllers/formBuilder/EditFormBuilderSection.vc'
+} from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
-		editFormBuilderSection: EditFormBuilderSectionViewController
+		editFormBuilderSection: EditFormBuilderSectionCardViewController
 	}
 
 	export interface ViewControllerOptionsMap {
@@ -24,12 +24,12 @@ declare module '../../../types/heartwood.types' {
 
 export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionViewController,
+		editFormBuilderSection: EditFormBuilderSectionCardViewController,
 		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	private static formBuilderVc: FormBuilderCardViewController
-	private static vc: EditFormBuilderSectionViewController
+	private static vc: EditFormBuilderSectionCardViewController
 	private static formVc: FormViewController<EditSectionSectionSchema>
 	private static fieldListVc: ListViewController
 	private static dialogVc: DialogViewController
@@ -77,7 +77,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	@test()
 	protected static async clickingAddSectionShowsAddSectionDialog() {
 		assert.isTruthy(this.vc)
-		assert.isTrue(this.vc instanceof EditFormBuilderSectionViewController)
+		assert.isTrue(this.vc instanceof EditFormBuilderSectionCardViewController)
 	}
 
 	@test()
@@ -420,7 +420,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	}
 
 	private static async simulateAddSectionClick(clickedSectionIdx = 0) {
-		let builderSectionVc: EditFormBuilderSectionViewController | undefined
+		let builderSectionVc: EditFormBuilderSectionCardViewController | undefined
 		let dialogVc: DialogViewController | undefined
 
 		await vcAssertUtil.assertRendersDialog(
@@ -429,12 +429,12 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			(vc) => {
 				dialogVc = vc
 				builderSectionVc =
-					vc.getCardVc() as EditFormBuilderSectionViewController
+					vc.getCardVc() as EditFormBuilderSectionCardViewController
 			}
 		)
 		return {
 			builderSectionVc:
-				builderSectionVc as EditFormBuilderSectionViewController,
+				builderSectionVc as EditFormBuilderSectionCardViewController,
 			dialogVc: dialogVc as DialogViewController,
 		}
 	}
