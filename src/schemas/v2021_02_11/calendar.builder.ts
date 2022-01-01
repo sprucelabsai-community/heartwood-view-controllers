@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { calendarEventSchema } from '@sprucelabs/spruce-calendar-utils'
 
 const timeSchema = buildSchema({
 	id: 'calendarTime',
@@ -76,6 +77,13 @@ export default buildSchema({
 			hint: 'Any time after this will be dimmed out. Only applies if people have no schedules.',
 			options: {
 				schema: timeSchema,
+			},
+		},
+		events: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schema: calendarEventSchema,
 			},
 		},
 		timezoneOffsetMs: {

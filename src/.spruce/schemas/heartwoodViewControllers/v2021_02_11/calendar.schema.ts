@@ -3,6 +3,7 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import calendarPersonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarPerson.schema'
 import calendarTimeSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
+import calendarEventSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/calendarEvent.schema'
 
 const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema  = {
 	id: 'calendar',
@@ -51,6 +52,12 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                type: 'schema',
 	                hint: 'Any time after this will be dimmed out. Only applies if people have no schedules.',
 	                options: {schema: calendarTimeSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'events': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: calendarEventSchema_v2021_05_19,}
 	            },
 	            /** Timezone offset. In milliseconds */
 	            'timezoneOffsetMs': {
