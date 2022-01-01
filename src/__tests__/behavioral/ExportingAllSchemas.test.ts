@@ -1,5 +1,5 @@
 import pathUtil from 'path'
-import { diskUtil, HASH_SPRUCE_DIR } from '@sprucelabs/spruce-skill-utils'
+import { diskUtil, HASH_SPRUCE_BUILD_DIR } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
 import globby from 'globby'
 
@@ -7,9 +7,9 @@ export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 	@test()
 	protected static async exportsAllSchemas() {
 		const builderPattern = this.resolvePath(
-			HASH_SPRUCE_DIR,
+			HASH_SPRUCE_BUILD_DIR,
 			'schemas',
-			'**/*.schema.ts'
+			'**/*.schema.js'
 		)
 		const schemas = await globby(builderPattern)
 
@@ -17,14 +17,19 @@ export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 		const missingImports: string[] = []
 		for (const schema of schemas) {
 			const builderFileName = pathUtil.basename(schema)
-			const schemaFileName = builderFileName.replace('.schema.ts', '.schema')
-			const schemaName = builderFileName.replace('.schema.ts', 'Schema')
+			const schemaFileName = builderFileName.replace('.schema.js', '.schema')
+			const schemaName = builderFileName.replace('.schema.js', 'Schema')
+
+			const imported = require(schema).default
 
 			const importStatement =
 				`export { default as ${schemaName} } from '#spruce` +
 				`/schemas/heartwoodViewControllers/v2021_02_11/${schemaFileName}'`
 
-			if (!indexContents.includes(importStatement)) {
+			if (
+				imported.namespace === 'HeartwoodViewControllers' &&
+				!indexContents.includes(importStatement)
+			) {
 				missingImports.push(importStatement)
 			}
 		}
