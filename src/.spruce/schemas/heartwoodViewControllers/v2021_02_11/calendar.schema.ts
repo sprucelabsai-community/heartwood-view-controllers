@@ -73,6 +73,11 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                defaultValue: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'onClick': {
+	                type: 'raw',
+	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+	            },
 	    }
 }
 

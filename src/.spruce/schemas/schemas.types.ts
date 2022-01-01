@@ -3754,6 +3754,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'view'?: ("day" | "month")| undefined | null
 				/** Render header. */
 				'shouldRenderHeader'?: boolean| undefined | null
+				
+				'onClick'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -3824,6 +3826,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** . */
+			            'onClick': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 			            },
 			    }
 		}

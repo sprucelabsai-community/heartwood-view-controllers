@@ -64,6 +64,7 @@ import ToolBeltViewController, {
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import '@sprucelabs/mercury-core-events'
+export * from './calendar.types'
 
 export type ErrorHandler = (message: string) => void
 

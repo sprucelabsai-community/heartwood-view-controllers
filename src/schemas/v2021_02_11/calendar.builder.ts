@@ -105,5 +105,12 @@ export default buildSchema({
 			label: 'Render header',
 			defaultValue: true,
 		},
+		onClick: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
+			},
+		},
 	},
 })
