@@ -1,3 +1,10 @@
+# [53.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.0.12...v53.1.0) (2022-01-01)
+
+
+### Features
+
+* calendar now has onClick property ([253684e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/253684e))
+
 ## [53.0.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.0.11...v53.0.12) (2022-01-01)
 
 ## [53.0.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.0.10...v53.0.11) (2022-01-01)
