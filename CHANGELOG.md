@@ -1,3 +1,10 @@
+# [53.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.2.4...v53.3.0) (2022-01-02)
+
+
+### Features
+
+* Devs can now control calendars, their events, and which event is selected. Oh, and mixing in events and removing duplicates ([608887b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/608887b))
+
 ## [53.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.2.3...v53.2.4) (2022-01-02)
 
 ## [53.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.2.2...v53.2.3) (2022-01-02)
