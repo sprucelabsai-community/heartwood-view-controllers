@@ -1,3 +1,10 @@
+# [53.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.5.0...v53.6.0) (2022-01-02)
+
+
+### Features
+
+* Devs can replace events inside a range, making updating the calendar even EASIER! ([f1377aa](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f1377aa))
+
 # [53.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.4.1...v53.5.0) (2022-01-02)
 
 
