@@ -356,6 +356,25 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
 	}
 
+	@test()
+	protected static selectingEventTriggersRender() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.selectEvent(event.id)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static getsNoEventsToStart() {
+		assert.isEqualDeep(this.vc.getEvents(), [])
+	}
+
+	@test()
+	protected static returnsEvents() {
+		this.populateCalendar()
+		assert.isLength(this.vc.getEvents(), 3)
+	}
+
 	private static assertRendersTotalEvents(expected: number) {
 		const model = this.render(this.vc)
 		assert.isLength(model.events ?? [], expected)

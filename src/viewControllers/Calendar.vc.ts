@@ -116,6 +116,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			})
 		}
 		this.model.selectedEvent = match
+		this.triggerRender()
 	}
 
 	public getSelectedEvent() {
@@ -187,6 +188,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.model.events = [...existing, ...events]
 
 		this.triggerRender()
+	}
+
+	public getEvents() {
+		return this.model.events
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar & {
