@@ -1,25 +1,51 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
+import SpruceError from '../errors/SpruceError'
 import { ViewControllerOptions } from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
-type ViewModel = Omit<
+type CalendarOptions = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
-	'controller'
->
+	'controller' | 'events'
+> & {
+	events?: Event[]
+}
 type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
-export type CalendarViewControllerOptions = ViewModel
-export type CalendarView = NonNullable<ViewModel['view']>
+type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
-export default class CalendarViewController extends AbstractViewController<ViewModel> {
-	private model: ViewModel
+export type CalendarViewControllerOptions = CalendarOptions
+export type CalendarView = NonNullable<CalendarOptions['view']>
 
-	public constructor(options: ViewModel & ViewControllerOptions) {
+export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
+	private model: CalendarOptions & { events: Event[] }
+
+	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
 
 		const view = options.view ?? 'day'
 
+		this.assertValidView(view, options)
+		this.assertValidMinAndMaxTime(options)
+
+		this.model = {
+			events: [],
+			...removeUniversalViewOptions(options),
+			view,
+		}
+	}
+
+	private assertValidView(
+		view: string,
+		options: Omit<
+			SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
+			'controller' | 'events'
+		> & {
+			events?:
+				| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
+				| undefined
+		} & ViewControllerOptions
+	) {
 		if (view === 'day' && !options.people) {
 			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
@@ -28,7 +54,18 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 					'You have to supply at least 1 person to your calendar to render it (today).',
 			})
 		}
+	}
 
+	private assertValidMinAndMaxTime(
+		options: Omit<
+			SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
+			'controller' | 'events'
+		> & {
+			events?:
+				| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
+				| undefined
+		} & ViewControllerOptions
+	) {
 		const minHour = options.minTime?.hour ?? 0
 		const minMinute = options.minTime?.minute ?? 0
 
@@ -44,11 +81,6 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 					'maxTime must be before minTime.',
 				],
 			})
-		}
-
-		this.model = {
-			...removeUniversalViewOptions(options),
-			view,
 		}
 	}
 
@@ -75,6 +107,21 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 		this.triggerRender()
 	}
 
+	public selectEvent(id: string) {
+		const match = this.getEventById(id)
+		if (!match) {
+			throw new SpruceError({
+				code: 'EVENT_NOT_FOUND',
+				id,
+			})
+		}
+		this.model.selectedEvent = match
+	}
+
+	public getSelectedEvent() {
+		return this.model.selectedEvent
+	}
+
 	public getView() {
 		return this.model.view
 	}
@@ -84,7 +131,67 @@ export default class CalendarViewController extends AbstractViewController<ViewM
 		this.triggerRender()
 	}
 
-	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar {
+	public addEvent(event: Event) {
+		const eventId = event.id
+		const match = this.getEventById(eventId)
+		if (match) {
+			throw new SpruceError({
+				code: 'DUPLICATE_EVENT_ID',
+				id: eventId,
+			})
+		}
+
+		this.model.events.push(event)
+		this.triggerRender()
+	}
+
+	private getEventById(eventId: string) {
+		const match = this.model.events.find((e) => e.id === eventId)
+
+		return match
+	}
+
+	public removeEvent(id: string) {
+		const match = this.getEventById(id)
+
+		if (!match) {
+			throw new SpruceError({
+				code: 'EVENT_NOT_FOUND',
+				id,
+				friendlyMessage: `I could not find an event with the id of ${id} to remove.`,
+			})
+		}
+
+		this.model.events = this.model.events.filter((e) => e.id !== id)
+		this.triggerRender()
+	}
+
+	public mixinEvents(events: Event[]) {
+		for (const event of events) {
+			const count = events.filter((e) => e.id === event.id).length
+			if (count > 1) {
+				throw new SpruceError({
+					code: 'DUPLICATE_EVENT_ID',
+					id: event.id,
+					friendlyMessage: `You are trying to mixin events that contain a duplicate id: '${event.id}'`,
+				})
+			}
+		}
+
+		let existing: Event[] = []
+
+		for (const event of events) {
+			existing = this.model.events.filter((e) => e.id !== event.id)
+		}
+
+		this.model.events = [...existing, ...events]
+
+		this.triggerRender()
+	}
+
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar & {
+		events: Event[]
+	} {
 		return {
 			...this.model,
 			controller: this,

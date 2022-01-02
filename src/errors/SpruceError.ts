@@ -32,19 +32,27 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'INVALID_SKILL_VIEW_CONTROLLER':
-				message = `The \`${options.id}\` controller you created is not valid:\n\n${options.friendlyMessage}`
+				message = `The '${options.id}' controller you created is not valid:\n\n${options.friendlyMessage}`
 				break
 
 			case 'DUPLICATE_ROW_ID':
-				message = `A row with the id \`${options.rowId}\` already exists.`
+				message = `A row with the id '${options.rowId}' already exists.`
 				break
 
 			case 'DUPLICATE_TOOL_ID':
-				message = `A tool with the id \`${options.id}\` already exists!`
+				message = `A tool with the id '${options.id}' already exists!`
 				break
 
 			case 'VIEW_ALREADY_DESTROYED':
 				message = 'A View already destroyed just happened!'
+				break
+
+			case 'DUPLICATE_EVENT_ID':
+				message = `An event with the id '${options.id}' already exists!`
+				break
+
+			case 'EVENT_NOT_FOUND':
+				message = 'A Event not found just happened!'
 				break
 
 			default:

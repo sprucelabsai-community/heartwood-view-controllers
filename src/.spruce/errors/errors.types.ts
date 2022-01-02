@@ -178,6 +178,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface EventNotFound {
+		
+			
+			'id': string
+	}
+
+	export interface EventNotFoundSchema extends SpruceSchema.Schema {
+		id: 'eventNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Event not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type EventNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.EventNotFoundSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface DuplicateToolId {
 		
 			
@@ -230,6 +260,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type DuplicateRowIdEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DuplicateRowIdSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface DuplicateEventId {
+		
+			
+			'id': string
+	}
+
+	export interface DuplicateEventIdSchema extends SpruceSchema.Schema {
+		id: 'duplicateEventId',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Duplicate event id',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type DuplicateEventIdEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DuplicateEventIdSchema>
 
 }
 

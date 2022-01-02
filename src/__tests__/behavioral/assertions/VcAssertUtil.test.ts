@@ -971,6 +971,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 									{
 										calendar: {
 											people: [],
+											events: [],
 										},
 									},
 								],

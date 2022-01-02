@@ -3,7 +3,7 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import calendarPersonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarPerson.schema'
 import calendarTimeSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
-import calendarEventSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/calendarEvent.schema'
+import calendarEventSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEvent.schema'
 
 const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema  = {
 	id: 'calendar',
@@ -56,8 +56,15 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            /** . */
 	            'events': {
 	                type: 'schema',
+	                isRequired: true,
 	                isArray: true,
-	                options: {schema: calendarEventSchema_v2021_05_19,}
+	                minArrayLength: 0,
+	                options: {schema: calendarEventSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'selectedEvent': {
+	                type: 'schema',
+	                options: {schema: calendarEventSchema_v2021_02_11,}
 	            },
 	            /** Timezone offset. In milliseconds */
 	            'timezoneOffsetMs': {
@@ -84,6 +91,16 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'onClick': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'onSelectEvent': {
+	                type: 'raw',
+	                options: {valueType: `(options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'onDeselectEvent': {
+	                type: 'raw',
+	                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
 	            },
 	    }
 }

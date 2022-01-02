@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { calendarEventSchema } from '@sprucelabs/spruce-calendar-utils'
+import calendarEventBuilder from './calendarEvent.builder'
 
 const timeSchema = buildSchema({
 	id: 'calendarTime',
@@ -82,8 +82,16 @@ export default buildSchema({
 		events: {
 			type: 'schema',
 			isArray: true,
+			isRequired: true,
+			minArrayLength: 0,
 			options: {
-				schema: calendarEventSchema,
+				schema: calendarEventBuilder,
+			},
+		},
+		selectedEvent: {
+			type: 'schema',
+			options: {
+				schema: calendarEventBuilder,
 			},
 		},
 		timezoneOffsetMs: {
@@ -118,6 +126,20 @@ export default buildSchema({
 			options: {
 				valueType:
 					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
+			},
+		},
+		onSelectEvent: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>',
+			},
+		},
+		onDeselectEvent: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>',
 			},
 		},
 	},

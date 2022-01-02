@@ -5,6 +5,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import { vcAssertUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import generateRandomEventValues from '../../../tests/utilities/generateRandomEventValues'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 
 type CalendarTime =
@@ -52,6 +53,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			timezoneOffsetMs: new Date().getTimezoneOffset() * 1000,
 			minTime: { hour: 3, minute: 0 },
 			maxTime: { hour: 10, minute: 0 },
+			events: [generateRandomEventValues()],
 			[`${new Date().getTime()}`]: Math.random(),
 			view: 'day',
 			people: [
@@ -164,5 +166,206 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.setView('month')
 		assert.isEqual(this.vc.getView(), 'month')
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		this.vc.setView('day')
+		assert.isEqual(this.vc.getView(), 'day')
+	}
+
+	@test()
+	protected static canAddEvent() {
+		this.vc.addEvent(generateRandomEventValues())
+	}
+
+	@test()
+	protected static cantAddEventWithSameIdTwice() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		const err = assert.doesThrow(() => this.vc.addEvent(event))
+		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+			id: event.id,
+		})
+	}
+
+	@test()
+	protected static addingEventAddsToModel() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+
+		const model = this.render(this.vc)
+		assert.isEqualDeep(model.events, [event])
+	}
+
+	@test()
+	protected static canAddAFewEvents() {
+		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(generateRandomEventValues())
+
+		const expected = 3
+
+		this.assertRendersTotalEvents(expected)
+	}
+
+	@test()
+	protected static addingEventTriggersRender() {
+		this.vc.addEvent(generateRandomEventValues())
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static cantRemoveEventThatDoesNotExist() {
+		const err = assert.doesThrow(() => this.vc.removeEvent('aoeu'))
+		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+			id: 'aoeu',
+		})
+	}
+
+	@test()
+	protected static canRemoveEventWithGoodId() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.removeEvent(event.id)
+	}
+
+	@test()
+	protected static removeEventRemovesItFromTheModel() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.removeEvent(event.id)
+		this.assertRendersTotalEvents(0)
+	}
+
+	@test()
+	protected static onlyRemovesExpectedEvent() {
+		const event1 = generateRandomEventValues()
+		this.vc.addEvent(event1)
+		const event2 = generateRandomEventValues()
+		this.vc.addEvent(event2)
+
+		this.vc.removeEvent(event1.id)
+
+		const model = this.render(this.vc)
+		assert.isEqualDeep(model.events, [event2])
+	}
+
+	@test()
+	protected static removingAnEventTriggersRender() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.removeEvent(event.id)
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static canMixinEvents() {
+		this.vc.mixinEvents([generateRandomEventValues()])
+	}
+
+	@test()
+	protected static cantMixinEventsWithSameIdAtOnce() {
+		const event = generateRandomEventValues()
+		const err = assert.doesThrow(() => this.vc.mixinEvents([event, event]))
+		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+			id: event.id,
+		})
+	}
+
+	@test()
+	protected static mixingInDupsNotNextToEachOtherStillThrows() {
+		const event = generateRandomEventValues()
+		const err = assert.doesThrow(() =>
+			this.vc.mixinEvents([
+				generateRandomEventValues(),
+				event,
+				generateRandomEventValues(),
+				event,
+			])
+		)
+		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+			id: event.id,
+		})
+	}
+
+	@test()
+	protected static canMixinEventsToEmptyCalendar() {
+		this.vc.mixinEvents([generateRandomEventValues()])
+		this.assertRendersTotalEvents(1)
+	}
+
+	@test()
+	protected static mixingInDoesNotClearPreviousEvents() {
+		this.vc.addEvent(generateRandomEventValues())
+		this.vc.mixinEvents([generateRandomEventValues()])
+		this.assertRendersTotalEvents(2)
+	}
+
+	@test()
+	protected static mixingInReplacesEventsWithMatchingId() {
+		const original = generateRandomEventValues()
+		this.vc.addEvent(original)
+		const updated = { ...generateRandomEventValues(), id: original.id }
+
+		this.vc.mixinEvents([updated])
+
+		this.assertRendersTotalEvents(1)
+	}
+
+	@test()
+	protected static mixingInReplacesEventsWithMatchingIdInBusyCalendar() {
+		const original = generateRandomEventValues()
+
+		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(original)
+
+		const updated = { ...generateRandomEventValues(), id: original.id }
+
+		this.vc.mixinEvents([generateRandomEventValues(), updated])
+
+		this.assertRendersTotalEvents(3)
+	}
+
+	@test()
+	protected static mixinTriggersRender() {
+		this.populateCalendar()
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static cantSelectEventThatDoesNotExist() {
+		this.populateCalendar()
+		const err = assert.doesThrow(() => this.vc.selectEvent('1234'))
+
+		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+			id: '1234',
+		})
+	}
+
+	@test()
+	protected static canSelectEvent() {
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.selectEvent(event.id)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+	}
+
+	@test()
+	protected static canSelectFromBusyCalendar() {
+		this.populateCalendar()
+		const event = generateRandomEventValues()
+		this.vc.addEvent(event)
+		this.vc.selectEvent(event.id)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+	}
+
+	private static assertRendersTotalEvents(expected: number) {
+		const model = this.render(this.vc)
+		assert.isLength(model.events ?? [], expected)
+	}
+
+	private static populateCalendar() {
+		this.vc.mixinEvents([
+			generateRandomEventValues(),
+			generateRandomEventValues(),
+			generateRandomEventValues(),
+		])
 	}
 }

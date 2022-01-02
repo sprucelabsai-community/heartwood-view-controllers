@@ -45,7 +45,7 @@ export default abstract class AbstractViewController<ViewModel>
 	public abstract render(): ViewModel
 	public triggerRender() {}
 
-	public mixinControllers(map: Record<string, any>) {
+	protected mixinControllers(map: Record<string, any>) {
 		this.vcFactory.mixinControllers(map as any)
 	}
 
