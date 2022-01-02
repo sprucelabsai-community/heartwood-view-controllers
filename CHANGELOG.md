@@ -1,3 +1,10 @@
+# [53.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.3.0...v53.4.0) (2022-01-02)
+
+
+### Features
+
+* Devs can now get the events off a calendar, making building experiences even BETTER ([0b53054](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0b53054))
+
 # [53.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.2.4...v53.3.0) (2022-01-02)
 
 
