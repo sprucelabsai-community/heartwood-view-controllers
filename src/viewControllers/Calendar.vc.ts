@@ -194,6 +194,15 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.events
 	}
 
+	public setStartDate(date: number) {
+		this.model.startDate = date
+		this.triggerRender()
+	}
+
+	public getStartDate() {
+		return this.model.startDate
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar & {
 		events: Event[]
 	} {

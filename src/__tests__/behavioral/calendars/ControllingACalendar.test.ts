@@ -375,6 +375,31 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isLength(this.vc.getEvents(), 3)
 	}
 
+	@test()
+	protected static canSetStartDate() {
+		this.vc.setStartDate(new Date().getTime())
+	}
+
+	@test()
+	protected static canGetStartDate() {
+		const date = getDate()
+		this.vc.setStartDate(date)
+		assert.isEqual(this.vc.getStartDate(), date)
+	}
+
+	@test()
+	protected static rendersStartDate() {
+		const date = getDate()
+		this.vc.setStartDate(date)
+		assert.isEqual(this.render(this.vc).startDate, date)
+	}
+
+	@test()
+	protected static settingStartDateTriggersRender() {
+		this.vc.setStartDate(getDate())
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
 	private static assertRendersTotalEvents(expected: number) {
 		const model = this.render(this.vc)
 		assert.isLength(model.events ?? [], expected)
@@ -387,4 +412,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			generateRandomEventValues(),
 		])
 	}
+}
+function getDate() {
+	return new Date().getTime()
 }

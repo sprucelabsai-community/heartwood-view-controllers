@@ -3668,6 +3668,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** Maximum time. The latest time to show in the calendar. */
 				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				/** date. The date the calendar will start on. First of month or first of week. */
+				'startDate'?: number| undefined | null
 				/** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
 				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
@@ -3723,6 +3725,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                hint: 'The latest time to show in the calendar.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
+			            },
+			            /** date. The date the calendar will start on. First of month or first of week. */
+			            'startDate': {
+			                label: 'date',
+			                type: 'number',
+			                hint: 'The date the calendar will start on. First of month or first of week.',
+			                options: undefined
 			            },
 			            /** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
 			            'defaultStartTime': {

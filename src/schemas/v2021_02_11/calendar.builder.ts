@@ -63,6 +63,11 @@ export default buildSchema({
 				schema: timeSchema,
 			},
 		},
+		startDate: {
+			type: 'number',
+			label: 'date',
+			hint: 'The date the calendar will start on. First of month or first of week.',
+		},
 		defaultStartTime: {
 			type: 'schema',
 			label: 'Default start time',
