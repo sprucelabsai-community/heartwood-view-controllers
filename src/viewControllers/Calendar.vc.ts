@@ -203,6 +203,27 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.startDate
 	}
 
+	public replaceEventsInRange(
+		events: Event[],
+		startDate: number,
+		endDate: number
+	) {
+		if (endDate < startDate) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['endDate'],
+				friendlyMessage: 'Your end date has to be after the start date.',
+			})
+		}
+
+		const filtered = this.model.events.filter(
+			(e) => e.startDateTimeMs < startDate || e.startDateTimeMs >= endDate
+		)
+
+		this.model.events = [...filtered, ...events]
+		this.triggerRender()
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar & {
 		events: Event[]
 	} {

@@ -3,7 +3,11 @@ import { dateUtil } from '@sprucelabs/spruce-calendar-utils'
 
 let idCount = 0
 
-export default function generateRandomEventValues(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent {
+type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+
+export default function generateRandomEventValues(
+	values?: Partial<Event>
+): Event {
 	return {
 		id: `new ${new Date().getTime() * Math.random()}-${idCount++}`,
 		startDateTimeMs: dateUtil.getStartOfDay(),
@@ -18,5 +22,6 @@ export default function generateRandomEventValues(): SpruceSchemas.HeartwoodView
 				title: `Block ${new Date().getTime()}`,
 			},
 		],
+		...values,
 	}
 }

@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
+import { dateUtil } from '@sprucelabs/spruce-calendar-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
@@ -397,6 +398,66 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static settingStartDateTriggersRender() {
 		this.vc.setStartDate(getDate())
+		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static settingEventsForRangeThrowsWithEndBeforeStart() {
+		const err = assert.doesThrow(() => this.vc.replaceEventsInRange([], 10, 0))
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['endDate'],
+		})
+	}
+
+	@test()
+	protected static settingEventsForTodayClearsExistingEvents() {
+		this.populateCalendar()
+		this.vc.replaceEventsInRange(
+			[],
+			dateUtil.getStartOfDay(),
+			dateUtil.getEndOfDay()
+		)
+
+		this.assertRendersTotalEvents(0)
+	}
+
+	@test()
+	protected static setEventsForRangeClearsOutEventsOutsideOfRange() {
+		this.populateCalendar()
+		const event = generateRandomEventValues({
+			startDateTimeMs: dateUtil.addDays(dateUtil.getEndOfDay(), 2),
+		})
+
+		this.vc.addEvent(event)
+
+		this.vc.replaceEventsInRange(
+			[],
+			dateUtil.getStartOfDay(),
+			dateUtil.getEndOfDay()
+		)
+
+		this.assertRendersTotalEvents(1)
+	}
+
+	@test()
+	protected static replacedEventsAreSet() {
+		this.vc.replaceEventsInRange(
+			[generateRandomEventValues()],
+			dateUtil.getStartOfDay(),
+			dateUtil.getEndOfDay()
+		)
+
+		this.assertRendersTotalEvents(1)
+	}
+
+	@test()
+	protected static replacingEventsTriggersRender() {
+		this.vc.replaceEventsInRange(
+			[generateRandomEventValues()],
+			dateUtil.getStartOfDay(),
+			dateUtil.getEndOfDay()
+		)
+
 		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
 	}
 
