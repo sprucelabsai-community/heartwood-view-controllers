@@ -212,6 +212,8 @@ export default class ViewControllerExporter {
 				throw new SchemaError({
 					code: 'INVALID_PARAMETERS',
 					parameters: ['profilerStatsDestination'],
+					friendlyMessage:
+						'env.VIEW_PROFILER_STATS_DESTINATION_DIR must point to a directory that already exists.',
 				})
 			}
 		}
