@@ -151,4 +151,47 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			destination: this.destination,
 		})
 	}
+
+	@test()
+	protected static async profileStatsDestMustBeADirectory() {
+		const err = await assert.doesThrowAsync(() =>
+			this.exporter.export({
+				source: this.source,
+				destination: this.destination,
+				profilerStatsDestination: this.resolvePath('test.ts'),
+			})
+		)
+
+		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['profilerStatsDestination'],
+		})
+	}
+
+	@test()
+	protected static async canExportProfileStats() {
+		const statsDestination = diskUtil.createRandomTempDir()
+
+		await this.exporter.export({
+			source: this.source,
+			destination: this.destination,
+			profilerStatsDestination: this.resolvePath(statsDestination),
+		})
+
+		const filepath = this.resolvePath(statsDestination, '/stats.json')
+		assert.isTrue(
+			diskUtil.doesFileExist(filepath),
+			`Did not generate ${filepath}.`
+		)
+	}
+
+	@test()
+	protected static async doesNotIncludeChalk() {
+		await this.exporter.export({
+			source: this.source,
+			destination: this.destination,
+		})
+
+		const contents = diskUtil.readFile(this.destination)
+		assert.doesNotInclude(contents, 'chalk')
+	}
 }

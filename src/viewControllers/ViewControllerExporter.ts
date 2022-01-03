@@ -1,5 +1,5 @@
 import pathUtil from 'path'
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
 import { Configuration, webpack } from 'webpack'
@@ -21,10 +21,11 @@ export default class ViewControllerExporter {
 	public async export(options: {
 		source: string
 		destination: string
+		profilerStatsDestination?: string
 	}): Promise<void> {
 		this.assertValidExportOptions(options)
 
-		const { source, destination } = options
+		const { source, destination, profilerStatsDestination } = options
 
 		this.assertValidSource(source)
 
@@ -35,10 +36,11 @@ export default class ViewControllerExporter {
 		const config: Configuration = this.buildConfiguration(
 			source,
 			dirname,
-			filename
+			filename,
+			!!profilerStatsDestination
 		)
 
-		await this.webpack(config)
+		await this.webpack(config, profilerStatsDestination)
 	}
 
 	public getCwd(): string {
@@ -51,7 +53,7 @@ export default class ViewControllerExporter {
 		return { filename, dirname }
 	}
 
-	private webpack(config: Configuration) {
+	private webpack(config: Configuration, profilerStatsDestination?: string) {
 		return new Promise((resolve: any, reject) => {
 			webpack(config, (err, stats) => {
 				if (err) {
@@ -78,6 +80,14 @@ export default class ViewControllerExporter {
 					return
 				}
 
+				if (profilerStatsDestination) {
+					const contents = JSON.stringify(stats.toJson())
+					diskUtil.writeFile(
+						diskUtil.resolvePath(profilerStatsDestination, 'stats.json'),
+						contents
+					)
+				}
+
 				resolve()
 			})
 		})
@@ -86,11 +96,13 @@ export default class ViewControllerExporter {
 	private buildConfiguration(
 		entry: string,
 		destinationDirname: string,
-		destinationFilename: string
+		destinationFilename: string,
+		shouldProfile?: boolean
 	): Configuration {
 		return {
 			entry,
 			context: this.cwd,
+			stats: !!shouldProfile,
 			resolve: {
 				extensions: ['.ts', '.js'],
 				fallback: {
@@ -191,20 +203,17 @@ export default class ViewControllerExporter {
 	private assertValidExportOptions(options: {
 		source: string
 		destination: string
+		profilerStatsDestination?: string
 	}) {
-		const missing: string[] = []
-		for (const key of ['source', 'destination']) {
-			//@ts-ignore
-			if (!options?.[key]) {
-				missing.push(key)
-			}
-		}
+		assertOptions(options ?? {}, ['source', 'destination'])
 
-		if (missing.length > 0) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
+		if (options.profilerStatsDestination) {
+			if (!diskUtil.isDir(options.profilerStatsDestination)) {
+				throw new SchemaError({
+					code: 'INVALID_PARAMETERS',
+					parameters: ['profilerStatsDestination'],
+				})
+			}
 		}
 	}
 }
