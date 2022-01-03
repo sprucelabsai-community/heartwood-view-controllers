@@ -198,11 +198,15 @@ export type ImportedViewController = (new () =>
 export type ViewControllerId = keyof ViewControllerMap
 export type SkillViewControllerId = keyof SkillViewControllerMap
 
+export interface RedirectOptions {
+	shouldTrackHistory?: boolean
+}
+
 export interface Router {
 	redirect<Id extends SkillViewControllerId>(
 		id: Id,
 		args?: SkillViewControllerArgs<Id>,
-		options?: { shouldTrackHistory?: boolean }
+		options?: RedirectOptions
 	): Promise<SkillViewControllerMap[Id]>
 	back(): Promise<SkillViewController | undefined>
 }
