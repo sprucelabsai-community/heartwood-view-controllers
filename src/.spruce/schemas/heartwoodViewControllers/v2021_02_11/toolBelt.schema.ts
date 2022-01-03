@@ -14,7 +14,7 @@ const toolBeltSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBel
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt>`,}
+	                options: {valueType: `HeartwoodTypes.ToolBeltViewController`,}
 	            },
 	            /** Icon. */
 	            'lineIcon': {
