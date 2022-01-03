@@ -1,3 +1,10 @@
+# [53.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.7.2...v53.8.0) (2022-01-03)
+
+
+### Features
+
+* Devs can now specify a redirect should not be tracked in history, making throwing errors and things so they don't mess with navigation history ([6cccc1a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6cccc1a))
+
 ## [53.7.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.7.1...v53.7.2) (2022-01-03)
 
 ## [53.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.7.0...v53.7.1) (2022-01-03)
