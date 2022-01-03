@@ -41,6 +41,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface ToolNotFound {
+		
+			
+			'id': string
+	}
+
+	export interface ToolNotFoundSchema extends SpruceSchema.Schema {
+		id: 'toolNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Tool not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type ToolNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.ToolNotFoundSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface MissingStorage {
 		
 	}

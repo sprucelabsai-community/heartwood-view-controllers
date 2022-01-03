@@ -215,4 +215,64 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 			card: {} as any,
 		})
 	}
+
+	@test()
+	protected static returnsCopyOfArrayOfTools() {
+		this.addTool()
+
+		const tools1 = this.vc.getTools()
+		const tools2 = this.vc.getTools()
+
+		assert.isNotEqual(tools1, tools2)
+	}
+
+	@test('cant find tool that does not exist 1', 'taco')
+	@test('cant find tool that does not exist 1', 'taco-tuesday')
+	protected static cantFocusToolThatDoesNotExist(id: string) {
+		const err = assert.doesThrow(() => this.vc.focusTool(id))
+		errorAssertUtil.assertError(err, 'TOOL_NOT_FOUND', {
+			id,
+		})
+	}
+
+	@test('can focus tool 1', 'testing')
+	@test('can focus tool 2', 'testing-again')
+	protected static async invokesFocusHandler(id: string) {
+		let wasHit = false
+		let passedId: any
+
+		this.addTool(id)
+
+		//@ts-ignore
+		this.vc.handleFocusTool = (id: string) => {
+			wasHit = true
+			passedId = id
+		}
+
+		this.vc.focusTool(id)
+
+		assert.isTrue(wasHit)
+		assert.isEqual(passedId, id)
+	}
+
+	@test()
+	protected static async doesNotTriggerFocusHandlerForToolNotFound() {
+		let wasHit = false
+
+		//@ts-ignore
+		this.vc.handleFocusTool = () => {
+			wasHit = true
+		}
+
+		assert.doesThrow(() => this.vc.focusTool('cheesy'))
+		assert.isFalse(wasHit)
+	}
+
+	private static addTool(id = 'maps_2') {
+		this.vc.addTool({
+			id,
+			lineIcon: 'map',
+			card: {} as any,
+		})
+	}
 }

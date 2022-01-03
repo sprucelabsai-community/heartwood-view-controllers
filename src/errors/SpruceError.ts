@@ -32,7 +32,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'INVALID_SKILL_VIEW_CONTROLLER':
-				message = `The '${options.id}' controller you created is not valid:\n\n${options.friendlyMessage}`
+				message = `The controller with id '${options.id}' you created is not valid:\n\n${options.friendlyMessage}`
 				break
 
 			case 'DUPLICATE_ROW_ID':
@@ -44,7 +44,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'VIEW_ALREADY_DESTROYED':
-				message = 'A View already destroyed just happened!'
+				message = 'That view has already been destroyed'
 				break
 
 			case 'DUPLICATE_EVENT_ID':
@@ -52,7 +52,11 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'EVENT_NOT_FOUND':
-				message = 'A Event not found just happened!'
+				message = `I could not find an event with the id '${options.id}'!`
+				break
+
+			case 'TOOL_NOT_FOUND':
+				message = `I could not find a tool with the id '${options.id}'!`
 				break
 
 			default:

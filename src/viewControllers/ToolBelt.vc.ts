@@ -12,6 +12,8 @@ export type ToolBeltViewControllerOptions = Partial<ViewModel>
 
 export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
+	private handleFocusTool = (_id: string) => {}
+
 	public constructor(
 		options: ToolBeltViewControllerOptions & ViewControllerOptions
 	) {
@@ -53,11 +55,21 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 	}
 
 	public getTools() {
-		return this.model.tools
+		return [...this.model.tools]
 	}
 
 	public getTool(id: string) {
 		return this.model.tools.find((t) => t.id === id)
+	}
+
+	public focusTool(id: string) {
+		const tool = this.getTool(id)
+
+		if (!tool) {
+			throw new SpruceError({ code: 'TOOL_NOT_FOUND', id })
+		}
+
+		this.handleFocusTool(id)
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
