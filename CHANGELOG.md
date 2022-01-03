@@ -1,3 +1,10 @@
+# [53.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.6.5...v53.7.0) (2022-01-03)
+
+
+### Features
+
+* Devs can now send focus to a tool in the toolbelt, making it even EASIER to create intuitive experiences in complicated UI scenarios! ([f9f8fac](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f9f8fac))
+
 ## [53.6.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.6.4...v53.6.5) (2022-01-03)
 
 ## [53.6.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.6.3...v53.6.4) (2022-01-03)
