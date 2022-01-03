@@ -1,3 +1,10 @@
+# [53.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.8.2...v53.9.0) (2022-01-03)
+
+
+### Features
+
+* Exporting can now write profile information ([79690e8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/79690e8))
+
 ## [53.8.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.8.1...v53.8.2) (2022-01-03)
 
 ## [53.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.8.0...v53.8.1) (2022-01-03)
