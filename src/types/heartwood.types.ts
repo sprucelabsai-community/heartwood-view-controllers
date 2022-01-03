@@ -201,7 +201,8 @@ export type SkillViewControllerId = keyof SkillViewControllerMap
 export interface Router {
 	redirect<Id extends SkillViewControllerId>(
 		id: Id,
-		args?: SkillViewControllerArgs<Id>
+		args?: SkillViewControllerArgs<Id>,
+		options?: { shouldTrackHistory?: boolean }
 	): Promise<SkillViewControllerMap[Id]>
 	back(): Promise<SkillViewController | undefined>
 }
