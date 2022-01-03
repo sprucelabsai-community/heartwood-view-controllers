@@ -6,7 +6,6 @@ import {
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
-import '@sprucelabs/mercury-core-events'
 import ListViewController, { ListRowModel } from './list/List.vc'
 
 export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
