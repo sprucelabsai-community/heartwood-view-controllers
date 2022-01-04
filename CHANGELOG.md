@@ -1,3 +1,10 @@
+# [54.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.9.3...v54.0.0) (2022-01-04)
+
+
+### Breaking Changes
+
+* aserting for tools in the toolbelt returns the cardVc only, making it consistent with other assertions ([957316c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/957316c))
+
 ## [53.9.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.9.2...v53.9.3) (2022-01-04)
 
 ## [53.9.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.9.1...v53.9.2) (2022-01-03)
