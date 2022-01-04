@@ -17,7 +17,7 @@ export default buildSchema({
 			type: 'raw',
 			label: 'On change handler',
 			options: {
-				valueType: '(value?: number) => any | Promise<any>',
+				valueType: '(value: number) => any | Promise<any>',
 			},
 		},
 	},

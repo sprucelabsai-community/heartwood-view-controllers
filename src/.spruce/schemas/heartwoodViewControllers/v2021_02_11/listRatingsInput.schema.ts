@@ -49,7 +49,7 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: number) => any | Promise<any>`,}
+	                options: {valueType: `(value: number) => any | Promise<any>`,}
 	            },
 	            /** Can be changed. */
 	            'canBeChanged': {

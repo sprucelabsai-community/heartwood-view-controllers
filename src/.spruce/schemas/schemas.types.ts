@@ -194,7 +194,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: number) => any | Promise<any>)| undefined | null
+				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -247,7 +247,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: number) => any | Promise<any>`,}
+			                options: {valueType: `(value: number) => any | Promise<any>`,}
 			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
@@ -2854,7 +2854,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: number) => any | Promise<any>)| undefined | null
+				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -2909,7 +2909,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: number) => any | Promise<any>`,}
+			                options: {valueType: `(value: number) => any | Promise<any>`,}
 			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
