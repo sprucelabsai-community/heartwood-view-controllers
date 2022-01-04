@@ -109,7 +109,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -160,7 +160,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -287,7 +287,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -336,7 +336,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			    }
 		}
@@ -364,7 +364,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -414,7 +414,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			    }
 		}
@@ -848,7 +848,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -902,7 +902,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3076,7 +3076,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3131,7 +3131,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3177,7 +3177,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3230,7 +3230,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -4593,7 +4593,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
 
 		interface AddressInputSchema extends SpruceSchema.Schema {
@@ -4642,7 +4642,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 			            },
 			    }
 		}
