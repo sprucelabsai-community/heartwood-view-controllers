@@ -910,11 +910,7 @@ const vcAssertUtil = {
 			`I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
 		)
 
-		return {
-			tool,
-			cardVc: tool.card.controller as ViewController<Card>,
-			toolBeltVc,
-		}
+		return tool.card.controller as ViewController<Card>
 	},
 
 	assertDoesNotRenderToolBelt(svc: SkillViewController) {

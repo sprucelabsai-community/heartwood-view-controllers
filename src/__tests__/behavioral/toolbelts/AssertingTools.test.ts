@@ -148,20 +148,12 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
+		vcAssertUtil.assertRendersToolBelt(vc)
 
-		const {
-			tool,
-			cardVc,
-			toolBeltVc: toolBeltVc1,
-		} = vcAssertUtil.assertToolBeltRendersTool(vc, 'taco')
-		assert.isEqual(tool.id, 'taco')
-		assert.isEqualDeep(tool.lineIcon, 'add')
+		const cardVc = vcAssertUtil.assertToolBeltRendersTool(vc, 'taco')
 		assert.isEqual(cardVc, card1)
-		assert.isEqual(toolBeltVc, toolBeltVc1)
 
-		const { tool: tool2 } = vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
-		assert.isEqual(tool2.id, randomId)
+		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
 	}
 
 	@test()
