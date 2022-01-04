@@ -3082,7 +3082,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				
-				'setValue'?: ((name: string, value: text) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -3149,7 +3149,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: text) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: string) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -3181,7 +3181,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'setValue'?: ((name: string, value: text) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -3241,7 +3241,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: text) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: string) => Promise<any> | any`,}
 			            },
 			    }
 		}

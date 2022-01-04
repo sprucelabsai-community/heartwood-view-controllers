@@ -88,7 +88,8 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: text) => Promise<any> | any',
+								valueType:
+									'(name: string, value: string) => Promise<any> | any',
 							},
 						},
 					},
@@ -106,7 +107,8 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: text) => Promise<any> | any',
+								valueType:
+									'(name: string, value: string) => Promise<any> | any',
 							},
 						},
 					},
