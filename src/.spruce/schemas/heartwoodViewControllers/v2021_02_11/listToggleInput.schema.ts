@@ -49,12 +49,12 @@ const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: boolean) => void | boolean | Promise<void | boolean>`,}
+	                options: {valueType: `(value: boolean) => void | boolean | Promise<void | boolean>`,}
 	            },
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+	                options: {valueType: `(name: string, value: boolean) => Promise<any> | any`,}
 	            },
 	    }
 }

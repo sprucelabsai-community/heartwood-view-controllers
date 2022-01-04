@@ -37,7 +37,7 @@ export default buildSchema({
 			label: 'On change handler',
 			options: {
 				valueType:
-					'(value?: string) => void | boolean | Promise<void | boolean>',
+					'(value: string) => void | boolean | Promise<void | boolean>',
 			},
 		},
 	},

@@ -49,7 +49,7 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value?: string) => void | boolean | Promise<void | boolean>`,}
+	                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
 	            },
 	            /** Placeholder. */
 	            'placeholder': {
@@ -60,7 +60,7 @@ const listTextInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+	                options: {valueType: `(name: string, value: string) => Promise<any> | any`,}
 	            },
 	    }
 }

@@ -33,4 +33,7 @@ export default class HandlingErrorsInConfirmsTest extends AbstractViewController
 
 		await assert.doesThrowAsync(() => confirmVc.accept())
 	}
+
+	@test()
+	protected static needOneTestSoReporterShowsPassing() {}
 }
