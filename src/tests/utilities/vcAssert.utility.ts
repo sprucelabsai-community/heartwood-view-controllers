@@ -3,11 +3,6 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import {
-	ActiveRecordCardViewController,
-	StatsViewController,
-	TalkingSprucebotViewController,
-} from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -20,6 +15,7 @@ import {
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
+import ActiveRecordCardViewController from '../../viewControllers/ActiveRecordCard.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
@@ -27,6 +23,8 @@ import FormBuilderCardViewController from '../../viewControllers/formBuilder/For
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
+import StatsViewController from '../../viewControllers/reporting/Stats.vc'
+import TalkingSprucebotViewController from '../../viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter.utility'
