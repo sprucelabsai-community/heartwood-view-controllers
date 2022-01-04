@@ -193,7 +193,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	@test()
 	protected static canCheckInstanceOfTool() {
 		let vc = this.ToolBeltSvc()
-		const toolBeltVc = vc.getToolBeltVc()
+		const toolBeltVc = this.ToolBeltSvc()
 		assert.isTruthy(toolBeltVc)
 
 		assert.doesThrow(() =>
@@ -216,28 +216,18 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			tool2Id: randomId,
 		})
 
-		vcAssertUtil.assertToolInstanceOf(
-			vc.getToolBeltVc() as any,
-			randomId,
-			CardViewController
-		)
+		vcAssertUtil.assertToolInstanceOf(vc, randomId, CardViewController)
 	}
 
 	@test()
 	protected static canTellToolInstanceOfSubClass() {
-		vcAssertUtil.assertToolInstanceOf(
-			//@ts-ignore
-			this.ToolBeltSvc().getToolBeltVc(),
-			'fancy',
-			FancyCard
-		)
+		vcAssertUtil.assertToolInstanceOf(this.ToolBeltSvc(), 'fancy', FancyCard)
 	}
 
 	@test()
 	protected static canTellParentMostClass() {
 		const toolVc = vcAssertUtil.assertToolInstanceOf(
-			//@ts-ignore
-			this.ToolBeltSvc().getToolBeltVc(),
+			this.ToolBeltSvc(),
 			'tool',
 			FancyTool
 		)

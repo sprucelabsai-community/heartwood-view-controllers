@@ -872,10 +872,11 @@ const vcAssertUtil = {
 			'Your skill view does not render a tool belt with any tools!'
 		)
 
-		return toolBelt?.controller as ToolBeltViewController | undefined
+		return toolBelt?.controller as ToolBeltViewController
 	},
 
-	assertToolInstanceOf(vc: ToolBeltViewController, toolId: string, Class: any) {
+	assertToolInstanceOf(svc: SkillViewController, toolId: string, Class: any) {
+		const vc = this.assertRendersToolBelt(svc)
 		const tool = vc.getTool(toolId)
 
 		const checks = [
