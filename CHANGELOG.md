@@ -1,3 +1,10 @@
+# [55.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v54.0.0...v55.0.0) (2022-01-04)
+
+
+### Breaking Changes
+
+* asserting tools are instance of just got easier! ([2b3531d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2b3531d))
+
 # [54.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v53.9.3...v54.0.0) (2022-01-04)
 
 
