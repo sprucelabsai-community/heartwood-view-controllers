@@ -32,7 +32,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
 
 		interface ToggleInputSchema extends SpruceSchema.Schema {
@@ -81,7 +81,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: boolean) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: boolean) => void | boolean | Promise<void | boolean>`,}
 			            },
 			    }
 		}
@@ -2860,7 +2860,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListRatingsInputSchema extends SpruceSchema.Schema {
@@ -2926,7 +2926,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: number) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -2954,9 +2954,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value?: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: boolean) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListToggleInputSchema extends SpruceSchema.Schema {
@@ -3005,12 +3005,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value?: boolean) => void | boolean | Promise<void | boolean>`,}
+			                options: {valueType: `(value: boolean) => void | boolean | Promise<void | boolean>`,}
 			            },
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: boolean) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -3082,7 +3082,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				
-				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: text) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -3149,7 +3149,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: text) => Promise<any> | any`,}
 			            },
 			    }
 		}
@@ -3181,7 +3181,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
-				'setValue'?: ((name: string, value: any) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: text) => Promise<any> | any)| undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -3241,7 +3241,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
-			                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+			                options: {valueType: `(name: string, value: text) => Promise<any> | any`,}
 			            },
 			    }
 		}

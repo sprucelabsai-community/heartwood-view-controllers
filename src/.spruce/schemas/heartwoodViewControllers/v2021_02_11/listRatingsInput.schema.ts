@@ -66,7 +66,7 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	            /** . */
 	            'setValue': {
 	                type: 'raw',
-	                options: {valueType: `(name: string, value: any) => Promise<any> | any`,}
+	                options: {valueType: `(name: string, value: number) => Promise<any> | any`,}
 	            },
 	    }
 }

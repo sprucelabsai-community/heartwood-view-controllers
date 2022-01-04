@@ -16,7 +16,7 @@ export default buildSchema({
 			label: 'On change handler',
 			options: {
 				valueType:
-					'(value?: boolean) => void | boolean | Promise<void | boolean>',
+					'(value: boolean) => void | boolean | Promise<void | boolean>',
 			},
 		},
 	},

@@ -88,7 +88,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<any> | any',
+								valueType: '(name: string, value: text) => Promise<any> | any',
 							},
 						},
 					},
@@ -106,7 +106,7 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<any> | any',
+								valueType: '(name: string, value: text) => Promise<any> | any',
 							},
 						},
 					},
@@ -124,7 +124,8 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<any> | any',
+								valueType:
+									'(name: string, value: boolean) => Promise<any> | any',
 							},
 						},
 					},
@@ -142,7 +143,8 @@ export default buildSchema({
 						setValue: {
 							type: 'raw',
 							options: {
-								valueType: '(name: string, value: any) => Promise<any> | any',
+								valueType:
+									'(name: string, value: number) => Promise<any> | any',
 							},
 						},
 					},
