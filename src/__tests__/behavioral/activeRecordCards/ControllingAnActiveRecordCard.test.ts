@@ -529,7 +529,6 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.doesInclude(expected, newRow)
 	}
 
-
 	private static async seedAndGetVc() {
 		const organizations = await this.seedOrganizations()
 
