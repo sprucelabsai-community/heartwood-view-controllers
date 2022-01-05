@@ -505,6 +505,31 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isEqualDeep(passedRow, { cells: [{ lineIcon: 'info' }] })
 	}
 
+	@test('can add row directly 1', {
+		id: 'test',
+		cells: [],
+	})
+	@test('can add row directly 1', {
+		id: 'test2',
+		cells: [
+			{
+				text: {
+					content: 'hey',
+				},
+			},
+		],
+	})
+	protected static async canAddRowDirectly(newRow: Record<string, any>) {
+		const vc = this.Vc({})
+
+		vc.addRow(newRow as any)
+
+		const expected = this.render(vc.getListVc()).rows[0]
+
+		assert.doesInclude(expected, newRow)
+	}
+
+
 	private static async seedAndGetVc() {
 		const organizations = await this.seedOrganizations()
 

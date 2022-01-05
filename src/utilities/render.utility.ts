@@ -68,7 +68,7 @@ const renderUtil = {
 		vc: VC,
 		options?: RenderOptions
 	): ReturnType<VC['render']> {
-		if (typeof vc.render !== 'function') {
+		if (typeof vc?.render !== 'function') {
 			throw new Error(`Your ViewController does not have a render function!`)
 		}
 		const model = vc.render()

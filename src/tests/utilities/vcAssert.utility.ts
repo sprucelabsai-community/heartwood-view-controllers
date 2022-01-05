@@ -902,6 +902,14 @@ const vcAssertUtil = {
 		return null
 	},
 
+	assertToolBeltDoesNotRenderTool(svc: SkillViewController, toolId: string) {
+		try {
+			this.assertToolBeltRendersTool(svc, toolId)
+		} catch {
+			return
+		}
+		assert.fail(`You rendered the tool '${toolId}' and should not have!`)
+	},
 	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
 		const toolBeltVc = this.assertRendersToolBelt(svc)
 

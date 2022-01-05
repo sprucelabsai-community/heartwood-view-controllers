@@ -83,9 +83,9 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 
 		if (row.atIndex) {
-			this.model.rows.splice(row.atIndex, 0, row)
+			this.model.rows.splice(row.atIndex, 0, { ...row })
 		} else {
-			this.model.rows.push(row)
+			this.model.rows.push({ ...row })
 		}
 
 		this._rowVcs = []

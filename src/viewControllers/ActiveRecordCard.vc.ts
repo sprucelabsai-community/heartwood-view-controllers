@@ -240,6 +240,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.listVc
 	}
 
+	public addRow(
+		row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+	) {
+		this.listVc.addRow(row)
+	}
+
 	public render(): Card {
 		return this.cardVc.render()
 	}

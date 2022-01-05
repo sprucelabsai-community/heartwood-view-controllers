@@ -154,6 +154,10 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		assert.isEqual(cardVc, card1)
 
 		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertToolBeltDoesNotRenderTool(vc, randomId)
+		)
 	}
 
 	@test()
@@ -187,28 +191,30 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		vcAssertUtil.assertToolBeltRendersTool(vc, 'add')
 		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc2, 'add'))
 		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc, 'taco'))
+		vcAssertUtil.assertToolBeltDoesNotRenderTool(vc, 'taco')
+
 		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
 	}
 
 	@test()
 	protected static canCheckInstanceOfTool() {
 		let vc = this.ToolBeltSvc()
-		const toolBeltVc = this.ToolBeltSvc()
-		assert.isTruthy(toolBeltVc)
+		const svc = this.ToolBeltSvc()
+		assert.isTruthy(svc)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'add', FormViewController)
+			vcAssertUtil.assertToolInstanceOf(svc, 'add', FormViewController)
 		)
 
 		const swipeVc = vcAssertUtil.assertToolInstanceOf(
-			toolBeltVc,
+			svc,
 			'add',
 			SwipeViewController
 		)
 
 		assert.isEqual(swipeVc, this.swipeVc)
 
-		vcAssertUtil.assertToolInstanceOf(toolBeltVc, 'edit', CardViewController)
+		vcAssertUtil.assertToolInstanceOf(svc, 'edit', CardViewController)
 
 		const randomId = `${new Date().getTime()}`
 
