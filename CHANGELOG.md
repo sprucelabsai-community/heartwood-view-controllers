@@ -1,3 +1,10 @@
+# [55.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.0.3...v55.1.0) (2022-01-05)
+
+
+### Features
+
+* assertToolBeltDoesNotRenderTool to make hiding tools a testable thing. ACtive record card view controllers have add row ([f951485](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f951485))
+
 ## [55.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.0.2...v55.0.3) (2022-01-05)
 
 ## [55.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.0.1...v55.0.2) (2022-01-05)
