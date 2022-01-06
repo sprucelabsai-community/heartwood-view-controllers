@@ -11,6 +11,7 @@ import {
 	ViewController,
 	Router,
 	CardViewController,
+	ScopedBy,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
@@ -1401,6 +1402,34 @@ const vcAssertUtil = {
 		)
 
 		return progress.controller
+	},
+
+	assertSkillViewNotScoped(vc: SkillViewController) {
+		const scope = vc.getScopedBy?.() ?? 'none'
+		assert.isEqual(
+			scope,
+			'none',
+			`Your skill view '${getVcName(
+				vc
+			)}' should not be scoped, but is set to '${scope}'!`
+		)
+	},
+
+	assertSkillViewScopedBy(vc: SkillViewController, scopedBy: ScopedBy) {
+		if (scopedBy !== 'location' && scopedBy !== 'organization') {
+			assert.fail(
+				`Valid scopes are 'none', 'location', or 'organization'. You passed '${scopedBy}'.`
+			)
+		}
+
+		const scope = vc.getScopedBy?.() ?? 'none'
+		assert.isEqual(
+			scope,
+			scopedBy,
+			`Your skill view '${getVcName(
+				vc
+			)}' should be scoped to ${scopedBy}, but is set to '${scope}'!`
+		)
 	},
 }
 

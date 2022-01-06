@@ -184,6 +184,7 @@ export interface SkillViewController<
 > extends ViewController<SkillView> {
 	getIsLoginRequired?(): Promise<boolean>
 	focus?(): Promise<void>
+	getScopedBy?(): ScopedBy | undefined
 	blur?(): Promise<void>
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 	renderToolBelt(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
@@ -425,3 +426,5 @@ export type KeyboardKey =
 	| 'Escape'
 
 export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes
+
+export type ScopedBy = 'none' | 'organization' | 'location'
