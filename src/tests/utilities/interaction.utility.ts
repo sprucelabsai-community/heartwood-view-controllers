@@ -225,7 +225,7 @@ const interactionUtil = {
 		const button = rowModel.cells.find((c) => c.button?.id === buttonId)?.button
 		assert.isTruthy(
 			button,
-			`I could not find a button with the id of ${buttonId} to click!`
+			`I could not find a button with the id of '${buttonId}' to click in row '${rowIdxOrId}'!`
 		)
 
 		await this.click(button)
