@@ -1,3 +1,10 @@
+# [55.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.1.13...v55.2.0) (2022-01-06)
+
+
+### Features
+
+* Skill views can set scope to let heartwood handle org/location select ([62ce219](https://github.com/sprucelabsai/heartwood-view-controllers/commit/62ce219))
+
 ## [55.1.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.1.12...v55.1.13) (2022-01-06)
 
 ## [55.1.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.1.11...v55.1.12) (2022-01-06)
