@@ -1,3 +1,10 @@
+# [55.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.2.7...v55.3.0) (2022-01-07)
+
+
+### Features
+
+* devs can now assert that a row does not render a button ([5955ef0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5955ef0))
+
 ## [55.2.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.2.6...v55.2.7) (2022-01-07)
 
 ## [55.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.2.5...v55.2.6) (2022-01-07)
