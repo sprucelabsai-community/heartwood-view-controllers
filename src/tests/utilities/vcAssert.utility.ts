@@ -337,7 +337,9 @@ const vcAssertUtil = {
 				//@ts-ignore
 				const oldRenderInDialog =
 					//@ts-ignore
-					vc._originalRenderInDialog ?? vc.renderInDialog?.bind(vc) ?? function () {}
+					vc._originalRenderInDialog ??
+					vc.renderInDialog?.bind(vc) ??
+					function () {}
 
 				let dialogPromise = new Promise((resolve) => {
 					//@ts-ignore
