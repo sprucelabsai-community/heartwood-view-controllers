@@ -338,6 +338,7 @@ const vcAssertUtil = {
 				const oldRenderInDialog =
 					//@ts-ignore
 					vc._originalRenderInDialog ??
+					//@ts-ignore
 					vc.renderInDialog?.bind(vc) ??
 					function () {}
 
