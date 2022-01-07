@@ -1,22 +1,8 @@
 import { assert, test } from '@sprucelabs/test'
 import { vcAssertUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import AbstractViewController from '../../../viewControllers/Abstract.vc'
+import dialogTestPatcher from '../../../tests/utilities/dialogTestPatcher'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
-
-const dialogTestPatcher = {
-	patchDialogToThrow(vc: AbstractViewController<any>) {
-		//@ts-ignore
-		vc._oldRenderInDialog = vc.renderInDialog?.bind(vc)
-
-		//@ts-ignore
-		vc.renderInDialog = () => {
-			assert.fail(
-				`You unexpectedly rendered a dialog. Make sure you use vcAssert.assertRendersDialog()`
-			)
-		}
-	},
-}
 
 export default class AssertingDialogsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {

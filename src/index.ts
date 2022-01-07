@@ -100,9 +100,14 @@ export { default as ViewControllerFactory } from './viewControllers/ViewControll
 export { default as MockStorage } from './tests/MockStorage'
 
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
+/**
+ * @deprecated vcAssertUtil -> vcAssert
+ */
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
+export { default as vcAssert } from './tests/utilities/vcAssert.utility'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as formTestUtil } from './tests/utilities/formTest.utility'
+export { default as dialogTestPatcher } from './tests/utilities/dialogTestPatcher'
 export { default as renderUtil } from './utilities/render.utility'
 export * from './utilities/render.utility'
 export { default as listUtil } from './viewControllers/list/list.utility'
