@@ -4,7 +4,7 @@ import AbstractViewController from '../../viewControllers/Abstract.vc'
 const dialogTestPatcher = {
 	patchDialogToThrow(vc: AbstractViewController<any>) {
 		//@ts-ignore
-		vc._oldRenderInDialog = vc.renderInDialog?.bind(vc)
+		vc._originalRenderInDialog = vc.renderInDialog?.bind(vc)
 
 		//@ts-ignore
 		vc.renderInDialog = () => {
