@@ -945,6 +945,14 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		assert.doesThrow(() =>
 			vcAssertUtil.assertRowRendersButton(rowVc, 'test', 'edit')
 		)
+
+		vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'test', 'edit')
+
+		assert.doesThrow(() =>
+			vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'first', 'edit')
+		)
+
+		vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'apple', '234234')
 		vcAssertUtil.assertRowRendersButton(rowVc, 'first', 'edit')
 
 		assert.doesThrow(() =>
