@@ -37,7 +37,7 @@ type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-interface ConfirmViewController {
+export interface ConfirmViewController {
 	accept: () => void | Promise<void>
 	decline: () => void | Promise<void>
 	options: ConfirmOptions
