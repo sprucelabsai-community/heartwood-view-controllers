@@ -1091,7 +1091,8 @@ const vcAssertUtil = {
 	async assertActionRedirects(options: AssertRedirectOptions) {
 		const { router, action, destination } = options
 
-		const oldRedirect = router.redirect.bind(router)
+		//@ts-ignore
+		const oldRedirect = router._originalRedirect ?? router.redirect.bind(router)
 
 		let wasHit = false
 		let failMessage: string | undefined
