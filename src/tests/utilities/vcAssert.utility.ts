@@ -335,7 +335,9 @@ const vcAssertUtil = {
 				let wasHit = false
 				let dialogVc: DialogViewController | undefined
 				//@ts-ignore
-				const oldRenderInDialog = vc.renderInDialog?.bind(vc) ?? function () {}
+				const oldRenderInDialog =
+					//@ts-ignore
+					vc._oldRenderInDialog ?? vc.renderInDialog?.bind(vc) ?? function () {}
 
 				let dialogPromise = new Promise((resolve) => {
 					//@ts-ignore
