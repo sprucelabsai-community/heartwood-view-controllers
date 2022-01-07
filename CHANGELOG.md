@@ -1,3 +1,10 @@
+# [55.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.4.1...v55.5.0) (2022-01-07)
+
+
+### Features
+
+* dialog test patcher export missed. vcAssertUtil -> vcAssert (non breaking) ([69e3991](https://github.com/sprucelabsai/heartwood-view-controllers/commit/69e3991))
+
 ## [55.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.4.0...v55.4.1) (2022-01-07)
 
 # [55.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.3.1...v55.4.0) (2022-01-07)
