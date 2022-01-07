@@ -1,3 +1,10 @@
+# [55.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.5.0...v55.6.0) (2022-01-07)
+
+
+### Features
+
+* Devs can patch the a router to throw on redirect, making testing even EASIER! ([f6f938e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f6f938e))
+
 # [55.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.4.1...v55.5.0) (2022-01-07)
 
 
