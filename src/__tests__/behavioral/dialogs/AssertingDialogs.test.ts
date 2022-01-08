@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import dialogTestPatcher from '../../../tests/utilities/dialogTestPatcher'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
@@ -17,15 +17,34 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canBePathedToThrowWhenRenderingDialog() {
-		await assert.doesThrowAsync(() => this.vc.getRenderInDialogController())
+		await assert.doesThrowAsync(() => this.vc.renderInDialogAndGetDlgVc())
 	}
 
 	@test()
 	protected static async assertingDoesRenderWorksAsExpected() {
-		await vcAssertUtil.assertRendersDialog(
+		await this.assertRendersDialog()
+	}
+
+	private static async assertRendersDialog() {
+		await vcAssert.assertRendersDialog(
 			this.vc,
-			() => this.vc.getRenderInDialogController() as any
+			() => this.vc.renderInDialogAndGetDlgVc() as any
 		)
+	}
+
+	@test()
+	protected static async callsOriginalDialogHandler() {
+		let wasHit = false
+		this.vc = this.PatchedVc()
+
+		//@ts-ignore
+		this.vc.renderInDialogHandler = () => {
+			wasHit = true
+		}
+
+		await this.assertRendersDialog()
+
+		assert.isTruthy(wasHit)
 	}
 
 	private static PatchedVc() {

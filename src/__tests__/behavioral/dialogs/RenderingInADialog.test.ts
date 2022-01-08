@@ -32,14 +32,14 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static getsBackDialogController() {
-		const dialog = this.svc.getRenderInDialogController()
+		const dialog = this.svc.renderInDialogAndGetDlgVc()
 		assert.isTruthy(dialog)
 		assert.isFunction(dialog.hide)
 	}
 
 	@test()
 	protected static async canWaitUntilDialogIsClossed() {
-		const dialog = this.svc.getRenderInDialogController()
+		const dialog = this.svc.renderInDialogAndGetDlgVc()
 
 		let waited = false
 

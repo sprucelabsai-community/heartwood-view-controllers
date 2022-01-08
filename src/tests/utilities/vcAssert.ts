@@ -360,8 +360,14 @@ const vcAssert = {
 				let dialogHandlerPromise: any
 
 				//@ts-ignore
+				const originalHandler = vc.renderInDialogHandler?.bind(vc)
+
+				//@ts-ignore
 				vc.renderInDialogHandler = ({ controller }) => {
 					wasHit = true
+
+					originalHandler?.({ controller })
+
 					//@ts-ignore
 					setTimeout(async () => {
 						dialogHandlerPromise = dialogHandler?.(controller)?.catch?.(

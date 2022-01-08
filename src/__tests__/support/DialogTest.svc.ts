@@ -20,7 +20,7 @@ export default class DialogTestSkillViewController extends AbstractSkillViewCont
 		await this.hideDialog()
 	}
 
-	public getRenderInDialogController() {
+	public renderInDialogAndGetDlgVc() {
 		const controller = this.renderInDialog(this.dialog)
 
 		setupController(controller)
