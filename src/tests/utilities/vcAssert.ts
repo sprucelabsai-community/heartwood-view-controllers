@@ -741,7 +741,9 @@ const vcAssert = {
 		const model = renderUtil.render(vc)
 		if (!model.body?.isBusy) {
 			assert.fail(
-				`Expected your card '${model.id}' to be busy. Try \`this.setIsBusy(true)\` or setting { body: { isBusy: true } }`
+				`Expected your card '${getVcName(
+					vc
+				)}' to be busy. Try \`this.setIsBusy(true)\` or setting { body: { isBusy: true } }`
 			)
 		}
 	},
@@ -750,7 +752,9 @@ const vcAssert = {
 		const model = renderUtil.render(vc)
 		if (model.body?.isBusy) {
 			assert.fail(
-				`Expected your card '${model.id}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
+				`Expected your card '${getVcName(
+					vc
+				)}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)
 		}
 	},
