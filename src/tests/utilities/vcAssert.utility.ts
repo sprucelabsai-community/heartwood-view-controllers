@@ -1095,7 +1095,7 @@ const vcAssertUtil = {
 		const oldRedirect = router._originalRedirect ?? router.redirect.bind(router)
 
 		let wasHit = false
-		let failMessage: string | undefined
+		let failMessage: any | undefined
 
 		const redirectPromise = new Promise((resolve: any) => {
 			//@ts-ignore
@@ -1121,7 +1121,7 @@ const vcAssertUtil = {
 					//@ts-ignore
 					await oldRedirect(id, args)
 				} catch (err: any) {
-					failMessage = err.message
+					failMessage = err
 				}
 				resolve()
 			}
@@ -1134,7 +1134,7 @@ const vcAssertUtil = {
 		await redirectPromise
 
 		if (failMessage) {
-			assert.fail(failMessage)
+			throw failMessage
 		}
 	},
 
