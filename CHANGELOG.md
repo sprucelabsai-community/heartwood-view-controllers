@@ -1,3 +1,10 @@
+# [55.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.7.1...v55.8.0) (2022-01-08)
+
+
+### Features
+
+* devs can now check if a list by id is NOT rendered! ([c0d5427](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c0d5427))
+
 ## [55.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.7.0...v55.7.1) (2022-01-08)
 
 # [55.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.6.12...v55.7.0) (2022-01-08)
