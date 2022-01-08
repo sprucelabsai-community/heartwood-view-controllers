@@ -104,7 +104,7 @@ export { default as normalizeFormSectionFieldNamesUtil } from './utilities/norma
  * @deprecated vcAssertUtil -> vcAssert
  */
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
-export { default as vcAssert } from './tests/utilities/vcAssert.utility'
+export { default as vcAssert } from './tests/utilities/vcAssert'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as formTestUtil } from './tests/utilities/formTest.utility'
 export { default as dialogTestPatcher } from './tests/utilities/dialogTestPatcher'
