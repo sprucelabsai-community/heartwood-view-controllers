@@ -454,7 +454,7 @@ const vcAssert = {
 		)
 
 		if (id) {
-			assert.isTrue(foundById, `Found a list, but not by the id you sent!`)
+			assert.isTrue(foundById, `Found a list, but nothing with the id '${id}'!`)
 		}
 
 		return match?.controller
