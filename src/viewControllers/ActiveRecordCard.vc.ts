@@ -61,13 +61,19 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.emitTarget = options.target
 		this.filter = options.filter
 
-		this.listVc = this.Controller('list', {
-			columnWidths: options.columnWidths as any,
-			defaultRowHeight: options.defaultRowHeight,
-			shouldRenderRowDividers: options.shouldRenderRowDividers,
-		})
+		this.listVc = this.ListVc(options)
+		this.cardVc = this.CardVc(options)
 
-		this.cardVc = this.Controller('card', {
+		//@ts-ignore
+		this.cardVc.__isActiveRecord = true
+		//@ts-ignore
+		this.cardVc.__activeRecordParent = this
+	}
+
+	private CardVc(
+		options: ActiveRecordCardViewControllerOptions
+	): CardViewController {
+		return this.Controller('card', {
 			id: options.id,
 			header: options.header,
 			footer: options.footer,
@@ -80,11 +86,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 				],
 			},
 		})
+	}
 
-		//@ts-ignore
-		this.cardVc.__isActiveRecord = true
-		//@ts-ignore
-		this.cardVc.__activeRecordParent = this
+	private ListVc(
+		options: ActiveRecordCardViewControllerOptions
+	): ListViewController {
+		return this.Controller('list', {
+			id: options.id,
+			columnWidths: options.columnWidths as any,
+			defaultRowHeight: options.defaultRowHeight,
+			shouldRenderRowDividers: options.shouldRenderRowDividers,
+		})
 	}
 
 	public async load() {

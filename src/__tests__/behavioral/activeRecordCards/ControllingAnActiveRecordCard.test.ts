@@ -4,10 +4,11 @@ import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { vcAssert } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER_ACTIVE_RECORD } from '../../../tests/constants'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/ActiveRecordCard.vc'
@@ -64,8 +65,8 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static rendersBusyCardToStart() {
 		const vc = this.Vc()
 
-		vcAssertUtil.assertRendersValidCard(vc)
-		vcAssertUtil.assertCardIsBusy(vc)
+		vcAssert.assertRendersValidCard(vc)
+		vcAssert.assertCardIsBusy(vc)
 	}
 
 	@test()
@@ -101,9 +102,16 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static rendersList() {
 		const vc = this.Vc()
 
-		const listVc = vcAssertUtil.assertCardRendersList(vc)
+		const listVc = vcAssert.assertCardRendersList(vc)
 		assert.isEqual(listVc, vc.getListVc())
-		vcAssertUtil.assertListRendersRows(listVc, 0)
+		vcAssert.assertListRendersRows(listVc, 0)
+	}
+
+	@test('sets id on list 1', 'test')
+	@test('sets id on list 2', 'waka')
+	protected static listIdIsSetBasedOnCardId(id: string) {
+		const vc = this.Vc({ id })
+		assert.isEqual(this.render(vc.getListVc()).id, id)
 	}
 
 	@test()
@@ -150,14 +158,10 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		vcAssertUtil.assertCardIsNotBusy(vc)
-		vcAssertUtil.assertListRendersRow(vc.getListVc(), 'no-results')
+		vcAssert.assertCardIsNotBusy(vc)
+		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
 
-		vcAssertUtil.assertRowRendersContent(
-			vc.getListVc(),
-			'no-results',
-			'no results'
-		)
+		vcAssert.assertRowRendersContent(vc.getListVc(), 'no-results', 'no results')
 	}
 
 	@test()
@@ -177,11 +181,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			},
 		})
 
-		vcAssertUtil.assertRowRendersContent(
-			vc.getListVc(),
-			'no-results',
-			'oh no!!'
-		)
+		vcAssert.assertRowRendersContent(vc.getListVc(), 'no-results', 'oh no!!')
 	}
 
 	@test()
@@ -209,8 +209,8 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			})
 		})
 
-		vcAssertUtil.assertListRendersRow(vc.getListVc(), 'error')
-		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), 'no-results')
+		vcAssert.assertListRendersRow(vc.getListVc(), 'error')
+		vcAssert.assertListDoesNotRenderRow(vc.getListVc(), 'no-results')
 	}
 
 	@test()
@@ -225,11 +225,11 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		await vc.load()
 
-		vcAssertUtil.assertListRendersRows(vc.getListVc(), organizations.length)
+		vcAssert.assertListRendersRows(vc.getListVc(), organizations.length)
 
 		for (const org of organizations) {
-			vcAssertUtil.assertListRendersRow(vc.getListVc(), org.id)
-			vcAssertUtil.assertRowRendersContent(vc.getListVc(), org.id, org.name)
+			vcAssert.assertListRendersRow(vc.getListVc(), org.id)
+			vcAssert.assertRowRendersContent(vc.getListVc(), org.id, org.name)
 		}
 	}
 
@@ -241,7 +241,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		}))
 
 		const listVc = vc.getListVc()
-		vcAssertUtil.assertListRendersRows(listVc, 1)
+		vcAssert.assertListRendersRows(listVc, 1)
 
 		organizations.push({
 			id: 'aoeuaou',
@@ -259,9 +259,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		await vc.refresh()
 
-		vcAssertUtil.assertListDoesNotRenderRow(listVc, 'not-found')
+		vcAssert.assertListDoesNotRenderRow(listVc, 'not-found')
 
-		vcAssertUtil.assertListRendersRows(
+		vcAssert.assertListRendersRows(
 			listVc,
 			organizations.map((o) => o.id)
 		)
@@ -281,7 +281,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		await vc.refresh()
 
 		for (const org of oldOrgs) {
-			vcAssertUtil.assertListDoesNotRenderRow(listVc, org.id)
+			vcAssert.assertListDoesNotRenderRow(listVc, org.id)
 		}
 	}
 
@@ -301,7 +301,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		vc.deleteRow(organization.id)
 
-		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organization.id)
+		vcAssert.assertListDoesNotRenderRow(vc.getListVc(), organization.id)
 	}
 
 	@test()
@@ -328,14 +328,10 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		await vc.load()
 
-		vcAssertUtil.assertRowRendersContent(
-			vc.getListVc(),
-			organization.id,
-			'waka'
-		)
+		vcAssert.assertRowRendersContent(vc.getListVc(), organization.id, 'waka')
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersContent(
+			vcAssert.assertRowRendersContent(
 				vc.getListVc(),
 				organization.id,
 				organization.name
@@ -453,7 +449,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		await vc.load()
 
-		vcAssertUtil.assertListDoesNotRenderRow(vc.getListVc(), organizations[0].id)
+		vcAssert.assertListDoesNotRenderRow(vc.getListVc(), organizations[0].id)
 	}
 
 	@test('can set to tall', 'tall')
