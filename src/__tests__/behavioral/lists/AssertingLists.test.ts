@@ -46,18 +46,23 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		assert.doesThrow(() =>
 			vcAssert.assertCardRendersList(this.Vc(['waka']), 'not-found')
 		)
+
+		vcAssert.assertCardDoesNotRenderList(this.Vc(['waka']), 'not-found')
 	}
 
 	@test()
 	protected static findsOneById() {
 		vcAssert.assertCardRendersList(this.Vc(['not-found']), 'not-found')
+		assert.doesThrow(() =>
+			vcAssert.assertCardDoesNotRenderList(this.Vc(['not-found']), 'not-found')
+		)
 	}
 
 	@test()
 	protected static findsByIdIfNotFirstSection() {
 		vcAssert.assertCardRendersList(
-			this.Vc(['yes', 'no', 'not-found']),
-			'not-found'
+			this.Vc(['yes', 'no', 'not-found-2']),
+			'not-found-2'
 		)
 	}
 

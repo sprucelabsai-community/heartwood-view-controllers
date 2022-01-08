@@ -461,15 +461,20 @@ const vcAssert = {
 	},
 
 	assertCardDoesNotRenderList(
-		vc: ViewController<Card> | FormViewController<any>
+		vc: ViewController<Card> | FormViewController<any>,
+		id?: string
 	) {
 		try {
-			this.assertCardRendersList(vc)
+			this.assertCardRendersList(vc, id)
 		} catch {
 			return
 		}
 
-		assert.fail(`Your view controller renders a list and it shouldn't.`)
+		assert.fail(
+			`Your view controller renders a list${
+				id ? ` with the id '${id}'` : ''
+			} and it shouldn't.`
+		)
 	},
 
 	assertDialogWasClosed(vc: DialogViewController) {

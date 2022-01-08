@@ -8,7 +8,7 @@ import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import {
 	LineIcon,
 	SkillViewController,
@@ -176,7 +176,7 @@ class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewContro
 
 class NewTestingCardViewController extends CardViewController {}
 
-export default class VcAssertUtilTest extends AbstractViewControllerTest {
+export default class VcAssertTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		bad: BadSkillViewController,
 		good: GoodSkillViewController,
@@ -190,19 +190,19 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static knowsIfNotRenderingCard() {
-		assert.isFunction(vcAssertUtil.assertSkillViewRendersCard)
+		assert.isFunction(vcAssert.assertSkillViewRendersCard)
 		const vc = this.BadController()
 		//@ts-ignore
-		assert.doesThrow(() => vcAssertUtil.assertSkillViewRendersCard(vc))
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCard(vc))
 		//@ts-ignore
-		assert.doesThrow(() => vcAssertUtil.assertSkillViewRendersCards(vc))
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCards(vc))
 	}
 
 	@test()
 	protected static canAssertNumberOfCards() {
 		const vc = this.BadController()
 		//@ts-ignore
-		let cardVcs = vcAssertUtil.assertSkillViewRendersCards(vc, 0)
+		let cardVcs = vcAssert.assertSkillViewRendersCards(vc, 0)
 		assert.isLength(cardVcs, 0)
 
 		const goodVc = this.GoodController({
@@ -219,15 +219,15 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		assert.doesThrow(() =>
 			//@ts-ignore
-			vcAssertUtil.assertSkillViewRendersCards(goodVc, 0)
+			vcAssert.assertSkillViewRendersCards(goodVc, 0)
 		)
 
 		//@ts-ignore
-		cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
+		cardVcs = vcAssert.assertSkillViewRendersCards(goodVc, 1)
 		assert.isLength(cardVcs, 1)
 
 		//@ts-ignore
-		cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc)
+		cardVcs = vcAssert.assertSkillViewRendersCards(goodVc)
 		assert.isLength(cardVcs, 1)
 	}
 
@@ -246,7 +246,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		//@ts-ignore
-		const matchVc = vcAssertUtil.assertSkillViewRendersCard(goodVc)
+		const matchVc = vcAssert.assertSkillViewRendersCard(goodVc)
 
 		assert.isEqual(matchVc, cardVc)
 	}
@@ -266,7 +266,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		//@ts-ignore
-		const cardVcs = vcAssertUtil.assertSkillViewRendersCards(goodVc, 1)
+		const cardVcs = vcAssert.assertSkillViewRendersCards(goodVc, 1)
 
 		assert.isEqual(cardVcs[0], cardVc)
 	}
@@ -288,7 +288,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		//@ts-ignore
-		const cardVc = vcAssertUtil.assertSkillViewRendersCard(vc)
+		const cardVc = vcAssert.assertSkillViewRendersCard(vc)
 
 		assert.isEqual(cardVc.getHeaderTitle(), 'go!')
 	}
@@ -311,7 +311,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		//@ts-ignore
-		const cardVc = vcAssertUtil.assertSkillViewRendersCard(vc)
+		const cardVc = vcAssert.assertSkillViewRendersCard(vc)
 
 		assert.isEqual(cardVc.getHeaderTitle(), 'go2!')
 	}
@@ -348,34 +348,28 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCard(vc, 'not-found'))
+
+		vcAssert.assertSkillViewDoesNotRenderCard(vc, 'not-found')
+
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersCard(vc, 'not-found')
+			vcAssert.assertSkillViewRendersCards(vc, [id2, 'not-found'])
 		)
 
-		vcAssertUtil.assertSkillViewDoesNotRenderCard(vc, 'not-found')
+		vcAssert.assertSkillViewDoesNotRenderCards(vc, [id2, 'not-found'])
+
+		vcAssert.assertSkillViewRendersCard(vc, id)
+
+		assert.doesThrow(() => vcAssert.assertSkillViewDoesNotRenderCard(vc, id))
+
+		vcAssert.assertSkillViewRendersCard(vc, id2)
+
+		assert.doesThrow(() => vcAssert.assertSkillViewDoesNotRenderCard(vc, id2))
+
+		vcAssert.assertSkillViewRendersCards(vc, [id2, id])
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersCards(vc, [id2, 'not-found'])
-		)
-
-		vcAssertUtil.assertSkillViewDoesNotRenderCards(vc, [id2, 'not-found'])
-
-		vcAssertUtil.assertSkillViewRendersCard(vc, id)
-
-		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewDoesNotRenderCard(vc, id)
-		)
-
-		vcAssertUtil.assertSkillViewRendersCard(vc, id2)
-
-		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewDoesNotRenderCard(vc, id2)
-		)
-
-		vcAssertUtil.assertSkillViewRendersCards(vc, [id2, id])
-
-		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewDoesNotRenderCards(vc, [id2, id])
+			vcAssert.assertSkillViewDoesNotRenderCards(vc, [id2, id])
 		)
 	}
 
@@ -387,18 +381,18 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 		const cardVc = this.Controller('cardVc', {})
 
-		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(vc))
-		assert.doesThrow(() => vcAssertUtil.assertCardIsBusy(cardVc))
-		vcAssertUtil.assertCardIsNotBusy(vc)
-		vcAssertUtil.assertCardIsNotBusy(cardVc)
+		assert.doesThrow(() => vcAssert.assertCardIsBusy(vc))
+		assert.doesThrow(() => vcAssert.assertCardIsBusy(cardVc))
+		vcAssert.assertCardIsNotBusy(vc)
+		vcAssert.assertCardIsNotBusy(cardVc)
 
 		vc.setIsBusy(true)
 		cardVc.isBusy = true
 
-		vcAssertUtil.assertCardIsBusy(vc)
-		vcAssertUtil.assertCardIsBusy(cardVc)
-		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(vc))
-		assert.doesThrow(() => vcAssertUtil.assertCardIsNotBusy(cardVc))
+		vcAssert.assertCardIsBusy(vc)
+		vcAssert.assertCardIsBusy(cardVc)
+		assert.doesThrow(() => vcAssert.assertCardIsNotBusy(vc))
+		assert.doesThrow(() => vcAssert.assertCardIsNotBusy(cardVc))
 	}
 
 	@test('fails with empty cells', [])
@@ -419,12 +413,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		assert.isFunction(vcAssertUtil.assertRowRendersContent)
+		assert.isFunction(vcAssert.assertRowRendersContent)
+		assert.doesThrow(() => vcAssert.assertRowRendersContent(vc, 'main', 'waka'))
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersContent(vc, 'main', 'waka')
-		)
-		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersContent(vc, 'main', 'undefined')
+			vcAssert.assertRowRendersContent(vc, 'main', 'undefined')
 		)
 	}
 
@@ -488,7 +480,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			rows: [{ ...row, id: 'first' }],
 		})
 
-		vcAssertUtil.assertRowRendersContent(vc, 'first', search)
+		vcAssert.assertRowRendersContent(vc, 'first', search)
 	}
 
 	@test()
@@ -501,7 +493,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		validateSchemaValues(skillViewSchema, this.render(vc))
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersViewController(vc, FormViewController)
+			vcAssert.assertSkillViewRendersViewController(vc, FormViewController)
 		)
 	}
 
@@ -511,7 +503,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		cardIdx: 0,
 		sectionIdx: 0,
 		bodyGenerator: () => ({
-			form: VcAssertUtilTest.renderEmptyForm(),
+			form: VcAssertTest.renderEmptyForm(),
 		}),
 	})
 	@test('knows if form rendered in random layout, first card, first section', {
@@ -519,13 +511,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		cardIdx: 0,
 		sectionIdx: 0,
 		bodyGenerator: () => ({
-			form: VcAssertUtilTest.renderEmptyForm(),
+			form: VcAssertTest.renderEmptyForm(),
 		}),
 	})
 	@test('knows if form rendered in random layout, random card, first section', {
 		VcClass: FormViewController,
 		bodyGenerator: () => ({
-			form: VcAssertUtilTest.renderEmptyForm(),
+			form: VcAssertTest.renderEmptyForm(),
 		}),
 	})
 	@test(
@@ -533,14 +525,14 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		{
 			VcClass: FormViewController,
 			bodyGenerator: () => ({
-				form: VcAssertUtilTest.renderEmptyForm(),
+				form: VcAssertTest.renderEmptyForm(),
 			}),
 		}
 	)
 	@test('knows if list is renderd', {
 		VcClass: ListViewController,
 		bodyGenerator: () => ({
-			list: VcAssertUtilTest.renderEmptyList(),
+			list: VcAssertTest.renderEmptyList(),
 		}),
 	})
 	@test('knows if list is not renderd', {
@@ -550,7 +542,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		sectionIdx: 0,
 		shouldPass: false,
 		bodyGenerator: () => ({
-			form: VcAssertUtilTest.renderEmptyForm(),
+			form: VcAssertTest.renderEmptyForm(),
 		}),
 	})
 	protected static knowsIfSkillViewRendersViewController(options: {
@@ -605,14 +597,11 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		const vc = this.Controller('good', model)
 
 		if (shouldPass) {
-			const match = vcAssertUtil.assertSkillViewRendersViewController(
-				vc,
-				VcClass
-			)
+			const match = vcAssert.assertSkillViewRendersViewController(vc, VcClass)
 			assert.isTrue(match instanceof VcClass)
 		} else {
 			assert.doesThrow(() =>
-				vcAssertUtil.assertSkillViewRendersViewController(vc, VcClass)
+				vcAssert.assertSkillViewRendersViewController(vc, VcClass)
 			)
 		}
 	}
@@ -627,13 +616,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		vcAssertUtil.assertSkillViewRendersViewController(
+		vcAssert.assertSkillViewRendersViewController(
 			vc,
 			NewTestingCardViewController
 		)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewDoesNotRenderViewController(
+			vcAssert.assertSkillViewDoesNotRenderViewController(
 				vc,
 				NewTestingCardViewController
 			)
@@ -651,23 +640,20 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertSkillViewRendersViewController(vc, ListViewController)
+			vcAssert.assertSkillViewRendersViewController(vc, ListViewController)
 		)
 
-		vcAssertUtil.assertSkillViewDoesNotRenderViewController(
-			vc,
-			ListViewController
-		)
+		vcAssert.assertSkillViewDoesNotRenderViewController(vc, ListViewController)
 	}
 
 	@test()
 	protected static async knowsIfRenderingDialog() {
 		const vc = this.Controller('goodWithDialog', {})
 
-		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+		await vcAssert.assertRendersDialog(vc, () => vc.load())
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+			vcAssert.assertDoesNotRenderDialog(vc, () => vc.load())
 		)
 	}
 
@@ -677,10 +663,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			layouts: [],
 		})
 
-		await vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+		await vcAssert.assertDoesNotRenderDialog(vc, () => vc.load())
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+			vcAssert.assertRendersDialog(vc, () => vc.load())
 		)
 	}
 
@@ -707,11 +693,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersCard(vc, 'test-2')
-		)
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCard(vc, 'test-2'))
 
-		const actual = vcAssertUtil.assertSkillViewRendersCard(vc, 'test-3')
+		const actual = vcAssert.assertSkillViewRendersCard(vc, 'test-3')
 
 		assert.isEqual(actual, card)
 	}
@@ -771,13 +755,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		if (options.shouldPass) {
-			vcAssertUtil.assertRowRendersButtonWithIcon(
+			vcAssert.assertRowRendersButtonWithIcon(
 				listVc.getRowVc(options.rowIdx),
 				options.iconToCheck
 			)
 		} else {
 			assert.doesThrow(() =>
-				vcAssertUtil.assertRowRendersButtonWithIcon(
+				vcAssert.assertRowRendersButtonWithIcon(
 					listVc.getRowVc(options.rowIdx),
 					options.iconToCheck
 				)
@@ -789,8 +773,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	@test('can assert rending bigForms', 'bigForm')
 	protected static knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
 		const cardVc = this.Controller('card', {})
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 1))
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersForm(cardVc))
+		assert.doesThrow(() => vcAssert.assertCardRendersForms(cardVc, 1))
+		assert.doesThrow(() => vcAssert.assertCardRendersForm(cardVc))
 
 		const formVc1 = this.buildEmptyForm(vcId)
 
@@ -799,10 +783,10 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			[vcId]: formVc1.render(),
 		})
 
-		vcAssertUtil.assertCardRendersForms(cardVc, 1)
-		assert.isEqual(formVc1, vcAssertUtil.assertCardRendersForm(cardVc))
+		vcAssert.assertCardRendersForms(cardVc, 1)
+		assert.isEqual(formVc1, vcAssert.assertCardRendersForm(cardVc))
 
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersForms(cardVc, 2))
+		assert.doesThrow(() => vcAssert.assertCardRendersForms(cardVc, 2))
 
 		const formVc = this.buildEmptyForm(vcId)
 
@@ -810,7 +794,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			title: 'hey!',
 			[vcId]: formVc.render(),
 		})
-		const forms = vcAssertUtil.assertCardRendersForms(cardVc, 2)
+		const forms = vcAssert.assertCardRendersForms(cardVc, 2)
 		assert.isEqual(forms[1], formVc)
 	}
 
@@ -820,8 +804,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		let wasSecondaryHit = false
 
 		const cardVc = this.Controller('card', {})
-		vcAssertUtil.assertCardDoesNotRenderCriticalError(cardVc)
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersCriticalError(cardVc))
+		vcAssert.assertCardDoesNotRenderCriticalError(cardVc)
+		assert.doesThrow(() => vcAssert.assertCardRendersCriticalError(cardVc))
 		cardVc.setCriticalError({
 			title: 'Oh my!',
 			buttons: [
@@ -840,9 +824,9 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		vcAssertUtil.assertCardRendersCriticalError(cardVc)
+		vcAssert.assertCardRendersCriticalError(cardVc)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardDoesNotRenderCriticalError(cardVc)
+			vcAssert.assertCardDoesNotRenderCriticalError(cardVc)
 		)
 
 		await interactionUtil.clickPrimaryInFooter(cardVc)
@@ -855,7 +839,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	@test()
 	protected static async assertConfirmHoldsOnConfirmUntilClosed() {
 		const vc = this.Controller('goodWithConfirm', {})
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
 			vc.showConfirm()
 		)
 
@@ -869,7 +853,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canDeclineConfirm() {
 		const vc = this.Controller('goodWithConfirm', {})
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
 			vc.showConfirm()
 		)
 
@@ -886,7 +870,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		}
 
 		const vc = this.Controller('goodWithConfirm', {})
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
 			vc.showConfirm(options as any)
 		)
 
@@ -895,14 +879,14 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async knowsWhenNotRenderingCalendar() {
-		assert.isFunction(vcAssertUtil.assertRendersCalendar)
+		assert.isFunction(vcAssert.assertRendersCalendar)
 
 		const svc = this.Controller('good', {
 			layouts: [{}],
 		})
 
-		assert.doesThrow(() => vcAssertUtil.assertRendersCalendar(svc))
-		vcAssertUtil.assertDoesNotRenderCalendar(svc)
+		assert.doesThrow(() => vcAssert.assertRendersCalendar(svc))
+		vcAssert.assertDoesNotRenderCalendar(svc)
 	}
 
 	@test()
@@ -943,28 +927,28 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersButton(rowVc, 'test', 'edit')
+			vcAssert.assertRowRendersButton(rowVc, 'test', 'edit')
 		)
 
-		vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'test', 'edit')
+		vcAssert.assertRowDoesNotRenderButton(rowVc, 'test', 'edit')
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'first', 'edit')
+			vcAssert.assertRowDoesNotRenderButton(rowVc, 'first', 'edit')
 		)
 
-		vcAssertUtil.assertRowDoesNotRenderButton(rowVc, 'apple', '234234')
-		vcAssertUtil.assertRowRendersButton(rowVc, 'first', 'edit')
+		vcAssert.assertRowDoesNotRenderButton(rowVc, 'apple', '234234')
+		vcAssert.assertRowRendersButton(rowVc, 'first', 'edit')
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersButton(rowVc, 'test', 'bad')
+			vcAssert.assertRowRendersButton(rowVc, 'test', 'bad')
 		)
 
-		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'delete')
+		vcAssert.assertRowRendersButton(rowVc, 'second', 'delete')
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'create')
+			vcAssert.assertRowRendersButton(rowVc, 'second', 'create')
 		)
-		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'taco')
-		vcAssertUtil.assertRowRendersButton(rowVc, 'second', 'waka')
+		vcAssert.assertRowRendersButton(rowVc, 'second', 'taco')
+		vcAssert.assertRowRendersButton(rowVc, 'second', 'waka')
 	}
 
 	@test('knows when rendering in layouts[0] cards[0] sections[0]')
@@ -990,8 +974,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		vcAssertUtil.assertRendersCalendar(svc)
-		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderCalendar(svc))
+		vcAssert.assertRendersCalendar(svc)
+		assert.doesThrow(() => vcAssert.assertDoesNotRenderCalendar(svc))
 	}
 
 	@test()
@@ -1014,7 +998,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			layouts: [...new Array(Math.round(Math.random() * 100)), layout],
 		})
 
-		vcAssertUtil.assertRendersCalendar(svc)
+		vcAssert.assertRendersCalendar(svc)
 	}
 
 	@test()
@@ -1057,22 +1041,22 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertFormRendersFields(formVc, ['one', 'two', 'three'])
+			vcAssert.assertFormRendersFields(formVc, ['one', 'two', 'three'])
 		)
 
-		vcAssertUtil.assertFormRendersFields(formVc, ['four'])
-		vcAssertUtil.assertFormRendersFields(formVc, ['four', 'five'])
-		vcAssertUtil.assertFormRendersFields(formVc, ['four', 'five', 'six'])
+		vcAssert.assertFormRendersFields(formVc, ['four'])
+		vcAssert.assertFormRendersFields(formVc, ['four', 'five'])
+		vcAssert.assertFormRendersFields(formVc, ['four', 'five', 'six'])
 	}
 
 	@test()
 	protected static async knowsIfRenderingDialogThatWaits() {
 		const vc = this.Controller('goodWithDialogThatWaits', {})
 
-		await vcAssertUtil.assertRendersDialog(vc, () => vc.load())
+		await vcAssert.assertRendersDialog(vc, () => vc.load())
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderDialog(vc, () => vc.load())
+			vcAssert.assertDoesNotRenderDialog(vc, () => vc.load())
 		)
 	}
 
@@ -1085,15 +1069,15 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		assert.doesThrow(() => vcAssertUtil.assertFooterRendersButtonWithType(vc))
+		assert.doesThrow(() => vcAssert.assertFooterRendersButtonWithType(vc))
 		assert.doesThrow(() =>
-			vcAssertUtil.assertFooterRendersButtonWithType(emptyButtonsVc)
+			vcAssert.assertFooterRendersButtonWithType(emptyButtonsVc)
 		)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardRendersButtons(emptyButtonsVc, ['button-one'])
+			vcAssert.assertCardRendersButtons(emptyButtonsVc, ['button-one'])
 		)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardRendersButton(emptyButtonsVc, 'button-one')
+			vcAssert.assertCardRendersButton(emptyButtonsVc, 'button-one')
 		)
 
 		const button1Id = `${Math.random()}`
@@ -1115,27 +1099,25 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertFooterRendersButtonWithType(vc2)
+		vcAssert.assertFooterRendersButtonWithType(vc2)
 
-		vcAssertUtil.assertCardRendersButtons(vc2, [button1Id])
-		vcAssertUtil.assertCardRendersButtons(vc2, [button2Id])
-		vcAssertUtil.assertCardRendersButtons(vc2, [button1Id, button2Id])
-		vcAssertUtil.assertCardRendersButtons(vc2, [button2Id, button1Id])
+		vcAssert.assertCardRendersButtons(vc2, [button1Id])
+		vcAssert.assertCardRendersButtons(vc2, [button2Id])
+		vcAssert.assertCardRendersButtons(vc2, [button1Id, button2Id])
+		vcAssert.assertCardRendersButtons(vc2, [button2Id, button1Id])
 
-		vcAssertUtil.assertCardRendersButton(vc2, button1Id)
-		vcAssertUtil.assertCardRendersButton(vc2, button2Id)
+		vcAssert.assertCardRendersButton(vc2, button1Id)
+		vcAssert.assertCardRendersButton(vc2, button2Id)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertFooterRendersButtonWithType(vc2, 'primary')
+			vcAssert.assertFooterRendersButtonWithType(vc2, 'primary')
 		)
 		assert.doesThrow(() =>
-			vcAssertUtil.assertCardRendersButtons(vc2, [button1Id, 'bad-id'])
+			vcAssert.assertCardRendersButtons(vc2, [button1Id, 'bad-id'])
 		)
-		assert.doesThrow(() =>
-			vcAssertUtil.assertCardRendersButton(vc2, 'button-one')
-		)
+		assert.doesThrow(() => vcAssert.assertCardRendersButton(vc2, 'button-one'))
 
-		vcAssertUtil.assertFooterRendersButtonWithType(vc2, 'destructive')
+		vcAssert.assertFooterRendersButtonWithType(vc2, 'destructive')
 	}
 
 	@test('knows if rendering button as first section in body', [])
@@ -1180,11 +1162,11 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersButton(vc, button1Id)
-		vcAssertUtil.assertCardRendersButtons(vc, [button3Id, button4Id, button1Id])
-		vcAssertUtil.assertCardRendersButton(vc, button4Id)
-		vcAssertUtil.assertCardRendersButtons(vc, [button3Id, button4Id])
-		vcAssertUtil.assertCardRendersButton(vc, button4Id)
+		vcAssert.assertCardRendersButton(vc, button1Id)
+		vcAssert.assertCardRendersButtons(vc, [button3Id, button4Id, button1Id])
+		vcAssert.assertCardRendersButton(vc, button4Id)
+		vcAssert.assertCardRendersButtons(vc, [button3Id, button4Id])
+		vcAssert.assertCardRendersButton(vc, button4Id)
 	}
 
 	@test()
@@ -1200,8 +1182,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		const vc = this.Controller('goodWithAlert', {})
 		const vc2 = this.Controller('goodWithDialog', {})
 
-		vcAssertUtil.patchAlertToThrow(vc)
-		vcAssertUtil.patchAlertToThrow(vc2)
+		vcAssert.patchAlertToThrow(vc)
+		vcAssert.patchAlertToThrow(vc2)
 
 		await assert.doesThrowAsync(() => vc.showAlert())
 
@@ -1210,13 +1192,13 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async knowsIfNotRenderingTalkingSprucebot() {
-		assert.isFunction(vcAssertUtil.assertCardRendersTalkingSprucebot)
-		assert.isFunction(vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot)
+		assert.isFunction(vcAssert.assertCardRendersTalkingSprucebot)
+		assert.isFunction(vcAssert.assertCardDoesNotRenderTalkingSprucebot)
 
 		const vc = this.Controller('card', {})
 
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersTalkingSprucebot(vc))
-		vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot(vc)
+		assert.doesThrow(() => vcAssert.assertCardRendersTalkingSprucebot(vc))
+		vcAssert.assertCardDoesNotRenderTalkingSprucebot(vc)
 	}
 
 	@test()
@@ -1239,10 +1221,8 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		assert.doesThrow(() =>
-			vcAssertUtil.assertCardDoesNotRenderTalkingSprucebot(vc)
-		)
-		const actual = vcAssertUtil.assertCardRendersTalkingSprucebot(vc)
+		assert.doesThrow(() => vcAssert.assertCardDoesNotRenderTalkingSprucebot(vc))
+		const actual = vcAssert.assertCardRendersTalkingSprucebot(vc)
 
 		assert.isEqual(actual, expected)
 
@@ -1259,7 +1239,7 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersTalkingSprucebot(vc2)
+		vcAssert.assertCardRendersTalkingSprucebot(vc2)
 	}
 
 	@test()
@@ -1279,26 +1259,24 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		})
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertListRendersRow(list1, 'not-found-' + newId)
+			vcAssert.assertListRendersRow(list1, 'not-found-' + newId)
 		)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertListRendersRows(list1, ['not-found-' + newId])
+			vcAssert.assertListRendersRows(list1, ['not-found-' + newId])
 		)
+
+		assert.doesThrow(() => vcAssert.assertListDoesNotRenderRow(list1, newId))
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertListDoesNotRenderRow(list1, newId)
+			vcAssert.assertListRendersRows(list1, ['not-found-' + newId, newId])
 		)
 
-		assert.doesThrow(() =>
-			vcAssertUtil.assertListRendersRows(list1, ['not-found-' + newId, newId])
-		)
-
-		vcAssertUtil.assertListDoesNotRenderRow(list1, 'not-found-' + newId)
-		vcAssertUtil.assertListRendersRow(list1, 'good-one')
-		vcAssertUtil.assertListRendersRow(list1, newId)
-		vcAssertUtil.assertListRendersRows(list1, ['good-one'])
-		vcAssertUtil.assertListRendersRows(list1, ['good-one', newId])
+		vcAssert.assertListDoesNotRenderRow(list1, 'not-found-' + newId)
+		vcAssert.assertListRendersRow(list1, 'good-one')
+		vcAssert.assertListRendersRow(list1, newId)
+		vcAssert.assertListRendersRows(list1, ['good-one'])
+		vcAssert.assertListRendersRows(list1, ['good-one', newId])
 	}
 
 	@test()
@@ -1307,16 +1285,16 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			isFullScreen: false,
 			layouts: [],
 		})
-		assert.doesThrow(() => vcAssertUtil.assertIsFullScreen(vc))
-		vcAssertUtil.assertIsNotFullScreen(vc)
+		assert.doesThrow(() => vcAssert.assertIsFullScreen(vc))
+		vcAssert.assertIsNotFullScreen(vc)
 
 		const vcIsFullScreen = this.Controller('good', {
 			isFullScreen: true,
 			layouts: [],
 		})
 
-		vcAssertUtil.assertIsFullScreen(vcIsFullScreen)
-		assert.doesThrow(() => vcAssertUtil.assertIsNotFullScreen(vcIsFullScreen))
+		vcAssert.assertIsFullScreen(vcIsFullScreen)
+		assert.doesThrow(() => vcAssert.assertIsNotFullScreen(vcIsFullScreen))
 	}
 
 	@test()
@@ -1326,17 +1304,17 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 			layouts: [],
 		})
 
-		await assert.doesThrowAsync(() => vcAssertUtil.assertLoginIsRequired(vc))
-		await vcAssertUtil.assertLoginIsNotRequired(vc)
+		await assert.doesThrowAsync(() => vcAssert.assertLoginIsRequired(vc))
+		await vcAssert.assertLoginIsNotRequired(vc)
 
 		const vcRequiresLogin = this.Controller('good', {
 			isLoginRequired: true,
 			layouts: [],
 		})
 
-		await vcAssertUtil.assertLoginIsRequired(vcRequiresLogin)
+		await vcAssert.assertLoginIsRequired(vcRequiresLogin)
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertLoginIsNotRequired(vcRequiresLogin)
+			vcAssert.assertLoginIsNotRequired(vcRequiresLogin)
 		)
 	}
 
@@ -1372,27 +1350,25 @@ export default class VcAssertUtilTest extends AbstractViewControllerTest {
 		vc2: GoodWithDialogSkillViewController
 	) {
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersAlert(vc, () => vc.load())
+			vcAssert.assertRendersAlert(vc, () => vc.load())
 		)
 
-		await vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.load())
+		await vcAssert.assertDoesNotRenderAlert(vc, () => vc.load())
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersAlert(vc2, () => vc2.load())
+			vcAssert.assertRendersAlert(vc2, () => vc2.load())
 		)
 
-		const alertVc = await vcAssertUtil.assertRendersAlert(vc, () =>
-			vc.showAlert()
-		)
+		const alertVc = await vcAssert.assertRendersAlert(vc, () => vc.showAlert())
 
 		const msg = await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert())
+			vcAssert.assertDoesNotRenderAlert(vc, () => vc.showAlert())
 		)
 
 		assert.doesInclude(msg.message, 'go team')
 
 		const msg2 = await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertDoesNotRenderAlert(vc, () => vc.showAlert2())
+			vcAssert.assertDoesNotRenderAlert(vc, () => vc.showAlert2())
 		)
 
 		assert.doesInclude(msg2.message, 'moar team')
