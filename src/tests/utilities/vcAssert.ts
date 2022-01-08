@@ -93,7 +93,7 @@ interface SelectViewController {
 	getIsRequired: () => boolean
 }
 
-interface AssertRedirectOptions {
+export interface AssertRedirectOptions {
 	router: Router
 	action: () => Promise<any> | any
 	destination?: {
