@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
@@ -22,31 +22,31 @@ export default class AssertingRatingsInListsTest extends AbstractViewControllerT
 	@test()
 	protected static throwWhenNoRatingsRenderedInList() {
 		const listVc = this.ListVc(buildRows(1))
-		assert.doesThrow(() => vcAssertUtil.assertRowRendersRatings(listVc, 0))
+		assert.doesThrow(() => vcAssert.assertRowRendersRatings(listVc, 0))
 	}
 
 	@test()
 	protected static throwsWhenPassingBadRow() {
 		const listVc = this.ListVc(buildRows(2))
-		assert.doesThrow(() => vcAssertUtil.assertRowRendersRatings(listVc, 3))
+		assert.doesThrow(() => vcAssert.assertRowRendersRatings(listVc, 3))
 	}
 
 	@test()
 	protected static throwsWhenPassingRowWithoutRatings() {
 		const listVc = this.ListVc(buildRows(2, 0))
-		assert.doesThrow(() => vcAssertUtil.assertRowRendersRatings(listVc, 3))
+		assert.doesThrow(() => vcAssert.assertRowRendersRatings(listVc, 3))
 	}
 
 	@test()
 	protected static findsInFirstCellOfFirstRow() {
 		const listVc = this.ListVc(buildRows(2, 0))
-		vcAssertUtil.assertRowRendersRatings(listVc, 0)
+		vcAssert.assertRowRendersRatings(listVc, 0)
 	}
 
 	@test()
 	protected static findsRatingsInSecondCell() {
 		const listVc = this.ListVc(buildRows(3, 2, 3))
-		vcAssertUtil.assertRowRendersRatings(listVc, 2)
+		vcAssert.assertRowRendersRatings(listVc, 2)
 	}
 
 	private static ListVc(rows: ListViewControllerOptions['rows'] = []) {
