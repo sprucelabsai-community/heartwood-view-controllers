@@ -9,7 +9,7 @@ const dialogTestPatcher = {
 		//@ts-ignore
 		vc.renderInDialog = () => {
 			assert.fail(
-				`You unexpectedly rendered a dialog. Make sure you use vcAssert.assertRendersDialog()`
+				`You unexpectedly rendered a dialog. If this was on purpose, use await vcAssert.assertRendersDialog(). If this was a mistake, remember, there are only happy accidents. Also, stop this dialog from rendering.`
 			)
 		}
 	},
