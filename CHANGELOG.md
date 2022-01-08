@@ -1,3 +1,10 @@
+# [55.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.6.12...v55.7.0) (2022-01-08)
+
+
+### Features
+
+* devs can now test for lists by id, so a card with many lists is now testable ([0239bd2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0239bd2))
+
 ## [55.6.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.6.11...v55.6.12) (2022-01-08)
 
 ## [55.6.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.6.10...v55.6.11) (2022-01-08)
