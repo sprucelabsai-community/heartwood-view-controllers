@@ -88,7 +88,7 @@ async function wait(...promises: (Promise<any> | undefined | void)[]) {
 	})
 }
 
-interface SelectViewController {
+export interface SelectViewController {
 	getChoices: () => SelectChoice[]
 	getIsRequired: () => boolean
 }
