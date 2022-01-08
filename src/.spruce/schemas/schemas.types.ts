@@ -2775,6 +2775,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface List {
 			
+				
+				'id'?: string| undefined | null
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
 				/** Render row dividers. */
@@ -2794,6 +2796,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'list',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Controller. */
 			            'controller': {
 			                label: 'Controller',

@@ -10,6 +10,11 @@ const listSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema 
 	name: 'list',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Controller. */
 	            'controller': {
 	                label: 'Controller',

@@ -421,21 +421,43 @@ const vcAssert = {
 	},
 
 	assertCardRendersList(
-		vc: ViewController<Card> | FormViewController<any>
+		vc: ViewController<Card> | FormViewController<any>,
+		id?: string
 	): ListViewController {
 		const model = renderUtil.render(vc)
-		const list = pluckFirstFromCard(
+		const lists = pluckAllFromCard(
 			//@ts-ignore
 			model.body ? model : { body: model },
 			'list'
 		)
 
+		let foundList = false
+		let foundById = false
+		let match: any
+
+		for (const list of lists) {
+			if (!match && list?.controller instanceof ListViewController) {
+				foundList = true
+				match = list
+			}
+
+			if (id && list?.id === id) {
+				foundById = true
+				match = list
+				break
+			}
+		}
+
 		assert.isTrue(
-			list?.controller instanceof ListViewController,
+			foundList,
 			"Expected to find a list inside your CardViewController, but didn't find one!"
 		)
 
-		return list?.controller
+		if (id) {
+			assert.isTrue(foundById, `Found a list, but not by the id you sent!`)
+		}
+
+		return match?.controller
 	},
 
 	assertCardDoesNotRenderList(

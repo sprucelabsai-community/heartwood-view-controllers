@@ -11,6 +11,9 @@ export default buildSchema({
 	name: 'list',
 	description: '',
 	fields: {
+		id: {
+			type: 'id',
+		},
 		controller: {
 			type: 'raw',
 			label: 'Controller',
