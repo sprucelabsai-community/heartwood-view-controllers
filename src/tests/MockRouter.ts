@@ -7,6 +7,8 @@ import {
 } from '../types/heartwood.types'
 
 export default class MockRouter implements Router {
+	public static redirectResponse = {}
+
 	public lastRedirect?: {
 		id: string
 		args: any
@@ -20,7 +22,7 @@ export default class MockRouter implements Router {
 			args,
 		}
 
-		return {} as any
+		return MockRouter.redirectResponse as any
 	}
 
 	public async back(): Promise<

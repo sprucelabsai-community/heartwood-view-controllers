@@ -184,4 +184,20 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 			},
 		})
 	}
+
+	@test()
+	protected static async redirectPassesBackReturnObject() {
+		const mockResponse = { hello: `${new Date().getTime() * Math.random()}` }
+		MockRouter.redirectResponse = mockResponse
+
+		const vc = await vcAssertUtil.assertActionRedirects({
+			router: this.router,
+			//@ts-ignore
+			action: async () => this.router.redirect('heartwood.root'),
+		})
+
+		assert.isTruthy(vc)
+
+		assert.isEqualDeep(vc, mockResponse)
+	}
 }

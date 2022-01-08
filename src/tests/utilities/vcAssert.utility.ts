@@ -1096,6 +1096,7 @@ const vcAssertUtil = {
 
 		let wasHit = false
 		let failMessage: any | undefined
+		let results: any | undefined
 
 		const redirectPromise = new Promise((resolve: any) => {
 			//@ts-ignore
@@ -1119,7 +1120,8 @@ const vcAssertUtil = {
 					}
 
 					//@ts-ignore
-					await oldRedirect(id, args)
+					results = oldRedirect(id, args)
+					await results
 				} catch (err: any) {
 					failMessage = err
 				}
@@ -1136,6 +1138,8 @@ const vcAssertUtil = {
 		if (failMessage) {
 			throw failMessage
 		}
+
+		return results
 	},
 
 	assertRowRendersToggle(
