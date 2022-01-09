@@ -473,7 +473,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		const records = vc.getRecords()
 
-		assert.isEqualDeep(records, organizations)
+		const sorter = (a: any, b: any) => (a.id > b.id ? 1 : -1)
+
+		assert.isEqualDeep(records.sort(sorter), organizations.sort(sorter))
 	}
 
 	@test()
