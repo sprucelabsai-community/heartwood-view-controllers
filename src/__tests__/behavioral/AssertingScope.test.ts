@@ -12,7 +12,7 @@ class Scope extends AbstractSkillViewController {
 	}
 
 	public getScopedBy() {
-		return this.scope
+		return this.scope ?? 'none'
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
