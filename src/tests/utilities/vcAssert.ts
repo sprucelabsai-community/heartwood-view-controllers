@@ -1490,7 +1490,7 @@ const vcAssert = {
 			scopedBy,
 			`Your skill view '${getVcName(
 				vc
-			)}' should be scoped to ${scopedBy}, but is set to '${scope}' Try \`public getScopedBy => '${scopedBy}'\`!`
+			)}' should be scoped to ${scopedBy}, but is set to '${scope}' Try \`public getScopedBy = () => '${scopedBy}'\`!`
 		)
 	},
 }
