@@ -1,5 +1,5 @@
 import isObjectLike from 'lodash/isObjectLike'
-import { attachTriggerRenderCounter } from '../tests/utilities/attachTriggerRenderCounter.utility'
+import { attachTriggerRenderCounter } from '../tests/utilities/attachTriggerRenderCounter'
 import { ViewController } from '../types/heartwood.types'
 import removeUniversalViewOptions from './removeUniversalViewOptions'
 

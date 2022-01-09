@@ -28,7 +28,7 @@ import StatsViewController from '../../viewControllers/reporting/Stats.vc'
 import TalkingSprucebotViewController from '../../viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
-import { attachTriggerRenderCounter } from './attachTriggerRenderCounter.utility'
+import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
 import formTestUtil from './formTest.utility'
 
 const WAIT_TIMEOUT = 5000
