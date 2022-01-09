@@ -1,3 +1,10 @@
+# [55.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.8.12...v55.9.0) (2022-01-09)
+
+
+### Features
+
+* confirm patcher to throw if a confirm happens unexpectedly ([cf56956](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cf56956))
+
 ## [55.8.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.8.11...v55.8.12) (2022-01-09)
 
 ## [55.8.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.8.10...v55.8.11) (2022-01-09)
