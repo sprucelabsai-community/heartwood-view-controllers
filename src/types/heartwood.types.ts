@@ -140,9 +140,9 @@ type Location = SpruceSchemas.Spruce.v2020_07_22.Location
 
 export interface Scope {
 	getCurrentOrganization(): Promise<Organization | null>
-	setCurrentOrganization(id: string): void
+	setCurrentOrganization(id: string | null): void
 	getCurrentLocation(): Promise<Location | null>
-	setCurrentLocation(id: string): void
+	setCurrentLocation(id: string | null): void
 	clearSession(): void
 }
 
