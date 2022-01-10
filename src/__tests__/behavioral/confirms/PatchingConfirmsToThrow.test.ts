@@ -24,22 +24,28 @@ export default class PatchingConfirmsToThrowTest extends AbstractViewControllerT
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.vc = this.Controller('confirmTest', {}) as any
-	}
-
-	@test()
-	protected static patcherExists() {
-		assert.isFunction(confirmTestPatcher.patchConfirmToThrow)
+		confirmTestPatcher.patchConfirmToThrow(this.vc)
 	}
 
 	@test()
 	protected static async patchingCausesConfirmsToThrow() {
-		confirmTestPatcher.patchConfirmToThrow(this.vc)
 		await assert.doesThrowAsync(() => this.vc.goConfirm())
 	}
 
 	@test()
 	protected static async canStillAssertAConfirm() {
-		confirmTestPatcher.patchConfirmToThrow(this.vc)
 		await vcAssert.assertRendersConfirm(this.vc, () => this.vc.goConfirm())
+	}
+
+	@test()
+	protected static async confirmHandlerCalledStill() {
+		let wasHit = false
+		//@ts-ignore
+		this.vc.confirmHandler = () => {
+			wasHit = true
+		}
+		await vcAssert.assertRendersConfirm(this.vc, () => this.vc.goConfirm())
+
+		assert.isTrue(wasHit)
 	}
 }

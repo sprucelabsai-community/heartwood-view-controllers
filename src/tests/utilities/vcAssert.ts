@@ -151,9 +151,13 @@ const vcAssert = {
 
 		const confirmPromise = new Promise((confirmResolve) => {
 			//@ts-ignore
+			const originalConfirm = vc._originalConfirm
+
+			//@ts-ignore
 			vc.confirm = async (options: ConfirmOptions) => {
 				wasHit = true
 
+				originalConfirm?.()
 				//@ts-ignore
 				confirmResolve()
 
