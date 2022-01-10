@@ -199,6 +199,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		if (this.model.body) {
 			this.model.body.sections = [...sections]
 		}
+
+		this.triggerRender()
 	}
 
 	private ensureSectionsExist() {

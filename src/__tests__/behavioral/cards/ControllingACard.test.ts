@@ -164,6 +164,13 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static triggersRenderOnCardWhenSectionsAreSet() {
+		this.renderCard()
+		this.vc.setSections([])
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+	}
+
+	@test()
 	protected static async doesNotDropInABody() {
 		const vc = this.Controller('card', { header: { title: 'Hey friend!' } })
 		const model = vc.render()
