@@ -941,6 +941,8 @@ const vcAssert = {
 		const vc = this.assertRendersToolBelt(svc)
 		const tool = vc.getTool(toolId)
 
+		assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
+
 		const checks = [
 			tool?.card?.controller,
 			//@ts-ignore
