@@ -1,1 +1,1 @@
-export { calendarEventTargetSchema as default } from '@sprucelabs/spruce-calendar-utils'
+export { calendarEventTargetSchema as default } from '@sprucelabs/calendar-utils'

@@ -1,6 +1,6 @@
+import { lineIcons } from '@sprucelabs/calendar-utils'
 import { SchemaFieldsByName, SelectChoice } from '@sprucelabs/schema'
-import { lineIcons } from '@sprucelabs/spruce-calendar-utils'
-export { lineIcons } from '@sprucelabs/spruce-calendar-utils'
+export { lineIcons } from '@sprucelabs/calendar-utils'
 
 export const fancyIcons = [
 	'accesibility',

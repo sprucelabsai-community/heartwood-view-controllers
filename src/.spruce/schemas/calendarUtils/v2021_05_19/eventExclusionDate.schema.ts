@@ -1,1 +1,1 @@
-export { eventExclusionDateSchema as default } from '@sprucelabs/spruce-calendar-utils'
+export { eventExclusionDateSchema as default } from '@sprucelabs/calendar-utils'

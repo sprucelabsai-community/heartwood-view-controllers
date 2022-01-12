@@ -1,5 +1,5 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { dateUtil } from '@sprucelabs/spruce-calendar-utils'
 
 let idCount = 0
 

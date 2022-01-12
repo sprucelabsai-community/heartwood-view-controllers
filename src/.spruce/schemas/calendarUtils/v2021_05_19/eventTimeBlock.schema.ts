@@ -1,1 +1,1 @@
-export { eventTimeBlockSchema as default } from '@sprucelabs/spruce-calendar-utils'
+export { eventTimeBlockSchema as default } from '@sprucelabs/calendar-utils'

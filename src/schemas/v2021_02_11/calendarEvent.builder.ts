@@ -1,5 +1,5 @@
+import { calendarEventSchema as originalEventSchema } from '@sprucelabs/calendar-utils'
 import { buildSchema, dropFields } from '@sprucelabs/schema'
-import { calendarEventSchema as originalEventSchema } from '@sprucelabs/spruce-calendar-utils'
 
 const calendarEventSchema = buildSchema({
 	id: 'calendarEvent',
