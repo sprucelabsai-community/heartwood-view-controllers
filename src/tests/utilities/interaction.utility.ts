@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
 import { ListViewController } from '../..'
 import { KeyboardKey, ViewController } from '../../types/heartwood.types'
@@ -7,10 +8,11 @@ import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
-import { pluckAllFromCard } from './vcAssert.utility'
+import { getVcName, pluckAllFromCard } from './vcAssert.utility'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
+type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactionUtil = {
@@ -308,6 +310,43 @@ const interactionUtil = {
 		assert.isTruthy(model.onClick, `Row '${model.id}' is missing an onClick!`)
 
 		await model.onClick?.()
+	},
+
+	async clickCalendarMonthView(
+		vc: ViewController<Calendar>,
+		time: number,
+		personId: string
+	) {
+		assertOptions({ vc, time, personId }, ['vc', 'time', 'personId'])
+
+		const model = renderUtil.render(vc)
+
+		assert.isEqual(
+			model.view,
+			'month',
+			`Your calendar '${getVcName(
+				vc
+			)}' needs it's view set to 'month', it's currently set to ${
+				model.view ?? '***empty***'
+			}`
+		)
+
+		const personMatch = model?.people?.find((p) => p?.id === personId)
+
+		assert.isTruthy(
+			personMatch,
+			`I could not find a person with the id of ${personId}.`
+		)
+
+		assert.isFunction(
+			model.onClick,
+			`You have to set 'onClick' on your calendar!`
+		)
+
+		await model.onClick?.({
+			time,
+			person: personMatch,
+		})
 	},
 }
 

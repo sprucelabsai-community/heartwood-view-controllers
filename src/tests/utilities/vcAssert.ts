@@ -1515,7 +1515,7 @@ const vcAssert = {
 
 export default vcAssert
 
-function getVcName(vc: ViewController<any>) {
+export function getVcName(vc: ViewController<any>) {
 	return (
 		//@ts-ignore
 		vc.id ?? Object.getPrototypeOf(vc)?.constructor?.name ?? `view controller`

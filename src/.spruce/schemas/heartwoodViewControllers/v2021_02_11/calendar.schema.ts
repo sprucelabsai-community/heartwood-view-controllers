@@ -22,7 +22,9 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'people': {
 	                label: 'People',
 	                type: 'schema',
+	                isRequired: true,
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: calendarPersonSchema_v2021_02_11,}
 	            },
 	            /** Minimum time. The earliest time to show in the calendar. */

@@ -31,6 +31,8 @@ export default buildSchema({
 			type: 'schema',
 			label: 'People',
 			isArray: true,
+			isRequired: true,
+			minArrayLength: 0,
 			options: {
 				schema: {
 					id: 'calendarPerson',
