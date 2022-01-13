@@ -304,6 +304,9 @@ const interactionUtil = {
 	async clickRow(listVc: ListViewController, row: number | string) {
 		const rowVc = listVc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
+
+		assert.isTruthy(model.onClick, `Row '${model.id}' is missing an onClick!`)
+
 		await model.onClick?.()
 	},
 }
