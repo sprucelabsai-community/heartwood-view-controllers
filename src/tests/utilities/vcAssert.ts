@@ -996,29 +996,41 @@ const vcAssert = {
 		assert.fail(`Your skill view should not be rendering a toolbelt with tools`)
 	},
 
-	assertRendersCalendar(svc: SkillViewController) {
+	assertSkillViewRendersCalendar(svc: SkillViewController) {
 		const model = renderUtil.render(svc)
 
 		for (const layout of model.layouts ?? []) {
 			for (const card of layout?.cards ?? []) {
 				const calendar = pluckFirstFromCard(card ?? {}, 'calendar')
 				if (calendar) {
-					return
+					return calendar.controller
 				}
 			}
 		}
 
 		assert.fail('Your skill view does not render a calendar!')
 	},
+	/**
+	 * @deprecated - use assertSkillViewRendersCalendar
+	 */
+	assertRendersCalendar(svc: SkillViewController) {
+		return this.assertSkillViewRendersCalendar(svc)
+	},
 
-	assertDoesNotRenderCalendar(svc: SkillViewController) {
+	assertSkillViewDoesNotRenderCalendar(svc: SkillViewController) {
 		try {
-			this.assertRendersCalendar(svc)
+			this.assertSkillViewRendersCalendar(svc)
 		} catch {
 			return
 		}
 
 		assert.fail('Your skill view should not be rendering a calendar right now!')
+	},
+	/**
+	 * @deprecated - use assertSkillViewDoesNotRenderCalendar
+	 */
+	assertDoesNotRenderCalendar(svc: SkillViewController) {
+		return this.assertSkillViewDoesNotRenderCalendar(svc)
 	},
 
 	assertCardRendersTalkingSprucebot(

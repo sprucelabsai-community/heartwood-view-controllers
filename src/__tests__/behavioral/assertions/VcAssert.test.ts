@@ -879,14 +879,14 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async knowsWhenNotRenderingCalendar() {
-		assert.isFunction(vcAssert.assertRendersCalendar)
+		assert.isFunction(vcAssert.assertSkillViewRendersCalendar)
 
 		const svc = this.Controller('good', {
 			layouts: [{}],
 		})
 
-		assert.doesThrow(() => vcAssert.assertRendersCalendar(svc))
-		vcAssert.assertDoesNotRenderCalendar(svc)
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCalendar(svc))
+		vcAssert.assertSkillViewDoesNotRenderCalendar(svc)
 	}
 
 	@test()
@@ -974,8 +974,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		vcAssert.assertRendersCalendar(svc)
-		assert.doesThrow(() => vcAssert.assertDoesNotRenderCalendar(svc))
+		vcAssert.assertSkillViewRendersCalendar(svc)
+		assert.doesThrow(() => vcAssert.assertSkillViewDoesNotRenderCalendar(svc))
 	}
 
 	@test()
@@ -998,7 +998,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			layouts: [...new Array(Math.round(Math.random() * 100)), layout],
 		})
 
-		vcAssert.assertRendersCalendar(svc)
+		vcAssert.assertSkillViewRendersCalendar(svc)
 	}
 
 	@test()

@@ -4,9 +4,9 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
-import { vcAssertUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import generateRandomEventValues from '../../../tests/utilities/generateRandomEventValues'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 
 type CalendarTime =
@@ -109,7 +109,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set min time 2', { hour: 10, minute: 0 })
 	protected static canSetMinTime(time: CalendarTime) {
 		this.vc.setMinTime(time)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		assert.isEqualDeep(this.render(this.vc).minTime, time)
 	}
@@ -118,7 +118,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set max time 2', { hour: 17, minute: 0 })
 	protected static canSetMaxTime(time: CalendarTime) {
 		this.vc.setMaxTime(time)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		assert.isEqualDeep(this.render(this.vc).maxTime, time)
 	}
@@ -136,7 +136,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set timezoneOffset 2', 14 * 60 * 60 * 1000)
 	protected static canSetTimezoneOffset(time: number) {
 		this.vc.setTimezoneOffsetMs(time)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		assert.isEqualDeep(this.render(this.vc).timezoneOffsetMs, time)
 	}
 
@@ -166,7 +166,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static canSetView() {
 		this.vc.setView('month')
 		assert.isEqual(this.vc.getView(), 'month')
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.vc.setView('day')
 		assert.isEqual(this.vc.getView(), 'day')
 	}
@@ -209,7 +209,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static addingEventTriggersRender() {
 		this.vc.addEvent(generateRandomEventValues())
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -253,7 +253,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = generateRandomEventValues()
 		this.vc.addEvent(event)
 		this.vc.removeEvent(event.id)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -327,7 +327,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static mixinTriggersRender() {
 		this.populateCalendar()
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -362,7 +362,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = generateRandomEventValues()
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -398,7 +398,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static settingStartDateTriggersRender() {
 		this.vc.setStartDate(getDate())
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -458,7 +458,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			dateUtil.getEndOfDay()
 		)
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static assertRendersTotalEvents(expected: number) {
