@@ -1,3 +1,10 @@
+# [55.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.10.34...v55.11.0) (2022-01-13)
+
+
+### Features
+
+* devs can now simulate clicks on the calendar if it's in month view! ([9141986](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9141986))
+
 ## [55.10.34](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.10.33...v55.10.34) (2022-01-13)
 
 ## [55.10.33](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.10.32...v55.10.33) (2022-01-13)
