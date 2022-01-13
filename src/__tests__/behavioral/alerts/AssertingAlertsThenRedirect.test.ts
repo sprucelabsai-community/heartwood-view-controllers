@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractSkillViewController, vcAssertUtil, Router } from '../../..'
+import { AbstractSkillViewController, vcAssert, Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockRouter from '../../../tests/MockRouter'
 
@@ -89,7 +89,7 @@ export default class AssertAlertAndRedirectTest extends AbstractViewControllerTe
 	}
 
 	private static assert(action: () => Promise<any>): any {
-		return vcAssertUtil.assertRendersAlertThenRedirects({
+		return vcAssert.assertRendersAlertThenRedirects({
 			action,
 			vc: this.vc,
 			router: this.router,

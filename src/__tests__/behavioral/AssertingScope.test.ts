@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractSkillViewController, ScopedBy, vcAssertUtil } from '../..'
+import { AbstractSkillViewController, ScopedBy, vcAssert } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 
 class Scope extends AbstractSkillViewController {
@@ -31,38 +31,38 @@ export default class AssertingScopeTest extends AbstractViewControllerTest {
 	protected static scopeMustBeValued() {
 		assert.doesThrow(() =>
 			//@ts-ignore
-			vcAssertUtil.assertSkillViewScopedBy(this.Vc('organization'), 'aoeuaoeu')
+			vcAssert.assertSkillViewScopedBy(this.Vc('organization'), 'aoeuaoeu')
 		)
 		assert.doesThrow(() =>
 			//@ts-ignore
-			vcAssertUtil.assertSkillViewScopedBy(this.Vc('organization'), '523423423')
+			vcAssert.assertSkillViewScopedBy(this.Vc('organization'), '523423423')
 		)
 	}
 
 	@test()
 	protected static scopeIsDefaultToNone() {
 		const vc = this.Vc()
-		vcAssertUtil.assertSkillViewNotScoped(vc)
+		vcAssert.assertSkillViewNotScoped(vc)
 	}
 
 	@test('knows if scoped by location', 'location')
 	@test('knows if scoped by organization', 'organization')
 	protected static knowsIfScopedBySomething(scope: ScopedBy) {
 		const vc = this.Vc(scope)
-		assert.doesThrow(() => vcAssertUtil.assertSkillViewNotScoped(vc))
-		vcAssertUtil.assertSkillViewScopedBy(vc, scope)
+		assert.doesThrow(() => vcAssert.assertSkillViewNotScoped(vc))
+		vcAssert.assertSkillViewScopedBy(vc, scope)
 	}
 
 	@test()
 	protected static scopeToNoneCountsAsNotScoped() {
 		const vc = this.Vc('none')
-		vcAssertUtil.assertSkillViewNotScoped(vc)
+		vcAssert.assertSkillViewNotScoped(vc)
 	}
 
 	@test()
 	protected static throwsIfScopedBySomethingElse() {
 		const vc = this.Vc('organization')
-		assert.doesThrow(() => vcAssertUtil.assertSkillViewScopedBy(vc, 'location'))
+		assert.doesThrow(() => vcAssert.assertSkillViewScopedBy(vc, 'location'))
 	}
 
 	private static Vc(scope?: ScopedBy) {

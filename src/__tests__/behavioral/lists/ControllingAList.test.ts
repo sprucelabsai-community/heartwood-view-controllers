@@ -4,7 +4,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 import { interactionUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 export default class ControllingAListTest extends AbstractViewControllerTest {
@@ -110,7 +110,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -506,11 +506,11 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const rowVc = this.vc.getRowVc(0)
-		vcAssertUtil.assertTriggerRenderCount(rowVc, 0)
+		vcAssert.assertTriggerRenderCount(rowVc, 0)
 
 		await rowVc.setValue('firstName', 'Test')
 
-		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
+		vcAssert.assertTriggerRenderCount(rowVc, 1)
 	}
 
 	@test()
@@ -604,7 +604,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		let rowVc = this.vc.getRowVc(0)
 		let model = this.render(rowVc)
@@ -666,7 +666,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		this.vc.deleteRow(0)
 		assert.isEqual(this.vc.getTotalRows(), 1)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 3)
+		vcAssert.assertTriggerRenderCount(this.vc, 3)
 
 		const rowVc2 = this.vc.getRowVc(0)
 		assert.doesInclude(this.render(rowVc2), {
@@ -1001,7 +1001,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		this.vc.deleteAllRows()
 
 		assert.isEqual(this.vc.getTotalRows(), 0)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1 + startingRenderCount)
+		vcAssert.assertTriggerRenderCount(this.vc, 1 + startingRenderCount)
 
 		//@ts-ignore
 		assert.isLength(this.vc._rowVcs, 0)

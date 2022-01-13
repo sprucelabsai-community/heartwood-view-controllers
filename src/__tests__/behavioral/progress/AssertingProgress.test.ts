@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { CardViewControllerOptions } from '../../../viewControllers/Card.vc'
 import { ProgressViewControllerOptions } from '../../../viewControllers/reporting/Progress.vc'
@@ -8,7 +8,7 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 	@test()
 	protected static assertThrowsIfNotRenderingProgress() {
 		const vc = this.CardVc()
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersProgress(vc))
+		assert.doesThrow(() => vcAssert.assertCardRendersProgress(vc))
 	}
 
 	@test()
@@ -25,7 +25,7 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersProgress(vc)
+		vcAssert.assertCardRendersProgress(vc)
 	}
 
 	@test()
@@ -42,7 +42,7 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersProgress(vc)
+		vcAssert.assertCardRendersProgress(vc)
 	}
 
 	@test()
@@ -58,14 +58,14 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 			},
 		})
 
-		const matchVc = vcAssertUtil.assertCardRendersProgress(vc)
+		const matchVc = vcAssert.assertCardRendersProgress(vc)
 		assert.isEqual(matchVc, progressVc)
 	}
 
 	@test()
 	protected static throwsWhenAssertPercentCompleteIsWrong() {
 		const vc = this.ProgressVc()
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersProgress(vc, 1))
+		assert.doesThrow(() => vcAssert.assertCardRendersProgress(vc, 1))
 	}
 
 	@test('matches percent 0.5', 0.5)
@@ -74,8 +74,8 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 		percentComplete: number
 	) {
 		const vc = this.ProgressVc({ percentComplete })
-		vcAssertUtil.assertCardRendersProgress(vc, percentComplete)
-		vcAssertUtil.assertCardRendersProgress(vc)
+		vcAssert.assertCardRendersProgress(vc, percentComplete)
+		vcAssert.assertCardRendersProgress(vc)
 	}
 
 	private static ProgressVc(options?: ProgressViewControllerOptions) {

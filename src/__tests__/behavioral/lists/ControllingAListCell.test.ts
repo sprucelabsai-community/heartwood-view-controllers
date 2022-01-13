@@ -3,7 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import ListCellViewController, {
 	ListCellModel,
 } from '../../../viewControllers/list/ListCell.vc'
@@ -136,8 +136,8 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 
 		assert.isEqual(values[0].firstName, value)
 
-		vcAssertUtil.assertTriggerRenderCount(rowVc, 0)
-		vcAssertUtil.assertTriggerRenderCount(cellVc, 1)
+		vcAssert.assertTriggerRenderCount(rowVc, 0)
+		vcAssert.assertTriggerRenderCount(cellVc, 1)
 	}
 
 	private static CellVc(idx: number, cellModel?: ListCellModel) {

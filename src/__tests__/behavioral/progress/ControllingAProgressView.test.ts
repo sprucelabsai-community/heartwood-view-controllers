@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ProgressViewController, {
 	ProgressViewControllerOptions,
@@ -65,7 +65,7 @@ export default class ControllingAProgressViewTest extends AbstractViewController
 	@test()
 	protected static settingPercentCompleteTriggersRender() {
 		this.vc.setPercentComplete(0.5)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test('can start with title', 'you are so close!')
@@ -87,7 +87,7 @@ export default class ControllingAProgressViewTest extends AbstractViewController
 	@test()
 	protected static settingTitleTriggersRender() {
 		this.vc.setTitle('hey')
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static Vc(options?: ProgressViewControllerOptions) {

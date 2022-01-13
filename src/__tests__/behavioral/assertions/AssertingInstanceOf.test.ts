@@ -4,7 +4,7 @@ import {
 	AbstractSkillViewController,
 	AbstractViewController,
 	ActiveRecordCardViewController,
-	vcAssertUtil,
+	vcAssert,
 } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -116,21 +116,21 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static hasInstanceOf() {
-		assert.isFunction(vcAssertUtil.assertControllerInstanceOf)
+		assert.isFunction(vcAssert.assertControllerInstanceOf)
 	}
 
 	@test()
 	protected static throwsWhenPassedNoInstanceOf() {
 		const vc = this.Controller('card', {})
 		assert.doesThrow(() =>
-			vcAssertUtil.assertControllerInstanceOf(vc, FormViewController)
+			vcAssert.assertControllerInstanceOf(vc, FormViewController)
 		)
 	}
 
 	@test()
 	protected static knowsWhenPassedCorrectClassReference() {
 		const vc = this.Controller('card', {})
-		vcAssertUtil.assertControllerInstanceOf(vc, CardViewController)
+		vcAssert.assertControllerInstanceOf(vc, CardViewController)
 	}
 
 	@test()
@@ -138,7 +138,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		const vc = this.Controller('fancy', {}) as any
 
-		vcAssertUtil.assertControllerInstanceOf(vc, FancyCardViewController)
+		vcAssert.assertControllerInstanceOf(vc, FancyCardViewController)
 	}
 
 	@test()
@@ -146,7 +146,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		const model = this.render(this.Controller('fancy', {}))
 
-		vcAssertUtil.assertControllerInstanceOf(
+		vcAssert.assertControllerInstanceOf(
 			model.controller as any,
 			FancyCardViewController
 		)
@@ -157,10 +157,10 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		const vc = this.Controller('fancy', {}) as FancyCardViewController
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRendersAsInstanceOf(vc, FormViewController)
+			vcAssert.assertRendersAsInstanceOf(vc, FormViewController)
 		)
 
-		const match1 = vcAssertUtil.assertRendersAsInstanceOf(
+		const match1 = vcAssert.assertRendersAsInstanceOf(
 			vc,
 			CardViewController
 		)
@@ -168,7 +168,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		assert.isEqual(match1, vc.cardVc)
 
-		const match2 = vcAssertUtil.assertRendersAsInstanceOf(
+		const match2 = vcAssert.assertRendersAsInstanceOf(
 			vc,
 			FancyCardViewController
 		)
@@ -181,18 +181,18 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		const svc = this.Controller('activeSvc', {})
 		//@ts-ignore
-		const match = vcAssertUtil.assertSkillViewRendersCard(svc, 'active')
-		vcAssertUtil.assertRendersAsInstanceOf(match, ActiveCard)
+		const match = vcAssert.assertSkillViewRendersCard(svc, 'active')
+		vcAssert.assertRendersAsInstanceOf(match, ActiveCard)
 	}
 
 	@test()
 	protected static async canAssertDialogRendersAsInstanceOf() {
 		//@ts-ignore
 		const svc = this.Controller('dialogSvc', {}) as DialogSkillViewController
-		const dialogVc = await vcAssertUtil.assertRendersDialog(svc, () =>
+		const dialogVc = await vcAssert.assertRendersDialog(svc, () =>
 			svc.showDialog()
 		)
 
-		vcAssertUtil.assertRendersAsInstanceOf(dialogVc, DialogCardViewController)
+		vcAssert.assertRendersAsInstanceOf(dialogVc, DialogCardViewController)
 	}
 }

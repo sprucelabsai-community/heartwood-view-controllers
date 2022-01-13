@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
@@ -47,7 +47,7 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 	protected static canSetValueLater(value: number) {
 		this.vc.setValue(value)
 		assert.isEqual(this.vc.getValue(), value)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.assertRendersValue(value)
 	}
 
@@ -104,7 +104,7 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 	@test('can set to stars later', 'stars')
 	protected static canSetValidRenderAsLater(renderAs: any) {
 		this.vc.setRenderAs(renderAs)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		assert.isEqual(this.render(this.vc).renderAs, renderAs)
 	}
 

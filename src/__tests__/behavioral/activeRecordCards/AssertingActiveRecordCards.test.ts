@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { ActiveRecordCardViewController, vcAssertUtil } from '../../..'
+import { ActiveRecordCardViewController, vcAssert } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -44,7 +44,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 		})
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+			vcAssert.assertSkillViewRendersActiveRecordCard(vc)
 		)
 	}
 
@@ -61,13 +61,13 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 			],
 		})
 
-		vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+		vcAssert.assertSkillViewRendersActiveRecordCard(vc)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc, 'test2')
+			vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test2')
 		)
 
-		vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc, 'test')
+		vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test')
 	}
 
 	@test()
@@ -82,9 +82,9 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 		})
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+			vcAssert.assertSkillViewRendersActiveRecordCard(vc)
 		)
-		assert.doesThrow(() => vcAssertUtil.assertIsActiveRecordCard(cardVc))
+		assert.doesThrow(() => vcAssert.assertIsActiveRecordCard(cardVc))
 	}
 
 	@test()
@@ -98,12 +98,12 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 			],
 		})
 
-		const match = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+		const match = vcAssert.assertSkillViewRendersActiveRecordCard(vc)
 		assert.isEqual(active, match)
 
 		assert.isTrue(match instanceof ActiveRecordCardViewController)
-		vcAssertUtil.assertIsActiveRecordCard(match)
-		vcAssertUtil.assertIsActiveRecordCard(match.getCardVc())
+		vcAssert.assertIsActiveRecordCard(match)
+		vcAssert.assertIsActiveRecordCard(match.getCardVc())
 	}
 
 	private static renderActiveRecordCard(

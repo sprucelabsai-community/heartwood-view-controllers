@@ -7,7 +7,7 @@ import { interactionUtil } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formTestUtil from '../../../tests/utilities/formTest.utility'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import { FormViewController } from '../../../types/heartwood.types'
 import { testFormOptions } from './testFormOptions'
 
@@ -342,7 +342,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static addingSectionShouldTriggerRender() {
 		this.vc.addSection({ title: 'go!', fields: [] })
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -461,7 +461,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			},
 		})
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -543,7 +543,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			title: 'doobey',
 		})
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -579,7 +579,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isEqual(section.title, 'go team!')
 		assert.isEqualDeep(section.fields, ['first', 'last'])
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -692,7 +692,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isFalsy(model.schema.fields.favoriteNumber)
 		assert.isTruthy(testFormOptions.schema.fields.favoriteNumber)
 
-		vcAssertUtil.assertFormRendersField(this.vc, 'secondFavoriteNumber')
+		vcAssert.assertFormRendersField(this.vc, 'secondFavoriteNumber')
 	}
 
 	@test()
@@ -733,24 +733,24 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static canDisableForm() {
 		this.vc.setIsBusy(false)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		this.vc.disable()
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 
-		vcAssertUtil.assertFormIsDisabled(this.vc)
-		vcAssertUtil.assertFormIsNotBusy(this.vc)
+		vcAssert.assertFormIsDisabled(this.vc)
+		vcAssert.assertFormIsNotBusy(this.vc)
 
 		this.vc.setIsBusy(true)
 		this.vc.disable()
 
-		vcAssertUtil.assertFormIsBusy(this.vc)
+		vcAssert.assertFormIsBusy(this.vc)
 
 		this.vc.enable()
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 5)
+		vcAssert.assertTriggerRenderCount(this.vc, 5)
 
-		vcAssertUtil.assertFormIsBusy(this.vc)
-		vcAssertUtil.assertFormIsEnabled(this.vc)
+		vcAssert.assertFormIsBusy(this.vc)
+		vcAssert.assertFormIsEnabled(this.vc)
 	}
 
 	@test()
@@ -833,7 +833,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		vcAssertUtil.assertFormIsDisabled(vc)
+		vcAssert.assertFormIsDisabled(vc)
 	}
 
 	@test('is valid if required field is set', { name: 'test' }, [['name']], true)

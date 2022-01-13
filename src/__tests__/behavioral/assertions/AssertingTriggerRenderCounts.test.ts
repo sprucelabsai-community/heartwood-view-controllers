@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractViewController, vcAssertUtil } from '../../..'
+import { AbstractViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import CardViewController from '../../../viewControllers/Card.vc'
 
@@ -31,7 +31,7 @@ export default class AssertingTriggerRenderCountsTest extends AbstractViewContro
 			},
 		})
 
-		vcAssertUtil.attachTriggerRenderCounter(vc)
+		vcAssert.attachTriggerRenderCounter(vc)
 
 		//@ts-ignore
 		assert.isEqual(vc.__renderInvocationCount, 0)
@@ -41,7 +41,7 @@ export default class AssertingTriggerRenderCountsTest extends AbstractViewContro
 		//@ts-ignore
 		assert.isEqual(vc.__renderInvocationCount, 1)
 
-		vcAssertUtil.attachTriggerRenderCounter(vc)
+		vcAssert.attachTriggerRenderCounter(vc)
 
 		//@ts-ignore
 		assert.isEqual(vc.__renderInvocationCount, 1)

@@ -3,7 +3,7 @@ import { test, assert } from '@sprucelabs/test'
 import {
 	AbstractSkillViewController,
 	interactionUtil,
-	vcAssertUtil,
+	vcAssert,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
@@ -41,7 +41,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async invokingAlertThrowsByDefault() {
-		vcAssertUtil.patchAlertToThrow(this.vc)
+		vcAssert.patchAlertToThrow(this.vc)
 		await assert.doesThrowAsync(() => this.vc.showAnAlert())
 		//@ts-ignore
 		await assert.doesThrowAsync(() => this.vc.alert())
@@ -49,7 +49,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async doesNotThrowWithOtherStylesAlert() {
-		vcAssertUtil.patchAlertToThrow(this.vc)
+		vcAssert.patchAlertToThrow(this.vc)
 		//@ts-ignore
 		await this.vc.alert({
 			style: 'info',
@@ -67,7 +67,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 		const title = `${new Date().getTime()}`
 		const message = `${new Date().getTime() * Math.random()}`
 
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
 				title,
@@ -83,7 +83,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async executionHoldsUntilAlertIsClosed() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			this.vc.showAnAlert()
 		)
 
@@ -97,7 +97,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async alertingWithoutTitleDoesntRenderHeader() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
 				message: 'go team!',
@@ -110,19 +110,19 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async hasSingleFooterButtonThatIsDestructive() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
 				message: 'go team!',
 			})
 		)
 
-		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'destructive')
+		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'destructive')
 	}
 
 	@test()
 	protected static async clickingDestructiveButtonInFooterHidesDialog() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			this.vc.showAnAlert()
 		)
 
@@ -137,7 +137,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async alertsCanReceiveTypeOfButton() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
 				title: 'hey',
@@ -146,12 +146,12 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
-		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'secondary')
+		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'secondary')
 	}
 
 	@test()
 	protected static async successRendersPrimaryButton() {
-		const dlgVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
 				title: 'hey',
@@ -160,6 +160,6 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
-		vcAssertUtil.assertFooterRendersButtonWithType(dlgVc, 'primary')
+		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'primary')
 	}
 }

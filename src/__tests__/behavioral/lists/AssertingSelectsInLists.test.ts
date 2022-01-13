@@ -1,6 +1,6 @@
 import { selectAssertUtil } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 export default class AssertingSelectsInListsTest extends AbstractViewControllerTest {
@@ -8,14 +8,14 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 
 	@test()
 	protected static throwsIfRowDoesNotHaveSelect() {
-		assert.isFunction(vcAssertUtil.assertRowRendersSelect)
+		assert.isFunction(vcAssert.assertRowRendersSelect)
 	}
 
 	@test()
 	protected static throwsIfCantFindRow() {
 		const vc = this.ListVc()
 
-		assert.doesThrow(() => vcAssertUtil.assertRowRendersSelect(vc, 'not-found'))
+		assert.doesThrow(() => vcAssert.assertRowRendersSelect(vc, 'not-found'))
 	}
 
 	@test()
@@ -25,25 +25,25 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 			row1Id,
 		})
 
-		vcAssertUtil.assertRowRendersSelect(vc, row1Id)
+		vcAssert.assertRowRendersSelect(vc, row1Id)
 	}
 
 	@test()
 	protected static cantFindSelectInRowThatDoesNotHaveOne() {
 		const vc = this.ListVc({})
-		assert.doesThrow(() => vcAssertUtil.assertRowRendersSelect(vc, 'last'))
+		assert.doesThrow(() => vcAssert.assertRowRendersSelect(vc, 'last'))
 	}
 
 	@test()
 	protected static canFindSelectInCellAfterFirst() {
 		const vc = this.ListVc({})
-		vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+		vcAssert.assertRowRendersSelect(vc, 'middle')
 	}
 
 	@test()
 	protected static returnsASelectViewController() {
 		const vc = this.ListVc({})
-		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+		const selectVc = vcAssert.assertRowRendersSelect(vc, 'middle')
 
 		assert.isTruthy(selectVc)
 		assert.isFunction(selectVc.getChoices)
@@ -59,7 +59,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 			isMiddleRequired: true,
 		})
 
-		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+		const selectVc = vcAssert.assertRowRendersSelect(vc, 'middle')
 		assert.isTrue(selectVc.getIsRequired())
 	}
 
@@ -69,7 +69,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 			isMiddleRequired: true,
 		})
 
-		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'middle')
+		const selectVc = vcAssert.assertRowRendersSelect(vc, 'middle')
 
 		selectAssertUtil.assertSelectChoicesMatch(selectVc?.getChoices(), [
 			'foo',
@@ -83,7 +83,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 			isMiddleRequired: true,
 		})
 
-		const selectVc = vcAssertUtil.assertRowRendersSelect(vc, 'first')
+		const selectVc = vcAssert.assertRowRendersSelect(vc, 'first')
 
 		selectAssertUtil.assertSelectChoicesMatch(selectVc?.getChoices(), [
 			'red',

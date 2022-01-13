@@ -3,7 +3,7 @@ import { Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockRouter from '../../../tests/MockRouter'
 import routerTestPatcher from '../../../tests/utilities/routerTestPatcher'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 
 export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -17,7 +17,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async knowsWhenNotRedirecting() {
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionRedirects({
+			vcAssert.assertActionRedirects({
 				router: this.router,
 				action: () => {},
 			})
@@ -33,9 +33,9 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 				await this.router.redirect('hey')
 			},
 		}
-		await vcAssertUtil.assertActionRedirects(options)
+		await vcAssert.assertActionRedirects(options)
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionDoesNotRedirect(options)
+			vcAssert.assertActionDoesNotRedirect(options)
 		)
 	}
 
@@ -46,7 +46,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 		const value = `${Math.random()}`
 		const args = { [key]: value }
 
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.router,
 			action: async () => {
 				//@ts-ignore
@@ -63,7 +63,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async finishesWithForeverAction() {
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.router,
 			action: async () => {
 				//@ts-ignore
@@ -86,15 +86,15 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 			},
 		}
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionRedirects(options)
+			vcAssert.assertActionRedirects(options)
 		)
 
-		await vcAssertUtil.assertActionDoesNotRedirect(options)
+		await vcAssert.assertActionDoesNotRedirect(options)
 	}
 
 	@test()
 	protected static async passesWithDestinationIdMatch() {
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.router,
 			action: async () => {
 				//@ts-ignore
@@ -109,7 +109,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async throwsWhenNotPassedArgsButExpecting() {
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionRedirects({
+			vcAssert.assertActionRedirects({
 				router: this.router,
 				action: async () => {
 					//@ts-ignore
@@ -127,7 +127,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async matchesArgs() {
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.router,
 			action: async () => {
 				//@ts-ignore
@@ -145,7 +145,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async throwsWithMissMatchedArgs() {
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertActionRedirects({
+			vcAssert.assertActionRedirects({
 				router: this.router,
 				action: async () => {
 					//@ts-ignore
@@ -176,7 +176,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async assertRedirectOnPatchedRouterWorks() {
 		routerTestPatcher.patchRedirectToThrow(this.router)
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.router,
 			action: async () => {
 				//@ts-ignore
@@ -190,7 +190,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 		const mockResponse = { hello: `${new Date().getTime() * Math.random()}` }
 		MockRouter.redirectResponse = mockResponse
 
-		const vc = await vcAssertUtil.assertActionRedirects({
+		const vc = await vcAssert.assertActionRedirects({
 			router: this.router,
 			//@ts-ignore
 			action: async () => this.router.redirect('heartwood.root'),

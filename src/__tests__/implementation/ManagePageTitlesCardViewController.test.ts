@@ -2,7 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ManagePageTitlesCardViewController, {
@@ -69,9 +69,9 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 	@test()
 	protected static rendersAValidCard() {
-		vcAssertUtil.assertRendersValidCard(this.vc)
-		vcAssertUtil.assertCardRendersHeader(this.vc)
-		vcAssertUtil.assertCardRendersFooter(this.vc)
+		vcAssert.assertRendersValidCard(this.vc)
+		vcAssert.assertCardRendersHeader(this.vc)
+		vcAssert.assertCardRendersFooter(this.vc)
 	}
 
 	@test()
@@ -82,7 +82,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 	@test()
 	protected static rendersList() {
-		vcAssertUtil.assertCardRendersList(this.vc)
+		vcAssert.assertCardRendersList(this.vc)
 	}
 
 	@test()
@@ -91,7 +91,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		await this.formBuilderVc.addPage({ title: 'Page 3' })
 
 		const listVc = this.vc.getListVc()
-		vcAssertUtil.assertListRendersRows(listVc, 3)
+		vcAssert.assertListRendersRows(listVc, 3)
 
 		assert.isEqual(listVc.getRowVc(0).getValues().title, 'Page 1')
 		assert.isEqual(listVc.getRowVc(1).getValues().title, 'Page 2')
@@ -115,11 +115,11 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		await this.formBuilderVc.addPage({ title: 'Page 3' })
 		await this.formBuilderVc.addPage({ title: 'Page 4' })
 
-		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
+		vcAssert.assertListRendersRows(this.vc.getListVc(), 4)
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
@@ -130,7 +130,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 4')
 
-		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 3)
+		vcAssert.assertListRendersRows(this.vc.getListVc(), 3)
 	}
 
 	@test()
@@ -139,26 +139,26 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		await this.formBuilderVc.addPage({ title: 'Page 3' })
 		await this.formBuilderVc.addPage({ title: 'Page 4' })
 
-		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
+		vcAssert.assertListRendersRows(this.vc.getListVc(), 4)
 		let rowVc = this.vc.getListVc().getRowVc(2)
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
 		await confirmVc.decline()
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 4)
-		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 4)
+		vcAssert.assertListRendersRows(this.vc.getListVc(), 4)
 	}
 
 	@test()
 	protected static async clickingSecondaryButtonInTheFooterAddsPage() {
 		await interactionUtil.clickSecondaryInFooter(this.vc)
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 2)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
-		vcAssertUtil.assertListRendersRows(this.vc.getListVc(), 2)
+		vcAssert.assertListRendersRows(this.vc.getListVc(), 2)
 	}
 }
