@@ -3904,7 +3904,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>)| undefined | null
 				/** People. */
-				'people': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]
+				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]| undefined | null
 				/** Minimum time. The earliest time to show in the calendar. */
 				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** Maximum time. The latest time to show in the calendar. */
@@ -3950,9 +3950,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'people': {
 			                label: 'People',
 			                type: 'schema',
-			                isRequired: true,
 			                isArray: true,
-			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPersonSchema,}
 			            },
 			            /** Minimum time. The earliest time to show in the calendar. */

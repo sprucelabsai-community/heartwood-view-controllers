@@ -35,6 +35,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['people'],
 		})
+
+		//@ts-ignore
 		assert.doesThrow(() => this.Controller('calendar', { view: 'day' }))
 	}
 
