@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil, ViewController, ViewControllerOptions } from '../../..'
+import { vcAssert, ViewController, ViewControllerOptions } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 
@@ -28,7 +28,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
 	@test()
 	protected static throwsIfNotRenderingStats() {
 		const vc = this.Card()
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersStats(vc))
+		assert.doesThrow(() => vcAssert.assertCardRendersStats(vc))
 	}
 
 	@test()
@@ -50,7 +50,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersStats(vc)
+		vcAssert.assertCardRendersStats(vc)
 	}
 
 	@test()
@@ -74,7 +74,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertCardRendersStats(vc)
+		vcAssert.assertCardRendersStats(vc)
 	}
 
 	@test()
@@ -96,7 +96,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		const matchVc = vcAssertUtil.assertCardRendersStats(vc)
+		const matchVc = vcAssert.assertCardRendersStats(vc)
 		assert.isEqual(matchVc, statsVc)
 	}
 

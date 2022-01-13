@@ -12,7 +12,7 @@ import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import MockStorage from './MockStorage'
 import interactionUtil from './utilities/interaction.utility'
-import vcAssertUtil from './utilities/vcAssert.utility'
+import vcAssert from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any> = {}
@@ -22,7 +22,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		await super.beforeEach()
 		Authenticator.reset()
 		Authenticator.setStorage(new MockStorage())
-		vcAssertUtil._setVcFactory(this.Factory())
+		vcAssert._setVcFactory(this.Factory())
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
 		SwipeViewController.swipeDelay = 0
@@ -55,7 +55,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		//@ts-ignore
 		this.render(vc)
 
-		vcAssertUtil.attachTriggerRenderCounter(vc as any)
+		vcAssert.attachTriggerRenderCounter(vc as any)
 
 		return vc
 	}

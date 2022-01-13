@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractViewController, vcAssertUtil } from '../../..'
+import { AbstractViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
@@ -40,7 +40,7 @@ export default class AssertingForVotesTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canCreateAssertingForVotes() {
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertAsksForAVote(this.vc, () => this.vc.doNotVote())
+			vcAssert.assertAsksForAVote(this.vc, () => this.vc.doNotVote())
 		)
 	}
 
@@ -67,6 +67,6 @@ export default class AssertingForVotesTest extends AbstractViewControllerTest {
 	}
 
 	private static async vote() {
-		return await vcAssertUtil.assertAsksForAVote(this.vc, () => this.vc.vote())
+		return await vcAssert.assertAsksForAVote(this.vc, () => this.vc.vote())
 	}
 }

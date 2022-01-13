@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import SwipeViewController, {
 	SwipeViewControllerOptions,
 } from '../../../viewControllers/Swipe.vc'
@@ -202,11 +202,11 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	@test()
 	protected static addingSlideTriggersRender() {
 		this.vc.addSlide({ title: 'Go!' })
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		this.vc.addSlide({ title: 'Go!' })
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -214,13 +214,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		this.vc.addSlide({ title: 'Go!' })
 		this.vc.removeSlide(1)
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
 	protected static async addingSlideAtIndexTriggersRender() {
 		this.vc.addSlideAtIndex(0, { title: 'new' })
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()

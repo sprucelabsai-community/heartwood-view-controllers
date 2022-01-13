@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { renderUtil, vcAssertUtil } from '../../..'
+import { renderUtil, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
@@ -153,9 +153,9 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	@test()
 	protected static tiggersRenderWhenAddingAndRemovingTool() {
 		this.vc.addTool({ id: 'go', card: {} as any, lineIcon: 'video' })
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.vc.removeTool('go')
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()

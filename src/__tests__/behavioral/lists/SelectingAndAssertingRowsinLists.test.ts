@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListRowModel } from '../../../viewControllers/list/List.vc'
 
@@ -10,8 +10,8 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 
 		assert.isEqualDeep(vc.getSelectedRows(), [])
 
-		assert.doesThrow(() => vcAssertUtil.assertRowIsSelected(vc, 'test'))
-		assert.doesThrow(() => vcAssertUtil.assertRowsAreSelected(vc, ['test']))
+		assert.doesThrow(() => vcAssert.assertRowIsSelected(vc, 'test'))
+		assert.doesThrow(() => vcAssert.assertRowsAreSelected(vc, ['test']))
 	}
 
 	@test()
@@ -34,8 +34,8 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		assert.isTrue(vc.isRowSelected(rowId))
 		assert.isEqualDeep(vc.getSelectedRows(), [rowId])
 
-		vcAssertUtil.assertRowIsSelected(vc, rowId)
-		vcAssertUtil.assertRowsAreSelected(vc, [rowId])
+		vcAssert.assertRowIsSelected(vc, rowId)
+		vcAssert.assertRowsAreSelected(vc, [rowId])
 	}
 
 	@test()
@@ -62,12 +62,12 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 
 		assert.isEqualDeep(vc.getSelectedRows(), ['start', 'end'])
 		assert.doesThrow(() =>
-			vcAssertUtil.assertRowsAreSelected(vc, ['start', 'middle'])
+			vcAssert.assertRowsAreSelected(vc, ['start', 'middle'])
 		)
 
-		assert.doesThrow(() => vcAssertUtil.assertRowIsNotSelected(vc, 'start'))
-		assert.doesThrow(() => vcAssertUtil.assertRowIsNotSelected(vc, 'end'))
-		vcAssertUtil.assertRowIsNotSelected(vc, 'middle')
+		assert.doesThrow(() => vcAssert.assertRowIsNotSelected(vc, 'start'))
+		assert.doesThrow(() => vcAssert.assertRowIsNotSelected(vc, 'end'))
+		vcAssert.assertRowIsNotSelected(vc, 'middle')
 	}
 
 	@test()
@@ -80,7 +80,7 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 			},
 		])
 
-		vcAssertUtil.assertRowIsSelected(vc, 'test')
+		vcAssert.assertRowIsSelected(vc, 'test')
 	}
 
 	@test()
@@ -97,16 +97,16 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		])
 
 		vc.selectRow('test')
-		vcAssertUtil.assertRowIsSelected(vc, 'test')
+		vcAssert.assertRowIsSelected(vc, 'test')
 
 		vc.deselectRow('test')
-		vcAssertUtil.assertRowIsNotSelected(vc, 'test')
+		vcAssert.assertRowIsNotSelected(vc, 'test')
 
 		vc.selectRow('more')
-		vcAssertUtil.assertRowIsSelected(vc, 'more')
+		vcAssert.assertRowIsSelected(vc, 'more')
 
 		vc.deselectRow('more')
-		vcAssertUtil.assertRowIsNotSelected(vc, 'more')
+		vcAssert.assertRowIsNotSelected(vc, 'more')
 	}
 
 	@test()
@@ -131,14 +131,14 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		])
 
 		vc.setSelectedRows(['test'])
-		vcAssertUtil.assertRowsAreSelected(vc, ['test'])
+		vcAssert.assertRowsAreSelected(vc, ['test'])
 
 		vc.setSelectedRows(['middle'])
-		vcAssertUtil.assertRowIsNotSelected(vc, 'test')
+		vcAssert.assertRowIsNotSelected(vc, 'test')
 
 		vc.setSelectedRows(['more', 'end'])
-		vcAssertUtil.assertRowsAreSelected(vc, ['more', 'end'])
-		vcAssertUtil.assertRowIsNotSelected(vc, 'middle')
+		vcAssert.assertRowsAreSelected(vc, ['more', 'end'])
+		vcAssert.assertRowIsNotSelected(vc, 'middle')
 	}
 
 	@test()
@@ -152,11 +152,11 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 
 		const rowVc = vc.getRowVc(0)
 
-		vcAssertUtil.attachTriggerRenderCounter(rowVc)
+		vcAssert.attachTriggerRenderCounter(rowVc)
 
 		rowVc.setIsSelected(true)
 
-		vcAssertUtil.assertTriggerRenderCount(rowVc, 1)
+		vcAssert.assertTriggerRenderCount(rowVc, 1)
 	}
 
 	@test()
@@ -180,7 +180,7 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 			cells: [],
 		})
 
-		vcAssertUtil.assertRowIsSelected(vc, 'happy')
+		vcAssert.assertRowIsSelected(vc, 'happy')
 	}
 
 	private static Vc(

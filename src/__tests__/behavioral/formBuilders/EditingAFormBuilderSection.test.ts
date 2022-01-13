@@ -2,7 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
@@ -86,7 +86,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const listVc = builderSectionVc.getFieldListVc()
 
-		vcAssertUtil.assertListRendersRows(listVc, 4)
+		vcAssert.assertListRendersRows(listVc, 4)
 
 		assert.isEqualDeep(listVc.getValues(), [
 			{
@@ -130,7 +130,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		builderSectionVc.addField()
 
 		await interactionUtil.submitForm(formVc)
-		vcAssertUtil.assertDialogWasClosed(dialogVc)
+		vcAssert.assertDialogWasClosed(dialogVc)
 
 		const pageVc = this.formBuilderVc.getPresentPageVc()
 
@@ -239,7 +239,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	}
 
 	private static async simulateEditSectionClick(clickedSectionIdx = 0) {
-		const dialogVc = await vcAssertUtil.assertRendersDialog(
+		const dialogVc = await vcAssert.assertRendersDialog(
 			this.formBuilderVc,
 			() => this.formBuilderVc.handleClickEditSection(clickedSectionIdx)
 		)
@@ -251,7 +251,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			builderSectionVc:
 				builderSectionVc as EditFormBuilderSectionCardViewController,
 			dialogVc: dialogVc as DialogViewController,
-			formVc: vcAssertUtil.assertCardRendersForm(builderSectionVc as any),
+			formVc: vcAssert.assertCardRendersForm(builderSectionVc as any),
 		}
 	}
 }

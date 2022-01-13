@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import StatsViewController, {
 	StatsViewControllerOptions,
@@ -85,13 +85,13 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 
 		vc.setValue(idx, value)
 
-		vcAssertUtil.assertStatsRendersValue(vc, idx, value)
+		vcAssert.assertStatsRendersValue(vc, idx, value)
 	}
 
 	@test()
 	protected static settingValueTriggersRender() {
 		this.vc.setValue(0, 0)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static Vc(options?: Partial<StatsViewControllerOptions>) {

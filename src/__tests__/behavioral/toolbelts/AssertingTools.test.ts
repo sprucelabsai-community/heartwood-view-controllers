@@ -2,7 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { AbstractViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import {
 	SkillViewController,
 	ViewControllerOptions,
@@ -106,7 +106,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static hasAssertRendersToolBelt() {
-		assert.isFunction(vcAssertUtil.assertRendersToolBelt)
+		assert.isFunction(vcAssert.assertRendersToolBelt)
 	}
 
 	@test('throws if given nothing', null)
@@ -116,8 +116,8 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	) {
 		const vc = this.Controller('toolBeltSvc', { toolBelt })
 
-		assert.doesThrow(() => vcAssertUtil.assertRendersToolBelt(vc as any))
-		vcAssertUtil.assertDoesNotRenderToolBelt(vc as any)
+		assert.doesThrow(() => vcAssert.assertRendersToolBelt(vc as any))
+		vcAssert.assertDoesNotRenderToolBelt(vc as any)
 	}
 
 	@test()
@@ -148,15 +148,15 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		vcAssertUtil.assertRendersToolBelt(vc)
+		vcAssert.assertRendersToolBelt(vc)
 
-		const cardVc = vcAssertUtil.assertToolBeltRendersTool(vc, 'taco')
+		const cardVc = vcAssert.assertToolBeltRendersTool(vc, 'taco')
 		assert.isEqual(cardVc, card1)
 
-		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
+		vcAssert.assertToolBeltRendersTool(vc, randomId)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertToolBeltDoesNotRenderTool(vc, randomId)
+			vcAssert.assertToolBeltDoesNotRenderTool(vc, randomId)
 		)
 	}
 
@@ -174,8 +174,8 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(vc)
-		assert.doesThrow(() => vcAssertUtil.assertDoesNotRenderToolBelt(vc))
+		const toolBeltVc = vcAssert.assertRendersToolBelt(vc)
+		assert.doesThrow(() => vcAssert.assertDoesNotRenderToolBelt(vc))
 		assert.isTrue(toolBeltVc instanceof ToolBeltViewController)
 	}
 
@@ -188,12 +188,12 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			layouts: [],
 		})
 
-		vcAssertUtil.assertToolBeltRendersTool(vc, 'add')
-		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc2, 'add'))
-		assert.doesThrow(() => vcAssertUtil.assertToolBeltRendersTool(vc, 'taco'))
-		vcAssertUtil.assertToolBeltDoesNotRenderTool(vc, 'taco')
+		vcAssert.assertToolBeltRendersTool(vc, 'add')
+		assert.doesThrow(() => vcAssert.assertToolBeltRendersTool(vc2, 'add'))
+		assert.doesThrow(() => vcAssert.assertToolBeltRendersTool(vc, 'taco'))
+		vcAssert.assertToolBeltDoesNotRenderTool(vc, 'taco')
 
-		vcAssertUtil.assertToolBeltRendersTool(vc, randomId)
+		vcAssert.assertToolBeltRendersTool(vc, randomId)
 	}
 
 	@test()
@@ -203,10 +203,10 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		assert.isTruthy(svc)
 
 		assert.doesThrow(() =>
-			vcAssertUtil.assertToolInstanceOf(svc, 'add', FormViewController)
+			vcAssert.assertToolInstanceOf(svc, 'add', FormViewController)
 		)
 
-		const swipeVc = vcAssertUtil.assertToolInstanceOf(
+		const swipeVc = vcAssert.assertToolInstanceOf(
 			svc,
 			'add',
 			SwipeViewController
@@ -214,7 +214,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
 		assert.isEqual(swipeVc, this.swipeVc)
 
-		vcAssertUtil.assertToolInstanceOf(svc, 'edit', CardViewController)
+		vcAssert.assertToolInstanceOf(svc, 'edit', CardViewController)
 
 		const randomId = `${new Date().getTime()}`
 
@@ -222,17 +222,17 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			tool2Id: randomId,
 		})
 
-		vcAssertUtil.assertToolInstanceOf(vc, randomId, CardViewController)
+		vcAssert.assertToolInstanceOf(vc, randomId, CardViewController)
 	}
 
 	@test()
 	protected static canTellToolInstanceOfSubClass() {
-		vcAssertUtil.assertToolInstanceOf(this.ToolBeltSvc(), 'fancy', FancyCard)
+		vcAssert.assertToolInstanceOf(this.ToolBeltSvc(), 'fancy', FancyCard)
 	}
 
 	@test()
 	protected static canTellParentMostClass() {
-		const toolVc = vcAssertUtil.assertToolInstanceOf(
+		const toolVc = vcAssert.assertToolInstanceOf(
 			this.ToolBeltSvc(),
 			'tool',
 			FancyTool

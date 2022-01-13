@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { CardViewControllerOptions } from '../../../viewControllers/Card.vc'
 
@@ -8,7 +8,7 @@ export default class AssertingRatingsViewsTest extends AbstractViewControllerTes
 	@test('throws when no rating found 2', { body: { sections: [{}] } })
 	protected static throwsWhenNoRatingsRendered(options?: any) {
 		const cardVc = this.Vc(options)
-		assert.doesThrow(() => vcAssertUtil.assertCardRendersRatings(cardVc))
+		assert.doesThrow(() => vcAssert.assertCardRendersRatings(cardVc))
 	}
 
 	@test()
@@ -23,7 +23,7 @@ export default class AssertingRatingsViewsTest extends AbstractViewControllerTes
 			},
 		})
 
-		vcAssertUtil.assertCardRendersRatings(cardVc)
+		vcAssert.assertCardRendersRatings(cardVc)
 	}
 
 	@test()
@@ -40,7 +40,7 @@ export default class AssertingRatingsViewsTest extends AbstractViewControllerTes
 			},
 		})
 
-		vcAssertUtil.assertCardRendersRatings(cardVc)
+		vcAssert.assertCardRendersRatings(cardVc)
 	}
 
 	@test()
@@ -58,7 +58,7 @@ export default class AssertingRatingsViewsTest extends AbstractViewControllerTes
 			},
 		})
 
-		const vc = vcAssertUtil.assertCardRendersRatings(cardVc)
+		const vc = vcAssert.assertCardRendersRatings(cardVc)
 		assert.isEqual(vc, ratingsVc)
 	}
 

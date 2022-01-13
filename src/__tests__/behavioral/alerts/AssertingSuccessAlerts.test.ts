@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { AbstractSkillViewController, vcAssertUtil } from '../../..'
+import { AbstractSkillViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 class SuccessAlertSkillViewController extends AbstractSkillViewController {
@@ -37,7 +37,7 @@ export default class AssertingSuccessAlertsTest extends AbstractViewControllerTe
 		const vc = this.Vc()
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersSuccessAlert(vc, () => vc.doNothing())
+			vcAssert.assertRendersSuccessAlert(vc, () => vc.doNothing())
 		)
 	}
 
@@ -45,10 +45,10 @@ export default class AssertingSuccessAlertsTest extends AbstractViewControllerTe
 	protected static async doesNotThrowWhenSuccessRendered() {
 		const vc = this.Vc()
 
-		await vcAssertUtil.assertRendersSuccessAlert(vc, () => vc.renderSuccess())
+		await vcAssert.assertRendersSuccessAlert(vc, () => vc.renderSuccess())
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersAlert(vc, () => vc.renderSuccess())
+			vcAssert.assertRendersAlert(vc, () => vc.renderSuccess())
 		)
 	}
 
@@ -58,7 +58,7 @@ export default class AssertingSuccessAlertsTest extends AbstractViewControllerTe
 		const vc = this.Vc()
 
 		await assert.doesThrowAsync(() =>
-			vcAssertUtil.assertRendersSuccessAlert(vc, () => vc.showWithStyle(style))
+			vcAssert.assertRendersSuccessAlert(vc, () => vc.showWithStyle(style))
 		)
 	}
 

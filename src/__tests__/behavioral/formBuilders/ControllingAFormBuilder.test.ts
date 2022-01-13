@@ -9,7 +9,7 @@ import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/car
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../../utilities/render.utility'
 import { EditFormBuilderFieldCardViewController } from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
@@ -146,9 +146,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static async removingPageTriggersRender() {
 		await this.vc.addPage()
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		await this.vc.removePage(0)
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
@@ -215,7 +215,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const pageVc = this.vc.getPageVc(0)
 		pageVc.setTitle('Page Waka')
 
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		assert.isEqual(pageVc.getTitle(), 'Page Waka')
 		const model = this.render(this.vc)
@@ -235,9 +235,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async addingPageTriggersRender() {
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 0)
+		vcAssert.assertTriggerRenderCount(this.vc, 0)
 		await this.vc.addPage()
-		vcAssertUtil.assertTriggerRenderCount(this.vc, 1)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
@@ -376,11 +376,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async clickingAddPageInFooterAddsAPage() {
 		const model = this.render(this.vc)
 
-		await vcAssertUtil.assertRendersDialog(
+		await vcAssert.assertRendersDialog(
 			this.vc,
 			() => this.click(model.footer?.buttons?.[0]),
 			async (dialogVc) => {
-				const form = vcAssertUtil.assertCardRendersForm(dialogVc)
+				const form = vcAssert.assertCardRendersForm(dialogVc)
 
 				await form.setValue('title', 'taco bell')
 				await form.submit()
@@ -389,7 +389,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		assert.isEqual(this.vc.getTotalPages(), 2)
 
-		vcAssertUtil.assertRendersValidCard(this.vc)
+		vcAssert.assertRendersValidCard(this.vc)
 	}
 
 	@test()
@@ -568,7 +568,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async deletesPageWhenConfirmingOnClickDeletePage() {
 		assert.isFunction(this.vc.handleClickDeletePage)
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			this.vc.handleClickDeletePage()
 		)
 
@@ -582,7 +582,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async cancelsDeletingPageWhenConfirmingOnClickDeletePage() {
 		assert.isFunction(this.vc.handleClickDeletePage)
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			this.vc.handleClickDeletePage()
 		)
 
@@ -596,11 +596,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async showsAddDialogWhenHandlingClickAddPage() {
 		assert.isFunction(this.vc.handleClickAddPage)
 
-		const dialogVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
 
-		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)
+		const formVc = vcAssert.assertCardRendersForm(dialogVc)
 		const schema = formVc.getSchema()
 
 		assert.isFalse(formVc.shouldShowCancelButton())
@@ -609,10 +609,10 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async submittingAddFormAddsPage() {
-		const dialogVc = await vcAssertUtil.assertRendersDialog(this.vc, () =>
+		const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
-		const formVc = vcAssertUtil.assertCardRendersForm(dialogVc)
+		const formVc = vcAssert.assertCardRendersForm(dialogVc)
 
 		await formVc.setValue('title', 'A new one!')
 		await formVc.submit()
@@ -620,7 +620,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const pageVc = this.vc.getPageVc(1)
 		assert.isEqual(pageVc.getTitle(), 'A new one!')
 
-		vcAssertUtil.assertDialogWasClosed(dialogVc)
+		vcAssert.assertDialogWasClosed(dialogVc)
 	}
 
 	@test()
@@ -674,7 +674,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async handlesClickingPageTitles() {
 		assert.isFunction(this.vc.handleClickPageTitles)
 
-		await vcAssertUtil.assertRendersDialog(
+		await vcAssert.assertRendersDialog(
 			this.vc,
 			async () => this.vc.handleClickPageTitles(),
 			async (dialogVc) => {
@@ -684,7 +684,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 				const vc = dialogVc.getCardVc() as ManagePageTitlesCardViewController
 				await interactionUtil.clickPrimaryInFooter(vc)
-				vcAssertUtil.assertDialogWasClosed(dialogVc)
+				vcAssert.assertDialogWasClosed(dialogVc)
 			}
 		)
 	}
@@ -808,12 +808,12 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			isBusy: true,
 		})
 
-		vcAssertUtil.assertCardIsBusy(this.vc)
+		vcAssert.assertCardIsBusy(this.vc)
 	}
 
 	@test()
 	protected static startsNotBusy() {
-		vcAssertUtil.assertCardIsNotBusy(this.vc)
+		vcAssert.assertCardIsNotBusy(this.vc)
 	}
 
 	private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
@@ -833,7 +833,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		await this.vc.jumpToPage(pageIdx)
 
-		await vcAssertUtil.assertRendersDialog(
+		await vcAssert.assertRendersDialog(
 			this.vc,
 			async () => this.vc.handleClickEditField(oldFieldName),
 			async (dialogVc) => {
@@ -859,15 +859,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				)
 
 				await interactionUtil.clickPrimaryInFooter(formVc)
-				vcAssertUtil.assertDialogWasClosed(dialogVc)
+				vcAssert.assertDialogWasClosed(dialogVc)
 			}
 		)
 
 		const pageVc = this.vc.getPageVc(pageIdx)
+		newFieldName && vcAssert.assertFormRendersField(pageVc as any, newFieldName)
 		newFieldName &&
-			vcAssertUtil.assertFormRendersField(pageVc as any, newFieldName)
-		newFieldName &&
-			vcAssertUtil.assertFormDoesNotRenderField(pageVc as any, oldFieldName)
+			vcAssert.assertFormDoesNotRenderField(pageVc as any, oldFieldName)
 
 		const model = this.render(pageVc)
 

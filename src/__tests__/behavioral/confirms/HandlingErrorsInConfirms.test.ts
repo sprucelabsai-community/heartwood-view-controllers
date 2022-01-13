@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { AbstractSkillViewController, vcAssertUtil } from '../../..'
+import { AbstractSkillViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 //@ts-ignore
@@ -27,7 +27,7 @@ export default class HandlingErrorsInConfirmsTest extends AbstractViewController
 	protected static async shouldThrowUnhandledError() {
 		//@ts-ignore
 		const vc = this.Controller('confirmSvc', {}) as Confirm
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(vc, () =>
+		const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
 			vc.doConfirm()
 		)
 

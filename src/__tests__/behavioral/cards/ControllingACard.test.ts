@@ -3,7 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { vcAssertUtil } from '../../..'
+import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import renderUtil from '../../../utilities/render.utility'
 import CardViewController, {
@@ -424,9 +424,9 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static settingFooterBusyTriggersRender() {
 		const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
-		vcAssertUtil.attachTriggerRenderCounter(vc)
+		vcAssert.attachTriggerRenderCounter(vc)
 		vc.setFooterIsBusy(true)
-		vcAssertUtil.assertTriggerRenderCount(vc, 1)
+		vcAssert.assertTriggerRenderCount(vc, 1)
 	}
 
 	private static beginTrackingFooterRender(vc = this.vc) {

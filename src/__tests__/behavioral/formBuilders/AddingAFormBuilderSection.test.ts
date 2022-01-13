@@ -2,7 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
-import vcAssertUtil from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import EditFormBuilderSectionCardViewController, {
@@ -40,8 +40,8 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
-		this.formVc = vcAssertUtil.assertCardRendersForm(this.vc) as any
-		this.fieldListVc = vcAssertUtil.assertCardRendersList(this.formVc)
+		this.formVc = vcAssert.assertCardRendersForm(this.vc) as any
+		this.fieldListVc = vcAssert.assertCardRendersList(this.formVc)
 	}
 
 	@test()
@@ -97,16 +97,16 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		await this.formVc.setValue('type', 'form')
 		await this.formVc.setValue('shouldRenderAsGrid', true)
 
-		vcAssertUtil.assertFormRendersField(this.formVc, 'title')
-		vcAssertUtil.assertFormRendersField(this.formVc, 'type')
-		vcAssertUtil.assertFormRendersField(this.formVc, 'shouldRenderAsGrid')
+		vcAssert.assertFormRendersField(this.formVc, 'title')
+		vcAssert.assertFormRendersField(this.formVc, 'type')
+		vcAssert.assertFormRendersField(this.formVc, 'shouldRenderAsGrid')
 
 		assert.isEqual(this.fieldListVc.getTotalRows(), 1)
 	}
 
 	@test()
 	protected static async startsWithOneRowInFields() {
-		vcAssertUtil.assertListRendersRows(this.fieldListVc, 1)
+		vcAssert.assertListRendersRows(this.fieldListVc, 1)
 		await this.fieldListVc.getRowVc(0).setValue('fieldName', 'what!')
 		await this.fieldListVc.getRowVc(0).setValue('fieldType', 'text')
 	}
@@ -136,9 +136,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		const model = this.render(this.formVc)
 		await this.click(model.footer?.buttons?.[0])
 
-		vcAssertUtil.assertTriggerRenderCount(this.fieldListVc, 1)
+		vcAssert.assertTriggerRenderCount(this.fieldListVc, 1)
 
-		const listVc = vcAssertUtil.assertCardRendersList(this.formVc)
+		const listVc = vcAssert.assertCardRendersList(this.formVc)
 
 		assert.isEqual(listVc.getTotalRows(), 2)
 
@@ -191,7 +191,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		await interactionUtil.clickDestructiveInRow(listVc, 2)
 
-		let confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		let confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			interactionUtil.clickDestructiveInRow(listVc, 2)
 		)
 
@@ -203,7 +203,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqual(listVc.getTotalRows(), 4)
 
 		//clicking confirm on confirmation
-		confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+		confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
 			interactionUtil.clickDestructiveInRow(listVc, 2)
 		)
 
@@ -237,9 +237,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	protected static async switchingSectionToInstructionsHidesFormRelatedFields() {
 		await this.formVc.setValue('type', 'text')
 
-		vcAssertUtil.assertFormDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
-		vcAssertUtil.assertCardDoesNotRenderList(this.formVc)
-		vcAssertUtil.assertFormRendersField(this.formVc, 'text')
+		vcAssert.assertFormDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
+		vcAssert.assertCardDoesNotRenderList(this.formVc)
+		vcAssert.assertFormRendersField(this.formVc, 'text')
 
 		const model = this.render(this.formVc)
 		assert.isFalsy(model.footer)
@@ -339,7 +339,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		await interactionUtil.submitForm(this.formVc)
 
-		vcAssertUtil.assertDialogWasClosed(this.dialogVc)
+		vcAssert.assertDialogWasClosed(this.dialogVc)
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 1)
 		const pageVc = this.formBuilderVc.getPresentPageVc()
@@ -384,7 +384,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		await interactionUtil.submitForm(this.formVc)
 
-		vcAssertUtil.assertDialogWasClosed(this.dialogVc)
+		vcAssert.assertDialogWasClosed(this.dialogVc)
 
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 1)
 		const pageVc = this.formBuilderVc.getPresentPageVc()
@@ -407,7 +407,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			.addSection({ title: 'A brand new section!' })
 		const { builderSectionVc } = await this.simulateAddSectionClick(0)
 
-		this.formVc = vcAssertUtil.assertCardRendersForm(builderSectionVc) as any
+		this.formVc = vcAssert.assertCardRendersForm(builderSectionVc) as any
 
 		await this.formVc.setValue('title', 'Now second section')
 		await this.formVc.setValue('type', 'text')
@@ -423,7 +423,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		let builderSectionVc: EditFormBuilderSectionCardViewController | undefined
 		let dialogVc: DialogViewController | undefined
 
-		await vcAssertUtil.assertRendersDialog(
+		await vcAssert.assertRendersDialog(
 			this.formBuilderVc,
 			() => this.formBuilderVc.handleClickAddSection(clickedSectionIdx),
 			(vc) => {
