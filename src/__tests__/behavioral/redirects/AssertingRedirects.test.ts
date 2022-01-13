@@ -85,9 +85,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 				id: 'tester',
 			},
 		}
-		await assert.doesThrowAsync(() =>
-			vcAssert.assertActionRedirects(options)
-		)
+		await assert.doesThrowAsync(() => vcAssert.assertActionRedirects(options))
 
 		await vcAssert.assertActionDoesNotRedirect(options)
 	}

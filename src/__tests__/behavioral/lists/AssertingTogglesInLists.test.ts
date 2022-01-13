@@ -58,9 +58,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
 	protected static async knowsIfNoToggleIsRender() {
 		const listVc = this.ListVc()
 
-		assert.doesThrow(() =>
-			vcAssert.assertRowRendersToggle(listVc, 'editing')
-		)
+		assert.doesThrow(() => vcAssert.assertRowRendersToggle(listVc, 'editing'))
 		vcAssert.assertRowDoesNotRenderToggle(listVc, 'editing')
 	}
 

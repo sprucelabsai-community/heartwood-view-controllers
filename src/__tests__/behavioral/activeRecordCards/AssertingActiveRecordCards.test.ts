@@ -43,9 +43,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 			layouts: [],
 		})
 
-		assert.doesThrow(() =>
-			vcAssert.assertSkillViewRendersActiveRecordCard(vc)
-		)
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersActiveRecordCard(vc))
 	}
 
 	@test()
@@ -81,9 +79,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 			],
 		})
 
-		assert.doesThrow(() =>
-			vcAssert.assertSkillViewRendersActiveRecordCard(vc)
-		)
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersActiveRecordCard(vc))
 		assert.doesThrow(() => vcAssert.assertIsActiveRecordCard(cardVc))
 	}
 

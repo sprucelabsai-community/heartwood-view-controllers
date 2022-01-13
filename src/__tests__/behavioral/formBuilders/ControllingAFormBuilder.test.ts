@@ -864,8 +864,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		)
 
 		const pageVc = this.vc.getPageVc(pageIdx)
-		newFieldName &&
-			vcAssert.assertFormRendersField(pageVc as any, newFieldName)
+		newFieldName && vcAssert.assertFormRendersField(pageVc as any, newFieldName)
 		newFieldName &&
 			vcAssert.assertFormDoesNotRenderField(pageVc as any, oldFieldName)
 

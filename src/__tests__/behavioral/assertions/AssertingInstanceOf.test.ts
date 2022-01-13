@@ -160,10 +160,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 			vcAssert.assertRendersAsInstanceOf(vc, FormViewController)
 		)
 
-		const match1 = vcAssert.assertRendersAsInstanceOf(
-			vc,
-			CardViewController
-		)
+		const match1 = vcAssert.assertRendersAsInstanceOf(vc, CardViewController)
 
 		//@ts-ignore
 		assert.isEqual(match1, vc.cardVc)
