@@ -1,3 +1,10 @@
+# [56.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.0.0...v56.1.0) (2022-01-14)
+
+
+### Features
+
+* focus and blur optional hooks on view controller ([77e89d1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/77e89d1))
+
 # [56.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.13.0...v56.0.0) (2022-01-14)
 
 
