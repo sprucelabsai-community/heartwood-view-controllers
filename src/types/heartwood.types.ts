@@ -177,6 +177,10 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel
 	triggerRender: () => void
 	destroy?: () => Promise<void> | void
+	willBlur?: () => void
+	didBlur?: () => void
+	willFocus?: () => void
+	didFocus?: () => void
 }
 
 export interface SkillViewController<
