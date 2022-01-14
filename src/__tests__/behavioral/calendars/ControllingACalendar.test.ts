@@ -12,6 +12,9 @@ import CalendarViewController from '../../../viewControllers/Calendar.vc'
 type CalendarTime =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
 
+type CalendarEvent =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+
 export default class ControllingACalendarTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
 	protected static vc: CalendarViewController
@@ -469,19 +472,120 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test('throws with getting bad event 1', '123')
+	@test('throws with getting bad event 2', '567')
+	protected static throwsIfGettingBadEvent(id: string) {
+		this.vc.addEvent(calendarSeeder.generateEventValues())
+		const err = assert.doesThrow(() => this.vc.getEvent(id))
+		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+			id,
+		})
+	}
+
+	@test()
+	protected static canGetFirstEvent() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+		const match = this.vc.getEvent(event.id)
+		assert.isEqualDeep(match, event)
+	}
+
+	@test()
+	protected static canGetSecondEvent() {
+		const events = calendarSeeder.generateEventsValues(5)
+
+		this.vc.mixinEvents(events)
+
+		const event = events[2]
+		const match = this.vc.getEvent(event.id)
+		assert.isEqualDeep(match, event)
+	}
+
+	@test()
+	protected static gettingEventReturnsCopy() {
+		const event = calendarSeeder.generateEventValues()
+
+		this.vc.addEvent(event)
+
+		const match = this.vc.getEvent(event.id)
+
+		assert.isNotEqual(event, match)
+	}
+
+	@test('throws with updating bad event 1', '123')
+	@test('throws with updating bad event 2', '567')
+	protected static throwsIfUpdatingEventTHatDoesNotExist(id: string) {
+		this.vc.addEvent(calendarSeeder.generateEventValues())
+
+		const err = assert.doesThrow(() => this.vc.updateEvent(id, {}))
+		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+			id,
+		})
+	}
+
+	@test('can update start time for first event', 0)
+	@test('can update start time for third event', 2)
+	@test('can update start time for fifth event', 4)
+	protected static updatesStartTime(idx: number) {
+		const events = calendarSeeder.generateEventsValues(10)
+		const event = events[idx]
+
+		this.vc.mixinEvents(events)
+
+		this.assertChangesArMade(event, { startDateTimeMs: 100 })
+	}
+
+	@test()
+	protected static canUpdateCalendarId() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+
+		this.assertChangesArMade(event, { calendarId: '23423' })
+	}
+
+	@test()
+	protected static updatingReplacesEvent() {
+		const [, event] = this.populateCalendar(2)
+		this.vc.updateEvent(event.id, {})
+
+		const { events } = this.render(this.vc)
+		const matches = events.filter((e) => e.id === event.id)
+		assert.isLength(matches, 1)
+	}
+
+	@test()
+	protected static updatingEventTriggersRender() {
+		const [event] = this.populateCalendar(1)
+		this.vc.updateEvent(event.id, {})
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
 	private static assertRendersTotalEvents(expected: number) {
 		const model = this.render(this.vc)
 		assert.isLength(model.events ?? [], expected)
 	}
 
-	private static populateCalendar() {
-		this.vc.mixinEvents([
-			calendarSeeder.generateEventValues(),
-			calendarSeeder.generateEventValues(),
-			calendarSeeder.generateEventValues(),
-		])
+	private static populateCalendar(total = 3) {
+		const events = calendarSeeder.generateEventsValues(total)
+		this.vc.mixinEvents(events)
+		return events
+	}
+
+	private static assertChangesArMade(
+		event: CalendarEvent,
+		changes: Partial<CalendarEvent>
+	) {
+		this.vc.updateEvent(event.id, changes)
+
+		const expected = {
+			...event,
+			...changes,
+		}
+
+		assert.isEqualDeep(this.vc.getEvent(event.id), expected)
 	}
 }
+
 function getDate() {
 	return new Date().getTime()
 }

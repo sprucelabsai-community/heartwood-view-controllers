@@ -108,13 +108,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public selectEvent(id: string) {
-		const match = this.getEventById(id)
-		if (!match) {
-			throw new SpruceError({
-				code: 'EVENT_NOT_FOUND',
-				id,
-			})
-		}
+		const match = this.getEvent(id)
 		this.model.selectedEvent = match
 		this.triggerRender()
 	}
@@ -134,8 +128,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public addEvent(event: Event) {
 		const eventId = event.id
-		const match = this.getEventById(eventId)
-		if (match) {
+		if (this.doesEventExist(eventId)) {
 			throw new SpruceError({
 				code: 'DUPLICATE_EVENT_ID',
 				id: eventId,
@@ -146,25 +139,46 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
-	private getEventById(eventId: string) {
+	private doesEventExist(eventId: string) {
 		const match = this.model.events.find((e) => e.id === eventId)
+
+		return !!match
+	}
+
+	public removeEvent(id: string) {
+		this.getEvent(id)
+
+		this.model.events = this.model.events.filter((e) => e.id !== id)
+		this.triggerRender()
+	}
+
+	public updateEvent(id: string, updates: Partial<Event>) {
+		let match = this.getEvent(id)
+
+		match = {
+			...match,
+			...updates,
+		}
+
+		const idx = this.model.events.findIndex((e) => e.id === id)
+
+		this.model.events.splice(idx, 1, match)
+
+		this.triggerRender()
 
 		return match
 	}
 
-	public removeEvent(id: string) {
-		const match = this.getEventById(id)
+	public getEvent(id: string) {
+		const events = this.getEvents()
+
+		const match = events.find((e) => e.id === id)
 
 		if (!match) {
-			throw new SpruceError({
-				code: 'EVENT_NOT_FOUND',
-				id,
-				friendlyMessage: `I could not find an event with the id of ${id} to remove.`,
-			})
+			throw new SpruceError({ code: 'EVENT_NOT_FOUND', id })
 		}
 
-		this.model.events = this.model.events.filter((e) => e.id !== id)
-		this.triggerRender()
+		return { ...match }
 	}
 
 	public mixinEvents(events: Event[]) {

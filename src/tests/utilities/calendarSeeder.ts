@@ -14,9 +14,15 @@ const calendarSeeder = {
 			casualName: 'Timmy',
 		}
 	},
+	generateEventsValues(total: number) {
+		return new Array(total)
+			.fill(0)
+			.map(() => calendarSeeder.generateEventValues())
+	},
+
 	generateEventValues(values?: Partial<Event>): Event {
 		return {
-			id: `new ${new Date().getTime() * Math.random()}-${idCount++}`,
+			id: `${new Date().getTime() * Math.random()}-${idCount++}`,
 			startDateTimeMs: dateUtil.getStartOfDay(),
 			target: {
 				personId: '1234',
