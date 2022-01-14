@@ -17,7 +17,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	protected static async interactingThrowsWhenMissingOptions() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactionUtil.clickCalendarMonthView()
+			interactionUtil.clickCalendarDayView()
 		)
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'time', 'personId'],
@@ -27,11 +27,11 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async throwsWhenClickingCalendarInWrongView() {
 		this.Vc({
-			view: 'day',
+			view: 'month',
 		})
 
 		const err = await assert.doesThrowAsync(() => this.clickCalendar())
-		assert.doesInclude(err.message, 'day')
+		assert.doesInclude(err.message, 'month')
 	}
 
 	@test()
@@ -105,7 +105,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 
 	private static Vc(options?: Partial<CalendarViewControllerOptions>) {
 		this.vc = this.Controller('calendar', {
-			view: 'month',
+			view: 'day',
 			people: [],
 			onClick: () => {},
 			...options,
@@ -116,7 +116,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		personId: string
 		time?: number
 	}): any {
-		return interactionUtil.clickCalendarMonthView(
+		return interactionUtil.clickCalendarDayView(
 			this.vc,
 			options?.time ?? new Date().getTime(),
 			options?.personId ?? `123`

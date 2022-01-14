@@ -312,7 +312,7 @@ const interactionUtil = {
 		await model.onClick?.()
 	},
 
-	async clickCalendarMonthView(
+	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
 		time: number,
 		personId: string
@@ -323,10 +323,10 @@ const interactionUtil = {
 
 		assert.isEqual(
 			model.view,
-			'month',
+			'day',
 			`Your calendar '${getVcName(
 				vc
-			)}' needs it's view set to 'month', it's currently set to ${
+			)}' needs it's view set to 'day', it's currently set to ${
 				model.view ?? '***empty***'
 			}`
 		)
