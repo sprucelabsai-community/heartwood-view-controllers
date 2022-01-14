@@ -1,11 +1,8 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import {
-	CalendarViewController,
-	CalendarViewControllerOptions,
-	SpruceSchemas,
-} from '../../..'
+import { CalendarViewController, CalendarViewControllerOptions } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 
 export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
@@ -97,7 +94,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		totalPeople: number,
 		options?: Partial<CalendarViewControllerOptions>
 	) {
-		const people = generatePeopleValues(totalPeople)
+		const people = calendarSeeder.generatePeopleValues(totalPeople)
 
 		this.Vc({
 			people,
@@ -125,16 +122,5 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 			options?.time ?? new Date().getTime(),
 			options?.personId ?? `123`
 		)
-	}
-}
-
-function generatePeopleValues(total: number) {
-	return new Array(total).fill(0).map(() => generatePersonValues())
-}
-
-function generatePersonValues(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson {
-	return {
-		id: `${new Date().getTime() * Math.random()}`,
-		casualName: 'Timmy',
 	}
 }
