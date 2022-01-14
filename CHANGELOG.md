@@ -1,3 +1,10 @@
+# [55.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.11.0...v55.12.0) (2022-01-14)
+
+
+### Features
+
+* seeder for working with calendar ([f7dd0fd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f7dd0fd))
+
 # [55.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v55.10.34...v55.11.0) (2022-01-13)
 
 
