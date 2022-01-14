@@ -1,3 +1,10 @@
+# [56.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.1.0...v56.2.0) (2022-01-14)
+
+
+### Features
+
+* can update and get events on a calendar ([864e7b5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/864e7b5))
+
 # [56.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.0.0...v56.1.0) (2022-01-14)
 
 
