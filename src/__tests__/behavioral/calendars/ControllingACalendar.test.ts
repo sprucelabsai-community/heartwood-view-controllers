@@ -5,7 +5,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import generateRandomEventValues from '../../../tests/utilities/generateRandomEventValues'
+import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 
@@ -56,7 +56,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			timezoneOffsetMs: new Date().getTimezoneOffset() * 1000,
 			minTime: { hour: 3, minute: 0 },
 			maxTime: { hour: 10, minute: 0 },
-			events: [generateRandomEventValues()],
+			events: [calendarSeeder.generateEventValues()],
 			[`${new Date().getTime()}`]: Math.random(),
 			view: 'day',
 			people: [
@@ -175,12 +175,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canAddEvent() {
-		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
 	}
 
 	@test()
 	protected static cantAddEventWithSameIdTwice() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		const err = assert.doesThrow(() => this.vc.addEvent(event))
 		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
@@ -190,7 +190,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static addingEventAddsToModel() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 
 		const model = this.render(this.vc)
@@ -199,9 +199,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canAddAFewEvents() {
-		this.vc.addEvent(generateRandomEventValues())
-		this.vc.addEvent(generateRandomEventValues())
-		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
 
 		const expected = 3
 
@@ -210,7 +210,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static addingEventTriggersRender() {
-		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
@@ -224,14 +224,14 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canRemoveEventWithGoodId() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.removeEvent(event.id)
 	}
 
 	@test()
 	protected static removeEventRemovesItFromTheModel() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.removeEvent(event.id)
 		this.assertRendersTotalEvents(0)
@@ -239,9 +239,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static onlyRemovesExpectedEvent() {
-		const event1 = generateRandomEventValues()
+		const event1 = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event1)
-		const event2 = generateRandomEventValues()
+		const event2 = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event2)
 
 		this.vc.removeEvent(event1.id)
@@ -252,7 +252,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static removingAnEventTriggersRender() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.removeEvent(event.id)
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
@@ -260,12 +260,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canMixinEvents() {
-		this.vc.mixinEvents([generateRandomEventValues()])
+		this.vc.mixinEvents([calendarSeeder.generateEventValues()])
 	}
 
 	@test()
 	protected static cantMixinEventsWithSameIdAtOnce() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		const err = assert.doesThrow(() => this.vc.mixinEvents([event, event]))
 		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
 			id: event.id,
@@ -274,12 +274,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static mixingInDupsNotNextToEachOtherStillThrows() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		const err = assert.doesThrow(() =>
 			this.vc.mixinEvents([
-				generateRandomEventValues(),
+				calendarSeeder.generateEventValues(),
 				event,
-				generateRandomEventValues(),
+				calendarSeeder.generateEventValues(),
 				event,
 			])
 		)
@@ -290,22 +290,25 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canMixinEventsToEmptyCalendar() {
-		this.vc.mixinEvents([generateRandomEventValues()])
+		this.vc.mixinEvents([calendarSeeder.generateEventValues()])
 		this.assertRendersTotalEvents(1)
 	}
 
 	@test()
 	protected static mixingInDoesNotClearPreviousEvents() {
-		this.vc.addEvent(generateRandomEventValues())
-		this.vc.mixinEvents([generateRandomEventValues()])
+		this.vc.addEvent(calendarSeeder.generateEventValues())
+		this.vc.mixinEvents([calendarSeeder.generateEventValues()])
 		this.assertRendersTotalEvents(2)
 	}
 
 	@test()
 	protected static mixingInReplacesEventsWithMatchingId() {
-		const original = generateRandomEventValues()
+		const original = calendarSeeder.generateEventValues()
 		this.vc.addEvent(original)
-		const updated = { ...generateRandomEventValues(), id: original.id }
+		const updated = {
+			...calendarSeeder.generateEventValues(),
+			id: original.id,
+		}
 
 		this.vc.mixinEvents([updated])
 
@@ -314,14 +317,17 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static mixingInReplacesEventsWithMatchingIdInBusyCalendar() {
-		const original = generateRandomEventValues()
+		const original = calendarSeeder.generateEventValues()
 
-		this.vc.addEvent(generateRandomEventValues())
+		this.vc.addEvent(calendarSeeder.generateEventValues())
 		this.vc.addEvent(original)
 
-		const updated = { ...generateRandomEventValues(), id: original.id }
+		const updated = {
+			...calendarSeeder.generateEventValues(),
+			id: original.id,
+		}
 
-		this.vc.mixinEvents([generateRandomEventValues(), updated])
+		this.vc.mixinEvents([calendarSeeder.generateEventValues(), updated])
 
 		this.assertRendersTotalEvents(3)
 	}
@@ -344,7 +350,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canSelectEvent() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
 		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
@@ -353,7 +359,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static canSelectFromBusyCalendar() {
 		this.populateCalendar()
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
 		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
@@ -361,7 +367,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static selectingEventTriggersRender() {
-		const event = generateRandomEventValues()
+		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
@@ -426,7 +432,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static setEventsForRangeClearsOutEventsOutsideOfRange() {
 		this.populateCalendar()
-		const event = generateRandomEventValues({
+		const event = calendarSeeder.generateEventValues({
 			startDateTimeMs: dateUtil.addDays(dateUtil.getEndOfDay(), 2),
 		})
 
@@ -444,7 +450,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static replacedEventsAreSet() {
 		this.vc.replaceEventsInRange(
-			[generateRandomEventValues()],
+			[calendarSeeder.generateEventValues()],
 			dateUtil.getStartOfDay(),
 			dateUtil.getEndOfDay()
 		)
@@ -455,7 +461,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static replacingEventsTriggersRender() {
 		this.vc.replaceEventsInRange(
-			[generateRandomEventValues()],
+			[calendarSeeder.generateEventValues()],
 			dateUtil.getStartOfDay(),
 			dateUtil.getEndOfDay()
 		)
@@ -470,9 +476,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	private static populateCalendar() {
 		this.vc.mixinEvents([
-			generateRandomEventValues(),
-			generateRandomEventValues(),
-			generateRandomEventValues(),
+			calendarSeeder.generateEventValues(),
+			calendarSeeder.generateEventValues(),
+			calendarSeeder.generateEventValues(),
 		])
 	}
 }

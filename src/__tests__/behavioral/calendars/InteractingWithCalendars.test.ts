@@ -31,7 +31,6 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		})
 
 		const err = await assert.doesThrowAsync(() => this.clickCalendar())
-
 		assert.doesInclude(err.message, 'day')
 	}
 
