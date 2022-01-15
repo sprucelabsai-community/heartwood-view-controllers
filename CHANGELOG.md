@@ -1,3 +1,10 @@
+# [56.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.3.0...v56.4.0) (2022-01-15)
+
+
+### Features
+
+* devs can now simulate clicking on events. also, some utilities for things like generating events ([c1d3fe5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c1d3fe5))
+
 # [56.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.2.4...v56.3.0) (2022-01-15)
 
 
