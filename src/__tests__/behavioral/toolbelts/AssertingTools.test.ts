@@ -253,7 +253,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async assertToolIsFocusedThrowsIfNoToolBelt() {
 		await assert.doesThrowAsync(() =>
-			vcAssert.assertToolIsFocused(
+			vcAssert.assertActionFocusesTool(
 				this.Controller('good', { layouts: [] }),
 				'tool',
 				async () => {}
@@ -264,7 +264,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async assertToolIsFocusedThrowsIfBadToolId() {
 		await assert.doesThrowAsync(() =>
-			vcAssert.assertToolIsFocused(
+			vcAssert.assertActionFocusesTool(
 				this.ToolBeltSvc(),
 				'no-found',
 				async () => {}
@@ -276,13 +276,15 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	@test('assert focuses tool 2', 'new-tool-2')
 	protected static async passesWhenFocusingTool(id: string) {
 		const svc = this.ToolBeltSvc({ tool2Id: id })
-		await vcAssert.assertToolIsFocused(svc, id, async () => svc.focusTool(id))
+		await vcAssert.assertActionFocusesTool(svc, id, async () =>
+			svc.focusTool(id)
+		)
 	}
 
 	@test()
 	protected static async passesWhenFocusHappensLater() {
 		const svc = this.ToolBeltSvc({ tool2Id: 'ten' })
-		await vcAssert.assertToolIsFocused(svc, 'ten', async () =>
+		await vcAssert.assertActionFocusesTool(svc, 'ten', async () =>
 			svc.delayedFocusTool('ten')
 		)
 	}
@@ -292,7 +294,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		const svc = this.ToolBeltSvc({ tool2Id: 'new-tool' })
 
 		await assert.doesThrowAsync(() =>
-			vcAssert.assertToolIsFocused(svc, 'new-tool', async () =>
+			vcAssert.assertActionFocusesTool(svc, 'new-tool', async () =>
 				svc.focusTool('add')
 			)
 		)

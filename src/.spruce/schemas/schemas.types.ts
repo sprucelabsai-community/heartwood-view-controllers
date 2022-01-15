@@ -3928,7 +3928,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onClick'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 				
-				'onSelectEvent'?: ((options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>)| undefined | null
+				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
 				
 				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
 		}
@@ -4028,9 +4028,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 			            },
 			            /** . */
-			            'onSelectEvent': {
+			            'onClickEvent': {
 			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>`,}
+			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
 			            },
 			            /** . */
 			            'onDeselectEvent': {

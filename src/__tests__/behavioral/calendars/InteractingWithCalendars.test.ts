@@ -1,12 +1,17 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
-import { CalendarViewController, CalendarViewControllerOptions } from '../../..'
+import {
+	CalendarViewController,
+	CalendarViewControllerOptions,
+	ClickEventOptions,
+} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
 
 export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	private static vc: CalendarViewController
+	private static lastOnClickOptions: ClickEventOptions
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -67,7 +72,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async invokesOnClick() {
+	protected static async invokesOnClickOnView() {
 		let wasHit = false
 		let passedOptions: any
 
@@ -89,6 +94,131 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static async cantClickOnEventWhenMissingParames() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			interactionUtil.clickCalendarEvent()
+		)
+
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'eventId'],
+		})
+	}
+
+	@test()
+	protected static async cantClickEventThatDoesNotExist() {
+		await assert.doesThrowAsync(
+			() => interactionUtil.clickCalendarEvent(this.vc, 'not-found'),
+			/not-found/gi
+		)
+	}
+
+	@test()
+	protected static async throwsWithoutOnClick() {
+		this.VcWithPeople(4, {
+			onClickEvent: undefined,
+		})
+		await assert.doesThrowAsync(() => this.addEventsAndClickLast(4), 'onClick')
+	}
+
+	@test()
+	protected static async canClickFirstEvent() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+		await this.clickEvent(event.id)
+	}
+
+	@test()
+	protected static async canClickLaterEvent() {
+		const events = calendarSeeder.generateEventsValues(10)
+		this.vc.mixinEvents(events)
+		await this.clickEvent(events[4].id)
+	}
+
+	@test()
+	protected static async clickingEventInvokesOnClickEvent() {
+		const event = await this.addEventsAndClickLast(3)
+
+		assert.isEqualDeep(this.lastOnClickOptions, {
+			event,
+			block: event.timeBlocks[0],
+			blockIdx: 0,
+		})
+	}
+
+	@test()
+	protected static async cantClickOnEventBlockThatDoesNotExist() {
+		await assert.doesThrowAsync(() => this.addEventsAndClickLast(3, 1))
+	}
+
+	@test()
+	protected static async cantClickOnEventBlockThatDoesNotExist2() {
+		const event = calendarSeeder.generateEventValues({
+			timeBlocks: [
+				{
+					durationMinutes: 20,
+					isBusy: true,
+					title: `Block ${new Date().getTime()}`,
+				},
+				{
+					durationMinutes: 10,
+					isBusy: false,
+					title: `Block ${new Date().getTime()}`,
+				},
+			],
+		})
+
+		this.vc.addEvent(event)
+		await assert.doesThrowAsync(() => this.clickEvent(event?.id, 2))
+	}
+
+	@test('can click on second block', 1)
+	@test('can click on third block', 2)
+	protected static async canClickOnLaterBlock(blockIdx: number) {
+		const timeBlocks = [
+			{
+				durationMinutes: 20,
+				isBusy: true,
+				title: `Block ${new Date().getTime()}`,
+			},
+			{
+				durationMinutes: 10,
+				isBusy: false,
+				title: `Block ${new Date().getTime()}`,
+			},
+			{
+				durationMinutes: 10,
+				isBusy: false,
+				title: `Block ${new Date().getTime()}`,
+			},
+		]
+		const event = calendarSeeder.generateEventValues({
+			timeBlocks,
+		})
+
+		this.vc.addEvent(event)
+
+		const match = await this.clickEvent(event.id, blockIdx)
+
+		assert.isEqualDeep(match.timeBlocks, timeBlocks)
+		assert.isEqualDeep(this.lastOnClickOptions.block, timeBlocks[blockIdx])
+		assert.isEqual(this.lastOnClickOptions.blockIdx, blockIdx)
+	}
+
+	private static async addEventsAndClickLast(total: number, blockIdx?: number) {
+		const events = calendarSeeder.generateEventsValues(total)
+		this.vc.mixinEvents(events)
+		const selected = events[total - 1]
+		await this.clickEvent(selected.id, blockIdx)
+
+		return selected
+	}
+
+	private static async clickEvent(eventId: string, blockIdx?: number) {
+		return interactionUtil.clickCalendarEvent(this.vc, eventId, blockIdx)
+	}
+
 	private static VcWithPeople(
 		totalPeople: number,
 		options?: Partial<CalendarViewControllerOptions>
@@ -108,6 +238,9 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 			view: 'day',
 			people: [],
 			onClick: () => {},
+			onClickEvent: (options) => {
+				this.lastOnClickOptions = options
+			},
 			...options,
 		})
 	}

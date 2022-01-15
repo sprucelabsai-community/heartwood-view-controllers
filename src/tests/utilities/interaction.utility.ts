@@ -312,6 +312,41 @@ const interactionUtil = {
 		await model.onClick?.()
 	},
 
+	async clickCalendarEvent(
+		vc: ViewController<Calendar>,
+		eventId: string,
+		blockIdx?: number
+	) {
+		assertOptions({ vc, eventId }, ['vc', 'eventId'])
+
+		const model = renderUtil.render(vc)
+		const match = model.events?.find((e) => e.id === eventId)
+		const idx = blockIdx ?? 0
+
+		assert.isTruthy(
+			match,
+			`I could not find an event with the id '${eventId}'.`
+		)
+
+		assert.isFunction(
+			model.onClickEvent,
+			`You gotta set 'onClickEvent' on your calendar to click an event!`
+		)
+
+		assert.isTruthy(
+			match.timeBlocks?.[idx],
+			`I could not find block ${idx} in event '${eventId}.'`
+		)
+
+		await model.onClickEvent?.({
+			event: match,
+			block: match.timeBlocks[idx],
+			blockIdx: idx,
+		})
+
+		return match
+	},
+
 	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
 		time: number,

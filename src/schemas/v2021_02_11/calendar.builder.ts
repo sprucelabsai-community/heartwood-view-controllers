@@ -133,11 +133,11 @@ export default buildSchema({
 					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
 			},
 		},
-		onSelectEvent: {
+		onClickEvent: {
 			type: 'raw',
 			options: {
 				valueType:
-					'(options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>',
+					'(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>',
 			},
 		},
 		onDeselectEvent: {

@@ -32,7 +32,7 @@ const calendarSeeder = {
 				{
 					durationMinutes: 60,
 					isBusy: true,
-					title: `Block ${new Date().getTime()}`,
+					title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
 				},
 			],
 			...values,

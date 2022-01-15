@@ -926,7 +926,7 @@ const vcAssert = {
 		)
 	},
 
-	async assertToolIsFocused(
+	async assertActionFocusesTool(
 		svc: SkillViewController,
 		toolId: string,
 		action: () => Promise<any> | any

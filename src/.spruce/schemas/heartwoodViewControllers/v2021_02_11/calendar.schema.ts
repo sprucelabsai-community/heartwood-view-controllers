@@ -100,9 +100,9 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 	            },
 	            /** . */
-	            'onSelectEvent': {
+	            'onClickEvent': {
 	                type: 'raw',
-	                options: {valueType: `(options: HeartwoodTypes.SelectEventOptions) => void | Promise<void>`,}
+	                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
 	            },
 	            /** . */
 	            'onDeselectEvent': {

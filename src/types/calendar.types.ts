@@ -10,7 +10,7 @@ export interface ClickCalendarViewOptions {
 	person?: Person
 }
 
-export interface SelectEventOptions {
+export interface ClickEventOptions {
 	event: CalendarEvent
 	block: TimeBlock
 	blockIdx: number
