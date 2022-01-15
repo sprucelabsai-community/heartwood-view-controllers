@@ -76,6 +76,11 @@ class ToolBeltSkillViewController implements SkillViewController {
 		this.toolBelt?.focusTool(id)
 	}
 
+	public async delayedFocusTool(id: string) {
+		await new Promise((resolve) => setTimeout(resolve, 1000))
+		this.toolBelt?.focusTool(id)
+	}
+
 	public renderToolBelt() {
 		return this.toolBelt?.render() ?? null
 	}
@@ -272,6 +277,14 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	protected static async passesWhenFocusingTool(id: string) {
 		const svc = this.ToolBeltSvc({ tool2Id: id })
 		await vcAssert.assertToolIsFocused(svc, id, async () => svc.focusTool(id))
+	}
+
+	@test()
+	protected static async passesWhenFocusHappensLater() {
+		const svc = this.ToolBeltSvc({ tool2Id: 'ten' })
+		await vcAssert.assertToolIsFocused(svc, 'ten', async () =>
+			svc.delayedFocusTool('ten')
+		)
 	}
 
 	@test()

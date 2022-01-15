@@ -940,7 +940,7 @@ const vcAssert = {
 			passedToolId = id
 		}
 
-		wait(action())
+		await wait(action())
 
 		assert.isTruthy(
 			passedToolId,
@@ -952,12 +952,6 @@ const vcAssert = {
 			toolId,
 			`You did not focus the tool I expected. I was waiting for '${toolId}' but got '${passedToolId}'.`
 		)
-
-		// if (toolId === 'new-tool') {
-		// 	return
-		// }
-
-		// assert.fail(`Your skill view ${getVcName(svc)} does not render a Toolbelt.`)
 	},
 
 	assertRendersToolBelt(svc: SkillViewController) {
