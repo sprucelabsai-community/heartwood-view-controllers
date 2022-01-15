@@ -70,6 +70,9 @@
     "watch.build.dev": "tsc-watch --sourceMap --onCompilationComplete 'yarn post.watch.build'",
     "lint.tsc": "tsc -p . --noEmit"
   },
+  "resolutions": {
+    "**/dotenv": "11.0.0"
+  },
   "dependencies": {
     "@babel/core": "^7.16.7",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
@@ -87,7 +90,7 @@
     "@swc/core": "1.2.103",
     "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
-    "dotenv": "^11.0.0",
+    "dotenv": "11.0.0",
     "esbuild": "^0.14.11",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
