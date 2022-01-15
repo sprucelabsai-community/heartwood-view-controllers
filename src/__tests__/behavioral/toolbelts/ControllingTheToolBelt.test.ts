@@ -5,9 +5,6 @@ import { renderUtil, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
-type ToolBeltTool =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
-
 export default class ControllingTheToolBeltTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
 	protected static vc: ToolBeltViewController
@@ -45,11 +42,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	protected static canAddTool() {
 		assert.isFunction(this.vc.addTool)
 
-		const tool: ToolBeltTool = {
-			id: 'maps',
-			lineIcon: 'map',
-			card: {} as any,
-		}
+		const tool = toolGenerator.generatTool()
 		this.vc.addTool(tool)
 
 		const model = renderUtil.render(this.vc)
@@ -59,41 +52,30 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canAdd2Tools() {
-		this.vc.addTool({
-			id: 'maps',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool())
 
-		this.vc.addTool({
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool('maps_2'))
 
 		const model = renderUtil.render(this.vc)
 
-		assert.isEqualDeep(model.tools, [
-			{
-				id: 'maps',
-				lineIcon: 'map',
-				card: {} as any,
-			},
-			{
-				id: 'maps_2',
-				lineIcon: 'map',
-				card: {} as any,
-			},
-		])
+		assert.isEqualDeep(
+			model.tools,
+			toolGenerator.generateTools([
+				{
+					id: 'maps',
+					lineIcon: 'map',
+				},
+				{
+					id: 'maps_2',
+					lineIcon: 'map',
+				},
+			])
+		)
 	}
 
 	@test()
 	protected static cantAddToolWithSameSlugTwice() {
-		this.vc.addTool({
-			id: 'maps',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool())
 
 		const err = assert.doesThrow(() =>
 			this.vc.addTool({
@@ -116,11 +98,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canRemoveTool() {
-		this.vc.addTool({
-			id: 'maps',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool())
 
 		this.vc.removeTool('maps')
 		const model = renderUtil.render(this.vc)
@@ -128,26 +106,14 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	}
 
 	@test()
-	protected static canRemoveAfterAddingTwice() {
-		this.vc.addTool({
-			id: 'maps',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+	protected static canRemoveAfterAddingTwo() {
+		this.vc.addTool(toolGenerator.generatTool())
 
-		this.vc.addTool({
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool('maps_2'))
 
 		this.vc.removeTool('maps')
 		const model = renderUtil.render(this.vc)
-		assert.isEqualDeep(model.tools[0], {
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		assert.isEqualDeep(model.tools[0], toolGenerator.generatTool('maps_2'))
 	}
 
 	@test()
@@ -172,48 +138,49 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static getsBackTools() {
-		this.vc.addTool({
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool('maps_2'))
 
 		const tools = this.vc.getTools()
 
-		assert.isEqualDeep(tools, [
-			{
-				id: 'maps_2',
-				lineIcon: 'map',
-				card: {} as any,
-			},
-		])
+		assert.isEqualDeep(tools, [toolGenerator.generatTool('maps_2')])
 	}
 
 	@test()
-	protected static canGetButtonBackById() {
-		this.vc.addTool({
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+	protected static canClearTools() {
+		this.addTool('tool_1')
+		this.addTool('tool_2')
+		this.addTool('tool_3')
 
-		assert.isEqualDeep(this.vc.getTool('maps_2'), {
-			id: 'maps_2',
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.clearTools()
 
-		this.vc.addTool({
-			id: 'maps_4',
-			lineIcon: 'add',
-			card: {} as any,
-		})
+		assert.isEqualDeep(this.vc.getTools(), [])
+	}
 
-		assert.isEqualDeep(this.vc.getTool('maps_4'), {
-			id: 'maps_4',
-			lineIcon: 'add',
-			card: {} as any,
-		})
+	@test()
+	protected static canSetOneTool() {
+		this.assertCanSetTools(1)
+	}
+
+	@test()
+	protected static canSetTwoTools() {
+		this.assertCanSetTools(2)
+	}
+
+	@test()
+	protected static canGetToolBackById() {
+		this.vc.addTool(toolGenerator.generatTool('maps_2'))
+
+		assert.isEqualDeep(
+			this.vc.getTool('maps_2'),
+			toolGenerator.generatTool('maps_2')
+		)
+
+		this.vc.addTool(toolGenerator.generatTool('maps_4', 'add'))
+
+		assert.isEqualDeep(
+			this.vc.getTool('maps_4'),
+			toolGenerator.generatTool('maps_4', 'add')
+		)
 	}
 
 	@test()
@@ -268,11 +235,38 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 		assert.isFalse(wasHit)
 	}
 
+	@test()
+	protected static async canAllGetTools() {}
+
 	private static addTool(id = 'maps_2') {
-		this.vc.addTool({
-			id,
-			lineIcon: 'map',
-			card: {} as any,
-		})
+		this.vc.addTool(toolGenerator.generatTool(id))
 	}
+
+	private static assertCanSetTools(total: number) {
+		const tools = toolGenerator.generateTools(total)
+		this.vc.setTools(tools)
+		assert.isEqualDeep(tools, this.vc.getTools())
+	}
+}
+
+type Tool = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
+type LineIcon =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineIcon['name']
+
+const toolGenerator = {
+	generateTools(tools: number | Omit<Tool, 'card'>[]) {
+		if (typeof tools === 'number') {
+			return new Array(tools)
+				.fill(0)
+				.map((_, idx) => this.generatTool(`tool_${idx}`))
+		}
+		return tools.map((t) => this.generatTool(t.id, t.lineIcon))
+	},
+	generatTool(id?: string, lineIcon?: LineIcon): Tool {
+		return {
+			id: id ?? 'maps',
+			lineIcon: lineIcon ?? 'map',
+			card: {} as any,
+		}
+	},
 }

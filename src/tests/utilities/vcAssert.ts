@@ -926,6 +926,40 @@ const vcAssert = {
 		)
 	},
 
+	async assertToolIsFocused(
+		svc: SkillViewController,
+		toolId: string,
+		action: () => Promise<any> | any
+	) {
+		const tool = this.assertRendersToolBelt(svc)
+		this.assertToolBeltRendersTool(svc, toolId)
+
+		let passedToolId: any
+
+		tool.focusTool = (id: string) => {
+			passedToolId = id
+		}
+
+		wait(action())
+
+		assert.isTruthy(
+			passedToolId,
+			`I expected you to focus the tool '${toolId}', but you didn't! Try 'this.toolBeltVc.focusTool('${toolId}')'`
+		)
+
+		assert.isEqual(
+			passedToolId,
+			toolId,
+			`You did not focus the tool I expected. I was waiting for '${toolId}' but got '${passedToolId}'.`
+		)
+
+		// if (toolId === 'new-tool') {
+		// 	return
+		// }
+
+		// assert.fail(`Your skill view ${getVcName(svc)} does not render a Toolbelt.`)
+	},
+
 	assertRendersToolBelt(svc: SkillViewController) {
 		const toolBelt = svc.renderToolBelt()
 

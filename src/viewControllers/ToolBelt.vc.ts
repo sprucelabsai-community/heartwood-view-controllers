@@ -40,6 +40,12 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		this.triggerRender()
 	}
 
+	public setTools(
+		tools: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
+	) {
+		this.model.tools = tools
+	}
+
 	public removeTool(id: string) {
 		const idx = this.model.tools.findIndex((t) => t.id === id)
 		if (idx === -1) {
@@ -56,6 +62,10 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 
 	public getTools() {
 		return [...this.model.tools]
+	}
+
+	public clearTools() {
+		this.model.tools = []
 	}
 
 	public getTool(id: string) {

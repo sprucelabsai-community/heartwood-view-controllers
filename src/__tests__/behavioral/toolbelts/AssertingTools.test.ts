@@ -2,7 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { AbstractViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import {
 	SkillViewController,
 	ViewControllerOptions,
@@ -71,6 +71,10 @@ class ToolBeltSkillViewController implements SkillViewController {
 
 	public async load() {}
 	public triggerRender() {}
+
+	public async focusTool(id: string) {
+		this.toolBelt?.focusTool(id)
+	}
 
 	public renderToolBelt() {
 		return this.toolBelt?.render() ?? null
@@ -239,6 +243,46 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		)
 
 		assert.isEqual(toolVc, this.fancyTool)
+	}
+
+	@test()
+	protected static async assertToolIsFocusedThrowsIfNoToolBelt() {
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertToolIsFocused(
+				this.Controller('good', { layouts: [] }),
+				'tool',
+				async () => {}
+			)
+		)
+	}
+
+	@test()
+	protected static async assertToolIsFocusedThrowsIfBadToolId() {
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertToolIsFocused(
+				this.ToolBeltSvc(),
+				'no-found',
+				async () => {}
+			)
+		)
+	}
+
+	@test('assert focuses tool 1', 'new-tool')
+	@test('assert focuses tool 2', 'new-tool-2')
+	protected static async passesWhenFocusingTool(id: string) {
+		const svc = this.ToolBeltSvc({ tool2Id: id })
+		await vcAssert.assertToolIsFocused(svc, id, async () => svc.focusTool(id))
+	}
+
+	@test()
+	protected static async assertToolIsFocusedThrowsIfToolIdDoesNotMatch() {
+		const svc = this.ToolBeltSvc({ tool2Id: 'new-tool' })
+
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertToolIsFocused(svc, 'new-tool', async () =>
+				svc.focusTool('add')
+			)
+		)
 	}
 
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
