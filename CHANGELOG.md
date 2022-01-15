@@ -1,3 +1,10 @@
+# [56.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.2.4...v56.3.0) (2022-01-15)
+
+
+### Features
+
+* can clear and set all tools in tool belt at once ([c7f0a19](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c7f0a19))
+
 ## [56.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.2.3...v56.2.4) (2022-01-14)
 
 ## [56.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.2.2...v56.2.3) (2022-01-14)
