@@ -955,6 +955,12 @@ const vcAssert = {
 	},
 
 	assertRendersToolBelt(svc: SkillViewController) {
+		assert.isFunction(
+			svc.renderToolBelt,
+			`Your skill view '${getVcName(
+				svc
+			)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
+		)
 		const toolBelt = svc.renderToolBelt()
 
 		assert.isTrue(
