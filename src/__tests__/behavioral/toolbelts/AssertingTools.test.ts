@@ -309,7 +309,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 				lineIcon: 'calendar',
 				card: {} as any,
 			})
-			svc.focusTool('new-tool')
+			await svc.focusTool('new-tool')
 		})
 	}
 
