@@ -1,4 +1,4 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import SpruceError from '../errors/SpruceError'
 import { ViewControllerOptions } from '../types/heartwood.types'
@@ -13,6 +13,7 @@ type CalendarOptions = Omit<
 }
 type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
 type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 
 export type CalendarViewControllerOptions = CalendarOptions
 export type CalendarView = NonNullable<CalendarOptions['view']>
@@ -54,6 +55,14 @@ export default class CalendarViewController extends AbstractViewController<Calen
 					'You have to supply at least 1 person to your calendar to render it (today).',
 			})
 		}
+	}
+
+	public getPeople(): Person[] {
+		return this.model.people ?? []
+	}
+
+	public setPeople(people: Person[]) {
+		this.model.people = [...people]
 	}
 
 	private assertValidMinAndMaxTime(
@@ -149,6 +158,27 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.getEvent(id)
 
 		this.model.events = this.model.events.filter((e) => e.id !== id)
+		this.triggerRender()
+	}
+
+	public removePerson(id: string) {
+		const idx = this.model.people?.findIndex((p) => p.id === id) ?? -1
+
+		if (idx === -1) {
+			throw new SpruceError({
+				code: 'PERSON_NOT_FOUND',
+				personId: id,
+			})
+		}
+
+		this.model.people?.splice(idx, 1)
+	}
+
+	public addPerson(person: Person) {
+		assertOptions({ person }, ['person'])
+
+		this.model.people?.push(person)
+
 		this.triggerRender()
 	}
 

@@ -7,6 +7,9 @@ export interface ViewAlreadyDestroyedErrorOptions extends SpruceErrors.Heartwood
 export interface ToolNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.ToolNotFound, ISpruceErrorOptions {
 	code: 'TOOL_NOT_FOUND'
 }
+export interface PersonNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.PersonNotFound, ISpruceErrorOptions {
+	code: 'PERSON_NOT_FOUND'
+}
 export interface MissingStorageErrorOptions extends SpruceErrors.HeartwoodViewControllers.MissingStorage, ISpruceErrorOptions {
 	code: 'MISSING_STORAGE'
 }
@@ -35,6 +38,6 @@ export interface DuplicateEventIdErrorOptions extends SpruceErrors.HeartwoodView
 	code: 'DUPLICATE_EVENT_ID'
 }
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | PersonNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions 
 
 export default ErrorOptions

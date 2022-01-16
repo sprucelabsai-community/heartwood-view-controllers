@@ -71,6 +71,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface PersonNotFound {
+		
+			
+			'personId': string
+	}
+
+	export interface PersonNotFoundSchema extends SpruceSchema.Schema {
+		id: 'personNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Person not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'personId': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type PersonNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.PersonNotFoundSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface MissingStorage {
 		
 	}

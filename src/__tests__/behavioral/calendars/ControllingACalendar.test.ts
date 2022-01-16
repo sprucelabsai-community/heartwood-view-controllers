@@ -19,15 +19,15 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static controllerMap = {}
 	protected static vc: CalendarViewController
 
+	private static readonly firstPerson = {
+		id: `${new Date().getTime()}`,
+		casualName: 'Tay',
+	}
+
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.vc = this.Controller('calendar', {
-			people: [
-				{
-					id: `${new Date().getTime()}`,
-					casualName: 'Tay',
-				},
-			],
+			people: [this.firstPerson],
 		})
 	}
 
@@ -558,6 +558,73 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const [event] = this.populateCalendar(1)
 		this.vc.updateEvent(event.id, {})
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static needAPersonToAddPerson() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => this.vc.addPerson())
+		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['person'],
+		})
+	}
+
+	@test()
+	protected static canAddPerson() {
+		const person = this.addPerson()
+		assert.isEqualDeep(this.vc.getPeople(), [this.firstPerson, person])
+	}
+
+	@test()
+	protected static async addingPersonTriggersRender() {
+		this.addPerson()
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test('cant remove person no there 1', 'aoeu')
+	@test('cant remove person no there 2', 'sth')
+	protected static cantRemovePersonWhoIsNotThere(personId: string) {
+		const err = assert.doesThrow(() => this.vc.removePerson(personId))
+		errorAssertUtil.assertError(err, 'PERSON_NOT_FOUND', {
+			personId,
+		})
+	}
+
+	@test()
+	protected static canRemoveRemovePeople() {
+		this.vc.removePerson(this.firstPerson.id)
+		assert.isEqualDeep(this.vc.getPeople(), [])
+
+		const person = this.addPerson()
+		const person2 = this.addPerson()
+
+		this.vc.removePerson(person.id)
+		assert.isEqualDeep(this.vc.getPeople(), [person2])
+	}
+
+	@test()
+	protected static canRemoveLaterPerson() {
+		const p1 = this.addPerson()
+		const p2 = this.addPerson()
+		const person = this.addPerson()
+
+		this.vc.removePerson(person.id)
+
+		assert.isEqualDeep(this.vc.getPeople(), [this.firstPerson, p1, p2])
+	}
+
+	@test()
+	protected static canSetPeople() {
+		const people = calendarSeeder.generatePeopleValues(1)
+		this.vc.setPeople(people)
+		assert.isEqualDeep(this.vc.getPeople(), people)
+		assert.isNotEqual(this.vc.getPeople(), people)
+	}
+
+	private static addPerson() {
+		const person = calendarSeeder.generatePersonValues()
+		this.vc.addPerson(person)
+		return person
 	}
 
 	private static assertRendersTotalEvents(expected: number) {

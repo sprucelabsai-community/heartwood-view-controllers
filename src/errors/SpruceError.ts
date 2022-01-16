@@ -59,6 +59,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `I could not find a tool with the id '${options.id}'!`
 				break
 
+			case 'PERSON_NOT_FOUND':
+				message = `I could not find that person!!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}
