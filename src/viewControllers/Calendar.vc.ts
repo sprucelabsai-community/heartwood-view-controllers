@@ -155,6 +155,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	public addPerson(person: Person) {
 		assertOptions({ person }, ['person'])
 
+		if (!this.model.people) {
+			this.model.people = []
+		}
+
 		this.model.people?.push(person)
 
 		this.triggerRender()

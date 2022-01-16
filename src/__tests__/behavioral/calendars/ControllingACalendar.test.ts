@@ -564,6 +564,13 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static canRenderEvenWhenStartingWithNoPeople() {
+		this.vc = this.Controller('calendar', {})
+		const person = this.addPerson()
+		assert.isEqualDeep(this.vc.getPeople(), [person])
+	}
+
+	@test()
 	protected static async addingPersonTriggersRender() {
 		this.addPerson()
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
