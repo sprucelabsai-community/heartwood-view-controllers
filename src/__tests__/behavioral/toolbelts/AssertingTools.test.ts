@@ -300,6 +300,19 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static async canTellIfToolFocusedEvenIfToolAddedLate() {
+		const svc = this.ToolBeltSvc()
+		await vcAssert.assertActionFocusesTool(svc, 'new-tool', async () => {
+			svc.getToolBeltVc()?.addTool({
+				id: 'new-tool',
+				lineIcon: 'calendar',
+				card: {} as any,
+			})
+			svc.focusTool('new-tool')
+		})
+	}
+
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
 		//@ts-ignore
 		this.swipeVc = this.Controller('swipe', {})

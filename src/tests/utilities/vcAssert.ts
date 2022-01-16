@@ -931,16 +931,17 @@ const vcAssert = {
 		toolId: string,
 		action: () => Promise<any> | any
 	) {
-		const tool = this.assertRendersToolBelt(svc)
-		this.assertToolBeltRendersTool(svc, toolId)
+		const toolBeltVc = this.assertRendersToolBelt(svc)
 
 		let passedToolId: any
 
-		tool.focusTool = (id: string) => {
+		toolBeltVc.focusTool = (id: string) => {
 			passedToolId = id
 		}
 
 		await wait(action())
+
+		this.assertToolBeltRendersTool(svc, toolId)
 
 		assert.isTruthy(
 			passedToolId,
