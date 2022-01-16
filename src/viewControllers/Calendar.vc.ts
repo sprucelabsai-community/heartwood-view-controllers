@@ -19,7 +19,7 @@ export type CalendarViewControllerOptions = CalendarOptions
 export type CalendarView = NonNullable<CalendarOptions['view']>
 
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
-	private model: CalendarOptions & { events: Event[] }
+	protected model: CalendarOptions & { events: Event[] }
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
