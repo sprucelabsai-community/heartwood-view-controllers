@@ -32,18 +32,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static throwsIfMissingRequiredFieldsInDayView() {
-		//@ts-ignore
-		const err = assert.doesThrow(() => this.Controller('calendar', {}))
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['people'],
-		})
-
-		//@ts-ignore
-		assert.doesThrow(() => this.Controller('calendar', { view: 'day' }))
-	}
-
-	@test()
 	protected static doesNotThroughIfMissingPeopleInMonthView() {
 		this.Controller('calendar', { view: 'month' })
 	}

@@ -26,34 +26,12 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		const view = options.view ?? 'day'
 
-		this.assertValidView(view, options)
 		this.assertValidMinAndMaxTime(options)
 
 		this.model = {
 			events: [],
 			...removeUniversalViewOptions(options),
 			view,
-		}
-	}
-
-	private assertValidView(
-		view: string,
-		options: Omit<
-			SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
-			'controller' | 'events'
-		> & {
-			events?:
-				| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
-				| undefined
-		} & ViewControllerOptions
-	) {
-		if (view === 'day' && !options.people) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: ['people'],
-				friendlyMessage:
-					'You have to supply at least 1 person to your calendar to render it (today).',
-			})
 		}
 	}
 
