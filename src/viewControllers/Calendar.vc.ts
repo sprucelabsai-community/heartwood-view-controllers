@@ -150,6 +150,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		this.model.people?.splice(idx, 1)
+
+		this.triggerRender()
 	}
 
 	public addPerson(person: Person) {

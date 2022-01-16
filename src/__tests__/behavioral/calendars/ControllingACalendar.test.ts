@@ -609,6 +609,13 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static async removingPersonTriggersRender() {
+		const p1 = this.addPerson()
+		this.vc.removePerson(p1.id)
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
 	protected static canSetPeople() {
 		const people = calendarSeeder.generatePeopleValues(1)
 		this.vc.setPeople(people)
