@@ -1,3 +1,10 @@
+# [56.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.4.7...v56.5.0) (2022-01-16)
+
+
+### Features
+
+* devs can now get and set people on the calendar! ([3a5a27a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3a5a27a))
+
 ## [56.4.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.4.6...v56.4.7) (2022-01-16)
 
 ## [56.4.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.4.5...v56.4.6) (2022-01-16)
