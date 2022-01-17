@@ -1,3 +1,10 @@
+# [56.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.5.13...v56.6.0) (2022-01-17)
+
+
+### Features
+
+* date picker  render as ([b272d16](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b272d16))
+
 ## [56.5.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.5.12...v56.5.13) (2022-01-17)
 
 ## [56.5.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.5.11...v56.5.12) (2022-01-17)
