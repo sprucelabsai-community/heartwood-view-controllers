@@ -1,3 +1,11 @@
+# [56.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.6.1...v56.7.0) (2022-01-17)
+
+
+### Features
+
+* devs can now do assertions on tools directly vs needing a skill view controller, making testing even EASIER! ([6f0d8b5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6f0d8b5))
+* viewControllerExporter can now be configured to include define replacements ([9f06ecc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9f06ecc))
+
 ## [56.6.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.6.0...v56.6.1) (2022-01-17)
 
 # [56.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.5.13...v56.6.0) (2022-01-17)
