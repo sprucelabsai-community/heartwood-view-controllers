@@ -318,7 +318,7 @@ export interface ViewControllerOptions {
 
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
-	renderAs?: 'colorPicker' | 'number' | 'textarea' | 'ratings'
+	renderAs?: 'colorPicker' | 'number' | 'textarea' | 'ratings' | 'datePicker'
 	renderHintAs?: 'subtitle' | 'tooltip'
 	placeholder?: string
 	label?: string
