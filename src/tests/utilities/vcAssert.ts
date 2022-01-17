@@ -931,7 +931,7 @@ const vcAssert = {
 		toolId: string,
 		action: () => Promise<any> | any
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt)
+		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
 
 		let passedToolId: any
 
@@ -956,12 +956,14 @@ const vcAssert = {
 	},
 
 	assertRendersToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		assertHasAtLeast1Tool = true
 	) {
 		let toolBelt:
 			| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 			| undefined
 			| null
+
 		if (svcOrToolBelt instanceof ToolBeltViewController) {
 			toolBelt = svcOrToolBelt.render()
 		} else {
@@ -975,10 +977,12 @@ const vcAssert = {
 			toolBelt = svc.renderToolBelt()
 		}
 
-		assert.isTrue(
-			(toolBelt?.tools?.length ?? 0) > 0,
-			'You tool belt does not render any tools!'
-		)
+		if (assertHasAtLeast1Tool) {
+			assert.isTrue(
+				(toolBelt?.tools?.length ?? 0) > 0,
+				'You tool belt does not render any tools!'
+			)
+		}
 
 		return toolBelt?.controller as ToolBeltViewController
 	},
