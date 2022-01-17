@@ -927,11 +927,11 @@ const vcAssert = {
 	},
 
 	async assertActionFocusesTool(
-		svc: SkillViewController,
+		svcOrToolBelt: SkillViewController,
 		toolId: string,
 		action: () => Promise<any> | any
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svc)
+		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt)
 
 		let passedToolId: any
 
@@ -941,7 +941,7 @@ const vcAssert = {
 
 		await wait(action())
 
-		this.assertToolBeltRendersTool(svc, toolId)
+		this.assertToolBeltRendersTool(svcOrToolBelt, toolId)
 
 		assert.isTruthy(
 			passedToolId,
@@ -955,14 +955,25 @@ const vcAssert = {
 		)
 	},
 
-	assertRendersToolBelt(svc: SkillViewController) {
-		assert.isFunction(
-			svc.renderToolBelt,
-			`Your skill view '${getVcName(
-				svc
-			)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
-		)
-		const toolBelt = svc.renderToolBelt()
+	assertRendersToolBelt(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController
+	) {
+		let toolBelt:
+			| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+			| undefined
+			| null
+		if (svcOrToolBelt instanceof ToolBeltViewController) {
+			toolBelt = svcOrToolBelt.render()
+		} else {
+			const svc = svcOrToolBelt
+			assert.isFunction(
+				svc.renderToolBelt,
+				`Your skill view '${getVcName(
+					svc
+				)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
+			)
+			toolBelt = svc.renderToolBelt()
+		}
 
 		assert.isTrue(
 			(toolBelt?.tools?.length ?? 0) > 0,
@@ -972,8 +983,12 @@ const vcAssert = {
 		return toolBelt?.controller as ToolBeltViewController
 	},
 
-	assertToolInstanceOf(svc: SkillViewController, toolId: string, Class: any) {
-		const vc = this.assertRendersToolBelt(svc)
+	assertToolInstanceOf(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		toolId: string,
+		Class: any
+	) {
+		const vc = this.assertRendersToolBelt(svcOrToolBelt)
 		const tool = vc.getTool(toolId)
 
 		assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
@@ -1009,8 +1024,11 @@ const vcAssert = {
 		}
 		assert.fail(`You rendered the tool '${toolId}' and should not have!`)
 	},
-	assertToolBeltRendersTool(svc: SkillViewController, toolId: string) {
-		const toolBeltVc = this.assertRendersToolBelt(svc)
+	assertToolBeltRendersTool(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		toolId: string
+	) {
+		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt)
 
 		const tool = toolBeltVc?.getTool?.(toolId)
 		assert.isTruthy(
