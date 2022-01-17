@@ -2,7 +2,7 @@ import pathUtil from 'path'
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
-import { Configuration, webpack } from 'webpack'
+import { Configuration, DefinePlugin, webpack } from 'webpack'
 import SpruceError from '../errors/SpruceError'
 
 export default class ViewControllerExporter {
@@ -10,6 +10,7 @@ export default class ViewControllerExporter {
 	private constructor(cwd: string) {
 		this.cwd = cwd
 	}
+	private config: Configuration = {}
 
 	public static Exporter(cwd: string) {
 		if (!cwd) {
@@ -22,10 +23,11 @@ export default class ViewControllerExporter {
 		source: string
 		destination: string
 		profilerStatsDestination?: string
+		defines?: any
 	}): Promise<void> {
 		this.assertValidExportOptions(options)
 
-		const { source, destination, profilerStatsDestination } = options
+		const { source, destination, profilerStatsDestination, defines } = options
 
 		this.assertValidSource(source)
 
@@ -33,18 +35,23 @@ export default class ViewControllerExporter {
 
 		this.assertValidDestinationFilename(filename)
 
-		const config: Configuration = this.buildConfiguration(
+		this.config = this.buildConfiguration(
 			source,
 			dirname,
 			filename,
-			!!profilerStatsDestination
+			!!profilerStatsDestination,
+			defines
 		)
 
-		await this.webpack(config, profilerStatsDestination)
+		await this.webpack(this.config, profilerStatsDestination)
 	}
 
 	public getCwd(): string {
 		return this.cwd
+	}
+
+	public getConfig(): Configuration {
+		return this.config
 	}
 
 	private splitToFileAndDir(destination: string) {
@@ -97,7 +104,8 @@ export default class ViewControllerExporter {
 		entry: string,
 		destinationDirname: string,
 		destinationFilename: string,
-		shouldProfile?: boolean
+		shouldProfile?: boolean,
+		defines?: any
 	): Configuration {
 		return {
 			entry,
@@ -175,6 +183,11 @@ export default class ViewControllerExporter {
 				minimize: true,
 				minimizer: [new TerserPlugin()],
 			},
+			plugins: [
+				new DefinePlugin({
+					...defines,
+				}),
+			],
 		}
 	}
 

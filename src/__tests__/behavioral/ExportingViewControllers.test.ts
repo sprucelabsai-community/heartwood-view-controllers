@@ -9,6 +9,7 @@ import {
 	importExportSource,
 	importExportSource_nodeModulesImport,
 	importExportSource_syntaxError,
+	importExportSource_withDefines,
 } from '../../tests/constants'
 import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
 
@@ -193,5 +194,58 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
 		const contents = diskUtil.readFile(this.destination)
 		assert.doesNotInclude(contents, 'chalk')
+	}
+
+	@test('can use define plugin 1', {
+		'process.env.TACO': JSON.stringify('ninja'),
+	})
+	@test('can use define plugin 2', {
+		'process.env.TACO': JSON.stringify('salad'),
+		'process.env.BURRITO': JSON.stringify('supreme'),
+	})
+	protected static async canPassCustomDefinesToExporterConfig(
+		definePlugin: any
+	) {
+		await this.exporter.export({
+			source: this.source,
+			destination: this.destination,
+			defines: definePlugin,
+		})
+
+		const config = this.exporter.getConfig()
+		assert.doesInclude(config, {
+			plugins: [{ definitions: definePlugin }],
+		})
+	}
+
+	@test(
+		'replace process.env.TACO with salad',
+		'process.env.TACO',
+		JSON.stringify('salad')
+	)
+	@test(
+		'replace process.env.TACO with pizza',
+		'process.env.TACO',
+		JSON.stringify('pizza')
+	)
+	@test(
+		'replace WIZARDS_NAME with Merlin',
+		'WIZARDS_NAME',
+		JSON.stringify('Merlin')
+	)
+	protected static async exportedCustomDefinesAreReplaced(
+		key: string,
+		value: string
+	) {
+		await this.exporter.export({
+			source: importExportSource_withDefines,
+			destination: this.destination,
+			defines: { [key]: value },
+		})
+
+		const contents = diskUtil.readFile(this.destination)
+
+		assert.doesNotInclude(contents, key)
+		assert.doesInclude(contents, value)
 	}
 }

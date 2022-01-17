@@ -78,3 +78,17 @@ export const importExportSource_nodeModulesImport = diskUtil.resolvePath(
 	'views',
 	'views.ts'
 )
+
+export const importExportSource_withDefines = diskUtil.resolvePath(
+	__dirname,
+	'..',
+	'..',
+	'src',
+	'__tests__',
+	'testDirsAndFiles',
+	'skill_with_defines',
+	'src',
+	'.spruce',
+	'views',
+	'views.ts'
+)
