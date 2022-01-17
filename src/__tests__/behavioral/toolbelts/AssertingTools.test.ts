@@ -292,6 +292,12 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		await vcAssert.assertActionFocusesTool(svc, id, async () =>
 			svc.focusTool(id)
 		)
+
+		await vcAssert.assertActionFocusesTool(
+			svc.getToolBeltVc() as any,
+			id,
+			async () => svc.focusTool(id)
+		)
 	}
 
 	@test()

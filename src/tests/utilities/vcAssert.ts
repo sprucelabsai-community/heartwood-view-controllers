@@ -927,7 +927,7 @@ const vcAssert = {
 	},
 
 	async assertActionFocusesTool(
-		svcOrToolBelt: SkillViewController,
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
 		action: () => Promise<any> | any
 	) {
@@ -977,7 +977,7 @@ const vcAssert = {
 
 		assert.isTrue(
 			(toolBelt?.tools?.length ?? 0) > 0,
-			'Your skill view does not render a tool belt with any tools!'
+			'You tool belt does not render any tools!'
 		)
 
 		return toolBelt?.controller as ToolBeltViewController
