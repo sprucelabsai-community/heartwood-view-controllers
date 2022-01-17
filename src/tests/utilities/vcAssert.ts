@@ -1020,7 +1020,10 @@ const vcAssert = {
 		return null
 	},
 
-	assertToolBeltDoesNotRenderTool(svc: SkillViewController, toolId: string) {
+	assertToolBeltDoesNotRenderTool(
+		svc: SkillViewController | ToolBeltViewController,
+		toolId: string
+	) {
 		try {
 			this.assertToolBeltRendersTool(svc, toolId)
 		} catch {
