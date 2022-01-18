@@ -1,3 +1,10 @@
+# [56.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.7.10...v56.8.0) (2022-01-18)
+
+
+### Features
+
+* devs can now test taht buttons are not rendered in cards! ([4947a3c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4947a3c))
+
 ## [56.7.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.7.9...v56.7.10) (2022-01-18)
 
 ## [56.7.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.7.8...v56.7.9) (2022-01-18)
