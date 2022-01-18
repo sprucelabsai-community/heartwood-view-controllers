@@ -25,7 +25,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		MercuryClientFactory.setIsTestMode(true)
 
-		const { client } = await this.getMercuryFixture().loginAsDemoPerson(
+		const { client } = await this.mercury.loginAsDemoPerson(
 			DEMO_NUMBER_ACTIVE_RECORD
 		)
 
@@ -600,7 +600,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		cb: () => Promise<{ organizations: any[] }>,
 		options?: Partial<ActiveRecordCardViewControllerOptions>
 	) {
-		const client = await this.getMercuryFixture().connectToApi()
+		const client = await this.mercury.connectToApi()
 
 		await client.on('list-organizations::v2020_12_25', cb)
 

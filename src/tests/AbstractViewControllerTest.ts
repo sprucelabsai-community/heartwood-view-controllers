@@ -18,6 +18,14 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	protected static controllerMap: Record<string, any> = {}
 	private static mercuryFixture?: MercuryFixture
 
+	protected static get mercury() {
+		if (!this.mercuryFixture) {
+			this.mercuryFixture = new MercuryFixture(this.cwd)
+		}
+
+		return this.mercuryFixture
+	}
+
 	protected static async beforeEach() {
 		await super.beforeEach()
 		Authenticator.reset()
@@ -35,7 +43,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	}
 
 	protected static Factory() {
-		const mercury = this.getMercuryFixture()
+		const mercury = this.mercury
 
 		return ViewControllerFactory.Factory({
 			controllerMap: this.controllerMap,
@@ -73,13 +81,5 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		} | null
 	) {
 		return interactionUtil.click(button)
-	}
-
-	protected static getMercuryFixture() {
-		if (!this.mercuryFixture) {
-			this.mercuryFixture = new MercuryFixture(this.cwd)
-		}
-
-		return this.mercuryFixture
 	}
 }
