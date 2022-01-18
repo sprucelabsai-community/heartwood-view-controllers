@@ -72,12 +72,27 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		const sm = this.StateMachine()
 		const state = this.State()
 
-		const options = {}
-		sm.setContext(options)
+		const context = {}
+		sm.setContext(context)
 
 		await sm.transitionTo(state)
 
-		assert.isEqual(sm.getContext(), options)
+		assert.isEqualDeep(sm.getContext(), context)
+	}
+
+	@test()
+	protected static async canSetPartsOfContext() {
+		const sm = this.StateMachine()
+		const context = {
+			hello: 'world',
+		}
+		const context2 = {
+			world: 'hello',
+		}
+		sm.setContext(context)
+		sm.setContext(context2)
+
+		assert.isEqualDeep(sm.getContext(), { ...context, ...context2 })
 	}
 
 	private static State(state?: Partial<ToolBeltState>) {

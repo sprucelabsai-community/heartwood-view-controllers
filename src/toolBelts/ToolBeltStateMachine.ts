@@ -30,7 +30,7 @@ export default class ToolBeltStateMachine<
 > {
 	private state?: ToolBeltState
 	private toolBeltVc: ToolBeltViewController
-	private context?: Context
+	private context?: Partial<Context> = {}
 
 	public Controller: ControllerFactory
 	public connectToApi: MercuryConnectFactory
@@ -63,7 +63,7 @@ export default class ToolBeltStateMachine<
 		return this.toolBeltVc
 	}
 
-	public setContext(options: Context) {
-		this.context = options
+	public setContext(options: Partial<Context>) {
+		this.context = { ...this.context, ...options }
 	}
 }
