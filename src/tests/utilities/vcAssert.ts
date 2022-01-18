@@ -887,8 +887,10 @@ const vcAssert = {
 			return
 		}
 
+		const { found } = checkForButtons(vc, ids)
+
 		assert.fail(
-			`I did not expect your card to render buttons:\n\n${ids.join(', ')}`
+			`I did not expect your card to render buttons:\n\n${found.join(', ')}`
 		)
 	},
 
@@ -905,23 +907,7 @@ const vcAssert = {
 	},
 
 	assertCardRendersButtons(vc: ViewController<Card>, ids: string[]) {
-		const model = renderUtil.render(vc)
-		const buttons = [...(model.footer?.buttons ?? [])]
-
-		pluckAllFromCard(model, 'buttons').forEach((b) => {
-			if (b) {
-				buttons.push(...b)
-			}
-		})
-
-		const missing: string[] = []
-
-		for (const id of ids) {
-			const match = buttons.find((b) => b?.id === id)
-			if (!match) {
-				missing.push(id)
-			}
-		}
+		const { missing } = checkForButtons(vc, ids)
 
 		if (missing.length > 0) {
 			assert.fail(
@@ -1598,6 +1584,33 @@ const vcAssert = {
 }
 
 export default vcAssert
+
+function checkForButtons(
+	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
+	ids: string[]
+): { found: string[]; missing: string[] } {
+	const model = renderUtil.render(vc)
+	const buttons = [...(model.footer?.buttons ?? [])]
+
+	pluckAllFromCard(model, 'buttons').forEach((b) => {
+		if (b) {
+			buttons.push(...b)
+		}
+	})
+
+	const missing: string[] = []
+	const found: string[] = []
+
+	for (const id of ids) {
+		const match = buttons.find((b) => b?.id === id)
+		if (!match) {
+			missing.push(id)
+		} else {
+			found.push(id)
+		}
+	}
+	return { found, missing }
+}
 
 export function getVcName(vc: ViewController<any>) {
 	return (
