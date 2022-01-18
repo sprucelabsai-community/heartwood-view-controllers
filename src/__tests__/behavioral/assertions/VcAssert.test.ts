@@ -8,7 +8,7 @@ import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactionUtil from '../../../tests/utilities/interaction.utility'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import {
 	LineIcon,
 	SkillViewController,
@@ -1062,6 +1062,26 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async knowsIfCardFooterIsRenderingButtons() {
+		const assertDoesNotRenderButton = (vc: any, id: any) => {
+			assert.doesThrow(() => vcAssert.assertCardRendersButton(vc, id))
+			vcAssert.assertCardDoesNotRenderButton(vc, id)
+		}
+
+		const assertRendersButton = (vc: any, id: any) => {
+			assert.doesThrow(() => vcAssert.assertCardDoesNotRenderButton(vc, id))
+			vcAssert.assertCardRendersButton(vc, id)
+		}
+
+		const assertCardRendersButtons = (vc: any, id: any) => {
+			assert.doesThrow(() => vcAssert.assertCardDoesNotRenderButtons(vc, id))
+			vcAssert.assertCardRendersButtons(vc, id)
+		}
+
+		const assertDoesNotRenderButtons = (vc: any, id: any) => {
+			assert.doesThrow(() => vcAssert.assertCardRendersButtons(vc, id))
+			vcAssert.assertCardDoesNotRenderButtons(vc, id)
+		}
+
 		const vc = this.Controller('card', {})
 		const emptyButtonsVc = this.Controller('card', {
 			footer: {
@@ -1073,12 +1093,9 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		assert.doesThrow(() =>
 			vcAssert.assertFooterRendersButtonWithType(emptyButtonsVc)
 		)
-		assert.doesThrow(() =>
-			vcAssert.assertCardRendersButtons(emptyButtonsVc, ['button-one'])
-		)
-		assert.doesThrow(() =>
-			vcAssert.assertCardRendersButton(emptyButtonsVc, 'button-one')
-		)
+
+		assertDoesNotRenderButtons(emptyButtonsVc, ['button-one'])
+		assertDoesNotRenderButton(emptyButtonsVc, 'button-one')
 
 		const button1Id = `${Math.random()}`
 		const button2Id = `${Math.random()}`
@@ -1101,21 +1118,23 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
 		vcAssert.assertFooterRendersButtonWithType(vc2)
 
-		vcAssert.assertCardRendersButtons(vc2, [button1Id])
-		vcAssert.assertCardRendersButtons(vc2, [button2Id])
-		vcAssert.assertCardRendersButtons(vc2, [button1Id, button2Id])
-		vcAssert.assertCardRendersButtons(vc2, [button2Id, button1Id])
+		assertCardRendersButtons(vc2, [button1Id])
+		assertCardRendersButtons(vc2, [button2Id])
+		assertCardRendersButtons(vc2, [button1Id, button2Id])
+		assertCardRendersButtons(vc2, [button2Id, button1Id])
 
-		vcAssert.assertCardRendersButton(vc2, button1Id)
-		vcAssert.assertCardRendersButton(vc2, button2Id)
+		assertRendersButton(vc2, button1Id)
+		assertRendersButton(vc2, button2Id)
 
 		assert.doesThrow(() =>
 			vcAssert.assertFooterRendersButtonWithType(vc2, 'primary')
 		)
+
 		assert.doesThrow(() =>
 			vcAssert.assertCardRendersButtons(vc2, [button1Id, 'bad-id'])
 		)
-		assert.doesThrow(() => vcAssert.assertCardRendersButton(vc2, 'button-one'))
+
+		assertDoesNotRenderButton(vc2, 'button-one')
 
 		vcAssert.assertFooterRendersButtonWithType(vc2, 'destructive')
 	}

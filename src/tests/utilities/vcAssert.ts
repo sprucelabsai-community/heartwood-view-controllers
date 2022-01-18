@@ -880,6 +880,30 @@ const vcAssert = {
 		}
 	},
 
+	assertCardDoesNotRenderButtons(vc: ViewController<Card>, ids: string[]) {
+		try {
+			this.assertCardRendersButtons(vc, ids)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I did not expect your card to render buttons:\n\n${ids.join(', ')}`
+		)
+	},
+
+	assertCardDoesNotRenderButton(vc: ViewController<Card>, id: string) {
+		try {
+			this.assertCardRendersButton(vc, id)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I did not expect your card to render a button with the id '${id}', but it did!`
+		)
+	},
+
 	assertCardRendersButtons(vc: ViewController<Card>, ids: string[]) {
 		const model = renderUtil.render(vc)
 		const buttons = [...(model.footer?.buttons ?? [])]
