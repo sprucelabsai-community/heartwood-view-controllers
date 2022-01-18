@@ -19,15 +19,16 @@ const interactionUtil = {
 	async click(
 		button?: {
 			onClick?: ((options?: any) => void | Promise<void>) | null | undefined
+			id?: string | null
 		} | null,
 		onClickOptions?: Record<string, any>
 	) {
 		//@ts-ignore
-		const { onClick } = button ?? {}
+		const { onClick, id = '**missing id**' } = button ?? {}
 
 		assert.isFunction(
 			onClick,
-			'Clicking failed because button does not have onClick set.'
+			`Clicking failed because the button '${id}' does not have onClick set.`
 		)
 		//@ts-ignore
 		await onClick(
