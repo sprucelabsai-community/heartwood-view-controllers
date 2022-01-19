@@ -541,7 +541,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async showsNoResultsIfFilterDropsTheRecords() {
-		const { vc } = await this.seedAndGetVc()
+		const { vc } = await this.seedAndGetVc({
+			filter: () => false,
+		})
 
 		await vc.load()
 		await vc.refresh()
@@ -549,13 +551,16 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
 	}
 
-	private static async seedAndGetVc() {
+	private static async seedAndGetVc(
+		options?: Partial<ActiveRecordCardViewControllerOptions>
+	) {
 		const organizations = await this.seedOrganizations()
 
 		const vc = this.Vc({
 			payload: {
 				shouldOnlyShowMine: true,
 			},
+			...options,
 		})
 		return { vc, organizations }
 	}
