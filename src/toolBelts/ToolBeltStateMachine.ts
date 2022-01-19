@@ -11,10 +11,13 @@ export interface ToolBeltState {
 	readonly id: string
 	load(stateMachine: ToolBeltStateMachine): Promise<any> | any
 }
-export interface ToolBeltStateMachineOptions {
+export interface ToolBeltStateMachineOptions<
+	Context extends Record<string, any> = Record<string, any>
+> {
 	toolBeltVc: ToolBeltViewController
 	Controller: ControllerFactory
 	connectToApi: MercuryConnectFactory
+	context?: Partial<Context>
 }
 
 type ControllerFactory = <
@@ -35,14 +38,15 @@ export default class ToolBeltStateMachine<
 	public Controller: ControllerFactory
 	public connectToApi: MercuryConnectFactory
 
-	public constructor(options: ToolBeltStateMachineOptions) {
+	public constructor(options: ToolBeltStateMachineOptions<Context>) {
 		assertOptions(options, ['toolBeltVc', 'Controller', 'connectToApi'])
 
-		const { toolBeltVc, Controller, connectToApi } = options
+		const { toolBeltVc, Controller, connectToApi, context = {} } = options
 
 		this.toolBeltVc = toolBeltVc
 		this.Controller = Controller
 		this.connectToApi = connectToApi
+		this.context = context
 	}
 
 	public async transitionTo(state: ToolBeltState) {
