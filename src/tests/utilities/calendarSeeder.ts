@@ -21,6 +21,8 @@ const calendarSeeder = {
 	},
 
 	generateEventValues(values?: Partial<Event>): Event {
+		const totalTimeBlocks = Math.round(Math.random() * 3) + 1
+
 		return {
 			id: `${new Date().getTime() * Math.random()}-${idCount++}`,
 			startDateTimeMs: dateUtil.getStartOfDay(),
@@ -28,13 +30,11 @@ const calendarSeeder = {
 				personId: '1234',
 			},
 			calendarId: '2134',
-			timeBlocks: [
-				{
-					durationMinutes: 60,
-					isBusy: true,
-					title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
-				},
-			],
+			timeBlocks: new Array(totalTimeBlocks).fill(0).map(() => ({
+				durationMinutes: Math.round(Math.random() * 89) + 1,
+				isBusy: true,
+				title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
+			})),
 			...values,
 		}
 	},

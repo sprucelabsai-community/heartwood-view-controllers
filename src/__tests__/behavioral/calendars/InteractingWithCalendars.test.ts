@@ -149,7 +149,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async cantClickOnEventBlockThatDoesNotExist() {
-		await assert.doesThrowAsync(() => this.addEventsAndClickLast(3, 1))
+		await assert.doesThrowAsync(() => this.addEventsAndClickLast(3, 10))
 	}
 
 	@test()
