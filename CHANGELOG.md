@@ -1,3 +1,10 @@
+# [56.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.8.6...v56.9.0) (2022-01-19)
+
+
+### Features
+
+* You can now get the state off the state machine ([8b47a1d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8b47a1d))
+
 ## [56.8.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.8.5...v56.8.6) (2022-01-19)
 
 ## [56.8.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.8.4...v56.8.5) (2022-01-19)
