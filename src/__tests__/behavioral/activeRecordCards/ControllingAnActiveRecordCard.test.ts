@@ -7,7 +7,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER_ACTIVE_RECORD } from '../../../tests/constants'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/ActiveRecordCard.vc'
@@ -304,6 +304,19 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	@test()
+	protected static async listCallsTriggerRenderOnceForEntireLoad() {
+		const vc = this.Vc()
+
+		await vc.load()
+
+		vcAssert.assertTriggerRenderCount(vc.getListVc(), 1)
+
+		await vc.refresh()
+
+		vcAssert.assertTriggerRenderCount(vc.getListVc(), 2)
+	}
+
+	@test()
 	protected static async usesRowTransformer() {
 		const organization = await this.seedOrganization()
 
@@ -526,6 +539,16 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.doesInclude(expected, newRow)
 	}
 
+	@test()
+	protected static async showsNoResultsIfFilterDropsTheRecords() {
+		const { vc } = await this.seedAndGetVc()
+
+		await vc.load()
+		await vc.refresh()
+
+		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
+	}
+
 	private static async seedAndGetVc() {
 		const organizations = await this.seedOrganizations()
 
@@ -550,13 +573,14 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	private static async seedOrganization() {
-		const results = await this.client.emit('create-organization::v2020_12_25', {
-			payload: {
-				name: 'New org!',
-			},
-		})
-
-		const { organization } = eventResponseUtil.getFirstResponseOrThrow(results)
+		const [{ organization }] = await this.client.emitAndFlattenResponses(
+			'create-organization::v2020_12_25',
+			{
+				payload: {
+					name: 'New org!',
+				},
+			}
+		)
 
 		return organization
 	}

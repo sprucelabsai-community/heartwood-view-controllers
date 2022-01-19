@@ -104,7 +104,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			throw new Error(`You can't load your active record card twice!`)
 		}
 
-		await this.fetchResults()
+		await this.listVc.renderOnce(() => this.fetchResults())
 	}
 
 	private async fetchResults() {
@@ -124,8 +124,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			if (!records) {
 				responseKeyError = true
 			} else {
-				this.records = records
-				if (records.length === 0) {
+				this.records = records.filter(
+					(r: any) => !this.filter || this.filter(r)
+				)
+
+				if (this.records.length === 0) {
 					this.listVc.addRow({
 						id: 'no-results',
 						cells: [
@@ -138,10 +141,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 						...this.noResultsRow,
 					})
 				} else {
-					for (const record of records) {
-						if (!this.filter || this.filter?.(record)) {
-							this.listVc.addRow(this.rowTransformer(record))
-						}
+					for (const record of this.records) {
+						this.listVc.addRow(this.rowTransformer(record))
 					}
 				}
 			}
@@ -243,9 +244,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			)
 		}
 
-		this.listVc.deleteAllRows()
-
-		await this.fetchResults()
+		await this.listVc.renderOnce(async () => {
+			this.listVc.deleteAllRows()
+			await this.fetchResults()
+		})
 	}
 
 	public getListVc() {

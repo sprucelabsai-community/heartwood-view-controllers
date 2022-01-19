@@ -33,6 +33,7 @@ export default abstract class AbstractViewController<ViewModel>
 	protected connectToApi: () => Promise<Client>
 	private voteHandler: VoteHandler
 	private children: ViewController<any>[] = []
+	private _suspendendRender?: () => void
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -84,6 +85,26 @@ export default abstract class AbstractViewController<ViewModel>
 
 	protected async askForAVote(options: VoteOptions) {
 		await this.voteHandler(options)
+	}
+
+	private suspendRendering() {
+		this._suspendendRender = this.triggerRender.bind(this)
+		this.triggerRender = () => {}
+	}
+
+	private restoreRendering() {
+		if (this._suspendendRender) {
+			this.triggerRender = this._suspendendRender
+		}
+	}
+
+	public async renderOnce(cb: () => any | Promise<any>) {
+		this.suspendRendering()
+
+		await cb()
+
+		this.restoreRendering()
+		this.triggerRender()
 	}
 
 	public async destroy() {
