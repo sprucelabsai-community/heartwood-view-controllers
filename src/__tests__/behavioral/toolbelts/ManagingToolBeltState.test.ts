@@ -95,6 +95,19 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqualDeep(sm.getContext(), { ...context, ...context2 })
 	}
 
+	@test()
+	protected static async canGetCurrentState() {
+		const state: ToolBeltState = {
+			id: 'test',
+			load() {},
+		}
+
+		const sm = this.StateMachine()
+		await sm.transitionTo(state)
+
+		assert.isEqual(sm.getState(), state)
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,

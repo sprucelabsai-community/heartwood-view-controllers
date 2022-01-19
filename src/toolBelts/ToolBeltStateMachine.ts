@@ -59,6 +59,10 @@ export default class ToolBeltStateMachine<
 		return this.state?.id
 	}
 
+	public getState() {
+		return this.state
+	}
+
 	public getToolBeltVc() {
 		return this.toolBeltVc
 	}
