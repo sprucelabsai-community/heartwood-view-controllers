@@ -140,6 +140,13 @@ export default buildSchema({
 					'(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>',
 			},
 		},
+		onDropEvent: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.DropEventOptions) => void | Promise<void>',
+			},
+		},
 		onDeselectEvent: {
 			type: 'raw',
 			options: {

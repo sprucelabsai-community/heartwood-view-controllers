@@ -4,6 +4,7 @@ import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
 	ClickEventOptions,
+	vcAssert,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
@@ -158,7 +159,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async updatingEventClearsVc() {
+	protected static async updatingEventDoesNotClearVc() {
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 
@@ -168,7 +169,16 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 
 		const vc2 = this.vc.getEventVc(event.id)
 
-		assert.isNotEqual(vc1, vc2)
+		assert.isEqual(vc1, vc2)
+	}
+
+	@test()
+	protected static async updatingAnEventDoesNotTriggerRender() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+		this.vc.updateEvent(event.id, { startDateTimeMs: 100 })
+
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()

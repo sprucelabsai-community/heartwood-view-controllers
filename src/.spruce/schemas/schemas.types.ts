@@ -3677,7 +3677,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'eventTypeSlug'?: string| undefined | null
 				
 				'startDateTimeMs': number
-				
+				/** . Show progress or loader... */
 				'isBusy'?: boolean| undefined | null
 				
 				'isResizeable'?: boolean| undefined | null
@@ -3743,9 +3743,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isRequired: true,
 			                options: undefined
 			            },
-			            /** . */
+			            /** . Show progress or loader... */
 			            'isBusy': {
 			                type: 'boolean',
+			                hint: 'Show progress or loader...',
 			                options: undefined
 			            },
 			            /** . */
@@ -3937,6 +3938,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
 				
+				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | Promise<void>)| undefined | null
+				
 				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
 		}
 
@@ -4038,6 +4041,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onClickEvent': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onDropEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.DropEventOptions) => void | Promise<void>`,}
 			            },
 			            /** . */
 			            'onDeselectEvent': {

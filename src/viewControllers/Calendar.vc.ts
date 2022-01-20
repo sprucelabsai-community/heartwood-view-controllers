@@ -1,10 +1,13 @@
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import SpruceError from '../errors/SpruceError'
-import { ViewControllerOptions } from '../types/heartwood.types'
+import {
+	ViewControllerOptions,
+	CalendarEventViewController,
+} from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
-import CalendarEventViewController from './CalendarEvent.vc'
+import CalendarEventViewControllerImpl from './CalendarEvent.vc'
 
 type CalendarOptions = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
@@ -31,7 +34,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.assertValidMinAndMaxTime(options)
 
-		this.mixinControllers({ calendarEvent: CalendarEventViewController })
+		this.mixinControllers({ calendarEvent: CalendarEventViewControllerImpl })
 
 		this.model = {
 			events: [],
@@ -186,9 +189,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.model.events.splice(idx, 1, match)
 
-		delete this.vcsById[id]
-
-		this.triggerRender()
+		this.vcsById[id]?.triggerRender()
 
 		return match
 	}
@@ -209,13 +210,16 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.vcIdsByEventType[type] = vcId
 	}
 
-	public getEventVc(eventId: string) {
+	public getEventVc(eventId: string): CalendarEventViewController {
 		if (!this.vcsById[eventId]) {
 			const event = this.getEvent(eventId)
 			const vc = this.Controller(
 				(this.vcIdsByEventType[event.eventTypeSlug ?? '***missing***'] ??
 					'calendarEvent') as any,
-				event
+				{
+					getEvent: () => this.getEvent(eventId),
+					setEvent: (event: Event) => this.updateEvent(eventId, event),
+				}
 			)
 
 			this.vcsById[eventId] = vc

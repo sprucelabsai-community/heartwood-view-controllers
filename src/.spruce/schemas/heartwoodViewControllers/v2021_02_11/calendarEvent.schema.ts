@@ -41,9 +41,10 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** . */
+	            /** . Show progress or loader... */
 	            'isBusy': {
 	                type: 'boolean',
+	                hint: 'Show progress or loader...',
 	                options: undefined
 	            },
 	            /** . */

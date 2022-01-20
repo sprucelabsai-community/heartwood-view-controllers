@@ -228,8 +228,6 @@ export default class FormViewController<
 
 					errorsByField[err.name].push(err)
 				})
-			} else {
-				// this.viewModel.onError?.(err.friendMessage ?? err.message)
 			}
 		}
 

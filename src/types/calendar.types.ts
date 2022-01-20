@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { ToolBeltState } from '..'
 import { ViewController } from './heartwood.types'
 
 type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
@@ -18,5 +19,25 @@ export interface ClickEventOptions {
 	blockIdx: number
 }
 
+export interface DragEvent extends CalendarEvent {
+	originalId?: string
+}
+
+export interface BlockUpdate {
+	blockIdx: number
+	durationSec: number
+}
+export interface DropEventOptions {
+	event: CalendarEvent
+	dragEvent: DragEvent
+	newStartAt?: number
+	newPerson?: Person
+	blockUpdates?: BlockUpdate[]
+}
+
 export interface CalendarEventViewController
-	extends ViewController<CalendarEvent> {}
+	extends ViewController<CalendarEvent> {
+	mixinChanges(changes: Partial<CalendarEvent>): void
+	setIsBusy(isBusy: boolean): void
+	getToolBeltState?(): ToolBeltState
+}

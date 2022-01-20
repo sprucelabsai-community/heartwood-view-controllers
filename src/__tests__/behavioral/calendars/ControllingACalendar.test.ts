@@ -548,10 +548,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static updatingEventTriggersRender() {
+	protected static updatingEventDoesNotTriggersRender() {
 		const [event] = this.populateCalendar(1)
 		this.vc.updateEvent(event.id, {})
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
