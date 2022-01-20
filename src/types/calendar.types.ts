@@ -37,6 +37,7 @@ export interface DropEventOptions {
 
 export interface CalendarEventViewController
 	extends ViewController<CalendarEvent> {
+	isOrphaned(): boolean
 	mixinChanges(changes: Partial<CalendarEvent>): void
 	setIsBusy(isBusy: boolean): void
 	getToolBeltState?(): ToolBeltState

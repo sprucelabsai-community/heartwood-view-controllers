@@ -27,7 +27,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Controller('calendarEvent', {}))
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['setEvent', 'getEvent'],
+			parameters: ['setEvent', 'getEvent', 'hasEvent'],
 		})
 	}
 
@@ -73,5 +73,14 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	protected static async updatingAnEventOnCalendarTriggersRenderOnEvent() {
 		this.calendarVc.updateEvent(this.eventModel.id, { style: 'draft' })
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async eventKnowsIfBeenDeleted() {
+		assert.isFalse(this.vc.isOrphaned())
+
+		this.calendarVc.removeEvent(this.eventModel.id)
+
+		assert.isTrue(this.vc.isOrphaned())
 	}
 }

@@ -195,15 +195,19 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public getEvent(id: string) {
-		const events = this.getEvents()
-
-		const match = events.find((e) => e.id === id)
+		const match = this.findEvent(id)
 
 		if (!match) {
 			throw new SpruceError({ code: 'EVENT_NOT_FOUND', id })
 		}
 
 		return { ...match }
+	}
+
+	private findEvent(id: string) {
+		const events = this.getEvents()
+		const match = events.find((e) => e.id === id)
+		return match
 	}
 
 	public setControllerForEventType(type: string, vcId: string) {
@@ -219,6 +223,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 				{
 					getEvent: () => this.getEvent(eventId),
 					setEvent: (event: Event) => this.updateEvent(eventId, event),
+					hasEvent: () => this.hasEvent(eventId),
 				}
 			)
 
@@ -226,6 +231,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		return this.vcsById[eventId]
+	}
+
+	public hasEvent(id: string) {
+		return !!this.findEvent(id)
 	}
 
 	public mixinEvents(events: Event[]) {

@@ -8,10 +8,12 @@ type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
 type GetEventHandler = () => Event
 type SetEventHandler = (event: Event) => void
+type HasEventHandler = () => boolean
 
 interface CalendarEventOptions extends Event {
 	getEvent: GetEventHandler
 	setEvent: SetEventHandler
+	hasEvent: HasEventHandler
 }
 
 export default class CalendarEventViewController
@@ -21,18 +23,24 @@ export default class CalendarEventViewController
 	public static id = 'calendar-event'
 	private setEvent: SetEventHandler
 	private getEvent: GetEventHandler
+	private hasEvent: HasEventHandler
 
 	public constructor(options: ViewControllerOptions & CalendarEventOptions) {
 		super(options)
 
-		assertOptions(options, ['setEvent', 'getEvent'])
+		assertOptions(options, ['setEvent', 'getEvent', 'hasEvent'])
 
 		this.setEvent = options.setEvent
 		this.getEvent = options.getEvent
+		this.hasEvent = options.hasEvent
 	}
 
 	public setIsBusy(isBusy: boolean): void {
 		this.mixinChanges({ isBusy })
+	}
+
+	public isOrphaned(): boolean {
+		return !this.hasEvent()
 	}
 
 	public mixinChanges(
