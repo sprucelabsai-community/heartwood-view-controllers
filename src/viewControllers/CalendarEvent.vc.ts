@@ -18,7 +18,7 @@ export default class CalendarEventViewController
 		this.model = removeUniversalViewOptions(options)
 	}
 
-	public render() {
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent {
 		return { ...this.model, controller: this }
 	}
 }
