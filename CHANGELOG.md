@@ -1,3 +1,10 @@
+# [56.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.9.9...v56.10.0) (2022-01-20)
+
+
+### Features
+
+* calendar events are now fully controlled! ([972e3ee](https://github.com/sprucelabsai/heartwood-view-controllers/commit/972e3ee))
+
 ## [56.9.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.9.8...v56.9.9) (2022-01-20)
 
 ## [56.9.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.9.7...v56.9.8) (2022-01-20)
