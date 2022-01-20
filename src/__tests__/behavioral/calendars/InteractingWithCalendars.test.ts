@@ -140,11 +140,46 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	protected static async clickingEventInvokesOnClickEvent() {
 		const event = await this.addEventsAndClickLast(3)
 
+		assert.isEqual(
+			this.lastOnClickOptions.viewController,
+			this.vc.getEventVc(event.id)
+		)
+
+		//@ts-ignore
+		delete this.lastOnClickOptions.viewController
+		delete this.lastOnClickOptions.event.controller
+
+		//@ts-ignore
 		assert.isEqualDeep(this.lastOnClickOptions, {
 			event,
 			block: event.timeBlocks[0],
 			blockIdx: 0,
 		})
+	}
+
+	@test()
+	protected static async updatingEventClearsVc() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+
+		const vc1 = this.vc.getEventVc(event.id)
+
+		this.vc.updateEvent(event.id, { startDateTimeMs: 100 })
+
+		const vc2 = this.vc.getEventVc(event.id)
+
+		assert.isNotEqual(vc1, vc2)
+	}
+
+	@test()
+	protected static async deletingEventClearsVc() {
+		const event = calendarSeeder.generateEventValues()
+
+		this.vc.addEvent(event)
+		this.vc.getEventVc(event.id)
+		this.vc.removeEvent(event.id)
+
+		assert.doesThrow(() => this.vc.getEventVc(event.id))
 	}
 
 	@test()

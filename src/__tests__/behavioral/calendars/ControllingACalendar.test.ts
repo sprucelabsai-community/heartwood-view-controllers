@@ -4,10 +4,13 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
+import { ListViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
+import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
+import CardViewController from '../../../viewControllers/Card.vc'
 
 type CalendarTime =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
@@ -62,6 +65,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 		assert.isTrue(actual.controller === vc)
 		delete actual.controller
+		delete actual.events[0].controller
 
 		assert.isEqualDeep(actual, model)
 	}
@@ -185,6 +189,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.addEvent(event)
 
 		const model = this.render(this.vc)
+		delete model.events[0].controller
 		assert.isEqualDeep(model.events, [event])
 	}
 
@@ -238,6 +243,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.removeEvent(event1.id)
 
 		const model = this.render(this.vc)
+		delete model.events[0].controller
 		assert.isEqualDeep(model.events, [event2])
 	}
 
@@ -621,6 +627,96 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.setPeople(people)
 		assert.isEqualDeep(this.vc.getPeople(), people)
 		assert.isNotEqual(this.vc.getPeople(), people)
+	}
+
+	@test()
+	protected static throwsWhenGettingBadEventVc() {
+		const id = `${new Date().getTime() * Math.random()}`
+		const err = assert.doesThrow(() => this.vc.getEventVc(id))
+
+		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+			id,
+		})
+	}
+
+	@test()
+	protected static canGetEventVc() {
+		const { vc } = this.addEventAndGetVc()
+		assert.isTrue(vc instanceof CalendarEventViewController)
+	}
+
+	@test()
+	protected static eventVcRendersExpectedEvent() {
+		const { vc, event } = this.addEventAndGetVc()
+		const model = this.render(vc)
+		assert.doesNotInclude(event, model)
+	}
+
+	@test()
+	protected static canSetViewControllersByEventType() {
+		this.assertSetsVcForEventType('test', 'list', ListViewController)
+
+		this.Factory().setController('card', CardViewController)
+		this.assertSetsVcForEventType('waka', 'card', CardViewController)
+
+		this.assertVcForEventType('test', ListViewController)
+	}
+
+	@test()
+	protected static renderingEventRendersController() {
+		const { vc } = this.addEventAndGetVc()
+		const model = this.render(vc)
+		assert.isEqual(model.controller, vc)
+	}
+
+	@test()
+	protected static calendarRendersEventControllers() {
+		this.vc.mixinEvents(calendarSeeder.generateEventsValues(10))
+		const model = this.render(this.vc)
+
+		assert.isTruthy(model.events[0].controller)
+		assert.isTrue(
+			model.events[0].controller instanceof CalendarEventViewController
+		)
+
+		for (const event of model.events) {
+			const model = this.render(event.controller as any)
+			assert.isTruthy(model)
+			assert.isTruthy(model.id)
+			assert.doesInclude(event, model)
+		}
+	}
+
+	@test()
+	protected static reUsesEventVc() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+
+		assert.isEqual(this.vc.getEventVc(event.id), this.vc.getEventVc(event.id))
+	}
+
+	private static assertSetsVcForEventType(
+		type: string,
+		vcId: string,
+		Class: any
+	) {
+		this.vc.setControllerForEventType(type, vcId)
+		this.assertVcForEventType(type, Class)
+	}
+
+	private static assertVcForEventType(type: string, Class: any) {
+		const { vc } = this.addEventAndGetVc({ eventTypeSlug: type })
+		assert.isTrue(vc instanceof Class)
+	}
+
+	private static addEventAndGetVc(event?: Partial<CalendarEvent>) {
+		const e = { ...calendarSeeder.generateEventValues(), ...event }
+
+		this.vc.addEvent(e)
+
+		const vc = this.vc.getEventVc(e.id)
+
+		return { vc, event: e }
 	}
 
 	private static addPerson() {

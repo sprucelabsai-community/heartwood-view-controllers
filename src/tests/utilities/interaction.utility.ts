@@ -344,6 +344,7 @@ const interactionUtil = {
 		)
 
 		await model.onClickEvent?.({
+			viewController: match.controller as any,
 			event: match,
 			block: match.timeBlocks[idx],
 			blockIdx: idx,

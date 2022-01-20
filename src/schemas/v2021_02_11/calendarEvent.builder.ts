@@ -13,6 +13,12 @@ const calendarEventSchema = buildSchema({
 			type: 'number',
 			options: undefined,
 		},
+		controller: {
+			type: 'raw',
+			options: {
+				valueType: 'HeartwoodTypes.CalendarEventViewController',
+			},
+		},
 	},
 })
 

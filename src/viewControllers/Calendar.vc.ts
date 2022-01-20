@@ -4,6 +4,7 @@ import SpruceError from '../errors/SpruceError'
 import { ViewControllerOptions } from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
+import CalendarEventViewController from './CalendarEvent.vc'
 
 type CalendarOptions = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
@@ -20,6 +21,8 @@ export type CalendarView = NonNullable<CalendarOptions['view']>
 
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
 	protected model: CalendarOptions & { events: Event[] }
+	private vcIdsByEventType: Record<string, string> = {}
+	private vcsById: Record<string, CalendarEventViewController> = {}
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -27,6 +30,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		const view = options.view ?? 'day'
 
 		this.assertValidMinAndMaxTime(options)
+
+		this.mixinControllers({ calendarEvent: CalendarEventViewController })
 
 		this.model = {
 			events: [],
@@ -136,6 +141,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.getEvent(id)
 
 		this.model.events = this.model.events.filter((e) => e.id !== id)
+
+		delete this.vcsById[id]
+
 		this.triggerRender()
 	}
 
@@ -178,6 +186,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.model.events.splice(idx, 1, match)
 
+		delete this.vcsById[id]
+
 		this.triggerRender()
 
 		return match
@@ -193,6 +203,25 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		return { ...match }
+	}
+
+	public setControllerForEventType(type: string, vcId: string) {
+		this.vcIdsByEventType[type] = vcId
+	}
+
+	public getEventVc(eventId: string) {
+		if (!this.vcsById[eventId]) {
+			const event = this.getEvent(eventId)
+			const vc = this.Controller(
+				(this.vcIdsByEventType[event.eventTypeSlug ?? '***missing***'] ??
+					'calendarEvent') as any,
+				event
+			)
+
+			this.vcsById[eventId] = vc
+		}
+
+		return this.vcsById[eventId]
 	}
 
 	public mixinEvents(events: Event[]) {
@@ -257,6 +286,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	} {
 		return {
 			...this.model,
+			events: this.model.events.map((e) => ({
+				...e,
+				controller: this.getEventVc(e.id),
+			})),
 			controller: this,
 		}
 	}

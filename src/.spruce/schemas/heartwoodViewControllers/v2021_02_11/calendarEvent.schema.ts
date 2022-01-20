@@ -112,6 +112,11 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                isArray: true,
 	                options: {schema: eventExclusionDateSchema_v2021_05_19,}
 	            },
+	            /** . */
+	            'controller': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}
+	            },
 	    }
 }
 

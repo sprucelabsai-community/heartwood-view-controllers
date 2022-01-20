@@ -3703,6 +3703,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'activeUntilDate'?: number| undefined | null
 				
 				'exclusionDates'?: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDate[]| undefined | null
+				
+				'controller'?: (HeartwoodTypes.CalendarEventViewController)| undefined | null
 		}
 
 		interface CalendarEventSchema extends SpruceSchema.Schema {
@@ -3811,6 +3813,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDateSchema,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}
 			            },
 			    }
 		}

@@ -17,6 +17,7 @@ import vcAssert from './utilities/vcAssert.utility'
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any> = {}
 	private static mercuryFixture?: MercuryFixture
+	private static views?: ViewControllerFactory
 
 	protected static get mercury() {
 		if (!this.mercuryFixture) {
@@ -34,6 +35,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
 		SwipeViewController.swipeDelay = 0
+		this.views = undefined
 		await MercuryFixture.beforeEach()
 	}
 
@@ -53,11 +55,19 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		})
 	}
 
+	protected static getFactory() {
+		if (!this.views) {
+			this.views = this.Factory()
+		}
+
+		return this.views
+	}
+
 	protected static Controller<N extends keyof ViewControllerMap>(
 		name: N,
 		options: ControllerOptions<N>
 	) {
-		const vc = this.Factory().Controller(name, options)
+		const vc = this.getFactory().Controller(name, options)
 
 		//vc's have to be rendered once to attach counters
 		//@ts-ignore
