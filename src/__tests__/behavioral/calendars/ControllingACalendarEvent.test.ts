@@ -77,10 +77,10 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
 	@test()
 	protected static async eventKnowsIfBeenDeleted() {
-		assert.isFalse(this.vc.isOrphaned())
+		assert.isFalse(this.vc.getIsOrphaned())
 
 		this.calendarVc.removeEvent(this.eventModel.id)
 
-		assert.isTrue(this.vc.isOrphaned())
+		assert.isTrue(this.vc.getIsOrphaned())
 	}
 }

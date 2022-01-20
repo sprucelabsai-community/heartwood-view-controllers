@@ -30,14 +30,14 @@ export interface BlockUpdate {
 export interface DropEventOptions {
 	event: CalendarEvent
 	dragEvent: DragEvent
-	newStartAt?: number
+	newStartDateTimeMs?: number
 	newPerson?: Person
 	blockUpdates?: BlockUpdate[]
 }
 
 export interface CalendarEventViewController
 	extends ViewController<CalendarEvent> {
-	isOrphaned(): boolean
+	getIsOrphaned(): boolean
 	mixinChanges(changes: Partial<CalendarEvent>): void
 	setIsBusy(isBusy: boolean): void
 	getToolBeltState?(): ToolBeltState
