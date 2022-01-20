@@ -695,6 +695,15 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isEqual(this.vc.getEventVc(event.id), this.vc.getEventVc(event.id))
 	}
 
+	@test()
+	protected static mixingInManyEventsDoesNotDup() {
+		const events = calendarSeeder.generateEventsValues(5)
+		this.vc.mixinEvents(events)
+		this.vc.mixinEvents(events)
+
+		assert.isLength(this.render(this.vc).events, 5)
+	}
+
 	private static assertSetsVcForEventType(
 		type: string,
 		vcId: string,

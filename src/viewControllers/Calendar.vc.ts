@@ -240,10 +240,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			}
 		}
 
-		let existing: Event[] = []
+		let existing = [...this.model.events]
 
 		for (const event of events) {
-			existing = this.model.events.filter((e) => e.id !== event.id)
+			existing = existing.filter((e) => e.id !== event.id)
 		}
 
 		this.model.events = [...existing, ...events]
