@@ -144,7 +144,7 @@ export default buildSchema({
 			type: 'raw',
 			options: {
 				valueType:
-					'(options: HeartwoodTypes.DropEventOptions) => void | Promise<void>',
+					'(options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>',
 			},
 		},
 		onDeselectEvent: {

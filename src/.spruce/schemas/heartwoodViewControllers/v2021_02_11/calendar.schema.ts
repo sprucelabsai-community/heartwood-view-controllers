@@ -107,7 +107,7 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            /** . */
 	            'onDropEvent': {
 	                type: 'raw',
-	                options: {valueType: `(options: HeartwoodTypes.DropEventOptions) => void | Promise<void>`,}
+	                options: {valueType: `(options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>`,}
 	            },
 	            /** . */
 	            'onDeselectEvent': {
