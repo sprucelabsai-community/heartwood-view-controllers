@@ -1,3 +1,10 @@
+# [57.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.11.3...v57.0.0) (2022-01-20)
+
+
+### Breaking Changes
+
+* interface changes for consistency, making working with heartwood even EASIER! ([ee2615f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ee2615f))
+
 ## [56.11.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.11.2...v56.11.3) (2022-01-20)
 
 ## [56.11.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.11.1...v56.11.2) (2022-01-20)
