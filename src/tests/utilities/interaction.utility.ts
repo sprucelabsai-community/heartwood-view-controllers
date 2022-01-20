@@ -76,7 +76,11 @@ const interactionUtil = {
 		const match = buttons.find((b) => b.id === buttonId)
 
 		if (!match) {
-			assert.fail(`Could not find a button `)
+			assert.fail(
+				`Could not find a button in '${getVcName(
+					vc
+				)}' with the id '${buttonId}'`
+			)
 		}
 
 		await this.click(match)
