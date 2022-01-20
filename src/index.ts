@@ -99,6 +99,7 @@ export { default as ViewControllerFactory } from './viewControllers/ViewControll
 
 export { default as MockStorage } from './tests/MockStorage'
 
+export { default as ViewControllerError } from './errors/SpruceError'
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
 export { default as vcAssert } from './tests/utilities/vcAssert'
