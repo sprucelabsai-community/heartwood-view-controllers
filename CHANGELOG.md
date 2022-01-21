@@ -1,3 +1,11 @@
+# [57.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.0.1...v57.1.0) (2022-01-21)
+
+
+### Features
+
+* Devs can now simulate dragging of events ([f095b48](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f095b48))
+* updating context event in tool belt state machine ([e77fc30](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e77fc30))
+
 ## [57.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.0.0...v57.0.1) (2022-01-21)
 
 # [57.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v56.11.3...v57.0.0) (2022-01-20)
