@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
-import { ListViewController } from '../..'
+import { DropEventOptions, ListViewController } from '../..'
 import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
@@ -324,8 +324,7 @@ const interactionUtil = {
 	) {
 		assertOptions({ vc, eventId }, ['vc', 'eventId'])
 
-		const model = renderUtil.render(vc)
-		const match = model.events?.find((e) => e.id === eventId)
+		const { match, model } = findEvent(vc, eventId)
 		const idx = blockIdx ?? 0
 
 		assert.isTruthy(
@@ -351,6 +350,29 @@ const interactionUtil = {
 		})
 
 		return match
+	},
+
+	async dragCalendarEventTo(
+		vc: ViewController<Calendar>,
+		eventId: string,
+		updates: Omit<DropEventOptions, 'event' | 'dragEvent'>
+	) {
+		const { match, model } = findEvent(vc, eventId)
+		assert.isTruthy(
+			match,
+			`I could not find an event with the id of '${eventId}'.`
+		)
+
+		assert.isFunction(
+			model.onDropEvent,
+			`You need to set onDropEvent on your calendar.`
+		)
+
+		await model.onDropEvent({
+			event: match,
+			dragEvent: { ...match, id: 'dragging' },
+			...updates,
+		})
 	},
 
 	async clickCalendarDayView(
@@ -392,6 +414,15 @@ const interactionUtil = {
 }
 
 export default interactionUtil
+
+function findEvent(
+	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>,
+	eventId: string
+) {
+	const model = renderUtil.render(vc)
+	const match = model.events?.find((e) => e.id === eventId)
+	return { match, model }
+}
 
 function pluckButtons(
 	model:

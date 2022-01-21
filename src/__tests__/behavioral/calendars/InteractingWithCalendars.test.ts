@@ -4,6 +4,7 @@ import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
 	ClickEventOptions,
+	DropEventOptions,
 	vcAssert,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -251,13 +252,90 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		assert.isEqual(this.lastOnClickOptions.blockIdx, blockIdx)
 	}
 
+	@test()
+	protected static hasDragEvent() {
+		assert.isFunction(interactionUtil.dragCalendarEventTo)
+	}
+
+	@test()
+	protected static async throwsIfEventDoesNotExist() {
+		await assert.doesThrowAsync(() =>
+			interactionUtil.dragCalendarEventTo(this.vc, 'aoeu', {
+				newStartDateTimeMs: 100,
+			})
+		)
+	}
+
+	@test()
+	protected static async canFindEvent() {
+		let [event] = this.addEvents(1)
+
+		await assert.doesThrowAsync(() =>
+			interactionUtil.dragCalendarEventTo(this.vc, 'event.id', {
+				newStartDateTimeMs: 100,
+			})
+		)
+
+		this.Vc({
+			onDropEvent: () => {},
+		})
+
+		event = this.addEvents(1)[0]
+
+		await interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+			newStartDateTimeMs: 100,
+		})
+	}
+
+	@test('cand drag event 1', {
+		newStartDateTimeMs: 100,
+	})
+	@test('cand drag event 2', {
+		blockUpdates: [{ hello: 'world' }],
+	})
+	protected static async passesThroughToChanges(
+		updates: Partial<DropEventOptions>
+	) {
+		let wasHit = false
+		let passedOptions: any
+		this.Vc({
+			onDropEvent: (options) => {
+				passedOptions = options
+				wasHit = true
+			},
+		})
+
+		const [event] = this.addEvents(1)
+
+		await interactionUtil.dragCalendarEventTo(this.vc, event.id, updates)
+
+		delete event.controller
+		delete passedOptions.event.controller
+		delete passedOptions.dragEvent.controller
+
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedOptions, {
+			event,
+			dragEvent: {
+				...event,
+				id: 'dragging',
+			},
+			...updates,
+		})
+	}
+
 	private static async addEventsAndClickLast(total: number, blockIdx?: number) {
-		const events = calendarSeeder.generateEventsValues(total)
-		this.vc.mixinEvents(events)
+		const events = this.addEvents(total)
 		const selected = events[total - 1]
 		await this.clickEvent(selected.id, blockIdx)
 
 		return selected
+	}
+
+	private static addEvents(total: number) {
+		const events = calendarSeeder.generateEventsValues(total)
+		this.vc.mixinEvents(events)
+		return events
 	}
 
 	private static async clickEvent(eventId: string, blockIdx?: number) {
