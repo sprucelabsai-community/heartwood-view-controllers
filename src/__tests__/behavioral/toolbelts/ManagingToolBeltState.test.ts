@@ -7,6 +7,13 @@ import ToolBeltStateMachine, {
 } from '../../../toolBelts/ToolBeltStateMachine'
 
 export default class ToolBeltStateMachineTest extends AbstractViewControllerTest {
+	private static sm: ToolBeltStateMachine
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		this.sm = this.StateMachine()
+	}
+
 	@test()
 	protected static throwsWhenMissingStates() {
 		//@ts-ignore
@@ -18,10 +25,8 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async needsStateWhenTransitioning() {
-		const sm = this.StateMachine()
-
 		//@ts-ignore
-		const err = await assert.doesThrowAsync(() => sm.transitionTo())
+		const err = await assert.doesThrowAsync(() => this.sm.transitionTo())
 
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['state'],
@@ -45,72 +50,92 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			},
 		})
 
-		const sm = await this.transitionTo(state)
+		await this.transitionTo(state)
 
 		assert.isTrue(wasHit)
-		assert.isEqual(passedOptions, sm)
+		assert.isEqual(passedOptions, this.sm)
 	}
 
 	@test('can get state id 1', 'taco')
 	@test('can get state id 2', 'burrito')
 	protected static async canGetStateId(id: string) {
 		const state = this.State({ id })
-		const sm = await this.transitionTo(state)
-		assert.isEqual(sm.getStateId(), id)
+		await this.transitionTo(state)
+		assert.isEqual(this.sm.getStateId(), id)
 	}
 
 	@test()
 	protected static async catGetToolBeltOffMachine() {
 		const vc = this.Controller('toolBelt', {})
-		const sm = this.StateMachine({ toolBeltVc: vc })
+		this.sm = this.StateMachine({ toolBeltVc: vc })
 
-		assert.isEqual(sm.getToolBeltVc(), vc)
+		assert.isEqual(this.sm.getToolBeltVc(), vc)
 	}
 
 	@test()
 	protected static async canSetContext() {
-		const sm = this.StateMachine()
 		const state = this.State()
 
 		const context = {}
-		sm.setContext(context)
 
-		await sm.transitionTo(state)
+		await this.sm.updateContext(context)
+		await this.sm.transitionTo(state)
 
-		assert.isEqualDeep(sm.getContext(), context)
+		assert.isEqualDeep(this.sm.getContext(), context)
 	}
 
 	@test()
 	protected static async canSetPartsOfContext() {
-		const sm = this.StateMachine()
 		const context = {
 			hello: 'world',
 		}
 		const context2 = {
 			world: 'hello',
 		}
-		sm.setContext(context)
-		sm.setContext(context2)
+		await this.sm.updateContext(context)
+		await this.sm.updateContext(context2)
 
-		assert.isEqualDeep(sm.getContext(), { ...context, ...context2 })
+		assert.isEqualDeep(this.sm.getContext(), { ...context, ...context2 })
 	}
 
 	@test()
 	protected static async canGetCurrentState() {
 		const state = this.State()
 
-		const sm = this.StateMachine()
-		await sm.transitionTo(state)
+		await this.sm.transitionTo(state)
 
-		assert.isEqual(sm.getState(), state)
+		assert.isEqual(this.sm.getState(), state)
 	}
 
 	@test()
 	protected static async canSetStateDuringInstantiating() {
 		const context = { hello: 'world' }
-		const sm = this.StateMachine({ context })
 
-		assert.isEqualDeep(context, sm.getContext())
+		this.sm = this.StateMachine({ context })
+
+		assert.isEqualDeep(context, this.sm.getContext())
+	}
+
+	@test()
+	protected static async canSubscribeToContextChanges() {
+		const originalContext = {}
+		const updates = { hello: true }
+
+		let wasHit = false
+		let passedOld: any
+		let passedUpdates: any
+
+		await this.sm.on('did-update-context', ({ old, updates }) => {
+			wasHit = true
+			passedOld = old
+			passedUpdates = updates
+		})
+
+		await this.sm.updateContext(updates)
+
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedOld, originalContext)
+		assert.isEqualDeep(passedUpdates, updates)
 	}
 
 	private static State(state?: Partial<ToolBeltState>) {
@@ -131,9 +156,8 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	}
 
 	private static async transitionTo(state: ToolBeltState) {
-		const sm = this.StateMachine()
-		await sm.transitionTo(state)
+		await this.sm.transitionTo(state)
 
-		return sm
+		return this.sm
 	}
 }

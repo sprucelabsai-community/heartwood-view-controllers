@@ -1,5 +1,7 @@
 import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
-import { assertOptions } from '@sprucelabs/schema'
+import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
+import { buildEventContract } from '@sprucelabs/mercury-types'
+import { assertOptions, buildSchema } from '@sprucelabs/schema'
 import {
 	ControllerOptions,
 	ViewControllerId,
@@ -28,9 +30,37 @@ type ControllerFactory = <
 	options: O
 ) => ViewControllerMap[N]
 
+const eventContract = buildEventContract({
+	eventSignatures: {
+		['did-update-context']: {
+			emitPayloadSchema: buildSchema({
+				id: 'did-update-context',
+				fields: {
+					old: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+					updates: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+				},
+			}),
+		},
+	},
+})
+
+type EventContract = typeof eventContract
+
 export default class ToolBeltStateMachine<
 	Context extends Record<string, any> = Record<string, any>
-> {
+> extends AbstractEventEmitter<EventContract> {
 	private state?: ToolBeltState
 	private toolBeltVc: ToolBeltViewController
 	private context?: Partial<Context> = {}
@@ -39,6 +69,8 @@ export default class ToolBeltStateMachine<
 	public connectToApi: MercuryConnectFactory
 
 	public constructor(options: ToolBeltStateMachineOptions<Context>) {
+		super(eventContract)
+
 		assertOptions(options, ['toolBeltVc', 'Controller', 'connectToApi'])
 
 		const { toolBeltVc, Controller, connectToApi, context = {} } = options
@@ -71,7 +103,12 @@ export default class ToolBeltStateMachine<
 		return this.toolBeltVc
 	}
 
-	public setContext(options: Partial<Context>) {
-		this.context = { ...this.context, ...options }
+	public async updateContext(updates: Partial<Context>) {
+		const old = { ...this.context }
+		this.context = { ...this.context, ...updates }
+		await this.emit('did-update-context', {
+			old,
+			updates,
+		})
 	}
 }

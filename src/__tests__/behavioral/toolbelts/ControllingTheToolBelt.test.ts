@@ -235,9 +235,6 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 		assert.isFalse(wasHit)
 	}
 
-	@test()
-	protected static async canAllGetTools() {}
-
 	private static addTool(id = 'maps_2') {
 		this.vc.addTool(toolGenerator.generatTool(id))
 	}
