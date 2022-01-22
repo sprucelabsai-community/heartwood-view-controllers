@@ -23,13 +23,10 @@ export type CalendarViewControllerOptions = CalendarOptions
 export type CalendarView = NonNullable<CalendarOptions['view']>
 
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
-	protected model: CalendarOptions & { events: Event[] }
+	protected model: Omit<CalendarOptions, 'events'>
 	private vcIdsByEventType: Record<string, string> = {}
 	private vcsById: Record<string, CalendarEventViewController> = {}
-	private eventsById: Record<
-		string,
-		{ event: Event; vc: CalendarEventViewController }
-	> = {}
+	private eventsById: Record<string, Event> = {}
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -40,10 +37,13 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.mixinControllers({ calendarEvent: CalendarEventViewControllerImpl })
 
-		const { ...rest } = removeUniversalViewOptions(options)
+		const { events = [], ...rest } = removeUniversalViewOptions(options)
+
+		for (const event of events) {
+			this.eventsById[event.id] = event
+		}
 
 		this.model = {
-			events: [],
 			...rest,
 			view,
 		}
@@ -136,21 +136,18 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			})
 		}
 
-		this.model.events.push(event)
+		this.eventsById[event.id] = event
 		this.triggerRender()
 	}
 
 	private doesEventExist(eventId: string) {
-		const match = this.model.events.find((e) => e.id === eventId)
-
-		return !!match
+		return !!this.eventsById[eventId]
 	}
 
 	public removeEvent(id: string) {
 		this.getEvent(id)
 
-		this.model.events = this.model.events.filter((e) => e.id !== id)
-
+		delete this.eventsById[id]
 		delete this.vcsById[id]
 
 		this.triggerRender()
@@ -191,10 +188,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			...updates,
 		}
 
-		const idx = this.model.events.findIndex((e) => e.id === id)
-
-		this.model.events.splice(idx, 1, match)
-
+		this.eventsById[id] = match
 		this.vcsById[id]?.triggerRender()
 
 		return match
@@ -211,9 +205,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	private findEvent(id: string) {
-		const events = this.getEvents()
-		const match = events.find((e) => e.id === id)
-		return match
+		return this.eventsById[id]
 	}
 
 	public setControllerForEventType(type: string, vcId: string) {
@@ -255,19 +247,15 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			}
 		}
 
-		let existing = [...this.model.events]
-
 		for (const event of events) {
-			existing = existing.filter((e) => e.id !== event.id)
+			this.eventsById[event.id] = event
 		}
-
-		this.model.events = [...existing, ...events]
 
 		this.triggerRender()
 	}
 
 	public getEvents() {
-		return this.model.events
+		return Object.values(this.eventsById)
 	}
 
 	public setStartDate(date: number) {
@@ -292,11 +280,18 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			})
 		}
 
-		const filtered = this.model.events.filter(
-			(e) => e.startDateTimeMs < startDate || e.startDateTimeMs >= endDate
-		)
+		for (const event of this.getEvents()) {
+			if (
+				event.startDateTimeMs >= startDate &&
+				event.startDateTimeMs < endDate
+			) {
+				delete this.eventsById[event.id]
+			}
+		}
 
-		this.model.events = [...filtered, ...events]
+		for (const event of events) {
+			this.eventsById[event.id] = event
+		}
 		this.triggerRender()
 	}
 
@@ -305,7 +300,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	} {
 		return {
 			...this.model,
-			events: this.model.events.map((e) => ({
+			events: this.getEvents().map((e) => ({
 				...e,
 				controller: this.getEventVc(e.id),
 			})),
