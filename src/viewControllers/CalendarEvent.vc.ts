@@ -39,6 +39,10 @@ export default class CalendarEventViewController
 		this.mixinChanges({ isBusy })
 	}
 
+	public getIsBusy(): boolean {
+		return this.getEvent().isBusy ?? false
+	}
+
 	public getIsOrphaned(): boolean {
 		return !this.hasEvent()
 	}

@@ -57,7 +57,9 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
 	@test()
 	protected static canSetIsBusy() {
+		assert.isFalse(this.vc.getIsBusy())
 		this.vc.setIsBusy(true)
+		assert.isTrue(this.vc.getIsBusy())
 		assert.isTrue(this.render(this.vc).isBusy)
 		this.vc.setIsBusy(false)
 		assert.isFalse(this.render(this.vc).isBusy)

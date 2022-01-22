@@ -26,6 +26,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	protected model: CalendarOptions & { events: Event[] }
 	private vcIdsByEventType: Record<string, string> = {}
 	private vcsById: Record<string, CalendarEventViewController> = {}
+	private eventsById: Record<
+		string,
+		{ event: Event; vc: CalendarEventViewController }
+	> = {}
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -36,9 +40,11 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.mixinControllers({ calendarEvent: CalendarEventViewControllerImpl })
 
+		const { ...rest } = removeUniversalViewOptions(options)
+
 		this.model = {
 			events: [],
-			...removeUniversalViewOptions(options),
+			...rest,
 			view,
 		}
 	}
