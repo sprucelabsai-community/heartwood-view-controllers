@@ -44,6 +44,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		this.model = {
+			shouldEnableAnimations: true,
 			...rest,
 			view,
 		}
@@ -93,6 +94,26 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	public setMaxTime(time: Time) {
 		this.model.maxTime = time
 		this.triggerRender()
+	}
+
+	public getIsAnimationEnabled(): boolean {
+		return this.model.shouldEnableAnimations ?? true
+	}
+
+	public enableAnimation() {
+		const original = this.model.shouldEnableAnimations
+		this.model.shouldEnableAnimations = true
+		if (!original) {
+			this.triggerRender()
+		}
+	}
+
+	public disableAnimations() {
+		const original = this.model.shouldEnableAnimations
+		this.model.shouldEnableAnimations = false
+		if (original) {
+			this.triggerRender()
+		}
 	}
 
 	public setTimezoneOffsetMs(offsetMs: number): any {

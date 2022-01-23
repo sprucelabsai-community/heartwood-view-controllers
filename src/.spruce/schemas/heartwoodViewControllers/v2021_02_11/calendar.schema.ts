@@ -80,6 +80,12 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                hint: 'In milliseconds',
 	                options: undefined
 	            },
+	            /** Enable animations. */
+	            'shouldEnableAnimations': {
+	                label: 'Enable animations',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** View. */
 	            'view': {
 	                label: 'View',

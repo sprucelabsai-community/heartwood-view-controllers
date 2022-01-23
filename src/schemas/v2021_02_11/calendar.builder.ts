@@ -104,6 +104,10 @@ export default buildSchema({
 			label: 'Timezone offset',
 			hint: 'In milliseconds',
 		},
+		shouldEnableAnimations: {
+			type: 'boolean',
+			label: 'Enable animations',
+		},
 		view: {
 			type: 'select',
 			label: 'View',

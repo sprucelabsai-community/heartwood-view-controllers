@@ -3928,6 +3928,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
 				/** Timezone offset. In milliseconds */
 				'timezoneOffsetMs'?: number| undefined | null
+				/** Enable animations. */
+				'shouldEnableAnimations'?: boolean| undefined | null
 				/** View. */
 				'view'?: ("day" | "month")| undefined | null
 				/** Render header. */
@@ -4015,6 +4017,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Timezone offset',
 			                type: 'number',
 			                hint: 'In milliseconds',
+			                options: undefined
+			            },
+			            /** Enable animations. */
+			            'shouldEnableAnimations': {
+			                label: 'Enable animations',
+			                type: 'boolean',
 			                options: undefined
 			            },
 			            /** View. */

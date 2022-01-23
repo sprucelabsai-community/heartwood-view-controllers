@@ -67,7 +67,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		delete actual.controller
 		delete actual.events[0].controller
 
-		assert.isEqualDeep(actual, model)
+		assert.isEqualDeep(actual, { ...model, shouldEnableAnimations: true })
 	}
 
 	@test(
@@ -702,6 +702,29 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.mixinEvents(events)
 
 		assert.isLength(this.render(this.vc).events, 5)
+	}
+
+	@test()
+	protected static canControlAnimation() {
+		assert.isTrue(this.vc.getIsAnimationEnabled())
+		assert.isTrue(this.render(this.vc).shouldEnableAnimations)
+		this.vc.disableAnimations()
+		assert.isFalse(this.render(this.vc).shouldEnableAnimations)
+		assert.isFalse(this.vc.getIsAnimationEnabled())
+		this.vc.enableAnimation()
+		assert.isTrue(this.render(this.vc).shouldEnableAnimations)
+		assert.isTrue(this.vc.getIsAnimationEnabled())
+	}
+
+	@test()
+	protected static enablingDisablingAnimationsTriggersRender() {
+		this.vc.enableAnimation()
+		vcAssert.assertTriggerRenderCount(this.vc, 0)
+		this.vc.disableAnimations()
+		this.vc.disableAnimations()
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.vc.enableAnimation()
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	private static assertSetsVcForEventType(
