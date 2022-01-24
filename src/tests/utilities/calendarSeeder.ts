@@ -33,7 +33,7 @@ const calendarSeeder = {
 			calendarId: '2134',
 			timeBlocks: new Array(totalTimeBlocks).fill(0).map((_, idx) => ({
 				durationMinutes: Math.round(Math.random() * 89) + 1,
-				isBusy: !!(idx % 2),
+				isBusy: !(idx % 2),
 				title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
 			})),
 			...values,
