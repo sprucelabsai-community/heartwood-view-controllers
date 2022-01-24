@@ -378,6 +378,8 @@ const interactionUtil = {
 			typeof results === 'boolean',
 			'You gotta return true or false from onDropEvent'
 		)
+
+		return results
 	},
 
 	async clickCalendarDayView(

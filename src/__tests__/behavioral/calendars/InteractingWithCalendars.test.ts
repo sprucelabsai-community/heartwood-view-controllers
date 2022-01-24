@@ -294,9 +294,15 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 
 		let [event] = this.addEvents(1)
 
-		await interactionUtil.dragCalendarEventTo(this.vc, event.id, {
-			newStartDateTimeMs: 100,
-		})
+		const actual = await interactionUtil.dragCalendarEventTo(
+			this.vc,
+			event.id,
+			{
+				newStartDateTimeMs: 100,
+			}
+		)
+
+		assert.isEqual(actual, results)
 	}
 
 	@test()
