@@ -1,3 +1,10 @@
+# [57.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.2.5...v57.3.0) (2022-01-23)
+
+
+### Features
+
+* devs can now control whether calendars are animated or not ([c8771dd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c8771dd))
+
 ## [57.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.2.4...v57.2.5) (2022-01-22)
 
 ## [57.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.2.3...v57.2.4) (2022-01-22)
