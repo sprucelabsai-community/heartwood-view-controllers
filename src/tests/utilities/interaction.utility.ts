@@ -356,7 +356,7 @@ const interactionUtil = {
 		vc: ViewController<Calendar>,
 		eventId: string,
 		updates: Omit<DropEventOptions, 'event' | 'dragEvent'>
-	) {
+	): Promise<boolean> {
 		const { match, model } = findEvent(vc, eventId)
 		assert.isTruthy(
 			match,
@@ -376,10 +376,10 @@ const interactionUtil = {
 
 		assert.isTrue(
 			typeof results === 'boolean',
-			'You gotta return true or false from onDropEvent'
+			'You gotta return true or false from onDropEvent.'
 		)
 
-		return results
+		return results as boolean
 	},
 
 	async clickCalendarDayView(
