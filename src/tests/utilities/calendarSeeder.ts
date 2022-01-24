@@ -31,7 +31,9 @@ const calendarSeeder = {
 			startDateTimeMs: dateUtil.setTimeOfDay(
 				new Date().getTime(),
 				hour,
-				generateRandomMinutes(45)
+				generateRandomMinutes(45),
+				0,
+				0
 			),
 			target: {
 				personId: '1234',

@@ -18,9 +18,8 @@ export default class CalendarSeederTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async allEventsIn9To5OnTheCurrentDay() {
-		const earliest = dateUtil.setTimeOfDay(new Date().getTime(), 9)
+		const earliest = dateUtil.setTimeOfDay(new Date().getTime(), 9, 0, 0, 0)
 		const latest = dateUtil.setTimeOfDay(new Date().getTime(), 18)
-
 		const events = calendarSeeder.generateEventsValues(10)
 
 		for (const event of events) {
@@ -30,7 +29,7 @@ export default class CalendarSeederTest extends AbstractViewControllerTest {
 			)
 			assert.isTrue(
 				event.startDateTimeMs < latest,
-				`${event.startDateTimeMs} needs to be less than ${earliest}`
+				`${event.startDateTimeMs} needs to be less than ${latest}`
 			)
 		}
 	}
