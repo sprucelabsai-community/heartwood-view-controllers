@@ -258,7 +258,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async throwsIfEventDoesNotExist() {
+	protected static async throwsIfDraggingEventDoesNotExist() {
 		await assert.doesThrowAsync(() =>
 			interactionUtil.dragCalendarEventTo(this.vc, 'aoeu', {
 				newStartDateTimeMs: 100,
@@ -267,17 +267,52 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async canFindEvent() {
+	protected static async throwsIfCallbackDoesNotReturnBoolean() {
+		this.Vc({
+			onDropEvent: () => {},
+		})
+
 		let [event] = this.addEvents(1)
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.dragCalendarEventTo(this.vc, 'event.id', {
+			interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+				newStartDateTimeMs: 100,
+			})
+		)
+	}
+
+	@test('Dropping works if onDropEvent returns true', true)
+	@test('Dropping works if onDropEvent returns false', false)
+	protected static async canDragIfReturningBoolFromOnDropEvent(
+		results: boolean
+	) {
+		this.Vc({
+			onDropEvent: () => {
+				return results
+			},
+		})
+
+		let [event] = this.addEvents(1)
+
+		await interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+			newStartDateTimeMs: 100,
+		})
+	}
+
+	@test()
+	protected static async canDragEventItFindEvent() {
+		let [event] = this.addEvents(1)
+
+		await assert.doesThrowAsync(() =>
+			interactionUtil.dragCalendarEventTo(this.vc, event.id, {
 				newStartDateTimeMs: 100,
 			})
 		)
 
 		this.Vc({
-			onDropEvent: () => {},
+			onDropEvent: () => {
+				return true
+			},
 		})
 
 		event = this.addEvents(1)[0]
@@ -287,10 +322,10 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 		})
 	}
 
-	@test('cand drag event 1', {
+	@test('can drag event 1', {
 		newStartDateTimeMs: 100,
 	})
-	@test('cand drag event 2', {
+	@test('can drag event 2', {
 		blockUpdates: [{ hello: 'world' }],
 	})
 	protected static async passesThroughToChanges(
@@ -302,6 +337,7 @@ export class InteractingWithCalendarsTest extends AbstractViewControllerTest {
 			onDropEvent: (options) => {
 				passedOptions = options
 				wasHit = true
+				return true
 			},
 		})
 

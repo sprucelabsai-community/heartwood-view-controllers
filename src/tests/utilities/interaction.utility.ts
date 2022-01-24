@@ -368,11 +368,16 @@ const interactionUtil = {
 			`You need to set onDropEvent on your calendar.`
 		)
 
-		await model.onDropEvent({
+		const results = await model.onDropEvent({
 			event: match,
 			dragEvent: { ...match, id: 'dragging' },
 			...updates,
 		})
+
+		assert.isTrue(
+			typeof results === 'boolean',
+			'You gotta return true or false from onDropEvent'
+		)
 	},
 
 	async clickCalendarDayView(
