@@ -358,6 +358,7 @@ const interactionUtil = {
 		updates: Omit<DropEventOptions, 'event' | 'dragEvent'>
 	): Promise<boolean> {
 		const { match, model } = findEvent(vc, eventId)
+
 		assert.isTruthy(
 			match,
 			`I could not find an event with the id of '${eventId}'.`

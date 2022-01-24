@@ -24,15 +24,21 @@ const calendarSeeder = {
 		const blocks = [1, 3]
 		const totalTimeBlocks = blocks[Math.round(Math.random())]
 
+		const hour = Math.round(Math.random() * 8) + 9
+
 		return {
 			id: `${new Date().getTime() * Math.random()}-${idCount++}`,
-			startDateTimeMs: dateUtil.getStartOfDay(),
+			startDateTimeMs: dateUtil.setTimeOfDay(
+				new Date().getTime(),
+				hour,
+				generateRandomMinutes(45)
+			),
 			target: {
 				personId: '1234',
 			},
 			calendarId: '2134',
 			timeBlocks: new Array(totalTimeBlocks).fill(0).map((_, idx) => ({
-				durationMinutes: Math.round((Math.random() * 75 + 15) / 15) * 15,
+				durationMinutes: generateRandomMinutes(75),
 				isBusy: !(idx % 2),
 				title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
 			})),
@@ -42,3 +48,6 @@ const calendarSeeder = {
 }
 
 export default calendarSeeder
+function generateRandomMinutes(maxMinutes: number): number {
+	return Math.round((Math.random() * maxMinutes + 15) / 15) * 15
+}
