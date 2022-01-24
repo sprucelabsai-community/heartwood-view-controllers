@@ -117,11 +117,11 @@ export default abstract class AbstractViewController<ViewModel>
 	}
 
 	protected async alert(options: AlertOptions) {
-		const header = options.title
-			? {
-					title: options.title,
-			  }
-			: undefined
+		const { title = 'Alert! 🌲🤖' } = options
+
+		const header = {
+			title,
+		}
 
 		const dlg = this.renderInDialog({
 			header,

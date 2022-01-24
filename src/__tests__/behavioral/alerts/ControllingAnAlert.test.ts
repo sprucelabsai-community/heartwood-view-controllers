@@ -96,7 +96,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async alertingWithoutTitleDoesntRenderHeader() {
+	protected static async alertingWithoutTitleDropsInDefault() {
 		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			//@ts-ignore
 			this.vc.alert({
@@ -105,7 +105,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 		)
 
 		const model = this.render(dlgVc)
-		assert.isFalsy(model.header)
+		assert.isString(model.header?.title)
 	}
 
 	@test()
