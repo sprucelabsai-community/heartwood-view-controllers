@@ -13,6 +13,12 @@ const calendarEventSchema = buildSchema({
 			type: 'number',
 			options: undefined,
 		},
+		error: {
+			type: 'raw',
+			options: {
+				valueType: 'Error',
+			},
+		},
 		controller: {
 			type: 'raw',
 			options: {
