@@ -663,6 +663,30 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static settingViewControllerSetsOnEventsAlreadySet() {
+		const { event } = this.addEventWithType('test')
+		this.vc.setControllerForEventType('test', 'list')
+
+		const match = this.vc.getEventVc(event.id)
+		assert.isTrue(match instanceof ListViewController)
+	}
+
+	@test()
+	protected static settingViewControllerByTypeTriggersRender() {
+		this.vc.setControllerForEventType('test', 'list')
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async settingViewControllerDoesNotClearPastVcs() {
+		const { vc, event } = this.addEventAndGetVc()
+		this.vc.setControllerForEventType('test', 'list')
+
+		const match = this.vc.getEventVc(event.id)
+		assert.isEqual(vc, match)
+	}
+
+	@test()
 	protected static renderingEventRendersController() {
 		const { vc } = this.addEventAndGetVc()
 		const model = this.render(vc)
@@ -725,6 +749,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.vc.enableAnimation()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	private static addEventWithType(type: string) {
+		return this.addEventAndGetVc({
+			eventTypeSlug: type,
+		})
 	}
 
 	private static assertSetsVcForEventType(
