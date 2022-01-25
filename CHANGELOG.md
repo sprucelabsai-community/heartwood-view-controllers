@@ -1,3 +1,10 @@
+# [57.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.3.16...v57.4.0) (2022-01-25)
+
+
+### Features
+
+* devs can attach errors to calendar events ([f1def74](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f1def74))
+
 ## [57.3.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.3.15...v57.3.16) (2022-01-25)
 
 ## [57.3.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.3.14...v57.3.15) (2022-01-25)
