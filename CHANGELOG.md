@@ -1,3 +1,10 @@
+# [57.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.5.0...v57.6.0) (2022-01-26)
+
+
+### Features
+
+* devs can now get the vcFactory off the view controller to make working with vcs even EASIER! ([4bb14ee](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4bb14ee))
+
 # [57.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.4.13...v57.5.0) (2022-01-26)
 
 
