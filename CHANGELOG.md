@@ -1,3 +1,10 @@
+# [57.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.4.13...v57.5.0) (2022-01-26)
+
+
+### Features
+
+* new AbstractCalendarEventViewController to make exiting calendar events a BREEZE! ([ed8e276](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ed8e276))
+
 ## [57.4.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.4.12...v57.4.13) (2022-01-26)
 
 ## [57.4.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.4.11...v57.4.12) (2022-01-26)
