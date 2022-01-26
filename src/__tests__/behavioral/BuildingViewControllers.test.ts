@@ -14,10 +14,6 @@ export class TestViewController extends AbstractViewController<ViewModel> {
 		super(options)
 		this.constructorOptions = options
 	}
-	public getVcFactory() {
-		//@ts-ignore
-		return this.vcFactory
-	}
 	public render() {
 		return {}
 	}
@@ -30,10 +26,6 @@ export class TestViewControllerWithId extends AbstractViewController<ViewModel> 
 	public constructor(options: any) {
 		super(options)
 		this.constructorOptions = options
-	}
-	public getVcFactory() {
-		//@ts-ignore
-		return this.vcFactory
 	}
 	public render() {
 		return {}
@@ -112,6 +104,8 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		const vc = this.factory.Controller('test', {})
 
 		assert.isTruthy(vc.getVcFactory())
+		//@ts-ignore
+		assert.isEqual(vc.vcFactory, vc.getVcFactory())
 	}
 
 	@test()
