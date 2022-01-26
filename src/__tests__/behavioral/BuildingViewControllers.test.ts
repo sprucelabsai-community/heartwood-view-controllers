@@ -103,6 +103,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 	protected static async canGetVcFactory() {
 		const vc = this.factory.Controller('test', {})
 
+		//@ts-ignore
 		assert.isTruthy(vc.getVcFactory())
 		//@ts-ignore
 		assert.isEqual(vc.vcFactory, vc.getVcFactory())
