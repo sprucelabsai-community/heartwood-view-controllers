@@ -28,6 +28,7 @@ export { default as ActiveRecordCardViewController } from './viewControllers/Act
 export { default as StatsViewController } from './viewControllers/reporting/Stats.vc'
 export { default as ProgressViewController } from './viewControllers/reporting/Progress.vc'
 export { default as RatingsViewController } from './viewControllers/Ratings.vc'
+export { default as AbstractCalendarEventViewController } from './viewControllers/AbstractCalendarEvent.vc'
 
 export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
