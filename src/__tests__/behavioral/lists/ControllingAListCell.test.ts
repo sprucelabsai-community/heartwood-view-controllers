@@ -97,6 +97,16 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		false
 	)
 	@test(
+		'setting checkbox cell sets value on list and triggers render in all the right places',
+		{
+			checkboxInput: {
+				name: 'firstName',
+				value: false,
+			},
+		},
+		false
+	)
+	@test(
 		'setting ratings cell sets value on list and triggers render in all the right places',
 		{
 			ratingsInput: {

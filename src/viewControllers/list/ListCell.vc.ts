@@ -50,14 +50,21 @@ export default class ListCellViewController implements ViewController<Model> {
 	}
 
 	public render(): Model {
-		const { textInput, selectInput, toggleInput, ratingsInput, ...rest } =
-			this.model
+		const {
+			textInput,
+			selectInput,
+			toggleInput,
+			ratingsInput,
+			checkboxInput,
+			...rest
+		} = this.model
 
 		for (const item of [
 			{ name: 'textInput', input: textInput },
 			{ name: 'selectInput', input: selectInput },
 			{ name: 'toggleInput', input: toggleInput },
 			{ name: 'ratingsInput', input: ratingsInput },
+			{ name: 'checkboxInput', input: checkboxInput },
 		]) {
 			const { name, input } = item
 			if (input) {

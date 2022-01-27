@@ -64,6 +64,10 @@ export default buildSchema({
 								choices: heightChoices,
 							},
 						},
+						isEnabled: {
+							type: 'boolean',
+							label: 'Enabled',
+						},
 						id: {
 							type: 'id',
 							label: 'Id',

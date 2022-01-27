@@ -2706,6 +2706,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
 				/** Row height. */
 				'height'?: ("standard" | "tall" | "content")| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
 				/** Id. */
 				'id': string
 				/** Click handler. */
@@ -2734,6 +2736,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Row height',
 			                type: 'select',
 			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Id. */
 			            'id': {
@@ -3455,6 +3463,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput| undefined | null
 				/** Toggle input. */
 				'toggleInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput| undefined | null
+				/** Checkbox input. */
+				'checkboxInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput| undefined | null
 				/** Ratings input. */
 				'ratingsInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput| undefined | null
 		}
@@ -3518,6 +3528,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Toggle input. */
 			            'toggleInput': {
 			                label: 'Toggle input',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema,}
+			            },
+			            /** Checkbox input. */
+			            'checkboxInput': {
+			                label: 'Checkbox input',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema,}
 			            },

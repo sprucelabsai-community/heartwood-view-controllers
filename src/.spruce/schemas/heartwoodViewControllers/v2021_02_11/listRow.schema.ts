@@ -22,6 +22,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                type: 'select',
 	                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
 	            },
+	            /** Enabled. */
+	            'isEnabled': {
+	                label: 'Enabled',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Id. */
 	            'id': {
 	                label: 'Id',

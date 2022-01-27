@@ -70,6 +70,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                type: 'schema',
 	                options: {schema: listToggleInputSchema_v2021_02_11,}
 	            },
+	            /** Checkbox input. */
+	            'checkboxInput': {
+	                label: 'Checkbox input',
+	                type: 'schema',
+	                options: {schema: listToggleInputSchema_v2021_02_11,}
+	            },
 	            /** Ratings input. */
 	            'ratingsInput': {
 	                label: 'Ratings input',

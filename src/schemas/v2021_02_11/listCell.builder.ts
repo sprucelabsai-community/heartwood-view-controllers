@@ -134,6 +134,25 @@ export default buildSchema({
 				},
 			},
 		},
+		checkboxInput: {
+			type: 'schema',
+			label: 'Checkbox input',
+			options: {
+				schema: {
+					id: 'listToggleInput',
+					fields: {
+						...toggleInputBuilder.fields,
+						setValue: {
+							type: 'raw',
+							options: {
+								valueType:
+									'(name: string, value: boolean) => Promise<any> | any',
+							},
+						},
+					},
+				},
+			},
+		},
 		ratingsInput: {
 			type: 'schema',
 			label: 'Ratings input',
