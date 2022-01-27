@@ -99,6 +99,7 @@ export default class ListRowViewController
 
 	public setIsEnabled(isEnabled: boolean) {
 		this.setIsEnabledHandler(isEnabled)
+		this.triggerRender()
 	}
 
 	public setIsSelected(isSelected: boolean) {

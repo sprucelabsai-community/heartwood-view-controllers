@@ -92,6 +92,21 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		vcAssert.assertRowIsDisabled(vc, 'second')
 	}
 
+	@test()
+	protected static settingEnabledTriggersRender() {
+		const vc = this.Controller('list', {})
+		vc.addRow({
+			id: 'first',
+			cells: [],
+		})
+
+		const rowVc = vc.getRowVc(0)
+
+		vcAssert.attachTriggerRenderCounter(rowVc)
+		rowVc.setIsEnabled(true)
+		vcAssert.assertTriggerRenderCount(rowVc, 1)
+	}
+
 	protected static Vc(listIds: string[]): ListVc {
 		//@ts-ignore
 		return this.Controller('listVc', { listIds })
