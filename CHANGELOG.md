@@ -1,3 +1,10 @@
+# [57.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.8.0...v57.9.0) (2022-01-27)
+
+
+### Features
+
+* Devs can test if rows in lists are enabled or disabled, making testing even EASIER! ([21906f3](https://github.com/sprucelabsai/heartwood-view-controllers/commit/21906f3))
+
 # [57.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.7.2...v57.8.0) (2022-01-27)
 
 
