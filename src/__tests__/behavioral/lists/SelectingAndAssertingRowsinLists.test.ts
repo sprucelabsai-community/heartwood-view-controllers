@@ -183,6 +183,26 @@ export default class SelectingRowsinListsTest extends AbstractViewControllerTest
 		vcAssert.assertRowIsSelected(vc, 'happy')
 	}
 
+	@test()
+	protected static rendersIsSelected() {
+		const vc = this.Vc([
+			{
+				id: 'day',
+				cells: [],
+			},
+		])
+
+		const rowVc = vc.getRowVc('day')
+
+		rowVc.setIsSelected(true)
+		let model = this.render(vc)
+		assert.isTrue(model.rows[0].isSelected)
+
+		rowVc.setIsSelected(false)
+		model = this.render(vc)
+		assert.isFalse(model.rows[0].isSelected)
+	}
+
 	private static Vc(
 		rows: ListRowModel[] = [
 			{

@@ -1065,6 +1065,27 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isTrue(wasHit)
 	}
 
+	@test()
+	protected static async canEnableAndDisableRow() {
+		this.vc.addRow({
+			id: generateRandomId(),
+			cells: [],
+		})
+
+		let model = this.render(this.vc)
+		assert.isUndefined(model.rows[0].isEnabled)
+
+		this.vc.getRowVc(0).setIsEnabled(false)
+
+		model = this.render(this.vc)
+		assert.isFalse(model.rows[0].isEnabled)
+
+		this.vc.getRowVc(0).setIsEnabled(true)
+
+		model = this.render(this.vc)
+		assert.isTrue(model.rows[0].isEnabled)
+	}
+
 	private static add3Rows() {
 		this.vc.addRows([
 			{

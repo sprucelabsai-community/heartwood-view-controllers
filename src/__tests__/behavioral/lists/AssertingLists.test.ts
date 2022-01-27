@@ -66,6 +66,32 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static canTellIfRowIsEnabled() {
+		const vc = this.Controller('list', {})
+		vc.addRow({
+			id: 'first',
+			isEnabled: false,
+			cells: [],
+		})
+		vc.addRow({
+			id: 'second',
+			isEnabled: false,
+			cells: [],
+		})
+
+		assert.doesThrow(() => vcAssert.assertRowIsEnabled(vc, 'first'))
+		vcAssert.assertRowIsDisabled(vc, 'second')
+
+		vc.getRowVc(0).setIsEnabled(true)
+
+		vcAssert.assertRowIsEnabled(vc, 'first')
+		assert.doesThrow(() => vcAssert.assertRowIsDisabled(vc, 'first'))
+
+		assert.doesThrow(() => vcAssert.assertRowIsEnabled(vc, 'second'))
+		vcAssert.assertRowIsDisabled(vc, 'second')
+	}
+
 	protected static Vc(listIds: string[]): ListVc {
 		//@ts-ignore
 		return this.Controller('listVc', { listIds })

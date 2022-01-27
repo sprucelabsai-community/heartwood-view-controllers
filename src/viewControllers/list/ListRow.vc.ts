@@ -8,21 +8,26 @@ export default class ListRowViewController
 	implements
 		ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow>
 {
-	private model: ListRowModel
+	private get model() {
+		return this.getModelHandler()
+	}
+
 	private setValueHandler: (name: string, value: any) => void | Promise<void>
 	private getValuesHandler: () => Record<string, any>
 	private deleteRowHandler: () => void
 	private _isLastRow: boolean
-	private getIsSelectedHandler: () => boolean
 	private setIsSelectedHandler: (isSelected: boolean) => void
+	private setIsEnabledHandler: (isEnabled: boolean) => void
+	private getModelHandler: () => ListRowModel
 
 	public constructor(
 		options: ListRowModel & {
 			setValue: (name: string, value: any) => void | Promise<void>
 			getValues: () => Record<string, any>
 			deleteRow: () => void
-			getIsSelected: () => boolean
 			setIsSelected: (isSelected: boolean) => void
+			setIsEnabled: (isEnabled: boolean) => void
+			getModel: () => ListRowModel
 			isLastRow: boolean
 		}
 	) {
@@ -30,19 +35,19 @@ export default class ListRowViewController
 			setValue,
 			getValues,
 			deleteRow,
-			getIsSelected,
 			setIsSelected,
 			isLastRow,
-			...model
+			getModel,
+			setIsEnabled,
 		} = options
 
-		this.model = model
+		this.getModelHandler = getModel
 
 		this.setValueHandler = setValue
 		this.getValuesHandler = getValues
 		this.deleteRowHandler = deleteRow
-		this.getIsSelectedHandler = getIsSelected
 		this.setIsSelectedHandler = setIsSelected
+		this.setIsEnabledHandler = setIsEnabled
 
 		this._isLastRow = isLastRow
 	}
@@ -60,16 +65,6 @@ export default class ListRowViewController
 
 	public getValues(): Record<string, any> {
 		return this.getValuesHandler()
-	}
-
-	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow {
-		return {
-			...this.model,
-			controller: this,
-			cells: this.model.cells.map((cell, idx) => ({
-				...this.getCellVc(idx).render(),
-			})),
-		}
 	}
 
 	public getValue(fieldName: string): any {
@@ -99,7 +94,11 @@ export default class ListRowViewController
 	}
 
 	public getIsSelected(): boolean {
-		return this.getIsSelectedHandler()
+		return this.model.isSelected ?? false
+	}
+
+	public setIsEnabled(isEnabled: boolean) {
+		this.setIsEnabledHandler(isEnabled)
 	}
 
 	public setIsSelected(isSelected: boolean) {
@@ -121,5 +120,15 @@ export default class ListRowViewController
 			...cell,
 			setValue: this._setValue.bind(this),
 		})
+	}
+
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow {
+		return {
+			...this.model,
+			controller: this,
+			cells: this.model.cells.map((_cell, idx) => ({
+				...this.getCellVc(idx).render(),
+			})),
+		}
 	}
 }

@@ -1314,6 +1314,26 @@ const vcAssert = {
 		}
 	},
 
+	assertRowIsEnabled(listVc: ListViewController, row: string | number) {
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+		assert.isTrue(model.isEnabled ?? true, `The row '${row}' is not enabled!`)
+	},
+
+	assertRowIsDisabled(listVc: ListViewController, row: string | number) {
+		try {
+			this.assertRowIsEnabled(listVc, row)
+
+			// eslint-disable-next-line no-empty
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I expected row '${row}' to be disabled, but it was actually enabled!`
+		)
+	},
+
 	assertRowDoesNotRenderToggle(
 		listVc: ListViewController,
 		row: string | number,
