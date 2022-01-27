@@ -1,3 +1,10 @@
+# [57.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.6.5...v57.7.0) (2022-01-27)
+
+
+### Features
+
+* Devs can now get view controllers off the vcfactory ([147396a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/147396a))
+
 ## [57.6.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.6.4...v57.6.5) (2022-01-27)
 
 ## [57.6.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.6.3...v57.6.4) (2022-01-27)
