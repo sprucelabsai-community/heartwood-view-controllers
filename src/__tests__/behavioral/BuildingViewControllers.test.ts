@@ -188,4 +188,11 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		//@ts-ignore
 		assert.isEqual(vc.voteHandler, handler)
 	}
+
+	@test('can get vc class 1', 'test', TestViewController)
+	@test('can get vc class 2', 'testSkillView', TestSkillViewController)
+	protected static canGetVcClass(id: any, Class: any) {
+		const Actual = this.factory.getController(id)
+		assert.isEqual(Actual, Class)
+	}
 }

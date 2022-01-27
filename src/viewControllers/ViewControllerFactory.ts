@@ -116,6 +116,10 @@ export default class ViewControllerFactory {
 		return !!this.controllerMap[name]
 	}
 
+	public getController<N extends ViewControllerId>(name: N) {
+		return this.controllerMap[name]
+	}
+
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
