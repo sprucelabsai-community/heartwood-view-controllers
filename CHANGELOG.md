@@ -1,3 +1,10 @@
+# [57.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.7.2...v57.8.0) (2022-01-27)
+
+
+### Features
+
+* devs can drop checkboxes into forms and lists! also, list rows can be disabled creating more diverse experience opportunities ([1c6dad0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1c6dad0))
+
 ## [57.7.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.7.1...v57.7.2) (2022-01-27)
 
 ## [57.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.7.0...v57.7.1) (2022-01-27)
