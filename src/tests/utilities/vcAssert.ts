@@ -38,8 +38,8 @@ type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export interface ConfirmViewController {
-	accept: () => void | Promise<void>
-	decline: () => void | Promise<void>
+	accept: () => any | Promise<any>
+	decline: () => any | Promise<any>
 	options: ConfirmOptions
 }
 
@@ -54,8 +54,8 @@ export function pluckFirstFromCard(model: Card, key: keyof CardSection) {
 	return pluckAllFromCard(model, key)[0] as any
 }
 
-async function wait(...promises: (Promise<any> | undefined | void)[]) {
-	return new Promise<void>((resolve, reject) => {
+async function wait(...promises: (Promise<any> | undefined | any)[]) {
+	return new Promise<any>((resolve, reject) => {
 		let isDone = false
 
 		const done = () => {
@@ -64,6 +64,7 @@ async function wait(...promises: (Promise<any> | undefined | void)[]) {
 
 				setTimeout(() => {
 					clearTimeout(timeout)
+					//@ts-ignore
 					resolve()
 				}, 0)
 			}
@@ -137,7 +138,7 @@ const vcAssert = {
 	},
 	async assertRendersConfirm(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>
+		action: () => any | Promise<any>
 	) {
 		let confirmVc: ConfirmViewController = {
 			//@ts-ignore
@@ -190,7 +191,7 @@ const vcAssert = {
 
 	async assertDoesNotRenderDialog(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>
+		action: () => any | Promise<any>
 	) {
 		try {
 			await this.assertRendersDialog(vc, action)
@@ -266,7 +267,7 @@ const vcAssert = {
 
 	async assertDoesNotRenderAlert(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>
+		action: () => any | Promise<any>
 	) {
 		//@ts-ignore
 		let oldAlert = vc._originalAlert
@@ -296,7 +297,7 @@ const vcAssert = {
 
 	async assertAsksForAVote(
 		vc: ViewController<any>,
-		action: () => Promise<void>
+		action: () => Promise<any>
 	) {
 		let wasHit = false
 		const voteVc = {
@@ -329,8 +330,8 @@ const vcAssert = {
 
 	async assertRendersDialog(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>,
-		dialogHandler?: (dialogVc: DialogViewController) => void | Promise<void>
+		action: () => any | Promise<any>,
+		dialogHandler?: (dialogVc: DialogViewController) => any | Promise<any>
 	): Promise<DialogViewController> {
 		let run = () => {}
 
@@ -375,7 +376,7 @@ const vcAssert = {
 					//@ts-ignore
 					setTimeout(async () => {
 						dialogHandlerPromise = dialogHandler?.(controller)?.catch?.(
-							(err) => {
+							(err: any) => {
 								reject(err)
 							}
 						)
