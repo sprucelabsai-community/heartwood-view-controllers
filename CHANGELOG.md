@@ -1,3 +1,10 @@
+# [57.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.9.7...v57.10.0) (2022-01-28)
+
+
+### Features
+
+* calendar asserting for cards ([4ec1dea](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4ec1dea))
+
 ## [57.9.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.9.6...v57.9.7) (2022-01-28)
 
 ## [57.9.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.9.5...v57.9.6) (2022-01-28)

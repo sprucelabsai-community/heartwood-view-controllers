@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "57.9.7",
+  "version": "57.10.0",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
