@@ -1002,7 +1002,7 @@ const vcAssert = {
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
 		Class: any
-	) {
+	): CardViewController {
 		const vc = this.assertRendersToolBelt(svcOrToolBelt)
 		const tool = vc.getTool(toolId)
 
@@ -1022,13 +1022,13 @@ const vcAssert = {
 
 			const match = isVcInstanceOf(check, Class)
 			if (match) {
-				return match
+				return match as any
 			}
 		}
 
 		assert.fail(`The tool '${toolId}' wasn't an instance of a '${Class.name}'`)
 
-		return null
+		return null as any
 	},
 
 	assertToolBeltDoesNotRenderTool(
