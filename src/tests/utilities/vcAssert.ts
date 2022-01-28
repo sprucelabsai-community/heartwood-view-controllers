@@ -212,7 +212,7 @@ const vcAssert = {
 
 	async assertRendersAlert(
 		vc: ViewController<any>,
-		action: () => void | Promise<void>,
+		action: () => any | Promise<any>,
 		style: AlertOptions['style'] = 'error'
 	) {
 		let wasAlertTriggered = false
