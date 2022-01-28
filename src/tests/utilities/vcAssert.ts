@@ -1002,7 +1002,7 @@ const vcAssert = {
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
 		Class: any
-	): ViewController {
+	): ViewController<any> {
 		const vc = this.assertRendersToolBelt(svcOrToolBelt)
 		const tool = vc.getTool(toolId)
 
