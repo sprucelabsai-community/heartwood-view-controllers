@@ -1082,7 +1082,7 @@ const vcAssert = {
 		assert.fail('Your skill view does not render a calendar!')
 	},
 
-	assertCardRendersCalendar(vc: CardViewController) {
+	assertCardRendersCalendar(vc: ViewController<Card>) {
 		const model = renderUtil.render(vc)
 		const calendar = pluckFirstFromCard(model, 'calendar')
 
@@ -1093,7 +1093,7 @@ const vcAssert = {
 		assert.fail(`Your card '${getVcName(vc)}' does not render a calendar!`)
 	},
 
-	assertCardDoesNotRenderCalendar(vc: CardViewController) {
+	assertCardDoesNotRenderCalendar(vc: ViewController<Card>) {
 		try {
 			this.assertCardRendersCalendar(vc)
 		} catch {
