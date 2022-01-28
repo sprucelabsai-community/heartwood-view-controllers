@@ -33,7 +33,7 @@ class CalendarPage extends AbstractSkillViewController {
 		return this.calVc
 	}
 
-	private CardVc() {
+	public CardVc() {
 		return this.Controller('card', {
 			body: {
 				sections: [{ calendar: this.getCalVc().render() }],
@@ -57,14 +57,32 @@ export default class AssertingCalendarsTest extends AbstractViewControllerTest {
 		cal: CalendarPage,
 		calVc: CalVc,
 	}
+	private static vc: CalendarPage
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		this.vc = this.Controller('cal' as any, {}) as CalendarPage
+	}
 
 	@test()
 	protected static assertingCalendarReturnsController() {
-		const vc = this.Controller('cal' as any, {}) as CalendarPage
-		const match = vcAssert.assertSkillViewRendersCalendar(vc)
+		const match = vcAssert.assertSkillViewRendersCalendar(this.vc)
 
 		assert.isTruthy(match)
-		assert.isEqual(match, vc.getCalVc().getCalendarVc())
+		assert.isEqual(match, this.vc.getCalVc().getCalendarVc())
 		vcAssert.assertRendersAsInstanceOf(match, CalVc)
+	}
+
+	@test()
+	protected static canAssertCardRendersCalendar() {
+		const vc = this.Controller('card', {})
+
+		assert.doesThrow(() => vcAssert.assertCardRendersCalendar(vc))
+		vcAssert.assertCardDoesNotRenderCalendar(vc)
+
+		const cardVc = this.vc.CardVc()
+
+		vcAssert.assertCardRendersCalendar(cardVc)
+		assert.doesThrow(() => vcAssert.assertCardDoesNotRenderCalendar(cardVc))
 	}
 }
