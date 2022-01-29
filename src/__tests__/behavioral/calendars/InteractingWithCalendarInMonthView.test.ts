@@ -60,7 +60,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			},
 		})
 
-		interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
+		await interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
 
 		assert.isTrue(wasHit)
 	}
