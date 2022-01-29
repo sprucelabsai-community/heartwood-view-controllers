@@ -10,6 +10,7 @@ export type CalendarEvent =
 export interface ClickCalendarViewOptions {
 	time?: number
 	person?: Person
+	date?: number
 }
 
 export interface ClickEventOptions {

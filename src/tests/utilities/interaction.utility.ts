@@ -1,3 +1,4 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
@@ -381,6 +382,34 @@ const interactionUtil = {
 		)
 
 		return results as boolean
+	},
+
+	async clickCalendarMonthView(
+		vc: ViewController<Calendar>,
+		dateTimeMs: number
+	) {
+		assertOptions({ vc, dateTimeMs }, ['vc', 'dateTimeMs'])
+
+		const model = renderUtil.render(vc)
+
+		assert.isEqual(
+			model.view,
+			'month',
+			`Your calendar '${getVcName(
+				vc
+			)}' needs it's view set to 'month', it's currently set to ${
+				model.view ?? '***empty***'
+			}`
+		)
+
+		assert.isFunction(
+			model.onClick,
+			`You have to set 'onClick' on your calendar!`
+		)
+
+		await model.onClick?.({
+			date: dateUtil.getStartOfDay(dateTimeMs),
+		})
 	},
 
 	async clickCalendarDayView(
