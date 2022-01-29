@@ -3,9 +3,9 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
-	MonthViewClickEventOptions,
 	DropEventOptions,
 	vcAssert,
+	ClickEventOptions,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
@@ -13,7 +13,7 @@ import interactionUtil from '../../../tests/utilities/interaction.utility'
 
 export class InteractingWithCalendarInMonthViewTest extends AbstractViewControllerTest {
 	private static vc: CalendarViewController
-	private static lastOnClickOptions: MonthViewClickEventOptions
+	private static lastOnClickOptions: ClickEventOptions
 
 	protected static async beforeEach() {
 		await super.beforeEach()
