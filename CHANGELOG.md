@@ -1,3 +1,10 @@
+# [57.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.10.5...v57.11.0) (2022-01-29)
+
+
+### Features
+
+* devs can now click in day view to test even more calendar interations! ([90faadf](https://github.com/sprucelabsai/heartwood-view-controllers/commit/90faadf))
+
 ## [57.10.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.10.4...v57.10.5) (2022-01-29)
 
 ## [57.10.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.10.3...v57.10.4) (2022-01-29)
