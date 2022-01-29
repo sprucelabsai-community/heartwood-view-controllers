@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../tests/utilities/interaction.utility'
+import interactor from '../../tests/utilities/interactor'
 import vcAssert from '../../tests/utilities/vcAssert.utility'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
@@ -76,7 +76,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 	@test()
 	protected static async clickingFooterPrimaryTriggersOnDone() {
-		await interactionUtil.clickPrimaryInFooter(this.vc)
+		await interactor.clickPrimaryInFooter(this.vc)
 		assert.isTrue(this.wasOnDoneInvoked)
 	}
 
@@ -120,7 +120,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
 		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
+			interactor.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
 		await confirmVc.accept()
@@ -144,7 +144,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		assert.isEqual(rowVc.getValue('title'), 'Page 3')
 
 		const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickDestructiveInRow(this.vc.getListVc(), 2)
+			interactor.clickDestructiveInRow(this.vc.getListVc(), 2)
 		)
 
 		await confirmVc.decline()
@@ -155,7 +155,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
 	@test()
 	protected static async clickingSecondaryButtonInTheFooterAddsPage() {
-		await interactionUtil.clickSecondaryInFooter(this.vc)
+		await interactor.clickSecondaryInFooter(this.vc)
 		assert.isEqual(this.formBuilderVc.getTotalPages(), 2)
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 

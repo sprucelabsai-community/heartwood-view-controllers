@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
@@ -129,7 +129,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		builderSectionVc.addField()
 
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 		vcAssert.assertDialogWasClosed(dialogVc)
 
 		const pageVc = this.formBuilderVc.getPresentPageVc()
@@ -163,7 +163,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		builderSectionVc.addField()
 
-		await interactionUtil.keyDownOnElementInRow({
+		await interactor.keyDownOnElementInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
 			cellIdx: 2,
@@ -180,7 +180,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const fieldList = builderSectionVc.getFieldListVc()
 
-		await interactionUtil.keyDownOnElementInRow({
+		await interactor.keyDownOnElementInRow({
 			vc: fieldList.getRowVc(0),
 			key: char,
 			cellIdx: 2,
@@ -195,7 +195,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const fieldList = builderSectionVc.getFieldListVc()
 
-		await interactionUtil.keyDownOnElementInRow({
+		await interactor.keyDownOnElementInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
 			cellIdx: 2,
@@ -220,7 +220,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const { formVc } = await this.simulateEditSectionClick()
 
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 
 		const { compiledOptions } = this.formBuilderVc
 			.getPageVc(0)

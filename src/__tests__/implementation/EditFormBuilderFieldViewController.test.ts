@@ -2,7 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../tests/utilities/interaction.utility'
+import interactor from '../../tests/utilities/interactor'
 import vcAssert from '../../tests/utilities/vcAssert.utility'
 import { FormBuilderFieldType } from '../../types/heartwood.types'
 import FormViewController from '../../viewControllers/Form.vc'
@@ -174,7 +174,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		const actual = formVc.getValues()
 
 		assert.isEqualDeep(actual, expected)
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, initialValues)
 	}
 
@@ -194,7 +194,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			},
 		}).getFormVc()
 
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, {
 			name: 'firstName2',
 			label: 'First name2',
@@ -223,7 +223,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			},
 		}).getFormVc()
 
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, {
 			name: 'firstName2',
 			label: 'First name2',
@@ -256,7 +256,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		vcAssert.assertFormRendersField(formVc, 'isRequired')
 		await formVc.setValue('isRequired', true)
 
-		await interactionUtil.submitForm(formVc)
+		await interactor.submitForm(formVc)
 
 		assert.isTrue(submittedResults.isRequired)
 	}

@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssertUtil } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
@@ -142,7 +142,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		assert.isEqual(listVc.getTotalRows(), 2)
 
-		await interactionUtil.clickSecondaryInFooter(this.formVc)
+		await interactor.clickSecondaryInFooter(this.formVc)
 
 		assert.isEqual(listVc.getTotalRows(), 3)
 	}
@@ -189,10 +189,10 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		assert.isEqual(listVc.getRowVc(2).getValue('fieldName'), 'Field 3')
 		assert.isEqual(listVc.getTotalRows(), 4)
 
-		await interactionUtil.clickDestructiveInRow(listVc, 2)
+		await interactor.clickDestructiveInRow(listVc, 2)
 
 		let confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickDestructiveInRow(listVc, 2)
+			interactor.clickDestructiveInRow(listVc, 2)
 		)
 
 		assert.isTrue(confirmVc.options.isDestructive)
@@ -204,7 +204,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		//clicking confirm on confirmation
 		confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-			interactionUtil.clickDestructiveInRow(listVc, 2)
+			interactor.clickDestructiveInRow(listVc, 2)
 		)
 
 		await confirmVc.accept()
@@ -263,7 +263,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			onDoneValues = values
 		}
 
-		await interactionUtil.submitForm(this.formVc)
+		await interactor.submitForm(this.formVc)
 
 		assert.isTrue(wasOnDoneInvoked)
 		assert.isEqualDeep(onDoneValues, {
@@ -296,7 +296,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		this.vc.addField()
 
-		await interactionUtil.submitForm(this.formVc)
+		await interactor.submitForm(this.formVc)
 
 		assert.isEqualDeep(onDoneValues, {
 			title: 'go again',
@@ -337,7 +337,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		this.vc.addField()
 		this.vc.addField()
 
-		await interactionUtil.submitForm(this.formVc)
+		await interactor.submitForm(this.formVc)
 
 		vcAssert.assertDialogWasClosed(this.dialogVc)
 
@@ -382,7 +382,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		// will have no effect because type is text
 		await this.formVc.setValue('shouldRenderAsGrid', true)
 
-		await interactionUtil.submitForm(this.formVc)
+		await interactor.submitForm(this.formVc)
 
 		vcAssert.assertDialogWasClosed(this.dialogVc)
 
@@ -413,7 +413,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		await this.formVc.setValue('type', 'text')
 		await this.formVc.setValue('text', 'What is up?')
 
-		await interactionUtil.submitForm(this.formVc)
+		await interactor.submitForm(this.formVc)
 
 		const newSection = this.formBuilderVc.getPageVc(0).getSection(1)
 		assert.isEqual(newSection.title, 'Now second section')

@@ -6,7 +6,7 @@ import buildBigForm from '../../../builders/buildBigForm'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../../tests/constants'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 import { SkillViewController } from '../../../types/heartwood.types'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
@@ -36,13 +36,13 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canCreateInteractionUtil() {
-		assert.isTruthy(interactionUtil)
+		assert.isTruthy(interactor)
 	}
 
 	@test.skip('find out how to test with wildcard demo numbers')
 	protected static async loginFailsWithBadNumber() {
 		await assert.doesThrowAsync(() =>
-			interactionUtil.submitLoginForm(this.LoginVc(), '666-000-0000')
+			interactor.submitLoginForm(this.LoginVc(), '666-000-0000')
 		)
 	}
 
@@ -58,7 +58,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 
 		const { person } = await this.mercury.loginAsDemoPerson(phone)
 
-		await interactionUtil.submitLoginForm(this.LoginVc(), phone)
+		await interactor.submitLoginForm(this.LoginVc(), phone)
 
 		assert.isTrue(auth.isLoggedIn())
 		assert.isEqual(loggedInPersonId, person.id)
@@ -75,9 +75,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			sections: [],
 		})
 
-		await assert.doesThrowAsync(() =>
-			interactionUtil.clickPrimaryInFooter(formVc)
-		)
+		await assert.doesThrowAsync(() => interactor.clickPrimaryInFooter(formVc))
 	}
 
 	@test()
@@ -90,7 +88,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			sections: [],
 		})
 
-		await interactionUtil.clickPrimaryInFooter(formVc)
+		await interactor.clickPrimaryInFooter(formVc)
 	}
 
 	@test('can submit big form with 2 sections', [
@@ -139,7 +137,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			})
 		)
 
-		await interactionUtil.submitForm(bigFormVc)
+		await interactor.submitForm(bigFormVc)
 
 		assert.isTrue(wasHit)
 	}
@@ -180,23 +178,23 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 		})
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickButtonInRow(vc, 5, 'edit')
+			interactor.clickButtonInRow(vc, 5, 'edit')
 		)
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickButtonInRow(vc, 0, 'stamp')
+			interactor.clickButtonInRow(vc, 0, 'stamp')
 		)
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickButtonInRow(vc, 0, 'champ')
+			interactor.clickButtonInRow(vc, 0, 'champ')
 		)
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickButtonInRow(vc, 'first', 'champ')
+			interactor.clickButtonInRow(vc, 'first', 'champ')
 		)
 
-		await interactionUtil.clickButtonInRow(vc, 0, 'edit')
-		await interactionUtil.clickButtonInRow(vc, 'first', 'edit')
-		await interactionUtil.clickButtonInRow(vc, 1, 'stamp')
-		await interactionUtil.clickButtonInRow(vc, 1, 'champ')
-		await interactionUtil.clickButtonInRow(vc, 'second', 'champ')
+		await interactor.clickButtonInRow(vc, 0, 'edit')
+		await interactor.clickButtonInRow(vc, 'first', 'edit')
+		await interactor.clickButtonInRow(vc, 1, 'stamp')
+		await interactor.clickButtonInRow(vc, 1, 'champ')
+		await interactor.clickButtonInRow(vc, 'second', 'champ')
 	}
 
 	@test()
@@ -220,7 +218,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			],
 		})
 
-		await interactionUtil.clickButtonInRow(vc, 'first', 'edit')
+		await interactor.clickButtonInRow(vc, 'first', 'edit')
 
 		assert.isTrue(wasHit)
 	}
@@ -269,14 +267,12 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		await assert.doesThrowAsync(() =>
-			interactionUtil.clickButton(vc, badButton)
-		)
+		await assert.doesThrowAsync(() => interactor.clickButton(vc, badButton))
 
-		await interactionUtil.clickButton(vc, button1Id)
-		await interactionUtil.clickButton(vc, button2Id)
-		await interactionUtil.clickButton(vc, button3Id)
-		await interactionUtil.clickButton(vc, button4Id)
+		await interactor.clickButton(vc, button1Id)
+		await interactor.clickButton(vc, button2Id)
+		await interactor.clickButton(vc, button3Id)
+		await interactor.clickButton(vc, button4Id)
 	}
 
 	@test()
@@ -304,7 +300,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			},
 		})
 
-		const promise = interactionUtil.clickButton(vc, button1Id)
+		const promise = interactor.clickButton(vc, button1Id)
 		assert.isFalse(lateHit)
 		assert.isTrue(wasHit)
 
@@ -328,7 +324,7 @@ export default class InteractionUtilTest extends AbstractViewControllerTest {
 			})
 		)
 
-		await assert.doesThrowAsync(() => interactionUtil.submitForm(formVc))
+		await assert.doesThrowAsync(() => interactor.submitForm(formVc))
 	}
 
 	private static LoginVc() {

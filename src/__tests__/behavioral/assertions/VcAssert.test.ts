@@ -7,7 +7,7 @@ import { AbstractViewController } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
 	LineIcon,
@@ -829,8 +829,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			vcAssert.assertCardDoesNotRenderCriticalError(cardVc)
 		)
 
-		await interactionUtil.clickPrimaryInFooter(cardVc)
-		await interactionUtil.clickSecondaryInFooter(cardVc)
+		await interactor.clickPrimaryInFooter(cardVc)
+		await interactor.clickSecondaryInFooter(cardVc)
 
 		assert.isTrue(wasPrimaryHit)
 		assert.isTrue(wasSecondaryHit)

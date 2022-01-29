@@ -11,7 +11,7 @@ import SwipeViewController from '../viewControllers/Swipe.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import MockStorage from './MockStorage'
-import interactionUtil from './utilities/interaction.utility'
+import interactor from './utilities/interactor'
 import vcAssert from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
@@ -90,6 +90,6 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 			onClick?: (() => void | Promise<void>) | null | undefined
 		} | null
 	) {
-		return interactionUtil.click(button)
+		return interactor.click(button)
 	}
 }

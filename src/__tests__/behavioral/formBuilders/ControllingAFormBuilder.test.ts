@@ -8,7 +8,7 @@ import { errorAssertUtil } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../../utilities/render.utility'
 import { EditFormBuilderFieldCardViewController } from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
@@ -683,7 +683,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 				)
 
 				const vc = dialogVc.getCardVc() as ManagePageTitlesCardViewController
-				await interactionUtil.clickPrimaryInFooter(vc)
+				await interactor.clickPrimaryInFooter(vc)
 				vcAssert.assertDialogWasClosed(dialogVc)
 			}
 		)
@@ -858,7 +858,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 					selectOptions && selectOptions.join('\n')
 				)
 
-				await interactionUtil.clickPrimaryInFooter(formVc)
+				await interactor.clickPrimaryInFooter(formVc)
 				vcAssert.assertDialogWasClosed(dialogVc)
 			}
 		)

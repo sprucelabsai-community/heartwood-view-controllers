@@ -9,7 +9,7 @@ import {
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
-import interactionUtil from '../../../tests/utilities/interaction.utility'
+import interactor from '../../../tests/utilities/interactor'
 
 export class InteractingWithCalendarInMonthViewTest extends AbstractViewControllerTest {
 	private static vc: CalendarViewController
@@ -24,7 +24,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async interactingThrowsWhenMissingOptions() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactionUtil.clickCalendarDayView()
+			interactor.clickCalendarDayView()
 		)
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'time', 'personId'],
@@ -100,7 +100,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async cantClickOnEventWhenMissingParames() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactionUtil.clickCalendarEvent()
+			interactor.clickCalendarEvent()
 		)
 
 		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
@@ -111,7 +111,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	@test()
 	protected static async cantClickEventThatDoesNotExist() {
 		await assert.doesThrowAsync(
-			() => interactionUtil.clickCalendarEvent(this.vc, 'not-found'),
+			() => interactor.clickCalendarEvent(this.vc, 'not-found'),
 			/not-found/gi
 		)
 	}
@@ -254,13 +254,13 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static hasDragEvent() {
-		assert.isFunction(interactionUtil.dragCalendarEventTo)
+		assert.isFunction(interactor.dragCalendarEventTo)
 	}
 
 	@test()
 	protected static async throwsIfDraggingEventDoesNotExist() {
 		await assert.doesThrowAsync(() =>
-			interactionUtil.dragCalendarEventTo(this.vc, 'aoeu', {
+			interactor.dragCalendarEventTo(this.vc, 'aoeu', {
 				newStartDateTimeMs: 100,
 			})
 		)
@@ -275,7 +275,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		let [event] = this.addEvents(1)
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+			interactor.dragCalendarEventTo(this.vc, event.id, {
 				newStartDateTimeMs: 100,
 			})
 		)
@@ -294,13 +294,9 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		let [event] = this.addEvents(1)
 
-		const actual = await interactionUtil.dragCalendarEventTo(
-			this.vc,
-			event.id,
-			{
-				newStartDateTimeMs: 100,
-			}
-		)
+		const actual = await interactor.dragCalendarEventTo(this.vc, event.id, {
+			newStartDateTimeMs: 100,
+		})
 
 		assert.isEqual(actual, results)
 	}
@@ -310,7 +306,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		let [event] = this.addEvents(1)
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+			interactor.dragCalendarEventTo(this.vc, event.id, {
 				newStartDateTimeMs: 100,
 			})
 		)
@@ -323,7 +319,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		event = this.addEvents(1)[0]
 
-		await interactionUtil.dragCalendarEventTo(this.vc, event.id, {
+		await interactor.dragCalendarEventTo(this.vc, event.id, {
 			newStartDateTimeMs: 100,
 		})
 	}
@@ -349,7 +345,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		const [event] = this.addEvents(1)
 
-		await interactionUtil.dragCalendarEventTo(this.vc, event.id, updates)
+		await interactor.dragCalendarEventTo(this.vc, event.id, updates)
 
 		delete event.controller
 		delete passedOptions.event.controller
@@ -381,7 +377,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	}
 
 	private static async clickEvent(eventId: string, blockIdx?: number) {
-		return interactionUtil.clickCalendarEvent(this.vc, eventId, blockIdx)
+		return interactor.clickCalendarEvent(this.vc, eventId, blockIdx)
 	}
 
 	private static VcWithPeople(
@@ -414,7 +410,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		personId: string
 		time?: number
 	}): any {
-		return interactionUtil.clickCalendarDayView(
+		return interactor.clickCalendarDayView(
 			this.vc,
 			options?.time ?? new Date().getTime(),
 			options?.personId ?? `123`
