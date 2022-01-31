@@ -1,8 +1,13 @@
-import { SelectChoice, validateSchemaValues } from '@sprucelabs/schema'
+import {
+	assertOptions,
+	SelectChoice,
+	validateSchemaValues,
+} from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
+import { ButtonBarViewController } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -600,7 +605,30 @@ const vcAssert = {
 		if (typeof row === 'number') {
 			return listVc.getRowVc(row)
 		}
+
 		return listVc.getRowVc(row)
+	},
+
+	assertRowRendersButtonBar(
+		listVc: ListViewController,
+		row: string | number
+	): ButtonBarViewController {
+		assertOptions({ listVc, row }, ['listVc', 'row'])
+
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			if (cell.buttonBar) {
+				return cell.buttonBar.controller as any
+			}
+		}
+
+		assert.fail(
+			`I could not find a buttonBar inside your list at row '${row}'!`
+		)
+
+		return {} as any
 	},
 
 	assertRowRendersButton(

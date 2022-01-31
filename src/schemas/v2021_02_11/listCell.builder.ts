@@ -4,6 +4,7 @@ import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
+import buttonBarBuilder from './buttonBar.builder'
 import ratingsInputBuilder from './forms/ratingsInput.builder'
 import textInputBuilder from './forms/textInput.builder'
 import toggleInputBuilder from './forms/toggleInput.builder'
@@ -75,6 +76,12 @@ export default buildSchema({
 			label: 'Line icon',
 			options: {
 				...(lineIconFields.name.options as any),
+			},
+		},
+		buttonBar: {
+			type: 'schema',
+			options: {
+				schema: buttonBarBuilder,
 			},
 		},
 		textInput: {

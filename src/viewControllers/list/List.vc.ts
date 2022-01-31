@@ -123,6 +123,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 				...this.model.rows[row],
 			})
 		}
+
 		return this._rowVcs[row]
 	}
 
