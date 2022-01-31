@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { CalendarEvent, CalendarViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
@@ -26,7 +26,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	protected static throwWithoutGetterAndSetter() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Controller('calendarEvent', {}))
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['setEvent', 'getEvent', 'hasEvent'],
 		})
 	}

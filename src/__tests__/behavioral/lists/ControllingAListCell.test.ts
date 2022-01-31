@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -15,7 +15,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 	@test('cant get cell 1000', 100)
 	protected static cantGetACellVcFromBadIndex(cellIdx: number) {
 		const err = assert.doesThrow(() => this.CellVc(cellIdx))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['cellIdx'],
 		})
 	}

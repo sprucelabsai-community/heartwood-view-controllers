@@ -1,7 +1,7 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -239,7 +239,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static cantGetInvalidSection() {
 		const err = assert.doesThrow(() => this.vc.getSection(-1))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
 		})
 	}

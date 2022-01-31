@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import RatingsViewController, {
@@ -23,12 +23,12 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 	@test('-1 out of range', -1)
 	protected static throwsIfValueOutOfRange(value: number) {
 		const err = assert.doesThrow(() => this.Vc({ value }))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['value'],
 		})
 
 		const err2 = assert.doesThrow(() => this.vc.setValue(value))
-		errorAssertUtil.assertError(err2, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err2, 'INVALID_PARAMETERS', {
 			parameters: ['value'],
 		})
 	}
@@ -75,7 +75,7 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 	protected static throwsWithBadRendersAs() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Vc({ renderAs: 'aoeu' }))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['renderAs'],
 		})
 	}
@@ -95,7 +95,7 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
 	protected static throwsWhenSettingRenderAsToInvalidValueLater() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Vc().setRenderAs('aoeu'))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['renderAs'],
 		})
 	}

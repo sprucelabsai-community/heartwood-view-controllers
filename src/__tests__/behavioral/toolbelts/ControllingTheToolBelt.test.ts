@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { renderUtil, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
@@ -85,13 +85,13 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'DUPLICATE_TOOL_ID')
+		errorAssert.assertError(err, 'DUPLICATE_TOOL_ID')
 	}
 
 	@test()
 	protected static cantRemoveToolThatAlreadyExists() {
 		const err = assert.doesThrow(() => this.vc.removeTool('map'))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['id'],
 		})
 	}
@@ -197,7 +197,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	@test('cant find tool that does not exist 1', 'taco-tuesday')
 	protected static cantFocusToolThatDoesNotExist(id: string) {
 		const err = assert.doesThrow(() => this.vc.focusTool(id))
-		errorAssertUtil.assertError(err, 'TOOL_NOT_FOUND', {
+		errorAssert.assertError(err, 'TOOL_NOT_FOUND', {
 			id,
 		})
 	}

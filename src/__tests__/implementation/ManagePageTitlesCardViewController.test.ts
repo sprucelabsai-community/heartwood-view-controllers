@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactor from '../../tests/utilities/interactor'
 import vcAssert from '../../tests/utilities/vcAssert.utility'
@@ -56,7 +56,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 			//@ts-ignore
 			this.Controller('managePageTitles', {})
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['onDone', 'formBuilderVc'],
 		})
 	}

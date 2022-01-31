@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
@@ -26,7 +26,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			//@ts-ignore
 			interactor.clickCalendarDayView()
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'time', 'personId'],
 		})
 	}
@@ -103,7 +103,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			interactor.clickCalendarEvent()
 		)
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'eventId'],
 		})
 	}

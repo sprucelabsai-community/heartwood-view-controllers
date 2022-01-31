@@ -4,7 +4,7 @@ import {
 	namesUtil,
 } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -646,7 +646,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static gettingABadSectionFails() {
 		const err = assert.doesThrow(() => this.vc.getPageVc(0).getSection(-1))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
 		})
 	}
@@ -694,7 +694,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const pageVc = this.vc.getPageVc(0)
 		//@ts-ignore
 		const err = assert.doesThrow(() => pageVc.setField())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['fieldName', 'updates'],
 		})
 	}

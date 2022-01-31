@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
@@ -71,7 +71,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 			//@ts-ignore
 			ViewControllerFactory.Factory()
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['connectToApi'],
 		})
 	}
@@ -80,7 +80,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 	protected static async throwsWithInvalidName() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.factory.Controller('bad_name'))
-		errorAssertUtil.assertError(err, 'INVALID_VIEW_CONTROLLER_NAME')
+		errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_NAME')
 	}
 
 	@test()
@@ -158,7 +158,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.factory.Controller('test3'))
 
-		errorAssertUtil.assertError(err, 'INVALID_SKILL_VIEW_CONTROLLER')
+		errorAssert.assertError(err, 'INVALID_SKILL_VIEW_CONTROLLER')
 	}
 
 	@test()

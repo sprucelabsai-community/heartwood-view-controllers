@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import StatsViewController, {
@@ -16,7 +16,7 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 	protected static throwsIfMissingStats() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Controller('stats', {}))
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['stats'],
 		})
 	}

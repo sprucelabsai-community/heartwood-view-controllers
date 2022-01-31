@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
@@ -29,7 +29,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		Authenticator.setStorage(null)
 
 		const err = assert.doesThrow(() => Authenticator.getInstance())
-		errorAssertUtil.assertError(err, 'MISSING_STORAGE')
+		errorAssert.assertError(err, 'MISSING_STORAGE')
 	}
 
 	@test()

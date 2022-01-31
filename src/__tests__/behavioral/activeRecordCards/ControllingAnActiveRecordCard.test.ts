@@ -3,7 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER_ACTIVE_RECORD } from '../../../tests/constants'
@@ -55,7 +55,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.Controller('activeRecordCard', {}))
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['eventName', 'rowTransformer', 'responseKey'],
 		})
 	}

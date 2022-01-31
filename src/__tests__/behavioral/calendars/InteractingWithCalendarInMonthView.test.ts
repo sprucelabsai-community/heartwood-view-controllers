@@ -1,6 +1,6 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { assert, test } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
@@ -17,7 +17,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			//@ts-ignore
 			interactionUtil.clickCalendarMonthView()
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'dateTimeMs'],
 		})
 	}

@@ -1,6 +1,6 @@
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import * as constants from '../../tests/constants'
 import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
@@ -40,13 +40,13 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 	@test('throws with no object in response', '')
 	protected static importingInvalidScriptThrows(script: string) {
 		const err = assert.doesThrow(() => this.importer.import(script))
-		errorAssertUtil.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
+		errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
 	}
 
 	@test()
 	protected static throwsIfMissingPublicStaticIdOnVc() {
 		const err = assert.doesThrow(() => this.importControllers('_noIds'))
-		errorAssertUtil.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
+		errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
 		assert.doesInclude(err.message, 'public static readonly id =')
 	}
 

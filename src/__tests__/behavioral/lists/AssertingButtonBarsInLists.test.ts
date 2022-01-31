@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListRowModel } from '../../../viewControllers/list/List.vc'
@@ -9,7 +9,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 	protected static throwsMissingParams() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => vcAssert.assertRowRendersButtonBar())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['listVc', 'row'],
 		})
 	}

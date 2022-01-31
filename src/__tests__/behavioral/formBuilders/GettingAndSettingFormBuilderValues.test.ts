@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import FormBuilderCardViewController, {
 	FormBuilderImportExportObject,
@@ -187,7 +187,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		await vc.importObject(this.singlePageForm)
 
 		const err = await assert.doesThrowAsync(() => vc.setValues(expected))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['values'],
 		})
 	}

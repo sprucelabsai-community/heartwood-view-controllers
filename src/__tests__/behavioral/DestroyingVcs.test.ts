@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, ViewControllerOptions } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import CardViewController from '../../viewControllers/Card.vc'
@@ -115,6 +115,6 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 		await vc.destroy()
 		const err = await assert.doesThrowAsync(() => vc.destroy())
 
-		errorAssertUtil.assertError(err, 'VIEW_ALREADY_DESTROYED')
+		errorAssert.assertError(err, 'VIEW_ALREADY_DESTROYED')
 	}
 }

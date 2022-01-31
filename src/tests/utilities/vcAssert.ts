@@ -487,6 +487,20 @@ const vcAssert = {
 		)
 	},
 
+	assertCardRendersButtonBar(
+		cardVc: ViewController<Card>
+	): ButtonBarViewController {
+		assertOptions({ cardVc }, ['cardVc'])
+
+		const model = renderUtil.render(cardVc)
+
+		const match = model.body?.sections?.find((s) => !!s.buttonBar)
+
+		assert.isTruthy(match, `Your card does not render a button bar.`)
+
+		return match.buttonBar?.controller as any
+	},
+
 	assertDialogWasClosed(vc: DialogViewController) {
 		assert.isFalse(vc.getIsVisible(), 'Dialog was not closed!')
 	},
@@ -576,6 +590,21 @@ const vcAssert = {
 	) {
 		const model = renderUtil.render(cardVc)
 		assert.isObject(model.footer, `Your card did not render a footer!`)
+	},
+
+	assertButtonBarRendersButton(
+		buttonBarVc: ButtonBarViewController,
+		buttonId: string
+	) {
+		assertOptions({ buttonBarVc, buttonId }, ['buttonBarVc', 'buttonId'])
+
+		const model = renderUtil.render(buttonBarVc)
+		const match = model.buttons.find((b) => b.id === buttonId)
+
+		assert.isTruthy(
+			match,
+			`Your button bar doesn't have a button with the id '${buttonId}'`
+		)
 	},
 
 	assertListRendersRows(

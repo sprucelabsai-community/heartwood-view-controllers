@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ProgressViewController, {
@@ -25,7 +25,7 @@ export default class ControllingAProgressViewTest extends AbstractViewController
 	@test('throws if percent complete 1.1', 1.1)
 	protected static throwsIfPercentCompleteOutOfRange(percentComplete: number) {
 		const err = assert.doesThrow(() => this.Vc({ percentComplete }))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['percentComplete'],
 		})
 	}
@@ -38,7 +38,7 @@ export default class ControllingAProgressViewTest extends AbstractViewController
 	) {
 		const vc = this.Vc()
 		const err = assert.doesThrow(() => vc.setPercentComplete(percentComplete))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['percentComplete'],
 		})
 	}

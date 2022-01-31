@@ -2,7 +2,7 @@ import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import { ListViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -97,7 +97,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['minTime', 'maxTime'],
 		})
 	}
@@ -124,7 +124,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test("can't set bad timezone 2", 14 * 60 * 60 * 1001)
 	protected static mustSetValidTimezoneOffset(offset: number) {
 		const err = assert.doesThrow(() => this.vc.setTimezoneOffsetMs(offset))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['timezoneOffsetMs'],
 		})
 	}
@@ -178,7 +178,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		const err = assert.doesThrow(() => this.vc.addEvent(event))
-		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_EVENT_ID', {
 			id: event.id,
 		})
 	}
@@ -213,7 +213,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static cantRemoveEventThatDoesNotExist() {
 		const err = assert.doesThrow(() => this.vc.removeEvent('aoeu'))
-		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id: 'aoeu',
 		})
 	}
@@ -264,7 +264,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static cantMixinEventsWithSameIdAtOnce() {
 		const event = calendarSeeder.generateEventValues()
 		const err = assert.doesThrow(() => this.vc.mixinEvents([event, event]))
-		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_EVENT_ID', {
 			id: event.id,
 		})
 	}
@@ -280,7 +280,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 				event,
 			])
 		)
-		errorAssertUtil.assertError(err, 'DUPLICATE_EVENT_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_EVENT_ID', {
 			id: event.id,
 		})
 	}
@@ -340,7 +340,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.populateCalendar()
 		const err = assert.doesThrow(() => this.vc.selectEvent('1234'))
 
-		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id: '1234',
 		})
 	}
@@ -409,7 +409,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static settingEventsForRangeThrowsWithEndBeforeStart() {
 		const err = assert.doesThrow(() => this.vc.replaceEventsInRange([], 10, 0))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['endDate'],
 		})
 	}
@@ -471,7 +471,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static throwsIfGettingBadEvent(id: string) {
 		this.vc.addEvent(calendarSeeder.generateEventValues())
 		const err = assert.doesThrow(() => this.vc.getEvent(id))
-		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id,
 		})
 	}
@@ -512,7 +512,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.addEvent(calendarSeeder.generateEventValues())
 
 		const err = assert.doesThrow(() => this.vc.updateEvent(id, {}))
-		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id,
 		})
 	}
@@ -558,7 +558,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static needAPersonToAddPerson() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.addPerson())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['person'],
 		})
 	}
@@ -586,7 +586,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('cant remove person no there 2', 'sth')
 	protected static cantRemovePersonWhoIsNotThere(personId: string) {
 		const err = assert.doesThrow(() => this.vc.removePerson(personId))
-		errorAssertUtil.assertError(err, 'PERSON_NOT_FOUND', {
+		errorAssert.assertError(err, 'PERSON_NOT_FOUND', {
 			personId,
 		})
 	}
@@ -634,7 +634,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const id = `${new Date().getTime() * Math.random()}`
 		const err = assert.doesThrow(() => this.vc.getEventVc(id))
 
-		errorAssertUtil.assertError(err, 'EVENT_NOT_FOUND', {
+		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id,
 		})
 	}

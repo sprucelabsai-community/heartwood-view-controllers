@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import SwipeViewController, {
@@ -77,7 +77,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 			this.vc.setSlide(10, { text: { content: 'Hey' } })
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['slideIndex'],
 		})
 	}
@@ -139,7 +139,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	@test()
 	protected static throwsWhenMarkingBadSlideAsComplete() {
 		const err = assert.doesThrow(() => this.vc.markSlideAsComplete(-10))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['slideIndex'],
 		})
 	}
@@ -227,7 +227,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	protected static async cantJumpToSlideWithNonNumericIndex() {
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => this.vc.jumpToSlide('taco'))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['slideIndex'],
 		})
 	}

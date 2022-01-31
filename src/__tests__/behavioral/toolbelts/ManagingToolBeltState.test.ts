@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltStateMachine, {
 	ToolBeltState,
@@ -18,7 +18,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	protected static throwsWhenMissingStates() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => new ToolBeltStateMachine())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['toolBeltVc', 'Controller', 'connectToApi'],
 		})
 	}
@@ -28,7 +28,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => this.sm.transitionTo())
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['state'],
 		})
 	}

@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import talkingSprucebotSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import TalkingSprucebotViewController from '../../../viewControllers/TalkingSprucebot.vc'
@@ -16,7 +16,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['sentences'],
 		})
 

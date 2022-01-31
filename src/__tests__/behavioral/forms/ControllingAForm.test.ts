@@ -1,7 +1,7 @@
 import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import { interactionUtil } from '../../..'
 import buildForm from '../../../builders/buildForm'
@@ -281,7 +281,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static throwsGettingBadSection() {
 		const err1 = assert.doesThrow(() => this.vc.getSection(-1))
 
-		errorAssertUtil.assertError(err1, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err1, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
 		})
 	}
@@ -350,7 +350,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.addFields({}))
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['sectionIdx', 'fields'],
 		})
 	}
@@ -364,7 +364,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
 		})
 	}
@@ -474,7 +474,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setSection())
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['sectionIdx', 'newSection'],
 		})
 	}
@@ -484,7 +484,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setSection(0))
 
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['newSection'],
 		})
 	}
@@ -494,7 +494,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setSection(-1, {}))
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdx'],
 		})
 	}
@@ -602,7 +602,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static cantUpdateWhenMissingEverything() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setField())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['fieldName', 'updates'],
 		})
 	}
@@ -611,7 +611,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static cantUpdateWithouSupplyingUpdates() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setField('test'))
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['updates'],
 		})
 	}
@@ -625,7 +625,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 				fieldDefinition: {},
 			})
 		)
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['fieldName'],
 		})
 	}

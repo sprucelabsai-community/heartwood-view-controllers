@@ -50,7 +50,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	private buildSectionVcs(): Section[] {
-		return this.model.body?.sections?.map(
+		return this.model.body?.sections?.map?.(
 			this.buildSectionVc.bind(this)
 		) as Section[]
 	}

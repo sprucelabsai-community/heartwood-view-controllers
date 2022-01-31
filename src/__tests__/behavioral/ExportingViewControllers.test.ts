@@ -2,7 +2,7 @@ import fsUtil from 'fs'
 import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import {
 	buildCwd_nodeModulesImport,
 	importExportCwd,
@@ -56,7 +56,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	protected static async packagerThrowsMissingParams() {
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => this.exporter.export())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['source', 'destination'],
 		})
 	}
@@ -67,7 +67,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			//@ts-ignore
 			this.exporter.export({ source: this.source })
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['destination'],
 		})
 	}
@@ -81,7 +81,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['destination'],
 		})
 	}
@@ -95,7 +95,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['source'],
 		})
 	}
@@ -109,7 +109,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'EXPORT_FAILED')
+		errorAssert.assertError(err, 'EXPORT_FAILED')
 		assert.doesInclude(err.message, 'Missing semicolon')
 	}
 
@@ -163,7 +163,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['profilerStatsDestination'],
 		})
 	}

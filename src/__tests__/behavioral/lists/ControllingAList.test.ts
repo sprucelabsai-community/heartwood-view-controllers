@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 import { interactionUtil } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -49,7 +49,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static async cantAddEmptyRow() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.addRow())
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['cells'],
 		})
 	}
@@ -60,7 +60,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static cantAddBadRow(cells: any) {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.addRow({ cells }))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['cells'],
 		})
 	}
@@ -214,7 +214,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static cantGetRowVcFromBadRow() {
 		const err = assert.doesThrow(() => this.vc.getRowVc(0))
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowIdx'],
 		})
 	}
@@ -248,7 +248,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const rowVc = this.vc.getRowVc(0)
 		const err = await assert.doesThrowAsync(() => rowVc.setValue('taco', true))
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['fieldName'],
 		})
 	}
@@ -583,7 +583,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const rowVc = this.vc.getRowVc(0)
 		const err = assert.doesThrow(() => rowVc.getValue('waka'))
 
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['fieldName'],
 		})
 
@@ -631,7 +631,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static cantDeleteBadRow() {
 		const err = assert.doesThrow(() => this.vc.deleteRow(-1))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowIdx'],
 		})
 	}
@@ -718,7 +718,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static cantGetRowByIdThatIsntFound() {
 		const err = assert.doesThrow(() => this.vc.getRowVc('test'))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
 		})
 	}
@@ -752,7 +752,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_ROW_ID', {
 			rowId: 'test',
 		})
 	}
@@ -796,7 +796,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_ROW_ID', {
 			rowId: 'first',
 		})
 	}
@@ -828,7 +828,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			])
 		)
 
-		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_ROW_ID', {
 			rowId: 'test',
 		})
 	}
@@ -861,7 +861,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			})
 		)
 
-		errorAssertUtil.assertError(err, 'DUPLICATE_ROW_ID', {
+		errorAssert.assertError(err, 'DUPLICATE_ROW_ID', {
 			rowId: 'test',
 		})
 
@@ -912,7 +912,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqual(rowVc2.getId(), 'test2')
 
 		const err = assert.doesThrow(() => this.vc.getRowVc('aoeu'))
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
 		})
 	}
@@ -970,7 +970,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const err = await assert.doesThrowAsync(() =>
 			this.vc.deleteRow('aoeuaoeuaoeuaoeu')
 		)
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['rowId'],
 		})
 	}

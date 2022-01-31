@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssertUtil } from '@sprucelabs/test-utils'
+import { errorAssert } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactor from '../../tests/utilities/interactor'
@@ -63,7 +63,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		const err = assert.doesThrow(() =>
 			this.Controller('editFormBuilderField', options)
 		)
-		errorAssertUtil.assertError(err, 'MISSING_PARAMETERS', {
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: expected,
 		})
 	}
@@ -81,7 +81,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 				options: {},
 			})
 		)
-		errorAssertUtil.assertError(err, 'INVALID_PARAMETERS', {
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['type'],
 		})
 	}

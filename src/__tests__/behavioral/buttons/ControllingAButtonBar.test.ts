@@ -6,7 +6,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 	protected static controllerMap = {}
 
 	@test()
-	protected static async canCreateControllingAButtonBar() {
+	protected static async canCreateAButtonBar() {
 		const vc = this.Controller('buttonBar', {
 			buttons: [],
 		})
