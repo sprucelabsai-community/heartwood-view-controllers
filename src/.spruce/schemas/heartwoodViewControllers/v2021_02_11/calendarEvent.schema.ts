@@ -37,7 +37,7 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	            },
 	            /** . */
 	            'startDateTimeMs': {
-	                type: 'number',
+	                type: 'dateTime',
 	                isRequired: true,
 	                options: undefined
 	            },
@@ -82,7 +82,7 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	            },
 	            /** . */
 	            'repeatsUntil': {
-	                type: 'number',
+	                type: 'dateTime',
 	                options: undefined
 	            },
 	            /** . */
@@ -103,7 +103,7 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	            },
 	            /** . */
 	            'activeUntilDate': {
-	                type: 'number',
+	                type: 'dateTime',
 	                options: undefined
 	            },
 	            /** . */

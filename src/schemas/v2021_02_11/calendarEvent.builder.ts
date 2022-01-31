@@ -10,7 +10,7 @@ const calendarEventSchema = buildSchema({
 			'dateDeleted',
 		]),
 		activeUntilDate: {
-			type: 'number',
+			type: 'dateTime',
 			options: undefined,
 		},
 		error: {

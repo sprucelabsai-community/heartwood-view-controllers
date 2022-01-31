@@ -42,7 +42,7 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            /** date. The date the calendar will start on. First of month or first of week. */
 	            'startDate': {
 	                label: 'date',
-	                type: 'number',
+	                type: 'dateTime',
 	                hint: 'The date the calendar will start on. First of month or first of week.',
 	                options: undefined
 	            },

@@ -3692,7 +3692,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'eventTypeSlug'?: string| undefined | null
 				
-				'startDateTimeMs': number
+				'startDateTimeMs': SpruceSchema.DateTimeFieldValue
 				
 				'isBusy'?: boolean| undefined | null
 				
@@ -3708,7 +3708,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'daysOfWeek'?: ("sun" | "mon" | "tue" | "wed" | "thur" | "fri" | "sat")[]| undefined | null
 				
-				'repeatsUntil'?: number| undefined | null
+				'repeatsUntil'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				
 				'occurrences'?: number| undefined | null
 				
@@ -3716,7 +3716,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'nthOccurrences'?: number[]| undefined | null
 				
-				'activeUntilDate'?: number| undefined | null
+				'activeUntilDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				
 				'exclusionDates'?: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDate[]| undefined | null
 				
@@ -3757,7 +3757,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'startDateTimeMs': {
-			                type: 'number',
+			                type: 'dateTime',
 			                isRequired: true,
 			                options: undefined
 			            },
@@ -3802,7 +3802,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'repeatsUntil': {
-			                type: 'number',
+			                type: 'dateTime',
 			                options: undefined
 			            },
 			            /** . */
@@ -3823,7 +3823,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'activeUntilDate': {
-			                type: 'number',
+			                type: 'dateTime',
 			                options: undefined
 			            },
 			            /** . */
@@ -3940,7 +3940,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Maximum time. The latest time to show in the calendar. */
 				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** date. The date the calendar will start on. First of month or first of week. */
-				'startDate'?: number| undefined | null
+				'startDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				/** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
 				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
 				/** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
@@ -4004,7 +4004,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** date. The date the calendar will start on. First of month or first of week. */
 			            'startDate': {
 			                label: 'date',
-			                type: 'number',
+			                type: 'dateTime',
 			                hint: 'The date the calendar will start on. First of month or first of week.',
 			                options: undefined
 			            },
