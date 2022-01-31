@@ -1,3 +1,10 @@
+# [58.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.11.1...v58.0.0) (2022-01-31)
+
+
+### Breaking Changes
+
+* upgrade ([ed293ef](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ed293ef))
+
 ## [57.11.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.11.0...v57.11.1) (2022-01-29)
 
 # [57.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v57.10.5...v57.11.0) (2022-01-29)
