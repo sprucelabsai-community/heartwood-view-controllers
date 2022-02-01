@@ -1,3 +1,18 @@
+# [59.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v58.0.7...v59.0.0) (2022-02-01)
+
+
+### Breaking Changes
+
+* devs can now select dates in calendars in vc ([29e5c50](https://github.com/sprucelabsai/heartwood-view-controllers/commit/29e5c50))
+
+
+### Features
+
+* assert button bars in cards & and an upgrade ([6e2decd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6e2decd))
+* button bars in list assertions ([ff46be8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ff46be8))
+* devs can check for calendars in list!! what a world!!?? ([c35b3b0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c35b3b0))
+* devs can now interact with buttonbars! ([eaa4eda](https://github.com/sprucelabsai/heartwood-view-controllers/commit/eaa4eda))
+
 ## [58.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v58.0.6...v58.0.7) (2022-02-01)
 
 ## [58.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v58.0.5...v58.0.6) (2022-02-01)
