@@ -92,16 +92,16 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 
 	@test()
 	protected static canCheckIfSelected() {
-		assert.isFalse(this.vc.getIsDateSelected(2020, 10, 10))
+		assert.isFalse(this.vc.isDateSelected(2020, 10, 10))
 		this.vc.selectDate(2020, 10, 10)
-		assert.isTrue(this.vc.getIsDateSelected(2020, 10, 10))
+		assert.isTrue(this.vc.isDateSelected(2020, 10, 10))
 		this.vc.selectDate(1990, 1, 1)
-		assert.isTrue(this.vc.getIsDateSelected(1990, 1, 1))
+		assert.isTrue(this.vc.isDateSelected(1990, 1, 1))
 		this.vc.deselectDate(2020, 10, 10)
-		assert.isFalse(this.vc.getIsDateSelected(1990, 1, 2))
+		assert.isFalse(this.vc.isDateSelected(1990, 1, 2))
 		this.vc.selectDate(1990, 1, 2)
-		assert.isTrue(this.vc.getIsDateSelected(1990, 1, 2))
-		assert.isFalse(this.vc.getIsDateSelected(1990, 10, 2))
+		assert.isTrue(this.vc.isDateSelected(1990, 1, 2))
+		assert.isFalse(this.vc.isDateSelected(1990, 10, 2))
 	}
 
 	@test()
