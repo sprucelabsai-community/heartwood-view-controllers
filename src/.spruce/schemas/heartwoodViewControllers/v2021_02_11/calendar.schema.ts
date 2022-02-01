@@ -108,6 +108,11 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                options: undefined
 	            },
 	            /** . */
+	            'onChangeStartDate': {
+	                type: 'raw',
+	                options: {valueType: `(date: number) => void | Promise<void>`,}
+	            },
+	            /** . */
 	            'onClick': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}

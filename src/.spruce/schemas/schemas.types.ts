@@ -4020,6 +4020,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Render header. */
 				'shouldRenderHeader'?: boolean| undefined | null
 				
+				'onChangeStartDate'?: ((date: number) => void | Promise<void>)| undefined | null
+				
 				'onClick'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 				
 				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
@@ -4129,6 +4131,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** . */
+			            'onChangeStartDate': {
+			                type: 'raw',
+			                options: {valueType: `(date: number) => void | Promise<void>`,}
 			            },
 			            /** . */
 			            'onClick': {

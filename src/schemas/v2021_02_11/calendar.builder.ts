@@ -153,6 +153,12 @@ export default buildSchema({
 			label: 'Render header',
 			defaultValue: true,
 		},
+		onChangeStartDate: {
+			type: 'raw',
+			options: {
+				valueType: '(date: number) => void | Promise<void>',
+			},
+		},
 		onClick: {
 			type: 'raw',
 			options: {
