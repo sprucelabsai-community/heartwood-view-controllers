@@ -1,3 +1,11 @@
+# [59.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v59.1.0...v59.2.0) (2022-02-01)
+
+
+### Features
+
+* devs can now check if a specific date is selected ([2780b84](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2780b84))
+* devs can now select all the dates on a calendar at once! ([eb0d4cb](https://github.com/sprucelabsai/heartwood-view-controllers/commit/eb0d4cb))
+
 # [59.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v59.0.5...v59.1.0) (2022-02-01)
 
 
