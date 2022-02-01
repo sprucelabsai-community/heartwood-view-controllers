@@ -91,25 +91,26 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 	}
 
 	@test()
+	protected static canCheckIfSelected() {
+		assert.isFalse(this.vc.getIsDateSelected(2020, 10, 10))
+		this.vc.selectDate(2020, 10, 10)
+		assert.isTrue(this.vc.getIsDateSelected(2020, 10, 10))
+		this.vc.selectDate(1990, 1, 1)
+		assert.isTrue(this.vc.getIsDateSelected(1990, 1, 1))
+		this.vc.deselectDate(2020, 10, 10)
+		assert.isFalse(this.vc.getIsDateSelected(1990, 1, 2))
+		this.vc.selectDate(1990, 1, 2)
+		assert.isTrue(this.vc.getIsDateSelected(1990, 1, 2))
+		assert.isFalse(this.vc.getIsDateSelected(1990, 10, 2))
+	}
+
+	@test()
 	protected static deselectThrowsWhenMissing() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.deselectDate())
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['year', 'month', 'day'],
 		})
-	}
-
-	@test()
-	protected static canDeselecDate() {
-		this.vc.selectDate(2020, 10, 10)
-		this.vc.deselectDate(2020, 10, 10)
-		this.assertSelectedRendered([])
-
-		this.vc.selectDate(2020, 10, 10)
-		this.vc.selectDate(2020, 1, 1)
-		this.vc.deselectDate(2020, 1, 1)
-
-		this.assertSelectedRendered([{ year: 2020, month: 10, day: 10 }])
 	}
 
 	@test('cant deselect event not selected', 2020, 1, 1)
@@ -125,6 +126,19 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 			month,
 			day,
 		})
+	}
+
+	@test()
+	protected static canDeselecDate() {
+		this.vc.selectDate(2020, 10, 10)
+		this.vc.deselectDate(2020, 10, 10)
+		this.assertSelectedRendered([])
+
+		this.vc.selectDate(2020, 10, 10)
+		this.vc.selectDate(2020, 1, 1)
+		this.vc.deselectDate(2020, 1, 1)
+
+		this.assertSelectedRendered([{ year: 2020, month: 10, day: 10 }])
 	}
 
 	@test()

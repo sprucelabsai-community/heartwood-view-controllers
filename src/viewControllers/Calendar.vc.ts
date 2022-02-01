@@ -165,6 +165,13 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.selectedDates ?? []
 	}
 
+	public getIsDateSelected(year: number, month: number, day: number): boolean {
+		const selected = this.model.selectedDates ?? []
+		return !!selected.find(
+			(s) => s?.year === year && s?.month === month && s?.day === day
+		)
+	}
+
 	public getSelectedEvent() {
 		return this.model.selectedEvent
 	}
