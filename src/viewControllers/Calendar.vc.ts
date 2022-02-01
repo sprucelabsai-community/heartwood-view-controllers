@@ -172,7 +172,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
-	public getIsDateSelected(year: number, month: number, day: number): boolean {
+	public isDateSelected(year: number, month: number, day: number): boolean {
 		const selected = this.model.selectedDates ?? []
 		return !!selected.find(
 			(s) => s?.year === year && s?.month === month && s?.day === day
