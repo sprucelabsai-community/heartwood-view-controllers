@@ -1,3 +1,10 @@
+# [59.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v59.0.5...v59.1.0) (2022-02-01)
+
+
+### Features
+
+* better handling of row vc's when being deleted ([a6bf06f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a6bf06f))
+
 ## [59.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v59.0.4...v59.0.5) (2022-02-01)
 
 ## [59.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v59.0.3...v59.0.4) (2022-02-01)
