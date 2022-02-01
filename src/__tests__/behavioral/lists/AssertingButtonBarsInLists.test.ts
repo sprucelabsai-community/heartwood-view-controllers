@@ -3,6 +3,7 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListRowModel } from '../../../viewControllers/list/List.vc'
+import { ListCellModel } from '../../../viewControllers/list/ListCell.vc'
 
 export default class AssertingButtonBarsInListsTest extends AbstractViewControllerTest {
 	@test()
@@ -52,7 +53,12 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 	@test()
 	protected static canFindButtonBarInDifferentCell() {
 		const vc = this.Controller('list', {
-			rows: [{ id: 'waka', cells: [{}, this.renderCellWithButtonBar()] }],
+			rows: [
+				{
+					id: 'waka',
+					cells: [{ text: { content: 'hey' } }, this.renderCellWithButtonBar()],
+				},
+			],
 		})
 
 		vcAssert.assertRowRendersButtonBar(vc, 0)
@@ -83,7 +89,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 		}
 	}
 
-	private static renderCellWithButtonBar(): import('/Users/taylorromero/Development/SpruceLabs/heartwood-view-controllers/src/viewControllers/list/ListCell.vc').ListCellModel {
+	private static renderCellWithButtonBar(): ListCellModel {
 		return {
 			buttonBar: this.Controller('buttonBar', {
 				buttons: [

@@ -631,11 +631,24 @@ const vcAssert = {
 	},
 
 	assertListRendersRow(listVc: ListViewController, row: string | number) {
-		if (typeof row === 'number') {
-			return listVc.getRowVc(row)
-		}
-
 		return listVc.getRowVc(row)
+	},
+
+	assertRowRendersCalendar(listVc: ListViewController, row: string | number) {
+		assertOptions({ listVc, row }, ['listVc', 'row'])
+
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		const match = model.cells.find((c) => c.calendar)
+
+		assert.isTruthy(match, `I could not find a calendar in row '${row}'!`)
+
+		assert.isEqual(
+			match?.calendar?.view,
+			'month',
+			`Your calendar needs view='month' in order to render in a row!`
+		)
 	},
 
 	assertRowRendersButtonBar(

@@ -67,7 +67,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		delete actual.controller
 		delete actual.events[0].controller
 
-		assert.isEqualDeep(actual, { ...model, shouldEnableAnimations: true })
+		assert.doesInclude(actual, { ...model, shouldEnableAnimations: true })
 	}
 
 	@test(

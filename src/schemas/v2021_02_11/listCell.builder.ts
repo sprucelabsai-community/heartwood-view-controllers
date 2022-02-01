@@ -5,6 +5,7 @@ import {
 	buildRemoteTypesImport,
 } from '../../utilities/importBuilder'
 import buttonBarBuilder from './buttonBar.builder'
+import calendarBuilder from './calendar.builder'
 import ratingsInputBuilder from './forms/ratingsInput.builder'
 import textInputBuilder from './forms/textInput.builder'
 import toggleInputBuilder from './forms/toggleInput.builder'
@@ -76,6 +77,12 @@ export default buildSchema({
 			label: 'Line icon',
 			options: {
 				...(lineIconFields.name.options as any),
+			},
+		},
+		calendar: {
+			type: 'schema',
+			options: {
+				schema: calendarBuilder,
 			},
 		},
 		buttonBar: {
