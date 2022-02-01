@@ -394,6 +394,24 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static settingDateTriggersOnDateChange() {
+		let wasHit = false
+		let passedDate
+		this.vc = this.Controller('calendar', {
+			onChangeStartDate: (date) => {
+				passedDate = date
+				wasHit = true
+			},
+		})
+
+		const date = getDate()
+		this.vc.setStartDate(date)
+
+		assert.isTrue(wasHit)
+		assert.isEqual(passedDate, date)
+	}
+
+	@test()
 	protected static rendersStartDate() {
 		const date = getDate()
 		this.vc.setStartDate(date)

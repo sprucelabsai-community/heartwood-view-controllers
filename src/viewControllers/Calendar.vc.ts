@@ -332,6 +332,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public setStartDate(date: number) {
 		this.model.startDate = date
+		this.model.onChangeStartDate?.(date)
 		this.triggerRender()
 	}
 

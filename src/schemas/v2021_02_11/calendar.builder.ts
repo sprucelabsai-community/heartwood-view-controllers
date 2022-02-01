@@ -66,7 +66,7 @@ export default buildSchema({
 		startDate: {
 			type: 'dateTime',
 			label: 'date',
-			hint: 'The date the calendar will start on. First of month or first of week.',
+			hint: 'The date the calendar will start on. First of month or first of week. Is in ms from epoch.',
 		},
 		defaultStartTime: {
 			type: 'schema',
