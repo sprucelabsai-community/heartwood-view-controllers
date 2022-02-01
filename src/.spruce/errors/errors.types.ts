@@ -71,6 +71,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface RowDeleted {
+		
+			
+			'row': string
+	}
+
+	export interface RowDeletedSchema extends SpruceSchema.Schema {
+		id: 'rowDeleted',
+		namespace: 'HeartwoodViewControllers',
+		name: 'row deleted',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'row': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type RowDeletedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.RowDeletedSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface PersonNotFound {
 		
 			

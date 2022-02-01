@@ -99,25 +99,32 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 
 		if (!this._rowVcs[row]) {
 			this.assertValidRowIdx(row)
+			const id = this.model.rows[row].id
 
 			this._rowVcs[row] = new ListRowViewController({
 				setIsSelected: (is) => {
-					this.model.rows[row].isSelected = is
+					const idx = this.getIdxForId(id)
+					this.model.rows[idx].isSelected = is
 				},
 				setIsEnabled: (is) => {
-					this.model.rows[row].isEnabled = is
+					const idx = this.getIdxForId(id)
+					this.model.rows[idx].isEnabled = is
 				},
 				setValue: async (name: string, value: any) => {
-					await this.setValue({ rowIdx: row, name, value })
+					const idx = this.getIdxForId(id)
+					await this.setValue({ rowIdx: idx, name, value })
 				},
 				getValues: () => {
-					return this.getRowValues(row)
+					const idx = this.getIdxForId(id)
+					return this.getRowValues(idx)
 				},
 				deleteRow: () => {
-					this.deleteRow(row)
+					const idx = this.getIdxForId(id)
+					this.deleteRow(idx)
 				},
 				getModel: () => {
-					return this.model.rows[row]
+					const idx = this.getIdxForId(id)
+					return this.model.rows[idx]
 				},
 				isLastRow: row == this.getTotalRows() - 1,
 				...this.model.rows[row],

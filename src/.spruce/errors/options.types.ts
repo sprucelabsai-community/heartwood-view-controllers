@@ -7,6 +7,9 @@ export interface ViewAlreadyDestroyedErrorOptions extends SpruceErrors.Heartwood
 export interface ToolNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.ToolNotFound, ISpruceErrorOptions {
 	code: 'TOOL_NOT_FOUND'
 }
+export interface RowDeletedErrorOptions extends SpruceErrors.HeartwoodViewControllers.RowDeleted, ISpruceErrorOptions {
+	code: 'ROW_DELETED'
+}
 export interface PersonNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.PersonNotFound, ISpruceErrorOptions {
 	code: 'PERSON_NOT_FOUND'
 }
@@ -44,6 +47,6 @@ export interface DateAlreadySelectedErrorOptions extends SpruceErrors.HeartwoodV
 	code: 'DATE_ALREADY_SELECTED'
 }
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | PersonNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions 
 
 export default ErrorOptions

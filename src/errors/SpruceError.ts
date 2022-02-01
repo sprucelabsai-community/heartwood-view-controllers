@@ -71,6 +71,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `${options.year}-${options.month}-${options.day}! cannot be deselected because it's not selected!`
 				break
 
+			case 'ROW_DELETED':
+				message = `Row ${options.row} has been deleted and can't be rendered!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

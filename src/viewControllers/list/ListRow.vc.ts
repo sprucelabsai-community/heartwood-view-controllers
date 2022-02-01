@@ -1,5 +1,6 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import SpruceError from '../../errors/SpruceError'
 import { ViewController } from '../../types/heartwood.types'
 import { ListRowModel } from './List.vc'
 import ListCellViewController from './ListCell.vc'
@@ -19,6 +20,7 @@ export default class ListRowViewController
 	private setIsSelectedHandler: (isSelected: boolean) => void
 	private setIsEnabledHandler: (isEnabled: boolean) => void
 	private getModelHandler: () => ListRowModel
+	private id: string
 
 	public constructor(
 		options: ListRowModel & {
@@ -29,6 +31,7 @@ export default class ListRowViewController
 			setIsEnabled: (isEnabled: boolean) => void
 			getModel: () => ListRowModel
 			isLastRow: boolean
+			id: string
 		}
 	) {
 		const {
@@ -39,10 +42,11 @@ export default class ListRowViewController
 			isLastRow,
 			getModel,
 			setIsEnabled,
+			id,
 		} = options
 
 		this.getModelHandler = getModel
-
+		this.id = id
 		this.setValueHandler = setValue
 		this.getValuesHandler = getValues
 		this.deleteRowHandler = deleteRow
@@ -102,6 +106,10 @@ export default class ListRowViewController
 		this.triggerRender()
 	}
 
+	public getIsEnabled() {
+		return this.model.isEnabled !== false
+	}
+
 	public setIsSelected(isSelected: boolean) {
 		this.setIsSelectedHandler(isSelected)
 		this.triggerRender()
@@ -128,10 +136,16 @@ export default class ListRowViewController
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow {
+		if (this.getIsDeleted()) {
+			throw new SpruceError({ code: 'ROW_DELETED', row: this.id })
+		}
+
+		const model = this.model
+
 		return {
-			...this.model,
+			...model,
 			controller: this,
-			cells: this.model.cells.map((_cell, idx) => ({
+			cells: model.cells.map((_cell, idx) => ({
 				...this.getCellVc(idx).render(),
 			})),
 		}
