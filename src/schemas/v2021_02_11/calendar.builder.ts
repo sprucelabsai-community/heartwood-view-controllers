@@ -99,6 +99,29 @@ export default buildSchema({
 				schema: calendarEventBuilder,
 			},
 		},
+		selectedDates: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schema: {
+					id: 'calendarSelectedDate',
+					fields: {
+						day: {
+							type: 'number',
+							isRequired: true,
+						},
+						month: {
+							type: 'number',
+							isRequired: true,
+						},
+						year: {
+							type: 'number',
+							isRequired: true,
+						},
+					},
+				},
+			},
+		},
 		timezoneOffsetMs: {
 			type: 'number',
 			label: 'Timezone offset',

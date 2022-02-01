@@ -135,6 +135,36 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
+	public deselectDate(year: number, month: number, day: number) {
+		assertOptions({ year, month, day }, ['year', 'month', 'day'])
+
+		const idx =
+			this.model.selectedDates?.findIndex(
+				(s) => s.year === year && s.month === month && s.day === day
+			) ?? -1
+
+		if (idx < 0) {
+			throw new SpruceError({
+				code: 'DATE_NOT_SELECTED',
+				year,
+				month,
+				day,
+			})
+		}
+
+		if (!this.model.selectedDates) {
+			this.model.selectedDates = []
+		}
+
+		this.model.selectedDates.splice(idx, 1)
+
+		this.triggerRender()
+	}
+
+	public getSelectedDates() {
+		return this.model.selectedDates ?? []
+	}
+
 	public getSelectedEvent() {
 		return this.model.selectedEvent
 	}
@@ -295,6 +325,30 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.startDate
 	}
 
+	public selectDate(year: number, month: number, day: number) {
+		assertOptions({ year, month, day }, ['year', 'month', 'day'])
+		if (!this.model.selectedDates) {
+			this.model.selectedDates = []
+		}
+
+		if (
+			this.model.selectedDates[0]?.year === year &&
+			this.model.selectedDates[0]?.month === month &&
+			this.model.selectedDates[0]?.day === day
+		) {
+			throw new SpruceError({
+				code: 'DATE_ALREADY_SELECTED',
+				year: 2020,
+				month: 1,
+				day: 1,
+			})
+		}
+
+		this.model.selectedDates.push({ year, month, day })
+
+		this.triggerRender()
+	}
+
 	public replaceEventsInRange(
 		events: Event[],
 		startDate: number,
@@ -333,6 +387,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 				controller: this.getEventVc(e.id),
 			})),
 			controller: this,
+			selectedDates: this.model.selectedDates,
 		}
 	}
 }

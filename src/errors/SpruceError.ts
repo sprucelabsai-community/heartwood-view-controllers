@@ -63,6 +63,14 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `I could not find that person!!`
 				break
 
+			case 'DATE_ALREADY_SELECTED':
+				message = `You already selected ${options.year}-${options.month}-${options.day}!`
+				break
+
+			case 'DATE_NOT_SELECTED':
+				message = `${options.year}-${options.month}-${options.day}! cannot be deselected because it's not selected!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

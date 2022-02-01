@@ -355,4 +355,96 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 
 
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface DateNotSelected {
+		
+			
+			'year': number
+			
+			'month': number
+			
+			'day': number
+	}
+
+	export interface DateNotSelectedSchema extends SpruceSchema.Schema {
+		id: 'dateNotSelected',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Date not selected',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'year': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'month': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'day': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type DateNotSelectedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DateNotSelectedSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface DateAlreadySelected {
+		
+			
+			'year': number
+			
+			'month': number
+			
+			'day': number
+	}
+
+	export interface DateAlreadySelectedSchema extends SpruceSchema.Schema {
+		id: 'dateAlreadySelected',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Date already selected',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'year': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'month': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		            /** . */
+		            'day': {
+		                type: 'number',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type DateAlreadySelectedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DateAlreadySelectedSchema>
+
+}
+
+
+
 

@@ -4,6 +4,7 @@ import { SpruceSchemas } from '../../schemas.types'
 import calendarPersonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarPerson.schema'
 import calendarTimeSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
 import calendarEventSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEvent.schema'
+import calendarSelectedDateSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarSelectedDate.schema'
 
 const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema  = {
 	id: 'calendar',
@@ -72,6 +73,12 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'selectedEvent': {
 	                type: 'schema',
 	                options: {schema: calendarEventSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'selectedDates': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: calendarSelectedDateSchema_v2021_02_11,}
 	            },
 	            /** Timezone offset. In milliseconds */
 	            'timezoneOffsetMs': {

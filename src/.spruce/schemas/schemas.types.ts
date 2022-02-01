@@ -3688,6 +3688,52 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface CalendarSelectedDate {
+			
+				
+				'day': number
+				
+				'month': number
+				
+				'year': number
+		}
+
+		interface CalendarSelectedDateSchema extends SpruceSchema.Schema {
+			id: 'calendarSelectedDate',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'day': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'month': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'year': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		type CalendarSelectedDateEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CalendarEvent {
 			
 				
@@ -3956,6 +4002,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'events': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
 				
 				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
+				
+				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
 				/** Timezone offset. In milliseconds */
 				'timezoneOffsetMs'?: number| undefined | null
 				/** Enable animations. */
@@ -4041,6 +4089,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'selectedEvent': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
+			            },
+			            /** . */
+			            'selectedDates': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
 			            },
 			            /** Timezone offset. In milliseconds */
 			            'timezoneOffsetMs': {
