@@ -5,12 +5,8 @@ import ButtonGroupViewController, {
 	ButtonGroupViewControllerOptions,
 } from './ButtonGroup.vc'
 
-type ButtonBar = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar,
-	'controller'
->
-export type ButtonBarViewControllerOptions = ButtonBar &
-	ButtonGroupViewControllerOptions
+type ButtonBar = ButtonGroupViewControllerOptions
+export type ButtonBarViewControllerOptions = ButtonBar
 
 export default class ButtonBarViewController extends AbstractViewController<ButtonBar> {
 	private buttonGroupVc: ButtonGroupViewController
@@ -31,22 +27,22 @@ export default class ButtonBarViewController extends AbstractViewController<Butt
 		return this.buttonGroupVc.getSelectedButtons()
 	}
 
-	public selectButton(idx: number) {
-		this.buttonGroupVc.selectButton(idx)
+	public selectButton(id: string) {
+		this.buttonGroupVc.selectButton(id)
 	}
 
-	public selectButtons(idxs: number[]) {
-		this.buttonGroupVc.selectButtons(idxs)
+	public selectButtons(ids: string[]) {
+		this.buttonGroupVc.selectButtons(ids)
 	}
 
-	public deselectButton(idx: number) {
-		this.buttonGroupVc.deselectButton(idx)
+	public deselectButton(id: string) {
+		this.buttonGroupVc.deselectButton(id)
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar {
 		return {
 			controller: this,
-			buttons: this.buttonGroupVc.render(),
+			buttons: this.buttonGroupVc.render() as any,
 		}
 	}
 }

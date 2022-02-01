@@ -61,7 +61,11 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 	@test()
 	protected static returnsButtonBarController() {
 		const buttonBarVc = this.Controller('buttonBar', {
-			buttons: [{}],
+			buttons: [
+				{
+					id: 'first',
+				},
+			],
 		})
 
 		const vc = this.Controller('list', {
@@ -82,7 +86,11 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 	private static renderCellWithButtonBar(): import('/Users/taylorromero/Development/SpruceLabs/heartwood-view-controllers/src/viewControllers/list/ListCell.vc').ListCellModel {
 		return {
 			buttonBar: this.Controller('buttonBar', {
-				buttons: [{}],
+				buttons: [
+					{
+						id: 'first',
+					},
+				],
 			}).render(),
 		}
 	}

@@ -1,4 +1,4 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, dropFields } from '@sprucelabs/schema'
 import { buttonFields } from '../../constants'
 
 export default buildSchema({
@@ -21,7 +21,11 @@ export default buildSchema({
 				schema: {
 					id: 'buttonBarButton',
 					fields: {
-						...buttonFields,
+						...dropFields(buttonFields, ['onClick', 'onClickHintIcon']),
+						id: {
+							type: 'id',
+							isRequired: true,
+						},
 					},
 				},
 			},

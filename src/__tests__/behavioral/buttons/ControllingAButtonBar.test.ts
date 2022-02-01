@@ -20,6 +20,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		const vc = this.Controller('buttonBar', {
 			buttons: [
 				{
+					id: 'first',
 					label: 'what the?',
 				},
 			],
@@ -35,9 +36,11 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		const vc = this.Controller('buttonBar', {
 			buttons: [
 				{
+					id: 'first',
 					label: 'what the?',
 				},
 				{
+					id: 'second',
 					label: 'what the 2',
 				},
 			],
@@ -51,9 +54,11 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 	protected static async optionsPassedThroughToButtonGroup() {
 		const buttons = [
 			{
+				id: 'first',
 				label: 'what the?',
 			},
 			{
+				id: 'second',
 				label: 'what the 2',
 			},
 		]
@@ -95,11 +100,15 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 
 	@test()
 	protected static delegatesCallsToButtonGroup() {
+		const id = `${new Date().getTime()}`
+
 		const buttons = [
 			{
-				label: `${new Date().getTime()}`,
+				id,
+				label: id,
 			},
 			{
+				id: 'second',
 				label: 'what the 2',
 			},
 		]
@@ -113,13 +122,13 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 			vc.getButtonGroupVc().getSelectedButtons()
 		)
 
-		vc.selectButton(0)
-		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [0])
+		vc.selectButton(id)
+		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [id])
 
-		vc.selectButtons([1])
-		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [1])
+		vc.selectButtons(['second'])
+		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), ['second'])
 
-		vc.deselectButton(1)
+		vc.deselectButton('second')
 		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [])
 	}
 }

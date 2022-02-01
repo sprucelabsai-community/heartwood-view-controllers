@@ -13,6 +13,8 @@ import { getVcName, pluckAllFromCard } from './vcAssert.utility'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
+type ButtonBarVc =
+	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
@@ -85,6 +87,14 @@ const interactor = {
 		}
 
 		await this.click(match)
+	},
+
+	async clickButtonInButtonBar(vc: ButtonBarVc, buttonId: string) {
+		assertOptions({ vc }, ['vc'])
+
+		const model = renderUtil.render(vc)
+		const match = model.buttons.find((b) => b.id === buttonId)
+		return this.click(match)
 	},
 
 	async clickInFooterWithType(

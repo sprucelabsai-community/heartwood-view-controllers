@@ -1,27 +1,33 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { assertOptions } from '@sprucelabs/schema'
 import {
 	ButtonController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-type ViewModel = Button[]
+type Button = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button,
+	'onClick' | 'onClickHintIcon'
+> & {
+	id: string
+}
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 
-type SelectionChangeHandler = (selected: number[]) => void | Promise<void>
-type HintClickHandler = (selected: number) => void
+type SelectionChangeHandler = (selected: string[]) => void | Promise<void>
+type HintClickHandler = (selected: string) => void
 
 export interface ButtonGroupViewControllerOptions {
 	buttons: Button[]
 	onSelectionChange?: SelectionChangeHandler
 	onClickHintIcon?: HintClickHandler
 	shouldAllowMultiSelect?: boolean
-	selected?: number[]
+	selected?: string[]
 }
 
 export default class ButtonGroupViewController extends AbstractViewController<ViewModel> {
 	private buttons: Button[]
-	private selectedButtons: number[] = []
+	private selectedButtons: string[] = []
 	private selectionChangeHandler?: SelectionChangeHandler
 	private shouldAllowMultiSelect: boolean
 	private buttonTriggerRenderHandlers: (() => void)[] = []
@@ -50,12 +56,12 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 	}
 
-	public selectButtons(idxs: number[]) {
-		this.selectedButtons = idxs
+	public selectButtons(ids: string[]) {
+		this.selectedButtons = ids
 	}
 
-	public selectButton(idx: number) {
-		if (this.isSelected(idx)) {
+	public selectButton(id: string) {
+		if (this.isSelected(id)) {
 			return
 		}
 
@@ -63,7 +69,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 			this.selectedButtons = []
 		}
 
-		this.selectedButtons.push(idx)
+		this.selectedButtons.push(id)
 		this.didSelectHandler()
 	}
 
@@ -77,15 +83,15 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		this.triggerRender()
 	}
 
-	private isSelected(idx: number) {
+	private isSelected(id: string) {
 		if (this.selectedButtons.length === 0) {
 			return null
 		}
-		return this.selectedButtons.indexOf(idx) > -1
+		return this.selectedButtons.indexOf(id) > -1
 	}
 
-	public deselectButton(idx: number) {
-		const match = this.selectedButtons.indexOf(idx)
+	public deselectButton(id: string) {
+		const match = this.selectedButtons.indexOf(id)
 
 		if (match > -1) {
 			this.selectedButtons.splice(match, 1)
@@ -99,10 +105,11 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}))
 	}
 
-	private buildButtonController(
-		button: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button,
-		idx: number
-	): ButtonController {
+	private buildButtonController(button: Button, idx: number): ButtonController {
+		if (!button.id) {
+			assertOptions(button, ['id'])
+		}
+
 		const controller: ButtonController = {
 			triggerRender: () => {},
 			//@ts-ignore
@@ -115,18 +122,18 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 				const options = {
 					...button,
 					controller,
-					isSelected: this.isSelected(idx),
+					isSelected: this.isSelected(button.id),
 					shouldQueueShow,
 					onClick: () => {
-						if (!this.isSelected(idx)) {
-							this.selectButton(idx)
+						if (!this.isSelected(button.id)) {
+							this.selectButton(button.id)
 						} else {
-							this.deselectButton(idx)
+							this.deselectButton(button.id)
 						}
 						controller.triggerRender()
 					},
 					onClickHintIcon: () => {
-						this.handleClickHintIcon(idx)
+						this.handleClickHintIcon(button.id)
 					},
 				}
 
@@ -137,8 +144,8 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		return controller
 	}
 
-	private handleClickHintIcon(idx: number) {
-		this.clickHintHandler?.(idx)
+	private handleClickHintIcon(id: string) {
+		this.clickHintHandler?.(id)
 	}
 
 	public getSelectedButtons() {

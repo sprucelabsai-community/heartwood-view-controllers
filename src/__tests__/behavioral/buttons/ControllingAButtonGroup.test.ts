@@ -5,10 +5,10 @@ import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 
 export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	private static singleSelectVc: ButtonGroupViewController
-	private static onSelectInvocations: number[][]
+	private static onSelectInvocations: string[][]
 	private static multiSelectVc: ButtonGroupViewController
 	protected static controllerMap = {}
-	private static onClickHintInvocations: number[] = []
+	private static onClickHintInvocations: string[] = []
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -23,12 +23,15 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 			},
 			buttons: [
 				{
+					id: 'first',
 					label: 'first',
 				},
 				{
+					id: 'second',
 					label: 'second',
 				},
 				{
+					id: 'third',
 					label: 'third',
 				},
 			],
@@ -41,15 +44,19 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 			},
 			buttons: [
 				{
+					id: 'first',
 					label: 'first',
 				},
 				{
+					id: 'second',
 					label: 'second',
 				},
 				{
+					id: 'third',
 					label: 'third',
 				},
 				{
+					id: 'founth',
 					label: 'founth',
 				},
 			],
@@ -59,6 +66,20 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	@test()
 	protected static canCreateUsingAButtonGrid() {
 		assert.isTruthy(this.singleSelectVc)
+	}
+
+	@test()
+	protected static throwsIfButtonsHaveNoIds() {
+		assert.doesThrow(() =>
+			this.Controller('buttonGroup', {
+				buttons: [
+					//@ts-ignore
+					{
+						label: 'no id',
+					},
+				],
+			})
+		)
 	}
 
 	@test()
@@ -84,23 +105,23 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canSelectButtonAndMarkRestAsDeselected() {
-		this.singleSelectVc.selectButton(0)
+		this.singleSelectVc.selectButton('first')
 		const buttons = this.render(this.singleSelectVc)
 		this.assertFirstButtonSelected(buttons)
 	}
 
 	@test()
 	protected static selectingSameButtonMoreThanOnceHasNoNegativeEffect() {
-		this.singleSelectVc.selectButton(0)
-		this.singleSelectVc.selectButton(0)
-		this.singleSelectVc.selectButton(0)
+		this.singleSelectVc.selectButton('first')
+		this.singleSelectVc.selectButton('first')
+		this.singleSelectVc.selectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 1)
 		let buttons = this.render(this.singleSelectVc)
 
 		this.assertFirstButtonSelected(buttons)
 
-		this.singleSelectVc.deselectButton(0)
+		this.singleSelectVc.deselectButton('first')
 
 		buttons = this.render(this.singleSelectVc)
 		assert.doesNotInclude(buttons, { isSelected: true })
@@ -108,9 +129,9 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static deselectingSameButtonMoreThanOnceHasNoNegativeEffect() {
-		this.singleSelectVc.selectButton(0)
-		this.singleSelectVc.deselectButton(0)
-		this.singleSelectVc.deselectButton(0)
+		this.singleSelectVc.selectButton('first')
+		this.singleSelectVc.deselectButton('first')
+		this.singleSelectVc.deselectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 2)
 
@@ -120,8 +141,8 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canDeselectButton() {
-		this.singleSelectVc.selectButton(0)
-		this.singleSelectVc.deselectButton(0)
+		this.singleSelectVc.selectButton('first')
+		this.singleSelectVc.deselectButton('first')
 
 		const buttons = this.render(this.singleSelectVc)
 
@@ -139,16 +160,16 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static onSelectFiredWhenButtonSelected() {
-		this.singleSelectVc.selectButton(0)
+		this.singleSelectVc.selectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 1)
-		assert.isEqualDeep(this.onSelectInvocations[0], [0])
+		assert.isEqualDeep(this.onSelectInvocations[0], ['first'])
 	}
 
 	@test()
 	protected static canSelectMoreThanOneButton() {
-		this.multiSelectVc.selectButton(0)
-		this.multiSelectVc.selectButton(1)
+		this.multiSelectVc.selectButton('first')
+		this.multiSelectVc.selectButton('second')
 
 		const buttons = this.render(this.multiSelectVc)
 
@@ -161,16 +182,16 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static onSelectFiredWhenMultiButtonSelectedAndDeselected() {
-		this.multiSelectVc.selectButton(0)
-		this.multiSelectVc.selectButton(1)
-		this.multiSelectVc.deselectButton(0)
-		this.multiSelectVc.deselectButton(0)
+		this.multiSelectVc.selectButton('first')
+		this.multiSelectVc.selectButton('second')
+		this.multiSelectVc.deselectButton('first')
+		this.multiSelectVc.deselectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 3)
 
-		assert.isEqualDeep(this.onSelectInvocations[0], [0])
-		assert.isEqualDeep(this.onSelectInvocations[1], [0, 1])
-		assert.isEqualDeep(this.onSelectInvocations[2], [1])
+		assert.isEqualDeep(this.onSelectInvocations[0], ['first'])
+		assert.isEqualDeep(this.onSelectInvocations[1], ['first', 'second'])
+		assert.isEqualDeep(this.onSelectInvocations[2], ['second'])
 	}
 
 	@test()
@@ -193,37 +214,41 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		await buttons[0].onClickHintIcon?.()
 
 		assert.isLength(this.onClickHintInvocations, 1)
-		assert.isEqual(this.onClickHintInvocations[0], 0)
+		assert.isEqual(this.onClickHintInvocations[0], 'first')
 
 		await buttons[1].onClickHintIcon?.()
-		assert.isEqual(this.onClickHintInvocations[1], 1)
+		assert.isEqual(this.onClickHintInvocations[1], 'second')
 	}
 
 	@test()
 	protected static async canSetSelectedButtonsToStart() {
 		const vc = this.Factory().Controller('buttonGroup', {
-			selected: [0, 1],
+			selected: ['first', 'second'],
 			onSelectionChange: (selected) => {
 				this.onSelectInvocations.push(selected)
 			},
 			buttons: [
 				{
+					id: 'first',
 					label: 'first',
 				},
 				{
+					id: 'second',
 					label: 'second',
 				},
 				{
+					id: 'third',
 					label: 'third',
 				},
 				{
+					id: 'founth',
 					label: 'founth',
 				},
 			],
 		})
 
 		const selected = vc.getSelectedButtons()
-		assert.isEqualDeep(selected, [0, 1])
+		assert.isEqualDeep(selected, ['first', 'second'])
 
 		const buttons = this.render(vc)
 		assert.doesInclude(buttons, { isSelected: true })
