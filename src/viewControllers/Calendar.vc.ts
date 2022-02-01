@@ -18,6 +18,8 @@ type CalendarOptions = Omit<
 type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
 type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
+type SelectedDate =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
 
 export type CalendarViewControllerOptions = CalendarOptions
 export type CalendarView = NonNullable<CalendarOptions['view']>
@@ -163,6 +165,11 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public getSelectedDates() {
 		return this.model.selectedDates ?? []
+	}
+
+	public clearSelectedDates() {
+		this.model.selectedDates = []
+		this.triggerRender()
 	}
 
 	public getIsDateSelected(year: number, month: number, day: number): boolean {
@@ -330,6 +337,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public getStartDate() {
 		return this.model.startDate
+	}
+
+	public selectDates(dates: SelectedDate[]) {
+		this.model.selectedDates = [...dates]
 	}
 
 	public selectDate(year: number, month: number, day: number) {

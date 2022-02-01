@@ -148,9 +148,35 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
+	@test()
+	protected static canClearSelectedDates() {
+		this.vc.selectDate(2020, 1, 1)
+		this.vc.clearSelectedDates()
+		this.assertSelectedRendered([])
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test('can set dates 1', [{ year: 2020, month: 10, day: 10 }])
+	@test('can set dates 2', [
+		{ year: 2021, month: 1, day: 1 },
+		{ year: 1992, month: 2, day: 2 },
+	])
+	protected static canSetAllSectedDatesAtOnce(dates: any) {
+		this.vc.selectDates(dates)
+		this.assertSelectedRendered(dates)
+		assert.isNotEqual(this.vc.getSelectedDates(), dates)
+	}
+
 	private static assertSelectedRendered(
 		expected?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]
 	) {
 		assert.isEqualDeep(this.render(this.vc).selectedDates, expected)
+		if (expected) {
+			assert.isNotEqual(
+				this.render(this.vc).selectedDates,
+				expected,
+				'calendar should copy selected dates, not set directly'
+			)
+		}
 	}
 }
