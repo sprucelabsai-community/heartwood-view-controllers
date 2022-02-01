@@ -107,6 +107,10 @@ export default class ListRowViewController
 		this.triggerRender()
 	}
 
+	public getIsDeleted() {
+		return !this.getModelHandler()
+	}
+
 	public getCellVc(idx: number) {
 		const cell = this.model.cells[idx]
 
