@@ -1,3 +1,10 @@
+# [61.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v60.0.2...v61.0.0) (2022-02-02)
+
+
+### Breaking Changes
+
+* devs can now test for swipe views! swipe -> swipeCard ([98e41c4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/98e41c4))
+
 ## [60.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v60.0.1...v60.0.2) (2022-02-02)
 
 ## [60.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v60.0.0...v60.0.1) (2022-02-02)
