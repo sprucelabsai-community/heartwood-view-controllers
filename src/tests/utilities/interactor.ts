@@ -16,6 +16,7 @@ type CardVc =
 type ButtonBarVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
+type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactor = {
@@ -420,6 +421,17 @@ const interactor = {
 		await model.onClick?.({
 			date: dateUtil.getStartOfDay(dateTimeMs),
 		})
+	},
+
+	async clickButtonHint(button: Button) {
+		assertOptions({ button }, ['button'])
+		assert.isFunction(
+			button.onClickHintIcon,
+			`You gotta set 'onClickHintIcon' on your button with the id: '${
+				button.id ?? '***missing***'
+			}'`
+		)
+		return button.onClickHintIcon?.()
 	},
 
 	async clickCalendarDayView(
