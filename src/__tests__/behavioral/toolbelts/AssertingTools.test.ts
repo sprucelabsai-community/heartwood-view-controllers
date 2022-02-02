@@ -9,7 +9,7 @@ import {
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
-import SwipeViewController from '../../../viewControllers/Swipe.vc'
+import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
@@ -109,7 +109,7 @@ class FancyCard extends AbstractViewController<Card> {
 }
 
 export default class AssertingToolsTest extends AbstractViewControllerTest {
-	private static swipeVc: SwipeViewController
+	private static swipeVc: SwipeCardViewController
 	private static fancyTool: FancyTool
 
 	protected static controllerMap = {
@@ -237,7 +237,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		const swipeVc = vcAssert.assertToolInstanceOf(
 			svc,
 			'add',
-			SwipeViewController
+			SwipeCardViewController
 		)
 
 		assert.isEqual(swipeVc, this.swipeVc)
@@ -353,7 +353,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
 		//@ts-ignore
-		this.swipeVc = this.Controller('swipe', {})
+		this.swipeVc = this.Controller('swipeCard', {})
 		this.fancyTool = this.Controller('tool', {})
 
 		return this.Controller('toolBeltSvc', {

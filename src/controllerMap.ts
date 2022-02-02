@@ -12,14 +12,14 @@ import LoginViewController from './viewControllers/Login.vc'
 import RatingsViewController from './viewControllers/Ratings.vc'
 import ProgressViewController from './viewControllers/reporting/Progress.vc'
 import StatsViewController from './viewControllers/reporting/Stats.vc'
-import SwipeViewController from './viewControllers/Swipe.vc'
+import SwipeCardViewController from './viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController from './viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from './viewControllers/ToolBelt.vc'
 
 export const CORE_CONTROLLER_MAP = {
 	form: FormViewController,
 	login: LoginViewController,
-	swipe: SwipeViewController,
+	swipeCard: SwipeCardViewController,
 	buttonGroup: ButtonGroupViewController,
 	card: CardViewController,
 	dialog: DialogViewController,

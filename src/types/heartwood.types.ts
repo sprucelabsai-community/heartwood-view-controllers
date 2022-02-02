@@ -53,9 +53,9 @@ import ProgressViewController, {
 import StatsViewController, {
 	StatsViewControllerOptions,
 } from '../viewControllers/reporting/Stats.vc'
-import SwipeViewControllerImpl, {
+import SwipeCardViewControllerImpl, {
 	SwipeViewControllerOptions,
-} from '../viewControllers/Swipe.vc'
+} from '../viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController, {
 	TalkingSprucebotViewControllerOptions,
 } from '../viewControllers/TalkingSprucebot.vc'
@@ -168,7 +168,8 @@ type CardUniversals = Pick<
 
 export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
 	CardUniversals
-export type SwipeViewController = SwipeViewControllerImpl & CardUniversals
+export type SwipeCardViewController = SwipeCardViewControllerImpl &
+	CardUniversals
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
 export type BigFormViewController<S extends Schema> =
 	BigFormViewControllerImpl<S>
@@ -227,7 +228,7 @@ export interface ButtonController {
 export interface ViewControllerMap {
 	form: FormViewController<any>
 	login: LoginViewController
-	swipe: SwipeViewController
+	swipeCard: SwipeCardViewController
 	buttonGroup: ButtonGroupViewController
 	card: CardViewController
 	dialog: DialogViewController
@@ -248,7 +249,7 @@ export interface ViewControllerMap {
 export interface ViewControllerOptionsMap {
 	form: FormViewControllerOptions<any>
 	login: LoginViewControllerOptions
-	swipe: SwipeViewControllerOptions
+	swipeCard: SwipeViewControllerOptions
 	buttonGroup: ButtonGroupViewControllerOptions
 	card: CardViewControllerOptions
 	dialog: DialogViewControllerOptions

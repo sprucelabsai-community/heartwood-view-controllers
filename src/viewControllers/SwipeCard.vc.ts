@@ -25,7 +25,7 @@ type PassthroughMethods = {
 }
 
 /** @ts-ignore */
-export default class SwipeViewController
+export default class SwipeCardViewController
 	extends AbstractViewController<Card>
 	implements PassthroughMethods
 {
@@ -85,7 +85,7 @@ export default class SwipeViewController
 				setTimeout(() => {
 					this.slideChangeHandler?.(slide)
 					resolve()
-				}, SwipeViewController.swipeDelay)
+				}, SwipeCardViewController.swipeDelay)
 			})
 		}
 	}

@@ -2,13 +2,13 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
-import SwipeViewController, {
+import SwipeCardViewController, {
 	SwipeViewControllerOptions,
-} from '../../../viewControllers/Swipe.vc'
+} from '../../../viewControllers/SwipeCard.vc'
 
 export default class SwipingThroughSlidesTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
-	private static vc: SwipeViewController
+	private static vc: SwipeCardViewController
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.vc = this.Vc({
@@ -26,8 +26,10 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		})
 	}
 
-	private static Vc(options: SwipeViewControllerOptions): SwipeViewController {
-		return this.Controller('swipe', options)
+	private static Vc(
+		options: SwipeViewControllerOptions
+	): SwipeCardViewController {
+		return this.Controller('swipeCard', options)
 	}
 
 	@test()
@@ -157,7 +159,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async settingCurrentSlideTriggersSlideCallback() {
-		SwipeViewController.swipeDelay = 0
+		SwipeCardViewController.swipeDelay = 0
 		let onSlideChangeSlide = -1
 		let changeHitCount = 0
 		const vc = this.Vc({

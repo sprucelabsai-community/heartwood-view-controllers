@@ -7,7 +7,7 @@ import {
 	ViewControllerMap,
 } from '../types/heartwood.types'
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
-import SwipeViewController from '../viewControllers/Swipe.vc'
+import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import MockStorage from './MockStorage'
@@ -34,7 +34,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		vcAssert._setVcFactory(this.Factory())
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
-		SwipeViewController.swipeDelay = 0
+		SwipeCardViewController.swipeDelay = 0
 		this.views = undefined
 		await MercuryFixture.beforeEach()
 	}

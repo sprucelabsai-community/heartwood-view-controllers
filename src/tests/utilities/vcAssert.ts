@@ -30,6 +30,7 @@ import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
 import StatsViewController from '../../viewControllers/reporting/Stats.vc'
+import SwipeCardViewController from '../../viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController from '../../viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
@@ -714,6 +715,24 @@ const vcAssert = {
 			return
 		}
 		assert.fail(`I found a row '${row}' and I didn't expect to!`)
+	},
+
+	assertSkillViewRendersSwipeCard(
+		vc: SkillViewController
+	): SwipeCardViewController {
+		assertOptions({ vc }, ['vc'])
+
+		const model = renderUtil.render(vc)
+
+		for (const layout of model.layouts) {
+			for (const card of layout.cards ?? []) {
+				if (card.controller instanceof SwipeCardViewController) {
+					return card.controller
+				}
+			}
+		}
+		assert.fail(`I could not find a swipe view in '${getVcName(vc)}'!`)
+		return {} as any
 	},
 
 	assertSkillViewRendersFormBuilder(

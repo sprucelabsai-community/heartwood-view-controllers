@@ -6,7 +6,7 @@ import { ViewControllerOptions } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
-import SwipeViewController from '../Swipe.vc'
+import SwipeCardViewController from '../SwipeCard.vc'
 import { EditFormBuilderFieldCardViewController } from './EditFormBuilderFieldCard.vc'
 import EditFormBuilderSectionCardViewController, {
 	EditFormBuilderSectionOptions,
@@ -37,7 +37,7 @@ export interface FormBuilderCardViewControllerOptions {
 }
 
 export default class FormBuilderCardViewController extends AbstractViewController<Card> {
-	private swipeVc: SwipeViewController
+	private swipeVc: SwipeCardViewController
 	private footerOverride?:
 		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 		| null
@@ -55,7 +55,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		this.footerOverride = options.footer
 		this.shouldAllowEditing = options.shouldAllowEditing ?? true
 
-		this.swipeVc = this.Controller('swipe', {
+		this.swipeVc = this.Controller('swipeCard', {
 			id: options.id,
 			isBusy: options.isBusy,
 			header: {
