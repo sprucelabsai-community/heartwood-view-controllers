@@ -705,6 +705,23 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static canSetDefaultVcForEvents() {
+		assert.isFalsy(this.vc.getDefaultControllerForEvents())
+
+		this.vc.setDefaultControllerForEvents('list')
+
+		assert.isEqual(this.vc.getDefaultControllerForEvents(), 'list')
+		const { vc } = this.addEventAndGetVc()
+		assert.isTrue(vc instanceof ListViewController)
+
+		this.vc.setDefaultControllerForEvents('card')
+
+		assert.isEqual(this.vc.getDefaultControllerForEvents(), 'card')
+		const { vc: vc2 } = this.addEventAndGetVc()
+		assert.isTrue(vc2 instanceof CardViewController)
+	}
+
+	@test()
 	protected static renderingEventRendersController() {
 		const { vc } = this.addEventAndGetVc()
 		const model = this.render(vc)

@@ -24,6 +24,8 @@ type SelectedDate =
 export type CalendarViewControllerOptions = CalendarOptions
 export type CalendarView = NonNullable<CalendarOptions['view']>
 
+const DEFAULT_EVENT_TYPE = '**default**'
+
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
 	protected model: Omit<CalendarOptions, 'events'>
 	private vcIdsByEventType: Record<string, string> = {}
@@ -273,6 +275,14 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.eventsById[id]
 	}
 
+	public getDefaultControllerForEvents(): string | undefined {
+		return this.vcIdsByEventType[DEFAULT_EVENT_TYPE]
+	}
+
+	public setDefaultControllerForEvents(vcId: string) {
+		this.vcIdsByEventType[DEFAULT_EVENT_TYPE] = vcId
+	}
+
 	public setControllerForEventType(type: string, vcId: string) {
 		this.vcIdsByEventType[type] = vcId
 		for (const event of this.getEvents()) {
@@ -288,7 +298,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		if (!this.vcsById[eventId]) {
 			const event = this.getEvent(eventId)
 			const vc = this.Controller(
-				(this.vcIdsByEventType[event.eventTypeSlug ?? '***missing***'] ??
+				(this.vcIdsByEventType[event.eventTypeSlug ?? DEFAULT_EVENT_TYPE] ??
 					'calendarEvent') as any,
 				{
 					getEvent: () => this.getEvent(eventId),
