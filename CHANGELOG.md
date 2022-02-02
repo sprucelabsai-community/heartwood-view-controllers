@@ -1,3 +1,10 @@
+# [61.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.1.3...v61.2.0) (2022-02-02)
+
+
+### Features
+
+* devs can now click hints on buttons! ([75c4131](https://github.com/sprucelabsai/heartwood-view-controllers/commit/75c4131))
+
 ## [61.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.1.2...v61.1.3) (2022-02-02)
 
 ## [61.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.1.1...v61.1.2) (2022-02-02)
