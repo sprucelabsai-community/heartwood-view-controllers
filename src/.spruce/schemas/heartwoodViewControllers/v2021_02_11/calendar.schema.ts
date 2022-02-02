@@ -40,11 +40,11 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                hint: 'The latest time to show in the calendar.',
 	                options: {schema: calendarTimeSchema_v2021_02_11,}
 	            },
-	            /** date. The date the calendar will start on. First of month or first of week. */
+	            /** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
 	            'startDate': {
 	                label: 'date',
 	                type: 'dateTime',
-	                hint: 'The date the calendar will start on. First of month or first of week.',
+	                hint: 'The date the calendar will start on. First of month or first of week. Is in ms from epoch.',
 	                options: undefined
 	            },
 	            /** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
