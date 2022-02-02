@@ -1,3 +1,10 @@
+# [61.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.0.1...v61.1.0) (2022-02-02)
+
+
+### Features
+
+* devs can now set default view controllers for events on a calendar! ([e23abb5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e23abb5))
+
 ## [61.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.0.0...v61.0.1) (2022-02-02)
 
 # [61.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v60.0.2...v61.0.0) (2022-02-02)
