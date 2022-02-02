@@ -722,6 +722,18 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static defaultEventVcFallsBackForEventsWithTypeSlugs() {
+		this.vc.setDefaultControllerForEvents('list')
+		const event = calendarSeeder.generateEventValues()
+		event.eventTypeSlug = 'waka'
+		this.vc.addEvent(event)
+
+		const vc = this.vc.getEventVc(event.id)
+
+		assert.isTrue(vc instanceof ListViewController)
+	}
+
+	@test()
 	protected static renderingEventRendersController() {
 		const { vc } = this.addEventAndGetVc()
 		const model = this.render(vc)
