@@ -241,7 +241,9 @@ const vcAssert = {
 			dlgVc = await this.assertRendersDialog(vc, action)
 		} catch (err: any) {
 			assert.fail(
-				`Expected this.alert() to be called in your view and it wasn't.${
+				`Expected this.alert() to be called in your view '${getVcName(
+					vc
+				)}' within 5 seconds and it wasn't.${
 					err.stack.includes('renderInDialog(')
 						? ``
 						: ` This was the specific error:\n\n${err.stack}`
@@ -251,7 +253,9 @@ const vcAssert = {
 
 		assert.isTrue(
 			wasAlertTriggered,
-			`Expected this.alert() to be called in your view and it wasn't.`
+			`Expected this.alert() to be called in '${getVcName(
+				vc
+			)}' within 5 seconds and it wasn't.`
 		)
 
 		//@ts-ignore
