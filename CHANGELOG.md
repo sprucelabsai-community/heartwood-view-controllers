@@ -1,3 +1,10 @@
+# [62.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.2.10...v62.0.0) (2022-02-04)
+
+
+### Breaking Changes
+
+* state machine requires vcFactory vs Controller for more flexibility ([3d981f0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3d981f0))
+
 ## [61.2.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.2.9...v61.2.10) (2022-02-04)
 
 ## [61.2.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v61.2.8...v61.2.9) (2022-02-04)
