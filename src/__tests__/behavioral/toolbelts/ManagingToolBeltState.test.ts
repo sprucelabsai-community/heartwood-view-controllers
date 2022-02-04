@@ -19,7 +19,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		//@ts-ignore
 		const err = assert.doesThrow(() => new ToolBeltStateMachine())
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['toolBeltVc', 'Controller', 'connectToApi'],
+			parameters: ['toolBeltVc', 'vcFactory', 'connectToApi'],
 		})
 	}
 
@@ -138,6 +138,13 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqualDeep(passedUpdates, updates)
 	}
 
+	@test()
+	protected static canGetVcFactory() {
+		const vcFactory = this.getFactory()
+		this.sm = this.StateMachine({ vcFactory })
+		assert.isEqual(this.sm.getVcFactory(), vcFactory)
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,
@@ -149,7 +156,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	private static StateMachine(options?: Partial<ToolBeltStateMachineOptions>) {
 		return new ToolBeltStateMachine({
 			toolBeltVc: this.Controller('toolBelt', {}),
-			Controller: this.Controller.bind(this),
+			vcFactory: this.getFactory(),
 			connectToApi: this.mercury.getApiClientFactory(),
 			...options,
 		})

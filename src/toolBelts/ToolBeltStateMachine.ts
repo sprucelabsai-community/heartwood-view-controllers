@@ -2,6 +2,7 @@ import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
+import { ViewControllerFactory } from '..'
 import {
 	ControllerOptions,
 	ViewControllerId,
@@ -17,7 +18,7 @@ export interface ToolBeltStateMachineOptions<
 	Context extends Record<string, any> = Record<string, any>
 > {
 	toolBeltVc: ToolBeltViewController
-	Controller: ControllerFactory
+	vcFactory: ViewControllerFactory
 	connectToApi: MercuryConnectFactory
 	context?: Partial<Context>
 }
@@ -67,16 +68,18 @@ export default class ToolBeltStateMachine<
 
 	public Controller: ControllerFactory
 	public connectToApi: MercuryConnectFactory
+	private vcFactory: ViewControllerFactory
 
 	public constructor(options: ToolBeltStateMachineOptions<Context>) {
 		super(eventContract)
 
-		assertOptions(options, ['toolBeltVc', 'Controller', 'connectToApi'])
+		assertOptions(options, ['toolBeltVc', 'vcFactory', 'connectToApi'])
 
-		const { toolBeltVc, Controller, connectToApi, context = {} } = options
+		const { toolBeltVc, vcFactory, connectToApi, context = {} } = options
 
 		this.toolBeltVc = toolBeltVc
-		this.Controller = Controller
+		this.Controller = vcFactory.Controller.bind(vcFactory)
+		this.vcFactory = vcFactory
 		this.connectToApi = connectToApi
 		this.context = context
 	}
@@ -85,6 +88,10 @@ export default class ToolBeltStateMachine<
 		assertOptions({ state }, ['state'])
 		await state.load(this)
 		this.state = state
+	}
+
+	public getVcFactory() {
+		return this.vcFactory
 	}
 
 	public getContext() {
