@@ -1,3 +1,10 @@
+# [62.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v62.0.13...v62.1.0) (2022-02-06)
+
+
+### Features
+
+* devs can now use dateInputs in lists ([95f620f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/95f620f))
+
 ## [62.0.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v62.0.12...v62.0.13) (2022-02-06)
 
 ## [62.0.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v62.0.11...v62.0.12) (2022-02-06)
