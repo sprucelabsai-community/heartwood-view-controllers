@@ -16,7 +16,6 @@ type CardVc =
 type ButtonBarVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactor = {
@@ -73,21 +72,23 @@ const interactor = {
 	},
 
 	async clickButton(vc: CardVc | FormVc, buttonId: string) {
-		const model = renderUtil.render(vc) as any
-		const buttons: any[] = [...(model.footer?.buttons ?? [])]
-
-		pluckAllFromCard(model, 'buttons').map((b) => b && buttons.push(...b))
-		const match = buttons.find((b) => b.id === buttonId)
-
-		if (!match) {
-			assert.fail(
-				`Could not find a button in '${getVcName(
-					vc
-				)}' with the id '${buttonId}'`
-			)
-		}
+		const match = pluckButtonFromCard(vc, buttonId)
 
 		await this.click(match)
+	},
+
+	async clickButtonHint(vc: CardVc | FormVc, buttonId: string) {
+		assertOptions({ vc, buttonId }, ['vc', 'buttonId'])
+
+		const button = pluckButtonFromCard(vc, buttonId)
+
+		assert.isFunction(
+			button.onClickHintIcon,
+			`You gotta set 'onClickHintIcon' on your button with the id: '${
+				button.id ?? '***missing***'
+			}'`
+		)
+		return button.onClickHintIcon?.()
 	},
 
 	async clickButtonInButtonBar(vc: ButtonBarVc, buttonId: string) {
@@ -423,17 +424,6 @@ const interactor = {
 		})
 	},
 
-	async clickButtonHint(button: Button) {
-		assertOptions({ button }, ['button'])
-		assert.isFunction(
-			button.onClickHintIcon,
-			`You gotta set 'onClickHintIcon' on your button with the id: '${
-				button.id ?? '***missing***'
-			}'`
-		)
-		return button.onClickHintIcon?.()
-	},
-
 	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
 		time: number,
@@ -473,6 +463,20 @@ const interactor = {
 }
 
 export default interactor
+
+function pluckButtonFromCard(vc: CardVc | FormVc, buttonId: string) {
+	const model = renderUtil.render(vc) as any
+	const buttons: any[] = [...(model.footer?.buttons ?? [])]
+
+	pluckAllFromCard(model, 'buttons').map((b) => b && buttons.push(...b))
+	const match = buttons.find((b) => b.id === buttonId)
+
+	assert.isTruthy(
+		match,
+		`Could not find a button in '${getVcName(vc)}' with the id '${buttonId}'`
+	)
+	return match
+}
 
 function findEvent(
 	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>,

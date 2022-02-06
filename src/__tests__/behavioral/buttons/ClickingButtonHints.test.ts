@@ -1,10 +1,7 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 
 export default class ClickingButtonHintsTest extends AbstractViewControllerTest {
 	@test()
@@ -12,42 +9,103 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => interactor.clickButtonHint())
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['button'],
+			parameters: ['vc', 'buttonId'],
 		})
 	}
 
 	@test()
-	protected static async canClickHintIcon() {
-		const button = await this.button({
-			onClickHintIcon: () => {},
-		})
-		await interactor.clickButtonHint(button)
+	protected static async throwsWhenNotFindingButton() {
+		const cardVc = this.Controller('card', {})
+		await assert.doesThrowAsync(
+			() => interactor.clickButtonHint(cardVc, 'not-found'),
+			'not find'
+		)
 	}
 
 	@test()
 	protected static async throwsWhenNoHintListenerWasSet() {
-		const button = await this.button({})
-		await assert.doesThrowAsync(() => interactor.clickButtonHint(button))
+		const cardVc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [{ id: 'found' }],
+					},
+				],
+			},
+		})
+		await assert.doesThrowAsync(
+			() => interactor.clickButtonHint(cardVc, 'found'),
+			'onClickHintIcon'
+		)
+	}
+
+	@test()
+	protected static async canClickFirstHintIcon() {
+		const cardVc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [{ id: 'found', onClickHintIcon: () => {} }],
+					},
+				],
+			},
+		})
+		await interactor.clickButtonHint(cardVc, 'found')
+	}
+
+	@test()
+	protected static async clicksALaterButton() {
+		const cardVc = this.Controller('card', {
+			body: {
+				sections: [
+					{},
+					{
+						buttons: [
+							{ id: 'found' },
+							{ id: 'another', onClickHintIcon: () => {} },
+						],
+					},
+				],
+			},
+		})
+		await interactor.clickButtonHint(cardVc, 'another')
+	}
+
+	@test()
+	protected static async clicksButtonInFooter() {
+		const cardVc = this.Controller('card', {
+			footer: {
+				buttons: [
+					{ id: 'found' },
+					{ id: 'another', onClickHintIcon: () => {} },
+				],
+			},
+		})
+		await interactor.clickButtonHint(cardVc, 'another')
 	}
 
 	@test()
 	protected static async triggersCallback() {
 		let wasHit = false
-		const button = await this.button({
-			onClickHintIcon: () => {
-				wasHit = true
+		const cardVc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [
+							{
+								id: 'a-button',
+								onClickHintIcon: () => {
+									wasHit = true
+								},
+							},
+						],
+					},
+				],
 			},
 		})
-		await interactor.clickButtonHint(button)
+
+		await interactor.clickButtonHint(cardVc, 'a-button')
 
 		assert.isTrue(wasHit)
-	}
-
-	private static async button(btn: Partial<Button>) {
-		const button = {
-			...btn,
-		}
-
-		return button as Button
 	}
 }
