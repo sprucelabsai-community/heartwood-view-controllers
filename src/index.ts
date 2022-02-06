@@ -94,6 +94,7 @@ export { default as listRatingsInputSchema } from '#spruce/schemas/heartwoodView
 export { default as ratingsInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratingsInput.schema'
 export { default as calendarEventSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEvent.schema'
 export { default as calendarSelectedDateSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarSelectedDate.schema'
+export { default as listDateInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listDateInput.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
