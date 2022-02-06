@@ -7,7 +7,8 @@ const listUtil = {
 			cell.selectInput ??
 			cell.toggleInput ??
 			cell.ratingsInput ??
-			cell.checkboxInput
+			cell.checkboxInput ??
+			cell.dateInput
 		)
 	},
 	getElementFromCell(cell: ListCellModel) {

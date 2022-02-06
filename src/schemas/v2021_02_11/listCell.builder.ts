@@ -110,6 +110,25 @@ export default buildSchema({
 				},
 			},
 		},
+		dateInput: {
+			type: 'schema',
+			label: 'Date input',
+			options: {
+				schema: {
+					id: 'listDateInput',
+					fields: {
+						...textInputBuilder.fields,
+						setValue: {
+							type: 'raw',
+							options: {
+								valueType:
+									'(name: string, value: number) => Promise<any> | any',
+							},
+						},
+					},
+				},
+			},
+		},
 		selectInput: {
 			type: 'schema',
 			label: 'Select input',

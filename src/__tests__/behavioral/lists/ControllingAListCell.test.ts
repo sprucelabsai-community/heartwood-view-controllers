@@ -125,6 +125,16 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		},
 		0.3
 	)
+	@test(
+		'setting date input list and triggers render in all the right places',
+		{
+			dateInput: {
+				name: 'firstName',
+				value: 100,
+			},
+		},
+		100
+	)
 	protected static async settingValueOnInputSetsValueOnListAndTriggersRender(
 		cellModel: ListCellModel,
 		value: any

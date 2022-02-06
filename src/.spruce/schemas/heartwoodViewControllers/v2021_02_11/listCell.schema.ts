@@ -6,6 +6,7 @@ import listCellButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewContr
 import calendarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import buttonBarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/buttonBar.schema'
 import listTextInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listTextInput.schema'
+import listDateInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listDateInput.schema'
 import listSelectInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
 import listToggleInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listToggleInput.schema'
 import listRatingsInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listRatingsInput.schema'
@@ -69,6 +70,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                label: 'Text input',
 	                type: 'schema',
 	                options: {schema: listTextInputSchema_v2021_02_11,}
+	            },
+	            /** Date input. */
+	            'dateInput': {
+	                label: 'Date input',
+	                type: 'schema',
+	                options: {schema: listDateInputSchema_v2021_02_11,}
 	            },
 	            /** Select input. */
 	            'selectInput': {

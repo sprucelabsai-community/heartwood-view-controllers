@@ -3177,6 +3177,98 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface ListDateInput {
+			
+				
+				'id'?: string| undefined | null
+				
+				'name': string
+				
+				'value'?: string| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				/** Hint. */
+				'hint'?: string| undefined | null
+				/** Required. */
+				'isRequired'?: boolean| undefined | null
+				/** On change handler. */
+				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
+				
+				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
+		}
+
+		interface ListDateInputSchema extends SpruceSchema.Schema {
+			id: 'listDateInput',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'value': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Hint. */
+			            'hint': {
+			                label: 'Hint',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Required. */
+			            'isRequired': {
+			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** On change handler. */
+			            'onChange': {
+			                label: 'On change handler',
+			                type: 'raw',
+			                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
+			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'setValue': {
+			                type: 'raw',
+			                options: {valueType: `(name: string, value: number) => Promise<any> | any`,}
+			            },
+			    }
+		}
+
+		type ListDateInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInputSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ListTextInput {
 			
 				
@@ -3463,6 +3555,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
 				/** Text input. */
 				'textInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput| undefined | null
+				/** Date input. */
+				'dateInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInput| undefined | null
 				/** Select input. */
 				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput| undefined | null
 				/** Toggle input. */
@@ -3532,6 +3626,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Text input',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema,}
+			            },
+			            /** Date input. */
+			            'dateInput': {
+			                label: 'Date input',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInputSchema,}
 			            },
 			            /** Select input. */
 			            'selectInput': {
