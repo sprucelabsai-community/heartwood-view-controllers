@@ -24,6 +24,40 @@ export default class ConfirmingAnActionTest extends AbstractViewControllerTest {
 		void this.svc.confirmShouldSave()
 	}
 
+	@test()
+	protected static dropInConfirmBody() {
+		const section1 = {
+			text: {
+				content: 'hey',
+			},
+		}
+		const section2 = {
+			text: {
+				content: 'there!',
+			},
+		}
+
+		const sections = {
+			sections: [section1, section2],
+		}
+
+		const message = 'hey there!'
+		const confirmVc = this.Controller('confirm', {
+			message,
+			body: sections,
+			onAccept: () => {},
+			onDecline: () => {},
+		})
+
+		const model = this.render(confirmVc)
+		assert.doesInclude(model.body?.sections?.[0], {
+			title: 'hey there!',
+		})
+
+		assert.doesInclude(model.body?.sections?.[1], section1)
+		assert.doesInclude(model.body?.sections?.[2], section2)
+	}
+
 	private static Svc() {
 		return this.Factory().Controller('confirmTest', {})
 	}

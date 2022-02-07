@@ -82,6 +82,11 @@ const interactor = {
 
 		const button = pluckButtonFromCard(vc, buttonId)
 
+		assert.isTrue(
+			button.shouldShowHintIcon,
+			`Make sure have 'shouldShowHintIcon' set to true in your button: '${buttonId}'`
+		)
+
 		assert.isFunction(
 			button.onClickHintIcon,
 			`You gotta set 'onClickHintIcon' on your button with the id: '${

@@ -28,7 +28,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 			body: {
 				sections: [
 					{
-						buttons: [{ id: 'found' }],
+						buttons: [{ id: 'found', shouldShowHintIcon: true }],
 					},
 				],
 			},
@@ -40,12 +40,41 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 	}
 
 	@test()
+	protected static async throwsWhenHintNotSetToTrue() {
+		const cardVc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						buttons: [
+							{
+								id: 'found',
+								shouldShowHintIcon: false,
+								onClickHintIcon: () => {},
+							},
+						],
+					},
+				],
+			},
+		})
+		await assert.doesThrowAsync(
+			() => interactor.clickButtonHint(cardVc, 'found'),
+			'shouldShowHintIcon'
+		)
+	}
+
+	@test()
 	protected static async canClickFirstHintIcon() {
 		const cardVc = this.Controller('card', {
 			body: {
 				sections: [
 					{
-						buttons: [{ id: 'found', onClickHintIcon: () => {} }],
+						buttons: [
+							{
+								id: 'found',
+								onClickHintIcon: () => {},
+								shouldShowHintIcon: true,
+							},
+						],
 					},
 				],
 			},
@@ -62,7 +91,11 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 					{
 						buttons: [
 							{ id: 'found' },
-							{ id: 'another', onClickHintIcon: () => {} },
+							{
+								id: 'another',
+								onClickHintIcon: () => {},
+								shouldShowHintIcon: true,
+							},
 						],
 					},
 				],
@@ -77,7 +110,11 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 			footer: {
 				buttons: [
 					{ id: 'found' },
-					{ id: 'another', onClickHintIcon: () => {} },
+					{
+						id: 'another',
+						onClickHintIcon: () => {},
+						shouldShowHintIcon: true,
+					},
 				],
 			},
 		})
@@ -97,6 +134,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
 								onClickHintIcon: () => {
 									wasHit = true
 								},
+								shouldShowHintIcon: true,
 							},
 						],
 					},

@@ -23,6 +23,24 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 		this.acceptHandler = options.onAccept
 		this.declineHandler = options.onDecline
 
+		let body: any
+
+		if (options.body) {
+			body = options.body
+		}
+
+		if (options.message) {
+			if (!body) {
+				body = {
+					sections: [],
+				}
+			}
+
+			body.sections.unshift({
+				title: options.message,
+			})
+		}
+
 		this.dialogVc = this.Controller('dialog', {
 			isVisible: true,
 			shouldShowCloseButton: false,
@@ -33,15 +51,7 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 							subtitle: options.subtitle,
 					  }
 					: null,
-			body: options.message
-				? {
-						sections: [
-							{
-								title: options.message,
-							},
-						],
-				  }
-				: undefined,
+			body,
 			footer: {
 				buttons: [
 					{
