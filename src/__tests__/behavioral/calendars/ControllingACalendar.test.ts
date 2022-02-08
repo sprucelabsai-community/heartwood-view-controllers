@@ -821,6 +821,38 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
+	@test('updating selected event updates start date 1', 100)
+	@test('updating selected event updates start date 2', 200)
+	protected static updatingSelectedEventChangesStartDateOfCalendar(
+		startDate: number
+	) {
+		const event = this.addOneEventAndSelectIt()
+
+		this.vc.updateEvent(event.id, { startDateTimeMs: startDate })
+		assert.isEqual(this.vc.getStartDate(), startDate)
+	}
+
+	@test()
+	protected static updatingEventOtherThanSelectedDoesNotChangeStartDate() {
+		const original = this.vc.getStartDate()
+		const [event] = this.populateCalendar(1)
+		this.vc.updateEvent(event.id, { startDateTimeMs: 100 })
+		assert.isEqual(original, this.vc.getStartDate())
+	}
+
+	@test()
+	protected static doesNotClearStartDateIfSelectedUpdated() {
+		const event = this.addOneEventAndSelectIt()
+		const original = 100
+		this.vc.setStartDate(original)
+
+		this.vc.updateEvent(event.id, {
+			groupId: '12334',
+		})
+
+		assert.isEqual(original, this.vc.getStartDate())
+	}
+
 	private static addEventWithType(type: string) {
 		return this.addEventAndGetVc({
 			eventTypeSlug: type,
