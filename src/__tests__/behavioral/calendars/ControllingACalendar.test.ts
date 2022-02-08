@@ -373,10 +373,24 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static selectingEventTriggersRender() {
-		const event = calendarSeeder.generateEventValues()
-		this.vc.addEvent(event)
-		this.vc.selectEvent(event.id)
+		this.addOneEventAndSelectIt()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static deletingSelectedEventDoesNotBlowUp() {
+		const event = this.addOneEventAndSelectIt()
+		this.vc.removeEvent(event.id)
+		assert.isUndefined(this.vc.getSelectedEvent())
+	}
+
+	@test()
+	protected static removingEventOtherThanSelectedDoesNotDeselect() {
+		const event = this.addOneEventAndSelectIt()
+		const [event2] = this.populateCalendar(1)
+
+		this.vc.removeEvent(event2.id)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
 	}
 
 	@test()
