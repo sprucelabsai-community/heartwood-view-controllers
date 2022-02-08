@@ -347,10 +347,18 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canSelectEvent() {
-		const event = calendarSeeder.generateEventValues()
-		this.vc.addEvent(event)
-		this.vc.selectEvent(event.id)
+		const event = this.addOneEventAndSelectIt()
 		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+	}
+
+	@test()
+	protected static updatingASelectedEventReflectsChanges() {
+		const event = this.addOneEventAndSelectIt()
+		const updates = {
+			startDateTimeMs: 100,
+		}
+		this.vc.updateEvent(event.id, updates)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), { ...event, ...updates })
 	}
 
 	@test()
@@ -360,6 +368,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
 		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+		assert.isEqualDeep(this.render(this.vc).selectedEvent, event)
 	}
 
 	@test()
@@ -843,6 +852,13 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const events = calendarSeeder.generateEventsValues(total)
 		this.vc.mixinEvents(events)
 		return events
+	}
+
+	private static addOneEventAndSelectIt() {
+		const event = calendarSeeder.generateEventValues()
+		this.vc.addEvent(event)
+		this.vc.selectEvent(event.id)
+		return event
 	}
 
 	private static assertChangesArMade(

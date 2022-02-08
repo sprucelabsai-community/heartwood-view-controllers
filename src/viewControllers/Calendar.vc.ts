@@ -30,6 +30,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	private vcsById: Record<string, CalendarEventViewController> = {}
 	private eventsById: Record<string, Event> = {}
 	private defaultEventVcId?: string
+	private selectedEventId?: string
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -133,8 +134,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public selectEvent(id: string) {
-		const match = this.getEvent(id)
-		this.model.selectedEvent = match
+		this.getEvent(id)
+		this.selectedEventId = id
 		this.triggerRender()
 	}
 
@@ -181,7 +182,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public getSelectedEvent() {
-		return this.model.selectedEvent
+		return this.selectedEventId
+			? this.getEvent(this.selectedEventId)
+			: undefined
 	}
 
 	public getView() {
@@ -417,6 +420,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			})),
 			controller: this,
 			selectedDates: this.model.selectedDates,
+			selectedEvent: this.getSelectedEvent(),
 		}
 	}
 }
