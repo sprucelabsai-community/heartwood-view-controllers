@@ -1,3 +1,10 @@
+# [63.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.0.20...v63.1.0) (2022-02-09)
+
+
+### Features
+
+* Interactor can now selectChoiceInRow by name ([f7dc891](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f7dc891))
+
 ## [63.0.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.0.19...v63.0.20) (2022-02-09)
 
 ## [63.0.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.0.18...v63.0.19) (2022-02-09)
