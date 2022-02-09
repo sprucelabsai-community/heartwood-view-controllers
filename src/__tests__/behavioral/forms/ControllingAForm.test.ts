@@ -3,7 +3,7 @@ import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formTestUtil from '../../../tests/utilities/formTest.utility'
@@ -806,11 +806,11 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 
 		vc.disable()
-		await assert.doesThrowAsync(() => interactionUtil.submitForm(vc))
+		await assert.doesThrowAsync(() => interactor.submitForm(vc))
 		assert.isFalse(wasHit)
 
 		vc.enable()
-		await interactionUtil.submitForm(vc)
+		await interactor.submitForm(vc)
 		assert.isTrue(wasHit)
 	}
 
@@ -936,7 +936,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqualDeep(actual, expected)
 
-		await interactionUtil.submitForm(vc)
+		await interactor.submitForm(vc)
 
 		assert.isEqualDeep(actual, submittedValues)
 	}
@@ -1016,7 +1016,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			...this.testForm,
 		}) as any
 		await assert.doesThrowAsync(() => this.vc.submit())
-		await interactionUtil.submitForm(this.vc)
+		await interactor.submitForm(this.vc)
 		await assert.doesThrowAsync(() => this.vc.submit())
 	}
 

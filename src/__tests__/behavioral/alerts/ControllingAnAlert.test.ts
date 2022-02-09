@@ -1,10 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import {
-	AbstractSkillViewController,
-	interactionUtil,
-	vcAssert,
-} from '../../..'
+import { AbstractSkillViewController, interactor, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 class AlertSkillViewController extends AbstractSkillViewController {
@@ -128,7 +124,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 		assert.isFalse(this.vc.afterAlert)
 
-		await interactionUtil.clickDestructiveInFooter(dlgVc)
+		await interactor.clickDestructiveInFooter(dlgVc)
 
 		await this.wait(0)
 

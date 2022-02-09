@@ -2,7 +2,7 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import ListViewController from '../../../viewControllers/list/List.vc'
@@ -1022,7 +1022,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 
-		await interactionUtil.clickToggleInRow(this.vc, 'my-row')
+		await interactor.clickToggleInRow(this.vc, 'my-row')
 
 		const values = this.vc.getValues()
 		assert.isFalse(values[0].isEnabled)
@@ -1060,7 +1060,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const listVc = this.vc
-		await interactionUtil.clickRow(listVc, 0)
+		await interactor.clickRow(listVc, 0)
 
 		assert.isTrue(wasHit)
 	}

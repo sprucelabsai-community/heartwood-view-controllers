@@ -4,7 +4,7 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import {
 	CalendarViewController,
 	CalendarViewControllerOptions,
-	interactionUtil,
+	interactor,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
@@ -15,7 +15,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async throwsWhenMissingVars() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactionUtil.clickCalendarMonthView()
+			interactor.clickCalendarMonthView()
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'dateTimeMs'],
@@ -29,7 +29,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		})
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
+			interactor.clickCalendarMonthView(this.vc, new Date().getTime())
 		)
 	}
 
@@ -39,7 +39,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			onClick: () => {},
 		})
 
-		await interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
+		await interactor.clickCalendarMonthView(this.vc, new Date().getTime())
 	}
 
 	@test()
@@ -47,7 +47,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		this.vc = this.Vc()
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
+			interactor.clickCalendarMonthView(this.vc, new Date().getTime())
 		)
 	}
 
@@ -60,7 +60,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			},
 		})
 
-		await interactionUtil.clickCalendarMonthView(this.vc, new Date().getTime())
+		await interactor.clickCalendarMonthView(this.vc, new Date().getTime())
 
 		assert.isTrue(wasHit)
 	}
@@ -78,7 +78,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			},
 		})
 
-		await interactionUtil.clickCalendarMonthView(this.vc, date)
+		await interactor.clickCalendarMonthView(this.vc, date)
 
 		const expected = dateUtil.getStartOfDay(date)
 		assert.isEqualDeep(passedOptions, {

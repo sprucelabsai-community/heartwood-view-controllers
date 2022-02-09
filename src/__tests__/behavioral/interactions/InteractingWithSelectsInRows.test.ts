@@ -1,11 +1,11 @@
 import { test, assert } from '@sprucelabs/test'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 export default class InteractingWithSelectsInRowsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async hasInteractWithSelectFunction() {
-		assert.isFunction(interactionUtil.selectChoiceInRow)
+		assert.isFunction(interactor.selectChoiceInRow)
 	}
 
 	@test()
@@ -13,7 +13,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 		const vc = this.ListVc()
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.selectChoiceInRow({
+			interactor.selectChoiceInRow({
 				vc,
 				row: 'not-found',
 				newChoice: 'red',
@@ -26,7 +26,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 		const firstRowId = `${new Date().getTime()}`
 
 		const vc = this.ListVc({ firstRowId })
-		await interactionUtil.selectChoiceInRow({
+		await interactor.selectChoiceInRow({
 			vc,
 			row: firstRowId,
 			newChoice: 'red',
@@ -39,7 +39,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 
 		const vc = this.ListVc({ middleRowId })
 		await assert.doesThrowAsync(() =>
-			interactionUtil.selectChoiceInRow({
+			interactor.selectChoiceInRow({
 				vc,
 				row: middleRowId,
 				newChoice: 'red',
@@ -50,7 +50,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 	@test()
 	protected static async doesNotThrowWhenFindingSelectInLaterCell() {
 		const vc = this.ListVc()
-		await interactionUtil.selectChoiceInRow({
+		await interactor.selectChoiceInRow({
 			vc,
 			row: 'last',
 			newChoice: 'happy',
@@ -61,7 +61,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 	protected static async throwsWhenSelectingChoiceThatDoesNotExist() {
 		const vc = this.ListVc()
 		await assert.doesThrowAsync(() =>
-			interactionUtil.selectChoiceInRow({ vc, row: 'first', newChoice: 'aoud' })
+			interactor.selectChoiceInRow({ vc, row: 'first', newChoice: 'aoud' })
 		)
 
 		assert.isUndefined(vc.getRowVc('first').getValue('favoriteColor'))
@@ -70,7 +70,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 	@test()
 	protected static async setsValueOnList() {
 		const vc = this.ListVc()
-		await interactionUtil.selectChoiceInRow({
+		await interactor.selectChoiceInRow({
 			vc,
 			row: 'first',
 			newChoice: 'green',
@@ -83,7 +83,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 	@test()
 	protected static async setsInLastRow() {
 		const vc = this.ListVc()
-		await interactionUtil.selectChoiceInRow({
+		await interactor.selectChoiceInRow({
 			vc,
 			row: 'last',
 			newChoice: 'soHappy',
@@ -91,6 +91,55 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 
 		const row = vc.getRowVc('last')
 		assert.isEqual(row.getValue('feeling'), 'soHappy')
+	}
+
+	@test()
+	protected static async throwsWhenSelectingByInputNameThatDoesNotExist() {
+		const vc = this.ListVc()
+		await assert.doesThrowAsync(() =>
+			interactor.selectChoiceInRow({
+				vc,
+				row: 'multipleSelects',
+				name: 'fdsapanda',
+				newChoice: 'red',
+			})
+		)
+	}
+
+	@test()
+	protected static async throwsWhenSelectingInvalidChoiceByInputName() {
+		const vc = this.ListVc()
+		await assert.doesThrowAsync(() =>
+			interactor.selectChoiceInRow({
+				vc,
+				row: 'multipleSelects',
+				name: 'favoriteCarColor',
+				newChoice: 'pizza',
+			})
+		)
+	}
+
+	@test()
+	protected static async setsWhenSelectingByInputNameThatExists() {
+		const vc = this.ListVc()
+
+		await interactor.selectChoiceInRow({
+			vc,
+			row: 'multipleSelects',
+			name: 'favoriteCarColor',
+			newChoice: 'green',
+		})
+
+		await interactor.selectChoiceInRow({
+			vc,
+			row: 'multipleSelects',
+			name: 'favoriteFood',
+			newChoice: 'pizza',
+		})
+
+		const row = vc.getRowVc('multipleSelects')
+		assert.isEqual(row.getValue('favoriteCarColor'), 'green')
+		assert.isEqual(row.getValue('favoriteFood'), 'pizza')
 	}
 
 	private static ListVc(options?: {
@@ -122,6 +171,41 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
 				{
 					id: options?.middleRowId ?? 'middle',
 					cells: [],
+				},
+				{
+					id: 'multipleSelects',
+					cells: [
+						{
+							selectInput: {
+								name: 'favoriteCarColor',
+								choices: [
+									{
+										value: 'red',
+										label: 'red',
+									},
+									{
+										value: 'green',
+										label: 'green',
+									},
+								],
+							},
+						},
+						{
+							selectInput: {
+								name: 'favoriteFood',
+								choices: [
+									{
+										value: 'tacos',
+										label: 'tacos',
+									},
+									{
+										value: 'pizza',
+										label: 'pizza',
+									},
+								],
+							},
+						},
+					],
 				},
 				{
 					id: 'last',
