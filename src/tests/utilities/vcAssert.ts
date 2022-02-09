@@ -1084,7 +1084,7 @@ const vcAssert = {
 		if (assertHasAtLeast1Tool) {
 			assert.isTrue(
 				(toolBelt?.tools?.length ?? 0) > 0,
-				'You tool belt does not render any tools!'
+				'Your tool belt does not render any tools! You try toolBeltVc.addTool(...)?'
 			)
 		}
 
