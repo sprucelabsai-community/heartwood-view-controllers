@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
@@ -8,14 +8,14 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 
 	@test()
 	protected static async canCreateClickingTogglesInRows() {
-		assert.isFunction(interactionUtil.clickToggleInRow)
+		assert.isFunction(interactor.clickToggleInRow)
 	}
 
 	@test()
 	protected static async throwsIfCantFindRow() {
 		const listVc = this.ListVc()
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickToggleInRow(listVc, 'last')
+			interactor.clickToggleInRow(listVc, 'last')
 		)
 	}
 
@@ -40,7 +40,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 				},
 			],
 		})
-		await interactionUtil.clickToggleInRow(listVc, toggleId)
+		await interactor.clickToggleInRow(listVc, toggleId)
 	}
 
 	@test()
@@ -55,7 +55,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 		})
 
 		await assert.doesThrowAsync(() =>
-			interactionUtil.clickToggleInRow(listVc, 'first')
+			interactor.clickToggleInRow(listVc, 'first')
 		)
 	}
 
@@ -81,7 +81,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 				},
 			],
 		})
-		await interactionUtil.clickToggleInRow(listVc, 'last')
+		await interactor.clickToggleInRow(listVc, 'last')
 	}
 
 	@test()
@@ -107,12 +107,12 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
 			],
 		})
 
-		await interactionUtil.clickToggleInRow(listVc, 'last')
+		await interactor.clickToggleInRow(listVc, 'last')
 
 		assert.isTrue(wasHit)
 		assert.isTrue(passedValue)
 
-		await interactionUtil.clickToggleInRow(listVc, 'last')
+		await interactor.clickToggleInRow(listVc, 'last')
 
 		assert.isFalse(passedValue)
 	}

@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { interactionUtil } from '../..'
+import { interactor } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionCardViewController, {
 	EditFormBuilderSectionOptions,
@@ -28,13 +28,13 @@ export default class EditFormBuilderSectionCardTest extends AbstractViewControll
 		vc.addField()
 
 		const listVc = vc.getFieldListVc()
-		await interactionUtil.selectChoiceInRow({
+		await interactor.selectChoiceInRow({
 			vc: listVc,
 			row: idx,
 			newChoice: 'select',
 		})
 
-		await interactionUtil.submitForm(vc.getFormVc())
+		await interactor.submitForm(vc.getFormVc())
 
 		assert.isEqualDeep(passedValues.fields[idx].options?.choices, [])
 	}

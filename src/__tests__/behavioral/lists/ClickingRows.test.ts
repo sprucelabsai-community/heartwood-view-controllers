@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
@@ -24,7 +24,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
 		})
 
 		assert.isFalse(wasHit)
-		await interactionUtil.clickRow(vc, 1)
+		await interactor.clickRow(vc, 1)
 		assert.isTrue(wasHit)
 	}
 

@@ -15,7 +15,7 @@ const formTestUtil = {
 			FormViewController.prototype.submit = function () {
 				if (shouldPatchSubmitToThrow) {
 					assert.fail(
-						`You can't submit a form directly! You gotta use 'interactionUtil.submitForm()' instead!`
+						`You can't submit a form directly! You gotta use 'interactor.submitForm()' instead!`
 					)
 				} else {
 					//@ts-ignore

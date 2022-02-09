@@ -1,5 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import { interactionUtil } from '../../..'
+import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { testFormOptions } from '../forms/testFormOptions'
 
@@ -11,7 +11,7 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 	@test()
 	protected static async throwsWhenNoOnCancelHandlerSet() {
 		const formVc = this.Controller('form', testFormOptions)
-		await assert.doesThrowAsync(() => interactionUtil.cancelForm(formVc))
+		await assert.doesThrowAsync(() => interactor.cancelForm(formVc))
 	}
 
 	@test()
@@ -24,7 +24,7 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 			},
 		})
 
-		await interactionUtil.cancelForm(formVc)
+		await interactor.cancelForm(formVc)
 		assert.isTrue(wasHit)
 	}
 }

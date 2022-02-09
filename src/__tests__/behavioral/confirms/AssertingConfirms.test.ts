@@ -1,9 +1,5 @@
 import { assert, test } from '@sprucelabs/test'
-import {
-	AbstractSkillViewController,
-	interactionUtil,
-	vcAssert,
-} from '../../..'
+import { AbstractSkillViewController, interactor, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 class TestSvc extends AbstractSkillViewController {
@@ -37,7 +33,7 @@ export default class AssertingConfirmsTest extends AbstractViewControllerTest {
 
 		const err = await assert.doesThrowAsync(() =>
 			vcAssert.assertRendersConfirm(vc, async () =>
-				interactionUtil.clickRow(vc.getListVc(), 0)
+				interactor.clickRow(vc.getListVc(), 0)
 			)
 		)
 

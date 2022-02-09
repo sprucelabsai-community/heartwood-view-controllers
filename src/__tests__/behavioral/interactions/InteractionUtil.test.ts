@@ -29,13 +29,13 @@ class GoodSkillViewController implements SkillViewController {
 	}
 }
 
-export default class InteractionUtilTest extends AbstractViewControllerTest {
+export default class interactorTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		good: GoodSkillViewController,
 	}
 
 	@test()
-	protected static async canCreateInteractionUtil() {
+	protected static async canCreateinteractor() {
 		assert.isTruthy(interactor)
 	}
 

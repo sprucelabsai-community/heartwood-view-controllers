@@ -300,14 +300,19 @@ const interactor = {
 		vc: ListViewController
 		row: string | number
 		newChoice: string
+		name?: string
 	}) {
-		const { vc, row, newChoice } = options
+		const { vc, row, newChoice, name } = options
 
 		const rowVc = vc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
 			if (cell.selectInput) {
+				if (name && cell.selectInput.name !== name) {
+					continue
+				}
+
 				const choices = cell.selectInput.choices.filter(
 					(c) => c.value === newChoice
 				)
@@ -323,6 +328,11 @@ const interactor = {
 			}
 		}
 
+		if (name) {
+			assert.fail(
+				`I could not find a select by name of '${name}' in row '${row}' to make a choice!`
+			)
+		}
 		assert.fail(`I could not find a select in row '${row}' to make a choice!`)
 	},
 
