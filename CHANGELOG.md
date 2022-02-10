@@ -1,3 +1,10 @@
+# [63.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.1.10...v63.2.0) (2022-02-10)
+
+
+### Features
+
+* sticky tools in tool belts, allowing devs to stick tools to the top or the bottom of a tool belt. Plus, assertion tools to make deving so FAST! ([e4ccc37](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e4ccc37))
+
 ## [63.1.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.1.9...v63.1.10) (2022-02-10)
 
 ## [63.1.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.1.8...v63.1.9) (2022-02-10)
