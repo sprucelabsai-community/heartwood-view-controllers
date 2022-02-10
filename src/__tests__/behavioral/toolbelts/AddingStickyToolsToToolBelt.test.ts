@@ -92,6 +92,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
 		const tools = this.render(this.vc).tools
 
+		//@ts-ignore
 		this.assertToolsMatch({ ...tool, id: 'bottom' }, tools[1])
 	}
 
