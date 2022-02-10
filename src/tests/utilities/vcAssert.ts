@@ -7,7 +7,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ButtonBarViewController } from '../..'
+import { ButtonBarViewController, StickyToolPosition } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -1084,7 +1084,7 @@ const vcAssert = {
 		if (assertHasAtLeast1Tool) {
 			assert.isTrue(
 				(toolBelt?.tools?.length ?? 0) > 0,
-				'Your tool belt does not render any tools! You try toolBeltVc.addTool(...)?'
+				'Your tool belt does not render any tools! You can try toolBeltVc.addTool(...)?'
 			)
 		}
 
@@ -1098,25 +1098,15 @@ const vcAssert = {
 	): ViewController<any> {
 		const vc = this.assertRendersToolBelt(svcOrToolBelt)
 		const tool = vc.getTool(toolId)
-
 		assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
 
-		const checks = [
-			tool?.card?.controller,
-			//@ts-ignore
-			tool?.card?.controller?.getParent?.(),
-		]
+		const match = assertToolInstanceOf(tool, Class)
+		assert.isTruthy(
+			match,
+			`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
+		)
 
-		for (const check of checks) {
-			const match = isVcInstanceOf(check, Class)
-			if (match) {
-				return match as any
-			}
-		}
-
-		assert.fail(`The tool '${toolId}' wasn't an instance of a '${Class.name}'`)
-
-		return null as any
+		return match
 	},
 
 	assertToolBeltDoesNotRenderTool(
@@ -1130,13 +1120,45 @@ const vcAssert = {
 		}
 		assert.fail(`You rendered the tool '${toolId}' and should not have!`)
 	},
+
+	assertToolBeltStickyToolInstanceOf(options: {
+		toolBeltVc: ToolBeltViewController
+		position: StickyToolPosition
+		Class: any
+	}) {
+		const { position, toolBeltVc, Class } = assertOptions(options, [
+			'toolBeltVc',
+			'position',
+			'Class',
+		])
+
+		//@ts-ignore
+		const tool = toolBeltVc.getStickyTools()[position]
+
+		assert.isTruthy(
+			tool,
+			`It appears you have no sticky tool set in position '${position}'! try 'this.toolBeltVc.addStickyTool(...)'!`
+		)
+
+		const match = assertToolInstanceOf(tool, Class)
+
+		assert.isTruthy(
+			match,
+			`The sticky tool at the ${position} is not an instance of '${Class.name}'`
+		)
+
+		return match
+	},
+
 	assertToolBeltRendersTool(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string
 	) {
 		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt)
 
-		const tool = toolBeltVc?.getTool?.(toolId)
+		const model = renderUtil.render(toolBeltVc)
+		const tool = model.tools.find((t) => t.id === toolId)
+
 		assert.isTruthy(
 			tool,
 			`I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
@@ -1779,4 +1801,23 @@ function findControllerInModel(VcClass: any, model: any) {
 	}
 
 	return null
+}
+function assertToolInstanceOf(
+	tool: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool,
+	Class: any
+): ViewController<any> {
+	const checks = [
+		tool?.card?.controller,
+		//@ts-ignore
+		tool?.card?.controller?.getParent?.(),
+	]
+
+	for (const check of checks) {
+		const match = isVcInstanceOf(check, Class)
+		if (match) {
+			return match as any
+		}
+	}
+
+	return null as any
 }

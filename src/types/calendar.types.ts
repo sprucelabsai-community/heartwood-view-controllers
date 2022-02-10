@@ -44,3 +44,11 @@ export interface CalendarEventViewController
 	getIsBusy(): boolean
 	getToolBeltState?(): ToolBeltState
 }
+
+export type StickyToolPosition = 'top' | 'bottom'
+
+export type StickyTool = Omit<Tool, 'id'> & {
+	position: StickyToolPosition
+}
+
+type Tool = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool

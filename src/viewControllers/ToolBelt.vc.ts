@@ -1,7 +1,9 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import {
 	AbstractViewController,
 	SpruceSchemas,
+	StickyTool,
+	StickyToolPosition,
 	ViewControllerOptions,
 } from '..'
 import SpruceError from '../errors/SpruceError'
@@ -13,6 +15,7 @@ export type ToolBeltViewControllerOptions = Partial<ViewModel>
 export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
 	private handleFocusTool = (_id: string) => {}
+	private stickyTools: Record<StickyToolPosition, Tool> = {}
 
 	public constructor(
 		options: ToolBeltViewControllerOptions & ViewControllerOptions
@@ -38,6 +41,18 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 
 		this.model.tools.push(tool)
 		this.triggerRender()
+	}
+
+	public setStickyTool(sticky: StickyTool) {
+		assertOptions(sticky, ['card', 'lineIcon', 'position'])
+
+		const { position, ...tool } = sticky
+
+		this.stickyTools[position] = { id: position, ...tool }
+	}
+
+	public getStickyTools() {
+		return this.stickyTools
 	}
 
 	public setTools(
@@ -82,7 +97,20 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		this.handleFocusTool(id)
 	}
 
+	public renderTools(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[] {
+		const tools = [...this.model.tools]
+		if (this.stickyTools.top) {
+			tools.unshift(this.stickyTools.top)
+		}
+
+		if (this.stickyTools.bottom) {
+			tools.push(this.stickyTools.bottom)
+		}
+
+		return tools
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
-		return { ...this.model, controller: this }
+		return { ...this.model, controller: this, tools: this.renderTools() }
 	}
 }
