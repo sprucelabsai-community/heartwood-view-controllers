@@ -3,9 +3,8 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import ToolBeltViewController, {
-	StickyTool,
-} from '../../../viewControllers/ToolBelt.vc'
+import { StickyTool } from '../../../types/calendar.types'
+import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
 export default class AddingStickyToolsToToolBeltTest extends AbstractViewControllerTest {
 	private static vc: ToolBeltViewController
@@ -61,7 +60,8 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 		const model = this.render(this.vc)
 		const renderedTool = model.tools[0]
 
-		this.assertToolsMatch(tool, renderedTool)
+		//@ts-ignore
+		this.assertToolsMatch({ ...tool, id: 'top' }, renderedTool)
 	}
 
 	@test()
@@ -92,7 +92,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
 		const tools = this.render(this.vc).tools
 
-		this.assertToolsMatch(tool, tools[1])
+		this.assertToolsMatch({ ...tool, id: 'bottom' }, tools[1])
 	}
 
 	private static assertToolsMatch(
@@ -102,6 +102,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 		//@ts-ignore
 		delete tool.position
 
+		//@ts-ignore
 		assert.isEqualDeep(renderedTool, tool)
 	}
 
@@ -115,7 +116,6 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
 	private static setStickyTool(tool?: Partial<StickyTool>) {
 		const built: StickyTool = {
-			id: 'test',
 			lineIcon: 'add-circle',
 			position: 'top',
 			card: {} as any,

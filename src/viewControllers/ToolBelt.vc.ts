@@ -15,7 +15,10 @@ export type ToolBeltViewControllerOptions = Partial<ViewModel>
 export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
 	private handleFocusTool = (_id: string) => {}
-	private stickyTools: Record<StickyToolPosition, Tool> = {}
+	private stickyTools: Record<StickyToolPosition, Tool | undefined> = {
+		top: undefined,
+		bottom: undefined,
+	}
 
 	public constructor(
 		options: ToolBeltViewControllerOptions & ViewControllerOptions
