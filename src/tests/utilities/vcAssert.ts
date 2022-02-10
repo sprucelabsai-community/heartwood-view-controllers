@@ -1812,6 +1812,24 @@ function assertToolInstanceOf(
 		tool?.card?.controller?.getParent?.(),
 	]
 
+	let anyControllersFound = !!checks.find((c) => !!c)
+
+	if (!anyControllersFound) {
+		assert.fail(`You are not rendering a good card. Make sure you are rendering a controller, like:
+
+public render() { 
+	return { controller: this }
+}
+
+or
+
+public render() {
+	return this.cardVc.render()
+}
+
+`)
+	}
+
 	for (const check of checks) {
 		const match = isVcInstanceOf(check, Class)
 		if (match) {
