@@ -1108,11 +1108,6 @@ const vcAssert = {
 		]
 
 		for (const check of checks) {
-			assert.isTruthy(
-				check,
-				`Your tool wasn't properly rendered. Make sure you are either render another vc:\n\npublic render() { return this.cardVc.render() }\n\nor control it yourself\n\npublic render() { return { controller: this }}`
-			)
-
 			const match = isVcInstanceOf(check, Class)
 			if (match) {
 				return match as any
