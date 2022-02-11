@@ -1742,6 +1742,8 @@ function checkForButtons(
 	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
 	ids: string[]
 ): { found: string[]; missing: string[] } {
+	assertOptions({ vc, ids }, ['vc', 'ids'])
+
 	const model = renderUtil.render(vc)
 	const buttons = [...(model.footer?.buttons ?? [])]
 
