@@ -7,13 +7,20 @@ export default class CalendarSeederTest extends AbstractViewControllerTest {
 	@test()
 	protected static async eventsAreNotAllTheSame() {
 		const events = calendarSeeder.generateEventsValues(10)
-		const uniques: Record<string, boolean> = {}
+		const startDateTimes: Record<string, boolean> = {}
+		const subtitles: Record<string, boolean> = {}
 
 		events.forEach((e) => {
-			uniques[e.startDateTimeMs] = true
+			startDateTimes[e.startDateTimeMs] = true
+			subtitles[e.timeBlocks[0].subtitle ?? `${new Date().getTime()}`] = true
 		})
 
-		assert.isAbove(Object.keys(uniques).length, 1)
+		assert.isAbove(Object.keys(startDateTimes).length, 1)
+		assert.isAbove(
+			Object.keys(subtitles).length,
+			1,
+			'all subtitles are the same'
+		)
 	}
 
 	@test()
