@@ -47,6 +47,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			this.eventsById[event.id] = event
 		}
 
+		this.triggerRender = this.triggerRender.bind(this)
+
 		this.model = {
 			shouldEnableAnimations: true,
 			...rest,
@@ -318,6 +320,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 				}
 			)
 
+			vc.triggerRender = this.triggerRender
 			this.vcsById[eventId] = vc
 		}
 

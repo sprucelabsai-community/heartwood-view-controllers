@@ -85,4 +85,13 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
 		assert.isTrue(this.vc.getIsOrphaned())
 	}
+
+	@test()
+	protected static eventsTriggerRenderByDefaultTriggersCalendarRender() {
+		const event = calendarSeeder.generateEventValues()
+		this.calendarVc.addEvent(event)
+
+		const vc = this.calendarVc.getEventVc(event.id)
+		assert.isEqual(vc.triggerRender, this.calendarVc.triggerRender)
+	}
 }
