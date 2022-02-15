@@ -1,3 +1,10 @@
+# [63.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.3.26...v63.4.0) (2022-02-15)
+
+
+### Features
+
+* calendars can clear events ([244dcdd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/244dcdd))
+
 ## [63.3.26](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.3.25...v63.3.26) (2022-02-15)
 
 ## [63.3.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.3.24...v63.3.25) (2022-02-15)
