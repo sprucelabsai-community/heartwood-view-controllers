@@ -4,13 +4,13 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
-import { ListViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
 import CardViewController from '../../../viewControllers/Card.vc'
+import ListViewController from '../../../viewControllers/list/List.vc'
 
 type CalendarTime =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
@@ -851,6 +851,31 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		})
 
 		assert.isEqual(original, this.vc.getStartDate())
+	}
+
+	@test()
+	protected static canClearAllEvents() {
+		const events = this.populateCalendar(10)
+
+		let passedIds: string[] = []
+
+		this.vc.removeEvent = (id) => {
+			passedIds.push(id)
+		}
+
+		this.vc.clearEvents()
+
+		assert.isEqualDeep(
+			passedIds,
+			events.map((e) => e.id)
+		)
+	}
+
+	@test()
+	protected static async clearingEventsRendersOnce() {
+		this.populateCalendar(10)
+		this.vc.clearEvents()
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static addEventWithType(type: string) {

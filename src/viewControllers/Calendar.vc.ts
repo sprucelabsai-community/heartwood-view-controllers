@@ -226,6 +226,13 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
+	public clearEvents() {
+		const events = this.getEvents()
+		void this.renderOnce(() => {
+			events.forEach((e) => this.removeEvent(e.id))
+		})
+	}
+
 	public removePerson(id: string) {
 		const idx = this.model.people?.findIndex((p) => p.id === id) ?? -1
 
