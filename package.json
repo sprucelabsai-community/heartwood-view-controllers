@@ -71,12 +71,12 @@
     "lint.tsc": "tsc -p . --noEmit"
   },
   "dependencies": {
-    "@babel/core": "^7.17.2",
+    "@babel/core": "^7.17.3",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@sprucelabs/calendar-utils": "^14.1.5",
+    "@sprucelabs/calendar-utils": "^14.1.6",
     "@sprucelabs/error": "^5.0.398",
     "@sprucelabs/mercury-core-events": "^2.0.79",
     "@sprucelabs/mercury-types": "^27.0.78",
