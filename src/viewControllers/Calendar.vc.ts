@@ -253,7 +253,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
-	public updateEvent(id: string, updates: Partial<Event>) {
+	public updateEvent(id: string, updates: Partial<Event>): Event {
 		let match = this.getEvent(id)
 
 		match = {
@@ -271,7 +271,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return match
 	}
 
-	public getEvent(id: string) {
+	public getEvent(id: string): Event {
 		const match = this.findEvent(id)
 
 		if (!match) {
