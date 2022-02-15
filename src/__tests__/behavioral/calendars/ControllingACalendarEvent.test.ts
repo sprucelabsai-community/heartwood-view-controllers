@@ -92,6 +92,14 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		this.calendarVc.addEvent(event)
 
 		const vc = this.calendarVc.getEventVc(event.id)
-		assert.isEqual(vc.triggerRender, this.calendarVc.triggerRender)
+
+		let wasHit = false
+		this.calendarVc.triggerRender = () => {
+			wasHit = true
+		}
+
+		assert.isFalse(wasHit)
+		vc.triggerRender()
+		assert.isTrue(wasHit)
 	}
 }
