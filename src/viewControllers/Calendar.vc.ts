@@ -139,6 +139,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
+	public deselectEvent() {
+		this.selectedEventId = undefined
+	}
+
 	public deselectDate(year: number, month: number, day: number) {
 		assertOptions({ year, month, day }, ['year', 'month', 'day'])
 

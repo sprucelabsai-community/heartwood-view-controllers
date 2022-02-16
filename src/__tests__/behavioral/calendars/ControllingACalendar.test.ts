@@ -378,7 +378,14 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static deletingSelectedEventDoesNotBlowUp() {
+	protected static canDeselectEvent() {
+		this.addOneEventAndSelectIt()
+		this.vc.deselectEvent()
+		assert.isUndefined(this.vc.getSelectedEvent())
+	}
+
+	@test()
+	protected static removingSelectedEventDoesNotBlowUp() {
 		const event = this.addOneEventAndSelectIt()
 		this.vc.removeEvent(event.id)
 		assert.isUndefined(this.vc.getSelectedEvent())
