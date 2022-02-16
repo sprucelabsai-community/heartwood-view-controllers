@@ -1,3 +1,10 @@
+# [64.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.6.3...v64.0.0) (2022-02-16)
+
+
+### Breaking Changes
+
+* selectDates -> setSelectedDates for clarity ([e4d541c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e4d541c))
+
 ## [63.6.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.6.2...v63.6.3) (2022-02-16)
 
 ## [63.6.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.6.1...v63.6.2) (2022-02-16)
