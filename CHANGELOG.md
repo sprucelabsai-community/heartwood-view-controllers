@@ -1,3 +1,10 @@
+# [63.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.4.5...v63.5.0) (2022-02-16)
+
+
+### Features
+
+* devs can now deselect event an event from the calendar ([7c6ea11](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7c6ea11))
+
 ## [63.4.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.4.4...v63.4.5) (2022-02-16)
 
 ## [63.4.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.4.3...v63.4.4) (2022-02-16)
