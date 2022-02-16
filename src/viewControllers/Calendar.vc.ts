@@ -13,10 +13,14 @@ type CalendarOptions = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
 	'controller' | 'events'
 > & {
-	events?: Event[]
+	events?: ConstructorEvent[]
 }
 type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
 type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+type ConstructorEvent = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent,
+	'isSelected'
+>
 type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 type SelectedDate =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
@@ -279,11 +283,12 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		this.eventsById[id] = match
-		this.vcsById[id]?.triggerRender()
 
 		if (updates.startDateTimeMs && id === this.selectedEventId) {
 			this.model.startDate = updates.startDateTimeMs
 		}
+
+		this.vcsById[id]?.triggerRender()
 
 		return match
 	}
@@ -295,7 +300,13 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			throw new SpruceError({ code: 'EVENT_NOT_FOUND', id })
 		}
 
-		return { ...match }
+		const e = { ...match }
+
+		if (this.selectedEventId && this.selectedEventId === id) {
+			e.isSelected = true
+		}
+
+		return e
 	}
 
 	private findEvent(id: string) {

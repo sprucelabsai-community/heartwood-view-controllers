@@ -2,7 +2,10 @@ import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '../..'
 
 let idCount = 0
-type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+type Event = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent,
+	'isSelected'
+>
 
 const calendarSeeder = {
 	generatePeopleValues(total: number) {

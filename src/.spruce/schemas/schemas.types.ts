@@ -3884,6 +3884,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'error'?: (Error)| undefined | null
 				
+				'isSelected'?: boolean| undefined | null
+				
 				'controller'?: (HeartwoodTypes.CalendarEventViewController)| undefined | null
 		}
 
@@ -4004,6 +4006,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'error': {
 			                type: 'raw',
 			                options: {valueType: `Error`,}
+			            },
+			            /** . */
+			            'isSelected': {
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** . */
 			            'controller': {

@@ -124,6 +124,11 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                options: {valueType: `Error`,}
 	            },
 	            /** . */
+	            'isSelected': {
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** . */
 	            'controller': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}

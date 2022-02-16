@@ -19,6 +19,9 @@ const calendarEventSchema = buildSchema({
 				valueType: 'Error',
 			},
 		},
+		isSelected: {
+			type: 'boolean',
+		},
 		controller: {
 			type: 'raw',
 			options: {

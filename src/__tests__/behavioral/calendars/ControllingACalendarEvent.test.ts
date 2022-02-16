@@ -14,7 +14,10 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		await super.beforeEach()
 
 		this.calendarVc = this.Controller('calendar', {})
-		this.eventModel = calendarSeeder.generateEventValues()
+		this.eventModel = {
+			...calendarSeeder.generateEventValues(),
+			isSelected: false,
+		}
 
 		this.calendarVc.addEvent(this.eventModel)
 		this.vc = this.calendarVc.getEventVc(this.eventModel.id)
@@ -88,8 +91,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
 	@test()
 	protected static eventsTriggerRenderByDefaultTriggersCalendarRender() {
-		const event = calendarSeeder.generateEventValues()
-		this.calendarVc.addEvent(event)
+		const event = this.addEvent()
 
 		const vc = this.calendarVc.getEventVc(event.id)
 
@@ -101,5 +103,36 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		assert.isFalse(wasHit)
 		vc.triggerRender()
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static eventsRenderIsSelectedFalseByDefault() {
+		let event = this.addEvent()
+
+		assert.isUndefined(this.getEvent(event.id).isSelected)
+
+		this.calendarVc.selectEvent(event.id)
+
+		assert.isTrue(this.getEvent(event.id).isSelected)
+	}
+
+	@test()
+	protected static havingASelectedEventDoesNotImpactNotSelectedEvents() {
+		const e1 = this.addEvent()
+		const e2 = this.addEvent()
+
+		this.calendarVc.selectEvent(e1.id)
+
+		assert.isUndefined(this.getEvent(e2.id).isSelected)
+	}
+
+	private static getEvent(eventId: string) {
+		return this.calendarVc.getEvent(eventId)
+	}
+
+	private static addEvent() {
+		const event = calendarSeeder.generateEventValues()
+		this.calendarVc.addEvent(event)
+		return event
 	}
 }

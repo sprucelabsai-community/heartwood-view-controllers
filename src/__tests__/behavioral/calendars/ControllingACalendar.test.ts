@@ -348,7 +348,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static canSelectEvent() {
 		const event = this.addOneEventAndSelectIt()
-		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), {
+			...event,
+			isSelected: true,
+		})
 	}
 
 	@test()
@@ -375,8 +378,14 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const updates = {
 			startDateTimeMs: 100,
 		}
+
 		this.vc.updateEvent(event.id, updates)
-		assert.isEqualDeep(this.vc.getSelectedEvent(), { ...event, ...updates })
+
+		assert.isEqualDeep(this.vc.getSelectedEvent(), {
+			...event,
+			...updates,
+			isSelected: true,
+		})
 	}
 
 	@test()
@@ -385,8 +394,14 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		this.vc.selectEvent(event.id)
-		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
-		assert.isEqualDeep(this.render(this.vc).selectedEvent, event)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), {
+			...event,
+			isSelected: true,
+		})
+		assert.isEqualDeep(this.render(this.vc).selectedEvent, {
+			...event,
+			isSelected: true,
+		})
 	}
 
 	@test()
@@ -416,7 +431,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.deselectEvent()
 
 		assert.isTruthy(passedEvent)
-		assert.isEqualDeep(passedEvent, event)
+		assert.isEqualDeep(passedEvent, { ...event, isSelected: true })
 	}
 
 	@test()
@@ -459,7 +474,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const [event2] = this.populateCalendar(1)
 
 		this.vc.removeEvent(event2.id)
-		assert.isEqualDeep(this.vc.getSelectedEvent(), event)
+		assert.isEqualDeep(this.vc.getSelectedEvent(), {
+			...event,
+			isSelected: true,
+		})
 	}
 
 	@test()
