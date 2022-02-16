@@ -134,13 +134,19 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public selectEvent(id: string) {
-		this.getEvent(id)
+		const event = this.getEvent(id)
 		this.selectedEventId = id
 		this.triggerRender()
+		this.model?.onSelectEvent?.(event)
 	}
 
 	public deselectEvent() {
-		this.selectedEventId = undefined
+		const event = this.getSelectedEvent()
+		if (event) {
+			this.selectedEventId = undefined
+			this.model.onDeselectEvent?.(event)
+			this.triggerRender()
+		}
 	}
 
 	public deselectDate(year: number, month: number, day: number) {

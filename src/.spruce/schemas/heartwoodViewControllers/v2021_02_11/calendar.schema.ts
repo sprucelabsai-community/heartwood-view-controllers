@@ -132,6 +132,11 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
 	            },
+	            /** . */
+	            'onSelectEvent': {
+	                type: 'raw',
+	                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+	            },
 	    }
 }
 

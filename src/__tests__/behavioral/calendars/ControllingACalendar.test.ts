@@ -352,6 +352,24 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static async selectingEventTriggersCallback() {
+		let passedEvent: any
+
+		this.vc = this.Controller('calendar', {
+			onSelectEvent: (event) => {
+				passedEvent = event
+			},
+		})
+
+		const [event] = this.populateCalendar(1)
+
+		this.vc.selectEvent(event.id)
+
+		assert.isTruthy(passedEvent)
+		assert.isEqualDeep(passedEvent, event)
+	}
+
+	@test()
 	protected static updatingASelectedEventReflectsChanges() {
 		const event = this.addOneEventAndSelectIt()
 		const updates = {
@@ -379,9 +397,45 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canDeselectEvent() {
-		this.addOneEventAndSelectIt()
-		this.vc.deselectEvent()
+		this.addEventSelectAndDeselectIt()
 		assert.isUndefined(this.vc.getSelectedEvent())
+	}
+
+	@test()
+	protected static async deselectingTriggersCallback() {
+		let passedEvent: any
+		this.vc = this.Controller('calendar', {
+			onDeselectEvent: (event) => {
+				passedEvent = event
+			},
+		})
+
+		const [event] = this.populateCalendar(1)
+
+		this.vc.selectEvent(event.id)
+		this.vc.deselectEvent()
+
+		assert.isTruthy(passedEvent)
+		assert.isEqualDeep(passedEvent, event)
+	}
+
+	@test()
+	protected static async deselectingEventTriggersRender() {
+		this.addEventSelectAndDeselectIt()
+		vcAssert.assertTriggerRenderCount(this.vc, 3)
+	}
+
+	@test()
+	protected static deselectingWithNoSelectedEventHasNoEffect() {
+		let wasHit = false
+		this.vc = this.Controller('calendar', {
+			onDeselectEvent: () => {
+				wasHit = true
+			},
+		})
+		this.vc.deselectEvent()
+		assert.isFalse(wasHit)
+		vcAssert.assertTriggerRenderCount(this.vc, 0)
 	}
 
 	@test()
@@ -951,6 +1005,11 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		}
 
 		assert.isEqualDeep(this.vc.getEvent(event.id), expected)
+	}
+
+	private static addEventSelectAndDeselectIt() {
+		this.addOneEventAndSelectIt()
+		this.vc.deselectEvent()
 	}
 }
 

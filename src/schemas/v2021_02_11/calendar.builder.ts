@@ -187,5 +187,12 @@ export default buildSchema({
 					'(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>',
 			},
 		},
+		onSelectEvent: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>',
+			},
+		},
 	},
 })
