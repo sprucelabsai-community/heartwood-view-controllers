@@ -379,8 +379,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.startDate
 	}
 
-	public selectDates(dates: SelectedDate[]) {
+	public setSelectedDates(dates: SelectedDate[]) {
 		this.model.selectedDates = [...dates]
+		this.triggerRender()
 	}
 
 	public selectDate(year: number, month: number, day: number) {

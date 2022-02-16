@@ -162,9 +162,22 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 		{ year: 1992, month: 2, day: 2 },
 	])
 	protected static canSetAllSelectedDatesAtOnce(dates: any) {
-		this.vc.selectDates(dates)
+		this.vc.setSelectedDates(dates)
 		this.assertSelectedRendered(dates)
 		assert.isNotEqual(this.vc.getSelectedDates(), dates)
+	}
+
+	@test()
+	protected static selectingDateTriggersRender() {
+		this.vc.setSelectedDates([
+			{
+				year: 2020,
+				month: 10,
+				day: 1,
+			},
+		])
+
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static assertSelectedRendered(
