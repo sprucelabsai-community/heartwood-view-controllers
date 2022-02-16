@@ -226,12 +226,12 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	public removeEvent(id: string) {
 		this.getEvent(id)
 
+		if (this.selectedEventId === id) {
+			this.deselectEvent()
+		}
+
 		delete this.eventsById[id]
 		delete this.vcsById[id]
-
-		if (this.selectedEventId === id) {
-			this.selectedEventId = undefined
-		}
 
 		this.triggerRender()
 	}
