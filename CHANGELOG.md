@@ -1,3 +1,10 @@
+# [63.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.5.0...v63.6.0) (2022-02-16)
+
+
+### Features
+
+* devs can now deselect an event and listen to deselect callbacks ([5a1e584](https://github.com/sprucelabsai/heartwood-view-controllers/commit/5a1e584))
+
 # [63.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v63.4.5...v63.5.0) (2022-02-16)
 
 
