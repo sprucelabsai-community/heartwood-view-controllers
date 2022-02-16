@@ -918,9 +918,9 @@ const vcAssert = {
 		}
 
 		assert.fail(
-			`Expected a ${
-				VcClass.name ?? 'UknownViewController'
-			} to be rendered in your skill view, but it wasn't!`
+			`Expected a ${getVcName(
+				vc
+			)} to be rendered in your skill view, but it wasn't!`
 		)
 	},
 
@@ -1576,7 +1576,7 @@ const vcAssert = {
 			const model = renderUtil.render(vc)
 			assert.isTruthy(
 				model.controller,
-				`Your view controller does not return a controllor. Make sure you return 'controller:this' from rende() or that you're rending a built in skill view.`
+				`Your view controller does not return a controller. Make sure you return 'controller:this' from render() or that you're rending a built in skill view.`
 			)
 			return this.assertControllerInstanceOf<Controller>(
 				model.controller,
