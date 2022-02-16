@@ -115,7 +115,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 
 	@test('cant deselect event not selected', 2020, 1, 1)
 	@test('cant deselect event not selected', 2021, 1, 1)
-	protected static cantDeletectDateNotSelected(
+	protected static cantDeselectDateNotSelected(
 		year: number,
 		month: number,
 		day: number
@@ -129,7 +129,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 	}
 
 	@test()
-	protected static canDeselecDate() {
+	protected static canDeselectDate() {
 		this.vc.selectDate(2020, 10, 10)
 		this.vc.deselectDate(2020, 10, 10)
 		this.assertSelectedRendered([])
@@ -161,7 +161,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 		{ year: 2021, month: 1, day: 1 },
 		{ year: 1992, month: 2, day: 2 },
 	])
-	protected static canSetAllSectedDatesAtOnce(dates: any) {
+	protected static canSetAllSelectedDatesAtOnce(dates: any) {
 		this.vc.selectDates(dates)
 		this.assertSelectedRendered(dates)
 		assert.isNotEqual(this.vc.getSelectedDates(), dates)
