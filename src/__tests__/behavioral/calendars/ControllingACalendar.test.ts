@@ -7,6 +7,7 @@ import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import AbstractCalendarEventViewController from '../../../viewControllers/AbstractCalendarEvent.vc'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
 import CardViewController from '../../../viewControllers/Card.vc'
@@ -18,8 +19,12 @@ type CalendarTime =
 type CalendarEvent =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
+class TestEventViewController extends AbstractCalendarEventViewController {}
+
 export default class ControllingACalendarTest extends AbstractViewControllerTest {
-	protected static controllerMap = {}
+	protected static controllerMap = {
+		testEvent: TestEventViewController,
+	}
 	protected static vc: CalendarViewController
 
 	private static readonly firstPerson = {
@@ -965,6 +970,38 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test()
+	protected static updatingAnEventToNewTypeSlugSetsNewVc() {
+		const { event } = this.addEventAndGetVc()
+		const event2 = this.addEvent()
+
+		this.render(this.vc)
+
+		this.vc.setControllerForEventType('testing', 'testEvent')
+
+		this.vc.updateEvent(event.id, { eventTypeSlug: 'testing' })
+
+		const eventVc = this.vc.getEventVc(event.id)
+
+		assert.isTrue(eventVc instanceof TestEventViewController)
+
+		//@ts-ignore
+		assert.isTrue(event2.id in this.vc.vcsById)
+
+		vcAssert.assertTriggerRenderCount(this.vc, 4)
+	}
+
+	@test()
+	protected static onlyClearsVcByIdIfSlugChanges() {
+		this.vc.setControllerForEventType('testing', 'testEvent')
+		const { event } = this.addEventAndGetVc({ eventTypeSlug: 'testing' })
+
+		this.vc.updateEvent(event.id, { eventTypeSlug: 'testing' })
+
+		//@ts-ignore
+		assert.isTrue(event.id in this.vc.vcsById)
+	}
+
 	private static addEventWithType(type: string) {
 		return this.addEventAndGetVc({
 			eventTypeSlug: type,
@@ -986,13 +1023,20 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	private static addEventAndGetVc(event?: Partial<CalendarEvent>) {
-		const e = { ...calendarSeeder.generateEventValues(), ...event }
-
-		this.vc.addEvent(e)
+		const e = ControllingACalendarTest.addEvent(event)
 
 		const vc = this.vc.getEventVc(e.id)
 
 		return { vc, event: e }
+	}
+
+	private static addEvent(
+		event?: Partial<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent>
+	) {
+		const e = { ...calendarSeeder.generateEventValues(), ...event }
+
+		this.vc.addEvent(e)
+		return e
 	}
 
 	private static addPerson() {

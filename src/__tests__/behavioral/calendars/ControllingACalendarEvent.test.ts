@@ -1,6 +1,11 @@
 import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { CalendarEvent, CalendarViewController, vcAssert } from '../../..'
+import {
+	AbstractCalendarEventViewController,
+	CalendarEvent,
+	CalendarViewController,
+	vcAssert,
+} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import { CalendarEventViewController } from '../../../types/calendar.types'

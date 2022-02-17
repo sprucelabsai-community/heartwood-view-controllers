@@ -275,10 +275,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public updateEvent(id: string, updates: Partial<Event>): Event {
-		let match = this.getEvent(id)
+		const original = this.getEvent(id)
 
-		match = {
-			...match,
+		const match = {
+			...original,
 			...updates,
 		}
 
@@ -288,7 +288,12 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			this.model.startDate = updates.startDateTimeMs
 		}
 
-		this.vcsById[id]?.triggerRender()
+		if (updates.eventTypeSlug !== original.eventTypeSlug) {
+			delete this.vcsById[id]
+			this.triggerRender()
+		} else {
+			this.vcsById[id]?.triggerRender()
+		}
 
 		return match
 	}
