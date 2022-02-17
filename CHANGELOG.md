@@ -1,3 +1,10 @@
+# [64.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.0.5...v64.1.0) (2022-02-17)
+
+
+### Features
+
+* devs can now clear sticky tools ([e0923f7](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e0923f7))
+
 ## [64.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.0.4...v64.0.5) (2022-02-17)
 
 ## [64.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.0.3...v64.0.4) (2022-02-17)
