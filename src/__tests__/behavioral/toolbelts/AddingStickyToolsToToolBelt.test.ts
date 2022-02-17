@@ -1,9 +1,9 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { StickyTool } from '../../../types/calendar.types'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import { StickyTool, StickyToolPosition } from '../../../types/calendar.types'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
 export default class AddingStickyToolsToToolBeltTest extends AbstractViewControllerTest {
@@ -94,6 +94,53 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
 		//@ts-ignore
 		this.assertToolsMatch({ ...tool, id: 'bottom' }, tools[1])
+	}
+
+	@test(`can't remove bottom sticky if not found`, 'bottom')
+	@test(`can't remove top sticky if not found`, 'top')
+	protected static removingStickyThrowsIfNotSet(position: StickyToolPosition) {
+		const err = assert.doesThrow(() => this.vc.removeStickyTool(position))
+		errorAssert.assertError(err, 'TOOL_NOT_FOUND', {
+			id: position,
+		})
+	}
+
+	@test('can remove bottom sticky', 'bottom')
+	@test('can remove top sticky', 'top')
+	protected static canRemoveSticky(position: StickyToolPosition) {
+		this.setStickyTool({
+			position,
+		})
+
+		this.vc.removeStickyTool(position)
+
+		this.assertRendersTotalTools(0)
+	}
+
+	@test()
+	protected static clearsOnlyStickyTool() {
+		this.setStickyTool({
+			position: 'top',
+		})
+
+		this.setStickyTool({
+			position: 'bottom',
+		})
+
+		this.vc.removeStickyTool('bottom')
+		this.assertRendersTotalTools(1)
+	}
+
+	@test()
+	protected static removingStickyToolTriggersRender() {
+		this.setStickyTool({ position: 'top' })
+		this.vc.removeStickyTool('top')
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	private static assertRendersTotalTools(expected: number) {
+		const tools = this.render(this.vc).tools
+		assert.isLength(tools, expected)
 	}
 
 	private static assertToolsMatch(

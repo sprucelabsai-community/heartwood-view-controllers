@@ -78,6 +78,19 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		this.triggerRender()
 	}
 
+	public removeStickyTool(position: StickyToolPosition) {
+		if (!this.stickyTools[position]) {
+			throw new SpruceError({
+				code: 'TOOL_NOT_FOUND',
+				id: position,
+			})
+		}
+
+		delete this.stickyTools[position]
+
+		this.triggerRender()
+	}
+
 	public getTools() {
 		return [...this.model.tools]
 	}
