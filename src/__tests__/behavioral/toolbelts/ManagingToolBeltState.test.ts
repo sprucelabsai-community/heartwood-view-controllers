@@ -145,6 +145,46 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqual(this.sm.getVcFactory(), vcFactory)
 	}
 
+	@test()
+	protected static async copiesContextDeep() {
+		const hello = {
+			hello: 'world',
+		}
+
+		const context = {
+			test: hello,
+		}
+
+		let passedChanges: any
+
+		await this.sm.on('did-update-context', ({ updates }) => {
+			passedChanges = updates
+		})
+
+		await this.sm.updateContext(context)
+
+		const actual = this.sm.getContext()
+		assert.isNotEqual(hello, actual.test)
+		assert.isNotEqual(hello, passedChanges.test)
+	}
+
+	@test('does not emit if same 1', { whatever: { pizza: true } })
+	@test('does not emit if same 2', { howdy: { ho: false } })
+	@test('does not emit if same 3', { cheesy: () => {} })
+	protected static async doesNotEmitIfContextHasNotChanged(updates: any) {
+		await this.sm.updateContext(updates)
+
+		let wasHit = false
+
+		await this.sm.on('did-update-context', () => {
+			wasHit = true
+		})
+
+		await this.sm.updateContext(updates)
+
+		assert.isFalse(wasHit)
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,

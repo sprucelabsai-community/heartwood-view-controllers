@@ -2,13 +2,14 @@ import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
-import { ViewControllerFactory } from '..'
+import cloneDeep from 'lodash/cloneDeep'
 import {
 	ControllerOptions,
 	ViewControllerId,
 	ViewControllerMap,
 } from '../types/heartwood.types'
 import ToolBeltViewController from '../viewControllers/ToolBelt.vc'
+import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 
 export interface ToolBeltState {
 	readonly id: string
@@ -111,11 +112,48 @@ export default class ToolBeltStateMachine<
 	}
 
 	public async updateContext(updates: Partial<Context>) {
+		const cloned = cloneDeep(updates)
 		const old = { ...this.context }
-		this.context = { ...this.context, ...updates }
+		const newContext = { ...this.context, ...cloned }
+
+		if (deepEqual(this.context, newContext)) {
+			return
+		}
+
+		this.context = newContext
+
 		await this.emit('did-update-context', {
 			old,
-			updates,
+			updates: cloned,
 		})
+	}
+}
+
+const deepEqual = function (x: any, y: any) {
+	if (x === y) {
+		return true
+	} else if (
+		typeof x == 'object' &&
+		x != null &&
+		typeof y == 'object' &&
+		y != null
+	) {
+		if (Object.keys(x).length != Object.keys(y).length) {
+			return false
+		}
+
+		for (let prop in x) {
+			if (Object.prototype.hasOwnProperty.call(y, prop)) {
+				if (!deepEqual(x[prop], y[prop])) {
+					return false
+				}
+			} else {
+				return false
+			}
+		}
+
+		return true
+	} else {
+		return false
 	}
 }
