@@ -187,7 +187,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static callsDestroyWhenTransitioningAwayFromState() {
+	protected static async callsDestroyWhenTransitioningAwayFromState() {
 		let state1DestroyCount = 0
 
 		const state1 = this.State({
