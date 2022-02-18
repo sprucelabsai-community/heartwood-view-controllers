@@ -42,7 +42,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	protected static canAddTool() {
 		assert.isFunction(this.vc.addTool)
 
-		const tool = toolGenerator.generatTool()
+		const tool = toolGenerator.generateTool()
 		this.vc.addTool(tool)
 
 		const model = renderUtil.render(this.vc)
@@ -52,9 +52,8 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canAdd2Tools() {
-		this.vc.addTool(toolGenerator.generatTool())
-
-		this.vc.addTool(toolGenerator.generatTool('maps_2'))
+		this.vc.addTool(toolGenerator.generateTool())
+		this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
 		const model = renderUtil.render(this.vc)
 
@@ -75,7 +74,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static cantAddToolWithSameSlugTwice() {
-		this.vc.addTool(toolGenerator.generatTool())
+		this.vc.addTool(toolGenerator.generateTool())
 
 		const err = assert.doesThrow(() =>
 			this.vc.addTool({
@@ -98,7 +97,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canRemoveTool() {
-		this.vc.addTool(toolGenerator.generatTool())
+		this.vc.addTool(toolGenerator.generateTool())
 
 		this.vc.removeTool('maps')
 		const model = renderUtil.render(this.vc)
@@ -107,17 +106,17 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canRemoveAfterAddingTwo() {
-		this.vc.addTool(toolGenerator.generatTool())
-
-		this.vc.addTool(toolGenerator.generatTool('maps_2'))
+		this.vc.addTool(toolGenerator.generateTool())
+		this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
 		this.vc.removeTool('maps')
 		const model = renderUtil.render(this.vc)
-		assert.isEqualDeep(model.tools[0], toolGenerator.generatTool('maps_2'))
+
+		assert.isEqualDeep(model.tools[0], toolGenerator.generateTool('maps_2'))
 	}
 
 	@test()
-	protected static tiggersRenderWhenAddingAndRemovingTool() {
+	protected static triggersRenderWhenAddingAndRemovingTool() {
 		this.vc.addTool({ id: 'go', card: {} as any, lineIcon: 'video' })
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.vc.removeTool('go')
@@ -138,11 +137,11 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static getsBackTools() {
-		this.vc.addTool(toolGenerator.generatTool('maps_2'))
+		this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
 		const tools = this.vc.getTools()
 
-		assert.isEqualDeep(tools, [toolGenerator.generatTool('maps_2')])
+		assert.isEqualDeep(tools, [toolGenerator.generateTool('maps_2')])
 	}
 
 	@test()
@@ -168,18 +167,18 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	@test()
 	protected static canGetToolBackById() {
-		this.vc.addTool(toolGenerator.generatTool('maps_2'))
+		this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
 		assert.isEqualDeep(
 			this.vc.getTool('maps_2'),
-			toolGenerator.generatTool('maps_2')
+			toolGenerator.generateTool('maps_2')
 		)
 
-		this.vc.addTool(toolGenerator.generatTool('maps_4', 'add'))
+		this.vc.addTool(toolGenerator.generateTool('maps_4', 'add'))
 
 		assert.isEqualDeep(
 			this.vc.getTool('maps_4'),
-			toolGenerator.generatTool('maps_4', 'add')
+			toolGenerator.generateTool('maps_4', 'add')
 		)
 	}
 
@@ -236,7 +235,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 	}
 
 	private static addTool(id = 'maps_2') {
-		this.vc.addTool(toolGenerator.generatTool(id))
+		this.vc.addTool(toolGenerator.generateTool(id))
 	}
 
 	private static assertCanSetTools(total: number) {
@@ -255,11 +254,11 @@ const toolGenerator = {
 		if (typeof tools === 'number') {
 			return new Array(tools)
 				.fill(0)
-				.map((_, idx) => this.generatTool(`tool_${idx}`))
+				.map((_, idx) => this.generateTool(`tool_${idx}`))
 		}
-		return tools.map((t) => this.generatTool(t.id, t.lineIcon))
+		return tools.map((t) => this.generateTool(t.id, t.lineIcon))
 	},
-	generatTool(id?: string, lineIcon?: LineIcon): Tool {
+	generateTool(id?: string, lineIcon?: LineIcon): Tool {
 		return {
 			id: id ?? 'maps',
 			lineIcon: lineIcon ?? 'map',
