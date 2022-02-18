@@ -3878,6 +3878,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'nthOccurrences'?: number[]| undefined | null
 				
+				'nthInRepeating'?: number| undefined | null
+				
 				'activeUntilDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				
 				'exclusionDates'?: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDate[]| undefined | null
@@ -3989,6 +3991,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'nthOccurrences': {
 			                type: 'number',
 			                isArray: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'nthInRepeating': {
+			                type: 'number',
 			                options: undefined
 			            },
 			            /** . */
