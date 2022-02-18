@@ -14,6 +14,7 @@ import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export interface ToolBeltState {
 	readonly id: string
 	load(stateMachine: ToolBeltStateMachine): Promise<any> | any
+	destroy?: () => Promise<any> | any
 }
 export interface ToolBeltStateMachineOptions<
 	Context extends Record<string, any> = Record<string, any>
