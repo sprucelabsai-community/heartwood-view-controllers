@@ -186,6 +186,25 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isFalse(wasHit)
 	}
 
+	@test()
+	protected static callsDestroyWhenTransitioningAwayFromState() {
+		let state1DestroyCount = 0
+
+		const state1 = this.State({
+			destroy: async () => {
+				state1DestroyCount++
+			},
+		})
+
+		const state2 = this.State()
+
+		this.transitionTo(state1)
+		assert.isEqual(state1DestroyCount, 0)
+
+		this.transitionTo(state2)
+		assert.isEqual(state1DestroyCount, 1)
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,

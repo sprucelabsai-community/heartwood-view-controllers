@@ -88,8 +88,14 @@ export default class ToolBeltStateMachine<
 
 	public async transitionTo(state: ToolBeltState) {
 		assertOptions({ state }, ['state'])
-		await state.load(this)
+
+		const destroyPromise = this.state?.destroy?.()
+
 		this.state = state
+
+		await state.load(this)
+
+		await destroyPromise
 	}
 
 	public getVcFactory() {
