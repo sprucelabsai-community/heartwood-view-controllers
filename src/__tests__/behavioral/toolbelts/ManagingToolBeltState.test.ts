@@ -198,10 +198,10 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 		const state2 = this.State()
 
-		this.transitionTo(state1)
+		await this.transitionTo(state1)
 		assert.isEqual(state1DestroyCount, 0)
 
-		this.transitionTo(state2)
+		await this.transitionTo(state2)
 		assert.isEqual(state1DestroyCount, 1)
 	}
 
