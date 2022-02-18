@@ -1,3 +1,10 @@
+# [64.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.1.16...v64.2.0) (2022-02-18)
+
+
+### Features
+
+* tool belt states now have destroy hook to teardown listeners ([1ad4357](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1ad4357))
+
 ## [64.1.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.1.15...v64.1.16) (2022-02-18)
 
 ## [64.1.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.1.14...v64.1.15) (2022-02-18)
