@@ -108,6 +108,11 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                options: undefined
 	            },
 	            /** . */
+	            'nthInRepeating': {
+	                type: 'number',
+	                options: undefined
+	            },
+	            /** . */
 	            'activeUntilDate': {
 	                type: 'dateTime',
 	                options: undefined
