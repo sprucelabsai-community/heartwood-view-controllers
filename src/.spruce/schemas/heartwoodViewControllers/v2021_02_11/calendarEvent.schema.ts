@@ -108,11 +108,6 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                options: undefined
 	            },
 	            /** . */
-	            'nthInRepeating': {
-	                type: 'number',
-	                options: undefined
-	            },
-	            /** . */
 	            'activeUntilDate': {
 	                type: 'dateTime',
 	                options: undefined
@@ -122,6 +117,16 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: eventExclusionDateSchema_v2021_05_19,}
+	            },
+	            /** . */
+	            'nthInRepeating': {
+	                type: 'number',
+	                options: undefined
+	            },
+	            /** . */
+	            'totalInRepeating': {
+	                type: 'number',
+	                options: undefined
 	            },
 	            /** . */
 	            'error': {
