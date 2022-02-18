@@ -16,7 +16,6 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		this.calendarVc = this.Controller('calendar', {})
 		this.eventModel = {
 			...calendarSeeder.generateEventValues(),
-			isSelected: false,
 		}
 
 		this.calendarVc.addEvent(this.eventModel)
