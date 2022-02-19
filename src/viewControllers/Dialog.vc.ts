@@ -58,6 +58,10 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		return this.isVisible
 	}
 
+	public getShouldShowCloseButton() {
+		return this.shouldShowCloseButton
+	}
+
 	public async hide() {
 		const results = await this.onCloseHandler?.()
 

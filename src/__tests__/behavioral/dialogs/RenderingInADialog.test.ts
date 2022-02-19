@@ -38,7 +38,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async canWaitUntilDialogIsClossed() {
+	protected static async canWaitUntilDialogIsClosed() {
 		const dialog = this.svc.renderInDialogAndGetDlgVc()
 
 		let waited = false
@@ -100,6 +100,16 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 
 		const cardVc = vc.getCardVc()
 		assert.isTrue(cardVc instanceof CardViewController)
+	}
+
+	@test('can get should show close button 1', false)
+	@test('can get should show close button 2', true)
+	protected static canGetShowingCloseButton(expected: boolean) {
+		const vc = this.Controller('dialog', {
+			shouldShowCloseButton: expected,
+		})
+
+		assert.isEqual(vc.getShouldShowCloseButton(), expected)
 	}
 
 	protected static assertSectionsHaveControllers(vc: DialogViewController) {
