@@ -1,3 +1,5 @@
+## [64.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.5...v64.2.6) (2022-02-19)
+
 ## [64.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.4...v64.2.5) (2022-02-19)
 
 ## [64.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.3...v64.2.4) (2022-02-19)
