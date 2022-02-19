@@ -1,3 +1,10 @@
+# [64.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.8...v64.3.0) (2022-02-19)
+
+
+### Features
+
+* can get if a dialog should show close button ([16fa980](https://github.com/sprucelabsai/heartwood-view-controllers/commit/16fa980))
+
 ## [64.2.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.7...v64.2.8) (2022-02-19)
 
 ## [64.2.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.2.6...v64.2.7) (2022-02-19)
