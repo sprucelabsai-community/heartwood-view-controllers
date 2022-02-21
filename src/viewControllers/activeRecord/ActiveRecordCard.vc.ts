@@ -7,7 +7,7 @@ import {
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
-import { ActiveRecordListViewControllerOptions } from './activeRecordList.vc'
+import { ActiveRecordListViewControllerOptions } from './anotherctiveRecordList.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
