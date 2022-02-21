@@ -1,3 +1,10 @@
+# [64.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.4.2...v64.5.0) (2022-02-21)
+
+
+### Features
+
+* building active record lists ([4a9dff0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4a9dff0))
+
 ## [64.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.4.1...v64.4.2) (2022-02-21)
 
 ## [64.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.4.0...v64.4.1) (2022-02-21)
