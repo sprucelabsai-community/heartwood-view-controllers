@@ -6,13 +6,11 @@ import {
 	SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues } from '@sprucelabs/schema'
-import {
-	Row,
-	Card,
-	ActiveRecordCardViewControllerOptions,
-} from '../viewControllers/ActiveRecordCard.vc'
+import { ActiveRecordCardViewControllerOptions } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
 interface ActiveRecordCardBuilder<Contract extends EventContract> {
 	<

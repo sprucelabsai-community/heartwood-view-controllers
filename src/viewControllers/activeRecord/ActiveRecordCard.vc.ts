@@ -4,27 +4,18 @@ import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import {
 	CardViewController,
 	ViewControllerOptions,
-} from '../types/heartwood.types'
-import AbstractViewController from './Abstract.vc'
-import ListViewController, { ListRowModel } from './list/List.vc'
+} from '../../types/heartwood.types'
+import AbstractViewController from '../Abstract.vc'
+import ListViewController, { ListRowModel } from '../list/List.vc'
+import { ActiveRecordListViewControllerOptions } from './activeRecordList.vc'
 
-export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-export type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
-export interface ActiveRecordCardViewControllerOptions {
-	eventName: string
-	responseKey: string
-	rowTransformer: (record: Record<string, any>) => Row
-	noResultsRow?: Omit<Row, 'id'>
-	payload?: Record<string, any>
-	target?: Record<string, any>
+export interface ActiveRecordCardViewControllerOptions
+	extends ActiveRecordListViewControllerOptions {
 	header?: Card['header']
 	footer?: Card['footer']
-	id?: string
-	columnWidths?: string[]
-	shouldRenderRowDividers?: boolean
-	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
-	filter?: (record: Record<string, any>) => boolean
 }
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {

@@ -21,7 +21,7 @@ import {
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
-import ActiveRecordCardViewController from '../../viewControllers/ActiveRecordCard.vc'
+import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'

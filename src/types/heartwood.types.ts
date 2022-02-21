@@ -10,7 +10,7 @@ import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
-} from '../viewControllers/ActiveRecordCard.vc'
+} from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'

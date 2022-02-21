@@ -24,7 +24,7 @@ export { default as CalendarViewController } from './viewControllers/Calendar.vc
 export * from './viewControllers/Calendar.vc'
 export { default as ButtonBarViewController } from './viewControllers/ButtonBar.vc'
 export { default as TalkingSprucebotViewController } from './viewControllers/TalkingSprucebot.vc'
-export { default as ActiveRecordCardViewController } from './viewControllers/ActiveRecordCard.vc'
+export { default as ActiveRecordCardViewController } from './viewControllers/activeRecord/ActiveRecordCard.vc'
 export { default as StatsViewController } from './viewControllers/reporting/Stats.vc'
 export { default as ProgressViewController } from './viewControllers/reporting/Progress.vc'
 export { default as RatingsViewController } from './viewControllers/Ratings.vc'

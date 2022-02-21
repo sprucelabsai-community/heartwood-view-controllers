@@ -10,7 +10,7 @@ import { DEMO_NUMBER_ACTIVE_RECORD } from '../../../tests/constants'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
-} from '../../../viewControllers/ActiveRecordCard.vc'
+} from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {

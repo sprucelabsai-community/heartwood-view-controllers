@@ -1,4 +1,4 @@
-import ActiveRecordCardViewController from './viewControllers/ActiveRecordCard.vc'
+import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonBarViewController from './viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
