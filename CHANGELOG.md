@@ -1,3 +1,20 @@
+## [64.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.4.0...v64.4.1) (2022-02-21)
+
+# [64.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.16...v64.4.0) (2022-02-21)
+
+
+### Features
+
+* added ratings and address to formBuilderFieldTypes ([a5d9c6d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a5d9c6d))
+
+## [64.3.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.15...v64.3.16) (2022-02-21)
+
+## [64.3.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.14...v64.3.15) (2022-02-21)
+
+## [64.3.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.13...v64.3.14) (2022-02-21)
+
+## [64.3.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.12...v64.3.13) (2022-02-21)
+
 ## [64.3.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.11...v64.3.12) (2022-02-21)
 
 ## [64.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.3.10...v64.3.11) (2022-02-21)
