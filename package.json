@@ -153,7 +153,7 @@
             "packagerPackages": "I105",
             "canGetVcFactory": "I106",
             "controllersGetIdsSet": "I124",
-            "assertRendersExpectedFields": "2023312774:D39"
+            "shouldShowSelectOptionsIfTheyArePassedByDefault": "2023312774:D39"
           }
         }
       ]
