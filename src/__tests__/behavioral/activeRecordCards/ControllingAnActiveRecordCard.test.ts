@@ -1,7 +1,6 @@
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
@@ -13,6 +12,7 @@ import ActiveRecordCardViewController, {
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
+
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		activeRecordCard: ActiveRecordCardViewController,
@@ -31,13 +31,14 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		this.client = client
 
-		const results = await client.emit('list-organizations::v2020_12_25', {
-			payload: {
-				shouldOnlyShowMine: true,
-			},
-		})
-
-		const { organizations } = eventResponseUtil.getFirstResponseOrThrow(results)
+		const [{ organizations }] = await client.emitAndFlattenResponses(
+			'list-organizations::v2020_12_25',
+			{
+				payload: {
+					shouldOnlyShowMine: true,
+				},
+			}
+		)
 
 		await Promise.all(
 			organizations.map((org) =>
