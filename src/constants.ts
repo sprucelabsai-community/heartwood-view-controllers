@@ -551,6 +551,8 @@ export const formBuilderFieldTypes = {
 	select: 'Dropdown',
 	phone: 'Phone',
 	number: 'Number',
+	ratings: 'Ratings',
+	address: 'Address',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(

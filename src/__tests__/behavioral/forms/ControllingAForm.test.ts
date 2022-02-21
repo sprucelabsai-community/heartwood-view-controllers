@@ -519,7 +519,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static udpateSectionUpdatesEverything() {
+	protected static updateSectionUpdatesEverything() {
 		this.vc.setSection(0, {
 			title: 'Hey gang!',
 			fields: ['first'],

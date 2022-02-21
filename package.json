@@ -152,7 +152,8 @@
           "testMap": {
             "packagerPackages": "I105",
             "canGetVcFactory": "I106",
-            "controllersGetIdsSet": "I124"
+            "controllersGetIdsSet": "I124",
+            "assertRendersExpectedFields": "2023312774:D39"
           }
         }
       ]
