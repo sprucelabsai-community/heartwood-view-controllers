@@ -7,7 +7,7 @@ import AbstractViewController from '../Abstract.vc'
 import { ListRowModel } from '../list/List.vc'
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
-} from './ActiveRecordList2.vc'
+} from './ActiveRecordList.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 

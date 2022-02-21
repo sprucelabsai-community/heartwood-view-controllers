@@ -13,7 +13,7 @@ import ActiveRecordCardViewController, {
 } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
-} from '../viewControllers/activeRecord/ActiveRecordList2.vc'
+} from '../viewControllers/activeRecord/ActiveRecordList.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
