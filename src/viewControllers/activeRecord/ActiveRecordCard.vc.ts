@@ -1,16 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assertOptions } from '@sprucelabs/schema'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import {
 	CardViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import ListViewController, { ListRowModel } from '../list/List.vc'
-import { ActiveRecordListViewControllerOptions } from './anotherctiveRecordList.vc'
+import { ListRowModel } from '../list/List.vc'
+import ActiveRecordListViewController, {
+	ActiveRecordListViewControllerOptions,
+} from './ActiveRecordList2.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
 export interface ActiveRecordCardViewControllerOptions
 	extends ActiveRecordListViewControllerOptions {
@@ -20,37 +19,16 @@ export interface ActiveRecordCardViewControllerOptions
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
 	private cardVc: CardViewController
-	private listVc: ListViewController
-	private noResultsRow?: Omit<Row, 'id'>
-	private rowTransformer: (record: Record<string, any>) => Row
-	private eventName: string
-	private responseKey: string
-	private emitPayload?: Record<string, any>
-	private emitTarget?: Record<string, any>
-	private isLoaded = false
-	private filter?: (record: Record<string, any>) => boolean
-
-	private static shouldThrowOnResponseError = false
-	private records: any[] = []
+	private listVc: ActiveRecordListViewController
 
 	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
-		this.shouldThrowOnResponseError = shouldThrow
+		ActiveRecordListViewController.setShouldThrowOnResponseError(shouldThrow)
 	}
 
 	public constructor(
 		options: ViewControllerOptions & ActiveRecordCardViewControllerOptions
 	) {
 		super(options)
-
-		assertOptions(options, ['eventName', 'rowTransformer', 'responseKey'])
-
-		this.noResultsRow = options.noResultsRow
-		this.rowTransformer = options.rowTransformer
-		this.eventName = options.eventName
-		this.responseKey = options.responseKey
-		this.emitPayload = options.payload
-		this.emitTarget = options.target
-		this.filter = options.filter
 
 		this.listVc = this.ListVc(options)
 		this.cardVc = this.CardVc(options)
@@ -81,111 +59,33 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 	private ListVc(
 		options: ActiveRecordCardViewControllerOptions
-	): ListViewController {
-		return this.Controller('list', {
-			id: options.id,
-			columnWidths: options.columnWidths as any,
-			defaultRowHeight: options.defaultRowHeight,
-			shouldRenderRowDividers: options.shouldRenderRowDividers,
+	): ActiveRecordListViewController {
+		return this.Controller('activeRecordList', {
+			...options,
+			onWillFetch: () => this.cardVc.setIsBusy(true),
+			onDidFetch: () => this.cardVc.setIsBusy(false),
 		})
 	}
 
 	public async load() {
-		if (this.isLoaded) {
-			throw new Error(`You can't load your active record card twice!`)
-		}
-
-		await this.listVc.renderOnce(() => this.fetchResults())
-	}
-
-	private async fetchResults() {
-		let responseKeyError: any
-
-		try {
-			const client = await this.connectToApi()
-
-			const results = await client.emit(
-				this.eventName as any,
-				this.buildTargetAndPayload()
-			)
-
-			const responsePayload = eventResponseUtil.getFirstResponseOrThrow(results)
-			const records = responsePayload[this.responseKey]
-
-			if (!records) {
-				responseKeyError = true
-			} else {
-				this.records = records.filter(
-					(r: any) => !this.filter || this.filter(r)
-				)
-
-				if (this.records.length === 0) {
-					this.listVc.addRow({
-						id: 'no-results',
-						cells: [
-							{
-								text: {
-									content: 'No results found!',
-								},
-							},
-						],
-						...this.noResultsRow,
-					})
-				} else {
-					for (const record of this.records) {
-						this.listVc.addRow(this.rowTransformer(record))
-					}
-				}
-			}
-		} catch (err: any) {
-			if (ActiveRecordCardViewController.shouldThrowOnResponseError) {
-				throw err
-			}
-			this.listVc.addRow(this.buildErrorRow(err))
-		}
-
-		if (responseKeyError) {
-			throw new Error(
-				`The key '${responseKeyError}' was not found in response!`
-			)
-		}
-
-		this.isLoaded = true
-		this.cardVc.setIsBusy(false)
-	}
-
-	private buildErrorRow(err: any): Row {
-		return {
-			id: 'error',
-			height: 'content',
-			cells: [
-				{
-					text: {
-						content: 'Oh no! Something went wrong!',
-					},
-					subText: {
-						content: err.message,
-					},
-				},
-			],
-		}
+		await this.listVc.load()
 	}
 
 	public getIsLoaded() {
-		return this.isLoaded
+		return this.listVc.getIsLoaded()
 	}
 
 	public getRecords() {
-		if (!this.isLoaded) {
+		if (!this.getIsLoaded()) {
 			throw new Error(
 				`You have to load your activeRecordCard before you can get records from it.`
 			)
 		}
-		return this.records
+		return this.listVc.getRecords()
 	}
 
 	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
-		if (!this.isLoaded) {
+		if (!this.getIsLoaded()) {
 			throw new Error(
 				`You have to load your activeRecordCard before you can upsert a row.`
 			)
@@ -193,27 +93,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 		this.listVc.upsertRow(id, { ...row })
 	}
-	private buildTargetAndPayload() {
-		const targetAndPayload: Record<string, any> = {}
-
-		if (this.emitTarget) {
-			//@ts-ignore
-			targetAndPayload.target = this.emitTarget
-		}
-
-		if (this.emitPayload) {
-			//@ts-ignore
-			targetAndPayload.payload = this.emitPayload
-		}
-		return targetAndPayload
-	}
 
 	public getTarget() {
-		return this.emitTarget
+		return this.listVc.getTarget()
 	}
 
 	public setTarget(target?: Record<string, any>) {
-		this.emitTarget = target
+		this.listVc.setTarget(target)
 	}
 
 	public deleteRow(id: string | number) {
@@ -229,20 +115,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	}
 
 	public async refresh() {
-		if (!this.isLoaded) {
+		if (!this.getIsLoaded()) {
 			throw new Error(
 				`You can't refresh your active record card until it's been loaded.`
 			)
 		}
 
-		await this.listVc.renderOnce(async () => {
-			this.listVc.deleteAllRows()
-			await this.fetchResults()
-		})
+		await this.listVc.refresh()
 	}
 
 	public getListVc() {
-		return this.listVc
+		return this.listVc.getListVc()
 	}
 
 	public addRow(

@@ -1,6 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
@@ -20,6 +19,8 @@ export interface ActiveRecordListViewControllerOptions {
 	shouldRenderRowDividers?: boolean
 	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
 	filter?: (record: Record<string, any>) => boolean
+	onWillFetch?: () => Promise<void> | void
+	onDidFetch?: () => Promise<void> | void
 }
 
 export default class ActiveRecordListViewController extends AbstractViewController<List> {
@@ -34,6 +35,12 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 	private filter?: (record: Record<string, any>) => boolean
 
 	private static shouldThrowOnResponseError = false
+	private willFetchHandler?: () => void | Promise<void>
+	private didFetchHandler?: () => void | Promise<void>
+	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
+		this.shouldThrowOnResponseError = shouldThrow
+	}
+
 	private records: any[] = []
 
 	public constructor(
@@ -50,6 +57,8 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		this.emitPayload = options.payload
 		this.emitTarget = options.target
 		this.filter = options.filter
+		this.willFetchHandler = options.onWillFetch
+		this.didFetchHandler = options.onDidFetch
 
 		this.listVc = this.ListVc(options)
 	}
@@ -76,15 +85,16 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 	private async fetchResults() {
 		let responseKeyError: any
 
+		await this.willFetchHandler?.()
+
 		try {
 			const client = await this.connectToApi()
 
-			const results = await client.emit(
+			const [responsePayload] = await client.emitAndFlattenResponses(
 				this.eventName as any,
 				this.buildTargetAndPayload()
 			)
 
-			const responsePayload = eventResponseUtil.getFirstResponseOrThrow(results)
 			const records = responsePayload[this.responseKey]
 
 			if (!records) {
@@ -126,6 +136,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		}
 
 		this.isLoaded = true
+		await this.didFetchHandler?.()
 	}
 
 	private buildErrorRow(err: any): Row {
@@ -152,7 +163,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 	public getRecords() {
 		if (!this.isLoaded) {
 			throw new Error(
-				`You have to load your activeRecordCard before you can get records from it.`
+				`You have to load your activeRecordList before you can get records from it.`
 			)
 		}
 		return this.records

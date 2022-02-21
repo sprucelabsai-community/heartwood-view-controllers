@@ -11,6 +11,9 @@ import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptio
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
+import ActiveRecordListViewController, {
+	ActiveRecordListViewControllerOptions,
+} from '../viewControllers/activeRecord/ActiveRecordList2.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -236,6 +239,7 @@ export interface ViewControllerMap {
 	confirm: ConfirmViewController
 	formBuilderCard: FormBuilderCardViewController
 	activeRecordCard: ActiveRecordCardViewController
+	activeRecordList: ActiveRecordListViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
@@ -262,6 +266,7 @@ export interface ViewControllerOptionsMap {
 	buttonBar: ButtonBarViewControllerOptions
 	talkingSprucebot: TalkingSprucebotViewControllerOptions
 	activeRecordCard: ActiveRecordCardViewControllerOptions
+	activeRecordList: ActiveRecordListViewControllerOptions
 	stats: StatsViewControllerOptions
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions

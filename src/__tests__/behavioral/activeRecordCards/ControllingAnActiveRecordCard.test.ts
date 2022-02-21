@@ -243,14 +243,14 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertListRendersRows(listVc, 1)
 
 		organizations.push({
-			id: 'aoeuaou',
+			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
 			dateCreated: new Date().getTime(),
 		})
 
 		organizations.push({
-			id: 'aoeuaoeuaoteu',
+			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
 			dateCreated: new Date().getTime(),
@@ -271,7 +271,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		organizations.pop()
 
 		organizations.push({
-			id: 'thnatoehu',
+			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
 			dateCreated: new Date().getTime(),
