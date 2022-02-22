@@ -1,3 +1,10 @@
+# [64.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.5.9...v64.6.0) (2022-02-22)
+
+
+### Features
+
+* minor upgrade ([b7640cd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b7640cd))
+
 ## [64.5.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.5.8...v64.5.9) (2022-02-22)
 
 ## [64.5.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.5.7...v64.5.8) (2022-02-22)
