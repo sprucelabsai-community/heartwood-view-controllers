@@ -135,7 +135,7 @@ export default class SwipeCardViewController
 		return this.cardVc.getSection(idx)
 	}
 
-	public setFooter(footer: Footer) {
+	public setFooter(footer: Footer | null | undefined) {
 		this.cardVc.setFooter(footer)
 	}
 

@@ -61,6 +61,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 				triggerRender: () => {},
 				render: () => {
 					this.triggerRenderSections[idx] = sectionVc.triggerRender
+
 					const section = this.model.body?.sections?.[idx]
 
 					return { ...section, controller: this }
