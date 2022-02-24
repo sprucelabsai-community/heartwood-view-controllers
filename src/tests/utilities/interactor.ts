@@ -187,14 +187,14 @@ const interactor = {
 			await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)
 		}
 
-		const originaSubmit = vc.submit
+		const originalSubmit = vc.submit
 		//@ts-ignore
 		const submit = vc._originalSubmit ?? vc.submit
 		vc.submit = submit
 
 		//@ts-ignore
 		await renderUtil.render(vc).onSubmit?.()
-		vc.submit = originaSubmit
+		vc.submit = originalSubmit
 	},
 
 	async submitLoginForm(vc: LoginViewController, demoNumber: string) {
@@ -435,16 +435,20 @@ const interactor = {
 		)
 
 		await model.onClick?.({
-			date: dateUtil.getStartOfDay(dateTimeMs),
+			dateTimeMs: dateUtil.getStartOfDay(dateTimeMs),
 		})
 	},
 
 	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
-		time: number,
+		dateTimeMs: number,
 		personId: string
 	) {
-		assertOptions({ vc, time, personId }, ['vc', 'time', 'personId'])
+		assertOptions({ vc, dateTimeMs, personId }, [
+			'vc',
+			'dateTimeMs',
+			'personId',
+		])
 
 		const model = renderUtil.render(vc)
 
@@ -471,7 +475,7 @@ const interactor = {
 		)
 
 		await model.onClick?.({
-			time,
+			dateTimeMs,
 			person: personMatch,
 		})
 	},

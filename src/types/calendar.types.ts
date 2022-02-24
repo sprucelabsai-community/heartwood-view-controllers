@@ -8,9 +8,8 @@ export type CalendarEvent =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
 export interface ClickCalendarViewOptions {
-	time?: number
+	dateTimeMs?: number
 	person?: Person
-	date?: number
 }
 
 export interface ClickEventOptions {

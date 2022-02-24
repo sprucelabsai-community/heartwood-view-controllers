@@ -27,7 +27,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			interactor.clickCalendarDayView()
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['vc', 'time', 'personId'],
+			parameters: ['vc', 'dateTimeMs', 'personId'],
 		})
 	}
 
@@ -85,19 +85,19 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			},
 		})
 
-		const time = new Date().getTime()
+		const dateTimeMs = new Date().getTime()
 
-		await this.clickCalendar({ personId: person.id, time })
+		await this.clickCalendar({ personId: person.id, dateTimeMs })
 
 		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedOptions, {
 			person,
-			time,
+			dateTimeMs,
 		})
 	}
 
 	@test()
-	protected static async cantClickOnEventWhenMissingParames() {
+	protected static async cantClickOnEventWhenMissingParams() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
 			interactor.clickCalendarEvent()
@@ -408,11 +408,11 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	private static clickCalendar(options?: {
 		personId: string
-		time?: number
+		dateTimeMs?: number
 	}): any {
 		return interactor.clickCalendarDayView(
 			this.vc,
-			options?.time ?? new Date().getTime(),
+			options?.dateTimeMs ?? new Date().getTime(),
 			options?.personId ?? `123`
 		)
 	}

@@ -82,7 +82,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		const expected = dateUtil.getStartOfDay(date)
 		assert.isEqualDeep(passedOptions, {
-			date: expected,
+			dateTimeMs: expected,
 		})
 	}
 
