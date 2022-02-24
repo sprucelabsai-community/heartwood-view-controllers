@@ -40,7 +40,7 @@
     "boot.local": "node -r ts-node/register -r tsconfig-paths/register ./src/index",
     "build": "yarn build.dev",
     "build.copy-files": "mkdir -p build && rsync -avzq --exclude='*.ts' ./src/ ./build/",
-    "build.ci": "yarn build.tsc && yarn build.resolve-paths && yarn lint",
+    "build.ci": "NODE_OPTIONS=--max_old_space_size=4096 yarn build.tsc && yarn build.resolve-paths && yarn lint",
     "build.dev": "yarn build.tsc --sourceMap ; yarn resolve-paths.lint",
     "build.dist": "tsc --project tsconfig.dist.json && yarn build.resolve-paths && mv build esm && yarn build.esm-postbuild && yarn build.tsc && yarn build.resolve-paths && mv esm build/ && yarn clean.dist",
     "build.esm-postbuild": "esm-postbuild --target esm --patterns '**/*.js'",
