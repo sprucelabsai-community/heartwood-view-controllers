@@ -2,14 +2,13 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { ToolBeltState } from '..'
 import { ViewController } from './heartwood.types'
 
-type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 type TimeBlock = SpruceSchemas.CalendarUtils.v2021_05_19.EventTimeBlock
 export type CalendarEvent =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
 export interface ClickCalendarViewOptions {
 	dateTimeMs?: number
-	person?: Person
+	personId?: string
 }
 
 export interface ClickEventOptions {
@@ -31,7 +30,7 @@ export interface DropEventOptions {
 	event: CalendarEvent
 	dragEvent: DragEvent
 	newStartDateTimeMs?: number
-	newPerson?: Person
+	newPersonId?: string
 	blockUpdates?: BlockUpdate[]
 }
 

@@ -476,7 +476,7 @@ const interactor = {
 
 		await model.onClick?.({
 			dateTimeMs,
-			person: personMatch,
+			personId: personMatch.id,
 		})
 	},
 }
