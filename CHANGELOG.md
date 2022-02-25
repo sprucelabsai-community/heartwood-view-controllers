@@ -1,3 +1,10 @@
+# [65.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.1.0...v65.2.0) (2022-02-25)
+
+
+### Features
+
+* emphesized and calledOut totals in receipts ([025ee04](https://github.com/sprucelabsai/heartwood-view-controllers/commit/025ee04))
+
 # [65.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.0.2...v65.1.0) (2022-02-25)
 
 
