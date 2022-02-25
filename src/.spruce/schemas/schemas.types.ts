@@ -991,6 +991,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'label': string
 				
 				'value': string
+				
+				'shouldBeEmphasized'?: boolean| undefined | null
+				
+				'shouldBeCalledOut'?: boolean| undefined | null
 		}
 
 		interface ReceiptTotalSchema extends SpruceSchema.Schema {
@@ -1010,6 +1014,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'value': {
 			                type: 'text',
 			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'shouldBeEmphasized': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'shouldBeCalledOut': {
+			                type: 'boolean',
 			                options: undefined
 			            },
 			    }

@@ -22,6 +22,16 @@ const receiptTotalSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Rec
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** . */
+	            'shouldBeEmphasized': {
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** . */
+	            'shouldBeCalledOut': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	    }
 }
 

@@ -75,6 +75,12 @@ export default buildSchema({
 							type: 'text',
 							isRequired: true,
 						},
+						shouldBeEmphasized: {
+							type: 'boolean',
+						},
+						shouldBeCalledOut: {
+							type: 'boolean',
+						},
 					},
 				}),
 			},
