@@ -7,6 +7,7 @@ import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
 import progressBuilder from '../progress.builder'
 import ratingsBuilder from '../ratings.builder'
+import receiptBuilder from '../receipt.builder'
 import statsBuilder from '../stats.builder'
 import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import textBuilder from '../text.builder'
@@ -124,6 +125,13 @@ export default buildSchema({
 			label: 'Ratings',
 			options: {
 				schema: ratingsBuilder,
+			},
+		},
+		receipt: {
+			type: 'schema',
+			label: 'Receipt',
+			options: {
+				schema: receiptBuilder,
 			},
 		},
 		shouldRenderContentsAsGrid: {
