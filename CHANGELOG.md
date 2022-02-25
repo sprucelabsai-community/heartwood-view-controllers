@@ -1,3 +1,10 @@
+# [65.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.2.1...v65.3.0) (2022-02-25)
+
+
+### Features
+
+* tool belts can now render all tools at once! ([9c82c94](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9c82c94))
+
 ## [65.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.2.0...v65.2.1) (2022-02-25)
 
 # [65.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.1.0...v65.2.0) (2022-02-25)
