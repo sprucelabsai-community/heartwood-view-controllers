@@ -20,6 +20,9 @@ export default buildSchema({
 				choices: lineIconChoices,
 			},
 		},
+		shouldRenderAllToolsAtOnce: {
+			type: 'boolean',
+		},
 		tools: {
 			type: 'schema',
 			label: 'Tools',

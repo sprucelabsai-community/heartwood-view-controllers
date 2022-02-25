@@ -27,10 +27,7 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 
 		this.model = {
 			tools: options.tools ?? [],
-		}
-
-		if (options.lineIcon) {
-			this.model.lineIcon = options.lineIcon
+			...options,
 		}
 	}
 
