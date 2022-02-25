@@ -1,3 +1,10 @@
+# [65.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.0.2...v65.1.0) (2022-02-25)
+
+
+### Features
+
+* new receipt schemas for rendering totals and checkouts and other things in a very familiar way! ([e369170](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e369170))
+
 ## [65.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.0.1...v65.0.2) (2022-02-25)
 
 ## [65.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.0.0...v65.0.1) (2022-02-25)
