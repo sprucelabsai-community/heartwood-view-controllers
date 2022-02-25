@@ -91,7 +91,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedOptions, {
-			person,
+			personId: person.id,
 			dateTimeMs,
 		})
 	}
