@@ -1,3 +1,11 @@
+# [65.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.6.15...v65.0.0) (2022-02-25)
+
+
+### Breaking Changes
+
+* clicking type improvemets ([f5c60bf](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f5c60bf))
+* type changes for consistency ([2b59c9a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2b59c9a))
+
 ## [64.6.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.6.14...v64.6.15) (2022-02-24)
 
 ## [64.6.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v64.6.13...v64.6.14) (2022-02-24)
