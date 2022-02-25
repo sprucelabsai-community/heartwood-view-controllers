@@ -10,7 +10,9 @@
     ]
   },
   "scriptUpdater": {
-    "skipped": []
+    "skipped": [
+      "build.tsc"
+    ]
   },
   "skipped": [
     "skill"
