@@ -119,7 +119,7 @@ export default class ToolBeltStateMachine<
 	}
 
 	public async updateContext(updates: Partial<Context>) {
-		const typesToClone = ['String', 'Object']
+		const typesToClone = ['Object']
 		const cloned = cloneDeepWith(updates, (item) => {
 			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
 				return item
