@@ -40,6 +40,7 @@ const calendarSeeder = {
 			),
 			target: {
 				personId: `${new Date().getTime()}`,
+				locationId: `${new Date().getTime()}`,
 			},
 			calendarId: `${new Date().getTime()}`,
 			timeBlocks: new Array(totalTimeBlocks).fill(0).map((_, idx) => ({
