@@ -2,7 +2,7 @@ import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
-import cloneDeep from 'lodash/cloneDeep'
+import { cloneDeepWith } from 'lodash'
 import {
 	ControllerOptions,
 	ViewControllerId,
@@ -119,7 +119,12 @@ export default class ToolBeltStateMachine<
 	}
 
 	public async updateContext(updates: Partial<Context>) {
-		const cloned = cloneDeep(updates)
+		const typesToClone = ['String', 'Object']
+		const cloned = cloneDeepWith(updates, (item) => {
+			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
+				return item
+			}
+		})
 		const old = { ...this.context }
 		const newContext = { ...this.context, ...cloned }
 

@@ -148,12 +148,19 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async copiesContextDeep() {
+		class Test {
+			public test = 'true'
+		}
+
+		const instance = new Test()
+
 		const hello = {
 			hello: 'world',
 		}
 
 		const context = {
-			test: hello,
+			hello,
+			instance,
 		}
 
 		let passedChanges: any
@@ -165,8 +172,10 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		await this.sm.updateContext(context)
 
 		const actual = this.sm.getContext()
-		assert.isNotEqual(hello, actual.test)
-		assert.isNotEqual(hello, passedChanges.test)
+
+		assert.isNotEqual(hello, actual.hello)
+		assert.isNotEqual(hello, passedChanges.hello)
+		assert.isEqual(instance, actual.instance)
 	}
 
 	@test('does not emit if same 1', { whatever: { pizza: true } })
