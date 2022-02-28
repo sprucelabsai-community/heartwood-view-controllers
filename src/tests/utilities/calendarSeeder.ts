@@ -13,7 +13,7 @@ const calendarSeeder = {
 	},
 	generatePersonValues(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson {
 		return {
-			id: `${new Date().getTime() * Math.random()}`,
+			id: `${random()}`,
 			casualName: 'Timmy',
 		}
 	},
@@ -30,7 +30,7 @@ const calendarSeeder = {
 		const hour = Math.round(Math.random() * 8) + 9
 
 		return {
-			id: `${new Date().getTime() * Math.random()}-${idCount++}`,
+			id: `${random()}-${idCount++}`,
 			startDateTimeMs: dateUtil.setTimeOfDay(
 				new Date().getTime(),
 				hour,
@@ -39,17 +39,15 @@ const calendarSeeder = {
 				0
 			),
 			target: {
-				personId: `${new Date().getTime()}`,
-				locationId: `${new Date().getTime()}`,
+				personId: `${random()}`,
+				locationId: `${random()}`,
 			},
-			calendarId: `${new Date().getTime()}`,
+			calendarId: `${random()}`,
 			timeBlocks: new Array(totalTimeBlocks).fill(0).map((_, idx) => ({
 				durationMinutes: generateRandomMinutes(75),
 				isBusy: !(idx % 2),
-				title: `Block ${new Date().getTime() * Math.random()}-${idCount++}`,
-				subtitle: `Subtitle ${
-					new Date().getTime() * Math.random()
-				}-${idCount++}`,
+				title: `Block ${random()}-${idCount++}`,
+				subtitle: `Subtitle ${random()}-${idCount++}`,
 			})),
 			...values,
 		}
@@ -57,6 +55,10 @@ const calendarSeeder = {
 }
 
 export default calendarSeeder
+function random() {
+	return new Date().getTime() * Math.random()
+}
+
 function generateRandomMinutes(maxMinutes: number): number {
 	return Math.round((Math.random() * maxMinutes + 15) / 15) * 15
 }
