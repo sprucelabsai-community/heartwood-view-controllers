@@ -1,3 +1,10 @@
+# [67.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v66.0.0...v67.0.0) (2022-03-03)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([a002cfc](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a002cfc))
+
 # [66.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v65.3.15...v66.0.0) (2022-03-03)
 
 
