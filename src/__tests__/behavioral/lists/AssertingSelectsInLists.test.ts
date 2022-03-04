@@ -7,7 +7,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 	protected static controllerMap = {}
 
 	@test()
-	protected static throwsIfRowDoesNotHaveSelect() {
+	protected static hasAssertRowRendersSelect() {
 		assert.isFunction(vcAssert.assertRowRendersSelect)
 	}
 
@@ -78,7 +78,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
 	}
 
 	@test()
-	protected static selectVcKnowsOptionsInDifferntRow() {
+	protected static selectVcKnowsOptionsInDifferentRow() {
 		const vc = this.ListVc({
 			isMiddleRequired: true,
 		})

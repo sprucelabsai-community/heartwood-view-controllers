@@ -639,6 +639,14 @@ const vcAssert = {
 		return listVc.getRowVc(row)
 	},
 
+	assertRowRendersCheckBox(listVc: ListViewController, row: string | number) {
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		const checkbox = model.cells.find((cell) => !!cell.checkboxInput)
+		assert.isTruthy(checkbox, `I could not find a checkbox in row '${row}'!`)
+	},
+
 	assertRowRendersCalendar(listVc: ListViewController, row: string | number) {
 		assertOptions({ listVc, row }, ['listVc', 'row'])
 
