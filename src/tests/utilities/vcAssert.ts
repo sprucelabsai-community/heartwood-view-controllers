@@ -1024,16 +1024,18 @@ const vcAssert = {
 		this.assertCardRendersButtons(vc, [id])
 	},
 
-	assertCardRendersCriticalError(vc: CardViewController) {
-		assert.isTrue(
-			vc.getHasCriticalError(),
+	assertCardRendersCriticalError(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		assert.isTruthy(
+			model.criticalError,
 			'Your card did not have a critical error set.'
 		)
 	},
 
-	assertCardDoesNotRenderCriticalError(vc: CardViewController) {
-		assert.isFalse(
-			vc.getHasCriticalError(),
+	assertCardDoesNotRenderCriticalError(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		assert.isFalsy(
+			model.criticalError,
 			'Your card was not supposed to render a critical error!'
 		)
 	},
