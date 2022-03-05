@@ -1,3 +1,10 @@
+# [69.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.0.6...v69.1.0) (2022-03-04)
+
+
+### Features
+
+* devs can now test for checkboxes in rows of lists! ([55c54f1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/55c54f1))
+
 ## [69.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.0.5...v69.0.6) (2022-03-04)
 
 ## [69.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.0.4...v69.0.5) (2022-03-04)
