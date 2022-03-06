@@ -1,3 +1,10 @@
+# [69.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.1.7...v69.2.0) (2022-03-06)
+
+
+### Features
+
+* devs can now click on checkboxes in rows (not by name yet) ([9ffe100](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9ffe100))
+
 ## [69.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.1.6...v69.1.7) (2022-03-06)
 
 ## [69.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.1.5...v69.1.6) (2022-03-06)
