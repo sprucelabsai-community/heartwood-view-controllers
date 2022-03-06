@@ -281,6 +281,19 @@ const interactor = {
 		await element.onKeyDown({ key: options.key, rowVc: options.vc })
 	},
 
+	async clickCheckboxInRow(vc: ListViewController, row: string | number) {
+		const rowVc = vc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+		const checkboxInput = model.cells.find(
+			(c) => c.checkboxInput
+		)?.checkboxInput
+
+		assert.isTruthy(checkboxInput, `I could not find a checkbox to click!`)
+
+		const current = checkboxInput.value ?? false
+		await rowVc.setValue(checkboxInput.name, !current)
+	},
+
 	async clickToggleInRow(vc: ListViewController, row: string | number) {
 		const rowVc = vc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
