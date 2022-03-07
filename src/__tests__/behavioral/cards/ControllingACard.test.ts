@@ -204,7 +204,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static removingHeaderRetainstTitle() {
+	protected static removingHeaderRetainsTitle() {
 		this.vc.setHeaderSubtitle('Waka waka')
 		this.vc.setHeaderImage('test.jpg')
 		this.vc.setHeaderImage(null)
@@ -427,6 +427,20 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		vcAssert.attachTriggerRenderCounter(vc)
 		vc.setFooterIsBusy(true)
 		vcAssert.assertTriggerRenderCount(vc, 1)
+	}
+
+	@test()
+	protected static async canSetBodyToNull() {
+		const vc = this.Vc({ body: { sections: [] } })
+		vc.setBody(null)
+		assert.isNull(this.render(vc).body)
+	}
+
+	@test()
+	protected static async canSetHeaderToNull() {
+		const vc = this.Vc({ header: {} })
+		vc.setHeader(null)
+		assert.isNull(this.render(vc).header)
 	}
 
 	private static beginTrackingFooterRender(vc = this.vc) {

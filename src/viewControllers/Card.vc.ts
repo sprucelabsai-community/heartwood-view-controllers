@@ -291,8 +291,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 	}
 
-	public setBody(body: Body) {
-		this.model.body = { ...body }
+	public setBody(body: Body | null | undefined) {
+		this.model.body = body ? { ...body } : body
 		this.triggerRender()
 	}
 
