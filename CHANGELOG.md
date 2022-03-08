@@ -1,3 +1,10 @@
+# [69.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.2.5...v69.3.0) (2022-03-08)
+
+
+### Features
+
+* devs can now check for a section by it's id in a card! ([2885665](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2885665))
+
 ## [69.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.2.4...v69.2.5) (2022-03-08)
 
 ## [69.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.2.3...v69.2.4) (2022-03-08)
