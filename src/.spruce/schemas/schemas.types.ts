@@ -2099,6 +2099,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface CardSection {
 			
+				
+				'id'?: string| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
 				/** Complete. When being rendered as a slide, this will signify the step is complete. */
@@ -2148,6 +2150,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Title. */
 			            'title': {
 			                label: 'Title',

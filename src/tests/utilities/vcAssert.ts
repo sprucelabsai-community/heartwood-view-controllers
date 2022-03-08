@@ -435,6 +435,14 @@ const vcAssert = {
 			| BigFormViewController<any>
 	},
 
+	assertCardRendersSection(vc: ViewController<Card>, sectionId: string) {
+		const model = renderUtil.render(vc)
+		assert.isTruthy(
+			model.body?.sections?.find((s) => s.id === sectionId),
+			`I could not find a section called '${sectionId}' in your card!`
+		)
+	},
+
 	assertCardRendersList(
 		vc: ViewController<Card> | FormViewController<any>,
 		id?: string

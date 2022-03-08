@@ -15,6 +15,9 @@ import textBuilder from '../text.builder'
 export default buildSchema({
 	id: 'cardSection',
 	fields: {
+		id: {
+			type: 'id',
+		},
 		title: {
 			type: 'text',
 			label: 'Title',

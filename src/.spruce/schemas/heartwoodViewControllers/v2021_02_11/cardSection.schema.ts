@@ -21,6 +21,11 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Title. */
 	            'title': {
 	                label: 'Title',
