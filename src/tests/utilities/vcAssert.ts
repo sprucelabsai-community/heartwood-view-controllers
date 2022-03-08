@@ -848,7 +848,7 @@ const vcAssert = {
 		if (!model.body?.isBusy) {
 			assert.fail(
 				`Expected your card '${
-					model.id ?? '**missing id**'
+					model.id ?? getVcName(vc)
 				}' to be busy. Try \`this.setIsBusy(true)\` or setting { body: { isBusy: true } }`
 			)
 		}
@@ -859,7 +859,7 @@ const vcAssert = {
 		if (model.body?.isBusy) {
 			assert.fail(
 				`Expected your card '${
-					model.id ?? '**missing id**'
+					model.id ?? getVcName(vc)
 				}}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)
 		}
