@@ -71,6 +71,35 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface SlideNotFound {
+		
+			
+			'id'?: string| undefined | null
+	}
+
+	export interface SlideNotFoundSchema extends SpruceSchema.Schema {
+		id: 'slideNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Slide not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type SlideNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.SlideNotFoundSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface RowDeleted {
 		
 			

@@ -165,34 +165,72 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 	}
 
-	public getSection(idx: number) {
+	public getSection(idOrIdx: number | string) {
+		let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
 		const section = this.getSections()?.[idx]
+
 		if (!section) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
-				friendlyMessage: `There is no section at index ${idx}.`,
+				friendlyMessage: `There is no section at  '${idOrIdx}'.`,
 				parameters: ['sectionIdx'],
 			})
 		}
 
 		return section
 	}
+	private sectionIdOrIdxToIdx(idOrIdx: string | number) {
+		let idx: number
+		if (typeof idOrIdx === 'string') {
+			idx = this.getIdxFromId(idOrIdx)
+		} else {
+			idx = idOrIdx
+		}
+		return idx
+	}
 
-	public setSection(idx: number, section: Section) {
+	private getIdxFromId(id: string) {
+		return this.getSections()?.findIndex((s) => s.id === id) ?? -1
+	}
+
+	public updateSection(
+		idOrIdx: number | string,
+		updates: Partial<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>
+	) {
+		let idx: number = this.assertValidIdOrIdx(idOrIdx)
+		if (this.model.body?.sections?.[idx]) {
+			this.model.body.sections[idx] = {
+				...this.model.body.sections[idx],
+				...updates,
+			}
+		}
+	}
+
+	public setSection(idOrIdx: number | string, section: Section) {
 		this.ensureSectionsExist()
 
-		if (!this.model.body?.sections?.[idx]) {
-			throw new SchemaError({
-				code: 'INVALID_PARAMETERS',
-				friendlyMessage: `Can't update section at index ${idx} because there isn't one.`,
-				parameters: ['sectionIdx'],
-			})
-		}
+		let idx: number = this.assertValidIdOrIdx(idOrIdx)
 
 		if (this.model.body?.sections) {
+			const existingId = this.model.body?.sections?.[idx]?.id
+			if (existingId) {
+				section.id = existingId
+			}
 			this.model.body.sections[idx] = section
 			this.triggerRenderSections[idx]?.()
 		}
+	}
+
+	private assertValidIdOrIdx(idOrIdx: string | number) {
+		let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
+		if (!this.model.body?.sections?.[idx]) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't update section at index ${idOrIdx} because there isn't one.`,
+				parameters: ['section'],
+			})
+		}
+		return idx
 	}
 
 	public setSections(sections: Section[]) {

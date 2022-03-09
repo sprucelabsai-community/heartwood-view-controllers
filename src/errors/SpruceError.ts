@@ -75,6 +75,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `Row ${options.row} has been deleted and can't be rendered!`
 				break
 
+			case 'SLIDE_NOT_FOUND':
+				message = 'A Slide not found just happened!'
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

@@ -94,23 +94,44 @@ export default class SwipeCardViewController
 		return this.presentSlide
 	}
 
-	public setSlide(slideIdx: number, slide: Partial<Slide>) {
-		this.assertSlideAtIndex(slideIdx)
-		return this.cardVc.setSection(slideIdx, slide)
+	public setSlide(idOrIdx: number | string, slide: Partial<Slide>) {
+		const idx = this.sectionIdOrIdxToId(idOrIdx)
+		this.assertSlideExists(idx)
+		return this.cardVc.setSection(idx, slide)
 	}
 
-	private assertSlideAtIndex(slideIdx: number) {
-		if (!this.getSlides()?.[slideIdx]) {
+	public updateSlide(idOrIdx: number | string, updates: Partial<Slide>) {
+		const idx = this.sectionIdOrIdxToId(idOrIdx)
+		this.assertSlideExists(idx)
+		this.cardVc.updateSection(idx, updates)
+	}
+
+	private sectionIdOrIdxToId(idOrIdx: string | number) {
+		let idx: number
+		if (typeof idOrIdx === 'string') {
+			idx = this.getIdxFromId(idOrIdx)
+		} else {
+			idx = idOrIdx
+		}
+		return idx
+	}
+
+	private getIdxFromId(id: string) {
+		return this.getSlides()?.findIndex((s) => s.id === id) ?? -1
+	}
+
+	private assertSlideExists(slide: number) {
+		if (!this.getSlides()?.[slide]) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
-				parameters: ['slideIndex'],
-				friendlyMessage: `I couldn't update slide ${slideIdx} because it doesn't exist.`,
+				parameters: ['slide'],
+				friendlyMessage: `I couldn't update slide ${slide} because it doesn't exist.`,
 			})
 		}
 	}
 
 	public markSlideAsComplete(slideIdx: number) {
-		this.assertSlideAtIndex(slideIdx)
+		this.assertSlideExists(slideIdx)
 		const section = this.cardVc.getSection(slideIdx)
 		section.isComplete = true
 	}

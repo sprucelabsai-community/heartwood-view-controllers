@@ -80,12 +80,12 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		)
 
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['slideIndex'],
+			parameters: ['slide'],
 		})
 	}
 
 	@test()
-	protected static async canUpdateSection() {
+	protected static async canSetSlide() {
 		const vc = this.Vc({
 			slides: [
 				{
@@ -103,6 +103,140 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 		const model = this.render(vc)
 		assert.isEqual(model.body?.sections?.[0].text?.content, 'hey there updated')
+	}
+
+	@test()
+	protected static async throwsWhenSettingSlideThatDoesNotExist() {
+		const vc = this.Vc({
+			slides: [
+				{
+					id: 'testing',
+				},
+			],
+		})
+		const err = assert.doesThrow(() => vc.setSlide('test', {}))
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['slide'],
+		})
+	}
+
+	@test()
+	protected static async canSetSlideById() {
+		const vc = this.Vc({
+			slides: [
+				{
+					id: 'step-1',
+					title: 'step 1',
+					text: { content: 'hey there!' },
+				},
+				{
+					id: 'step-2',
+					title: 'step 2',
+					text: { content: 'hey there dude!!' },
+				},
+			],
+		})
+
+		vc.setSlide('step-1', { text: { content: 'hey there updated' } })
+
+		let model = this.render(vc)
+		assert.isEqual(model.body?.sections?.[0].text?.content, 'hey there updated')
+		assert.isEqual(model.body?.sections?.[0].id, 'step-1')
+
+		vc.setSlide('step-2', { text: { content: 'what is up?' } })
+
+		model = this.render(vc)
+		assert.isEqual(model.body?.sections?.[1].text?.content, 'what is up?')
+		assert.isEqual(model.body?.sections?.[1].id, 'step-2')
+	}
+
+	@test()
+	protected static updatingSectionThatDoesNotExistThrows() {
+		const vc = this.Vc({
+			slides: [
+				{
+					id: 'testing',
+				},
+			],
+		})
+		const err = assert.doesThrow(() => vc.updateSlide('test', {}))
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['slide'],
+		})
+	}
+
+	@test()
+	protected static updatesIfFound() {
+		const vc = this.Vc({
+			slides: [
+				{
+					id: 'testing',
+				},
+				{
+					id: 'next',
+				},
+			],
+		})
+
+		const updates = {
+			buttons: [
+				{
+					id: 'test',
+					label: 'team',
+				},
+			],
+		}
+
+		vc.updateSlide('testing', updates)
+
+		let section = this.renderSection(vc)
+
+		assert.isEqualDeep(section, { ...updates, id: 'testing' })
+
+		let updates2 = {
+			title: 'hey',
+		}
+
+		vc.updateSlide('testing', updates2)
+
+		section = this.renderSection(vc)
+
+		assert.isEqualDeep(section, { ...updates, ...updates2, id: 'testing' })
+	}
+
+	@test()
+	protected static canUpdateSlideThatIsNotTheFirst() {
+		const vc = this.Vc({
+			slides: [
+				{
+					id: 'testing',
+				},
+				{
+					id: 'next',
+				},
+			],
+		})
+
+		const updates = {
+			buttons: [
+				{
+					id: 'test',
+					label: 'team',
+				},
+			],
+		}
+
+		vc.updateSlide('next', updates)
+		const section = this.renderSection(vc, 1)
+		assert.isEqualDeep(section, { ...updates, id: 'next' })
+	}
+
+	private static renderSection(vc: SwipeCardViewController, idx = 0) {
+		const model = this.render(vc)
+		const section = model.body?.sections?.[idx]
+		assert.isTruthy(section)
+		delete section.controller
+		return section
 	}
 
 	@test()
@@ -142,12 +276,12 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	protected static throwsWhenMarkingBadSlideAsComplete() {
 		const err = assert.doesThrow(() => this.vc.markSlideAsComplete(-10))
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['slideIndex'],
+			parameters: ['slide'],
 		})
 	}
 
 	@test()
-	protected static canMarkeSlideAsComplete() {
+	protected static canMarkSlideAsComplete() {
 		let model = this.render(this.vc)
 		assert.isUndefined(model.body?.sections?.[0].isComplete)
 
@@ -212,7 +346,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static removingSlideTrigersRender() {
+	protected static removingSlideTriggersRender() {
 		this.vc.addSlide({ title: 'Go!' })
 		this.vc.removeSlide(1)
 

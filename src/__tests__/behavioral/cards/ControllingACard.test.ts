@@ -443,6 +443,17 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isNull(this.render(vc).header)
 	}
 
+	@test()
+	protected static async updatingBadSectionThrows() {
+		const vc = this.Vc({})
+		const err = assert.doesThrow(() =>
+			vc.updateSection(`${new Date().getTime()}`, {})
+		)
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['section'],
+		})
+	}
+
 	private static beginTrackingFooterRender(vc = this.vc) {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
