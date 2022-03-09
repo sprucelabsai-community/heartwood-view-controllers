@@ -1,3 +1,10 @@
+# [69.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.4.0...v69.5.0) (2022-03-09)
+
+
+### Features
+
+* buttons can have hints that render inline ([c519e3d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c519e3d))
+
 # [69.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.3.0...v69.4.0) (2022-03-09)
 
 
