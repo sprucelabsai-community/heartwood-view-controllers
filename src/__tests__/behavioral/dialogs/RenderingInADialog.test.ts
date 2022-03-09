@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
 

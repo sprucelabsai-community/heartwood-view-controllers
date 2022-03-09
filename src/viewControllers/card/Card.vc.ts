@@ -1,7 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
-import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
-import AbstractViewController from './Abstract.vc'
+import {
+	ViewController,
+	ViewControllerOptions,
+} from '../../types/heartwood.types'
+import AbstractViewController from '../Abstract.vc'
+import sectionIdOrIdxToIdx from './sectionIdOrIdxToIdx'
 
 type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardViewControllerOptions = ViewModel
@@ -166,7 +170,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	public getSection(idOrIdx: number | string) {
-		let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
+		let idx: number = sectionIdOrIdxToIdx(this.getSections() ?? [], idOrIdx)
 		const section = this.getSections()?.[idx]
 
 		if (!section) {
@@ -178,20 +182,6 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 
 		return section
-	}
-
-	private sectionIdOrIdxToIdx(idOrIdx: string | number) {
-		let idx: number
-		if (typeof idOrIdx === 'string') {
-			idx = this.getIdxFromId(idOrIdx)
-		} else {
-			idx = idOrIdx
-		}
-		return idx
-	}
-
-	private getIdxFromId(id: string) {
-		return this.getSections()?.findIndex((s) => s.id === id) ?? -1
 	}
 
 	public updateSection(
@@ -223,7 +213,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	private assertValidIdOrIdx(idOrIdx: string | number) {
-		let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
+		let idx: number = sectionIdOrIdxToIdx(this.getSections(), idOrIdx)
 		if (!this.model.body?.sections?.[idx]) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',

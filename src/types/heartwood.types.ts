@@ -28,7 +28,7 @@ import CalendarViewController, {
 } from '../viewControllers/Calendar.vc'
 import CardViewControllerImpl, {
 	CardViewControllerOptions,
-} from '../viewControllers/Card.vc'
+} from '../viewControllers/card/Card.vc'
 import ConfirmViewController, {
 	ConfirmViewControllerOptions,
 } from '../viewControllers/Confirm.vc'

@@ -2,7 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, ViewControllerOptions } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import CardViewController from '../../viewControllers/Card.vc'
+import CardViewController from '../../viewControllers/card/Card.vc'
 
 class NoDestroy extends AbstractSkillViewController {
 	public cardVc: CardViewController

@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { CardViewControllerOptions } from '../../../viewControllers/Card.vc'
+import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
 import { ProgressViewControllerOptions } from '../../../viewControllers/reporting/Progress.vc'
 
 export default class AssertingProgressTest extends AbstractViewControllerTest {

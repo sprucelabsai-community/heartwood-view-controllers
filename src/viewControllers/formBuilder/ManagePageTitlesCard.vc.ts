@@ -1,6 +1,6 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { ViewControllerOptions } from '../../types/heartwood.types'
-import CardViewController from '../Card.vc'
+import CardViewController from '../card/Card.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
 import FormBuilderCardViewController from './FormBuilderCard.vc'
 

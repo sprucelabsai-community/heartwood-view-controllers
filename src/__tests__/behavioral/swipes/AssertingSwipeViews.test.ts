@@ -8,7 +8,7 @@ import {
 	ViewControllerOptions,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 
 type Card = CardViewController | SwipeCardViewController

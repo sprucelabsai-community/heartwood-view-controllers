@@ -8,7 +8,7 @@ import {
 } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card

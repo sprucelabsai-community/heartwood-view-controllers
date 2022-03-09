@@ -14,7 +14,7 @@ import {
 	FormBuilderFieldType,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
-import CardViewController from '../Card.vc'
+import CardViewController from '../card/Card.vc'
 import FormViewController from '../Form.vc'
 
 export interface EditFormBuilderFieldOptions {

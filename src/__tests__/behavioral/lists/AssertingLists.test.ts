@@ -6,7 +6,7 @@ import {
 	ViewControllerOptions,
 } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 

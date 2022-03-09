@@ -14,7 +14,7 @@ import {
 	SkillViewController,
 	ConfirmOptions,
 } from '../../../types/heartwood.types'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import ListViewController, {
 	ListRowModel,

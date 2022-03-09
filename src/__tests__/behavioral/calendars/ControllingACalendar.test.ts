@@ -10,7 +10,7 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 import AbstractCalendarEventViewController from '../../../viewControllers/AbstractCalendarEvent.vc'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 type CalendarTime =

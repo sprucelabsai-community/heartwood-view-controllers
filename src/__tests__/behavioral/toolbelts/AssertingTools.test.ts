@@ -7,7 +7,7 @@ import {
 	SkillViewController,
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
-import CardViewController from '../../../viewControllers/Card.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'

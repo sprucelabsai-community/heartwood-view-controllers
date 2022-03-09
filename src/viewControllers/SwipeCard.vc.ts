@@ -6,7 +6,8 @@ import {
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
-import CardViewController from './Card.vc'
+import CardViewController from './card/Card.vc'
+import sectionIdOrIdxToIdx from './card/sectionIdOrIdxToIdx'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Slide = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
@@ -95,29 +96,15 @@ export default class SwipeCardViewController
 	}
 
 	public setSlide(idOrIdx: number | string, slide: Partial<Slide>) {
-		const idx = this.sectionIdOrIdxToId(idOrIdx)
+		const idx = sectionIdOrIdxToIdx(this.getSlides(), idOrIdx)
 		this.assertSlideExists(idx)
 		return this.cardVc.setSection(idx, slide)
 	}
 
 	public updateSlide(idOrIdx: number | string, updates: Partial<Slide>) {
-		const idx = this.sectionIdOrIdxToId(idOrIdx)
+		const idx = sectionIdOrIdxToIdx(this.getSlides(), idOrIdx)
 		this.assertSlideExists(idx)
 		this.cardVc.updateSection(idx, updates)
-	}
-
-	private sectionIdOrIdxToId(idOrIdx: string | number) {
-		let idx: number
-		if (typeof idOrIdx === 'string') {
-			idx = this.getIdxFromId(idOrIdx)
-		} else {
-			idx = idOrIdx
-		}
-		return idx
-	}
-
-	private getIdxFromId(id: string) {
-		return this.getSlides()?.findIndex((s) => s.id === id) ?? -1
 	}
 
 	private assertSlideExists(slide: number) {

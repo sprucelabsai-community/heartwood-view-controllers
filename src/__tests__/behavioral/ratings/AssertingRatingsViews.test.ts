@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { CardViewControllerOptions } from '../../../viewControllers/Card.vc'
+import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
 
 export default class AssertingRatingsViewsTest extends AbstractViewControllerTest {
 	@test('throws when no rating found 1')

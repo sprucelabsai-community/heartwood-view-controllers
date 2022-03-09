@@ -8,7 +8,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import renderUtil from '../../../utilities/render.utility'
 import CardViewController, {
 	CardViewControllerOptions,
-} from '../../../viewControllers/Card.vc'
+} from '../../../viewControllers/card/Card.vc'
 
 export default class ControllingACardTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
