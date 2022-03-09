@@ -1,3 +1,10 @@
+# [69.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.3.0...v69.4.0) (2022-03-09)
+
+
+### Features
+
+* devs can now update secitons and slides while retaining other values. also, can now update based on id ([7a1a098](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7a1a098))
+
 # [69.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.2.5...v69.3.0) (2022-03-08)
 
 
