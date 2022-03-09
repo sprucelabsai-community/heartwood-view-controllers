@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/text.schema'
 
 const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema  = {
 	id: 'dropdownButton',
@@ -57,6 +57,11 @@ const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.D
 	                label: 'Click handler for hint icon',
 	                type: 'raw',
 	                options: {valueType: `() => Promise<any> | any`,}
+	            },
+	            /** . */
+	            'hint': {
+	                type: 'schema',
+	                options: {schema: textSchema_v2021_02_11,}
 	            },
 	            /** Type. */
 	            'type': {

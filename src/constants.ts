@@ -1,5 +1,6 @@
 import { lineIcons } from '@sprucelabs/calendar-utils'
 import { SchemaFieldsByName, SelectChoice } from '@sprucelabs/schema'
+import textBuilder from './schemas/v2021_02_11/text.builder'
 export { lineIcons } from '@sprucelabs/calendar-utils'
 
 export const fancyIcons = [
@@ -502,6 +503,12 @@ export const buttonFields: SchemaFieldsByName = {
 		label: 'Click handler for hint icon',
 		options: {
 			valueType: '() => Promise<any> | any',
+		},
+	},
+	hint: {
+		type: 'schema',
+		options: {
+			schema: textBuilder,
 		},
 	},
 	type: {

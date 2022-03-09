@@ -179,6 +179,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 		return section
 	}
+
 	private sectionIdOrIdxToIdx(idOrIdx: string | number) {
 		let idx: number
 		if (typeof idOrIdx === 'string') {
