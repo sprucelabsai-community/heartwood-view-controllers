@@ -112,6 +112,11 @@ export interface AssertRedirectOptions {
 
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
+export interface ButtonViewController {
+	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+	triggerRender(): void
+}
+
 const vcAssert = {
 	_setVcFactory(factory: ViewControllerFactory) {
 		//@ts-ignore
@@ -1038,8 +1043,11 @@ const vcAssert = {
 		)
 	},
 
-	assertCardRendersButtons(vc: ViewController<Card>, ids: string[]) {
-		const { missing } = checkForButtons(vc, ids)
+	assertCardRendersButtons(
+		vc: ViewController<Card>,
+		ids: string[]
+	): ButtonViewController[] {
+		const { missing, foundButtons } = checkForButtons(vc, ids)
 
 		if (missing.length > 0) {
 			assert.fail(
@@ -1048,10 +1056,17 @@ const vcAssert = {
 				)}' is missing buttons with the following ids: ${missing.join(', ')}`
 			)
 		}
+
+		return foundButtons.map((button) => ({
+			render() {
+				return button
+			},
+			triggerRender() {},
+		}))
 	},
 
 	assertCardRendersButton(vc: ViewController<Card>, id: string) {
-		this.assertCardRendersButtons(vc, [id])
+		return this.assertCardRendersButtons(vc, [id])[0]
 	},
 
 	assertCardRendersCriticalError(vc: ViewController<Card>) {
@@ -1801,9 +1816,9 @@ function checkForCardSection(
 }
 
 function checkForButtons(
-	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
+	vc: ViewController<Card>,
 	ids: string[]
-): { found: string[]; missing: string[] } {
+): { found: string[]; missing: string[]; foundButtons: Button[] } {
 	assertOptions({ vc, ids }, ['vc', 'ids'])
 
 	const model = renderUtil.render(vc)
@@ -1817,6 +1832,7 @@ function checkForButtons(
 
 	const missing: string[] = []
 	const found: string[] = []
+	const foundButtons: Button[] = []
 
 	for (const id of ids) {
 		const match = buttons.find((b) => b?.id === id)
@@ -1824,9 +1840,10 @@ function checkForButtons(
 			missing.push(id)
 		} else {
 			found.push(id)
+			foundButtons.push(match)
 		}
 	}
-	return { found, missing }
+	return { found, missing, foundButtons }
 }
 
 export function getVcName(vc: ViewController<any>) {

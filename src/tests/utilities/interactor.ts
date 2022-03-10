@@ -9,6 +9,7 @@ import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
+import { ButtonViewController } from './vcAssert'
 import { getVcName, pluckAllFromCard } from './vcAssert.utility'
 
 type CardVc =
@@ -20,12 +21,19 @@ type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactor = {
 	async click(
-		button?: {
-			onClick?: ((options?: any) => void | Promise<void>) | null | undefined
-			id?: string | null
-		} | null,
+		button?:
+			| ButtonViewController
+			| {
+					onClick?: ((options?: any) => void | Promise<void>) | null | undefined
+					id?: string | null
+			  }
+			| null,
 		onClickOptions?: Record<string, any>
 	) {
+		const btnVc = button as ButtonViewController
+		if (btnVc.render) {
+			button = btnVc.render()
+		}
 		//@ts-ignore
 		const { onClick, id = '**missing id**' } = button ?? {}
 
