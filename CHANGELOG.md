@@ -1,3 +1,10 @@
+# [69.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.6.0...v69.7.0) (2022-03-10)
+
+
+### Features
+
+* assertCardSectionRendersButton now accepts id or idx ([1185860](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1185860))
+
 # [69.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.5.2...v69.6.0) (2022-03-10)
 
 
