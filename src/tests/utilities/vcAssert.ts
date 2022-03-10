@@ -436,11 +436,29 @@ const vcAssert = {
 	},
 
 	assertCardRendersSection(vc: ViewController<Card>, sectionId: string) {
-		const model = renderUtil.render(vc)
-		assert.isTruthy(
-			model.body?.sections?.find((s) => s.id === sectionId),
-			`I could not find a section called '${sectionId}' in your card!`
-		)
+		checkForCardSection(vc, sectionId)
+	},
+
+	assertCardSectionRendersButton(
+		vc: ViewController<Card>,
+		sectionId: string,
+		buttonId?: string
+	) {
+		const section = checkForCardSection(vc, sectionId)
+
+		if (buttonId) {
+			const match = section?.buttons?.find((b) => b.id === buttonId)
+
+			assert.isTruthy(
+				match,
+				`Could not find button '${buttonId}' in section '${sectionId}'`
+			)
+		} else {
+			assert.isTruthy(
+				section?.buttons,
+				`Could not find button in section '${sectionId}'`
+			)
+		}
 	},
 
 	assertCardRendersList(
@@ -1755,6 +1773,19 @@ const vcAssert = {
 }
 
 export default vcAssert
+
+function checkForCardSection(
+	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
+	sectionId: string
+) {
+	const model = renderUtil.render(vc)
+	const match = model.body?.sections?.find((s) => s.id === sectionId)
+	assert.isTruthy(
+		match,
+		`I could not find a section called '${sectionId}' in your card!`
+	)
+	return match
+}
 
 function checkForButtons(
 	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
