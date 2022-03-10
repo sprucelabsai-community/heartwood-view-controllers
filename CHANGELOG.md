@@ -1,3 +1,10 @@
+# [69.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.9.0...v69.10.0) (2022-03-10)
+
+
+### Features
+
+* asserting if not rendering talking sprucebot ([2cef73d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2cef73d))
+
 # [69.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.8.0...v69.9.0) (2022-03-10)
 
 
