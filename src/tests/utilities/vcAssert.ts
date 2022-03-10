@@ -1312,15 +1312,20 @@ const vcAssert = {
 		return sprucebot.controller
 	},
 
-	assertCardDoesNotRenderTalkingSprucebot(vc: ViewController<Card>) {
+	assertCardDoesNotRenderTalkingSprucebot(
+		vc: ViewController<Card>,
+		id?: string
+	) {
 		try {
-			this.assertCardRendersTalkingSprucebot(vc)
+			this.assertCardRendersTalkingSprucebot(vc, id)
 		} catch {
 			return
 		}
 
 		assert.fail(
-			`Your Card wasn't supposed to render a talking sprucebot, but it is!`
+			`Your card wasn't supposed to render a talking sprucebot${
+				id ? ` with the id of ${id}` : ''
+			}, but it is!`
 		)
 	},
 

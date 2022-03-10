@@ -35,6 +35,8 @@ export default class AssertingTalkingSprucebots extends AbstractViewControllerTe
 		id: string
 	) {
 		assert.doesThrow(() => this.assertRendersTalkingSprucebot(sections, id))
+		const vc = this.Vc(sections)
+		vcAssert.assertCardDoesNotRenderTalkingSprucebot(vc, id)
 	}
 
 	@test(
@@ -70,12 +72,21 @@ export default class AssertingTalkingSprucebots extends AbstractViewControllerTe
 		sections: Section[],
 		idToCheck: string
 	) {
-		const vc = this.Controller('card', {
+		const vc = this.Vc(sections)
+		vcAssert.assertCardRendersTalkingSprucebot(vc, idToCheck)
+
+		assert.doesThrow(() =>
+			vcAssert.assertCardDoesNotRenderTalkingSprucebot(vc, idToCheck)
+		)
+	}
+
+	private static Vc(
+		sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]
+	) {
+		return this.Controller('card', {
 			body: {
 				sections,
 			},
 		})
-
-		vcAssert.assertCardRendersTalkingSprucebot(vc, idToCheck)
 	}
 }
