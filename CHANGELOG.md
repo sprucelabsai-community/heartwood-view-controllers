@@ -1,3 +1,10 @@
+# [69.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.8.0...v69.9.0) (2022-03-10)
+
+
+### Features
+
+* devs can click button view controllers (which are really just stubs for now) ([c5b314b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c5b314b))
+
 # [69.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.7.4...v69.8.0) (2022-03-10)
 
 
