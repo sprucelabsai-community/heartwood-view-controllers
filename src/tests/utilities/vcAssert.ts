@@ -23,6 +23,7 @@ import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
+import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
@@ -441,22 +442,30 @@ const vcAssert = {
 
 	assertCardSectionRendersButton(
 		vc: ViewController<Card>,
-		sectionId: string,
+		sectionIdOrIdx: string | number,
 		buttonId?: string
 	) {
-		const section = checkForCardSection(vc, sectionId)
+		const model = renderUtil.render(vc)
+		const sections = model.body?.sections ?? []
+
+		const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
+		if (idx === -1) {
+			assert.fail(`could not find a section ${sectionIdOrIdx}`)
+		}
+
+		const section = sections?.[idx]
 
 		if (buttonId) {
 			const match = section?.buttons?.find((b) => b.id === buttonId)
 
 			assert.isTruthy(
 				match,
-				`Could not find button '${buttonId}' in section '${sectionId}'`
+				`Could not find button '${buttonId}' in section '${sectionIdOrIdx}'`
 			)
 		} else {
 			assert.isTruthy(
 				section?.buttons,
-				`Could not find button in section '${sectionId}'`
+				`Could not find button in section '${sectionIdOrIdx}'`
 			)
 		}
 	},

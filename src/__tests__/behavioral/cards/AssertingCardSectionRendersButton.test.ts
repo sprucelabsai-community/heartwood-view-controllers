@@ -25,6 +25,11 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
 		[{ id: 'testing' }, { id: 'test' }],
 		'test'
 	)
+	@test(
+		'throws if second section does not have a button (section idx)',
+		[{ id: 'testing', buttons: [{ id: 'button1' }] }, { id: 'test' }],
+		1
+	)
 	protected static throwsIfSectionMissingButton(
 		sections: Section[],
 		sectionId: string
@@ -83,6 +88,23 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
 			},
 		] as Section[],
 		'testing'
+	)
+	@test(
+		'finds matching in later section using index',
+		[
+			{ id: 'test' },
+			{
+				id: 'testing',
+				buttons: [
+					{
+						id: 'button1',
+						lineIcon: 'delete',
+						type: 'destructive',
+					},
+				],
+			},
+		] as Section[],
+		1
 	)
 	protected static passesInFirstSection(sections: Section[], lookupId: string) {
 		this.assertFindsButtonInSectionById(sections, lookupId)
