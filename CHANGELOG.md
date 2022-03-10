@@ -1,3 +1,10 @@
+# [69.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.5.2...v69.6.0) (2022-03-10)
+
+
+### Features
+
+* devs can now check if a section has a button ([885feb6](https://github.com/sprucelabsai/heartwood-view-controllers/commit/885feb6))
+
 ## [69.5.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.5.1...v69.5.2) (2022-03-09)
 
 ## [69.5.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.5.0...v69.5.1) (2022-03-09)
