@@ -6,6 +6,7 @@ export default buildSchema({
 	name: 'Talking sprucebot',
 	description: '',
 	fields: {
+		id: { type: 'id' },
 		...sprucebotTypeMessageBuilder.fields,
 		onComplete: {
 			type: 'raw',

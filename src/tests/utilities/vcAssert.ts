@@ -436,8 +436,11 @@ const vcAssert = {
 			| BigFormViewController<any>
 	},
 
-	assertCardRendersSection(vc: ViewController<Card>, sectionId: string) {
-		checkForCardSection(vc, sectionId)
+	assertCardRendersSection(
+		vc: ViewController<Card>,
+		sectionIdOrIdx: string | number
+	) {
+		checkForCardSection(vc, sectionIdOrIdx)
 	},
 
 	assertCardSectionRendersButton(
@@ -445,15 +448,7 @@ const vcAssert = {
 		sectionIdOrIdx: string | number,
 		buttonId?: string
 	) {
-		const model = renderUtil.render(vc)
-		const sections = model.body?.sections ?? []
-
-		const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
-		if (idx === -1) {
-			assert.fail(`could not find a section ${sectionIdOrIdx}`)
-		}
-
-		const section = sections?.[idx]
+		const section = checkForCardSection(vc, sectionIdOrIdx)
 
 		if (buttonId) {
 			const match = section?.buttons?.find((b) => b.id === buttonId)
@@ -1282,13 +1277,20 @@ const vcAssert = {
 	},
 
 	assertCardRendersTalkingSprucebot(
-		vc: ViewController<Card>
+		vc: ViewController<Card>,
+		id?: string
 	): TalkingSprucebotViewController {
 		const model = renderUtil.render(vc)
-		const sprucebot = pluckFirstFromCard(model, 'talkingSprucebot')
+		const sprucebots = pluckAllFromCard(model, 'talkingSprucebot')
+
+		const sprucebot = sprucebots.find((sb) => sb?.id === id)
 
 		if (!sprucebot) {
-			assert.fail('Your card does not render a talking sprucebot!')
+			assert.fail(
+				id
+					? `I could not find a talking Sprucebot with the id '${id}' in your card!`
+					: 'Your card does not render a talking sprucebot!'
+			)
 		}
 
 		//@ts-ignore
@@ -1785,13 +1787,15 @@ export default vcAssert
 
 function checkForCardSection(
 	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
-	sectionId: string
+	sectionIdOrIdx: string | number
 ) {
 	const model = renderUtil.render(vc)
-	const match = model.body?.sections?.find((s) => s.id === sectionId)
+	const sections = model.body?.sections ?? []
+	const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
+	const match = sections[idx]
 	assert.isTruthy(
 		match,
-		`I could not find a section called '${sectionId}' in your card!`
+		`I could not find a section called '${sectionIdOrIdx}' in your card!`
 	)
 	return match
 }

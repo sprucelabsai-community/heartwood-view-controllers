@@ -11,6 +11,11 @@ const talkingSprucebotSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	name: 'Talking sprucebot',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 	            'sentences': {
 	                label: 'Sentences',

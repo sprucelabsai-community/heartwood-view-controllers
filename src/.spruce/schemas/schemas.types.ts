@@ -2386,6 +2386,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface TalkingSprucebot {
 			
+				
+				'id'?: string| undefined | null
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
@@ -2409,6 +2411,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Talking sprucebot',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 			            'sentences': {
 			                label: 'Sentences',
