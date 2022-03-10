@@ -1,3 +1,10 @@
+# [69.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.7.4...v69.8.0) (2022-03-10)
+
+
+### Features
+
+* devs can now check for talking sprucebots with id, making testing even more RELIABLE! ([b49a90a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b49a90a))
+
 ## [69.7.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.7.3...v69.7.4) (2022-03-10)
 
 ## [69.7.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.7.2...v69.7.3) (2022-03-10)
