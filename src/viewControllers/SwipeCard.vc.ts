@@ -139,8 +139,8 @@ export default class SwipeCardViewController
 		return this.cardVc.addSection(slide)
 	}
 
-	public getSlide(idx: number) {
-		return this.cardVc.getSection(idx)
+	public getSlide(idOrIdx: number | string) {
+		return this.cardVc.getSection(idOrIdx)
 	}
 
 	public setFooter(footer: Footer | null | undefined) {

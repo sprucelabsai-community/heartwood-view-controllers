@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import SwipeCardViewController, {
 	SwipeViewControllerOptions,
 } from '../../../viewControllers/SwipeCard.vc'
@@ -24,12 +24,6 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 				},
 			],
 		})
-	}
-
-	private static Vc(
-		options: SwipeViewControllerOptions
-	): SwipeCardViewController {
-		return this.Controller('swipeCard', options)
 	}
 
 	@test()
@@ -395,5 +389,24 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		this.vc.cardVc.triggerRender()
 
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static canGetSlideById() {
+		this.vc = this.Vc({
+			slides: [
+				{
+					id: 'test',
+				},
+			],
+		})
+
+		assert.isEqualDeep(this.vc.getSlide('test'), this.vc.getSlide(0))
+	}
+
+	private static Vc(
+		options: SwipeViewControllerOptions
+	): SwipeCardViewController {
+		return this.Controller('swipeCard', options)
 	}
 }
