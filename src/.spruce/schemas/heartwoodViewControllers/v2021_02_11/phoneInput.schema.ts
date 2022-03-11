@@ -45,6 +45,11 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'isInteractive': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** On change handler. */
 	            'onChange': {
 	                label: 'On change handler',

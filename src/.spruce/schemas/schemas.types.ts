@@ -31,6 +31,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
@@ -77,6 +79,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -108,6 +115,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
@@ -156,6 +165,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -193,6 +207,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** Can be changed. */
@@ -243,6 +259,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -286,6 +307,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
@@ -332,6 +355,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -363,6 +391,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
@@ -407,6 +437,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Required. */
 			            'isRequired': {
 			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -854,6 +889,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
@@ -902,6 +939,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Required. */
 			            'isRequired': {
 			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -3127,6 +3169,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** Can be changed. */
@@ -3179,6 +3223,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -3227,6 +3276,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				
@@ -3272,6 +3323,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Required. */
 			            'isRequired': {
 			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -3349,6 +3405,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
@@ -3401,6 +3459,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -3450,6 +3513,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
@@ -3500,6 +3565,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                options: undefined
 			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
 			            /** On change handler. */
 			            'onChange': {
 			                label: 'On change handler',
@@ -3542,6 +3612,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** Placeholder. */
@@ -3589,6 +3661,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Required. */
 			            'isRequired': {
 			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -5127,6 +5204,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hint'?: string| undefined | null
 				/** Required. */
 				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | boolean | Promise<void | boolean>)| undefined | null
 		}
@@ -5170,6 +5249,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Required. */
 			            'isRequired': {
 			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
 			                type: 'boolean',
 			                options: undefined
 			            },

@@ -45,6 +45,11 @@ const ratingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Rat
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'isInteractive': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** On change handler. */
 	            'onChange': {
 	                label: 'On change handler',

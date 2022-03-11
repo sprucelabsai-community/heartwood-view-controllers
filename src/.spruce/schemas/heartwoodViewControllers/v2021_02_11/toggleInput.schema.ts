@@ -45,6 +45,11 @@ const toggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Togg
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'isInteractive': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** On change handler. */
 	            'onChange': {
 	                label: 'On change handler',

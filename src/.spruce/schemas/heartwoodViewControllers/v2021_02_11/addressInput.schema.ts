@@ -45,6 +45,11 @@ const addressInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Add
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'isInteractive': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** On change handler. */
 	            'onChange': {
 	                label: 'On change handler',

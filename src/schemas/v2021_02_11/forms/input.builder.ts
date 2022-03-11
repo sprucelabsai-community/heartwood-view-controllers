@@ -32,6 +32,9 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Required',
 		},
+		isInteractive: {
+			type: 'boolean',
+		},
 		onChange: {
 			type: 'raw',
 			label: 'On change handler',
