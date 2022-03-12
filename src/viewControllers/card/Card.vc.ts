@@ -195,6 +195,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 				...updates,
 			}
 		}
+
+		this.triggerRender()
 	}
 
 	public setSection(idOrIdx: number | string, section: Section) {

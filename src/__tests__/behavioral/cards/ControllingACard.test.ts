@@ -454,6 +454,22 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static async updatingSectionTriggersRender() {
+		const vc = this.Vc({
+			body: {
+				sections: [
+					{
+						id: 'test',
+					},
+				],
+			},
+		})
+
+		vc.updateSection('test', {})
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+	}
+
 	private static beginTrackingFooterRender(vc = this.vc) {
 		this.footerTriggerRenderCount = 0
 		//@ts-ignore
