@@ -1,3 +1,22 @@
+## [69.11.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.5...v69.11.6) (2022-03-12)
+
+## [69.11.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.4...v69.11.5) (2022-03-12)
+
+## [69.11.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.3...v69.11.4) (2022-03-12)
+
+## [69.11.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.2...v69.11.3) (2022-03-12)
+
+## [69.11.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.1...v69.11.2) (2022-03-12)
+
+## [69.11.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.0...v69.11.1) (2022-03-12)
+
+# [69.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.10.4...v69.11.0) (2022-03-11)
+
+
+### Features
+
+* interactive option for inputs. disables clicking but does not render like "disabled" ([2510815](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2510815))
+
 ## [69.10.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.10.3...v69.10.4) (2022-03-11)
 
 ## [69.10.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.10.2...v69.10.3) (2022-03-11)
