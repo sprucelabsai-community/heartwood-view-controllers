@@ -1,4 +1,4 @@
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
