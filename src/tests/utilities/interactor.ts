@@ -6,6 +6,7 @@ import { DropEventOptions, ListViewController } from '../..'
 import { KeyboardKey, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
+import ButtonGroupViewController from '../../viewControllers/ButtonGroup.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
@@ -16,6 +17,9 @@ type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
 type ButtonBarVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
+type ButtonGroupVc = ViewController<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+>
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 type FormVc = FormViewController<any> | BigFormViewController<any>
 
@@ -81,6 +85,24 @@ const interactor = {
 
 	async clickButton(vc: CardVc | FormVc, buttonId: string) {
 		const match = pluckButtonFromCard(vc, buttonId)
+		await this.click(match)
+	},
+
+	async clickButtonInGroup(
+		buttonGroupVc: ButtonGroupVc,
+		buttonIdOrIdx: string | number
+	) {
+		assertOptions({ buttonGroupVc, buttonIdOrIdx }, [
+			'buttonGroupVc',
+			'buttonIdOrIdx',
+		])
+
+		const buttons = renderUtil.render(buttonGroupVc)
+
+		const match = buttons.find(
+			(b, idx) => b.id === buttonIdOrIdx || idx === buttonIdOrIdx
+		)
+		assert.isTruthy(match, `I could not find the '${buttonIdOrIdx}' button!`)
 
 		await this.click(match)
 	},
