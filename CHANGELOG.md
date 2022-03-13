@@ -1,3 +1,10 @@
+# [69.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.7...v69.12.0) (2022-03-13)
+
+
+### Features
+
+* devs can now easily click on buttons in button groups ([fa096d5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fa096d5))
+
 ## [69.11.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.6...v69.11.7) (2022-03-12)
 
 ## [69.11.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.11.5...v69.11.6) (2022-03-12)
