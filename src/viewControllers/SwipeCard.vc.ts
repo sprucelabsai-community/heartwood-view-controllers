@@ -97,28 +97,28 @@ export default class SwipeCardViewController
 
 	public setSlide(idOrIdx: number | string, slide: Partial<Slide>) {
 		const idx = sectionIdOrIdxToIdx(this.getSlides(), idOrIdx)
-		this.assertSlideExists(idx)
+		this.assertSlideExists(idx, idOrIdx)
 		return this.cardVc.setSection(idx, slide)
 	}
 
 	public updateSlide(idOrIdx: number | string, updates: Partial<Slide>) {
 		const idx = sectionIdOrIdxToIdx(this.getSlides(), idOrIdx)
-		this.assertSlideExists(idx)
+		this.assertSlideExists(idx, idOrIdx)
 		this.cardVc.updateSection(idx, updates)
 	}
 
-	private assertSlideExists(slide: number) {
+	private assertSlideExists(slide: number, idOrIdx: string | number) {
 		if (!this.getSlides()?.[slide]) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['slide'],
-				friendlyMessage: `I couldn't update slide ${slide} because it doesn't exist.`,
+				friendlyMessage: `I couldn't update slide ${idOrIdx} because it doesn't exist.`,
 			})
 		}
 	}
 
 	public markSlideAsComplete(slideIdx: number) {
-		this.assertSlideExists(slideIdx)
+		this.assertSlideExists(slideIdx, slideIdx)
 		const section = this.cardVc.getSection(slideIdx)
 		section.isComplete = true
 	}
