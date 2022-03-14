@@ -100,7 +100,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		})
 	}
 
-	@test()
+	@test.only()
 	protected static async throwsWithSyntaxError() {
 		const err = await assert.doesThrowAsync(() =>
 			this.exporter.export({
@@ -110,7 +110,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		)
 
 		errorAssert.assertError(err, 'EXPORT_FAILED')
-		assert.doesInclude(err.message, 'Missing semicolon')
+		assert.doesInclude(err.message, 'Unexpected keyword')
 	}
 
 	@test()
