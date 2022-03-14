@@ -100,7 +100,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		})
 	}
 
-	@test.only()
+	@test()
 	protected static async throwsWithSyntaxError() {
 		const err = await assert.doesThrowAsync(() =>
 			this.exporter.export({
