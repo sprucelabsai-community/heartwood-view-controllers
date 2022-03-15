@@ -177,9 +177,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 					shouldQueueShow,
 					onClick: () => {
 						if (!this.isSelected(button.id)) {
-							this.selectButton(button.id)
+							return this.selectButton(button.id)
 						} else {
-							this.deselectButton(button.id)
+							return this.deselectButton(button.id)
 						}
 					},
 					onClickHintIcon: () => {
