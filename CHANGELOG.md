@@ -1,3 +1,10 @@
+# [70.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.13.1...v70.0.0) (2022-03-15)
+
+
+### Breaking Changes
+
+* button groups have will change to allow devs to stop the normal interactions. also, selected and deselect buttons are now async, meaning it's a major! ([966ab98](https://github.com/sprucelabsai/heartwood-view-controllers/commit/966ab98))
+
 ## [69.13.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.13.0...v69.13.1) (2022-03-15)
 
 # [69.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.12.9...v69.13.0) (2022-03-15)
