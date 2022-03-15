@@ -99,7 +99,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 	}
 
 	@test()
-	protected static delegatesCallsToButtonGroup() {
+	protected static async delegatesCallsToButtonGroup() {
 		const id = `${new Date().getTime()}`
 
 		const buttons = [
@@ -122,13 +122,13 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 			vc.getButtonGroupVc().getSelectedButtons()
 		)
 
-		vc.selectButton(id)
+		await vc.selectButton(id)
 		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [id])
 
-		vc.selectButtons(['second'])
+		await vc.selectButtons(['second'])
 		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), ['second'])
 
-		vc.deselectButton('second')
+		await vc.deselectButton('second')
 		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [])
 	}
 }

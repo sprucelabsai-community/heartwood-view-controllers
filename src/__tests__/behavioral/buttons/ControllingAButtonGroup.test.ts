@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactor from '../../../tests/utilities/interactor'
 import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 
 export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
@@ -56,8 +57,8 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 					label: 'third',
 				},
 				{
-					id: 'founth',
-					label: 'founth',
+					id: 'fourth',
+					label: 'fourth',
 				},
 			],
 		})
@@ -104,34 +105,34 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canSelectButtonAndMarkRestAsDeselected() {
-		this.singleSelectVc.selectButton('first')
+	protected static async canSelectButtonAndMarkRestAsDeselected() {
+		await this.singleSelectVc.selectButton('first')
 		const buttons = this.render(this.singleSelectVc)
 		this.assertFirstButtonSelected(buttons)
 	}
 
 	@test()
-	protected static selectingSameButtonMoreThanOnceHasNoNegativeEffect() {
-		this.singleSelectVc.selectButton('first')
-		this.singleSelectVc.selectButton('first')
-		this.singleSelectVc.selectButton('first')
+	protected static async selectingSameButtonMoreThanOnceHasNoNegativeEffect() {
+		await this.singleSelectVc.selectButton('first')
+		await this.singleSelectVc.selectButton('first')
+		await this.singleSelectVc.selectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 1)
 		let buttons = this.render(this.singleSelectVc)
 
 		this.assertFirstButtonSelected(buttons)
 
-		this.singleSelectVc.deselectButton('first')
+		await this.singleSelectVc.deselectButton('first')
 
 		buttons = this.render(this.singleSelectVc)
 		assert.doesNotInclude(buttons, { isSelected: true })
 	}
 
 	@test()
-	protected static deselectingSameButtonMoreThanOnceHasNoNegativeEffect() {
-		this.singleSelectVc.selectButton('first')
-		this.singleSelectVc.deselectButton('first')
-		this.singleSelectVc.deselectButton('first')
+	protected static async deselectingSameButtonMoreThanOnceHasNoNegativeEffect() {
+		await this.singleSelectVc.selectButton('first')
+		await this.singleSelectVc.deselectButton('first')
+		await this.singleSelectVc.deselectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 2)
 
@@ -140,9 +141,9 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canDeselectButton() {
-		this.singleSelectVc.selectButton('first')
-		this.singleSelectVc.deselectButton('first')
+	protected static async canDeselectButton() {
+		await this.singleSelectVc.selectButton('first')
+		await this.singleSelectVc.deselectButton('first')
 
 		const buttons = this.render(this.singleSelectVc)
 
@@ -159,17 +160,17 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static onSelectFiredWhenButtonSelected() {
-		this.singleSelectVc.selectButton('first')
+	protected static async onSelectFiredWhenButtonSelected() {
+		await this.singleSelectVc.selectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 1)
 		assert.isEqualDeep(this.onSelectInvocations[0], ['first'])
 	}
 
 	@test()
-	protected static canSelectMoreThanOneButton() {
-		this.multiSelectVc.selectButton('first')
-		this.multiSelectVc.selectButton('second')
+	protected static async canSelectMoreThanOneButton() {
+		await this.multiSelectVc.selectButton('first')
+		await this.multiSelectVc.selectButton('second')
 
 		const buttons = this.render(this.multiSelectVc)
 
@@ -181,11 +182,11 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static onSelectFiredWhenMultiButtonSelectedAndDeselected() {
-		this.multiSelectVc.selectButton('first')
-		this.multiSelectVc.selectButton('second')
-		this.multiSelectVc.deselectButton('first')
-		this.multiSelectVc.deselectButton('first')
+	protected static async onSelectFiredWhenMultiButtonSelectedAndDeselected() {
+		await this.multiSelectVc.selectButton('first')
+		await this.multiSelectVc.selectButton('second')
+		await this.multiSelectVc.deselectButton('first')
+		await this.multiSelectVc.deselectButton('first')
 
 		assert.isLength(this.onSelectInvocations, 3)
 
@@ -241,8 +242,8 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 					label: 'third',
 				},
 				{
-					id: 'founth',
-					label: 'founth',
+					id: 'fourth',
+					label: 'fourth',
 				},
 			],
 		})
@@ -252,6 +253,132 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 		const buttons = this.render(vc)
 		assert.doesInclude(buttons, { isSelected: true })
+	}
+
+	@test()
+	protected static async canCancelChangeToCancelChange() {
+		let wasHit = false
+		const vc = this.Factory().Controller('buttonGroup', {
+			onWillChangeSelection: () => {
+				return false
+			},
+			onSelectionChange: () => {
+				wasHit = true
+			},
+			buttons: [
+				{
+					id: 'first',
+					label: 'first',
+				},
+			],
+		})
+
+		await interactor.clickButtonInGroup(vc, 0)
+		assert.isEqualDeep(vc.getSelectedButtons(), [])
+
+		assert.isFalse(wasHit)
+	}
+
+	@test()
+	protected static async canCancelChangeDeselect() {
+		let wasHit = false
+		const vc = this.Factory().Controller('buttonGroup', {
+			selected: ['first'],
+			onWillChangeSelection: () => {
+				return false
+			},
+			buttons: [
+				{
+					id: 'first',
+					label: 'first',
+				},
+			],
+		})
+
+		await interactor.clickButtonInGroup(vc, 0)
+		assert.isEqualDeep(vc.getSelectedButtons(), ['first'])
+
+		assert.isFalse(wasHit)
+	}
+
+	@test()
+	protected static async willChangeReceivesExpectedPayload() {
+		let passedToWillChange: any
+		let wasSelectionChangeHit = false
+
+		const vc = this.Factory().Controller('buttonGroup', {
+			onWillChangeSelection: (selected, changed) => {
+				passedToWillChange = {
+					selected,
+					changed,
+				}
+			},
+			onSelectionChange: () => {
+				wasSelectionChangeHit = true
+			},
+			buttons: [
+				{
+					id: 'first',
+					label: 'first',
+				},
+				{
+					id: 'second',
+					label: 'second',
+				},
+				{
+					id: 'third',
+					label: 'third',
+				},
+			],
+		})
+
+		await interactor.clickButtonInGroup(vc, 0)
+		assert.isTruthy(wasSelectionChangeHit)
+		assert.isEqualDeep(passedToWillChange, {
+			selected: [],
+			changed: {
+				adding: 'first',
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 1)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['first'],
+			changed: {
+				adding: 'second',
+				removing: 'first',
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 2)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['second'],
+			changed: {
+				adding: 'third',
+				removing: 'second',
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 2)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['third'],
+			changed: {
+				removing: 'third',
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 1)
+		await interactor.clickButtonInGroup(vc, 1)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['second'],
+			changed: {
+				removing: 'second',
+			},
+		})
 	}
 
 	private static assertFirstButtonSelected(

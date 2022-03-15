@@ -19,16 +19,27 @@ export interface ButtonGroupChanges {
 	removed?: string
 }
 
+export interface ButtonGroupPendingChanges {
+	adding?: string
+	removing?: string
+}
+
 export type SelectionChangeHandler = (
 	selected: string[],
 	changed: ButtonGroupChanges
 ) => void | Promise<void>
+
+export type WillChangeSelectionHandler = (
+	selected: string[],
+	changes: ButtonGroupPendingChanges
+) => void | boolean | Promise<void | boolean>
 
 type HintClickHandler = (selected: string) => void
 
 export interface ButtonGroupViewControllerOptions {
 	buttons: Button[]
 	onSelectionChange?: SelectionChangeHandler
+	onWillChangeSelection?: WillChangeSelectionHandler
 	onClickHintIcon?: HintClickHandler
 	shouldAllowMultiSelect?: boolean
 	selected?: string[]
@@ -43,6 +54,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	private buttonControllers: { controller: ButtonController }[] = []
 	private hasBeenRendered: boolean[] = []
 	private clickHintHandler?: HintClickHandler
+	private willChangeSelectionHandler?: WillChangeSelectionHandler
 
 	public constructor(
 		options: ButtonGroupViewControllerOptions & ViewControllerOptions
@@ -51,6 +63,8 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		this.buttons = options.buttons
 		this.selectionChangeHandler = options.onSelectionChange
+		this.willChangeSelectionHandler = options.onWillChangeSelection
+
 		this.shouldAllowMultiSelect = options.shouldAllowMultiSelect ?? false
 		this.clickHintHandler = options.onClickHintIcon
 
@@ -69,15 +83,26 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		this.selectedButtons = ids
 	}
 
-	public selectButton(id: string) {
+	public async selectButton(id: string) {
 		if (this.isSelected(id)) {
 			return
 		}
 
 		const changes: ButtonGroupChanges = { added: id }
+		const pending: ButtonGroupPendingChanges = { adding: id }
 
 		if (!this.shouldAllowMultiSelect && this.selectedButtons[0]) {
 			changes.removed = this.selectedButtons[0]
+			pending.removing = this.selectedButtons[0]
+		}
+
+		const results = await this.willChangeSelectionHandler?.(
+			[...this.selectedButtons],
+			pending
+		)
+
+		if (results === false) {
+			return
 		}
 
 		if (!this.shouldAllowMultiSelect) {
@@ -85,12 +110,12 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 
 		this.selectedButtons.push(id)
-		this.didSelectHandler(changes)
+		await this.didSelectHandler(changes)
 	}
 
-	private didSelectHandler(changes: ButtonGroupChanges) {
+	private async didSelectHandler(changes: ButtonGroupChanges) {
 		this.rebuildAndTriggerRender()
-		void this.selectionChangeHandler?.([...this.selectedButtons], changes)
+		await this.selectionChangeHandler?.([...this.selectedButtons], changes)
 	}
 
 	private rebuildAndTriggerRender() {
@@ -105,12 +130,23 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		return this.selectedButtons.indexOf(id) > -1
 	}
 
-	public deselectButton(id: string) {
+	public async deselectButton(id: string) {
 		const match = this.selectedButtons.indexOf(id)
+
+		const results = await this.willChangeSelectionHandler?.(
+			[...this.selectedButtons],
+			{
+				removing: id,
+			}
+		)
+
+		if (results === false) {
+			return
+		}
 
 		if (match > -1) {
 			this.selectedButtons.splice(match, 1)
-			this.didSelectHandler({ removed: id })
+			await this.didSelectHandler({ removed: id })
 		}
 	}
 
@@ -145,7 +181,6 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 						} else {
 							this.deselectButton(button.id)
 						}
-						controller.triggerRender()
 					},
 					onClickHintIcon: () => {
 						this.handleClickHintIcon(button.id)
