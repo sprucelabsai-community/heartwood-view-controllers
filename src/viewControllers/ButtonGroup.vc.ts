@@ -14,7 +14,16 @@ type Button = Omit<
 }
 type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 
-type SelectionChangeHandler = (selected: string[]) => void | Promise<void>
+export interface ButtonGroupChanges {
+	added?: string
+	removed?: string
+}
+
+export type SelectionChangeHandler = (
+	selected: string[],
+	changed: ButtonGroupChanges
+) => void | Promise<void>
+
 type HintClickHandler = (selected: string) => void
 
 export interface ButtonGroupViewControllerOptions {
@@ -65,17 +74,23 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 			return
 		}
 
+		const changes: ButtonGroupChanges = { added: id }
+
+		if (!this.shouldAllowMultiSelect && this.selectedButtons[0]) {
+			changes.removed = this.selectedButtons[0]
+		}
+
 		if (!this.shouldAllowMultiSelect) {
 			this.selectedButtons = []
 		}
 
 		this.selectedButtons.push(id)
-		this.didSelectHandler()
+		this.didSelectHandler(changes)
 	}
 
-	private didSelectHandler() {
+	private didSelectHandler(changes: ButtonGroupChanges) {
 		this.rebuildAndTriggerRender()
-		void this.selectionChangeHandler?.([...this.selectedButtons])
+		void this.selectionChangeHandler?.([...this.selectedButtons], changes)
 	}
 
 	private rebuildAndTriggerRender() {
@@ -95,7 +110,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		if (match > -1) {
 			this.selectedButtons.splice(match, 1)
-			this.didSelectHandler()
+			this.didSelectHandler({ removed: id })
 		}
 	}
 

@@ -2,7 +2,11 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
-import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
+import ButtonGroupViewController, {
+	ButtonGroupChanges,
+	ButtonGroupViewControllerOptions,
+	SelectionChangeHandler,
+} from '../../../viewControllers/ButtonGroup.vc'
 
 export default class InteractingWithButtonGroupsTest extends AbstractViewControllerTest {
 	private static vc: ButtonGroupViewController
@@ -60,14 +64,104 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 		this.assertSelected(['not-found'])
 	}
 
-	@test()
-	protected static async throwsWithBadNumberIndex() {
-		await assert.doesThrowAsync(() => this.clickButton(10), `could not find`)
+	@test('throws with bad 1', 10)
+	@test('throws with bad 2', 5)
+	protected static async throwsWithBadNumberIndex(idx: number) {
+		await assert.doesThrowAsync(() => this.clickButton(idx), `could not find`)
+	}
+
+	@test('passes with good 1', 0)
+	@test('passes with good 2', 1)
+	protected static async passesWithGoodIndex(idx: number) {
+		await this.clickButton(idx)
 	}
 
 	@test()
-	protected static async passesWithGoodIndex() {
-		await this.clickButton(0)
+	protected static async passesExpectedChangesToChangeHandler() {
+		let passedChanged: any
+
+		this.VcWithChangeHandler(
+			(_: string[], changed: ButtonGroupChanges): void => {
+				passedChanged = changed
+			}
+		)
+
+		await this.clickButton('test')
+
+		assert.isEqualDeep(passedChanged, { added: 'test' })
+
+		await this.clickButton('test')
+
+		assert.isEqualDeep(passedChanged, { removed: 'test' })
+
+		await this.clickButton('second')
+
+		assert.isEqualDeep(passedChanged, { added: 'second' })
+
+		await this.clickButton('second')
+
+		assert.isEqualDeep(passedChanged, { removed: 'second' })
+	}
+
+	@test()
+	protected static async passesDeselectedWithSelected() {
+		let passedChanged: any
+
+		this.VcWithChangeHandler(
+			(_: string[], changed: ButtonGroupChanges): void => {
+				passedChanged = changed
+			}
+		)
+
+		await this.clickButton('test')
+		await this.clickButton('second')
+
+		assert.isEqualDeep(passedChanged, { added: 'second', removed: 'test' })
+
+		await this.clickButton('third')
+
+		assert.isEqualDeep(passedChanged, { added: 'third', removed: 'second' })
+	}
+
+	@test()
+	protected static async passesExpectedChangesWithMultiSelect() {
+		let passedChanged: any
+
+		this.VcWithChangeHandler(
+			(_: string[], changed: ButtonGroupChanges): void => {
+				passedChanged = changed
+			},
+			true
+		)
+
+		await this.clickButton('test')
+
+		assert.isEqualDeep(passedChanged, { added: 'test' })
+
+		await this.clickButton('second')
+
+		assert.isEqualDeep(passedChanged, { added: 'second' })
+	}
+
+	private static VcWithChangeHandler(
+		changeHandler: SelectionChangeHandler,
+		isMultiSelect = false
+	) {
+		this.vc = this.Vc({
+			onSelectionChange: changeHandler,
+			shouldAllowMultiSelect: isMultiSelect,
+			buttons: [
+				{
+					id: 'test',
+				},
+				{
+					id: 'second',
+				},
+				{
+					id: 'third',
+				},
+			],
+		})
 	}
 
 	private static assertSelected(expected: string[]) {
@@ -80,7 +174,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 	}
 
 	private static With3Buttons() {
-		return this.Controller('buttonGroup', {
+		return this.Vc({
 			buttons: [
 				{ id: 'not-found' },
 				{
@@ -91,5 +185,9 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 				},
 			],
 		})
+	}
+
+	private static Vc(options: ButtonGroupViewControllerOptions) {
+		return this.Controller('buttonGroup', { ...options })
 	}
 }
