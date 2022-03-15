@@ -27,16 +27,16 @@ export default class ButtonBarViewController extends AbstractViewController<Butt
 		return this.buttonGroupVc.getSelectedButtons()
 	}
 
-	public selectButton(id: string) {
-		this.buttonGroupVc.selectButton(id)
+	public async selectButton(id: string) {
+		await this.buttonGroupVc.selectButton(id)
 	}
 
 	public selectButtons(ids: string[]) {
 		this.buttonGroupVc.selectButtons(ids)
 	}
 
-	public deselectButton(id: string) {
-		this.buttonGroupVc.deselectButton(id)
+	public async deselectButton(id: string) {
+		await this.buttonGroupVc.deselectButton(id)
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar {
