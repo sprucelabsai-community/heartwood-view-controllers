@@ -1,3 +1,10 @@
+# [69.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.12.9...v69.13.0) (2022-03-15)
+
+
+### Features
+
+* button group now passes added/removed buttons to change handler to make updates easier! ([bb9a30b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/bb9a30b))
+
 ## [69.12.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.12.8...v69.12.9) (2022-03-15)
 
 ## [69.12.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v69.12.7...v69.12.8) (2022-03-15)
