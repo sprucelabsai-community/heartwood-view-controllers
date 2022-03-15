@@ -6,6 +6,7 @@ export { default as AbstractSkillViewController } from './skillViewControllers/A
 export { default as AbstractViewController } from './viewControllers/Abstract.vc'
 export * from './viewControllers/BigForm.vc'
 export { default as ButtonGroupViewController } from './viewControllers/ButtonGroup.vc'
+export * from './viewControllers/ButtonGroup.vc'
 export { default as CardViewControllerImpl } from './viewControllers/card/Card.vc'
 export { default as ConfirmViewController } from './viewControllers/Confirm.vc'
 export { default as DialogViewController } from './viewControllers/Dialog.vc'
