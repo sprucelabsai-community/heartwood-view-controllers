@@ -27,7 +27,7 @@ const textSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema 
 	                label: 'Align',
 	                type: 'select',
 	                defaultValue: "left",
-	                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"}],}
+	                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"},{"value":"center","label":"Center"}],}
 	            },
 	    }
 }

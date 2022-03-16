@@ -4739,7 +4739,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Html. */
 				'html'?: string| undefined | null
 				/** Align. */
-				'align'?: ("left" | "right")| undefined | null
+				'align'?: ("left" | "right" | "center")| undefined | null
 		}
 
 		interface TextSchema extends SpruceSchema.Schema {
@@ -4766,7 +4766,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Align',
 			                type: 'select',
 			                defaultValue: "left",
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"}],}
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"},{"value":"center","label":"Center"}],}
 			            },
 			    }
 		}

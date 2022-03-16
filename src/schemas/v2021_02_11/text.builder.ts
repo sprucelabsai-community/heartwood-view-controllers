@@ -27,6 +27,10 @@ export default buildSchema({
 						value: 'right',
 						label: 'Right',
 					},
+					{
+						value: 'center',
+						label: 'Center',
+					},
 				],
 			},
 		},
