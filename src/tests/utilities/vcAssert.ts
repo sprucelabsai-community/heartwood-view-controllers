@@ -721,6 +721,30 @@ const vcAssert = {
 		return {} as any
 	},
 
+	assertRowRendersCell(
+		listVc: ListViewController,
+		row: string | number,
+		cell: string | number
+	) {
+		assertOptions({ listVc, row, cell }, ['listVc', 'row', 'cell'])
+
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		let rowCell
+
+		if (typeof cell === 'string') {
+			rowCell = model.cells.find((c) => c.id === cell)
+		} else {
+			rowCell = model.cells[cell]
+		}
+
+		assert.isTruthy(
+			rowCell,
+			`Could not find Cell '${cell}' in Row '${model.id}'`
+		)
+	},
+
 	assertRowRendersButton(
 		listVc: ListViewController,
 		row: string | number,
