@@ -1,3 +1,10 @@
+# [70.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.3.0...v70.4.0) (2022-03-16)
+
+
+### Features
+
+* adds assertRowDoesNotRenderCell ([67144b2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/67144b2))
+
 # [70.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.2.0...v70.3.0) (2022-03-16)
 
 
