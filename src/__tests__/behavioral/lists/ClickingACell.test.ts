@@ -1,11 +1,138 @@
 import { test, assert } from '@sprucelabs/test'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
+import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
 export default class ClickingACellTest extends AbstractViewControllerTest {
 	@test()
-	protected static async canCreateClickingACell() {
+	protected static async hasClickCell() {
+		assert.isFunction(interactor.clickCell)
+	}
+
+	@test()
+	protected static async cantClickACellWithoutOptions() {
 		//@ts-ignore
-		await assert.doesThrowAsync(() => interactor.clickCell())
+		const err = await assert.doesThrowAsync(() => interactor.clickCell())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['listVc', 'rowIdxOrId', 'cellIdxOrId'],
+		})
+	}
+
+	@test()
+	protected static async throwsWhenClickingCellWithoutOnClick() {
+		const vc = this.ListVc({})
+
+		const err = await assert.doesThrowAsync(() =>
+			interactor.clickCell(vc, 0, 'second')
+		)
+		assert.doesInclude(err.message, 'is missing an onClick')
+	}
+
+	@test('can click cell in row 0 by name first', 0, 'first')
+	@test('can click cell in row 0 by name second', 0, 'second')
+	@test('can click cell in row 1 by name square', 1, 'square')
+	@test('can click cell in row panda by name square', 'panda', 'square')
+	protected static async canClickCellInRowById(
+		rowIdOrIdx: string | number,
+		cellId: string
+	) {
+		let wasHit = 'not hit'
+		const vc = this.ListVc({
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							id: 'first',
+							onClick: () => {
+								wasHit = 'first'
+							},
+						},
+						{
+							id: 'second',
+							onClick: () => {
+								wasHit = 'second'
+							},
+						},
+					],
+				},
+				{
+					id: 'panda',
+					cells: [
+						{
+							id: 'square',
+							onClick: () => {
+								wasHit = 'square'
+							},
+						},
+					],
+				},
+			],
+		})
+
+		assert.isEqual(wasHit, 'not hit')
+		await interactor.clickCell(vc, rowIdOrIdx, cellId)
+		assert.isEqual(wasHit, cellId)
+	}
+
+	@test()
+	protected static async canClickCellInRowByIdx() {
+		let wasHit = false
+		const vc = this.ListVc({
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							id: 'first',
+							onClick: () => {
+								wasHit = true
+							},
+						},
+						{
+							id: 'second',
+						},
+					],
+				},
+			],
+		})
+
+		assert.isFalse(wasHit)
+		await interactor.clickCell(vc, 0, 0)
+		assert.isTrue(wasHit)
+	}
+
+	@test('throws when clicking cell with bad id', 'fifth')
+	@test('throws when clicking cell with bad idx', '30')
+	protected static async throwsWhenClickingCellWithBadCellIdxOrId(
+		cellIdxOrId: number | string
+	) {
+		const vc = this.ListVc({})
+
+		const err = await assert.doesThrowAsync(() =>
+			interactor.clickCell(vc, 0, cellIdxOrId)
+		)
+		assert.doesInclude(err.message, 'Could not find Cell')
+	}
+
+	protected static ListVc(options?: Partial<ListViewControllerOptions>) {
+		return this.Controller('list', {
+			rows: [
+				{
+					id: 'first',
+					cells: [
+						{
+							id: 'first',
+							onClick: () => {},
+						},
+						{
+							id: 'second',
+						},
+					],
+				},
+			],
+			...options,
+		})
 	}
 }

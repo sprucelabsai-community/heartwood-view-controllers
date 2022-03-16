@@ -387,6 +387,41 @@ const interactor = {
 		await model.onClick?.()
 	},
 
+	async clickCell(
+		listVc: ListViewController,
+		rowIdxOrId: number | string,
+		cellIdxOrId: number | string
+	) {
+		assertOptions({ listVc, rowIdxOrId, cellIdxOrId }, [
+			'listVc',
+			'rowIdxOrId',
+			'cellIdxOrId',
+		])
+
+		const rowVc = listVc.getRowVc(rowIdxOrId)
+		const model = renderUtil.render(rowVc)
+
+		let rowCell
+
+		if (typeof cellIdxOrId === 'string') {
+			rowCell = model.cells.find((c) => c.id === cellIdxOrId)
+		} else {
+			rowCell = model.cells[cellIdxOrId]
+		}
+
+		assert.isTruthy(
+			rowCell,
+			`Could not find Cell '${cellIdxOrId}' in Row '${model.id}'`
+		)
+
+		assert.isTruthy(
+			rowCell?.onClick,
+			`Cell '${cellIdxOrId}' in Row '${model.id}' is missing an onClick!`
+		)
+
+		await rowCell.onClick?.()
+	},
+
 	async clickCalendarEvent(
 		vc: ViewController<Calendar>,
 		eventId: string,
