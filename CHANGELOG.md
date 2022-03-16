@@ -1,3 +1,10 @@
+# [70.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.4.0...v70.5.0) (2022-03-16)
+
+
+### Features
+
+* assertRowRendersCheckbox can optionally check name ([17081e2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/17081e2))
+
 # [70.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.3.0...v70.4.0) (2022-03-16)
 
 
