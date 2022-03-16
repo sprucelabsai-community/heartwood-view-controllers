@@ -38,6 +38,12 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 			[this.rowWithCheckboxInFirstCell, this.rowWithoutCheckbox],
 			1
 		)
+		this.assertThrows(
+			[this.rowWithCheckboxInFirstCell, this.rowWithoutCheckbox],
+			0,
+			'panda',
+			'I could not find a checkbox by name'
+		)
 	}
 
 	@test()
@@ -46,23 +52,39 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 		this.assertFound([this.rowWithCheckboxInSecondCell], 0)
 	}
 
+	@test()
+	protected static passesWhenCheckboxHasMatchingName() {
+		this.assertFound([this.rowWithCheckboxInFirstCell], 0, 'test')
+		this.assertFound([this.rowWithCheckboxInSecondCell], 0, 'test')
+	}
+
 	private static assertThrows(
 		rows: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[],
-		row: number
+		row: number,
+		name?: string,
+		expectedError?: string
 	) {
 		const listVc = this.Controller('list', {
 			rows,
 		})
-		assert.doesThrow(() => vcAssert.assertRowRendersCheckBox(listVc, row))
+
+		const err = assert.doesThrow(() =>
+			vcAssert.assertRowRendersCheckBox(listVc, row, name)
+		)
+
+		if (expectedError) {
+			assert.doesInclude(err.message, expectedError)
+		}
 	}
 
 	private static assertFound(
 		rows: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[],
-		row: number
+		row: number,
+		name?: string
 	) {
 		const listVc = this.Controller('list', {
 			rows,
 		})
-		vcAssert.assertRowRendersCheckBox(listVc, row)
+		vcAssert.assertRowRendersCheckBox(listVc, row, name)
 	}
 }
