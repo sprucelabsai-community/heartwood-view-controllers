@@ -3837,6 +3837,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controller'?: (HeartwoodTypes.ListCellViewController)| undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any)| undefined | null
 				/** Subtext. */
 				'subText'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Image url. */
@@ -3882,6 +3884,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Text',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Subtext. */
 			            'subText': {

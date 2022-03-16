@@ -31,6 +31,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                type: 'schema',
 	                options: {schema: textSchema_v2021_02_11,}
 	            },
+	            /** Click handler. */
+	            'onClick': {
+	                label: 'Click handler',
+	                type: 'raw',
+	                options: {valueType: `() => Promise<any> | any`,}
+	            },
 	            /** Subtext. */
 	            'subText': {
 	                label: 'Subtext',

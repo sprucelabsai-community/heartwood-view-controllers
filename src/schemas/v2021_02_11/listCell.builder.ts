@@ -33,6 +33,13 @@ export default buildSchema({
 				schema: textBuilder,
 			},
 		},
+		onClick: {
+			type: 'raw',
+			label: 'Click handler',
+			options: {
+				valueType: '() => Promise<any> | any',
+			},
+		},
 		subText: {
 			type: 'schema',
 			label: 'Subtext',
