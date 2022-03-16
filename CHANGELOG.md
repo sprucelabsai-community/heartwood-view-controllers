@@ -1,3 +1,10 @@
+# [70.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.1.0...v70.2.0) (2022-03-16)
+
+
+### Features
+
+* devs can now click list row cells using interactor ([23eed3e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/23eed3e))
+
 # [70.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.0.3...v70.1.0) (2022-03-16)
 
 
