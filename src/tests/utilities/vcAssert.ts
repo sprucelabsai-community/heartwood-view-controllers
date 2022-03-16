@@ -745,6 +745,21 @@ const vcAssert = {
 		)
 	},
 
+	assertRowDoesNotRenderCell(
+		listVc: ListViewController,
+		row: string | number,
+		cell: string | number
+	) {
+		try {
+			this.assertRowRendersCell(listVc, row, cell)
+		} catch {
+			return
+		}
+		assert.fail(
+			`Your list renders a cell with the id of '${cell}' in row '${row}' and it should not!`
+		)
+	},
+
 	assertRowRendersButton(
 		listVc: ListViewController,
 		row: string | number,
