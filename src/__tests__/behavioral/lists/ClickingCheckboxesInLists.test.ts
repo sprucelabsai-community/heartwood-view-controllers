@@ -73,6 +73,38 @@ export default class ClickingCheckboxesInListsTest extends AbstractViewControlle
 		assert.isFalse(listVc.getValues()[0].another)
 	}
 
+	@test()
+	protected static async throwsWhenCantFindByName() {
+		const listVc = this.ListVc([
+			{
+				id: 'another',
+				cells: [
+					{
+						checkboxInput: {
+							name: 'another',
+						},
+					},
+					{
+						checkboxInput: {
+							name: 'last',
+						},
+					},
+				],
+			},
+		])
+
+		await assert.doesThrowAsync(() =>
+			interactor.clickCheckboxInRow(listVc, 0, 'test')
+		)
+
+		await assert.doesThrowAsync(() =>
+			interactor.clickCheckboxInRow(listVc, 0, 'what')
+		)
+
+		await interactor.clickCheckboxInRow(listVc, 0, 'another')
+		await interactor.clickCheckboxInRow(listVc, 0, 'last')
+	}
+
 	private static get checkboxCell() {
 		return {
 			checkboxInput: {
