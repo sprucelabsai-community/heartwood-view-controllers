@@ -1,3 +1,10 @@
+# [70.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.0.3...v70.1.0) (2022-03-16)
+
+
+### Features
+
+* list cells can have ids ([33a307b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/33a307b))
+
 ## [70.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.0.2...v70.0.3) (2022-03-16)
 
 ## [70.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.0.1...v70.0.2) (2022-03-16)
