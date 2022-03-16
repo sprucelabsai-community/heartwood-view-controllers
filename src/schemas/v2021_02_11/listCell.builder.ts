@@ -26,6 +26,9 @@ export default buildSchema({
 				valueType: 'HeartwoodTypes.ListCellViewController',
 			},
 		},
+		id: {
+			type: 'id',
+		},
 		text: {
 			type: 'schema',
 			label: 'Text',

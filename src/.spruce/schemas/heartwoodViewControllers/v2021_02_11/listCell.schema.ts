@@ -25,6 +25,11 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ListCellViewController`,}
 	            },
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Text. */
 	            'text': {
 	                label: 'Text',

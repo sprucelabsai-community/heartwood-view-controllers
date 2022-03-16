@@ -3835,6 +3835,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListCellViewController)| undefined | null
+				
+				'id'?: string| undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Click handler. */
@@ -3878,6 +3880,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Controller',
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.ListCellViewController`,}
+			            },
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
 			            },
 			            /** Text. */
 			            'text': {
