@@ -1,3 +1,10 @@
+# [70.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.2.0...v70.3.0) (2022-03-16)
+
+
+### Features
+
+* devs can now assert that a list row cell exists by idx or id ([4944a2a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4944a2a))
+
 # [70.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.1.0...v70.2.0) (2022-03-16)
 
 
