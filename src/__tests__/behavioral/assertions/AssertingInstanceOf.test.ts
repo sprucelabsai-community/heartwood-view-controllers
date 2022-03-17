@@ -128,6 +128,14 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 	}
 
 	@test()
+	protected static throwsWhenPassedNull() {
+		const err = assert.doesThrow(() =>
+			vcAssert.assertControllerInstanceOf(null, FormViewController)
+		)
+		assert.doesInclude(err.message, 'Expected a vc')
+	}
+
+	@test()
 	protected static knowsWhenPassedCorrectClassReference() {
 		const vc = this.Controller('card', {})
 		vcAssert.assertControllerInstanceOf(vc, CardViewController)

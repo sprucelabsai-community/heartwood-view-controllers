@@ -1673,9 +1673,11 @@ const vcAssert = {
 	},
 
 	assertControllerInstanceOf<Controller extends ViewController<any>>(
-		vc: ViewController<any>,
+		vc: ViewController<any> | null,
 		Class: new (...arg: any[]) => Controller
 	): Controller {
+		assert.isTruthy(vc, 'Expected a vc but recived null!')
+
 		const match = isVcInstanceOf(vc, Class)
 
 		assert.isTruthy(
