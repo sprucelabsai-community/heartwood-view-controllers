@@ -1,3 +1,10 @@
+# [70.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.5.0...v70.6.0) (2022-03-16)
+
+
+### Features
+
+* can click cells in rows by name ([7fb81b5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7fb81b5))
+
 # [70.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.4.0...v70.5.0) (2022-03-16)
 
 
