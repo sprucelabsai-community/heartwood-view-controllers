@@ -75,7 +75,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			})
 		}
 
-		if (row.id && this.doesIdExist(row.id)) {
+		if (row.id && this.doesRowExist(row.id)) {
 			throw new SpruceError({
 				code: 'DUPLICATE_ROW_ID',
 				rowId: row.id,
@@ -252,10 +252,17 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 	}
 
-	public doesIdExist(id: string) {
+	public doesRowExist(id: string) {
 		const model = this.model
 		const match = this.doesRowIdExistInModel(model, id)
 		return !!match
+	}
+
+	/**
+	 * @deprecated doesIdExist() -> doesRowExist
+	 */
+	public doesIdExist(id: string) {
+		return this.doesRowExist()
 	}
 
 	private doesRowIdExistInModel(model: List, id: string) {
