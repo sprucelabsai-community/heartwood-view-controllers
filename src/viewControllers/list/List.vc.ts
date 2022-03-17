@@ -262,7 +262,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	 * @deprecated doesIdExist() -> doesRowExist
 	 */
 	public doesIdExist(id: string) {
-		return this.doesRowExist()
+		return this.doesRowExist(id)
 	}
 
 	private doesRowIdExistInModel(model: List, id: string) {
