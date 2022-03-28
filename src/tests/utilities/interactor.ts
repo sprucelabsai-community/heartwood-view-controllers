@@ -393,7 +393,9 @@ const interactor = {
 
 		assert.isTruthy(model.onClick, `Row '${model.id}' is missing an onClick!`)
 
-		await model.onClick?.()
+		if (model.isEnabled !== false) {
+			await model.onClick?.()
+		}
 	},
 
 	async clickCell(
