@@ -19,6 +19,15 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Full screen',
 		},
+		title: {
+			type: 'text',
+		},
+		subtitle: {
+			type: 'text',
+		},
+		description: {
+			type: 'text',
+		},
 		layouts: {
 			type: 'schema',
 			label: 'Layout',

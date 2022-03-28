@@ -1074,6 +1074,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldCenterVertically'?: boolean| undefined | null
 				/** Full screen. */
 				'isFullScreen'?: boolean| undefined | null
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+				
+				'description'?: string| undefined | null
 				/** Layout. */
 				'layouts': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]
 		}
@@ -1102,6 +1108,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'isFullScreen': {
 			                label: 'Full screen',
 			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'description': {
+			                type: 'text',
 			                options: undefined
 			            },
 			            /** Layout. */

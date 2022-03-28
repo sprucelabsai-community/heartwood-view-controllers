@@ -29,6 +29,21 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'title': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'subtitle': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'description': {
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Layout. */
 	            'layouts': {
 	                label: 'Layout',
