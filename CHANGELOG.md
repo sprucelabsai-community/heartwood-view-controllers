@@ -1,3 +1,10 @@
+# [70.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.6.27...v70.7.0) (2022-03-28)
+
+
+### Features
+
+* title, subtitle, description fileds on skill view ([cd967f1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cd967f1))
+
 ## [70.6.27](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.6.26...v70.6.27) (2022-03-26)
 
 ## [70.6.26](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.6.25...v70.6.26) (2022-03-26)
