@@ -10,9 +10,11 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
 	@test('does not find with miss-matched id', [{ id: 'testing' }], 'test')
 	protected static throwsIfNoSection(sections: Section[], lookupId: string) {
 		assert.doesThrow(
-			() => this.assertFindsSection(sections, lookupId),
+			() => this.assertRendersSection(sections, lookupId),
 			'find a section'
 		)
+
+		this.assertDoesNotRenderSection(sections, lookupId)
 	}
 
 	@test(
@@ -44,11 +46,22 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
 		'testing'
 	)
 	protected static passesInFirstSection(sections: Section[], lookupId: string) {
-		this.assertFindsSection(sections, lookupId)
+		this.assertRendersSection(sections, lookupId)
+		assert.doesThrow(
+			() => this.assertDoesNotRenderSection(sections, lookupId),
+			'find a section'
+		)
 	}
 
-	private static assertFindsSection(sections: Section[], sectionId: string) {
+	private static assertRendersSection(sections: Section[], sectionId: string) {
 		vcAssert.assertCardRendersSection(this.CardVc(sections), sectionId)
+	}
+
+	private static assertDoesNotRenderSection(
+		sections: Section[],
+		sectionId: string
+	) {
+		vcAssert.assertCardDoesNotRendersSection(this.CardVc(sections), sectionId)
 	}
 
 	private static CardVc(sections?: Section[]) {

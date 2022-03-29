@@ -14,6 +14,11 @@ const formSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form
 	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	    fields: {
 	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
+	            /** . */
 	            'className': {
 	                type: 'text',
 	                isPrivate: true,

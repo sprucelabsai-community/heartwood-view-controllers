@@ -1888,6 +1888,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
+				'id'?: string| undefined | null
+				
 				'className'?: string| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
@@ -1912,6 +1914,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'className': {
 			                type: 'text',
@@ -2775,6 +2782,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
+				'id'?: string| undefined | null
+				
 				'className'?: string| undefined | null
 				/** Title. */
 				'title'?: string| undefined | null
@@ -2797,6 +2806,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'className': {
 			                type: 'text',

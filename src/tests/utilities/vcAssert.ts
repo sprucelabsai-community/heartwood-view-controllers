@@ -448,6 +448,19 @@ const vcAssert = {
 		checkForCardSection(vc, sectionIdOrIdx)
 	},
 
+	assertCardDoesNotRendersSection(
+		vc: ViewController<Card>,
+		sectionIdOrIdx: string | number
+	) {
+		try {
+			this.assertCardRendersSection(vc, sectionIdOrIdx)
+		} catch {
+			return
+		}
+
+		assert.fail(`I could not find a section '${sectionIdOrIdx}'`)
+	},
+
 	assertCardSectionRendersButton(
 		vc: ViewController<Card>,
 		sectionIdOrIdx: string | number,

@@ -12,6 +12,9 @@ export default buildSchema({
 	importsWhenLocal: buildLocalTypesImport(),
 	importsWhenRemote: buildRemoteTypesImport(),
 	fields: {
+		id: {
+			type: 'id',
+		},
 		className: {
 			type: 'text',
 			isPrivate: true,
