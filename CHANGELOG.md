@@ -1,3 +1,10 @@
+# [70.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.7.6...v70.8.0) (2022-03-29)
+
+
+### Features
+
+* can check if card does NOT render section. making testing even FASTER! ([8a973d7](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8a973d7))
+
 ## [70.7.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.7.5...v70.7.6) (2022-03-29)
 
 ## [70.7.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.7.4...v70.7.5) (2022-03-29)
