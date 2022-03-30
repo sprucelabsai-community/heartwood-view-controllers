@@ -1,3 +1,10 @@
+# [70.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.8.3...v70.9.0) (2022-03-30)
+
+
+### Features
+
+* devs can now directly set the title and subtitle on their skill views to make the heartwood experience even more INTUITIVE! ([2e4cd65](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2e4cd65))
+
 ## [70.8.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.8.2...v70.8.3) (2022-03-30)
 
 ## [70.8.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.8.1...v70.8.2) (2022-03-30)
