@@ -458,7 +458,9 @@ const vcAssert = {
 			return
 		}
 
-		assert.fail(`I could not find a section '${sectionIdOrIdx}'`)
+		assert.fail(
+			`I found the section '${sectionIdOrIdx}' in your card and I should not have!`
+		)
 	},
 
 	assertCardSectionRendersButton(
