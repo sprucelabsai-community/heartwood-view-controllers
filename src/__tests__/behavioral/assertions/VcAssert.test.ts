@@ -529,13 +529,13 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			}),
 		}
 	)
-	@test('knows if list is renderd', {
+	@test('knows if list is rendered', {
 		VcClass: ListViewController,
 		bodyGenerator: () => ({
 			list: VcAssertTest.renderEmptyList(),
 		}),
 	})
-	@test('knows if list is not renderd', {
+	@test('knows if list is not rendered', {
 		VcClass: ListViewController,
 		layoutIdx: 0,
 		cardIdx: 0,
