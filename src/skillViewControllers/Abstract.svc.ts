@@ -27,7 +27,7 @@ export default abstract class AbstractSkillViewController<
 	public async focus(): Promise<void> {}
 	public async blur(): Promise<void> {}
 
-	protected setTitle(title: string | null) {
+	protected setTitle(title: string | null | undefined) {
 		this.title = title ?? undefined
 		this.triggerRender()
 	}
@@ -36,7 +36,7 @@ export default abstract class AbstractSkillViewController<
 		return this.title
 	}
 
-	protected setSubtitle(subtitle: string | null) {
+	protected setSubtitle(subtitle: string | null | undefined) {
 		this.subtitle = subtitle ?? undefined
 		this.triggerRender()
 	}
