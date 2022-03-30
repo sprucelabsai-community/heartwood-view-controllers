@@ -16,6 +16,8 @@ export default abstract class AbstractSkillViewController<
 	implements SkillViewController
 {
 	public static id: string
+	protected title?: string
+	protected subtitle?: string
 
 	public async load(
 		// eslint-disable-next-line no-unused-vars
@@ -24,6 +26,24 @@ export default abstract class AbstractSkillViewController<
 
 	public async focus(): Promise<void> {}
 	public async blur(): Promise<void> {}
+
+	protected setTitle(title: string | null) {
+		this.title = title ?? undefined
+		this.triggerRender()
+	}
+
+	public getTitle() {
+		return this.title
+	}
+
+	protected setSubtitle(subtitle: string | null) {
+		this.subtitle = subtitle ?? undefined
+		this.triggerRender()
+	}
+
+	public getSubtitle() {
+		return this.subtitle
+	}
 
 	public renderToolBelt(): ToolBelt | null {
 		return null
