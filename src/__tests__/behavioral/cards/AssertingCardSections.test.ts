@@ -49,7 +49,7 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
 		this.assertRendersSection(sections, lookupId)
 		assert.doesThrow(
 			() => this.assertDoesNotRenderSection(sections, lookupId),
-			'find a section'
+			'the section'
 		)
 	}
 
