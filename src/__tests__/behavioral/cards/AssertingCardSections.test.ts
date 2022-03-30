@@ -61,7 +61,7 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
 		sections: Section[],
 		sectionId: string
 	) {
-		vcAssert.assertCardDoesNotRendersSection(this.CardVc(sections), sectionId)
+		vcAssert.assertCardDoesNotRenderSection(this.CardVc(sections), sectionId)
 	}
 
 	private static CardVc(sections?: Section[]) {

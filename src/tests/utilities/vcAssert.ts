@@ -448,7 +448,7 @@ const vcAssert = {
 		checkForCardSection(vc, sectionIdOrIdx)
 	},
 
-	assertCardDoesNotRendersSection(
+	assertCardDoesNotRenderSection(
 		vc: ViewController<Card>,
 		sectionIdOrIdx: string | number
 	) {
