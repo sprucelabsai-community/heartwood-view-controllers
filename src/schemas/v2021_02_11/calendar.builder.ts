@@ -194,5 +194,33 @@ export default buildSchema({
 					'(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>',
 			},
 		},
+		shifts: {
+			type: 'schema',
+			isArray: true,
+			minArrayLength: 0,
+			options: {
+				schema: buildSchema({
+					id: 'calendarShift',
+					fields: {
+						startDateTimeMs: {
+							type: 'date',
+							isRequired: true,
+						},
+						endDateTimeMs: {
+							type: 'date',
+							isRequired: true,
+						},
+						id: {
+							type: 'text',
+							isRequired: true,
+						},
+						personId: {
+							type: 'text',
+							isRequired: true,
+						},
+					},
+				}),
+			},
+		},
 	},
 })

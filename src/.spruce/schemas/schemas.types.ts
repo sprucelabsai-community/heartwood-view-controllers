@@ -4141,6 +4141,60 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface CalendarShift {
+			
+				
+				'startDateTimeMs': SpruceSchema.DateFieldValue
+				
+				'endDateTimeMs': SpruceSchema.DateFieldValue
+				
+				'id': string
+				
+				'personId': string
+		}
+
+		interface CalendarShiftSchema extends SpruceSchema.Schema {
+			id: 'calendarShift',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'startDateTimeMs': {
+			                type: 'date',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'endDateTimeMs': {
+			                type: 'date',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'id': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'personId': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		type CalendarShiftEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CalendarSelectedDate {
 			
 				
@@ -4506,6 +4560,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
 				
 				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				
+				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -4638,6 +4694,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onSelectEvent': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'shifts': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema,}
 			            },
 			    }
 		}

@@ -5,6 +5,7 @@ import calendarPersonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewContr
 import calendarTimeSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarTime.schema'
 import calendarEventSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEvent.schema'
 import calendarSelectedDateSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarSelectedDate.schema'
+import calendarShiftSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarShift.schema'
 
 const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema  = {
 	id: 'calendar',
@@ -136,6 +137,13 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'onSelectEvent': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'shifts': {
+	                type: 'schema',
+	                isArray: true,
+	                minArrayLength: 0,
+	                options: {schema: calendarShiftSchema_v2021_02_11,}
 	            },
 	    }
 }

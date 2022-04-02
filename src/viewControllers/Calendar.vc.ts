@@ -108,6 +108,13 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.shouldEnableAnimations ?? true
 	}
 
+	public setShifts(
+		shifts: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]
+	) {
+		this.model.shifts = [...shifts]
+		this.triggerRender()
+	}
+
 	public enableAnimation() {
 		const original = this.model.shouldEnableAnimations
 		this.model.shouldEnableAnimations = true
@@ -135,6 +142,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.model.timezoneOffsetMs = offsetMs
 		this.triggerRender()
+	}
+
+	public getShifts() {
+		return this.model.shifts
 	}
 
 	public selectEvent(id: string) {
