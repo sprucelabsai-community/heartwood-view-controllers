@@ -1,3 +1,10 @@
+# [70.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.9.7...v70.10.0) (2022-04-02)
+
+
+### Features
+
+* calendar now supports shifts! ([9226c89](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9226c89))
+
 ## [70.9.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.9.6...v70.9.7) (2022-04-02)
 
 ## [70.9.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.9.5...v70.9.6) (2022-04-01)
