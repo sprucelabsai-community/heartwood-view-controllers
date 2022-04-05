@@ -15,6 +15,7 @@ export { default as ListRowViewController } from './viewControllers/list/ListRow
 export { default as ListCellViewController } from './viewControllers/list/ListCell.vc'
 export { default as FormViewControllerImpl } from './viewControllers/Form.vc'
 export { default as ToolBeltViewController } from './viewControllers/ToolBelt.vc'
+export * from './viewControllers/ToolBelt.vc'
 export * from './viewControllers/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
