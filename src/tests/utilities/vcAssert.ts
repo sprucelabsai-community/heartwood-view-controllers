@@ -33,7 +33,9 @@ import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
 import StatsViewController from '../../viewControllers/reporting/Stats.vc'
 import SwipeCardViewController from '../../viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController from '../../viewControllers/TalkingSprucebot.vc'
-import ToolBeltViewController from '../../viewControllers/ToolBelt.vc'
+import ToolBeltViewController, {
+	OpenToolBeltOptions,
+} from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
 import formTestUtil from './formTest.utility'
@@ -1182,14 +1184,22 @@ const vcAssert = {
 		)
 	},
 
-	async assertActionForcesOpenToolBelt(
+	async assertActionOpensToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		action: () => Promise<any> | any
+		action: () => Promise<any> | any,
+		options?: OpenToolBeltOptions
 	) {
 		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
 		let wasForced = false
 
-		toolBeltVc.forceOpen = () => {
+		toolBeltVc.open = (actualOptions) => {
+			if (options) {
+				assert.isEqualDeep(
+					actualOptions,
+					options,
+					`The options passed to 'toolBeltSvc.show(...) did not match what I expected.' `
+				)
+			}
 			wasForced = true
 		}
 
@@ -1197,23 +1207,21 @@ const vcAssert = {
 
 		assert.isTrue(
 			wasForced,
-			`I expected you to call 'toolBeltVc.forceOpen()', but you didn't!`
+			`I expected you to call 'toolBeltVc.open()', but you didn't!`
 		)
 	},
 
-	async assertActionDoesNotForceOpenToolBelt(
+	async assertActionDoesNotOpenToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		action: () => Promise<any> | any
 	) {
 		try {
-			await this.assertActionForcesOpenToolBelt(svcOrToolBelt, action)
+			await this.assertActionOpensToolBelt(svcOrToolBelt, action)
 		} catch {
 			return
 		}
 
-		assert.fail(
-			`I didn't expect you to call 'toolBeltVc.forceOpen()', but you did!`
-		)
+		assert.fail(`I didn't expect you to call 'toolBeltVc.open()', but you did!`)
 	},
 
 	async assertActionClosesToolBelt(

@@ -10,7 +10,9 @@ import {
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
-import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
+import ToolBeltViewController, {
+	OpenToolBeltOptions,
+} from '../../../viewControllers/ToolBelt.vc'
 
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
@@ -76,11 +78,11 @@ class ToolBeltSkillViewController implements SkillViewController {
 		this.toolBelt?.focusTool(id)
 	}
 
-	public async forceOpen() {
-		this.toolBelt?.forceOpen()
+	public open(options?: OpenToolBeltOptions) {
+		this.toolBelt?.open(options)
 	}
 
-	public async close() {
+	public close() {
 		this.toolBelt?.close()
 	}
 
@@ -362,7 +364,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async hasForceOpenAndCloseTheMethods() {
 		const vc = this.ToolBeltVc()
-		assert.isFunction(vc.forceOpen)
+		assert.isFunction(vc.open)
 		assert.isFunction(vc.close)
 	}
 
@@ -370,26 +372,61 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	protected static async throwsWhenToolBeltNotForcedOpen() {
 		const svc = this.ToolBeltSvc()
 		await assert.doesThrowAsync(
-			() => vcAssert.assertActionForcesOpenToolBelt(svc, () => {}),
-			'forceOpen'
+			() => vcAssert.assertActionOpensToolBelt(svc, () => {}),
+			'open'
 		)
 
-		vcAssert.assertActionDoesNotForceOpenToolBelt(svc, () => {})
+		await vcAssert.assertActionDoesNotOpenToolBelt(svc, () => {})
 	}
 
 	@test()
-	protected static async passesWhenForcedOpen() {
+	protected static async passesWhenOpened() {
 		const svc = this.ToolBeltSvc()
-		vcAssert.assertActionForcesOpenToolBelt(svc, () => {
-			svc.forceOpen()
+		await vcAssert.assertActionOpensToolBelt(svc, () => {
+			svc.open()
 		})
 
 		await assert.doesThrowAsync(
 			() =>
-				vcAssert.assertActionDoesNotForceOpenToolBelt(svc, () => {
-					svc.forceOpen()
+				vcAssert.assertActionDoesNotOpenToolBelt(svc, () => {
+					svc.open()
 				}),
-			'forceOpen'
+			'open'
+		)
+	}
+
+	@test()
+	protected static async openingThrowsWhenOptionsDontMatch() {
+		const svc = this.ToolBeltSvc()
+		await assert.doesThrowAsync(
+			() =>
+				vcAssert.assertActionOpensToolBelt(
+					svc,
+					() => {
+						svc.open()
+					},
+					{
+						shouldStayOpen: true,
+					}
+				),
+			'shouldStayOpen'
+		)
+	}
+
+	@test('passes closing when options match 1', {
+		shouldStayOpen: true,
+	})
+	@test('passes closing when options match 2', {
+		shouldStayOpen: false,
+	})
+	protected static async worksWhenOpeningWithExpectedOptions(expected: any) {
+		const svc = this.ToolBeltSvc()
+		await vcAssert.assertActionOpensToolBelt(
+			svc,
+			() => {
+				svc.open(expected)
+			},
+			expected
 		)
 	}
 
@@ -401,13 +438,13 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 			'close'
 		)
 
-		vcAssert.assertActionDoesNotCloseToolBelt(svc, () => {})
+		await vcAssert.assertActionDoesNotCloseToolBelt(svc, () => {})
 	}
 
 	@test()
 	protected static async passesWhenClosed() {
 		const svc = this.ToolBeltSvc()
-		vcAssert.assertActionClosesToolBelt(svc, () => {
+		await vcAssert.assertActionClosesToolBelt(svc, () => {
 			svc.close()
 		})
 
