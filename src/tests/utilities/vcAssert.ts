@@ -1182,6 +1182,74 @@ const vcAssert = {
 		)
 	},
 
+	async assertActionForcesOpenToolBelt(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		action: () => Promise<any> | any
+	) {
+		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
+		let wasForced = false
+
+		toolBeltVc.forceOpen = () => {
+			wasForced = true
+		}
+
+		await action()
+
+		assert.isTrue(
+			wasForced,
+			`I expected you to call 'toolBeltVc.forceOpen()', but you didn't!`
+		)
+	},
+
+	async assertActionDoesNotForceOpenToolBelt(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		action: () => Promise<any> | any
+	) {
+		try {
+			await this.assertActionForcesOpenToolBelt(svcOrToolBelt, action)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I didn't expect you to call 'toolBeltVc.forceOpen()', but you did!`
+		)
+	},
+
+	async assertActionClosesToolBelt(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		action: () => Promise<any> | any
+	) {
+		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
+		let wasForced = false
+
+		toolBeltVc.close = () => {
+			wasForced = true
+		}
+
+		await action()
+
+		assert.isTrue(
+			wasForced,
+			`I expected you to call 'toolBeltVc.close()', but you didn't!`
+		)
+	},
+
+	async assertActionDoesNotCloseToolBelt(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController,
+		action: () => Promise<any> | any
+	) {
+		try {
+			await this.assertActionClosesToolBelt(svcOrToolBelt, action)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I didn't expect you to call 'toolBeltVc.close()', but you did!`
+		)
+	},
+
 	assertRendersToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		assertHasAtLeast1Tool = true

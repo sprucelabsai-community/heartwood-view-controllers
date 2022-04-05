@@ -76,6 +76,14 @@ class ToolBeltSkillViewController implements SkillViewController {
 		this.toolBelt?.focusTool(id)
 	}
 
+	public async forceOpen() {
+		this.toolBelt?.forceOpen()
+	}
+
+	public async close() {
+		this.toolBelt?.close()
+	}
+
 	public async delayedFocusTool(id: string) {
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 		this.toolBelt?.focusTool(id)
@@ -315,7 +323,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async canFocuseWhenToolStartsWithNoTools() {
+	protected static async canFocusWhenToolStartsWithNoTools() {
 		const svc = this.Controller('toolBeltSvc', {
 			toolBelt: {
 				tools: [],
@@ -348,6 +356,73 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 				card: {} as any,
 			})
 			await svc.focusTool('new-tool')
+		})
+	}
+
+	@test()
+	protected static async hasForceOpenAndCloseTheMethods() {
+		const vc = this.ToolBeltVc()
+		assert.isFunction(vc.forceOpen)
+		assert.isFunction(vc.close)
+	}
+
+	@test()
+	protected static async throwsWhenToolBeltNotForcedOpen() {
+		const svc = this.ToolBeltSvc()
+		await assert.doesThrowAsync(
+			() => vcAssert.assertActionForcesOpenToolBelt(svc, () => {}),
+			'forceOpen'
+		)
+
+		vcAssert.assertActionDoesNotForceOpenToolBelt(svc, () => {})
+	}
+
+	@test()
+	protected static async passesWhenForcedOpen() {
+		const svc = this.ToolBeltSvc()
+		vcAssert.assertActionForcesOpenToolBelt(svc, () => {
+			svc.forceOpen()
+		})
+
+		await assert.doesThrowAsync(
+			() =>
+				vcAssert.assertActionDoesNotForceOpenToolBelt(svc, () => {
+					svc.forceOpen()
+				}),
+			'forceOpen'
+		)
+	}
+
+	@test()
+	protected static async throwsWhenToolBeltNotClosed() {
+		const svc = this.ToolBeltSvc()
+		await assert.doesThrowAsync(
+			() => vcAssert.assertActionClosesToolBelt(svc, () => {}),
+			'close'
+		)
+
+		vcAssert.assertActionDoesNotCloseToolBelt(svc, () => {})
+	}
+
+	@test()
+	protected static async passesWhenClosed() {
+		const svc = this.ToolBeltSvc()
+		vcAssert.assertActionClosesToolBelt(svc, () => {
+			svc.close()
+		})
+
+		await assert.doesThrowAsync(
+			() =>
+				vcAssert.assertActionDoesNotCloseToolBelt(svc, () => {
+					svc.close()
+				}),
+			'close'
+		)
+	}
+
+	private static ToolBeltVc() {
+		return this.Controller('toolBelt', {
+			tools: [],
 		})
 	}
 

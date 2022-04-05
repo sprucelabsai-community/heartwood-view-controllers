@@ -123,6 +123,10 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		return tools
 	}
 
+	public close() {}
+
+	public forceOpen() {}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
 		return { ...this.model, controller: this, tools: this.renderTools() }
 	}
