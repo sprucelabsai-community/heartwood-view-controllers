@@ -1,3 +1,10 @@
+# [70.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.10.13...v70.11.0) (2022-04-05)
+
+
+### Features
+
+* tool belts can be forced opened and closed ([e8e305d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e8e305d))
+
 ## [70.10.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.10.12...v70.10.13) (2022-04-05)
 
 ## [70.10.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.10.11...v70.10.12) (2022-04-05)
