@@ -1,3 +1,10 @@
+# [70.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.11.7...v70.12.0) (2022-04-06)
+
+
+### Features
+
+* tool belt state context updates can now be cancelled in will-update! ([e2ff497](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e2ff497))
+
 ## [70.11.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.11.6...v70.11.7) (2022-04-06)
 
 ## [70.11.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.11.5...v70.11.6) (2022-04-06)
