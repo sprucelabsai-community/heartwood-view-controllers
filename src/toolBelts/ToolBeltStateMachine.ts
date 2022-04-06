@@ -2,7 +2,7 @@ import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
-import { cloneDeepWith } from 'lodash'
+import cloneDeepWith from 'lodash/cloneDeepWith'
 import {
 	ControllerOptions,
 	ViewControllerId,
