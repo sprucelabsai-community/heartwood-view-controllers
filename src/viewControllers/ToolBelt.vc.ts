@@ -129,9 +129,8 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 
 	public close() {}
 
-	public open(options?: OpenToolBeltOptions) {
-		console.log(options)
-	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public open(options?: OpenToolBeltOptions) {}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
 		return { ...this.model, controller: this, tools: this.renderTools() }
