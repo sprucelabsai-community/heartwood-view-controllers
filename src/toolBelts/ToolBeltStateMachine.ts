@@ -56,6 +56,36 @@ const eventContract = buildEventContract({
 				},
 			}),
 		},
+		['will-update-context']: {
+			emitPayloadSchema: buildSchema({
+				id: 'will-update-context-emit',
+				fields: {
+					current: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+					updates: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+				},
+			}),
+			responsePayloadSchema: buildSchema({
+				id: 'will-update-context-response',
+				fields: {
+					shouldAllowUpdates: {
+						type: 'boolean',
+						defaultValue: true,
+					},
+				},
+			}),
+		},
 	},
 })
 
@@ -125,11 +155,23 @@ export default class ToolBeltStateMachine<
 				return item
 			}
 		})
+
+		const results = await this.emit('will-update-context', {
+			current: this.context,
+			updates,
+		})
+
+		if (
+			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
+		) {
+			return false
+		}
+
 		const old = { ...this.context }
 		const newContext = { ...this.context, ...cloned }
 
 		if (deepEqual(this.context, newContext)) {
-			return
+			return false
 		}
 
 		this.context = newContext
@@ -138,6 +180,8 @@ export default class ToolBeltStateMachine<
 			old,
 			updates: cloned,
 		})
+
+		return true
 	}
 }
 

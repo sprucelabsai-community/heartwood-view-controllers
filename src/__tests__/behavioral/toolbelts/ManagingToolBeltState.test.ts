@@ -139,6 +139,61 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqualDeep(passedUpdates, updates)
 	}
 
+	@test('can cancel context update 1', { go: 'team' })
+	@test('can cancel context update 2', { what: 'the!?' })
+	@test('can cancel context update 3', { what: 'the!?' }, { no: 'more' })
+	protected static async canCancelContextUpdates(
+		current: Record<string, any>,
+		updates = { go: 'team' }
+	) {
+		let wasHit = false
+
+		await this.sm.updateContext(current)
+
+		let passedCurrent: any
+		let passedUpdates: any
+
+		await this.sm.on('will-update-context', ({ current, updates }) => {
+			wasHit = true
+			passedCurrent = current
+			passedUpdates = updates
+			return {
+				shouldAllowUpdates: false,
+			}
+		})
+
+		await this.assertContextUpdateBlocked(updates)
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(current, passedCurrent)
+		assert.isEqualDeep(passedUpdates, updates)
+
+		assert.isEqualDeep(this.sm.getContext(), current)
+	}
+
+	@test()
+	protected static async updatingContextReturnsTrueByDefault() {
+		await this.sm.on('will-update-context', () => {
+			return {}
+		})
+
+		await this.assertContextUpdateNotBlocked({ yes: 'please' })
+		await this.assertContextUpdateBlocked({ yes: 'please' })
+	}
+
+	@test()
+	protected static async anyListenerCanCancelUpdates() {
+		await this.sm.on('will-update-context', () => {
+			return {}
+		})
+		await this.sm.on('will-update-context', () => {
+			return {
+				shouldAllowUpdates: false,
+			}
+		})
+		let response = await this.sm.updateContext({ yes: 'please' })
+		assert.isFalse(response)
+	}
+
 	@test()
 	protected static canGetVcFactory() {
 		const vcFactory = this.getFactory()
@@ -235,5 +290,17 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		await this.sm.transitionTo(state)
 
 		return this.sm
+	}
+
+	private static async assertContextUpdateNotBlocked(updates: { yes: string }) {
+		let response = await this.sm.updateContext(updates)
+		assert.isTrue(response)
+	}
+
+	private static async assertContextUpdateBlocked(
+		updates: Record<string, any>
+	) {
+		const response = await this.sm.updateContext(updates)
+		assert.isFalse(response)
 	}
 }
