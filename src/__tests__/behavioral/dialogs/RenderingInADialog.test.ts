@@ -112,6 +112,21 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 		assert.isEqual(vc.getShouldShowCloseButton(), expected)
 	}
 
+	@test()
+	protected static async renderingInDialogGetsShouldShowCloseButtonWhenRenderingAsCard() {
+		const dlg = this.svc.renderInDialogAndGetDlgVc({
+			shouldShowCloseButton: false,
+			...this.Controller('card', {
+				header: {
+					title: 'first name!',
+				},
+			}).render(),
+		})
+
+		const model = this.render(dlg)
+		assert.isFalse(model.shouldShowCloseButton)
+	}
+
 	protected static assertSectionsHaveControllers(vc: DialogViewController) {
 		const model = this.render(vc)
 		for (const section of model.body?.sections ?? []) {

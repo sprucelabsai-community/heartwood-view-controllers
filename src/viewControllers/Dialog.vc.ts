@@ -38,6 +38,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 			controller: this,
 			cardController: this.cardVc,
 			isVisible: this.isVisible,
+			shouldShowCloseButton: this.shouldShowCloseButton,
 			closeHandler:
 				this.shouldShowCloseButton !== false
 					? this.handleClose.bind(this)
