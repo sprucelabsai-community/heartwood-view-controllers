@@ -25,13 +25,6 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
 		await this.assertRendersDialog()
 	}
 
-	private static async assertRendersDialog() {
-		await vcAssert.assertRendersDialog(
-			this.vc,
-			() => this.vc.renderInDialogAndGetDlgVc() as any
-		)
-	}
-
 	@test()
 	protected static async callsOriginalDialogHandler() {
 		let wasHit = false
@@ -45,6 +38,25 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
 		await this.assertRendersDialog()
 
 		assert.isTruthy(wasHit)
+	}
+
+	@test()
+	protected static async renderingMoreThanOneDialogPerAssertionThrows() {
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertRendersDialog(this.vc, async () => {
+				await Promise.all([
+					this.vc.renderInDialogAndGetDlgVc(),
+					this.vc.renderInDialogAndGetDlgVc(),
+				])
+			})
+		)
+	}
+
+	private static async assertRendersDialog() {
+		await vcAssert.assertRendersDialog(
+			this.vc,
+			() => this.vc.renderInDialogAndGetDlgVc() as any
+		)
 	}
 
 	private static PatchedVc() {

@@ -357,18 +357,19 @@ const vcAssert = {
 			try {
 				let wasHit = false
 				let dialogVc: DialogViewController | undefined
-				//@ts-ignore
-				const oldRenderInDialog =
-					//@ts-ignore
-					vc._originalRenderInDialog ??
-					//@ts-ignore
-					vc.renderInDialog?.bind(vc) ??
-					function () {}
-
 				let dialogPromise = new Promise((resolve) => {
-					//@ts-ignore
-					vc.renderInDialog = (...args: any[]) => {
+					const renderInDialogHandler = (...args: any[]) => {
+						assert.isFalsy(
+							//@ts-ignore
+							vc._alreadyRenderingInDialog,
+							`Holy dialogs Batman! You tried to render more than 1 dialog!`
+						)
+
+						//@ts-ignore
+						vc._alreadyRenderingInDialog = true
+
 						dialogVc = oldRenderInDialog(...args)
+
 						//@ts-ignore
 						dialogVc.getParent = () => {
 							//@ts-ignore
@@ -378,6 +379,19 @@ const vcAssert = {
 						resolve(undefined)
 						return dialogVc
 					}
+
+					//@ts-ignore
+					const oldRenderInDialog =
+						//@ts-ignore
+						vc._originalRenderInDialog ??
+						//@ts-ignore
+						vc.renderInDialog?.bind(vc) ??
+						function () {}
+
+					//@ts-ignore
+					vc._originalRenderInDialog = oldRenderInDialog
+					//@ts-ignore
+					vc.renderInDialog = renderInDialogHandler
 				})
 
 				let dialogHandlerPromise: any
@@ -414,6 +428,8 @@ const vcAssert = {
 
 						assert.isTruthy(dialogVc)
 
+						//@ts-ignore
+						vc._alreadyRenderingInDialog = false
 						resolve(dialogVc)
 					} catch (err) {
 						reject(err)
