@@ -28,6 +28,11 @@ export default class DialogTestSkillViewController extends AbstractSkillViewCont
 		return controller
 	}
 
+	public async renderInDialogAndWait() {
+		const dlgVc = this.renderInDialogAndGetDlgVc()
+		await dlgVc.wait()
+	}
+
 	public async load(options: SkillViewControllerLoadOptions) {
 		this.loadInvocations.push(options)
 	}

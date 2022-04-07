@@ -52,6 +52,19 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static async canTestMultipleTimesInOneTest() {
+		const dlg = await vcAssert.assertRendersDialog(this.vc, async () => {
+			await this.vc.renderInDialogAndWait()
+		})
+
+		await dlg.hide()
+
+		await vcAssert.assertRendersDialog(this.vc, async () => {
+			await this.vc.renderInDialogAndWait()
+		})
+	}
+
 	private static async assertRendersDialog() {
 		await vcAssert.assertRendersDialog(
 			this.vc,

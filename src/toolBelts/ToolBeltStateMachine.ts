@@ -156,6 +156,13 @@ export default class ToolBeltStateMachine<
 			}
 		})
 
+		const old = { ...this.context }
+		const newContext = { ...this.context, ...cloned }
+
+		if (deepEqual(this.context, newContext)) {
+			return false
+		}
+
 		const results = await this.emit('will-update-context', {
 			current: this.context,
 			updates,
@@ -164,13 +171,6 @@ export default class ToolBeltStateMachine<
 		if (
 			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
 		) {
-			return false
-		}
-
-		const old = { ...this.context }
-		const newContext = { ...this.context, ...cloned }
-
-		if (deepEqual(this.context, newContext)) {
 			return false
 		}
 

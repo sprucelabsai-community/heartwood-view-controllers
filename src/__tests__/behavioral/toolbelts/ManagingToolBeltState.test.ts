@@ -139,7 +139,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqualDeep(passedUpdates, updates)
 	}
 
-	@test('can cancel context update 1', { go: 'team' })
+	@test('can cancel context update 1', { go: 'buddy' })
 	@test('can cancel context update 2', { what: 'the!?' })
 	@test('can cancel context update 3', { what: 'the!?' }, { no: 'more' })
 	protected static async canCancelContextUpdates(
@@ -239,15 +239,22 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	protected static async doesNotEmitIfContextHasNotChanged(updates: any) {
 		await this.sm.updateContext(updates)
 
-		let wasHit = false
+		let wasDidHit = false
+		let wasWillHit = false
+
+		await this.sm.on('will-update-context', () => {
+			wasWillHit = true
+			return {}
+		})
 
 		await this.sm.on('did-update-context', () => {
-			wasHit = true
+			wasDidHit = true
 		})
 
 		await this.sm.updateContext(cloneDeep(updates))
 
-		assert.isFalse(wasHit)
+		assert.isFalse(wasDidHit)
+		assert.isFalse(wasWillHit)
 	}
 
 	@test()

@@ -361,12 +361,12 @@ const vcAssert = {
 					const renderInDialogHandler = (...args: any[]) => {
 						assert.isFalsy(
 							//@ts-ignore
-							vc._alreadyRenderingInDialog,
+							vc._currentlyRenderingInDialog,
 							`Holy dialogs Batman! You tried to render more than 1 dialog!`
 						)
 
 						//@ts-ignore
-						vc._alreadyRenderingInDialog = true
+						vc._currentlyRenderingInDialog = true
 
 						dialogVc = oldRenderInDialog(...args)
 
@@ -429,7 +429,7 @@ const vcAssert = {
 						assert.isTruthy(dialogVc)
 
 						//@ts-ignore
-						vc._alreadyRenderingInDialog = false
+						vc._currentlyRenderingInDialog = false
 						resolve(dialogVc)
 					} catch (err) {
 						reject(err)
