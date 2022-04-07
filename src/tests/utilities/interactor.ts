@@ -393,9 +393,13 @@ const interactor = {
 
 		assert.isTruthy(model.onClick, `Row '${model.id}' is missing an onClick!`)
 
-		if (model.isEnabled !== false) {
-			await model.onClick?.()
-		}
+		assert.isNotEqual(
+			model.isEnabled,
+			false,
+			`You tried to click a disabled row. Onclick will not be triggered. You can, however, click a checkbox in a row that is disabled.`
+		)
+
+		await model.onClick?.()
 	},
 
 	async clickCell(

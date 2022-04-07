@@ -29,7 +29,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async cantClickOnDisabledRows() {
+	protected static async clickingOnDisabledRowThrows() {
 		let wasHit = false
 		const vc = this.ListVc({
 			rows: [
@@ -49,7 +49,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
 		})
 
 		assert.isFalse(wasHit)
-		await interactor.clickRow(vc, 1)
+		await assert.doesThrowAsync(() => interactor.clickRow(vc, 1))
 		assert.isFalse(wasHit)
 	}
 
