@@ -1,3 +1,5 @@
+## [70.12.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.6...v70.12.7) (2022-04-07)
+
 ## [70.12.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.5...v70.12.6) (2022-04-07)
 
 ## [70.12.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.4...v70.12.5) (2022-04-07)
