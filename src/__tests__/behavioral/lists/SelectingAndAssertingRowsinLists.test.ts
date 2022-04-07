@@ -3,7 +3,7 @@ import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListRowModel } from '../../../viewControllers/list/List.vc'
 
-export default class SelectingRowsinListsTest extends AbstractViewControllerTest {
+export default class SelectingRowsInListsTest extends AbstractViewControllerTest {
 	@test()
 	protected static rowNotSelectedByDefault() {
 		const vc = this.Vc()
