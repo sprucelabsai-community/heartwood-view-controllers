@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
+import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import ListViewController, { ListRowModel } from '../list/List.vc'
@@ -146,7 +147,13 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 			cells: [
 				{
 					text: {
-						content: 'Oh no! Something went wrong!',
+						content: randomUtil.rand([
+							'Oh no! Something is not right!',
+							"Hmm, this isn't great.",
+							'Oops! Major error!',
+							'Error. Error. Error',
+							'Something went wrong! 🤬',
+						]),
 					},
 					subText: {
 						content: err.message,
