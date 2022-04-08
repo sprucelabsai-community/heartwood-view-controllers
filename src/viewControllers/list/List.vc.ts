@@ -249,6 +249,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		} else {
 			this.model.rows[idx] = { id, ...row }
 			this._rowVcs = []
+			this.triggerRender()
 		}
 	}
 

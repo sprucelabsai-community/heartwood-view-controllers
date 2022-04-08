@@ -918,7 +918,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static canupsertRowToUpdate() {
+	protected static canUpsertRowToUpdate() {
 		this.vc.addRows([
 			{
 				id: 'test1',
@@ -966,7 +966,19 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async cantdeleteRowIfNoIdFound() {
+	protected static async upsertingRowRendersIt() {
+		this.vc.upsertRow('taco', {
+			cells: [],
+		})
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.vc.upsertRow('taco', {
+			cells: [],
+		})
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static async cantDeleteRowIfNoIdFound() {
 		const err = await assert.doesThrowAsync(() =>
 			this.vc.deleteRow('aoeuaoeuaoeuaoeu')
 		)
