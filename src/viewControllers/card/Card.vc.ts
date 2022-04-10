@@ -66,14 +66,14 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	private buildSectionVc(idx: number) {
 		if (!this.sectionVcs[idx]) {
-			const sectionVc: any = this.model.body?.sections?.[idx].controller ?? {
+			const sectionVc: any = {
 				triggerRender: () => {},
 				render: () => {
 					this.triggerRenderSections[idx] = sectionVc.triggerRender
 
 					const section = this.model.body?.sections?.[idx]
 
-					return { ...section, controller: sectionVc }
+					return { ...section, controller: this.getSectionVc(idx) }
 				},
 			}
 
@@ -208,7 +208,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		const vc = this.getSectionVc(0)
 		vc.triggerRender()
 
-		updates.controller && this.triggerRender()
+		if (updates.controller) {
+			this.sectionVcs[idx] = updates.controller
+			this.triggerRender()
+		}
 	}
 
 	public setSection(idOrIdx: number | string, section: Section) {
