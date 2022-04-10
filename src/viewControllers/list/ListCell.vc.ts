@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import SpruceError from '../../errors/SpruceError'
 import { ViewController } from '../../types/heartwood.types'
 
 type Model = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
@@ -31,8 +32,16 @@ export default class ListCellViewController implements ViewController<Model> {
 		this.triggerRender()
 	}
 
+	public getIsDeleted() {
+		return !this.model
+	}
+
 	public render(): Model {
 		const { ...model } = this.model
+
+		if (this.getIsDeleted()) {
+			throw new SpruceError({ code: 'CELL_DELETED' })
+		}
 
 		const keys = Object.keys(model)
 			.map((key) => {

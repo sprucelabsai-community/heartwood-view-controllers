@@ -49,7 +49,10 @@ export interface DateNotSelectedErrorOptions extends SpruceErrors.HeartwoodViewC
 export interface DateAlreadySelectedErrorOptions extends SpruceErrors.HeartwoodViewControllers.DateAlreadySelected, ISpruceErrorOptions {
 	code: 'DATE_ALREADY_SELECTED'
 }
+export interface CellDeletedErrorOptions extends SpruceErrors.HeartwoodViewControllers.CellDeleted, ISpruceErrorOptions {
+	code: 'CELL_DELETED'
+}
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions 
 
 export default ErrorOptions

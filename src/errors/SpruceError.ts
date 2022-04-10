@@ -79,6 +79,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = 'A Slide not found just happened!'
 				break
 
+			case 'CELL_DELETED':
+				message = `The cell you tried to render has been deleted!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

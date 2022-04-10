@@ -506,4 +506,26 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 
 
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface CellDeleted {
+		
+	}
+
+	export interface CellDeletedSchema extends SpruceSchema.Schema {
+		id: 'cellDeleted',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Cell deleted',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		    }
+	}
+
+	export type CellDeletedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.CellDeletedSchema>
+
+}
+
+
+
 

@@ -191,8 +191,22 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 	}
 
 	@test()
-	protected static cellsGetLatestChanges() {
-		// assert.isTrue(false)
+	protected static knowsWhenDeleted() {
+		const listVc = this.ListVc([
+			{
+				id: 'first',
+				cells: [{}, {}],
+			},
+		])
+
+		const cellVc = listVc.getRowVc(0).getCellVc(0)
+		assert.isFalse(cellVc.getIsDeleted())
+
+		listVc.deleteRow(0)
+		assert.isTrue(cellVc.getIsDeleted())
+
+		const err = assert.doesThrow(() => this.render(cellVc))
+		errorAssert.assertError(err, 'CELL_DELETED')
 	}
 
 	private static CellVc(idx: number, cellModel?: ListCell) {

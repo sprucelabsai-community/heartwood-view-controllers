@@ -132,7 +132,7 @@ export default class ListRowViewController
 			}
 
 			this.cellVcs[idx] = new ListCellViewController({
-				getViewModel: () => this.model.cells[idx],
+				getViewModel: () => this.model?.cells[idx],
 				setValue: this._setValue.bind(this),
 			})
 		}
