@@ -3,7 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { vcAssert } from '../../..'
+import { vcAssert, ViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import renderUtil from '../../../utilities/render.utility'
 import CardViewController, {
@@ -475,6 +475,33 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test('can get expected section 1', 0, 'first')
 	@test('can get expected section 2', 1, 'second')
 	protected static canGetExpectedSection(idx: number, id: string) {
+		ControllingACardTest.setVcWith3Sections()
+
+		const beforeRender = this.vc.getSectionVc(id)
+
+		const model = this.renderCard()
+
+		//@ts-ignore
+		const sectionVc = this.vc.sectionVcs[idx]
+
+		assert.isEqual(sectionVc, model.body.sections[idx].controller)
+		assert.isEqual(sectionVc, this.vc.getSectionVc(idx))
+		assert.isEqual(sectionVc, this.vc.getSectionVc(id))
+		assert.isEqual(sectionVc, beforeRender)
+	}
+
+	@test('overridden section controller persists 1', 0)
+	@test('overridden section controller persists 1', 1)
+	protected static async overriddenSectionControllersPersist(
+		sectionIdx: number
+	) {
+		this.setVcWith3Sections()
+		const sectionVc = new SectionVc()
+		this.vc.updateSection(sectionIdx, sectionVc.render())
+		assert.isEqual(this.vc.getSectionVc(sectionIdx), sectionVc)
+	}
+
+	private static setVcWith3Sections() {
 		this.vc = this.Vc({
 			body: {
 				sections: [
@@ -490,18 +517,6 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 				],
 			},
 		})
-
-		const beforeRender = this.vc.getSectionVc(id)
-
-		const model = this.renderCard()
-
-		//@ts-ignore
-		const sectionVc = this.vc.sectionVcs[idx]
-
-		assert.isEqual(sectionVc, model.body.sections[idx].controller)
-		assert.isEqual(sectionVc, this.vc.getSectionVc(idx))
-		assert.isEqual(sectionVc, this.vc.getSectionVc(id))
-		assert.isEqual(sectionVc, beforeRender)
 	}
 
 	private static beginTrackingFooterRender(vc = this.vc) {
@@ -531,4 +546,16 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 			}
 		})
 	}
+}
+
+class SectionVc
+	implements
+		ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>
+{
+	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection {
+		return {
+			controller: this,
+		}
+	}
+	public triggerRender = () => {}
 }

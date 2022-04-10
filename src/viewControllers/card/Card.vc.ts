@@ -66,7 +66,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	private buildSectionVc(idx: number) {
 		if (!this.sectionVcs[idx]) {
-			const sectionVc = {
+			const sectionVc: any = this.model.body?.sections?.[idx].controller ?? {
 				triggerRender: () => {},
 				render: () => {
 					this.triggerRenderSections[idx] = sectionVc.triggerRender
