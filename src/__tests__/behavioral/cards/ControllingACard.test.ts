@@ -501,6 +501,21 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		assert.isEqual(this.vc.getSectionVc(sectionIdx), sectionVc)
 	}
 
+	@test()
+	protected static overriddenSectionControllerTriggersRenderOnEntireCard() {
+		this.setVcWith3Sections()
+		const sectionVc = new SectionVc()
+
+		this.vc.updateSection(0, sectionVc.render())
+		assert.isEqual(this.cardTriggerRenderCount, 1)
+	}
+
+	@test()
+	protected static async updatingSectionWithoutControllerDoesNotTriggerRenderOnCard() {
+		this.vc.updateSection(0, {})
+		assert.isEqual(this.cardTriggerRenderCount, 0)
+	}
+
 	private static setVcWith3Sections() {
 		this.vc = this.Vc({
 			body: {

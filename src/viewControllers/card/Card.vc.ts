@@ -207,6 +207,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 		const vc = this.getSectionVc(0)
 		vc.triggerRender()
+
+		updates.controller && this.triggerRender()
 	}
 
 	public setSection(idOrIdx: number | string, section: Section) {
