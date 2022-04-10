@@ -1,3 +1,27 @@
+## [70.12.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.19...v70.12.20) (2022-04-10)
+
+## [70.12.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.18...v70.12.19) (2022-04-10)
+
+## [70.12.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.17...v70.12.18) (2022-04-10)
+
+## [70.12.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.16...v70.12.17) (2022-04-10)
+
+## [70.12.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.15...v70.12.16) (2022-04-10)
+
+## [70.12.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.14...v70.12.15) (2022-04-09)
+
+## [70.12.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.13...v70.12.14) (2022-04-09)
+
+## [70.12.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.12...v70.12.13) (2022-04-09)
+
+## [70.12.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.11...v70.12.12) (2022-04-09)
+
+## [70.12.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.10...v70.12.11) (2022-04-09)
+
+## [70.12.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.9...v70.12.10) (2022-04-08)
+
+## [70.12.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.8...v70.12.9) (2022-04-08)
+
 ## [70.12.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.7...v70.12.8) (2022-04-08)
 
 ## [70.12.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.6...v70.12.7) (2022-04-07)
