@@ -3,7 +3,7 @@ import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import ListViewController, { ListRowModel } from '../list/List.vc'
+import ListViewController, { ListRow } from '../list/List.vc'
 
 type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
@@ -180,7 +180,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		return this.listVc.render()
 	}
 
-	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
+	public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
 		if (!this.isLoaded) {
 			throw new Error(
 				`You have to load your activeRecordCard before you can upsert a row.`

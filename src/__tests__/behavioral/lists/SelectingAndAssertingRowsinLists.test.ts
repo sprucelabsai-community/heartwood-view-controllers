@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ListRowModel } from '../../../viewControllers/list/List.vc'
+import { ListRow } from '../../../viewControllers/list/List.vc'
 
 export default class SelectingRowsInListsTest extends AbstractViewControllerTest {
 	@test()
@@ -204,7 +204,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
 	}
 
 	private static Vc(
-		rows: ListRowModel[] = [
+		rows: ListRow[] = [
 			{
 				id: 'first',
 				cells: [],

@@ -4,9 +4,8 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import ListCellViewController, {
-	ListCellModel,
-} from '../../../viewControllers/list/ListCell.vc'
+import { ListCell, ListRow } from '../../../viewControllers/list/List.vc'
+import ListCellViewController from '../../../viewControllers/list/ListCell.vc'
 
 export default class ControllingARowCellTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -43,7 +42,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 	@test('renders expected 2', { text: { content: 'hey you!' } })
 	@test('renders expected 3', { button: { label: 'hey you!' } })
 	@test('renders expected 4', { [`${Math.random()}`]: { label: 'hey you!' } })
-	protected static rendersExpectedContent(cellModel: ListCellModel) {
+	protected static rendersExpectedContent(cellModel: ListCell) {
 		const cellVc = this.CellVc(0, cellModel)
 		const model = this.render(cellVc)
 		assert.isEqualDeep(model, { ...cellModel, controller: cellVc })
@@ -51,10 +50,39 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static listRendersCells() {
-		const listVc = this.ListVc()
+		const listVc = this.ListVcWithSingleRow()
 		const model = this.render(listVc)
 		assert.isTrue(
 			model.rows[0].cells[0].controller instanceof ListCellViewController
+		)
+	}
+
+	@test()
+	protected static cellVcsReUsed() {
+		const vc = this.ListVc([
+			{
+				id: 'first',
+				cells: [
+					{
+						lineIcon: 'add',
+					},
+				],
+			},
+		])
+
+		const rowVc = vc.getRowVc(0)
+		const cellVc = rowVc.getCellVc(0)
+
+		const updates: ListCell = {
+			lineIcon: 'alarm',
+		}
+		vc.upsertRow('first', {
+			cells: [updates],
+		})
+
+		assert.isEqualDeep(
+			this.render(cellVc, { shouldStripControllers: true }),
+			updates
 		)
 	}
 
@@ -136,14 +164,16 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		100
 	)
 	protected static async settingValueOnInputSetsValueOnListAndTriggersRender(
-		cellModel: ListCellModel,
+		cellModel: ListCell,
 		value: any
 	) {
-		const listVc = this.ListVc(cellModel)
+		const listVc = this.ListVcWithSingleRow(cellModel)
 
 		const rowVc = listVc.getRowVc(0)
 		const cellVc = rowVc.getCellVc(0)
+
 		const model = this.render(cellVc)
+
 		const key = Object.keys(cellModel)[0]
 
 		//@ts-ignore
@@ -160,8 +190,13 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		vcAssert.assertTriggerRenderCount(cellVc, 1)
 	}
 
-	private static CellVc(idx: number, cellModel?: ListCellModel) {
-		const listVc = this.ListVc(cellModel)
+	@test()
+	protected static cellsGetLatestChanges() {
+		// assert.isTrue(false)
+	}
+
+	private static CellVc(idx: number, cellModel?: ListCell) {
+		const listVc = this.ListVcWithSingleRow(cellModel)
 
 		const rowVc = listVc.getRowVc(0)
 		const cell = rowVc.getCellVc(idx)
@@ -169,16 +204,21 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 		return cell
 	}
 
-	private static ListVc(
-		cellModel: ListCellModel = { text: { content: 'hey!' } }
+	private static ListVcWithSingleRow(
+		cellModel: ListCell = { text: { content: 'hey!' } }
 	) {
+		const rows = [
+			{
+				id: 'random',
+				cells: [cellModel],
+			},
+		]
+		return this.ListVc(rows)
+	}
+
+	private static ListVc(rows: ListRow[]) {
 		return this.Controller('list', {
-			rows: [
-				{
-					id: 'random',
-					cells: [cellModel],
-				},
-			],
+			rows,
 		})
 	}
 }

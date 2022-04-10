@@ -17,9 +17,9 @@ import {
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 import ListViewController, {
-	ListRowModel,
+	ListCell,
+	ListRow,
 } from '../../../viewControllers/list/List.vc'
-import { ListCellModel } from '../../../viewControllers/list/ListCell.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
@@ -403,7 +403,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			},
 		},
 	])
-	protected static throwsIfRowDoesNotRenderContent(cells: ListCellModel[]) {
+	protected static throwsIfRowDoesNotRenderContent(cells: ListCell[]) {
 		const vc = this.Controller('list', {
 			rows: [
 				{
@@ -475,7 +475,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		{ cells: [{ button: { label: 'Waka' } }] },
 		'Waka'
 	)
-	protected static knowsIfRowRendersContent(row: ListRowModel, search: string) {
+	protected static knowsIfRowRendersContent(row: ListRow, search: string) {
 		const vc = this.Controller('list', {
 			rows: [{ ...row, id: 'first' }],
 		})
@@ -734,10 +734,10 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		iconToCheck: LineIcon
 		shouldPass?: boolean
 	}) {
-		let rows: ListRowModel[] = []
+		let rows: ListRow[] = []
 
 		while (rows.length <= options.rowIdx) {
-			const cells: ListCellModel[] = []
+			const cells: ListCell[] = []
 
 			while (cells.length <= options.cellIdx) {
 				cells.push({ text: { content: `empty row` } })

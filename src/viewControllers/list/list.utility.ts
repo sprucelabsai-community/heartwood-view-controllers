@@ -1,7 +1,7 @@
-import { ListCellModel } from './ListCell.vc'
+import { ListCell } from './List.vc'
 
 const listUtil = {
-	getInputFromCell(cell: ListCellModel) {
+	getInputFromCell(cell: ListCell) {
 		return (
 			cell.textInput ??
 			cell.selectInput ??
@@ -11,7 +11,7 @@ const listUtil = {
 			cell.dateInput
 		)
 	},
-	getElementFromCell(cell: ListCellModel) {
+	getElementFromCell(cell: ListCell) {
 		return this.getInputFromCell(cell) ?? cell.button
 	},
 }

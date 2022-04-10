@@ -37,7 +37,9 @@ function renderItems(
 	}
 
 	if (options?.shouldStripPrivateFields !== false) {
-		rendered = removeUniversalViewOptions(rendered)
+		rendered = Array.isArray(rendered)
+			? rendered
+			: removeUniversalViewOptions(rendered)
 	}
 
 	return rendered
@@ -71,6 +73,7 @@ const renderUtil = {
 		if (typeof vc?.render !== 'function') {
 			throw new Error(`Your ViewController does not have a render function!`)
 		}
+		attachTriggerRenderCounter(vc as any)
 		const model = vc.render()
 		const rendered = renderItem(model, options)
 

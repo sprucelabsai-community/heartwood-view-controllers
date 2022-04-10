@@ -11,6 +11,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	private static vc: SwipeCardViewController
 	protected static async beforeEach() {
 		await super.beforeEach()
+
 		this.vc = this.Vc({
 			slides: [
 				{

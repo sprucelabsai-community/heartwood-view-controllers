@@ -352,7 +352,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		subtitle: 'there!',
 	})
 	@test('can set header 2', {
-		title: 'whaat!?',
+		title: 'what!?',
 		subtitle: 'the!!!!',
 	})
 	protected static canSetHeader(newHeader: any) {
@@ -376,7 +376,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
 		this.renderCard(vc)
 
-		vc.setHeader({ title: 'whaaaa!?' })
+		vc.setHeader({ title: 'wha!?' })
 
 		assert.isEqual(this.headerTriggerRenderCount, 1)
 		assert.isEqual(this.cardTriggerRenderCount, 0)
@@ -466,8 +466,42 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 			},
 		})
 
+		this.renderCard(vc)
 		vc.updateSection('test', {})
-		assert.isEqual(this.cardTriggerRenderCount, 1)
+
+		vcAssert.assertTriggerRenderCount(vc.getSectionVc(0), 1)
+	}
+
+	@test('can get expected section 1', 0, 'first')
+	@test('can get expected section 2', 1, 'second')
+	protected static canGetExpectedSection(idx: number, id: string) {
+		this.vc = this.Vc({
+			body: {
+				sections: [
+					{
+						id: 'first',
+					},
+					{
+						id: 'second',
+					},
+					{
+						id: 'third',
+					},
+				],
+			},
+		})
+
+		const beforeRender = this.vc.getSectionVc(id)
+
+		const model = this.renderCard()
+
+		//@ts-ignore
+		const sectionVc = this.vc.sectionVcs[idx]
+
+		assert.isEqual(sectionVc, model.body.sections[idx].controller)
+		assert.isEqual(sectionVc, this.vc.getSectionVc(idx))
+		assert.isEqual(sectionVc, this.vc.getSectionVc(id))
+		assert.isEqual(sectionVc, beforeRender)
 	}
 
 	private static beginTrackingFooterRender(vc = this.vc) {

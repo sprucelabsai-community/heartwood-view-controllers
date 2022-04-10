@@ -4,21 +4,12 @@ import SpruceError from '../../errors/SpruceError'
 import { ViewControllerOptions } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import listUtil from './list.utility'
-import { ListCellModel } from './ListCell.vc'
 import ListRowViewController from './ListRow.vc'
 
-type List = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List,
-	'rows'
-> & {
-	rows: ListRowModel[]
-}
-export type ListRowModel = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow,
-	'cells'
-> & {
-	cells: ListCellModel[]
-}
+type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
+export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+export type ListCell =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 
 export type ListViewControllerOptions = Partial<List>
 
@@ -53,13 +44,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return this.model.rows
 	}
 
-	public addRows(rows: ListRowModel[]) {
+	public addRows(rows: ListRow[]) {
 		for (const row of rows) {
 			this.addRow(row)
 		}
 	}
 
-	public addRow(row: ListRowModel & { atIndex?: number }): void {
+	public addRow(row: ListRow & { atIndex?: number }): void {
 		if (!row) {
 			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
@@ -201,7 +192,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return values
 	}
 
-	public setRows(rows: ListRowModel[]) {
+	public setRows(rows: ListRow[]) {
 		this.model.rows = rows
 		this._rowVcs = []
 		this.triggerRender()
@@ -238,11 +229,11 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 	/**
 	 * @deprecated Use upsertRow() instead.
 	 */
-	public upsertRowById(id: string, row: Omit<ListRowModel, 'id'>) {
+	public upsertRowById(id: string, row: Omit<ListRow, 'id'>) {
 		return this.upsertRow(id, row)
 	}
 
-	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
+	public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
 		const idx = this.getIdxForId(id)
 		if (idx === -1) {
 			this.addRow({ id, ...row })

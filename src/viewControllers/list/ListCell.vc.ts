@@ -3,44 +3,26 @@ import { ViewController } from '../../types/heartwood.types'
 
 type Model = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 
-export type ListCellModel = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell,
-	'textInput' | 'selectInput'
-> & {
-	textInput?: ListTextInput | null
-	selectInput?: ListSelectInput | null
-	ratingsInput?: ListRatingsInput | null
-}
-
-type ListTextInput = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput,
-	'setValue'
->
-
-type ListSelectInput = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput,
-	'setValue'
->
-
-type ListRatingsInput = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput,
-	'setValue'
->
-
+type Cell = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 type SetValueHandler = (name: string, value: any) => Promise<void>
 
-export default class ListCellViewController implements ViewController<Model> {
-	private model: ListCellModel
-	private setValueHandler: SetValueHandler
+interface CellOptions {
+	setValue: SetValueHandler
+	getViewModel: () => Cell
+}
 
-	public constructor(model: ListCellModel & { setValue: SetValueHandler }) {
-		const { setValue: setValueHandler, ...rest } = model
+export default class ListCellViewController implements ViewController<Model> {
+	private get model() {
+		return this.getViewModelHandler()
+	}
+	private setValueHandler: SetValueHandler
+	private getViewModelHandler: () => SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+
+	public constructor(options: Cell & CellOptions) {
+		const { setValue: setValueHandler, getViewModel } = options
 
 		this.setValueHandler = setValueHandler
-
-		this.model = {
-			...rest,
-		}
+		this.getViewModelHandler = getViewModel
 	}
 	public triggerRender() {}
 

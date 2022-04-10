@@ -2,8 +2,7 @@ import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ListRowModel } from '../../../viewControllers/list/List.vc'
-import { ListCellModel } from '../../../viewControllers/list/ListCell.vc'
+import { ListCell, ListRow } from '../../../viewControllers/list/List.vc'
 
 export default class AssertingButtonBarsInListsTest extends AbstractViewControllerTest {
 	@test()
@@ -82,14 +81,14 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 		assert.isEqual(match, buttonBarVc)
 	}
 
-	private static renderRowWithButtonBar(): ListRowModel {
+	private static renderRowWithButtonBar(): ListRow {
 		return {
 			id: 'first',
 			cells: [this.renderCellWithButtonBar()],
 		}
 	}
 
-	private static renderCellWithButtonBar(): ListCellModel {
+	private static renderCellWithButtonBar(): ListCell {
 		return {
 			buttonBar: this.Controller('buttonBar', {
 				buttons: [

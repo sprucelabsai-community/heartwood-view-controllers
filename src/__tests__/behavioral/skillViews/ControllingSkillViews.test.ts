@@ -59,10 +59,6 @@ export default class ControllingSkillViewsTest extends AbstractViewControllerTes
 		this.assertSubtitleUndefined()
 	}
 
-	private static assertSubtitleUndefined() {
-		assert.isUndefined(this.vc.getSubtitle())
-	}
-
 	@test()
 	protected static canSetSubtitle() {
 		this.setSubtitle('hello again!')
@@ -79,6 +75,10 @@ export default class ControllingSkillViewsTest extends AbstractViewControllerTes
 	protected static settingSubtitleTriggersRender() {
 		this.setSubtitle('go!')
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	private static assertSubtitleUndefined() {
+		assert.isUndefined(this.vc.getSubtitle())
 	}
 
 	private static assertSubtitleEquals(title: string) {

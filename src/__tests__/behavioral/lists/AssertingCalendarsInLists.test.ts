@@ -2,8 +2,7 @@ import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ListRowModel } from '../../../viewControllers/list/List.vc'
-import { ListCellModel } from '../../../viewControllers/list/ListCell.vc'
+import { ListRow, ListCell } from '../../../viewControllers/list/List.vc'
 
 export default class AssertingCalendarsInListsTest extends AbstractViewControllerTest {
 	@test()
@@ -73,7 +72,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
 
 	private static renderRowWithCalendar(
 		view: 'month' | 'day' = 'month'
-	): ListRowModel {
+	): ListRow {
 		return {
 			id: 'first',
 			cells: [this.renderCellWithCalendar(view)],
@@ -82,7 +81,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
 
 	private static renderCellWithCalendar(
 		view: 'month' | 'day' = 'month'
-	): ListCellModel {
+	): ListCell {
 		return {
 			calendar: this.Controller('calendar', {
 				view,

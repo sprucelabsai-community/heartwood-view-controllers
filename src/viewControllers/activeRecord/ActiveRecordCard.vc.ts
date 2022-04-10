@@ -4,7 +4,7 @@ import {
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import { ListRowModel } from '../list/List.vc'
+import { ListRow } from '../list/List.vc'
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from './ActiveRecordList.vc'
@@ -84,7 +84,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.listVc.getRecords()
 	}
 
-	public upsertRow(id: string, row: Omit<ListRowModel, 'id'>) {
+	public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
 		if (!this.getIsLoaded()) {
 			throw new Error(
 				`You have to load your activeRecordCard before you can upsert a row.`

@@ -54,12 +54,17 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	private buildSectionVcs(): Section[] {
-		return this.model.body?.sections?.map?.(
-			this.buildSectionVc.bind(this)
-		) as Section[]
+		return this.model.body?.sections?.map?.((_, idx) => ({
+			controller: this.buildSectionVc(idx),
+		})) as Section[]
 	}
 
-	private buildSectionVc(_: Section, idx: number) {
+	public getSectionVc(section: string | number) {
+		let idx: number = this.sectionIdOrIdxToIdx(section)
+		return this.buildSectionVc(idx)
+	}
+
+	private buildSectionVc(idx: number) {
 		if (!this.sectionVcs[idx]) {
 			const sectionVc = {
 				triggerRender: () => {},
@@ -68,14 +73,14 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 					const section = this.model.body?.sections?.[idx]
 
-					return { ...section, controller: this }
+					return { ...section, controller: sectionVc }
 				},
 			}
 
 			this.sectionVcs[idx] = sectionVc
 		}
 
-		return { controller: this.sectionVcs[idx] }
+		return this.sectionVcs[idx]
 	}
 
 	private buildFooterVc() {
@@ -170,7 +175,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	public getSection(idOrIdx: number | string) {
-		let idx: number = sectionIdOrIdxToIdx(this.getSections() ?? [], idOrIdx)
+		let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
 		const section = this.getSections()?.[idx]
 
 		if (!section) {
@@ -182,6 +187,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		}
 
 		return section
+	}
+
+	private sectionIdOrIdxToIdx(idOrIdx: string | number): number {
+		return sectionIdOrIdxToIdx(this.getSections() ?? [], idOrIdx)
 	}
 
 	public updateSection(
@@ -196,7 +205,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 			}
 		}
 
-		this.triggerRender()
+		const vc = this.getSectionVc(0)
+		vc.triggerRender()
 	}
 
 	public setSection(idOrIdx: number | string, section: Section) {

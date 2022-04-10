@@ -73,8 +73,6 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		//@ts-ignore
 		this.render(vc)
 
-		vcAssert.attachTriggerRenderCounter(vc as any)
-
 		return vc
 	}
 
