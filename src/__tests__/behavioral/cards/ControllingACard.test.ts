@@ -454,22 +454,26 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 		})
 	}
 
-	@test()
-	protected static async updatingSectionTriggersRender() {
+	@test('can trigger render on first section', 'test')
+	@test('can trigger render on first section', 'new')
+	protected static async updatingSectionTriggersRender(id: string) {
 		const vc = this.Vc({
 			body: {
 				sections: [
 					{
 						id: 'test',
 					},
+					{
+						id: 'new',
+					},
 				],
 			},
 		})
 
 		this.renderCard(vc)
-		vc.updateSection('test', {})
+		vc.updateSection(id, {})
 
-		vcAssert.assertTriggerRenderCount(vc.getSectionVc(0), 1)
+		vcAssert.assertTriggerRenderCount(vc.getSectionVc(id), 1)
 	}
 
 	@test('can get expected section 1', 0, 'first')

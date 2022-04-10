@@ -205,7 +205,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 			}
 		}
 
-		const vc = this.getSectionVc(0)
+		const vc = this.getSectionVc(idx)
 		vc.triggerRender()
 
 		if (updates.controller) {
