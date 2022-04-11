@@ -71,7 +71,9 @@ export default class FormViewController<
 	private dirtyFields: Record<string, boolean> = {}
 	private originalValues: SchemaPartialValues<S>
 	private willChangeHandler?: (
-		options: FormOnChangeOptions<S>
+		options: FormOnChangeOptions<S> & {
+			changes: SchemaPartialValues<S>
+		}
 	) => Promise<boolean | void | undefined> | boolean | void | undefined
 
 	public constructor(
@@ -118,13 +120,16 @@ export default class FormViewController<
 		)
 	}
 
-	public async setValue<N extends SchemaFieldNames<S>>(name: N, value: any) {
+	public async setValue<N extends SchemaFieldNames<S>>(
+		name: N,
+		value: SchemaPartialValues<S>[N]
+	) {
 		return this._setValue<N>({ name, value })
 	}
 
 	private async _setValue<N extends SchemaFieldNames<S>>(options: {
 		name: N
-		value: any
+		value: SchemaPartialValues<S>[N]
 		shouldSetIsDirty?: boolean
 	}) {
 		const { name, value, shouldSetIsDirty = true } = options
@@ -137,9 +142,8 @@ export default class FormViewController<
 			})
 		}
 
-		const shouldBail = await this.willChangeHandler?.(
-			this.buildChangeOptions({})
-		)
+		//@ts-ignore
+		const shouldBail = await this.emitWillChange({ [name]: value })
 
 		if (shouldBail === false) {
 			return
@@ -158,6 +162,13 @@ export default class FormViewController<
 		this.setErrorsByField(errorsByField)
 	}
 
+	private async emitWillChange(changes: SchemaPartialValues<S>) {
+		return await this.willChangeHandler?.({
+			...this.buildChangeOptions({}),
+			changes,
+		})
+	}
+
 	private async emitOnChange(errorsByField: any) {
 		return this.model.onChange?.(this.buildChangeOptions(errorsByField))
 	}
@@ -172,6 +183,12 @@ export default class FormViewController<
 	}
 
 	public async setValues(values: SchemaPartialValues<S>) {
+		const shouldBail = await this.emitWillChange(values)
+
+		if (shouldBail === false) {
+			return
+		}
+
 		this.model.values = { ...values }
 		const errorsByField = this.validateDirtyFields()
 
@@ -445,7 +462,7 @@ export default class FormViewController<
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['fieldName'],
-				friendlyMessage: `I could not find a field being renderd called \`${fieldName}\``,
+				friendlyMessage: `I could not find a field being rendered called \`${fieldName}\``,
 			})
 		}
 
@@ -512,7 +529,7 @@ export default class FormViewController<
 		delete this.dirtyFields[name]
 		await this._setValue<N>({
 			name,
-			value: this.originalValues?.[name],
+			value: this.originalValues?.[name] as any,
 			shouldSetIsDirty: false,
 		})
 	}

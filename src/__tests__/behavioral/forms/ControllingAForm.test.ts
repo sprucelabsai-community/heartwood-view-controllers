@@ -7,7 +7,7 @@ import { interactor } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formTestUtil from '../../../tests/utilities/formTest.utility'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import { FormViewController } from '../../../types/heartwood.types'
 import { testFormOptions } from './testFormOptions'
 
@@ -266,6 +266,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async resetFieldsClearsItsErrors() {
+		//@ts-ignore
 		await this.vc.setValue('favoriteNumber', 'aoeu')
 
 		let errs = this.vc.getErrorsByField()
@@ -490,7 +491,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static throwsWithbadSectionOnUpdate() {
+	protected static throwsWithBadSectionOnUpdate() {
 		//@ts-ignore
 		const err = assert.doesThrow(() => this.vc.setSection(-1, {}))
 
@@ -540,7 +541,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static updatesTriggerRender() {
 		this.vc.setSection(0, {
-			title: 'doobey',
+			title: 'do-bee',
 		})
 
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
@@ -782,6 +783,50 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.doesInclude(changeOptions[1], changeOptions[0])
 	}
 
+	@test('will changes triggered with options 1', { firstName: 'Tay' })
+	@test('will changes triggered with options 2', { lastName: 'Ro' })
+	protected static async willChangeIsTriggered(updates: any) {
+		let passedOptions: any
+		let wasHit = false
+		const vc = this.FormWithOnChange(
+			() => {},
+			(options) => {
+				passedOptions = options
+				wasHit = true
+				return true
+			}
+		)
+
+		assert.isFalse(wasHit)
+
+		await vc.setValues(updates)
+
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedOptions, {
+			//@ts-ignore
+			...vc.buildChangeOptions({}),
+			changes: {
+				...updates,
+			},
+		})
+	}
+
+	@test()
+	protected static async cancellingWillStopsDidFromBeingHit() {
+		let wasHit = false
+		const vc = this.FormWithOnChange(
+			() => {
+				wasHit = true
+			},
+			() => {
+				return false
+			}
+		)
+
+		await vc.setValues({ firstName: 'tay' })
+		assert.isFalse(wasHit)
+	}
+
 	@test()
 	protected static async cantSubmitIfNotEnabled() {
 		let wasHit = false
@@ -966,8 +1011,21 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isEqual(vc.getValue('name'), 'test')
 	}
 
-	@test()
-	protected static async canKeepChangeWithOnChangeReturningFalse() {
+	@test(
+		'will change gets expected options when changing 1 field',
+		'name',
+		'Jim'
+	)
+	@test(
+		'will change gets expected options when changing 2 field',
+		'name',
+		'Phil'
+	)
+	@test('will change gets expected options when changing 3 field', 'num', 'doh')
+	protected static async canKeepChangeWithOnChangeReturningFalse(
+		fieldName: any,
+		value: string
+	) {
 		let willChangeOptions: any
 		let didChangeOptions: any
 
@@ -995,8 +1053,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		await vc.setValue('name', 'Tay')
-		assert.isEqual(vc.getValue('name'), 'Tay')
+		await vc.setValue(fieldName, value)
+		assert.isEqual(vc.getValue(fieldName), value)
 
 		await vc.submit()
 
@@ -1005,7 +1063,10 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqualDeep(willChangeOptions, {
 			...didChangeOptions,
-			values: { ...didChangeOptions.values, name: 'test' },
+			values: { name: 'test', num: 'test' },
+			changes: {
+				[fieldName]: value,
+			},
 		})
 	}
 
@@ -1046,7 +1107,10 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isTrue(wasHit)
 	}
 
-	private static FormWithOnChange(onChange: (options: any) => void) {
+	private static FormWithOnChange(
+		onChange: (options: any) => void,
+		onWillChange?: (options: any) => boolean
+	) {
 		return this.Controller(
 			'form',
 			buildForm({
@@ -1057,9 +1121,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 						firstName: {
 							type: 'text',
 						},
+						lastName: {
+							type: 'text',
+						},
 					},
 				}),
 				onChange,
+				onWillChange,
 				sections: [{}],
 			})
 		)
