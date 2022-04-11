@@ -22,6 +22,7 @@ import {
 	ViewControllerOptions,
 	FieldRenderOptions,
 	FormOnChangeOptions,
+	FormWillChangeOptions,
 } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
@@ -71,9 +72,7 @@ export default class FormViewController<
 	private dirtyFields: Record<string, boolean> = {}
 	private originalValues: SchemaPartialValues<S>
 	private willChangeHandler?: (
-		options: FormOnChangeOptions<S> & {
-			changes: SchemaPartialValues<S>
-		}
+		options: FormWillChangeOptions<S>
 	) => Promise<boolean | void | undefined> | boolean | void | undefined
 
 	public constructor(

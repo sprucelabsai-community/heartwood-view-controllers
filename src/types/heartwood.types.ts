@@ -121,6 +121,10 @@ export interface FormOnChangeOptions<S extends Schema = Schema> {
 	isValid: boolean
 }
 
+export type FormWillChangeOptions<S extends Schema> = FormOnChangeOptions<S> & {
+	changes: SchemaPartialValues<S>
+}
+
 export type FormOnSubmitOptions<S extends Schema = Schema> =
 	FormOnChangeOptions<S>
 
