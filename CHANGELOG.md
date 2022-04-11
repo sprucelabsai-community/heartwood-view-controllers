@@ -1,3 +1,10 @@
+# [70.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.25...v70.13.0) (2022-04-11)
+
+
+### Features
+
+* form will submit passes changes and blocks setValues ([ffb3a7f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ffb3a7f))
+
 ## [70.12.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.24...v70.12.25) (2022-04-10)
 
 ## [70.12.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.12.23...v70.12.24) (2022-04-10)
