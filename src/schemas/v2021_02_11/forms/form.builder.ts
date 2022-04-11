@@ -55,7 +55,7 @@ export default buildSchema({
 			label: 'Will change handler',
 			options: {
 				valueType:
-					'(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined',
+					'(options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined',
 			},
 		},
 		onChange: {

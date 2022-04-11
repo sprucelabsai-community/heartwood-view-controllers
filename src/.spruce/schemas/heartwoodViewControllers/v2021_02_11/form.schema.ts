@@ -53,7 +53,7 @@ const formSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema 
 	            'onWillChange': {
 	                label: 'Will change handler',
 	                type: 'raw',
-	                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
+	                options: {valueType: `(options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
 	            },
 	            /** Change handler. */
 	            'onChange': {
