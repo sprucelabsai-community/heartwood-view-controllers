@@ -254,7 +254,7 @@ const vcAssert = {
 				)}' within 5 seconds and it wasn't.${
 					err.stack.includes('renderInDialog(')
 						? ``
-						: ` This was the specific error:\n\n${err.stack}`
+						: ` I was interrupted by this error:\n\n${err.stack ?? err.message}`
 				}`
 			)
 		}
