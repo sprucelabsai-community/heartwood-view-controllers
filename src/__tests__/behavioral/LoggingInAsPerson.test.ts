@@ -1,3 +1,4 @@
+import { MercuryClientFactory } from '@sprucelabs/mercury-client'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
@@ -199,6 +200,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		assert.isUndefined(code)
 
 		const errors = form.getErrorsByField()
+
 		//@ts-ignore
 		assert.isEqualDeep(errors, {})
 	}
@@ -233,6 +235,27 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		await promise
 
 		assert.isFalse(loginVc.getIsBusy())
+	}
+
+	@test()
+	protected static async anErrorReturnsFalseOnSubmit() {
+		MercuryClientFactory.setIsTestMode(true)
+		const { client } = await this.mercury.loginAsDemoPerson()
+
+		await client.on('request-pin::v2020_12_25', (() =>
+			assert.fail('throw')) as any)
+
+		const vc = this.LoginVc()
+		const formVc = vc.getLoginForm()
+
+		let wasHit = false
+		formVc.goForward = async () => {
+			wasHit = true
+		}
+		await formVc.setValue('phone', DEMO_NUMBER)
+		await formVc.submit()
+
+		assert.isFalse(wasHit)
 	}
 
 	private static LoginVc() {

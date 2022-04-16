@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { Schema, SchemaPartialValues } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
+import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
 import {
@@ -72,11 +73,19 @@ export default class LoginViewController
 
 		this.sections = [
 			{
-				title: 'What is your cell?',
+				title: randomUtil.rand([
+					'What is your cell?',
+					'Gimme a number to text.',
+					'What is your number 👇',
+				]),
 				fields: ['phone'],
 			},
 			{
-				title: 'Now the pin! 👇',
+				title: randomUtil.rand([
+					'Now the pin! 👇',
+					'The pin is next!',
+					'Time for pin.',
+				]),
 				fields: [{ name: 'code', renderAs: 'number' }],
 				shouldShowSubmitButton: false,
 			},
@@ -109,7 +118,7 @@ export default class LoginViewController
 		let response = true
 
 		if (presentSlide === 0 && values.phone) {
-			await this.handleSubmitPhone(values.phone)
+			response = await this.handleSubmitPhone(values.phone)
 		} else if (presentSlide === 1 && values.code) {
 			await this.handleSubmitPin(values.code)
 			response = false
@@ -149,7 +158,11 @@ export default class LoginViewController
 					friendlyMessage: err.message,
 				},
 			])
+
+			return false
 		}
+
+		return true
 	}
 
 	public getIsBusy() {
@@ -199,9 +212,30 @@ export default class LoginViewController
 			//@ts-ignore
 			controller: this,
 			header: {
-				title: this.currentSlide === 0 ? 'Get started' : 'Almost there!',
+				title:
+					this.currentSlide === 0
+						? randomUtil.rand([
+								'Get started',
+								`Time to log in!`,
+								`Let's do this! 💪`,
+						  ])
+						: randomUtil.rand([
+								'Almost there!',
+								'Enter your pin below!',
+								'Last step!',
+						  ]),
 				subtitle:
-					this.currentSlide === 0 ? 'Login or signup below!' : 'Last step!',
+					this.currentSlide === 0
+						? randomUtil.rand([
+								'Login or signup below!',
+								"One text and one pin and you're in!",
+								"I'm so excited!",
+						  ])
+						: randomUtil.rand([
+								'Last step!',
+								`So close I can taste it!`,
+								`You got this!`,
+						  ]),
 			},
 			body: {
 				sections: [
