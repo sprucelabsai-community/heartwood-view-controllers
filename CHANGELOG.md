@@ -1,3 +1,10 @@
+# [70.14.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.13.18...v70.14.0) (2022-04-17)
+
+
+### Features
+
+* vcs can now pass scope flags that handle being employed ([965ceaf](https://github.com/sprucelabsai/heartwood-view-controllers/commit/965ceaf))
+
 ## [70.13.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.13.17...v70.13.18) (2022-04-17)
 
 ## [70.13.17](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.13.16...v70.13.17) (2022-04-16)
