@@ -7,7 +7,7 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ButtonBarViewController, StickyToolPosition } from '../..'
+import { ButtonBarViewController, ScopeFlag, StickyToolPosition } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -1937,35 +1937,67 @@ const vcAssert = {
 	},
 
 	assertSkillViewNotScoped(vc: SkillViewController) {
-		const scope = vc.getScopedBy?.() ?? 'none'
-		assert.isEqual(
-			scope,
-			'none',
+		const actualAsArray = normalizeScopeFromVc(vc)
+		assert.isEqualDeep(
+			actualAsArray,
+			['none'],
 			`Your skill view '${getVcName(
 				vc
-			)}' should not be scoped, but is set to '${scope}'!`
+			)}' should not be scoped, but is set to '${renderScopeMarkup(
+				actualAsArray
+			)}'!`
 		)
 	},
 
-	assertSkillViewScopedBy(vc: SkillViewController, scopedBy: ScopedBy) {
-		if (scopedBy !== 'location' && scopedBy !== 'organization') {
-			assert.fail(
-				`Valid scopes are 'none', 'location', or 'organization'. You passed '${scopedBy}'.`
-			)
+	assertSkillViewScopedBy(
+		vc: SkillViewController,
+		scopedBy: ScopedBy | ScopeFlag[]
+	) {
+		let expectedAsArray = Array.isArray(scopedBy) ? scopedBy : [scopedBy]
+
+		for (const scope of expectedAsArray) {
+			if (
+				['none', 'location', 'organization', 'employed'].indexOf(scope) === -1
+			) {
+				assert.fail(
+					`Valid scopes are 'none', 'location', 'organization', and/or 'employed'. You passed '${scopedBy}'.`
+				)
+			}
 		}
 
-		const scope = vc.getScopedBy?.() ?? 'none'
-		assert.isEqual(
-			scope,
-			scopedBy,
+		const actualAsArray = normalizeScopeFromVc(vc)
+
+		expectedAsArray.sort()
+		actualAsArray.sort()
+
+		assert.isEqualDeep(
+			actualAsArray,
+			expectedAsArray,
 			`Your skill view '${getVcName(
 				vc
-			)}' should be scoped to ${scopedBy}, but is set to '${scope}' Try \`public getScopedBy = () => '${scopedBy}' as const\`!`
+			)}' is not scoped as expected. Try \`public getScoped = () => ${renderScopeMarkup(
+				expectedAsArray
+			)} as const\`!`
 		)
 	},
 }
 
 export default vcAssert
+
+function renderScopeMarkup(expectedAsArray: ScopedBy[] | ScopeFlag[]) {
+	return `['${expectedAsArray.join("','")}']`
+}
+
+export function normalizeScopeFromVc(
+	vc: SkillViewController<Record<string, any>>
+) {
+	const actual = vc.getScopedBy?.()
+	const actualAsArray: ScopeFlag[] = actual ? [actual] : vc.getScope?.() ?? []
+	if (actualAsArray.length === 0) {
+		actualAsArray.push('none')
+	}
+	return actualAsArray
+}
 
 function checkForCardSection(
 	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,

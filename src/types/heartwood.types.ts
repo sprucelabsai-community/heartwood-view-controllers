@@ -191,12 +191,18 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 	didFocus?: () => void
 }
 
+export type ScopeFlag = 'location' | 'organization' | 'employed' | 'none'
+
 export interface SkillViewController<
 	Args extends Record<string, any> = Record<string, any>
 > extends ViewController<SkillView> {
 	getIsLoginRequired?(): Promise<boolean>
 	focus?(): Promise<void>
+	/**
+	 * @deprecated -> use getScope() => ['location']
+	 */
 	getScopedBy?(): ScopedBy
+	getScope?(): ScopeFlag[]
 	blur?(): Promise<void>
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 	renderToolBelt(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
