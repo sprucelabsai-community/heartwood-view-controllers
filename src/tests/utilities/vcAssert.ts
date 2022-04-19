@@ -1977,7 +1977,7 @@ const vcAssert = {
 				vc
 			)}' is not scoped as expected. Try \`public getScope = () => ${renderScopeMarkup(
 				expectedAsArray
-			)} as const\`!`
+			)} as ScopeFlag[]\`!`
 		)
 	},
 }
