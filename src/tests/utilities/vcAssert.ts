@@ -1975,7 +1975,7 @@ const vcAssert = {
 			expectedAsArray,
 			`Your skill view '${getVcName(
 				vc
-			)}' is not scoped as expected. Try \`public getScoped = () => ${renderScopeMarkup(
+			)}' is not scoped as expected. Try \`public getScope = () => ${renderScopeMarkup(
 				expectedAsArray
 			)} as const\`!`
 		)
