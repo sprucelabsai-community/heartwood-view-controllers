@@ -86,7 +86,7 @@
     "@sprucelabs/spruce-event-utils": "^19.1.86",
     "@sprucelabs/spruce-skill-utils": "^25.0.83",
     "@swc/core": "1.2.103",
-    "babel-loader": "^8.2.4",
+    "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^16.0.0",
     "esbuild": "^0.14.36",
