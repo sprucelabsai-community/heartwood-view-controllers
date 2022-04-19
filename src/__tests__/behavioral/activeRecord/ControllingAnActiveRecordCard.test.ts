@@ -1,11 +1,16 @@
-import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
+import {
+	MercuryClient,
+	MercuryClientFactory,
+	MercuryTestClient,
+} from '@sprucelabs/mercury-client'
+import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { DEMO_NUMBER_ACTIVE_RECORD } from '../../../tests/constants'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
@@ -18,37 +23,34 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		activeRecordCard: ActiveRecordCardViewController,
 	}
 
+	protected static organizations: Organization[] = []
 	protected static client: MercuryClient
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
+		MercuryTestClient.setShouldRequireLocalListeners(true)
 		MercuryClientFactory.setIsTestMode(true)
 
-		const { client } = await this.mercury.loginAsDemoPerson(
-			DEMO_NUMBER_ACTIVE_RECORD
+		const client = MercuryTestClient.getInternalEmitter(
+			eventContractUtil.unifyContracts(coreEventContracts as any)
 		)
 
 		this.client = client
 
-		const [{ organizations }] = await client.emitAndFlattenResponses(
-			'list-organizations::v2020_12_25',
-			{
-				payload: {
-					shouldOnlyShowMine: true,
-				},
+		await client.on('list-organizations::v2020_12_25', () => {
+			return {
+				organizations: this.organizations,
 			}
-		)
+		})
 
-		await Promise.all(
-			organizations.map((org) =>
-				client.emit('delete-organization::v2020_12_25', {
-					target: {
-						organizationId: org.id,
-					},
-				})
-			)
-		)
+		await client.on('list-locations::v2020_12_25', () => {
+			return {
+				locations: [],
+			}
+		})
+
+		this.organizations = []
 	}
 
 	@test()
@@ -152,7 +154,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async rendersNoResultsWhenNoResultsReturned() {
-		const vc = await this.NoResultsVc({
+		const vc = await this.fakeListOrgsNoResultsAndLoad({
 			payload: {
 				shouldOnlyShowMine: true,
 			},
@@ -164,9 +166,19 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertRowRendersContent(vc.getListVc(), 'no-results', 'no results')
 	}
 
+	@test('can get/set payload 1', { test: true })
+	@test('can get/set payload 2', { taco: 'bravo' })
+	protected static async canGetPayload(expected: any) {
+		const vc = this.Vc({
+			payload: expected,
+		})
+
+		assert.isEqualDeep(vc.getPayload(), expected)
+	}
+
 	@test()
 	protected static async canCustomizeEmptyRow() {
-		const vc = await this.NoResultsVc({
+		const vc = await this.fakeListOrgsNoResultsAndLoad({
 			payload: {
 				shouldOnlyShowMine: true,
 			},
@@ -189,7 +201,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		ActiveRecordCardViewController.setShouldThrowOnResponseError(true)
 
 		await assert.doesThrowAsync(() =>
-			this.MockResultsVc(() => {
+			this.fakeListOrgsAndLoad(() => {
 				throw new SchemaError({
 					code: 'NOT_IMPLEMENTED',
 					instructions: 'gonna make it work',
@@ -202,7 +214,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	protected static async showsAnErrorRowOnError() {
 		ActiveRecordCardViewController.setShouldThrowOnResponseError(false)
 
-		const vc = await this.MockResultsVc(() => {
+		const vc = await this.fakeListOrgsAndLoad(() => {
 			throw new SchemaError({
 				code: 'NOT_IMPLEMENTED',
 				instructions: 'gonna make it work',
@@ -235,22 +247,19 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async canRefreshToGetNewRecords() {
-		const organizations: Organization[] = []
-		const vc = await this.MockResultsVc(async () => ({
-			organizations,
-		}))
+		const vc = await this.VcLoaded({})
 
 		const listVc = vc.getListVc()
 		vcAssert.assertListRendersRows(listVc, 1)
 
-		organizations.push({
+		this.organizations.push({
 			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
 			dateCreated: new Date().getTime(),
 		})
 
-		organizations.push({
+		this.organizations.push({
 			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
@@ -263,15 +272,15 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		vcAssert.assertListRendersRows(
 			listVc,
-			organizations.map((o) => o.id)
+			this.organizations.map((o) => o.id)
 		)
 
-		const oldOrgs = [...organizations]
+		const oldOrgs = [...this.organizations]
 
-		organizations.pop()
-		organizations.pop()
+		this.organizations.pop()
+		this.organizations.pop()
 
-		organizations.push({
+		this.organizations.push({
 			id: `${new Date().getTime() * Math.random()}`,
 			name: 'new org',
 			slug: 'my-org',
@@ -579,19 +588,21 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	}
 
 	private static async seedOrganization() {
-		const [{ organization }] = await this.client.emitAndFlattenResponses(
-			'create-organization::v2020_12_25',
-			{
-				payload: {
-					name: 'New org!',
-				},
-			}
-		)
+		const organization = {
+			id: `${new Date().getTime() * Math.random()}`,
+			name: 'New org ' + this.organizations.length,
+			slug: 'new-org-' + this.organizations.length,
+			dateCreated: new Date().getTime(),
+		}
+
+		this.organizations.push(organization)
 
 		return organization
 	}
 
-	private static Vc(options?: Partial<ActiveRecordCardViewControllerOptions>) {
+	private static Vc(
+		options?: Partial<ActiveRecordCardViewControllerOptions>
+	): ActiveRecordCardViewController {
 		return this.Controller('activeRecordCard', {
 			...buildActiveRecordCard({
 				eventName: 'list-organizations::v2020_12_25',
@@ -613,7 +624,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		})
 	}
 
-	private static async NoResultsVc(
+	private static async fakeListOrgsNoResultsAndLoad(
 		options?: Partial<ActiveRecordCardViewControllerOptions>
 	) {
 		const cb = async () => {
@@ -622,11 +633,11 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			}
 		}
 
-		const vc = await this.MockResultsVc(cb, options)
+		const vc = await this.fakeListOrgsAndLoad(cb, options)
 		return vc
 	}
 
-	private static async MockResultsVc(
+	private static async fakeListOrgsAndLoad(
 		cb: () => Promise<{ organizations: any[] }>,
 		options?: Partial<ActiveRecordCardViewControllerOptions>
 	) {
@@ -634,8 +645,14 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 		await client.on('list-organizations::v2020_12_25', cb)
 
-		const vc = this.Vc(options)
+		const vc = await this.VcLoaded(options)
+		return vc
+	}
 
+	private static async VcLoaded(
+		options?: Partial<ActiveRecordCardViewControllerOptions>
+	) {
+		const vc = this.Vc(options)
 		await vc.load()
 		return vc
 	}
