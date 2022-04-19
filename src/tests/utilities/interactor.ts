@@ -388,6 +388,12 @@ const interactor = {
 	},
 
 	async clickRow(listVc: ListViewController, row: number | string) {
+		assertOptions(
+			{ listVc, row },
+			['listVc', 'row'],
+			`You have to pass a list and it's row to click it!`
+		)
+
 		const rowVc = listVc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
