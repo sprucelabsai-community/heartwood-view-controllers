@@ -1,3 +1,10 @@
+# [70.15.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.14.10...v70.15.0) (2022-04-19)
+
+
+### Features
+
+* devs can now get active record card and list payloads. also, active record tests now faked for a minute cut off test time. ([78e134c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/78e134c))
+
 ## [70.14.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.14.9...v70.14.10) (2022-04-19)
 
 ## [70.14.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.14.8...v70.14.9) (2022-04-19)
