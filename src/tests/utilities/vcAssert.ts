@@ -1574,7 +1574,10 @@ const vcAssert = {
 	},
 
 	async assertActionRedirects(options: AssertRedirectOptions) {
-		const { router, action, destination } = options
+		const { router, action, destination } = assertOptions(options, [
+			'action',
+			'router',
+		])
 
 		//@ts-ignore
 		const oldRedirect = router._originalRedirect ?? router.redirect.bind(router)
