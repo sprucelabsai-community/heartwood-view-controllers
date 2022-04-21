@@ -89,7 +89,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^16.0.0",
-    "esbuild": "^0.14.36",
+    "esbuild": "^0.14.37",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "^5.3.1",
