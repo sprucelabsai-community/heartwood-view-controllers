@@ -1,3 +1,5 @@
+## [70.15.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.15.19...v70.15.20) (2022-04-26)
+
 ## [70.15.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.15.18...v70.15.19) (2022-04-26)
 
 ## [70.15.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v70.15.17...v70.15.18) (2022-04-26)
