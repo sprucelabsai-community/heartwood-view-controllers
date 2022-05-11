@@ -1,3 +1,10 @@
+# [71.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.1.3...v71.2.0) (2022-05-11)
+
+
+### Features
+
+* asserting for critical error returns the error making testing even EASIER! ([fb01791](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fb01791))
+
 ## [71.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.1.2...v71.1.3) (2022-05-11)
 
 ## [71.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.1.1...v71.1.2) (2022-05-11)
