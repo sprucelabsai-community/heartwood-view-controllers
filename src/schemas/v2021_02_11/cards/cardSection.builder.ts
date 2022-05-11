@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { feedSchema } from '@sprucelabs/spruce-core-schemas'
 import buttonBuilder from '../button.builder'
 import buttonBarBuilder from '../buttonBar.builder'
 import calendarBuilder from '../calendar.builder'
@@ -135,6 +136,13 @@ export default buildSchema({
 			label: 'Receipt',
 			options: {
 				schema: receiptBuilder,
+			},
+		},
+		feed: {
+			type: 'schema',
+			label: 'Feed',
+			options: {
+				schema: feedSchema,
 			},
 		},
 		shouldRenderContentsAsGrid: {
