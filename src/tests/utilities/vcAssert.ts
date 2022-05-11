@@ -981,7 +981,7 @@ const vcAssert = {
 			assert.fail(
 				`Expected your card '${
 					model.id ?? getVcName(vc)
-				}}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
+				}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
 			)
 		}
 	},
