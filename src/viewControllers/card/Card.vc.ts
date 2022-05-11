@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import {
+	CriticalError,
 	ViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
@@ -43,7 +44,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		return !!this.model.criticalError
 	}
 
-	public setCriticalError(criticalError: ViewModel['criticalError']) {
+	public setCriticalError(criticalError: CriticalError) {
 		this.model.criticalError = criticalError
 		this.triggerRender()
 	}

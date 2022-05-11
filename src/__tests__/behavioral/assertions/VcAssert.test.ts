@@ -3,7 +3,7 @@ import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
-import { AbstractViewController } from '../../..'
+import { AbstractViewController, CriticalError } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -806,7 +806,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		const cardVc = this.Controller('card', {})
 		vcAssert.assertCardDoesNotRenderCriticalError(cardVc)
 		assert.doesThrow(() => vcAssert.assertCardRendersCriticalError(cardVc))
-		cardVc.setCriticalError({
+		const expected: CriticalError = {
 			title: 'Oh my!',
 			buttons: [
 				{
@@ -822,9 +822,11 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 					},
 				},
 			],
-		})
+		}
+		cardVc.setCriticalError(expected)
 
-		vcAssert.assertCardRendersCriticalError(cardVc)
+		const actual = vcAssert.assertCardRendersCriticalError(cardVc)
+		assert.isEqualDeep(actual, expected)
 		assert.doesThrow(() =>
 			vcAssert.assertCardDoesNotRenderCriticalError(cardVc)
 		)

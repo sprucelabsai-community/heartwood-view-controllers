@@ -1161,6 +1161,8 @@ const vcAssert = {
 			model.criticalError,
 			'Your card did not have a critical error set.'
 		)
+
+		return model.criticalError
 	},
 
 	assertCardDoesNotRenderCriticalError(vc: ViewController<Card>) {

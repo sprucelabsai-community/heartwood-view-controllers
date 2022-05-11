@@ -450,3 +450,5 @@ export type KeyboardKey =
 export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes
 
 export type ScopedBy = 'none' | 'organization' | 'location'
+export type CriticalError =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
