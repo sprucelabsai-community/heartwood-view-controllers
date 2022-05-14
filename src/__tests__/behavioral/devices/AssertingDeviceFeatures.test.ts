@@ -12,6 +12,7 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
 	@test()
 	protected static async hassAssertWasVibrated() {
 		assert.isFunction(deviceAssert.assertWasVibrated)
+		assert.isFunction(deviceAssert.assertWasNotVibrated)
 	}
 
 	@test()
@@ -24,18 +25,25 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
 	}
 
 	@test()
+	protected static async throwsWhenMissingForNotVibrated() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => deviceAssert.assertWasNotVibrated())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc'],
+		})
+	}
+
+	@test()
 	protected static async passesWhenVibrateWasCalledOnce() {
 		this.vc.vibrate()
 		this.assertWasVibrated()
-	}
-
-	private static assertWasVibrated() {
-		deviceAssert.assertWasVibrated(this.vc)
+		assert.doesThrow(() => this.assertWasNotVibrated())
 	}
 
 	@test()
 	protected static async throwsWhenNotVibrated() {
 		assert.doesThrow(() => this.assertWasVibrated())
+		this.assertWasNotVibrated()
 	}
 
 	@test()
@@ -44,5 +52,14 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
 		this.vc.vibrate()
 		this.vc.vibrate()
 		this.assertWasVibrated()
+		assert.doesThrow(() => this.assertWasNotVibrated())
+	}
+
+	private static assertWasVibrated() {
+		deviceAssert.assertWasVibrated(this.vc)
+	}
+
+	private static assertWasNotVibrated(): any {
+		return deviceAssert.assertWasNotVibrated(this.vc)
 	}
 }

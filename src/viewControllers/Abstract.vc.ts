@@ -154,6 +154,7 @@ export default abstract class AbstractViewController<ViewModel>
 			},
 		})
 
+		this.device.vibrate()
 		await dlg.wait()
 	}
 

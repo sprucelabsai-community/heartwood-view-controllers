@@ -2,6 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { AbstractSkillViewController, interactor, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import deviceAssert from '../../../tests/utilities/deviceAssert'
 
 class AlertSkillViewController extends AbstractSkillViewController {
 	public afterAlert = false
@@ -157,5 +158,12 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 		)
 
 		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'primary')
+	}
+
+	@test()
+	protected static async renderingAnAlertVibratesTheDevice() {
+		deviceAssert.assertWasNotVibrated(this.vc)
+		await vcAssert.assertRendersDialog(this.vc, () => this.vc.showAnAlert())
+		deviceAssert.assertWasVibrated(this.vc)
 	}
 }

@@ -14,6 +14,19 @@ const deviceAssert = {
 			"I expected you to vibrate the device and you didn't! What's up, you don't like fun?"
 		)
 	},
+
+	assertWasNotVibrated(vc: AbstractViewController<any>) {
+		assertOptions({ vc }, ['vc'])
+		try {
+			this.assertWasVibrated(vc)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`You vibrated the device and should not have! Getting a little excited I see!`
+		)
+	},
 }
 
 export default deviceAssert
