@@ -1,5 +1,5 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions } from '@sprucelabs/schema'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
 import {
@@ -12,6 +12,7 @@ import {
 	ViewControllerId,
 	ViewControllerOptions,
 	VoteHandler,
+	Device,
 } from '../types/heartwood.types'
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
@@ -26,6 +27,7 @@ export default class ViewControllerFactory {
 	private confirmHandler: ConfirmHandler
 	private connectToApi: ConnectToApi
 	private voteHandler: VoteHandler
+	private device: Device
 
 	public constructor(options: {
 		controllerMap: Record<string, any>
@@ -33,13 +35,23 @@ export default class ViewControllerFactory {
 		confirmHandler: ConfirmHandler
 		connectToApi: ConnectToApi
 		voteHandler: VoteHandler
+		device: Device
 	}) {
-		const { controllerMap, renderInDialogHandler, confirmHandler } = options
+		const {
+			controllerMap,
+			renderInDialogHandler,
+			confirmHandler,
+			connectToApi,
+			voteHandler,
+			device,
+		} = options
+
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
 		this.renderInDialogHandler = renderInDialogHandler
 		this.confirmHandler = confirmHandler
-		this.connectToApi = options.connectToApi
-		this.voteHandler = options.voteHandler
+		this.connectToApi = connectToApi
+		this.voteHandler = voteHandler
+		this.device = device
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -60,6 +72,7 @@ export default class ViewControllerFactory {
 		voteHandler?: VoteHandler
 		confirmHandler?: ConfirmHandler
 		connectToApi: ConnectToApi
+		device: Device
 	}) {
 		const {
 			controllerMap = {},
@@ -67,18 +80,13 @@ export default class ViewControllerFactory {
 			confirmHandler,
 			connectToApi,
 			voteHandler,
-		} = options ?? {}
-
-		if (!options?.connectToApi) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: ['connectToApi'],
-			})
-		}
+			device,
+		} = assertOptions(options, ['connectToApi', 'device'])
 
 		return new this({
 			controllerMap,
 			connectToApi,
+			device,
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
 			renderInDialogHandler: renderInDialogHandler
@@ -141,6 +149,7 @@ export default class ViewControllerFactory {
 			confirmHandler: this.confirmHandler,
 			voteHandler: options?.voteHandler ?? this.voteHandler,
 			connectToApi: this.connectToApi,
+			device: this.device,
 		}
 
 		const oldController = Class.prototype.Controller

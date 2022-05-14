@@ -110,12 +110,14 @@ export { default as ViewControllerExporter } from './viewControllers/ViewControl
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
 export { default as ViewControllerFactory } from './viewControllers/ViewControllerFactory'
 
-export { default as MockStorage } from './tests/MockStorage'
+export { default as StubStorage } from './tests/StubStorage'
+export { default as SpyDevice } from './tests/SpyDevice'
 
 export { default as ViewControllerError } from './errors/SpruceError'
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
 export { default as vcAssert } from './tests/utilities/vcAssert'
+export { default as deviceAssert } from './tests/utilities/deviceAssert'
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'

@@ -4,11 +4,11 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
-import MockStorage from '../../tests/MockStorage'
+import StubStorage from '../../tests/StubStorage'
 
 export default class AuthenticatorTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {}
-	private static storage: MockStorage
+	private static storage: StubStorage
 
 	private static readonly person = {
 		casualName: 'friend',
@@ -19,7 +19,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.storage = new MockStorage()
+		this.storage = new StubStorage()
 
 		Authenticator.reset()
 		Authenticator.setStorage(this.storage)

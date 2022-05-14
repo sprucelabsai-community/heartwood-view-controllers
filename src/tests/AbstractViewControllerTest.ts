@@ -10,7 +10,8 @@ import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
-import MockStorage from './MockStorage'
+import SpyDevice from './SpyDevice'
+import StubStorage from './StubStorage'
 import interactor from './utilities/interactor'
 import vcAssert from './utilities/vcAssert.utility'
 
@@ -30,7 +31,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	protected static async beforeEach() {
 		await super.beforeEach()
 		Authenticator.reset()
-		Authenticator.setStorage(new MockStorage())
+		Authenticator.setStorage(new StubStorage())
 		vcAssert._setVcFactory(this.Factory())
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
@@ -49,6 +50,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
 		return ViewControllerFactory.Factory({
 			controllerMap: this.controllerMap,
+			device: new SpyDevice(),
 			connectToApi: () => {
 				return mercury.connectToApi()
 			},

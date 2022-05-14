@@ -11,6 +11,7 @@ import {
 	ControllerOptions,
 	VoteHandler,
 	VoteOptions,
+	Device,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -32,6 +33,7 @@ export default abstract class AbstractViewController<ViewModel>
 	private activeDialog?: any
 	protected connectToApi: () => Promise<Client>
 	private voteHandler: VoteHandler
+	private device: Device
 	private children: ViewController<any>[] = []
 	private _suspendedRender?: () => void
 
@@ -41,6 +43,7 @@ export default abstract class AbstractViewController<ViewModel>
 		this.confirmHandler = options.confirmHandler
 		this.connectToApi = options.connectToApi
 		this.voteHandler = options.voteHandler
+		this.device = options.device
 	}
 
 	public abstract render(): ViewModel
@@ -174,5 +177,9 @@ export default abstract class AbstractViewController<ViewModel>
 
 	protected async waitForRender() {
 		await new Promise<void>((resolve) => setTimeout(resolve, 0))
+	}
+
+	protected getDevice() {
+		return this.device
 	}
 }

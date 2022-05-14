@@ -72,7 +72,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 			ViewControllerFactory.Factory()
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['connectToApi'],
+			parameters: ['connectToApi', 'device'],
 		})
 	}
 

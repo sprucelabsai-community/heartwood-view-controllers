@@ -332,6 +332,7 @@ export interface ViewControllerOptions {
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler
 	voteHandler: VoteHandler
+	device: Device
 }
 
 export type FieldRenderOptions<S extends Schema> = {
@@ -452,3 +453,7 @@ export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes
 export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
+
+export interface Device {
+	vibrate(): void
+}

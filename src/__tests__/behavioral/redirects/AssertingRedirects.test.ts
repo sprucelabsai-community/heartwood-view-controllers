@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import { Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import MockRouter from '../../../tests/MockRouter'
+import SpyRouter from '../../../tests/SpyRouter'
 import routerTestPatcher from '../../../tests/utilities/routerTestPatcher'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 
@@ -11,7 +11,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.router = new MockRouter()
+		this.router = new SpyRouter()
 	}
 
 	@test()
@@ -186,7 +186,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async redirectPassesBackReturnObject() {
 		const mockResponse = { hello: `${new Date().getTime() * Math.random()}` }
-		MockRouter.redirectResponse = mockResponse
+		SpyRouter.redirectResponse = mockResponse
 
 		const vc = await vcAssert.assertActionRedirects({
 			router: this.router,

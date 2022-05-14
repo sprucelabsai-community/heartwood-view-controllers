@@ -1,6 +1,6 @@
 import { Storage } from '../auth/Authenticator'
 
-export default class MockStorage implements Storage {
+export default class StubStorage implements Storage {
 	private items: Record<string, string> = {}
 
 	public removeItem(key: string): void {

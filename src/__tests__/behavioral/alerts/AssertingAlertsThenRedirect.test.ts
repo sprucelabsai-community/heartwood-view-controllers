@@ -2,7 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import { AbstractSkillViewController, vcAssert, Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import MockRouter from '../../../tests/MockRouter'
+import SpyRouter from '../../../tests/SpyRouter'
 
 class DemoSkillViewController extends AbstractSkillViewController {
 	private router: Router
@@ -52,7 +52,7 @@ export default class AssertAlertAndRedirectTest extends AbstractViewControllerTe
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.router = new MockRouter()
+		this.router = new SpyRouter()
 		this.vc = this.Vc()
 	}
 

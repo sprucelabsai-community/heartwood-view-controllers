@@ -6,7 +6,7 @@ import {
 	SkillViewControllerMap,
 } from '../types/heartwood.types'
 
-export default class MockRouter implements Router {
+export default class SpyRouter implements Router {
 	public static redirectResponse = {}
 
 	public lastRedirect?: {
@@ -22,7 +22,7 @@ export default class MockRouter implements Router {
 			args,
 		}
 
-		return MockRouter.redirectResponse as any
+		return SpyRouter.redirectResponse as any
 	}
 
 	public async back(): Promise<
