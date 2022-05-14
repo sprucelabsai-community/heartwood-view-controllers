@@ -1,3 +1,15 @@
+# [72.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.2.19...v72.0.0) (2022-05-14)
+
+
+### Breaking Changes
+
+* new Device support to bind to native device functionality across platforms! ([ac89d6e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ac89d6e))
+
+
+### Features
+
+* missed device did not vibrate and vibration during alerts ([a9e273e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a9e273e))
+
 ## [71.2.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.2.18...v71.2.19) (2022-05-14)
 
 ## [71.2.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v71.2.17...v71.2.18) (2022-05-14)
