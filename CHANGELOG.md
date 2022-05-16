@@ -1,3 +1,10 @@
+# [72.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.0.7...v72.1.0) (2022-05-16)
+
+
+### Features
+
+* feed with controller support for better feed DX! ([e583f36](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e583f36))
+
 ## [72.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.0.6...v72.0.7) (2022-05-16)
 
 ## [72.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.0.5...v72.0.6) (2022-05-15)
