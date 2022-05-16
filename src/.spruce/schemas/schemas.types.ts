@@ -1243,6 +1243,52 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Feed {
+			
+				
+				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				
+				'shouldEnableChat'?: boolean| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>)| undefined | null
+		}
+
+		interface FeedSchema extends SpruceSchema.Schema {
+			id: 'feed',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Feed',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . */
+			            'shouldEnableChat': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>`,}
+			            },
+			    }
+		}
+
+		type FeedEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface FancyIcon {
 			
 				/** Name. */

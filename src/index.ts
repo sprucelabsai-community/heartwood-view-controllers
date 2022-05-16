@@ -105,6 +105,7 @@ export { default as receiptLineItemSchema } from '#spruce/schemas/heartwoodViewC
 export { default as receiptSectionSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receiptSection.schema'
 export { default as receiptTotalSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receiptTotal.schema'
 export { default as calendarShiftSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarShift.schema'
+export { default as feedSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
