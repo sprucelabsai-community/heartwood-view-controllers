@@ -1,3 +1,10 @@
+# [72.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.1.9...v72.2.0) (2022-05-17)
+
+
+### Features
+
+* devs can now do easy assertions to toggling row enabled/disabled easily! ([daf7fda](https://github.com/sprucelabsai/heartwood-view-controllers/commit/daf7fda))
+
 ## [72.1.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.1.8...v72.1.9) (2022-05-17)
 
 ## [72.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v72.1.7...v72.1.8) (2022-05-17)
