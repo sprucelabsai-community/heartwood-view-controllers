@@ -1,4 +1,4 @@
-import { Vc } from './vcAssert.utility'
+import { Vc } from './assertSupport'
 
 export function attachTriggerRenderCounter(vc: Vc) {
 	//@ts-ignore

@@ -9,8 +9,8 @@ import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
-import { ButtonViewController } from './vcAssert'
-import { getVcName, pluckAllFromCard } from './vcAssert.utility'
+import { getVcName, pluckAllFromCard } from './assertSupport'
+import { ButtonViewController } from './ButtonViewController'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>

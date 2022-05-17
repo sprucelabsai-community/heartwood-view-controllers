@@ -1,8 +1,4 @@
-import {
-	assertOptions,
-	SelectChoice,
-	validateSchemaValues,
-} from '@sprucelabs/schema'
+import { assertOptions, validateSchemaValues } from '@sprucelabs/schema'
 import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
@@ -14,7 +10,6 @@ import {
 	LineIcon,
 	SkillViewController,
 	ViewController,
-	Router,
 	CardViewController,
 	ScopedBy,
 } from '../../types/heartwood.types'
@@ -37,31 +32,25 @@ import ToolBeltViewController, {
 	OpenToolBeltOptions,
 } from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
+import {
+	Vc,
+	ConfirmViewController,
+	pluckFirstFromCard,
+	pluckAllFromCard,
+	ButtonViewController,
+	AssertRedirectOptions,
+	SelectViewController,
+	getVcName,
+} from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
 import formTestUtil from './formTest.utility'
+import interactor from './interactor'
 
 const WAIT_TIMEOUT = 5000
-export type Vc = ViewController<any>
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-type CardSection =
+export type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-export interface ConfirmViewController {
-	accept: () => any | Promise<any>
-	decline: () => any | Promise<any>
-	options: ConfirmOptions
-}
-
-export function pluckAllFromCard<K extends keyof CardSection>(
-	model: Card,
-	key: K
-): CardSection[K][] {
-	return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
-}
-
-export function pluckFirstFromCard(model: Card, key: keyof CardSection) {
-	return pluckAllFromCard(model, key)[0] as any
-}
+export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 async function wait(...promises: (Promise<any> | undefined | any)[]) {
 	return new Promise<any>((resolve, reject) => {
@@ -98,27 +87,7 @@ async function wait(...promises: (Promise<any> | undefined | any)[]) {
 	})
 }
 
-export interface SelectViewController {
-	getChoices: () => SelectChoice[]
-	getIsRequired: () => boolean
-}
-
-export interface AssertRedirectOptions {
-	router: Router
-	action: () => Promise<any> | any
-	destination?: {
-		id?: string
-		args?: Record<string, any>
-	}
-}
-
 type FormVc = FormViewController<any> | BigFormViewController<any>
-
-export interface ButtonViewController {
-	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-	triggerRender(): void
-}
-
 const vcAssert = {
 	_setVcFactory(factory: ViewControllerFactory) {
 		//@ts-ignore
@@ -1985,6 +1954,30 @@ const vcAssert = {
 			)} as ScopeFlag[]\`!`
 		)
 	},
+
+	async assertCheckboxTogglesRowEnabled(
+		listVc: ListViewController,
+		row: string | number
+	) {
+		assertOptions({ listVc, row }, ['listVc', 'row'])
+
+		const rowVc = listVc.getRowVc(row)
+		const model = renderUtil.render(rowVc)
+		const wasEnabled = rowVc.getIsEnabled()
+
+		assert.isTruthy(
+			model.cells[0]?.checkboxInput,
+			`You need to render a checkbox in the first cell of your row!`
+		)
+
+		await interactor.clickCheckboxInRow(listVc, row)
+
+		assert.isNotEqual(
+			wasEnabled,
+			rowVc.getIsEnabled(),
+			`You need to make sure your checkbox toggles the enabled status of your row!`
+		)
+	},
 }
 
 export default vcAssert
@@ -2048,13 +2041,6 @@ function checkForButtons(
 		}
 	}
 	return { found, missing, foundButtons }
-}
-
-export function getVcName(vc: ViewController<any>) {
-	return (
-		//@ts-ignore
-		vc.id ?? Object.getPrototypeOf(vc)?.constructor?.name ?? `view controller`
-	)
 }
 
 function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
