@@ -105,9 +105,13 @@ export default class ToolBeltStateMachine<
 	public constructor(options: ToolBeltStateMachineOptions<Context>) {
 		super(eventContract)
 
-		assertOptions(options, ['toolBeltVc', 'vcFactory', 'connectToApi'])
-
-		const { toolBeltVc, vcFactory, connectToApi, context = {} } = options
+		const {
+			toolBeltVc,
+			vcFactory,
+			connectToApi,
+			context = {},
+			//@ts-ignore
+		} = assertOptions(options, ['toolBeltVc', 'vcFactory', 'connectToApi'])
 
 		this.toolBeltVc = toolBeltVc
 		this.Controller = vcFactory.Controller.bind(vcFactory)
