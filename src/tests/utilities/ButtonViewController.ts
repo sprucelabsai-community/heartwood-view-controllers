@@ -1,7 +1,6 @@
-import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas';
-
+import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 
 export interface ButtonViewController {
-	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button;
-	triggerRender(): void;
+	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+	triggerRender(): void
 }
