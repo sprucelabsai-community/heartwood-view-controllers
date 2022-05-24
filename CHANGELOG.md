@@ -1,3 +1,10 @@
+# [75.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v74.0.0...v75.0.0) (2022-05-24)
+
+
+### Breaking Changes
+
+* upgrade ([3d66b3c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3d66b3c))
+
 # [74.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v73.0.1...v74.0.0) (2022-05-24)
 
 
