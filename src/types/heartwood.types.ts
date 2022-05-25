@@ -462,7 +462,7 @@ export interface Device {
 
 export interface Locale {
 	setTimezoneOffsetMinutes(offset: number): void
-	getTimezoneOffsetMinutes(): void
+	getTimezoneOffsetMinutes(): number
 }
 
 export interface Authorizer {
