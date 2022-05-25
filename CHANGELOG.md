@@ -1,3 +1,12 @@
+## [76.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.0.0...v76.0.1) (2022-05-25)
+
+# [76.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v75.0.6...v76.0.0) (2022-05-25)
+
+
+### Breaking Changes
+
+* authorizer and locale to skill views for loading ([f6c8067](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f6c8067))
+
 ## [75.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v75.0.5...v75.0.6) (2022-05-25)
 
 ## [75.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v75.0.4...v75.0.5) (2022-05-25)
