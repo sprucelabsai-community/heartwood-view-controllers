@@ -465,9 +465,13 @@ export interface Locale {
 	getTimezoneOffsetMinutes(): number
 }
 
+export interface AuthorizerCanOptions<PermissionId extends string> {
+	contractId: string
+	permissionIds: PermissionId[]
+}
+
 export interface Authorizer {
-	can<PermissionId extends string>(options: {
-		contractId: string
-		permissionIds: PermissionId[]
-	}): Promise<Record<PermissionId, boolean>>
+	can<PermissionId extends string>(
+		options: AuthorizerCanOptions<PermissionId>
+	): Promise<Record<PermissionId, boolean>>
 }
