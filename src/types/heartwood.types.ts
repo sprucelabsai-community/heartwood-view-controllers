@@ -469,5 +469,8 @@ export interface Authorizer {
 	getPermissions(options: {
 		contractId: string
 	}): Promise<SpruceSchemas.Mercury.v2020_12_25.ResolvedContract>
-	can(options: { contractId: string; permissions: string[] }): Promise<boolean>
+	can<PermissionId extends string>(options: {
+		contractId: string
+		permissionIds: PermissionId[]
+	}): Promise<Record<PermissionId, boolean>>
 }
