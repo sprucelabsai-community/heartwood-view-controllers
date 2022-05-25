@@ -159,6 +159,8 @@ export interface SkillViewControllerLoadOptions<
 	router: Router
 	args: Args
 	authenticator: Authenticator
+	authorizer: Authorizer
+	locale: Locale
 	scope: Scope
 }
 
@@ -456,4 +458,16 @@ export type CriticalError =
 
 export interface Device {
 	vibrate(): void
+}
+
+export interface Locale {
+	setTimezoneOffsetMinutes(offset: number): void
+	getTimezoneOffsetMinutes(): void
+}
+
+export interface Authorizer {
+	getPermissions(options: {
+		contractId: string
+		permissionsIds: string[]
+	}): Promise<SpruceSchemas.Mercury.v2020_12_25.ResolvedContract>
 }

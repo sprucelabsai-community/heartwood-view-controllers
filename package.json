@@ -79,7 +79,7 @@
     "@babel/preset-typescript": "^7.17.12",
     "@sprucelabs/calendar-utils": "^22.0.2",
     "@sprucelabs/error": "^5.0.460",
-    "@sprucelabs/mercury-core-events": "^6.0.4",
+    "@sprucelabs/mercury-core-events": "^6.1.0",
     "@sprucelabs/mercury-types": "^30.0.2",
     "@sprucelabs/schema": "^28.2.16",
     "@sprucelabs/spruce-core-schemas": "^29.0.3",
