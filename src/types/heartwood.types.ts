@@ -468,6 +468,6 @@ export interface Locale {
 export interface Authorizer {
 	getPermissions(options: {
 		contractId: string
-		permissionsIds: string[]
 	}): Promise<SpruceSchemas.Mercury.v2020_12_25.ResolvedContract>
+	can(options: { contractId: string; permissions: string[] }): Promise<boolean>
 }
