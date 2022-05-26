@@ -468,6 +468,7 @@ export interface Locale {
 export interface AuthorizerCanOptions<PermissionId extends string> {
 	contractId: string
 	permissionIds: PermissionId[]
+	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
 export interface Authorizer {
