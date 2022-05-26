@@ -1,3 +1,10 @@
+# [76.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.0.8...v76.1.0) (2022-05-26)
+
+
+### Features
+
+* date utils on all views accessible via 'this.dates' to make working with dates and times even EASIER ([aa06238](https://github.com/sprucelabsai/heartwood-view-controllers/commit/aa06238))
+
 ## [76.0.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.0.7...v76.0.8) (2022-05-26)
 
 ## [76.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.0.6...v76.0.7) (2022-05-26)
