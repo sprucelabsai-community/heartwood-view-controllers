@@ -329,7 +329,8 @@ export type VoteOptions =
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
 
-export type DateUtils = typeof dateUtil
+type Du = typeof dateUtil
+export interface DateUtils extends Du {}
 
 export interface ViewControllerOptions {
 	vcFactory: ViewControllerFactory
