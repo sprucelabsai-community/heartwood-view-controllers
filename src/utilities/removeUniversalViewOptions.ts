@@ -5,6 +5,7 @@ export const universalViewOptionFields = [
 	'voteHandler',
 	'connectToApi',
 	'device',
+	'dates',
 ] as const
 
 export type UniversalViewOptionFields = typeof universalViewOptionFields[number]
@@ -20,6 +21,7 @@ export default function removeUniversalViewOptions<
 	delete options.connectToApi
 	delete options.voteHandler
 	delete options.device
+	delete options.dates
 
 	return options
 }

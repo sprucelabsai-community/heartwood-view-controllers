@@ -1,5 +1,7 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
+import { DateUtils } from '../..'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
@@ -13,6 +15,10 @@ export class TestViewController extends AbstractViewController<ViewModel> {
 	public constructor(options: any) {
 		super(options)
 		this.constructorOptions = options
+	}
+
+	public getDates() {
+		return this.dates
 	}
 	public render() {
 		return {}
@@ -54,10 +60,12 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		testSkillView: TestSkillViewController,
 	}
 	private static factory: ViewControllerFactory
+	private static vc: TestViewController
 
 	public static async beforeEach() {
 		await super.beforeEach()
 		this.factory = this.Factory()
+		this.vc = this.factory.Controller('test', {})
 	}
 
 	@test()
@@ -95,24 +103,20 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 	@test()
 	protected static async getsVcFactoryInConstructorOptions() {
-		const vc = this.factory.Controller('test', {})
-		assert.isTruthy(vc.constructorOptions.vcFactory)
+		assert.isTruthy(this.vc.constructorOptions.vcFactory)
 	}
 
 	@test()
 	protected static async canGetVcFactory() {
-		const vc = this.factory.Controller('test', {})
-
 		//@ts-ignore
-		assert.isTruthy(vc.getVcFactory())
+		assert.isTruthy(this.vc.getVcFactory())
 		//@ts-ignore
-		assert.isEqual(vc.vcFactory, vc.getVcFactory())
+		assert.isEqual(this.vc.vcFactory, this.vc.getVcFactory())
 	}
 
 	@test()
 	protected static builtVcGetsConnectToApiHandler() {
-		const vc = this.factory.Controller('test', {})
-		assert.isTruthy(vc.constructorOptions.connectToApi)
+		assert.isTruthy(this.vc.constructorOptions.connectToApi)
 	}
 
 	@test()
@@ -130,11 +134,8 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
 	@test()
 	protected static controllersGetIdsSet() {
-		const vc = this.factory.Controller('test', {})
-		assert.isTruthy(vc)
-
 		//@ts-ignore
-		assert.isEqual(vc.id, 'test')
+		assert.isEqual(this.vc.id, 'test')
 	}
 
 	@test()
@@ -194,5 +195,31 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 	protected static canGetVcClass(id: any, Class: any) {
 		const Actual = this.factory.getController(id)
 		assert.isEqual(Actual, Class)
+	}
+
+	@test()
+	protected static async datesIsDateUtil() {
+		this.assertDatesInContructorOptions(dateUtil)
+		this.assertDatesPropEquals(dateUtil)
+	}
+
+	@test()
+	protected static async canPassDateUtilToFactory() {
+		const dates = {} as any
+		this.factory = this.Factory({
+			dates,
+		})
+
+		this.vc = this.factory.Controller('test', {})
+		this.assertDatesInContructorOptions(dates)
+		this.assertDatesPropEquals(dates)
+	}
+
+	private static assertDatesPropEquals(expected: DateUtils) {
+		assert.isEqual(this.vc.getDates(), expected)
+	}
+
+	private static assertDatesInContructorOptions(expected: DateUtils) {
+		assert.isEqual(this.vc.constructorOptions.dates, expected)
 	}
 }

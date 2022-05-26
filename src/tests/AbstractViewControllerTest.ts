@@ -8,7 +8,9 @@ import {
 } from '../types/heartwood.types'
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
-import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
+import ViewControllerFactory, {
+	ViewControllerFactoryOptions,
+} from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
 import StubStorage from './StubStorage'
@@ -45,7 +47,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		this.mercuryFixture?.destroy()
 	}
 
-	protected static Factory() {
+	protected static Factory(options?: Partial<ViewControllerFactoryOptions>) {
 		const mercury = this.mercury
 
 		return ViewControllerFactory.Factory({
@@ -54,6 +56,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 			connectToApi: () => {
 				return mercury.connectToApi()
 			},
+			...options,
 		})
 	}
 

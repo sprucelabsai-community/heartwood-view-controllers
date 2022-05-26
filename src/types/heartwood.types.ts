@@ -1,3 +1,4 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
@@ -328,6 +329,8 @@ export type VoteOptions =
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
 
+export type DateUtils = typeof dateUtil
+
 export interface ViewControllerOptions {
 	vcFactory: ViewControllerFactory
 	connectToApi: () => Promise<Client>
@@ -335,6 +338,7 @@ export interface ViewControllerOptions {
 	confirmHandler: ConfirmHandler
 	voteHandler: VoteHandler
 	device: Device
+	dates: DateUtils
 }
 
 export type FieldRenderOptions<S extends Schema> = {

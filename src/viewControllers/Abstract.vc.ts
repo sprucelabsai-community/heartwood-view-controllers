@@ -12,6 +12,7 @@ import {
 	VoteHandler,
 	VoteOptions,
 	Device,
+	DateUtils,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -32,6 +33,7 @@ export default abstract class AbstractViewController<ViewModel>
 
 	private activeDialog?: any
 	protected connectToApi: () => Promise<Client>
+	protected dates: DateUtils
 	private voteHandler: VoteHandler
 	private device: Device
 	private children: ViewController<any>[] = []
@@ -44,6 +46,7 @@ export default abstract class AbstractViewController<ViewModel>
 		this.connectToApi = options.connectToApi
 		this.voteHandler = options.voteHandler
 		this.device = options.device
+		this.dates = options.dates
 	}
 
 	public abstract render(): ViewModel

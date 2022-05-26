@@ -1,3 +1,4 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { assertOptions } from '@sprucelabs/schema'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
@@ -13,6 +14,7 @@ import {
 	ViewControllerOptions,
 	VoteHandler,
 	Device,
+	DateUtils,
 } from '../types/heartwood.types'
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
@@ -21,6 +23,16 @@ export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 
 type ConnectToApi = () => Promise<MercuryClient>
 
+export interface ViewControllerFactoryOptions {
+	controllerMap?: Record<string, any>
+	renderInDialogHandler?: RenderInDialogHandler
+	voteHandler?: VoteHandler
+	confirmHandler?: ConfirmHandler
+	connectToApi: ConnectToApi
+	device: Device
+	dates?: DateUtils
+}
+
 export default class ViewControllerFactory {
 	private controllerMap: Record<string, any>
 	private renderInDialogHandler: RenderInDialogHandler
@@ -28,6 +40,7 @@ export default class ViewControllerFactory {
 	private connectToApi: ConnectToApi
 	private voteHandler: VoteHandler
 	private device: Device
+	private dates: DateUtils
 
 	public constructor(options: {
 		controllerMap: Record<string, any>
@@ -36,6 +49,7 @@ export default class ViewControllerFactory {
 		connectToApi: ConnectToApi
 		voteHandler: VoteHandler
 		device: Device
+		dates?: DateUtils
 	}) {
 		const {
 			controllerMap,
@@ -44,6 +58,7 @@ export default class ViewControllerFactory {
 			connectToApi,
 			voteHandler,
 			device,
+			dates,
 		} = options
 
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
@@ -52,6 +67,7 @@ export default class ViewControllerFactory {
 		this.connectToApi = connectToApi
 		this.voteHandler = voteHandler
 		this.device = device
+		this.dates = dates ?? dateUtil
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -66,14 +82,7 @@ export default class ViewControllerFactory {
 		this.voteHandler = handler
 	}
 
-	public static Factory(options: {
-		controllerMap?: Record<string, any>
-		renderInDialogHandler?: RenderInDialogHandler
-		voteHandler?: VoteHandler
-		confirmHandler?: ConfirmHandler
-		connectToApi: ConnectToApi
-		device: Device
-	}) {
+	public static Factory(options: ViewControllerFactoryOptions) {
 		const {
 			controllerMap = {},
 			renderInDialogHandler,
@@ -81,12 +90,14 @@ export default class ViewControllerFactory {
 			connectToApi,
 			voteHandler,
 			device,
+			dates,
 		} = assertOptions(options, ['connectToApi', 'device'])
 
 		return new this({
 			controllerMap,
 			connectToApi,
 			device,
+			dates,
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
 			renderInDialogHandler: renderInDialogHandler
@@ -145,6 +156,7 @@ export default class ViewControllerFactory {
 		const constructorOptions = {
 			...options,
 			vcFactory: this,
+			dates: this.dates,
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
 			voteHandler: options?.voteHandler ?? this.voteHandler,
