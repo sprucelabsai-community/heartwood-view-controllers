@@ -7,6 +7,7 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
+import { timezoneChoices } from '@sprucelabs/spruce-core-schemas'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
@@ -461,6 +462,9 @@ export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
 
+type TimezoneChoices = typeof timezoneChoices
+export type TimezoneName = TimezoneChoices[number]['value']
+
 export interface Device {
 	vibrate(): void
 }
@@ -468,6 +472,7 @@ export interface Device {
 export interface Locale {
 	setTimezoneOffsetMinutes(offset: number): void
 	getTimezoneOffsetMinutes(): number
+	zoneNameToOffsetMinutes(name: TimezoneName): number
 }
 
 export interface AuthorizerCanOptions<PermissionId extends string> {

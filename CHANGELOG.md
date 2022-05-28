@@ -1,3 +1,26 @@
+## [77.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.3...v77.0.4) (2022-05-28)
+
+## [77.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.2...v77.0.3) (2022-05-27)
+
+## [77.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.1...v77.0.2) (2022-05-27)
+
+## [77.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.0...v77.0.1) (2022-05-27)
+
+# [77.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.6...v77.0.0) (2022-05-27)
+
+
+### Breaking Changes
+
+* Locale now has zoneNameToOffsetMinutes ([d81c573](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d81c573))
+
+## [76.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.5...v76.1.6) (2022-05-27)
+
+## [76.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.4...v76.1.5) (2022-05-27)
+
+## [76.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.3...v76.1.4) (2022-05-27)
+
+## [76.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.2...v76.1.3) (2022-05-26)
+
 ## [76.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.1...v76.1.2) (2022-05-26)
 
 ## [76.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v76.1.0...v76.1.1) (2022-05-26)
