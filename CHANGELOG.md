@@ -1,3 +1,10 @@
+# [77.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.4...v77.1.0) (2022-05-28)
+
+
+### Features
+
+* new dropdown ([d303714](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d303714))
+
 ## [77.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.3...v77.0.4) (2022-05-28)
 
 ## [77.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.2...v77.0.3) (2022-05-27)
