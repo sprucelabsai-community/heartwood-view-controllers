@@ -4857,7 +4857,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Dropdown {
 			
 				/** Position. */
-				'position'?: ("bottom" | "top" | "right")| undefined | null
+				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
 				
 				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
 				
@@ -4875,7 +4875,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'position': {
 			                label: 'Position',
 			                type: 'select',
-			                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
 			            },
 			            /** . */
 			            'items': {

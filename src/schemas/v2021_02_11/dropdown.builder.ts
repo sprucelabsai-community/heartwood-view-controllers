@@ -12,16 +12,20 @@ export default buildSchema({
 			options: {
 				choices: [
 					{
-						label: 'Bottom',
-						value: 'bottom',
-					},
-					{
 						label: 'Top',
 						value: 'top',
 					},
 					{
 						label: 'Right',
 						value: 'right',
+					},
+					{
+						label: 'Bottom',
+						value: 'bottom',
+					},
+					{
+						label: 'Left',
+						value: 'left',
 					},
 				],
 			},

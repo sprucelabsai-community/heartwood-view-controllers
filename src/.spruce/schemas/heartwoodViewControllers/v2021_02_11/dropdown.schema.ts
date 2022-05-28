@@ -15,7 +15,7 @@ const dropdownSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdow
 	            'position': {
 	                label: 'Position',
 	                type: 'select',
-	                options: {choices: [{"label":"Bottom","value":"bottom"},{"label":"Top","value":"top"},{"label":"Right","value":"right"}],}
+	                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
 	            },
 	            /** . */
 	            'items': {
