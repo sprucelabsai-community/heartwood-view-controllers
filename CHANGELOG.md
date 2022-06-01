@@ -1,3 +1,10 @@
+# [81.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v80.0.0...v81.0.0) (2022-06-01)
+
+
+### Breaking Changes
+
+* spruce upgrade ([548175c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/548175c))
+
 # [80.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v79.0.0...v80.0.0) (2022-06-01)
 
 
