@@ -1,6 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { Schema, SchemaPartialValues } from '@sprucelabs/schema'
-import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
@@ -140,14 +139,14 @@ export default class LoginViewController
 			await this.loginForm.resetField('code')
 
 			const client = await this.connectToApi()
-			const pinResults = await client.emit('request-pin::v2020_12_25', {
-				payload: {
-					phone,
-				},
-			})
-
-			const { challenge } =
-				eventResponseUtil.getFirstResponseOrThrow(pinResults)
+			const [{ challenge }] = await client.emitAndFlattenResponses(
+				'request-pin::v2020_12_25',
+				{
+					payload: {
+						phone,
+					},
+				}
+			)
 
 			this.userChallenge = challenge
 		} catch (err: any) {
@@ -172,18 +171,17 @@ export default class LoginViewController
 	private async handleSubmitPin(pin: string) {
 		this.setIsBusy(true)
 
-		const client = await this.connectToApi()
-
-		const confirmResults = await client.emit('confirm-pin::v2020_12_25', {
-			payload: {
-				challenge: this.userChallenge as string,
-				pin,
-			},
-		})
-
 		try {
-			const { person, token } =
-				eventResponseUtil.getFirstResponseOrThrow(confirmResults)
+			const client = await this.connectToApi()
+			const [{ person, token }] = await client.emitAndFlattenResponses(
+				'confirm-pin::v2020_12_25',
+				{
+					payload: {
+						challenge: this.userChallenge as string,
+						pin,
+					},
+				}
+			)
 
 			Authenticator.getInstance().setSessionToken(token, person)
 
