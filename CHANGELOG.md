@@ -1,3 +1,74 @@
+## [81.0.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.9...v81.0.10) (2022-06-02)
+
+## [81.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.8...v81.0.9) (2022-06-02)
+
+## [81.0.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.7...v81.0.8) (2022-06-02)
+
+## [81.0.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.6...v81.0.7) (2022-06-02)
+
+## [81.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.5...v81.0.6) (2022-06-02)
+
+## [81.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.4...v81.0.5) (2022-06-02)
+
+## [81.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.3...v81.0.4) (2022-06-02)
+
+## [81.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.2...v81.0.3) (2022-06-01)
+
+## [81.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.1...v81.0.2) (2022-06-01)
+
+## [81.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.0...v81.0.1) (2022-06-01)
+
+# [81.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v80.0.0...v81.0.0) (2022-06-01)
+
+
+### Breaking Changes
+
+* spruce upgrade ([548175c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/548175c))
+
+# [80.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v79.0.0...v80.0.0) (2022-06-01)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([c7a1dd1](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c7a1dd1))
+
+# [79.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v78.0.2...v79.0.0) (2022-06-01)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([33b0073](https://github.com/sprucelabsai/heartwood-view-controllers/commit/33b0073))
+
+## [78.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v78.0.1...v78.0.2) (2022-05-31)
+
+## [78.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v78.0.0...v78.0.1) (2022-05-31)
+
+# [78.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.6...v78.0.0) (2022-05-31)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([997a16a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/997a16a))
+
+## [77.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.5...v77.1.6) (2022-05-30)
+
+## [77.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.4...v77.1.5) (2022-05-30)
+
+## [77.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.3...v77.1.4) (2022-05-30)
+
+## [77.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.2...v77.1.3) (2022-05-29)
+
+## [77.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.1...v77.1.2) (2022-05-28)
+
+## [77.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.1.0...v77.1.1) (2022-05-28)
+
+# [77.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.4...v77.1.0) (2022-05-28)
+
+
+### Features
+
+* new dropdown ([d303714](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d303714))
+
 ## [77.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.3...v77.0.4) (2022-05-28)
 
 ## [77.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v77.0.2...v77.0.3) (2022-05-27)
