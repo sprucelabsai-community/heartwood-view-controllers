@@ -112,12 +112,7 @@ export default class FormViewController<
 		}
 	}
 
-	public focusInput(named: string) {
-		console.log(
-			"Focus not set on FormController by heartwood. Can't focus field named:",
-			named
-		)
-	}
+	public focusInput(_named: string) {}
 
 	public async setValue<N extends SchemaFieldNames<S>>(
 		name: N,
