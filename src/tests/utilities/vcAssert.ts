@@ -59,9 +59,9 @@ async function wait(...promises: (Promise<any> | undefined | any)[]) {
 		const done = () => {
 			if (!isDone) {
 				isDone = true
+				clearTimeout(timeout)
 
 				setTimeout(() => {
-					clearTimeout(timeout)
 					//@ts-ignore
 					resolve()
 				}, 0)
@@ -71,6 +71,7 @@ async function wait(...promises: (Promise<any> | undefined | any)[]) {
 		}
 
 		const catcher = (err: any) => {
+			clearTimeout(timeout)
 			if (!isDone) {
 				isDone = true
 				reject(err)

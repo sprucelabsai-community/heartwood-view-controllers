@@ -61,9 +61,8 @@ export default class BigFormViewController<
 		return this.model.sections.length
 	}
 
-	public replaySlideHeading(idx: number) {
-		console.log('replaySlideHeading not overridden by view', idx)
-	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public replaySlideHeading(idx: number) {}
 
 	public async goForward() {
 		await this.jumpToSlide(this.getPresentSlide() + 1)

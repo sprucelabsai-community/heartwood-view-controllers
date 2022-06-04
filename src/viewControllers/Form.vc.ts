@@ -112,7 +112,8 @@ export default class FormViewController<
 		}
 	}
 
-	public focusInput(_named: string) {}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public focusInput(named: string) {}
 
 	public async setValue<N extends SchemaFieldNames<S>>(
 		name: N,

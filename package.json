@@ -60,7 +60,7 @@
     "rebuild": "yarn clean.all && yarn && yarn build.dev",
     "release": "semantic-release",
     "resolve-paths.lint": "yarn build.resolve-paths ; yarn lint",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "update.dependencies": "yarn clean.dependencies && yarn",
     "upgrade.packages": "yarn-upgrade-all && rm -f yarn.lock ; yarn ; yarn fix.lint ; true",
     "upgrade.packages.all": "yarn install && yarn upgrade.packages",
