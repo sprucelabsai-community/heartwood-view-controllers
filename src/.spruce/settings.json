@@ -11,7 +11,8 @@
   },
   "scriptUpdater": {
     "skipped": [
-      "build.tsc"
+      "build.tsc",
+      "test"
     ]
   },
   "skipped": [
