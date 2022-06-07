@@ -140,6 +140,7 @@ export default class ViewControllerExporter {
 					assert: false,
 					'mongodb-client-encryption': false,
 					tty: false,
+					timers: false,
 				},
 			},
 			output: {
