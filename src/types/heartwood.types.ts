@@ -1,4 +1,8 @@
-import { dateUtil } from '@sprucelabs/calendar-utils'
+import {
+	dateUtil,
+	Locale as ILocale,
+	TimezoneName as ITimezoneName,
+} from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
@@ -7,7 +11,6 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
-import { timezoneChoices } from '@sprucelabs/spruce-core-schemas'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
@@ -76,6 +79,7 @@ export type ErrorHandler = (message: string) => void
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 type DidLoginPayload = (payload: { token: string; person: Person }) => void
 type DidLogoutPayload = (payload: { person: Person }) => void
+
 interface Payloads {
 	'did-login': DidLoginPayload
 	'did-logout': DidLogoutPayload
@@ -462,17 +466,17 @@ export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
 
-type TimezoneChoices = typeof timezoneChoices
-export type TimezoneName = TimezoneChoices[number]['value']
+/**
+ * @deprecated moved to @sprucelabs/calendar-utils
+ */
+export type TimezoneName = ITimezoneName
+/**
+ * @deprecated moved to @sprucelabs/calendar-utils
+ */
+export type Locale = ILocale
 
 export interface Device {
 	vibrate(): void
-}
-
-export interface Locale {
-	setTimezoneOffsetMinutes(offset: number): void
-	getTimezoneOffsetMinutes(): number
-	zoneNameToOffsetMinutes(name: TimezoneName): number
 }
 
 export interface AuthorizerCanOptions<PermissionId extends string> {
