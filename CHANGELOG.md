@@ -1,3 +1,10 @@
+# [81.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.31...v81.1.0) (2022-06-07)
+
+
+### Features
+
+* can get timezoneOffset from calendar ([8e5192c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8e5192c))
+
 ## [81.0.31](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.30...v81.0.31) (2022-06-07)
 
 ## [81.0.30](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.0.29...v81.0.30) (2022-06-07)
