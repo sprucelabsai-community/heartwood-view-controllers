@@ -144,6 +144,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
+	public getTimezoneOffsetMs(): any {
+		return this.model.timezoneOffsetMs
+	}
+
 	public getShifts() {
 		return this.model.shifts
 	}

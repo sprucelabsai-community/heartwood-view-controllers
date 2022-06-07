@@ -139,7 +139,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static canSetTimezoneOffset(time: number) {
 		this.vc.setTimezoneOffsetMs(time)
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
-		assert.isEqualDeep(this.render(this.vc).timezoneOffsetMs, time)
+		assert.isEqual(this.render(this.vc).timezoneOffsetMs, time)
+		assert.isEqual(this.vc.getTimezoneOffsetMs(), time)
 	}
 
 	@test()
