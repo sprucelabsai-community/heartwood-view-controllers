@@ -1,5 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
+import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import autocompleteAssert from '../../../tests/utilities/autocompleteAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import AutocompleteInputViewController, {
 	AutocompleteInputViewControllerOptions,
@@ -76,6 +78,121 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	) {
 		this.vc.showSuggestions(suggestions)
 		assert.isEqualDeep(this.renderVc().suggestions, suggestions)
+	}
+
+	@test()
+	protected static async assertShowThrowsWhenMissing() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			autocompleteAssert.assertActionShowsSuggestions()
+		)
+
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'action'],
+		})
+	}
+
+	@test()
+	protected static async assertHideThrowsWhenMissing() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			autocompleteAssert.assertActionHidesSuggestions()
+		)
+
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'action'],
+		})
+	}
+
+	@test()
+	protected static async assertingShowThrowsIfDropdownNotOpened() {
+		await assert.doesThrowAsync(
+			() => autocompleteAssert.assertActionShowsSuggestions(this.vc, () => {}),
+			'showSuggestions'
+		)
+	}
+
+	@test()
+	protected static async assertingHideThrowsIfDropdownNotOpened() {
+		await assert.doesThrowAsync(
+			() => autocompleteAssert.assertActionHidesSuggestions(this.vc, () => {}),
+			'hideSuggestions'
+		)
+	}
+
+	@test()
+	protected static async assertingShowPassesWhenSuggestionsShown() {
+		await this.assertShowsSuggestions()
+	}
+
+	@test()
+	protected static async assertingHidePassesWhenSuggestionsHidden() {
+		await autocompleteAssert.assertActionHidesSuggestions(this.vc, async () => {
+			this.vc.hideSuggestions()
+		})
+	}
+
+	@test()
+	protected static async assertionCallsOriginalShowSuggestions() {
+		let wasHit = false
+		let passedSuggestions: AutocompleteSuggestion[] = []
+
+		this.vc.showSuggestions = (suggestions) => {
+			wasHit = true
+			passedSuggestions = suggestions
+		}
+
+		const suggestions: AutocompleteSuggestion[] = [{ id: 'test', label: 'me' }]
+
+		await this.assertShowsSuggestions(suggestions)
+
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedSuggestions, suggestions)
+	}
+
+	@test("throws when showing suggestions don't match 1", ['one'], ['two'])
+	@test("throws when showing suggestions don't match 1", ['two'], ['one'])
+	protected static async assertShowThrowsWhenSuggestionIdsDontMatch(
+		ids: string[],
+		checks: string[]
+	) {
+		const suggestions = ids.map((id) => ({ id, label: id }))
+
+		await assert.doesThrowAsync(
+			() => this.assertShowsSuggestions(suggestions, checks),
+			'do not match'
+		)
+	}
+
+	@test(
+		'passes when showing suggestions that match in order',
+		['two', 'five'],
+		['two', 'five']
+	)
+	@test(
+		'passes when showing suggestions that match out of order',
+		['two', 'five'],
+		['five', 'two']
+	)
+	protected static async passesWhenSuggestionIdsDoMatch(
+		ids: string[],
+		checks: string[]
+	) {
+		const suggestions = ids.map((id) => ({ id, label: id }))
+		await this.assertShowsSuggestions(suggestions, checks)
+	}
+
+	private static async assertShowsSuggestions(
+		suggestions: AutocompleteSuggestion[] = [],
+		expectedSuggestionIds?: string[]
+	) {
+		await autocompleteAssert.assertActionShowsSuggestions(
+			this.vc,
+			async () => {
+				this.vc.showSuggestions(suggestions)
+			},
+			expectedSuggestionIds
+		)
 	}
 
 	private static async assertGetSetValue(value: string) {
