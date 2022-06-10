@@ -210,14 +210,14 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async settingValueWithoutRenderedValueDoesNotClearRenderedValue() {
 		this.setRenderedValue('yo')
-		this.setValue('hey')
+		await this.setValue('hey')
 		this.assertRenderedValueEquals('yo')
 	}
 
 	@test()
 	protected static async passingNullToSetValueClearsRenderedValue() {
 		this.setRenderedValue('yo')
-		this.setValue('hey', null)
+		await this.setValue('hey', null)
 		this.assertRenderedValueEquals(null)
 	}
 
