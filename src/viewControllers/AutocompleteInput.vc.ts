@@ -40,8 +40,10 @@ export default class AutocompleteInputViewController
 	}
 }
 
-type ViewModel =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput
+type ViewModel = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput,
+	'name'
+>
 export interface AutocompleteInputViewControllerOptions extends ViewModel {}
 export type AutocompleteSuggestion =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion

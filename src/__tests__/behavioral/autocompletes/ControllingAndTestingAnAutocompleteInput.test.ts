@@ -19,7 +19,6 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static passesOptionsThroughToRender() {
 		const options: AutocompleteInputViewControllerOptions = {
-			name: generateId(),
 			hint: generateId(),
 			value: generateId(),
 		}
@@ -210,7 +209,6 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 	private static Vc(options?: Partial<AutocompleteInputViewControllerOptions>) {
 		return this.Controller('autocompleteInput', {
-			name: 'test',
 			...options,
 		})
 	}
