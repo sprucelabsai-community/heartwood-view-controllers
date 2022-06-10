@@ -1,11 +1,11 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, dropFields } from '@sprucelabs/schema'
 import textInputBuilder from './forms/textInput.builder'
 
 export default buildSchema({
 	id: 'autocompleteInput',
 	name: 'Autocomplete input',
 	fields: {
-		...textInputBuilder.fields,
+		...dropFields(textInputBuilder.fields, ['name']),
 		controller: {
 			type: 'raw',
 			label: 'Controller',

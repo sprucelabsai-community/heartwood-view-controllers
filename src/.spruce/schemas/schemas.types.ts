@@ -5408,8 +5408,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string| undefined | null
 				
-				'name': string
-				
 				'value'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
@@ -5439,12 +5437,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'id': {
 			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'name': {
-			                type: 'text',
-			                isRequired: true,
 			                options: undefined
 			            },
 			            /** . */

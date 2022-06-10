@@ -8,7 +8,7 @@ import AbstractViewController from './Abstract.vc'
 
 export default class AutocompleteInputViewController
 	extends AbstractViewController<ViewModel>
-	implements FormFieldViewController
+	implements FormFieldViewController<ViewModel>
 {
 	private model: ViewModel
 
@@ -36,14 +36,12 @@ export default class AutocompleteInputViewController
 	}
 
 	public render(): ViewModel {
-		return this.model
+		return { ...this.model, controller: this }
 	}
 }
 
-type ViewModel = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput,
-	'name'
->
+type ViewModel =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput
 export interface AutocompleteInputViewControllerOptions extends ViewModel {}
 export type AutocompleteSuggestion =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion

@@ -16,12 +16,6 @@ const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	                options: undefined
 	            },
 	            /** . */
-	            'name': {
-	                type: 'text',
-	                isRequired: true,
-	                options: undefined
-	            },
-	            /** . */
 	            'value': {
 	                type: 'text',
 	                isPrivate: true,

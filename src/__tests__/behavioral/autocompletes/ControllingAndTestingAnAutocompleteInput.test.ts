@@ -25,7 +25,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 		this.vc = this.Vc(options)
 		const model = this.renderVc()
-		assert.isEqualDeep(model, options)
+		assert.isEqualDeep(model, { ...options, controller: this.vc })
 	}
 
 	@test()
@@ -179,6 +179,12 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	) {
 		const suggestions = ids.map((id) => ({ id, label: id }))
 		await this.assertShowsSuggestions(suggestions, checks)
+	}
+
+	@test()
+	protected static async autocompleteRendersSelfAsController() {
+		const model = this.render(this.vc)
+		assert.isEqual(model.controller, this.vc)
 	}
 
 	private static async assertShowsSuggestions(
