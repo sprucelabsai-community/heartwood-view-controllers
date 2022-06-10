@@ -5423,6 +5423,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
 				
 				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[]| undefined | null
 		}
@@ -5485,6 +5487,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Placeholder',
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
 			            },
 			            /** . */
 			            'suggestions': {

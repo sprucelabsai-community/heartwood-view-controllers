@@ -342,7 +342,9 @@ export type VoteHandler = (options: VoteOptions) => Promise<void>
 type Du = typeof dateUtil
 export interface DateUtils extends Du {}
 
-export interface FormFieldViewController extends ViewController<any> {
+export interface FormFieldViewController<
+	View extends Record<string, any> = Record<string, any>
+> extends ViewController<View> {
 	setValue(value: any): Promise<void> | void
 	getValue(): any
 }

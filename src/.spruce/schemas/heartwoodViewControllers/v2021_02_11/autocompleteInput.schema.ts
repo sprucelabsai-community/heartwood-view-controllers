@@ -62,6 +62,12 @@ const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
+	            },
 	            /** . */
 	            'suggestions': {
 	                type: 'schema',

@@ -6,6 +6,14 @@ export default buildSchema({
 	name: 'Autocomplete input',
 	fields: {
 		...textInputBuilder.fields,
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType:
+					'HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>',
+			},
+		},
 		suggestions: {
 			type: 'schema',
 			isArray: true,
