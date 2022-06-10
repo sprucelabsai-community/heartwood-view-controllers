@@ -187,6 +187,49 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		assert.isEqual(model.controller, this.vc)
 	}
 
+	@test()
+	protected static async settingValueWithRenderedValueUpdatesModel() {
+		const renderedValue = generateId()
+		await this.setValue('hey', renderedValue)
+		this.assertRenderedValueEquals(renderedValue)
+	}
+
+	@test()
+	protected static async canSetRenderedValueDirectly() {
+		const renderedValue = generateId()
+		this.setRenderedValue(renderedValue)
+		this.assertRenderedValueEquals(renderedValue)
+	}
+
+	@test()
+	protected static async renderedValueTriggersRender() {
+		this.vc.setRenderedValue('aeou')
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async settingValueWithoutRenderedValueDoesNotClearRenderedValue() {
+		this.setRenderedValue('yo')
+		this.setValue('hey')
+		this.assertRenderedValueEquals('yo')
+	}
+
+	@test()
+	protected static async passingNullToSetValueClearsRenderedValue() {
+		this.setRenderedValue('yo')
+		this.setValue('hey', null)
+		this.assertRenderedValueEquals(null)
+	}
+
+	private static setRenderedValue(renderedValue: string) {
+		this.vc.setRenderedValue(renderedValue)
+	}
+
+	private static assertRenderedValueEquals(renderedValue: string | null) {
+		const model = this.render(this.vc)
+		assert.isEqual(model.renderedValue, renderedValue)
+	}
+
 	private static async assertShowsSuggestions(
 		suggestions: AutocompleteSuggestion[] = [],
 		expectedSuggestionIds?: string[]
@@ -205,8 +248,8 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		assert.isEqual(this.vc.getValue(), value)
 	}
 
-	private static async setValue(value: string) {
-		await this.vc.setValue(value)
+	private static async setValue(value: string, renderedValue?: string | null) {
+		await this.vc.setValue(value, renderedValue)
 	}
 
 	private static renderVc() {

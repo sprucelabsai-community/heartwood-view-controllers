@@ -19,10 +19,21 @@ export default class AutocompleteInputViewController
 		this.model = removeUniversalViewOptions(options)
 	}
 
-	public async setValue(value: string) {
+	public async setValue(value: string, renderedValue?: string | null) {
 		this.model.value = value
-		this.triggerRender()
+
+		if (typeof renderedValue !== 'undefined') {
+			this.setRenderedValue(renderedValue)
+		} else {
+			this.triggerRender()
+		}
+
 		await this.model.onChange?.(value)
+	}
+
+	public setRenderedValue(renderedValue: any) {
+		this.model.renderedValue = renderedValue
+		this.triggerRender()
 	}
 
 	public getValue() {

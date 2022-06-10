@@ -345,7 +345,8 @@ export interface DateUtils extends Du {}
 export interface FormFieldViewController<
 	View extends Record<string, any> = Record<string, any>
 > extends ViewController<View> {
-	setValue(value: any): Promise<void> | void
+	setValue(value: any, renderedValue?: any): Promise<void> | void
+	setRenderedValue?: (renderedValue: any) => void
 	getValue(): any
 }
 
