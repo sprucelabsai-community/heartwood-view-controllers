@@ -1,3 +1,10 @@
+# [81.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.2.0...v81.3.0) (2022-06-10)
+
+
+### Features
+
+* auto complete assertion library to make testing autocomplete even FASTER ([deddda2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/deddda2))
+
 # [81.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.1.12...v81.2.0) (2022-06-10)
 
 
