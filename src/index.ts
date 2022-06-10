@@ -32,6 +32,7 @@ export { default as StatsViewController } from './viewControllers/reporting/Stat
 export { default as ProgressViewController } from './viewControllers/reporting/Progress.vc'
 export { default as RatingsViewController } from './viewControllers/Ratings.vc'
 export { default as AbstractCalendarEventViewController } from './viewControllers/AbstractCalendarEvent.vc'
+export { default as AutocompleteInputViewController } from './viewControllers/AutocompleteInput.vc'
 export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 export { default as buildActiveRecordList } from './builders/buildActiveRecordList'
 
@@ -106,6 +107,8 @@ export { default as receiptSectionSchema } from '#spruce/schemas/heartwoodViewCo
 export { default as receiptTotalSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receiptTotal.schema'
 export { default as calendarShiftSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarShift.schema'
 export { default as feedSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
+export { default as autocompleteInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/autocompleteInput.schema'
+export { default as autocompleteSuggestionSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/autocompleteSuggestion.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

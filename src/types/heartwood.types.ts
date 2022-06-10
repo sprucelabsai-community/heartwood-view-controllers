@@ -19,6 +19,9 @@ import ActiveRecordCardViewController, {
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordList.vc'
+import AutocompleteInputViewController, {
+	AutocompleteInputViewControllerOptions,
+} from '../viewControllers/AutocompleteInput.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -268,6 +271,7 @@ export interface ViewControllerMap {
 	stats: StatsViewController
 	progress: ProgressViewController
 	ratings: RatingsViewController
+	autocompleteInput: AutocompleteInputViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -290,6 +294,7 @@ export interface ViewControllerOptionsMap {
 	stats: StatsViewControllerOptions
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions
+	autocompleteInput: AutocompleteInputViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

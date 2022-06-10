@@ -1,13 +1,13 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
+import autocompleteSuggestionSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/autocompleteSuggestion.schema'
 
-
-const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PhoneInputSchema  = {
-	id: 'phoneInput',
+const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInputSchema  = {
+	id: 'autocompleteInput',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: 'Phone input',
+	name: 'Autocomplete input',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -23,9 +23,9 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	            },
 	            /** . */
 	            'value': {
-	                type: 'raw',
+	                type: 'text',
 	                isPrivate: true,
-	                options: {valueType: `any`,}
+	                options: undefined
 	            },
 	            /** Label. */
 	            'label': {
@@ -56,9 +56,21 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	                type: 'raw',
 	                options: {valueType: `(value: string) => void | Promise<void>`,}
 	            },
+	            /** Placeholder. */
+	            'placeholder': {
+	                label: 'Placeholder',
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'suggestions': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: autocompleteSuggestionSchema_v2021_02_11,}
+	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(phoneInputSchema)
+SchemaRegistry.getInstance().trackSchema(autocompleteInputSchema)
 
-export default phoneInputSchema
+export default autocompleteInputSchema

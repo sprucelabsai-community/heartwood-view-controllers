@@ -54,7 +54,7 @@ const addressInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Add
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value: string) => void | boolean | Promise<void | boolean>`,}
+	                options: {valueType: `(value: string) => void | Promise<void>`,}
 	            },
 	    }
 }

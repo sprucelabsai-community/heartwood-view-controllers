@@ -1,5 +1,6 @@
 import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController from './viewControllers/activeRecord/ActiveRecordList.vc'
+import AutocompleteInputViewController from './viewControllers/AutocompleteInput.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonBarViewController from './viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
@@ -36,4 +37,5 @@ export const CORE_CONTROLLER_MAP = {
 	stats: StatsViewController,
 	progress: ProgressViewController,
 	ratings: RatingsViewController,
+	autocompleteInput: AutocompleteInputViewController,
 }
