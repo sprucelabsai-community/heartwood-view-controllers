@@ -9,7 +9,10 @@ export default buildSchema({
 		...inputBuilder.fields,
 		value: {
 			type: 'text',
-			isPrivate: true,
+		},
+		renderedValue: {
+			type: 'text',
+			hint: `If you need the text input to render a value other than what is stored (a person's name vs. their id).`,
 		},
 		placeholder: {
 			type: 'text',

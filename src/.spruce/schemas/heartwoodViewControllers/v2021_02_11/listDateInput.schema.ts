@@ -24,7 +24,6 @@ const listDateInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	            /** . */
 	            'value': {
 	                type: 'text',
-	                isPrivate: true,
 	                options: undefined
 	            },
 	            /** Label. */
@@ -55,6 +54,12 @@ const listDateInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	                label: 'On change handler',
 	                type: 'raw',
 	                options: {valueType: `(value: string) => void | Promise<void>`,}
+	            },
+	            /** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+	            'renderedValue': {
+	                type: 'text',
+	                hint: 'If you need the text input to render a value other than what is saved (a person\'s name vs. their id).',
+	                options: undefined
 	            },
 	            /** Placeholder. */
 	            'placeholder': {
