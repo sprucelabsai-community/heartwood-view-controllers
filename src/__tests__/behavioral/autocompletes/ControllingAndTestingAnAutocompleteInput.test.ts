@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import autocompleteAssert from '../../../tests/utilities/autocompleteAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -214,8 +214,4 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 			...options,
 		})
 	}
-}
-
-function generateId(): string {
-	return `${new Date().getTime() * Math.random()}`
 }

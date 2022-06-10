@@ -342,6 +342,11 @@ export type VoteHandler = (options: VoteOptions) => Promise<void>
 type Du = typeof dateUtil
 export interface DateUtils extends Du {}
 
+export interface FormFieldViewController extends ViewController<any> {
+	setValue(value: any): Promise<void> | void
+	getValue(): any
+}
+
 export interface ViewControllerOptions {
 	vcFactory: ViewControllerFactory
 	connectToApi: () => Promise<Client>
@@ -365,6 +370,7 @@ export type FieldRenderOptions<S extends Schema> = {
 	placeholder?: string
 	label?: string
 	hint?: string
+	vc?: FormFieldViewController
 }
 
 export interface DropdownController {

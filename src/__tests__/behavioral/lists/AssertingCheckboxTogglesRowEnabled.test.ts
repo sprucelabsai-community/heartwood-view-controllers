@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import ListViewController, {
@@ -119,7 +119,3 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
 
 type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 type Cell = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
-
-function generateId(): string {
-	return `${new Date().getTime() * Math.random()}`
-}

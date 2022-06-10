@@ -160,6 +160,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface NoFieldVcSet {
+		
+			
+			'fieldName': string
+	}
+
+	export interface NoFieldVcSetSchema extends SpruceSchema.Schema {
+		id: 'noFieldVcSet',
+		namespace: 'HeartwoodViewControllers',
+		name: 'No field vc set',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'fieldName': {
+		                type: 'text',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type NoFieldVcSetEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.NoFieldVcSetSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface MissingStorage {
 		
 	}

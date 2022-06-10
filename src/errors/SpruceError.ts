@@ -83,6 +83,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `The cell you tried to render has been deleted!`
 				break
 
+			case 'NO_FIELD_VC_SET':
+				message = `You tried to get a view controller for '${options.fieldName}', but one was not set!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

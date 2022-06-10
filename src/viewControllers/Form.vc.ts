@@ -15,6 +15,7 @@ import {
 } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
 import { defaultSubmitButtonLabel } from '../constants'
+import SpruceError from '../errors/SpruceError'
 import {
 	FormErrorsByField,
 	ViewController,
@@ -23,6 +24,7 @@ import {
 	FieldRenderOptions,
 	FormOnChangeOptions,
 	FormWillChangeOptions,
+	FormFieldViewController,
 } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
@@ -52,7 +54,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 
 const cloneAndRetainControllers = function (obj: Record<string, any>) {
 	return cloneDeepWith(obj, (value, key) => {
-		if (key === 'controller') {
+		if (key === 'controller' || key === 'vc') {
 			return value
 		}
 	})
@@ -144,6 +146,13 @@ export default class FormViewController<
 			return
 		}
 
+		if (this.isFieldBeingRendered(name)) {
+			const vc = this._getFieldVc(name)
+			if (vc) {
+				await vc.setValue(value)
+			}
+		}
+
 		this.model.values[name] = value
 
 		if (shouldSetIsDirty) {
@@ -155,6 +164,30 @@ export default class FormViewController<
 		await this.emitOnChange(errorsByField)
 
 		this.setErrorsByField(errorsByField)
+	}
+
+	private isFieldBeingRendered(name: SchemaFieldNames<S>) {
+		const { sectionIdx } = this.getSectionAndFieldForFieldNamed(name)
+		const isBeingRendered = sectionIdx > -1
+		return isBeingRendered
+	}
+
+	public getFieldVc(fieldName: SchemaFieldNames<S>): FormFieldViewController {
+		const vc = this._getFieldVc(fieldName)
+		if (!vc) {
+			throw new SpruceError({
+				code: 'NO_FIELD_VC_SET',
+				fieldName,
+			})
+		}
+
+		return vc
+	}
+
+	private _getFieldVc(fieldName: SchemaFieldNames<S>) {
+		const field = this.getField(fieldName)
+		const vc = field.compiledOptions.vc
+		return vc
 	}
 
 	private async emitWillChange(changes: SchemaPartialValues<S>) {

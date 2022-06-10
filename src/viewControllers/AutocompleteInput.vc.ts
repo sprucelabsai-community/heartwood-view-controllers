@@ -1,9 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { ViewControllerOptions } from '..'
+import {
+	FormFieldViewController,
+	ViewControllerOptions,
+} from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
-export default class AutocompleteInputViewController extends AbstractViewController<ViewModel> {
+export default class AutocompleteInputViewController
+	extends AbstractViewController<ViewModel>
+	implements FormFieldViewController
+{
 	private model: ViewModel
 
 	public constructor(
