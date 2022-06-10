@@ -1,3 +1,10 @@
+# [81.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.1.12...v81.2.0) (2022-06-10)
+
+
+### Features
+
+* autocomplete field in place to make searching for things in heartwood even more INTUITIVE! ([c15489d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c15489d))
+
 ## [81.1.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.1.11...v81.1.12) (2022-06-09)
 
 ## [81.1.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.1.10...v81.1.11) (2022-06-09)
