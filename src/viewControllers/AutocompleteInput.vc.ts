@@ -10,7 +10,6 @@ export default class AutocompleteInputViewController extends AbstractViewControl
 		options: ViewControllerOptions & AutocompleteInputViewControllerOptions
 	) {
 		super(options)
-
 		this.model = removeUniversalViewOptions(options)
 	}
 
