@@ -1,3 +1,10 @@
+# [81.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.3.0...v81.4.0) (2022-06-10)
+
+
+### Features
+
+* form vc's can now render fields using custom vc's, making forms even more EXTENSIBLE! ([6d4e6cd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6d4e6cd))
+
 # [81.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.2.0...v81.3.0) (2022-06-10)
 
 
