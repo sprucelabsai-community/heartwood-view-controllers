@@ -119,7 +119,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
@@ -177,10 +177,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 			            'renderedValue': {
 			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is saved (a person\'s name vs. their id).',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
 			            },
 			            /** Placeholder. */
@@ -3613,7 +3613,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
@@ -3673,10 +3673,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 			            'renderedValue': {
 			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is saved (a person\'s name vs. their id).',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
 			            },
 			            /** Placeholder. */
@@ -3719,7 +3719,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
@@ -3779,10 +3779,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 			            'renderedValue': {
 			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is saved (a person\'s name vs. their id).',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
 			            },
 			            /** Placeholder. */
@@ -5440,7 +5440,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
@@ -5496,10 +5496,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is saved (a person's name vs. their id). */
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 			            'renderedValue': {
 			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is saved (a person\'s name vs. their id).',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
 			            },
 			            /** Placeholder. */
