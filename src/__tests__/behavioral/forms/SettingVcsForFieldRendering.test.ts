@@ -1,4 +1,4 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, SchemaFieldNames } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
@@ -15,14 +15,22 @@ class SpyTextFieldInput
 {
 	public value?: string
 	public name: string
+	public renderedValue?: string | null
 
 	public constructor(options: ViewControllerOptions & { name: string }) {
 		super(options)
 		this.name = options.name
 	}
 
-	public async setValue(value: string) {
+	public async setValue(value: string, renderedValue?: string | null) {
 		this.value = value
+		if (typeof renderedValue !== 'undefined') {
+			this.renderedValue = renderedValue
+		}
+	}
+
+	public async setRenderedValue(renderedValue: string) {
+		this.renderedValue = renderedValue
 	}
 
 	public getValue() {}
@@ -104,6 +112,33 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		const value = generateId()
 		await this.formVc.setValue('firstName', value)
 		assert.isEqual(this.firstNameVc.value, value)
+	}
+
+	@test('form decorates set value 1', 'new value')
+	@test('form decorates set value 2', 'another value')
+	protected static async formDecoratesSetValueOnVc(
+		name: SchemaFieldNames<FormSchema>,
+		value: string
+	) {
+		await this.firstNameVc.setValue(value)
+		assert.isEqual(this.formVc.getValue('firstName'), value)
+
+		await this.emailVc.setValue(value)
+		assert.isEqual(this.formVc.getValue('email'), value)
+	}
+
+	@test()
+	protected static async formVcCanStillSetRenderedValue() {
+		const rendered = generateId()
+		this.firstNameVc.setValue('hey', rendered)
+		assert.isEqual(this.firstNameVc.renderedValue, rendered)
+	}
+
+	@test()
+	protected static async settingValueDoesNotClearRenderedValue() {
+		this.firstNameVc.setRenderedValue('hey!')
+		await this.formVc.setValue('firstName', 'waka')
+		assert.isEqual(this.firstNameVc.renderedValue, 'hey!')
 	}
 }
 

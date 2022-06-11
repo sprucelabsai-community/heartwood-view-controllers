@@ -16,6 +16,7 @@ export default class AutocompleteInputViewController
 		options: ViewControllerOptions & AutocompleteInputViewControllerOptions
 	) {
 		super(options)
+
 		this.model = removeUniversalViewOptions(options)
 	}
 

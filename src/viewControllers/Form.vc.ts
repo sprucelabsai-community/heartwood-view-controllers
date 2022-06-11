@@ -112,6 +112,23 @@ export default class FormViewController<
 				isEnabled: false,
 			}
 		}
+
+		this.decorateFieldVcs()
+	}
+
+	private decorateFieldVcs() {
+		this.getVisibleFields().forEach((name) => {
+			const vc = this._getFieldVc(name)
+			if (vc) {
+				vc._originalSetValue = vc.setValue.bind(vc)
+				vc.setValue = async (value: any, renderedValue?: any | null) => {
+					if (renderedValue) {
+						vc.setRenderedValue?.(renderedValue)
+					}
+					return this.setValue(name, value as any)
+				}
+			}
+		})
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -149,7 +166,7 @@ export default class FormViewController<
 		if (this.isFieldBeingRendered(name)) {
 			const vc = this._getFieldVc(name)
 			if (vc) {
-				await vc.setValue(value)
+				await vc._originalSetValue?.(value)
 			}
 		}
 
@@ -187,7 +204,9 @@ export default class FormViewController<
 	private _getFieldVc(fieldName: SchemaFieldNames<S>) {
 		const field = this.getField(fieldName)
 		const vc = field.compiledOptions.vc
-		return vc
+		return vc as FormFieldViewController & {
+			_originalSetValue?: FormFieldViewController['setValue']
+		}
 	}
 
 	private async emitWillChange(changes: SchemaPartialValues<S>) {
@@ -288,7 +307,7 @@ export default class FormViewController<
 	private getVisibleFields(): SchemaFieldNames<S>[] {
 		const fields = []
 
-		for (const section of this.model.sections) {
+		for (const section of this.model.sections ?? []) {
 			if (section.fields) {
 				//@ts-ignore
 				fields.push(...section.fields.map((f) => f.name || f))
