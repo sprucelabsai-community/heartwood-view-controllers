@@ -29,7 +29,7 @@ class SpyTextFieldInput
 		}
 	}
 
-	public async setRenderedValue(renderedValue: string) {
+	public setRenderedValue(renderedValue: string) {
 		this.renderedValue = renderedValue
 	}
 
@@ -130,7 +130,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	@test()
 	protected static async formVcCanStillSetRenderedValue() {
 		const rendered = generateId()
-		this.firstNameVc.setValue('hey', rendered)
+		await this.firstNameVc.setValue('hey', rendered)
 		assert.isEqual(this.firstNameVc.renderedValue, rendered)
 	}
 
