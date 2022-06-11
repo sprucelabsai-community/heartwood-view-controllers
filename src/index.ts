@@ -33,6 +33,7 @@ export { default as ProgressViewController } from './viewControllers/reporting/P
 export { default as RatingsViewController } from './viewControllers/Ratings.vc'
 export { default as AbstractCalendarEventViewController } from './viewControllers/AbstractCalendarEvent.vc'
 export { default as AutocompleteInputViewController } from './viewControllers/form/AutocompleteInput.vc'
+export * from './viewControllers/form/AutocompleteInput.vc'
 export { default as AbstractInputViewController } from './viewControllers/form/AbstractInput.vc'
 export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 export { default as buildActiveRecordList } from './builders/buildActiveRecordList'
