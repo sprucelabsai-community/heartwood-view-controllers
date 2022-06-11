@@ -347,6 +347,7 @@ export interface FormFieldViewController<
 > extends ViewController<View> {
 	setValue(value: any, renderedValue?: any): Promise<void> | void
 	setRenderedValue?: (renderedValue: any) => void
+	getRenderedValue?: () => any
 	getValue(): any
 }
 

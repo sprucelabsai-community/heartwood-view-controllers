@@ -42,5 +42,12 @@ export default buildSchema({
 				valueType: '(value: string) => void | Promise<void>',
 			},
 		},
+		onChangeRenderedValue: {
+			type: 'raw',
+			label: 'On changed rendered value handler',
+			options: {
+				valueType: '(value: string) => void | Promise<void>',
+			},
+		},
 	},
 })

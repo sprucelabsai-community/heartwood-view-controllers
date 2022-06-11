@@ -100,7 +100,8 @@ export default class FormViewController<
 			id: id ?? `${new Date().getTime()}`,
 			errorsByField: {},
 			controller: this,
-			setValue: this.setValue.bind(this),
+			setValue: (name, value) =>
+				this._setValue({ name, value, shouldSetRenderedValueIfExists: true }),
 		}
 
 		//@ts-ignore
@@ -122,10 +123,10 @@ export default class FormViewController<
 			if (vc) {
 				vc._originalSetValue = vc.setValue.bind(vc)
 				vc.setValue = async (value: any, renderedValue?: any | null) => {
+					await this.setValue(name, value as any)
 					if (renderedValue) {
 						vc.setRenderedValue?.(renderedValue)
 					}
-					return this.setValue(name, value as any)
 				}
 			}
 		})
@@ -145,8 +146,14 @@ export default class FormViewController<
 		name: N
 		value: SchemaPartialValues<S>[N]
 		shouldSetIsDirty?: boolean
+		shouldSetRenderedValueIfExists?: boolean
 	}) {
-		const { name, value, shouldSetIsDirty = true } = options
+		let {
+			name,
+			value,
+			shouldSetIsDirty = true,
+			shouldSetRenderedValueIfExists = false,
+		} = options
 
 		if (!this.getSchema().fields?.[name]) {
 			throw new SchemaError({
@@ -163,14 +170,24 @@ export default class FormViewController<
 			return
 		}
 
+		let shouldSetValueLocally = true
+
 		if (this.isFieldBeingRendered(name)) {
 			const vc = this._getFieldVc(name)
 			if (vc) {
-				await vc._originalSetValue?.(value)
+				if (shouldSetRenderedValueIfExists && vc.getRenderedValue?.()) {
+					shouldSetIsDirty = false
+					shouldSetValueLocally = false
+					vc.setRenderedValue?.(value)
+				} else {
+					await vc._originalSetValue?.(value)
+				}
 			}
 		}
 
-		this.model.values[name] = value
+		if (shouldSetValueLocally) {
+			this.model.values[name] = value
+		}
 
 		if (shouldSetIsDirty) {
 			this.dirtyFields[name] = true
@@ -340,6 +357,10 @@ export default class FormViewController<
 	public setIsBusy(isBusy: boolean) {
 		this.model.isBusy = isBusy
 		this.triggerRender()
+	}
+
+	public getIsDirty() {
+		return Object.keys(this.dirtyFields).length > 0
 	}
 
 	public async submit() {

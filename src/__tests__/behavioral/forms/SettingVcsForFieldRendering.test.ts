@@ -2,10 +2,13 @@ import { buildSchema, SchemaFieldNames } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
-import { FormFieldViewController } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ViewControllerOptions } from '../../../types/heartwood.types'
+import {
+	FormFieldViewController,
+	ViewControllerOptions,
+} from '../../../types/heartwood.types'
+import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import FormViewController from '../../../viewControllers/Form.vc'
 
@@ -16,10 +19,12 @@ class SpyTextFieldInput
 	public value?: string
 	public name: string
 	public renderedValue?: string | null
+	public model: TextInput
 
 	public constructor(options: ViewControllerOptions & { name: string }) {
 		super(options)
 		this.name = options.name
+		this.model = removeUniversalViewOptions(options)
 	}
 
 	public async setValue(value: string, renderedValue?: string | null) {
@@ -33,12 +38,14 @@ class SpyTextFieldInput
 		this.renderedValue = renderedValue
 	}
 
+	public getRenderedValue() {
+		return this.renderedValue
+	}
+
 	public getValue() {}
 
 	public render(): TextInput {
-		return {
-			name: 'test',
-		}
+		return this.model
 	}
 }
 
@@ -53,13 +60,11 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.firstNameVc = this.Controller('textInput' as any, {
-			name: 'firstName',
-		}) as SpyTextFieldInput
+		this.firstNameVc = this.SpyInputVc({ name: 'firstName' })
 
-		this.emailVc = this.Controller('textInput' as any, {
+		this.emailVc = this.SpyInputVc({
 			name: 'email',
-		}) as SpyTextFieldInput
+		})
 
 		this.formVc = this.Controller(
 			'form',
@@ -87,6 +92,12 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 				],
 			})
 		)
+	}
+
+	private static SpyInputVc(options: TextInput): SpyTextFieldInput {
+		return this.Controller('textInput' as any, {
+			...options,
+		}) as SpyTextFieldInput
 	}
 
 	@test('throws when vc not found 1', 'lastName')
@@ -139,6 +150,29 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		this.firstNameVc.setRenderedValue('hey!')
 		await this.formVc.setValue('firstName', 'waka')
 		assert.isEqual(this.firstNameVc.renderedValue, 'hey!')
+	}
+
+	@test()
+	protected static async settingValueFromFormModelWithRenderedDoesNotDirtyForm() {
+		this.firstNameVc.setRenderedValue(generateId())
+
+		const model = this.render(this.formVc)
+
+		const renderedValue = generateId()
+
+		model.setValue('firstName', renderedValue)
+		await this.wait(1)
+
+		assert.isEqual(this.firstNameVc.renderedValue, renderedValue)
+		assert.isUndefined(this.firstNameVc.value)
+		assert.isUndefined(this.formVc.getValue('firstName'))
+		assert.isFalse(this.formVc.getIsDirty())
+	}
+
+	@test()
+	protected static async dirtySetAsExpectedWhenSettingValueOnField() {
+		await this.emailVc.setValue('waka awka')
+		assert.isTrue(this.formVc.getIsDirty())
 	}
 }
 

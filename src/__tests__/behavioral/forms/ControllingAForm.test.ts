@@ -96,7 +96,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static errorsByFieldShowsFirstDirtyFiel() {
+	protected static errorsByFieldEmtyToStart() {
 		const errorsByField = this.vc.getErrorsByField()
 		assert.isLength(Object.keys(errorsByField), 0)
 		assert.isFalse(this.vc.hasErrors())
@@ -117,6 +117,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isLength(Object.keys(errorsByField), 1)
 
 		assert.isLength(errorsByField.first, 1)
+	}
+
+	@test()
+	protected static async knowsIfDirty() {
+		assert.isFalse(this.vc.getIsDirty())
+		await this.vc.setValue('first', 'Tay')
+		assert.isTrue(this.vc.getIsDirty())
 	}
 
 	@test()
