@@ -4,7 +4,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
-import FormViewController from '../../../viewControllers/Form.vc'
+import FormViewController from '../../../viewControllers/form/Form.vc'
 import EditFormBuilderSectionCardViewController, {
 	EditSectionSectionSchema,
 	EditFormBuilderSectionOptions,

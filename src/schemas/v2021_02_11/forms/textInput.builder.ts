@@ -10,10 +10,6 @@ export default buildSchema({
 		value: {
 			type: 'text',
 		},
-		renderedValue: {
-			type: 'text',
-			hint: `If you need the text input to render a value other than what is stored (a person's name vs. their id).`,
-		},
 		placeholder: {
 			type: 'text',
 			label: 'Placeholder',

@@ -26,6 +26,12 @@ const textInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextIn
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+	            'renderedValue': {
+	                type: 'raw',
+	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+	                options: {valueType: `any`,}
+	            },
 	            /** Label. */
 	            'label': {
 	                label: 'Label',
@@ -60,12 +66,6 @@ const textInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextIn
 	                label: 'On changed rendered value handler',
 	                type: 'raw',
 	                options: {valueType: `(value: any) => void | Promise<void>`,}
-	            },
-	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-	            'renderedValue': {
-	                type: 'text',
-	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-	                options: undefined
 	            },
 	            /** Placeholder. */
 	            'placeholder': {

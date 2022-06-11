@@ -14,8 +14,8 @@ import {
 	SchemaError,
 } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
-import { defaultSubmitButtonLabel } from '../constants'
-import SpruceError from '../errors/SpruceError'
+import { defaultSubmitButtonLabel } from '../../constants'
+import SpruceError from '../../errors/SpruceError'
 import {
 	FormErrorsByField,
 	ViewController,
@@ -24,11 +24,11 @@ import {
 	FieldRenderOptions,
 	FormOnChangeOptions,
 	FormWillChangeOptions,
-	FormFieldViewController,
-} from '../types/heartwood.types'
-import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
-import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
-import AbstractViewController from './Abstract.vc'
+	FormInputViewController,
+} from '../../types/heartwood.types'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
+import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
+import AbstractViewController from '../Abstract.vc'
 
 type ViewModel<S extends Schema> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -206,7 +206,7 @@ export default class FormViewController<
 		return isBeingRendered
 	}
 
-	public getFieldVc(fieldName: SchemaFieldNames<S>): FormFieldViewController {
+	public getFieldVc(fieldName: SchemaFieldNames<S>): FormInputViewController {
 		const vc = this._getFieldVc(fieldName)
 		if (!vc) {
 			throw new SpruceError({
@@ -221,8 +221,8 @@ export default class FormViewController<
 	private _getFieldVc(fieldName: SchemaFieldNames<S>) {
 		const field = this.getField(fieldName)
 		const vc = field.compiledOptions.vc
-		return vc as FormFieldViewController & {
-			_originalSetValue?: FormFieldViewController['setValue']
+		return vc as FormInputViewController & {
+			_originalSetValue?: FormInputViewController['setValue']
 		}
 	}
 

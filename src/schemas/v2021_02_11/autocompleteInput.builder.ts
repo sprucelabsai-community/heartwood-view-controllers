@@ -11,7 +11,7 @@ export default buildSchema({
 			label: 'Controller',
 			options: {
 				valueType:
-					'HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>',
+					'HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>',
 			},
 		},
 		suggestions: {

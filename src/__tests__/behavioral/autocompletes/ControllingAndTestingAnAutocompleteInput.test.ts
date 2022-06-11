@@ -6,7 +6,7 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 import AutocompleteInputViewController, {
 	AutocompleteInputViewControllerOptions,
 	AutocompleteSuggestion,
-} from '../../../viewControllers/AutocompleteInput.vc'
+} from '../../../viewControllers/form/AutocompleteInput.vc'
 
 export default class ControllingAnAutocompleteInputTest extends AbstractViewControllerTest {
 	private static vc: AutocompleteInputViewController

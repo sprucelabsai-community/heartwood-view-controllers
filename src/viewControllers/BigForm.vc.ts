@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
-import FormViewController, { FormViewControllerOptions } from './Form.vc'
+import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
 type ViewModel<S extends Schema> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>

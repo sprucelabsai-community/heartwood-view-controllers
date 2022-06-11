@@ -2,7 +2,7 @@ import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
 import AutocompleteInputViewController, {
 	AutocompleteSuggestion,
-} from '../../viewControllers/AutocompleteInput.vc'
+} from '../../viewControllers/form/AutocompleteInput.vc'
 
 const autocompleteAssert = {
 	async assertActionShowsSuggestions(

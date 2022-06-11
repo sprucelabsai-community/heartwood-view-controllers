@@ -27,6 +27,12 @@ const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	                isPrivate: true,
 	                options: undefined
 	            },
+	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+	            'renderedValue': {
+	                type: 'raw',
+	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+	                options: {valueType: `any`,}
+	            },
 	            /** Label. */
 	            'label': {
 	                label: 'Label',

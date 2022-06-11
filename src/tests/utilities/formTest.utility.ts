@@ -1,5 +1,5 @@
 import { assert } from '@sprucelabs/test'
-import FormViewController from '../../viewControllers/Form.vc'
+import FormViewController from '../../viewControllers/form/Form.vc'
 
 let shouldPatchSubmitToThrow = true
 

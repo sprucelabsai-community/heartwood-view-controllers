@@ -5,16 +5,16 @@ import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import {
-	FormFieldViewController,
+	FormInputViewController,
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
-import FormViewController from '../../../viewControllers/Form.vc'
+import FormViewController from '../../../viewControllers/form/Form.vc'
 
 class SpyTextFieldInput
 	extends AbstractViewController<TextInput>
-	implements FormFieldViewController
+	implements FormInputViewController
 {
 	public value?: string
 	public name: string

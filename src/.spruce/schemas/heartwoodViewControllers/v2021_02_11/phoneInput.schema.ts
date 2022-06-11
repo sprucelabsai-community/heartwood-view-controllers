@@ -24,7 +24,12 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	            /** . */
 	            'value': {
 	                type: 'raw',
-	                isPrivate: true,
+	                options: {valueType: `any`,}
+	            },
+	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+	            'renderedValue': {
+	                type: 'raw',
+	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 	                options: {valueType: `any`,}
 	            },
 	            /** Label. */

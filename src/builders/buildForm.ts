@@ -1,5 +1,5 @@
 import { Schema } from '@sprucelabs/schema'
-import { FormViewControllerOptions } from '../viewControllers/Form.vc'
+import { FormViewControllerOptions } from '../viewControllers/form/Form.vc'
 
 type Form<S extends Schema> = FormViewControllerOptions<S>
 

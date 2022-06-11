@@ -5,7 +5,7 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactor from '../../tests/utilities/interactor'
 import vcAssert from '../../tests/utilities/vcAssert.utility'
 import { FormBuilderFieldType } from '../../types/heartwood.types'
-import FormViewController from '../../viewControllers/Form.vc'
+import FormViewController from '../../viewControllers/form/Form.vc'
 import {
 	EditFormBuilderFieldCardViewController,
 	EditFormBuilderFieldOptions,

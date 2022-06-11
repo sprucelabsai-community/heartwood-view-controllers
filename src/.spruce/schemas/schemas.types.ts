@@ -25,6 +25,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: boolean| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -62,6 +64,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                isPrivate: true,
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -117,6 +125,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: string| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -129,8 +139,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -157,6 +165,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'value': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -193,12 +207,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-			            'renderedValue': {
-			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-			                options: undefined
-			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -224,6 +232,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: number| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -265,6 +275,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'number',
 			                isPrivate: true,
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -332,6 +348,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: (any)| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -367,7 +385,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'raw',
-			                isPrivate: true,
+			                options: {valueType: `any`,}
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
@@ -424,6 +447,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: (any)| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -460,7 +485,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'raw',
-			                isPrivate: true,
+			                options: {valueType: `any`,}
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
@@ -930,6 +960,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: (any)| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -970,7 +1002,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'raw',
-			                isPrivate: true,
+			                options: {valueType: `any`,}
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
@@ -3307,6 +3344,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: number| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -3350,6 +3389,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'number',
 			                isPrivate: true,
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -3422,6 +3467,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: boolean| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -3461,6 +3508,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                isPrivate: true,
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -3559,6 +3612,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: (any)| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -3600,7 +3655,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'raw',
-			                isPrivate: true,
+			                options: {valueType: `any`,}
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
@@ -3675,6 +3735,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: string| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -3687,8 +3749,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3717,6 +3777,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'value': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -3752,12 +3818,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void>`,}
-			            },
-			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-			            'renderedValue': {
-			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-			                options: undefined
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3789,6 +3849,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: string| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -3801,8 +3863,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3831,6 +3891,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'value': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -3866,12 +3932,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void>`,}
-			            },
-			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-			            'renderedValue': {
-			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-			                options: undefined
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5518,6 +5578,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'id'?: string| undefined | null
 				
 				'value'?: string| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -5530,12 +5592,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
-				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: string| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
+				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
 				
 				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[]| undefined | null
 		}
@@ -5556,6 +5616,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'value': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
 			            },
 			            /** Label. */
 			            'label': {
@@ -5592,12 +5658,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void>`,}
 			            },
-			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-			            'renderedValue': {
-			                type: 'text',
-			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-			                options: undefined
-			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -5608,7 +5668,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                label: 'Controller',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
+			                options: {valueType: `HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
 			            },
 			            /** . */
 			            'suggestions': {
@@ -5635,6 +5695,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'name': string
 				
 				'value'?: (any)| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
 				/** Hint. */
@@ -5670,7 +5732,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'value': {
 			                type: 'raw',
-			                isPrivate: true,
+			                options: {valueType: `any`,}
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: {valueType: `any`,}
 			            },
 			            /** Label. */

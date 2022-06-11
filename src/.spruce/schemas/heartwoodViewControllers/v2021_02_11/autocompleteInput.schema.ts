@@ -20,6 +20,12 @@ const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+	            'renderedValue': {
+	                type: 'raw',
+	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+	                options: {valueType: `any`,}
+	            },
 	            /** Label. */
 	            'label': {
 	                label: 'Label',
@@ -55,12 +61,6 @@ const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	                type: 'raw',
 	                options: {valueType: `(value: any) => void | Promise<void>`,}
 	            },
-	            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-	            'renderedValue': {
-	                type: 'text',
-	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-	                options: undefined
-	            },
 	            /** Placeholder. */
 	            'placeholder': {
 	                label: 'Placeholder',
@@ -71,7 +71,7 @@ const autocompleteInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.FormFieldViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
+	                options: {valueType: `HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
 	            },
 	            /** . */
 	            'suggestions': {

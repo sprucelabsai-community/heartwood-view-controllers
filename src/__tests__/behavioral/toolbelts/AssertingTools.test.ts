@@ -8,7 +8,7 @@ import {
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/card/Card.vc'
-import FormViewController from '../../../viewControllers/Form.vc'
+import FormViewController from '../../../viewControllers/form/Form.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import ToolBeltViewController, {
 	OpenToolBeltOptions,

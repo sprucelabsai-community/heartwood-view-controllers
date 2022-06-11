@@ -19,9 +19,6 @@ import ActiveRecordCardViewController, {
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordList.vc'
-import AutocompleteInputViewController, {
-	AutocompleteInputViewControllerOptions,
-} from '../viewControllers/AutocompleteInput.vc'
 import BigFormViewControllerImpl, {
 	BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -43,9 +40,12 @@ import ConfirmViewController, {
 import DialogViewController, {
 	DialogViewControllerOptions,
 } from '../viewControllers/Dialog.vc'
+import AutocompleteInputViewController, {
+	AutocompleteInputViewControllerOptions,
+} from '../viewControllers/form/AutocompleteInput.vc'
 import FormViewControllerImpl, {
 	FormViewControllerOptions,
-} from '../viewControllers/Form.vc'
+} from '../viewControllers/form/Form.vc'
 import FormBuilderPageViewControllerImpl, {
 	FormBuilderCardViewControllerOptions,
 } from '../viewControllers/formBuilder/FormBuilderCard.vc'
@@ -342,7 +342,7 @@ export type VoteHandler = (options: VoteOptions) => Promise<void>
 type Du = typeof dateUtil
 export interface DateUtils extends Du {}
 
-export interface FormFieldViewController<
+export interface FormInputViewController<
 	View extends Record<string, any> = Record<string, any>
 > extends ViewController<View> {
 	setValue(value: any, renderedValue?: any): Promise<void>
@@ -374,7 +374,7 @@ export type FieldRenderOptions<S extends Schema> = {
 	placeholder?: string
 	label?: string
 	hint?: string
-	vc?: FormFieldViewController
+	vc?: FormInputViewController
 }
 
 export interface DropdownController {

@@ -20,7 +20,7 @@ import ActiveRecordCardViewController from '../../viewControllers/activeRecord/A
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
-import FormViewController from '../../viewControllers/Form.vc'
+import FormViewController from '../../viewControllers/form/Form.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'

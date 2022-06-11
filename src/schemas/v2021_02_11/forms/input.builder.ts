@@ -15,7 +15,13 @@ export default buildSchema({
 		},
 		value: {
 			type: 'raw',
-			isPrivate: true,
+			options: {
+				valueType: 'any',
+			},
+		},
+		renderedValue: {
+			type: 'raw',
+			hint: `If you need the text input to render a value other than what is stored (a person's name vs. their id).`,
 			options: {
 				valueType: 'any',
 			},
