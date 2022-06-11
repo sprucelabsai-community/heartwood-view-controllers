@@ -4,42 +4,25 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import {
-	FormInputViewController,
-	ViewControllerOptions,
-} from '../../../types/heartwood.types'
+import { ViewControllerOptions } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
-import AbstractViewController from '../../../viewControllers/Abstract.vc'
+import AbstractInputViewController from '../../../viewControllers/form/AbstractInput.vc'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 
-class SpyTextFieldInput
-	extends AbstractViewController<TextInput>
-	implements FormInputViewController
-{
-	public value?: string
+class SpyTextFieldInput extends AbstractInputViewController<TextInput> {
+	public get value() {
+		return this.model.value
+	}
 	public name: string
-	public renderedValue?: string | null
+	public get renderedValue() {
+		return this.model.renderedValue
+	}
 	public model: TextInput
 
 	public constructor(options: ViewControllerOptions & { name: string }) {
 		super(options)
 		this.name = options.name
 		this.model = removeUniversalViewOptions(options)
-	}
-
-	public async setValue(value: string, renderedValue?: string | null) {
-		this.value = value
-		if (typeof renderedValue !== 'undefined') {
-			this.renderedValue = renderedValue
-		}
-	}
-
-	public async setRenderedValue(renderedValue: string) {
-		this.renderedValue = renderedValue
-	}
-
-	public getRenderedValue() {
-		return this.renderedValue
 	}
 
 	public getValue() {}

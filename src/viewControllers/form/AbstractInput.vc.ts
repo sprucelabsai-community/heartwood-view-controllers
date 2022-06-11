@@ -37,6 +37,10 @@ export default abstract class AbstractInputViewController<
 		this.triggerRender()
 	}
 
+	public getRenderedValue() {
+		return this.model.renderedValue
+	}
+
 	public getValue() {
 		return this.model.value
 	}

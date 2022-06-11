@@ -346,8 +346,8 @@ export interface FormInputViewController<
 	View extends Record<string, any> = Record<string, any>
 > extends ViewController<View> {
 	setValue(value: any, renderedValue?: any): Promise<void>
-	setRenderedValue?: (renderedValue: any) => Promise<void>
-	getRenderedValue?: () => any
+	setRenderedValue: (renderedValue: any) => Promise<void>
+	getRenderedValue: () => any
 	getValue(): any
 }
 
