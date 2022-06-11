@@ -16,7 +16,6 @@ export default class AutocompleteInputViewController
 		options: ViewControllerOptions & AutocompleteInputViewControllerOptions
 	) {
 		super(options)
-
 		this.model = removeUniversalViewOptions(options)
 	}
 
@@ -24,7 +23,7 @@ export default class AutocompleteInputViewController
 		this.model.value = value
 
 		if (typeof renderedValue !== 'undefined') {
-			this.setRenderedValue(renderedValue)
+			await this.setRenderedValue(renderedValue)
 		} else {
 			this.triggerRender()
 		}
@@ -32,8 +31,9 @@ export default class AutocompleteInputViewController
 		await this.model.onChange?.(value)
 	}
 
-	public setRenderedValue(renderedValue: any) {
+	public async setRenderedValue(renderedValue: any) {
 		this.model.renderedValue = renderedValue
+		await this.model.onChangeRenderedValue?.(renderedValue)
 		this.triggerRender()
 	}
 

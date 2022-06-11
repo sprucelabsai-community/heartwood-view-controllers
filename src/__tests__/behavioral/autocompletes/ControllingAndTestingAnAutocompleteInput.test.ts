@@ -197,32 +197,52 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async canSetRenderedValueDirectly() {
 		const renderedValue = generateId()
-		this.setRenderedValue(renderedValue)
+		await this.setRenderedValue(renderedValue)
 		this.assertRenderedValueEquals(renderedValue)
 	}
 
 	@test()
 	protected static async renderedValueTriggersRender() {
-		this.vc.setRenderedValue('aeou')
+		await this.vc.setRenderedValue('aeou')
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	@test()
 	protected static async settingValueWithoutRenderedValueDoesNotClearRenderedValue() {
-		this.setRenderedValue('yo')
+		await this.setRenderedValue('yo')
 		await this.setValue('hey')
 		this.assertRenderedValueEquals('yo')
 	}
 
 	@test()
 	protected static async passingNullToSetValueClearsRenderedValue() {
-		this.setRenderedValue('yo')
+		await this.setRenderedValue('yo')
 		await this.setValue('hey', null)
 		this.assertRenderedValueEquals(null)
 	}
 
-	private static setRenderedValue(renderedValue: string) {
-		this.vc.setRenderedValue(renderedValue)
+	@test()
+	protected static async changingRenderdValueTriggersOnChange() {
+		let wasHit = false
+		let passedValue: string | undefined
+		this.vc = this.Vc({
+			onChangeRenderedValue: (value) => {
+				passedValue = value
+				wasHit = true
+			},
+		})
+
+		assert.isFalse(wasHit)
+
+		const value = generateId()
+		await this.vc.setRenderedValue(value)
+
+		assert.isTrue(wasHit)
+		assert.isEqual(passedValue, value)
+	}
+
+	private static async setRenderedValue(renderedValue: string) {
+		await this.vc.setRenderedValue(renderedValue)
 	}
 
 	private static assertRenderedValueEquals(renderedValue: string | null) {

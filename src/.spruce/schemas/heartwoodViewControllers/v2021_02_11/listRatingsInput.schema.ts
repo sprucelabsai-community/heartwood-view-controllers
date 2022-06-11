@@ -56,6 +56,12 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `(value: number) => any | Promise<any>`,}
 	            },
+	            /** On changed rendered value handler. */
+	            'onChangeRenderedValue': {
+	                label: 'On changed rendered value handler',
+	                type: 'raw',
+	                options: {valueType: `(value: any) => void | Promise<void>`,}
+	            },
 	            /** Can be changed. */
 	            'canBeChanged': {
 	                label: 'Can be changed',

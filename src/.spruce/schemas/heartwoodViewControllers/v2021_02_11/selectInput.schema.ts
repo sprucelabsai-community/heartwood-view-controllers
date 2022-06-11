@@ -55,7 +55,13 @@ const selectInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Sele
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value: string) => void | Promise<void>`,}
+	                options: {valueType: `(value: any) => void | Promise<void>`,}
+	            },
+	            /** On changed rendered value handler. */
+	            'onChangeRenderedValue': {
+	                label: 'On changed rendered value handler',
+	                type: 'raw',
+	                options: {valueType: `(value: any) => void | Promise<void>`,}
 	            },
 	            /** Placeholder. */
 	            'placeholder': {

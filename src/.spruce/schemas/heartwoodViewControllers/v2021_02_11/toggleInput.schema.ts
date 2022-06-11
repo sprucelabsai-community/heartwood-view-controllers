@@ -56,6 +56,12 @@ const toggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Togg
 	                type: 'raw',
 	                options: {valueType: `(value: boolean) => void | boolean | Promise<void | boolean>`,}
 	            },
+	            /** On changed rendered value handler. */
+	            'onChangeRenderedValue': {
+	                label: 'On changed rendered value handler',
+	                type: 'raw',
+	                options: {valueType: `(value: any) => void | Promise<void>`,}
+	            },
 	    }
 }
 

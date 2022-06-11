@@ -34,7 +34,7 @@ class SpyTextFieldInput
 		}
 	}
 
-	public setRenderedValue(renderedValue: string) {
+	public async setRenderedValue(renderedValue: string) {
 		this.renderedValue = renderedValue
 	}
 
@@ -147,14 +147,14 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 
 	@test()
 	protected static async settingValueDoesNotClearRenderedValue() {
-		this.firstNameVc.setRenderedValue('hey!')
+		await this.firstNameVc.setRenderedValue('hey!')
 		await this.formVc.setValue('firstName', 'waka')
 		assert.isEqual(this.firstNameVc.renderedValue, 'hey!')
 	}
 
 	@test()
 	protected static async settingValueFromFormModelWithRenderedDoesNotDirtyForm() {
-		this.firstNameVc.setRenderedValue(generateId())
+		await this.firstNameVc.setRenderedValue(generateId())
 
 		const model = this.render(this.formVc)
 
