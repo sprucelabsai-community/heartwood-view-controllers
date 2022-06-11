@@ -121,6 +121,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
+				/** On changed rendered value handler. */
+				'onChangeRenderedValue'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -182,6 +184,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
+			            },
+			            /** On changed rendered value handler. */
+			            'onChangeRenderedValue': {
+			                label: 'On changed rendered value handler',
+			                type: 'raw',
+			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3615,6 +3623,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
+				/** On changed rendered value handler. */
+				'onChangeRenderedValue'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3679,6 +3689,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
 			            },
+			            /** On changed rendered value handler. */
+			            'onChangeRenderedValue': {
+			                label: 'On changed rendered value handler',
+			                type: 'raw',
+			                options: {valueType: `(value: string) => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -3721,6 +3737,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
+				/** On changed rendered value handler. */
+				'onChangeRenderedValue'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3784,6 +3802,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
+			            },
+			            /** On changed rendered value handler. */
+			            'onChangeRenderedValue': {
+			                label: 'On changed rendered value handler',
+			                type: 'raw',
+			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5442,6 +5466,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
 				'renderedValue'?: string| undefined | null
+				/** On changed rendered value handler. */
+				'onChangeRenderedValue'?: ((value: string) => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Controller. */
@@ -5501,6 +5527,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 			                options: undefined
+			            },
+			            /** On changed rendered value handler. */
+			            'onChangeRenderedValue': {
+			                label: 'On changed rendered value handler',
+			                type: 'raw',
+			                options: {valueType: `(value: string) => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {

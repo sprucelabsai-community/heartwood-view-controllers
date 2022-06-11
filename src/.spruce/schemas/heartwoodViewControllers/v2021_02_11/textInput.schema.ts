@@ -61,6 +61,12 @@ const textInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextIn
 	                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
 	                options: undefined
 	            },
+	            /** On changed rendered value handler. */
+	            'onChangeRenderedValue': {
+	                label: 'On changed rendered value handler',
+	                type: 'raw',
+	                options: {valueType: `(value: string) => void | Promise<void>`,}
+	            },
 	            /** Placeholder. */
 	            'placeholder': {
 	                label: 'Placeholder',
