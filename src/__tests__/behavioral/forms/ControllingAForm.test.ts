@@ -187,7 +187,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	protected static canHideAndShowSubmitControls() {
 		this.vc.hideSubmitControls()
 		assert.isFalse(this.vc.render().shouldShowSubmitControls)
-		this.vc.showSubmitControls()
+		this.vc.getShowSubmitControls()
 		assert.isTrue(this.vc.render().shouldShowSubmitControls)
 	}
 
@@ -296,7 +296,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static cancelButtonDefaultsToShowing() {
-		assert.isTrue(this.vc.shouldShowCancelButton())
+		assert.isTrue(this.vc.getShouldShowCancelButton())
 		assert.isTrue(this.render(this.vc).shouldShowCancelButton)
 	}
 
@@ -307,7 +307,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			shouldShowCancelButton: false,
 		})
 
-		assert.isFalse(vc.shouldShowCancelButton())
+		assert.isFalse(vc.getShouldShowCancelButton())
 		const model = this.render(vc)
 
 		assert.isFalse(model.shouldShowCancelButton)
@@ -320,7 +320,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			shouldShowSubmitControls: false,
 		})
 
-		assert.isFalse(vc.shouldShowCancelButton())
+		assert.isFalse(vc.getShouldShowCancelButton())
 	}
 
 	@test()

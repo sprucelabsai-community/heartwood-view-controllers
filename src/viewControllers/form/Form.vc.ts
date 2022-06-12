@@ -410,25 +410,46 @@ export default class FormViewController<
 		return values as SchemaPartialValues<S>
 	}
 
-	public showSubmitControls() {
-		this.model.shouldShowSubmitControls = true
-		this.triggerRender()
-	}
-
 	public hideSubmitControls() {
 		this.model.shouldShowSubmitControls = false
 		this.triggerRender()
 	}
 
-	public shouldShowSubmitControls() {
+	public getShowSubmitControls() {
+		this.model.shouldShowSubmitControls = true
+		this.triggerRender()
+	}
+
+	public getShouldShowSubmitControls() {
 		return this.model.shouldShowSubmitControls ?? true
 	}
 
-	public shouldShowCancelButton() {
+	public getShouldShowCancelButton() {
 		return (
 			(this.model.shouldShowCancelButton ?? true) &&
-			this.shouldShowSubmitControls()
+			this.getShouldShowSubmitControls()
 		)
+	}
+
+	/**
+	 * @deprecated showSubmitControls -> getShowSubmitControls
+	 */
+	public showSubmitControls() {
+		return this.getShowSubmitControls()
+	}
+
+	/**
+	 * @deprecated shouldShowSubmitControls -> getShouldShowSubmitControls
+	 */
+	public shouldShowSubmitControls() {
+		return this.getShouldShowSubmitControls()
+	}
+
+	/**
+	 * @deprecated shouldShowCancelButton -> getShouldShowCancelButton
+	 */
+	public shouldShowCancelButton() {
+		return this.getShouldShowCancelButton()
 	}
 
 	public getSubmitButtonLabel() {
@@ -710,7 +731,7 @@ export default class FormViewController<
 			},
 		}
 
-		if (!this.shouldShowSubmitControls()) {
+		if (!this.getShouldShowSubmitControls()) {
 			delete view.footer
 		}
 
