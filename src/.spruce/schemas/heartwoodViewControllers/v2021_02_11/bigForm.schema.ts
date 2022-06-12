@@ -141,7 +141,7 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	            'onSubmitSlide': {
 	                label: 'Submit handler',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
+	                options: {valueType: `HeartwoodTypes.SubmitSlideHandler<S>`,}
 	            },
 	    }
 }

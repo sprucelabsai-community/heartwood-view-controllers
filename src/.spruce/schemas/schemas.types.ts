@@ -2152,7 +2152,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number| undefined | null
 				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>)| undefined | null
+				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>)| undefined | null
 		}
 
 		interface BigFormSchema extends SpruceSchema.Schema {
@@ -2292,7 +2292,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onSubmitSlide': {
 			                label: 'Submit handler',
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>`,}
+			                options: {valueType: `HeartwoodTypes.SubmitSlideHandler<S>`,}
 			            },
 			    }
 		}

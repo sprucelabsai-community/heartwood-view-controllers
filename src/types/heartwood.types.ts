@@ -138,6 +138,7 @@ export type FormOnSubmitOptions<S extends Schema = Schema> =
 	FormOnChangeOptions<S>
 
 type OnSubmitResponse = void | boolean
+
 export type SubmitHandler<
 	S extends Schema = Schema,
 	Extra extends Record<string, any> | undefined = undefined
@@ -146,6 +147,11 @@ export type SubmitHandler<
 		? FormOnChangeOptions<S>
 		: FormOnChangeOptions<S> & Extra
 ) => Promise<OnSubmitResponse> | OnSubmitResponse
+
+export type SubmitSlideHandler<S extends Schema = Schema> = SubmitHandler<
+	S,
+	{ presentSlide: number }
+>
 
 export interface SwipeController {
 	swipeTo(idx: number): void

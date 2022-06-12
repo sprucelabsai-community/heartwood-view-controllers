@@ -47,7 +47,7 @@ export default buildSchema({
 			type: 'raw',
 			label: 'Submit handler',
 			options: {
-				valueType: 'HeartwoodTypes.SubmitHandler<S, { presentSlide: number }>',
+				valueType: 'HeartwoodTypes.SubmitSlideHandler<S>',
 			},
 		},
 	},
