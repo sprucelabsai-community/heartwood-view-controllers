@@ -2,10 +2,19 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import AbstractInputViewController from './AbstractInput.vc'
 
 export default class AutocompleteInputViewController extends AbstractInputViewController<ViewModel> {
-	public hideSuggestions() {}
+	private isShowingSuggestions = false
+
+	public hideSuggestions() {
+		this.isShowingSuggestions = false
+	}
 
 	public showSuggestions(suggestions: AutocompleteSuggestion[]) {
 		this.model.suggestions = suggestions
+		this.isShowingSuggestions = true
+	}
+
+	public getIsShowingSuggestions() {
+		return this.isShowingSuggestions
 	}
 
 	public render(): ViewModel {

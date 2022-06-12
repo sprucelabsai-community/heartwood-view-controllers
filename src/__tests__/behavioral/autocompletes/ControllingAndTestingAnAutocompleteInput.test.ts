@@ -2,6 +2,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import autocompleteAssert from '../../../tests/utilities/autocompleteAssert'
+import autocompleteInteractor from '../../../tests/utilities/autocompleteInteractor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import AutocompleteInputViewController, {
 	AutocompleteInputViewControllerOptions,
@@ -239,6 +240,80 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 		assert.isTrue(wasHit)
 		assert.isEqual(passedValue, value)
+	}
+
+	@test()
+	protected static async interactorThrowsWhenClickingSuggestionMissingRequired() {
+		const err = await assert.doesThrowAsync(() =>
+			//@ts-ignore
+			autocompleteInteractor.clickSuggestion()
+		)
+
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'suggestionId'],
+		})
+	}
+
+	@test()
+	protected static async interactorThrowsWhenSuggestionsNotShowing() {
+		await assert.doesThrowAsync(
+			() => autocompleteInteractor.clickSuggestion(this.vc, 'test'),
+			'showSuggestions'
+		)
+	}
+
+	@test()
+	protected static async interactorThrowsWhenNoMatchOnSuggestions() {
+		this.vc.showSuggestions([
+			{
+				id: 'whatever',
+				label: 'you want',
+			},
+		])
+
+		await assert.doesThrowAsync(
+			() => autocompleteInteractor.clickSuggestion(this.vc, 'test'),
+			'could not find'
+		)
+	}
+
+	@test('throws when missing on click 1', 'test')
+	@test('throws when missing on click 2', 'whatever')
+	protected static async throwsWhenMissingOnClick(id: string) {
+		this.vc.showSuggestions([
+			{
+				id: 'test',
+				label: 'test',
+			},
+			{
+				id: 'whatever',
+				label: 'oy',
+			},
+		])
+
+		await assert.doesThrowAsync(
+			() => autocompleteInteractor.clickSuggestion(this.vc, id),
+			'onClick'
+		)
+	}
+
+	@test()
+	protected static async onClickInvoked() {
+		let passedId: string | undefined
+		const id = generateId()
+
+		this.vc.showSuggestions([
+			{
+				id,
+				label: 'test',
+				onClick: (id) => {
+					passedId = id
+				},
+			},
+		])
+
+		await autocompleteInteractor.clickSuggestion(this.vc, id)
+		assert.isEqual(passedId, id)
 	}
 
 	private static async setRenderedValue(renderedValue: string) {
