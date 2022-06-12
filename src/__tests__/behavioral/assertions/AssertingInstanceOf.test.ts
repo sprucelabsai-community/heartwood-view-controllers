@@ -105,6 +105,12 @@ class DialogCardViewController extends AbstractViewController<Card> {
 	}
 }
 
+class NoControllerViewController extends AbstractViewController<Card> {
+	public render() {
+		return {}
+	}
+}
+
 export default class AssertingInstanceOfTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		fancy: FancyCardViewController,
@@ -112,6 +118,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		activeCard: ActiveCard,
 		dialogSvc: DialogSkillViewController,
 		dialogCard: DialogCardViewController,
+		noController: NoControllerViewController,
 	}
 
 	@test()
@@ -199,5 +206,18 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 		)
 
 		vcAssert.assertRendersAsInstanceOf(dialogVc, DialogCardViewController)
+	}
+
+	@test()
+	protected static async instanceOfKnowsIfNoControllerReturned() {
+		const vc = this.Controller(
+			'noController' as any,
+			{}
+		) as NoControllerViewController
+
+		assert.doesThrow(
+			() => vcAssert.assertRendersAsInstanceOf(vc, CardViewController),
+			'does not return'
+		)
 	}
 }

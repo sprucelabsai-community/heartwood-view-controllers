@@ -1776,12 +1776,13 @@ const vcAssert = {
 		vc: ViewController<any>,
 		Class: new (...args: any[]) => Controller
 	): Controller {
+		const model = renderUtil.render(vc)
+		assert.isTruthy(
+			model.controller,
+			`Your view controller does not return a controller. Make sure you return 'controller:this' from render() or that you're rending a built in view with 'render() { return this.cardVc.render() }'.`
+		)
+
 		try {
-			const model = renderUtil.render(vc)
-			assert.isTruthy(
-				model.controller,
-				`Your view controller does not return a controller. Make sure you return 'controller:this' from render() or that you're rending a built in skill view.`
-			)
 			return this.assertControllerInstanceOf<Controller>(
 				model.controller,
 				Class
