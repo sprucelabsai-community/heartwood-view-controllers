@@ -137,21 +137,18 @@ export type FormWillChangeOptions<S extends Schema> = FormOnChangeOptions<S> & {
 export type FormOnSubmitOptions<S extends Schema = Schema> =
 	FormOnChangeOptions<S>
 
+export type BigFormOnSubmitOptions<S extends Schema = Schema> =
+	FormOnChangeOptions<S> & { presentSlide: number }
+
 type OnSubmitResponse = void | boolean
 
-export type SubmitHandler<
-	S extends Schema = Schema,
-	Extra extends Record<string, any> | undefined = undefined
-> = (
-	options: Extra extends undefined
-		? FormOnChangeOptions<S>
-		: FormOnChangeOptions<S> & Extra
+export type SubmitHandler<S extends Schema = Schema> = (
+	options: FormOnChangeOptions<S>
 ) => Promise<OnSubmitResponse> | OnSubmitResponse
 
-export type SubmitSlideHandler<S extends Schema = Schema> = SubmitHandler<
-	S,
-	{ presentSlide: number }
->
+export type SubmitSlideHandler<S extends Schema = Schema> = (
+	options: BigFormOnSubmitOptions<S>
+) => Promise<OnSubmitResponse> | OnSubmitResponse
 
 export interface SwipeController {
 	swipeTo(idx: number): void
