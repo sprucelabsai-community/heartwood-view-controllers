@@ -1,3 +1,10 @@
+# [81.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.4.14...v81.5.0) (2022-06-12)
+
+
+### Features
+
+* autocomplet interactor ([c0a119f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c0a119f))
+
 ## [81.4.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.4.13...v81.4.14) (2022-06-12)
 
 ## [81.4.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.4.12...v81.4.13) (2022-06-11)
