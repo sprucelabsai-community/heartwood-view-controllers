@@ -138,7 +138,10 @@ export type FormOnSubmitOptions<S extends Schema = Schema> =
 	FormOnChangeOptions<S>
 
 export type BigFormOnSubmitOptions<S extends Schema = Schema> =
-	FormOnChangeOptions<S> & { presentSlide: number }
+	FormOnChangeOptions<S> & {
+		presentSlide: number
+		controller: BigFormViewController<S>
+	}
 
 type OnSubmitResponse = void | boolean
 

@@ -137,6 +137,7 @@ export default class interactorTest extends AbstractViewControllerTest {
 			})
 		)
 
+		await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)
 		await interactor.submitForm(bigFormVc)
 
 		assert.isTrue(wasHit)

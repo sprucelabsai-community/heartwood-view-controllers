@@ -204,6 +204,24 @@ const interactor = {
 		await onCancel()
 	},
 
+	async submitBigFormSlide(vc: BigFormViewController<any>) {
+		assertOptions({ vc }, ['vc'])
+
+		const model = renderUtil.render(vc)
+
+		assert.isTruthy(
+			model.onSubmitSlide,
+			`I really want to submit this form, but first you gotta pass 'onSubmitSlide' or 'onSubmit' to your view controller.`
+		)
+
+		if (vc.getIsLastSlide()) {
+			return this.submitForm(vc)
+		} else {
+			//@ts-ignore
+			await model.onSubmitSlide(vc.buildOnSubmitOptions().options)
+		}
+	},
+
 	async submitForm(vc: FormVc) {
 		assert.isTruthy(vc, `You have to pass a view controller to submit a form.`)
 
@@ -213,12 +231,16 @@ const interactor = {
 
 		if ((vc as BigFormViewController<any>).getTotalSlides) {
 			const bigFormVc = vc as BigFormViewController<any>
-			await bigFormVc.jumpToSlide(bigFormVc.getTotalSlides() - 1)
+			const onLastSlide = bigFormVc.getIsLastSlide()
+			assert.isTrue(
+				onLastSlide,
+				`You tried to submit a big form that wasn't on the last slide. Try 'vc.jumpToSlide(...)' or 'interactor.submitBigFormSlide(...)' to get there!`
+			)
 		}
 
-		const originalSubmit = vc.submit
+		const originalSubmit = vc.submit.bind(vc)
 		//@ts-ignore
-		const submit = vc._originalSubmit ?? vc.submit
+		const submit = vc._originalSubmit ?? vc.submit.bind(vc)
 		vc.submit = submit
 
 		//@ts-ignore

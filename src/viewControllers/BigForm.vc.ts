@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
+import { BigFormOnSubmitOptions } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
@@ -73,14 +74,7 @@ export default class BigFormViewController<
 	}
 
 	public async submit() {
-		const errorsByField = this.validate()
-		const options = {
-			values: this.getValues(),
-			presentSlide: this.getPresentSlide(),
-			errorsByField,
-			controller: this,
-			isValid: this.isValid(),
-		}
+		const { options, errorsByField } = this.buildOnSubmitOptions()
 
 		const results = await this.model.onSubmitSlide?.(options)
 
@@ -97,6 +91,18 @@ export default class BigFormViewController<
 		} else {
 			this.setErrorsByField(errorsByField)
 		}
+	}
+
+	private buildOnSubmitOptions() {
+		const errorsByField = this.validate()
+		const options: BigFormOnSubmitOptions<S> = {
+			values: this.getValues(),
+			presentSlide: this.getPresentSlide(),
+			errorsByField,
+			controller: this,
+			isValid: this.isValid(),
+		}
+		return { options, errorsByField }
 	}
 
 	public getIsLastSlide() {
