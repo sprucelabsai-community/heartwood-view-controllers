@@ -175,7 +175,13 @@ export default class FormViewController<
 		if (this.isFieldBeingRendered(name)) {
 			const vc = this._getFieldVc(name)
 			if (vc) {
-				if (shouldSetRenderedValueIfExists && vc.getRenderedValue?.()) {
+				const renderedValue = vc.getRenderedValue?.()
+				const shouldSetRenderedValue =
+					shouldSetRenderedValueIfExists &&
+					typeof renderedValue !== 'undefined' &&
+					renderedValue !== null
+
+				if (shouldSetRenderedValue) {
 					shouldSetIsDirty = false
 					shouldSetValueLocally = false
 					vc.setRenderedValue?.(value)

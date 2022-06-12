@@ -135,9 +135,12 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isEqual(this.firstNameVc.renderedValue, 'hey!')
 	}
 
-	@test()
-	protected static async settingValueFromFormModelWithRenderedDoesNotDirtyForm() {
-		await this.firstNameVc.setRenderedValue(generateId())
+	@test('setting value from from model sets rendered value 1', generateId())
+	@test('setting value from from model sets rendered value 2', '')
+	protected static async settingValueFromFormModelWithRenderedDoesNotDirtyForm(
+		value: string
+	) {
+		await this.firstNameVc.setRenderedValue(value)
 
 		const model = this.render(this.formVc)
 
@@ -150,6 +153,15 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isUndefined(this.firstNameVc.value)
 		assert.isUndefined(this.formVc.getValue('firstName'))
 		assert.isFalse(this.formVc.getIsDirty())
+	}
+
+	@test()
+	protected static async settingRenderedValueToNullRestoresFormModelSetValueBehavior() {
+		await this.firstNameVc.setRenderedValue(null)
+		const model = this.render(this.formVc)
+		model.setValue('firstName', 'hey')
+		await this.wait(1)
+		assert.isEqual(this.formVc.getValue('firstName'), 'hey')
 	}
 
 	@test()
