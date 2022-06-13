@@ -346,6 +346,13 @@ const vcAssert = {
 						}
 
 						resolve(undefined)
+
+						const oldHide = dialogVc!.hide.bind(dialogVc!)
+						dialogVc!.hide = async () => {
+							await oldHide()
+							await new Promise((r) => setTimeout(r, 0))
+						}
+
 						return dialogVc
 					}
 
