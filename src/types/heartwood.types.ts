@@ -197,15 +197,18 @@ export type SwipeCardViewController = SwipeCardViewControllerImpl &
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
 export type BigFormViewController<S extends Schema> =
 	BigFormViewControllerImpl<S>
+export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+export type CardSection =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel
 	triggerRender: () => void
 	destroy?: () => Promise<void> | void
-	willBlur?: () => void
-	didBlur?: () => void
-	willFocus?: () => void
-	didFocus?: () => void
+	willBlur?: () => void | Promise<void>
+	didBlur?: () => void | Promise<void>
+	willFocus?: () => void | Promise<void>
+	didFocus?: () => void | Promise<void>
 }
 
 export type ScopeFlag = 'location' | 'organization' | 'employed' | 'none'

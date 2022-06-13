@@ -1,4 +1,3 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import SpyDevice from '../../../tests/SpyDevice'
 import AbstractDeviceTest from './AbstractDeviceTest'
@@ -25,5 +24,3 @@ export default class ControllingDevicesNativeFeaturesTest extends AbstractDevice
 		return this.vc.getDevice() as SpyDevice
 	}
 }
-
-export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card

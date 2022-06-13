@@ -4,8 +4,9 @@ import {
 	ConfirmOptions,
 	ViewController,
 	Router,
+	CardSection,
+	Card,
 } from '../../types/heartwood.types'
-import { CardSection, Card } from './vcAssert'
 
 export type Vc = ViewController<any>
 export interface ConfirmViewController {

@@ -4,33 +4,8 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ViewControllerOptions } from '../../../types/heartwood.types'
-import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
-import AbstractInputViewController from '../../../viewControllers/form/AbstractInput.vc'
 import FormViewController from '../../../viewControllers/form/Form.vc'
-
-class SpyTextFieldInput extends AbstractInputViewController<TextInput> {
-	public get value() {
-		return this.model.value
-	}
-	public name: string
-	public get renderedValue() {
-		return this.model.renderedValue
-	}
-	public model: TextInput
-
-	public constructor(options: ViewControllerOptions & { name: string }) {
-		super(options)
-		this.name = options.name
-		this.model = removeUniversalViewOptions(options)
-	}
-
-	public getValue() {}
-
-	public render(): TextInput {
-		return this.model
-	}
-}
+import SpyTextFieldInput from './SpyTextFieldInput'
 
 export default class SettingVcsForFieldRenderingTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
@@ -171,7 +146,8 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	}
 }
 
-type TextInput = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextInput
+export type TextInput =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextInput
 
 const formSchema = buildSchema({
 	id: 'testSchema',

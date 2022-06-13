@@ -3,7 +3,8 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
-import { BigFormOnSubmitOptions } from '../../../types/heartwood.types'
+import { BigFormOnSubmitOptions, Card } from '../../../types/heartwood.types'
+import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import BigFormViewController, {
 	BigFormViewControllerOptions,
 } from '../../../viewControllers/BigForm.vc'
@@ -13,8 +14,18 @@ import {
 	testFormSchema,
 } from '../forms/testFormOptions'
 
+class NoFocusViewController extends AbstractViewController<Card> {
+	public render(): Card {
+		return {}
+	}
+}
+
 export default class InteractingWithAFormTest extends AbstractViewControllerTest {
 	protected static bigFormVc: BigFormViewController<TestFormSchema>
+	protected static controllerMap: Record<string, any> = {
+		noFocus: NoFocusViewController,
+	}
+
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.bigFormVc = this.BigFormVc()
@@ -125,6 +136,119 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 
 		assert.isEqual(onSubmitCount, 2)
 		assert.isEqual(onSubmitSlideCount, 3)
+	}
+
+	@test()
+	protected static async focusingFieldWithoutFocusHookThrows() {
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => interactor.focus())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc'],
+		})
+	}
+
+	@test()
+	protected static async throwsWhenVcDoesNotImplementFocusEvents() {
+		const vc = this.NoFocusVc()
+		await assert.doesThrowAsync(
+			() => interactor.focus(vc),
+			/willFocus|didFocus/
+		)
+	}
+
+	@test()
+	protected static async invokesWillFocus() {
+		const vc = this.NoFocusVc()
+		let wasHit = false
+
+		vc.willFocus = () => {
+			wasHit = true
+		}
+
+		await interactor.focus(vc)
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async invokesDidFocusSecond() {
+		const vc = this.NoFocusVc()
+
+		let wasHit = ''
+
+		vc.didFocus = () => {
+			wasHit = 'didFocus'
+		}
+
+		vc.willFocus = () => {
+			wasHit = 'willFocus'
+		}
+
+		await interactor.focus(vc)
+		assert.isEqual(wasHit, 'didFocus')
+	}
+
+	@test()
+	protected static async doesNotThrowWithOnlyDidFocus() {
+		const vc = this.NoFocusVc()
+		vc.didFocus = () => {}
+		await interactor.focus(vc)
+	}
+
+	@test()
+	protected static async focusingFieldWithoutBlurHookThrows() {
+		//@ts-ignore
+		const err = await assert.doesThrowAsync(() => interactor.blur())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc'],
+		})
+	}
+
+	@test()
+	protected static async throwsWhenVcDoesNotImplementBlurEvents() {
+		const vc = this.NoFocusVc()
+		await assert.doesThrowAsync(() => interactor.blur(vc), /willBlur|didBlur/)
+	}
+
+	@test()
+	protected static async invokesWillBlur() {
+		const vc = this.NoFocusVc()
+		let wasHit = false
+
+		vc.willBlur = () => {
+			wasHit = true
+		}
+
+		await interactor.blur(vc)
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async invokesDidBlurSecond() {
+		const vc = this.NoFocusVc()
+
+		let wasHit = ''
+
+		vc.didBlur = () => {
+			wasHit = 'didBlur'
+		}
+
+		vc.willBlur = () => {
+			wasHit = 'willBlur'
+		}
+
+		await interactor.blur(vc)
+		assert.isEqual(wasHit, 'didBlur')
+	}
+
+	@test()
+	protected static async doesNotThrowWithOnlyDidBlur() {
+		const vc = this.NoFocusVc()
+		vc.didBlur = () => {}
+		await interactor.blur(vc)
+	}
+
+	private static NoFocusVc() {
+		return this.Controller('noFocus' as any, {})
 	}
 
 	private static async submitSlide(

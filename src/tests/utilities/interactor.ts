@@ -593,6 +593,30 @@ const interactor = {
 			personId: personMatch.id,
 		})
 	},
+
+	async focus(vc: ViewController<any>) {
+		assertOptions({ vc }, ['vc'])
+
+		assert.isTruthy(
+			vc.willFocus || vc.didFocus,
+			`You focused a view controller that has no focus handlers in place. Try adding 'public willFocus()' or 'public didFocus()' to your vc.`
+		)
+
+		await vc.willFocus?.()
+		await vc.didFocus?.()
+	},
+
+	async blur(vc: ViewController<any>) {
+		assertOptions({ vc }, ['vc'])
+
+		assert.isTruthy(
+			vc.willBlur || vc.didBlur,
+			`You focused a view controller that has no focus handlers in place. Try adding 'public willBlur()' or 'public didBlur()' to your vc.`
+		)
+
+		await vc.willBlur?.()
+		await vc.didBlur?.()
+	},
 }
 
 export default interactor

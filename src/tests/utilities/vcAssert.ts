@@ -3,7 +3,6 @@ import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { ButtonBarViewController, ScopeFlag, StickyToolPosition } from '../..'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
 import {
 	ConfirmOptions,
@@ -12,12 +11,16 @@ import {
 	ViewController,
 	CardViewController,
 	ScopedBy,
+	Card,
+	StickyToolPosition,
+	ScopeFlag,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
+import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
@@ -47,9 +50,6 @@ import interactor from './interactor'
 
 const WAIT_TIMEOUT = 5000
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-export type CardSection =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
-export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 async function wait(...promises: (Promise<any> | undefined | any)[]) {
 	return new Promise<any>((resolve, reject) => {

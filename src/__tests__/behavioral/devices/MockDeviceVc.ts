@@ -1,8 +1,8 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test'
 import SpyDevice from '../../../tests/SpyDevice'
+import { Card } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
-import { Card } from './ControllingADevicesNativeFeatures.test'
 
 export default class MockDeviceVc extends AbstractViewController<Card> {
 	public assertHasDeviceInstance() {
