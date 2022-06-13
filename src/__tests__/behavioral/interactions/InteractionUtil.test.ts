@@ -1,6 +1,14 @@
+import {
+	MercuryClient,
+	MercuryClientFactory,
+	MercuryTestClient,
+} from '@sprucelabs/mercury-client'
+import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { buildSchema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
+import { generateId } from '@sprucelabs/test-utils'
 import Authenticator from '../../../auth/Authenticator'
 import buildBigForm from '../../../builders/buildBigForm'
 import buildForm from '../../../builders/buildForm'
@@ -8,6 +16,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../../tests/constants'
 import interactor from '../../../tests/utilities/interactor'
 import { SkillViewController } from '../../../types/heartwood.types'
+import LoginViewController from '../../../viewControllers/Login.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
@@ -33,22 +42,64 @@ export default class interactorTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		good: GoodSkillViewController,
 	}
+	private static loginVc: LoginViewController
+	private static client: MercuryClient
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		MercuryClientFactory.setIsTestMode(true)
+		MercuryTestClient.setShouldRequireLocalListeners(true)
+		this.loginVc = this.LoginVc()
+		this.client = MercuryTestClient.getInternalEmitter(
+			eventContractUtil.unifyContracts(coreEventContracts as any)
+		)
+	}
 
 	@test()
 	protected static async canCreateinteractor() {
 		assert.isTruthy(interactor)
 	}
 
-	@test.skip('find out how to test with wildcard demo numbers')
-	protected static async loginFailsWithBadNumber() {
-		await assert.doesThrowAsync(() =>
-			interactor.submitLoginForm(this.LoginVc(), '666-000-0000')
+	@test()
+	protected static async loginGoesBackToFirstSlideError() {
+		await this.client.on(
+			'request-pin::v2020_12_25',
+			() => assert.fail('Noo!') as any
 		)
+		await assert.doesThrowAsync(
+			() => interactor.submitLoginForm(this.loginVc, '666-000-0000'),
+			'Noo!'
+		)
+
+		assert.isEqual(this.loginVc.getLoginForm().getPresentSlide(), 0)
 	}
 
 	@test(`can login with ${DEMO_NUMBER}`, DEMO_NUMBER)
 	@test(`can login with ${DEMO_NUMBER2}`, DEMO_NUMBER2)
 	protected static async loginPassesWithGoodDemoNumber(phone: string) {
+		const challenge = generateId()
+
+		await this.client.on('request-pin::v2020_12_25', () => {
+			return {
+				challenge,
+			}
+		})
+
+		let passedChallenge: string | undefined
+
+		const personId = generateId()
+		await this.client.on('confirm-pin::v2020_12_25', ({ payload }) => {
+			passedChallenge = payload.challenge
+			return {
+				token: generateId(),
+				person: {
+					id: personId,
+					casualName: 'Hey',
+					dateCreated: 0,
+				},
+			}
+		})
+
 		let loggedInPersonId: string | undefined
 		const auth = Authenticator.getInstance()
 
@@ -56,12 +107,11 @@ export default class interactorTest extends AbstractViewControllerTest {
 			loggedInPersonId = person.id
 		})
 
-		const { person } = await this.mercury.loginAsDemoPerson(phone)
-
 		await interactor.submitLoginForm(this.LoginVc(), phone)
 
 		assert.isTrue(auth.isLoggedIn())
-		assert.isEqual(loggedInPersonId, person.id)
+		assert.isEqual(loggedInPersonId, personId)
+		assert.isEqual(passedChallenge, challenge)
 	}
 
 	@test()

@@ -246,31 +246,19 @@ const interactor = {
 		if (demoNumber) {
 			const formVc = vc.getLoginForm()
 
-			//@ts-ignore
-			const oldHandler = vc.loginHandler
-			const promise = new Promise((resolve, reject) => {
-				//@ts-ignore
-				vc.loginHandler = async () => {
-					//@ts-ignore
-					await oldHandler?.()
-
-					//@ts-ignore
-					resolve()
-				}
-				//@ts-ignore
-
-				vc.loginFailedHandler = (err) => {
-					reject(err)
-				}
-			})
-
 			await formVc.setValue('phone', demoNumber)
 
 			await formVc.submit()
 
-			await formVc.setValue('code', demoNumber.substr(demoNumber.length - 4))
+			const errors = formVc.getErrorsByField() as any
+			const error = errors[Object.keys(errors)[0]]?.[0]
 
-			await promise
+			assert.isFalse(
+				formVc.hasErrors(),
+				error?.friendlyMessage ?? error?.stack ?? error?.message
+			)
+
+			await formVc.setValue('code', demoNumber.substr(demoNumber.length - 4))
 
 			return
 		}
