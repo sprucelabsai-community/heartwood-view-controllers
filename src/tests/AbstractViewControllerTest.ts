@@ -1,5 +1,13 @@
+import {
+	MercuryClient,
+	MercuryClientFactory,
+	MercuryTestClient,
+} from '@sprucelabs/mercury-client'
+import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
+import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test'
+import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
 	ControllerOptions,
@@ -21,6 +29,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	protected static controllerMap: Record<string, any> = {}
 	private static mercuryFixture?: MercuryFixture
 	private static views?: ViewControllerFactory
+	protected static client: MercuryClient
+	protected static eventFaker: EventFaker
 
 	protected static get mercury() {
 		if (!this.mercuryFixture) {
@@ -40,6 +50,14 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		SwipeCardViewController.swipeDelay = 0
 		this.views = undefined
 		await MercuryFixture.beforeEach()
+
+		MercuryClientFactory.setIsTestMode(true)
+		MercuryTestClient.setShouldRequireLocalListeners(true)
+
+		this.client = MercuryTestClient.getInternalEmitter(
+			eventContractUtil.unifyContracts(coreEventContracts as any)
+		)
+		this.eventFaker = new EventFaker(this.client)
 	}
 
 	protected static async afterEach() {

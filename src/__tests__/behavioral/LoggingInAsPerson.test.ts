@@ -1,4 +1,3 @@
-import { MercuryClientFactory } from '@sprucelabs/mercury-client'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
@@ -23,6 +22,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 		Authenticator.reset()
 		Authenticator.setStorage(this.storage)
+
+		await this.eventFaker.fakeRequestPin()
+		await this.eventFaker.fakeConfirmPin()
 	}
 
 	@test()
@@ -239,10 +241,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async anErrorReturnsFalseOnSubmit() {
-		MercuryClientFactory.setIsTestMode(true)
-		const { client } = await this.mercury.loginAsDemoPerson()
-
-		await client.on('request-pin::v2020_12_25', (() =>
+		await this.client.on('request-pin::v2020_12_25', (() =>
 			assert.fail('throw')) as any)
 
 		const vc = this.LoginVc()

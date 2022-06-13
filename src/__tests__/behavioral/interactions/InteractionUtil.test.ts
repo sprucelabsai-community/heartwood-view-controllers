@@ -1,12 +1,5 @@
-import {
-	MercuryClient,
-	MercuryClientFactory,
-	MercuryTestClient,
-} from '@sprucelabs/mercury-client'
-import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { buildSchema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import Authenticator from '../../../auth/Authenticator'
@@ -43,16 +36,10 @@ export default class interactorTest extends AbstractViewControllerTest {
 		good: GoodSkillViewController,
 	}
 	private static loginVc: LoginViewController
-	private static client: MercuryClient
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		MercuryClientFactory.setIsTestMode(true)
-		MercuryTestClient.setShouldRequireLocalListeners(true)
 		this.loginVc = this.LoginVc()
-		this.client = MercuryTestClient.getInternalEmitter(
-			eventContractUtil.unifyContracts(coreEventContracts as any)
-		)
 	}
 
 	@test()
@@ -79,25 +66,16 @@ export default class interactorTest extends AbstractViewControllerTest {
 	protected static async loginPassesWithGoodDemoNumber(phone: string) {
 		const challenge = generateId()
 
-		await this.client.on('request-pin::v2020_12_25', () => {
-			return {
-				challenge,
-			}
-		})
+		await this.eventFaker.fakeRequestPin(challenge)
 
 		let passedChallenge: string | undefined
 
 		const personId = generateId()
-		await this.client.on('confirm-pin::v2020_12_25', ({ payload }) => {
-			passedChallenge = payload.challenge
-			return {
-				token: generateId(),
-				person: {
-					id: personId,
-					casualName: 'Hey',
-					dateCreated: 0,
-				},
-			}
+		await this.eventFaker.fakeConfirmPin({
+			personId,
+			cb: ({ payload }) => {
+				passedChallenge = payload.challenge
+			},
 		})
 
 		let loggedInPersonId: string | undefined
