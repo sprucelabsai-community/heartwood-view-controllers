@@ -59,13 +59,13 @@ const phoneInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Phone
 	            'onChange': {
 	                label: 'On change handler',
 	                type: 'raw',
-	                options: {valueType: `(value: any) => void | Promise<void>`,}
+	                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 	            },
 	            /** On changed rendered value handler. */
 	            'onChangeRenderedValue': {
 	                label: 'On changed rendered value handler',
 	                type: 'raw',
-	                options: {valueType: `(value: any) => void | Promise<void>`,}
+	                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 	            },
 	    }
 }

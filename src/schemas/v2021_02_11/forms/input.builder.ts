@@ -45,14 +45,14 @@ export default buildSchema({
 			type: 'raw',
 			label: 'On change handler',
 			options: {
-				valueType: '(value: any) => void | Promise<void>',
+				valueType: '(value: any) => void | Promise<void | boolean> | boolean',
 			},
 		},
 		onChangeRenderedValue: {
 			type: 'raw',
 			label: 'On changed rendered value handler',
 			options: {
-				valueType: '(value: any) => void | Promise<void>',
+				valueType: '(value: any) => void | Promise<void | boolean> | boolean',
 			},
 		},
 	},

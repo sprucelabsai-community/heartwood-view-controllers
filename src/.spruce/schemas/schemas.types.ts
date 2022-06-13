@@ -38,7 +38,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** On change handler. */
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 		}
 
 		interface ToggleInputSchema extends SpruceSchema.Schema {
@@ -104,7 +104,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			    }
 		}
@@ -136,9 +136,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -199,13 +199,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -245,7 +245,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** On change handler. */
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -315,7 +315,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
@@ -359,9 +359,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -420,13 +420,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			    }
 		}
@@ -458,9 +458,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -520,13 +520,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			    }
 		}
@@ -971,9 +971,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -1037,13 +1037,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3357,7 +3357,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** On change handler. */
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -3429,7 +3429,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
@@ -3480,7 +3480,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** On change handler. */
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				
 				'setValue'?: ((name: string, value: boolean) => Promise<any> | any)| undefined | null
 		}
@@ -3548,7 +3548,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** . */
 			            'setValue': {
@@ -3623,9 +3623,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3690,13 +3690,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3746,9 +3746,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3811,13 +3811,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3860,9 +3860,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3925,13 +3925,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5589,9 +5589,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Controller. */
@@ -5650,13 +5650,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5706,9 +5706,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean| undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void>)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 		}
 
 		interface AddressInputSchema extends SpruceSchema.Schema {
@@ -5767,13 +5767,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onChange': {
 			                label: 'On change handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			            /** On changed rendered value handler. */
 			            'onChangeRenderedValue': {
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void>`,}
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
 			    }
 		}
