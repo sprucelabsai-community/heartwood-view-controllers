@@ -4,6 +4,7 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactor from '../../../tests/utilities/interactor'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 import SpyTextFieldInput from './SpyTextFieldInput'
 
@@ -18,44 +19,10 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.firstNameVc = this.SpyInputVc({ name: 'firstName' })
+		this.firstNameVc = this.SpyInputVc()
+		this.emailVc = this.SpyInputVc()
 
-		this.emailVc = this.SpyInputVc({
-			name: 'email',
-		})
-
-		this.formVc = this.Controller(
-			'form',
-			buildForm({
-				schema: formSchema,
-				sections: [
-					{
-						fields: [
-							{
-								name: 'firstName',
-								vc: this.firstNameVc,
-							},
-							{
-								name: 'lastName',
-							},
-							{
-								name: 'email',
-								vc: this.emailVc,
-							},
-							{
-								name: 'age',
-							},
-						],
-					},
-				],
-			})
-		)
-	}
-
-	private static SpyInputVc(options: TextInput): SpyTextFieldInput {
-		return this.Controller('textInput' as any, {
-			...options,
-		}) as SpyTextFieldInput
+		this.formVc = this.FormVc()
 	}
 
 	@test('throws when vc not found 1', 'lastName')
@@ -143,6 +110,71 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	protected static async dirtySetAsExpectedWhenSettingValueOnField() {
 		await this.emailVc.setValue('waka awka')
 		assert.isTrue(this.formVc.getIsDirty())
+	}
+
+	@test()
+	protected static async focusAndBlurHandlersCalled() {
+		let wasBlurHit = false
+		let wasFocusHit = false
+
+		this.emailVc = this.SpyInputVc({
+			onBlur: () => {
+				wasBlurHit = true
+			},
+			onFocus: () => {
+				wasFocusHit = true
+			},
+		})
+
+		assert.isFalse(wasBlurHit)
+		assert.isFalse(wasFocusHit)
+
+		await interactor.focus(this.emailVc)
+
+		assert.isFalse(wasBlurHit)
+		assert.isTrue(wasFocusHit)
+
+		await interactor.blur(this.emailVc)
+
+		assert.isTrue(wasBlurHit)
+		assert.isTrue(wasFocusHit)
+	}
+
+	private static FormVc() {
+		return this.Controller(
+			'form',
+			buildForm({
+				schema: formSchema,
+				sections: [
+					{
+						fields: [
+							{
+								name: 'firstName',
+								vc: this.firstNameVc,
+							},
+							{
+								name: 'lastName',
+							},
+							{
+								name: 'email',
+								vc: this.emailVc,
+							},
+							{
+								name: 'age',
+							},
+						],
+					},
+				],
+			})
+		)
+	}
+
+	private static SpyInputVc(
+		options?: Omit<TextInput, 'name'>
+	): SpyTextFieldInput {
+		return this.Controller('textInput' as any, {
+			...options,
+		}) as SpyTextFieldInput
 	}
 }
 

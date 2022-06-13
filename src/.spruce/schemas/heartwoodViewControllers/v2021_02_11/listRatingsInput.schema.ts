@@ -68,6 +68,18 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 	            },
+	            /** On focus handler. */
+	            'onFocus': {
+	                label: 'On focus handler',
+	                type: 'raw',
+	                options: {valueType: `() => void | Promise<void>`,}
+	            },
+	            /** On blur handler. */
+	            'onBlur': {
+	                label: 'On blur handler',
+	                type: 'raw',
+	                options: {valueType: `() => void | Promise<void>`,}
+	            },
 	            /** Can be changed. */
 	            'canBeChanged': {
 	                label: 'Can be changed',

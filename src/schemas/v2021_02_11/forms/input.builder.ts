@@ -55,5 +55,19 @@ export default buildSchema({
 				valueType: '(value: any) => void | Promise<void | boolean> | boolean',
 			},
 		},
+		onFocus: {
+			type: 'raw',
+			label: 'On focus handler',
+			options: {
+				valueType: '() => void | Promise<void>',
+			},
+		},
+		onBlur: {
+			type: 'raw',
+			label: 'On blur handler',
+			options: {
+				valueType: '() => void | Promise<void>',
+			},
+		},
 	},
 })

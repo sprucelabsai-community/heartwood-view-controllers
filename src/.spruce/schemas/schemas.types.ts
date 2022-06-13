@@ -39,6 +39,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 		}
 
 		interface ToggleInputSchema extends SpruceSchema.Schema {
@@ -106,6 +110,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			    }
 		}
 
@@ -139,6 +155,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -207,6 +227,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -246,6 +278,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -317,6 +353,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
 			                label: 'Can be changed',
@@ -362,6 +410,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -428,6 +480,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			    }
 		}
 
@@ -461,6 +525,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -527,6 +595,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			    }
 		}
@@ -974,6 +1054,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -1044,6 +1128,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3358,6 +3454,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
@@ -3431,6 +3531,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
 			                label: 'Can be changed',
@@ -3481,6 +3593,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				
 				'setValue'?: ((name: string, value: boolean) => Promise<any> | any)| undefined | null
 		}
@@ -3549,6 +3665,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** . */
 			            'setValue': {
@@ -3626,6 +3754,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3698,6 +3830,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -3749,6 +3893,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3819,6 +3967,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -3863,6 +4023,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -3932,6 +4096,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5592,6 +5768,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Controller. */
@@ -5658,6 +5838,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
 			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -5709,6 +5901,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
 				/** On changed rendered value handler. */
 				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
 		}
 
 		interface AddressInputSchema extends SpruceSchema.Schema {
@@ -5774,6 +5970,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On changed rendered value handler',
 			                type: 'raw',
 			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			    }
 		}

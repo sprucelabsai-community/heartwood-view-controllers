@@ -16,6 +16,7 @@ export default abstract class AbstractInputViewController<
 
 	public constructor(options: ViewControllerOptions & Model) {
 		super(options)
+
 		this.model = removeUniversalViewOptions(options as any) as Model
 	}
 
@@ -39,6 +40,14 @@ export default abstract class AbstractInputViewController<
 
 	public getRenderedValue() {
 		return this.model.renderedValue
+	}
+
+	public async didFocus() {
+		return this.model.onFocus?.()
+	}
+
+	public async didBlur() {
+		return this.model.onBlur?.()
 	}
 
 	public getValue() {
