@@ -129,7 +129,6 @@ export { default as autocompleteInteractor } from './tests/utilities/autocomplet
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
-export { default as formTestUtil } from './tests/utilities/formTest.utility'
 export { default as calendarSeeder } from './tests/utilities/calendarSeeder'
 export { default as confirmTestPatcher } from './tests/utilities/confirmTestPatcher'
 export { default as dialogTestPatcher } from './tests/utilities/dialogTestPatcher'

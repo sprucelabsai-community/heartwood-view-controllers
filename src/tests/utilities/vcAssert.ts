@@ -43,7 +43,6 @@ import {
 	getVcName,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
-import formTestUtil from './formTest.utility'
 import interactor from './interactor'
 
 const WAIT_TIMEOUT = 5000
@@ -1858,13 +1857,6 @@ const vcAssert = {
 				)
 			}
 		}
-	},
-
-	/**
-	 * @deprecated use formTestUtil.patchSubmitToThrow() instead
-	 */
-	patchSubmitToThrow() {
-		formTestUtil.patchSubmitToThrow()
 	},
 
 	assertCardRendersProgress(

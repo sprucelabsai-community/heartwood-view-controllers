@@ -6,7 +6,6 @@ import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/for
 import { interactor } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import formTestUtil from '../../../tests/utilities/formTest.utility'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { FormViewController } from '../../../types/heartwood.types'
 import { testFormOptions } from './testFormOptions'
@@ -1075,27 +1074,6 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 				[fieldName]: value,
 			},
 		})
-	}
-
-	@test()
-	protected static async formsCanBeSetToThrowOnSubmit() {
-		formTestUtil.patchSubmitToThrow()
-		this.vc = this.Controller('form', {
-			...this.testForm,
-		}) as any
-		await assert.doesThrowAsync(() => this.vc.submit())
-		await interactor.submitForm(this.vc)
-		await assert.doesThrowAsync(() => this.vc.submit())
-	}
-
-	@test()
-	protected static async canDisablePatchSubmitToThrow() {
-		formTestUtil.disablePatchingSubmitToThrow()
-		formTestUtil.patchSubmitToThrow()
-		this.vc = this.Controller('form', {
-			...this.testForm,
-		}) as any
-		await this.vc.submit()
 	}
 
 	@test()

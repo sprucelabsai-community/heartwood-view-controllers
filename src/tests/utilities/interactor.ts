@@ -238,14 +238,8 @@ const interactor = {
 			)
 		}
 
-		const originalSubmit = vc.submit.bind(vc)
-		//@ts-ignore
-		const submit = vc._originalSubmit ?? vc.submit.bind(vc)
-		vc.submit = submit
-
 		//@ts-ignore
 		await renderUtil.render(vc).onSubmit?.()
-		vc.submit = originalSubmit
 	},
 
 	async submitLoginForm(vc: LoginViewController, demoNumber: string) {
