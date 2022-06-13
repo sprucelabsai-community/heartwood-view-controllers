@@ -1,3 +1,10 @@
+# [82.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.5.4...v82.0.0) (2022-06-13)
+
+
+### Breaking Changes
+
+* no more patching form view controllers to throw ([c9b175b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c9b175b))
+
 ## [81.5.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.5.3...v81.5.4) (2022-06-13)
 
 ## [81.5.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v81.5.2...v81.5.3) (2022-06-12)
