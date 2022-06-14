@@ -214,7 +214,7 @@ const interactor = {
 		} else {
 			assert.isTruthy(
 				model.onSubmitSlide,
-				`I really want to submit this big form, but first you gotta pass 'onSubmitSlide' to your view controller. Or, you can 'vc.jumpToSlide(this.vc.getTotalSlides())' to jump to the last slide and submit again, which will submit the entire form (including all slides).`
+				`I really want to submit this big form, but first you gotta pass 'onSubmitSlide' to your view controller. Or, you can 'vc.jumpToSlide(this.vc.getTotalSlides() - 1)' to jump to the last slide and submit again, which will submit the entire form (including all slides).`
 			)
 
 			//@ts-ignore
