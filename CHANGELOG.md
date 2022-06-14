@@ -1,3 +1,10 @@
+# [84.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.1.0...v84.0.0) (2022-06-14)
+
+
+### Breaking Changes
+
+* isPaused -> isPlaying to avoid positive negatives ([ebdb0f9](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ebdb0f9))
+
 # [83.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.0.9...v83.1.0) (2022-06-14)
 
 
