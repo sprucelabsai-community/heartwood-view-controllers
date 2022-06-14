@@ -1,3 +1,10 @@
+# [83.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.0.9...v83.1.0) (2022-06-14)
+
+
+### Features
+
+* talking sprucebot knows if paused and sentences can be updated! ([fd9f85d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fd9f85d))
+
 ## [83.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.0.8...v83.0.9) (2022-06-14)
 
 ## [83.0.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.0.7...v83.0.8) (2022-06-14)
