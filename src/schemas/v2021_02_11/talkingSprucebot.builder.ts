@@ -15,5 +15,12 @@ export default buildSchema({
 				valueType: '() => Promise<void> | void',
 			},
 		},
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType: 'HeartwoodTypes.TalkingSprucebotViewController',
+			},
+		},
 	},
 })

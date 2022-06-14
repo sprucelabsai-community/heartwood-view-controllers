@@ -65,6 +65,12 @@ const talkingSprucebotSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `() => Promise<void> | void`,}
 	            },
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.TalkingSprucebotViewController`,}
+	            },
 	    }
 }
 

@@ -2665,6 +2665,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isPaused'?: boolean| undefined | null
 				/** Completion handler. */
 				'onComplete'?: (() => Promise<void> | void)| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController)| undefined | null
 		}
 
 		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
@@ -2727,6 +2729,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Completion handler',
 			                type: 'raw',
 			                options: {valueType: `() => Promise<void> | void`,}
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.TalkingSprucebotViewController`,}
 			            },
 			    }
 		}

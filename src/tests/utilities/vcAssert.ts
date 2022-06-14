@@ -109,12 +109,12 @@ const vcAssert = {
 		assert.isEqual(
 			actual,
 			expected,
-			`Expected triggerRender of \`${
+			`Expected triggerRender of '${
 				//@ts-ignore
 				vc.id ?? 'view controller'
-			}\` to be invoked \`${expected}\` time${
+			}' to be invoked '${expected}' time${
 				expected === 1 ? '' : 's'
-			}, but it was actually invoked \`${actual}\` time${
+			}, but it was actually invoked '${actual}' time${
 				actual === 1 ? '' : 's'
 			}.`
 		)
@@ -607,7 +607,7 @@ const vcAssert = {
 		}
 
 		assert.fail(
-			`Form does not render field named \`${fieldName}\`. Make sure it's in your form's schema and set in \`form.sections.fields\`.`
+			`Form does not render field named '${fieldName}'. Make sure it's in your form's schema and set in 'form.sections.fields'.`
 		)
 	},
 
@@ -618,7 +618,7 @@ const vcAssert = {
 			return
 		}
 
-		assert.fail(`Form should not be rendering \`${fieldName}\`, but it is.`)
+		assert.fail(`Form should not be rendering '${fieldName}', but it is.`)
 	},
 
 	assertFormRendersFields(formVc: FormVc, fields: string[]) {
@@ -946,7 +946,7 @@ const vcAssert = {
 			assert.fail(
 				`Expected your card '${
 					model.id ?? getVcName(vc)
-				}' to be busy. Try \`this.setIsBusy(true)\` or setting { body: { isBusy: true } }`
+				}' to be busy. Try 'this.setIsBusy(true)' or setting { body: { isBusy: true } }`
 			)
 		}
 	},
@@ -957,7 +957,7 @@ const vcAssert = {
 			assert.fail(
 				`Expected your card '${
 					model.id ?? getVcName(vc)
-				}' not to be busy, but it was. Try \`this.setIsBusy(false)\`.`
+				}' not to be busy, but it was. Try 'this.setIsBusy(false)'.`
 			)
 		}
 	},
@@ -982,7 +982,7 @@ const vcAssert = {
 			}
 		}
 		assert.fail(
-			`Expected row '${row}' to render content \`${content}\`, but it did not.`
+			`Expected row '${row}' to render content '${content}', but it did not.`
 		)
 	},
 
@@ -1038,7 +1038,7 @@ const vcAssert = {
 			}
 		}
 
-		assert.fail(`Could not find button with \`lineIcon='${icon}'\` in row!`)
+		assert.fail(`Could not find button with 'lineIcon='${icon}'' in row!`)
 	},
 
 	assertCardRendersForms(vc: CardViewController, count: number) {
@@ -1523,7 +1523,7 @@ const vcAssert = {
 			//@ts-ignore
 			`Your skill view ${getVcName(
 				vc
-			)} does not require login and it should! Try implementing \`public async getIsLoginRequired() { return true }\` in your SkillViewController.`
+			)} does not require login and it should! Try implementing 'public async getIsLoginRequired() { return true }' in your SkillViewController.`
 		)
 	},
 
@@ -1535,7 +1535,7 @@ const vcAssert = {
 		}
 
 		assert.fail(
-			`Your skill view does not require login and it should! Make sure \`getIsLoginRequired\` returns false in your SkillViewController.`
+			`Your skill view does not require login and it should! Make sure 'getIsLoginRequired' returns false in your SkillViewController.`
 		)
 	},
 
@@ -1950,9 +1950,9 @@ const vcAssert = {
 			expectedAsArray,
 			`Your skill view '${getVcName(
 				vc
-			)}' is not scoped as expected. Try \`public getScope = () => ${renderScopeMarkup(
+			)}' is not scoped as expected. Try 'public getScope = () => ${renderScopeMarkup(
 				expectedAsArray
-			)} as ScopeFlag[]\`!`
+			)} as ScopeFlag[]'!`
 		)
 	},
 

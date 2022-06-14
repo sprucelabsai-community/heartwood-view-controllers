@@ -3,11 +3,6 @@ import { SchemaError } from '@sprucelabs/schema'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type ViewModel =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
-
-export interface TalkingSprucebotViewControllerOptions extends ViewModel {}
-
 export default class TalkingSprucebotViewController
 	extends AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
@@ -47,6 +42,7 @@ export default class TalkingSprucebotViewController
 	}
 
 	public async play(): Promise<void> {
+		this.model.isPaused = false
 		this.playHandler()
 		return new Promise((resolve) => {
 			this.playResolver = resolve as any
@@ -57,7 +53,17 @@ export default class TalkingSprucebotViewController
 		this.restartHandler()
 	}
 	public pause() {
+		this.model.isPaused = true
 		this.pauseHandler()
+	}
+
+	public getIsPlaying() {
+		return this.model.isPaused !== true
+	}
+
+	public setSentences(sentences: Sentence[]) {
+		this.model.sentences = sentences
+		this.triggerRender()
 	}
 
 	public render(): ViewModel {
@@ -65,3 +71,11 @@ export default class TalkingSprucebotViewController
 		return { ...this.model, controller: this }
 	}
 }
+
+type ViewModel =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
+
+export type Sentence =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence
+
+export interface TalkingSprucebotViewControllerOptions extends ViewModel {}
