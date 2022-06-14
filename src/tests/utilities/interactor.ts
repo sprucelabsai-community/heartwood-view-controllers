@@ -209,16 +209,16 @@ const interactor = {
 
 		const model = renderUtil.render(vc)
 
-		assert.isTruthy(
-			model.onSubmitSlide,
-			`I really want to submit this form, but first you gotta pass 'onSubmitSlide' or 'onSubmit' to your view controller.`
-		)
-
 		if (vc.getIsLastSlide()) {
 			return this.submitForm(vc)
 		} else {
+			assert.isTruthy(
+				model.onSubmitSlide,
+				`I really want to submit this big form, but first you gotta pass 'onSubmitSlide' to your view controller. Or, you can 'vc.jumpToSlide(this.vc.getTotalSlides())' to jump to the last slide and submit again, which will submit the entire form (including all slides).`
+			)
+
 			//@ts-ignore
-			await model.onSubmitSlide(vc.buildOnSubmitOptions().options)
+			await model.onSubmitSlide?.(vc.buildOnSubmitOptions().options)
 		}
 	},
 

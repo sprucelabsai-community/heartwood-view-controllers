@@ -110,6 +110,14 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static async onSubmitSlideWithOnSubmitHandlerDoesNotThrow() {
+		await this.submitSlide({
+			sections: [{ fields: ['first'] }],
+			onSubmit() {},
+		})
+	}
+
+	@test()
 	protected static async submitListSlideTriggersOnSubmit() {
 		let onSubmitCount = 0
 		let onSubmitSlideCount = 0
