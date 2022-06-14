@@ -48,9 +48,9 @@ const sprucebotTypedMessageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_
 	                defaultValue: "small",
 	                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 	            },
-	            /** Paused. */
-	            'isPaused': {
-	                label: 'Paused',
+	            /** Playing. */
+	            'isPlaying': {
+	                label: 'Playing',
 	                type: 'boolean',
 	                options: undefined
 	            },

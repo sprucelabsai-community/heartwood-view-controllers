@@ -967,8 +967,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldLoop'?: boolean| undefined | null
 				/** Size. */
 				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** Paused. */
-				'isPaused'?: boolean| undefined | null
+				/** Playing. */
+				'isPlaying'?: boolean| undefined | null
 		}
 
 		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
@@ -1015,9 +1015,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                defaultValue: "small",
 			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 			            },
-			            /** Paused. */
-			            'isPaused': {
-			                label: 'Paused',
+			            /** Playing. */
+			            'isPlaying': {
+			                label: 'Playing',
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -2661,8 +2661,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldLoop'?: boolean| undefined | null
 				/** Size. */
 				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** Paused. */
-				'isPaused'?: boolean| undefined | null
+				/** Playing. */
+				'isPlaying'?: boolean| undefined | null
 				/** Completion handler. */
 				'onComplete'?: (() => Promise<void> | void)| undefined | null
 				/** Controller. */
@@ -2718,9 +2718,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                defaultValue: "small",
 			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 			            },
-			            /** Paused. */
-			            'isPaused': {
-			                label: 'Paused',
+			            /** Playing. */
+			            'isPlaying': {
+			                label: 'Playing',
 			                type: 'boolean',
 			                options: undefined
 			            },

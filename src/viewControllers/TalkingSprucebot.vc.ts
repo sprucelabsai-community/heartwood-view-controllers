@@ -42,7 +42,7 @@ export default class TalkingSprucebotViewController
 	}
 
 	public async play(): Promise<void> {
-		this.model.isPaused = false
+		this.model.isPlaying = true
 		this.playHandler()
 		return new Promise((resolve) => {
 			this.playResolver = resolve as any
@@ -53,12 +53,12 @@ export default class TalkingSprucebotViewController
 		this.restartHandler()
 	}
 	public pause() {
-		this.model.isPaused = true
+		this.model.isPlaying = false
 		this.pauseHandler()
 	}
 
 	public getIsPlaying() {
-		return this.model.isPaused !== true
+		return this.model.isPlaying !== false
 	}
 
 	public setSentences(sentences: Sentence[]) {

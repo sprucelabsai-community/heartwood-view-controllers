@@ -76,9 +76,9 @@ const sprucebotTypeMessageBuilder = buildSchema({
 				choices: sizeChoices,
 			},
 		},
-		isPaused: {
+		isPlaying: {
 			type: 'boolean',
-			label: 'Paused',
+			label: 'Playing',
 		},
 	},
 })

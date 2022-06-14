@@ -53,9 +53,9 @@ const talkingSprucebotSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                defaultValue: "small",
 	                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 	            },
-	            /** Paused. */
-	            'isPaused': {
-	                label: 'Paused',
+	            /** Playing. */
+	            'isPlaying': {
+	                label: 'Playing',
 	                type: 'boolean',
 	                options: undefined
 	            },
