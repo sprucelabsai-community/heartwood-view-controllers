@@ -1,3 +1,22 @@
+## [84.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.5...v84.0.6) (2022-06-15)
+
+## [84.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.4...v84.0.5) (2022-06-15)
+
+## [84.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.3...v84.0.4) (2022-06-15)
+
+## [84.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.2...v84.0.3) (2022-06-15)
+
+## [84.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.1...v84.0.2) (2022-06-15)
+
+## [84.0.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.0...v84.0.1) (2022-06-14)
+
+# [84.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.1.0...v84.0.0) (2022-06-14)
+
+
+### Breaking Changes
+
+* isPaused -> isPlaying to avoid positive negatives ([ebdb0f9](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ebdb0f9))
+
 # [83.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v83.0.9...v83.1.0) (2022-06-14)
 
 
