@@ -7,7 +7,7 @@ import AutocompleteInputViewController, {
 const autocompleteAssert = {
 	async assertActionShowsSuggestions(
 		vc: AutocompleteInputViewController,
-		action: () => Promise<void> | void,
+		action: () => Promise<any> | any,
 		expectedSuggestionIds?: string[]
 	) {
 		assertOptions({ vc, action }, ['vc', 'action'])
@@ -45,7 +45,7 @@ const autocompleteAssert = {
 
 	async assertActionHidesSuggestions(
 		vc: AutocompleteInputViewController,
-		action: () => Promise<void> | void
+		action: () => Promise<any> | any
 	) {
 		assertOptions({ vc, action }, ['vc', 'action'])
 
