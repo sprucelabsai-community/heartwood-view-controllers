@@ -1,14 +1,25 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, FieldDefinitions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../builders/buildForm'
 import {
+	BigFormViewController,
+	Card,
+	FormBuilderCardViewController,
 	FormInputViewController,
 	FormViewController,
+	SkillViewController,
+	ViewController,
 } from '../../types/heartwood.types'
+import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
+import renderUtil from '../../utilities/render.utility'
+import DialogViewController from '../../viewControllers/Dialog.vc'
+import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
+import { pluckFirstFromCard } from './assertSupport'
 
 type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>
+export type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const formAssert = {
 	views: {} as SimpleFactory,
@@ -27,7 +38,7 @@ const formAssert = {
 			`You gotta create a 'setValue()' method on your input!`
 		)
 
-		const formVc = FormVc(this.views, inputVc)
+		const formVc = BuildFormVc(this.views, inputVc)
 		let value = generateId()
 
 		await formVc.setValue('field', value)
@@ -48,9 +59,182 @@ const formAssert = {
 			`You need to implement 'setRenderedValue(...)' on your input!`
 		)
 	},
+
+	formRendersField(
+		formVc: FormVc,
+		fieldName: string,
+		fieldDefinition?: Partial<FieldDefinitions>
+	) {
+		const model = renderUtil.render(formVc)
+		const schema = formVc.getSchema()
+
+		for (const section of model.sections) {
+			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
+				section.fields,
+				schema
+			)
+			const match = fields.find((n) => n.name === fieldName)
+
+			if (match) {
+				if (fieldDefinition) {
+					assert.doesInclude(match, fieldDefinition)
+				}
+
+				return
+			}
+		}
+
+		assert.fail(
+			`Form does not render field named '${fieldName}'. Make sure it's in your form's schema and set in 'form.sections.fields'.`
+		)
+	},
+
+	formDoesNotRenderField(formVc: FormVc, fieldName: string) {
+		try {
+			this.formRendersField(formVc, fieldName)
+		} catch {
+			return
+		}
+
+		assert.fail(`Form should not be rendering '${fieldName}', but it is.`)
+	},
+
+	formRendersFields(formVc: FormVc, fields: string[]) {
+		for (const field of fields) {
+			this.formRendersField(formVc, field)
+		}
+	},
+
+	formIsDisabled(vc: FormVc) {
+		assert.isFalse(
+			vc.isEnabled(),
+			'Your form is enabled and it should not be! Try this.formVc.disable()'
+		)
+	},
+
+	formIsEnabled(vc: FormVc) {
+		assert.isTrue(
+			vc.isEnabled(),
+			'Your form is not yet enabled! Try this.formVc.enable()'
+		)
+	},
+
+	formIsBusy(vc: FormVc) {
+		assert.isTrue(
+			vc.getIsBusy(),
+			'Your form is not busy and should be! Try this.formVc.setIsBusy(true).'
+		)
+	},
+
+	formIsNotBusy(vc: FormVc) {
+		assert.isFalse(
+			vc.getIsBusy(),
+			'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
+		)
+	},
+
+	cardRendersForm(vc: ViewController<Card> | DialogViewController) {
+		const model = renderUtil.render(vc)
+
+		const form =
+			pluckFirstFromCard(model, 'bigForm') || pluckFirstFromCard(model, 'form')
+
+		assert.isTrue(
+			form?.controller instanceof FormViewControllerImpl,
+			"Expected to find a form inside your CardViewController, but didn't find one!"
+		)
+
+		return form?.controller as
+			| FormViewController<any>
+			| BigFormViewController<any>
+	},
+
+	cardRendersForms(vc: ViewController<Card>, count: number) {
+		const model = renderUtil.render(vc)
+		const forms =
+			model.body?.sections
+				?.map((s) => s.form?.controller ?? s.bigForm?.controller)
+				.filter((s) => !!s) ?? []
+
+		if (forms.length !== count) {
+			assert.fail(
+				`Expected your card to render ${count} form${
+					count === 1 ? '' : 's'
+				}, but I found ${forms.length === 0 ? 'none' : forms.length}!`
+			)
+		}
+
+		return forms as FormViewController<any>[] | BigFormViewController<any>[]
+	},
+
+	formFieldRendersUsingInputVc(
+		vc: FormVc,
+		fieldName: string,
+		inputVc: FormInputViewController
+	) {
+		try {
+			vc.getField(fieldName)
+		} catch {
+			assert.fail(
+				`I could not find a field called '${fieldName}' on your form!`
+			)
+		}
+
+		const match = vc.getFieldVc(fieldName)
+
+		assert.isEqual(
+			match,
+			inputVc,
+			`Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
+		
+		
+		
+this.Controller(
+	'form',
+	buildForm({
+		schema: formSchema,
+		sections: [
+			{
+				fields: [
+					{
+						name: 'firstName',
+						vc: this.myInputVc, <----- drop it in here
+					},
+				],
+			},
+		],
+	})
+)`
+		)
+	},
+
+	skillViewRendersFormBuilder(
+		vc: SkillViewController,
+		id?: string
+	): FormBuilderCardViewController {
+		const model = renderUtil.render(vc)
+
+		for (const layout of model.layouts) {
+			for (const card of layout.cards ?? []) {
+				const vc = card?.controller
+				//@ts-ignore
+				if (vc && vc.__isFormBuilder && (!id || card.id === id)) {
+					return vc as any
+				}
+			}
+		}
+
+		assert.fail(
+			`Could not find a form builder${
+				id ? ` with the id ${id}` : ''
+			} in your skill view!`
+		)
+
+		return {} as any
+	},
 }
 
-function FormVc(
+function BuildFormVc(
 	views: SimpleFactory,
 	inputVc: FormInputViewController
 ): FormViewController<FormSchema> {
@@ -72,7 +256,7 @@ function FormVc(
 	)
 }
 
-type FormAssert = Pick<typeof formAssert, 'inputVcIsValid'>
+type FormAssert = Omit<typeof formAssert, 'views' | '_setVcFactory'>
 
 export default formAssert as FormAssert
 

@@ -15,11 +15,9 @@ import {
 	StickyToolPosition,
 	ScopeFlag,
 } from '../../types/heartwood.types'
-import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
-import BigFormViewController from '../../viewControllers/BigForm.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
@@ -46,6 +44,7 @@ import {
 	getVcName,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
+import formAssert, { FormVc } from './formAssert'
 import interactor from './interactor'
 
 const WAIT_TIMEOUT = 5000
@@ -87,7 +86,6 @@ async function wait(...promises: (Promise<any> | undefined | any)[]) {
 	})
 }
 
-type FormVc = FormViewController<any> | BigFormViewController<any>
 const vcAssert = {
 	_setVcFactory(factory: ViewControllerFactory) {
 		//@ts-ignore
@@ -419,20 +417,11 @@ const vcAssert = {
 		})
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersForm -> formAssert.cardRendersForm
+	 */
 	assertCardRendersForm(vc: ViewController<Card> | DialogViewController) {
-		const model = renderUtil.render(vc)
-
-		const form =
-			pluckFirstFromCard(model, 'bigForm') || pluckFirstFromCard(model, 'form')
-
-		assert.isTrue(
-			form?.controller instanceof FormViewController,
-			"Expected to find a form inside your CardViewController, but didn't find one!"
-		)
-
-		return form?.controller as
-			| FormViewController<any>
-			| BigFormViewController<any>
+		return formAssert.cardRendersForm(vc)
 	},
 
 	assertCardRendersSection(
@@ -582,49 +571,29 @@ const vcAssert = {
 		}
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormRendersField -> formAssert.formRendersField
+	 */
 	assertFormRendersField(
 		formVc: FormVc,
 		fieldName: string,
 		fieldDefinition?: Partial<FieldDefinitions>
 	) {
-		const model = renderUtil.render(formVc)
-		const schema = formVc.getSchema()
-
-		for (const section of model.sections) {
-			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
-				section.fields,
-				schema
-			)
-			const match = fields.find((n) => n.name === fieldName)
-
-			if (match) {
-				if (fieldDefinition) {
-					assert.doesInclude(match, fieldDefinition)
-				}
-
-				return
-			}
-		}
-
-		assert.fail(
-			`Form does not render field named '${fieldName}'. Make sure it's in your form's schema and set in 'form.sections.fields'.`
-		)
+		return formAssert.formRendersField(formVc, fieldName, fieldDefinition)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormDoesNotRenderField -> formAssert.formDoesNotRenderField
+	 */
 	assertFormDoesNotRenderField(formVc: FormVc, fieldName: string) {
-		try {
-			this.assertFormRendersField(formVc, fieldName)
-		} catch {
-			return
-		}
-
-		assert.fail(`Form should not be rendering '${fieldName}', but it is.`)
+		return formAssert.formDoesNotRenderField(formVc, fieldName)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormRendersFields -> formAssert.formRendersFields
+	 */
 	assertFormRendersFields(formVc: FormVc, fields: string[]) {
-		for (const field of fields) {
-			this.assertFormRendersField(formVc, field)
-		}
+		return formAssert.formRendersFields(formVc, fields)
 	},
 
 	assertCardRendersHeader(
@@ -844,29 +813,14 @@ const vcAssert = {
 		return {} as any
 	},
 
+	/**
+	 * @deprecated vcAssert.assertSkillViewRendersFormBuilder -> formAssert.skillViewRendersFormBuilder
+	 */
 	assertSkillViewRendersFormBuilder(
 		vc: SkillViewController,
 		id?: string
 	): FormBuilderCardViewController {
-		const model = renderUtil.render(vc)
-
-		for (const layout of model.layouts) {
-			for (const card of layout.cards ?? []) {
-				const vc = card?.controller
-				//@ts-ignore
-				if (vc && vc.__isFormBuilder && (!id || card.id === id)) {
-					return vc as any
-				}
-			}
-		}
-
-		assert.fail(
-			`Could not find a form builder${
-				id ? ` with the id ${id}` : ''
-			} in your skill view!`
-		)
-
-		return {} as any
+		return formAssert.skillViewRendersFormBuilder(vc, id)
 	},
 
 	assertSkillViewRendersCard(
@@ -1041,22 +995,11 @@ const vcAssert = {
 		assert.fail(`Could not find button with 'lineIcon='${icon}'' in row!`)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersForms -> formAssert.cardRendersForms
+	 */
 	assertCardRendersForms(vc: CardViewController, count: number) {
-		const model = renderUtil.render(vc)
-		const forms =
-			model.body?.sections
-				?.map((s) => s.form?.controller ?? s.bigForm?.controller)
-				.filter((s) => !!s) ?? []
-
-		if (forms.length !== count) {
-			assert.fail(
-				`Expected your card to render ${count} form${
-					count === 1 ? '' : 's'
-				}, but I found ${forms.length === 0 ? 'none' : forms.length}!`
-			)
-		}
-
-		return forms as FormViewController<any>[] | BigFormViewController<any>[]
+		return formAssert.cardRendersForms(vc, count)
 	},
 
 	assertFooterRendersButtonWithType(
@@ -1467,32 +1410,32 @@ const vcAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormIsDisabled -> formAssert.formIsDisabled
+	 */
 	assertFormIsDisabled(vc: FormViewController<any>) {
-		assert.isFalse(
-			vc.isEnabled(),
-			'Your form is enabled and it should not be! Try this.formVc.disable()'
-		)
+		return formAssert.formIsDisabled(vc)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormIsEnabled -> formAssert.formIsEnabled
+	 */
 	assertFormIsEnabled(vc: FormViewController<any>) {
-		assert.isTrue(
-			vc.isEnabled(),
-			'Your form is not yet enabled! Try this.formVc.enable()'
-		)
+		return formAssert.formIsEnabled(vc)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormIsBusy -> formAssert.formIsBusy
+	 */
 	assertFormIsBusy(vc: FormViewController<any>) {
-		assert.isTrue(
-			vc.getIsBusy(),
-			'Your form is not busy and should be! Try this.formVc.setIsBusy(true).'
-		)
+		return formAssert.formIsBusy(vc)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFormIsNotBusy -> formAssert.formIsNotBusy
+	 */
 	assertFormIsNotBusy(vc: FormViewController<any>) {
-		assert.isFalse(
-			vc.getIsBusy(),
-			'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
-		)
+		return formAssert.formIsNotBusy(vc)
 	},
 
 	assertIsFullScreen(vc: SkillViewController) {

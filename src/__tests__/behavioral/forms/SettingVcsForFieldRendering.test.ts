@@ -234,6 +234,41 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isTrue(wasFocusHit)
 	}
 
+	@test()
+	protected static assertionThrowsWhenFormFieldDoesNotExist() {
+		assert.doesThrow(
+			() =>
+				formAssert.formFieldRendersUsingInputVc(
+					this.formVc,
+					generateId(),
+					this.firstNameVc
+				),
+			'not find'
+		)
+	}
+
+	@test()
+	protected static assertionFailsIfVcIsNotBeingUsed() {
+		assert.doesThrow(
+			() =>
+				formAssert.formFieldRendersUsingInputVc(
+					this.formVc,
+					'firstName',
+					this.emailVc
+				),
+			'did not render'
+		)
+	}
+
+	@test()
+	protected static async passesWhenFieldVcMatches() {
+		formAssert.formFieldRendersUsingInputVc(
+			this.formVc,
+			'firstName',
+			this.firstNameVc
+		)
+	}
+
 	private static FormVc() {
 		return this.Controller(
 			'form',
