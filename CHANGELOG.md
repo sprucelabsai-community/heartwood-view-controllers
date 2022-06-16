@@ -1,3 +1,12 @@
+## [84.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.1.0...v84.1.1) (2022-06-16)
+
+# [84.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.15...v84.1.0) (2022-06-16)
+
+
+### Features
+
+* formAssert for creating/testing input view controllers ([03d5a1c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/03d5a1c))
+
 ## [84.0.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.14...v84.0.15) (2022-06-16)
 
 ## [84.0.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.0.13...v84.0.14) (2022-06-16)
