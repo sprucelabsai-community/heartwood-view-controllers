@@ -14,6 +14,7 @@ import {
 import FormViewController from '../../../viewControllers/form/Form.vc'
 import SpyTextFieldInput from './SpyTextFieldInput'
 
+//@ts-ignore
 class NoRenderedValueValueMethods implements FormInputViewController {
 	private model: FormInputOptions
 
