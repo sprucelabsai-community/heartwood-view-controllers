@@ -204,6 +204,8 @@ export type BigFormViewController<S extends Schema> =
 export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+export type CardHeader =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel
