@@ -1,3 +1,10 @@
+# [84.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.1.3...v84.2.0) (2022-06-16)
+
+
+### Features
+
+* form assertions moved to formAssert... also new formAssert.formFieldRendersUsingInputVc to making building input vcs even FASTER! ([99739df](https://github.com/sprucelabsai/heartwood-view-controllers/commit/99739df))
+
 ## [84.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.1.2...v84.1.3) (2022-06-16)
 
 ## [84.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.1.1...v84.1.2) (2022-06-16)
