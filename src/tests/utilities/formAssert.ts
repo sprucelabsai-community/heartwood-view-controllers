@@ -19,7 +19,7 @@ const formAssert = {
 	async inputVcIsValid(inputVc: FormInputViewController) {
 		assert.isFunction(
 			inputVc.getValue,
-			`You gotta create a 'getValue()' method on your input!`
+			`You gotta create a 'getValue()' method on your input! Or consider having your vc extend AbstractFormInputViewContorller and be done! 💪`
 		)
 
 		assert.isFunction(
