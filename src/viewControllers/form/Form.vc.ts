@@ -121,7 +121,7 @@ export default class FormViewController<
 		this.getVisibleFields().forEach((name) => {
 			const vc = this._getFieldVc(name)
 			if (vc) {
-				vc._originalSetValue = vc.setValue.bind(vc)
+				vc._originalSetValue = vc._originalSetValue ?? vc.setValue.bind(vc)
 				vc.setValue = async (value: any, renderedValue?: any | null) => {
 					await this.setValue(name, value as any)
 					if (renderedValue) {

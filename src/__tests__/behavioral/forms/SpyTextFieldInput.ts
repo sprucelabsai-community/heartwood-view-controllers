@@ -4,10 +4,12 @@ import AbstractInputViewController from '../../../viewControllers/form/AbstractI
 import { TextInput } from './SettingVcsForFieldRendering.test'
 
 export default class SpyTextFieldInput extends AbstractInputViewController<TextInput> {
+	public name: string
+
 	public get value() {
 		return this.model.value
 	}
-	public name: string
+
 	public get renderedValue() {
 		return this.model.renderedValue
 	}
@@ -18,8 +20,6 @@ export default class SpyTextFieldInput extends AbstractInputViewController<TextI
 		this.name = options.name
 		this.model = removeUniversalViewOptions(options)
 	}
-
-	public getValue() {}
 
 	public render(): TextInput {
 		return this.model

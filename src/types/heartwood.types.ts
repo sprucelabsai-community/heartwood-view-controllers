@@ -190,6 +190,10 @@ type CardUniversals = Pick<
 	| 'isBusy'
 >
 
+export type FormInputOptions = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Input,
+	'name'
+>
 export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
 	CardUniversals
 export type SwipeCardViewController = SwipeCardViewControllerImpl &
@@ -355,9 +359,9 @@ export interface FormInputViewController<
 	View extends Record<string, any> = Record<string, any>
 > extends ViewController<View> {
 	setValue(value: any, renderedValue?: any): Promise<void>
+	getValue(): any
 	setRenderedValue: (renderedValue: any) => Promise<void>
 	getRenderedValue: () => any
-	getValue(): any
 }
 
 export interface ViewControllerOptions {

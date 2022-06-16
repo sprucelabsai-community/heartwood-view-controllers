@@ -1,5 +1,5 @@
-import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import {
+	FormInputOptions,
 	FormInputViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
@@ -16,7 +16,6 @@ export default abstract class AbstractInputViewController<
 
 	public constructor(options: ViewControllerOptions & Model) {
 		super(options)
-
 		this.model = removeUniversalViewOptions(options as any) as Model
 	}
 
@@ -57,5 +56,4 @@ export default abstract class AbstractInputViewController<
 	public abstract render(): Model
 }
 
-type ViewModel = Record<string, any> &
-	Omit<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Input, 'name'>
+type ViewModel = Record<string, any> & FormInputOptions

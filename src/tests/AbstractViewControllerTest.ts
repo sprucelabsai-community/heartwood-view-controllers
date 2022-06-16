@@ -27,8 +27,8 @@ import vcAssert from './utilities/vcAssert.utility'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any> = {}
-	private static mercuryFixture?: MercuryFixture
 	private static views?: ViewControllerFactory
+	private static mercuryFixture?: MercuryFixture
 	protected static client: MercuryClient
 	protected static eventFaker: EventFaker
 

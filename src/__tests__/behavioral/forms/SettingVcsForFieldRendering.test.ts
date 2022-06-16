@@ -4,13 +4,40 @@ import { test, assert } from '@sprucelabs/test'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
+import {
+	FormInputOptions,
+	FormInputViewController,
+	ViewControllerOptions,
+} from '../../../types/heartwood.types'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 import SpyTextFieldInput from './SpyTextFieldInput'
+
+class NoRenderedValueValueMethods implements FormInputViewController {
+	private model: FormInputOptions
+
+	public constructor(options: ViewControllerOptions & FormInputOptions) {
+		this.model = options
+	}
+
+	public async setValue(value: any): Promise<void> {
+		this.model.value = value
+	}
+	public getValue() {
+		return this.model.value
+	}
+
+	public render(): Record<string, any> {
+		return {}
+	}
+	public triggerRender() {}
+}
 
 export default class SettingVcsForFieldRenderingTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		textInput: SpyTextFieldInput,
+		noRenderedValue: NoRenderedValueValueMethods,
 	}
 	private static formVc: FormViewController<FormSchema>
 	private static firstNameVc: SpyTextFieldInput
@@ -23,6 +50,9 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		this.emailVc = this.SpyInputVc()
 
 		this.formVc = this.FormVc()
+
+		//@ts-ignore
+		formAssert._setVcFactory(this.Factory())
 	}
 
 	@test('throws when vc not found 1', 'lastName')
@@ -47,7 +77,25 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	protected static async settingValueOnFormCallsSetValueOnFieldVc() {
 		const value = generateId()
 		await this.formVc.setValue('firstName', value)
-		assert.isEqual(this.firstNameVc.value, value)
+		assert.isEqual(this.firstNameVc.getValue(), value)
+	}
+
+	@test()
+	protected static async assertRequiresGetAndSetValues() {
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(this.Controller('card', {})),
+			'getValue'
+		)
+
+		//@ts-ignore
+		this.firstNameVc.setValue = 0
+
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(this.firstNameVc),
+			'setValue'
+		)
 	}
 
 	@test('form decorates set value 1', 'new value')
@@ -95,6 +143,51 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isUndefined(this.firstNameVc.value)
 		assert.isUndefined(this.formVc.getValue('firstName'))
 		assert.isFalse(this.formVc.getIsDirty())
+	}
+
+	@test()
+	protected static async assertSetsGetsValuesToViewModel() {
+		const vc = this.Controller('card', {})
+		//@ts-ignore
+		vc.setValue = () => {}
+		//@ts-ignore
+		vc.getValue = () => {}
+
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(vc),
+			'this.model.value'
+		)
+
+		this.firstNameVc.getValue = () => 'hey'
+
+		await assert.doesThrowAsync(
+			() => formAssert.inputVcIsValid(this.firstNameVc),
+			`returns the 'this.model.value'`
+		)
+	}
+
+	@test()
+	protected static async throwsWithNoRenderedValueGetSet() {
+		const vc = this.Controller(
+			'noRenderedValue' as any,
+			{}
+		) as NoRenderedValueValueMethods
+
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(vc),
+			`getRenderedValue`
+		)
+
+		//@ts-ignore
+		vc.getRenderedValue = () => {}
+
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(vc),
+			`setRenderedValue`
+		)
 	}
 
 	@test()
