@@ -1,3 +1,10 @@
+# [84.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.2...v84.3.0) (2022-06-17)
+
+
+### Features
+
+* assertRowRendersSelect now can target by name ([6bf5c73](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6bf5c73))
+
 ## [84.2.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.1...v84.2.2) (2022-06-17)
 
 ## [84.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.0...v84.2.1) (2022-06-16)
