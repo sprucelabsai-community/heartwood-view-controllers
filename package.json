@@ -90,11 +90,11 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^16.0.1",
-    "esbuild": "^0.14.44",
+    "esbuild": "^0.14.45",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "5.3.1",
-    "uglify-js": "^3.16.0",
+    "uglify-js": "^3.16.1",
     "webpack": "5.70.0"
   },
   "devDependencies": {
