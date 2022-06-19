@@ -1,3 +1,36 @@
+## [84.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.10...v84.3.11) (2022-06-18)
+
+## [84.3.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.9...v84.3.10) (2022-06-18)
+
+## [84.3.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.8...v84.3.9) (2022-06-18)
+
+## [84.3.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.7...v84.3.8) (2022-06-18)
+
+## [84.3.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.6...v84.3.7) (2022-06-18)
+
+## [84.3.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.5...v84.3.6) (2022-06-18)
+
+## [84.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.4...v84.3.5) (2022-06-18)
+
+## [84.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.3...v84.3.4) (2022-06-18)
+
+## [84.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.2...v84.3.3) (2022-06-17)
+
+## [84.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.1...v84.3.2) (2022-06-17)
+
+## [84.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.0...v84.3.1) (2022-06-17)
+
+# [84.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.2...v84.3.0) (2022-06-17)
+
+
+### Features
+
+* assertRowRendersSelect now can target by name ([6bf5c73](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6bf5c73))
+
+## [84.2.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.1...v84.2.2) (2022-06-17)
+
+## [84.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.2.0...v84.2.1) (2022-06-16)
+
 # [84.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.1.3...v84.2.0) (2022-06-16)
 
 

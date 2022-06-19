@@ -1638,13 +1638,17 @@ const vcAssert = {
 
 	assertRowRendersSelect(
 		listVc: ListViewController,
-		row: string | number
+		row: string | number,
+		name?: string
 	): SelectViewController {
 		const rowVc = listVc.getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
 			if (cell.selectInput) {
+				if (name && name !== cell.selectInput.name) {
+					continue
+				}
 				return {
 					getChoices() {
 						return cell.selectInput?.choices ?? []
@@ -1656,6 +1660,9 @@ const vcAssert = {
 			}
 		}
 
+		if (name) {
+			assert.fail(`Could not find select in row '${row}' by name '${name}'`)
+		}
 		assert.fail(
 			`Could not find select in row '${row}' and I totally expected to!`
 		)
