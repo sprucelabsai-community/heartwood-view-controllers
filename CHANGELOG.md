@@ -1,3 +1,10 @@
+# [84.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.11...v84.4.0) (2022-06-19)
+
+
+### Features
+
+* sticky tools can now be cleared! ([21a5f5b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/21a5f5b))
+
 ## [84.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.10...v84.3.11) (2022-06-18)
 
 ## [84.3.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.9...v84.3.10) (2022-06-18)
