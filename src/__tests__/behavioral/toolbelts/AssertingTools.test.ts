@@ -184,20 +184,6 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		)
 	}
 
-	private static assertToolRendersCard(
-		vc: ToolBeltSkillViewController,
-		card1: CardViewController
-	) {
-		const cardVc = vcAssert.assertToolBeltRendersTool(vc, 'taco')
-		assert.isEqual(cardVc, card1)
-
-		const cardVc2 = vcAssert.assertToolBeltRendersTool(
-			vc.getToolBeltVc() as any,
-			'taco'
-		)
-		assert.isEqual(cardVc2, card1)
-	}
-
 	@test()
 	protected static knowsIfGivenToolBelt() {
 		const vc = this.Controller('toolBeltSvc', {
@@ -455,6 +441,43 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 				}),
 			'close'
 		)
+	}
+
+	@test()
+	protected static async canAssertIfRendersStickyTools() {
+		const vc = this.Controller('toolBelt', {})
+
+		vc.setStickyTool({ position: 'bottom', card: {}, lineIcon: 'add' })
+
+		assert.doesThrow(
+			() => vcAssert.assertToolBeltDoesNotRenderStickyTools(vc),
+			'renders sticky'
+		)
+
+		vc.removeStickyTool('bottom')
+
+		vcAssert.assertToolBeltDoesNotRenderStickyTools(vc)
+
+		vc.setStickyTool({ position: 'top', card: {}, lineIcon: 'add' })
+
+		assert.doesThrow(
+			() => vcAssert.assertToolBeltDoesNotRenderStickyTools(vc),
+			'renders sticky'
+		)
+	}
+
+	private static assertToolRendersCard(
+		vc: ToolBeltSkillViewController,
+		card1: CardViewController
+	) {
+		const cardVc = vcAssert.assertToolBeltRendersTool(vc, 'taco')
+		assert.isEqual(cardVc, card1)
+
+		const cardVc2 = vcAssert.assertToolBeltRendersTool(
+			vc.getToolBeltVc() as any,
+			'taco'
+		)
+		assert.isEqual(cardVc2, card1)
 	}
 
 	private static ToolBeltVc() {

@@ -1227,6 +1227,17 @@ const vcAssert = {
 		return toolBelt?.controller as ToolBeltViewController
 	},
 
+	assertToolBeltDoesNotRenderStickyTools(
+		svcOrToolBelt: SkillViewController | ToolBeltViewController
+	) {
+		const vc = this.assertRendersToolBelt(svcOrToolBelt, false)
+
+		assert.isFalsy(
+			vc.getStickyTools().top ?? vc.getStickyTools().bottom,
+			`Your tool belt renders sticky tools and I did not expect it to!`
+		)
+	},
+
 	assertToolInstanceOf(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
