@@ -1,3 +1,10 @@
+# [84.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.4.0...v84.5.0) (2022-06-19)
+
+
+### Features
+
+* toolBeltAssert lib in place.... vcAssert tool assertions marked as deprecated ([cd584d2](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cd584d2))
+
 # [84.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.3.11...v84.4.0) (2022-06-19)
 
 
