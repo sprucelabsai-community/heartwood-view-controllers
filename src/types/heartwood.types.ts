@@ -206,6 +206,9 @@ export type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type CardHeader =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
+export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+export type ToolBelt =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel

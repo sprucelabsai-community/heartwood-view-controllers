@@ -14,6 +14,7 @@ import {
 	Card,
 	StickyToolPosition,
 	ScopeFlag,
+	Button,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
@@ -42,49 +43,14 @@ import {
 	AssertRedirectOptions,
 	SelectViewController,
 	getVcName,
+	wait,
+	WAIT_TIMEOUT,
+	isVcInstanceOf,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
 import formAssert, { FormVc } from './formAssert'
 import interactor from './interactor'
-
-const WAIT_TIMEOUT = 5000
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-
-async function wait(...promises: (Promise<any> | undefined | any)[]) {
-	return new Promise<any>((resolve, reject) => {
-		let isDone = false
-
-		const done = () => {
-			if (!isDone) {
-				isDone = true
-				clearTimeout(timeout)
-
-				setTimeout(() => {
-					//@ts-ignore
-					resolve()
-				}, 0)
-			}
-
-			isDone = true
-		}
-
-		const catcher = (err: any) => {
-			clearTimeout(timeout)
-			if (!isDone) {
-				isDone = true
-				reject(err)
-			} else {
-				throw err
-			}
-		}
-
-		const timeout = setTimeout(done, WAIT_TIMEOUT)
-
-		for (const promise of promises) {
-			promise?.catch?.(catcher)?.then?.(done)
-		}
-	})
-}
+import toolBeltAssert from './toolBeltAssert'
 
 const vcAssert = {
 	_setVcFactory(factory: ViewControllerFactory) {
@@ -1092,236 +1058,124 @@ const vcAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertActionFocusesTool -> toolBeltAssert.actionFocusesTool
+	 */
 	async assertActionFocusesTool(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
 		action: () => Promise<any> | any
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
-
-		let passedToolId: any
-
-		toolBeltVc.focusTool = (id: string) => {
-			passedToolId = id
-		}
-
-		await wait(action())
-
-		this.assertToolBeltRendersTool(svcOrToolBelt, toolId)
-
-		assert.isTruthy(
-			passedToolId,
-			`I expected you to focus the tool '${toolId}', but you didn't! Try 'this.toolBeltVc.focusTool('${toolId}')'`
-		)
-
-		assert.isEqual(
-			passedToolId,
-			toolId,
-			`You did not focus the tool I expected. I was waiting for '${toolId}' but got '${passedToolId}'.`
-		)
+		return toolBeltAssert.actionFocusesTool(svcOrToolBelt, toolId, action)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertActionOpensToolBelt -> toolBeltAssert.actionOpensToolBelt
+	 */
 	async assertActionOpensToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		action: () => Promise<any> | any,
 		options?: OpenToolBeltOptions
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
-		let wasForced = false
-
-		toolBeltVc.open = (actualOptions) => {
-			if (options) {
-				assert.isEqualDeep(
-					actualOptions,
-					options,
-					`The options passed to 'toolBeltSvc.show(...) did not match what I expected.' `
-				)
-			}
-			wasForced = true
-		}
-
-		await action()
-
-		assert.isTrue(
-			wasForced,
-			`I expected you to call 'toolBeltVc.open()', but you didn't!`
-		)
+		return toolBeltAssert.actionOpensToolBelt(svcOrToolBelt, action, options)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertActionDoesNotOpenToolBelt -> toolBeltAssert.ActionDoesNotOpenToolBelt
+	 */
 	async assertActionDoesNotOpenToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		action: () => Promise<any> | any
 	) {
-		try {
-			await this.assertActionOpensToolBelt(svcOrToolBelt, action)
-		} catch {
-			return
-		}
-
-		assert.fail(`I didn't expect you to call 'toolBeltVc.open()', but you did!`)
+		return toolBeltAssert.actionDoesNotOpenToolBelt(svcOrToolBelt, action)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertActionClosesToolBelt -> toolBeltAssert.actionClosesToolBelt
+	 */
 	async assertActionClosesToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		action: () => Promise<any> | any
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt, false)
-		let wasForced = false
-
-		toolBeltVc.close = () => {
-			wasForced = true
-		}
-
-		await action()
-
-		assert.isTrue(
-			wasForced,
-			`I expected you to call 'toolBeltVc.close()', but you didn't!`
-		)
+		return toolBeltAssert.actionClosesToolBelt(svcOrToolBelt, action)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertActionDoesNotCloseToolBelt -> toolBeltAssert.actionDoesNotCloseToolBelt
+	 */
 	async assertActionDoesNotCloseToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		action: () => Promise<any> | any
 	) {
-		try {
-			await this.assertActionClosesToolBelt(svcOrToolBelt, action)
-		} catch {
-			return
-		}
-
-		assert.fail(
-			`I didn't expect you to call 'toolBeltVc.close()', but you did!`
-		)
+		return toolBeltAssert.actionDoesNotCloseToolBelt(svcOrToolBelt, action)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertRendersToolBelt -> toolBeltAssert.rendersToolBelt
+	 */
 	assertRendersToolBelt(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		assertHasAtLeast1Tool = true
 	) {
-		let toolBelt:
-			| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
-			| undefined
-			| null
-
-		if (svcOrToolBelt instanceof ToolBeltViewController) {
-			toolBelt = svcOrToolBelt.render()
-		} else {
-			const svc = svcOrToolBelt
-			assert.isFunction(
-				svc.renderToolBelt,
-				`Your skill view '${getVcName(
-					svc
-				)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
-			)
-			toolBelt = svc.renderToolBelt()
-		}
-
-		if (assertHasAtLeast1Tool) {
-			assert.isTrue(
-				(toolBelt?.tools?.length ?? 0) > 0,
-				'Your tool belt does not render any tools! You can try toolBeltVc.addTool(...)?'
-			)
-		}
-
-		return toolBelt?.controller as ToolBeltViewController
+		return toolBeltAssert.rendersToolBelt(svcOrToolBelt, assertHasAtLeast1Tool)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertToolBeltDoesNotRenderStickyTools -> toolBeltAssert.toolBeltDoesNotRenderStickyTools
+	 */
 	assertToolBeltDoesNotRenderStickyTools(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController
 	) {
-		const vc = this.assertRendersToolBelt(svcOrToolBelt, false)
-
-		assert.isFalsy(
-			vc.getStickyTools().top ?? vc.getStickyTools().bottom,
-			`Your tool belt renders sticky tools and I did not expect it to!`
-		)
+		return toolBeltAssert.toolBeltDoesNotRenderStickyTools(svcOrToolBelt)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertToolInstanceOf -> toolBeltAssert.toolInstanceOf
+	 */
 	assertToolInstanceOf(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string,
 		Class: any
 	): ViewController<any> {
-		const vc = this.assertRendersToolBelt(svcOrToolBelt)
-		const tool = vc.getTool(toolId)
-		assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
-
-		const match = assertToolInstanceOf(tool, Class)
-		assert.isTruthy(
-			match,
-			`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
-		)
-
-		return match
+		return toolBeltAssert.toolInstanceOf(svcOrToolBelt, toolId, Class)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertToolBeltDoesNotRenderTool -> toolBeltAssert.toolBeltDoesNotRenderTool
+	 */
 	assertToolBeltDoesNotRenderTool(
 		svc: SkillViewController | ToolBeltViewController,
 		toolId: string
 	) {
-		try {
-			this.assertToolBeltRendersTool(svc, toolId)
-		} catch {
-			return
-		}
-		assert.fail(`You rendered the tool '${toolId}' and should not have!`)
+		return toolBeltAssert.assertToolBeltDoesNotRenderTool(svc, toolId)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertToolBeltStickyToolInstanceOf -> toolBeltAssert.toolBeltStickyToolInstanceOf
+	 */
 	assertToolBeltStickyToolInstanceOf(options: {
 		toolBeltVc: ToolBeltViewController
 		position: StickyToolPosition
 		Class: any
 	}) {
-		const { position, toolBeltVc, Class } = assertOptions(options, [
-			'toolBeltVc',
-			'position',
-			'Class',
-		])
-
-		//@ts-ignore
-		const tool = toolBeltVc.getStickyTools()[position]
-
-		assert.isTruthy(
-			tool,
-			`It appears you have no sticky tool set in position '${position}'! try 'this.toolBeltVc.addStickyTool(...)'!`
-		)
-
-		const match = assertToolInstanceOf(tool, Class)
-
-		assert.isTruthy(
-			match,
-			`The sticky tool at the ${position} is not an instance of '${Class.name}'`
-		)
-
-		return match
+		return toolBeltAssert.toolBeltStickyToolInstanceOf(options)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertToolBeltRendersTool -> toolBeltAssert.toolBeltRendersTool
+	 */
 	assertToolBeltRendersTool(
 		svcOrToolBelt: SkillViewController | ToolBeltViewController,
 		toolId: string
 	) {
-		const toolBeltVc = this.assertRendersToolBelt(svcOrToolBelt)
-
-		const model = renderUtil.render(toolBeltVc)
-		const tool = model.tools.find((t) => t.id === toolId)
-
-		assert.isTruthy(
-			tool,
-			`I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
-		)
-
-		return tool.card.controller as ViewController<Card>
+		return toolBeltAssert.toolBeltRendersTool(svcOrToolBelt, toolId)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertDoesNotRenderToolBelt -> toolBeltAssert.doesNotRenderToolBelt
+	 */
 	assertDoesNotRenderToolBelt(svc: SkillViewController) {
-		try {
-			this.assertRendersToolBelt(svc)
-		} catch {
-			return
-		}
-
-		assert.fail(`Your skill view should not be rendering a toolbelt with tools`)
+		return toolBeltAssert.doesNotRenderToolBelt(svc)
 	},
 
 	assertSkillViewRendersCalendar(svc: SkillViewController) {
@@ -2005,20 +1859,6 @@ function checkForButtons(
 	return { found, missing, foundButtons }
 }
 
-function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
-	if (vc) {
-		if (vc instanceof Class) {
-			return vc
-		} else if (vc?.getParent?.() instanceof Class) {
-			return vc.getParent()
-		} else if (vc?.getParent?.()?.getParent?.() instanceof Class) {
-			return vc?.getParent?.()?.getParent?.()
-		}
-	}
-
-	return false
-}
-
 function findControllerInModel(VcClass: any, model: any) {
 	if (model?.controller instanceof VcClass) {
 		return model?.controller
@@ -2034,41 +1874,4 @@ function findControllerInModel(VcClass: any, model: any) {
 	}
 
 	return null
-}
-function assertToolInstanceOf(
-	tool: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool,
-	Class: any
-): ViewController<any> {
-	const checks = [
-		tool?.card?.controller,
-		//@ts-ignore
-		tool?.card?.controller?.getParent?.(),
-	]
-
-	let anyControllersFound = !!checks.find((c) => !!c)
-
-	if (!anyControllersFound) {
-		assert.fail(`You are not rendering a good card. Make sure you are rendering a controller, like:
-
-public render() { 
-	return { controller: this }
-}
-
-or
-
-public render() {
-	return this.cardVc.render()
-}
-
-`)
-	}
-
-	for (const check of checks) {
-		const match = isVcInstanceOf(check, Class)
-		if (match) {
-			return match as any
-		}
-	}
-
-	return null as any
 }
