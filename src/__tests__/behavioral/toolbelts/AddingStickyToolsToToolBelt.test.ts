@@ -138,6 +138,16 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test()
+	protected static async canClearStickTools() {
+		this.setStickyTool({ position: 'top' })
+		this.setStickyTool({ position: 'bottom' })
+		this.vc.clearStickyTools()
+		assert.isFalsy(this.vc.getStickyTools().top)
+		assert.isFalsy(this.vc.getStickyTools().bottom)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
 	private static assertRendersTotalTools(expected: number) {
 		const tools = this.render(this.vc).tools
 		assert.isLength(tools, expected)

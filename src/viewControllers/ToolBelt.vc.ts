@@ -59,6 +59,12 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 		return this.stickyTools
 	}
 
+	public clearStickyTools() {
+		this.stickyTools.top = undefined
+		this.stickyTools.bottom = undefined
+		this.triggerRender()
+	}
+
 	public setTools(
 		tools: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
 	) {
