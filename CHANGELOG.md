@@ -1,3 +1,10 @@
+# [84.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.5.2...v84.6.0) (2022-06-21)
+
+
+### Features
+
+* state machine now has waitForContextUpdate() to make timing things easier ([b16f6dd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b16f6dd))
+
 ## [84.5.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.5.1...v84.5.2) (2022-06-21)
 
 ## [84.5.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.5.0...v84.5.1) (2022-06-21)
