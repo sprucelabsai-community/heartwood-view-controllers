@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "84.5.0",
+  "version": "84.5.1",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -90,7 +90,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^16.0.1",
-    "esbuild": "^0.14.46",
+    "esbuild": "^0.14.47",
     "globby": "^11.0.4",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "5.3.1",
