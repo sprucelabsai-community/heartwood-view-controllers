@@ -175,7 +175,7 @@ const toolBeltAssert = {
 		return match
 	},
 
-	assertToolBeltDoesNotRenderTool(
+	toolBeltDoesNotRenderTool(
 		svc: SkillViewController | ToolBeltViewController,
 		toolId: string
 	) {

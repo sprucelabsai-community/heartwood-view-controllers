@@ -1147,7 +1147,7 @@ const vcAssert = {
 		svc: SkillViewController | ToolBeltViewController,
 		toolId: string
 	) {
-		return toolBeltAssert.assertToolBeltDoesNotRenderTool(svc, toolId)
+		return toolBeltAssert.toolBeltDoesNotRenderTool(svc, toolId)
 	},
 
 	/**
