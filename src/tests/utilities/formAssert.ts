@@ -1,4 +1,8 @@
-import { buildSchema, FieldDefinitions } from '@sprucelabs/schema'
+import {
+	assertOptions,
+	buildSchema,
+	FieldDefinitions,
+} from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../builders/buildForm'
@@ -8,6 +12,7 @@ import {
 	FormBuilderCardViewController,
 	FormInputViewController,
 	FormViewController,
+	RenderAsComponent,
 	SkillViewController,
 	ViewController,
 } from '../../types/heartwood.types'
@@ -231,6 +236,24 @@ this.Controller(
 		)
 
 		return {} as any
+	},
+
+	formFieldRendersAs(
+		vc: FormVc,
+		fieldName: string,
+		expected: RenderAsComponent
+	) {
+		assertOptions({ vc, fieldName, expected }, ['vc', 'fieldName', 'expected'])
+
+		const field = vc.getField(fieldName)
+
+		assert.isEqual(
+			field.compiledOptions.renderAs,
+			expected,
+			`The field named '${fieldName}' is rendering as '${
+				field.compiledOptions.renderAs ?? '***default**'
+			}', but I expected it to render as '${expected}'!`
+		)
 	},
 }
 

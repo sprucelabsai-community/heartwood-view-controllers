@@ -379,15 +379,17 @@ export interface ViewControllerOptions {
 	dates: DateUtils
 }
 
+export type RenderAsComponent =
+	| 'colorPicker'
+	| 'number'
+	| 'textarea'
+	| 'ratings'
+	| 'checkbox'
+	| 'autocomplete'
+
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
-	renderAs?:
-		| 'colorPicker'
-		| 'number'
-		| 'textarea'
-		| 'ratings'
-		| 'checkbox'
-		| 'autocomplete'
+	renderAs?: RenderAsComponent
 	renderHintAs?: 'subtitle' | 'tooltip'
 	placeholder?: string
 	label?: string
