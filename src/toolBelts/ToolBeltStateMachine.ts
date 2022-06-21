@@ -158,44 +158,44 @@ export default class ToolBeltStateMachine<
 	}
 
 	public async updateContext(updates: Partial<Context>) {
-		// eslint-disable-next-line no-async-promise-executor
-		this.updateContextPromise = new Promise(async (resolve) => {
-			const typesToClone = ['Object']
-			const cloned = cloneDeepWith(updates, (item) => {
-				if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
-					return item
-				}
-			})
+		this.updateContextPromise = this._updateContext(updates)
+		return this.updateContextPromise
+	}
 
-			const old = { ...this.context }
-			const newContext = { ...this.context, ...cloned }
-
-			if (deepEqual(this.context, newContext)) {
-				return resolve(false)
+	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
+		const typesToClone = ['Object']
+		const cloned = cloneDeepWith(updates, (item) => {
+			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
+				return item
 			}
-
-			const results = await this.emit('will-update-context', {
-				current: this.context,
-				updates,
-			})
-
-			if (
-				results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
-			) {
-				return resolve(false)
-			}
-
-			this.context = newContext
-
-			await this.emit('did-update-context', {
-				old,
-				updates: cloned,
-			})
-
-			return resolve(true)
 		})
 
-		return this.updateContextPromise
+		const old = { ...this.context }
+		const newContext = { ...this.context, ...cloned }
+
+		if (deepEqual(this.context, newContext)) {
+			return false
+		}
+
+		const results = await this.emit('will-update-context', {
+			current: this.context,
+			updates,
+		})
+
+		if (
+			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
+		) {
+			return false
+		}
+
+		this.context = newContext
+
+		await this.emit('did-update-context', {
+			old,
+			updates: cloned,
+		})
+
+		return true
 	}
 }
 
