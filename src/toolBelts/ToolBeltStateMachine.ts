@@ -101,6 +101,7 @@ export default class ToolBeltStateMachine<
 	public Controller: ControllerFactory
 	public connectToApi: MercuryConnectFactory
 	private vcFactory: ViewControllerFactory
+	private updateContextPromise?: Promise<boolean>
 
 	public constructor(options: ToolBeltStateMachineOptions<Context>) {
 		super(eventContract)
@@ -152,40 +153,49 @@ export default class ToolBeltStateMachine<
 		return this.toolBeltVc
 	}
 
+	public async waitForContextUpdate() {
+		await this.updateContextPromise
+	}
+
 	public async updateContext(updates: Partial<Context>) {
-		const typesToClone = ['Object']
-		const cloned = cloneDeepWith(updates, (item) => {
-			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
-				return item
+		// eslint-disable-next-line no-async-promise-executor
+		this.updateContextPromise = new Promise(async (resolve) => {
+			const typesToClone = ['Object']
+			const cloned = cloneDeepWith(updates, (item) => {
+				if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
+					return item
+				}
+			})
+
+			const old = { ...this.context }
+			const newContext = { ...this.context, ...cloned }
+
+			if (deepEqual(this.context, newContext)) {
+				return resolve(false)
 			}
+
+			const results = await this.emit('will-update-context', {
+				current: this.context,
+				updates,
+			})
+
+			if (
+				results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
+			) {
+				return resolve(false)
+			}
+
+			this.context = newContext
+
+			await this.emit('did-update-context', {
+				old,
+				updates: cloned,
+			})
+
+			return resolve(true)
 		})
 
-		const old = { ...this.context }
-		const newContext = { ...this.context, ...cloned }
-
-		if (deepEqual(this.context, newContext)) {
-			return false
-		}
-
-		const results = await this.emit('will-update-context', {
-			current: this.context,
-			updates,
-		})
-
-		if (
-			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
-		) {
-			return false
-		}
-
-		this.context = newContext
-
-		await this.emit('did-update-context', {
-			old,
-			updates: cloned,
-		})
-
-		return true
+		return this.updateContextPromise
 	}
 }
 

@@ -276,6 +276,31 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqual(state1DestroyCount, 1)
 	}
 
+	@test()
+	protected static async canWaitUntilContextUpdateIsDone() {
+		let willUpdateHit = false
+		let didUpdateHit = false
+
+		await this.sm.on('will-update-context', async () => {
+			await new Promise((resolve) => setTimeout(resolve, 100))
+
+			willUpdateHit = true
+		})
+
+		await this.sm.on('did-update-context', async () => {
+			await new Promise((resolve) => setTimeout(resolve, 100))
+
+			didUpdateHit = true
+		})
+
+		void this.sm.updateContext({ test: true })
+
+		await this.sm.waitForContextUpdate()
+
+		assert.isTrue(willUpdateHit)
+		assert.isTrue(didUpdateHit)
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,
