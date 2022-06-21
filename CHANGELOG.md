@@ -1,3 +1,10 @@
+# [84.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.6.2...v84.7.0) (2022-06-21)
+
+
+### Features
+
+* form assert can now assert fields rendering as, making working with forms even EASIER! ([cf7a217](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cf7a217))
+
 ## [84.6.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.6.1...v84.6.2) (2022-06-21)
 
 ## [84.6.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.6.0...v84.6.1) (2022-06-21)
