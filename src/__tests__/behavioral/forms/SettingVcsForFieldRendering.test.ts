@@ -269,6 +269,21 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		)
 	}
 
+	@test()
+	protected static async renderedValueOfInputPassedToForm() {
+		const rendered = generateId()
+		this.firstNameVc = this.SpyInputVc({
+			renderedValue: rendered,
+		})
+
+		this.formVc = this.FormVc()
+
+		assert.isEqual(
+			this.formVc.getFieldVc('firstName').getRenderedValue(),
+			rendered
+		)
+	}
+
 	private static FormVc() {
 		return this.Controller(
 			'form',
