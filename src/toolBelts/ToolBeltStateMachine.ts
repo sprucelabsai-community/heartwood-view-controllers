@@ -1,8 +1,13 @@
 import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
-import { buildEventContract } from '@sprucelabs/mercury-types'
+import {
+	buildEventContract,
+	MercuryAggregateResponse,
+} from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
+import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import cloneDeepWith from 'lodash/cloneDeepWith'
+import SpruceError from '../errors/SpruceError'
 import {
 	ControllerOptions,
 	SimpleViewControllerFactory,
@@ -178,10 +183,12 @@ export default class ToolBeltStateMachine<
 			return false
 		}
 
-		const results = await this.emit('will-update-context', {
+		let results = await this.emit('will-update-context', {
 			current: this.context,
 			updates,
 		})
+
+		this.assertNoErrorsInResponse(results)
 
 		if (
 			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
@@ -191,12 +198,25 @@ export default class ToolBeltStateMachine<
 
 		this.context = newContext
 
-		await this.emit('did-update-context', {
+		results = await this.emit('did-update-context', {
 			old,
 			updates: cloned,
 		})
 
+		this.assertNoErrorsInResponse(results)
+
 		return true
+	}
+
+	private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {
+		const { errors } = eventResponseUtil.getAllResponsePayloadsAndErrors(
+			results,
+			SpruceError
+		)
+
+		if (errors) {
+			throw errors[0]
+		}
 	}
 }
 

@@ -301,6 +301,24 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isTrue(didUpdateHit)
 	}
 
+	@test()
+	protected static async willUpdateThrowingCausesSmToThrow() {
+		await this.sm.on('will-update-context', async () => {
+			assert.fail('you know it!')
+		})
+
+		await assert.doesThrowAsync(() => this.sm.updateContext({ test: true }))
+	}
+
+	@test()
+	protected static async didUpdateThrowingCausesSmToThrow() {
+		await this.sm.on('did-update-context', async () => {
+			assert.fail('oh you think?')
+		})
+
+		await assert.doesThrowAsync(() => this.sm.updateContext({ test: true }))
+	}
+
 	private static State(state?: Partial<ToolBeltState>) {
 		return {
 			id: `${new Date().getTime() * Math.random()}`,
