@@ -131,4 +131,25 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		await vc.deselectButton('second')
 		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [])
 	}
+
+	@test()
+	protected static async selectingButtonsTriggersOnChange() {
+		let wasHit = true
+		const vc = this.Controller('buttonBar', {
+			onSelectionChange: () => {
+				wasHit = true
+			},
+			buttons: [
+				{
+					id: 'one',
+				},
+				{ id: 'two' },
+			],
+		})
+
+		vc.selectButtons(['one'])
+		await this.wait(0)
+
+		assert.isTrue(wasHit)
+	}
 }

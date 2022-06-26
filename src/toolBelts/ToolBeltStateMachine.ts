@@ -20,7 +20,7 @@ export interface ToolBeltStateMachineOptions<
 	Context extends Record<string, any> = Record<string, any>
 > {
 	toolBeltVc: ToolBeltViewController
-	vcFactory: ViewControllerFactory
+	vcFactory: Pick<ViewControllerFactory, 'Controller'>
 	connectToApi: MercuryConnectFactory
 	context?: Partial<Context>
 }
