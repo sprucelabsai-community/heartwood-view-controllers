@@ -1,3 +1,27 @@
+## [84.7.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.13...v84.7.14) (2022-06-23)
+
+## [84.7.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.12...v84.7.13) (2022-06-23)
+
+## [84.7.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.11...v84.7.12) (2022-06-23)
+
+## [84.7.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.10...v84.7.11) (2022-06-23)
+
+## [84.7.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.9...v84.7.10) (2022-06-23)
+
+## [84.7.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.8...v84.7.9) (2022-06-23)
+
+## [84.7.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.7...v84.7.8) (2022-06-22)
+
+## [84.7.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.6...v84.7.7) (2022-06-22)
+
+## [84.7.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.5...v84.7.6) (2022-06-22)
+
+## [84.7.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.4...v84.7.5) (2022-06-22)
+
+## [84.7.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.3...v84.7.4) (2022-06-22)
+
+## [84.7.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.2...v84.7.3) (2022-06-22)
+
 ## [84.7.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.1...v84.7.2) (2022-06-22)
 
 ## [84.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v84.7.0...v84.7.1) (2022-06-22)
