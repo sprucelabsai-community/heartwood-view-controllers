@@ -209,6 +209,10 @@ export type CardHeader =
 export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type ToolBelt =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+export type SimpleViewControllerFactory = Pick<
+	ViewControllerFactory,
+	'Controller'
+>
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel

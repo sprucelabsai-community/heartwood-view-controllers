@@ -5,22 +5,23 @@ import { assertOptions, buildSchema } from '@sprucelabs/schema'
 import cloneDeepWith from 'lodash/cloneDeepWith'
 import {
 	ControllerOptions,
+	SimpleViewControllerFactory,
 	ViewControllerId,
 	ViewControllerMap,
 } from '../types/heartwood.types'
 import ToolBeltViewController from '../viewControllers/ToolBelt.vc'
-import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 
 export interface ToolBeltState {
 	readonly id: string
 	load(stateMachine: ToolBeltStateMachine): Promise<any> | any
 	destroy?: () => Promise<any> | any
 }
+
 export interface ToolBeltStateMachineOptions<
 	Context extends Record<string, any> = Record<string, any>
 > {
 	toolBeltVc: ToolBeltViewController
-	vcFactory: Pick<ViewControllerFactory, 'Controller'>
+	vcFactory: SimpleViewControllerFactory
 	connectToApi: MercuryConnectFactory
 	context?: Partial<Context>
 }
@@ -100,7 +101,7 @@ export default class ToolBeltStateMachine<
 
 	public Controller: ControllerFactory
 	public connectToApi: MercuryConnectFactory
-	private vcFactory: ViewControllerFactory
+	private vcFactory: SimpleViewControllerFactory
 	private updateContextPromise?: Promise<boolean>
 
 	public constructor(options: ToolBeltStateMachineOptions<Context>) {
