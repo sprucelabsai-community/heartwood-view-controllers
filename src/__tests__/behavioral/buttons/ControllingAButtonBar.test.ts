@@ -147,7 +147,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 			],
 		})
 
-		vc.selectButtons(['one'])
+		await vc.selectButtons(['one'])
 		await this.wait(0)
 
 		assert.isTrue(wasHit)

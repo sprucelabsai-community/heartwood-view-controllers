@@ -31,8 +31,8 @@ export default class ButtonBarViewController extends AbstractViewController<Butt
 		await this.buttonGroupVc.selectButton(id)
 	}
 
-	public selectButtons(ids: string[]) {
-		this.buttonGroupVc.selectButtons(ids)
+	public async selectButtons(ids: string[]) {
+		await this.buttonGroupVc.selectButtons(ids)
 	}
 
 	public async deselectButton(id: string) {
