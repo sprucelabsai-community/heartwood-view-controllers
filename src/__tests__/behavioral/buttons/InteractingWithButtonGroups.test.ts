@@ -88,19 +88,19 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 
 		await this.clickButton('test')
 
-		assert.isEqualDeep(passedChanged, { added: 'test' })
+		assert.isEqualDeep(passedChanged, { added: ['test'], removed: [] })
 
 		await this.clickButton('test')
 
-		assert.isEqualDeep(passedChanged, { removed: 'test' })
+		assert.isEqualDeep(passedChanged, { added: [], removed: ['test'] })
 
 		await this.clickButton('second')
 
-		assert.isEqualDeep(passedChanged, { added: 'second' })
+		assert.isEqualDeep(passedChanged, { added: ['second'], removed: [] })
 
 		await this.clickButton('second')
 
-		assert.isEqualDeep(passedChanged, { removed: 'second' })
+		assert.isEqualDeep(passedChanged, { added: [], removed: ['second'] })
 	}
 
 	@test()
@@ -116,11 +116,11 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 		await this.clickButton('test')
 		await this.clickButton('second')
 
-		assert.isEqualDeep(passedChanged, { added: 'second', removed: 'test' })
+		assert.isEqualDeep(passedChanged, { added: ['second'], removed: ['test'] })
 
 		await this.clickButton('third')
 
-		assert.isEqualDeep(passedChanged, { added: 'third', removed: 'second' })
+		assert.isEqualDeep(passedChanged, { added: ['third'], removed: ['second'] })
 	}
 
 	@test()
@@ -136,11 +136,11 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 
 		await this.clickButton('test')
 
-		assert.isEqualDeep(passedChanged, { added: 'test' })
+		assert.isEqualDeep(passedChanged, { added: ['test'], removed: [] })
 
 		await this.clickButton('second')
 
-		assert.isEqualDeep(passedChanged, { added: 'second' })
+		assert.isEqualDeep(passedChanged, { added: ['second'], removed: [] })
 	}
 
 	private static VcWithChangeHandler(

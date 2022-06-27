@@ -2,7 +2,10 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
-import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
+import ButtonGroupViewController, {
+	ButtonGroupPendingChanges,
+	ButtonGroupViewControllerOptions,
+} from '../../../viewControllers/ButtonGroup.vc'
 
 export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	private static singleSelectVc: ButtonGroupViewController
@@ -15,53 +18,8 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		await super.beforeEach()
 		this.onSelectInvocations = []
 
-		this.singleSelectVc = this.Factory().Controller('buttonGroup', {
-			onSelectionChange: (selected) => {
-				this.onSelectInvocations.push(selected)
-			},
-			onClickHintIcon: (idx) => {
-				this.onClickHintInvocations.push(idx)
-			},
-			buttons: [
-				{
-					id: 'first',
-					label: 'first',
-				},
-				{
-					id: 'second',
-					label: 'second',
-				},
-				{
-					id: 'third',
-					label: 'third',
-				},
-			],
-		})
-
-		this.multiSelectVc = this.Factory().Controller('buttonGroup', {
-			shouldAllowMultiSelect: true,
-			onSelectionChange: (selected) => {
-				this.onSelectInvocations.push(selected)
-			},
-			buttons: [
-				{
-					id: 'first',
-					label: 'first',
-				},
-				{
-					id: 'second',
-					label: 'second',
-				},
-				{
-					id: 'third',
-					label: 'third',
-				},
-				{
-					id: 'fourth',
-					label: 'fourth',
-				},
-			],
-		})
+		this.singleSelectVc = this.SingleSelectVc()
+		this.multiSelectVc = this.MultiSelectVc()
 	}
 
 	@test()
@@ -196,19 +154,6 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static buttonsFadeInFirstRender() {
-		const buttons = this.render(this.singleSelectVc)
-		assert.isTrue(buttons[0].shouldQueueShow)
-	}
-
-	@test()
-	protected static buttonsDoesNotFadeInSecondRender() {
-		this.render(this.singleSelectVc)
-		const buttons = this.render(this.singleSelectVc)
-		assert.isFalse(buttons[0].shouldQueueShow)
-	}
-
-	@test()
 	protected static async clickingHintIconTriggersHintCallback() {
 		let buttons = this.render(this.singleSelectVc)
 
@@ -223,29 +168,8 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canSetSelectedButtonsToStart() {
-		const vc = this.Factory().Controller('buttonGroup', {
+		const vc = this.MultiSelectVc({
 			selected: ['first', 'second'],
-			onSelectionChange: (selected) => {
-				this.onSelectInvocations.push(selected)
-			},
-			buttons: [
-				{
-					id: 'first',
-					label: 'first',
-				},
-				{
-					id: 'second',
-					label: 'second',
-				},
-				{
-					id: 'third',
-					label: 'third',
-				},
-				{
-					id: 'fourth',
-					label: 'fourth',
-				},
-			],
 		})
 
 		const selected = vc.getSelectedButtons()
@@ -303,18 +227,149 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async willChangeReceivesExpectedPayload() {
-		let passedToWillChange: any
+		let passedToWillChange:
+			| {
+					changes: ButtonGroupPendingChanges
+					selected: string[]
+			  }
+			| undefined
 		let wasSelectionChangeHit = false
 
-		const vc = this.Factory().Controller('buttonGroup', {
-			onWillChangeSelection: (selected, changed) => {
+		const vc = this.SingleSelectVc({
+			onWillChangeSelection: (selected, changes) => {
 				passedToWillChange = {
 					selected,
-					changed,
+					changes,
 				}
 			},
 			onSelectionChange: () => {
 				wasSelectionChangeHit = true
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 0)
+		assert.isTruthy(wasSelectionChangeHit)
+		assert.isEqualDeep(passedToWillChange, {
+			selected: [],
+			changes: {
+				adding: ['first'],
+				removing: [],
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 1)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['first'],
+			changes: {
+				adding: ['second'],
+				removing: ['first'],
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 2)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['second'],
+			changes: {
+				adding: ['third'],
+				removing: ['second'],
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 2)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['third'],
+			changes: {
+				adding: [],
+				removing: ['third'],
+			},
+		})
+
+		await interactor.clickButtonInGroup(vc, 1)
+		await interactor.clickButtonInGroup(vc, 1)
+
+		assert.isEqualDeep(passedToWillChange, {
+			selected: ['second'],
+			changes: {
+				adding: [],
+				removing: ['second'],
+			},
+		})
+	}
+
+	@test()
+	protected static async willChangeHitsOnSettingSelectedButtons() {
+		let passedSelected: string[] | undefined
+		let passedChanges: ButtonGroupPendingChanges | undefined
+
+		this.multiSelectVc = this.MultiSelectVc({
+			onWillChangeSelection: (
+				selected: string[],
+				changes: ButtonGroupPendingChanges
+			) => {
+				passedSelected = selected
+				passedChanges = changes
+			},
+		})
+
+		await this.multiSelectVc.selectButtons(['first', 'second'])
+
+		assert.isEqualDeep(passedSelected, [])
+		assert.isEqualDeep(passedChanges, {
+			adding: ['first', 'second'],
+			removing: [],
+		})
+	}
+
+	private static assertFirstButtonSelected(
+		buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+	) {
+		assert.doesInclude(buttons, { isSelected: true })
+		assert.doesInclude(buttons[0], { isSelected: true })
+		assert.doesInclude(buttons[1], { isSelected: false })
+	}
+
+	private static MultiSelectVc(
+		options?: Partial<ButtonGroupViewControllerOptions>
+	): ButtonGroupViewController {
+		return this.Factory().Controller('buttonGroup', {
+			shouldAllowMultiSelect: true,
+			onSelectionChange: (selected) => {
+				this.onSelectInvocations.push(selected)
+			},
+			buttons: [
+				{
+					id: 'first',
+					label: 'first',
+				},
+				{
+					id: 'second',
+					label: 'second',
+				},
+				{
+					id: 'third',
+					label: 'third',
+				},
+				{
+					id: 'fourth',
+					label: 'fourth',
+				},
+			],
+			...options,
+		})
+	}
+
+	private static SingleSelectVc(
+		options?: Partial<ButtonGroupViewControllerOptions>
+	): ButtonGroupViewController {
+		return this.Controller('buttonGroup', {
+			onSelectionChange: (selected) => {
+				this.onSelectInvocations.push(selected)
+			},
+			onClickHintIcon: (idx) => {
+				this.onClickHintInvocations.push(idx)
 			},
 			buttons: [
 				{
@@ -330,62 +385,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 					label: 'third',
 				},
 			],
+			...options,
 		})
-
-		await interactor.clickButtonInGroup(vc, 0)
-		assert.isTruthy(wasSelectionChangeHit)
-		assert.isEqualDeep(passedToWillChange, {
-			selected: [],
-			changed: {
-				adding: 'first',
-			},
-		})
-
-		await interactor.clickButtonInGroup(vc, 1)
-
-		assert.isEqualDeep(passedToWillChange, {
-			selected: ['first'],
-			changed: {
-				adding: 'second',
-				removing: 'first',
-			},
-		})
-
-		await interactor.clickButtonInGroup(vc, 2)
-
-		assert.isEqualDeep(passedToWillChange, {
-			selected: ['second'],
-			changed: {
-				adding: 'third',
-				removing: 'second',
-			},
-		})
-
-		await interactor.clickButtonInGroup(vc, 2)
-
-		assert.isEqualDeep(passedToWillChange, {
-			selected: ['third'],
-			changed: {
-				removing: 'third',
-			},
-		})
-
-		await interactor.clickButtonInGroup(vc, 1)
-		await interactor.clickButtonInGroup(vc, 1)
-
-		assert.isEqualDeep(passedToWillChange, {
-			selected: ['second'],
-			changed: {
-				removing: 'second',
-			},
-		})
-	}
-
-	private static assertFirstButtonSelected(
-		buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
-	) {
-		assert.doesInclude(buttons, { isSelected: true })
-		assert.doesInclude(buttons[0], { isSelected: true })
-		assert.doesInclude(buttons[1], { isSelected: false })
 	}
 }

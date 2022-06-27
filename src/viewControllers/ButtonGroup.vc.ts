@@ -15,13 +15,13 @@ type Button = Omit<
 type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 
 export interface ButtonGroupChanges {
-	added?: string
-	removed?: string
+	added: string[]
+	removed: string[]
 }
 
 export interface ButtonGroupPendingChanges {
-	adding?: string
-	removing?: string
+	adding: string[]
+	removing: string[]
 }
 
 export type SelectionChangeHandler = (
@@ -47,7 +47,7 @@ export interface ButtonGroupViewControllerOptions {
 
 export default class ButtonGroupViewController extends AbstractViewController<ViewModel> {
 	private buttons: Button[]
-	private selectedButtons: string[] = []
+	private selectedButtonIds: string[] = []
 	private selectionChangeHandler?: SelectionChangeHandler
 	private shouldAllowMultiSelect: boolean
 	private buttonTriggerRenderHandlers: (() => void)[] = []
@@ -67,10 +67,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		this.shouldAllowMultiSelect = options.shouldAllowMultiSelect ?? false
 		this.clickHintHandler = options.onClickHintIcon
+		this.selectedButtonIds = options.selected ?? []
 
 		this.rebuildButtons()
-
-		options.selected && this.selectButtons(options.selected)
 	}
 
 	public triggerRender() {
@@ -79,25 +78,33 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 	}
 
-	public selectButtons(ids: string[]) {
-		this.selectedButtons = ids
-	}
+	public async selectButtons(ids: string[]) {
+		let addingIds = ids.filter((id, idx) => ids.indexOf(id) === idx)
 
-	public async selectButton(id: string) {
-		if (this.isSelected(id)) {
+		if (!this.shouldAllowMultiSelect && ids[0]) {
+			addingIds = [addingIds[addingIds.length - 1]]
+		}
+
+		const selectedKey = this.selectedButtonIds.join('-')
+		const newKey = addingIds.join('-')
+
+		if (selectedKey === newKey) {
 			return
 		}
 
-		const changes: ButtonGroupChanges = { added: id }
-		const pending: ButtonGroupPendingChanges = { adding: id }
+		const adding = ids.filter((id) => this.selectedButtonIds.indexOf(id) === -1)
+		const removing = this.selectedButtonIds.filter(
+			(id) => addingIds.indexOf(id) === -1
+		)
 
-		if (!this.shouldAllowMultiSelect && this.selectedButtons[0]) {
-			changes.removed = this.selectedButtons[0]
-			pending.removing = this.selectedButtons[0]
+		const changes: ButtonGroupChanges = { added: adding, removed: removing }
+		const pending: ButtonGroupPendingChanges = {
+			adding,
+			removing,
 		}
 
 		const results = await this.willChangeSelectionHandler?.(
-			[...this.selectedButtons],
+			[...this.selectedButtonIds],
 			pending
 		)
 
@@ -105,17 +112,19 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 			return
 		}
 
-		if (!this.shouldAllowMultiSelect) {
-			this.selectedButtons = []
-		}
+		this.selectedButtonIds = addingIds
 
-		this.selectedButtons.push(id)
 		await this.didSelectHandler(changes)
+	}
+
+	public async selectButton(id: string) {
+		const selected = [...this.selectedButtonIds, id]
+		await this.selectButtons(selected)
 	}
 
 	private async didSelectHandler(changes: ButtonGroupChanges) {
 		this.rebuildAndTriggerRender()
-		await this.selectionChangeHandler?.([...this.selectedButtons], changes)
+		await this.selectionChangeHandler?.([...this.selectedButtonIds], changes)
 	}
 
 	private rebuildAndTriggerRender() {
@@ -124,30 +133,15 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	}
 
 	private isSelected(id: string) {
-		if (this.selectedButtons.length === 0) {
+		if (this.selectedButtonIds.length === 0) {
 			return null
 		}
-		return this.selectedButtons.indexOf(id) > -1
+		return this.selectedButtonIds.indexOf(id) > -1
 	}
 
 	public async deselectButton(id: string) {
-		const match = this.selectedButtons.indexOf(id)
-
-		const results = await this.willChangeSelectionHandler?.(
-			[...this.selectedButtons],
-			{
-				removing: id,
-			}
-		)
-
-		if (results === false) {
-			return
-		}
-
-		if (match > -1) {
-			this.selectedButtons.splice(match, 1)
-			await this.didSelectHandler({ removed: id })
-		}
+		const selected = this.selectedButtonIds.filter((i) => i !== id)
+		await this.selectButtons(selected)
 	}
 
 	private rebuildButtons() {
@@ -167,14 +161,12 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 			render: () => {
 				this.buttonTriggerRenderHandlers[idx] = controller.triggerRender
 
-				const shouldQueueShow = !this.hasBeenRendered[idx]
 				this.hasBeenRendered[idx] = true
 
 				const options = {
 					...button,
 					controller,
 					isSelected: this.isSelected(button.id),
-					shouldQueueShow,
 					onClick: () => {
 						if (!this.isSelected(button.id)) {
 							return this.selectButton(button.id)
@@ -199,7 +191,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	}
 
 	public getSelectedButtons() {
-		return this.selectedButtons
+		return this.selectedButtonIds
 	}
 
 	public render(): ViewModel {
