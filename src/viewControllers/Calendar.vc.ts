@@ -64,6 +64,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public setPeople(people: Person[]) {
 		this.model.people = [...people]
+		this.triggerRender()
 	}
 
 	private assertValidMinAndMaxTime(

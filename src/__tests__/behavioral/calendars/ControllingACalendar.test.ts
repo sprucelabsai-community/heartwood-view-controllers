@@ -1003,6 +1003,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isTrue(event.id in this.vc.vcsById)
 	}
 
+	@test()
+	protected static async settingPeopleTriggersRender() {
+		this.vc.setPeople([])
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
 	private static addEventWithType(type: string) {
 		return this.addEventAndGetVc({
 			eventTypeSlug: type,
