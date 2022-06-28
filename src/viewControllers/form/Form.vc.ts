@@ -155,6 +155,10 @@ export default class FormViewController<
 			shouldSetRenderedValueIfExists = false,
 		} = options
 
+		if (value === this.model.values[name]) {
+			return
+		}
+
 		if (!this.getSchema().fields?.[name]) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
@@ -396,18 +400,6 @@ export default class FormViewController<
 
 	public hasErrors(): boolean {
 		return Object.keys(this.getErrorsByField()).length > 0
-	}
-
-	public getValues() {
-		const visibleFields = this.getVisibleFields()
-		const values = {}
-
-		for (const field of visibleFields) {
-			//@ts-ignore
-			values[field] = this.model.values[field]
-		}
-
-		return values as SchemaPartialValues<S>
 	}
 
 	public hideSubmitControls() {
@@ -705,6 +697,18 @@ export default class FormViewController<
 	public getValue<N extends SchemaFieldNames<S>>(named: N): SchemaValues<S>[N] {
 		//@ts-ignore
 		return this.getValues()[named]
+	}
+
+	public getValues() {
+		const visibleFields = this.getVisibleFields()
+		const values = {}
+
+		for (const field of visibleFields) {
+			//@ts-ignore
+			values[field] = this.model.values[field]
+		}
+
+		return values as SchemaPartialValues<S>
 	}
 
 	public setFooter(

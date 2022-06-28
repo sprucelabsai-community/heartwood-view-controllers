@@ -834,6 +834,24 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static async noOnChangeIfValueDidNotchange() {
+		let hitCount = 0
+		const vc = this.FormWithOnChange(() => {
+			hitCount++
+		})
+
+		await vc.setValue('firstName', 'tay')
+		assert.isEqual(hitCount, 1)
+		await vc.setValue('firstName', 'tay')
+		assert.isEqual(hitCount, 1)
+
+		await vc.setValue('lastName', 'ro')
+		assert.isEqual(hitCount, 2)
+		await vc.setValue('lastName', 'ro')
+		assert.isEqual(hitCount, 2)
+	}
+
+	@test()
 	protected static async cantSubmitIfNotEnabled() {
 		let wasHit = false
 

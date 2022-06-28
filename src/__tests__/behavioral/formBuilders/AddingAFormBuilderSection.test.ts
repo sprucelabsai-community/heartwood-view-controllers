@@ -379,7 +379,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		await this.formVc.setValue('title', 'My second section')
 		await this.formVc.setValue('type', 'text')
 		await this.formVc.setValue('text', 'What is up?')
-		// will have no effect because type is text
+		// will have no effect because type is text and field is not visible
 		await this.formVc.setValue('shouldRenderAsGrid', true)
 
 		await interactor.submitForm(this.formVc)
