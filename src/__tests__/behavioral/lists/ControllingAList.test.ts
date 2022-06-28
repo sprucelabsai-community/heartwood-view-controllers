@@ -1098,6 +1098,31 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isTrue(model.rows[0].isEnabled)
 	}
 
+	@test()
+	protected static async settingValueToSameValueHasNoEffect() {
+		let hitCount = 0
+
+		this.vc.addRow({
+			id: 'first',
+			cells: [
+				{
+					textInput: {
+						name: 'firstName',
+						onChange: () => {
+							hitCount++
+						},
+					},
+				},
+			],
+		})
+
+		const first = this.vc.getRowVc('first')
+		await first.setValue('firstName', 'test')
+		assert.isEqual(hitCount, 1)
+		await first.setValue('firstName', 'test')
+		assert.isEqual(hitCount, 1)
+	}
+
 	private static add3Rows() {
 		this.vc.addRows([
 			{

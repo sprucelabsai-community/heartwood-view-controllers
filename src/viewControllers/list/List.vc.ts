@@ -161,7 +161,11 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		const { rowIdx, name, value } = options
 		for (const cell of this.model.rows[rowIdx].cells) {
 			const input = listUtil.getInputFromCell(cell)
-			if (input?.name === name) {
+			const isField = input?.name === name
+			if (isField && input.value === value) {
+				return
+			}
+			if (isField) {
 				//@ts-ignore
 				const onChangeResponse = await input.onChange?.(value)
 				if (onChangeResponse !== false) {
