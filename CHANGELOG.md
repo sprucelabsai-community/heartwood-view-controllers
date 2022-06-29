@@ -1,3 +1,10 @@
+# [86.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v85.0.4...v86.0.0) (2022-06-29)
+
+
+### Breaking Changes
+
+* field inputs share view models with form ([1dfaa03](https://github.com/sprucelabsai/heartwood-view-controllers/commit/1dfaa03))
+
 ## [85.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v85.0.3...v85.0.4) (2022-06-28)
 
 ## [85.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v85.0.2...v85.0.3) (2022-06-28)
