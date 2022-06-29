@@ -7,31 +7,46 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import {
+	FormInputHandlers,
 	FormInputOptions,
 	FormInputViewController,
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
-import FormViewController from '../../../viewControllers/form/Form.vc'
+import FormViewController, {
+	FormViewControllerOptions,
+} from '../../../viewControllers/form/Form.vc'
 import SpyTextFieldInput from './SpyTextFieldInput'
 
 //@ts-ignore
-class NoRenderedValueValueMethods implements FormInputViewController {
-	private model: FormInputOptions
+class NoRenderedValueValueMethods
+	implements FormInputViewController<TextInput>
+{
+	public model: FormInputOptions
+	private getValueHandler!: () => any
+	private setValueHandler!: (value: any) => Promise<void>
 
 	public constructor(options: ViewControllerOptions & FormInputOptions) {
 		this.model = options
 	}
 
-	public async setValue(value: any): Promise<void> {
-		this.model.value = value
-	}
-	public getValue() {
-		return this.model.value
+	public setHandlers(options: FormInputHandlers<TextInput>): void {
+		const { getValue, setValue } = options
+		this.getValueHandler = getValue
+		this.setValueHandler = setValue
 	}
 
-	public render(): Record<string, any> {
-		return {}
+	public async setValue(value: any): Promise<void> {
+		await this.setValueHandler(value)
 	}
+
+	public getValue() {
+		return this.getValueHandler()
+	}
+
+	public render() {
+		return {} as any
+	}
+
 	public triggerRender() {}
 }
 
@@ -87,6 +102,15 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 			//@ts-ignore
 			() => formAssert.inputVcIsValid(this.Controller('card', {})),
 			'getValue'
+		)
+
+		//@ts-ignore
+		this.firstNameVc.setValue = () => {}
+
+		await assert.doesThrowAsync(
+			//@ts-ignore
+			() => formAssert.inputVcIsValid(this.firstNameVc),
+			'setValueHandler'
 		)
 
 		//@ts-ignore
@@ -157,14 +181,14 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		await assert.doesThrowAsync(
 			//@ts-ignore
 			() => formAssert.inputVcIsValid(vc),
-			'this.model.value'
+			'setHandlers'
 		)
 
 		this.firstNameVc.getValue = () => 'hey'
 
 		await assert.doesThrowAsync(
 			() => formAssert.inputVcIsValid(this.firstNameVc),
-			`returns the 'this.model.value'`
+			`this.getValueHandler()`
 		)
 	}
 
@@ -220,6 +244,8 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 			},
 		})
 
+		this.FormVc()
+
 		assert.isFalse(wasBlurHit)
 		assert.isFalse(wasFocusHit)
 
@@ -272,6 +298,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	@test()
 	protected static async renderedValueOfInputPassedToForm() {
 		const rendered = generateId()
+
 		this.firstNameVc = this.SpyInputVc({
 			renderedValue: rendered,
 		})
@@ -284,11 +311,59 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		)
 	}
 
-	private static FormVc() {
+	@test()
+	protected static async vcGetsInitialValueFromForm() {
+		const firstName = generateId()
+		this.formVc = this.FormVc({
+			firstName,
+		})
+
+		assert.isEqual(this.firstNameVc.getValue(), firstName)
+	}
+
+	@test()
+	protected static async settingValueOnFormFiresChangeOnField() {
+		let wasHit = false
+
+		this.firstNameVc = this.SpyInputVc({
+			onChange: () => {
+				wasHit = true
+			},
+		})
+
+		this.formVc = this.FormVc()
+
+		await this.formVc.setValue('firstName', 'hey')
+
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async willChangeOnlyFiredOnceWhenSettingValue() {
+		let hitCount = 0
+		this.formVc = this.FormVc(
+			{},
+			{
+				onWillChange: () => {
+					hitCount++
+				},
+			}
+		)
+
+		await this.formVc.setValue('firstName', 'hey')
+		assert.isEqual(hitCount, 1)
+	}
+
+	private static FormVc(
+		values: Record<string, any> = {},
+		options?: Partial<FormViewControllerOptions<any>>
+	) {
 		return this.Controller(
 			'form',
 			buildForm({
 				schema: formSchema,
+				values,
+				...options,
 				sections: [
 					{
 						fields: [

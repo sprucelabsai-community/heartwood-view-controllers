@@ -5,23 +5,22 @@ import { TextInput } from './SettingVcsForFieldRendering.test'
 
 export default class SpyTextFieldInput extends AbstractInputViewController<TextInput> {
 	public name: string
-
+	public constructorOptions: Record<string, any> = {}
 	public get value() {
 		return this.model.value
 	}
-
 	public get renderedValue() {
 		return this.model.renderedValue
 	}
-	public model: TextInput
-
+	public getModel() {
+		return this.model
+	}
 	public constructor(options: ViewControllerOptions & { name: string }) {
 		super(options)
 		this.name = options.name
-		this.model = removeUniversalViewOptions(options)
+		this.constructorOptions = removeUniversalViewOptions(options)
 	}
-
-	public render(): TextInput {
+	public render() {
 		return this.model
 	}
 }

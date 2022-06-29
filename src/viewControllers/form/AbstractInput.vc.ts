@@ -1,4 +1,5 @@
 import {
+	FormInputHandlers,
 	FormInputOptions,
 	FormInputViewController,
 	ViewControllerOptions,
@@ -12,15 +13,41 @@ export default abstract class AbstractInputViewController<
 	extends AbstractViewController<Model>
 	implements FormInputViewController<Model>
 {
-	protected model: Model
+	private setValueHandler?: (value: any) => Promise<void>
+	private getValueHandler?: () => any
+	private setModelHandler?: (model: Model) => void
+	private getModelHandler?: () => Model
+
+	private constructorModel: Model
+	protected get model() {
+		return this.getModelHandler?.() ?? ({} as any)
+	}
+
+	protected set model(model: Model) {
+		this.setModelHandler?.(model)
+	}
 
 	public constructor(options: ViewControllerOptions & Model) {
 		super(options)
-		this.model = removeUniversalViewOptions(options as any) as Model
+		this.constructorModel = removeUniversalViewOptions(options as any) as Model
+	}
+
+	public setHandlers(options: FormInputHandlers<Model>): void {
+		const { getValue, setValue, setModel, getModel } = options
+
+		this.getValueHandler = getValue
+		this.setValueHandler = setValue
+		this.setModelHandler = setModel
+		this.getModelHandler = getModel
+
+		this.setModelHandler({
+			...this.getModelHandler(),
+			...this.constructorModel,
+		})
 	}
 
 	public async setValue(value: string, renderedValue?: string | null) {
-		this.model.value = value
+		await this.setValueHandler?.(value)
 
 		if (typeof renderedValue !== 'undefined') {
 			await this.setRenderedValue(renderedValue)
@@ -32,7 +59,11 @@ export default abstract class AbstractInputViewController<
 	}
 
 	public async setRenderedValue(renderedValue: any) {
-		this.model.renderedValue = renderedValue
+		this.setModelHandler?.({
+			...this.model,
+			renderedValue,
+		})
+
 		await this.model.onChangeRenderedValue?.(renderedValue)
 		this.triggerRender()
 	}
@@ -50,10 +81,12 @@ export default abstract class AbstractInputViewController<
 	}
 
 	public getValue() {
-		return this.model.value
+		return this.getValueHandler?.() ?? null
 	}
 
-	public abstract render(): Model
+	public render(): Model {
+		return this.model
+	}
 }
 
 type ViewModel = Record<string, any> & FormInputOptions

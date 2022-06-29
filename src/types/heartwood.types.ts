@@ -192,7 +192,7 @@ type CardUniversals = Pick<
 
 export type FormInputOptions = Omit<
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Input,
-	'name'
+	'name' | 'value'
 >
 export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
 	CardUniversals
@@ -364,9 +364,16 @@ export type VoteHandler = (options: VoteOptions) => Promise<void>
 type Du = typeof dateUtil
 export interface DateUtils extends Du {}
 
-export interface FormInputViewController<
-	View extends Record<string, any> = Record<string, any>
-> extends ViewController<View> {
+export interface FormInputHandlers<View> {
+	getValue: () => any
+	setValue: (value: any) => Promise<void>
+	setModel: (model: View) => void
+	getModel: () => View
+}
+
+export interface FormInputViewController<View extends Record<string, any> = any>
+	extends ViewController<View> {
+	setHandlers(options: FormInputHandlers<View>): void
 	setValue(value: any, renderedValue?: any): Promise<void>
 	getValue(): any
 	setRenderedValue: (renderedValue: any) => Promise<void>

@@ -11,6 +11,8 @@ import AutocompleteInputViewController, {
 
 export default class ControllingAnAutocompleteInputTest extends AbstractViewControllerTest {
 	private static vc: AutocompleteInputViewController
+	private static inputValue: any
+	private static inputViewModel: AutocompleteInputViewControllerOptions
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -352,8 +354,17 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	}
 
 	private static Vc(options?: Partial<AutocompleteInputViewControllerOptions>) {
-		return this.Controller('autocompleteInput', {
+		const autoCompelete = this.Controller('autocompleteInput', {
 			...options,
 		})
+
+		autoCompelete.setHandlers({
+			getValue: () => this.inputValue,
+			setValue: async (value: any) => (this.inputValue = value),
+			getModel: () => this.inputViewModel,
+			setModel: (model) => (this.inputViewModel = model),
+		})
+
+		return autoCompelete
 	}
 }

@@ -121,13 +121,17 @@ export default class FormViewController<
 		this.getVisibleFields().forEach((name) => {
 			const vc = this._getFieldVc(name)
 			if (vc) {
-				vc._originalSetValue = vc._originalSetValue ?? vc.setValue.bind(vc)
-				vc.setValue = async (value: any, renderedValue?: any | null) => {
-					await this.setValue(name, value as any)
-					if (renderedValue) {
-						vc.setRenderedValue?.(renderedValue)
-					}
-				}
+				vc.setHandlers({
+					setValue: async (value) =>
+						this._setValue({ name, value, shouldCallSetValueOnFieldVc: false }),
+					getValue: () => this.getValue(name),
+					getModel: () => this.getField(name).compiledOptions,
+					setModel: (model) =>
+						this.setField(name, {
+							//@ts-ignore
+							fieldDefinition: model,
+						}),
+				})
 			}
 		})
 	}
@@ -147,12 +151,14 @@ export default class FormViewController<
 		value: SchemaPartialValues<S>[N]
 		shouldSetIsDirty?: boolean
 		shouldSetRenderedValueIfExists?: boolean
+		shouldCallSetValueOnFieldVc?: boolean
 	}) {
 		let {
 			name,
 			value,
 			shouldSetIsDirty = true,
 			shouldSetRenderedValueIfExists = false,
+			shouldCallSetValueOnFieldVc = true,
 		} = options
 
 		if (value === this.model.values[name]) {
@@ -167,11 +173,13 @@ export default class FormViewController<
 			})
 		}
 
-		//@ts-ignore
-		const shouldBail = await this.emitWillChange({ [name]: value })
+		if (shouldCallSetValueOnFieldVc) {
+			//@ts-ignore
+			const shouldBail = await this.emitWillChange({ [name]: value })
 
-		if (shouldBail === false) {
-			return
+			if (shouldBail === false) {
+				return
+			}
 		}
 
 		let shouldSetValueLocally = true
@@ -188,9 +196,10 @@ export default class FormViewController<
 				if (shouldSetRenderedValue) {
 					shouldSetIsDirty = false
 					shouldSetValueLocally = false
+
 					vc.setRenderedValue?.(value)
-				} else {
-					await vc._originalSetValue?.(value)
+				} else if (shouldCallSetValueOnFieldVc) {
+					return vc.setValue?.(value)
 				}
 			}
 		}

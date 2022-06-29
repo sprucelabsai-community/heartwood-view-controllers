@@ -35,7 +35,7 @@ const formAssert = {
 	async inputVcIsValid(inputVc: FormInputViewController) {
 		assert.isFunction(
 			inputVc.getValue,
-			`You gotta create a 'getValue()' method on your input! Or consider having your vc extend AbstractFormInputViewContorller and be done! 💪`
+			`You gotta create a 'getValue()' method on your input! Or consider having your vc extend AbstractFormInputViewController and be done! 💪`
 		)
 
 		assert.isFunction(
@@ -43,15 +43,30 @@ const formAssert = {
 			`You gotta create a 'setValue()' method on your input!`
 		)
 
+		assert.isFunction(
+			inputVc.setHandlers,
+			`You need to create a 'setHandlers(...)' method that conforms to FormInputViewController. Consider extending AbstractFormInputViewController to skip all this.`
+		)
+
 		const formVc = BuildFormVc(this.views, inputVc)
 		let value = generateId()
+
+		await inputVc.setValue(value)
+
+		assert.isEqual(
+			formVc.getValue('field'),
+			value,
+			`You need to make sure 'setValue()' returns 'this.setValueHandler()' from your input.`
+		)
+
+		value = generateId()
 
 		await formVc.setValue('field', value)
 
 		assert.isEqual(
 			inputVc.getValue(),
 			value,
-			`You need to make sure 'getValue()' returns the 'this.model.value' from your input.`
+			`You need to make sure 'getValue()' returns 'this.getValueHandler()' from your input.`
 		)
 
 		assert.isFunction(
