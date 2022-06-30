@@ -9,7 +9,10 @@ export default class AutocompleteInputViewController extends AbstractInputViewCo
 	}
 
 	public showSuggestions(suggestions: AutocompleteSuggestion[]) {
-		this.model.suggestions = suggestions
+		this.model = {
+			...this.model,
+			suggestions,
+		}
 		this.isShowingSuggestions = true
 	}
 

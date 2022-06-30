@@ -11,8 +11,6 @@ import AutocompleteInputViewController, {
 
 export default class ControllingAnAutocompleteInputTest extends AbstractViewControllerTest {
 	private static vc: AutocompleteInputViewController
-	private static inputValue: any
-	private static inputViewModel: AutocompleteInputViewControllerOptions
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -28,7 +26,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 		this.vc = this.Vc(options)
 		const model = this.renderVc()
-		assert.isEqualDeep(model, { ...options, controller: this.vc })
+		assert.doesInclude(model, options)
 	}
 
 	@test()
@@ -358,11 +356,25 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 			...options,
 		})
 
-		autoCompelete.setHandlers({
-			getValue: () => this.inputValue,
-			setValue: async (value: any) => (this.inputValue = value),
-			getModel: () => this.inputViewModel,
-			setModel: (model) => (this.inputViewModel = model),
+		this.Controller('form', {
+			schema: {
+				id: 'test',
+				fields: {
+					firstName: {
+						type: 'text',
+					},
+				},
+			},
+			sections: [
+				{
+					fields: [
+						{
+							name: 'firstName',
+							vc: autoCompelete,
+						},
+					],
+				},
+			],
 		})
 
 		return autoCompelete
