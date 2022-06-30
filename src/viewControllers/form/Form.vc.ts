@@ -215,10 +215,9 @@ export default class FormViewController<
 		}
 
 		const errorsByField = this.validateDirtyFields()
+		this.setErrorsByField(errorsByField)
 
 		await this.emitOnChange(errorsByField)
-
-		this.setErrorsByField(errorsByField)
 	}
 
 	private isFieldBeingRendered(name: SchemaFieldNames<S>) {
