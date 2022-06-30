@@ -126,11 +126,13 @@ export default class FormViewController<
 						this._setValue({ name, value, shouldCallSetValueOnFieldVc: false }),
 					getValue: () => this.getValue(name),
 					getModel: () => this.getField(name).compiledOptions,
-					setModel: (model) =>
+					setModel: (model) => {
+						delete model.value
 						this.setField(name, {
 							//@ts-ignore
 							fieldDefinition: model,
-						}),
+						})
+					},
 				})
 			}
 		})

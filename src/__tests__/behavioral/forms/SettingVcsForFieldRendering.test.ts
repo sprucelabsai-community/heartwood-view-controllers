@@ -354,6 +354,19 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isEqual(hitCount, 1)
 	}
 
+	@test()
+	protected static async valueOnFieldNotPassedToFormSchema() {
+		this.firstNameVc = this.SpyInputVc({ value: 'there' })
+		this.formVc = this.FormVc({
+			firstName: 'hey',
+		})
+
+		const schema = this.formVc.getSchema()
+
+		//@ts-ignore
+		assert.isFalsy(schema.fields.firstName.value)
+	}
+
 	private static FormVc(
 		values: Record<string, any> = {},
 		options?: Partial<FormViewControllerOptions<any>>

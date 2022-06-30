@@ -21,7 +21,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	protected static passesOptionsThroughToRender() {
 		const options: AutocompleteInputViewControllerOptions = {
 			hint: generateId(),
-			value: generateId(),
+			label: generateId(),
 		}
 
 		this.vc = this.Vc(options)
