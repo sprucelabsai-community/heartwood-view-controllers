@@ -45,14 +45,25 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.mixinControllers({ calendarEvent: CalendarEventViewControllerImpl })
 
-		const { events = [], ...rest } = removeUniversalViewOptions(options)
+		let {
+			events = [],
+			selectedDates,
+			startDate,
+			...rest
+		} = removeUniversalViewOptions(options)
 
 		for (const event of events) {
 			this.eventsById[event.id] = event
 		}
 
+		if (selectedDates?.[0] && !startDate) {
+			startDate = this.dates.getStartOfMonth(this.dates.date(selectedDates[0]))
+		}
+
 		this.model = {
 			shouldEnableAnimations: true,
+			selectedDates,
+			startDate,
 			...rest,
 			view,
 		}

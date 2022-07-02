@@ -1,4 +1,4 @@
-import { dateUtil } from '@sprucelabs/calendar-utils'
+import { dateUtil, lunch } from '@sprucelabs/calendar-utils'
 import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
@@ -84,6 +84,33 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		assert.isEqualDeep(passedOptions, {
 			dateTimeMs: expected,
 		})
+	}
+
+	@test()
+	protected static async currentMonthMatchesThatOfFirstSelectedDate() {
+		const lunchInMonths = dateUtil.addMonths(lunch(), 2)
+
+		this.vc = this.Vc({
+			selectedDates: [dateUtil.splitDate(lunchInMonths)],
+		})
+
+		const actual = this.vc.getStartDate()
+		const expected = dateUtil.getStartOfMonth(lunchInMonths)
+
+		assert.isAbove(actual, expected - 1)
+		assert.isBelow(actual, expected + 100)
+	}
+
+	@test()
+	protected static async startDateRetained() {
+		const startDate = new Date().getTime()
+
+		this.vc = this.Vc({
+			selectedDates: [dateUtil.splitDate(new Date().getTime())],
+			startDate,
+		})
+
+		assert.isEqual(this.vc.getStartDate(), startDate)
 	}
 
 	protected static Vc(options?: CalendarViewControllerOptions) {
