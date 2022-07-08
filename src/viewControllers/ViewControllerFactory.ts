@@ -3,7 +3,7 @@ import { MercuryClient } from '@sprucelabs/mercury-client'
 import { assertOptions } from '@sprucelabs/schema'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
-import mapUtil, { MapUtil } from '../maps/map.utility'
+import mapUtil from '../maps/map.utility'
 import {
 	ConfirmHandler,
 	ControllerOptions,
@@ -15,6 +15,7 @@ import {
 	ViewControllerOptions,
 	VoteHandler,
 	Device,
+	MapUtil,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {

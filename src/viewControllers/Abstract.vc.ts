@@ -1,6 +1,5 @@
 import { DateUtil } from '@sprucelabs/calendar-utils'
 import SpruceError from '../errors/SpruceError'
-import { MapUtil } from '../maps/map.utility'
 import {
 	Client,
 	ConfirmHandler,
@@ -14,6 +13,7 @@ import {
 	VoteHandler,
 	VoteOptions,
 	Device,
+	MapUtil,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
