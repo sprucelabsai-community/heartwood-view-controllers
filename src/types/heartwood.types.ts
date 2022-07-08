@@ -1,5 +1,5 @@
 import {
-	dateUtil,
+	DateUtil,
 	Locale as ILocale,
 	TimezoneName as ITimezoneName,
 } from '@sprucelabs/calendar-utils'
@@ -12,6 +12,7 @@ import {
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
+import { MapUtil } from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
@@ -361,9 +362,6 @@ export type VoteOptions =
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
 
-type Du = typeof dateUtil
-export interface DateUtils extends Du {}
-
 export interface FormInputHandlers<View> {
 	getValue: () => any
 	setValue: (value: any) => Promise<void>
@@ -387,7 +385,8 @@ export interface ViewControllerOptions {
 	confirmHandler: ConfirmHandler
 	voteHandler: VoteHandler
 	device: Device
-	dates: DateUtils
+	dates: DateUtil
+	maps: MapUtil
 }
 
 export type RenderAsComponent =

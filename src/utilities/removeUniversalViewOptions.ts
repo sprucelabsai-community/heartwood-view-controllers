@@ -6,6 +6,7 @@ export const universalViewOptionFields = [
 	'connectToApi',
 	'device',
 	'dates',
+	'maps',
 ] as const
 
 export type UniversalViewOptionFields = typeof universalViewOptionFields[number]
@@ -15,13 +16,9 @@ export default function removeUniversalViewOptions<
 >(rendered: R): Omit<R, UniversalViewOptionFields> {
 	const { ...options } = rendered
 
-	delete options.vcFactory
-	delete options.renderInDialogHandler
-	delete options.confirmHandler
-	delete options.connectToApi
-	delete options.voteHandler
-	delete options.device
-	delete options.dates
+	for (const key of universalViewOptionFields) {
+		delete options[key]
+	}
 
 	return options
 }

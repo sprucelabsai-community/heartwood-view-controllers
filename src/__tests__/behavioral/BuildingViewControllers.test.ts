@@ -1,7 +1,8 @@
-import { dateUtil } from '@sprucelabs/calendar-utils'
+import { DateUtil, dateUtil } from '@sprucelabs/calendar-utils'
+import { AddressFieldValue } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { DateUtils } from '../..'
+import { MapUtil } from '../../maps/map.utility'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
@@ -19,6 +20,9 @@ export class TestViewController extends AbstractViewController<ViewModel> {
 
 	public getDates() {
 		return this.dates
+	}
+	public getMaps() {
+		return this.maps
 	}
 	public render() {
 		return {}
@@ -215,11 +219,26 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		this.assertDatesPropEquals(dates)
 	}
 
-	private static assertDatesPropEquals(expected: DateUtils) {
+	@test()
+	protected static async passesThroughMapsUtil() {
+		const maps: MapUtil = {
+			openNavigation(_options: { to: AddressFieldValue }): void {},
+		}
+
+		this.factory = this.Factory({
+			maps,
+		})
+
+		const vc = this.factory.Controller('test', {})
+
+		assert.isEqual(vc.getMaps(), maps)
+	}
+
+	private static assertDatesPropEquals(expected: DateUtil) {
 		assert.isEqual(this.vc.getDates(), expected)
 	}
 
-	private static assertDatesInContructorOptions(expected: DateUtils) {
+	private static assertDatesInContructorOptions(expected: DateUtil) {
 		assert.isEqual(this.vc.constructorOptions.dates, expected)
 	}
 }
