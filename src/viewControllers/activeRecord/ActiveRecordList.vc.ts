@@ -106,17 +106,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 				)
 
 				if (this.records.length === 0) {
-					this.listVc.addRow({
-						id: 'no-results',
-						cells: [
-							{
-								text: {
-									content: 'No results found!',
-								},
-							},
-						],
-						...this.noResultsRow,
-					})
+					this.listVc.addRow(this.renderNoResultsRow())
 				} else {
 					for (const record of this.records) {
 						this.listVc.addRow(this.rowTransformer(record))
@@ -138,6 +128,22 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
 		this.isLoaded = true
 		await this.didFetchHandler?.()
+	}
+
+	private renderNoResultsRow(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow & {
+		atIndex?: number | undefined
+	} {
+		return {
+			id: 'no-results',
+			cells: [
+				{
+					text: {
+						content: 'No results found!',
+					},
+				},
+			],
+			...this.noResultsRow,
+		}
 	}
 
 	private buildErrorRow(err: any): Row {
@@ -214,6 +220,9 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
 	public deleteRow(id: string | number) {
 		this.listVc.deleteRow(id)
+		if (this.listVc.getTotalRows() === 0) {
+			this.listVc.addRow(this.renderNoResultsRow())
+		}
 	}
 
 	public async refresh() {

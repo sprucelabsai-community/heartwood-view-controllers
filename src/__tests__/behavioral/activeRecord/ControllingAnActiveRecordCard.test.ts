@@ -18,9 +18,15 @@ import ActiveRecordCardViewController, {
 
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 
+class SpyActiveRecordCard extends ActiveRecordCardViewController {
+	public getListVc() {
+		return this.listVc.getListVc()
+	}
+}
+
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		activeRecordCard: ActiveRecordCardViewController,
+		activeRecordCard: SpyActiveRecordCard,
 	}
 
 	protected static organizations: Organization[] = []
@@ -561,10 +567,29 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
 	}
 
+	@test()
+	protected static async deletingLastRowShowsNoResults() {
+		const {
+			vc,
+			organizations: [org1, org2],
+		} = await this.seedAndGetVc({ totalOrgs: 2 })
+
+		await vc.load()
+		vc.deleteRow(org1.id)
+
+		vcAssert.assertListDoesNotRenderRow(vc.getListVc(), 'no-results')
+
+		vc.deleteRow(org2.id)
+
+		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
+	}
+
 	private static async seedAndGetVc(
-		options?: Partial<ActiveRecordCardViewControllerOptions>
+		options?: Partial<ActiveRecordCardViewControllerOptions> & {
+			totalOrgs?: number
+		}
 	) {
-		const organizations = await this.seedOrganizations()
+		const organizations = await this.seedOrganizations(options?.totalOrgs)
 
 		const vc = this.Vc({
 			payload: {
@@ -575,9 +600,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		return { vc, organizations }
 	}
 
-	private static async seedOrganizations() {
+	private static async seedOrganizations(totalOrgs = 5) {
 		let organizations = await Promise.all(
-			new Array(5).fill(0).map(() => this.seedOrganization())
+			new Array(totalOrgs).fill(0).map(() => this.seedOrganization())
 		)
 
 		organizations = organizations.sort((a, b) => {
@@ -602,7 +627,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	private static Vc(
 		options?: Partial<ActiveRecordCardViewControllerOptions>
-	): ActiveRecordCardViewController {
+	): SpyActiveRecordCard {
 		return this.Controller('activeRecordCard', {
 			...buildActiveRecordCard({
 				eventName: 'list-organizations::v2020_12_25',

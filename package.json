@@ -160,7 +160,8 @@
             "controllersGetIdsSet": "I124",
             "shouldShowSelectOptionsIfTheyArePassedByDefault": "2023312774:D39",
             "sets suggestions 1": "1823878579:B28",
-            "startDateRetained": "1823878579:D48"
+            "startDateRetained": "1823878579:D48",
+            "deletingLastRowShowsNoResults": "1823878579:D75"
           }
         }
       ]

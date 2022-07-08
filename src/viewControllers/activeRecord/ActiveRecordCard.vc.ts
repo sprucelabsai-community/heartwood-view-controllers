@@ -19,7 +19,7 @@ export interface ActiveRecordCardViewControllerOptions
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
 	private cardVc: CardViewController
-	private listVc: ActiveRecordListViewController
+	protected listVc: ActiveRecordListViewController
 
 	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
 		ActiveRecordListViewController.setShouldThrowOnResponseError(shouldThrow)
@@ -124,6 +124,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		await this.listVc.refresh()
 	}
 
+	/**
+	 * @deprecated - don't use this anymore, use active record card directly or subclass and create a spy
+	 */
 	public getListVc() {
 		return this.listVc.getListVc()
 	}
