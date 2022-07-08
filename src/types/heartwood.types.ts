@@ -6,6 +6,7 @@ import {
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
+	AddressFieldValue,
 	FieldError,
 	Schema,
 	SchemaFieldNames,
@@ -332,6 +333,10 @@ export type ControllerOptions<
 >
 
 export type MapUtil = typeof mapUtil
+
+export interface OpenNavigationOptions {
+	to: AddressFieldValue
+}
 
 export type SkillViewControllerArgs<
 	N extends SkillViewControllerId,

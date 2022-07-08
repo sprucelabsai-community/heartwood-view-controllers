@@ -1,8 +1,8 @@
-import { AddressFieldValue } from '@sprucelabs/schema'
+import { OpenNavigationOptions } from '../types/heartwood.types'
 
 const mapUtil = {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	openNavigation(options: { to: AddressFieldValue }) {},
+	openNavigation(options: OpenNavigationOptions) {},
 }
 
 export default mapUtil
