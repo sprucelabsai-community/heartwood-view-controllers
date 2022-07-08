@@ -1,3 +1,10 @@
+# [86.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.0.42...v86.1.0) (2022-07-08)
+
+
+### Features
+
+* maps util in skills ([db3e99a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/db3e99a))
+
 ## [86.0.42](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.0.41...v86.0.42) (2022-07-08)
 
 ## [86.0.41](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.0.40...v86.0.41) (2022-07-07)
