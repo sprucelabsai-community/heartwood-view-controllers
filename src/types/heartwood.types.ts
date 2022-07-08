@@ -12,7 +12,7 @@ import {
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
-import { MapUtil } from '../maps/map.utility'
+import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
@@ -330,6 +330,8 @@ export type ControllerOptions<
 	N extends keyof O ? O[N] : Record<string, never>,
 	UniversalViewOptionFields
 >
+
+export type MapUtil = typeof mapUtil
 
 export type SkillViewControllerArgs<
 	N extends SkillViewControllerId,

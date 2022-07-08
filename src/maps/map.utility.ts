@@ -6,4 +6,3 @@ const mapUtil = {
 }
 
 export default mapUtil
-export type MapUtil = typeof mapUtil
