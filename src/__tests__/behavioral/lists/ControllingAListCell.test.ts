@@ -4,7 +4,7 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { ListCell, ListRow } from '../../../viewControllers/list/List.vc'
+import { ListCell, ListRow } from '../../../types/heartwood.types'
 import ListCellViewController from '../../../viewControllers/list/ListCell.vc'
 
 export default class ControllingARowCellTest extends AbstractViewControllerTest {

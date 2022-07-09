@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 
 export default class AssertingTogglesInListsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}

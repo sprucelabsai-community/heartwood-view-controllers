@@ -13,9 +13,10 @@ import {
 	FormViewController,
 	ViewControllerOptions,
 	FieldRenderOptions,
+	ListRow,
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
-import ListViewController, { ListRow } from '../list/List.vc'
+import ListViewController from '../list/List.vc'
 
 const addSectionSchema = buildSchema({
 	id: 'addSection',

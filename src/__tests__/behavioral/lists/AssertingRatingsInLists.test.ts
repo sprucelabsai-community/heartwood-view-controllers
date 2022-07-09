@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
 function buildRows(total: number, rowIdxForRatings?: number, cellIdx?: number) {

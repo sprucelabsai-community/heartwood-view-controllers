@@ -1,4 +1,4 @@
-import { ListCell } from './List.vc'
+import { ListCell } from '../../types/heartwood.types'
 
 const listUtil = {
 	getInputFromCell(cell: ListCell) {

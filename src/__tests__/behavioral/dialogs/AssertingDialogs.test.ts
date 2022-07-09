@@ -1,7 +1,7 @@
 import { assert, test } from '@sprucelabs/test'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import dialogTestPatcher from '../../../tests/utilities/dialogTestPatcher'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
 
 export default class AssertingDialogsTest extends AbstractViewControllerTest {

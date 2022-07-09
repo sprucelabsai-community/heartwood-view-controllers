@@ -1,6 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
 
 export default class AssertingRatingsViewsTest extends AbstractViewControllerTest {

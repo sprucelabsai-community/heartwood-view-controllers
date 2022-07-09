@@ -1,9 +1,9 @@
 import { selectAssert } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ListRow } from '../../../viewControllers/list/List.vc'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import { ListRow } from '../../../types/heartwood.types'
 
 export default class AssertingSelectsInListsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}

@@ -2,9 +2,9 @@ import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
-import { interactor } from '../../..'
+import { interactor, ListColumnWidth } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 export default class ControllingAListTest extends AbstractViewControllerTest {
@@ -1121,6 +1121,29 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqual(hitCount, 1)
 		await first.setValue('firstName', 'test')
 		assert.isEqual(hitCount, 1)
+	}
+
+	@test()
+	protected static async canSetColumnWidths() {
+		this.assertSettingColumnWidthsRendersExpected(['content', 'fill'])
+		this.assertSettingColumnWidthsRendersExpected(['fill'])
+	}
+
+	@test()
+	protected static settingColmunWidthsTriggersRender() {
+		this.setColumnWidths(['content', 'fill'])
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	private static assertSettingColumnWidthsRendersExpected(
+		widths: ListColumnWidth[]
+	) {
+		this.setColumnWidths(widths)
+		assert.isEqualDeep(this.render(this.vc).columnWidths, widths)
+	}
+
+	private static setColumnWidths(widths: ListColumnWidth[]) {
+		this.vc.setColumnWidths(widths)
 	}
 
 	private static add3Rows() {

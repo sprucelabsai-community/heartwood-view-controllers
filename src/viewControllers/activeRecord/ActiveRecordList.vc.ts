@@ -1,18 +1,19 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
-import { ViewControllerOptions } from '../../types/heartwood.types'
+import {
+	List,
+	ListRow,
+	ViewControllerOptions,
+} from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import ListViewController, { ListRow } from '../list/List.vc'
-
-type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
-export type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+import ListViewController from '../list/List.vc'
 
 export interface ActiveRecordListViewControllerOptions {
 	eventName: string
 	responseKey: string
-	rowTransformer: (record: Record<string, any>) => Row
-	noResultsRow?: Omit<Row, 'id'>
+	rowTransformer: (record: Record<string, any>) => ListRow
+	noResultsRow?: Omit<ListRow, 'id'>
 	payload?: Record<string, any>
 	target?: Record<string, any>
 	id?: string
@@ -26,8 +27,8 @@ export interface ActiveRecordListViewControllerOptions {
 
 export default class ActiveRecordListViewController extends AbstractViewController<List> {
 	private listVc: ListViewController
-	private noResultsRow?: Omit<Row, 'id'>
-	private rowTransformer: (record: Record<string, any>) => Row
+	private noResultsRow?: Omit<ListRow, 'id'>
+	private rowTransformer: (record: Record<string, any>) => ListRow
 	private eventName: string
 	private responseKey: string
 	private emitPayload?: Record<string, any>
@@ -146,7 +147,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		}
 	}
 
-	private buildErrorRow(err: any): Row {
+	private buildErrorRow(err: any): ListRow {
 		return {
 			id: 'error',
 			height: 'content',

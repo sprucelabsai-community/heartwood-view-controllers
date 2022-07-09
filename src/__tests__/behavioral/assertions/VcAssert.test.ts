@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
-import { AbstractViewController, CriticalError } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -13,33 +11,16 @@ import {
 	LineIcon,
 	SkillViewController,
 	ConfirmOptions,
-} from '../../../types/heartwood.types'
-import CardViewController from '../../../viewControllers/card/Card.vc'
-import FormViewController from '../../../viewControllers/form/Form.vc'
-import ListViewController, {
+	SkillView,
 	ListCell,
 	ListRow,
-} from '../../../viewControllers/list/List.vc'
-
-type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-
-declare module '../../../types/heartwood.types' {
-	interface ViewControllerMap {
-		good: GoodSkillViewController
-		bad: BadSkillViewController
-		newCard: NewTestingCardViewController
-		goodWithDialog: GoodWithDialogSkillViewController
-		goodWithAlert: GoodWithAlertSkillViewController
-		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
-		goodWithConfirm: GoodWithConfirm
-		cardVc: CardVc
-	}
-	interface ViewControllerOptionsMap {
-		good: SkillView & { isLoginRequired?: boolean }
-		bad: any
-	}
-}
+	CriticalError,
+	Card,
+} from '../../../types/heartwood.types'
+import AbstractViewController from '../../../viewControllers/Abstract.vc'
+import CardViewController from '../../../viewControllers/card/Card.vc'
+import FormViewController from '../../../viewControllers/form/Form.vc'
+import ListViewController from '../../../viewControllers/list/List.vc'
 
 class CardVc extends AbstractViewController<Card> {
 	public isBusy = false
@@ -1401,5 +1382,22 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		await this.wait(0)
 
 		assert.isTrue(vc.afterAlert)
+	}
+}
+
+declare module '../../../types/heartwood.types' {
+	interface ViewControllerMap {
+		good: GoodSkillViewController
+		bad: BadSkillViewController
+		newCard: NewTestingCardViewController
+		goodWithDialog: GoodWithDialogSkillViewController
+		goodWithAlert: GoodWithAlertSkillViewController
+		goodWithDialogThatWaits: GoodWithDialogThatWaitsSkillViewController
+		goodWithConfirm: GoodWithConfirm
+		cardVc: CardVc
+	}
+	interface ViewControllerOptionsMap {
+		good: SkillView & { isLoginRequired?: boolean }
+		bad: any
 	}
 }

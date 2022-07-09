@@ -1,8 +1,8 @@
 import { assert, test } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { ListCell, ListRow } from '../../../viewControllers/list/List.vc'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import { ListCell, ListRow } from '../../../types/heartwood.types'
 
 export default class AssertingButtonBarsInListsTest extends AbstractViewControllerTest {
 	@test()

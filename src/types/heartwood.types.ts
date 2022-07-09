@@ -215,6 +215,14 @@ export type SimpleViewControllerFactory = Pick<
 	ViewControllerFactory,
 	'Controller'
 >
+export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
+export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+export type ListCell =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+export type SkillView =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+
+export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel
@@ -266,9 +274,6 @@ export interface Router {
 	): Promise<SkillViewControllerMap[Id]>
 	back(): Promise<SkillViewController | undefined>
 }
-
-export type SkillView =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
 export interface ButtonController {
 	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button

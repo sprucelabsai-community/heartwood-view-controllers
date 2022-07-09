@@ -1,10 +1,10 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
 	CardViewController,
+	ListRow,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
-import { ListRow } from '../list/List.vc'
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from './ActiveRecordList.vc'

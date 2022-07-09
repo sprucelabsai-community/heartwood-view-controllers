@@ -1,8 +1,7 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
-import { ViewController } from '../../types/heartwood.types'
-import { ListRow } from './List.vc'
+import { ListRow, ViewController } from '../../types/heartwood.types'
 import ListCellViewController from './ListCell.vc'
 
 export default class ListRowViewController

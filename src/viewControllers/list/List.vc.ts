@@ -1,17 +1,15 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
-import { ViewControllerOptions } from '../../types/heartwood.types'
+import {
+	List,
+	ListColumnWidth,
+	ListRow,
+	ViewControllerOptions,
+} from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import listUtil from './list.utility'
 import ListRowViewController from './ListRow.vc'
-
-type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
-export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
-export type ListCell =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
-
-export type ListViewControllerOptions = Partial<List>
 
 export default class ListViewController extends AbstractViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List> {
 	private model: List = {
@@ -48,6 +46,11 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		for (const row of rows) {
 			this.addRow(row)
 		}
+	}
+
+	public setColumnWidths(widths: ListColumnWidth[]) {
+		this.model.columnWidths = [...widths]
+		this.triggerRender()
 	}
 
 	public addRow(row: ListRow & { atIndex?: number }): void {
@@ -317,3 +320,5 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		}
 	}
 }
+
+export type ListViewControllerOptions = Partial<List>
