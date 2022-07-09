@@ -1,3 +1,10 @@
+# [86.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.1.2...v86.2.0) (2022-07-09)
+
+
+### Features
+
+* list's can let you setColumnWidths making list even more POWERFUL! ([14c1e15](https://github.com/sprucelabsai/heartwood-view-controllers/commit/14c1e15))
+
 ## [86.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.1.1...v86.1.2) (2022-07-08)
 
 ## [86.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.1.0...v86.1.1) (2022-07-08)
