@@ -73,6 +73,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Avatar. */
+	            'avatar': {
+	                label: 'Avatar',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Form. */
 	            'form': {
 	                label: 'Form',

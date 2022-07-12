@@ -58,6 +58,10 @@ export default buildSchema({
 			type: 'text',
 			label: 'Image',
 		},
+		avatar: {
+			type: 'text',
+			label: 'Avatar',
+		},
 		form: {
 			type: 'schema',
 			label: 'Form',

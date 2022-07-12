@@ -2419,6 +2419,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
 				/** Image. */
 				'image'?: string| undefined | null
+				/** Avatar. */
+				'avatar'?: string| undefined | null
 				/** Form. */
 				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
 				/** Talking Sprucebot. */
@@ -2504,6 +2506,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Image. */
 			            'image': {
 			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
 			                type: 'text',
 			                options: undefined
 			            },
