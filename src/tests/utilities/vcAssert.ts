@@ -135,6 +135,20 @@ const vcAssert = {
 
 		return confirmVc
 	},
+	async assertDoesNotRenderConfirm(
+		vc: ViewController<any>,
+		action: () => any | Promise<any>
+	) {
+		try {
+			await this.assertRendersConfirm(vc, action)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`Your view controller rendered a confirm and it should not have!`
+		)
+	},
 
 	async assertDoesNotRenderDialog(
 		vc: ViewController<any>,

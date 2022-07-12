@@ -834,6 +834,20 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async assertDoesNotRenderConfirmThrowsIfRendersConfirm() {
+		const vc = this.Controller('goodWithConfirm', {})
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertDoesNotRenderConfirm(vc, () => vc.showConfirm())
+		)
+	}
+
+	@test()
+	protected static async assertDoesNotRenderConfirm() {
+		const vc = this.Controller('goodWithDialogThatWaits', {})
+		await vcAssert.assertDoesNotRenderConfirm(vc, () => vc.load())
+	}
+
+	@test()
 	protected static async canDeclineConfirm() {
 		const vc = this.Controller('goodWithConfirm', {})
 		const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
