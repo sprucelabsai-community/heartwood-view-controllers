@@ -536,6 +536,10 @@ export const buttonFields: SchemaFieldsByName = {
 		type: 'text',
 		label: 'Image',
 	},
+	avatar: {
+		type: 'text',
+		label: 'Avatar',
+	},
 	lineIcon: {
 		type: 'select',
 		label: 'Line icon',

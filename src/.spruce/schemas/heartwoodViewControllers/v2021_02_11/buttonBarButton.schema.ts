@@ -71,6 +71,12 @@ const buttonBarButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Avatar. */
+	            'avatar': {
+	                label: 'Avatar',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Line icon. */
 	            'lineIcon': {
 	                label: 'Line icon',

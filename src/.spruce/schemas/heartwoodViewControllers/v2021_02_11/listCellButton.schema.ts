@@ -76,6 +76,12 @@ const listCellButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.L
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Avatar. */
+	            'avatar': {
+	                label: 'Avatar',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Line icon. */
 	            'lineIcon': {
 	                label: 'Line icon',

@@ -77,6 +77,12 @@ const buttonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSch
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Avatar. */
+	            'avatar': {
+	                label: 'Avatar',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Line icon. */
 	            'lineIcon': {
 	                label: 'Line icon',
