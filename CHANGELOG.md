@@ -1,3 +1,10 @@
+# [86.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.2.6...v86.3.0) (2022-07-12)
+
+
+### Features
+
+* avatar in card section ([4b32dde](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4b32dde))
+
 ## [86.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.2.5...v86.2.6) (2022-07-12)
 
 ## [86.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.2.4...v86.2.5) (2022-07-11)
