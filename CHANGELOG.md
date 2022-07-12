@@ -1,3 +1,10 @@
+# [86.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.3.3...v86.4.0) (2022-07-12)
+
+
+### Features
+
+* avatar on buttons ([400e848](https://github.com/sprucelabsai/heartwood-view-controllers/commit/400e848))
+
 ## [86.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.3.2...v86.3.3) (2022-07-12)
 
 ## [86.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.3.1...v86.3.2) (2022-07-12)
