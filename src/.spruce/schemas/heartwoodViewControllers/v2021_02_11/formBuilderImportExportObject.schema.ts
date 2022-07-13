@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import builderImportExportPageSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/builderImportExportPage.schema'
+
 
 const formBuilderImportExportObjectSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema  = {
 	id: 'formBuilderImportExportObject',
@@ -9,6 +9,7 @@ const formBuilderImportExportObjectSchema: SpruceSchemas.HeartwoodViewController
 	namespace: 'HeartwoodViewControllers',
 	name: 'form builder import export object',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	    fields: {
 	            /** Title. */
 	            'title': {
@@ -26,10 +27,10 @@ const formBuilderImportExportObjectSchema: SpruceSchemas.HeartwoodViewController
 	            /** Pages. */
 	            'pages': {
 	                label: 'Pages',
-	                type: 'schema',
+	                type: 'raw',
 	                isRequired: true,
 	                isArray: true,
-	                options: {schema: builderImportExportPageSchema_v2021_02_11,}
+	                options: {valueType: `SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>`,}
 	            },
 	    }
 }

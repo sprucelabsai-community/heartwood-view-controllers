@@ -1,14 +1,15 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import formSectionSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/formSection.schema'
 
-const builderImportExportPageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema  = {
-	id: 'builderImportExportPage',
+
+const formBuilderImportExportPageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPageSchema  = {
+	id: 'formBuilderImportExportPage',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	    fields: {
 	            /** Page title. */
 	            'title': {
@@ -27,14 +28,14 @@ const builderImportExportPageSchema: SpruceSchemas.HeartwoodViewControllers.v202
 	            /** Sections. */
 	            'sections': {
 	                label: 'Sections',
-	                type: 'schema',
+	                type: 'raw',
 	                isRequired: true,
 	                isArray: true,
-	                options: {schema: formSectionSchema_v2021_02_11,}
+	                options: {valueType: `SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>`,}
 	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(builderImportExportPageSchema)
+SchemaRegistry.getInstance().trackSchema(formBuilderImportExportPageSchema)
 
-export default builderImportExportPageSchema
+export default formBuilderImportExportPageSchema

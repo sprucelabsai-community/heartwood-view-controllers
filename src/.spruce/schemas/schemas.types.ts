@@ -1332,22 +1332,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface BuilderImportExportPage {
+		interface FormBuilderImportExportPage<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				/** Page title. */
 				'title': string
 				/** Schema. */
 				'schema': (SpruceSchema.Schema)
 				/** Sections. */
-				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection[]
+				'sections': (SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>)[]
 		}
 
-		interface BuilderImportExportPageSchema extends SpruceSchema.Schema {
-			id: 'builderImportExportPage',
+		interface FormBuilderImportExportPageSchema extends SpruceSchema.Schema {
+			id: 'formBuilderImportExportPage',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** Page title. */
 			            'title': {
@@ -1366,15 +1367,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Sections. */
 			            'sections': {
 			                label: 'Sections',
-			                type: 'schema',
+			                type: 'raw',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema,}
+			                options: {valueType: `SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>`,}
 			            },
 			    }
 		}
 
-		type BuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema>
+		type FormBuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPageSchema>
 
 	}
 
@@ -1382,14 +1383,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface FormBuilderImportExportObject {
+		interface FormBuilderImportExportObject<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				/** Title. */
 				'title': string
 				/** Subtitle. */
 				'subtitle'?: string| undefined | null
 				/** Pages. */
-				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
+				'pages': (SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>)[]
 		}
 
 		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
@@ -1398,6 +1399,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'HeartwoodViewControllers',
 			name: 'form builder import export object',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 			    fields: {
 			            /** Title. */
 			            'title': {
@@ -1415,10 +1417,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Pages. */
 			            'pages': {
 			                label: 'Pages',
-			                type: 'schema',
+			                type: 'raw',
 			                isRequired: true,
 			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
+			                options: {valueType: `SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>`,}
 			            },
 			    }
 		}

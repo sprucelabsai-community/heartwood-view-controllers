@@ -1,8 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
-import formSectionBuilder from './formSection.builder'
 
 export default buildSchema({
 	id: 'formBuilderImportExportObject',
+	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	name: 'form builder import export object',
 	description: '',
 	fields: {
@@ -16,38 +16,13 @@ export default buildSchema({
 			label: 'Subtitle',
 		},
 		pages: {
-			type: 'schema',
-			label: 'Pages',
-			isRequired: true,
+			type: 'raw',
 			isArray: true,
+			isRequired: true,
+			label: 'Pages',
 			options: {
-				schema: {
-					id: 'builderImportExportPage',
-					fields: {
-						title: {
-							type: 'text',
-							label: 'Page title',
-							isRequired: true,
-						},
-						schema: {
-							type: 'raw',
-							label: 'Schema',
-							isRequired: true,
-							options: {
-								valueType: 'SpruceSchema.Schema',
-							},
-						},
-						sections: {
-							type: 'schema',
-							label: 'Sections',
-							isRequired: true,
-							isArray: true,
-							options: {
-								schema: formSectionBuilder,
-							},
-						},
-					},
-				},
+				valueType:
+					'SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>',
 			},
 		},
 	},

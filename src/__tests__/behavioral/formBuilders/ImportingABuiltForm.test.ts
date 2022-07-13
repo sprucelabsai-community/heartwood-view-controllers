@@ -1,9 +1,8 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import { FormBuilder } from '../../../types/heartwood.types'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
-import FormBuilderCardViewController, {
-	FormBuilderImportExportObject,
-} from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
@@ -30,7 +29,7 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
 
 	@test()
 	protected static async canImportCustomObject() {
-		const simpleImport: FormBuilderImportExportObject = {
+		const simpleImport: FormBuilder = {
 			title: 'Building your form',
 			subtitle: 'a subtitle',
 			pages: [

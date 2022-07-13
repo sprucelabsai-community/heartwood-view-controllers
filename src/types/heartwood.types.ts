@@ -221,6 +221,12 @@ export type ListCell =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 export type SkillView =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+export type CardFooter =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
+export type FormBuilder =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
+export type FormBuilderPage =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
 
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 

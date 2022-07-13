@@ -2,7 +2,13 @@ import { Schema, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
-import { ViewControllerOptions } from '../../types/heartwood.types'
+import {
+	Button,
+	CardFooter,
+	FormBuilder,
+	FormBuilderPage,
+	ViewControllerOptions,
+} from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
@@ -21,12 +27,6 @@ import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card & {
 	shouldAllowEditing?: boolean
 }
-type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-export type FormBuilderImportExportObject =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
-type Page =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage
 
 export interface FormBuilderCardViewControllerOptions {
 	header?: Card['header']
@@ -82,7 +82,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		})
 	}
 
-	private buildFooter(): Footer {
+	private buildFooter(): CardFooter {
 		if (this.footerOverride) {
 			return this.footerOverride
 		}
@@ -103,7 +103,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		}
 	}
 
-	private buildSlideForNewPage(options?: Partial<Page>): {
+	private buildSlideForNewPage(options?: Partial<FormBuilderPage>): {
 		title: string
 		form: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema>
 	} {
@@ -115,7 +115,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	private renderNewForm(
-		options?: Partial<Page>
+		options?: Partial<FormBuilderPage>
 	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema> {
 		return this.Controller('form', {
 			shouldShowSubmitControls: false,
@@ -160,7 +160,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	public async addPage(
-		options?: { atIndex?: number; title?: string } & Partial<Page>
+		options?: { atIndex?: number; title?: string } & Partial<FormBuilderPage>
 	) {
 		const { atIndex: idx } = options ?? {}
 
@@ -370,7 +370,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		const dialog = this.renderInDialog({ ...vc.render() })
 	}
 
-	public async toObject(): Promise<FormBuilderImportExportObject> {
+	public async toObject(): Promise<FormBuilder> {
 		const object = renderUtil.render(this, {
 			shouldStripControllers: true,
 			shouldStripFunctions: true,
@@ -391,7 +391,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		}
 	}
 
-	public async importObject(imported: FormBuilderImportExportObject) {
+	public async importObject(imported: FormBuilder) {
 		this.swipeVc.setHeaderTitle(imported.title)
 		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
 		this.swipeVc.setSections([])

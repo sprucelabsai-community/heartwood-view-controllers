@@ -1,8 +1,8 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import { FormBuilder } from '../../../types/heartwood.types'
 import FormBuilderCardViewController, {
-	FormBuilderImportExportObject,
 	FormBuilderCardViewControllerOptions,
 } from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
@@ -11,7 +11,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		formBuilderCard: FormBuilderCardViewController,
 	}
 
-	private static readonly singlePageForm: FormBuilderImportExportObject = {
+	private static readonly singlePageForm: FormBuilder = {
 		title: 'Building your form',
 		pages: [
 			{
@@ -61,7 +61,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 		],
 	}
 
-	private static readonly multiPageForm: FormBuilderImportExportObject = {
+	private static readonly multiPageForm: FormBuilder = {
 		title: 'Building your form',
 		pages: [
 			{
