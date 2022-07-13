@@ -232,7 +232,8 @@ const vcAssert = {
 
 	async assertDoesNotRenderAlert(
 		vc: ViewController<any>,
-		action: () => any | Promise<any>
+		action: () => any | Promise<any>,
+		style: AlertOptions['style'] = 'error'
 	) {
 		//@ts-ignore
 		let oldAlert = vc._originalAlert
@@ -250,7 +251,7 @@ const vcAssert = {
 		}
 
 		try {
-			await this.assertRendersAlert(vc, action)
+			await this.assertRendersAlert(vc, action, style)
 		} catch {
 			return
 		}

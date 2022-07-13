@@ -85,6 +85,17 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
 		assert.isTrue(this.vc.afterAlertWasHit)
 	}
 
+	@test()
+	protected static async throwsWhenRenderingInfoWhenNotExpectingTo() {
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertDoesNotRenderAlert(
+				this.vc,
+				() => this.vc.showWithStyle('info'),
+				'info'
+			)
+		)
+	}
+
 	private static Vc() {
 		return this.Controller(
 			'success.root' as any,
