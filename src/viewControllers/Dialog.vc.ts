@@ -70,6 +70,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 
 	public setIsBusy(isBusy: boolean) {
 		;(this.cardVc as CardViewControllerImpl)?.setIsBusy?.(isBusy)
+		this.triggerRender()
 	}
 
 	public async wait() {

@@ -1,5 +1,6 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
@@ -130,7 +131,9 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetBusyOnDialog() {
 		const dlg = this.vc.renderInDialogAndGetDlgVc({})
+		vcAssert.attachTriggerRenderCounter(dlg)
 		dlg.setIsBusy(true)
+		vcAssert.assertTriggerRenderCount(dlg, 1)
 		this.assertDialogIsBusy(dlg)
 		dlg.setIsBusy(false)
 		this.assertDialogIsNotBusy(dlg)
