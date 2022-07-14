@@ -1,3 +1,10 @@
+# [86.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.5.15...v86.6.0) (2022-07-14)
+
+
+### Features
+
+* dialogs can now be set to busy! ([c932dba](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c932dba))
+
 ## [86.5.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.5.14...v86.5.15) (2022-07-14)
 
 ## [86.5.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.5.13...v86.5.14) (2022-07-14)
