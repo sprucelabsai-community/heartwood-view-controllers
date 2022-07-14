@@ -4314,7 +4314,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Image url. */
 				'image'?: string| undefined | null
 				/** Avatars. */
-				'avatars'?: string[]| undefined | null
+				'avatars'?: (string | null | undefined)[]| undefined | null
 				/** Button. */
 				'button'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButton| undefined | null
 				/** Line icon. */
@@ -4383,9 +4383,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Avatars. */
 			            'avatars': {
 			                label: 'Avatars',
-			                type: 'text',
+			                type: 'raw',
 			                isArray: true,
-			                options: undefined
+			                options: {valueType: `string | null | undefined`,}
 			            },
 			            /** Button. */
 			            'button': {

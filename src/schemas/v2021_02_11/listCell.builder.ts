@@ -55,9 +55,12 @@ export default buildSchema({
 			label: 'Image url',
 		},
 		avatars: {
-			type: 'text',
+			type: 'raw',
 			isArray: true,
 			label: 'Avatars',
+			options: {
+				valueType: 'string | null | undefined',
+			},
 		},
 		button: {
 			type: 'schema',
