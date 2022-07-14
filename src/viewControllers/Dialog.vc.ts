@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { CardViewControllerImpl } from '..'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
@@ -29,21 +30,6 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		this.cardVc = options.controller ?? this.Controller('card', options)
 		this.onCloseHandler = options.onClose
 		this.isVisible = !!options.isVisible
-	}
-
-	public render(): Dialog {
-		return {
-			...this.cardVc.render(),
-			//@ts-ignore
-			controller: this,
-			cardController: this.cardVc,
-			isVisible: this.isVisible,
-			shouldShowCloseButton: this.shouldShowCloseButton,
-			closeHandler:
-				this.shouldShowCloseButton !== false
-					? this.handleClose.bind(this)
-					: undefined,
-		}
 	}
 
 	protected async handleClose() {
@@ -82,6 +68,10 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		return this.cardVc
 	}
 
+	public setIsBusy(isBusy: boolean) {
+		;(this.cardVc as CardViewControllerImpl)?.setIsBusy?.(isBusy)
+	}
+
 	public async wait() {
 		if (!this.closeResolver) {
 			this.closePromise = new Promise((resolve) => {
@@ -90,5 +80,20 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 		}
 
 		await this.closePromise
+	}
+
+	public render(): Dialog {
+		return {
+			...this.cardVc.render(),
+			//@ts-ignore
+			controller: this,
+			cardController: this.cardVc,
+			isVisible: this.isVisible,
+			shouldShowCloseButton: this.shouldShowCloseButton,
+			closeHandler:
+				this.shouldShowCloseButton !== false
+					? this.handleClose.bind(this)
+					: undefined,
+		}
 	}
 }
