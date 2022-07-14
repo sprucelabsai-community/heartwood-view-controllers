@@ -54,6 +54,13 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Avatars. */
+	            'avatars': {
+	                label: 'Avatars',
+	                type: 'text',
+	                isArray: true,
+	                options: undefined
+	            },
 	            /** Button. */
 	            'button': {
 	                label: 'Button',
