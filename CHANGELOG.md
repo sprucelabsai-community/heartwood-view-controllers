@@ -1,3 +1,10 @@
+# [86.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.6.3...v86.7.0) (2022-07-14)
+
+
+### Features
+
+* list cells can have avatars ([e6e4468](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e6e4468))
+
 ## [86.6.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.6.2...v86.6.3) (2022-07-14)
 
 ## [86.6.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.6.1...v86.6.2) (2022-07-14)
