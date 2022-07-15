@@ -16,8 +16,6 @@ import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
-type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
-
 class SpyActiveRecordCard extends ActiveRecordCardViewController {
 	public getListVc() {
 		return this.listVc.getListVc()
@@ -604,7 +602,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
 	@test()
 	protected static async loadingRemovesCustomRows() {
-		this.seedOrganization()
+		await this.seedOrganization()
 		const vc = this.Vc()
 		await this.assertListLoadingClearsCustomRow(vc)
 	}
@@ -715,3 +713,5 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		return vc
 	}
 }
+
+type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
