@@ -594,6 +594,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	@test()
 	protected static async errorRemovesCustomRows() {
 		await this.client.on('list-organizations::v2020_12_25', () =>
+			//@ts-ignore
 			assert.fail('persosly failing')
 		)
 
