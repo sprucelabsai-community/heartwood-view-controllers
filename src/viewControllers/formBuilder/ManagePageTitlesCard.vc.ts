@@ -1,4 +1,4 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { ListRow, ViewControllerOptions } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
 import ListViewController from '../list/List.vc'
@@ -17,27 +17,13 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 	) {
 		super(options)
 
-		const missing = []
-		if (!options.onDone) {
-			missing.push('onDone')
-		}
-
-		if (!options.formBuilderVc) {
-			missing.push('formBuilderVc')
-		}
-
-		if (missing.length > 0) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
+		assertOptions(options, ['onDone', 'formBuilderVc'])
 
 		this.formBuilderVc = options.formBuilderVc
 
 		this.listVc = this.Controller('list', {
 			columnWidths: ['fill'],
-			rows: this.buildRows(),
+			rows: this.renderRows(),
 		})
 
 		this.model = {
@@ -58,7 +44,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 						label: 'Add row',
 						onClick: () => {
 							void this.formBuilderVc.addPage()
-							this.listVc.setRows(this.buildRows())
+							this.listVc.setRows(this.renderRows())
 							this.triggerRender()
 						},
 					},
@@ -74,7 +60,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 		}
 	}
 
-	private buildRows(): ListRow[] {
+	private renderRows(): ListRow[] {
 		const pages = this.formBuilderVc.getPageVcs()
 		const rows: ListRow[] = []
 
@@ -105,7 +91,7 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 
 								if (didConfirm) {
 									await this.formBuilderVc.removePage(page.getIndex())
-									this.listVc.setRows(this.buildRows())
+									this.listVc.setRows(this.renderRows())
 								}
 							},
 						},

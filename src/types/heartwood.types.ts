@@ -231,7 +231,7 @@ export type FormBuilderPage =
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 
 export interface ViewController<ViewModel extends Record<string, any>> {
-	render(): ViewModel
+	render(): ViewModel | null
 	triggerRender: () => void
 	destroy?: () => Promise<void> | void
 	willBlur?: () => void | Promise<void>
