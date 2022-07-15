@@ -109,9 +109,9 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 				if (this.records.length === 0) {
 					this.listVc.setRows([this.renderNoResultsRow()])
 				} else {
-					for (const record of this.records) {
-						this.listVc.addRow(this.rowTransformer(record))
-					}
+					this.listVc.setRows(
+						this.records.map((record) => this.rowTransformer(record))
+					)
 				}
 			}
 		} catch (err: any) {
