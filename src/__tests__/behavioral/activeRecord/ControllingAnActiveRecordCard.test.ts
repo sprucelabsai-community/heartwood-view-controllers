@@ -584,6 +584,31 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertListRendersRow(vc.getListVc(), 'no-results')
 	}
 
+	@test()
+	protected static async customRowsRemovedWhenNoResultsRendered() {
+		this.organizations = []
+		const vc = this.Vc()
+		await this.assertListLoadingClearsCustomRow(vc)
+	}
+
+	@test()
+	protected static async errorRemovesCustomRows() {
+		await this.client.on('list-organizations::v2020_12_25', () =>
+			assert.fail('persosly failing')
+		)
+
+		const vc = this.Vc()
+		await this.assertListLoadingClearsCustomRow(vc)
+	}
+
+	private static async assertListLoadingClearsCustomRow(
+		vc: SpyActiveRecordCard
+	) {
+		vc.addRow({ id: 'test', cells: [] })
+		await vc.load()
+		assert.isEqual(vc.getListVc().getTotalRows(), 1)
+	}
+
 	private static async seedAndGetVc(
 		options?: Partial<ActiveRecordCardViewControllerOptions> & {
 			totalOrgs?: number
