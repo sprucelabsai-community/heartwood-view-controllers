@@ -125,7 +125,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ToggleInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToggleInputSchema>
+		interface ToggleInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToggleInputSchema> {}
 
 	}
 
@@ -248,7 +248,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TextInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextInputSchema>
+		interface TextInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextInputSchema> {}
 
 	}
 
@@ -380,7 +380,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type RatingsInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsInputSchema>
+		interface RatingsInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsInputSchema> {}
 
 	}
 
@@ -495,7 +495,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type PhoneInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PhoneInputSchema>
+		interface PhoneInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PhoneInputSchema> {}
 
 	}
 
@@ -611,7 +611,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type InputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputSchema>
+		interface InputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputSchema> {}
 
 	}
 
@@ -660,7 +660,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ToolBeltToolEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltToolSchema>
+		interface ToolBeltToolEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltToolSchema> {}
 
 	}
 
@@ -715,7 +715,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ToolBeltEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltSchema>
+		interface ToolBeltEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltSchema> {}
 
 	}
 
@@ -917,7 +917,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ThemePropsEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema>
+		interface ThemePropsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema> {}
 
 	}
 
@@ -947,7 +947,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ThemeEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema>
+		interface ThemeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema> {}
 
 	}
 
@@ -1024,7 +1024,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSchema>
+		interface SprucebotTypedMessageEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSchema> {}
 
 	}
 
@@ -1157,7 +1157,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SelectInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema>
+		interface SelectInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema> {}
 
 	}
 
@@ -1188,7 +1188,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type LineIconEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineIconSchema>
+		interface LineIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineIconSchema> {}
 
 	}
 
@@ -1246,7 +1246,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type LayoutEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema>
+		interface LayoutEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema> {}
 
 	}
 
@@ -1324,7 +1324,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SkillViewEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema>
+		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
 
 	}
 
@@ -1375,7 +1375,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FormBuilderImportExportPageEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPageSchema>
+		interface FormBuilderImportExportPageEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPageSchema> {}
 
 	}
 
@@ -1425,7 +1425,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FormBuilderImportExportObjectEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema>
+		interface FormBuilderImportExportObjectEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObjectSchema> {}
 
 	}
 
@@ -1471,7 +1471,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FeedEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema>
+		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
 
 	}
 
@@ -1510,7 +1510,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FancyIconEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema>
+		interface FancyIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema> {}
 
 	}
 
@@ -1590,7 +1590,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardBodyEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema>
+		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
 
 	}
 
@@ -1709,7 +1709,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type DialogEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema>
+		interface DialogEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema> {}
 
 	}
 
@@ -1761,7 +1761,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ReceiptTotalEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema>
+		interface ReceiptTotalEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema> {}
 
 	}
 
@@ -1814,7 +1814,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ReceiptLineItemEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptLineItemSchema>
+		interface ReceiptLineItemEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptLineItemSchema> {}
 
 	}
 
@@ -1851,7 +1851,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ReceiptSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema>
+		interface ReceiptSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema> {}
 
 	}
 
@@ -1887,7 +1887,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ReceiptHeaderEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema>
+		interface ReceiptHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema> {}
 
 	}
 
@@ -1932,7 +1932,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ReceiptEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema>
+		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
 
 	}
 
@@ -1987,7 +1987,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type RatingsEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema>
+		interface RatingsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema> {}
 
 	}
 
@@ -2027,7 +2027,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ProgressEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema>
+		interface ProgressEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema> {}
 
 	}
 
@@ -2063,7 +2063,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type StatsStatEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema>
+		interface StatsStatEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema> {}
 
 	}
 
@@ -2113,7 +2113,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type StatsEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema>
+		interface StatsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema> {}
 
 	}
 
@@ -2201,7 +2201,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type BigFormSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema>
+		interface BigFormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema> {}
 
 	}
 
@@ -2395,7 +2395,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type BigFormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema>
+		interface BigFormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema> {}
 
 	}
 
@@ -2607,7 +2607,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema>
+		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
 
 	}
 
@@ -2649,7 +2649,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageAvatarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema>
+		interface SprucebotTypedMessageAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema> {}
 
 	}
 
@@ -2749,7 +2749,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TalkingSprucebotEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema>
+		interface TalkingSprucebotEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema> {}
 
 	}
 
@@ -2791,7 +2791,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotAvatarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema>
+		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
 
 	}
 
@@ -2840,7 +2840,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SprucebotTypedMessageSentenceEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema>
+		interface SprucebotTypedMessageSentenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema> {}
 
 	}
 
@@ -2974,7 +2974,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardFooterButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButtonSchema>
+		interface CardFooterButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButtonSchema> {}
 
 	}
 
@@ -3039,7 +3039,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardFooterEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema>
+		interface CardFooterEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema> {}
 
 	}
 
@@ -3215,7 +3215,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FormEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema>
+		interface FormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema> {}
 
 	}
 
@@ -3296,7 +3296,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListRowEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema>
+		interface ListRowEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema> {}
 
 	}
 
@@ -3369,7 +3369,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema>
+		interface ListEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema> {}
 
 	}
 
@@ -3450,7 +3450,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type FormSectionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema>
+		interface FormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema> {}
 
 	}
 
@@ -3589,7 +3589,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListRatingsInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema>
+		interface ListRatingsInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema> {}
 
 	}
 
@@ -3712,7 +3712,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListToggleInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema>
+		interface ListToggleInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema> {}
 
 	}
 
@@ -3750,7 +3750,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type SelectInputChoiceEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema>
+		interface SelectInputChoiceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema> {}
 
 	}
 
@@ -3889,7 +3889,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListSelectInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInputSchema>
+		interface ListSelectInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInputSchema> {}
 
 	}
 
@@ -4019,7 +4019,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListDateInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInputSchema>
+		interface ListDateInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInputSchema> {}
 
 	}
 
@@ -4149,7 +4149,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListTextInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema>
+		interface ListTextInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInputSchema> {}
 
 	}
 
@@ -4291,7 +4291,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListCellButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButtonSchema>
+		interface ListCellButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButtonSchema> {}
 
 	}
 
@@ -4448,7 +4448,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ListCellEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema>
+		interface ListCellEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema> {}
 
 	}
 
@@ -4492,7 +4492,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CriticalErrorEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema>
+		interface CriticalErrorEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema> {}
 
 	}
 
@@ -4575,7 +4575,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardHeaderEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema>
+		interface CardHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema> {}
 
 	}
 
@@ -4629,7 +4629,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarShiftEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema>
+		interface CalendarShiftEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema> {}
 
 	}
 
@@ -4675,7 +4675,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarSelectedDateEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema>
+		interface CalendarSelectedDateEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema> {}
 
 	}
 
@@ -4870,7 +4870,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema>
+		interface CalendarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema> {}
 
 	}
 
@@ -5071,7 +5071,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarEventEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema>
+		interface CalendarEventEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema> {}
 
 	}
 
@@ -5109,7 +5109,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarTimeEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema>
+		interface CalendarTimeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema> {}
 
 	}
 
@@ -5147,7 +5147,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CalendarPersonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPersonSchema>
+		interface CalendarPersonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPersonSchema> {}
 
 	}
 
@@ -5187,7 +5187,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ButtonBarEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema>
+		interface ButtonBarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema> {}
 
 	}
 
@@ -5274,7 +5274,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type CardEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema>
+		interface CardEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema> {}
 
 	}
 
@@ -5321,7 +5321,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type TextEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema>
+		interface TextEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema> {}
 
 	}
 
@@ -5440,7 +5440,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ButtonBarButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButtonSchema>
+		interface ButtonBarButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButtonSchema> {}
 
 	}
 
@@ -5574,7 +5574,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type DropdownButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema>
+		interface DropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema> {}
 
 	}
 
@@ -5619,7 +5619,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type DropdownEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema>
+		interface DropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema> {}
 
 	}
 
@@ -5761,7 +5761,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type ButtonEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema>
+		interface ButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema> {}
 
 	}
 
@@ -5807,7 +5807,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type AutocompleteSuggestionEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema>
+		interface AutocompleteSuggestionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema> {}
 
 	}
 
@@ -5938,7 +5938,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type AutocompleteInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInputSchema>
+		interface AutocompleteInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInputSchema> {}
 
 	}
 
@@ -6053,7 +6053,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type AddressInputEntity = SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AddressInputSchema>
+		interface AddressInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AddressInputSchema> {}
 
 	}
 
