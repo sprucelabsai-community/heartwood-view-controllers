@@ -1,4 +1,4 @@
-import { assertOptions, SchemaError } from '@sprucelabs/schema'
+import { assertOptions } from '@sprucelabs/schema'
 import { ListRow, ViewControllerOptions } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
 import ListViewController from '../list/List.vc'
