@@ -1,3 +1,10 @@
+# [86.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.7.16...v86.8.0) (2022-07-16)
+
+
+### Features
+
+* buttons in lists can have dropdowns! ([10aec0d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/10aec0d))
+
 ## [86.7.16](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.7.15...v86.7.16) (2022-07-16)
 
 ## [86.7.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.7.14...v86.7.15) (2022-07-16)
