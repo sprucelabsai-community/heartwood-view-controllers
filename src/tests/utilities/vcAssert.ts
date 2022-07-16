@@ -1583,9 +1583,14 @@ const vcAssert = {
 	},
 
 	assertIsActiveRecordCard(vc: ViewController<Card>) {
+		const rendered = renderUtil.render(vc)
 		assert.isTruthy(
-			//@ts-ignore
-			vc instanceof ActiveRecordCardViewController || vc.__activeRecordParent,
+			vc instanceof ActiveRecordCardViewController ||
+				//@ts-ignore
+				vc.__activeRecordParent ||
+				//@ts-ignore
+				rendered?.controller?.getParent?.() instanceof
+					ActiveRecordCardViewController,
 			`The card you sent was not an active record card!`
 		)
 	},

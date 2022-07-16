@@ -102,6 +102,16 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 		vcAssert.assertIsActiveRecordCard(match.getCardVc())
 	}
 
+	@test()
+	protected static matchesWhenCardRendersActiveRecordCard() {
+		const active = this.ActiveRecordCard()
+		const vc = this.Controller('card', {})
+		vc.render = () => {
+			return active.render()
+		}
+		vcAssert.assertIsActiveRecordCard(vc)
+	}
+
 	private static renderActiveRecordCard(
 		id?: string
 	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
