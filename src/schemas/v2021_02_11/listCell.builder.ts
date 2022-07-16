@@ -86,6 +86,13 @@ export default buildSchema({
 									'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>',
 							},
 						},
+						dropdown: {
+							type: 'schema',
+							label: 'Dropdown',
+							options: {
+								schemaId: { id: 'dropdown' },
+							},
+						},
 					},
 				},
 			},

@@ -51,13 +51,9 @@ export default buildSchema({
 			},
 		},
 		card: {
-			type: 'schema',
+			type: 'raw',
 			options: {
-				schemaId: {
-					id: 'card',
-					namespace: 'HeartwoodViewControllers',
-					version: 'v2021_02_11',
-				},
+				valueType: 'HeartwoodTypes.Card',
 			},
 		},
 	},
