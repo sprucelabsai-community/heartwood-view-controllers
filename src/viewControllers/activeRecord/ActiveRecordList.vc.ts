@@ -234,7 +234,6 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		}
 
 		await this.listVc.renderOnce(async () => {
-			this.listVc.deleteAllRows()
 			await this.fetchResults()
 		})
 	}
