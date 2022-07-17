@@ -4795,7 +4795,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isResizeable'?: boolean| undefined | null
 				
-				'style'?: ("tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical" | "draft")| undefined | null
+				'style'?: ("draft" | "tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical")| undefined | null
 				
 				'groupId'?: string| undefined | null
 				
@@ -4879,7 +4879,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'style': {
 			                type: 'select',
-			                options: {choices: [{"value":"tentative","label":"Tentative"},{"value":"upcoming","label":"Upcoming"},{"value":"unavailable","label":"Unavailable"},{"value":"blocked","label":"Blocked"},{"value":"active","label":"Active"},{"value":"past","label":"Past"},{"value":"warn","label":"Warn"},{"value":"critical","label":"Critical"},{"value":"draft","label":"Draft"}],}
+			                options: {choices: [{"value":"draft","label":"Draft"},{"value":"tentative","label":"Tentative"},{"value":"upcoming","label":"Upcoming"},{"value":"unavailable","label":"Unavailable"},{"value":"blocked","label":"Blocked"},{"value":"active","label":"Active"},{"value":"past","label":"Past"},{"value":"warn","label":"Warning"},{"value":"critical","label":"Critical"}],}
 			            },
 			            /** . */
 			            'groupId': {
