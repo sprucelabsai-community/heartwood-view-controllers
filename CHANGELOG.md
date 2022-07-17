@@ -1,3 +1,10 @@
+# [86.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.8.5...v86.9.0) (2022-07-17)
+
+
+### Features
+
+* can get row vc from active card and list ([669b51a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/669b51a))
+
 ## [86.8.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.8.4...v86.8.5) (2022-07-17)
 
 ## [86.8.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.8.3...v86.8.4) (2022-07-17)
