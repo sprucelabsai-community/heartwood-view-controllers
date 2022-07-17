@@ -137,6 +137,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.listVc.addRow(row)
 	}
 
+	public getValues() {
+		return this.listVc.getValues()
+	}
+
 	public getPayload() {
 		return this.listVc.getPayload()
 	}

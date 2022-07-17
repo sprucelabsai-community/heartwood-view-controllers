@@ -8,7 +8,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -615,6 +615,25 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		await vc.load()
 		assert.isEqual(vc.getRowVc(0), vc.getListVc().getRowVc(0))
 		assert.isEqual(vc.getRowVc(1), vc.getListVc().getRowVc(1))
+	}
+
+	@test()
+	protected static async canGetValues() {
+		const vc = this.Vc()
+
+		const expected = [
+			{
+				[generateId()]: generateId(),
+			},
+		]
+
+		vc.getListVc().getValues = () => expected
+
+		await vc.load()
+
+		const actual = vc.getValues()
+
+		assert.isEqual(actual, expected)
 	}
 
 	private static async assertListLoadingClearsCustomRow(

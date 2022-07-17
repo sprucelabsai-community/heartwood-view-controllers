@@ -239,6 +239,10 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		})
 	}
 
+	public getValues() {
+		return this.listVc.getValues()
+	}
+
 	public addRow(
 		row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 	) {
