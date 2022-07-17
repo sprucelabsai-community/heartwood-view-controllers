@@ -607,6 +607,16 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		await this.assertListLoadingClearsCustomRow(vc)
 	}
 
+	@test()
+	protected static async canGetRowVCs() {
+		await this.seedOrganization()
+		await this.seedOrganization()
+		const vc = this.Vc()
+		await vc.load()
+		assert.isEqual(vc.getRowVc(0), vc.getListVc().getRowVc(0))
+		assert.isEqual(vc.getRowVc(1), vc.getListVc().getRowVc(1))
+	}
+
 	private static async assertListLoadingClearsCustomRow(
 		vc: SpyActiveRecordCard
 	) {

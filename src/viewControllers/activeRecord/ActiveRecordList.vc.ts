@@ -245,6 +245,10 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		this.listVc.addRow(row)
 	}
 
+	public getRowVc(row: number | string) {
+		return this.listVc.getRowVc(row)
+	}
+
 	public getPayload() {
 		return this.emitPayload
 	}
