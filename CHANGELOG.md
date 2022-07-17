@@ -1,3 +1,10 @@
+# [86.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.9.0...v86.10.0) (2022-07-17)
+
+
+### Features
+
+* active record card can now get values from internal controls! ([4369df8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4369df8))
+
 # [86.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.8.5...v86.9.0) (2022-07-17)
 
 
