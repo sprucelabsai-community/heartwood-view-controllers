@@ -753,7 +753,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color4ComplimentTransparent'?: string| undefined | null
 				/** Color 4 (inverse). Background for buttons and menu items. */
 				'color4Inverse'?: string| undefined | null
-				/** Color (inverse, compliment). Background for buttons and menu items */
+				/** Color 4 (inverse, compliment). Background for buttons and menu items */
 				'color4InverseCompliment'?: string| undefined | null
 				/** Control bar color 1. The foreground color of the control bar. */
 				'controlBarColor1'?: string| undefined | null
@@ -761,10 +761,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controlBarColor2'?: string| undefined | null
 				/** Tool belt color 2. The background color of the tool belts. */
 				'toolBeltColor2'?: string| undefined | null
-				/** Color. Errors overlayed on a background colored with errorColor1Inverse. */
+				/** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 				'errorColor1'?: string| undefined | null
-				/** Color. The background used when rendering errors. */
+				/** Error color 2. The background used when rendering errors. */
 				'errorColor1Inverse'?: string| undefined | null
+				/** Warning color 1. Warnings overlayed on a background colored with warningColor1Inverse. */
+				'warningColor1'?: string| undefined | null
+				/** Warning color 2. The background used when rendering tarnings. */
+				'warningColor1Inverse'?: string| undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -872,9 +876,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'Background for buttons and menu items.',
 			                options: undefined
 			            },
-			            /** Color (inverse, compliment). Background for buttons and menu items */
+			            /** Color 4 (inverse, compliment). Background for buttons and menu items */
 			            'color4InverseCompliment': {
-			                label: 'Color (inverse, compliment)',
+			                label: 'Color 4 (inverse, compliment)',
 			                type: 'text',
 			                hint: 'Background for buttons and menu items',
 			                options: undefined
@@ -900,18 +904,32 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'The background color of the tool belts.',
 			                options: undefined
 			            },
-			            /** Color. Errors overlayed on a background colored with errorColor1Inverse. */
+			            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 			            'errorColor1': {
-			                label: 'Color',
+			                label: 'Error color 1',
 			                type: 'text',
 			                hint: 'Errors overlayed on a background colored with errorColor1Inverse.',
 			                options: undefined
 			            },
-			            /** Color. The background used when rendering errors. */
+			            /** Error color 2. The background used when rendering errors. */
 			            'errorColor1Inverse': {
-			                label: 'Color',
+			                label: 'Error color 2',
 			                type: 'text',
 			                hint: 'The background used when rendering errors.',
+			                options: undefined
+			            },
+			            /** Warning color 1. Warnings overlayed on a background colored with warningColor1Inverse. */
+			            'warningColor1': {
+			                label: 'Warning color 1',
+			                type: 'text',
+			                hint: 'Warnings overlayed on a background colored with warningColor1Inverse.',
+			                options: undefined
+			            },
+			            /** Warning color 2. The background used when rendering tarnings. */
+			            'warningColor1Inverse': {
+			                label: 'Warning color 2',
+			                type: 'text',
+			                hint: 'The background used when rendering tarnings.',
 			                options: undefined
 			            },
 			    }
@@ -4795,7 +4813,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isResizeable'?: boolean| undefined | null
 				
-				'style'?: ("draft" | "tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical")| undefined | null
+				'style'?: ("tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical" | "draft")| undefined | null
 				
 				'groupId'?: string| undefined | null
 				
@@ -4879,7 +4897,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'style': {
 			                type: 'select',
-			                options: {choices: [{"value":"draft","label":"Draft"},{"value":"tentative","label":"Tentative"},{"value":"upcoming","label":"Upcoming"},{"value":"unavailable","label":"Unavailable"},{"value":"blocked","label":"Blocked"},{"value":"active","label":"Active"},{"value":"past","label":"Past"},{"value":"warn","label":"Warning"},{"value":"critical","label":"Critical"}],}
+			                options: {choices: [{"value":"tentative","label":"tentative"},{"value":"upcoming","label":"upcoming"},{"value":"unavailable","label":"unavailable"},{"value":"blocked","label":"blocked"},{"value":"active","label":"active"},{"value":"past","label":"past"},{"value":"warn","label":"warn"},{"value":"critical","label":"critical"},{"value":"draft","label":"draft"}],}
 			            },
 			            /** . */
 			            'groupId': {

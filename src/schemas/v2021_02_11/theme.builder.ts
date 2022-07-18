@@ -84,7 +84,7 @@ export default buildSchema({
 						},
 						color4InverseCompliment: {
 							type: 'text',
-							label: 'Color (inverse, compliment)',
+							label: 'Color 4 (inverse, compliment)',
 							hint: 'Background for buttons and menu items',
 						},
 						controlBarColor1: {
@@ -104,13 +104,23 @@ export default buildSchema({
 						},
 						errorColor1: {
 							type: 'text',
-							label: 'Color',
+							label: 'Error color 1',
 							hint: 'Errors overlayed on a background colored with errorColor1Inverse.',
 						},
 						errorColor1Inverse: {
 							type: 'text',
-							label: 'Color',
+							label: 'Error color 2',
 							hint: 'The background used when rendering errors.',
+						},
+						warningColor1: {
+							type: 'text',
+							label: 'Warning color 1',
+							hint: 'Warnings overlayed on a background colored with warningColor1Inverse.',
+						},
+						warningColor1Inverse: {
+							type: 'text',
+							label: 'Warning color 2',
+							hint: 'The background used when rendering tarnings.',
 						},
 					},
 				},

@@ -108,9 +108,9 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Background for buttons and menu items.',
 	                options: undefined
 	            },
-	            /** Color (inverse, compliment). Background for buttons and menu items */
+	            /** Color 4 (inverse, compliment). Background for buttons and menu items */
 	            'color4InverseCompliment': {
-	                label: 'Color (inverse, compliment)',
+	                label: 'Color 4 (inverse, compliment)',
 	                type: 'text',
 	                hint: 'Background for buttons and menu items',
 	                options: undefined
@@ -136,18 +136,32 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'The background color of the tool belts.',
 	                options: undefined
 	            },
-	            /** Color. Errors overlayed on a background colored with errorColor1Inverse. */
+	            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 	            'errorColor1': {
-	                label: 'Color',
+	                label: 'Error color 1',
 	                type: 'text',
 	                hint: 'Errors overlayed on a background colored with errorColor1Inverse.',
 	                options: undefined
 	            },
-	            /** Color. The background used when rendering errors. */
+	            /** Error color 2. The background used when rendering errors. */
 	            'errorColor1Inverse': {
-	                label: 'Color',
+	                label: 'Error color 2',
 	                type: 'text',
 	                hint: 'The background used when rendering errors.',
+	                options: undefined
+	            },
+	            /** Warning color 1. Warnings overlayed on a background colored with warningColor1Inverse. */
+	            'warningColor1': {
+	                label: 'Warning color 1',
+	                type: 'text',
+	                hint: 'Warnings overlayed on a background colored with warningColor1Inverse.',
+	                options: undefined
+	            },
+	            /** Warning color 2. The background used when rendering tarnings. */
+	            'warningColor1Inverse': {
+	                label: 'Warning color 2',
+	                type: 'text',
+	                hint: 'The background used when rendering tarnings.',
 	                options: undefined
 	            },
 	    }
