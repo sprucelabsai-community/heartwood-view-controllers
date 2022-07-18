@@ -1,3 +1,10 @@
+# [86.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.10.6...v86.11.0) (2022-07-18)
+
+
+### Features
+
+* themes can have a warning color ([b8be003](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b8be003))
+
 ## [86.10.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.10.5...v86.10.6) (2022-07-18)
 
 ## [86.10.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.10.4...v86.10.5) (2022-07-18)
