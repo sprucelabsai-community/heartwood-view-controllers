@@ -169,10 +169,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 				return
 			}
 			if (isField) {
+				const originalValue = input.value
+				input.value = value
+
 				//@ts-ignore
 				const onChangeResponse = await input.onChange?.(value)
-				if (onChangeResponse !== false) {
-					input.value = value
+				if (onChangeResponse === false) {
+					input.value = originalValue
 				}
 				return
 			}

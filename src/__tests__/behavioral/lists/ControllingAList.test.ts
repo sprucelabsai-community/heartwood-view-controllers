@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 import { interactor, ListColumnWidth } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -1133,6 +1133,34 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static settingColmunWidthsTriggersRender() {
 		this.setColumnWidths(['content', 'fill'])
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async valuesAreUpdatedInOnChange() {
+		let onChangedValue: string | undefined
+		let listValue: string | undefined
+
+		this.vc.setRows([
+			{
+				id: generateId(),
+				cells: [
+					{
+						textInput: {
+							name: 'test',
+							onChange: async (value) => {
+								onChangedValue = value
+								listValue = this.vc.getValues()[0].test
+							},
+						},
+					},
+				],
+			},
+		])
+
+		const value = generateId()
+		await this.vc.getRowVc(0).setValue('test', value)
+
+		assert.isEqual(listValue, onChangedValue)
 	}
 
 	private static assertSettingColumnWidthsRendersExpected(
