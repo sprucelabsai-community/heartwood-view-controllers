@@ -9,7 +9,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../../tests/constants'
 import interactor from '../../../tests/utilities/interactor'
 import { SkillViewController } from '../../../types/heartwood.types'
-import LoginViewController from '../../../viewControllers/Login.vc'
+import LoginViewController from '../../../viewControllers/login/Login.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 

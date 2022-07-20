@@ -1,15 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { Schema, SchemaPartialValues } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
-import Authenticator from '../auth/Authenticator'
-import buildBigForm from '../builders/buildBigForm'
+import Authenticator from '../../auth/Authenticator'
+import buildBigForm from '../../builders/buildBigForm'
 import {
 	BigFormViewController,
 	FormOnChangeOptions,
 	ViewController,
 	ViewControllerOptions,
-} from '../types/heartwood.types'
-import AbstractViewController from './Abstract.vc'
+} from '../../types/heartwood.types'
+import AbstractViewController from '../Abstract.vc'
 
 type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Section<S extends Schema> =

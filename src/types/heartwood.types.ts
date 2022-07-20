@@ -56,7 +56,7 @@ import ListViewController, {
 } from '../viewControllers/list/List.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
-} from '../viewControllers/Login.vc'
+} from '../viewControllers/login/Login.vc'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
@@ -78,6 +78,9 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
+import ConfirmJoinCardViewController, {
+	ConfirmJoinCardViewControllerOptions,
+} from '../viewControllers/login/ConfirmJoinCard.vc'
 
 export type ErrorHandler = (message: string) => void
 
@@ -307,6 +310,7 @@ export interface ViewControllerMap {
 	progress: ProgressViewController
 	ratings: RatingsViewController
 	autocompleteInput: AutocompleteInputViewController
+	confirmJoinCard: ConfirmJoinCardViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -330,6 +334,7 @@ export interface ViewControllerOptionsMap {
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions
 	autocompleteInput: AutocompleteInputViewControllerOptions
+	confirmJoinCard: ConfirmJoinCardViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
