@@ -36,8 +36,8 @@ export default class ConfirmJoinCardTest extends AbstractViewControllerTest {
 			organizationId: this.org.id,
 		})
 
-		this.eventFaker.fakeGetOrganization(() => this.org)
-		this.eventFaker.fakeGetLocation(() => this.location)
+		await this.eventFaker.fakeGetOrganization(() => this.org)
+		await this.eventFaker.fakeGetLocation(() => this.location)
 	}
 
 	@test()

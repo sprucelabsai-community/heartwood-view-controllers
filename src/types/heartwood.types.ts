@@ -54,6 +54,9 @@ import FormBuilderPageViewControllerImpl, {
 import ListViewController, {
 	ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
+import ConfirmJoinCardViewController, {
+	ConfirmJoinCardViewControllerOptions,
+} from '../viewControllers/login/ConfirmJoinCard.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/login/Login.vc'
@@ -78,9 +81,6 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
-import ConfirmJoinCardViewController, {
-	ConfirmJoinCardViewControllerOptions,
-} from '../viewControllers/login/ConfirmJoinCard.vc'
 
 export type ErrorHandler = (message: string) => void
 
