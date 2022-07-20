@@ -10,8 +10,7 @@ import DialogViewController from './viewControllers/Dialog.vc'
 import AutocompleteInputViewController from './viewControllers/form/AutocompleteInput.vc'
 import FormViewController from './viewControllers/form/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
-import ConfirmJoinCardViewController from './viewControllers/login/ConfirmJoinCard.vc'
-import LoginViewController from './viewControllers/login/Login.vc'
+import LoginViewController from './viewControllers/Login.vc'
 import RatingsViewController from './viewControllers/Ratings.vc'
 import ProgressViewController from './viewControllers/reporting/Progress.vc'
 import StatsViewController from './viewControllers/reporting/Stats.vc'
@@ -39,5 +38,4 @@ export const CORE_CONTROLLER_MAP = {
 	progress: ProgressViewController,
 	ratings: RatingsViewController,
 	autocompleteInput: AutocompleteInputViewController,
-	confirmJoinCard: ConfirmJoinCardViewController,
 }

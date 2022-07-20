@@ -1,9 +1,9 @@
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import Authenticator from '../../../auth/Authenticator'
-import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { DEMO_NUMBER } from '../../../tests/constants'
-import StubStorage from '../../../tests/StubStorage'
+import Authenticator from '../../auth/Authenticator'
+import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { DEMO_NUMBER } from '../../tests/constants'
+import StubStorage from '../../tests/StubStorage'
 
 export default class AuthenticatorTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {}

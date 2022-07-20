@@ -8,7 +8,7 @@ import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
-import LoginViewController from '../../viewControllers/login/Login.vc'
+import LoginViewController from '../../viewControllers/Login.vc'
 import { getVcName, pluckAllFromCard } from './assertSupport'
 import { ButtonViewController } from './ButtonViewController'
 

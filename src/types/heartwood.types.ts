@@ -54,12 +54,9 @@ import FormBuilderPageViewControllerImpl, {
 import ListViewController, {
 	ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
-import ConfirmJoinCardViewController, {
-	ConfirmJoinCardViewControllerOptions,
-} from '../viewControllers/login/ConfirmJoinCard.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
-} from '../viewControllers/login/Login.vc'
+} from '../viewControllers/Login.vc'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
@@ -310,7 +307,6 @@ export interface ViewControllerMap {
 	progress: ProgressViewController
 	ratings: RatingsViewController
 	autocompleteInput: AutocompleteInputViewController
-	confirmJoinCard: ConfirmJoinCardViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -334,7 +330,6 @@ export interface ViewControllerOptionsMap {
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions
 	autocompleteInput: AutocompleteInputViewControllerOptions
-	confirmJoinCard: ConfirmJoinCardViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

@@ -18,6 +18,12 @@ import {
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
 
+export interface AlertOptions {
+	title?: string
+	message: string
+	style?: 'info' | 'error' | 'success'
+}
+
 export default abstract class AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
 {
@@ -183,10 +189,4 @@ export default abstract class AbstractViewController<ViewModel>
 	protected getDevice() {
 		return this.device
 	}
-}
-
-export interface AlertOptions {
-	title?: string
-	message: string
-	style?: 'info' | 'error' | 'success'
 }
