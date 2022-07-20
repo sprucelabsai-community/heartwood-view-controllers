@@ -1,3 +1,10 @@
+# [86.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.11.5...v86.12.0) (2022-07-20)
+
+
+### Features
+
+* confirm join card! ([26c5e35](https://github.com/sprucelabsai/heartwood-view-controllers/commit/26c5e35))
+
 ## [86.11.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.11.4...v86.11.5) (2022-07-19)
 
 ## [86.11.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.11.3...v86.11.4) (2022-07-19)
