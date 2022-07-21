@@ -11,12 +11,6 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-export interface LoginViewControllerOptions {
-	onLogin?: LoginHandler
-	onLoginFailed?: (err: Error) => void
-	id?: string | null
-}
-
 const loginSchema = {
 	id: 'loginSchema',
 	fields: {
@@ -249,3 +243,9 @@ type Section<S extends Schema> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>
 
 export type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
+
+export interface LoginViewControllerOptions {
+	onLogin?: LoginHandler
+	onLoginFailed?: (err: Error) => void
+	id?: string | null
+}
