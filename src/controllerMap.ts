@@ -21,6 +21,7 @@ import ToolBeltViewController from './viewControllers/ToolBelt.vc'
 export const CORE_CONTROLLER_MAP = {
 	form: FormViewController,
 	login: LoginViewController,
+	'login-card': LoginViewController,
 	swipeCard: SwipeCardViewController,
 	buttonGroup: ButtonGroupViewController,
 	card: CardViewController,

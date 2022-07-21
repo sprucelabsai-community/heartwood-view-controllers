@@ -259,7 +259,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
 	private static LoginVc() {
 		const factory = this.Factory()
-		const login = factory.Controller('login', {})
+		const login = factory.Controller('login-card', {})
 		return login
 	}
 }

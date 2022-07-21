@@ -45,7 +45,7 @@ const loginSchema = {
 
 type LoginSchema = typeof loginSchema
 
-interface OnLoginOptions {
+export interface OnLoginOptions {
 	person: SpruceSchemas.Spruce.v2020_07_22.Person
 }
 

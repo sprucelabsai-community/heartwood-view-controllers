@@ -288,7 +288,11 @@ export interface ButtonController {
 
 export interface ViewControllerMap {
 	form: FormViewController<any>
+	/**
+	 * @deprecated 'login' -> 'login-card'
+	 */
 	login: LoginViewController
+	'login-card': LoginViewController
 	swipeCard: SwipeCardViewController
 	buttonGroup: ButtonGroupViewController
 	card: CardViewController
@@ -312,6 +316,7 @@ export interface ViewControllerMap {
 export interface ViewControllerOptionsMap {
 	form: FormViewControllerOptions<any>
 	login: LoginViewControllerOptions
+	'login-card': LoginViewControllerOptions
 	swipeCard: SwipeViewControllerOptions
 	buttonGroup: ButtonGroupViewControllerOptions
 	card: CardViewControllerOptions
