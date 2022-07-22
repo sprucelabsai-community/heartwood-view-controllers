@@ -10,10 +10,8 @@ import {
 	SchemaFieldsByName,
 	SchemaValues,
 	FieldDefinitions,
-	SchemaError as SchemaSpruceError,
 	SchemaError,
 } from '@sprucelabs/schema'
-import cloneDeepWith from 'lodash/cloneDeepWith'
 import { defaultSubmitButtonLabel } from '../../constants'
 import SpruceError from '../../errors/SpruceError'
 import {
@@ -501,7 +499,7 @@ export default class FormViewController<
 		}
 
 		if (missing.length) {
-			throw new SchemaSpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})
@@ -511,7 +509,7 @@ export default class FormViewController<
 		const oldDefinition = schema.fields?.[passedFieldName]
 
 		if (!oldDefinition) {
-			throw new SchemaSpruceError({
+			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `You can't update the field ${fieldName} because it does not exist.`,
 				parameters: ['fieldName'],
@@ -605,7 +603,7 @@ export default class FormViewController<
 		}
 
 		if (missing.length) {
-			throw new SchemaSpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})
@@ -678,7 +676,7 @@ export default class FormViewController<
 		}
 
 		if (missing.length > 0) {
-			throw new SchemaSpruceError({
+			throw new SchemaError({
 				code: 'MISSING_PARAMETERS',
 				parameters: missing,
 			})

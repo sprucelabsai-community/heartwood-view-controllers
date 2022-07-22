@@ -1,15 +1,6 @@
-import isObjectLike from 'lodash/isObjectLike'
 import { attachTriggerRenderCounter } from '../tests/utilities/attachTriggerRenderCounter'
 import { ViewController } from '../types/heartwood.types'
 import removeUniversalViewOptions from './removeUniversalViewOptions'
-
-export interface RenderOptions {
-	shouldStripPrivateFields?: boolean
-	shouldStripControllers?: boolean
-	shouldStripFunctions?: boolean
-}
-
-const RENDER_ITEMS_IGNORE_KEYS = ['controller', 'schema']
 
 function renderItems(
 	item: Record<string, any> | any[] = {},
@@ -82,3 +73,14 @@ const renderUtil = {
 }
 
 export default renderUtil
+
+function isObjectLike(value: any) {
+	return typeof value === 'object' && value !== null
+}
+export interface RenderOptions {
+	shouldStripPrivateFields?: boolean
+	shouldStripControllers?: boolean
+	shouldStripFunctions?: boolean
+}
+
+const RENDER_ITEMS_IGNORE_KEYS = ['controller', 'schema']

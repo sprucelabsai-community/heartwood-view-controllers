@@ -92,6 +92,7 @@
     "dotenv": "^16.0.1",
     "esbuild": "^0.14.49",
     "globby": "^11.0.4",
+    "just-clone": "^6.0.1",
     "lodash-es": "^4.17.21",
     "terser-webpack-plugin": "5.3.1",
     "uglify-js": "^3.16.2",

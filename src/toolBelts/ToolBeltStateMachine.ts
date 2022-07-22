@@ -6,7 +6,6 @@ import {
 } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
-import cloneDeepWith from 'lodash/cloneDeepWith'
 import SpruceError from '../errors/SpruceError'
 import {
 	ControllerOptions,
@@ -170,7 +169,6 @@ export default class ToolBeltStateMachine<
 
 	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
 		const typesToClone = ['Object']
-		const cloned = cloneDeepWith(updates, (item) => {
 			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
 				return item
 			}
