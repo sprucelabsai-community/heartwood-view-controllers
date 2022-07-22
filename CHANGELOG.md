@@ -1,3 +1,10 @@
+# [86.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.6...v86.13.0) (2022-07-22)
+
+
+### Features
+
+* view controller factory can now have dates set late ([30e2ff4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/30e2ff4))
+
 ## [86.12.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.5...v86.12.6) (2022-07-22)
 
 ## [86.12.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.4...v86.12.5) (2022-07-22)
