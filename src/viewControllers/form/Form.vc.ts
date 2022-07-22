@@ -12,6 +12,7 @@ import {
 	FieldDefinitions,
 	SchemaError,
 } from '@sprucelabs/schema'
+import { cloneDeep } from '@sprucelabs/spruce-skill-utils'
 import { defaultSubmitButtonLabel } from '../../constants'
 import SpruceError from '../../errors/SpruceError'
 import {
@@ -51,7 +52,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
 
 const cloneAndRetainControllers = function (obj: Record<string, any>) {
-	return cloneDeepWith(obj, (value, key) => {
+	return cloneDeep(obj, (value, key) => {
 		if (key === 'controller' || key === 'vc') {
 			return value
 		}
