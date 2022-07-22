@@ -1,7 +1,7 @@
 import { DateUtil, dateUtil } from '@sprucelabs/calendar-utils'
 import { AddressFieldValue } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { MapUtil } from '../../types/heartwood.types'
@@ -232,6 +232,14 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 		const vc = this.factory.Controller('test', {})
 
 		assert.isEqual(vc.getMaps(), maps)
+	}
+
+	@test()
+	protected static async canSetDatesLater() {
+		const d = generateId() as any
+		this.factory.setDates(d)
+		//@ts-ignore
+		assert.isEqual(this.factory.dates, d)
 	}
 
 	private static assertDatesPropEquals(expected: DateUtil) {

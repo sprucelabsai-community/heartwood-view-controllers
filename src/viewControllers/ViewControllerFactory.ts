@@ -130,6 +130,10 @@ export default class ViewControllerFactory {
 		return this.controllerMap[name]
 	}
 
+	public setDates(dates: DateUtil) {
+		this.dates = dates
+	}
+
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
