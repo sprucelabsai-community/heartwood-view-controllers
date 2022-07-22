@@ -183,10 +183,6 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		return this.records
 	}
 
-	public render(): List {
-		return this.listVc.render()
-	}
-
 	public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
 		if (!this.isLoaded) {
 			throw new Error(
@@ -258,5 +254,9 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
 	public getListVc() {
 		return this.listVc
+	}
+
+	public render(): List {
+		return this.listVc.render()
 	}
 }
