@@ -1,3 +1,40 @@
+## [86.13.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.14...v86.13.15) (2022-07-25)
+
+## [86.13.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.13...v86.13.14) (2022-07-25)
+
+## [86.13.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.12...v86.13.13) (2022-07-25)
+
+## [86.13.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.11...v86.13.12) (2022-07-25)
+
+## [86.13.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.10...v86.13.11) (2022-07-25)
+
+## [86.13.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.9...v86.13.10) (2022-07-25)
+
+## [86.13.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.8...v86.13.9) (2022-07-24)
+
+## [86.13.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.7...v86.13.8) (2022-07-24)
+
+## [86.13.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.6...v86.13.7) (2022-07-23)
+
+## [86.13.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.5...v86.13.6) (2022-07-23)
+
+## [86.13.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.4...v86.13.5) (2022-07-23)
+
+## [86.13.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.3...v86.13.4) (2022-07-23)
+
+## [86.13.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.2...v86.13.3) (2022-07-23)
+
+## [86.13.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.1...v86.13.2) (2022-07-22)
+
+## [86.13.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.0...v86.13.1) (2022-07-22)
+
+# [86.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.6...v86.13.0) (2022-07-22)
+
+
+### Features
+
+* view controller factory can now have dates set late ([30e2ff4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/30e2ff4))
+
 ## [86.12.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.5...v86.12.6) (2022-07-22)
 
 ## [86.12.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.12.4...v86.12.5) (2022-07-22)
