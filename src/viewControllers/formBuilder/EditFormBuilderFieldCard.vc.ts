@@ -107,13 +107,13 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 			values.options = {
 				//@ts-ignore
 				choices: values.selectOptions.split('\n').map((label) => ({
-					label,
+					label: label.trim(),
 					value: namesUtil.toCamel(label),
 				})),
 			}
 		}
 
-		values.options = { ...values.options, ...fieldOptions }
+		values.options = { ...fieldOptions, ...values.options }
 		delete values.selectOptions
 	}
 

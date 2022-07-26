@@ -1,3 +1,5 @@
+import { SelectChoice } from '@sprucelabs/schema'
+import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
@@ -259,6 +261,37 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		await interactor.submitForm(formVc)
 
 		assert.isTrue(submittedResults.isRequired)
+	}
+
+	@test()
+	protected static async canUpdateFieldChoices() {
+		let passedChoices: SelectChoice[] | undefined
+
+		const vc = this.Vc({
+			name: 'color',
+			label: 'Fav color',
+			type: 'select',
+			options: {
+				//@ts-ignore
+				choices: [{ value: 'one', label: 'One' }],
+			},
+			onDone: ({ options }) => {
+				//@ts-ignore
+				passedChoices = options.choices
+			},
+		})
+
+		const input = 'Five\nSix \nSeven'
+		const expected = input.split('\n').map((e) => ({
+			label: e.trim(),
+			value: namesUtil.toCamel(e.trim()),
+		}))
+
+		const form = vc.getFormVc()
+		await form.setValue('selectOptions', input)
+
+		await interactor.submitForm(form)
+		assert.isEqualDeep(passedChoices, expected)
 	}
 
 	private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {
