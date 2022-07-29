@@ -63,10 +63,11 @@ export default class ManagePageTitlesCardViewController extends CardViewControll
 	private renderRows(): ListRow[] {
 		const pages = this.formBuilderVc.getPageVcs()
 		const rows: ListRow[] = []
+		let rowIdx = 0
 
 		for (const page of pages) {
 			rows.push({
-				id: page.getId(),
+				id: `page-${rowIdx}`,
 				cells: [
 					{
 						textInput: {
