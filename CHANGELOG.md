@@ -1,3 +1,10 @@
+# [86.14.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.43...v86.14.0) (2022-08-02)
+
+
+### Features
+
+* setting header title/subtitle exposed in active record card ([496f095](https://github.com/sprucelabsai/heartwood-view-controllers/commit/496f095))
+
 ## [86.13.43](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.42...v86.13.43) (2022-08-01)
 
 ## [86.13.42](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.13.41...v86.13.42) (2022-08-01)
