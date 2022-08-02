@@ -110,6 +110,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.cardVc.setIsBusy(isBusy)
 	}
 
+	/**
+	 * We need to stop accessing the card, use methods on the active vc, if it
+	 * cannot do what you want consider adding the appropriate method to the
+	 * active vc to minimize refactor on internal changes
+	 * @deprecated activeVc.getCard().setIsBusy(...) -> activeVc.setIsBusy(...)
+	 */
 	public getCardVc() {
 		return this.cardVc
 	}
