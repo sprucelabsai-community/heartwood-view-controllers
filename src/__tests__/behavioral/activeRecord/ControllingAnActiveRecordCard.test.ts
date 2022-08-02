@@ -20,6 +20,10 @@ class SpyActiveRecordCard extends ActiveRecordCardViewController {
 	public getListVc() {
 		return this.listVc.getListVc()
 	}
+
+	public getCardVc() {
+		return this.cardVc
+	}
 }
 
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
@@ -634,6 +638,22 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		const actual = vc.getValues()
 
 		assert.isEqual(actual, expected)
+	}
+
+	@test()
+	protected static async canSetHeaderTitle() {
+		const title = generateId()
+		const vc = this.Vc()
+		vc.setHeaderTitle(title)
+		assert.isEqual(vc.getCardVc().getHeaderTitle(), title)
+	}
+
+	@test()
+	protected static async canSetHeaderSubtitle() {
+		const title = generateId()
+		const vc = this.Vc()
+		vc.setHeaderSubtitle(title)
+		assert.isEqual(vc.getCardVc().getHeaderSubtitle(), title)
 	}
 
 	private static async assertListLoadingClearsCustomRow(

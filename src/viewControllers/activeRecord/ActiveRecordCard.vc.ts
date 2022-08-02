@@ -18,7 +18,7 @@ export interface ActiveRecordCardViewControllerOptions
 }
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
-	private cardVc: CardViewController
+	protected cardVc: CardViewController
 	protected listVc: ActiveRecordListViewController
 
 	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
@@ -128,6 +128,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		}
 
 		await this.listVc.refresh()
+	}
+
+	public setHeaderTitle(title: string) {
+		this.cardVc.setHeaderTitle(title)
+	}
+
+	public setHeaderSubtitle(subtitle: string) {
+		this.cardVc.setHeaderSubtitle(subtitle)
 	}
 
 	/**
