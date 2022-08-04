@@ -163,11 +163,12 @@ export default class FormViewController<
 			shouldCallSetValueOnFieldVc = true,
 		} = options
 
-		if (value === this.model.values[name]) {
+		if (value === this.model.values[name] && !this.pendingSets[name]) {
 			return
 		}
 
 		this.pendingSets[name] = value
+		console.log(this.pendingSets[name])
 
 		if (!this.getSchema().fields?.[name]) {
 			throw new SchemaError({
