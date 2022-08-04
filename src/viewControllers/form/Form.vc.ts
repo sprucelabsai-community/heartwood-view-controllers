@@ -226,6 +226,7 @@ export default class FormViewController<
 		this.setErrorsByField(errorsByField)
 
 		await this.emitOnChange(errorsByField)
+		this.triggerRender()
 	}
 
 	private isFieldBeingRendered(name: SchemaFieldNames<S>) {
@@ -318,7 +319,6 @@ export default class FormViewController<
 
 	public setErrorsByField(errorsByField: FormErrorsByField<S>) {
 		this.model.errorsByField = errorsByField
-		this.triggerRender()
 	}
 
 	public validate(): FormErrorsByField<S> {
@@ -469,8 +469,8 @@ export default class FormViewController<
 	}
 
 	public async reset() {
-		await this.setValues(this.originalValues)
 		this.setErrorsByField({})
+		await this.setValues(this.originalValues)
 	}
 
 	public addSection(section: Section & { atIndex?: number }) {
