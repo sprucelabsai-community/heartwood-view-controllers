@@ -75,6 +75,7 @@ export default class FormViewController<
 	private willChangeHandler?: (
 		options: FormWillChangeOptions<S>
 	) => Promise<boolean | void | undefined> | boolean | void | undefined
+	private pendingSets: Record<string, any> = {}
 
 	public constructor(
 		options: FormViewControllerOptions<S> & ViewControllerOptions
@@ -166,6 +167,8 @@ export default class FormViewController<
 			return
 		}
 
+		this.pendingSets[name] = value
+
 		if (!this.getSchema().fields?.[name]) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
@@ -181,6 +184,10 @@ export default class FormViewController<
 			if (shouldBail === false) {
 				return
 			}
+		}
+
+		if (this.pendingSets[name] !== value) {
+			return
 		}
 
 		let shouldSetValueLocally = true
