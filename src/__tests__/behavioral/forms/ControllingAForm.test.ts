@@ -1095,6 +1095,16 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static async settingValuesTriggersRender() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+		})
+
+		await vc.setValues({})
+		vcAssert.assertTriggerRenderCount(vc, 1)
+	}
+
+	@test()
 	protected static async formsHaveOnCancel() {
 		let wasHit = false
 		const vc = this.Controller('form', {

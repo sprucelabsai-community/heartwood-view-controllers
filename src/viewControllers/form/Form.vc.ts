@@ -285,6 +285,8 @@ export default class FormViewController<
 		const errorsByField = this.validateDirtyFields()
 
 		await this.emitOnChange(errorsByField)
+
+		this.triggerRender()
 	}
 
 	private validateDirtyFields() {
