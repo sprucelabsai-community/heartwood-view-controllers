@@ -168,7 +168,6 @@ export default class FormViewController<
 		}
 
 		this.pendingSets[name] = value
-		console.log(this.pendingSets[name])
 
 		if (!this.getSchema().fields?.[name]) {
 			throw new SchemaError({
