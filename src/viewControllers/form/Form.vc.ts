@@ -190,6 +190,8 @@ export default class FormViewController<
 			return
 		}
 
+		delete this.pendingSets[name]
+
 		let shouldSetValueLocally = true
 
 		if (this.isFieldBeingRendered(name)) {

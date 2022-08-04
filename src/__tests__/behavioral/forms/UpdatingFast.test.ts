@@ -46,6 +46,23 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		this.assertValue2Equals('3')
 	}
 
+	@test()
+	protected static async handlesTwoSetsOfUpdates() {
+		await this.update5Times()
+		await this.update5Times()
+		this.assertValue1Equals('5')
+	}
+
+	private static async update5Times() {
+		await this.all([
+			this.setValue1('1'),
+			this.setValue1('2'),
+			this.setValue1('3'),
+			this.setValue1('4'),
+			this.setValue1('5'),
+		])
+	}
+
 	private static async all(all: Promise<void>[]) {
 		await Promise.all(all)
 	}
