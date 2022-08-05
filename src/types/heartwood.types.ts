@@ -182,7 +182,7 @@ export interface SkillViewControllerLoadOptions<
 	themes: ThemeManager
 }
 
-type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
+export type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 
 export interface ThemeManager {
 	setTheme(theme: Theme): void
