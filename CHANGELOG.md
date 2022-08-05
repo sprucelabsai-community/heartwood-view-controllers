@@ -1,3 +1,10 @@
+# [87.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.14.12...v87.0.0) (2022-08-05)
+
+
+### Breaking Changes
+
+* theme manager passed to skill view on load (types only) ([b1f4779](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b1f4779))
+
 ## [86.14.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.14.11...v86.14.12) (2022-08-05)
 
 ## [86.14.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v86.14.10...v86.14.11) (2022-08-05)
