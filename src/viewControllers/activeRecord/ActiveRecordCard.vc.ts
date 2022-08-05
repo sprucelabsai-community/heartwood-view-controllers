@@ -113,7 +113,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	/**
 	 * We need to stop accessing the card, use methods on the active vc, if it
 	 * cannot do what you want consider adding the appropriate method to the
-	 * active vc to minimize refactor on internal changes
+	 * ActiveRecordCardViewController in heartwood-view-controllers to minimize
+	 * refactor on internal changes
+	 *
 	 * @deprecated activeVc.getCard().setIsBusy(...) -> activeVc.setIsBusy(...)
 	 */
 	public getCardVc() {
