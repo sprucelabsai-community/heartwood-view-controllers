@@ -11,6 +11,12 @@ const themeSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchem
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
+	            'name': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
 	            'props': {
 	                type: 'schema',
 	                isRequired: true,

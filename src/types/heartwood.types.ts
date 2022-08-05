@@ -179,6 +179,14 @@ export interface SkillViewControllerLoadOptions<
 	authorizer: Authorizer
 	locale: Locale
 	scope: Scope
+	theme: ThemeManager
+}
+
+type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
+
+export interface ThemeManager {
+	setTheme(theme: Theme): void
+	getTheme(): Theme
 }
 
 export type CardViewController = CardViewControllerImpl

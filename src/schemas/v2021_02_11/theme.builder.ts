@@ -5,6 +5,10 @@ export default buildSchema({
 	name: 'Theme',
 	description: '',
 	fields: {
+		name: {
+			type: 'text',
+			isRequired: true,
+		},
 		props: {
 			type: 'schema',
 			isRequired: true,

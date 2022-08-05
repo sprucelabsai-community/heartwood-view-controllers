@@ -946,6 +946,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Theme {
 			
 				
+				'name': string
+				
 				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
 		}
 
@@ -956,6 +958,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Theme',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
 			            /** . */
 			            'props': {
 			                type: 'schema',
