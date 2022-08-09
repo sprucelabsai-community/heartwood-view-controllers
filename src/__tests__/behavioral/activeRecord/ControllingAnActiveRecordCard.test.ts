@@ -44,7 +44,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 			eventContractUtil.unifyContracts(coreEventContracts as any)
 		)
 
-		this.client = client
+		this.client = client as MercuryClient
 
 		await client.on('list-organizations::v2020_12_25', () => {
 			return {

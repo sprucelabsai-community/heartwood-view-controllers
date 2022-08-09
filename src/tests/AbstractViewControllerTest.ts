@@ -23,7 +23,7 @@ import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
 import StubStorage from './StubStorage'
 import interactor from './utilities/interactor'
-import vcAssert from './utilities/vcAssert.utility'
+import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any> = {}
@@ -56,7 +56,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
 		this.client = MercuryTestClient.getInternalEmitter(
 			eventContractUtil.unifyContracts(coreEventContracts as any)
-		)
+		) as MercuryClient
 		this.eventFaker = new EventFaker(this.client)
 	}
 
