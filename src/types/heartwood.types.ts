@@ -432,9 +432,9 @@ export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
 	renderAs?: RenderAsComponent
 	renderHintAs?: 'subtitle' | 'tooltip'
-	placeholder?: string
-	label?: string
-	hint?: string
+	placeholder?: string | null
+	label?: string | null
+	hint?: string | null
 	vc?: FormInputViewController
 }
 
