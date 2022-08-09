@@ -56,7 +56,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
 		this.client = MercuryTestClient.getInternalEmitter(
 			eventContractUtil.unifyContracts(coreEventContracts as any)
-		) as MercuryClient
+		) as any
 		this.eventFaker = new EventFaker(this.client)
 	}
 
