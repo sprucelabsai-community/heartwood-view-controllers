@@ -1,3 +1,10 @@
+# [87.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v87.0.25...v87.1.0) (2022-08-15)
+
+
+### Features
+
+* active card view controller can set footer! ([cf13a78](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cf13a78))
+
 ## [87.0.25](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v87.0.24...v87.0.25) (2022-08-15)
 
 ## [87.0.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v87.0.23...v87.0.24) (2022-08-15)
