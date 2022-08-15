@@ -12,11 +12,13 @@ import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { CardFooter } from '../../../types/heartwood.types'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 class SpyActiveRecordCard extends ActiveRecordCardViewController {
+	
 	public getListVc() {
 		return this.listVc.getListVc()
 	}
@@ -654,6 +656,22 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		const vc = this.Vc()
 		vc.setHeaderSubtitle(title)
 		assert.isEqual(vc.getCardVc().getHeaderSubtitle(), title)
+	}
+
+	@test()
+	protected static async canSetFooter() {
+		const vc = this.Vc()
+		let passedFooter : CardFooter |undefined
+		vc.getCardVc().setFooter = (footer: CardFooter) {
+			passedFooter = footer
+		}
+
+		const footer = {
+		}
+
+		vc.setFooter(footer)
+		assert.isEqual(passedFooter, footer)
+		
 	}
 
 	private static async assertListLoadingClearsCustomRow(

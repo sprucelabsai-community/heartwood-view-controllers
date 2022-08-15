@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
+	CardFooter,
 	CardViewController,
 	ListRow,
 	ViewControllerOptions,
@@ -163,6 +164,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
 	public getRowVc(row: string | number) {
 		return this.listVc.getRowVc(row)
+	}
+
+	public setFooter(footer: CardFooter) {
+		this.cardVc.setFooter(footer)
 	}
 
 	public render(): Card {
