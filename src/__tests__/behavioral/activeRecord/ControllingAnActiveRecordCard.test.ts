@@ -18,7 +18,6 @@ import ActiveRecordCardViewController, {
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 class SpyActiveRecordCard extends ActiveRecordCardViewController {
-	
 	public getListVc() {
 		return this.listVc.getListVc()
 	}
@@ -661,17 +660,15 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 	@test()
 	protected static async canSetFooter() {
 		const vc = this.Vc()
-		let passedFooter : CardFooter |undefined
-		vc.getCardVc().setFooter = (footer: CardFooter) {
+		let passedFooter: CardFooter | undefined
+		vc.getCardVc().setFooter = (footer: CardFooter) => {
 			passedFooter = footer
 		}
 
-		const footer = {
-		}
+		const footer = {}
 
 		vc.setFooter(footer)
 		assert.isEqual(passedFooter, footer)
-		
 	}
 
 	private static async assertListLoadingClearsCustomRow(
