@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, test } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
 export default class ControllingAListRowTest extends AbstractViewControllerTest {
@@ -91,6 +91,37 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
 
 		thirdVc.delete()
 		assert.isTrue(thirdVc.getIsDeleted())
+	}
+
+	@test('knows if has date input by name', 'dateInput')
+	@test('knows if has text input by name', 'textInput')
+	protected static async knowsIfHasInput(input: 'dateInput' | 'textInput') {
+		const name = generateId()
+		const name2 = generateId()
+		const name3 = generateId()
+
+		const { listVc } = this.ListVcWithRowVc([
+			{
+				id: 'second',
+				cells: [
+					{
+						[input]: {
+							name,
+						},
+					},
+					{
+						textInput: {
+							name: name3,
+						},
+					},
+				],
+			},
+		])
+
+		const rowVc = listVc.getRowVc(1)
+		assert.isTrue(rowVc.hasInput(name))
+		assert.isFalse(rowVc.hasInput(name2))
+		assert.isTrue(rowVc.hasInput(name3))
 	}
 
 	private static ListVcWithRowVc(

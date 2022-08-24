@@ -2,6 +2,7 @@ import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
 import { ListRow, ViewController } from '../../types/heartwood.types'
+import listUtil from './list.utility'
 import ListCellViewController from './ListCell.vc'
 
 export default class ListRowViewController
@@ -65,6 +66,12 @@ export default class ListRowViewController
 
 	private async _setValue(name: string, value: any) {
 		await this.setValueHandler(name, value)
+	}
+
+	public hasInput(name: string): boolean {
+		return this.model.cells.reduce((hasInput, cell) => {
+			return hasInput || !!listUtil.getInputFromCell(cell, name)
+		}, false)
 	}
 
 	public getValues(): Record<string, any> {
