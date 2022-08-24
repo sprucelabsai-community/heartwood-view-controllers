@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
 import { ViewController } from '../../types/heartwood.types'
+import listUtil from './list.utility'
 
 type Model = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 
@@ -34,6 +35,10 @@ export default class ListCellViewController implements ViewController<Model> {
 
 	public getIsDeleted() {
 		return !this.model
+	}
+
+	public hasInput(name: string): boolean {
+		return !!listUtil.getInputFromCell(this.model, name)
 	}
 
 	public render(): Model {

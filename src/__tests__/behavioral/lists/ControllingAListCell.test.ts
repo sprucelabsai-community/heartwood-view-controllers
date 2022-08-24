@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -207,6 +207,45 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 
 		const err = assert.doesThrow(() => this.render(cellVc))
 		errorAssert.assertError(err, 'CELL_DELETED')
+	}
+
+	@test('knows if date input by name exists', 'dateInput')
+	@test('knows if text input by name exists', 'textInput')
+	protected static async knowsIfHasInput(input: 'dateInput' | 'textInput') {
+		const name = generateId()
+		const name2 = generateId()
+
+		const cellVc = this.CellVc(0, {
+			[input]: {
+				name,
+			},
+		})
+
+		assert.isTrue(cellVc.hasInput(name))
+		assert.isFalse(cellVc.hasInput(name2))
+	}
+
+	@test()
+	protected static async knowsIfHasInputWithMultipleInputs() {
+		const name = generateId()
+		const name2 = generateId()
+		const name3 = generateId()
+
+		const cellVc = this.CellVc(0, {
+			dateInput: {
+				name,
+			},
+			textInput: {
+				name: name2,
+			},
+			toggleInput: {
+				name: name3,
+			},
+		})
+
+		assert.isTrue(cellVc.hasInput(name))
+		assert.isTrue(cellVc.hasInput(name2))
+		assert.isTrue(cellVc.hasInput(name3))
 	}
 
 	private static CellVc(idx: number, cellModel?: ListCell) {

@@ -16,87 +16,6 @@ import {
 } from '../types/heartwood.types'
 import ToolBeltViewController from '../viewControllers/ToolBelt.vc'
 
-export interface ToolBeltState {
-	readonly id: string
-	load(stateMachine: ToolBeltStateMachine): Promise<any> | any
-	destroy?: () => Promise<any> | any
-}
-
-export interface ToolBeltStateMachineOptions<
-	Context extends Record<string, any> = Record<string, any>
-> {
-	toolBeltVc: ToolBeltViewController
-	vcFactory: SimpleViewControllerFactory
-	connectToApi: MercuryConnectFactory
-	context?: Partial<Context>
-}
-
-type ControllerFactory = <
-	N extends ViewControllerId,
-	O extends ControllerOptions<N>
->(
-	name: N,
-	options: O
-) => ViewControllerMap[N]
-
-const eventContract = buildEventContract({
-	eventSignatures: {
-		['did-update-context']: {
-			emitPayloadSchema: buildSchema({
-				id: 'did-update-context',
-				fields: {
-					old: {
-						type: 'raw',
-						isRequired: true,
-						options: {
-							valueType: 'Record<string, any>',
-						},
-					},
-					updates: {
-						type: 'raw',
-						isRequired: true,
-						options: {
-							valueType: 'Record<string, any>',
-						},
-					},
-				},
-			}),
-		},
-		['will-update-context']: {
-			emitPayloadSchema: buildSchema({
-				id: 'will-update-context-emit',
-				fields: {
-					current: {
-						type: 'raw',
-						isRequired: true,
-						options: {
-							valueType: 'Record<string, any>',
-						},
-					},
-					updates: {
-						type: 'raw',
-						isRequired: true,
-						options: {
-							valueType: 'Record<string, any>',
-						},
-					},
-				},
-			}),
-			responsePayloadSchema: buildSchema({
-				id: 'will-update-context-response',
-				fields: {
-					shouldAllowUpdates: {
-						type: 'boolean',
-						defaultValue: true,
-					},
-				},
-			}),
-		},
-	},
-})
-
-type EventContract = typeof eventContract
-
 export default class ToolBeltStateMachine<
 	Context extends Record<string, any> = Record<string, any>
 > extends AbstractEventEmitter<EventContract> {
@@ -117,7 +36,6 @@ export default class ToolBeltStateMachine<
 			vcFactory,
 			connectToApi,
 			context = {},
-			//@ts-ignore
 		} = assertOptions(options, ['toolBeltVc', 'vcFactory', 'connectToApi'])
 
 		this.toolBeltVc = toolBeltVc
@@ -248,3 +166,84 @@ const deepEqual = function (x: any, y: any) {
 		return false
 	}
 }
+
+export interface ToolBeltState {
+	readonly id: string
+	load(stateMachine: ToolBeltStateMachine): Promise<any> | any
+	destroy?: () => Promise<any> | any
+}
+
+export interface ToolBeltStateMachineOptions<
+	Context extends Record<string, any> = Record<string, any>
+> {
+	toolBeltVc: ToolBeltViewController
+	vcFactory: SimpleViewControllerFactory
+	connectToApi: MercuryConnectFactory
+	context?: Partial<Context>
+}
+
+type ControllerFactory = <
+	N extends ViewControllerId,
+	O extends ControllerOptions<N>
+>(
+	name: N,
+	options: O
+) => ViewControllerMap[N]
+
+const eventContract = buildEventContract({
+	eventSignatures: {
+		['did-update-context']: {
+			emitPayloadSchema: buildSchema({
+				id: 'did-update-context',
+				fields: {
+					old: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+					updates: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+				},
+			}),
+		},
+		['will-update-context']: {
+			emitPayloadSchema: buildSchema({
+				id: 'will-update-context-emit',
+				fields: {
+					current: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+					updates: {
+						type: 'raw',
+						isRequired: true,
+						options: {
+							valueType: 'Record<string, any>',
+						},
+					},
+				},
+			}),
+			responsePayloadSchema: buildSchema({
+				id: 'will-update-context-response',
+				fields: {
+					shouldAllowUpdates: {
+						type: 'boolean',
+						defaultValue: true,
+					},
+				},
+			}),
+		},
+	},
+})
+
+type EventContract = typeof eventContract
