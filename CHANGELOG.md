@@ -1,3 +1,10 @@
+# [88.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.0.24...v88.1.0) (2022-08-24)
+
+
+### Features
+
+* list cells can be checked for a input by name using hasinput ([6b438d6](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6b438d6))
+
 ## [88.0.24](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.0.23...v88.0.24) (2022-08-24)
 
 ## [88.0.23](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.0.22...v88.0.23) (2022-08-24)
