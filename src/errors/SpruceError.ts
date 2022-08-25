@@ -14,7 +14,9 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 			case 'INVALID_VIEW_CONTROLLER_NAME':
 				message = `Couldn't find a view controller called "${
 					options.name
-				}". Try one of the following:\n\n${options.validNames.join('\n')}`
+				}". Try one of the following (or run 'spruce create.view' if testing!):\n\n${options.validNames.join(
+					'\n'
+				)}`
 				break
 
 			case 'INVALID_VIEW_CONTROLLER_SOURCE':
