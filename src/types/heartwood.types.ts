@@ -572,3 +572,7 @@ export interface Authorizer {
 		options: AuthorizerCanOptions<PermissionId>
 	): Promise<Record<PermissionId, boolean>>
 }
+
+export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
+	options: ViewControllerOptions
+) => Vc

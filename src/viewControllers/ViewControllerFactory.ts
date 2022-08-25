@@ -12,10 +12,10 @@ import {
 	ViewController,
 	ViewControllerMap,
 	ViewControllerId,
-	ViewControllerOptions,
 	VoteHandler,
 	Device,
 	MapUtil,
+	ViewControllerConstructor,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -183,10 +183,6 @@ export default class ViewControllerFactory {
 		return instance
 	}
 }
-
-export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
-	options: ViewControllerOptions
-) => Vc
 
 type ConnectToApi = () => Promise<MercuryClient>
 
