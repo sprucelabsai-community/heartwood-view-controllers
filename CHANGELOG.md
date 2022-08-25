@@ -1,3 +1,12 @@
+## [88.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.2.0...v88.2.1) (2022-08-25)
+
+# [88.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.1.0...v88.2.0) (2022-08-24)
+
+
+### Features
+
+* List rows can now check in an input by name exists ([da67f69](https://github.com/sprucelabsai/heartwood-view-controllers/commit/da67f69))
+
 # [88.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.0.24...v88.1.0) (2022-08-24)
 
 
