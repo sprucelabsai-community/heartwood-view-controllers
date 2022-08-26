@@ -78,10 +78,16 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
 		assert.isTrue(thirdVc.getIsSelected())
 		assert.isTrue(thirdVc.getIsEnabled())
 
-		assert.isEqualDeep(thirdVc.getValues(), { willBeDeleted: 'Yes!' })
+		assert.isEqualDeep(thirdVc.getValues(), {
+			rowId: 'third',
+			willBeDeleted: 'Yes!',
+		})
 
 		await thirdVc.setValue('willBeDeleted', 'No!')
-		assert.isEqualDeep(thirdVc.getValues(), { willBeDeleted: 'No!' })
+		assert.isEqualDeep(thirdVc.getValues(), {
+			rowId: 'third',
+			willBeDeleted: 'No!',
+		})
 
 		thirdVc.setIsEnabled(false)
 		assert.isFalse(thirdVc.getIsEnabled())

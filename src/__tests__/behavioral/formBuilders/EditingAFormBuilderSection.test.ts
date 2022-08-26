@@ -88,24 +88,30 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		vcAssert.assertListRendersRows(listVc, 4)
 
-		assert.isEqualDeep(listVc.getValues(), [
-			{
-				fieldName: 'Field 1',
-				fieldType: 'text',
-			},
-			{
-				fieldName: 'waka1',
-				fieldType: 'text',
-			},
-			{
-				fieldName: 'waka2',
-				fieldType: 'select',
-			},
-			{
-				fieldName: 'waka3',
-				fieldType: 'text',
-			},
-		])
+		assert.isEqualDeep(
+			listVc.getValues().map((v) => {
+				delete v.rowId
+				return v
+			}),
+			[
+				{
+					fieldName: 'Field 1',
+					fieldType: 'text',
+				},
+				{
+					fieldName: 'waka1',
+					fieldType: 'text',
+				},
+				{
+					fieldName: 'waka2',
+					fieldType: 'select',
+				},
+				{
+					fieldName: 'waka3',
+					fieldType: 'text',
+				},
+			]
+		)
 	}
 
 	@test()

@@ -173,7 +173,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddATextInputToARow() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: {
@@ -188,7 +188,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canAddASelectinputToARow() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					selectInput: {
@@ -222,7 +222,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canGetGoodRowVc() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -237,7 +237,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async cantSetValueOnRowFieldByNameDoesNotExist() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -256,7 +256,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	public static rowVcHasNoValuesToStart() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: { content: 'so exciting!' },
@@ -271,7 +271,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetValueOnGoodFieldName() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: { name: 'lastName', label: 'row 1' },
@@ -280,7 +280,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 2' },
@@ -308,8 +308,9 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async settingValuesOnRowVcSetsValues() {
+		const rowId = generateId()
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: rowId,
 			cells: [
 				{
 					textInput: { name: 'lastName', label: 'row 1', value: 'Horse' },
@@ -318,16 +319,17 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		})
 
 		const rowVc = this.vc.getRowVc(0)
-		assert.isEqualDeep(rowVc.getValues(), { lastName: 'Horse' })
+		assert.isEqualDeep(rowVc.getValues(), { rowId, lastName: 'Horse' })
 
 		await rowVc.setValue('lastName', 'Taco')
-		assert.isEqualDeep(rowVc.getValues(), { lastName: 'Taco' })
+		assert.isEqualDeep(rowVc.getValues(), { rowId, lastName: 'Taco' })
 	}
 
 	@test()
 	protected static async settingValuesOnRowVcSetsValuesWithMultipleCells() {
+		const rowId = generateId()
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: rowId,
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -342,19 +344,22 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(rowVc.getValues(), {
 			lastName: 'Horse',
 			firstName: 'Mr.',
+			rowId,
 		})
 
 		await rowVc.setValue('lastName', 'Taco')
 		assert.isEqualDeep(rowVc.getValues(), {
 			lastName: 'Taco',
 			firstName: 'Mr.',
+			rowId,
 		})
 	}
 
 	@test()
 	protected static async canGetValuesOnList() {
+		const rowId = generateId()
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: rowId,
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -379,6 +384,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			firstName: 'Mr.',
 			middleInitial: 'Green',
 			lastName: 'Horse',
+			rowId,
 		})
 
 		const rowVc = this.vc.getRowVc(0)
@@ -391,13 +397,14 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			firstName: 'Ms.',
 			middleInitial: 'Purple',
 			lastName: 'Horse',
+			rowId,
 		})
 	}
 
 	@test()
 	protected static async renderingRendersValueOnInputs() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -428,8 +435,9 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canSetValueOnSetValueOfField() {
+		const rowId = generateId()
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: rowId,
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -462,6 +470,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			firstName: 'Trip',
 			lastName: 'Horse',
 			middleInitial: 'Brown',
+			rowId,
 		})
 	}
 
@@ -470,7 +479,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		const vc = this.Controller('list', {
 			rows: [
 				{
-					id: generateRandomId(),
+					id: generateId(),
 					cells: [
 						{
 							text: { content: 'go team!' },
@@ -486,7 +495,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async settingValueOnRowTriggersRender() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: { name: 'firstName', label: 'row 1', value: 'Mr.' },
@@ -519,7 +528,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		let onChangeSelectValue: string | undefined
 
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: {
@@ -560,7 +569,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static gettingBadValueOnRowThrows() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					textInput: {
@@ -595,7 +604,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	protected static canSetRowsDirectly() {
 		this.vc.setRows([
 			{
-				id: generateRandomId(),
+				id: generateId(),
 				cells: [
 					{
 						text: { content: 'yay' },
@@ -613,7 +622,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 
 		this.vc.setRows([
 			{
-				id: generateRandomId(),
+				id: generateId(),
 				cells: [
 					{
 						text: { content: 'yay 2' },
@@ -639,7 +648,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static canDeleteRow() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: {
@@ -649,7 +658,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			],
 		})
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: {
@@ -699,7 +708,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static rowsVcsKnowIfTheyAreTheLastRow() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [
 				{
 					text: {
@@ -1064,7 +1073,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 		let wasHit = false
 
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [],
 			onClick: () => {
 				wasHit = true
@@ -1080,7 +1089,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canEnableAndDisableRow() {
 		this.vc.addRow({
-			id: generateRandomId(),
+			id: generateId(),
 			cells: [],
 		})
 
@@ -1212,7 +1221,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 	private static add2Rows() {
 		this.vc.addRows([
 			{
-				id: generateRandomId(),
+				id: generateId(),
 				cells: [
 					{
 						text: {
@@ -1222,7 +1231,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 				],
 			},
 			{
-				id: generateRandomId(),
+				id: generateId(),
 				cells: [
 					{
 						text: {
@@ -1233,7 +1242,4 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
 			},
 		])
 	}
-}
-function generateRandomId(): string {
-	return `${Math.random() * new Date().getTime()}`
 }

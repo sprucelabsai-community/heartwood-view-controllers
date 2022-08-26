@@ -142,7 +142,9 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 		return this.model.rows.length
 	}
 
-	private getRowValues(rowIdx: number): Record<string, any> {
+	private getRowValues(
+		rowIdx: number
+	): Record<string, any> & { rowId?: string } {
 		const row = this.model.rows[rowIdx]
 		const values: Record<string, any> = {}
 
@@ -150,6 +152,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
 			const input = listUtil.getInputFromCell(cell)
 			if (input) {
 				values[input.name] = input.value
+				values.rowId = row.id
 			}
 		}
 
