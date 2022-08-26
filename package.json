@@ -26,7 +26,8 @@
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/spruce-event-plugin",
       "@sprucelabs/spruce-skill-booter",
-      "@swc/core"
+      "@swc/core",
+      "typescript"
     ]
   },
   "keywords": [
@@ -122,7 +123,7 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^5.0.3",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.7.4",
+    "typescript": "4.7.4",
     "yarn-upgrade-all": "^0.7.1"
   },
   "engines": {
