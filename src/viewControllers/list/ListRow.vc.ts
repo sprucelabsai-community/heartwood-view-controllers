@@ -1,7 +1,7 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
-import { ListRow, ViewController } from '../../types/heartwood.types'
+import { ListRow, RowValues, ViewController } from '../../types/heartwood.types'
 import listUtil from './list.utility'
 import ListCellViewController from './ListCell.vc'
 
@@ -74,7 +74,7 @@ export default class ListRowViewController
 		}, false)
 	}
 
-	public getValues(): Record<string, any> {
+	public getValues(): RowValues {
 		return this.getValuesHandler()
 	}
 

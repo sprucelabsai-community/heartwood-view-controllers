@@ -121,6 +121,10 @@ export interface WithErrorHandler {
 export type LineIcon = typeof lineIcons[number]
 export type FancyIcon = typeof fancyIcons[number]
 
+export type RowValues = Record<string, any> & {
+	rowId?: string
+}
+
 export type FormErrorsByField<S extends Schema = Schema> = Partial<
 	Record<SchemaFieldNames<S>, TypedFieldError<S>[]>
 >
