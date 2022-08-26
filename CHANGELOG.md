@@ -1,3 +1,10 @@
+# [89.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.4.1...v89.0.0) (2022-08-26)
+
+
+### Breaking Changes
+
+* listVc.getValues() now returns rowId making development even EASIER! ([0c3fe96](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0c3fe96))
+
 ## [88.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.4.0...v88.4.1) (2022-08-26)
 
 # [88.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.3.3...v88.4.0) (2022-08-26)
