@@ -1814,6 +1814,22 @@ const vcAssert = {
 			`You need to make sure your checkbox toggles the enabled status of your row!`
 		)
 	},
+
+	assertCardFooterIsDisabled(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		assert.isFalse(
+			model.footer?.isEnabled,
+			`I expected your footer to be disabled, try setting '{ footer: { isEnabled: false } }' or 'cardVc.disableFooter()'`
+		)
+	},
+
+	assertCardFooterIsEnabled(vc: ViewController<Card>) {
+		const model = renderUtil.render(vc)
+		assert.isTrue(
+			model.footer?.isEnabled !== false,
+			`I expected your footer to be enabled, try setting '{ footer: { isEnabled: true } }' or 'cardVc.enableFooter()'`
+		)
+	},
 }
 
 export default vcAssert
