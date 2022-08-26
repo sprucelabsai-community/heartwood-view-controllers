@@ -1,3 +1,10 @@
+# [88.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.3.3...v88.4.0) (2022-08-26)
+
+
+### Features
+
+* vcAssert can assert if the footer is enabled or disabled to make dev even FASTER! ([afff252](https://github.com/sprucelabsai/heartwood-view-controllers/commit/afff252))
+
 ## [88.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.3.2...v88.3.3) (2022-08-26)
 
 ## [88.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v88.3.1...v88.3.2) (2022-08-25)
