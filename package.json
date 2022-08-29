@@ -26,8 +26,7 @@
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/spruce-event-plugin",
       "@sprucelabs/spruce-skill-booter",
-      "@swc/core",
-      "typescript"
+      "@swc/core"
     ]
   },
   "keywords": [
