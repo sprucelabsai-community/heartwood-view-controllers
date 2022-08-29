@@ -1,3 +1,10 @@
+# [89.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.0.6...v89.1.0) (2022-08-29)
+
+
+### Features
+
+* can enable/disable footer of active record card ([68b52f5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/68b52f5))
+
 ## [89.0.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.0.5...v89.0.6) (2022-08-27)
 
 ## [89.0.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.0.4...v89.0.5) (2022-08-27)
