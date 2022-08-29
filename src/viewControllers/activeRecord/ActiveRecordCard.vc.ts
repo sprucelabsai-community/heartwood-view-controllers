@@ -170,6 +170,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.cardVc.setFooter(footer)
 	}
 
+	public disableFooter() {
+		this.cardVc.disableFooter()
+	}
+
+	public enableFooter() {
+		this.cardVc.enableFooter()
+	}
+
 	public render(): Card {
 		return this.cardVc.render()
 	}

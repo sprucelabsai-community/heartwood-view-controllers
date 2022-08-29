@@ -671,6 +671,15 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isEqual(passedFooter, footer)
 	}
 
+	@test()
+	protected static async canEnableDisableFooter() {
+		const vc = this.Vc()
+		vc.disableFooter()
+		vcAssert.assertCardFooterIsDisabled(vc)
+		vc.enableFooter()
+		vcAssert.assertCardFooterIsEnabled(vc)
+	}
+
 	private static async assertListLoadingClearsCustomRow(
 		vc: SpyActiveRecordCard
 	) {
