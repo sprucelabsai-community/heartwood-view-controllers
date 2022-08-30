@@ -1,3 +1,10 @@
+# [89.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.1.2...v89.2.0) (2022-08-30)
+
+
+### Features
+
+* can set active record card to render null ([27b9b1e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/27b9b1e))
+
 ## [89.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.1.1...v89.1.2) (2022-08-29)
 
 ## [89.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v89.1.0...v89.1.1) (2022-08-29)
