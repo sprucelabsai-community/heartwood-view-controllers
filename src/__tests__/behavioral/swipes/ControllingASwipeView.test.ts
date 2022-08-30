@@ -1,7 +1,8 @@
 import { test, assert } from '@sprucelabs/test'
-import { errorAssert } from '@sprucelabs/test-utils'
+import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { Card } from '../../../types/heartwood.types'
 import SwipeCardViewController, {
 	SwipeViewControllerOptions,
 } from '../../../viewControllers/SwipeCard.vc'
@@ -13,6 +14,9 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		await super.beforeEach()
 
 		this.vc = this.Vc({
+			header: {
+				title: generateId(),
+			},
 			slides: [
 				{
 					title: 'step 1',
@@ -24,6 +28,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 					title: 'step 3',
 				},
 			],
+			footer: {
+				buttons: [
+					{
+						id: generateId(),
+					},
+				],
+			},
 		})
 	}
 
@@ -325,6 +336,9 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canUpdateFooter() {
+		this.vc = this.Vc({
+			slides: [],
+		})
 		assert.isFalsy(this.render(this.vc).footer)
 		this.vc.setFooter({ buttons: [{ label: 'Hey!' }] })
 		assert.doesInclude(this.render(this.vc).footer?.buttons, { label: 'Hey!' })
@@ -403,6 +417,40 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		})
 
 		assert.isEqualDeep(this.vc.getSlide('test'), this.vc.getSlide(0))
+	}
+
+	@test()
+	protected static canBeSetToRenderNull() {
+		this.vc.setShouldRenderNull(true)
+
+		const model = this.renderVc()
+		this.cleanModel(model)
+
+		assert.isEqualDeep(model, {
+			header: null,
+			footer: null,
+			body: null,
+		})
+	}
+
+	@test()
+	protected static async restoresOriginalModelWhenNotNull() {
+		const expected = this.renderVc()
+
+		this.vc.setShouldRenderNull(true)
+		this.vc.setShouldRenderNull(false)
+
+		const actual = this.renderVc()
+		assert.isEqualDeep(this.cleanModel(actual), this.cleanModel(expected))
+	}
+
+	private static renderVc() {
+		return this.render(this.vc)
+	}
+
+	private static cleanModel(model: Card) {
+		delete model.controller
+		return model
 	}
 
 	private static Vc(

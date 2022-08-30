@@ -218,6 +218,8 @@ export type BigFormViewController<S extends Schema> =
 export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+export type CardBody =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 export type CardHeader =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
@@ -231,6 +233,8 @@ export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+export type Slide =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 export type CardFooter =

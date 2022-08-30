@@ -145,6 +145,14 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		return this.model.header?.title ?? undefined
 	}
 
+	public getHeader() {
+		return this.model.header
+	}
+
+	public getFooter() {
+		return this.model.footer
+	}
+
 	public getHeaderSubtitle(): string | undefined {
 		return this.model.header?.subtitle ?? undefined
 	}
@@ -343,10 +351,14 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.triggerRender()
 	}
 
+	public getBody() {
+		return this.model.body
+	}
+
 	//monkey patched by view
 	public payAttentionToMe() {}
 
-	public setHeader(header: Header | null) {
+	public setHeader(header: Header | null | undefined) {
 		const oldHeader = this.model.header
 		this.model.header = header
 

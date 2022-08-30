@@ -1,17 +1,17 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import {
+	Card,
+	CardBody,
+	CardFooter,
+	CardHeader,
+	Slide,
 	SwipeController,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './card/Card.vc'
 import sectionIdOrIdxToIdx from './card/sectionIdOrIdxToIdx'
-
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Slide = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
-type Footer = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 
 export type SwipeViewControllerOptions = {
 	slides: Slide[]
@@ -23,6 +23,12 @@ const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
 
 type PassthroughMethods = {
 	[K in typeof PASSTHROUGH_METHODS[number]]: CardViewController[K]
+}
+
+interface CardSnapshot {
+	header: CardHeader | null | undefined
+	body: CardBody | null | undefined
+	footer: CardFooter | null | undefined
 }
 
 /** @ts-ignore */
@@ -39,6 +45,7 @@ export default class SwipeCardViewController
 	public setHeaderTitle!: CardViewController['setHeaderTitle']
 	public setHeaderSubtitle!: CardViewController['setHeaderSubtitle']
 	public setSections!: CardViewController['setSections']
+	private cardBeforeNull?: CardSnapshot
 
 	public constructor(
 		options: SwipeViewControllerOptions & ViewControllerOptions
@@ -143,8 +150,26 @@ export default class SwipeCardViewController
 		return this.cardVc.getSection(idOrIdx)
 	}
 
-	public setFooter(footer: Footer | null | undefined) {
+	public setFooter(footer: CardFooter | null | undefined) {
 		this.cardVc.setFooter(footer)
+	}
+
+	public setShouldRenderNull(shouldRenderNull: boolean) {
+		if (shouldRenderNull) {
+			this.cardBeforeNull = {
+				header: this.cardVc.getHeader(),
+				body: this.cardVc.getBody(),
+				footer: this.cardVc.getFooter(),
+			}
+
+			this.cardVc.setHeader(null)
+			this.cardVc.setBody(null)
+			this.cardVc.setFooter(null)
+		} else {
+			this.cardVc.setHeader(this.cardBeforeNull?.header)
+			this.cardVc.setBody(this.cardBeforeNull?.body)
+			this.cardVc.setFooter(this.cardBeforeNull?.footer)
+		}
 	}
 
 	public getTotalSlides(): number {

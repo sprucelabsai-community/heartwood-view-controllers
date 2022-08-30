@@ -6,6 +6,7 @@ import {
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
+import { CardViewControllerOptions } from '../card/Card.vc'
 import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from './ActiveRecordList.vc'
@@ -43,8 +44,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	private CardVc(
 		options: ActiveRecordCardViewControllerOptions
 	): CardViewController {
-		return this.Controller('card', {
-			id: options.id,
+		const model: CardViewControllerOptions = {
 			header: options.header,
 			footer: options.footer,
 			body: {
@@ -55,7 +55,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 					},
 				],
 			},
-		})
+		}
+		if (options.id) {
+			model.id = options.id
+		}
+		return this.Controller('card', model)
 	}
 
 	private ListVc(
