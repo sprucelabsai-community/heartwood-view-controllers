@@ -20,6 +20,9 @@ export * from './viewControllers/form/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
 export * from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
+/**
+ * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
+ */
 export { default as SwipeViewControllerImpl } from './viewControllers/SwipeCard.vc'
 export { default as SwipeCardViewControllerImpl } from './viewControllers/SwipeCard.vc'
 export * from './viewControllers/SwipeCard.vc'
