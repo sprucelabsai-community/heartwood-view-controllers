@@ -952,7 +952,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 		let passedIds: string[] = []
 
-		this.vc.removeEvent = (id) => {
+		this.vc.removeEvent = async (id) => {
 			passedIds.push(id)
 		}
 

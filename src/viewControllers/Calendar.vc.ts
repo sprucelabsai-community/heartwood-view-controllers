@@ -164,18 +164,18 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return this.model.shifts
 	}
 
-	public selectEvent(id: string) {
+	public async selectEvent(id: string) {
 		const event = this.getEvent(id)
 		this.selectedEventId = id
 		this.triggerRender()
-		this.model?.onSelectEvent?.(event)
+		await this.model?.onSelectEvent?.(event)
 	}
 
-	public deselectEvent() {
+	public async deselectEvent() {
 		const event = this.getSelectedEvent()
 		if (event) {
 			this.selectedEventId = undefined
-			this.model.onDeselectEvent?.(event)
+			await this.model.onDeselectEvent?.(event)
 			this.triggerRender()
 		}
 	}
@@ -254,11 +254,11 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return !!this.eventsById[eventId]
 	}
 
-	public removeEvent(id: string) {
+	public async removeEvent(id: string) {
 		this.getEvent(id)
 
 		if (this.selectedEventId === id) {
-			this.deselectEvent()
+			await this.deselectEvent()
 		}
 
 		delete this.eventsById[id]
@@ -412,9 +412,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		return Object.values(this.eventsById)
 	}
 
-	public setStartDate(date: number) {
+	public async setStartDate(date: number) {
 		this.model.startDate = date
-		this.model.onChangeStartDate?.(date)
+		await this.model.onChangeStartDate?.(date)
 		this.triggerRender()
 	}
 

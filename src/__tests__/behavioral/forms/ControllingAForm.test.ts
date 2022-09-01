@@ -1115,7 +1115,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		})
 
 		const model = this.render(vc)
-		model.onCancel?.()
+		await model.onCancel?.()
 
 		assert.isTrue(wasHit)
 	}

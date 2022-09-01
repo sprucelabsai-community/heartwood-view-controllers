@@ -207,7 +207,7 @@ export default class FormViewController<
 					shouldSetIsDirty = false
 					shouldSetValueLocally = false
 
-					vc.setRenderedValue?.(value)
+					await vc.setRenderedValue?.(value)
 				} else if (shouldCallSetValueOnFieldVc) {
 					return vc.setValue?.(value)
 				}

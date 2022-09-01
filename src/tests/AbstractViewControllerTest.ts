@@ -62,7 +62,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
 	protected static async afterEach() {
 		await super.afterEach()
-		this.mercuryFixture?.destroy()
+		await this.mercuryFixture?.destroy()
 	}
 
 	protected static Factory(options?: Partial<ViewControllerFactoryOptions>) {

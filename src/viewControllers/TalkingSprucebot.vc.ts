@@ -36,8 +36,8 @@ export default class TalkingSprucebotViewController
 	private pauseHandler() {}
 
 	//@ts-ignore
-	private triggerComplete() {
-		this.model.onComplete?.()
+	private async triggerComplete() {
+		await this.model.onComplete?.()
 		this.playResolver?.()
 	}
 
