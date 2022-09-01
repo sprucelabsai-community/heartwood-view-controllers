@@ -217,8 +217,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static cantRemoveEventThatDoesNotExist() {
-		const err = assert.doesThrow(() => this.vc.removeEvent('aoeu'))
+	protected static async cantRemoveEventThatDoesNotExist() {
+		const err = await assert.doesThrowAsync(() => this.vc.removeEvent('aoeu'))
 		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id: 'aoeu',
 		})
@@ -342,9 +342,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static cantSelectEventThatDoesNotExist() {
+	protected static async cantSelectEventThatDoesNotExist() {
 		this.populateCalendar()
-		const err = assert.doesThrow(() => this.vc.selectEvent('1234'))
+		const err = await assert.doesThrowAsync(() => this.vc.selectEvent('1234'))
 
 		errorAssert.assertError(err, 'EVENT_NOT_FOUND', {
 			id: '1234',
