@@ -188,7 +188,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		this.vc.addEvent(event)
 		this.vc.getEventVc(event.id)
-		this.vc.removeEvent(event.id)
+		await this.vc.removeEvent(event.id)
 
 		assert.doesThrow(() => this.vc.getEventVc(event.id))
 	}

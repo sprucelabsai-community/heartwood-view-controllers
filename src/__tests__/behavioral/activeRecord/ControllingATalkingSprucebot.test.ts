@@ -112,7 +112,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 	}
 
 	@test()
-	protected static onCompleteCalledWhenOnCompleteIsInvoked() {
+	protected static async onCompleteCalledWhenOnCompleteIsInvoked() {
 		let wasHit = false
 
 		this.vc = this.TalkingSprucebot({
@@ -127,7 +127,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 		})
 
 		//@ts-ignore
-		this.vc.triggerComplete()
+		await this.vc.triggerComplete()
 
 		assert.isTrue(wasHit)
 	}
@@ -145,11 +145,11 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
 		const promise = this.vc.play()
 
 		let wasHit = false
-		const timeout = setTimeout(() => {
+		const timeout = setTimeout(async () => {
 			wasHit = true
 
 			//@ts-ignore
-			this.vc.triggerComplete()
+			await this.vc.triggerComplete()
 		}, 100)
 
 		await promise

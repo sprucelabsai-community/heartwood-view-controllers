@@ -225,28 +225,28 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static canRemoveEventWithGoodId() {
+	protected static async canRemoveEventWithGoodId() {
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
-		this.vc.removeEvent(event.id)
+		await this.vc.removeEvent(event.id)
 	}
 
 	@test()
-	protected static removeEventRemovesItFromTheModel() {
+	protected static async removeEventRemovesItFromTheModel() {
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
-		this.vc.removeEvent(event.id)
+		await this.vc.removeEvent(event.id)
 		this.assertRendersTotalEvents(0)
 	}
 
 	@test()
-	protected static onlyRemovesExpectedEvent() {
+	protected static async onlyRemovesExpectedEvent() {
 		const event1 = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event1)
 		const event2 = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event2)
 
-		this.vc.removeEvent(event1.id)
+		await this.vc.removeEvent(event1.id)
 
 		const model = this.render(this.vc)
 		delete model.events[0].controller
@@ -254,10 +254,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static removingAnEventTriggersRender() {
+	protected static async removingAnEventTriggersRender() {
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
-		this.vc.removeEvent(event.id)
+		await this.vc.removeEvent(event.id)
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
@@ -352,8 +352,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static canSelectEvent() {
-		const event = this.addOneEventAndSelectIt()
+	protected static async canSelectEvent() {
+		const event = await this.addOneEventAndSelectIt()
 		assert.isEqualDeep(this.vc.getSelectedEvent(), {
 			...event,
 			isSelected: true,
@@ -372,15 +372,15 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 		const [event] = this.populateCalendar(1)
 
-		this.vc.selectEvent(event.id)
+		await this.vc.selectEvent(event.id)
 
 		assert.isTruthy(passedEvent)
 		assert.isEqualDeep(passedEvent, event)
 	}
 
 	@test()
-	protected static updatingASelectedEventReflectsChanges() {
-		const event = this.addOneEventAndSelectIt()
+	protected static async updatingASelectedEventReflectsChanges() {
+		const event = await this.addOneEventAndSelectIt()
 		const updates = {
 			startDateTimeMs: 100,
 		}
@@ -395,11 +395,11 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static canSelectFromBusyCalendar() {
+	protected static async canSelectFromBusyCalendar() {
 		this.populateCalendar()
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
-		this.vc.selectEvent(event.id)
+		await this.vc.selectEvent(event.id)
 		assert.isEqualDeep(this.vc.getSelectedEvent(), {
 			...event,
 			isSelected: true,
@@ -411,14 +411,14 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static selectingEventTriggersRender() {
-		this.addOneEventAndSelectIt()
+	protected static async selectingEventTriggersRender() {
+		await this.addOneEventAndSelectIt()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	@test()
-	protected static canDeselectEvent() {
-		this.addEventSelectAndDeselectIt()
+	protected static async canDeselectEvent() {
+		await this.addEventSelectAndDeselectIt()
 		assert.isUndefined(this.vc.getSelectedEvent())
 	}
 
@@ -433,8 +433,8 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 		const [event] = this.populateCalendar(1)
 
-		this.vc.selectEvent(event.id)
-		this.vc.deselectEvent()
+		await this.vc.selectEvent(event.id)
+		await this.vc.deselectEvent()
 
 		assert.isTruthy(passedEvent)
 		assert.isEqualDeep(passedEvent, { ...event, isSelected: true })
@@ -442,44 +442,44 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async deselectingEventTriggersRender() {
-		this.addEventSelectAndDeselectIt()
+		await this.addEventSelectAndDeselectIt()
 		vcAssert.assertTriggerRenderCount(this.vc, 3)
 	}
 
 	@test()
-	protected static deselectingWithNoSelectedEventHasNoEffect() {
+	protected static async deselectingWithNoSelectedEventHasNoEffect() {
 		let wasHit = false
 		this.vc = this.Controller('calendar', {
 			onDeselectEvent: () => {
 				wasHit = true
 			},
 		})
-		this.vc.deselectEvent()
+		await this.vc.deselectEvent()
 		assert.isFalse(wasHit)
 		vcAssert.assertTriggerRenderCount(this.vc, 0)
 	}
 
 	@test()
-	protected static removingSelectedEventDeselectsIt() {
+	protected static async removingSelectedEventDeselectsIt() {
 		let wasHit = false
 		this.vc = this.Controller('calendar', {
 			onDeselectEvent: () => {
 				wasHit = true
 			},
 		})
-		const event = this.addOneEventAndSelectIt()
-		this.vc.removeEvent(event.id)
+		const event = await this.addOneEventAndSelectIt()
+		await this.vc.removeEvent(event.id)
 		assert.isUndefined(this.vc.getSelectedEvent())
 
 		assert.isTrue(wasHit)
 	}
 
 	@test()
-	protected static removingEventOtherThanSelectedDoesNotDeselect() {
-		const event = this.addOneEventAndSelectIt()
+	protected static async removingEventOtherThanSelectedDoesNotDeselect() {
+		const event = await this.addOneEventAndSelectIt()
 		const [event2] = this.populateCalendar(1)
 
-		this.vc.removeEvent(event2.id)
+		await this.vc.removeEvent(event2.id)
 		assert.isEqualDeep(this.vc.getSelectedEvent(), {
 			...event,
 			isSelected: true,
@@ -498,19 +498,19 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static canSetStartDate() {
-		this.vc.setStartDate(new Date().getTime())
+	protected static async canSetStartDate() {
+		await this.vc.setStartDate(new Date().getTime())
 	}
 
 	@test()
-	protected static canGetStartDate() {
+	protected static async canGetStartDate() {
 		const date = getDate()
-		this.vc.setStartDate(date)
+		await this.vc.setStartDate(date)
 		assert.isEqual(this.vc.getStartDate(), date)
 	}
 
 	@test()
-	protected static settingDateTriggersOnDateChange() {
+	protected static async settingDateTriggersOnDateChange() {
 		let wasHit = false
 		let passedDate
 		this.vc = this.Controller('calendar', {
@@ -521,22 +521,22 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		})
 
 		const date = getDate()
-		this.vc.setStartDate(date)
+		await this.vc.setStartDate(date)
 
 		assert.isTrue(wasHit)
 		assert.isEqual(passedDate, date)
 	}
 
 	@test()
-	protected static rendersStartDate() {
+	protected static async rendersStartDate() {
 		const date = getDate()
-		this.vc.setStartDate(date)
+		await this.vc.setStartDate(date)
 		assert.isEqual(this.render(this.vc).startDate, date)
 	}
 
 	@test()
-	protected static settingStartDateTriggersRender() {
-		this.vc.setStartDate(getDate())
+	protected static async settingStartDateTriggersRender() {
+		await this.vc.setStartDate(getDate())
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
@@ -916,10 +916,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test('updating selected event updates start date 1', 100)
 	@test('updating selected event updates start date 2', 200)
-	protected static updatingSelectedEventChangesStartDateOfCalendar(
+	protected static async updatingSelectedEventChangesStartDateOfCalendar(
 		startDate: number
 	) {
-		const event = this.addOneEventAndSelectIt()
+		const event = await this.addOneEventAndSelectIt()
 
 		this.vc.updateEvent(event.id, { startDateTimeMs: startDate })
 		assert.isEqual(this.vc.getStartDate(), startDate)
@@ -934,10 +934,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static doesNotClearStartDateIfSelectedUpdated() {
-		const event = this.addOneEventAndSelectIt()
+	protected static async doesNotClearStartDateIfSelectedUpdated() {
+		const event = await this.addOneEventAndSelectIt()
 		const original = 100
-		this.vc.setStartDate(original)
+		await this.vc.setStartDate(original)
 
 		this.vc.updateEvent(event.id, {
 			groupId: '12334',
@@ -1063,10 +1063,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		return events
 	}
 
-	private static addOneEventAndSelectIt() {
+	private static async addOneEventAndSelectIt() {
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
-		this.vc.selectEvent(event.id)
+		await this.vc.selectEvent(event.id)
 		return event
 	}
 
@@ -1084,9 +1084,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isEqualDeep(this.vc.getEvent(event.id), expected)
 	}
 
-	private static addEventSelectAndDeselectIt() {
-		this.addOneEventAndSelectIt()
-		this.vc.deselectEvent()
+	private static async addEventSelectAndDeselectIt() {
+		await this.addOneEventAndSelectIt()
+		await this.vc.deselectEvent()
 	}
 }
 

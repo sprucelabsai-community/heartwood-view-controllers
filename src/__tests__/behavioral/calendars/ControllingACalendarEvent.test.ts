@@ -83,7 +83,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	protected static async eventKnowsIfBeenDeleted() {
 		assert.isFalse(this.vc.getIsOrphaned())
 
-		this.calendarVc.removeEvent(this.eventModel.id)
+		await this.calendarVc.removeEvent(this.eventModel.id)
 
 		assert.isTrue(this.vc.getIsOrphaned())
 	}
@@ -105,22 +105,22 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	}
 
 	@test()
-	protected static eventsRenderIsSelectedFalseByDefault() {
+	protected static async eventsRenderIsSelectedFalseByDefault() {
 		let event = this.addEvent()
 
 		assert.isUndefined(this.getEvent(event.id).isSelected)
 
-		this.calendarVc.selectEvent(event.id)
+		await this.calendarVc.selectEvent(event.id)
 
 		assert.isTrue(this.getEvent(event.id).isSelected)
 	}
 
 	@test()
-	protected static havingASelectedEventDoesNotImpactNotSelectedEvents() {
+	protected static async havingASelectedEventDoesNotImpactNotSelectedEvents() {
 		const e1 = this.addEvent()
 		const e2 = this.addEvent()
 
-		this.calendarVc.selectEvent(e1.id)
+		await this.calendarVc.selectEvent(e1.id)
 
 		assert.isUndefined(this.getEvent(e2.id).isSelected)
 	}
