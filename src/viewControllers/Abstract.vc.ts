@@ -24,8 +24,9 @@ export interface AlertOptions {
 	style?: 'info' | 'error' | 'success'
 }
 
-export default abstract class AbstractViewController<ViewModel>
-	implements ViewController<ViewModel>
+export default abstract class AbstractViewController<
+	ViewModel extends Record<string, any>
+> implements ViewController<ViewModel>
 {
 	private vcFactory: ViewControllerFactory
 	private renderInDialogHandler: RenderInDialogHandler
