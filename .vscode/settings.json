@@ -69,5 +69,5 @@
 	"javascript.preferences.importModuleSpecifier": "relative",
 	"typescript.preferences.importModuleSpecifier": "relative",
 	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
-	"task.allowAutomaticTasks": true,
+	"task.allowAutomaticTasks": "on",
 }

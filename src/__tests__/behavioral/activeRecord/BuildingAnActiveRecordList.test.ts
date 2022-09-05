@@ -20,7 +20,18 @@ export default class BuildingAnActiveRecordListTest extends AbstractViewControll
 
 	@test()
 	protected static cardBuilderIsTyped() {
-		buildActiveRecordCard({
+		this.buildOptions()
+	}
+
+	@test()
+	protected static async undefinedTargetAndPayloadIfNeitherAreDefined() {
+		const vc = this.Controller('activeRecordList', this.buildOptions())
+		//@ts-ignore
+		assert.isUndefined(vc.buildTargetAndPayload())
+	}
+
+	private static buildOptions() {
+		return buildActiveRecordCard({
 			eventName: 'list-organizations::v2020_12_25',
 			rowTransformer: () => ({ id: 'test', cells: [] }),
 			responseKey: 'organizations',

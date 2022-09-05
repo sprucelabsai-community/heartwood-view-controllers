@@ -94,7 +94,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
 			const [responsePayload] = await client.emitAndFlattenResponses(
 				this.eventName as any,
-				this.buildTargetAndPayload()
+				this.buildTargetAndPayload() as any
 			)
 
 			const records = responsePayload[this.responseKey]
@@ -204,7 +204,9 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 			//@ts-ignore
 			targetAndPayload.payload = this.emitPayload
 		}
-		return targetAndPayload
+		return Object.keys(targetAndPayload).length === 0
+			? undefined
+			: targetAndPayload
 	}
 
 	public getTarget() {
