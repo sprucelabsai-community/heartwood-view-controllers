@@ -1,3 +1,10 @@
+# [90.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.1.1...v90.2.0) (2022-09-06)
+
+
+### Features
+
+* active card can now clear critical error ([25065b4](https://github.com/sprucelabsai/heartwood-view-controllers/commit/25065b4))
+
 ## [90.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.1.0...v90.1.1) (2022-09-06)
 
 # [90.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.0.13...v90.1.0) (2022-09-06)
