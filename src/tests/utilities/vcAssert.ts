@@ -794,6 +794,16 @@ const vcAssert = {
 		return {} as any
 	},
 
+	assertIsSwipeCard(vc: ViewController<Card>) {
+		const { controller } = renderUtil.render(vc)
+		assert.isTrue(
+			controller instanceof SwipeCardViewController,
+			`I expected a swipe card view controller but got '${getVcName(
+				vc
+			)}'! Make your render something like 'return this.swipeVc.render()'`
+		)
+	},
+
 	/**
 	 * @deprecated vcAssert.assertSkillViewRendersFormBuilder -> formAssert.skillViewRendersFormBuilder
 	 */

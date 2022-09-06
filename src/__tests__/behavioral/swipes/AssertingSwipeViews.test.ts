@@ -98,6 +98,18 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
 		assert.isEqual(match, swipeVc)
 	}
 
+	@test()
+	protected static knowsIfNotSwipeCard() {
+		const vc = this.Controller('card', {})
+
+		assert.doesThrow(() => vcAssert.assertIsSwipeCard(vc), 'expected a swipe')
+
+		const swipe = this.SwipeVc()
+		vc.render = () => swipe.render()
+
+		vcAssert.assertIsSwipeCard(vc)
+	}
+
 	private static CardVc(): CardViewController {
 		return this.Controller('card', {})
 	}
