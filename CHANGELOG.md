@@ -1,3 +1,10 @@
+# [90.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.0.13...v90.1.0) (2022-09-06)
+
+
+### Features
+
+* devs can now click buttons in critical errors easier than ever! Plus some improved error messaging ([b91f33f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b91f33f))
+
 ## [90.0.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.0.12...v90.0.13) (2022-09-05)
 
 ## [90.0.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.0.11...v90.0.12) (2022-09-05)
