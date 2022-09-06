@@ -697,6 +697,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vc.setCriticalError(error)
 		assert.isTrue(vc.getHasCriticalError())
 		assert.isEqualDeep(this.render(vc.getCardVc()).criticalError, error)
+
+		vc.clearCriticalError()
+		assert.isFalse(vc.getHasCriticalError())
 	}
 
 	private static async assertListLoadingClearsCustomRow(

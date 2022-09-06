@@ -90,6 +90,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.listVc.getIsLoaded()
 	}
 
+	public clearCriticalError() {
+		this.cardVc.clearCriticalError()
+	}
+
 	public getRecords() {
 		if (!this.getIsLoaded()) {
 			throw new Error(
