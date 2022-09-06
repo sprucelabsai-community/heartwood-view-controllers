@@ -12,7 +12,7 @@ import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { CardFooter } from '../../../types/heartwood.types'
+import { CardFooter, CriticalError } from '../../../types/heartwood.types'
 import ActiveRecordCardViewController, {
 	ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
@@ -678,6 +678,25 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		vcAssert.assertCardFooterIsDisabled(vc)
 		vc.enableFooter()
 		vcAssert.assertCardFooterIsEnabled(vc)
+	}
+
+	@test()
+	protected static async canSetCriticalError() {
+		const vc = this.Vc()
+		const error: CriticalError = {
+			buttons: [
+				{
+					id: generateId(),
+					label: generateId(),
+				},
+			],
+			message: generateId(),
+			title: generateId(),
+		}
+		assert.isFalse(vc.getHasCriticalError())
+		vc.setCriticalError(error)
+		assert.isTrue(vc.getHasCriticalError())
+		assert.isEqualDeep(this.render(vc.getCardVc()).criticalError, error)
 	}
 
 	private static async assertListLoadingClearsCustomRow(

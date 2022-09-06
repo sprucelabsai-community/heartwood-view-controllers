@@ -2,15 +2,20 @@ import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test'
-import { DropEventOptions, ListViewController } from '../..'
-import { KeyboardKey, ViewController } from '../../types/heartwood.types'
+import {
+	DropEventOptions,
+	KeyboardKey,
+	ViewController,
+} from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
+import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
 import { getVcName, pluckAllFromCard } from './assertSupport'
 import { ButtonViewController } from './ButtonViewController'
+import vcAssert from './vcAssert'
 
 type CardVc =
 	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
@@ -604,6 +609,23 @@ const interactor = {
 
 		await vc.willBlur?.()
 		await vc.didBlur?.()
+	},
+
+	async clickCriticalErrorButton(vc: CardVc, buttonId: string) {
+		const { buttons } = vcAssert.assertCardRendersCriticalError(vc)
+		const button = buttons?.find((b) => b.id === buttonId)
+
+		assert.isTruthy(
+			button,
+			`I could not find the button '${buttonId}' in your critical error`
+		)
+
+		assert.isFunction(
+			button.onClick,
+			"Your critical error button does not have an 'onClick` set! Try that next!"
+		)
+
+		await this.click(button)
 	},
 }
 

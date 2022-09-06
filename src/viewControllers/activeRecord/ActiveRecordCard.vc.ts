@@ -2,6 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
 	CardFooter,
 	CardViewController,
+	CriticalError,
 	ListRow,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
@@ -70,6 +71,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 			onWillFetch: () => this.cardVc.setIsBusy(true),
 			onDidFetch: () => this.cardVc.setIsBusy(false),
 		})
+	}
+
+	public setCriticalError(error: CriticalError) {
+		this.cardVc.setCriticalError(error)
+	}
+
+	public getHasCriticalError(): boolean {
+		return this.cardVc.getHasCriticalError()
 	}
 
 	public async load() {

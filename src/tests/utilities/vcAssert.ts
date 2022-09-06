@@ -1059,7 +1059,7 @@ const vcAssert = {
 		const model = renderUtil.render(vc)
 		assert.isTruthy(
 			model.criticalError,
-			'Your card did not have a critical error set.'
+			`I expected a critical error on your card, but didn'nt find one. Try 'this.cardVc.setCriticalError(...)'`
 		)
 
 		return model.criticalError
