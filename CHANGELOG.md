@@ -1,3 +1,10 @@
+# [90.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.2.0...v90.3.0) (2022-09-06)
+
+
+### Features
+
+* can assert if swipe view, making devving even faster! ([7e01b00](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7e01b00))
+
 # [90.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.1.1...v90.2.0) (2022-09-06)
 
 
