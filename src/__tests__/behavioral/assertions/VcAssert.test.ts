@@ -1,6 +1,7 @@
 import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test'
+import { generateId } from '@sprucelabs/test-utils'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
@@ -395,7 +396,10 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		})
 
 		assert.isFunction(vcAssert.assertRowRendersContent)
+
 		assert.doesThrow(() => vcAssert.assertRowRendersContent(vc, 'main', 'waka'))
+		vcAssert.assertRowDoesNotRenderContent(vc, 'main', 'waka')
+
 		assert.doesThrow(() =>
 			vcAssert.assertRowRendersContent(vc, 'main', 'undefined')
 		)
@@ -457,11 +461,15 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		'Waka'
 	)
 	protected static knowsIfRowRendersContent(row: ListRow, search: string) {
+		const id = generateId()
 		const vc = this.Controller('list', {
-			rows: [{ ...row, id: 'first' }],
+			rows: [{ ...row, id }],
 		})
 
-		vcAssert.assertRowRendersContent(vc, 'first', search)
+		vcAssert.assertRowRendersContent(vc, id, search)
+		assert.doesThrow(() =>
+			vcAssert.assertRowDoesNotRenderContent(vc, id, search)
+		)
 	}
 
 	@test()

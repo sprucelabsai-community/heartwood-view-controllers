@@ -15,6 +15,7 @@ import {
 	StickyToolPosition,
 	ScopeFlag,
 	Button,
+	List,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
@@ -607,7 +608,7 @@ const vcAssert = {
 	},
 
 	assertListRendersRows(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		expectedRows?: number | string[]
 	) {
 		const model = renderUtil.render(listVc)
@@ -629,16 +630,16 @@ const vcAssert = {
 		}
 	},
 
-	assertListRendersRow(listVc: ListViewController, row: string | number) {
-		return listVc.getRowVc(row)
+	assertListRendersRow(listVc: ViewController<List>, row: string | number) {
+		return getListVc(listVc).getRowVc(row)
 	},
 
 	assertRowRendersCheckBox(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		name?: string
 	) {
-		const rowVc = listVc.getRowVc(row)
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		const checkbox = model.cells.find(
@@ -673,12 +674,12 @@ const vcAssert = {
 	},
 
 	assertRowRendersButtonBar(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number
 	): ButtonBarViewController {
 		assertOptions({ listVc, row }, ['listVc', 'row'])
 
-		const rowVc = listVc.getRowVc(row)
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
@@ -695,13 +696,13 @@ const vcAssert = {
 	},
 
 	assertRowRendersCell(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		cell: string | number
 	) {
 		assertOptions({ listVc, row, cell }, ['listVc', 'row', 'cell'])
 
-		const rowVc = listVc.getRowVc(row)
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		let rowCell
@@ -719,7 +720,7 @@ const vcAssert = {
 	},
 
 	assertRowDoesNotRenderCell(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		cell: string | number
 	) {
@@ -734,7 +735,7 @@ const vcAssert = {
 	},
 
 	assertRowRendersButton(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		buttonId: string
 	) {
@@ -753,7 +754,7 @@ const vcAssert = {
 	},
 
 	assertRowDoesNotRenderButton(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		buttonId: string
 	) {
@@ -767,7 +768,10 @@ const vcAssert = {
 		)
 	},
 
-	assertListDoesNotRenderRow(listVc: ListViewController, row: string | number) {
+	assertListDoesNotRenderRow(
+		listVc: ViewController<List>,
+		row: string | number
+	) {
 		try {
 			this.assertListRendersRow(listVc, row)
 		} catch {
@@ -907,27 +911,43 @@ const vcAssert = {
 		}
 	},
 
+	assertRowDoesNotRenderContent(
+		vc: ViewController<List>,
+		row: string | number,
+		content: string
+	) {
+		try {
+			this.assertRowRendersContent(vc, row, content)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found '${content}' in row '${row}' of your list and didn't expect to!`
+		)
+	},
+
 	assertRowRendersContent(
-		vc: ListViewController,
+		vc: ViewController<List>,
 		row: string | number,
 		content: string
 	) {
 		const rowVc = this.assertListRendersRow(vc, row)
 		const model = renderUtil.render(rowVc)
+		const contents: string[] = []
 
 		for (const cell of model.cells) {
-			const value = `${cell.subText?.content ?? ''}
-				${cell.subText?.html ?? ''}
-				${cell.text?.content ?? ''}
-				${cell.text?.html ?? ''}
-			${cell.button?.label ?? ''}`
+			const value = renderCellContent(cell)
+			contents.push(value)
 
 			if (value?.toLowerCase().includes(content.toLowerCase())) {
 				return
 			}
 		}
 		assert.fail(
-			`Expected row '${row}' to render content '${content}', but it did not.`
+			`Expected row '${row}' to render content '${content}', but it did not. It renderd:\n\n${contents
+				.map((c, idx) => `Cell ${idx}: ${c}`)
+				.join('\n')}`
 		)
 	},
 
@@ -1442,7 +1462,7 @@ const vcAssert = {
 	},
 
 	assertRowRendersToggle(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		toggleName?: string
 	) {
@@ -1464,11 +1484,11 @@ const vcAssert = {
 		)
 	},
 
-	assertRowIsSelected(listVc: ListViewController, row: string | number) {
+	assertRowIsSelected(listVc: ViewController<List>, row: string | number) {
 		this.assertRowsAreSelected(listVc, [row])
 	},
 
-	assertRowIsNotSelected(listVc: ListViewController, row: string | number) {
+	assertRowIsNotSelected(listVc: ViewController<List>, row: string | number) {
 		try {
 			this.assertRowIsSelected(listVc, row)
 		} catch {
@@ -1478,9 +1498,13 @@ const vcAssert = {
 		assert.fail(`I didn't expect row '${row}' to be selected, but it was!`)
 	},
 
-	assertRowsAreSelected(listVc: ListViewController, rows: (string | number)[]) {
+	assertRowsAreSelected(
+		listVc: ViewController<List>,
+		rows: (string | number)[]
+	) {
+		const vc = getListVc(listVc)
 		for (const row of rows) {
-			const rowVc = listVc.getRowVc(row)
+			const rowVc = vc.getRowVc(row)
 
 			if (!rowVc.getIsSelected()) {
 				assert.fail(`I expected row '${row}' to be selected, but it wasn't!!`)
@@ -1488,13 +1512,13 @@ const vcAssert = {
 		}
 	},
 
-	assertRowIsEnabled(listVc: ListViewController, row: string | number) {
-		const rowVc = listVc.getRowVc(row)
+	assertRowIsEnabled(listVc: ViewController<List>, row: string | number) {
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 		assert.isTrue(model.isEnabled ?? true, `The row '${row}' is not enabled!`)
 	},
 
-	assertRowIsDisabled(listVc: ListViewController, row: string | number) {
+	assertRowIsDisabled(listVc: ViewController<List>, row: string | number) {
 		try {
 			this.assertRowIsEnabled(listVc, row)
 
@@ -1509,7 +1533,7 @@ const vcAssert = {
 	},
 
 	assertRowDoesNotRenderToggle(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		toggleName?: string
 	) {
@@ -1527,11 +1551,11 @@ const vcAssert = {
 	},
 
 	assertRowRendersSelect(
-		listVc: ListViewController,
+		listVc: ViewController<List>,
 		row: string | number,
 		name?: string
 	): SelectViewController {
-		const rowVc = listVc.getRowVc(row)
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
@@ -1560,8 +1584,8 @@ const vcAssert = {
 		return {} as any
 	},
 
-	assertRowRendersRatings(listVc: ListViewController, row: string | number) {
-		const rowVc = listVc.getRowVc(row)
+	assertRowRendersRatings(listVc: ViewController<List>, row: string | number) {
+		const rowVc = getListVc(listVc).getRowVc(row)
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
@@ -1843,6 +1867,25 @@ const vcAssert = {
 }
 
 export default vcAssert
+
+function renderCellContent(
+	cell: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+) {
+	return `${cell.subText?.content ?? ''}
+				${cell.subText?.html ?? ''}
+				${cell.text?.content ?? ''}
+				${cell.text?.html ?? ''}
+			${cell.button?.label ?? ''}`
+}
+
+function getListVc(listVc: ViewController<List>): ListViewController {
+	const controller = renderUtil.render(listVc).controller
+	assert.isTruthy(
+		controller,
+		'Your vc did not render with { controller: listVc }'
+	)
+	return controller
+}
 
 function renderScopeMarkup(expectedAsArray: ScopedBy[] | ScopeFlag[]) {
 	return `['${expectedAsArray.join("','")}']`
