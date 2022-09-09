@@ -1,3 +1,10 @@
+# [90.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.5.1...v90.6.0) (2022-09-09)
+
+
+### Features
+
+* can add pin to map one at a time ([45e396e](https://github.com/sprucelabsai/heartwood-view-controllers/commit/45e396e))
+
 ## [90.5.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.5.0...v90.5.1) (2022-09-09)
 
 # [90.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.4.2...v90.5.0) (2022-09-09)
