@@ -1,3 +1,12 @@
+## [90.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.4.0...v90.4.1) (2022-09-08)
+
+# [90.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.3.5...v90.4.0) (2022-09-08)
+
+
+### Features
+
+* can assert row does not render content ([ba8bf00](https://github.com/sprucelabsai/heartwood-view-controllers/commit/ba8bf00))
+
 ## [90.3.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.3.4...v90.3.5) (2022-09-08)
 
 ## [90.3.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.3.3...v90.3.4) (2022-09-07)
