@@ -443,9 +443,6 @@ export default class FormViewController<
 		)
 	}
 
-	/**
-	 * @deprecated showSubmitControls -> getShowSubmitControls
-	 */
 	public showSubmitControls() {
 		return this.getShowSubmitControls()
 	}
