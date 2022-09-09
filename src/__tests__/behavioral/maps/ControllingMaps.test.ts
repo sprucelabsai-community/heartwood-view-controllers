@@ -51,6 +51,20 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test()
+	protected static async canAddOnePinAtTime() {
+		const pin = this.addPin()
+		this.assertPinsEqual([pin])
+		const pin2 = this.addPin()
+		this.assertPinsEqual([pin, pin2])
+	}
+
+	private static addPin() {
+		const pin = this.generatePinValues()
+		this.vc.addPin(pin)
+		return pin
+	}
+
 	private static setPins(expected: MapPin[]) {
 		this.vc.setPins(expected)
 	}

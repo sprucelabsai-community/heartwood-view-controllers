@@ -20,6 +20,13 @@ export default class MapViewController extends AbstractViewController<Map> {
 		this.triggerRender()
 	}
 
+	public addPin(expected: MapPin) {
+		if (!this.model.pins) {
+			this.model.pins = []
+		}
+		this.model.pins?.push(expected)
+	}
+
 	public render(): Map {
 		return {
 			...this.model,

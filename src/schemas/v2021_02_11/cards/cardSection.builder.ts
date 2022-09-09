@@ -6,6 +6,7 @@ import calendarBuilder from '../calendar.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
+import mapBuilder from '../map.builder'
 import progressBuilder from '../progress.builder'
 import ratingsBuilder from '../ratings.builder'
 import receiptBuilder from '../receipt.builder'
@@ -83,6 +84,13 @@ export default buildSchema({
 			options: {
 				typeSuffix: '<any>',
 				schema: bigFormBuilder,
+			},
+		},
+		map: {
+			type: 'schema',
+			label: 'Map',
+			options: {
+				schema: mapBuilder,
 			},
 		},
 		buttons: {
