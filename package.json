@@ -154,7 +154,9 @@
           "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
           "worksheetId": 1262763347,
           "testMap": {
-            "passesThroughModel": "B25"
+            "passesThroughModel": "B25",
+            "canSetPins": "B28",
+            "canGetPins": "B29"
           }
         }
       ]
