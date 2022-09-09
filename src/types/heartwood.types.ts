@@ -236,6 +236,7 @@ export type SimpleViewControllerFactory = Pick<
 >
 export type Map = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map
 export type MapPin = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin
+export type LatLng = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng
 export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
