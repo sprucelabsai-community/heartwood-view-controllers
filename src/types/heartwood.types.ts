@@ -57,6 +57,9 @@ import ListViewController, {
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
+import MapViewController, {
+	MapViewControllerOptions,
+} from '../viewControllers/Map.vc'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
@@ -78,6 +81,8 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
+
+export { default as MapViewController } from '../viewControllers/Map.vc'
 
 export type ErrorHandler = (message: string) => void
 
@@ -229,6 +234,8 @@ export type SimpleViewControllerFactory = Pick<
 	ViewControllerFactory,
 	'Controller'
 >
+export type Map = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map
+export type MapPin = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin
 export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
@@ -327,6 +334,7 @@ export interface ViewControllerMap {
 	progress: ProgressViewController
 	ratings: RatingsViewController
 	autocompleteInput: AutocompleteInputViewController
+	map: MapViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -351,6 +359,7 @@ export interface ViewControllerOptionsMap {
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions
 	autocompleteInput: AutocompleteInputViewControllerOptions
+	map: MapViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

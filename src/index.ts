@@ -115,6 +115,9 @@ export { default as feedSchema } from '#spruce/schemas/heartwoodViewControllers/
 export { default as autocompleteInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/autocompleteInput.schema'
 export { default as autocompleteSuggestionSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/autocompleteSuggestion.schema'
 export { default as formBuilderImportExportPageSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/formBuilderImportExportPage.schema'
+export { default as latLngSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/latLng.schema'
+export { default as mapSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/map.schema'
+export { default as mapPinSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/mapPin.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

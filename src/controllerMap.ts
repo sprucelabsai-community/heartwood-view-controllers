@@ -11,6 +11,7 @@ import AutocompleteInputViewController from './viewControllers/form/Autocomplete
 import FormViewController from './viewControllers/form/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
+import MapViewController from './viewControllers/Map.vc'
 import RatingsViewController from './viewControllers/Ratings.vc'
 import ProgressViewController from './viewControllers/reporting/Progress.vc'
 import StatsViewController from './viewControllers/reporting/Stats.vc'
@@ -39,4 +40,5 @@ export const CORE_CONTROLLER_MAP = {
 	progress: ProgressViewController,
 	ratings: RatingsViewController,
 	autocompleteInput: AutocompleteInputViewController,
+	map: MapViewController,
 }

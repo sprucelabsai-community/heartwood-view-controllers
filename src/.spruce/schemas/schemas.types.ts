@@ -1058,84 +1058,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface SkillView {
-			
-				
-				'id'?: string| undefined | null
-				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
-				/** Full screen. */
-				'isFullScreen'?: boolean| undefined | null
-				
-				'title'?: string| undefined | null
-				
-				'subtitle'?: string| undefined | null
-				
-				'description'?: string| undefined | null
-				/** Layout. */
-				'layouts': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]
-		}
-
-		interface SkillViewSchema extends SpruceSchema.Schema {
-			id: 'skillView',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Skill view',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Center vertically. */
-			            'shouldCenterVertically': {
-			                label: 'Center vertically',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Full screen. */
-			            'isFullScreen': {
-			                label: 'Full screen',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** . */
-			            'title': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'subtitle': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'description': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Layout. */
-			            'layouts': {
-			                label: 'Layout',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
-			            },
-			    }
-		}
-
-		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface SelectInput {
 			
 				
@@ -1262,6 +1184,143 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface SelectInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface MapPin {
+			
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+				
+				'address': SpruceSchema.AddressFieldValue
+				
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+		}
+
+		interface MapPinSchema extends SpruceSchema.Schema {
+			id: 'mapPin',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'address': {
+			                type: 'address',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'buttons': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			    }
+		}
+
+		interface MapPinEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPinSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface LatLng {
+			
+				
+				'lat': number
+				
+				'lng': number
+		}
+
+		interface LatLngSchema extends SpruceSchema.Schema {
+			id: 'latLng',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'lat': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'lng': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface LatLngEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLngSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Map {
+			
+				
+				'center'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng| undefined | null
+				
+				'pins'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin[]| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.MapViewController)| undefined | null
+		}
+
+		interface MapSchema extends SpruceSchema.Schema {
+			id: 'map',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Map',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'center': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLngSchema,}
+			            },
+			            /** . */
+			            'pins': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPinSchema,}
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.MapViewController`,}
+			            },
+			    }
+		}
+
+		interface MapEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema> {}
 
 	}
 
@@ -1438,6 +1497,84 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface LayoutEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface SkillView {
+			
+				
+				'id'?: string| undefined | null
+				/** Center vertically. */
+				'shouldCenterVertically'?: boolean| undefined | null
+				/** Full screen. */
+				'isFullScreen'?: boolean| undefined | null
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+				
+				'description'?: string| undefined | null
+				/** Layout. */
+				'layouts': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]
+		}
+
+		interface SkillViewSchema extends SpruceSchema.Schema {
+			id: 'skillView',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Skill view',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Center vertically. */
+			            'shouldCenterVertically': {
+			                label: 'Center vertically',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Full screen. */
+			            'isFullScreen': {
+			                label: 'Full screen',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'description': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Layout. */
+			            'layouts': {
+			                label: 'Layout',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
+			            },
+			    }
+		}
+
+		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
 
 	}
 
@@ -1624,125 +1761,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface FancyIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Dialog {
-			
-				
-				'id'?: string| undefined | null
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
-				/** Header. */
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
-				/** Critical error. */
-				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
-				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
-				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
-				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
-				/** Visible. */
-				'isVisible'?: boolean| undefined | null
-				/** Show close button. */
-				'shouldShowCloseButton'?: boolean| undefined | null
-				/** Card controller. */
-				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
-				/** Close callback. */
-				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
-		}
-
-		interface DialogSchema extends SpruceSchema.Schema {
-			id: 'dialog',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Dialog',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
-			            },
-			            /** Header. */
-			            'header': {
-			                label: 'Header',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
-			            },
-			            /** Critical error. */
-			            'criticalError': {
-			                label: 'Critical error',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema,}
-			            },
-			            /** Fade in. */
-			            'shouldFadeIn': {
-			                label: 'Fade in',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-			            'body': {
-			                label: 'Body',
-			                type: 'schema',
-			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
-			            },
-			            /** Visible. */
-			            'isVisible': {
-			                label: 'Visible',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Show close button. */
-			            'shouldShowCloseButton': {
-			                label: 'Show close button',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Card controller. */
-			            'cardController': {
-			                label: 'Card controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
-			            },
-			            /** Close callback. */
-			            'onClose': {
-			                label: 'Close callback',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
-			            },
-			    }
-		}
-
-		interface DialogEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema> {}
 
 	}
 
@@ -2042,6 +2060,125 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Dialog {
+			
+				
+				'id'?: string| undefined | null
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
+				/** Header. */
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
+				/** Critical error. */
+				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
+				/** Fade in. */
+				'shouldFadeIn'?: boolean| undefined | null
+				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
+				/** Footer. */
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				/** Visible. */
+				'isVisible'?: boolean| undefined | null
+				/** Show close button. */
+				'shouldShowCloseButton'?: boolean| undefined | null
+				/** Card controller. */
+				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
+				/** Close callback. */
+				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
+		}
+
+		interface DialogSchema extends SpruceSchema.Schema {
+			id: 'dialog',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Dialog',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
+			            },
+			            /** Header. */
+			            'header': {
+			                label: 'Header',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
+			            },
+			            /** Critical error. */
+			            'criticalError': {
+			                label: 'Critical error',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema,}
+			            },
+			            /** Fade in. */
+			            'shouldFadeIn': {
+			                label: 'Fade in',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+			            'body': {
+			                label: 'Body',
+			                type: 'schema',
+			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** Visible. */
+			            'isVisible': {
+			                label: 'Visible',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Show close button. */
+			            'shouldShowCloseButton': {
+			                label: 'Show close button',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Card controller. */
+			            'cardController': {
+			                label: 'Card controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
+			            },
+			            /** Close callback. */
+			            'onClose': {
+			                label: 'Close callback',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
+			            },
+			    }
+		}
+
+		interface DialogEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ReceiptTotal {
 			
 				
@@ -2087,6 +2224,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ReceiptTotalEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Receipt {
+			
+				
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader| undefined | null
+				
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[]| undefined | null
+				
+				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[]| undefined | null
+		}
+
+		interface ReceiptSchema extends SpruceSchema.Schema {
+			id: 'receipt',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Receipt',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'header': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
+			            },
+			            /** . */
+			            'sections': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
+			            },
+			            /** . */
+			            'totals': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
+			            },
+			    }
+		}
+
+		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
 
 	}
 
@@ -2213,51 +2395,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ReceiptHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Receipt {
-			
-				
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader| undefined | null
-				
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[]| undefined | null
-				
-				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[]| undefined | null
-		}
-
-		interface ReceiptSchema extends SpruceSchema.Schema {
-			id: 'receipt',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Receipt',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'header': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
-			            },
-			            /** . */
-			            'sections': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
-			            },
-			            /** . */
-			            'totals': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
-			            },
-			    }
-		}
-
-		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
 
 	}
 
@@ -2770,97 +2907,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface SprucebotAvatar {
-			
-				/** Size. */
-				'size': ("small" | "medium" | "large")
-				/** State of mind. */
-				'stateOfMind': ("chill" | "contemplative" | "accomplished")
-		}
-
-		interface SprucebotAvatarSchema extends SpruceSchema.Schema {
-			id: 'sprucebotAvatar',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Sprucebot avatar',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                isRequired: true,
-			                defaultValue: "medium",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** State of mind. */
-			            'stateOfMind': {
-			                label: 'State of mind',
-			                type: 'select',
-			                isRequired: true,
-			                defaultValue: "chill",
-			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
-			            },
-			    }
-		}
-
-		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface SprucebotTypedMessageSentence {
-			
-				/** . A way to override the Sprucebot avatar for this sentence */
-				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
-				/** Words. The words being typed out */
-				'words': string
-				/** End delay. How long should I hold on this sentence after it's typed? */
-				'endDelay'?: SpruceSchema.DurationFieldValue| undefined | null
-		}
-
-		interface SprucebotTypedMessageSentenceSchema extends SpruceSchema.Schema {
-			id: 'sprucebotTypedMessageSentence',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Sprucebot Typed sentence',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . A way to override the Sprucebot avatar for this sentence */
-			            'avatar': {
-			                type: 'schema',
-			                hint: 'A way to override the Sprucebot avatar for this sentence',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
-			            },
-			            /** Words. The words being typed out */
-			            'words': {
-			                label: 'Words',
-			                type: 'text',
-			                isRequired: true,
-			                hint: 'The words being typed out',
-			                options: undefined
-			            },
-			            /** End delay. How long should I hold on this sentence after it's typed? */
-			            'endDelay': {
-			                label: 'End delay',
-			                type: 'duration',
-			                hint: 'How long should I hold on this sentence after it\'s typed?',
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface SprucebotTypedMessageSentenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface TalkingSprucebot {
 			
 				
@@ -2954,6 +3000,97 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface TalkingSprucebotEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface SprucebotAvatar {
+			
+				/** Size. */
+				'size': ("small" | "medium" | "large")
+				/** State of mind. */
+				'stateOfMind': ("chill" | "contemplative" | "accomplished")
+		}
+
+		interface SprucebotAvatarSchema extends SpruceSchema.Schema {
+			id: 'sprucebotAvatar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Sprucebot avatar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                isRequired: true,
+			                defaultValue: "medium",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** State of mind. */
+			            'stateOfMind': {
+			                label: 'State of mind',
+			                type: 'select',
+			                isRequired: true,
+			                defaultValue: "chill",
+			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
+			            },
+			    }
+		}
+
+		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface SprucebotTypedMessageSentence {
+			
+				/** . A way to override the Sprucebot avatar for this sentence */
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
+				/** Words. The words being typed out */
+				'words': string
+				/** End delay. How long should I hold on this sentence after it's typed? */
+				'endDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+		}
+
+		interface SprucebotTypedMessageSentenceSchema extends SpruceSchema.Schema {
+			id: 'sprucebotTypedMessageSentence',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Sprucebot Typed sentence',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . A way to override the Sprucebot avatar for this sentence */
+			            'avatar': {
+			                type: 'schema',
+			                hint: 'A way to override the Sprucebot avatar for this sentence',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
+			            },
+			            /** Words. The words being typed out */
+			            'words': {
+			                label: 'Words',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'The words being typed out',
+			                options: undefined
+			            },
+			            /** End delay. How long should I hold on this sentence after it's typed? */
+			            'endDelay': {
+			                label: 'End delay',
+			                type: 'duration',
+			                hint: 'How long should I hold on this sentence after it\'s typed?',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface SprucebotTypedMessageSentenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema> {}
 
 	}
 
