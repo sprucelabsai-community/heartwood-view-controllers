@@ -1,3 +1,10 @@
+# [90.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.4.2...v90.5.0) (2022-09-09)
+
+
+### Features
+
+* Map view controller, schemas, and types ([70c32a9](https://github.com/sprucelabsai/heartwood-view-controllers/commit/70c32a9))
+
 ## [90.4.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.4.1...v90.4.2) (2022-09-09)
 
 ## [90.4.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.4.0...v90.4.1) (2022-09-08)
