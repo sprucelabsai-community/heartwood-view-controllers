@@ -3,7 +3,7 @@ import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import mapInteractor from '../../../tests/utilities/mapInteractor'
 import { MapPin, MapViewController } from '../../../types/heartwood.types'
-import { generatePinValues } from './generatePinValues'
+import generatePinValues from './generatePinValues'
 
 export default class InteractingWithMapsTest extends AbstractViewControllerTest {
 	private static mapVc: MapViewController

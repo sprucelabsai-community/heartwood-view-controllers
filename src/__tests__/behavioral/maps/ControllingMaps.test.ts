@@ -5,7 +5,7 @@ import { MapPin } from '../../../types/heartwood.types'
 import MapViewController, {
 	MapViewControllerOptions,
 } from '../../../viewControllers/Map.vc'
-import { generatePinValues } from './generatePinValues'
+import generatePinValues from './generatePinValues'
 
 export default class ControllingMapsTest extends AbstractViewControllerTest {
 	private static vc: MapViewController

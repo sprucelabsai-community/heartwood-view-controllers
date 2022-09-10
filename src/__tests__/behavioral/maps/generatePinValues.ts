@@ -1,7 +1,7 @@
 import { generateId } from '@sprucelabs/test-utils'
 import { MapPin } from '../../../types/heartwood.types'
 
-export function generatePinValues(): MapPin {
+export default function generatePinValues(): MapPin {
 	return {
 		subtitle: generateId(),
 		title: generateId(),

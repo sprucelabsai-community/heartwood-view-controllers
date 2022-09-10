@@ -9,7 +9,7 @@ import {
 	MapViewController,
 } from '../../../types/heartwood.types'
 import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
-import { generatePinValues } from './generatePinValues'
+import generatePinValues from './generatePinValues'
 
 export default class AssertingMapsTest extends AbstractViewControllerTest {
 	private static vc: CardViewController
