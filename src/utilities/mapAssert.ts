@@ -1,5 +1,5 @@
 import { assert } from '@sprucelabs/test'
-import { Card, ViewController } from '../types/heartwood.types'
+import { Card, Map, MapPin, ViewController } from '../types/heartwood.types'
 import renderUtil from './render.utility'
 
 const mapAssert = {
@@ -13,6 +13,15 @@ const mapAssert = {
 		)
 
 		return match.map!.controller!
+	},
+
+	assertMapHasPin(vc: ViewController<Map>, pin: Partial<MapPin>) {
+		const { pins } = renderUtil.render(vc)
+		assert.doesInclude(
+			pins,
+			pin,
+			`Oh no! I checked the map and could not find that pin anywhere! Try 'this.mapVc.addPin(...)'!`
+		)
 	},
 }
 

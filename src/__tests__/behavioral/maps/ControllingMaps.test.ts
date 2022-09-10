@@ -1,11 +1,11 @@
 import { test, assert } from '@sprucelabs/test'
-import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { MapPin } from '../../../types/heartwood.types'
 import MapViewController, {
 	MapViewControllerOptions,
 } from '../../../viewControllers/Map.vc'
+import { generatePinValues } from './generatePinValues'
 
 export default class ControllingMapsTest extends AbstractViewControllerTest {
 	private static vc: MapViewController
@@ -90,16 +90,8 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
 		}
 	}
 
-	private static generatePinValues() {
-		return {
-			address: {
-				city: generateId(),
-				country: generateId(),
-				street1: generateId(),
-				province: generateId(),
-				zip: generateId(),
-			},
-		}
+	private static generatePinValues(): MapPin {
+		return generatePinValues()
 	}
 
 	private static Vc(
