@@ -158,7 +158,8 @@
             "canSetPins": "B28",
             "canGetPins": "B29",
             "returnsMapController": "B30",
-            "canFindPinMatchingAnything": "B31"
+            "canFindPinMatchingAnything": "B31",
+            "canMatchButtonById": "B32"
           }
         }
       ]

@@ -1,5 +1,5 @@
-import { generateId } from '@sprucelabs/test-utils';
-import { MapPin } from '../../../types/heartwood.types';
+import { generateId } from '@sprucelabs/test-utils'
+import { MapPin } from '../../../types/heartwood.types'
 
 export function generatePinValues(): MapPin {
 	return {
@@ -12,5 +12,5 @@ export function generatePinValues(): MapPin {
 			province: generateId(),
 			zip: generateId(),
 		},
-	};
+	}
 }

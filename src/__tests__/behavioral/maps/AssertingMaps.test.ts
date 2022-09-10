@@ -1,13 +1,13 @@
 import { test, assert } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import mapAssert from '../../../tests/utilities/mapAssert'
 import {
 	CardSection,
 	CardViewController,
 	MapPin,
 	MapViewController,
 } from '../../../types/heartwood.types'
-import mapAssert from '../../../utilities/mapAssert'
 import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
 import { generatePinValues } from './generatePinValues'
 

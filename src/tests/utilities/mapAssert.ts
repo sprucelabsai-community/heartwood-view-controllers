@@ -1,6 +1,6 @@
 import { assert } from '@sprucelabs/test'
-import { Card, Map, MapPin, ViewController } from '../types/heartwood.types'
-import renderUtil from './render.utility'
+import { Card, Map, MapPin, ViewController } from '../../types/heartwood.types'
+import renderUtil from '../../utilities/render.utility'
 
 const mapAssert = {
 	assertCardRendersMap(vc: ViewController<Card>) {
