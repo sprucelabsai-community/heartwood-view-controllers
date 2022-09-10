@@ -156,7 +156,8 @@
           "testMap": {
             "passesThroughModel": "B25",
             "canSetPins": "B28",
-            "canGetPins": "B29"
+            "canGetPins": "B29",
+            "returnsMapController": "B30"
           }
         }
       ]
