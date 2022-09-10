@@ -1,3 +1,10 @@
+# [90.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.6.2...v90.7.0) (2022-09-10)
+
+
+### Features
+
+* brand new map assert! ([f110d7d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f110d7d))
+
 ## [90.6.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.6.1...v90.6.2) (2022-09-10)
 
 ## [90.6.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.6.0...v90.6.1) (2022-09-09)
