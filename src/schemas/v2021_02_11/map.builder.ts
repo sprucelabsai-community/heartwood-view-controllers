@@ -17,6 +17,37 @@ export default buildSchema({
 				}),
 			},
 		},
+		zoom: {
+			type: 'select',
+			options: {
+				choices: [
+					{
+						label: 'House/Building',
+						value: 'house',
+					},
+					{
+						label: 'Neighborhood Block',
+						value: 'block',
+					},
+					{
+						label: 'Long walk',
+						value: 'longWalk',
+					},
+					{
+						label: 'Short drive',
+						value: 'shortDrive',
+					},
+					{
+						label: 'City',
+						value: 'city',
+					},
+					{
+						label: 'State',
+						value: 'state',
+					},
+				],
+			},
+		},
 		pins: {
 			type: 'schema',
 			isArray: true,

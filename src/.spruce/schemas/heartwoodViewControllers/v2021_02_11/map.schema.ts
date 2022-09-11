@@ -17,6 +17,11 @@ const mapSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema  =
 	                options: {schema: latLngSchema_v2021_02_11,}
 	            },
 	            /** . */
+	            'zoom': {
+	                type: 'select',
+	                options: {choices: [{"label":"House/Building","value":"house"},{"label":"Neighborhood Block","value":"block"},{"label":"Long walk","value":"longWalk"},{"label":"Short drive","value":"shortDrive"},{"label":"City","value":"city"},{"label":"State","value":"state"}],}
+	            },
+	            /** . */
 	            'pins': {
 	                type: 'schema',
 	                isArray: true,

@@ -2550,6 +2550,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'center'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng| undefined | null
 				
+				'zoom'?: ("house" | "block" | "longWalk" | "shortDrive" | "city" | "state")| undefined | null
+				
 				'pins'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin[]| undefined | null
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.MapViewController)| undefined | null
@@ -2566,6 +2568,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'center': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLngSchema,}
+			            },
+			            /** . */
+			            'zoom': {
+			                type: 'select',
+			                options: {choices: [{"label":"House/Building","value":"house"},{"label":"Neighborhood Block","value":"block"},{"label":"Long walk","value":"longWalk"},{"label":"Short drive","value":"shortDrive"},{"label":"City","value":"city"},{"label":"State","value":"state"}],}
 			            },
 			            /** . */
 			            'pins': {
