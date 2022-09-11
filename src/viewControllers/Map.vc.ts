@@ -41,6 +41,7 @@ export default class MapViewController extends AbstractViewController<Map> {
 
 	public setZoom(zoom: MapZoom) {
 		this.model.zoom = zoom
+		this.triggerRender()
 	}
 
 	public render(): Map {
