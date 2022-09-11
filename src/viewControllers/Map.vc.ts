@@ -6,7 +6,9 @@ import AbstractViewController from './Abstract.vc'
 export default class MapViewController extends AbstractViewController<Map> {
 	private model: Omit<Map, 'controller'>
 
-	public constructor(options: ViewControllerOptions) {
+	public constructor(
+		options: ViewControllerOptions & MapViewControllerOptions
+	) {
 		super(options)
 		this.model = removeUniversalViewOptions(options)
 	}
@@ -36,4 +38,4 @@ export default class MapViewController extends AbstractViewController<Map> {
 	}
 }
 
-export type MapViewControllerOptions = Map
+export type MapViewControllerOptions = Omit<Map, 'controller'>
