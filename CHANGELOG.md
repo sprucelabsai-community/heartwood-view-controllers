@@ -1,3 +1,10 @@
+# [90.9.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.8.4...v90.9.0) (2022-09-11)
+
+
+### Features
+
+* map zooms ([c1d2f77](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c1d2f77))
+
 ## [90.8.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.8.3...v90.8.4) (2022-09-11)
 
 ## [90.8.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.8.2...v90.8.3) (2022-09-11)
