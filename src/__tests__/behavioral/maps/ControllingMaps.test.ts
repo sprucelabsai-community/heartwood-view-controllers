@@ -69,8 +69,10 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
 	protected static async canGetSetZoom() {
 		this.assertSetsZoom('block')
 		this.assertSetsZoom('house')
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 		this.setZoom('block')
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+
+		vcAssert.assertTriggerRenderCount(this.vc, 3)
 	}
 
 	private static assertSetsZoom(zoom: MapZoom) {
