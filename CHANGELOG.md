@@ -1,3 +1,10 @@
+# [90.10.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.9.2...v90.10.0) (2022-09-11)
+
+
+### Features
+
+* can get/set zoom on a map vc! ([2ca7814](https://github.com/sprucelabsai/heartwood-view-controllers/commit/2ca7814))
+
 ## [90.9.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.9.1...v90.9.2) (2022-09-11)
 
 ## [90.9.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.9.0...v90.9.1) (2022-09-11)
