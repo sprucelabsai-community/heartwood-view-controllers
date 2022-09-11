@@ -1,7 +1,7 @@
 import { test, assert } from '@sprucelabs/test'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { MapPin } from '../../../types/heartwood.types'
+import { MapPin, MapZoom } from '../../../types/heartwood.types'
 import MapViewController, {
 	MapViewControllerOptions,
 } from '../../../viewControllers/Map.vc'
@@ -63,6 +63,22 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
 	protected static async addingPinTriggersRender() {
 		this.addPin()
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async canGetSetZoom() {
+		this.assertSetsZoom('block')
+		this.assertSetsZoom('house')
+	}
+
+	private static assertSetsZoom(zoom: MapZoom) {
+		this.setZoom(zoom)
+		assert.isEqual(this.render(this.vc).zoom, zoom)
+		assert.isEqual(this.vc.getZoom(), zoom)
+	}
+
+	private static setZoom(zoom: MapZoom) {
+		this.vc.setZoom(zoom)
 	}
 
 	private static addPin() {

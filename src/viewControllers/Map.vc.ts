@@ -1,5 +1,10 @@
 import { cloneDeep } from '@sprucelabs/schema'
-import { Map, MapPin, ViewControllerOptions } from '../types/heartwood.types'
+import {
+	Map,
+	MapPin,
+	MapZoom,
+	ViewControllerOptions,
+} from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
@@ -28,6 +33,14 @@ export default class MapViewController extends AbstractViewController<Map> {
 		}
 		this.model.pins?.push(expected)
 		this.triggerRender()
+	}
+
+	public getZoom() {
+		return this.model.zoom
+	}
+
+	public setZoom(zoom: MapZoom) {
+		this.model.zoom = zoom
 	}
 
 	public render(): Map {

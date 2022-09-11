@@ -159,7 +159,8 @@
             "canGetPins": "B29",
             "returnsMapController": "B30",
             "canFindPinMatchingAnything": "B31",
-            "canMatchButtonById": "B32"
+            "canMatchButtonById": "B32",
+            "canGetSetZoom": "B34"
           }
         }
       ]
