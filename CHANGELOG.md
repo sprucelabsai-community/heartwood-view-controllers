@@ -1,3 +1,15 @@
+## [90.8.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.8.1...v90.8.2) (2022-09-10)
+
+## [90.8.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.8.0...v90.8.1) (2022-09-10)
+
+# [90.8.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.7.0...v90.8.0) (2022-09-10)
+
+
+### Features
+
+* map interactor for clicking buttons on pins! ([6985cd3](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6985cd3))
+* map pin assertion!! ([983c1d0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/983c1d0))
+
 # [90.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.6.2...v90.7.0) (2022-09-10)
 
 
