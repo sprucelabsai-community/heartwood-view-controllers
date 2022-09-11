@@ -235,6 +235,7 @@ export type SimpleViewControllerFactory = Pick<
 	'Controller'
 >
 export type Map = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map
+export type MapZoom = NonNullable<Map['zoom']>
 export type MapPin = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin
 export type LatLng = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng
 export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
