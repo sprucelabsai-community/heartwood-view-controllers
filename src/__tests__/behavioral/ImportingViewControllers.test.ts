@@ -62,17 +62,6 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		assert.isEqual(controllers[1].id, 'book-form')
 	}
 
-	private static importControllers(suffix: '' | '_noIds' = '') {
-		const contents = diskUtil.readFile(
-			//@ts-ignore
-			constants[`importExportDestination${suffix}`]
-		)
-
-		const controllers = this.importer.import(contents)
-
-		return controllers
-	}
-
 	@test()
 	protected static canInstantiateImportedController() {
 		const factory = this.importAndGetFactory()
@@ -85,6 +74,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		assert.isFunction(vc.render)
 		assert.isEqual(vc.render(), 'go-team')
 		assert.isFunction(vc2.render)
+
 		//@ts-ignore
 		assert.isEqual(vc2.render().msg, 'what the?')
 	}
@@ -127,9 +117,14 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 	}
 
 	@test()
-	protected static hyphenedVarsCantCrashIt() {
-		//@ts-ignore
-		global['oh-no'] = true
+	protected static strangeVarNamesCantCrashIt() {
+		const names = ['oh-not', '0', '0there', '1three7']
+
+		names.forEach((n) => {
+			//@ts-ignore
+			global[n] = true
+		})
+
 		this.importAndRenderVc()
 	}
 
@@ -160,5 +155,16 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		const vc = factory.Controller('book-form', {})
 		const model = vc.render()
 		return model
+	}
+
+	private static importControllers(suffix: '' | '_noIds' = '') {
+		const contents = diskUtil.readFile(
+			//@ts-ignore
+			constants[`importExportDestination${suffix}`]
+		)
+
+		const controllers = this.importer.import(contents)
+
+		return controllers
 	}
 }

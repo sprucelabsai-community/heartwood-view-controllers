@@ -21,7 +21,7 @@ export default class ViewControllerImporter {
 							'clearInterval',
 						].indexOf(name) === -1
 				)
-				.filter((name) => name.search(/[^0-9a-zA-Z_]/) === -1)
+				.filter((name) => this.shouldOverideGlobalNamed(name))
 				.map((name) => `var ${name} = {};`)
 				.join('\n')
 
@@ -55,6 +55,10 @@ ${script}`
 				originalError: err,
 			})
 		}
+	}
+
+	private shouldOverideGlobalNamed(name: string): unknown {
+		return name.search(/[^0-9a-zA-Z_]/) === -1 && name.search(/^\d/) === -1
 	}
 
 	private validateImported(exports: Record<string, any>) {
