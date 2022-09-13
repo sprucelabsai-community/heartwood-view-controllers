@@ -1,4 +1,4 @@
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import { Card, Map, MapPin, ViewController } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 

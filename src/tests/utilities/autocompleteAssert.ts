@@ -1,5 +1,5 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import AutocompleteInputViewController, {
 	AutocompleteSuggestion,
 } from '../../viewControllers/form/AutocompleteInput.vc'

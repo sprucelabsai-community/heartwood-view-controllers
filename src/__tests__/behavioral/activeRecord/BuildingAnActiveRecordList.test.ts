@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import buildActiveRecordList from '../../../builders/buildActiveRecordList'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'

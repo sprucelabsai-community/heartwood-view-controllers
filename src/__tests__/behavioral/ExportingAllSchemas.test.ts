@@ -1,6 +1,6 @@
 import pathUtil from 'path'
 import { diskUtil, HASH_SPRUCE_BUILD_DIR } from '@sprucelabs/spruce-skill-utils'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test'
+import AbstractSpruceTest, { test, assert } from '@sprucelabs/test-utils'
 import globby from 'globby'
 
 export default class ExportingAllSchemasTest extends AbstractSpruceTest {

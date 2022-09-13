@@ -6,7 +6,7 @@ import {
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
-import AbstractSpruceTest from '@sprucelabs/test'
+import AbstractSpruceTest from '@sprucelabs/test-utils'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {

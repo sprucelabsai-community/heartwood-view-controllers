@@ -1,6 +1,6 @@
 import { SelectChoice } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import {
 	ConfirmOptions,
 	ViewController,

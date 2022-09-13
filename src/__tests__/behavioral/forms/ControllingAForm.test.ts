@@ -1,6 +1,6 @@
 import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import { interactor } from '../../..'

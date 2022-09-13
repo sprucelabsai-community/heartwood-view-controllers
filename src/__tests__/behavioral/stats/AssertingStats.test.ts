@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { vcAssert, ViewController, ViewControllerOptions } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'

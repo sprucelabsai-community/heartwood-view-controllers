@@ -1,6 +1,6 @@
 import { SelectChoice } from '@sprucelabs/schema'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'

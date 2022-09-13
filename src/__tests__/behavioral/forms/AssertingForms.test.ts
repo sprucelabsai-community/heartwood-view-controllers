@@ -1,5 +1,5 @@
 import { SchemaFieldNames } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { FormViewController, RenderAsComponent } from '../../..'
 import buildForm from '../../../builders/buildForm'

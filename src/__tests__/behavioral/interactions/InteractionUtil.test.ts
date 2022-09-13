@@ -1,6 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import Authenticator from '../../../auth/Authenticator'
 import buildBigForm from '../../../builders/buildBigForm'
