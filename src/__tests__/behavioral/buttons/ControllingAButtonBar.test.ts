@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 

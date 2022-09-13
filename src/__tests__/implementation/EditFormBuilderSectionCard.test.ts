@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import { interactor } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionCardViewController, {

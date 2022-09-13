@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { ActiveRecordCardViewController, vcAssert } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'

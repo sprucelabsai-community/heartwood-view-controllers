@@ -3,7 +3,7 @@ import {
 	buildSchema,
 	FieldDefinitions,
 } from '@sprucelabs/schema'
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../builders/buildForm'
 import {

@@ -1,7 +1,7 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import {
 	DropEventOptions,
 	KeyboardKey,

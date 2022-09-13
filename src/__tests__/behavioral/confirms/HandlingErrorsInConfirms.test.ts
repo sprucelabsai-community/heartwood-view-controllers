@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 

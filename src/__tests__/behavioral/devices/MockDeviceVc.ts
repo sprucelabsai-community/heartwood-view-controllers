@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert } from '@sprucelabs/test'
+import { assert } from '@sprucelabs/test-utils'
 import SpyDevice from '../../../tests/SpyDevice'
 import { Card } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'

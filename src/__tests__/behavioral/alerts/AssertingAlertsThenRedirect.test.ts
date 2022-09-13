@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, vcAssert, Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import SpyRouter from '../../../tests/SpyRouter'

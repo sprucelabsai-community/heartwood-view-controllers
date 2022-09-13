@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import deviceAssert from '../../../tests/utilities/deviceAssert'
 import AbstractDeviceTest from './AbstractDeviceTest'

@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardFooter, CardViewController } from '../../../types/heartwood.types'

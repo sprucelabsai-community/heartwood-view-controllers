@@ -1,5 +1,5 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { calendarSeeder } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 

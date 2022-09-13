@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'

@@ -1,7 +1,7 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'

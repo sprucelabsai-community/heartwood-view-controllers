@@ -1,5 +1,5 @@
 import { selectAssert } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { AbstractViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'

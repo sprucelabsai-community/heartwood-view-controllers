@@ -1,5 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'

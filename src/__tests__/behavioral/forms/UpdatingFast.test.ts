@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import FormViewController from '../../../viewControllers/form/Form.vc'

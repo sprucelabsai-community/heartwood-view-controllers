@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { Router } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import SpyRouter from '../../../tests/SpyRouter'

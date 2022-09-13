@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import dialogTestPatcher from '../../../tests/utilities/dialogTestPatcher'
 import vcAssert from '../../../tests/utilities/vcAssert'

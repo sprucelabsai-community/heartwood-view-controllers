@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'

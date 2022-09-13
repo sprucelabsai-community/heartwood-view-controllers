@@ -1,6 +1,6 @@
 import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 import buildForm from '../../../builders/buildForm'

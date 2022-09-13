@@ -3,7 +3,7 @@ import {
 	functionDelegationUtil,
 	namesUtil,
 } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
