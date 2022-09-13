@@ -184,7 +184,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.listVc.getRowVc(row)
 	}
 
-	public setFooter(footer: CardFooter) {
+	public setFooter(footer: CardFooter | null) {
 		this.cardVc.setFooter(footer)
 	}
 
