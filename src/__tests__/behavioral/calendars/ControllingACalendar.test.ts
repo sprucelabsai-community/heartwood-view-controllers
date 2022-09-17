@@ -1,4 +1,4 @@
-import { calendarUtil, dateUtil } from '@sprucelabs/calendar-utils'
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
