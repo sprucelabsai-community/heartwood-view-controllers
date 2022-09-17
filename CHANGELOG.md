@@ -1,3 +1,10 @@
+# [90.11.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.10.22...v90.11.0) (2022-09-17)
+
+
+### Features
+
+* can remove many events at once ([9211e0f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/9211e0f))
+
 ## [90.10.22](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.10.21...v90.10.22) (2022-09-16)
 
 ## [90.10.21](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.10.20...v90.10.21) (2022-09-15)
