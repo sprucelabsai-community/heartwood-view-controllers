@@ -12,15 +12,6 @@ import ActiveRecordListViewController, {
 	ActiveRecordListViewControllerOptions,
 } from './ActiveRecordList.vc'
 
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-
-export interface ActiveRecordCardViewControllerOptions
-	extends ActiveRecordListViewControllerOptions {
-	header?: Card['header']
-	footer?: Card['footer']
-	criticalError?: Card['criticalError']
-}
-
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
 	protected cardVc: CardViewController
 	protected listVc: ActiveRecordListViewController
@@ -199,4 +190,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 	public render(): Card {
 		return this.cardVc.render()
 	}
+}
+
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+
+export interface ActiveRecordCardViewControllerOptions
+	extends ActiveRecordListViewControllerOptions {
+	header?: Card['header']
+	footer?: Card['footer']
+	criticalError?: Card['criticalError']
 }

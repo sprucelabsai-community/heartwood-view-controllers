@@ -1,4 +1,4 @@
-import { dateUtil } from '@sprucelabs/calendar-utils'
+import { calendarUtil, dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
@@ -488,13 +488,13 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static getsNoEventsToStart() {
-		assert.isEqualDeep(this.vc.getEvents(), [])
+		assert.isEqualDeep(this.events, [])
 	}
 
 	@test()
 	protected static returnsEvents() {
 		this.populateCalendar()
-		assert.isLength(this.vc.getEvents(), 3)
+		assert.isLength(this.events, 3)
 	}
 
 	@test()
@@ -1009,6 +1009,36 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test()
+	protected static async canRemoveMaynEventsAtOnce() {
+		const [e1, e2, e3] = this.add3Events()
+		await this.removeEvents([e2])
+		const expected = [e1, e3]
+		this.assertEventsEqual(expected)
+		await this.removeEvents([e1, e3])
+		this.assertEventsEqual([])
+	}
+
+	@test()
+	protected static async removingManyEventsRendersOnce() {
+		const events = this.add3Events()
+		vcAssert.assertTriggerRenderCount(this.vc, 3)
+		await this.removeEvents(events)
+		vcAssert.assertTriggerRenderCount(this.vc, 4)
+	}
+
+	private static add3Events(): [any, any, any] {
+		return [this.addEvent(), this.addEvent(), this.addEvent()]
+	}
+
+	private static assertEventsEqual(expected: CalendarEvent[]) {
+		assert.isEqualDeep(this.events, expected)
+	}
+
+	private static async removeEvents(events: CalendarEvent[]) {
+		await this.vc.removeEvents(events.map((e) => e.id))
+	}
+
 	private static addEventWithType(type: string) {
 		return this.addEventAndGetVc({
 			eventTypeSlug: type,
@@ -1068,6 +1098,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.addEvent(event)
 		await this.vc.selectEvent(event.id)
 		return event
+	}
+	private static get events() {
+		return this.vc.getEvents()
 	}
 
 	private static assertChangesArMade(
