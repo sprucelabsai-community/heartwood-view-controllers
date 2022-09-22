@@ -314,7 +314,6 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 				choices: fieldTypeChoices,
 			},
 		})
-		assert.doesInclude(fieldTypeChoices, 'ratings')
 		assert.doesInclude(fieldTypeChoices, 'address')
 	}
 }
