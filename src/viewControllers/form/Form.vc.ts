@@ -661,7 +661,7 @@ export default class FormViewController<
 	}
 
 	private assertValidSection(idx: number | string) {
-		let section: FormSection | undefined
+		let section: FormSection<S> | undefined
 
 		if (typeof idx === 'string') {
 			section = this.model.sections.find((s) => s.id === idx)
