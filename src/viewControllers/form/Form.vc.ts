@@ -26,6 +26,7 @@ import {
 	FormWillChangeOptions,
 	FormInputViewController,
 	FormSection,
+	TriggerRender,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
@@ -78,6 +79,9 @@ export default class FormViewController<
 		options: FormWillChangeOptions<S>
 	) => Promise<boolean | void | undefined> | boolean | void | undefined
 	private pendingSets: Record<string, any> = {}
+	private triggerRendersByField: Partial<
+		Record<SchemaFieldNames<S>, TriggerRender>
+	> = {}
 
 	public constructor(
 		options: FormViewControllerOptions<S> & ViewControllerOptions
@@ -171,13 +175,7 @@ export default class FormViewController<
 
 		this.pendingSets[name] = value
 
-		if (!this.getSchema().fields?.[name]) {
-			throw new SchemaError({
-				code: 'INVALID_PARAMETERS',
-				friendlyMessage: `Can't set \`${name}\` field because it does not exist!`,
-				parameters: ['fieldName'],
-			})
-		}
+		this.assertValidFieldName(name)
 
 		if (shouldCallSetValueOnFieldVc) {
 			//@ts-ignore
@@ -228,13 +226,37 @@ export default class FormViewController<
 		this.setErrorsByField(errorsByField)
 
 		await this.emitOnChange(errorsByField)
-		this.triggerRender()
+
+		this.getTriggerRenderForInput(name)?.()
+	}
+
+	private assertValidFieldName(name: SchemaFieldNames<S>) {
+		if (!this.getSchema().fields?.[name]) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				friendlyMessage: `Can't set \`${name}\` field because it does not exist!`,
+				parameters: ['fieldName'],
+			})
+		}
 	}
 
 	private isFieldBeingRendered(name: SchemaFieldNames<S>) {
 		const { sectionIdx } = this.getSectionAndFieldForFieldNamed(name)
 		const isBeingRendered = sectionIdx > -1
 		return isBeingRendered
+	}
+
+	public setTriggerRenderForInput(
+		fieldName: SchemaFieldNames<S>,
+		cb: TriggerRender
+	) {
+		this.assertValidFieldName(fieldName)
+		this.triggerRendersByField[fieldName] = cb
+	}
+
+	public getTriggerRenderForInput(fieldName: SchemaFieldNames<S>) {
+		this.assertValidFieldName(fieldName)
+		return this.triggerRendersByField[fieldName]
 	}
 
 	public getFieldVc(fieldName: SchemaFieldNames<S>): FormInputViewController {

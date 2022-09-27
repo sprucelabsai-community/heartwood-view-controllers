@@ -23,9 +23,6 @@ import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { pluckFirstFromCard } from './assertSupport'
 
-type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>
-export type FormVc = FormViewController<any> | BigFormViewController<any>
-
 const formAssert = {
 	views: {} as SimpleFactory,
 	_setVcFactory(views: SimpleFactory) {
@@ -329,3 +326,6 @@ const formSchema = buildSchema({
 })
 
 type FormSchema = typeof formSchema
+
+type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>
+export type FormVc = FormViewController<any> | BigFormViewController<any>
