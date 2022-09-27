@@ -1,3 +1,10 @@
+# [90.13.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.12.0...v90.13.0) (2022-09-27)
+
+
+### Features
+
+* forms can now remove sections ([652777a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/652777a))
+
 # [90.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.11.20...v90.12.0) (2022-09-27)
 
 
