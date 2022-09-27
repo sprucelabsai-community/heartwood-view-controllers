@@ -80,6 +80,27 @@ const formAssert = {
 		)
 	},
 
+	formRendersSection(formVc: FormVc, sectionId: string) {
+		const model = renderUtil.render(formVc)
+		const match = model.sections.find((s) => s.id === sectionId)
+		assert.isTruthy(
+			match,
+			`I could not find section '${sectionId}' in your form!`
+		)
+	},
+
+	formDoesNotRendersSection(formVc: FormVc, sectionId: string) {
+		try {
+			this.formRendersSection(formVc, sectionId)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found section '${sectionId}' in your form and did not expect to!`
+		)
+	},
+
 	formRendersField(
 		formVc: FormVc,
 		fieldName: string,
