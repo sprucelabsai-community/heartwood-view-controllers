@@ -655,7 +655,7 @@ export default class FormViewController<
 		return this.model.sections.length ?? 0
 	}
 
-	public getSection(idx: number) {
+	public getSection(idx: number | string) {
 		const section = this.assertValidSection(idx)
 		return section
 	}
