@@ -11,9 +11,7 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-
 		this.sectionIds = [generateId(), generateId()]
-
 		this.vc = this.Vc()
 	}
 

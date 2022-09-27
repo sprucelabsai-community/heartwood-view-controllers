@@ -90,6 +90,7 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
 	}
 
 	private static getTriggerRender(name: string) {
+		//@ts-ignore
 		return this.vc.getTriggerRenderForInput(name as any)
 	}
 }

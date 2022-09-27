@@ -82,6 +82,7 @@ export default class FormViewController<
 	private triggerRendersByField: Partial<
 		Record<SchemaFieldNames<S>, TriggerRender>
 	> = {}
+	private triggerRenderOnFooter?: TriggerRender
 
 	public constructor(
 		options: FormViewControllerOptions<S> & ViewControllerOptions
@@ -228,6 +229,7 @@ export default class FormViewController<
 		await this.emitOnChange(errorsByField)
 
 		this.getTriggerRenderForInput(name)?.()
+		this.triggerRenderOnFooter?.()
 	}
 
 	private assertValidFieldName(name: SchemaFieldNames<S>) {
@@ -254,7 +256,11 @@ export default class FormViewController<
 		this.triggerRendersByField[fieldName] = cb
 	}
 
-	public getTriggerRenderForInput(fieldName: SchemaFieldNames<S>) {
+	public setTriggerRenderForFooter(cb: TriggerRender) {
+		this.triggerRenderOnFooter = cb
+	}
+
+	private getTriggerRenderForInput(fieldName: SchemaFieldNames<S>) {
 		this.assertValidFieldName(fieldName)
 		return this.triggerRendersByField[fieldName]
 	}

@@ -4,14 +4,6 @@ import { BigFormOnSubmitOptions } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
-type ViewModel<S extends Schema> =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
-
-export type BigFormViewControllerOptions<S extends Schema> =
-	FormViewControllerOptions<S> & {
-		onSubmitSlide?: ViewModel<S>['onSubmitSlide']
-	}
-
 export default class BigFormViewController<
 	S extends Schema,
 	V extends ViewModel<S> = ViewModel<S>
@@ -122,3 +114,11 @@ export default class BigFormViewController<
 		return view
 	}
 }
+
+type ViewModel<S extends Schema> =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
+
+export type BigFormViewControllerOptions<S extends Schema> =
+	FormViewControllerOptions<S> & {
+		onSubmitSlide?: ViewModel<S>['onSubmitSlide']
+	}
