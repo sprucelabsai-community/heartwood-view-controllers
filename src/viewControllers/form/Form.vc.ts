@@ -11,6 +11,7 @@ import {
 	SchemaValues,
 	FieldDefinitions,
 	SchemaError,
+	assertOptions,
 } from '@sprucelabs/schema'
 import { cloneDeep } from '@sprucelabs/spruce-skill-utils'
 import { defaultSubmitButtonLabel } from '../../constants'
@@ -601,26 +602,19 @@ export default class FormViewController<
 		return { sectionIdx, fieldIdx }
 	}
 
-	public setSection(sectionIdx: number, newSection: Section<S>) {
-		const missing: string[] = []
+	public setSection(section: number | string, newSection: Section<S>) {
+		assertOptions({ section, newSection }, ['section', 'newSection'])
+		const old = this.assertValidSection(section)
 
-		if (typeof sectionIdx !== 'number') {
-			missing.push('sectionIdx')
+		let idx =
+			typeof section === 'string'
+				? this.getSections().findIndex((s) => s.id === section)
+				: section
+
+		if (old.id) {
+			newSection.id = old.id
 		}
-
-		if (!newSection) {
-			missing.push('newSection')
-		}
-
-		if (missing.length) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
-
-		this.assertValidSection(sectionIdx)
-		this.model.sections[sectionIdx] = newSection
+		this.model.sections[idx] = newSection
 
 		this.triggerRender()
 	}
@@ -656,8 +650,7 @@ export default class FormViewController<
 	}
 
 	public getSection(idx: number | string) {
-		const section = this.assertValidSection(idx)
-		return section
+		return this.assertValidSection(idx)
 	}
 
 	private assertValidSection(idx: number | string) {

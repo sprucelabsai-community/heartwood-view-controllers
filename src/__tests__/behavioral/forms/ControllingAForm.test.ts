@@ -482,7 +482,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		const err = assert.doesThrow(() => this.vc.setSection())
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['sectionIdx', 'newSection'],
+			parameters: ['section', 'newSection'],
 		})
 	}
 

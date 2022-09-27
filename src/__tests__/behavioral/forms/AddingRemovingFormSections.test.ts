@@ -47,8 +47,36 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
 	@test()
 	protected static async canGetSectionByString() {
 		const expected = this.vc.getSection(0)
-		const actual = this.vc.getSection(this.sectionId(0))
+		const actual = this.getSection(0)
 		assert.isEqualDeep(actual, expected)
+	}
+
+	@test()
+	protected static canSectionByString() {
+		const section = {
+			text: {
+				content: generateId(),
+			},
+		}
+
+		this.assertSettingSectionByStringSetsCorrectly(0, section)
+		this.assertSettingSectionByStringSetsCorrectly(1, section)
+	}
+
+	private static assertSettingSectionByStringSetsCorrectly(
+		idx: number,
+		section: { text: { content: string } }
+	) {
+		this.setSection(idx, section)
+		const actual = this.getSection(idx)
+		assert.isEqualDeep(actual, { ...section, id: this.sectionId(idx) })
+	}
+
+	private static setSection(
+		sectionIdx: number,
+		section: { text: { content: string } }
+	) {
+		this.vc.setSection(this.sectionId(sectionIdx), section)
 	}
 
 	private static assertRendersSection(idx: number) {
@@ -57,6 +85,10 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
 
 	private static assertDoesNotRenderSection(idx: number) {
 		formAssert.formDoesNotRendersSection(this.vc, this.sectionId(idx))
+	}
+
+	private static getSection(idx: number) {
+		return this.vc.getSection(this.sectionId(idx))
 	}
 
 	private static removeSection(idx: number) {
