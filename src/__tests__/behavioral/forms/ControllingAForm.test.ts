@@ -1120,13 +1120,6 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isTrue(wasHit)
 	}
 
-	@test()
-	protected static canRemoveSection() {
-		const vc = this.Controller('form', {
-			...
-		})
-	}
-
 	private static FormWithOnChange(
 		onChange: (options: any) => void,
 		onWillChange?: (options: any) => boolean
