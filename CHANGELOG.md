@@ -1,3 +1,10 @@
+# [90.12.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.11.20...v90.12.0) (2022-09-27)
+
+
+### Features
+
+* form assert now checks sections! ([4e1a13c](https://github.com/sprucelabsai/heartwood-view-controllers/commit/4e1a13c))
+
 ## [90.11.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.11.19...v90.11.20) (2022-09-26)
 
 ## [90.11.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.11.18...v90.11.19) (2022-09-26)
