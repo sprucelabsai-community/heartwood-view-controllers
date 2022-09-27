@@ -24,6 +24,7 @@ import {
 	FormOnChangeOptions,
 	FormWillChangeOptions,
 	FormInputViewController,
+	FormSection,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
@@ -624,6 +625,14 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	public removeSection(section: number | string) {
+		this.assertValidSection(section)
+		const sections = this.getSections().filter(
+			(s, idx) => s.id !== section && idx !== section
+		)
+		this.setSections(sections)
+	}
+
 	public setSections(sections: Section<S>[]) {
 		this.model.sections = sections
 		this.triggerRender()
@@ -651,8 +660,14 @@ export default class FormViewController<
 		return section
 	}
 
-	private assertValidSection(idx: number) {
-		const section = this.model.sections[idx]
+	private assertValidSection(idx: number | string) {
+		let section: FormSection | undefined
+
+		if (typeof idx === 'string') {
+			section = this.model.sections.find((s) => s.id === idx)
+		} else {
+			section = this.model.sections[idx]
+		}
 
 		if (!section) {
 			throw new SchemaError({
