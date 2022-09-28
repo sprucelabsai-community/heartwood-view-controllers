@@ -11,32 +11,6 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-const loginSchema = {
-	id: 'loginSchema',
-	fields: {
-		phone: {
-			type: 'phone',
-			isRequired: true,
-			label: 'Phone',
-			hint: "I'm gonna send you a pin. Texting rates may apply.",
-		},
-		code: {
-			type: 'text',
-			isRequired: true,
-			label: 'Pin',
-			options: {
-				autoComplete: 'one-time-code',
-			},
-		},
-	},
-} as const
-
-type LoginSchema = typeof loginSchema
-
-export interface OnLoginOptions {
-	person: SpruceSchemas.Spruce.v2020_07_22.Person
-}
-
 export default class LoginViewController
 	extends AbstractViewController<ViewModel>
 	implements ViewController<ViewModel>
@@ -80,7 +54,11 @@ export default class LoginViewController
 
 		this.loginHandler = options.onLogin
 		this.loginFailedHandler = options.onLoginFailed
-		this.loginForm = this.Controller(
+		this.loginForm = this.BigForm()
+	}
+
+	private BigForm(): BigFormViewController<LoginSchema> {
+		return this.Controller(
 			'bigForm',
 			buildBigForm({
 				onChange: this.handleOnChange.bind(this),
@@ -90,7 +68,7 @@ export default class LoginViewController
 				schema: loginSchema,
 				sections: this.sections,
 			})
-		) as any
+		)
 	}
 
 	private async handleSubmitSlide({
@@ -248,4 +226,30 @@ export interface LoginViewControllerOptions {
 	onLogin?: LoginHandler
 	onLoginFailed?: (err: Error) => void
 	id?: string | null
+}
+
+const loginSchema = {
+	id: 'loginSchema',
+	fields: {
+		phone: {
+			type: 'phone',
+			isRequired: true,
+			label: 'Phone',
+			hint: "I'm gonna send you a pin. Texting rates may apply.",
+		},
+		code: {
+			type: 'text',
+			isRequired: true,
+			label: 'Pin',
+			options: {
+				autoComplete: 'one-time-code',
+			},
+		},
+	},
+} as const
+
+type LoginSchema = typeof loginSchema
+
+export interface OnLoginOptions {
+	person: SpruceSchemas.Spruce.v2020_07_22.Person
 }
