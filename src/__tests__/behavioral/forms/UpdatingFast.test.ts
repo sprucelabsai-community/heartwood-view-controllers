@@ -64,6 +64,23 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		this.assertValue2Equals('5')
 	}
 
+	@test()
+	protected static async updatesValueWhileProcessing() {
+		const expected = ''
+		let hitCount = 0
+		this.vc.setTriggerRenderForInput('field1', () => {
+			hitCount++
+		})
+
+		const promise = this.setValue1(expected)
+		assert.isEqual(hitCount, 1)
+		const actual = this.vc.getValue('field1')
+		assert.isEqual(actual, expected)
+		assert.isEqual(hitCount, 1)
+		await promise
+		assert.isEqual(hitCount, 2)
+	}
+
 	private static async updateValue1FiveTimes() {
 		await this.all([
 			this.setValue1('1'),

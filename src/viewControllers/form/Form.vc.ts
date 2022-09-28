@@ -174,15 +174,17 @@ export default class FormViewController<
 			return
 		}
 
-		this.pendingSets[name] = value
-
 		this.assertValidFieldName(name)
+
+		this.pendingSets[name] = value
+		this.triggerRenderForField(name)
 
 		if (shouldCallSetValueOnFieldVc) {
 			//@ts-ignore
 			const shouldBail = await this.emitWillChange({ [name]: value })
 
 			if (shouldBail === false) {
+				this.deletePendingValue(name)
 				return
 			}
 		}
@@ -191,7 +193,7 @@ export default class FormViewController<
 			return
 		}
 
-		delete this.pendingSets[name]
+		this.deletePendingValue(name)
 
 		let shouldSetValueLocally = true
 
@@ -228,8 +230,16 @@ export default class FormViewController<
 
 		await this.emitOnChange(errorsByField)
 
-		this.getTriggerRenderForInput(name)?.()
+		this.triggerRenderForField(name)
 		this.triggerRenderOnFooter?.()
+	}
+
+	private deletePendingValue(name: SchemaFieldNames<S>) {
+		delete this.pendingSets[name]
+	}
+
+	private triggerRenderForField(name: SchemaFieldNames<S>) {
+		this.getTriggerRenderForInput(name)?.()
 	}
 
 	private assertValidFieldName(name: SchemaFieldNames<S>) {
@@ -287,19 +297,23 @@ export default class FormViewController<
 
 	private async emitWillChange(changes: SchemaPartialValues<S>) {
 		return await this.willChangeHandler?.({
-			...this.buildChangeOptions({}),
+			...this.buildChangeOptions({ includePendingValues: false }),
 			changes,
 		})
 	}
 
 	private async emitOnChange(errorsByField: any) {
-		return this.model.onChange?.(this.buildChangeOptions(errorsByField))
+		return this.model.onChange?.(this.buildChangeOptions({ errorsByField }))
 	}
 
-	private buildChangeOptions(errorsByField: any): FormOnChangeOptions<S> {
+	private buildChangeOptions(options: {
+		errorsByField?: FormErrorsByField<S>
+		includePendingValues?: boolean
+	}): FormOnChangeOptions<S> {
+		const { errorsByField = {}, includePendingValues = true } = options
 		return {
 			controller: this,
-			values: this.getValues(),
+			values: this.getValues({ includePendingValues }),
 			errorsByField,
 			isValid: this.isValid(),
 		}
@@ -752,13 +766,18 @@ export default class FormViewController<
 		return this.getValues()[named]
 	}
 
-	public getValues() {
+	public getValues(options?: { includePendingValues?: boolean }) {
+		const { includePendingValues = true } = options ?? {}
+
 		const visibleFields = this.getVisibleFields()
 		const values = {}
 
 		for (const field of visibleFields) {
 			//@ts-ignore
-			values[field] = this.model.values[field]
+			values[field] =
+				includePendingValues && field in this.pendingSets
+					? this.pendingSets[field]
+					: this.model.values[field]
 		}
 
 		return values as SchemaPartialValues<S>

@@ -810,7 +810,9 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedOptions, {
 			//@ts-ignore
-			...vc.buildChangeOptions({}),
+			...vc.buildChangeOptions({
+				includePendingValues: false,
+			}),
 			changes: {
 				...updates,
 			},
