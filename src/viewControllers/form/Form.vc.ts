@@ -32,36 +32,6 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../Abstract.vc'
 
-type ViewModel<S extends Schema> =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
-type Section<S extends Schema = Schema> = ViewModel<S>['sections'][number]
-
-export type FormViewControllerOptions<S extends Schema> = Pick<
-	ViewModel<S>,
-	| 'schema'
-	| 'sections'
-	| 'onSubmit'
-	| 'onChange'
-	| 'onCancel'
-	| 'onWillChange'
-	| 'shouldShowCancelButton'
-	| 'shouldShowSubmitControls'
-	| 'submitButtonLabel'
-	| 'values'
-	| 'footer'
-	| 'isBusy'
-	| 'isEnabled'
-> &
-	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
-
-const cloneAndRetainControllers = function (obj: Record<string, any>) {
-	return cloneDeep(obj, (value, key) => {
-		if (key === 'controller' || key === 'vc') {
-			return value
-		}
-	})
-}
-
 export default class FormViewController<
 		S extends Schema,
 		V extends ViewModel<S> = ViewModel<S>
@@ -313,7 +283,9 @@ export default class FormViewController<
 		const { errorsByField = {}, includePendingValues = true } = options
 		return {
 			controller: this,
-			values: this.getValues({ includePendingValues }),
+			values: this.getValues({
+				shouldIncludePendingValues: includePendingValues,
+			}),
 			errorsByField,
 			isValid: this.isValid(),
 		}
@@ -761,13 +733,17 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
-	public getValue<N extends SchemaFieldNames<S>>(named: N): SchemaValues<S>[N] {
+	public getValue<N extends SchemaFieldNames<S>>(
+		named: N,
+		options?: GetValueOptions
+	): SchemaValues<S>[N] {
 		//@ts-ignore
-		return this.getValues()[named]
+		return this.getValues(options)[named]
 	}
 
-	public getValues(options?: { includePendingValues?: boolean }) {
-		const { includePendingValues = true } = options ?? {}
+	public getValues(options?: GetValueOptions) {
+		const { shouldIncludePendingValues: includePendingValues = false } =
+			options ?? {}
 
 		const visibleFields = this.getVisibleFields()
 		const values = {}
@@ -813,4 +789,38 @@ export default class FormViewController<
 
 		return view
 	}
+}
+
+type ViewModel<S extends Schema> =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
+type Section<S extends Schema = Schema> = ViewModel<S>['sections'][number]
+
+export type FormViewControllerOptions<S extends Schema> = Pick<
+	ViewModel<S>,
+	| 'schema'
+	| 'sections'
+	| 'onSubmit'
+	| 'onChange'
+	| 'onCancel'
+	| 'onWillChange'
+	| 'shouldShowCancelButton'
+	| 'shouldShowSubmitControls'
+	| 'submitButtonLabel'
+	| 'values'
+	| 'footer'
+	| 'isBusy'
+	| 'isEnabled'
+> &
+	Partial<Pick<ViewModel<S>, 'id' | 'isBusy'>>
+
+const cloneAndRetainControllers = function (obj: Record<string, any>) {
+	return cloneDeep(obj, (value, key) => {
+		if (key === 'controller' || key === 'vc') {
+			return value
+		}
+	})
+}
+
+type GetValueOptions = {
+	shouldIncludePendingValues?: boolean
 }

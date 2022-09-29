@@ -74,7 +74,9 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 
 		const promise = this.setValue1(expected)
 		assert.isEqual(hitCount, 1)
-		const actual = this.vc.getValue('field1')
+		const actual = this.vc.getValue('field1', {
+			shouldIncludePendingValues: true,
+		})
 		assert.isEqual(actual, expected)
 		assert.isEqual(hitCount, 1)
 		await promise
