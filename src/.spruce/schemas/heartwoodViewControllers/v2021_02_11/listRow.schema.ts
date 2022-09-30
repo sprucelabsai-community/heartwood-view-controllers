@@ -47,6 +47,12 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"standard","label":"Standard"},{"value":"warning","label":"Warning"},{"value":"critical","label":"Critical"}],}
+	            },
 	            /** Cells. */
 	            'cells': {
 	                label: 'Cells',

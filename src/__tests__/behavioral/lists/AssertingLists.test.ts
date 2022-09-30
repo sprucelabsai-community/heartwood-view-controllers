@@ -1,12 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, test } from '@sprucelabs/test-utils'
-import {
-	AbstractViewController,
-	vcAssert,
-	ViewControllerOptions,
-} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import {
+	ListRow,
+	RowStyle,
+	ViewControllerOptions,
+} from '../../../types/heartwood.types'
+import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
+import ListViewController from '../../../viewControllers/list/List.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
@@ -40,6 +43,12 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		listVc: ListVc,
 	}
+	private static vc: ListViewController
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		this.vc = this.Controller('list', {})
+	}
 
 	@test()
 	protected static throwsIfCantFindListWithId() {
@@ -68,43 +77,79 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canTellIfRowIsEnabled() {
-		const vc = this.Controller('list', {})
-		vc.addRow({
+		this.addRow({
 			id: 'first',
 			isEnabled: false,
-			cells: [],
 		})
-		vc.addRow({
+		this.addRow({
 			id: 'second',
 			isEnabled: false,
-			cells: [],
 		})
 
-		assert.doesThrow(() => vcAssert.assertRowIsEnabled(vc, 'first'))
-		vcAssert.assertRowIsDisabled(vc, 'second')
+		this.assertRowIsDisabled('first')
+		this.assertRowIsDisabled('second')
 
-		vc.getRowVc(0).setIsEnabled(true)
+		this.enableRow(0)
 
-		vcAssert.assertRowIsEnabled(vc, 'first')
-		assert.doesThrow(() => vcAssert.assertRowIsDisabled(vc, 'first'))
-
-		assert.doesThrow(() => vcAssert.assertRowIsEnabled(vc, 'second'))
-		vcAssert.assertRowIsDisabled(vc, 'second')
+		this.assertRowIsEnabled('first')
+		this.assertRowIsDisabled('second')
 	}
 
 	@test()
 	protected static settingEnabledTriggersRender() {
-		const vc = this.Controller('list', {})
-		vc.addRow({
+		this.addRow({
 			id: 'first',
-			cells: [],
 		})
 
-		const rowVc = vc.getRowVc(0)
+		const rowVc = this.getRow(0)
 
 		vcAssert.attachTriggerRenderCounter(rowVc)
 		rowVc.setIsEnabled(true)
 		vcAssert.assertTriggerRenderCount(rowVc, 1)
+	}
+
+	@test()
+	protected static canAssertRowStyle() {
+		this.addRow({
+			id: 'style',
+			style: 'critical',
+		})
+
+		this.assertRowStyle(0, 'critical')
+		assert.doesThrow(() => this.assertRowStyle(0, 'standard'))
+
+		this.addRow({
+			id: 'testing',
+		})
+
+		this.assertRowStyle('testing', 'standard')
+		this.assertRowStyle(0, 'standard')
+	}
+
+	private static assertRowStyle(row: number | string, style: RowStyle) {
+		vcAssert.assertRowIsStyle(this.vc, row, style)
+	}
+
+	private static getRow(row: number | string) {
+		return this.vc.getRowVc(row)
+	}
+
+	private static enableRow(row: number | string) {
+		this.vc.getRowVc(row).setIsEnabled(true)
+	}
+
+	private static assertRowIsEnabled(row: string | number) {
+		vcAssert.assertRowIsEnabled(this.vc, row)
+		assert.doesThrow(() => vcAssert.assertRowIsDisabled(this.vc, 'first'))
+	}
+
+	private static assertRowIsDisabled(row: string | number) {
+		assert.doesThrow(() => vcAssert.assertRowIsEnabled(this.vc, row))
+		vcAssert.assertRowIsDisabled(this.vc, row)
+	}
+
+	private static addRow(view: Partial<ListRow>) {
+		this.vc.addRow({ cells: [], ...view })
 	}
 
 	protected static Vc(listIds: string[]): ListVc {

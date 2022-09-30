@@ -84,6 +84,26 @@ export default buildSchema({
 							type: 'boolean',
 							label: 'Selected',
 						},
+						style: {
+							type: 'select',
+							label: 'Style',
+							options: {
+								choices: [
+									{
+										value: 'standard',
+										label: 'Standard',
+									},
+									{
+										value: 'warning',
+										label: 'Warning',
+									},
+									{
+										value: 'critical',
+										label: 'Critical',
+									},
+								],
+							},
+						},
 						cells: {
 							type: 'schema',
 							label: 'Cells',

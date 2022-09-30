@@ -130,6 +130,10 @@ export type RowValues = Record<string, any> & {
 	rowId?: string
 }
 
+export type RowStyle = NonNullable<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow['style']
+>
+
 export type FormErrorsByField<S extends Schema = Schema> = Partial<
 	Record<SchemaFieldNames<S>, TypedFieldError<S>[]>
 >

@@ -3502,6 +3502,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onClick'?: (() => Promise<any> | any)| undefined | null
 				/** Selected. */
 				'isSelected'?: boolean| undefined | null
+				/** Style. */
+				'style'?: ("standard" | "warning" | "critical")| undefined | null
 				/** Cells. */
 				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
 		}
@@ -3549,6 +3551,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Selected',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"warning","label":"Warning"},{"value":"critical","label":"Critical"}],}
 			            },
 			            /** Cells. */
 			            'cells': {

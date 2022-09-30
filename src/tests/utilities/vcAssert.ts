@@ -16,6 +16,7 @@ import {
 	ScopeFlag,
 	Button,
 	List,
+	RowStyle,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
@@ -1862,6 +1863,21 @@ const vcAssert = {
 		assert.isTrue(
 			model.footer?.isEnabled !== false,
 			`I expected your footer to be enabled, try setting '{ footer: { isEnabled: true } }' or 'cardVc.enableFooter()'`
+		)
+	},
+
+	assertRowIsStyle(
+		vc: ViewController<List>,
+		row: string | number,
+		style: RowStyle
+	) {
+		const rowVc = this.assertListRendersRow(vc, row)
+		const view = renderUtil.render(rowVc)
+		const actual = view.style ?? 'standard'
+		assert.isEqual(
+			actual,
+			style,
+			`You row is the wrong style! I expected it to be '${style}', but found '${actual}'!`
 		)
 	},
 }
