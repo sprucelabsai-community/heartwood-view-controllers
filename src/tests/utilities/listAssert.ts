@@ -34,7 +34,7 @@ const listAssert = {
 			)
 		} else if (Array.isArray(expectedRows)) {
 			for (const id of expectedRows) {
-				this.assertListRendersRow(listVc, id)
+				this.listRendersRow(listVc, id)
 			}
 		}
 	},

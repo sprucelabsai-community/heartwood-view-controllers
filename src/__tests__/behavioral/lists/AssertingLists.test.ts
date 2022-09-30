@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
@@ -149,7 +149,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 	}
 
 	private static addRow(view: Partial<ListRow>) {
-		this.vc.addRow({ cells: [], ...view })
+		this.vc.addRow({ cells: [], id: generateId(), ...view })
 	}
 
 	protected static Vc(listIds: string[]): ListVc {
