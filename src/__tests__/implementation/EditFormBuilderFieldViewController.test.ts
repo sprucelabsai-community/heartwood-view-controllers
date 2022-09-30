@@ -4,8 +4,8 @@ import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import formAssert from '../../tests/utilities/formAssert'
 import interactor from '../../tests/utilities/interactor'
-import vcAssert from '../../tests/utilities/vcAssert.utility'
 import { FormBuilderFieldType } from '../../types/heartwood.types'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import {
@@ -97,7 +97,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	@test()
 	protected static shouldRenderFormAccessibleFromGetter() {
 		const vc = this.Vc()
-		const formVc = vcAssert.assertCardRendersForm(vc)
+		const formVc = formAssert.cardRendersForm(vc)
 		assert.isEqual(formVc, vc.getFormVc())
 	}
 
@@ -105,7 +105,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	protected static shouldRenderNameLabelAndTypeAtLeast() {
 		const formVc = this.Vc().getFormVc()
 		this.assertRendersExpectedFields(formVc)
-		vcAssert.assertFormDoesNotRenderField(formVc, 'selectOptions')
+		formAssert.formDoesNotRenderField(formVc, 'selectOptions')
 	}
 
 	@test()
@@ -114,11 +114,11 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 
 		await formVc.setValue('type', 'select')
 		this.assertRendersExpectedFields(formVc)
-		vcAssert.assertFormRendersField(formVc, 'selectOptions')
+		formAssert.formRendersField(formVc, 'selectOptions')
 
 		await formVc.setValue('type', 'text')
 		this.assertRendersExpectedFields(formVc)
-		vcAssert.assertFormDoesNotRenderField(formVc, 'selectOptions')
+		formAssert.formDoesNotRenderField(formVc, 'selectOptions')
 	}
 
 	@test()
@@ -128,7 +128,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		}).getFormVc()
 
 		this.assertRendersExpectedFields(formVc)
-		vcAssert.assertFormRendersField(formVc, 'selectOptions')
+		formAssert.formRendersField(formVc, 'selectOptions')
 	}
 
 	@test('values set at construction 1', {
@@ -255,7 +255,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			},
 		}).getFormVc()
 
-		vcAssert.assertFormRendersField(formVc, 'isRequired')
+		formAssert.formRendersField(formVc, 'isRequired')
 		await formVc.setValue('isRequired', true)
 
 		await interactor.submitForm(formVc)
@@ -306,9 +306,9 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	}
 
 	private static assertRendersExpectedFields(formVc: FormViewController<any>) {
-		vcAssert.assertFormRendersField(formVc, 'name')
-		vcAssert.assertFormRendersField(formVc, 'label')
-		vcAssert.assertFormRendersField(formVc, 'type', {
+		formAssert.formRendersField(formVc, 'name')
+		formAssert.formRendersField(formVc, 'label')
+		formAssert.formRendersField(formVc, 'type', {
 			type: 'select',
 			options: {
 				choices: fieldTypeChoices,

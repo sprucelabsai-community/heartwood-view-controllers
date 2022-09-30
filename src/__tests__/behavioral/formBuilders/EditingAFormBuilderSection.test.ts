@@ -1,6 +1,7 @@
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import { CardViewController, KeyboardKey } from '../../../types/heartwood.types'
@@ -257,7 +258,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 			builderSectionVc:
 				builderSectionVc as EditFormBuilderSectionCardViewController,
 			dialogVc: dialogVc as DialogViewController,
-			formVc: vcAssert.assertCardRendersForm(builderSectionVc as any),
+			formVc: formAssert.cardRendersForm(builderSectionVc as any),
 		}
 	}
 }

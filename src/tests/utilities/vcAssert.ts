@@ -1,5 +1,4 @@
 import { assertOptions, validateSchemaValues } from '@sprucelabs/schema'
-import { FieldDefinitions } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
@@ -25,7 +24,6 @@ import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
-import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
@@ -50,7 +48,6 @@ import {
 	isVcInstanceOf,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
-import formAssert, { FormVc } from './formAssert'
 import listAssert from './listAssert'
 import toolBeltAssert from './toolBeltAssert'
 
@@ -400,13 +397,6 @@ const vcAssert = {
 		})
 	},
 
-	/**
-	 * @deprecated vcAssert.assertCardRendersForm -> formAssert.cardRendersForm
-	 */
-	assertCardRendersForm(vc: ViewController<Card> | DialogViewController) {
-		return formAssert.cardRendersForm(vc)
-	},
-
 	assertCardRendersSection(
 		vc: ViewController<Card>,
 		sectionIdOrIdx: string | number
@@ -451,6 +441,9 @@ const vcAssert = {
 		}
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersList(...) -> listAssert.cardRendersList(...)
+	 */
 	assertCardRendersList(
 		vc: ViewController<Card> | FormViewController<any>,
 		id?: string
@@ -552,31 +545,6 @@ const vcAssert = {
 		) {
 			assert.fail('Your primary button has to be last in your footer.')
 		}
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormRendersField -> formAssert.formRendersField
-	 */
-	assertFormRendersField(
-		formVc: FormVc,
-		fieldName: string,
-		fieldDefinition?: Partial<FieldDefinitions>
-	) {
-		return formAssert.formRendersField(formVc, fieldName, fieldDefinition)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormDoesNotRenderField -> formAssert.formDoesNotRenderField
-	 */
-	assertFormDoesNotRenderField(formVc: FormVc, fieldName: string) {
-		return formAssert.formDoesNotRenderField(formVc, fieldName)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormRendersFields -> formAssert.formRendersFields
-	 */
-	assertFormRendersFields(formVc: FormVc, fields: string[]) {
-		return formAssert.formRendersFields(formVc, fields)
 	},
 
 	assertCardRendersHeader(
@@ -732,16 +700,6 @@ const vcAssert = {
 				vc
 			)}'! Make your render something like 'return this.swipeVc.render()'`
 		)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertSkillViewRendersFormBuilder -> formAssert.skillViewRendersFormBuilder
-	 */
-	assertSkillViewRendersFormBuilder(
-		vc: SkillViewController,
-		id?: string
-	): FormBuilderCardViewController {
-		return formAssert.skillViewRendersFormBuilder(vc, id)
 	},
 
 	assertSkillViewRendersCard(
@@ -912,13 +870,6 @@ const vcAssert = {
 		}
 
 		assert.fail(`Could not find button with 'lineIcon='${icon}'' in row!`)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertCardRendersForms -> formAssert.cardRendersForms
-	 */
-	assertCardRendersForms(vc: CardViewController, count: number) {
-		return formAssert.cardRendersForms(vc, count)
 	},
 
 	assertFooterRendersButtonWithType(
@@ -1226,34 +1177,6 @@ const vcAssert = {
 				id ? ` with the id of ${id}` : ''
 			}, but it is!`
 		)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormIsDisabled -> formAssert.formIsDisabled
-	 */
-	assertFormIsDisabled(vc: FormViewController<any>) {
-		return formAssert.formIsDisabled(vc)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormIsEnabled -> formAssert.formIsEnabled
-	 */
-	assertFormIsEnabled(vc: FormViewController<any>) {
-		return formAssert.formIsEnabled(vc)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormIsBusy -> formAssert.formIsBusy
-	 */
-	assertFormIsBusy(vc: FormViewController<any>) {
-		return formAssert.formIsBusy(vc)
-	},
-
-	/**
-	 * @deprecated vcAssert.assertFormIsNotBusy -> formAssert.formIsNotBusy
-	 */
-	assertFormIsNotBusy(vc: FormViewController<any>) {
-		return formAssert.formIsNotBusy(vc)
 	},
 
 	assertIsFullScreen(vc: SkillViewController) {

@@ -258,6 +258,8 @@ export type FormBuilder =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
 export type FormBuilderPage =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
+export type Form<S extends Schema = any> =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 

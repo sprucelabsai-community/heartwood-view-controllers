@@ -8,6 +8,7 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../../utilities/render.utility'
@@ -380,7 +381,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc,
 			() => this.click(model.footer?.buttons?.[0]),
 			async (dialogVc) => {
-				const form = vcAssert.assertCardRendersForm(dialogVc)
+				const form = formAssert.cardRendersForm(dialogVc)
 
 				await form.setValue('title', 'taco bell')
 				await form.submit()
@@ -600,7 +601,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc.handleClickAddPage()
 		)
 
-		const formVc = vcAssert.assertCardRendersForm(dialogVc)
+		const formVc = formAssert.cardRendersForm(dialogVc)
 		const schema = formVc.getSchema()
 
 		assert.isFalse(formVc.getShouldShowCancelButton())
@@ -612,7 +613,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
 			this.vc.handleClickAddPage()
 		)
-		const formVc = vcAssert.assertCardRendersForm(dialogVc)
+		const formVc = formAssert.cardRendersForm(dialogVc)
 
 		await formVc.setValue('title', 'A new one!')
 		await formVc.submit()
@@ -864,9 +865,9 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		)
 
 		const pageVc = this.vc.getPageVc(pageIdx)
-		newFieldName && vcAssert.assertFormRendersField(pageVc as any, newFieldName)
+		newFieldName && formAssert.formRendersField(pageVc as any, newFieldName)
 		newFieldName &&
-			vcAssert.assertFormDoesNotRenderField(pageVc as any, oldFieldName)
+			formAssert.formDoesNotRenderField(pageVc as any, oldFieldName)
 
 		const model = this.render(pageVc)
 

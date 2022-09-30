@@ -1,14 +1,14 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
-import {
-	FormBuilderCardViewControllerImpl,
-	SkillViewController,
-	ViewControllerOptions,
-} from '../../..'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert.utility'
+import formAssert from '../../../tests/utilities/formAssert'
+import {
+	SkillViewController,
+	ViewControllerOptions,
+} from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
@@ -27,18 +27,18 @@ class GenericSkillViewController extends AbstractSkillViewController {
 export default class AssertRenderingFormBuilderTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		generic: GenericSkillViewController,
-		formBuilderCard: FormBuilderCardViewControllerImpl,
+		formBuilderCard: FormBuilderCardViewController,
 	}
 
 	@test()
 	protected static assertHasFunctionToAssertFormBuilder() {
-		assert.isFunction(vcAssert.assertSkillViewRendersFormBuilder)
+		assert.isFunction(formAssert.skillViewRendersFormBuilder)
 	}
 
 	@test()
 	protected static throwsWhenSkillViewNotRenderingFormBuilder() {
 		const svc = this.Svc()
-		assert.doesThrow(() => vcAssert.assertSkillViewRendersFormBuilder(svc))
+		assert.doesThrow(() => formAssert.skillViewRendersFormBuilder(svc))
 	}
 
 	@test()
@@ -55,7 +55,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		vcAssert.assertSkillViewRendersFormBuilder(svc)
+		formAssert.skillViewRendersFormBuilder(svc)
 	}
 
 	@test()
@@ -70,7 +70,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		assert.doesThrow(() => vcAssert.assertSkillViewRendersFormBuilder(svc))
+		assert.doesThrow(() => formAssert.skillViewRendersFormBuilder(svc))
 	}
 
 	@test()
@@ -88,7 +88,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		vcAssert.assertSkillViewRendersFormBuilder(svc)
+		formAssert.skillViewRendersFormBuilder(svc)
 	}
 
 	@test()
@@ -107,9 +107,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		assert.doesThrow(() =>
-			vcAssert.assertSkillViewRendersFormBuilder(svc, 'look')
-		)
+		assert.doesThrow(() => formAssert.skillViewRendersFormBuilder(svc, 'look'))
 	}
 
 	@test()
@@ -128,7 +126,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		vcAssert.assertSkillViewRendersFormBuilder(svc, 'look')
+		formAssert.skillViewRendersFormBuilder(svc, 'look')
 	}
 
 	@test()
@@ -146,7 +144,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 			],
 		})
 
-		const vc = vcAssert.assertSkillViewRendersFormBuilder(svc, 'look')
+		const vc = formAssert.skillViewRendersFormBuilder(svc, 'look')
 
 		assert.isEqual(vc, builder)
 	}

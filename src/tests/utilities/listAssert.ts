@@ -1,6 +1,8 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
+	Card,
+	FormViewController,
 	List,
 	ListCell,
 	RowStyle,
@@ -12,7 +14,11 @@ import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
-import { getVcName, SelectViewController } from './assertSupport'
+import {
+	getVcName,
+	pluckAllFromCard,
+	SelectViewController,
+} from './assertSupport'
 import interactor from './interactor'
 
 const listAssert = {
@@ -63,6 +69,46 @@ const listAssert = {
 		} else {
 			assert.isTruthy(checkbox, `I could not find a checkbox in row '${row}'!`)
 		}
+	},
+
+	cardRendersList(
+		vc: ViewController<Card> | FormViewController<any>,
+		id?: string
+	): ListViewController {
+		const model = renderUtil.render(vc)
+		const lists = pluckAllFromCard(
+			//@ts-ignore
+			model.body ? model : { body: model },
+			'list'
+		)
+
+		let foundList = false
+		let foundById = false
+		let match: any
+
+		for (const list of lists) {
+			if (!match && list?.controller instanceof ListViewController) {
+				foundList = true
+				match = list
+			}
+
+			if (id && list?.id === id) {
+				foundById = true
+				match = list
+				break
+			}
+		}
+
+		assert.isTrue(
+			foundList,
+			"Expected to find a list inside your CardViewController, but didn't find one!"
+		)
+
+		if (id) {
+			assert.isTrue(foundById, `Found a list, but nothing with the id '${id}'!`)
+		}
+
+		return match?.controller
 	},
 
 	rowRendersCalendar(listVc: ListViewController, row: string | number) {

@@ -1,7 +1,9 @@
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
+import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
 import FormViewController from '../../../viewControllers/form/Form.vc'
@@ -40,8 +42,8 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
-		this.formVc = vcAssert.assertCardRendersForm(this.vc) as any
-		this.fieldListVc = vcAssert.assertCardRendersList(this.formVc)
+		this.formVc = formAssert.cardRendersForm(this.vc) as any
+		this.fieldListVc = listAssert.cardRendersList(this.formVc)
 	}
 
 	@test()
@@ -97,9 +99,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		await this.formVc.setValue('type', 'form')
 		await this.formVc.setValue('shouldRenderAsGrid', true)
 
-		vcAssert.assertFormRendersField(this.formVc, 'title')
-		vcAssert.assertFormRendersField(this.formVc, 'type')
-		vcAssert.assertFormRendersField(this.formVc, 'shouldRenderAsGrid')
+		formAssert.formRendersField(this.formVc, 'title')
+		formAssert.formRendersField(this.formVc, 'type')
+		formAssert.formRendersField(this.formVc, 'shouldRenderAsGrid')
 
 		assert.isEqual(this.fieldListVc.getTotalRows(), 1)
 	}
@@ -237,9 +239,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	protected static async switchingSectionToInstructionsHidesFormRelatedFields() {
 		await this.formVc.setValue('type', 'text')
 
-		vcAssert.assertFormDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
+		formAssert.formDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
 		vcAssert.assertCardDoesNotRenderList(this.formVc)
-		vcAssert.assertFormRendersField(this.formVc, 'text')
+		formAssert.formRendersField(this.formVc, 'text')
 
 		const model = this.render(this.formVc)
 		assert.isFalsy(model.footer)
@@ -407,7 +409,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			.addSection({ title: 'A brand new section!' })
 		const { builderSectionVc } = await this.simulateAddSectionClick(0)
 
-		this.formVc = vcAssert.assertCardRendersForm(builderSectionVc) as any
+		this.formVc = formAssert.cardRendersForm(builderSectionVc) as any
 
 		await this.formVc.setValue('title', 'Now second section')
 		await this.formVc.setValue('type', 'text')

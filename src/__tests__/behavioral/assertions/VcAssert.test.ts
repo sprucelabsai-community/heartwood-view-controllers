@@ -6,6 +6,7 @@ import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_1
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
@@ -762,8 +763,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 	@test('can assert rending bigForms', 'bigForm')
 	protected static knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
 		const cardVc = this.Controller('card', {})
-		assert.doesThrow(() => vcAssert.assertCardRendersForms(cardVc, 1))
-		assert.doesThrow(() => vcAssert.assertCardRendersForm(cardVc))
+		assert.doesThrow(() => formAssert.cardRendersForms(cardVc, 1))
+		assert.doesThrow(() => formAssert.cardRendersForm(cardVc))
 
 		const formVc1 = this.buildEmptyForm(vcId)
 
@@ -772,10 +773,10 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			[vcId]: formVc1.render(),
 		})
 
-		vcAssert.assertCardRendersForms(cardVc, 1)
-		assert.isEqual(formVc1, vcAssert.assertCardRendersForm(cardVc))
+		formAssert.cardRendersForms(cardVc, 1)
+		assert.isEqual(formVc1, formAssert.cardRendersForm(cardVc))
 
-		assert.doesThrow(() => vcAssert.assertCardRendersForms(cardVc, 2))
+		assert.doesThrow(() => formAssert.cardRendersForms(cardVc, 2))
 
 		const formVc = this.buildEmptyForm(vcId)
 
@@ -783,7 +784,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			title: 'hey!',
 			[vcId]: formVc.render(),
 		})
-		const forms = vcAssert.assertCardRendersForms(cardVc, 2)
+		const forms = formAssert.cardRendersForms(cardVc, 2)
 		assert.isEqual(forms[1], formVc)
 	}
 
@@ -1046,12 +1047,12 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		)
 
 		assert.doesThrow(() =>
-			vcAssert.assertFormRendersFields(formVc, ['one', 'two', 'three'])
+			formAssert.formRendersFields(formVc, ['one', 'two', 'three'])
 		)
 
-		vcAssert.assertFormRendersFields(formVc, ['four'])
-		vcAssert.assertFormRendersFields(formVc, ['four', 'five'])
-		vcAssert.assertFormRendersFields(formVc, ['four', 'five', 'six'])
+		formAssert.formRendersFields(formVc, ['four'])
+		formAssert.formRendersFields(formVc, ['four', 'five'])
+		formAssert.formRendersFields(formVc, ['four', 'five', 'six'])
 	}
 
 	@test()

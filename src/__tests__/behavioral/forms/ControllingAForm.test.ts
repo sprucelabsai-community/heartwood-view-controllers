@@ -3,9 +3,10 @@ import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
-import { interactor } from '../../..'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import formAssert from '../../../tests/utilities/formAssert'
+import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { FormViewController } from '../../../types/heartwood.types'
 import { testFormOptions } from './testFormOptions'
@@ -699,7 +700,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isFalsy(model.schema.fields.favoriteNumber)
 		assert.isTruthy(testFormOptions.schema.fields.favoriteNumber)
 
-		vcAssert.assertFormRendersField(this.vc, 'secondFavoriteNumber')
+		formAssert.formRendersField(this.vc, 'secondFavoriteNumber')
 	}
 
 	@test()
@@ -745,19 +746,19 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.disable()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 
-		vcAssert.assertFormIsDisabled(this.vc)
-		vcAssert.assertFormIsNotBusy(this.vc)
+		formAssert.formIsDisabled(this.vc)
+		formAssert.formIsNotBusy(this.vc)
 
 		this.vc.setIsBusy(true)
 		this.vc.disable()
 
-		vcAssert.assertFormIsBusy(this.vc)
+		formAssert.formIsBusy(this.vc)
 
 		this.vc.enable()
 		vcAssert.assertTriggerRenderCount(this.vc, 5)
 
-		vcAssert.assertFormIsBusy(this.vc)
-		vcAssert.assertFormIsEnabled(this.vc)
+		formAssert.formIsBusy(this.vc)
+		formAssert.formIsEnabled(this.vc)
 	}
 
 	@test()
@@ -904,7 +905,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			})
 		)
 
-		vcAssert.assertFormIsDisabled(vc)
+		formAssert.formIsDisabled(vc)
 	}
 
 	@test('is valid if required field is set', { name: 'test' }, [['name']], true)
