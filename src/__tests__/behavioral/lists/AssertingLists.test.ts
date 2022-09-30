@@ -123,7 +123,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		})
 
 		this.assertRowStyle('testing', 'standard')
-		this.assertRowStyle(0, 'standard')
+		this.assertRowStyle(1, 'standard')
 	}
 
 	private static assertRowStyle(row: number | string, style: RowStyle) {
