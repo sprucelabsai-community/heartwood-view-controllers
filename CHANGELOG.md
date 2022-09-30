@@ -1,3 +1,11 @@
+# [90.16.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.15.20...v90.16.0) (2022-09-30)
+
+
+### Features
+
+* list rows now have style (warn/critical) and assertions ([d99a1ee](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d99a1ee))
+* listAssert for all your list needs! ([35b145d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/35b145d))
+
 ## [90.15.20](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.15.19...v90.15.20) (2022-09-30)
 
 ## [90.15.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v90.15.18...v90.15.19) (2022-09-30)
