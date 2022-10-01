@@ -10,6 +10,13 @@ export default buildSchema({
 			type: 'id',
 			isPrivate: true,
 		},
+		controller: {
+			type: 'raw',
+			label: 'Controller',
+			options: {
+				valueType: 'HeartwoodTypes.SkillViewController',
+			},
+		},
 		shouldCenterVertically: {
 			type: 'boolean',
 			label: 'Center vertically',

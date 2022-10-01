@@ -1062,6 +1062,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'id'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
 				/** Center vertically. */
 				'shouldCenterVertically'?: boolean| undefined | null
 				/** Full screen. */
@@ -1088,6 +1090,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'id',
 			                isPrivate: true,
 			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SkillViewController`,}
 			            },
 			            /** Center vertically. */
 			            'shouldCenterVertically': {

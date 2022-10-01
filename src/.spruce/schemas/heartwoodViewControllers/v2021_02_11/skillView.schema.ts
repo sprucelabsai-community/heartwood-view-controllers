@@ -16,6 +16,12 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                isPrivate: true,
 	                options: undefined
 	            },
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.SkillViewController`,}
+	            },
 	            /** Center vertically. */
 	            'shouldCenterVertically': {
 	                label: 'Center vertically',
