@@ -1,3 +1,10 @@
+# [91.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.0.10...v91.1.0) (2022-10-04)
+
+
+### Features
+
+* state machine can set context with dot key ([f0fb640](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f0fb640))
+
 ## [91.0.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.0.9...v91.0.10) (2022-10-04)
 
 ## [91.0.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.0.8...v91.0.9) (2022-10-03)
