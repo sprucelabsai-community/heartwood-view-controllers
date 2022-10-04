@@ -82,7 +82,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		await this.sm.updateContext(context)
 		await this.sm.transitionTo(state)
 
-		assert.isEqualDeep(this.sm.getContext(), context)
+		this.assertContextEquals(context)
 	}
 
 	@test()
@@ -103,9 +103,9 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	protected static async canGetCurrentState() {
 		const state = this.State()
 
-		await this.sm.transitionTo(state)
+		await this.transitionTo(state)
 
-		assert.isEqual(this.sm.getState(), state)
+		assert.isEqual(this.getState(), state)
 	}
 
 	@test()
@@ -132,7 +132,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			passedUpdates = updates
 		})
 
-		await this.sm.updateContext(updates)
+		await this.updateContext(updates)
 
 		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedOld, originalContext)
@@ -224,7 +224,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			passedChanges = updates
 		})
 
-		await this.sm.updateContext(context)
+		await this.updateContext(context)
 
 		const actual = this.sm.getContext()
 
@@ -251,7 +251,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			wasDidHit = true
 		})
 
-		await this.sm.updateContext(clone(updates))
+		await this.updateContext(clone(updates))
 
 		assert.isFalse(wasDidHit)
 		assert.isFalse(wasWillHit)
@@ -293,7 +293,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			didUpdateHit = true
 		})
 
-		void this.sm.updateContext({ test: true })
+		void this.updateContext({ test: true })
 
 		await this.sm.waitForContextUpdate()
 
@@ -307,7 +307,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			assert.fail('you know it!')
 		})
 
-		await assert.doesThrowAsync(() => this.sm.updateContext({ test: true }))
+		await assert.doesThrowAsync(() => this.updateContext({ test: true }))
 	}
 
 	@test()
@@ -316,7 +316,64 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			assert.fail('oh you think?')
 		})
 
-		await assert.doesThrowAsync(() => this.sm.updateContext({ test: true }))
+		await assert.doesThrowAsync(() => this.updateContext({ test: true }))
+	}
+
+	@test()
+	protected static async canMakeDotSyntaxUpdates() {
+		await this.setUpdateAssert(
+			{
+				what: {
+					the: false,
+				},
+				hello: 'world',
+			},
+			{ 'what.the': true },
+			{ what: { the: true }, hello: 'world' }
+		)
+	}
+
+	@test()
+	protected static async canMakeDotSyntaxUpdates2() {
+		await this.setUpdateAssert(
+			{
+				what: {
+					the: false,
+				},
+				hello: 'world',
+			},
+			{ 'what.the': true, hello: 'there' },
+			{ what: { the: true }, hello: 'there' }
+		)
+	}
+
+	@test()
+	protected static async canMakeDotSyntaxUpdates3() {
+		await this.setUpdateAssert(
+			{
+				hey: {
+					you: 'then',
+				},
+				hello: 'world',
+			},
+			{ 'hey.you': 'later' },
+			{
+				hey: {
+					you: 'later',
+				},
+				hello: 'world',
+			}
+		)
+	}
+
+	private static async setUpdateAssert(
+		starting: Record<string, any>,
+		updates: Record<string, any>,
+		expected: Record<string, any>
+	) {
+		await this.updateContext(starting)
+		await this.updateContext(updates)
+		this.assertContextEquals(expected)
 	}
 
 	private static State(state?: Partial<ToolBeltState>) {
@@ -325,6 +382,14 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			async load() {},
 			...state,
 		}
+	}
+
+	private static async updateContext(context: any) {
+		await this.sm.updateContext(context)
+	}
+
+	public static getState() {
+		return this.sm.getState()
 	}
 
 	private static StateMachine(options?: Partial<ToolBeltStateMachineOptions>) {
@@ -345,6 +410,13 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 	private static async assertContextUpdateNotBlocked(updates: { yes: string }) {
 		let response = await this.sm.updateContext(updates)
 		assert.isTrue(response)
+	}
+
+	private static assertContextEquals(context: Record<string, any>) {
+		assert.isEqualDeep(this.getContext(), context)
+	}
+	private static getContext() {
+		return this.sm.getContext()
 	}
 
 	private static async assertContextUpdateBlocked(

@@ -94,6 +94,7 @@
     "esbuild": "^0.15.10",
     "globby": "^11.0.4",
     "just-clone": "^6.1.1",
+    "just-safe-set": "^4.1.1",
     "terser-webpack-plugin": "5.3.1",
     "uglify-js": "^3.17.2",
     "webpack": "5.70.0"
@@ -160,7 +161,8 @@
             "returnsMapController": "B30",
             "canFindPinMatchingAnything": "B31",
             "canMatchButtonById": "B32",
-            "canGetSetZoom": "B34"
+            "canGetSetZoom": "B34",
+            "canMakeDotSyntaxUpdates3": "H10"
           }
         }
       ]

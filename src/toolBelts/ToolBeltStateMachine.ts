@@ -4,9 +4,9 @@ import {
 	buildEventContract,
 	MercuryAggregateResponse,
 } from '@sprucelabs/mercury-types'
-import { assertOptions, buildSchema } from '@sprucelabs/schema'
+import { assertOptions, buildSchema, cloneDeep } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
-import { cloneDeep } from '@sprucelabs/spruce-skill-utils'
+import set from 'just-safe-set'
 import SpruceError from '../errors/SpruceError'
 import {
 	ControllerOptions,
@@ -88,11 +88,18 @@ export default class ToolBeltStateMachine<
 
 	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
 		const typesToClone = ['Object']
-		const cloned = cloneDeep(updates, (item) => {
+		let cloned = cloneDeep(updates, (item) => {
 			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
 				return item
 			}
 		})
+
+		for (const key of Object.keys(cloned)) {
+			if (key.includes('.')) {
+				set(cloned, key, cloned[key])
+				delete cloned[key]
+			}
+		}
 
 		const old = { ...this.context }
 		const newContext = { ...this.context, ...cloned }
