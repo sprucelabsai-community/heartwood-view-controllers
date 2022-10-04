@@ -153,15 +153,8 @@
         "@sprucelabs/jest-sheets-reporter",
         {
           "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
-          "worksheetId": 1262763347,
+          "worksheetId": 889384139,
           "testMap": {
-            "passesThroughModel": "B25",
-            "canSetPins": "B28",
-            "canGetPins": "B29",
-            "returnsMapController": "B30",
-            "canFindPinMatchingAnything": "B31",
-            "canMatchButtonById": "B32",
-            "canGetSetZoom": "B34",
             "canMakeDotSyntaxUpdates3": "H10"
           }
         }
