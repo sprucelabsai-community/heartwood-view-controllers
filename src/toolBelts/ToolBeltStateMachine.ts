@@ -61,9 +61,9 @@ export default class ToolBeltStateMachine<
 		return this.vcFactory
 	}
 
-	public getContext(updatesToMixin?: Partial<Context>) {
+	public getContext(updatesToMixin?: Partial<Context>): Context {
 		return updatesToMixin
-			? this.getContextMixingInUpdates(updatesToMixin).newContext
+			? (this.getContextMixingInUpdates(updatesToMixin).newContext as Context)
 			: (this.context as Context)
 	}
 
@@ -123,7 +123,10 @@ export default class ToolBeltStateMachine<
 		return true
 	}
 
-	private getContextMixingInUpdates(updates: Partial<Context>) {
+	private getContextMixingInUpdates(updates: Partial<Context>): {
+		newContext: Context
+		expandedUpdates: Partial<Context>
+	} {
 		const typesToClone = ['Object']
 		let expandedUpdates = cloneDeep(updates, (item) => {
 			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
@@ -138,7 +141,7 @@ export default class ToolBeltStateMachine<
 			}
 		}
 
-		const newContext = { ...this.context, ...expandedUpdates }
+		const newContext = { ...this.context, ...expandedUpdates } as Context
 		return { newContext, expandedUpdates }
 	}
 
