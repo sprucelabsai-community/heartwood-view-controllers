@@ -1,3 +1,10 @@
+# [91.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.1.4...v91.2.0) (2022-10-05)
+
+
+### Features
+
+* state machine can mixin updates when getting context ([aa9ffde](https://github.com/sprucelabsai/heartwood-view-controllers/commit/aa9ffde))
+
 ## [91.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.1.3...v91.1.4) (2022-10-05)
 
 ## [91.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.1.2...v91.1.3) (2022-10-04)
