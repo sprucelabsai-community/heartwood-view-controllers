@@ -321,7 +321,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async canMakeDotSyntaxUpdates() {
-		await this.setUpdateAssert(
+		await this.assertSettingContextThenUpdatingEquals(
 			{
 				what: {
 					the: false,
@@ -335,7 +335,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async canMakeDotSyntaxUpdates2() {
-		await this.setUpdateAssert(
+		await this.assertSettingContextThenUpdatingEquals(
 			{
 				what: {
 					the: false,
@@ -349,7 +349,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async canMakeDotSyntaxUpdates3() {
-		await this.setUpdateAssert(
+		await this.assertSettingContextThenUpdatingEquals(
 			{
 				hey: {
 					you: 'then',
@@ -366,12 +366,20 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		)
 	}
 
-	private static async setUpdateAssert(
+	private static async assertSettingContextThenUpdatingEquals(
 		starting: Record<string, any>,
 		updates: Record<string, any>,
 		expected: Record<string, any>
 	) {
 		await this.updateContext(starting)
+
+		const actual = this.sm.getContext(updates)
+		assert.isEqualDeep(
+			actual,
+			expected,
+			`getContext() did not properly mixin updates.`
+		)
+
 		await this.updateContext(updates)
 		this.assertContextEquals(expected)
 	}

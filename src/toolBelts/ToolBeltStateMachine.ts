@@ -61,8 +61,10 @@ export default class ToolBeltStateMachine<
 		return this.vcFactory
 	}
 
-	public getContext() {
-		return this.context as Context
+	public getContext(updatesToMixin?: Partial<Context>) {
+		return updatesToMixin
+			? this.getContextMixingInUpdates(updatesToMixin).newContext
+			: (this.context as Context)
 	}
 
 	public getStateId(): string | undefined {
@@ -87,26 +89,14 @@ export default class ToolBeltStateMachine<
 	}
 
 	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
-		const typesToClone = ['Object']
-		let cloned = cloneDeep(updates, (item) => {
-			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
-				return item
-			}
-		})
-
-		for (const key of Object.keys(cloned)) {
-			if (key.includes('.')) {
-				set(cloned, key, cloned[key])
-				delete cloned[key]
-			}
-		}
-
-		const old = { ...this.context }
-		const newContext = { ...this.context, ...cloned }
+		let { newContext, expandedUpdates } =
+			this.getContextMixingInUpdates(updates)
 
 		if (deepEqual(this.context, newContext)) {
 			return false
 		}
+
+		const old = { ...this.context }
 
 		let results = await this.emit('will-update-context', {
 			current: this.context,
@@ -125,12 +115,31 @@ export default class ToolBeltStateMachine<
 
 		results = await this.emit('did-update-context', {
 			old,
-			updates: cloned,
+			updates: expandedUpdates,
 		})
 
 		this.assertNoErrorsInResponse(results)
 
 		return true
+	}
+
+	private getContextMixingInUpdates(updates: Partial<Context>) {
+		const typesToClone = ['Object']
+		let expandedUpdates = cloneDeep(updates, (item) => {
+			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
+				return item
+			}
+		})
+
+		for (const key of Object.keys(expandedUpdates)) {
+			if (key.includes('.')) {
+				set(expandedUpdates, key, expandedUpdates[key])
+				delete expandedUpdates[key]
+			}
+		}
+
+		const newContext = { ...this.context, ...expandedUpdates }
+		return { newContext, expandedUpdates }
 	}
 
 	private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {
