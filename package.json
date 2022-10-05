@@ -155,7 +155,8 @@
           "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
           "worksheetId": 889384139,
           "testMap": {
-            "canMakeDotSyntaxUpdates3": "H10"
+            "canMakeDotSyntaxUpdates3": "H10",
+            "noPendingSetInRenderedValueIfNotAlreadySet": "H6"
           }
         }
       ]

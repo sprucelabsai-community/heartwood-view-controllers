@@ -12,7 +12,10 @@ const normalizeFormSectionFieldNamesUtil = {
 		fields: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>['fields'],
 		schema?: Schema
 	): (FieldRenderOptions<S> &
-		Partial<FieldDefinitions> & { type: FieldType })[] {
+		Partial<FieldDefinitions> & {
+			type: FieldType
+			renderedValue?: any | null
+		})[] {
 		const normalized =
 			fields?.map((field) => {
 				let f = typeof field === 'string' ? { name: field } : field

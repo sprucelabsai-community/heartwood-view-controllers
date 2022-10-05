@@ -1,30 +1,28 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import FormViewController from '../../../viewControllers/form/Form.vc'
+import FormViewController, {
+	FormViewControllerOptions,
+} from '../../../viewControllers/form/Form.vc'
 
 export default class UpdatingFastTest extends AbstractViewControllerTest {
 	private static vc: FormViewController<FastTypingSchema>
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-
 		let timeout = 100
-		this.vc = this.Controller(
-			'form',
-			buildForm({
-				onWillChange: async () => {
-					await new Promise((r) => setTimeout(r, (timeout -= 10)))
+
+		this.vc = this.Vc({
+			onWillChange: async () => {
+				await new Promise((r) => setTimeout(r, (timeout -= 10)))
+			},
+			sections: [
+				{
+					fields: ['field1', 'field2'],
 				},
-				schema: fastTypingSchema,
-				sections: [
-					{
-						fields: ['field1', 'field2'],
-					},
-				],
-			})
-		)
+			],
+		})
 	}
 
 	@test()
@@ -83,6 +81,55 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		assert.isEqual(hitCount, 2)
 	}
 
+	@test()
+	protected static async updatesRenderedValueWhileProcessing() {
+		const inputVc = this.setupFormWithInputVc()
+
+		await inputVc.setRenderedValue('')
+
+		const expected = generateId()
+
+		this.setField1UsingSetValueHandler(expected)
+
+		assert.isEqual(inputVc.getRenderedValue(), expected)
+
+		await this.wait()
+	}
+
+	@test()
+	protected static async noPendingSetInRenderedValueIfNotAlreadySet() {
+		const inputVc = this.setupFormWithInputVc()
+		this.setField1UsingSetValueHandler(generateId())
+		assert.isUndefined(inputVc.getRenderedValue())
+	}
+
+	private static setField1UsingSetValueHandler(expected: string) {
+		const { setValue } = this.render(this.vc)
+		setValue('field1', expected)
+	}
+
+	private static setupFormWithInputVc() {
+		const inputVc = this.Controller('autocompleteInput', {
+			onChangeRenderedValue: async () => {
+				await new Promise((r) => setTimeout(r, 10))
+			},
+		})
+
+		this.vc = this.Vc({
+			sections: [
+				{
+					fields: [
+						{
+							name: 'field1',
+							vc: inputVc,
+						},
+					],
+				},
+			],
+		})
+		return inputVc
+	}
+
 	private static async updateValue1FiveTimes() {
 		await this.all([
 			this.setValue1('1'),
@@ -128,6 +175,19 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 
 	private static async setValue2(value: string): Promise<void> {
 		return this.vc.setValue('field2', value)
+	}
+
+	private static Vc(
+		options?: Partial<FormViewControllerOptions<FastTypingSchema>>
+	) {
+		return this.Controller(
+			'form',
+			buildForm({
+				schema: fastTypingSchema,
+				sections: [],
+				...options,
+			})
+		)
 	}
 }
 

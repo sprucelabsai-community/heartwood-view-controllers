@@ -586,17 +586,23 @@ export default class FormViewController<
 			})
 		}
 
-		const schema = this.getSchema()
-		const fieldDefinition = schema.fields?.[fieldName]
 		const renderOptions = normalizeFormSectionFieldNamesUtil.toObjects(
-			this.getSection(sectionIdx).fields ?? []
+			this.getSection(sectionIdx).fields ?? [],
+			this.getSchema()
 		)?.[fieldIdx]
 
+		const options = {
+			...renderOptions,
+		}
+
+		const isInPending = fieldName in this.pendingSets
+
+		if (isInPending && 'renderedValue' in options) {
+			options.renderedValue = this.pendingSets[fieldName]
+		}
+
 		return {
-			compiledOptions: {
-				...fieldDefinition,
-				...renderOptions,
-			},
+			compiledOptions: options,
 		}
 	}
 

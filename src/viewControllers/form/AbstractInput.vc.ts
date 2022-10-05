@@ -65,6 +65,7 @@ export default abstract class AbstractInputViewController<
 		})
 
 		await this.model.onChangeRenderedValue?.(renderedValue)
+
 		this.triggerRender()
 	}
 
