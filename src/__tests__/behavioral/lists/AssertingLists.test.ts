@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
 	ListRow,
@@ -124,6 +125,37 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
 		this.assertRowStyle('testing', 'standard')
 		this.assertRowStyle(1, 'standard')
+	}
+
+	@test()
+	protected static assertsHasInput() {
+		this.assertAssertingInputThrows('it does not exist')
+		this.addRow({
+			cells: [],
+		})
+
+		this.assertAssertingInputThrows('could not find an input')
+
+		this.addRow({
+			id: 'new',
+			cells: [
+				{
+					textInput: {
+						name: 'firstName',
+					},
+				},
+			],
+		})
+
+		listAssert.rowRendersInput(this.vc, 'new', 'firstName')
+		assert.doesThrow(() => {
+			listAssert.rowDoesNotRenderInput(this.vc, 'new', 'firstname')
+		})
+	}
+
+	private static assertAssertingInputThrows(msg: string) {
+		assert.doesThrow(() => listAssert.rowRendersInput(this.vc, 0, 'name'), msg)
+		listAssert.rowDoesNotRenderInput(this.vc, 0, 'name')
 	}
 
 	private static assertRowStyle(row: number | string, style: RowStyle) {

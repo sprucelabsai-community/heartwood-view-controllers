@@ -88,7 +88,7 @@ export default class ListRowViewController
 		throw new SchemaError({
 			code: 'INVALID_PARAMETERS',
 			parameters: ['fieldName'],
-			friendlyMessage: `I could not find an input named ${fieldName} in row ${this.getId()}`,
+			friendlyMessage: `I could not find an input named '${fieldName}' in row '${this.getId()}'!`,
 		})
 	}
 

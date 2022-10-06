@@ -248,6 +248,33 @@ const listAssert = {
 		return {} as any
 	},
 
+	rowRendersInput(
+		vc: ViewController<List>,
+		row: string | number,
+		inputName: string
+	) {
+		const listVc = getListVc(vc)
+		const rowVc = listVc.getRowVc(row)
+
+		rowVc.getValue(inputName)
+	},
+
+	rowDoesNotRenderInput(
+		vc: ViewController<List>,
+		row: string | number,
+		inputName: string
+	) {
+		try {
+			this.rowRendersInput(vc, row, inputName)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found an input called '${inputName}' in row '${row}' and I expected NOT to!`
+		)
+	},
+
 	rowDoesNotRenderContent(
 		vc: ViewController<List>,
 		row: string | number,
