@@ -149,7 +149,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
 		listAssert.rowRendersInput(this.vc, 'new', 'firstName')
 		assert.doesThrow(() => {
-			listAssert.rowDoesNotRenderInput(this.vc, 'new', 'firstname')
+			listAssert.rowDoesNotRenderInput(this.vc, 'new', 'firstName')
 		})
 	}
 
