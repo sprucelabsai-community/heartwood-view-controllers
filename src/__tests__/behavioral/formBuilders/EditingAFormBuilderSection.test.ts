@@ -173,7 +173,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
-			cellIdx: 2,
+			cell: 2,
 		})
 
 		assert.isEqual(fieldList.getTotalRows(), 2)
@@ -190,7 +190,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: char,
-			cellIdx: 2,
+			cell: 2,
 		})
 
 		assert.isEqual(fieldList.getTotalRows(), 1)
@@ -205,7 +205,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
-			cellIdx: 2,
+			cell: 2,
 		})
 
 		assert.isEqual(fieldList.getTotalRows(), 2)
