@@ -54,6 +54,7 @@ import FormBuilderPageViewControllerImpl, {
 import ListViewController, {
 	ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
+import ListRowViewController from '../viewControllers/list/ListRow.vc'
 import LoginViewController, {
 	LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
@@ -572,6 +573,11 @@ export type KeyboardKey =
 	| 'Escape'
 
 export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes
+
+export interface CellInputKeyDownOptions {
+	rowVc: ListRowViewController
+	key: KeyboardKey
+}
 
 export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =

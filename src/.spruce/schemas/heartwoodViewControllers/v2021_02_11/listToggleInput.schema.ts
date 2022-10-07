@@ -84,7 +84,7 @@ const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	            'onKeyDown': {
 	                label: 'Cell button key down handler',
 	                type: 'raw',
-	                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+	                options: {valueType: `(options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>`,}
 	            },
 	            /** . */
 	            'setValue': {

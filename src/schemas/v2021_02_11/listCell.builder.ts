@@ -18,7 +18,7 @@ const cellInputFields = {
 		label: 'Cell button key down handler',
 		options: {
 			valueType:
-				'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>',
+				'(options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>',
 		},
 	},
 } as const
