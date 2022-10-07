@@ -3769,6 +3769,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'canBeChanged'?: boolean| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
+				/** Cell button key down handler. */
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 				
 				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
 		}
@@ -3862,6 +3864,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'select',
 			                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
 			            },
+			            /** Cell button key down handler. */
+			            'onKeyDown': {
+			                label: 'Cell button key down handler',
+			                type: 'raw',
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+			            },
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
@@ -3904,6 +3912,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				/** Cell button key down handler. */
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 				
 				'setValue'?: ((name: string, value: boolean) => Promise<any> | any)| undefined | null
 		}
@@ -3984,6 +3994,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Cell button key down handler. */
+			            'onKeyDown': {
+			                label: 'Cell button key down handler',
+			                type: 'raw',
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
 			            },
 			            /** . */
 			            'setValue': {
@@ -4069,6 +4085,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'placeholder'?: string| undefined | null
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
+				/** Cell button key down handler. */
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 				
 				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
 		}
@@ -4162,6 +4180,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isArray: true,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoiceSchema,}
 			            },
+			            /** Cell button key down handler. */
+			            'onKeyDown': {
+			                label: 'Cell button key down handler',
+			                type: 'raw',
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+			            },
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
@@ -4206,6 +4230,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
+				/** Cell button key down handler. */
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 				
 				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
 		}
@@ -4292,6 +4318,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
+			            /** Cell button key down handler. */
+			            'onKeyDown': {
+			                label: 'Cell button key down handler',
+			                type: 'raw',
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+			            },
 			            /** . */
 			            'setValue': {
 			                type: 'raw',
@@ -4336,6 +4368,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
+				/** Cell button key down handler. */
+				'onKeyDown'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>)| undefined | null
 				
 				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
 		}
@@ -4421,6 +4455,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Placeholder',
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** Cell button key down handler. */
+			            'onKeyDown': {
+			                label: 'Cell button key down handler',
+			                type: 'raw',
+			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
 			            },
 			            /** . */
 			            'setValue': {

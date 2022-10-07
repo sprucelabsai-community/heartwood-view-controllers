@@ -92,6 +92,12 @@ const listSelectInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	                isArray: true,
 	                options: {schema: selectInputChoiceSchema_v2021_02_11,}
 	            },
+	            /** Cell button key down handler. */
+	            'onKeyDown': {
+	                label: 'Cell button key down handler',
+	                type: 'raw',
+	                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+	            },
 	            /** . */
 	            'setValue': {
 	                type: 'raw',

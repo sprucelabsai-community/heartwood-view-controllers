@@ -12,6 +12,17 @@ import toggleInputBuilder from './forms/toggleInput.builder'
 import selectInputBuilder from './selectInput.builder'
 import textBuilder from './text.builder'
 
+const cellInputFields = {
+	onKeyDown: {
+		type: 'raw',
+		label: 'Cell button key down handler',
+		options: {
+			valueType:
+				'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>',
+		},
+	},
+} as const
+
 export default buildSchema({
 	id: 'listCell',
 	name: 'List Cell',
@@ -70,20 +81,13 @@ export default buildSchema({
 					id: 'listCellButton',
 					fields: {
 						...buttonFields,
+						...cellInputFields,
 						onClick: {
 							type: 'raw',
 							label: 'Cell button click handler',
 							options: {
 								valueType:
 									'(options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>',
-							},
-						},
-						onKeyDown: {
-							type: 'raw',
-							label: 'Cell button key down handler',
-							options: {
-								valueType:
-									'(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>',
 							},
 						},
 						dropdown: {
@@ -124,6 +128,7 @@ export default buildSchema({
 					id: 'listTextInput',
 					fields: {
 						...textInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {
@@ -143,6 +148,7 @@ export default buildSchema({
 					id: 'listDateInput',
 					fields: {
 						...textInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {
@@ -162,6 +168,7 @@ export default buildSchema({
 					id: 'listSelectInput',
 					fields: {
 						...selectInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {
@@ -181,6 +188,7 @@ export default buildSchema({
 					id: 'listToggleInput',
 					fields: {
 						...toggleInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {
@@ -200,6 +208,7 @@ export default buildSchema({
 					id: 'listToggleInput',
 					fields: {
 						...toggleInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {
@@ -219,6 +228,7 @@ export default buildSchema({
 					id: 'listRatingsInput',
 					fields: {
 						...ratingsInputBuilder.fields,
+						...cellInputFields,
 						setValue: {
 							type: 'raw',
 							options: {

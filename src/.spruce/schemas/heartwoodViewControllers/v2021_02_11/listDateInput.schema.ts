@@ -85,6 +85,12 @@ const listDateInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Li
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Cell button key down handler. */
+	            'onKeyDown': {
+	                label: 'Cell button key down handler',
+	                type: 'raw',
+	                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController, key: HeartwoodTypes.KeyboardKey }) => any | Promise<any>`,}
+	            },
 	            /** . */
 	            'setValue': {
 	                type: 'raw',

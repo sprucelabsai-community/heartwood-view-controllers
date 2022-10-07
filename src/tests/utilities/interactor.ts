@@ -319,17 +319,13 @@ const interactor = {
 		const cell = renderUtil.render(options.vc.getCellVc(cellIdx))
 		const element = listUtil.getInputFromCell(cell) ?? cell.button
 
-		if (!element) {
-			assert.fail(`No input found in cell '${cellIdx}'`)
-		}
-		//@ts-ignore
-		if (!element.onKeyDown) {
-			assert.fail(
-				`Your input in cell '${cellIdx}' does not have \`onKeyDown\` set.`
-			)
-		}
+		assert.isTruthy(element, `No input found in cell '${cellIdx}'`)
 
-		//@ts-ignore
+		assert.isFunction(
+			element.onKeyDown,
+			`Your input in cell '${cellIdx}' does not have \`onKeyDown\` set.`
+		)
+
 		await element.onKeyDown({ key, rowVc: vc })
 	},
 
