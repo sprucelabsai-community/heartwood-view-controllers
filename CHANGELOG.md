@@ -1,3 +1,14 @@
+## [91.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.3.1...v91.3.2) (2022-10-07)
+
+## [91.3.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.3.0...v91.3.1) (2022-10-07)
+
+# [91.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.2.5...v91.3.0) (2022-10-06)
+
+
+### Features
+
+* list assertion on inputs for row! ([0d1b8fe](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0d1b8fe))
+
 ## [91.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.2.4...v91.2.5) (2022-10-06)
 
 ## [91.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.2.3...v91.2.4) (2022-10-06)
