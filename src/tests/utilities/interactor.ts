@@ -320,14 +320,12 @@ const interactor = {
 		const element = listUtil.getInputFromCell(cell) ?? cell.button
 
 		if (!element) {
-			assert.fail(
-				`No button, selectInput, or textInput set cell '${cellIdx}' does not have \`onKeyDown\` set.`
-			)
+			assert.fail(`No input found in cell '${cellIdx}'`)
 		}
 		//@ts-ignore
 		if (!element.onKeyDown) {
 			assert.fail(
-				`Your element in cell '${cellIdx}' does not have \`onKeyDown\` set.`
+				`Your input in cell '${cellIdx}' does not have \`onKeyDown\` set.`
 			)
 		}
 
