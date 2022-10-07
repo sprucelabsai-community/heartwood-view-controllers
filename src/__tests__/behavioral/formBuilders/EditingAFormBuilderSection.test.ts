@@ -170,7 +170,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		builderSectionVc.addField()
 
-		await interactor.keyDownOnElementInRow({
+		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
 			cellIdx: 2,
@@ -187,7 +187,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const fieldList = builderSectionVc.getFieldListVc()
 
-		await interactor.keyDownOnElementInRow({
+		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: char,
 			cellIdx: 2,
@@ -202,7 +202,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		const fieldList = builderSectionVc.getFieldListVc()
 
-		await interactor.keyDownOnElementInRow({
+		await interactor.keyDownOnInputInRow({
 			vc: fieldList.getRowVc(0),
 			key: 'Tab',
 			cellIdx: 2,

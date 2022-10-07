@@ -10,6 +10,7 @@ import {
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
+import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
@@ -294,29 +295,44 @@ const interactor = {
 		await this.click(button)
 	},
 
+	/**
+	 * @deprecated interactor.keyDownOnElementInRow(...) -> interactor.keyDownOnInputInRow(...)
+	 */
 	async keyDownOnElementInRow(options: {
 		vc: ListRowViewController
 		key: KeyboardKey
 		cellIdx: number
 	}) {
-		const model = renderUtil.render(options.vc)
-		const cell = model.cells[options.cellIdx]
-		const element = cell.button || cell.selectInput || cell.textInput
+		return this.keyDownOnInputInRow({
+			...options,
+			cell: options.cellIdx,
+		})
+	},
+
+	async keyDownOnInputInRow(options: {
+		vc: ListRowViewController
+		key: KeyboardKey
+		cell: number
+	}) {
+		const { vc, key, cell: cellIdx } = options
+
+		const cell = renderUtil.render(options.vc.getCellVc(cellIdx))
+		const element = listUtil.getInputFromCell(cell) ?? cell.button
 
 		if (!element) {
 			assert.fail(
-				`No button, selectInput, or textInput set cell '${options.cellIdx}' does not have \`onKeyDown\` set.`
+				`No button, selectInput, or textInput set cell '${cellIdx}' does not have \`onKeyDown\` set.`
 			)
 		}
 		//@ts-ignore
 		if (!element.onKeyDown) {
 			assert.fail(
-				`Your element in cell '${options.cellIdx}' does not have \`onKeyDown\` set.`
+				`Your element in cell '${cellIdx}' does not have \`onKeyDown\` set.`
 			)
 		}
 
 		//@ts-ignore
-		await element.onKeyDown({ key: options.key, rowVc: options.vc })
+		await element.onKeyDown({ key, rowVc: vc })
 	},
 
 	async clickCheckboxInRow(

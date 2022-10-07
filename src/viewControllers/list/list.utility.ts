@@ -15,9 +15,6 @@ const listUtil = {
 			inputFields.find((n) => !!cell[n] && (!name || cell[n]?.name === name))!
 		]
 	},
-	getElementFromCell(cell: ListCell) {
-		return this.getInputFromCell(cell) ?? cell.button
-	},
 }
 
 export default listUtil
