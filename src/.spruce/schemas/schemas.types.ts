@@ -3498,6 +3498,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ListRow {
 			
+				/** Column widths. */
+				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
 				/** Controller. */
 				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
 				/** Row height. */
@@ -3523,6 +3525,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** Column widths. */
+			            'columnWidths': {
+			                label: 'Column widths',
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `number | 'fill' | 'content'`,}
+			            },
 			            /** Controller. */
 			            'controller': {
 			                label: 'Controller',

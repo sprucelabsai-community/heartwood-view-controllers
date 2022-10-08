@@ -6,6 +6,18 @@ const heightChoices = [
 	{ label: 'Tall', value: 'tall' },
 	{ label: 'Content', value: 'content' },
 ]
+
+const columnWidthFields = {
+	columnWidths: {
+		type: 'raw',
+		label: 'Column widths',
+		isArray: true,
+		options: {
+			valueType: `number | 'fill' | 'content'`,
+		},
+	},
+} as const
+
 export default buildSchema({
 	id: 'list',
 	name: 'list',
@@ -25,14 +37,7 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Render row dividers',
 		},
-		columnWidths: {
-			type: 'raw',
-			label: 'Column widths',
-			isArray: true,
-			options: {
-				valueType: `number | 'fill' | 'content'`,
-			},
-		},
+		...columnWidthFields,
 		defaultRowHeight: {
 			type: 'select',
 			label: 'Row height',
@@ -50,6 +55,7 @@ export default buildSchema({
 				schema: {
 					id: 'listRow',
 					fields: {
+						...columnWidthFields,
 						controller: {
 							type: 'raw',
 							label: 'Controller',

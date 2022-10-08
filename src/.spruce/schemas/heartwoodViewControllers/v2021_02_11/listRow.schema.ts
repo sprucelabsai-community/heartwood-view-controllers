@@ -10,6 +10,13 @@ const listRowSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowS
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** Column widths. */
+	            'columnWidths': {
+	                label: 'Column widths',
+	                type: 'raw',
+	                isArray: true,
+	                options: {valueType: `number | 'fill' | 'content'`,}
+	            },
 	            /** Controller. */
 	            'controller': {
 	                label: 'Controller',
