@@ -1,3 +1,10 @@
+# [91.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.4.7...v91.5.0) (2022-10-08)
+
+
+### Features
+
+* list rows have col width now! ([931671f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/931671f))
+
 ## [91.4.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.4.6...v91.4.7) (2022-10-08)
 
 ## [91.4.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v91.4.5...v91.4.6) (2022-10-08)
