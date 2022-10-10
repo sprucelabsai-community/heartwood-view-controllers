@@ -2,6 +2,7 @@ import { buildSchema } from '@sprucelabs/schema'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import FormViewController, {
 	FormViewControllerOptions,
 } from '../../../viewControllers/form/Form.vc'
@@ -17,11 +18,6 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 			onWillChange: async () => {
 				await new Promise((r) => setTimeout(r, (timeout -= 10)))
 			},
-			sections: [
-				{
-					fields: ['field1', 'field2'],
-				},
-			],
 		})
 	}
 
@@ -101,6 +97,60 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		const inputVc = this.setupFormWithInputVc()
 		this.setField1UsingSetValueHandler(generateId())
 		assert.isUndefined(inputVc.getRenderedValue())
+	}
+
+	@test()
+	protected static async cancellingWillChangeTriggersRenderStill() {
+		this.vc = this.Vc({
+			onWillChange: async () => {
+				await new Promise((r) => setTimeout(r, 10))
+				return false
+			},
+		})
+
+		const waiting = this.setRandomValue1()
+		this.assertTriggerRenderCount(0)
+		await waiting
+		this.assertTriggerRenderCount(1)
+	}
+
+	@test()
+	protected static async triggerRenderHitsAfterWillChange() {
+		this.setValue1(generateId())
+
+		const hits: string[] = []
+
+		this.vc = this.Vc({
+			onWillChange: async () => {
+				hits.push('onWillChange')
+				return false
+			},
+		})
+
+		this.vc.triggerRender = () => {
+			hits.push('triggerRender')
+		}
+
+		//@ts-ignore
+		this.vc.deletePendingValue = () => {
+			hits.push('deletePendingValue')
+		}
+
+		await this.setRandomValue1()
+
+		assert.isEqualDeep(hits, [
+			'onWillChange',
+			'deletePendingValue',
+			'triggerRender',
+		])
+	}
+
+	private static async setRandomValue1() {
+		await this.setValue1(generateId())
+	}
+
+	private static assertTriggerRenderCount(expected: number) {
+		vcAssert.assertTriggerRenderCount(this.vc, expected)
 	}
 
 	private static setField1UsingSetValueHandler(expected: string) {
@@ -184,7 +234,11 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 			'form',
 			buildForm({
 				schema: fastTypingSchema,
-				sections: [],
+				sections: [
+					{
+						fields: ['field1', 'field2'],
+					},
+				],
 				...options,
 			})
 		)

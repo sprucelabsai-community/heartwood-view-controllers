@@ -155,6 +155,7 @@ export default class FormViewController<
 
 			if (shouldBail === false) {
 				this.deletePendingValue(name)
+				this.triggerRender()
 				return
 			}
 		}
