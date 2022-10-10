@@ -2,7 +2,6 @@ import { buildSchema } from '@sprucelabs/schema'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert'
 import FormViewController, {
 	FormViewControllerOptions,
 } from '../../../viewControllers/form/Form.vc'
@@ -104,14 +103,24 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		this.vc = this.Vc({
 			onWillChange: async () => {
 				await new Promise((r) => setTimeout(r, 10))
+
 				return false
 			},
 		})
 
+		let hitCount = 0
+
+		//@ts-ignore
+		this.vc.triggerRenderForInput = () => {
+			hitCount++
+		}
+
 		const waiting = this.setRandomValue1()
-		this.assertTriggerRenderCount(0)
+		assert.isEqual(hitCount, 1)
+
 		await waiting
-		this.assertTriggerRenderCount(1)
+
+		assert.isEqual(hitCount, 2)
 	}
 
 	@test()
@@ -127,8 +136,9 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 			},
 		})
 
-		this.vc.triggerRender = () => {
-			hits.push('triggerRender')
+		//@ts-ignore
+		this.vc.triggerRenderForInput = (name) => {
+			hits.push(name)
 		}
 
 		//@ts-ignore
@@ -139,18 +149,15 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 		await this.setRandomValue1()
 
 		assert.isEqualDeep(hits, [
+			'field1',
 			'onWillChange',
 			'deletePendingValue',
-			'triggerRender',
+			'field1',
 		])
 	}
 
 	private static async setRandomValue1() {
 		await this.setValue1(generateId())
-	}
-
-	private static assertTriggerRenderCount(expected: number) {
-		vcAssert.assertTriggerRenderCount(this.vc, expected)
 	}
 
 	private static setField1UsingSetValueHandler(expected: string) {

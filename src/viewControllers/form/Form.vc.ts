@@ -147,7 +147,7 @@ export default class FormViewController<
 		this.assertValidFieldName(name)
 
 		this.pendingSets[name] = value
-		this.triggerRenderForField(name)
+		this.triggerRenderForInput(name)
 
 		if (shouldCallSetValueOnFieldVc) {
 			//@ts-ignore
@@ -155,7 +155,7 @@ export default class FormViewController<
 
 			if (shouldBail === false) {
 				this.deletePendingValue(name)
-				this.triggerRender()
+				this.triggerRenderForInput(name)
 				return
 			}
 		}
@@ -201,7 +201,7 @@ export default class FormViewController<
 
 		await this.emitOnChange(errorsByField)
 
-		this.triggerRenderForField(name)
+		this.triggerRenderForInput(name)
 		this.triggerRenderOnFooter?.()
 	}
 
@@ -209,7 +209,7 @@ export default class FormViewController<
 		delete this.pendingSets[name]
 	}
 
-	private triggerRenderForField(name: SchemaFieldNames<S>) {
+	private triggerRenderForInput(name: SchemaFieldNames<S>) {
 		this.getTriggerRenderForInput(name)?.()
 	}
 
