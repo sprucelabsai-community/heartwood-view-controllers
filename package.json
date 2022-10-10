@@ -157,7 +157,7 @@
           "testMap": {
             "canMakeDotSyntaxUpdates3": "H10",
             "noPendingSetInRenderedValueIfNotAlreadySet": "H6",
-            "": ""
+            "cancellingWillChangeTriggersRender": "J2"
           }
         }
       ]

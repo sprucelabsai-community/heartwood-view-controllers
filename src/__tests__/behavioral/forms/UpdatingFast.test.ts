@@ -115,8 +115,8 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async triggerRenderHitsAfterWillChange() {
-		this.setValue1(generateId())
+	protected static async cancellingWillChangeTriggersRender() {
+		await this.setValue1(generateId())
 
 		const hits: string[] = []
 
