@@ -75,7 +75,6 @@ export default class AssertingMapsTest extends AbstractViewControllerTest {
 
 	private static addMapSection() {
 		const section = { map: this.render(this.mapVc) }
-
 		this.addSection(section)
 	}
 
