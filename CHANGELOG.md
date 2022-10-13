@@ -1,3 +1,10 @@
+# [95.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v94.0.4...v95.0.0) (2022-10-13)
+
+
+### Breaking Changes
+
+* upgrade ([997c024](https://github.com/sprucelabsai/heartwood-view-controllers/commit/997c024))
+
 ## [94.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v94.0.3...v94.0.4) (2022-10-13)
 
 ## [94.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v94.0.2...v94.0.3) (2022-10-12)
