@@ -1,3 +1,10 @@
+# [97.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.0.0...v97.1.0) (2022-10-21)
+
+
+### Features
+
+* touch view support ([233b5a8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/233b5a8))
+
 # [97.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v96.0.20...v97.0.0) (2022-10-21)
 
 
