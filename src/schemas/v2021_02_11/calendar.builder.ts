@@ -166,6 +166,13 @@ export default buildSchema({
 					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
 			},
 		},
+		onTouchView: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
+			},
+		},
 		onClickEvent: {
 			type: 'raw',
 			options: {
