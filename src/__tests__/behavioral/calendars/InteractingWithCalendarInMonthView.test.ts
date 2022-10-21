@@ -36,7 +36,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	@test()
 	protected static async canClickDayView() {
 		this.vc = this.Vc({
-			onClick: () => {},
+			onClickView: () => {},
 		})
 
 		await interactor.clickCalendarMonthView(this.vc, new Date().getTime())
@@ -55,7 +55,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async callsOnClick() {
 		let wasHit = false
 		this.vc = this.Vc({
-			onClick: () => {
+			onClickView: () => {
 				wasHit = true
 			},
 		})
@@ -73,7 +73,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async passesExpectedPayload(date: number) {
 		let passedOptions: any
 		this.vc = this.Vc({
-			onClick: (options) => {
+			onClickView: (options) => {
 				passedOptions = options
 			},
 		})

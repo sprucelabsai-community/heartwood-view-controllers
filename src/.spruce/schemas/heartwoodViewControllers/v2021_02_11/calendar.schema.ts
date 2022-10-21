@@ -114,7 +114,7 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                options: {valueType: `(date: number) => void | Promise<void>`,}
 	            },
 	            /** . */
-	            'onClick': {
+	            'onClickView': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 	            },
@@ -137,6 +137,11 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	            'onSelectEvent': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'onLongPressView': {
+	                type: 'raw',
+	                options: {valueType: `() => void | boolean`,}
 	            },
 	            /** . */
 	            'shifts': {

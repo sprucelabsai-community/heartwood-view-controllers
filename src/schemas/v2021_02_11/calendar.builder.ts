@@ -159,7 +159,7 @@ export default buildSchema({
 				valueType: '(date: number) => void | Promise<void>',
 			},
 		},
-		onClick: {
+		onClickView: {
 			type: 'raw',
 			options: {
 				valueType:
@@ -192,6 +192,12 @@ export default buildSchema({
 			options: {
 				valueType:
 					'(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>',
+			},
+		},
+		onLongPressView: {
+			type: 'raw',
+			options: {
+				valueType: '() => void | boolean',
 			},
 		},
 		shifts: {

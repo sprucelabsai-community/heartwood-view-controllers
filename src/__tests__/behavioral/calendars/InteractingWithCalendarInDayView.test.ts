@@ -51,7 +51,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static async throwsWithNoOnClick() {
-		const [person] = this.VcWithPeople(1, { onClick: null })
+		const [person] = this.VcWithPeople(1, { onClickView: null })
 
 		const err = await assert.doesThrowAsync(() =>
 			this.clickCalendar({ personId: person.id })
@@ -79,7 +79,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		let passedOptions: any
 
 		const [person] = this.VcWithPeople(1, {
-			onClick: (options) => {
+			onClickView: (options) => {
 				passedOptions = options
 				wasHit = true
 			},
@@ -398,7 +398,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		this.vc = this.Controller('calendar', {
 			view: 'day',
 			people: [],
-			onClick: () => {},
+			onClickView: () => {},
 			onClickEvent: (options) => {
 				this.lastOnClickOptions = options
 			},

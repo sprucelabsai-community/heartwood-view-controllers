@@ -547,11 +547,11 @@ const interactor = {
 		)
 
 		assert.isFunction(
-			model.onClick,
-			`You have to set 'onClick' on your calendar!`
+			model.onClickView,
+			`You have to set 'onClickView' on your calendar!`
 		)
 
-		await model.onClick?.({
+		await model.onClickView?.({
 			dateTimeMs: dateUtil.getStartOfDay(dateTimeMs),
 		})
 	},
@@ -587,11 +587,11 @@ const interactor = {
 		)
 
 		assert.isFunction(
-			model.onClick,
+			model.onClickView,
 			`You have to set 'onClick' on your calendar!`
 		)
 
-		await model.onClick?.({
+		await model.onClickView?.({
 			dateTimeMs,
 			personId: personMatch.id,
 		})

@@ -5331,7 +5331,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onChangeStartDate'?: ((date: number) => void | Promise<void>)| undefined | null
 				
-				'onClick'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 				
 				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
 				
@@ -5340,6 +5340,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
 				
 				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				
+				'onLongPressView'?: (() => void | boolean)| undefined | null
 				
 				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
 		}
@@ -5451,7 +5453,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `(date: number) => void | Promise<void>`,}
 			            },
 			            /** . */
-			            'onClick': {
+			            'onClickView': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 			            },
@@ -5474,6 +5476,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onSelectEvent': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onLongPressView': {
+			                type: 'raw',
+			                options: {valueType: `() => void | boolean`,}
 			            },
 			            /** . */
 			            'shifts': {
