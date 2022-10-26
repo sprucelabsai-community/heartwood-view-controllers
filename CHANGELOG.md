@@ -1,3 +1,10 @@
+# [97.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.14...v97.2.0) (2022-10-26)
+
+
+### Features
+
+* isSticky in footers! ([fef155d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fef155d))
+
 ## [97.1.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.13...v97.1.14) (2022-10-25)
 
 ## [97.1.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.12...v97.1.13) (2022-10-25)
