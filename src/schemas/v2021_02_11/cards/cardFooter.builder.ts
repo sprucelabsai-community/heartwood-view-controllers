@@ -29,6 +29,10 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Loading',
 		},
+		isSticky: {
+			type: 'boolean',
+			label: 'Sticky',
+		},
 		isEnabled: {
 			type: 'boolean',
 			label: 'Loading',
