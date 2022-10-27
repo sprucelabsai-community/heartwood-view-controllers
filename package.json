@@ -88,7 +88,7 @@
     "@sprucelabs/spruce-skill-utils": "^28.0.28",
     "@sprucelabs/test-utils": "^3.2.40",
     "@swc/core": "1.2.103",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "dotenv": "^16.0.3",
     "esbuild": "^0.15.12",
