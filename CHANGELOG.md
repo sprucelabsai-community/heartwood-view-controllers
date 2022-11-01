@@ -1,3 +1,10 @@
+# [97.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.15...v97.3.0) (2022-11-01)
+
+
+### Features
+
+* login vc passes through id to view model ([e3e254f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/e3e254f))
+
 ## [97.2.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.14...v97.2.15) (2022-11-01)
 
 ## [97.2.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.13...v97.2.14) (2022-11-01)
