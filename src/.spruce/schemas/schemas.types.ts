@@ -3263,6 +3263,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButton[]| undefined | null
 				/** Loading. */
 				'isBusy'?: boolean| undefined | null
+				/** Sticky. */
+				'isSticky'?: boolean| undefined | null
 				/** Loading. */
 				'isEnabled'?: boolean| undefined | null
 				/** Show border. */
@@ -3292,6 +3294,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Loading. */
 			            'isBusy': {
 			                label: 'Loading',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Sticky. */
+			            'isSticky': {
+			                label: 'Sticky',
 			                type: 'boolean',
 			                options: undefined
 			            },

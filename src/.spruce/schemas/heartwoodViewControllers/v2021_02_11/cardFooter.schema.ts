@@ -29,6 +29,12 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Sticky. */
+	            'isSticky': {
+	                label: 'Sticky',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Loading. */
 	            'isEnabled': {
 	                label: 'Loading',

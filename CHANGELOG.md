@@ -1,3 +1,40 @@
+## [97.2.15](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.14...v97.2.15) (2022-11-01)
+
+## [97.2.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.13...v97.2.14) (2022-11-01)
+
+## [97.2.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.12...v97.2.13) (2022-11-01)
+
+## [97.2.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.11...v97.2.12) (2022-11-01)
+
+## [97.2.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.10...v97.2.11) (2022-10-31)
+
+## [97.2.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.9...v97.2.10) (2022-10-31)
+
+## [97.2.9](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.8...v97.2.9) (2022-10-31)
+
+## [97.2.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.7...v97.2.8) (2022-10-30)
+
+## [97.2.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.6...v97.2.7) (2022-10-30)
+
+## [97.2.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.5...v97.2.6) (2022-10-27)
+
+## [97.2.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.4...v97.2.5) (2022-10-27)
+
+## [97.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.3...v97.2.4) (2022-10-26)
+
+## [97.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.2...v97.2.3) (2022-10-26)
+
+## [97.2.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.1...v97.2.2) (2022-10-26)
+
+## [97.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.2.0...v97.2.1) (2022-10-26)
+
+# [97.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.14...v97.2.0) (2022-10-26)
+
+
+### Features
+
+* isSticky in footers! ([fef155d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/fef155d))
+
 ## [97.1.14](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.13...v97.1.14) (2022-10-25)
 
 ## [97.1.13](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.1.12...v97.1.13) (2022-10-25)
