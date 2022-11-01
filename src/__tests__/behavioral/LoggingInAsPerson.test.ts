@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
@@ -156,6 +156,13 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 		const factory = this.Factory()
 		const login = factory.Controller('login', {})
 		assert.isTruthy(login)
+	}
+
+	@test()
+	protected static async passesTHroughId() {
+		const id = generateId()
+		const vc = this.Factory().Controller('login', { id })
+		assert.isEqual(this.render(vc).id, id)
 	}
 
 	@test()

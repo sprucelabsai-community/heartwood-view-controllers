@@ -175,6 +175,7 @@ export default class LoginViewController
 		return {
 			//@ts-ignore
 			controller: this,
+			id: this._id,
 			header: {
 				title:
 					this.currentSlide === 0
