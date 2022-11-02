@@ -171,6 +171,10 @@ export default class LoginViewController
 		this.loginForm.setIsBusy(isBusy)
 	}
 
+	public getLoginForm() {
+		return this.loginForm
+	}
+
 	public render(): ViewModel {
 		return {
 			//@ts-ignore
@@ -210,10 +214,6 @@ export default class LoginViewController
 				],
 			},
 		}
-	}
-
-	public getLoginForm() {
-		return this.loginForm
 	}
 }
 
