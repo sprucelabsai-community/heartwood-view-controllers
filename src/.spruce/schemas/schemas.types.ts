@@ -5341,6 +5341,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 				
+				'handleLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				
 				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
 				
 				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
@@ -5464,6 +5466,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'onClickView': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'handleLongPressViewDrop': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 			            },
