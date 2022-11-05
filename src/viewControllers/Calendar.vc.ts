@@ -257,14 +257,14 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	public async removeEvent(id: string) {
 		this.getEvent(id)
 
-		if (this.selectedEventId === id) {
-			await this.deselectEvent()
-		}
+		await this.renderOnce(async () => {
+			if (this.selectedEventId === id) {
+				await this.deselectEvent()
+			}
 
-		delete this.eventsById[id]
-		delete this.vcsById[id]
-
-		this.triggerRender()
+			delete this.eventsById[id]
+			delete this.vcsById[id]
+		})
 	}
 
 	public async removeEvents(ids: string[]) {
