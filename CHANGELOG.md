@@ -1,3 +1,10 @@
+# [97.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.3.12...v97.4.0) (2022-11-05)
+
+
+### Features
+
+* handleLongPressViewDrop on calendar ([f2a7e8d](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f2a7e8d))
+
 ## [97.3.12](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.3.11...v97.3.12) (2022-11-04)
 
 ## [97.3.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.3.10...v97.3.11) (2022-11-04)
