@@ -119,7 +119,7 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 	            },
 	            /** . */
-	            'handleLongPressViewDrop': {
+	            'onLongPressViewDrop': {
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
 	            },

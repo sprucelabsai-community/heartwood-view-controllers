@@ -166,7 +166,7 @@ export default buildSchema({
 					'(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>',
 			},
 		},
-		handleLongPressViewDrop: {
+		onLongPressViewDrop: {
 			type: 'raw',
 			options: {
 				valueType:
