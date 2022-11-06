@@ -3,6 +3,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
+	ClickCalendarViewOptions,
 	DropEventOptions,
 	KeyboardKey,
 	ViewController,
@@ -636,6 +637,19 @@ const interactor = {
 		)
 
 		await this.click(button)
+	},
+
+	async longPressDropOnView(
+		vc: ViewController<Calendar>,
+		options?: ClickCalendarViewOptions
+	) {
+		const { onLongPressViewDrop } = renderUtil.render(vc)
+
+		assert.isTruthy(
+			onLongPressViewDrop,
+			`You gotta set 'onLongPressViewDrop' in your calendar's constructor options.`
+		)
+		await onLongPressViewDrop?.({ ...options })
 	},
 }
 

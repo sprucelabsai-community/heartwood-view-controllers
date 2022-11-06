@@ -1,12 +1,12 @@
 import { dateUtil, lunch } from '@sprucelabs/calendar-utils'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import {
-	CalendarViewController,
-	CalendarViewControllerOptions,
-	interactor,
-} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import interactor from '../../../tests/utilities/interactor'
+import { ClickCalendarViewOptions } from '../../../types/calendar.types'
+import CalendarViewController, {
+	CalendarViewControllerOptions,
+} from '../../../viewControllers/Calendar.vc'
 
 export class InteractingWithCalendarInMonthViewTest extends AbstractViewControllerTest {
 	private static vc: CalendarViewController
@@ -111,6 +111,29 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		})
 
 		assert.isEqual(this.vc.getStartDate(), startDate)
+	}
+
+	@test()
+	protected static async throwsWithMissingOnPress() {
+		await assert.doesThrowAsync(() => interactor.longPressDropOnView(this.vc))
+	}
+
+	@test()
+	protected static async canSimulateLongPressDrop() {
+		let passedOptions: ClickCalendarViewOptions | undefined
+
+		this.vc = this.Vc({
+			onLongPressViewDrop: (options) => {
+				passedOptions = options
+			},
+		})
+
+		const options = {
+			dateTimeMs: new Date().getTime(),
+			personId: generateId(),
+		}
+		await interactor.longPressDropOnView(this.vc, options)
+		assert.isEqualDeep(passedOptions, options)
 	}
 
 	protected static Vc(options?: CalendarViewControllerOptions) {
