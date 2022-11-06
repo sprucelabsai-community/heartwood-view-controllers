@@ -1,3 +1,10 @@
+# [97.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.4.7...v97.5.0) (2022-11-06)
+
+
+### Features
+
+* you can now simulate long press drop on views with the interactor! ([6838eda](https://github.com/sprucelabsai/heartwood-view-controllers/commit/6838eda))
+
 ## [97.4.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.4.6...v97.4.7) (2022-11-06)
 
 ## [97.4.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.4.5...v97.4.6) (2022-11-06)
