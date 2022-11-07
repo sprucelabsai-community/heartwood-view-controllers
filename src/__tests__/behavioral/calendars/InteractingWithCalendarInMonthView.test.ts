@@ -115,7 +115,9 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static async throwsWithMissingOnPress() {
-		await assert.doesThrowAsync(() => interactor.longPressDropOnView(this.vc))
+		await assert.doesThrowAsync(() =>
+			interactor.longPressDropOnMonthView(this.vc)
+		)
 	}
 
 	@test()
@@ -132,7 +134,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			dateTimeMs: new Date().getTime(),
 			personId: generateId(),
 		}
-		await interactor.longPressDropOnView(this.vc, options)
+		await interactor.longPressDropOnMonthView(this.vc, options)
 		assert.isEqualDeep(passedOptions, options)
 	}
 

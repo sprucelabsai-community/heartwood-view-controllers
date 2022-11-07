@@ -639,7 +639,7 @@ const interactor = {
 		await this.click(button)
 	},
 
-	async longPressDropOnView(
+	async longPressDropOnMonthView(
 		vc: ViewController<Calendar>,
 		options?: ClickCalendarViewOptions
 	) {
