@@ -183,7 +183,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public getHighlightedEvent() {
-		return this.eventsById[this.highlightedEventId!]
+		return this.highlightedEventId
+			? this.eventsById[this.highlightedEventId]
+			: undefined
 	}
 
 	public async deselectEvent() {
