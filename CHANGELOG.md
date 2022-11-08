@@ -1,3 +1,12 @@
+## [97.7.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.7.0...v97.7.1) (2022-11-08)
+
+# [97.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.6.0...v97.7.0) (2022-11-08)
+
+
+### Features
+
+* can highlight/unhighlight events ([afa64fd](https://github.com/sprucelabsai/heartwood-view-controllers/commit/afa64fd))
+
 # [97.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.5.5...v97.6.0) (2022-11-08)
 
 
