@@ -1,14 +1,16 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import AbstractCalendarEventViewController from '../../../viewControllers/AbstractCalendarEvent.vc'
-import CalendarViewController from '../../../viewControllers/Calendar.vc'
+import CalendarViewController, {
+	CalendarViewControllerOptions,
+} from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
@@ -34,9 +36,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('calendar', {
-			people: [this.firstPerson],
-		})
+		this.vc = this.Vc()
 	}
 
 	@test()
@@ -1027,6 +1027,38 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 4)
 	}
 
+	@test()
+	protected static async cantHighlightBadEvent() {
+		assert.doesThrow(() => this.vc.highlightEvent(generateId()))
+	}
+
+	@test()
+	protected static async canHighlightEvent() {
+		const e = this.addEventAndHighlightIt()
+		const { highlightedEvent } = this.render(this.vc)
+		assert.isEqualDeep(highlightedEvent, e)
+	}
+
+	@test()
+	protected static async canUnhighlightEvent() {
+		this.addEventAndHighlightIt()
+		this.vc.unHighlightEvent()
+		const { highlightedEvent } = this.render(this.vc)
+		assert.isFalsy(highlightedEvent)
+	}
+
+	@test()
+	protected static async highlightingTriggersRender() {
+		this.addEventAndHighlightIt()
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	private static addEventAndHighlightIt() {
+		const e = this.addEvent()
+		this.vc.highlightEvent(e.id)
+		return e
+	}
+
 	private static add3Events(): [any, any, any] {
 		return [this.addEvent(), this.addEvent(), this.addEvent()]
 	}
@@ -1101,6 +1133,15 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 	private static get events() {
 		return this.vc.getEvents()
+	}
+
+	private static Vc(
+		options?: Partial<CalendarViewControllerOptions>
+	): CalendarViewController {
+		return this.Controller('calendar', {
+			people: [this.firstPerson],
+			...options,
+		})
 	}
 
 	private static assertChangesArMade(

@@ -99,6 +99,12 @@ export default buildSchema({
 				schema: calendarEventBuilder,
 			},
 		},
+		highlightedEvent: {
+			type: 'schema',
+			options: {
+				schema: calendarEventBuilder,
+			},
+		},
 		selectedDates: {
 			type: 'schema',
 			isArray: true,

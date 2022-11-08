@@ -5327,6 +5327,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
 				
+				'highlightedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
+				
 				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
 				/** Timezone offset. In milliseconds */
 				'timezoneOffsetMs'?: number| undefined | null
@@ -5423,6 +5425,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'selectedEvent': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
+			            },
+			            /** . */
+			            'highlightedEvent': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
 			            },

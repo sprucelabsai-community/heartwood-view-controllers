@@ -35,6 +35,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	private eventsById: Record<string, Event> = {}
 	private defaultEventVcId?: string
 	private selectedEventId?: string
+	private highlightedEventId?: string
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -169,6 +170,20 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.selectedEventId = id
 		this.triggerRender()
 		await this.model?.onSelectEvent?.(event)
+	}
+
+	public highlightEvent(id: string) {
+		this.getEvent(id)
+		this.highlightedEventId = id
+		this.triggerRender()
+	}
+
+	public unHighlightEvent() {
+		this.highlightedEventId = undefined
+	}
+
+	public getHighlightedEvent() {
+		return this.eventsById[this.highlightedEventId!]
 	}
 
 	public async deselectEvent() {
@@ -500,6 +515,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			controller: this,
 			selectedDates: this.model.selectedDates,
 			selectedEvent: this.getSelectedEvent(),
+			highlightedEvent: this.getHighlightedEvent(),
 		}
 	}
 }
