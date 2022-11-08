@@ -253,12 +253,15 @@ export type Slide =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+export type Calendar =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 export type CardFooter =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 export type FormBuilder =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
 export type FormBuilderPage =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
+
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 

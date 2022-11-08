@@ -17,6 +17,7 @@ import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
 import { getVcName, pluckAllFromCard } from './assertSupport'
 import { ButtonViewController } from './ButtonViewController'
+import calendarInteractor from './calendarInteractor'
 import vcAssert from './vcAssert'
 
 type CardVc =
@@ -639,17 +640,14 @@ const interactor = {
 		await this.click(button)
 	},
 
+	/**
+	 * @deprecated interactor.longPressDropOnMonthView() -> calendarInteractor.longPressDropOnMonthView()
+	 */
 	async longPressDropOnMonthView(
 		vc: ViewController<Calendar>,
 		options?: ClickCalendarViewOptions
 	) {
-		const { onLongPressViewDrop } = renderUtil.render(vc)
-
-		assert.isTruthy(
-			onLongPressViewDrop,
-			`You gotta set 'onLongPressViewDrop' in your calendar's constructor options.`
-		)
-		await onLongPressViewDrop?.({ ...options })
+		return calendarInteractor.longPressThenDrop(vc, options)
 	},
 }
 
