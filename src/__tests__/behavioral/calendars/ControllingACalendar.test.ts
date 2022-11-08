@@ -1053,6 +1053,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
+	@test()
+	protected static async getHighlightedEvent() {
+		const e = this.addEventAndHighlightIt()
+		assert.isEqualDeep(this.vc.getHighlightedEvent(), e)
+	}
+
 	private static addEventAndHighlightIt() {
 		const e = this.addEvent()
 		this.vc.highlightEvent(e.id)
