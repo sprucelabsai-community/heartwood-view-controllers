@@ -193,6 +193,13 @@ export default buildSchema({
 					'(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>',
 			},
 		},
+		onLongPressEvent: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>',
+			},
+		},
 		onDropEvent: {
 			type: 'raw',
 			options: {

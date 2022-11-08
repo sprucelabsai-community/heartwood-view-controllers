@@ -5349,6 +5349,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
 				
+				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
+				
 				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>)| undefined | null
 				
 				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
@@ -5488,6 +5490,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            },
 			            /** . */
 			            'onClickEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onLongPressEvent': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
 			            },
