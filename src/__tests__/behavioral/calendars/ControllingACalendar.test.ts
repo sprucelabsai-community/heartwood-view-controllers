@@ -1027,44 +1027,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 4)
 	}
 
-	@test()
-	protected static async cantHighlightBadEvent() {
-		assert.doesThrow(() => this.vc.highlightEvent(generateId()))
-	}
-
-	@test()
-	protected static async canHighlightEvent() {
-		const e = this.addEventAndHighlightIt()
-		const { highlightedEvent } = this.render(this.vc)
-		assert.isEqualDeep(highlightedEvent, e)
-	}
-
-	@test()
-	protected static async canUnhighlightEvent() {
-		this.addEventAndHighlightIt()
-		this.vc.unHighlightEvent()
-		const { highlightedEvent } = this.render(this.vc)
-		assert.isFalsy(highlightedEvent)
-	}
-
-	@test()
-	protected static async highlightingTriggersRender() {
-		this.addEventAndHighlightIt()
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
-	}
-
-	@test()
-	protected static async getHighlightedEvent() {
-		const e = this.addEventAndHighlightIt()
-		assert.isEqualDeep(this.vc.getHighlightedEvent(), e)
-	}
-
-	private static addEventAndHighlightIt() {
-		const e = this.addEvent()
-		this.vc.highlightEvent(e.id)
-		return e
-	}
-
 	private static add3Events(): [any, any, any] {
 		return [this.addEvent(), this.addEvent(), this.addEvent()]
 	}

@@ -76,11 +76,6 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                options: {schema: calendarEventSchema_v2021_02_11,}
 	            },
 	            /** . */
-	            'highlightedEvent': {
-	                type: 'schema',
-	                options: {schema: calendarEventSchema_v2021_02_11,}
-	            },
-	            /** . */
 	            'selectedDates': {
 	                type: 'schema',
 	                isArray: true,
