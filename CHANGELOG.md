@@ -1,3 +1,10 @@
+# [98.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.8.4...v98.0.0) (2022-11-12)
+
+
+### Breaking Changes
+
+* no more highlighted event ([bed7c85](https://github.com/sprucelabsai/heartwood-view-controllers/commit/bed7c85))
+
 ## [97.8.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.8.3...v97.8.4) (2022-11-09)
 
 ## [97.8.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v97.8.2...v97.8.3) (2022-11-09)
