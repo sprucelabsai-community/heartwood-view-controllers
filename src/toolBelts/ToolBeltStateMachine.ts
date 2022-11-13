@@ -128,21 +128,24 @@ export default class ToolBeltStateMachine<
 		expandedUpdates: Partial<Context>
 	} {
 		const typesToClone = ['Object']
-		let expandedUpdates = cloneDeep(updates, (item) => {
+		let clonedUpdates = cloneDeep(updates, (item) => {
 			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
 				return item
 			}
 		})
 
-		for (const key of Object.keys(expandedUpdates)) {
+		const newContext = { ...this.context } as Context
+
+		for (const key of Object.keys(clonedUpdates)) {
 			if (key.includes('.')) {
-				set(expandedUpdates, key, expandedUpdates[key])
-				delete expandedUpdates[key]
+				set(newContext, key, clonedUpdates[key])
+			} else {
+				//@ts-ignore
+				newContext[key] = clonedUpdates[key]
 			}
 		}
 
-		const newContext = { ...this.context, ...expandedUpdates } as Context
-		return { newContext, expandedUpdates }
+		return { newContext, expandedUpdates: clonedUpdates }
 	}
 
 	private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {

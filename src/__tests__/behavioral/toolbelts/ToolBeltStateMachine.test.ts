@@ -353,6 +353,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			{
 				hey: {
 					you: 'then',
+					yes: 'please',
 				},
 				hello: 'world',
 			},
@@ -360,6 +361,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			{
 				hey: {
 					you: 'later',
+					yes: 'please',
 				},
 				hello: 'world',
 			}
