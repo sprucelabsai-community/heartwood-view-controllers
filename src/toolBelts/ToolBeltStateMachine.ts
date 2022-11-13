@@ -89,7 +89,7 @@ export default class ToolBeltStateMachine<
 	}
 
 	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
-		let { newContext, expandedUpdates } =
+		let { newContext, clonedUpdates: expandedUpdates } =
 			this.getContextMixingInUpdates(updates)
 
 		if (deepEqual(this.context, newContext)) {
@@ -125,16 +125,11 @@ export default class ToolBeltStateMachine<
 
 	private getContextMixingInUpdates(updates: Partial<Context>): {
 		newContext: Context
-		expandedUpdates: Partial<Context>
+		clonedUpdates: Partial<Context>
 	} {
-		const typesToClone = ['Object']
-		let clonedUpdates = cloneDeep(updates, (item) => {
-			if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
-				return item
-			}
-		})
+		let clonedUpdates = clone(updates)
 
-		const newContext = { ...this.context } as Context
+		const newContext = { ...clone(this.context ?? {}) } as Context
 
 		for (const key of Object.keys(clonedUpdates)) {
 			if (key.includes('.')) {
@@ -145,7 +140,7 @@ export default class ToolBeltStateMachine<
 			}
 		}
 
-		return { newContext, expandedUpdates: clonedUpdates }
+		return { newContext, clonedUpdates }
 	}
 
 	private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {
@@ -269,3 +264,14 @@ const eventContract = buildEventContract({
 })
 
 type EventContract = typeof eventContract
+function clone<Context extends Record<string, any> = Record<string, any>>(
+	updates: Partial<Context>
+) {
+	const typesToClone = ['Object']
+	let clonedUpdates = cloneDeep(updates, (item) => {
+		if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
+			return item
+		}
+	})
+	return clonedUpdates
+}

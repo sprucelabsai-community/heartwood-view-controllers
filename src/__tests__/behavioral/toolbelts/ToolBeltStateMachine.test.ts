@@ -368,6 +368,33 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		)
 	}
 
+	@test()
+	protected static async updatingUsingDotSyntaxTriggersChangeListeners() {
+		await this.sm.updateContext({
+			hello: {
+				world: true,
+				test: 'again',
+			},
+		})
+
+		let hitCount = 0
+
+		await this.sm.on('did-update-context', () => {
+			hitCount++
+		})
+
+		await this.sm.on('will-update-context', () => {
+			hitCount++
+			return {}
+		})
+
+		await this.sm.updateContext({
+			'hello.world': false,
+		})
+
+		assert.isEqual(hitCount, 2)
+	}
+
 	private static async assertSettingContextThenUpdatingEquals(
 		starting: Record<string, any>,
 		updates: Record<string, any>,
