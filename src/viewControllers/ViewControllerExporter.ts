@@ -14,7 +14,7 @@ export default class ViewControllerExporter {
 
 	public static Exporter(cwd: string) {
 		if (!cwd) {
-			throw new SchemaError({ code: 'MISSING_PARAMETERS', parameters: ['cwd'] })
+			assertOptions({ cwd }, ['cwd'])
 		}
 		return new this(cwd)
 	}
