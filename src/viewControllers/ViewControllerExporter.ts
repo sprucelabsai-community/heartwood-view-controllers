@@ -2,32 +2,33 @@ import pathUtil from 'path'
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
-import { Configuration, DefinePlugin, webpack } from 'webpack'
+import { Compiler, Configuration, DefinePlugin, Stats, webpack } from 'webpack'
 import SpruceError from '../errors/SpruceError'
 
 export default class ViewControllerExporter {
 	private cwd: string
+
 	private constructor(cwd: string) {
 		this.cwd = cwd
 	}
 	private config: Configuration = {}
 
 	public static Exporter(cwd: string) {
-		if (!cwd) {
-			assertOptions({ cwd }, ['cwd'])
-		}
+		assertOptions({ cwd }, ['cwd'])
 		return new this(cwd)
 	}
 
-	public async export(options: {
-		source: string
-		destination: string
-		profilerStatsDestination?: string
-		defines?: any
-	}): Promise<void> {
+	public async export(options: ExportOptions): Promise<void> {
 		this.assertValidExportOptions(options)
 
-		const { source, destination, profilerStatsDestination, defines } = options
+		const {
+			source,
+			destination,
+			profilerStatsDestination,
+			defines,
+			shouldWatch,
+			onIncrementalBuildCompleted,
+		} = options
 
 		this.assertValidSource(source)
 
@@ -35,15 +36,19 @@ export default class ViewControllerExporter {
 
 		this.assertValidDestinationFilename(filename)
 
-		this.config = this.buildConfiguration(
-			source,
-			dirname,
-			filename,
-			!!profilerStatsDestination,
-			defines
-		)
+		this.config = this.buildConfiguration({
+			entry: source,
+			destinationDirname: dirname,
+			destinationFilename: filename,
+			shouldProfile: !!profilerStatsDestination,
+			defines,
+		})
 
-		await this.webpack(this.config, profilerStatsDestination)
+		await this.webpack({
+			shouldWatch,
+			profilerStatsDestination,
+			onIncrementalBuildCompleted,
+		})
 	}
 
 	public getCwd(): string {
@@ -60,9 +65,31 @@ export default class ViewControllerExporter {
 		return { filename, dirname }
 	}
 
-	private webpack(config: Configuration, profilerStatsDestination?: string) {
+	private webpack(options: {
+		profilerStatsDestination?: string
+		shouldWatch?: boolean
+		onIncrementalBuildCompleted?: OnIncrementalBuildHandler
+	}): Promise<Compiler> {
+		const {
+			profilerStatsDestination,
+			shouldWatch,
+			onIncrementalBuildCompleted,
+		} = options
+
 		return new Promise((resolve: any, reject) => {
-			webpack(config, (err, stats) => {
+			const compiler = this.WebPack()
+			let isFirst = true
+
+			const cb: Callback = (err, stats) => {
+				if (!isFirst) {
+					onIncrementalBuildCompleted?.(
+						//@ts-ignore
+						stats?.compilation?.errors?.[0]?.error ?? undefined
+					)
+					return
+				}
+				isFirst = false
+
 				if (err) {
 					reject(err)
 					return
@@ -95,18 +122,36 @@ export default class ViewControllerExporter {
 					)
 				}
 
-				resolve()
-			})
+				resolve(compiler)
+			}
+
+			if (shouldWatch) {
+				compiler.watch({}, cb)
+			} else {
+				compiler.run(cb)
+			}
 		})
 	}
 
-	private buildConfiguration(
-		entry: string,
-		destinationDirname: string,
-		destinationFilename: string,
-		shouldProfile?: boolean,
+	private WebPack() {
+		return webpack(this.config)
+	}
+
+	private buildConfiguration(options: {
+		entry: string
+		destinationDirname: string
+		destinationFilename: string
+		shouldProfile?: boolean
 		defines?: any
-	): Configuration {
+	}): Configuration {
+		const {
+			entry,
+			destinationDirname,
+			destinationFilename,
+			shouldProfile,
+			defines,
+		} = options
+
 		return {
 			entry,
 			context: this.cwd,
@@ -152,7 +197,6 @@ export default class ViewControllerExporter {
 				rules: [
 					{
 						test: /\.ts$/,
-						// exclude: /node_modules/, // **/node_modules/*.d.ts files are being imported downstream once this package is exported. Started 10/5/2021
 						use: {
 							loader: `babel-loader`,
 							options: {
@@ -233,3 +277,16 @@ export default class ViewControllerExporter {
 		}
 	}
 }
+
+type OnIncrementalBuildHandler = (err: Error | undefined) => void
+
+export interface ExportOptions {
+	source: string
+	destination: string
+	profilerStatsDestination?: string
+	defines?: any
+	onIncrementalBuildCompleted?: OnIncrementalBuildHandler
+	shouldWatch?: boolean
+}
+
+type Callback = (err?: null | Error, results?: Stats) => void

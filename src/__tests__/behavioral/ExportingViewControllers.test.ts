@@ -1,7 +1,11 @@
 import fsUtil from 'fs'
 import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test-utils'
+import AbstractSpruceTest, {
+	test,
+	assert,
+	generateId,
+} from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
 	buildCwd_nodeModulesImport,
@@ -11,14 +15,18 @@ import {
 	importExportSource_syntaxError,
 	importExportSource_withDefines,
 } from '../../tests/constants'
-import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
+import ViewControllerExporter, {
+	ExportOptions,
+} from '../../viewControllers/ViewControllerExporter'
 
 export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static readonly source = importExportSource
-	private static readonly buildCwd = importExportCwd
+	private static buildCwd = importExportCwd
 	private static destination: string
 
 	private static exporter: ViewControllerExporter
+	private static incrementalBuildCompletedCount: number
+	private static incrementalBuildError: Error | undefined
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -28,7 +36,9 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 			'bundle.js'
 		)
 
-		this.exporter = ViewControllerExporter.Exporter(this.buildCwd)
+		this.exporter = this.Exporter()
+		this.incrementalBuildCompletedCount = 0
+		this.incrementalBuildError = undefined
 	}
 
 	@test()
@@ -115,10 +125,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async packagerPackages() {
-		await this.exporter.export({
-			source: this.source,
-			destination: this.destination,
-		})
+		await this.export()
 
 		assert.isTrue(diskUtil.doesFileExist(this.destination))
 		assert.isAbove(fsUtil.statSync(this.destination).size, 0)
@@ -187,23 +194,20 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
 	@test()
 	protected static async doesNotIncludeChalk() {
-		await this.exporter.export({
-			source: this.source,
-			destination: this.destination,
-		})
+		await this.export()
 
 		const contents = diskUtil.readFile(this.destination)
 		assert.doesNotInclude(contents, 'chalk')
 	}
 
-	@test('can use define plugin 1', {
+	@test('can use define webpack plugin 1', {
 		'process.env.TACO': JSON.stringify('ninja'),
 	})
-	@test('can use define plugin 2', {
+	@test('can use define webpack plugin 2', {
 		'process.env.TACO': JSON.stringify('salad'),
 		'process.env.BURRITO': JSON.stringify('supreme'),
 	})
-	protected static async canPassCustomDefinesToExporterConfig(
+	protected static async canPassCustomWebpackDefinesToExporterConfig(
 		definePlugin: any
 	) {
 		await this.exporter.export({
@@ -247,5 +251,129 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
 		assert.doesNotInclude(contents, key)
 		assert.doesInclude(contents, value)
+	}
+
+	@test()
+	protected static async watchIsTrueIfEnvIsSetToTrue() {
+		const compiler = this.dropInSpyCompiler()
+		await this.export()
+		assert.isFalse(compiler.wasWatchHit)
+		assert.isTrue(compiler.wasRunHit)
+	}
+
+	@test()
+	protected static async watchIsTrueIfEnvIsSetToFalse() {
+		const compiler = this.dropInSpyCompiler()
+		await this.export({ shouldWatch: true })
+		assert.isTrue(compiler.wasWatchHit)
+		assert.isFalse(compiler.wasRunHit)
+	}
+
+	@test()
+	protected static async watchingTriggersCallbackOnChanges() {
+		await this.buildAndWatchSkillAtRandomDir()
+
+		await this.replaceInBookSvc('go-team', 'stop-dude')
+		this.assertOnIncrementalBuildHandlerHitCount(1)
+		await this.replaceInBookSvc('stop-dude', 'what-the')
+		this.assertOnIncrementalBuildHandlerHitCount(2)
+		assert.isFalsy(this.incrementalBuildError)
+	}
+
+	@test()
+	protected static async incrementalBuildgetsErrors() {
+		await this.buildAndWatchSkillAtRandomDir()
+		await this.replaceInBookSvc('go-team', "stop-dude'\n\naoeuaou")
+		assert.isTruthy(this.incrementalBuildError)
+	}
+
+	private static assertOnIncrementalBuildHandlerHitCount(expected: number) {
+		assert.isEqual(this.incrementalBuildCompletedCount, expected)
+	}
+
+	private static async buildAndWatchSkillAtRandomDir() {
+		await this.setupSkillAtRandomDir()
+		await this.exportAndWatch()
+	}
+
+	private static async exportAndWatch() {
+		await this.export({
+			shouldWatch: true,
+			onIncrementalBuildCompleted: (err) => {
+				this.incrementalBuildCompletedCount++
+				this.incrementalBuildError = err
+			},
+		})
+	}
+
+	private static async setupSkillAtRandomDir() {
+		this.buildCwd = this.resolvePath(
+			'build/__generated__/testDirsAndFiles',
+			generateId()
+		)
+
+		await diskUtil.copyDir(importExportCwd, this.buildCwd)
+		this.exporter = this.Exporter()
+	}
+
+	private static dropInSpyCompiler() {
+		const compiler = new SpyWebpackCompiler()
+
+		//@ts-ignore
+		this.exporter.WebPack = () => {
+			return compiler
+		}
+		return compiler
+	}
+
+	private static async replaceInBookSvc(search: string, replace: string) {
+		const updatedFile = this.resolvePath(
+			this.buildCwd,
+			'src',
+			'skillViewControllers',
+			'Book.svc.ts'
+		)
+
+		const contents = diskUtil.readFile(updatedFile)
+		const updated = contents.replace(search, replace)
+		diskUtil.writeFile(updatedFile, updated)
+
+		await this.wait(1000)
+	}
+
+	private static Exporter(cwd?: string): ViewControllerExporter {
+		return ViewControllerExporter.Exporter(cwd ?? this.buildCwd)
+	}
+
+	private static async export(options?: Partial<ExportOptions>) {
+		await this.exporter.export({
+			source: this.source,
+			destination: this.destination,
+			...options,
+		})
+	}
+}
+
+class SpyWebpackCompiler {
+	public wasRunHit = false
+	public wasWatchHit = false
+	public run(cb: (err: any, stats: any) => void) {
+		this.wasRunHit = true
+		cb(null, this.stats())
+	}
+	private stats(): any {
+		return {
+			hasErrors: () => false,
+			compilation: {
+				emittedAssets: {
+					size: 100,
+				},
+			},
+		}
+	}
+
+	public watch(config: any, cb: (err: any, stats: any) => void) {
+		this.wasWatchHit = true
+		cb(null, this.stats())
 	}
 }
