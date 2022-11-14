@@ -60,6 +60,45 @@ const calendarInteractor = {
 			dateTimeMs: dateUtil.getStartOfDay(dateTimeMs),
 		})
 	},
+
+	async clickDayView(
+		vc: ViewController<Calendar>,
+		dateTimeMs: number,
+		personId?: string
+	) {
+		assertOptions({ vc, dateTimeMs }, ['vc', 'dateTimeMs'])
+
+		const model = renderUtil.render(vc)
+
+		assert.isEqual(
+			model.view,
+			'day',
+			`Your calendar '${getVcName(
+				vc
+			)}' needs it's view set to 'day', it's currently set to ${
+				model.view ?? '***empty***'
+			}`
+		)
+
+		if (personId) {
+			const personMatch = model?.people?.find((p) => p?.id === personId)
+
+			assert.isTruthy(
+				personMatch,
+				`I could not find a person with the id of ${personId}.`
+			)
+		}
+
+		assert.isFunction(
+			model.onClickView,
+			`You have to set 'onClick' on your calendar!`
+		)
+
+		await model.onClickView?.({
+			dateTimeMs,
+			personId,
+		})
+	},
 }
 
 export default calendarInteractor

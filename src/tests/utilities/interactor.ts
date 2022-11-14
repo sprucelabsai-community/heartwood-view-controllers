@@ -1,4 +1,3 @@
-import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
@@ -530,73 +529,22 @@ const interactor = {
 		return results as boolean
 	},
 
+	/**
+	 * @deprecated interactor.clickCalendarMonthView(...) -> calendarInteractor.clickMonthView(...)
+	 */
 	async clickCalendarMonthView(
 		vc: ViewController<Calendar>,
 		dateTimeMs: number
 	) {
-		assertOptions({ vc, dateTimeMs }, ['vc', 'dateTimeMs'])
-
-		const model = renderUtil.render(vc)
-
-		assert.isEqual(
-			model.view,
-			'month',
-			`Your calendar '${getVcName(
-				vc
-			)}' needs it's view set to 'month', it's currently set to ${
-				model.view ?? '***empty***'
-			}`
-		)
-
-		assert.isFunction(
-			model.onClickView,
-			`You have to set 'onClickView' on your calendar!`
-		)
-
-		await model.onClickView?.({
-			dateTimeMs: dateUtil.getStartOfDay(dateTimeMs),
-		})
+		return calendarInteractor.clickMonthView(vc, dateTimeMs)
 	},
 
 	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
 		dateTimeMs: number,
-		personId: string
+		personId?: string
 	) {
-		assertOptions({ vc, dateTimeMs, personId }, [
-			'vc',
-			'dateTimeMs',
-			'personId',
-		])
-
-		const model = renderUtil.render(vc)
-
-		assert.isEqual(
-			model.view,
-			'day',
-			`Your calendar '${getVcName(
-				vc
-			)}' needs it's view set to 'day', it's currently set to ${
-				model.view ?? '***empty***'
-			}`
-		)
-
-		const personMatch = model?.people?.find((p) => p?.id === personId)
-
-		assert.isTruthy(
-			personMatch,
-			`I could not find a person with the id of ${personId}.`
-		)
-
-		assert.isFunction(
-			model.onClickView,
-			`You have to set 'onClick' on your calendar!`
-		)
-
-		await model.onClickView?.({
-			dateTimeMs,
-			personId: personMatch.id,
-		})
+		return calendarInteractor.clickDayView(vc, dateTimeMs, personId)
 	},
 
 	async focus(vc: ViewController<any>) {

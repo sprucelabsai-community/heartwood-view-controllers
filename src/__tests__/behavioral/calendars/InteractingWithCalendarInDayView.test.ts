@@ -27,7 +27,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			interactor.clickCalendarDayView()
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['vc', 'dateTimeMs', 'personId'],
+			parameters: ['vc', 'dateTimeMs'],
 		})
 	}
 
@@ -75,13 +75,11 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static async invokesOnClickOnView() {
-		let wasHit = false
 		let passedOptions: any
 
 		const [person] = this.VcWithPeople(1, {
 			onClickView: (options) => {
 				passedOptions = options
-				wasHit = true
 			},
 		})
 
@@ -89,9 +87,28 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		await this.clickCalendar({ personId: person.id, dateTimeMs })
 
-		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedOptions, {
 			personId: person.id,
+			dateTimeMs,
+		})
+	}
+
+	@test()
+	protected static async canPassUndefinedAsPersonId() {
+		let passedOptions: any
+
+		this.VcWithPeople(1, {
+			onClickView: (options) => {
+				passedOptions = options
+			},
+		})
+
+		const dateTimeMs = new Date().getTime()
+
+		await this.clickCalendar({ personId: null, dateTimeMs })
+
+		assert.isEqualDeep(passedOptions, {
+			personId: undefined,
 			dateTimeMs,
 		})
 	}
@@ -407,13 +424,13 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	}
 
 	private static clickCalendar(options?: {
-		personId: string
+		personId?: string | null
 		dateTimeMs?: number
 	}): any {
 		return interactor.clickCalendarDayView(
 			this.vc,
 			options?.dateTimeMs ?? new Date().getTime(),
-			options?.personId ?? `123`
+			options?.personId === null ? undefined : options?.personId ?? `123`
 		)
 	}
 }
