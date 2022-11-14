@@ -25,8 +25,9 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static destination: string
 
 	private static exporter: ViewControllerExporter
-	private static incrementalBuildCompletedCount: number
+	private static didIncremntallyBuildCount: number
 	private static incrementalBuildError: Error | undefined
+	private static willIncremntallyBuildCount: number
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -37,7 +38,8 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		)
 
 		this.exporter = this.Exporter()
-		this.incrementalBuildCompletedCount = 0
+		this.didIncremntallyBuildCount = 0
+		this.willIncremntallyBuildCount = 0
 		this.incrementalBuildError = undefined
 	}
 
@@ -279,10 +281,12 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		await this.buildAndWatchSkillAtRandomDir()
 
 		await this.replaceInBookSvc('go-team', 'stop-dude')
-		this.assertOnIncrementalBuildHandlerHitCount(1)
+		this.assertDidIncremntallyBuildHitCount(1)
+		this.assertWillIncremntallyBuildHitCount(1)
+
 		await this.replaceInBookSvc('stop-dude', 'what-the')
-		this.assertOnIncrementalBuildHandlerHitCount(2)
-		assert.isFalsy(this.incrementalBuildError)
+		this.assertDidIncremntallyBuildHitCount(2)
+		this.assertWillIncremntallyBuildHitCount(2)
 	}
 
 	@test()
@@ -292,8 +296,12 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		assert.isTruthy(this.incrementalBuildError)
 	}
 
-	private static assertOnIncrementalBuildHandlerHitCount(expected: number) {
-		assert.isEqual(this.incrementalBuildCompletedCount, expected)
+	private static assertWillIncremntallyBuildHitCount(expected: number) {
+		assert.isEqual(this.willIncremntallyBuildCount, expected)
+	}
+
+	private static assertDidIncremntallyBuildHitCount(expected: number) {
+		assert.isEqual(this.didIncremntallyBuildCount, expected)
 	}
 
 	private static async buildAndWatchSkillAtRandomDir() {
@@ -304,8 +312,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static async exportAndWatch() {
 		await this.export({
 			shouldWatch: true,
-			onIncrementalBuildCompleted: (err) => {
-				this.incrementalBuildCompletedCount++
+			onWillIncrementallyBuild: () => {
+				this.willIncremntallyBuildCount++
+			},
+			onDidIncrementallyBuild: (err) => {
+				this.didIncremntallyBuildCount++
 				this.incrementalBuildError = err
 			},
 		})

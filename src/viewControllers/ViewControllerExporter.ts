@@ -9,6 +9,8 @@ export default class ViewControllerExporter {
 	private cwd: string
 	private compiler?: Compiler
 	private isWatching: boolean | undefined = false
+	private willIncrementallyBuildHandler?: WillIncrementallyBuildHandler
+	private didIncrementallyBuildHandler?: DidIncrementallyBuildHandler
 
 	private constructor(cwd: string) {
 		this.cwd = cwd
@@ -29,7 +31,8 @@ export default class ViewControllerExporter {
 			profilerStatsDestination,
 			defines,
 			shouldWatch,
-			onIncrementalBuildCompleted,
+			onDidIncrementallyBuild,
+			onWillIncrementallyBuild,
 		} = options
 
 		this.assertValidSource(source)
@@ -49,10 +52,12 @@ export default class ViewControllerExporter {
 		this.compiler = this.Compiler()
 		this.isWatching = shouldWatch
 
+		this.willIncrementallyBuildHandler = onWillIncrementallyBuild
+		this.didIncrementallyBuildHandler = onDidIncrementallyBuild
+
 		await this.run({
 			shouldWatch,
 			profilerStatsDestination,
-			onIncrementalBuildCompleted,
 		})
 	}
 
@@ -81,20 +86,15 @@ export default class ViewControllerExporter {
 	private run(options: {
 		profilerStatsDestination?: string
 		shouldWatch?: boolean
-		onIncrementalBuildCompleted?: OnIncrementalBuildHandler
 	}): Promise<Compiler> {
-		const {
-			profilerStatsDestination,
-			shouldWatch,
-			onIncrementalBuildCompleted,
-		} = options
+		const { profilerStatsDestination, shouldWatch } = options
 
 		return new Promise((resolve: any, reject) => {
 			let isFirst = true
 
 			const cb: Callback = (err, stats) => {
 				if (!isFirst) {
-					onIncrementalBuildCompleted?.(
+					this.didIncrementallyBuildHandler?.(
 						//@ts-ignore
 						stats?.compilation?.errors?.[0]?.error ?? undefined
 					)
@@ -139,9 +139,20 @@ export default class ViewControllerExporter {
 
 			if (shouldWatch) {
 				this.compiler?.watch({}, cb)
+				this.attachWillBuildHandler()
 			} else {
 				this.compiler?.run(cb)
 			}
+		})
+	}
+
+	private attachWillBuildHandler() {
+		let firstRun = true
+		this.compiler?.hooks.beforeCompile.tap('ViewPlugin', () => {
+			if (!firstRun) {
+				this.willIncrementallyBuildHandler?.()
+			}
+			firstRun = false
 		})
 	}
 
@@ -290,15 +301,18 @@ export default class ViewControllerExporter {
 	}
 }
 
-type OnIncrementalBuildHandler = (err: Error | undefined) => void
+type DidIncrementallyBuildHandler = (err?: Error | undefined) => void
 
 export interface ExportOptions {
 	source: string
 	destination: string
 	profilerStatsDestination?: string
 	defines?: any
-	onIncrementalBuildCompleted?: OnIncrementalBuildHandler
+	onDidIncrementallyBuild?: DidIncrementallyBuildHandler
+	onWillIncrementallyBuild?: DidIncrementallyBuildHandler
 	shouldWatch?: boolean
 }
 
 type Callback = (err?: null | Error, results?: Stats) => void
+
+type WillIncrementallyBuildHandler = () => void
