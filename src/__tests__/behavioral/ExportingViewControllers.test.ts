@@ -41,6 +41,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		this.incrementalBuildError = undefined
 	}
 
+	protected static async afterEach(): Promise<void> {
+		super.beforeEach()
+		await this.exporter.kill()
+	}
+
 	@test()
 	protected static throwsWhenMissingCwd() {
 		//@ts-ignore
@@ -320,7 +325,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		const compiler = new SpyWebpackCompiler()
 
 		//@ts-ignore
-		this.exporter.WebPack = () => {
+		this.exporter.Compiler = () => {
 			return compiler
 		}
 		return compiler
@@ -360,6 +365,9 @@ class SpyWebpackCompiler {
 	public run(cb: (err: any, stats: any) => void) {
 		this.wasRunHit = true
 		cb(null, this.stats())
+	}
+	public close(r: () => void) {
+		r()
 	}
 	private stats(): any {
 		return {

@@ -7,6 +7,8 @@ import SpruceError from '../errors/SpruceError'
 
 export default class ViewControllerExporter {
 	private cwd: string
+	private compiler?: Compiler
+	private isWatching: boolean | undefined = false
 
 	private constructor(cwd: string) {
 		this.cwd = cwd
@@ -44,7 +46,10 @@ export default class ViewControllerExporter {
 			defines,
 		})
 
-		await this.webpack({
+		this.compiler = this.Compiler()
+		this.isWatching = shouldWatch
+
+		await this.run({
 			shouldWatch,
 			profilerStatsDestination,
 			onIncrementalBuildCompleted,
@@ -65,7 +70,15 @@ export default class ViewControllerExporter {
 		return { filename, dirname }
 	}
 
-	private webpack(options: {
+	public async kill() {
+		if (this.isWatching) {
+			await new Promise((r) => {
+				this.compiler?.close(r)
+			})
+		}
+	}
+
+	private run(options: {
 		profilerStatsDestination?: string
 		shouldWatch?: boolean
 		onIncrementalBuildCompleted?: OnIncrementalBuildHandler
@@ -77,7 +90,6 @@ export default class ViewControllerExporter {
 		} = options
 
 		return new Promise((resolve: any, reject) => {
-			const compiler = this.WebPack()
 			let isFirst = true
 
 			const cb: Callback = (err, stats) => {
@@ -122,18 +134,18 @@ export default class ViewControllerExporter {
 					)
 				}
 
-				resolve(compiler)
+				resolve(this.compiler)
 			}
 
 			if (shouldWatch) {
-				compiler.watch({}, cb)
+				this.compiler?.watch({}, cb)
 			} else {
-				compiler.run(cb)
+				this.compiler?.run(cb)
 			}
 		})
 	}
 
-	private WebPack() {
+	private Compiler() {
 		return webpack(this.config)
 	}
 
