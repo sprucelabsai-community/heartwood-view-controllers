@@ -42,7 +42,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	}
 
 	protected static async afterEach(): Promise<void> {
-		super.beforeEach()
+		await super.beforeEach()
 		await this.exporter.kill()
 	}
 
