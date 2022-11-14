@@ -1,3 +1,10 @@
+# [98.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.0.3...v98.1.0) (2022-11-14)
+
+
+### Features
+
+* building can now watch and triggers callbacks when watching ([a07ea4b](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a07ea4b))
+
 ## [98.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.0.2...v98.0.3) (2022-11-13)
 
 ## [98.0.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.0.1...v98.0.2) (2022-11-13)
