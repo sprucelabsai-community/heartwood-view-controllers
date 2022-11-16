@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { Schema, SchemaPartialValues } from '@sprucelabs/schema'
+import { buildSchema, Schema, SchemaPartialValues } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
@@ -229,7 +229,7 @@ export interface LoginViewControllerOptions {
 	id?: string | null
 }
 
-const loginSchema = {
+const loginSchema = buildSchema({
 	id: 'loginSchema',
 	fields: {
 		phone: {
@@ -242,12 +242,10 @@ const loginSchema = {
 			type: 'text',
 			isRequired: true,
 			label: 'Pin',
-			options: {
-				autoComplete: 'one-time-code',
-			},
+			options: {},
 		},
 	},
-} as const
+})
 
 type LoginSchema = typeof loginSchema
 

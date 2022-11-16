@@ -7,6 +7,7 @@ import CalendarViewController from './viewControllers/Calendar.vc'
 import CardViewController from './viewControllers/card/Card.vc'
 import ConfirmViewController from './viewControllers/Confirm.vc'
 import DialogViewController from './viewControllers/Dialog.vc'
+import FeedViewController from './viewControllers/Feed.vc'
 import AutocompleteInputViewController from './viewControllers/form/AutocompleteInput.vc'
 import FormViewController from './viewControllers/form/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
@@ -21,24 +22,61 @@ import ToolBeltViewController from './viewControllers/ToolBelt.vc'
 
 export const CORE_CONTROLLER_MAP = {
 	form: FormViewController,
+	/**
+	 * @deprecated 'login' -> 'login-card'
+	 */
 	login: LoginViewController,
 	'login-card': LoginViewController,
+	/**
+	 * @deprecated 'swipeCard' -> 'swipe-card'
+	 */
 	swipeCard: SwipeCardViewController,
+	'swipe-card': SwipeCardViewController,
+	/**
+	 * @deprecated 'buttonGroup' -> 'button-group'
+	 */
 	buttonGroup: ButtonGroupViewController,
+	'button-group': ButtonGroupViewController,
 	card: CardViewController,
 	dialog: DialogViewController,
+	/**
+	 * @deprecated 'bigForm' -> 'big-form'
+	 */
 	bigForm: BigFormViewController,
+	'big-form': BigFormViewController,
 	confirm: ConfirmViewController,
 	list: ListViewController,
 	toolBelt: ToolBeltViewController,
 	calendar: CalendarViewController,
+	/**
+	 * @deprecated 'buttonBar' -> 'button-bar'
+	 */
 	buttonBar: ButtonBarViewController,
+	'button-bar': ButtonBarViewController,
+	/**
+	 * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
+	 */
 	talkingSprucebot: TalkingSprucebotViewController,
+	'talking-sprucebot': TalkingSprucebotViewController,
+	/**
+	 * @deprecated 'activeRecordCard' -> 'activeRecordCard'
+	 */
 	activeRecordCard: ActiveRecordCardViewController,
+	'active-record-card': ActiveRecordCardViewController,
+
+	/**
+	 * @deprecated 'activeRecordList' -> 'active-record-list'
+	 */
 	activeRecordList: ActiveRecordListViewController,
+	'active-record-list': ActiveRecordListViewController,
 	stats: StatsViewController,
 	progress: ProgressViewController,
 	ratings: RatingsViewController,
+	/**
+	 * @deprecated 'autocompleteInput' -> 'autocomplete-input'
+	 */
 	autocompleteInput: AutocompleteInputViewController,
+	'autocomplete-input': AutocompleteInputViewController,
 	map: MapViewController,
+	feed: FeedViewController,
 }

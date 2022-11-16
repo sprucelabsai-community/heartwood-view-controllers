@@ -42,6 +42,9 @@ import ConfirmViewController, {
 import DialogViewController, {
 	DialogViewControllerOptions,
 } from '../viewControllers/Dialog.vc'
+import FeedViewController, {
+	FeedViewControllerOptions,
+} from '../viewControllers/Feed.vc'
 import AutocompleteInputViewController, {
 	AutocompleteInputViewControllerOptions,
 } from '../viewControllers/form/AutocompleteInput.vc'
@@ -235,6 +238,7 @@ export type CardHeader =
 export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type ToolBelt =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+export type Feed = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed
 export type SimpleViewControllerFactory = Pick<
 	ViewControllerFactory,
 	'Controller'
@@ -332,25 +336,59 @@ export interface ViewControllerMap {
 	 */
 	login: LoginViewController
 	'login-card': LoginViewController
+	/**
+	 * @deprecated 'swipeCard' -> 'swipe-card'
+	 */
 	swipeCard: SwipeCardViewController
+	'swipe-card': SwipeCardViewController
+	/**
+	 * @deprecated 'buttonGroup' -> 'button-group'
+	 */
 	buttonGroup: ButtonGroupViewController
+	'button-group': ButtonGroupViewController
 	card: CardViewController
 	dialog: DialogViewController
+	/**
+	 * @deprecated 'bigForm' -> 'big-form'
+	 */
 	bigForm: BigFormViewController<any>
+	'big-form': BigFormViewController<any>
 	confirm: ConfirmViewController
 	formBuilderCard: FormBuilderCardViewController
-	activeRecordCard: ActiveRecordCardViewController
-	activeRecordList: ActiveRecordListViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	calendar: CalendarViewController
+	/**
+	 * @deprecated 'buttonBar' -> 'button-bar'
+	 */
 	buttonBar: ButtonBarViewController
+	'button-bar': ButtonBarViewController
+	/**
+	 * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
+	 */
 	talkingSprucebot: TalkingSprucebotViewController
+	'talking-sprucebot': TalkingSprucebotViewController
+	/**
+	 * @deprecated 'activeRecordCard' -> 'activeRecordCard'
+	 */
+	activeRecordCard: ActiveRecordCardViewController
+	'active-record-card': ActiveRecordCardViewController
+
+	/**
+	 * @deprecated 'activeRecordList' -> 'active-record-list'
+	 */
+	activeRecordList: ActiveRecordListViewController
+	'active-record-list': ActiveRecordListViewController
 	stats: StatsViewController
 	progress: ProgressViewController
 	ratings: RatingsViewController
+	/**
+	 * @deprecated 'autocompleteInput' -> 'autocomplete-input'
+	 */
 	autocompleteInput: AutocompleteInputViewController
+	'autocomplete-input': AutocompleteInputViewController
 	map: MapViewController
+	feed: FeedViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -358,24 +396,35 @@ export interface ViewControllerOptionsMap {
 	login: LoginViewControllerOptions
 	'login-card': LoginViewControllerOptions
 	swipeCard: SwipeViewControllerOptions
+	'swipe-card': SwipeViewControllerOptions
 	buttonGroup: ButtonGroupViewControllerOptions
+	'button-group': ButtonGroupViewControllerOptions
 	card: CardViewControllerOptions
 	dialog: DialogViewControllerOptions
 	bigForm: BigFormViewControllerOptions<Schema>
+	'big-form': BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
 	formBuilderCard: FormBuilderCardViewControllerOptions
+	'form-builder-card': FormBuilderCardViewControllerOptions
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions
+	'tool-belt': ToolBeltViewControllerOptions
 	calendar: CalendarViewControllerOptions
 	buttonBar: ButtonBarViewControllerOptions
+	'button-bar': ButtonBarViewControllerOptions
 	talkingSprucebot: TalkingSprucebotViewControllerOptions
+	'talking-sprucebot': TalkingSprucebotViewControllerOptions
 	activeRecordCard: ActiveRecordCardViewControllerOptions
+	'active-record-card': ActiveRecordCardViewControllerOptions
 	activeRecordList: ActiveRecordListViewControllerOptions
+	'active-record-list': ActiveRecordListViewControllerOptions
 	stats: StatsViewControllerOptions
 	progress: ProgressViewControllerOptions
 	ratings: RatingsViewControllerOptions
 	autocompleteInput: AutocompleteInputViewControllerOptions
+	'autocomplete-input': AutocompleteInputViewControllerOptions
 	map: MapViewControllerOptions
+	feed: FeedViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

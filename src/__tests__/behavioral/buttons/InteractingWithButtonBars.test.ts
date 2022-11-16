@@ -19,7 +19,7 @@ export default class InteractingWithButtonBarsTest extends AbstractViewControlle
 	protected static async canClickButtonInButtonBar() {
 		let wasHit = false
 		let passedSelected: any
-		const vc = this.Controller('buttonBar', {
+		const vc = this.Controller('button-bar', {
 			onSelectionChange: (selected) => {
 				wasHit = true
 				passedSelected = selected
