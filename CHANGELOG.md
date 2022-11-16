@@ -1,3 +1,11 @@
+# [98.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.1.6...v98.2.0) (2022-11-16)
+
+
+### Features
+
+* feed interactor and feed view controller ([d927ab5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/d927ab5))
+* feed submit handler ([f875940](https://github.com/sprucelabsai/heartwood-view-controllers/commit/f875940))
+
 ## [98.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.1.5...v98.1.6) (2022-11-15)
 
 ## [98.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.1.4...v98.1.5) (2022-11-15)
