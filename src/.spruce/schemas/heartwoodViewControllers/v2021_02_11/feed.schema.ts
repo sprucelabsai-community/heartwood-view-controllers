@@ -19,11 +19,6 @@ const feedSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema 
 	                options: {schema: feedItemSchema_v2020_07_22,}
 	            },
 	            /** . */
-	            'shouldEnableChat': {
-	                type: 'boolean',
-	                options: undefined
-	            },
-	            /** . */
 	            'onSubmitMessage': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
