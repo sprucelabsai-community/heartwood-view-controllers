@@ -6,6 +6,12 @@ export default buildSchema({
 	name: 'Feed',
 	fields: {
 		...feedSchema.fields,
+		onSubmitMessage: {
+			type: 'raw',
+			options: {
+				valueType: 'HeartwoodTypes.OnSubmitFeedMessageHandler',
+			},
+		},
 		controller: {
 			type: 'raw',
 			options: {

@@ -586,6 +586,10 @@ export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
 
+export type OnSubmitFeedMessageHandler = (
+	message: string
+) => void | boolean | Promise<void | boolean>
+
 /**
  * @deprecated moved to @sprucelabs/calendar-utils
  */

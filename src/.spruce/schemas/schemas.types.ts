@@ -1561,6 +1561,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'shouldEnableChat'?: boolean| undefined | null
 				
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
+				
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>)| undefined | null
 		}
 
@@ -1583,6 +1585,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'shouldEnableChat': {
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'onSubmitMessage': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
 			            },
 			            /** . */
 			            'controller': {

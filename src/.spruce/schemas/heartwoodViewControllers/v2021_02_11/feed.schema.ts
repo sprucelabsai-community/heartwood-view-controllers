@@ -24,6 +24,11 @@ const feedSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema 
 	                options: undefined
 	            },
 	            /** . */
+	            'onSubmitMessage': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
+	            },
+	            /** . */
 	            'controller': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>`,}
