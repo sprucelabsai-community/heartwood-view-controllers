@@ -1,3 +1,10 @@
+# [98.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.2.4...v98.3.0) (2022-11-17)
+
+
+### Features
+
+* can now assert feeds and interact with them! ([bf8f948](https://github.com/sprucelabsai/heartwood-view-controllers/commit/bf8f948))
+
 ## [98.2.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.2.3...v98.2.4) (2022-11-17)
 
 ## [98.2.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.2.2...v98.2.3) (2022-11-17)
