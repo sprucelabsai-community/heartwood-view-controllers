@@ -99,10 +99,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static throwsIfDoesNotRenderCard() {
-		assert.doesThrow(
-			() => feedAssert.cardRendersFeed(this.Controller('card', {})),
-			`does not render a feed`
-		)
+		this.assertDoesNotRenderFeed([])
 	}
 
 	@test()
@@ -135,13 +132,35 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 		assert.isEqual(feedVc, this.vc)
 	}
 
+	@test()
+	protected static async feedWithoutControllerThrows() {
+		this.assertDoesNotRenderFeed([
+			{
+				feed: {
+					items: [],
+				},
+			},
+		])
+	}
+
+	private static assertDoesNotRenderFeed(sections: CardSection[]) {
+		assert.doesThrow(
+			() => feedAssert.cardRendersFeed(this.CardVc(sections)),
+			`does not render a feed`
+		)
+	}
+
 	private static assertCardRendersFeed(sections: CardSection[]) {
-		const vc = this.Controller('card', {
+		const vc = this.CardVc(sections)
+		return feedAssert.cardRendersFeed(vc)
+	}
+
+	private static CardVc(sections: CardSection[]) {
+		return this.Controller('card', {
 			body: {
 				sections,
 			},
 		})
-		return feedAssert.cardRendersFeed(vc)
 	}
 
 	private static setItems(items: FeedItem[]) {
