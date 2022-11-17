@@ -19,6 +19,11 @@ const feedSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema 
 	                options: {schema: feedItemSchema_v2020_07_22,}
 	            },
 	            /** . */
+	            'shouldEnableChat': {
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** . */
 	            'onSubmitMessage': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
@@ -26,7 +31,7 @@ const feedSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema 
 	            /** . */
 	            'controller': {
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
 	            },
 	    }
 }

@@ -43,7 +43,7 @@ export default class FeedViewController extends AbstractViewController<Feed> {
 	}
 
 	public render(): Feed {
-		return this.model
+		return { ...this.model, controller: this }
 	}
 }
 

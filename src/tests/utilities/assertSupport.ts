@@ -24,8 +24,11 @@ export function pluckAllFromCard<K extends keyof CardSection>(
 	return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
-export function pluckFirstFromCard(model: Card, key: keyof CardSection) {
-	return pluckAllFromCard(model, key)[0] as any
+export function pluckFirstFromCard<K extends keyof CardSection>(
+	model: Card,
+	key: K
+) {
+	return pluckAllFromCard(model, key)[0] as CardSection[K]
 }
 
 export interface SelectViewController {

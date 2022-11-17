@@ -1,7 +1,9 @@
 import { FeedItem } from '@sprucelabs/spruce-core-schemas'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import feedAssert from '../../../tests/utilities/feedAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { CardSection } from '../../../types/heartwood.types'
 import FeedViewController from '../../../viewControllers/Feed.vc'
 
 export default class ControllingTheFeedTest extends AbstractViewControllerTest {
@@ -84,6 +86,62 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 	protected static async settingItemsTriggersRender() {
 		this.setItems([])
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async assertingCardRendersFeedThrowsWithMissing() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => feedAssert.cardRendersFeed())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc'],
+		})
+	}
+
+	@test()
+	protected static throwsIfDoesNotRenderCard() {
+		assert.doesThrow(
+			() => feedAssert.cardRendersFeed(this.Controller('card', {})),
+			`does not render a feed`
+		)
+	}
+
+	@test()
+	protected static knowsIfFeedIsRenderedInFirstSection() {
+		this.assertCardRendersFeed([
+			{
+				feed: this.vc.render(),
+			},
+		])
+	}
+
+	@test()
+	protected static knowsIfFeedIsRenderedInSecondSection() {
+		this.assertCardRendersFeed([
+			{},
+			{
+				feed: this.vc.render(),
+			},
+		])
+	}
+
+	@test()
+	protected static async cardRenderingFeedReturnsFeedVc() {
+		const feedVc = this.assertCardRendersFeed([
+			{
+				feed: this.vc.render(),
+			},
+		])
+
+		assert.isEqual(feedVc, this.vc)
+	}
+
+	private static assertCardRendersFeed(sections: CardSection[]) {
+		const vc = this.Controller('card', {
+			body: {
+				sections,
+			},
+		})
+		return feedAssert.cardRendersFeed(vc)
 	}
 
 	private static setItems(items: FeedItem[]) {

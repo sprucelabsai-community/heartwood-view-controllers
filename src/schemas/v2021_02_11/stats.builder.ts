@@ -14,6 +14,13 @@ export default buildSchema({
 			label: 'Format values',
 			hint: 'Add commas to numbers.',
 		},
+		controller: {
+			type: 'raw',
+			options: {
+				valueType:
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>',
+			},
+		},
 		stats: {
 			type: 'schema',
 			label: 'Stats',

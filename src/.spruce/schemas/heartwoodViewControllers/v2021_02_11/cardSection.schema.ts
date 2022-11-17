@@ -14,7 +14,7 @@ import statsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2
 import progressSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progress.schema'
 import ratingsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
 import receiptSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receipt.schema'
-import feedSchema_v2020_07_22 from '#spruce/schemas/spruce/v2020_07_22/feed.schema'
+import feedSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
 
 const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -157,7 +157,7 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	            'feed': {
 	                label: 'Feed',
 	                type: 'schema',
-	                options: {schema: feedSchema_v2020_07_22,}
+	                options: {schema: feedSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {

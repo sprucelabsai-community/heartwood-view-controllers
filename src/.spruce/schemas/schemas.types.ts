@@ -284,6 +284,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 		}
@@ -370,6 +372,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Can be changed',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
 			            },
 			            /** Stars or Smilies. */
 			            'renderAs': {
@@ -1554,52 +1561,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface Feed {
-			
-				
-				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
-				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
-				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>)| undefined | null
-		}
-
-		interface FeedSchema extends SpruceSchema.Schema {
-			id: 'feed',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Feed',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
-			            },
-			            /** . */
-			            'onSubmitMessage': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
-			            },
-			            /** . */
-			            'controller': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>`,}
-			            },
-			    }
-		}
-
-		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface FancyIcon {
 			
 				/** Name. */
@@ -1838,6 +1799,59 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Feed {
+			
+				
+				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				
+				'shouldEnableChat'?: boolean| undefined | null
+				
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
+		}
+
+		interface FeedSchema extends SpruceSchema.Schema {
+			id: 'feed',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Feed',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . */
+			            'shouldEnableChat': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'onSubmitMessage': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
+			            },
+			    }
+		}
+
+		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ReceiptTotal {
 			
 				
@@ -2069,6 +2083,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'canBeChanged'?: boolean| undefined | null
 				/** Callback. */
 				'onChange'?: ((value: number) => any)| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 		}
@@ -2098,6 +2114,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Callback',
 			                type: 'raw',
 			                options: {valueType: `(value: number) => any`,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
 			            },
 			            /** Stars or Smilies. */
 			            'renderAs': {
@@ -2156,92 +2177,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface StatsStat {
-			
-				
-				'value'?: number| undefined | null
-				
-				'label'?: string| undefined | null
-		}
-
-		interface StatsStatSchema extends SpruceSchema.Schema {
-			id: 'statsStat',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'value': {
-			                type: 'number',
-			                options: undefined
-			            },
-			            /** . */
-			            'label': {
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface StatsStatEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Stats {
-			
-				/** Prefix. Will be rendered before the value. Could be a $ or something else. */
-				'valuePrefix'?: string| undefined | null
-				/** Format values. Add commas to numbers. */
-				'shouldFormatValues'?: boolean| undefined | null
-				/** Stats. */
-				'stats': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStat[]
-		}
-
-		interface StatsSchema extends SpruceSchema.Schema {
-			id: 'stats',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Stats',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Prefix. Will be rendered before the value. Could be a $ or something else. */
-			            'valuePrefix': {
-			                label: 'Prefix',
-			                type: 'text',
-			                hint: 'Will be rendered before the value. Could be a $ or something else.',
-			                options: undefined
-			            },
-			            /** Format values. Add commas to numbers. */
-			            'shouldFormatValues': {
-			                label: 'Format values',
-			                type: 'boolean',
-			                hint: 'Add commas to numbers.',
-			                options: undefined
-			            },
-			            /** Stats. */
-			            'stats': {
-			                label: 'Stats',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema,}
-			            },
-			    }
-		}
-
-		interface StatsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface CardSection {
 			
 				
@@ -2287,7 +2222,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Receipt. */
 				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
 				/** Feed. */
-				'feed'?: SpruceSchemas.Spruce.v2020_07_22.Feed| undefined | null
+				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Alignment. */
@@ -2435,7 +2370,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'feed': {
 			                label: 'Feed',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema,}
 			            },
 			            /** Grid. */
 			            'shouldRenderContentsAsGrid': {
@@ -2455,6 +2390,99 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface StatsStat {
+			
+				
+				'value'?: number| undefined | null
+				
+				'label'?: string| undefined | null
+		}
+
+		interface StatsStatSchema extends SpruceSchema.Schema {
+			id: 'statsStat',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'value': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface StatsStatEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Stats {
+			
+				/** Prefix. Will be rendered before the value. Could be a $ or something else. */
+				'valuePrefix'?: string| undefined | null
+				/** Format values. Add commas to numbers. */
+				'shouldFormatValues'?: boolean| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>)| undefined | null
+				/** Stats. */
+				'stats': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStat[]
+		}
+
+		interface StatsSchema extends SpruceSchema.Schema {
+			id: 'stats',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Stats',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Prefix. Will be rendered before the value. Could be a $ or something else. */
+			            'valuePrefix': {
+			                label: 'Prefix',
+			                type: 'text',
+			                hint: 'Will be rendered before the value. Could be a $ or something else.',
+			                options: undefined
+			            },
+			            /** Format values. Add commas to numbers. */
+			            'shouldFormatValues': {
+			                label: 'Format values',
+			                type: 'boolean',
+			                hint: 'Add commas to numbers.',
+			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>`,}
+			            },
+			            /** Stats. */
+			            'stats': {
+			                label: 'Stats',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStatSchema,}
+			            },
+			    }
+		}
+
+		interface StatsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema> {}
 
 	}
 
@@ -3784,6 +3812,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 				/** Stars or Smilies. */
 				'renderAs'?: ("stars" | "smilies")| undefined | null
 				/** Cell button key down handler. */
@@ -3874,6 +3904,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Can be changed',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
 			            },
 			            /** Stars or Smilies. */
 			            'renderAs': {

@@ -86,6 +86,11 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** . */
+	            'controller': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
+	            },
 	            /** Stars or Smilies. */
 	            'renderAs': {
 	                label: 'Stars or Smilies',

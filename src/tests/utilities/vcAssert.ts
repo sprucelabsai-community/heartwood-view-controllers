@@ -21,11 +21,13 @@ import renderUtil from '../../utilities/render.utility'
 import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
+import CalendarViewController from '../../viewControllers/Calendar.vc'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
+import RatingsViewController from '../../viewControllers/Ratings.vc'
 import ProgressViewController from '../../viewControllers/reporting/Progress.vc'
 import StatsViewController from '../../viewControllers/reporting/Stats.vc'
 import SwipeCardViewController from '../../viewControllers/SwipeCard.vc'
@@ -1089,12 +1091,14 @@ const vcAssert = {
 			for (const card of layout?.cards ?? []) {
 				const calendar = pluckFirstFromCard(card ?? {}, 'calendar')
 				if (calendar) {
-					return calendar.controller
+					return calendar.controller as CalendarViewController
 				}
 			}
 		}
 
 		assert.fail('Your skill view does not render a calendar!')
+
+		return {} as CalendarViewController
 	},
 
 	assertCardRendersCalendar(vc: ViewController<Card>) {
@@ -1102,10 +1106,12 @@ const vcAssert = {
 		const calendar = pluckFirstFromCard(model, 'calendar')
 
 		if (calendar) {
-			return calendar.controller
+			return calendar.controller as CalendarViewController
 		}
 
 		assert.fail(`Your card '${getVcName(vc)}' does not render a calendar!`)
+
+		return {} as CalendarViewController
 	},
 
 	assertCardDoesNotRenderCalendar(vc: ViewController<Card>) {
@@ -1453,7 +1459,7 @@ const vcAssert = {
 			`Your card did not render stats and I expected it to!`
 		)
 
-		return match.controller
+		return match.controller as StatsViewController
 	},
 
 	assertStatsRendersValue(vc: StatsViewController, idx: number, value: number) {
@@ -1547,7 +1553,7 @@ const vcAssert = {
 			`Expected to find a ratings view inside your card, but I didn't!`
 		)
 
-		return progress.controller
+		return progress.controller as RatingsViewController
 	},
 
 	assertSkillViewNotScoped(vc: SkillViewController) {

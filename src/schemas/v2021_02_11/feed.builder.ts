@@ -16,7 +16,7 @@ export default buildSchema({
 			type: 'raw',
 			options: {
 				valueType:
-					'HeartwoodTypes.ViewController<SpruceSchemas.Spruce.v2020_07_22.Feed>',
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>',
 			},
 		},
 	},

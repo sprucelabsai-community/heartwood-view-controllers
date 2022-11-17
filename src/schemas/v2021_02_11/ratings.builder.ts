@@ -20,6 +20,13 @@ export default buildSchema({
 				valueType: '(value: number) => any',
 			},
 		},
+		controller: {
+			type: 'raw',
+			options: {
+				valueType:
+					'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>',
+			},
+		},
 		renderAs: {
 			type: 'select',
 			label: 'Stars or Smilies',

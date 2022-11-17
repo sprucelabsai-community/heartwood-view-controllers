@@ -24,6 +24,11 @@ const statsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchem
 	                hint: 'Add commas to numbers.',
 	                options: undefined
 	            },
+	            /** . */
+	            'controller': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>`,}
+	            },
 	            /** Stats. */
 	            'stats': {
 	                label: 'Stats',
