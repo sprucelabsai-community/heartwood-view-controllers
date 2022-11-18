@@ -97,7 +97,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 				this.buildTargetAndPayload() as any
 			)
 
-			const records = responsePayload[this.responseKey]
+			const records = responsePayload[this.responseKey] as any[]
 
 			if (!records) {
 				responseKeyError = true

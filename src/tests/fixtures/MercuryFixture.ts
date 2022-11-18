@@ -53,7 +53,7 @@ export default class MercuryFixture {
 
 		this.setDefaultContractToLocalEventsIfExist()
 
-		this.clientPromise = MercuryClientFactory.Client<any>({
+		this.clientPromise = MercuryClientFactory.Client({
 			host: TEST_HOST,
 			shouldReconnect: false,
 			allowSelfSignedCrt:
