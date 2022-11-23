@@ -4,7 +4,11 @@ import {
 	TimezoneName as ITimezoneName,
 } from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import {
+	PermissionContractId,
+	PermissionId,
+	SpruceSchemas,
+} from '@sprucelabs/mercury-types'
 import {
 	AddressFieldValue,
 	FieldError,
@@ -652,16 +656,16 @@ export interface Device {
 	vibrate(): void
 }
 
-export interface AuthorizerCanOptions<PermissionId extends string> {
-	contractId: string
-	permissionIds: PermissionId[]
+export interface AuthorizerCanOptions<ContractId extends PermissionContractId> {
+	contractId: ContractId
+	permissionIds: PermissionId<ContractId>[]
 	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
 export interface Authorizer {
-	can<PermissionId extends string>(
-		options: AuthorizerCanOptions<PermissionId>
-	): Promise<Record<PermissionId, boolean>>
+	can<ContractId extends PermissionContractId>(
+		options: AuthorizerCanOptions<ContractId>
+	): Promise<Record<PermissionId<ContractId>, boolean>>
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
