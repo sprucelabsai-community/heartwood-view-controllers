@@ -656,16 +656,22 @@ export interface Device {
 	vibrate(): void
 }
 
-export interface AuthorizerCanOptions<ContractId extends PermissionContractId> {
+export interface AuthorizerCanOptions<
+	ContractId extends PermissionContractId,
+	Ids extends PermissionId<ContractId> = PermissionId<ContractId>
+> {
 	contractId: ContractId
-	permissionIds: PermissionId<ContractId>[]
+	permissionIds: Ids[]
 	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
 export interface Authorizer {
-	can<ContractId extends PermissionContractId>(
-		options: AuthorizerCanOptions<ContractId>
-	): Promise<Record<PermissionId<ContractId>, boolean>>
+	can<
+		ContractId extends PermissionContractId,
+		Ids extends PermissionId<ContractId>
+	>(
+		options: AuthorizerCanOptions<ContractId, Ids>
+	): Promise<Record<Ids, boolean>>
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
