@@ -1,3 +1,10 @@
+# [99.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.3.42...v99.0.0) (2022-12-02)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([8930f90](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8930f90))
+
 ## [98.3.42](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.3.41...v98.3.42) (2022-12-01)
 
 ## [98.3.41](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v98.3.40...v98.3.41) (2022-12-01)
