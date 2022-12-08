@@ -42,7 +42,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
 		assert.doesThrow(
 			() =>
 				vcAssert.assertToolBeltStickyToolInstanceOf({
-					toolBeltVc: this.Controller('toolBelt', {}),
+					toolBeltVc: this.Controller('tool-belt', {}),
 					position: 'top',
 					Class: {} as any,
 				}),
@@ -52,7 +52,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
 
 	@test()
 	protected static throwsWhenClassDoesNotMatch() {
-		const vc = this.Controller('toolBelt', {})
+		const vc = this.Controller('tool-belt', {})
 		const card1 = this.Controller('card', {})
 
 		vc.setStickyTool({
@@ -80,7 +80,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
 		vcId: ViewControllerId,
 		Class: any
 	) {
-		const vc = this.Controller('toolBelt', {})
+		const vc = this.Controller('tool-belt', {})
 		const cardVc = this.Controller(vcId, {})
 
 		vc.setStickyTool({

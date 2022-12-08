@@ -198,7 +198,7 @@ export interface SkillViewControllerLoadOptions<
 	args: Args
 	authenticator: Authenticator
 	authorizer: Authorizer
-	locale: Locale
+	locale: ILocale
 	scope: Scope
 	themes: ThemeManager
 }
@@ -361,6 +361,10 @@ export interface ViewControllerMap {
 	formBuilderCard: FormBuilderCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
+	/**
+	 * @deprecated 'toolBelt' -> 'tool-belt'
+	 */
+	'tool-belt': ToolBeltViewController
 	calendar: CalendarViewController
 	/**
 	 * @deprecated 'buttonBar' -> 'button-bar'

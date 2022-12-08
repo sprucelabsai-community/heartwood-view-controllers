@@ -46,7 +46,11 @@ export const CORE_CONTROLLER_MAP = {
 	'big-form': BigFormViewController,
 	confirm: ConfirmViewController,
 	list: ListViewController,
+	/**
+	 * @deprecated 'toolBelt' -> 'tool-belt'
+	 */
 	toolBelt: ToolBeltViewController,
+	'tool-belt': ToolBeltViewController,
 	calendar: CalendarViewController,
 	/**
 	 * @deprecated 'buttonBar' -> 'button-bar'

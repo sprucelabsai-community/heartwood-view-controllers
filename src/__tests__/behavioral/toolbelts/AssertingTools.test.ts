@@ -67,7 +67,7 @@ class ToolBeltSkillViewController implements SkillViewController {
 		options: { toolBelt: ToolBelt | null } & ViewControllerOptions
 	) {
 		this.toolBelt = options?.toolBelt
-			? options.vcFactory.Controller('toolBelt', options.toolBelt)
+			? options.vcFactory.Controller('tool-belt', options.toolBelt)
 			: undefined
 	}
 
@@ -445,7 +445,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async canAssertIfRendersStickyTools() {
-		const vc = this.Controller('toolBelt', {})
+		const vc = this.Controller('tool-belt', {})
 
 		vc.setStickyTool({ position: 'bottom', card: {}, lineIcon: 'add' })
 
@@ -481,7 +481,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	}
 
 	private static ToolBeltVc() {
-		return this.Controller('toolBelt', {
+		return this.Controller('tool-belt', {
 			tools: [],
 		})
 	}

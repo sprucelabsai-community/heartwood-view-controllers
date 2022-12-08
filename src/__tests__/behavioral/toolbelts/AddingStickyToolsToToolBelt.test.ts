@@ -11,7 +11,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('toolBelt', {})
+		this.vc = this.Controller('tool-belt', {})
 	}
 
 	@test()

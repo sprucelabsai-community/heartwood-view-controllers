@@ -67,7 +67,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async catGetToolBeltOffMachine() {
-		const vc = this.Controller('toolBelt', {})
+		const vc = this.Controller('tool-belt', {})
 		this.sm = this.StateMachine({ toolBeltVc: vc })
 
 		assert.isEqual(this.sm.getToolBeltVc(), vc)
@@ -431,7 +431,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
 	private static StateMachine(options?: Partial<ToolBeltStateMachineOptions>) {
 		return new ToolBeltStateMachine({
-			toolBeltVc: this.Controller('toolBelt', {}),
+			toolBeltVc: this.Controller('tool-belt', {}),
 			vcFactory: this.getFactory(),
 			connectToApi: this.mercury.getApiClientFactory(),
 			...options,

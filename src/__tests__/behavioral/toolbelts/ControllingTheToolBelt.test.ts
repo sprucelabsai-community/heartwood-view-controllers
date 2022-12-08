@@ -11,12 +11,12 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('toolBelt', {})
+		this.vc = this.Controller('tool-belt', {})
 	}
 
 	@test()
 	protected static async canCreateControllingTheToolBelt() {
-		const vc = this.Controller('toolBelt', {})
+		const vc = this.Controller('tool-belt', {})
 		assert.isTruthy(vc)
 	}
 
@@ -31,7 +31,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 		],
 	})
 	protected static rendersToolBeltPassedToIt(model: any) {
-		const vc = this.Controller('toolBelt', model)
+		const vc = this.Controller('tool-belt', model)
 		const actual = renderUtil.render(vc)
 		delete actual.controller
 
