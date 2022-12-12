@@ -246,6 +246,46 @@ this.Controller(
 		)
 	},
 
+	fieldRendersUsingInstanceOf(
+		vc: FormVc,
+		fieldName: string,
+		Class: new (options: any) => FormInputViewController
+	) {
+		try {
+			vc.getField(fieldName)
+		} catch {
+			assert.fail(
+				`I could not find a field called '${fieldName}' on your form!`
+			)
+		}
+
+		const match = vc.getFieldVc(fieldName)
+
+		assert.isTrue(
+			match instanceof Class,
+			`Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
+		
+		
+		
+this.Controller(
+	'form',
+	buildForm({
+		schema: formSchema,
+		sections: [
+			{
+				fields: [
+					{
+						name: 'firstName',
+						vc: this.myInputVc, <----- drop it in here
+					},
+				],
+			},
+		],
+	})
+)`
+		)
+	},
+
 	skillViewRendersFormBuilder(
 		vc: SkillViewController,
 		id?: string

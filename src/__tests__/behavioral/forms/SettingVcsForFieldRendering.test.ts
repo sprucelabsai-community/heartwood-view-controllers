@@ -17,6 +17,8 @@ import FormViewController, {
 } from '../../../viewControllers/form/Form.vc'
 import SpyTextFieldInput from './SpyTextFieldInput'
 
+class EmailSpyTextFieldInput extends SpyTextFieldInput {}
+
 //@ts-ignore
 class NoRenderedValueValueMethods
 	implements FormInputViewController<TextInput>
@@ -57,7 +59,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 	}
 	private static formVc: FormViewController<FormSchema>
 	private static firstNameVc: SpyTextFieldInput
-	private static emailVc: SpyTextFieldInput
+	private static emailVc: EmailSpyTextFieldInput
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -271,6 +273,16 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 				),
 			'not find'
 		)
+
+		assert.doesThrow(
+			() =>
+				formAssert.fieldRendersUsingInstanceOf(
+					this.formVc,
+					generateId(),
+					SpyTextFieldInput
+				),
+			'not find'
+		)
 	}
 
 	@test()
@@ -281,6 +293,16 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 					this.formVc,
 					'firstName',
 					this.emailVc
+				),
+			'did not render'
+		)
+
+		assert.doesThrow(
+			() =>
+				formAssert.fieldRendersUsingInstanceOf(
+					this.formVc,
+					'firstName',
+					EmailSpyTextFieldInput
 				),
 			'did not render'
 		)
