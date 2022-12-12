@@ -1,3 +1,10 @@
+# [99.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.0.34...v99.1.0) (2022-12-12)
+
+
+### Features
+
+* fieldRendersUsingInstanceOf to form assert ([8975b4f](https://github.com/sprucelabsai/heartwood-view-controllers/commit/8975b4f))
+
 ## [99.0.34](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.0.33...v99.0.34) (2022-12-11)
 
 ## [99.0.33](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.0.32...v99.0.33) (2022-12-11)
