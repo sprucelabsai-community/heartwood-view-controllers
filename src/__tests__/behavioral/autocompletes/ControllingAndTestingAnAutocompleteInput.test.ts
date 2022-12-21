@@ -106,9 +106,8 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 	@test()
 	protected static async assertingShowThrowsIfDropdownNotOpened() {
-		await assert.doesThrowAsync(
-			() => autocompleteAssert.assertActionShowsSuggestions(this.vc, () => {}),
-			'showSuggestions'
+		await this.assertThrowsNotShowingSuggestionsError(() =>
+			autocompleteAssert.assertActionShowsSuggestions(this.vc, () => {})
 		)
 	}
 
@@ -264,7 +263,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 	@test()
 	protected static async interactorThrowsWhenNoMatchOnSuggestions() {
-		this.vc.showSuggestions([
+		this.showSuggestions([
 			{
 				id: 'whatever',
 				label: 'you want',
@@ -280,7 +279,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test('throws when missing on click 1', 'test')
 	@test('throws when missing on click 2', 'whatever')
 	protected static async throwsWhenMissingOnClick(id: string) {
-		this.vc.showSuggestions([
+		this.showSuggestions([
 			{
 				id: 'test',
 				label: 'test',
@@ -302,7 +301,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		let passedId: string | undefined
 		const id = generateId()
 
-		this.vc.showSuggestions([
+		this.showSuggestions([
 			{
 				id,
 				label: 'test',
@@ -314,6 +313,77 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
 		await autocompleteInteractor.clickSuggestion(this.vc, id)
 		assert.isEqual(passedId, id)
+	}
+
+	@test()
+	protected static async throwsIfSuggestionIsShowingIsMissingParams() {
+		//@ts-ignore
+		const err = assert.doesThrow(() => autocompleteAssert.suggestionIsShowing())
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'suggestionId'],
+		})
+	}
+
+	@test()
+	protected static async throwsIfSuggestionIsNotShowingIsMissingParams() {
+		const err = assert.doesThrow(() =>
+			//@ts-ignore
+			autocompleteAssert.suggestionIsNotShowing()
+		)
+		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+			parameters: ['vc', 'suggestionId'],
+		})
+	}
+
+	@test()
+	protected static async knowsIfNotRenderingSuggestions() {
+		await this.assertThrowsNotShowingSuggestionsError(() =>
+			autocompleteAssert.suggestionIsShowing(this.vc, 'id')
+		)
+		autocompleteAssert.suggestionIsNotShowing(this.vc, 'id')
+	}
+
+	@test('throws if suggestion id not found 1', 'test', 'id')
+	@test('throws if suggestion id not found 2', 'id', 'test')
+	protected static async throwsIfSuggestionIsMissing(
+		id: string,
+		lookup: string
+	) {
+		this.showSuggestions([{ id, label: 'Hey!' }])
+		assert.doesThrow(
+			() => autocompleteAssert.suggestionIsShowing(this.vc, lookup),
+			'could not find'
+		)
+
+		autocompleteAssert.suggestionIsNotShowing(this.vc, lookup)
+	}
+
+	@test()
+	protected static async knowsIfRenderingSuggestion() {
+		this.showSuggestions([{ id: 'test', label: 'Hey!' }])
+		autocompleteAssert.suggestionIsShowing(this.vc, 'test')
+		this.assertDoesNotShowSuggestionThrowsWhenFound('test')
+	}
+
+	@test()
+	protected static canFindSuggestionsThatAreNotTheFirst() {
+		this.showSuggestions([
+			{ id: 'test', label: 'Hey!' },
+			{ id: 'test2', label: 'what the!?' },
+		])
+		autocompleteAssert.suggestionIsShowing(this.vc, 'test2')
+		this.assertDoesNotShowSuggestionThrowsWhenFound('test2')
+	}
+
+	private static assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
+		assert.doesThrow(
+			() => autocompleteAssert.suggestionIsNotShowing(this.vc, id),
+			`didn't expect to`
+		)
+	}
+
+	private static showSuggestions(suggestions: AutocompleteSuggestion[]) {
+		this.vc.showSuggestions(suggestions)
 	}
 
 	private static async setRenderedValue(renderedValue: string) {
@@ -378,5 +448,11 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		})
 
 		return autoCompelete
+	}
+
+	private static async assertThrowsNotShowingSuggestionsError(
+		action: () => Promise<void> | void
+	) {
+		await assert.doesThrowAsync(action, 'showSuggestions')
 	}
 }

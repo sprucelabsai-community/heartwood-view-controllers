@@ -1,11 +1,23 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
+import renderUtil from '../../utilities/render.utility'
 import AutocompleteInputViewController, {
 	AutocompleteSuggestion,
 } from '../../viewControllers/form/AutocompleteInput.vc'
 
 const autocompleteAssert = {
+	/**
+	 * @deprecated autocompleteAssert.assertActionShowsSuggestions(...) -> autocompleteAssert.actionShowsSuggestions(...)
+	 */
 	async assertActionShowsSuggestions(
+		vc: AutocompleteInputViewController,
+		action: () => Promise<any> | any,
+		expectedSuggestionIds?: string[]
+	) {
+		return this.actionShowsSuggestions(vc, action, expectedSuggestionIds)
+	},
+
+	async actionShowsSuggestions(
 		vc: AutocompleteInputViewController,
 		action: () => Promise<any> | any,
 		expectedSuggestionIds?: string[]
@@ -43,7 +55,17 @@ const autocompleteAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated autocompleteAssert.assertActionHidesSuggestions(...) -> autocompleteAssert.actionHidesSuggestions(...)
+	 */
 	async assertActionHidesSuggestions(
+		vc: AutocompleteInputViewController,
+		action: () => Promise<any> | any
+	) {
+		return this.actionHidesSuggestions(vc, action)
+	},
+
+	async actionHidesSuggestions(
 		vc: AutocompleteInputViewController,
 		action: () => Promise<any> | any
 	) {
@@ -60,6 +82,41 @@ const autocompleteAssert = {
 		assert.isTruthy(
 			wasHit,
 			`A was waiting for you to call 'vc.hideSuggestions()', but it never happened!`
+		)
+	},
+
+	suggestionIsShowing(
+		vc: AutocompleteInputViewController,
+		suggestionId: string
+	) {
+		assertOptions({ vc, suggestionId }, ['vc', 'suggestionId'])
+
+		assert.isTrue(
+			vc.getIsShowingSuggestions(),
+			"You aren't showing an suggestions. Try 'vc.showSuggestions(...)' to show suggestions!"
+		)
+
+		const { suggestions } = renderUtil.render(vc)
+
+		assert.isTruthy(
+			suggestions?.find((s) => s.id === suggestionId),
+			`I could not find a suggestion with the id of '${suggestionId}'!`
+		)
+	},
+
+	suggestionIsNotShowing(
+		vc: AutocompleteInputViewController,
+		suggestionId: string
+	) {
+		assertOptions({ vc, suggestionId }, ['vc', 'suggestionId'])
+		try {
+			this.suggestionIsShowing(vc, suggestionId)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found a suggestion with the id of '${suggestionId}' and didn't expect to!`
 		)
 	},
 }
