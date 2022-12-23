@@ -1,3 +1,14 @@
+## [99.2.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.2.1...v99.2.2) (2022-12-22)
+
+## [99.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.2.0...v99.2.1) (2022-12-21)
+
+# [99.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.1.19...v99.2.0) (2022-12-21)
+
+
+### Features
+
+* autocompleteAssert can assert if suggestion is being rendered! ([3c390d5](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3c390d5))
+
 ## [99.1.19](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.1.18...v99.1.19) (2022-12-21)
 
 ## [99.1.18](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.1.17...v99.1.18) (2022-12-20)
