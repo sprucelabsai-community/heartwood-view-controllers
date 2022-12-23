@@ -679,5 +679,5 @@ export interface Authorizer {
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
-	options: ViewControllerOptions
+	options: ViewControllerOptions & Record<string, any>
 ) => Vc
