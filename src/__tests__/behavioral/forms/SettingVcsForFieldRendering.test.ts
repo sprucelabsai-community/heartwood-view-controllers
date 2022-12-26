@@ -389,6 +389,26 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isFalsy(schema.fields.firstName.value)
 	}
 
+	@test()
+	protected static async settingRenderedValueDoesNotTriggerFormChange() {
+		let hitCount = 0
+		this.formVc = this.FormVc(
+			{},
+			{
+				onChange: () => {
+					hitCount++
+				},
+			}
+		)
+
+		const { setValue } = this.render(this.formVc)
+
+		await this.firstNameVc.setRenderedValue('hey')
+		setValue('firstName', generateId())
+		await this.wait(1)
+		assert.isEqual(hitCount, 0)
+	}
+
 	private static FormVc(
 		values: Record<string, any> = {},
 		options?: Partial<FormViewControllerOptions<any>>

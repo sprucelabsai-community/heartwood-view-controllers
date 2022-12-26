@@ -199,7 +199,9 @@ export default class FormViewController<
 		const errorsByField = this.validateDirtyFields()
 		this.setErrorsByField(errorsByField)
 
-		await this.emitOnChange(errorsByField)
+		if (shouldSetValueLocally) {
+			await this.emitOnChange(errorsByField)
+		}
 
 		this.triggerRenderForInput(name)
 		this.triggerRenderOnFooter?.()
