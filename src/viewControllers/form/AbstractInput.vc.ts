@@ -46,7 +46,10 @@ export default abstract class AbstractInputViewController<
 		})
 	}
 
-	public async setValue(value: string, renderedValue?: string | null) {
+	public async setValue(
+		value: string | null | undefined,
+		renderedValue?: string | null
+	) {
 		await this.setValueHandler?.(value)
 
 		if (typeof renderedValue !== 'undefined') {
