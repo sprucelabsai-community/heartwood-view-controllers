@@ -914,17 +914,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
-	@test('updating selected event updates start date 1', 100)
-	@test('updating selected event updates start date 2', 200)
-	protected static async updatingSelectedEventChangesStartDateOfCalendar(
-		startDate: number
-	) {
-		const event = await this.addOneEventAndSelectIt()
-
-		this.vc.updateEvent(event.id, { startDateTimeMs: startDate })
-		assert.isEqual(this.vc.getStartDate(), startDate)
-	}
-
 	@test()
 	protected static updatingEventOtherThanSelectedDoesNotChangeStartDate() {
 		const original = this.vc.getStartDate()

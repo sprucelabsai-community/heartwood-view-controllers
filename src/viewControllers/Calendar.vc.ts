@@ -320,10 +320,6 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		this.eventsById[id] = match
 
-		if (updates.startDateTimeMs && id === this.selectedEventId) {
-			this.model.startDate = updates.startDateTimeMs
-		}
-
 		if (updates.eventTypeSlug !== original.eventTypeSlug) {
 			delete this.vcsById[id]
 			this.triggerRender()
