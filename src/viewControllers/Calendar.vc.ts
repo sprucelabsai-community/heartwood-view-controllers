@@ -306,7 +306,6 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 
 		this.model.people?.push(person)
-
 		this.triggerRender()
 	}
 
