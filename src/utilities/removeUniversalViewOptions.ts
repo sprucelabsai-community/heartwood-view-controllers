@@ -9,7 +9,8 @@ export const universalViewOptionFields = [
 	'maps',
 ] as const
 
-export type UniversalViewOptionFields = typeof universalViewOptionFields[number]
+export type UniversalViewOptionFields =
+	(typeof universalViewOptionFields)[number]
 
 export default function removeUniversalViewOptions<
 	R extends Record<string, any>

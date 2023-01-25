@@ -22,7 +22,7 @@ export type SwipeViewControllerOptions = {
 const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
 
 type PassthroughMethods = {
-	[K in typeof PASSTHROUGH_METHODS[number]]: CardViewController[K]
+	[K in (typeof PASSTHROUGH_METHODS)[number]]: CardViewController[K]
 }
 
 interface CardSnapshot {

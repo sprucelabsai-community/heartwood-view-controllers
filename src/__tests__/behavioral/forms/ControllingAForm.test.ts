@@ -13,7 +13,7 @@ import { testFormOptions } from './testFormOptions'
 
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
-	private static vc: FormViewController<typeof testFormOptions['schema']>
+	private static vc: FormViewController<(typeof testFormOptions)['schema']>
 
 	private static readonly testForm = testFormOptions
 
@@ -251,7 +251,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async canResetField() {
-		const vc: FormViewController<typeof testFormOptions['schema']> =
+		const vc: FormViewController<(typeof testFormOptions)['schema']> =
 			this.Controller(
 				'form',
 				buildForm({

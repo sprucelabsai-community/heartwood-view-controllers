@@ -131,8 +131,8 @@ export interface WithErrorHandler {
 	onError?: ErrorHandler
 }
 
-export type LineIcon = typeof lineIcons[number]
-export type FancyIcon = typeof fancyIcons[number]
+export type LineIcon = (typeof lineIcons)[number]
+export type FancyIcon = (typeof fancyIcons)[number]
 
 export type RowValues = Record<string, any> & {
 	rowId?: string
