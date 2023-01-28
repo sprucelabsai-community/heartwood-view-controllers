@@ -147,7 +147,6 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	public getTotalPages() {
-		//swipe vc may not be instantiated yet
 		return this.swipeVc?.getSlides()?.length ?? 0
 	}
 
