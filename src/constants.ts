@@ -564,7 +564,7 @@ export const formBuilderFieldTypes = {
 	number: 'Number',
 	address: 'Address',
 	date: 'Date',
-	datetime: 'Date & Time',
+	dateTime: 'Date & Time',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(
