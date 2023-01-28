@@ -351,9 +351,10 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		const { compiledOptions } = pageVc.getField(fieldName)
 
 		const vc = this.Controller('editFormBuilderField' as any, {
-			...compiledOptions,
 			//@ts-ignore
+			...compiledOptions,
 			options: {
+				//@ts-ignore
 				...compiledOptions.options,
 			},
 			onDone: (options: any) => {

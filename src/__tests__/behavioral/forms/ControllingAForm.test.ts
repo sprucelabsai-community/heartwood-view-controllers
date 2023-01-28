@@ -9,7 +9,7 @@ import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { FormViewController } from '../../../types/heartwood.types'
-import { testFormOptions } from './testFormOptions'
+import { testFormOptions, TestFormSchema } from './testFormOptions'
 
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
@@ -1121,6 +1121,18 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		await model.onCancel?.()
 
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async getFieldIsTyped() {
+		const vc = this.Controller('form', {
+			...this.testForm,
+		}) as FormViewController<TestFormSchema>
+
+		const { compiledOptions } = vc.getField('first')
+		assert.isType<'text'>(compiledOptions.type)
+		// TODO get this typing to work!
+		// assert.isType<'first'>(compiledOptions.name)
 	}
 
 	private static FormWithOnChange(

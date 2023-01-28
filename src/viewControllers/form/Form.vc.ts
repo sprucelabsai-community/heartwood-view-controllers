@@ -12,8 +12,8 @@ import {
 	FieldDefinitions,
 	SchemaError,
 	assertOptions,
+	cloneDeep,
 } from '@sprucelabs/schema'
-import { cloneDeep } from '@sprucelabs/spruce-skill-utils'
 import { defaultSubmitButtonLabel } from '../../constants'
 import SpruceError from '../../errors/SpruceError'
 import {
@@ -577,7 +577,9 @@ export default class FormViewController<
 		}
 	}
 
-	public getField(fieldName: SchemaFieldNames<S>) {
+	public getField<N extends SchemaFieldNames<S>>(
+		fieldName: N
+	): { compiledOptions: CompiledFieldOptions<S, N> } {
 		const { sectionIdx, fieldIdx } =
 			this.getSectionAndFieldForFieldNamed(fieldName)
 
@@ -605,7 +607,7 @@ export default class FormViewController<
 		}
 
 		return {
-			compiledOptions: options,
+			compiledOptions: options as CompiledFieldOptions<S, N>,
 		}
 	}
 
@@ -833,3 +835,8 @@ const cloneAndRetainControllers = function (obj: Record<string, any>) {
 type GetValueOptions = {
 	shouldIncludePendingValues?: boolean
 }
+
+type CompiledFieldOptions<
+	S extends Schema,
+	N extends SchemaFieldNames<S>
+> = S['fields'][N] & FieldRenderOptions<S>
