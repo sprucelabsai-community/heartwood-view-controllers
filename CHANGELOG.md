@@ -1,3 +1,10 @@
+# [99.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.2.37...v99.3.0) (2023-01-28)
+
+
+### Features
+
+* date and datetime options ([a218055](https://github.com/sprucelabsai/heartwood-view-controllers/commit/a218055))
+
 ## [99.2.37](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.2.36...v99.2.37) (2023-01-28)
 
 ## [99.2.36](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.2.35...v99.2.36) (2023-01-27)
