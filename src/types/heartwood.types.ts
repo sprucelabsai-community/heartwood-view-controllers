@@ -669,6 +669,21 @@ export interface AuthorizerCanOptions<
 	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
+export interface SavePermissionsOptions<
+	ContractId extends PermissionContractId,
+	Ids extends PermissionId<ContractId>
+> {
+	target: {
+		personId?: string
+		skillId?: string
+	}
+	contractId: ContractId
+	permissions: {
+		id: Ids
+		can: StatusFlag
+	}[]
+}
+
 export interface Authorizer {
 	can<
 		ContractId extends PermissionContractId,
@@ -676,8 +691,16 @@ export interface Authorizer {
 	>(
 		options: AuthorizerCanOptions<ContractId, Ids>
 	): Promise<Record<Ids, boolean>>
+	savePermissions<
+		ContractId extends PermissionContractId,
+		Ids extends PermissionId<ContractId>
+	>(
+		options: SavePermissionsOptions<ContractId, Ids>
+	): Promise<void>
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 	options: any
 ) => Vc
+
+type StatusFlag = SpruceSchemas.Mercury.v2020_12_25.StatusFlags
