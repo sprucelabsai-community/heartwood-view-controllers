@@ -1,3 +1,10 @@
+# [100.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.3.3...v100.0.0) (2023-02-01)
+
+
+### Breaking Changes
+
+* authorizer save permission options ([c6c6390](https://github.com/sprucelabsai/heartwood-view-controllers/commit/c6c6390))
+
 ## [99.3.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.3.2...v99.3.3) (2023-01-29)
 
 ## [99.3.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v99.3.1...v99.3.2) (2023-01-29)
