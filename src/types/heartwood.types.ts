@@ -669,14 +669,16 @@ export interface AuthorizerCanOptions<
 	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
+type SavePermissionsTarget = Omit<
+	SpruceSchemas.Mercury.v2020_12_25.SavePermissionsEmitTarget,
+	'permissionPersonId' | 'permissionContractId' | 'permissionSkillId'
+>
+
 export interface SavePermissionsOptions<
 	ContractId extends PermissionContractId,
 	Ids extends PermissionId<ContractId>
 > {
-	target: {
-		personId?: string
-		skillId?: string
-	}
+	target: SavePermissionsTarget & { personId: string; skillId: string }
 	contractId: ContractId
 	permissions: {
 		id: Ids
