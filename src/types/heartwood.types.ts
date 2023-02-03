@@ -678,7 +678,7 @@ export interface SavePermissionsOptions<
 	ContractId extends PermissionContractId,
 	Ids extends PermissionId<ContractId>
 > {
-	target: SavePermissionsTarget & { personId: string; skillId: string }
+	target: SavePermissionsTarget & { personId?: string; skillId?: string }
 	contractId: ContractId
 	permissions: {
 		id: Ids
