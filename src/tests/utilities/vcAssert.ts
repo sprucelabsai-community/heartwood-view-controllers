@@ -721,7 +721,23 @@ const vcAssert = {
 			return
 		}
 
-		assert.fail(`I didn't expect to find cards`)
+		//@ts-ignore
+		const cards: CardViewController[] = pullCardsFromSkillView(vc, this.factory)
+		const matches: string[] = []
+
+		if (Array.isArray(expected)) {
+			for (const id of expected) {
+				const match = cards.find((c) => renderUtil.render(c).id === id)
+				if (match) {
+					//@ts-ignore
+					matches.push(match.id)
+				}
+			}
+		}
+
+		assert.fail(
+			`I didn't expect to find cards with the ids:\n\n${matches.join('\n')}`
+		)
 	},
 
 	assertSkillViewDoesNotRenderCard(vc: SkillViewController, id: string) {
@@ -738,18 +754,10 @@ const vcAssert = {
 		vc: SkillViewController,
 		expected?: number | string[]
 	): CardViewController[] {
-		const model = renderUtil.render(vc)
-		const cards: CardViewController[] = []
 		let matches: CardViewController[] = []
 
-		for (const layout of model?.layouts ?? []) {
-			for (const card of layout.cards ?? []) {
-				if (card) {
-					//@ts-ignore
-					cards.push(card.controller ?? this.factory.Controller('card', card))
-				}
-			}
-		}
+		//@ts-ignore
+		const cards: CardViewController[] = pullCardsFromSkillView(vc, this.factory)
 
 		if (Array.isArray(expected)) {
 			for (const id of expected) {
@@ -1640,6 +1648,23 @@ const vcAssert = {
 }
 
 export default vcAssert
+
+function pullCardsFromSkillView(
+	vc: SkillViewController<Record<string, any>>,
+	factory: any
+) {
+	const model = renderUtil.render(vc)
+	const cards: CardViewController[] = []
+	for (const layout of model?.layouts ?? []) {
+		for (const card of layout.cards ?? []) {
+			if (card) {
+				//@ts-ignore
+				cards.push(card.controller ?? factory.Controller('card', card))
+			}
+		}
+	}
+	return cards
+}
 
 function renderScopeMarkup(expectedAsArray: ScopedBy[] | ScopeFlag[]) {
 	return `['${expectedAsArray.join("','")}']`
