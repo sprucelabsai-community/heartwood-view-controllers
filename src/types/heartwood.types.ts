@@ -517,6 +517,7 @@ export type RenderAsComponent =
 	| 'ratings'
 	| 'checkbox'
 	| 'autocomplete'
+	| 'tags'
 
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
