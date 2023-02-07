@@ -1,3 +1,22 @@
+## [100.1.6](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.5...v100.1.6) (2023-02-07)
+
+## [100.1.5](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.4...v100.1.5) (2023-02-07)
+
+## [100.1.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.3...v100.1.4) (2023-02-07)
+
+## [100.1.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.2...v100.1.3) (2023-02-07)
+
+## [100.1.2](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.1...v100.1.2) (2023-02-06)
+
+## [100.1.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.0...v100.1.1) (2023-02-06)
+
+# [100.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.0.11...v100.1.0) (2023-02-06)
+
+
+### Features
+
+* can render a field as tags ([7a16b5a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/7a16b5a))
+
 ## [100.0.11](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.0.10...v100.0.11) (2023-02-05)
 
 ## [100.0.10](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.0.9...v100.0.10) (2023-02-05)
