@@ -727,10 +727,9 @@ const vcAssert = {
 
 		if (Array.isArray(expected)) {
 			for (const id of expected) {
-				const match = cards.find((c) => renderUtil.render(c).id === id)
+				const match = cards.find((c) => getViewId(c) === id)
 				if (match) {
-					//@ts-ignore
-					matches.push(match.id)
+					matches.push(getViewId(match))
 				}
 			}
 		}
@@ -761,7 +760,7 @@ const vcAssert = {
 
 		if (Array.isArray(expected)) {
 			for (const id of expected) {
-				const match = cards.find((c) => renderUtil.render(c).id === id)
+				const match = cards.find((c) => getViewId(c) === id)
 				if (!match) {
 					assert.fail(`I could not find a card with the id of ${id}!`)
 				} else {
@@ -1648,6 +1647,10 @@ const vcAssert = {
 }
 
 export default vcAssert
+
+function getViewId(c: ViewController<any>) {
+	return renderUtil.render(c).id
+}
 
 function pullCardsFromSkillView(
 	vc: SkillViewController<Record<string, any>>,
