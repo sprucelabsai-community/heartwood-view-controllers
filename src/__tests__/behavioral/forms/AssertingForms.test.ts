@@ -95,6 +95,26 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
 		this.assertRendersSection('testing')
 	}
 
+	@test()
+	protected static async canFindFormByNameInCard() {
+		const vc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						form: this.Vc([], 'test1').render(),
+					},
+					{
+						form: this.Vc([], 'test2').render(),
+					},
+				],
+			},
+		})
+		assert.doesThrow(() => formAssert.cardRendersForm(vc, 'test3'))
+		formAssert.cardRendersForm(vc, 'test1')
+		assert.doesThrow(() => formAssert.cardRendersForm(vc, generateId()))
+		formAssert.cardRendersForm(vc, 'test2')
+	}
+
 	private static assertRendersSection(sectionId: string): any {
 		return formAssert.formRendersSection(this.vc, sectionId)
 	}
@@ -122,10 +142,11 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
 		this.vc = this.Vc(sections)
 	}
 
-	private static Vc(sections: FormSection<TestFormSchema>[]) {
+	private static Vc(sections: FormSection<TestFormSchema>[], id?: string) {
 		return this.Controller(
 			'form',
 			buildForm({
+				id,
 				schema: testFormSchema,
 				sections,
 			})

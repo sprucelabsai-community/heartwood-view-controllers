@@ -9,6 +9,7 @@ import buildForm from '../../builders/buildForm'
 import {
 	BigFormViewController,
 	Card,
+	Form,
 	FormBuilderCardViewController,
 	FormInputViewController,
 	FormViewController,
@@ -21,7 +22,7 @@ import renderUtil from '../../utilities/render.utility'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
-import { pluckFirstFromCard } from './assertSupport'
+import { pluckAllFromCard, pluckFirstFromCard } from './assertSupport'
 
 const formAssert = {
 	views: {} as SimpleFactory,
@@ -171,18 +172,33 @@ const formAssert = {
 		)
 	},
 
-	cardRendersForm(vc: ViewController<Card> | DialogViewController) {
+	cardRendersForm(
+		vc: ViewController<Card> | DialogViewController,
+		id?: string
+	) {
 		const model = renderUtil.render(vc)
 
-		const form =
-			pluckFirstFromCard(model, 'bigForm') || pluckFirstFromCard(model, 'form')
+		const bigForms = pluckAllFromCard(model, 'bigForm')
+		const forms =
+			bigForms.length > 0 ? bigForms : pluckAllFromCard(model, 'form')
 
-		assert.isTrue(
-			form?.controller instanceof FormViewControllerImpl,
-			"Expected to find a form inside your CardViewController, but didn't find one!"
-		)
+		let form: Form | undefined | null
+		for (const match of forms) {
+			assert.isTrue(
+				match!.controller instanceof FormViewControllerImpl,
+				"Expected to find a form inside your CardViewController, but didn't find one!"
+			)
 
-		return form?.controller as
+			if (!id) {
+				form = match
+			} else if (id && renderUtil.render(match!.controller!).id === id) {
+				form = match
+			}
+		}
+
+		assert.isTruthy(form, `Could not find form with the id of ${id}!`)
+
+		return form!.controller as
 			| FormViewController<any>
 			| BigFormViewController<any>
 	},
