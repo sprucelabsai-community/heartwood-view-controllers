@@ -22,7 +22,7 @@ import renderUtil from '../../utilities/render.utility'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
-import { pluckAllFromCard, pluckFirstFromCard } from './assertSupport'
+import { pluckAllFromCard } from './assertSupport'
 
 const formAssert = {
 	views: {} as SimpleFactory,
