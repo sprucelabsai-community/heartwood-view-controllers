@@ -703,7 +703,7 @@ export default class FormViewController<
 
 	public addFieldToSection<N extends SchemaFieldNames<S>>(
 		sectionIdOrIdx: string | number,
-		fieldNameOrRenderOptions: N | FieldRenderOptions<S>
+		fieldNameOrRenderOptions: N | (FieldRenderOptions<S> & { atIndex?: number })
 	) {
 		const section = this.getSection(sectionIdOrIdx)
 
@@ -721,9 +721,24 @@ export default class FormViewController<
 			})
 		}
 
+		const { fieldIdx } = this.getSectionAndFieldForFieldNamed(fieldName)
+
+		if (fieldIdx > -1) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['fieldName'],
+				friendlyMessage: `The field \`${fieldName}\` is already being rendered. You can't add it again!`,
+			})
+		}
+
 		//@ts-ignore
-		if (fieldNameOrRenderOptions.name) {
-			section.fields?.push(fieldNameOrRenderOptions)
+		if (typeof fieldNameOrRenderOptions === 'object') {
+			const { atIndex, ...options } = fieldNameOrRenderOptions
+			if (typeof atIndex === 'number') {
+				section.fields?.splice(atIndex, 0, options)
+			} else {
+				section.fields?.push(fieldNameOrRenderOptions)
+			}
 		} else {
 			section.fields?.push(fieldName)
 		}

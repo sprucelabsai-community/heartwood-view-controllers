@@ -1184,10 +1184,6 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.doesInclude(section.fields, 'fieldNotPartOfSection')
 	}
 
-	private static getSection(sectionIdOrIdx: string | number) {
-		return this.vc.getSection(sectionIdOrIdx)
-	}
-
 	@test()
 	protected static async addingFieldBySectionTriggersRender() {
 		this.vc.addFieldToSection('first', 'fieldNotPartOfSection')
@@ -1205,6 +1201,53 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		this.vc.addFieldToSection(section, added)
 		assert.doesInclude(this.getSection(section).fields, added)
+	}
+
+	@test()
+	protected static async throwsIfAddingFieldThatAlreadyIsRendering() {
+		assert.doesThrow(() => this.vc.addFieldToSection('first', 'first'))
+		const err = assert.doesThrow(() =>
+			this.vc.addFieldToSection('first', 'last')
+		)
+
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['fieldName'],
+		})
+	}
+
+	@test()
+	protected static async canAddFieldsAtIndex() {
+		this.vc.addFieldToSection('first', {
+			name: 'fieldNotPartOfSection',
+			atIndex: 0,
+		})
+
+		this.assertSectionFieldsEqual('first', [
+			{ name: 'fieldNotPartOfSection' },
+			'first',
+		])
+
+		this.vc.addFieldToSection('first', {
+			name: 'anotherField',
+			atIndex: 1,
+		})
+
+		this.assertSectionFieldsEqual('first', [
+			{ name: 'fieldNotPartOfSection' },
+			{ name: 'anotherField' },
+			'first',
+		])
+	}
+
+	private static assertSectionFieldsEqual(
+		section: string,
+		expected: (string | { name: string })[]
+	) {
+		assert.isEqualDeep(this.getSection(section).fields, expected)
+	}
+
+	private static getSection(sectionIdOrIdx: string | number) {
+		return this.vc.getSection(sectionIdOrIdx)
 	}
 
 	private static TestFormVc() {
