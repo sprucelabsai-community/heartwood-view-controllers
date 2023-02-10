@@ -1,3 +1,12 @@
+## [100.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.2.0...v100.2.1) (2023-02-09)
+
+# [100.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.8...v100.2.0) (2023-02-08)
+
+
+### Features
+
+* can sepecify a form id when checking for rending form ([52ce910](https://github.com/sprucelabsai/heartwood-view-controllers/commit/52ce910))
+
 ## [100.1.8](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.7...v100.1.8) (2023-02-08)
 
 ## [100.1.7](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.6...v100.1.7) (2023-02-07)
