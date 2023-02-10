@@ -1,3 +1,10 @@
+# [100.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.2.1...v100.3.0) (2023-02-10)
+
+
+### Features
+
+* can add field to section if it already exists in the schema ([b0dca7a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/b0dca7a))
+
 ## [100.2.1](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.2.0...v100.2.1) (2023-02-09)
 
 # [100.2.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.1.8...v100.2.0) (2023-02-08)
