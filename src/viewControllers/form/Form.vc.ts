@@ -584,11 +584,7 @@ export default class FormViewController<
 			this.getSectionAndFieldForFieldNamed(fieldName)
 
 		if (sectionIdx === -1) {
-			throw new SchemaError({
-				code: 'INVALID_PARAMETERS',
-				parameters: ['fieldName'],
-				friendlyMessage: `I could not find a field being rendered called \`${fieldName}\``,
-			})
+			this.throwFieldNotFound<N>(fieldName)
 		}
 
 		const renderOptions = normalizeFormSectionFieldNamesUtil.toObjects(
@@ -609,6 +605,14 @@ export default class FormViewController<
 		return {
 			compiledOptions: options as CompiledFieldOptions<S, N>,
 		}
+	}
+
+	private throwFieldNotFound<N extends SchemaFieldNames<S>>(fieldName: N) {
+		throw new SchemaError({
+			code: 'INVALID_PARAMETERS',
+			parameters: ['fieldName'],
+			friendlyMessage: `I could not find a field being rendered called '${fieldName}'!`,
+		})
 	}
 
 	private getSectionAndFieldForFieldNamed(fieldName: string) {
@@ -701,6 +705,17 @@ export default class FormViewController<
 		return this.model.schema
 	}
 
+	public removeField<N extends SchemaFieldNames<S>>(fieldName: N) {
+		const { sectionIdx, fieldIdx } =
+			this.getSectionAndFieldForFieldNamed(fieldName)
+		if (fieldIdx === -1) {
+			this.throwFieldNotFound<N>(fieldName)
+		}
+		const section = this.getSection(sectionIdx)
+		section.fields?.splice(fieldIdx, 1)
+		this.triggerRender()
+	}
+
 	public addFieldToSection<N extends SchemaFieldNames<S>>(
 		sectionIdOrIdx: string | number,
 		fieldNameOrRenderOptions: N | (FieldRenderOptions<S> & { atIndex?: number })
@@ -718,6 +733,7 @@ export default class FormViewController<
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['fieldName'],
+				friendlyMessage: 'I could not find any field named ${}.',
 			})
 		}
 

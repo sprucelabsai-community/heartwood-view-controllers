@@ -1,6 +1,6 @@
 import { validateSchemaValues, buildSchema, Schema } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import buildForm from '../../../builders/buildForm'
@@ -1237,6 +1237,46 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			{ name: 'anotherField' },
 			'first',
 		])
+	}
+
+	@test()
+	protected static async removingFieldThrowsWithBadField() {
+		const err = assert.doesThrow(() => this.vc.removeField(generateId() as any))
+
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['fieldName'],
+		})
+	}
+
+	@test()
+	protected static async canRemoveFieldIfItExists() {
+		this.vc.addFieldToSection('first', {
+			name: 'fieldNotPartOfSection',
+		})
+
+		this.vc.removeField('fieldNotPartOfSection')
+
+		this.assertSectionFieldsEqual('first', ['first'])
+
+		this.vc.addFieldToSection('second', 'fieldNotPartOfSection')
+		this.vc.addFieldToSection('second', 'anotherField')
+
+		this.vc.removeField('fieldNotPartOfSection')
+		this.assertSectionFieldsEqual('second', [
+			'last',
+			'nickname',
+			'anotherField',
+		])
+
+		this.vc.removeField('nickname')
+
+		this.assertSectionFieldsEqual('second', ['last', 'anotherField'])
+	}
+
+	@test()
+	protected static async removingFieldTriggersRender() {
+		this.vc.removeField('nickname')
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
 	private static assertSectionFieldsEqual(
