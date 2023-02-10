@@ -1,3 +1,10 @@
+# [100.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.3.0...v100.4.0) (2023-02-10)
+
+
+### Features
+
+* can add form fields at a specific index ([cc27ba0](https://github.com/sprucelabsai/heartwood-view-controllers/commit/cc27ba0))
+
 # [100.3.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.2.1...v100.3.0) (2023-02-10)
 
 
