@@ -1,3 +1,10 @@
+# [100.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.4.0...v100.5.0) (2023-02-10)
+
+
+### Features
+
+* can now remove field by name from a  form! ([904b7b8](https://github.com/sprucelabsai/heartwood-view-controllers/commit/904b7b8))
+
 # [100.4.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.3.0...v100.4.0) (2023-02-10)
 
 
