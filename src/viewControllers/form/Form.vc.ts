@@ -674,8 +674,8 @@ export default class FormViewController<
 		return this.model.sections.length ?? 0
 	}
 
-	public getSection(idx: number | string) {
-		return this.assertValidSection(idx)
+	public getSection(idOrIdx: number | string) {
+		return this.assertValidSection(idOrIdx)
 	}
 
 	private assertValidSection(idx: number | string) {
@@ -691,7 +691,7 @@ export default class FormViewController<
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				friendlyMessage: `There is no section ${idx}.`,
-				parameters: ['sectionIdx'],
+				parameters: ['sectionIdOrIdx'],
 			})
 		}
 		return section
@@ -699,6 +699,36 @@ export default class FormViewController<
 
 	public getSchema() {
 		return this.model.schema
+	}
+
+	public addFieldToSection<N extends SchemaFieldNames<S>>(
+		sectionIdOrIdx: string | number,
+		fieldNameOrRenderOptions: N | FieldRenderOptions<S>
+	) {
+		const section = this.getSection(sectionIdOrIdx)
+
+		const fieldName =
+			typeof fieldNameOrRenderOptions === 'string'
+				? fieldNameOrRenderOptions
+				: fieldNameOrRenderOptions.name
+
+		const field = this.getSchema().fields?.[fieldName]
+
+		if (!field) {
+			throw new SchemaError({
+				code: 'INVALID_PARAMETERS',
+				parameters: ['fieldName'],
+			})
+		}
+
+		//@ts-ignore
+		if (fieldNameOrRenderOptions.name) {
+			section.fields?.push(fieldNameOrRenderOptions)
+		} else {
+			section.fields?.push(fieldName)
+		}
+
+		this.triggerRender()
 	}
 
 	public addFields(options: {

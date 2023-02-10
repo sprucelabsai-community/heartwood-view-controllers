@@ -38,7 +38,7 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
 	protected static throwsWhenTryingToRemoveBadSection() {
 		const err = assert.doesThrow(() => this.vc.removeSection(generateId()))
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 

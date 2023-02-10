@@ -1,4 +1,4 @@
-import { validateSchemaValues, buildSchema } from '@sprucelabs/schema'
+import { validateSchemaValues, buildSchema, Schema } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
@@ -8,7 +8,11 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { FormViewController } from '../../../types/heartwood.types'
+import {
+	FieldRenderOptions,
+	FormSection,
+	FormViewController,
+} from '../../../types/heartwood.types'
 import { testFormOptions, TestFormSchema } from './testFormOptions'
 
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
@@ -19,9 +23,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('form', {
-			...this.testForm,
-		}) as any
+		this.vc = this.TestFormVc()
 	}
 
 	@test()
@@ -290,7 +292,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		const err1 = assert.doesThrow(() => this.vc.getSection(-1))
 
 		errorAssert.assertError(err1, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 
@@ -373,7 +375,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 
@@ -455,7 +457,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static addingFieldTriggersRender() {
+	protected static addingFieldsTriggersRender() {
 		this.vc.addFields({
 			sectionIdx: 0,
 			fields: {
@@ -503,7 +505,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		const err = assert.doesThrow(() => this.vc.setSection(-1, {}))
 
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 
@@ -536,13 +538,16 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 			},
 		})
 
-		assert.isEqualDeep(this.vc.getSection(0), {
+		const expected: FormSection<TestFormSchema> = {
+			id: 'first',
 			title: 'Hey gang!',
 			fields: ['first'],
 			text: {
 				content: 'Waka waka!',
 			},
-		})
+		}
+		assert.isEqualDeep(this.vc.getSection(0), expected)
+		assert.isEqualDeep(this.vc.getSection('first'), expected)
 	}
 
 	@test()
@@ -1125,14 +1130,87 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async getFieldIsTyped() {
-		const vc = this.Controller('form', {
-			...this.testForm,
-		}) as FormViewController<TestFormSchema>
-
-		const { compiledOptions } = vc.getField('first')
+		const { compiledOptions } = this.vc.getField('first')
 		assert.isType<'text'>(compiledOptions.type)
 		// TODO get this typing to work!
 		// assert.isType<'first'>(compiledOptions.name)
+	}
+
+	@test('bad section by id', 'twenty')
+	@test('bad section by id 2', 'fiver')
+	@test('bad section by idx 1', 10)
+	protected static async throwsWhenAddingFieldToBadSection(
+		sectionIdOrIdx: string | number
+	) {
+		const err = assert.doesThrow(() =>
+			//@ts-ignore
+			this.vc.addFieldToSection(sectionIdOrIdx, 'test')
+		)
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['sectionIdOrIdx'],
+		})
+	}
+
+	@test()
+	protected static async throwsWhenAddingFieldNameThatDoesNotExistOnSchema() {
+		const err = assert.doesThrow(() =>
+			//@ts-ignore
+			this.vc.addFieldToSection('first', 'test')
+		)
+		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+			parameters: ['fieldName'],
+		})
+	}
+
+	@test()
+	protected static async canAddFieldByNameWithSectionIdx() {
+		this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
+		this.vc.addFieldToSection(1, 'anotherField')
+	}
+
+	@test()
+	protected static async canAddFieldByNameWithSectionById() {
+		this.vc.addFieldToSection('first', 'fieldNotPartOfSection')
+		this.vc.addFieldToSection('second', 'anotherField')
+	}
+
+	@test('can add field to section 0', 0)
+	@test('can add field to section second', 'second')
+	protected static async actuallyAddsTheFieldToTheSection(
+		sectionIdOrIdx: string | number
+	) {
+		this.vc.addFieldToSection(sectionIdOrIdx, 'fieldNotPartOfSection')
+		const section = this.getSection(sectionIdOrIdx)
+		assert.doesInclude(section.fields, 'fieldNotPartOfSection')
+	}
+
+	private static getSection(sectionIdOrIdx: string | number) {
+		return this.vc.getSection(sectionIdOrIdx)
+	}
+
+	@test()
+	protected static async addingFieldBySectionTriggersRender() {
+		this.vc.addFieldToSection('first', 'fieldNotPartOfSection')
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
+	protected static async canAddFieldWithFieldOptions() {
+		const added: FieldRenderOptions<Schema> = {
+			//@ts-ignore
+			name: 'fieldNotPartOfSection',
+			renderAs: 'checkbox',
+		}
+		const section = 'first'
+
+		this.vc.addFieldToSection(section, added)
+		assert.doesInclude(this.getSection(section).fields, added)
+	}
+
+	private static TestFormVc() {
+		return this.Controller('form', {
+			...this.testForm,
+		}) as FormViewController<TestFormSchema>
 	}
 
 	private static FormWithOnChange(

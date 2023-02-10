@@ -18,6 +18,12 @@ export const testFormSchema = buildSchema({
 		favoriteNumber: {
 			type: 'number',
 		},
+		fieldNotPartOfSection: {
+			type: 'id',
+		},
+		anotherField: {
+			type: 'id',
+		},
 	},
 })
 
@@ -28,9 +34,11 @@ export const testFormOptions = buildForm({
 	schema: testFormSchema,
 	sections: [
 		{
+			id: 'first',
 			fields: ['first'],
 		},
 		{
+			id: 'second',
 			fields: ['last', 'nickname'],
 		},
 		{

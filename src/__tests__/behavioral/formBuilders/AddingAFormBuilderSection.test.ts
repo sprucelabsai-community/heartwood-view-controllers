@@ -72,7 +72,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		)
 
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 

@@ -648,7 +648,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static gettingABadSectionFails() {
 		const err = assert.doesThrow(() => this.vc.getPageVc(0).getSection(-1))
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['sectionIdx'],
+			parameters: ['sectionIdOrIdx'],
 		})
 	}
 
