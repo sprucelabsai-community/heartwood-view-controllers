@@ -1279,6 +1279,24 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
+	@test()
+	protected static async knowsIfFieldIsNotBeingRendered() {
+		this.assertIsNotRenderingField('fieldNotPartOfSection')
+		this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
+		this.assertIsRenderingField('fieldNotPartOfSection')
+		this.assertIsNotRenderingField('anotherField')
+		this.vc.addFieldToSection(0, 'anotherField')
+		this.assertIsRenderingField('anotherField')
+	}
+
+	private static assertIsNotRenderingField(fieldName: string) {
+		assert.isFalse(this.vc.isFieldRendering(fieldName as any))
+	}
+
+	private static assertIsRenderingField(fieldName: string) {
+		assert.isTrue(this.vc.isFieldRendering(fieldName as any))
+	}
+
 	private static assertSectionFieldsEqual(
 		section: string,
 		expected: (string | { name: string })[]

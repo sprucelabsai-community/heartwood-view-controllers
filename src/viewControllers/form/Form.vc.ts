@@ -577,6 +577,13 @@ export default class FormViewController<
 		}
 	}
 
+	public isFieldRendering<N extends SchemaFieldNames<S>>(
+		fieldName: N
+	): boolean {
+		const { fieldIdx } = this.getSectionAndFieldForFieldNamed(fieldName)
+		return fieldIdx > -1
+	}
+
 	public getField<N extends SchemaFieldNames<S>>(
 		fieldName: N
 	): { compiledOptions: CompiledFieldOptions<S, N> } {
