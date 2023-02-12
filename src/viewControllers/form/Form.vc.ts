@@ -225,7 +225,7 @@ export default class FormViewController<
 		}
 	}
 
-	private isFieldBeingRendered(name: SchemaFieldNames<S>) {
+	public isFieldBeingRendered(name: SchemaFieldNames<S>) {
 		const { sectionIdx } = this.getSectionAndFieldForFieldNamed(name)
 		const isBeingRendered = sectionIdx > -1
 		return isBeingRendered
