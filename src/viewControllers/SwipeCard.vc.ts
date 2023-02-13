@@ -24,6 +24,7 @@ const PASSTHROUGH_METHODS = [
 	'setHeaderSubtitle',
 	'enableFooter',
 	'disableFooter',
+	'getIsFooterEnabled',
 ] as const
 
 export type SwipeCardPassthroughMethods = {
