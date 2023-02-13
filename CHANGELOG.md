@@ -1,3 +1,10 @@
+# [100.7.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.6.0...v100.7.0) (2023-02-13)
+
+
+### Features
+
+* swipe card can now enable/disable footer ([05bec59](https://github.com/sprucelabsai/heartwood-view-controllers/commit/05bec59))
+
 # [100.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.5.0...v100.6.0) (2023-02-12)
 
 
