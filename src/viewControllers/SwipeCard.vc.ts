@@ -60,6 +60,7 @@ export default class SwipeCardViewController
 		const { slides, onSlideChange, isBusy, ...rest } = options
 
 		this.slideChangeHandler = onSlideChange
+
 		this.cardVc = this.Controller('card', {
 			...rest,
 			body: {
