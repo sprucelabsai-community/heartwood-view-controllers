@@ -26,7 +26,7 @@ const PASSTHROUGH_METHODS = [
 	'disableFooter',
 ] as const
 
-type PassthroughMethods = {
+export type SwipeCardPassthroughMethods = {
 	[K in (typeof PASSTHROUGH_METHODS)[number]]: CardViewController[K]
 }
 
@@ -36,11 +36,7 @@ interface CardSnapshot {
 	footer: CardFooter | null | undefined
 }
 
-/** @ts-ignore */
-export default class SwipeCardViewController
-	extends AbstractViewController<Card>
-	implements PassthroughMethods
-{
+export default class SwipeCardViewController extends AbstractViewController<Card> {
 	private presentSlide = 0
 	private swipeController?: SwipeController
 	private slideChangeHandler: ((slide: number) => void) | undefined

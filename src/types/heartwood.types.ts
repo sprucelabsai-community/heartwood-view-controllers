@@ -78,6 +78,7 @@ import StatsViewController, {
 	StatsViewControllerOptions,
 } from '../viewControllers/reporting/Stats.vc'
 import SwipeCardViewControllerImpl, {
+	SwipeCardPassthroughMethods,
 	SwipeViewControllerOptions,
 } from '../viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController, {
@@ -228,6 +229,7 @@ export type FormInputOptions = Omit<
 export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
 	CardUniversals
 export type SwipeCardViewController = SwipeCardViewControllerImpl &
+	SwipeCardPassthroughMethods &
 	CardUniversals
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
 export type BigFormViewController<S extends Schema> =
