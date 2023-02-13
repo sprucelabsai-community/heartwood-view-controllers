@@ -309,7 +309,7 @@ const listAssert = {
 			}
 		}
 		assert.fail(
-			`Expected row '${row}' to render content '${content}', but it did not. It renderd:\n\n${contents
+			`Expected row '${row}' to render content '${content}', but it did not. It did, however, render the following cells:\n\n${contents
 				.map((c, idx) => `Cell ${idx}: ${c}`)
 				.join('\n')}`
 		)
