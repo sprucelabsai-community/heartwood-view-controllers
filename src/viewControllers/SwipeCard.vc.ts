@@ -19,7 +19,12 @@ export type SwipeViewControllerOptions = {
 	isBusy?: boolean
 } & Omit<Card, 'body'>
 
-const PASSTHROUGH_METHODS = ['setHeaderTitle', 'setHeaderSubtitle'] as const
+const PASSTHROUGH_METHODS = [
+	'setHeaderTitle',
+	'setHeaderSubtitle',
+	'enableFooter',
+	'disableFooter',
+] as const
 
 type PassthroughMethods = {
 	[K in (typeof PASSTHROUGH_METHODS)[number]]: CardViewController[K]

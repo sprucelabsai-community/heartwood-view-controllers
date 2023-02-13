@@ -451,11 +451,25 @@ export default class FormViewController<
 		this.triggerRender()
 	}
 
+	/**
+	 * @deprecated getShouldShowSubmitControls() -> getShouldRenderSubmitControls()
+	 */
 	public getShouldShowSubmitControls() {
+		return this.getShouldRenderSubmitControls()
+	}
+
+	public getShouldRenderSubmitControls() {
 		return this.model.shouldShowSubmitControls ?? true
 	}
 
+	/**
+	 * @deprecated getShouldShowCancelButton() -> getShouldRenderCancelButton()
+	 */
 	public getShouldShowCancelButton() {
+		return this.getShouldRenderCancelButton()
+	}
+
+	public getShouldRenderCancelButton() {
 		return (
 			(this.model.shouldShowCancelButton ?? true) &&
 			this.getShouldShowSubmitControls()
