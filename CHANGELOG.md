@@ -1,3 +1,10 @@
+# [100.6.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.5.0...v100.6.0) (2023-02-12)
+
+
+### Features
+
+* can check if field is rendering ([3f13927](https://github.com/sprucelabsai/heartwood-view-controllers/commit/3f13927))
+
 # [100.5.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.4.0...v100.5.0) (2023-02-10)
 
 
