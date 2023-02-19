@@ -741,7 +741,7 @@ export default class FormViewController<
 		sectionIdOrIdx: string | number,
 		fieldNameOrRenderOptions: N | (FieldRenderOptions<S> & { atIndex?: number })
 	) {
-		const section = this.getSection(sectionIdOrIdx)
+		const section = { ...this.getSection(sectionIdOrIdx) }
 
 		const fieldName =
 			typeof fieldNameOrRenderOptions === 'string'
@@ -780,7 +780,7 @@ export default class FormViewController<
 			section.fields?.push(fieldName)
 		}
 
-		this.triggerRender()
+		this.setSection(sectionIdOrIdx, section)
 	}
 
 	public addFields(options: {

@@ -1289,6 +1289,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.assertIsRenderingField('anotherField')
 	}
 
+	@test()
+	protected static async sectionIsClonedWhenAddingFieldToSection() {
+		const expected = this.vc.getSection(0)
+		this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
+		const actual = this.vc.getSection(0)
+		assert.isNotEqual(actual, expected)
+	}
+
 	private static assertIsNotRenderingField(fieldName: string) {
 		assert.isFalse(this.vc.isFieldRendering(fieldName as any))
 	}
