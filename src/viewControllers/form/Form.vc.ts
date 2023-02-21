@@ -105,7 +105,7 @@ export default class FormViewController<
 					getModel: () => this.getField(name).compiledOptions,
 					setModel: (model) => {
 						delete model.value
-						this.setField(name, {
+						this.updateField(name, {
 							//@ts-ignore
 							fieldDefinition: model,
 						})
@@ -514,38 +514,27 @@ export default class FormViewController<
 	}
 
 	public setSectionTitle(sectionIdx: number, title: string) {
-		this.setSection(sectionIdx, {
+		this.updateSection(sectionIdx, {
 			...this.getSection(sectionIdx),
 			title,
 		})
 	}
 
-	public setField(
+	/**
+	 * @deprecated setField(...) -> updateField(...)
+	 */
+	public setField(fieldName: SchemaFieldNames<S>, updates: UpdateFieldOptions) {
+		return this.updateField(fieldName, updates)
+	}
+
+	public updateField(
 		fieldName: SchemaFieldNames<S>,
-		updates: {
-			newName?: string
-			fieldDefinition?: FieldDefinitions
-			renderOptions?: Partial<FieldRenderOptions<Schema>>
-		}
+		updates: UpdateFieldOptions
 	) {
 		const { newName } = updates ?? {}
-		const missing: string[] = []
 		let passedFieldName = fieldName
 
-		if (!fieldName) {
-			missing.push('fieldName')
-		}
-
-		if (!updates) {
-			missing.push('updates')
-		}
-
-		if (missing.length) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
+		assertOptions({ fieldName, updates }, ['fieldName', 'updates'])
 
 		const schema = this.getSchema()
 		const oldDefinition = schema.fields?.[passedFieldName]
@@ -569,8 +558,7 @@ export default class FormViewController<
 		}
 
 		if (updates.fieldDefinition) {
-			//@ts-ignore
-			schema.fields[passedFieldName] = updates.fieldDefinition
+			this.updateFieldDefinition(passedFieldName, updates.fieldDefinition)
 		}
 
 		if (updates.renderOptions || newName) {
@@ -584,7 +572,7 @@ export default class FormViewController<
 				name: passedFieldName,
 			})
 
-			this.setSection(sectionIdx, {
+			this.updateSection(sectionIdx, {
 				...this.getSection(sectionIdx),
 				fields: newFields,
 			})
@@ -652,7 +640,14 @@ export default class FormViewController<
 		return { sectionIdx, fieldIdx }
 	}
 
+	/**
+	 * @deprecated setSection(...) -> updateSection(...)
+	 */
 	public setSection(section: number | string, newSection: Section<S>) {
+		return this.updateSection(section, newSection)
+	}
+
+	public updateSection(section: number | string, newSection: Section<S>) {
 		assertOptions({ section, newSection }, ['section', 'newSection'])
 		const old = this.assertValidSection(section)
 
@@ -743,10 +738,10 @@ export default class FormViewController<
 	) {
 		const section = { ...this.getSection(sectionIdOrIdx) }
 
-		const fieldName =
+		const fieldName: N =
 			typeof fieldNameOrRenderOptions === 'string'
 				? fieldNameOrRenderOptions
-				: fieldNameOrRenderOptions.name
+				: (fieldNameOrRenderOptions.name as N)
 
 		const field = this.getSchema().fields?.[fieldName]
 
@@ -770,7 +765,11 @@ export default class FormViewController<
 
 		//@ts-ignore
 		if (typeof fieldNameOrRenderOptions === 'object') {
-			const { atIndex, ...options } = fieldNameOrRenderOptions
+			const { atIndex, fieldDefinition, ...options } = fieldNameOrRenderOptions
+			if (fieldDefinition) {
+				this.updateFieldDefinition<N>(fieldName, fieldDefinition)
+			}
+
 			if (typeof atIndex === 'number') {
 				section.fields?.splice(atIndex, 0, options)
 			} else {
@@ -780,7 +779,21 @@ export default class FormViewController<
 			section.fields?.push(fieldName)
 		}
 
-		this.setSection(sectionIdOrIdx, section)
+		this.updateSection(sectionIdOrIdx, section)
+	}
+
+	private updateFieldDefinition<N extends SchemaFieldNames<S>>(
+		fieldName: N,
+		fieldDefinition: FieldDefinitions
+	) {
+		const schema = this.getClonedSchema()
+		//@ts-ignore
+		schema.fields[fieldName] = fieldDefinition
+		this.setSchema(schema)
+	}
+
+	private getClonedSchema(): S {
+		return cloneDeep(this.getSchema())
 	}
 
 	public addFields(options: {
@@ -789,24 +802,9 @@ export default class FormViewController<
 	}) {
 		const { sectionIdx, fields } = options
 
-		const missing: string[] = []
+		assertOptions({ sectionIdx, fields }, ['sectionIdx', 'fields'])
 
-		if (typeof sectionIdx === 'undefined') {
-			missing.push('sectionIdx')
-		}
-
-		if (!fields) {
-			missing.push('fields')
-		}
-
-		if (missing.length > 0) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
-
-		const schema = this.getSchema()
+		const schema = this.getClonedSchema()
 		schema.fields = {
 			...schema.fields,
 			...fields,
@@ -823,7 +821,13 @@ export default class FormViewController<
 			section.fields.push({ name: field })
 		}
 
+		this.setSchema(schema)
+
 		this.triggerRender()
+	}
+
+	private setSchema(schema: Schema) {
+		this.model.schema = schema as S
 	}
 
 	public getValue<N extends SchemaFieldNames<S>>(
@@ -922,3 +926,9 @@ type CompiledFieldOptions<
 	S extends Schema,
 	N extends SchemaFieldNames<S>
 > = S['fields'][N] & FieldRenderOptions<S>
+
+interface UpdateFieldOptions {
+	newName?: string
+	fieldDefinition?: FieldDefinitions
+	renderOptions?: Partial<FieldRenderOptions<Schema>>
+}

@@ -74,7 +74,7 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
 		sectionIdx: number,
 		section: { text: { content: string } }
 	) {
-		this.vc.setSection(this.sectionId(sectionIdx), section)
+		this.vc.updateSection(this.sectionId(sectionIdx), section)
 	}
 
 	private static assertRendersSection(idx: number) {

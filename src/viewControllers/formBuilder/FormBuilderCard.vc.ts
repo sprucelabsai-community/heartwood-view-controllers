@@ -200,7 +200,6 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 			title: slide.title ?? '**MISSING**',
 			index: idx,
 			fieldBuilder: this.buildField.bind(this),
-			schema: formVc.getSchema(),
 		}) as any
 	}
 
@@ -360,7 +359,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 				const { name, ...fieldDefinition } = options
 				void dialog.hide()
 				//@ts-ignore
-				pageVc.setField(fieldName, {
+				pageVc.updateField(fieldName, {
 					newName: name,
 					fieldDefinition,
 				})

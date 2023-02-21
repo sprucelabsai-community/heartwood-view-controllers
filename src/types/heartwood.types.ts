@@ -11,6 +11,7 @@ import {
 } from '@sprucelabs/mercury-types'
 import {
 	AddressFieldValue,
+	FieldDefinitions,
 	FieldError,
 	Schema,
 	SchemaFieldNames,
@@ -529,6 +530,7 @@ export type FieldRenderOptions<S extends Schema> = {
 	label?: string | null
 	hint?: string | null
 	vc?: FormInputViewController
+	fieldDefinition?: FieldDefinitions
 }
 
 export interface DropdownController {

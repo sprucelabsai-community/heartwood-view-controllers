@@ -93,7 +93,6 @@
     "dotenv": "^16.0.3",
     "esbuild": "^0.17.10",
     "globby": "^11.0.4",
-    "just-clone": "^6.2.0",
     "just-safe-set": "^4.2.1",
     "terser-webpack-plugin": "5.3.1",
     "uglify-js": "^3.17.4",

@@ -9,32 +9,6 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import { SimpleRow, SimpleSection } from './EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from './FormBuilderCard.vc'
 
-export type FieldBuilder = FormBuilderCardViewController['buildField']
-
-export type AddSectionOptions = Partial<SimpleSection> & {
-	atIndex?: number
-}
-
-export interface FormBuilderPageViewControllerEnhancements {
-	getId(): string
-	addSection(options?: AddSectionOptions): void
-	setSection(sectionIdx: number, section: SimpleSection): void
-	addField(
-		sectionIdx: number,
-		options?: { name?: string; type?: string; label?: string }
-	): void
-	getIndex(): number
-	getTitle(): string
-	setTitle(string: string): void
-	getSection(sectionIdx: number): SimpleSection
-}
-
-export type FormBuilderPageViewController = Omit<
-	FormViewController<Schema>,
-	keyof FormBuilderPageViewControllerEnhancements
-> &
-	FormBuilderPageViewControllerEnhancements
-
 export class FormBuilderPageViewControllerImpl
 	implements FormBuilderPageViewControllerEnhancements
 {
@@ -43,7 +17,6 @@ export class FormBuilderPageViewControllerImpl
 	public index: number
 	private title: string
 	private setTitleHandler: (title: string) => void
-	private schema: Schema
 
 	public constructor(options: {
 		formVc: FormViewController<Schema>
@@ -51,15 +24,12 @@ export class FormBuilderPageViewControllerImpl
 		title: string
 		fieldBuilder: FieldBuilder
 		setTitleHandler: (title: string) => void
-		schema: Schema
 	}) {
-		const { formVc, fieldBuilder, index, setTitleHandler, title, schema } =
-			options
+		const { formVc, fieldBuilder, index, setTitleHandler, title } = options
 
 		this.formVc = formVc
 		this.index = index
 		this.title = title
-		this.schema = schema
 		this.setTitleHandler = setTitleHandler
 		this.fieldBuilder = fieldBuilder
 		functionDelegationUtil.delegateFunctionCalls(this, formVc)
@@ -132,7 +102,7 @@ export class FormBuilderPageViewControllerImpl
 			updatedSection.text = { content: text }
 		}
 
-		this.formVc.setSection(sectionIdx, updatedSection)
+		this.formVc.updateSection(sectionIdx, updatedSection)
 		this.addFieldsToSection(sectionIdx, fields ?? [])
 	}
 
@@ -211,4 +181,34 @@ export class FormBuilderPageViewControllerImpl
 			})
 		}
 	}
+
+	private get schema() {
+		return this.formVc.getSchema()
+	}
 }
+
+export type FieldBuilder = FormBuilderCardViewController['buildField']
+
+export type AddSectionOptions = Partial<SimpleSection> & {
+	atIndex?: number
+}
+
+export interface FormBuilderPageViewControllerEnhancements {
+	getId(): string
+	addSection(options?: AddSectionOptions): void
+	setSection(sectionIdx: number, section: SimpleSection): void
+	addField(
+		sectionIdx: number,
+		options?: { name?: string; type?: string; label?: string }
+	): void
+	getIndex(): number
+	getTitle(): string
+	setTitle(string: string): void
+	getSection(sectionIdx: number): SimpleSection
+}
+
+export type FormBuilderPageViewController = Omit<
+	FormViewController<Schema>,
+	keyof FormBuilderPageViewControllerEnhancements
+> &
+	FormBuilderPageViewControllerEnhancements

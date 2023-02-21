@@ -273,7 +273,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		pageVc.addSection()
 
-		pageVc.getSchema()
+		schema = pageVc.getSchema()
 
 		assert.isTruthy(schema.fields?.field3)
 		assert.isEqual(schema.fields?.field3.type, 'text')
@@ -300,6 +300,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static newSectionsComeWith1FieldToStart() {
 		const pageVc = this.vc.getPageVc(0)
+
 		pageVc.addSection()
 
 		const section = pageVc.getSection(1)
@@ -694,7 +695,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static async throwsWhenPassingBadParamsToUpdateField() {
 		const pageVc = this.vc.getPageVc(0)
 		//@ts-ignore
-		const err = assert.doesThrow(() => pageVc.setField())
+		const err = assert.doesThrow(() => pageVc.updateField())
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['fieldName', 'updates'],
 		})

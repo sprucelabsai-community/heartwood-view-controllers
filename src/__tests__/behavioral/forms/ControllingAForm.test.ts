@@ -1,4 +1,9 @@
-import { validateSchemaValues, buildSchema, Schema } from '@sprucelabs/schema'
+import {
+	validateSchemaValues,
+	buildSchema,
+	Schema,
+	FieldDefinitions,
+} from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
@@ -475,14 +480,34 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static addingFieldsDoesNotMutateOriginalSchema() {
+		const schema = this.vc.getSchema()
+
+		this.vc.addFields({
+			sectionIdx: 0,
+			fields: {
+				phone1: {
+					type: 'phone',
+				},
+				phone2: {
+					type: 'phone',
+					label: 'Backup phone',
+				},
+			},
+		})
+
+		assert.isNotEqual(schema, this.vc.getSchema())
+	}
+
+	@test()
 	protected static hasUpdateSectionMethod() {
-		assert.isFunction(this.vc.setSection)
+		assert.isFunction(this.vc.updateSection)
 	}
 
 	@test()
 	protected static validatesUpdate() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.setSection())
+		const err = assert.doesThrow(() => this.vc.updateSection())
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['section', 'newSection'],
@@ -492,7 +517,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static validatesUpdateForUpdates() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.setSection(0))
+		const err = assert.doesThrow(() => this.vc.updateSection(0))
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['newSection'],
@@ -502,7 +527,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static throwsWithBadSectionOnUpdate() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.setSection(-1, {}))
+		const err = assert.doesThrow(() => this.vc.updateSection(-1, {}))
 
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
 			parameters: ['sectionIdOrIdx'],
@@ -511,7 +536,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateFirstSectionTitle() {
-		this.vc.setSection(0, {
+		this.vc.updateSection(0, {
 			title: 'Hey gang!',
 		})
 
@@ -519,7 +544,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 		assert.isEqual(model.sections[0].title, 'Hey gang!')
 		//@ts-ignore
-		this.vc.setSection(0, { title: 'go again!', fields: ['cheesy'] })
+		this.vc.updateSection(0, { title: 'go again!', fields: ['cheesy'] })
 
 		model = this.render(this.vc)
 
@@ -530,7 +555,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static updateSectionUpdatesEverything() {
-		this.vc.setSection(0, {
+		this.vc.updateSection(0, {
 			title: 'Hey gang!',
 			fields: ['first'],
 			text: {
@@ -552,7 +577,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static updatesTriggerRender() {
-		this.vc.setSection(0, {
+		this.vc.updateSection(0, {
 			title: 'do-bee',
 		})
 
@@ -614,7 +639,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static cantUpdateWhenMissingEverything() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.setField())
+		const err = assert.doesThrow(() => this.vc.updateField())
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['fieldName', 'updates'],
 		})
@@ -623,7 +648,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test()
 	protected static cantUpdateWithouSupplyingUpdates() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.vc.setField('test'))
+		const err = assert.doesThrow(() => this.vc.updateField('test'))
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['updates'],
 		})
@@ -633,7 +658,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	@test('cant update field with bad name random', `${Math.random()}`)
 	protected static cantUpdateFieldThatDoesNotExist(name: any) {
 		const err = assert.doesThrow(() =>
-			this.vc.setField(name, {
+			this.vc.updateField(name, {
 				//@ts-ignore
 				fieldDefinition: {},
 			})
@@ -645,7 +670,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateFieldLabelDirectly() {
-		this.vc.setField('first', {
+		this.vc.updateField('first', {
 			fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
 		})
 
@@ -661,8 +686,17 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static async updatingFieldDefinitionDoesNotMutateOriginalSchema() {
+		const schema = this.vc.getSchema()
+		this.vc.updateField('first', {
+			fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
+		})
+		assert.isNotEqual(schema, this.vc.getSchema())
+	}
+
+	@test()
 	protected static canUpdateFieldLabelWithRenderOptions() {
-		this.vc.setField('first', {
+		this.vc.updateField('first', {
 			renderOptions: { label: 'Cheesy burrito' },
 		})
 
@@ -680,7 +714,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canUpdateLabelInFieldInNotFirstSection() {
-		this.vc.setField('nickname', {
+		this.vc.updateField('nickname', {
 			renderOptions: { label: 'Cheesy burrito' },
 		})
 
@@ -694,7 +728,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canRenameField() {
-		this.vc.setField('favoriteNumber', {
+		this.vc.updateField('favoriteNumber', {
 			newName: 'secondFavoriteNumber',
 		})
 
@@ -710,7 +744,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canRenameWhileUpdatingDefinitionAndRenderOptions() {
-		this.vc.setField('favoriteNumber', {
+		this.vc.updateField('favoriteNumber', {
 			newName: 'secondFavoriteNumber',
 			fieldDefinition: {
 				type: 'select',
@@ -1295,6 +1329,56 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
 		const actual = this.vc.getSection(0)
 		assert.isNotEqual(actual, expected)
+	}
+
+	@test()
+	protected static async canAddFieldDefinitionWhenAddingFieldToSection() {
+		this.assertAddingFieldWithDefinitionSetsToSchema({
+			type: 'select',
+			options: {
+				choices: [],
+			},
+		})
+
+		this.assertAddingFieldWithDefinitionSetsToSchema(
+			{
+				type: 'text',
+				options: {},
+			},
+			'anotherField'
+		)
+	}
+
+	@test()
+	protected static async addingFieldWithNewDefinitionDoesNotMutateOriginalSchema() {
+		const originalSchema = this.vc.getSchema()
+		this.assertAddingFieldWithDefinitionSetsToSchema({
+			type: 'select',
+			options: {
+				choices: [],
+			},
+		})
+
+		assert.doesThrow(() =>
+			assert.isEqualDeep(originalSchema, this.vc.getSchema())
+		)
+	}
+
+	private static assertAddingFieldWithDefinitionSetsToSchema(
+		definition: FieldDefinitions,
+		fieldName = 'fieldNotPartOfSection'
+	) {
+		this.vc.addFieldToSection(0, {
+			name: fieldName as any,
+			fieldDefinition: definition,
+		})
+		this.assertIsRenderingField(fieldName)
+
+		assert.isEqualDeep(
+			//@ts-ignore
+			this.vc.getSchema().fields[fieldName] as FieldDefinitions,
+			definition
+		)
 	}
 
 	private static assertIsNotRenderingField(fieldName: string) {

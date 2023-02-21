@@ -215,7 +215,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 	protected static async showingEditSectionDoesNotLoseFieldOptions() {
 		const pageVc = this.formBuilderVc.getPageVc(0)
 		//@ts-ignore
-		pageVc.setField('field1', {
+		pageVc.updateField('field1', {
 			fieldDefinition: {
 				label: 'Field 1',
 				type: 'select',

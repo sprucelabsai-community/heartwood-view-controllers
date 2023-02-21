@@ -1,6 +1,6 @@
+import { cloneDeep } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import clone from 'just-clone'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltStateMachine, {
 	ToolBeltState,
@@ -251,7 +251,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			wasDidHit = true
 		})
 
-		await this.updateContext(clone(updates))
+		await this.updateContext(cloneDeep(updates))
 
 		assert.isFalse(wasDidHit)
 		assert.isFalse(wasWillHit)
