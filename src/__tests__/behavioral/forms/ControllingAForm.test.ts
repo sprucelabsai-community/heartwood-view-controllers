@@ -1164,10 +1164,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async getFieldIsTyped() {
-		const { compiledOptions } = this.vc.getField('first')
-		assert.isType<'text'>(compiledOptions.type)
-		// TODO get this typing to work!
-		// assert.isType<'first'>(compiledOptions.name)
+		const field = this.vc.getField('first')
+		assert.isType<'text'>(field.type)
 	}
 
 	@test('bad section by id', 'twenty')

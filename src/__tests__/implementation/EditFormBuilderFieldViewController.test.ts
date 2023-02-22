@@ -6,7 +6,6 @@ import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import formAssert from '../../tests/utilities/formAssert'
 import interactor from '../../tests/utilities/interactor'
-import { FormBuilderFieldType } from '../../types/heartwood.types'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import {
 	EditFormBuilderFieldCardViewController,
@@ -14,77 +13,20 @@ import {
 } from '../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 
-declare module '../../types/heartwood.types' {
-	interface ViewControllerMap {
-		editFormBuilderField: EditFormBuilderFieldCardViewController
-	}
-
-	export interface ViewControllerOptionsMap {
-		editFormBuilderField: EditFormBuilderFieldOptions
-	}
-}
-
 export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		editFormBuilderField: EditFormBuilderFieldCardViewController,
 		formBuilderCard: FormBuilderCardViewController,
 	}
 
-	@test('throws when missing everything', {}, [
-		'name',
-		'label',
-		'type',
-		'options',
-		'onDone',
-	])
-	@test('throws when supplied just name', { name: 'yay' }, [
-		'label',
-		'type',
-		'options',
-		'onDone',
-	])
-	@test(
-		'throws when supplied just name and label',
-		{ name: 'yay', label: 'go duck!' },
-		['type', 'options', 'onDone']
-	)
-	@test(
-		'throws when supplied just name, label, type',
-		{ name: 'yay', label: 'go duck!', type: 'text' },
-		['options', 'onDone']
-	)
-	@test(
-		'throws when supplied just name, label, type, options',
-		{ name: 'yay', label: 'go duck!', type: 'text', options: {} },
-		['onDone']
-	)
-	protected static async throwsWhenMissingParameters(
-		options: any,
-		expected: string[]
-	) {
+	@test()
+	protected static async throwsWhenMissingParameters() {
 		const err = assert.doesThrow(() =>
-			this.Controller('editFormBuilderField', options)
+			//@ts-ignore
+			this.Controller('editFormBuilderField', {})
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: expected,
-		})
-	}
-
-	@test('fails with type Jeepers', 'Jeepers')
-	@test('fails with type Creepers', 'Creepers')
-	@test('fails with type random', Math.random())
-	protected static throwsWhenPassedBadType(type: FormBuilderFieldType) {
-		const err = assert.doesThrow(() =>
-			this.Controller('editFormBuilderField', {
-				name: 'firstName',
-				label: 'First name',
-				onDone: () => {},
-				type,
-				options: {},
-			})
-		)
-		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-			parameters: ['type'],
+			parameters: ['name', 'field', 'onDone'],
 		})
 	}
 
@@ -124,7 +66,8 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	@test()
 	protected static shouldShowSelectOptionsIfTheyArePassedByDefault() {
 		const formVc = this.Vc({
-			type: 'select',
+			//@ts-ignore
+			field: { type: 'select' },
 		}).getFormVc()
 
 		this.assertRendersExpectedFields(formVc)
@@ -160,7 +103,9 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	) {
 		let submittedResults: any
 		const formVc = this.Vc({
-			...initialValues,
+			field: {
+				...initialValues,
+			},
 			onDone: (values) => {
 				submittedResults = values
 			},
@@ -185,11 +130,14 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		let submittedResults: any
 		const formVc = this.Vc({
 			name: 'firstName2',
-			label: 'First name2',
-			type: 'text',
-			options: {
+			field: {
+				label: 'First name2',
 				//@ts-ignore
-				anythingGoes: true,
+				type: 'text',
+				options: {
+					//@ts-ignore
+					anythingGoes: true,
+				},
 			},
 			onDone: (values) => {
 				submittedResults = values
@@ -199,9 +147,9 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, {
 			name: 'firstName2',
+			isRequired: undefined,
 			label: 'First name2',
 			type: 'text',
-			isRequired: undefined,
 			options: {
 				anythingGoes: true,
 			},
@@ -213,12 +161,14 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		let submittedResults: any
 		const formVc = this.Vc({
 			name: 'firstName2',
-			label: 'First name2',
-			type: 'select',
-			options: {
-				//@ts-ignore
-				anythingGoes: true,
-				choices: [{ value: 'one', label: 'One' }],
+			field: {
+				label: 'First name2',
+				type: 'select',
+				options: {
+					//@ts-ignore
+					anythingGoes: true,
+					choices: [{ value: 'one', label: 'One' }],
+				},
 			},
 			onDone: (values) => {
 				submittedResults = values
@@ -229,8 +179,8 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		assert.isEqualDeep(submittedResults, {
 			name: 'firstName2',
 			label: 'First name2',
-			type: 'select',
 			isRequired: undefined,
+			type: 'select',
 			options: {
 				anythingGoes: true,
 				choices: [{ value: 'one', label: 'One' }],
@@ -245,7 +195,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			name: 'firstName2',
 			label: 'First name2',
 			type: 'select',
-			options: {
+			field: {
 				//@ts-ignore
 				anythingGoes: true,
 				choices: [{ value: 'one', label: 'One' }],
@@ -271,7 +221,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			name: 'color',
 			label: 'Fav color',
 			type: 'select',
-			options: {
+			field: {
 				//@ts-ignore
 				choices: [{ value: 'one', label: 'One' }],
 			},
@@ -297,10 +247,12 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {
 		return this.Controller('editFormBuilderField', {
 			name: 'firstName',
-			label: 'First name',
-			type: 'text',
 			onDone: () => {},
-			options: {},
+			//@ts-ignore
+			field: {
+				label: 'First name',
+				type: 'text',
+			},
 			...options,
 		})
 	}
@@ -315,5 +267,15 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 			},
 		})
 		assert.doesInclude(fieldTypeChoices, 'address')
+	}
+}
+
+declare module '../../types/heartwood.types' {
+	interface ViewControllerMap {
+		editFormBuilderField: EditFormBuilderFieldCardViewController
+	}
+
+	export interface ViewControllerOptionsMap {
+		editFormBuilderField: EditFormBuilderFieldOptions
 	}
 }

@@ -229,12 +229,12 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
 		await interactor.submitForm(formVc)
 
-		const { compiledOptions } = this.formBuilderVc
+		const fieldOptions = this.formBuilderVc
 			.getPageVc(0)
 			//@ts-ignore
 			.getField('field1')
 
-		assert.isEqualDeep(compiledOptions, {
+		assert.isEqualDeep(fieldOptions, {
 			type: 'select',
 			//@ts-ignore
 			name: 'field1',

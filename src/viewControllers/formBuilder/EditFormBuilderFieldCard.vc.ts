@@ -4,6 +4,7 @@ import {
 	FieldDefinitions,
 	SchemaError,
 	SchemaValues,
+	assertOptions,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
@@ -11,58 +12,10 @@ import buildForm from '../../builders/buildForm'
 import { fieldTypeChoices, formBuilderFieldTypes } from '../../constants'
 import {
 	FieldRenderOptions,
-	FormBuilderFieldType,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
 import FormViewController from '../form/Form.vc'
-
-export interface EditFormBuilderFieldOptions {
-	name: string
-	label: string
-	type: FormBuilderFieldType
-	options: Omit<FieldDefinitions, 'type'>
-	onDone: (
-		fieldDefinition: FieldDefinitions & FieldRenderOptions<Schema>
-	) => void | Promise<void>
-}
-const editFieldFormSchema = buildSchema({
-	id: 'editFieldForm',
-	fields: {
-		name: {
-			type: 'text',
-			label: 'Name',
-			// isRequired: true,
-			hint: 'This is how the name is saved in the database, you can usually ignore this.',
-		},
-		label: {
-			type: 'text',
-			label: 'Label',
-			// isRequired: true,
-			hint: 'This is what people will see when filling out the form.',
-		},
-		isRequired: {
-			type: 'boolean',
-			label: 'Required',
-		},
-		type: {
-			type: 'select',
-			label: 'Type',
-			isRequired: true,
-			options: {
-				choices: fieldTypeChoices,
-			},
-		},
-		selectOptions: {
-			type: 'text',
-			label: 'Dropdown options',
-			// isRequired: true,
-			hint: "Put each choice on it's own line!",
-		},
-	},
-})
-
-type EditFieldFormSchema = typeof editFieldFormSchema
 
 export class EditFormBuilderFieldCardViewController extends CardViewController {
 	private formVc: FormViewController<EditFieldFormSchema>
@@ -71,11 +24,16 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 	) {
 		super(options)
 
+		const { field } = options
+
 		this.assertRequiredParameters(options)
-		this.assertSupportedFieldType(options)
+		this.assertSupportedFieldType(field.type ?? 'text')
 
 		const values: Partial<SchemaValues<EditFieldFormSchema>> =
-			this.optionsToFormValues(options)
+			this.optionsToFormValues({
+				...options,
+				...field,
+			} as FieldDefinitions)
 
 		this.formVc = this.Controller(
 			'form',
@@ -86,22 +44,18 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 				submitButtonLabel: 'Save',
 				values,
 				onSubmit: async ({ values }) => {
-					this.formValuesToOptions(values, options)
-
-					//@ts-ignore
-					await options.onDone(values)
+					this.formValuesToOptions(values, field)
+					await options.onDone(values as any)
 				},
-				sections: this.buildSections(options.type),
+				sections: this.buildSections(field?.type ?? 'text'),
 			})
 		)
 	}
 
 	private formValuesToOptions(
 		values: Record<string, any>,
-		options: Record<string, any>
+		field: Partial<FieldDefinitions>
 	) {
-		const fieldOptions = options.options
-
 		if (values.selectOptions) {
 			//@ts-ignore
 			values.options = {
@@ -113,78 +67,43 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 			}
 		}
 
-		values.options = { ...fieldOptions, ...values.options }
+		values.options = { ...field.options, ...values.options }
 		delete values.selectOptions
 	}
 
-	private optionsToFormValues(
-		options: ViewControllerOptions & EditFormBuilderFieldOptions
-	) {
-		const fieldOptions = options.options
+	private optionsToFormValues(field: FieldDefinitions) {
 		const values: Partial<SchemaValues<EditFieldFormSchema>> = {}
 
 		Object.keys(editFieldFormSchema.fields).forEach((name) => {
 			//@ts-ignore
-			values[name] = options[name]
+			values[name] = field[name]
 		})
 
 		//@ts-ignore
-		if (fieldOptions.choices) {
+		if (field.options?.choices) {
 			//@ts-ignore
-			const selectOptions = fieldOptions.choices.map((c) => c.label).join('\n')
-
+			const selectOptions = field.options.choices.map((c) => c.label).join('\n')
 			values.selectOptions = selectOptions
 		}
 		return values
 	}
 
-	private assertSupportedFieldType(
-		options: ViewControllerOptions & EditFormBuilderFieldOptions
-	) {
+	private assertSupportedFieldType(type: FieldDefinitions['type']) {
 		const types = Object.keys(formBuilderFieldTypes)
 
-		if (!types.includes(options.type)) {
+		if (!types.includes(type)) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['type'],
-				friendlyMessage: `Field type must be one of the following:\n\n${types.join(
+				friendlyMessage: `You passed a field with the type ${type}. Field type must be one of the following:\n\n${types.join(
 					'\n'
 				)}`,
 			})
 		}
 	}
 
-	private assertRequiredParameters(
-		options: ViewControllerOptions & EditFormBuilderFieldOptions
-	) {
-		const missing: string[] = []
-
-		if (!options.name) {
-			missing.unshift('name')
-		}
-
-		if (!options.label) {
-			missing.push('label')
-		}
-
-		if (!options.type) {
-			missing.push('type')
-		}
-
-		if (!options.options) {
-			missing.push('options')
-		}
-
-		if (!options.onDone) {
-			missing.push('onDone')
-		}
-
-		if (missing.length > 0) {
-			throw new SchemaError({
-				code: 'MISSING_PARAMETERS',
-				parameters: missing,
-			})
-		}
+	private assertRequiredParameters(options: EditFormBuilderFieldOptions) {
+		assertOptions(options, ['name', 'field', 'onDone'])
 	}
 
 	public handleFormChange() {
@@ -192,7 +111,7 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 		this.formVc.setSections(sections)
 	}
 
-	private buildSections(forType: EditFormBuilderFieldOptions['type']) {
+	private buildSections(forType: FieldDefinitions['type']) {
 		const sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<EditFieldFormSchema>[] =
 			[
 				{
@@ -241,3 +160,49 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 		}
 	}
 }
+
+export interface EditFormBuilderFieldOptions {
+	name: string
+	field: Partial<FieldDefinitions>
+	onDone: (
+		fieldDefinition: FieldDefinitions & FieldRenderOptions<Schema>
+	) => void | Promise<void>
+}
+
+const editFieldFormSchema = buildSchema({
+	id: 'editFieldForm',
+	fields: {
+		name: {
+			type: 'text',
+			label: 'Name',
+			// isRequired: true,
+			hint: 'This is how the name is saved in the database, you can usually ignore this.',
+		},
+		label: {
+			type: 'text',
+			label: 'Label',
+			// isRequired: true,
+			hint: 'This is what people will see when filling out the form.',
+		},
+		isRequired: {
+			type: 'boolean',
+			label: 'Required',
+		},
+		type: {
+			type: 'select',
+			label: 'Type',
+			isRequired: true,
+			options: {
+				choices: fieldTypeChoices,
+			},
+		},
+		selectOptions: {
+			type: 'text',
+			label: 'Dropdown options',
+			// isRequired: true,
+			hint: "Put each choice on it's own line!",
+		},
+	},
+})
+
+type EditFieldFormSchema = typeof editFieldFormSchema

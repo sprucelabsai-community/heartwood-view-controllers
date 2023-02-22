@@ -102,12 +102,11 @@ export default class FormViewController<
 					setValue: async (value) =>
 						this._setValue({ name, value, shouldCallSetValueOnFieldVc: false }),
 					getValue: () => this.getValue(name),
-					getModel: () => this.getField(name).compiledOptions,
+					getModel: () => this.getField(name),
 					setModel: (model) => {
 						delete model.value
 						this.updateField(name, {
-							//@ts-ignore
-							fieldDefinition: model,
+							renderOptions: model,
 						})
 					},
 				})
@@ -262,7 +261,7 @@ export default class FormViewController<
 
 	private _getFieldVc(fieldName: SchemaFieldNames<S>) {
 		const field = this.getField(fieldName)
-		const vc = field.compiledOptions.vc
+		const vc = field.vc
 		return vc as FormInputViewController & {
 			_originalSetValue?: FormInputViewController['setValue']
 		}
@@ -588,11 +587,12 @@ export default class FormViewController<
 
 	public getField<N extends SchemaFieldNames<S>>(
 		fieldName: N
-	): { compiledOptions: CompiledFieldOptions<S, N> } {
+	): CompiledFieldOptions<S, N> {
 		const { sectionIdx, fieldIdx } =
 			this.getSectionAndFieldForFieldNamed(fieldName)
 
 		if (sectionIdx === -1) {
+			1
 			this.throwFieldNotFound<N>(fieldName)
 		}
 
@@ -611,9 +611,7 @@ export default class FormViewController<
 			options.renderedValue = this.pendingSets[fieldName]
 		}
 
-		return {
-			compiledOptions: options as CompiledFieldOptions<S, N>,
-		}
+		return options as CompiledFieldOptions<S, N>
 	}
 
 	private throwFieldNotFound<N extends SchemaFieldNames<S>>(fieldName: N) {

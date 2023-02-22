@@ -337,10 +337,10 @@ this.Controller(
 		const field = vc.getField(fieldName)
 
 		assert.isEqual(
-			field.compiledOptions.renderAs,
+			field.renderAs,
 			expected,
 			`The field named '${fieldName}' is rendering as '${
-				field.compiledOptions.renderAs ?? '***default**'
+				field.renderAs ?? '***default**'
 			}', but I expected it to render as '${expected}'!`
 		)
 	},

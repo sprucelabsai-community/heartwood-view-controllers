@@ -1,4 +1,4 @@
-import { buildSchema, SchemaFieldNames } from '@sprucelabs/schema'
+import { buildSchema, cloneDeep, SchemaFieldNames } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
@@ -409,6 +409,12 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isEqual(hitCount, 0)
 	}
 
+	@test()
+	protected static async settingFieldVcDoesNotAddToSchema() {
+		const schema = this.formVc.getSchema()
+		assert.isEqualDeep(schema, formSchema)
+	}
+
 	private static FormVc(
 		values: Record<string, any> = {},
 		options?: Partial<FormViewControllerOptions<any>>
@@ -416,7 +422,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		return this.Controller(
 			'form',
 			buildForm({
-				schema: formSchema,
+				schema: cloneDeep(formSchema),
 				values,
 				...options,
 				sections: [

@@ -299,7 +299,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 
 		const fields = normalizeFormSectionFieldNamesUtil
 			.toNames(section.fields ?? [])
-			.map((f) => pageVc.getField(f).compiledOptions)
+			.map((f) => pageVc.getField(f))
 
 		//@ts-ignore
 		section.fields = fields
@@ -345,15 +345,15 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	public handleClickEditField(fieldName: string) {
 		const pageVc = this.getPresentPageVc()
 
-		//@ts-ignore
-		const { compiledOptions } = pageVc.getField(fieldName)
+		const field = pageVc.getField(fieldName as never) as any
 
 		const vc = this.Controller('editFormBuilderField' as any, {
-			//@ts-ignore
-			...compiledOptions,
-			options: {
+			name: field.name,
+			label: field.label,
+			type: field.type,
+			field: {
 				//@ts-ignore
-				...compiledOptions.options,
+				...field,
 			},
 			onDone: (options: any) => {
 				const { name, ...fieldDefinition } = options
