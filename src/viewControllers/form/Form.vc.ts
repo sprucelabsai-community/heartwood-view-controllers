@@ -725,9 +725,10 @@ export default class FormViewController<
 		if (fieldIdx === -1) {
 			this.throwFieldNotFound<N>(fieldName)
 		}
-		const section = this.getSection(sectionIdx)
+		const section = { ...this.getSection(sectionIdx) }
 		section.fields?.splice(fieldIdx, 1)
-		this.triggerRender()
+
+		this.updateSection(sectionIdx, section)
 	}
 
 	public addFieldToSection<N extends SchemaFieldNames<S>>(

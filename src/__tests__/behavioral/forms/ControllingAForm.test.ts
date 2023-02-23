@@ -1312,6 +1312,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static async removingFieldDoesNotMutateSection() {
+		const section = this.vc.getSection('second')
+		this.vc.removeField('nickname')
+		assert.isNotEqual(section, this.vc.getSection('second'))
+	}
+
+	@test()
 	protected static async knowsIfFieldIsNotBeingRendered() {
 		this.assertIsNotRenderingField('fieldNotPartOfSection')
 		this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
