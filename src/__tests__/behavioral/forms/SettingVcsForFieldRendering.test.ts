@@ -415,6 +415,31 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isEqualDeep(schema, formSchema)
 	}
 
+	@test()
+	protected static async settingValueToNullClearsRenderedValue() {
+		this.formVc = this.FormVc({
+			firstName: 'hey',
+		})
+
+		await this.firstNameVc.setRenderedValue('hey')
+		await this.formVc.setValue('firstName', null)
+
+		assert.isEqual(this.firstNameVc.getRenderedValue(), null)
+	}
+
+	@test()
+	protected static async settingValueToFalseDoesNotClearRenderedValue() {
+		this.formVc = this.FormVc({
+			firstName: 'hey',
+		})
+
+		await this.firstNameVc.setRenderedValue('hey')
+		//@ts-ignore
+		await this.formVc.setValue('firstName', false)
+
+		assert.isEqual(this.firstNameVc.getRenderedValue(), 'hey')
+	}
+
 	private static FormVc(
 		values: Record<string, any> = {},
 		options?: Partial<FormViewControllerOptions<any>>

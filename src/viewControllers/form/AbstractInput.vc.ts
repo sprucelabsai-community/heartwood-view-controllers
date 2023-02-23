@@ -52,8 +52,8 @@ export default abstract class AbstractInputViewController<
 	) {
 		await this.setValueHandler?.(value)
 
-		if (typeof renderedValue !== 'undefined') {
-			await this.setRenderedValue(renderedValue)
+		if (typeof renderedValue !== 'undefined' || value === null) {
+			await this.setRenderedValue(renderedValue ?? null)
 		} else {
 			this.triggerRender()
 		}
