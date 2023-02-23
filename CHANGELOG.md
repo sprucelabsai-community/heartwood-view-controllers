@@ -1,3 +1,10 @@
+# [101.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v101.0.0...v101.1.0) (2023-02-23)
+
+
+### Features
+
+* setting the value of an input view controller to null clears the rendered value ([0ba6170](https://github.com/sprucelabsai/heartwood-view-controllers/commit/0ba6170))
+
 # [101.0.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v100.8.23...v101.0.0) (2023-02-22)
 
 
