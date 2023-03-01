@@ -62,6 +62,10 @@ export default abstract class AbstractInputViewController<
 	}
 
 	public async setRenderedValue(renderedValue: any) {
+		if (this.getRenderedValue() === renderedValue) {
+			return
+		}
+
 		this.setModelHandler?.({
 			...this.model,
 			renderedValue,

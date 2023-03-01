@@ -375,6 +375,24 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.assertDoesNotShowSuggestionThrowsWhenFound('test2')
 	}
 
+	@test()
+	protected static async settingRenderedValueToNullIfRenderedValueIsAlreadyNullDoesNotSetRenderedValue() {
+		let hitCount = 0
+		this.vc = this.Vc({
+			onChangeRenderedValue: () => {
+				hitCount++
+			},
+		})
+
+		await this.setRenderedValue(null)
+		assert.isEqual(hitCount, 1)
+
+		await this.setValue(null)
+		assert.isEqual(hitCount, 1)
+
+		this.assertRenderedValueEquals(null)
+	}
+
 	private static assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
 		assert.doesThrow(
 			() => autocompleteAssert.suggestionIsNotShowing(this.vc, id),
@@ -386,7 +404,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.vc.showSuggestions(suggestions)
 	}
 
-	private static async setRenderedValue(renderedValue: string) {
+	private static async setRenderedValue(renderedValue: string | null) {
 		await this.vc.setRenderedValue(renderedValue)
 	}
 
@@ -399,7 +417,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		suggestions: AutocompleteSuggestion[] = [],
 		expectedSuggestionIds?: string[]
 	) {
-		await autocompleteAssert.assertActionShowsSuggestions(
+		await autocompleteAssert.actionShowsSuggestions(
 			this.vc,
 			async () => {
 				this.vc.showSuggestions(suggestions)
@@ -413,7 +431,10 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		assert.isEqual(this.vc.getValue(), value)
 	}
 
-	private static async setValue(value: string, renderedValue?: string | null) {
+	private static async setValue(
+		value: string | null,
+		renderedValue?: string | null
+	) {
 		await this.vc.setValue(value, renderedValue)
 	}
 
