@@ -13,34 +13,12 @@ import AbstractViewController from './Abstract.vc'
 import CardViewController from './card/Card.vc'
 import sectionIdOrIdxToIdx from './card/sectionIdOrIdxToIdx'
 
-export type SwipeViewControllerOptions = {
-	slides: Slide[]
-	onSlideChange?: (slide: number) => void
-	isBusy?: boolean
-} & Omit<Card, 'body'>
-
-const PASSTHROUGH_METHODS = [
-	'setHeaderTitle',
-	'setHeaderSubtitle',
-	'enableFooter',
-	'disableFooter',
-	'getIsFooterEnabled',
-] as const
-
-export type SwipeCardPassthroughMethods = {
-	[K in (typeof PASSTHROUGH_METHODS)[number]]: CardViewController[K]
-}
-
-interface CardSnapshot {
-	header: CardHeader | null | undefined
-	body: CardBody | null | undefined
-	footer: CardFooter | null | undefined
-}
-
 export default class SwipeCardViewController extends AbstractViewController<Card> {
 	private presentSlide = 0
 	private swipeController?: SwipeController
-	private slideChangeHandler: ((slide: number) => void) | undefined
+	private slideChangeHandler:
+		| ((slide: number) => void | Promise<void>)
+		| undefined
 	public static swipeDelay = 500
 	private cardVc: CardViewController
 
@@ -93,8 +71,8 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 		if (this.presentSlide !== slide) {
 			this.presentSlide = slide
 			await new Promise<void>((resolve) => {
-				setTimeout(() => {
-					this.slideChangeHandler?.(slide)
+				setTimeout(async () => {
+					await this.slideChangeHandler?.(slide)
 					resolve()
 				}, SwipeCardViewController.swipeDelay)
 			})
@@ -183,4 +161,28 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 		//@ts-ignore
 		return { ...this.cardVc.render(), controller: this }
 	}
+}
+
+export type SwipeViewControllerOptions = {
+	slides: Slide[]
+	onSlideChange?: (slide: number) => void
+	isBusy?: boolean
+} & Omit<Card, 'body'>
+
+const PASSTHROUGH_METHODS = [
+	'setHeaderTitle',
+	'setHeaderSubtitle',
+	'enableFooter',
+	'disableFooter',
+	'getIsFooterEnabled',
+] as const
+
+export type SwipeCardPassthroughMethods = {
+	[K in (typeof PASSTHROUGH_METHODS)[number]]: CardViewController[K]
+}
+
+interface CardSnapshot {
+	header: CardHeader | null | undefined
+	body: CardBody | null | undefined
+	footer: CardFooter | null | undefined
 }
