@@ -50,6 +50,10 @@ export default abstract class AbstractInputViewController<
 		value: string | null | undefined,
 		renderedValue?: string | null
 	) {
+		if (this.getValue() === value) {
+			return
+		}
+
 		await this.setValueHandler?.(value)
 
 		if (typeof renderedValue !== 'undefined' || value === null) {

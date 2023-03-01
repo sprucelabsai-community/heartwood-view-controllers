@@ -440,6 +440,22 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 		assert.isEqual(this.firstNameVc.getRenderedValue(), 'hey')
 	}
 
+	@test()
+	protected static async settingValueToSameValueDoesNotTriggerChange() {
+		let hitCount = 0
+		this.firstNameVc = this.SpyInputVc({
+			onChange: () => {
+				hitCount++
+			},
+		})
+		this.formVc = this.FormVc()
+
+		await this.firstNameVc.setValue('hey')
+		assert.isEqual(hitCount, 1)
+		await this.firstNameVc.setValue('hey')
+		assert.isEqual(hitCount, 1)
+	}
+
 	private static FormVc(
 		values: Record<string, any> = {},
 		options?: Partial<FormViewControllerOptions<any>>
