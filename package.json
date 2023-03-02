@@ -78,7 +78,7 @@
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.21.0",
-    "@sprucelabs/calendar-utils": "^31.4.47",
+    "@sprucelabs/calendar-utils": "^31.4.48",
     "@sprucelabs/error": "^5.0.583",
     "@sprucelabs/mercury-core-events": "^15.5.2",
     "@sprucelabs/mercury-types": "^38.0.124",
