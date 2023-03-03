@@ -1,16 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
+import { Button } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import vcAssert from '../../../tests/utilities/vcAssert'
-
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+import buttonAssert from '../../../tests/utilities/buttonAssert'
 
 export default class AssertingButtonsTest extends AbstractViewControllerTest {
 	@test()
 	protected static assertCardRendersButtonsThrowsWhenMissing() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => vcAssert.assertCardRendersButtons())
+		const err = assert.doesThrow(() => buttonAssert.cardRendersButtons())
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'ids'],
@@ -80,7 +79,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 			},
 		])
 
-		const buttonVcs = vcAssert.assertCardRendersButtons(vc, toCheckIds)
+		const buttonVcs = buttonAssert.cardRendersButtons(vc, toCheckIds)
 		assert.isLength(buttonVcs, toCheckIds.length)
 	}
 
@@ -96,7 +95,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 			},
 		])
 
-		const [, secondBtnVc] = vcAssert.assertCardRendersButtons(vc, [
+		const [, secondBtnVc] = buttonAssert.cardRendersButtons(vc, [
 			'first',
 			'second',
 		])
@@ -106,9 +105,45 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(model, { id: 'second', label: 'Waka' })
 	}
 
+	@test()
+	protected static knowsWhenButtonIsDisabledOrEnabled() {
+		const id = generateId()
+		const id2 = generateId()
+
+		const vc = this.Vc([
+			{
+				id,
+			},
+			{
+				id: id2,
+				isEnabled: false,
+			},
+		])
+
+		assert.doesThrow(
+			() => buttonAssert.buttonIsDisabled(vc, generateId()),
+			'missing buttons'
+		)
+
+		assert.doesThrow(
+			() => buttonAssert.buttonIsEnabled(vc, generateId()),
+			'missing buttons'
+		)
+
+		assert.doesThrow(
+			() => buttonAssert.buttonIsDisabled(vc, id),
+			'not disabled'
+		)
+
+		assert.doesThrow(() => buttonAssert.buttonIsEnabled(vc, id2), 'not enabled')
+
+		buttonAssert.buttonIsDisabled(vc, id2)
+		buttonAssert.buttonIsEnabled(vc, id)
+	}
+
 	private static assertRendersButton(buttons?: Button[], idToCheck = 'test') {
 		const vc = this.Vc(buttons)
-		const btnVc = vcAssert.assertCardRendersButton(vc, idToCheck)
+		const btnVc = buttonAssert.cardRendersButton(vc, idToCheck)
 
 		return btnVc
 	}

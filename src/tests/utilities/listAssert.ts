@@ -3,6 +3,7 @@ import { assert } from '@sprucelabs/test-utils'
 import {
 	Card,
 	FormViewController,
+	LineIcon,
 	List,
 	ListCell,
 	RowStyle,
@@ -13,6 +14,7 @@ import {
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
+import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
 import {
 	getVcName,
@@ -206,6 +208,18 @@ const listAssert = {
 		assert.fail(
 			`Your list does not render a button with the id of '${buttonId}' in row '${row}'.`
 		)
+	},
+
+	rowRendersButtonWithIcon(vc: ListRowViewController, icon: LineIcon) {
+		const model = renderUtil.render(vc)
+
+		for (const cell of model?.cells ?? []) {
+			if (cell.button?.lineIcon === icon) {
+				return
+			}
+		}
+
+		assert.fail(`Could not find button with 'lineIcon='${icon}'' in row!`)
 	},
 
 	rowDoesNotRenderButton(

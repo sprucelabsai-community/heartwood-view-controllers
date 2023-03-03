@@ -8,6 +8,8 @@ import {
 	CardSection,
 	Card,
 } from '../../types/heartwood.types'
+import renderUtil from '../../utilities/render.utility'
+import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 
 export type Vc = ViewController<any>
 export const WAIT_TIMEOUT = 5000
@@ -143,4 +145,19 @@ export function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
 	}
 
 	return false
+}
+
+export function checkForCardSection(
+	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
+	sectionIdOrIdx: string | number
+) {
+	const model = renderUtil.render(vc)
+	const sections = model.body?.sections ?? []
+	const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
+	const match = sections[idx]
+	assert.isTruthy(
+		match,
+		`I could not find a section called '${sectionIdOrIdx}' in your card!`
+	)
+	return match
 }

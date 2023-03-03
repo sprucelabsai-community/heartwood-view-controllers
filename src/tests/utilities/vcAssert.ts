@@ -48,8 +48,10 @@ import {
 	wait,
 	WAIT_TIMEOUT,
 	isVcInstanceOf,
+	checkForCardSection,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
+import buttonAssert from './buttonAssert'
 import listAssert from './listAssert'
 import toolBeltAssert from './toolBeltAssert'
 
@@ -421,26 +423,15 @@ const vcAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardSectionRendersButton(...) -> buttonAssert.cardSectionRendersButton(...)
+	 */
 	assertCardSectionRendersButton(
 		vc: ViewController<Card>,
 		sectionIdOrIdx: string | number,
 		buttonId?: string
 	) {
-		const section = checkForCardSection(vc, sectionIdOrIdx)
-
-		if (buttonId) {
-			const match = section?.buttons?.find((b) => b.id === buttonId)
-
-			assert.isTruthy(
-				match,
-				`Could not find button '${buttonId}' in section '${sectionIdOrIdx}'`
-			)
-		} else {
-			assert.isTruthy(
-				section?.buttons,
-				`Could not find button in section '${sectionIdOrIdx}'`
-			)
-		}
+		return buttonAssert.cardSectionRendersButton(vc, sectionIdOrIdx, buttonId)
 	},
 
 	/**
@@ -503,18 +494,13 @@ const vcAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersButtonBar(...) -> buttonAssert.cardRendersButtonBar(...)
+	 */
 	assertCardRendersButtonBar(
 		cardVc: ViewController<Card>
 	): ButtonBarViewController {
-		assertOptions({ cardVc }, ['cardVc'])
-
-		const model = renderUtil.render(cardVc)
-
-		const match = model.body?.sections?.find((s) => !!s.buttonBar)
-
-		assert.isTruthy(match, `Your card does not render a button bar.`)
-
-		return match.buttonBar?.controller as any
+		return buttonAssert.cardRendersButtonBar(cardVc)
 	},
 
 	assertDialogWasClosed(vc: DialogViewController) {
@@ -532,21 +518,13 @@ const vcAssert = {
 		}
 	},
 
+	/**
+	 * @deprecated vcAssert.assertLastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(...) -> buttonAssert.lastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(...)
+	 */
 	assertLastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(
 		vc: ViewController<Card>
 	) {
-		const model = renderUtil.render(vc)
-		const footer = model.footer ?? {}
-		const primaryIdx = footer.buttons?.findIndex((b) => b.type === 'primary')
-
-		if (
-			footer.buttons &&
-			typeof primaryIdx === 'number' &&
-			primaryIdx > -1 &&
-			footer.buttons?.[footer.buttons.length - 1]?.type !== 'primary'
-		) {
-			assert.fail('Your primary button has to be last in your footer.')
-		}
+		return buttonAssert.lastButtonInCardFooterIsPrimaryIfThereAreAnyButtons(vc)
 	},
 
 	assertCardRendersHeader(
@@ -563,19 +541,14 @@ const vcAssert = {
 		assert.isObject(model.footer, `Your card did not render a footer!`)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertButtonBarRendersButton(...) -> buttonAssert.buttonBarRendersButton(...)
+	 */
 	assertButtonBarRendersButton(
 		buttonBarVc: ButtonBarViewController,
 		buttonId: string
 	) {
-		assertOptions({ buttonBarVc, buttonId }, ['buttonBarVc', 'buttonId'])
-
-		const model = renderUtil.render(buttonBarVc)
-		const match = model.buttons.find((b) => b.id === buttonId)
-
-		assert.isTruthy(
-			match,
-			`Your button bar doesn't have a button with the id '${buttonId}'`
-		)
+		return buttonAssert.buttonBarRendersButton(buttonBarVc, buttonId)
 	},
 	/**
 	 * @deprecated vcAssert.assertListRendersRows(...) -> listAssert.listRendersRows(...)
@@ -869,86 +842,51 @@ const vcAssert = {
 		)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertRowRendersButtonWithIcon(...) -> listAssert.rowRendersButtonWithIcon(...)
+	 */
 	assertRowRendersButtonWithIcon(vc: ListRowViewController, icon: LineIcon) {
-		const model = renderUtil.render(vc)
-
-		for (const cell of model?.cells ?? []) {
-			if (cell.button?.lineIcon === icon) {
-				return
-			}
-		}
-
-		assert.fail(`Could not find button with 'lineIcon='${icon}'' in row!`)
+		return listAssert.rowRendersButtonWithIcon(vc, icon)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertFooterRendersButtonWithType(...) -> buttonAssert.footerRendersButtonWithType(...)
+	 */
 	assertFooterRendersButtonWithType(
 		vc: ViewController<Card>,
 		type?: Button['type']
 	) {
-		const model = renderUtil.render(vc)
-		const buttons = model.footer?.buttons
-
-		if (
-			!buttons ||
-			buttons.length === 0 ||
-			(type && !buttons.find((b) => b.type === type))
-		) {
-			assert.fail(
-				`Your footer is supposed to render a${
-					type ? ` ${type}` : ''
-				} button but it doesn't!`
-			)
-		}
+		return buttonAssert.footerRendersButtonWithType(vc, type)
 	},
 
+	/**
+	 *
+	 * @deprecated vcAssert.assertCardDoesNotRenderButtons(...) -> buttonAssert.cardDoesNotRenderButtons(...)
+	 */
 	assertCardDoesNotRenderButtons(vc: ViewController<Card>, ids: string[]) {
-		try {
-			this.assertCardRendersButtons(vc, ids)
-		} catch {
-			return
-		}
-
-		const { found } = checkForButtons(vc, ids)
-
-		assert.fail(
-			`I did not expect your card to render buttons:\n\n${found.join(', ')}`
-		)
+		return buttonAssert.cardDoesNotRenderButtons(vc, ids)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardDoesNotRenderButton(...) -> buttonAssert.cardDoesNotRenderButton(...)
+	 */
 	assertCardDoesNotRenderButton(vc: ViewController<Card>, id: string) {
-		try {
-			this.assertCardRendersButton(vc, id)
-		} catch {
-			return
-		}
-
-		assert.fail(
-			`I did not expect your card to render a button with the id '${id}', but it did!`
-		)
+		return buttonAssert.cardDoesNotRenderButton(vc, id)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersButtons(...) -> buttonAssert.cardRendersButtons(...)
+	 */
 	assertCardRendersButtons(
 		vc: ViewController<Card>,
 		ids: string[]
 	): ButtonViewController[] {
-		const { missing, foundButtons } = checkForButtons(vc, ids)
-
-		if (missing.length > 0) {
-			assert.fail(
-				`Your card '${getVcName(
-					vc
-				)}' is missing buttons with the following ids: ${missing.join(', ')}`
-			)
-		}
-
-		return foundButtons.map((button) => ({
-			render() {
-				return button
-			},
-			triggerRender() {},
-		}))
+		return buttonAssert.cardRendersButtons(vc, ids)
 	},
 
+	/**
+	 * @deprecated vcAssert.assertCardRendersButton(...) -> buttonAssert.cardRendersButton(...)
+	 */
 	assertCardRendersButton(vc: ViewController<Card>, id: string) {
 		return this.assertCardRendersButtons(vc, [id])[0]
 	},
@@ -1682,52 +1620,6 @@ export function normalizeScopeFromVc(
 		actualAsArray.push('none')
 	}
 	return actualAsArray
-}
-
-function checkForCardSection(
-	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
-	sectionIdOrIdx: string | number
-) {
-	const model = renderUtil.render(vc)
-	const sections = model.body?.sections ?? []
-	const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
-	const match = sections[idx]
-	assert.isTruthy(
-		match,
-		`I could not find a section called '${sectionIdOrIdx}' in your card!`
-	)
-	return match
-}
-
-function checkForButtons(
-	vc: ViewController<Card>,
-	ids: string[]
-): { found: string[]; missing: string[]; foundButtons: Button[] } {
-	assertOptions({ vc, ids }, ['vc', 'ids'])
-
-	const model = renderUtil.render(vc)
-	const buttons = [...(model.footer?.buttons ?? [])]
-
-	pluckAllFromCard(model, 'buttons').forEach((b) => {
-		if (b) {
-			buttons.push(...b)
-		}
-	})
-
-	const missing: string[] = []
-	const found: string[] = []
-	const foundButtons: Button[] = []
-
-	for (const id of ids) {
-		const match = buttons.find((b) => b?.id === id)
-		if (!match) {
-			missing.push(id)
-		} else {
-			found.push(id)
-			foundButtons.push(match)
-		}
-	}
-	return { found, missing, foundButtons }
 }
 
 function findControllerInModel(VcClass: any, model: any) {
