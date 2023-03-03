@@ -1316,6 +1316,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		const section = this.vc.getSection('second')
 		this.vc.removeField('nickname')
 		assert.isNotEqual(section, this.vc.getSection('second'))
+		assert.isNotEqualDeep(section, this.vc.getSection('second'))
 	}
 
 	@test()

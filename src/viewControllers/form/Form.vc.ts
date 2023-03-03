@@ -725,7 +725,7 @@ export default class FormViewController<
 		if (fieldIdx === -1) {
 			this.throwFieldNotFound<N>(fieldName)
 		}
-		const section = { ...this.getSection(sectionIdx) }
+		const section = cloneDeep(this.getSection(sectionIdx))
 		section.fields?.splice(fieldIdx, 1)
 
 		this.updateSection(sectionIdx, section)
