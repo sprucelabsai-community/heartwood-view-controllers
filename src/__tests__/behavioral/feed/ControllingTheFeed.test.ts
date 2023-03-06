@@ -196,9 +196,13 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 			dateCreated: new Date().getTime(),
 			source: {
 				casualName: generateId(),
+				isMe: false,
+				isSprucebot: false,
 			},
 			target: {
 				casualName: generateId(),
+				isMe: false,
+				isSprucebot: false,
 			},
 		}
 	}
