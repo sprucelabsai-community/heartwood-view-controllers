@@ -189,12 +189,15 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 		return item
 	}
 
-	private static generateItemValues() {
+	private static generateItemValues(): FeedItem {
 		return {
 			id: generateId(),
 			message: generateId(),
 			dateCreated: new Date().getTime(),
-			fromCasualName: generateId(),
+			source: {
+				personCasualName: generateId(),
+			},
+			target: {},
 		}
 	}
 }
