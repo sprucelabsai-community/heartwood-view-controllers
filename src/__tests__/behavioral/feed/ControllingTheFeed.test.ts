@@ -143,6 +143,15 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 		])
 	}
 
+	@test()
+	protected static async canGetItems() {
+		const item = this.addItem()
+		assert.isEqualDeep(this.vc.getItems(), [item])
+
+		const item2 = this.addItem()
+		assert.isEqualDeep(this.vc.getItems(), [item, item2])
+	}
+
 	private static assertDoesNotRenderFeed(sections: CardSection[]) {
 		assert.doesThrow(
 			() => feedAssert.cardRendersFeed(this.CardVc(sections)),

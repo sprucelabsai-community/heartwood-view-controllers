@@ -38,6 +38,10 @@ export default class FeedViewController extends AbstractViewController<Feed> {
 		this.triggerRender()
 	}
 
+	public getItems() {
+		return this.model.items
+	}
+
 	private getTotalItems() {
 		return this.model.items.length
 	}
