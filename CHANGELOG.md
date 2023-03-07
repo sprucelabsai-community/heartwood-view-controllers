@@ -1,3 +1,10 @@
+# [102.1.0](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v102.0.4...v102.1.0) (2023-03-07)
+
+
+### Features
+
+* can getItems from feedVc ([20b3f2a](https://github.com/sprucelabsai/heartwood-view-controllers/commit/20b3f2a))
+
 ## [102.0.4](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v102.0.3...v102.0.4) (2023-03-06)
 
 ## [102.0.3](https://github.com/sprucelabsai/heartwood-view-controllers/compare/v102.0.2...v102.0.3) (2023-03-06)
