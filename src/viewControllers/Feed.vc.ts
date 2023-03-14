@@ -14,8 +14,11 @@ export default class FeedViewController extends AbstractViewController<Feed> {
 	}
 
 	public addItem(item: FeedItem) {
-		this.model.items.push(item)
-		this.triggerRender()
+		const hasItem = this.model.items.some((i) => i.id === item.id)
+		if (!hasItem) {
+			this.model.items.push(item)
+			this.triggerRender()
+		}
 	}
 
 	public removeItem(id: string) {

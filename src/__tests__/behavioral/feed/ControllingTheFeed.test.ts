@@ -152,6 +152,14 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
 		assert.isEqualDeep(this.vc.getItems(), [item, item2])
 	}
 
+	@test()
+	protected static async cantAddTheSameItemTwice() {
+		const item = this.generateItemValues()
+		this.vc.addItem(item)
+		this.vc.addItem(item)
+		this.assertItemsEqual([item])
+	}
+
 	private static assertDoesNotRenderFeed(sections: CardSection[]) {
 		assert.doesThrow(
 			() => feedAssert.cardRendersFeed(this.CardVc(sections)),

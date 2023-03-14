@@ -15,6 +15,7 @@ export default class ExportingAllSchemasTest extends AbstractSpruceTest {
 
 		const indexContents = diskUtil.readFile(this.resolvePath('src', 'index.ts'))
 		const missingImports: string[] = []
+
 		for (const schema of schemas) {
 			const builderFileName = pathUtil.basename(schema)
 			const schemaFileName = builderFileName.replace('.schema.js', '.schema')
