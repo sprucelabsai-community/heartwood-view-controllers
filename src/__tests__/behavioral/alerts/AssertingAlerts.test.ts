@@ -6,6 +6,7 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 
 class SuccessAlertSkillViewController extends AbstractSkillViewController {
 	public afterAlertWasHit = false
+	public afterSuccessWasHit = false
 	public async renderSuccess() {
 		await this.alert({
 			style: 'success',
@@ -25,6 +26,11 @@ class SuccessAlertSkillViewController extends AbstractSkillViewController {
 	public async operationAfterAlert() {
 		await this.alert({ message: 'an alert!' })
 		this.afterAlertWasHit = true
+	}
+
+	public async operationAfterSuccess() {
+		await this.alert({ message: 'an alert!', style: 'success' })
+		this.afterSuccessWasHit = true
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
@@ -75,7 +81,18 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
-	protected static async hidingDialogLetsHandlerComplete() {
+	protected static async hidingSuccessDialogLetsHandlerComplete() {
+		const vc = await vcAssert.assertRendersSuccessAlert(this.vc, () =>
+			this.vc.operationAfterSuccess()
+		)
+
+		await vc.hide()
+
+		assert.isTrue(this.vc.afterSuccessWasHit)
+	}
+
+	@test()
+	protected static async hidingAlertLetsHandlerComplete() {
 		const vc = await vcAssert.assertRendersAlert(this.vc, () =>
 			this.vc.operationAfterAlert()
 		)

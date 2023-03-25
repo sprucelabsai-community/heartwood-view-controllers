@@ -171,7 +171,7 @@ const vcAssert = {
 		vc: ViewController<any>,
 		action: () => any | Promise<any>
 	) {
-		await this.assertRendersAlert(vc, action, 'success')
+		return await this.assertRendersAlert(vc, action, 'success')
 	},
 
 	async assertRendersAlert(
