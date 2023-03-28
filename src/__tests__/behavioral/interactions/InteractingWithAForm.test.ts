@@ -100,12 +100,15 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 
 		await this.submitSlide({
 			onSubmitSlide(options) {
+				//@ts-ignore
 				passedOptions = options
 			},
 		})
 
 		//@ts-ignore
 		const { options } = this.bigFormVc.buildOnSubmitOptions()
+
+		//@ts-ignore
 		assert.isEqualDeep(passedOptions, options)
 	}
 
