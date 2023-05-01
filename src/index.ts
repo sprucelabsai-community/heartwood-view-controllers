@@ -1,5 +1,6 @@
 export * from './constants'
 export * from './types/heartwood.types'
+export * from './utilities/removeUniversalViewOptions'
 export * from '#spruce/schemas/schemas.types'
 
 export { default as AbstractSkillViewController } from './skillViewControllers/Abstract.svc'
