@@ -23,7 +23,7 @@ export default buildSchema({
 		shouldRenderAllToolsAtOnce: {
 			type: 'boolean',
 		},
-		onCloseToolBeltHandler: {
+		onCloseToolBelt: {
 			type: 'raw',
 			options: {
 				valueType: 'HeartwoodTypes.ToolBeltCloseHandler',
