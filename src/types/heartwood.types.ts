@@ -711,3 +711,11 @@ export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
 ) => Vc
 
 type StatusFlag = SpruceSchemas.Mercury.v2020_12_25.StatusFlags
+
+export interface ToolBeltCloseHandlerOptions {
+	isDrawer: boolean
+}
+
+export type ToolBeltCloseHandler = (
+	options: ToolBeltCloseHandlerOptions
+) => Promise<void> | void

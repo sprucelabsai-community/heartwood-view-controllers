@@ -8,14 +8,6 @@ import {
 } from '..'
 import SpruceError from '../errors/SpruceError'
 
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
-type Tool = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
-export type ToolBeltViewControllerOptions = Partial<ViewModel>
-
-export interface OpenToolBeltOptions {
-	shouldStayOpen?: boolean
-}
-
 export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel
 	private handleFocusTool = (_id: string) => {}
@@ -141,4 +133,12 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
 		return { ...this.model, controller: this, tools: this.renderTools() }
 	}
+}
+
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+type Tool = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
+export type ToolBeltViewControllerOptions = Partial<ViewModel>
+
+export interface OpenToolBeltOptions {
+	shouldStayOpen?: boolean
 }
