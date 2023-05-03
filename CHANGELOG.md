@@ -1,3 +1,10 @@
+# [102.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.1.97...v102.2.0) (2023-05-03)
+
+
+### Features
+
+* tool belt onClose handler ([ab9dfb9](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ab9dfb9))
+
 ## [102.1.97](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.1.96...v102.1.97) (2023-05-03)
 
 ## [102.1.96](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.1.95...v102.1.96) (2023-05-03)
