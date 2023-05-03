@@ -1,3 +1,4 @@
+import { buildSchema } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -8,9 +9,11 @@ import AutocompleteInputViewController, {
 	AutocompleteInputViewControllerOptions,
 	AutocompleteSuggestion,
 } from '../../../viewControllers/form/AutocompleteInput.vc'
+import FormViewController from '../../../viewControllers/form/Form.vc'
 
 export default class ControllingAnAutocompleteInputTest extends AbstractViewControllerTest {
 	private static vc: AutocompleteInputViewController
+	private static formVc: FormViewController<TestForm>
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -393,6 +396,24 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.assertRenderedValueEquals(null)
 	}
 
+	@test()
+	protected static async settingValuesAlwaysOnlySetsRenderedValue() {
+		const value = 'Tay'
+		const { setValue } = this.render(this.formVc)
+
+		await setValue('firstName', value)
+		this.assertRenderedValueEquals(value)
+		this.assertValueEquals(undefined)
+
+		await setValue('firstName', '')
+		this.assertRenderedValueEquals('')
+		this.assertValueEquals(undefined)
+
+		await setValue('firstName', value)
+		this.assertRenderedValueEquals(value)
+		this.assertValueEquals(undefined)
+	}
+
 	private static assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
 		assert.doesThrow(
 			() => autocompleteAssert.suggestionIsNotShowing(this.vc, id),
@@ -404,13 +425,20 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.vc.showSuggestions(suggestions)
 	}
 
-	private static async setRenderedValue(renderedValue: string | null) {
+	private static async setRenderedValue(
+		renderedValue: string | undefined | null
+	) {
 		await this.vc.setRenderedValue(renderedValue)
 	}
 
 	private static assertRenderedValueEquals(renderedValue: string | null) {
 		const model = this.render(this.vc)
 		assert.isEqual(model.renderedValue, renderedValue)
+	}
+
+	private static assertValueEquals(value?: string | null) {
+		const model = this.render(this.vc)
+		assert.isEqual(model.value, value)
 	}
 
 	private static async assertShowsSuggestions(
@@ -447,15 +475,8 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 			...options,
 		})
 
-		this.Controller('form', {
-			schema: {
-				id: 'test',
-				fields: {
-					firstName: {
-						type: 'text',
-					},
-				},
-			},
+		this.formVc = this.Controller('form', {
+			schema: testFormSchema,
 			sections: [
 				{
 					fields: [
@@ -477,3 +498,14 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		await assert.doesThrowAsync(action, 'showSuggestions')
 	}
 }
+
+const testFormSchema = buildSchema({
+	id: 'test',
+	fields: {
+		firstName: {
+			type: 'text',
+		},
+	},
+})
+
+type TestForm = typeof testFormSchema

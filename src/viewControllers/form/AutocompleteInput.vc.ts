@@ -16,6 +16,10 @@ export default class AutocompleteInputViewController extends AbstractInputViewCo
 		this.isShowingSuggestions = true
 	}
 
+	public getRenderedValue() {
+		return super.getRenderedValue() ?? ''
+	}
+
 	public getIsShowingSuggestions() {
 		return this.isShowingSuggestions
 	}

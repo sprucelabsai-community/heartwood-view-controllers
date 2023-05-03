@@ -2,6 +2,7 @@ import { buildSchema } from '@sprucelabs/schema'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import AbstractInputViewController from '../../../viewControllers/form/AbstractInput.vc'
 import FormViewController, {
 	FormViewControllerOptions,
 } from '../../../viewControllers/form/Form.vc'
@@ -12,6 +13,9 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		let timeout = 100
+
+		const views = this.getFactory()
+		views.setController('fastInput', InputViewController)
 
 		this.vc = this.Vc({
 			onWillChange: async () => {
@@ -166,7 +170,7 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 	}
 
 	private static setupFormWithInputVc() {
-		const inputVc = this.Controller('autocompleteInput', {
+		const inputVc = this.Controller('fastInput' as any, {
 			onChangeRenderedValue: async () => {
 				await new Promise((r) => setTimeout(r, 10))
 			},
@@ -184,7 +188,7 @@ export default class UpdatingFastTest extends AbstractViewControllerTest {
 				},
 			],
 		})
-		return inputVc
+		return inputVc as InputViewController
 	}
 
 	private static async updateValue1FiveTimes() {
@@ -265,3 +269,5 @@ const fastTypingSchema = buildSchema({
 })
 
 type FastTypingSchema = typeof fastTypingSchema
+
+class InputViewController extends AbstractInputViewController {}
