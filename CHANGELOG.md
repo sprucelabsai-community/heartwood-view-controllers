@@ -1,3 +1,10 @@
+# [103.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.2.1...v103.0.0) (2023-05-04)
+
+
+### Breaking Changes
+
+* **auto-upgrade:** upgraded packages [upgrade-all] ([93d27da](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/93d27da))
+
 ## [102.2.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.2.0...v102.2.1) (2023-05-03)
 
 # [102.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v102.1.97...v102.2.0) (2023-05-03)
