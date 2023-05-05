@@ -371,7 +371,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async settingRenderedValueToEmptyStringHidesSuggestions() {
 		this.showSuggestions([{ id: 'test', label: 'Hey!' }])
-		this.setRenderedValue('hey')
+		await this.setRenderedValue('hey')
 
 		await autocompleteAssert.actionHidesSuggestions(this.vc, () =>
 			this.setRenderedValue('')
@@ -418,7 +418,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.assertRenderedValueEquals('')
 		this.assertValueEquals(undefined)
 
-		this.setValueOnForm(value)
+		await this.setValueOnForm(value)
 		this.assertRenderedValueEquals(value)
 		this.assertValueEquals(undefined)
 	}
