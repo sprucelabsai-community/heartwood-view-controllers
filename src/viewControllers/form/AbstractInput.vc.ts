@@ -19,13 +19,6 @@ export default abstract class AbstractInputViewController<
 	private getModelHandler?: () => Model
 
 	private constructorModel: Model
-	protected get model() {
-		return this.getModelHandler?.() ?? ({} as any)
-	}
-
-	protected set model(model: Model) {
-		this.setModelHandler?.(model)
-	}
 
 	public constructor(options: ViewControllerOptions & Model) {
 		super(options)
@@ -98,6 +91,14 @@ export default abstract class AbstractInputViewController<
 
 	public render(): Model {
 		return this.model
+	}
+
+	protected get model() {
+		return this.getModelHandler?.() ?? ({} as any)
+	}
+
+	protected set model(model: Model) {
+		this.setModelHandler?.(model)
 	}
 }
 

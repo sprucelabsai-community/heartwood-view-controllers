@@ -81,7 +81,7 @@ const autocompleteAssert = {
 
 		assert.isTruthy(
 			wasHit,
-			`A was waiting for you to call 'vc.hideSuggestions()', but it never happened!`
+			`I was waiting for you to call 'vc.hideSuggestions()', but it never happened!`
 		)
 	},
 

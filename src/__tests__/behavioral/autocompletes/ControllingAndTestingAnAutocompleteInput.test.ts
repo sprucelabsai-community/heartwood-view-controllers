@@ -110,7 +110,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async assertingShowThrowsIfDropdownNotOpened() {
 		await this.assertThrowsNotShowingSuggestionsError(() =>
-			autocompleteAssert.assertActionShowsSuggestions(this.vc, () => {})
+			autocompleteAssert.actionHidesSuggestions(this.vc, () => {})
 		)
 	}
 
@@ -368,6 +368,16 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.assertDoesNotShowSuggestionThrowsWhenFound('test')
 	}
 
+	@test.only()
+	protected static async settingRenderedValueToEmptyStringHidesSuggestions() {
+		this.showSuggestions([{ id: 'test', label: 'Hey!' }])
+		this.setRenderedValue('hey')
+
+		await autocompleteAssert.actionHidesSuggestions(this.vc, () =>
+			this.setRenderedValue('')
+		)
+	}
+
 	@test()
 	protected static canFindSuggestionsThatAreNotTheFirst() {
 		this.showSuggestions([
@@ -399,19 +409,23 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async settingValuesAlwaysOnlySetsRenderedValue() {
 		const value = 'Tay'
-		const { setValue } = this.render(this.formVc)
+		await this.setValueOnForm(value)
 
-		await setValue('firstName', value)
 		this.assertRenderedValueEquals(value)
 		this.assertValueEquals(undefined)
 
-		await setValue('firstName', '')
+		await this.setValueOnForm('')
 		this.assertRenderedValueEquals('')
 		this.assertValueEquals(undefined)
 
-		await setValue('firstName', value)
+		this.setValueOnForm(value)
 		this.assertRenderedValueEquals(value)
 		this.assertValueEquals(undefined)
+	}
+
+	protected static async setValueOnForm(value: string) {
+		const { setValue } = this.render(this.formVc)
+		await setValue('firstName', value)
 	}
 
 	private static assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
