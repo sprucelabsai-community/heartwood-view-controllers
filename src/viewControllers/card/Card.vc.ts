@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import {
+	CardFooter,
 	CriticalError,
 	ViewController,
 	ViewControllerOptions,
@@ -15,6 +16,11 @@ type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Body = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 type Header = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 
+type SimpleVc = {
+	triggerRender: () => void
+	render: () => CardFooter
+}
+
 export default class CardViewController<V extends ViewModel = ViewModel>
 	extends AbstractViewController<V>
 	implements ViewController<V>
@@ -24,10 +30,28 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	private triggerRenderHeader?: () => void
 	private triggerRenderSections: (() => void)[] = []
 	private sectionVcs: ViewController<Section>[] = []
+	private footerVc: SimpleVc
+	private headerVc: SimpleVc
 
 	public constructor(options: V & ViewControllerOptions) {
 		super(options)
 		this.model = options
+
+		this.footerVc = {
+			triggerRender: () => {},
+			render: () => {
+				this.triggerRenderFooter = this.footerVc.triggerRender
+				return { ...this.model.footer, controller: this }
+			},
+		}
+
+		this.headerVc = {
+			triggerRender: () => {},
+			render: () => {
+				this.triggerRenderHeader = this.headerVc.triggerRender
+				return { ...this.model.header, controller: this }
+			},
+		}
 	}
 
 	public setFooter(footer: V['footer']) {
@@ -85,30 +109,14 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	private buildFooterVc() {
-		const footerVc = {
-			triggerRender: () => {},
-			render: () => {
-				this.triggerRenderFooter = footerVc.triggerRender
-				return { ...this.model.footer, controller: this }
-			},
-		}
-
 		return {
-			controller: footerVc,
+			controller: this.footerVc,
 		}
 	}
 
 	private buildHeaderVc() {
-		const headerVc = {
-			triggerRender: () => {},
-			render: () => {
-				this.triggerRenderHeader = headerVc.triggerRender
-				return { ...this.model.header, controller: this }
-			},
-		}
-
 		return {
-			controller: headerVc,
+			controller: this.headerVc,
 		}
 	}
 
