@@ -110,7 +110,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 	@test()
 	protected static async assertingShowThrowsIfDropdownNotOpened() {
 		await this.assertThrowsNotShowingSuggestionsError(() =>
-			autocompleteAssert.actionHidesSuggestions(this.vc, () => {})
+			autocompleteAssert.actionShowsSuggestions(this.vc, () => {})
 		)
 	}
 
@@ -368,7 +368,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 		this.assertDoesNotShowSuggestionThrowsWhenFound('test')
 	}
 
-	@test.only()
+	@test()
 	protected static async settingRenderedValueToEmptyStringHidesSuggestions() {
 		this.showSuggestions([{ id: 'test', label: 'Hey!' }])
 		this.setRenderedValue('hey')
