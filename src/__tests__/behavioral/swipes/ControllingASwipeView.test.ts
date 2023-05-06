@@ -444,6 +444,20 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		assert.isEqualDeep(this.cleanModel(actual), this.cleanModel(expected))
 	}
 
+	@test()
+	protected static async sameFooterVcEverTime() {
+		const vc = this.renderAndGetFooterVc()
+		const vc2 = this.renderAndGetFooterVc()
+		assert.isEqual(vc, vc2)
+	}
+
+	private static renderAndGetFooterVc() {
+		const { controller } = this.render(this.vc)
+		const footer = this.render(controller!)
+		const vc = footer?.controller
+		return vc
+	}
+
 	private static renderVc() {
 		return this.render(this.vc)
 	}

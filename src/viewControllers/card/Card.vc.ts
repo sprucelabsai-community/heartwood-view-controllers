@@ -1,7 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import {
-	CardFooter,
 	CriticalError,
 	ViewController,
 	ViewControllerOptions,
@@ -16,11 +15,6 @@ type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 type Body = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 type Header = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 
-type SimpleVc = {
-	triggerRender: () => void
-	render: () => CardFooter
-}
-
 export default class CardViewController<V extends ViewModel = ViewModel>
 	extends AbstractViewController<V>
 	implements ViewController<V>
@@ -30,28 +24,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	private triggerRenderHeader?: () => void
 	private triggerRenderSections: (() => void)[] = []
 	private sectionVcs: ViewController<Section>[] = []
-	private footerVc: SimpleVc
-	private headerVc: SimpleVc
 
 	public constructor(options: V & ViewControllerOptions) {
 		super(options)
 		this.model = options
-
-		this.footerVc = {
-			triggerRender: () => {},
-			render: () => {
-				this.triggerRenderFooter = this.footerVc.triggerRender
-				return { ...this.model.footer, controller: this }
-			},
-		}
-
-		this.headerVc = {
-			triggerRender: () => {},
-			render: () => {
-				this.triggerRenderHeader = this.headerVc.triggerRender
-				return { ...this.model.header, controller: this }
-			},
-		}
 	}
 
 	public setFooter(footer: V['footer']) {
@@ -109,14 +85,30 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	private buildFooterVc() {
+		const footerVc = {
+			triggerRender: () => {},
+			render: () => {
+				this.triggerRenderFooter = footerVc.triggerRender
+				return { ...this.model.footer, controller: this }
+			},
+		}
+
 		return {
-			controller: this.footerVc,
+			controller: footerVc,
 		}
 	}
 
 	private buildHeaderVc() {
+		const headerVc = {
+			triggerRender: () => {},
+			render: () => {
+				this.triggerRenderHeader = headerVc.triggerRender
+				return { ...this.model.header, controller: this }
+			},
+		}
+
 		return {
-			controller: this.headerVc,
+			controller: headerVc,
 		}
 	}
 
@@ -232,7 +224,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	public setSection(idOrIdx: number | string, section: Section) {
-		this.ensureSectionsExist()
+		this.assertSectionsExist()
 
 		let idx: number = this.assertValidIdOrIdx(idOrIdx)
 
@@ -259,7 +251,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	public setSections(sections: Section[]) {
-		this.ensureSectionsExist()
+		this.assertSectionsExist()
 		if (this.model.body) {
 			this.model.body.sections = [...sections]
 		}
@@ -267,7 +259,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		this.triggerRender()
 	}
 
-	private ensureSectionsExist() {
+	private assertSectionsExist() {
 		if (!this.model.body) {
 			this.model.body = {}
 		}
@@ -278,7 +270,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 	}
 
 	public addSection(section: Section) {
-		this.ensureSectionsExist()
+		this.assertSectionsExist()
 		const sections = this.model.body?.sections
 		if (sections) {
 			sections.push(section)
@@ -300,7 +292,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 		const sections = this.getSections() ?? []
 		sections.splice(idx, 0, section)
 
-		this.ensureSectionsExist()
+		this.assertSectionsExist()
 
 		if (this.model.body?.sections) {
 			this.model.body.sections = sections
