@@ -217,6 +217,10 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		this.emitTarget = target
 	}
 
+	public setPayload(payload?: Record<string, any>) {
+		this.emitPayload = payload
+	}
+
 	public deleteRow(id: string | number) {
 		this.listVc.deleteRow(id)
 		if (this.listVc.getTotalRows() === 0) {

@@ -112,6 +112,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.listVc.setTarget(target)
 	}
 
+	public setPayload(payload?: Record<string, any>) {
+		this.listVc.setPayload(payload)
+	}
+
 	public deleteRow(id: string | number) {
 		this.listVc.deleteRow(id)
 	}

@@ -702,6 +702,31 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isFalse(vc.getHasCriticalError())
 	}
 
+	@test()
+	protected static async canSetPayload() {
+		const vc = this.Vc({
+			payload: {
+				hello: 'again',
+			},
+		})
+
+		vc.setPayload({
+			no: 'way',
+		})
+
+		assert.isEqualDeep(vc.getPayload(), {
+			no: 'way',
+		})
+
+		vc.setPayload({
+			taco: 'bravo',
+		})
+
+		assert.isEqualDeep(vc.getPayload(), {
+			taco: 'bravo',
+		})
+	}
+
 	private static async assertListLoadingClearsCustomRow(
 		vc: SpyActiveRecordCard
 	) {
