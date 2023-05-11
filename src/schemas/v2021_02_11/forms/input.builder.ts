@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import buttonBuilder from '../button.builder'
 
 export default buildSchema({
 	id: 'input',
@@ -67,6 +68,13 @@ export default buildSchema({
 			label: 'On blur handler',
 			options: {
 				valueType: '() => void | Promise<void>',
+			},
+		},
+		rightButtons: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schema: buttonBuilder,
 			},
 		},
 	},

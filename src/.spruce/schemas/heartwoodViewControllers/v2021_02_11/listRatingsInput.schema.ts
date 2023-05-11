@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/button.schema'
 
 const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInputSchema  = {
 	id: 'listRatingsInput',
@@ -79,6 +79,12 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                label: 'On blur handler',
 	                type: 'raw',
 	                options: {valueType: `() => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'rightButtons': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: buttonSchema_v2021_02_11,}
 	            },
 	            /** Can be changed. */
 	            'canBeChanged': {

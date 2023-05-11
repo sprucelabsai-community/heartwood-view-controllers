@@ -43,6 +43,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 		}
 
 		interface ToggleInputSchema extends SpruceSchema.Schema {
@@ -122,6 +124,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			    }
 		}
 
@@ -159,6 +167,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 		}
@@ -239,6 +249,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -282,6 +298,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				
@@ -367,6 +385,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
 			                label: 'Can be changed',
@@ -421,6 +445,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -499,6 +525,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			    }
 		}
 
@@ -536,6 +568,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -614,6 +648,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			    }
 		}
@@ -1184,6 +1224,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -1266,6 +1308,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -3810,6 +3858,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				
@@ -3899,6 +3949,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Can be changed. */
 			            'canBeChanged': {
 			                label: 'Can be changed',
@@ -3964,6 +4020,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Cell button key down handler. */
 				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
 				
@@ -4046,6 +4104,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			            /** Cell button key down handler. */
 			            'onKeyDown': {
@@ -4133,6 +4197,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				
@@ -4219,6 +4285,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -4280,6 +4352,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Cell button key down handler. */
@@ -4364,6 +4438,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
 			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
 			            /** Placeholder. */
 			            'placeholder': {
 			                label: 'Placeholder',
@@ -4418,6 +4498,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 				/** Placeholder. */
 				'placeholder'?: string| undefined | null
 				/** Cell button key down handler. */
@@ -4501,6 +4583,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			            /** Placeholder. */
 			            'placeholder': {
@@ -5564,138 +5652,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface ButtonBar {
-			
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ButtonBarViewController)| undefined | null
-				/** Buttons. */
-				'buttons': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton[]
-		}
-
-		interface ButtonBarSchema extends SpruceSchema.Schema {
-			id: 'buttonBar',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Button bar',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ButtonBarViewController`,}
-			            },
-			            /** Buttons. */
-			            'buttons': {
-			                label: 'Buttons',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButtonSchema,}
-			            },
-			    }
-		}
-
-		interface ButtonBarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Dropdown {
-			
-				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
-				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
-				
-				'card'?: (HeartwoodTypes.Card)| undefined | null
-		}
-
-		interface DropdownSchema extends SpruceSchema.Schema {
-			id: 'dropdown',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Dropdown',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.Card`,}
-			            },
-			    }
-		}
-
-		interface DropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Text {
-			
-				/** Text. */
-				'content'?: string| undefined | null
-				/** Html. */
-				'html'?: string| undefined | null
-				/** Align. */
-				'align'?: ("left" | "right" | "center")| undefined | null
-		}
-
-		interface TextSchema extends SpruceSchema.Schema {
-			id: 'text',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Text',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Text. */
-			            'content': {
-			                label: 'Text',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Html. */
-			            'html': {
-			                label: 'Html',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Align. */
-			            'align': {
-			                label: 'Align',
-			                type: 'select',
-			                defaultValue: "left",
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"},{"value":"center","label":"Center"}],}
-			            },
-			    }
-		}
-
-		interface TextEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface ButtonBarButton {
 			
 				
@@ -5808,6 +5764,457 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ButtonBarButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ButtonBar {
+			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ButtonBarViewController)| undefined | null
+				/** Buttons. */
+				'buttons': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton[]
+		}
+
+		interface ButtonBarSchema extends SpruceSchema.Schema {
+			id: 'buttonBar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Button bar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ButtonBarViewController`,}
+			            },
+			            /** Buttons. */
+			            'buttons': {
+			                label: 'Buttons',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButtonSchema,}
+			            },
+			    }
+		}
+
+		interface ButtonBarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface AutocompleteSuggestion {
+			
+				
+				'id': string
+				
+				'label': string
+				/** On click handler. */
+				'onClick'?: ((id: string) => void | Promise<void>)| undefined | null
+		}
+
+		interface AutocompleteSuggestionSchema extends SpruceSchema.Schema {
+			id: 'autocompleteSuggestion',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** On click handler. */
+			            'onClick': {
+			                label: 'On click handler',
+			                type: 'raw',
+			                options: {valueType: `(id: string) => void | Promise<void>`,}
+			            },
+			    }
+		}
+
+		interface AutocompleteSuggestionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface AutocompleteInput {
+			
+				
+				'id'?: string| undefined | null
+				
+				'value'?: string| undefined | null
+				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+				'renderedValue'?: (any)| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				/** Hint. */
+				'hint'?: string| undefined | null
+				/** Required. */
+				'isRequired'?: boolean| undefined | null
+				
+				'isInteractive'?: boolean| undefined | null
+				/** On change handler. */
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On changed rendered value handler. */
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				/** On focus handler. */
+				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				/** On blur handler. */
+				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				/** Placeholder. */
+				'placeholder'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
+				
+				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[]| undefined | null
+		}
+
+		interface AutocompleteInputSchema extends SpruceSchema.Schema {
+			id: 'autocompleteInput',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Autocomplete input',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'value': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
+			            'renderedValue': {
+			                type: 'raw',
+			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
+			                options: {valueType: `any`,}
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Hint. */
+			            'hint': {
+			                label: 'Hint',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Required. */
+			            'isRequired': {
+			                label: 'Required',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'isInteractive': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** On change handler. */
+			            'onChange': {
+			                label: 'On change handler',
+			                type: 'raw',
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On changed rendered value handler. */
+			            'onChangeRenderedValue': {
+			                label: 'On changed rendered value handler',
+			                type: 'raw',
+			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
+			            },
+			            /** On focus handler. */
+			            'onFocus': {
+			                label: 'On focus handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** On blur handler. */
+			            'onBlur': {
+			                label: 'On blur handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			            /** Placeholder. */
+			            'placeholder': {
+			                label: 'Placeholder',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
+			            },
+			            /** . */
+			            'suggestions': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema,}
+			            },
+			    }
+		}
+
+		interface AutocompleteInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInputSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Text {
+			
+				/** Text. */
+				'content'?: string| undefined | null
+				/** Html. */
+				'html'?: string| undefined | null
+				/** Align. */
+				'align'?: ("left" | "right" | "center")| undefined | null
+		}
+
+		interface TextSchema extends SpruceSchema.Schema {
+			id: 'text',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Text',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Text. */
+			            'content': {
+			                label: 'Text',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Html. */
+			            'html': {
+			                label: 'Html',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Align. */
+			            'align': {
+			                label: 'Align',
+			                type: 'select',
+			                defaultValue: "left",
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"right","label":"Right"},{"value":"center","label":"Center"}],}
+			            },
+			    }
+		}
+
+		interface TextEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface DropdownButton {
+			
+				
+				'id'?: string| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				/** Selected. */
+				'isSelected'?: boolean| undefined | null
+				/** Selected. */
+				'isEnabled'?: boolean| undefined | null
+				/** Add to fade-in queue.. Fade in effect could change. */
+				'shouldQueueShow'?: boolean| undefined | null
+				/** Show hint icon. */
+				'shouldShowHintIcon'?: boolean| undefined | null
+				/** Click handler for hint icon. */
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Type. */
+				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				/** Image. */
+				'image'?: string| undefined | null
+				/** Avatar. */
+				'avatar'?: string| undefined | null
+				/** Line icon. */
+				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
+				/** Click handler. */
+				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
+		}
+
+		interface DropdownButtonSchema extends SpruceSchema.Schema {
+			id: 'dropdownButton',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ButtonController`,}
+			            },
+			            /** Selected. */
+			            'isSelected': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Selected. */
+			            'isEnabled': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Add to fade-in queue.. Fade in effect could change. */
+			            'shouldQueueShow': {
+			                label: 'Add to fade-in queue.',
+			                type: 'boolean',
+			                hint: 'Fade in effect could change.',
+			                options: undefined
+			            },
+			            /** Show hint icon. */
+			            'shouldShowHintIcon': {
+			                label: 'Show hint icon',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Click handler for hint icon. */
+			            'onClickHintIcon': {
+			                label: 'Click handler for hint icon',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** . */
+			            'hint': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Type. */
+			            'type': {
+			                label: 'Type',
+			                type: 'select',
+			                defaultValue: "secondary",
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                options: {choices: [{"value":"sprucebot","label":"sprucebot"},{"value":"add-circle","label":"add-circle"},{"value":"chevron-left","label":"chevron-left"},{"value":"document-text","label":"document-text"},{"value":"link-angle","label":"link-angle"},{"value":"play-circle","label":"play-circle"},{"value":"star","label":"star"},{"value":"add-square","label":"add-square"},{"value":"chevron-right","label":"chevron-right"},{"value":"download-cloud","label":"download-cloud"},{"value":"link-flat","label":"link-flat"},{"value":"present","label":"present"},{"value":"sun","label":"sun"},{"value":"add","label":"add"},{"value":"chevron-up","label":"chevron-up"},{"value":"download","label":"download"},{"value":"loader","label":"loader"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"tag","label":"tag"},{"value":"alarm","label":"alarm"},{"value":"clipboard","label":"clipboard"},{"value":"edit-box","label":"edit-box"},{"value":"location-pin","label":"location-pin"},{"value":"refresh","label":"refresh"},{"value":"time","label":"time"},{"value":"arrow-back","label":"arrow-back"},{"value":"clock","label":"clock"},{"value":"edit-line","label":"edit-line"},{"value":"lock","label":"lock"},{"value":"repeat","label":"repeat"},{"value":"tool","label":"tool"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"close-circle","label":"close-circle"},{"value":"email","label":"email"},{"value":"map","label":"map"},{"value":"restricted","label":"restricted"},{"value":"trending-down","label":"trending-down"},{"value":"arrow-down","label":"arrow-down"},{"value":"close-square","label":"close-square"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"message-circle","label":"message-circle"},{"value":"rotate","label":"rotate"},{"value":"trending-up","label":"trending-up"},{"value":"arrow-next","label":"arrow-next"},{"value":"close","label":"close"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"message-square","label":"message-square"},{"value":"search-no","label":"search-no"},{"value":"triangle","label":"triangle"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"code","label":"code"},{"value":"external-link","label":"external-link"},{"value":"mic-off","label":"mic-off"},{"value":"search","label":"search"},{"value":"unlock","label":"unlock"},{"value":"arrow-up","label":"arrow-up"},{"value":"coffee","label":"coffee"},{"value":"fav-heart","label":"fav-heart"},{"value":"mic-on","label":"mic-on"},{"value":"selector-checked","label":"selector-checked"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"attachment","label":"attachment"},{"value":"command","label":"command"},{"value":"flag","label":"flag"},{"value":"minus-circle","label":"minus-circle"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"upload","label":"upload"},{"value":"award-badge","label":"award-badge"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"flip-01","label":"flip-01"},{"value":"minus-square","label":"minus-square"},{"value":"selector-circle","label":"selector-circle"},{"value":"user-add","label":"user-add"},{"value":"binoculars","label":"binoculars"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"flip-02","label":"flip-02"},{"value":"money-sign","label":"money-sign"},{"value":"send","label":"send"},{"value":"user-delete","label":"user-delete"},{"value":"bolt","label":"bolt"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"folder","label":"folder"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"settings-filled","label":"settings-filled"},{"value":"user","label":"user"},{"value":"book-open","label":"book-open"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"globe","label":"globe"},{"value":"more-vertical","label":"more-vertical"},{"value":"settings","label":"settings"},{"value":"users","label":"users"},{"value":"book","label":"book"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"hash-tag","label":"hash-tag"},{"value":"notification-off","label":"notification-off"},{"value":"share","label":"share"},{"value":"video-off","label":"video-off"},{"value":"bookmark","label":"bookmark"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"headphones","label":"headphones"},{"value":"notification-on","label":"notification-on"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"video","label":"video"},{"value":"calendar-add","label":"calendar-add"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"help-buoy","label":"help-buoy"},{"value":"object","label":"object"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"warning","label":"warning"},{"value":"calendar","label":"calendar"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"help-circle","label":"help-circle"},{"value":"pause-circle","label":"pause-circle"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"wifi","label":"wifi"},{"value":"camera","label":"camera"},{"value":"crop","label":"crop"},{"value":"home","label":"home"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"cellphone","label":"cellphone"},{"value":"delete","label":"delete"},{"value":"info","label":"info"},{"value":"phone","label":"phone"},{"value":"sound-off","label":"sound-off"},{"value":"zoom-out","label":"zoom-out"},{"value":"checkmark","label":"checkmark"},{"value":"document-blank","label":"document-blank"},{"value":"jump","label":"jump"},{"value":"photo","label":"photo"},{"value":"sound-on","label":"sound-on"},{"value":"chevron-down","label":"chevron-down"},{"value":"document-new","label":"document-new"},{"value":"layers","label":"layers"},{"value":"picked","label":"picked"},{"value":"star-filled","label":"star-filled"}],}
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
+			            },
+			    }
+		}
+
+		interface DropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Dropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
+				
+				'card'?: (HeartwoodTypes.Card)| undefined | null
+		}
+
+		interface DropdownSchema extends SpruceSchema.Schema {
+			id: 'dropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Dropdown',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface DropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema> {}
 
 	}
 
@@ -5957,317 +6364,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface DropdownButton {
-			
-				
-				'id'?: string| undefined | null
-				/** Label. */
-				'label'?: string| undefined | null
-				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
-				/** Selected. */
-				'isSelected'?: boolean| undefined | null
-				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
-				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
-				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
-				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
-				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
-				/** Image. */
-				'image'?: string| undefined | null
-				/** Avatar. */
-				'avatar'?: string| undefined | null
-				/** Line icon. */
-				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
-				/** Click handler. */
-				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
-		}
-
-		interface DropdownButtonSchema extends SpruceSchema.Schema {
-			id: 'dropdownButton',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Label. */
-			            'label': {
-			                label: 'Label',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'controller': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ButtonController`,}
-			            },
-			            /** Selected. */
-			            'isSelected': {
-			                label: 'Selected',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Selected. */
-			            'isEnabled': {
-			                label: 'Selected',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Add to fade-in queue.. Fade in effect could change. */
-			            'shouldQueueShow': {
-			                label: 'Add to fade-in queue.',
-			                type: 'boolean',
-			                hint: 'Fade in effect could change.',
-			                options: undefined
-			            },
-			            /** Show hint icon. */
-			            'shouldShowHintIcon': {
-			                label: 'Show hint icon',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Click handler for hint icon. */
-			            'onClickHintIcon': {
-			                label: 'Click handler for hint icon',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<any> | any`,}
-			            },
-			            /** . */
-			            'hint': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Type. */
-			            'type': {
-			                label: 'Type',
-			                type: 'select',
-			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Avatar. */
-			            'avatar': {
-			                label: 'Avatar',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Line icon. */
-			            'lineIcon': {
-			                label: 'Line icon',
-			                type: 'select',
-			                options: {choices: [{"value":"sprucebot","label":"sprucebot"},{"value":"add-circle","label":"add-circle"},{"value":"chevron-left","label":"chevron-left"},{"value":"document-text","label":"document-text"},{"value":"link-angle","label":"link-angle"},{"value":"play-circle","label":"play-circle"},{"value":"star","label":"star"},{"value":"add-square","label":"add-square"},{"value":"chevron-right","label":"chevron-right"},{"value":"download-cloud","label":"download-cloud"},{"value":"link-flat","label":"link-flat"},{"value":"present","label":"present"},{"value":"sun","label":"sun"},{"value":"add","label":"add"},{"value":"chevron-up","label":"chevron-up"},{"value":"download","label":"download"},{"value":"loader","label":"loader"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"tag","label":"tag"},{"value":"alarm","label":"alarm"},{"value":"clipboard","label":"clipboard"},{"value":"edit-box","label":"edit-box"},{"value":"location-pin","label":"location-pin"},{"value":"refresh","label":"refresh"},{"value":"time","label":"time"},{"value":"arrow-back","label":"arrow-back"},{"value":"clock","label":"clock"},{"value":"edit-line","label":"edit-line"},{"value":"lock","label":"lock"},{"value":"repeat","label":"repeat"},{"value":"tool","label":"tool"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"close-circle","label":"close-circle"},{"value":"email","label":"email"},{"value":"map","label":"map"},{"value":"restricted","label":"restricted"},{"value":"trending-down","label":"trending-down"},{"value":"arrow-down","label":"arrow-down"},{"value":"close-square","label":"close-square"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"message-circle","label":"message-circle"},{"value":"rotate","label":"rotate"},{"value":"trending-up","label":"trending-up"},{"value":"arrow-next","label":"arrow-next"},{"value":"close","label":"close"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"message-square","label":"message-square"},{"value":"search-no","label":"search-no"},{"value":"triangle","label":"triangle"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"code","label":"code"},{"value":"external-link","label":"external-link"},{"value":"mic-off","label":"mic-off"},{"value":"search","label":"search"},{"value":"unlock","label":"unlock"},{"value":"arrow-up","label":"arrow-up"},{"value":"coffee","label":"coffee"},{"value":"fav-heart","label":"fav-heart"},{"value":"mic-on","label":"mic-on"},{"value":"selector-checked","label":"selector-checked"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"attachment","label":"attachment"},{"value":"command","label":"command"},{"value":"flag","label":"flag"},{"value":"minus-circle","label":"minus-circle"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"upload","label":"upload"},{"value":"award-badge","label":"award-badge"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"flip-01","label":"flip-01"},{"value":"minus-square","label":"minus-square"},{"value":"selector-circle","label":"selector-circle"},{"value":"user-add","label":"user-add"},{"value":"binoculars","label":"binoculars"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"flip-02","label":"flip-02"},{"value":"money-sign","label":"money-sign"},{"value":"send","label":"send"},{"value":"user-delete","label":"user-delete"},{"value":"bolt","label":"bolt"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"folder","label":"folder"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"settings-filled","label":"settings-filled"},{"value":"user","label":"user"},{"value":"book-open","label":"book-open"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"globe","label":"globe"},{"value":"more-vertical","label":"more-vertical"},{"value":"settings","label":"settings"},{"value":"users","label":"users"},{"value":"book","label":"book"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"hash-tag","label":"hash-tag"},{"value":"notification-off","label":"notification-off"},{"value":"share","label":"share"},{"value":"video-off","label":"video-off"},{"value":"bookmark","label":"bookmark"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"headphones","label":"headphones"},{"value":"notification-on","label":"notification-on"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"video","label":"video"},{"value":"calendar-add","label":"calendar-add"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"help-buoy","label":"help-buoy"},{"value":"object","label":"object"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"warning","label":"warning"},{"value":"calendar","label":"calendar"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"help-circle","label":"help-circle"},{"value":"pause-circle","label":"pause-circle"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"wifi","label":"wifi"},{"value":"camera","label":"camera"},{"value":"crop","label":"crop"},{"value":"home","label":"home"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"cellphone","label":"cellphone"},{"value":"delete","label":"delete"},{"value":"info","label":"info"},{"value":"phone","label":"phone"},{"value":"sound-off","label":"sound-off"},{"value":"zoom-out","label":"zoom-out"},{"value":"checkmark","label":"checkmark"},{"value":"document-blank","label":"document-blank"},{"value":"jump","label":"jump"},{"value":"photo","label":"photo"},{"value":"sound-on","label":"sound-on"},{"value":"chevron-down","label":"chevron-down"},{"value":"document-new","label":"document-new"},{"value":"layers","label":"layers"},{"value":"picked","label":"picked"},{"value":"star-filled","label":"star-filled"}],}
-			            },
-			            /** Click handler. */
-			            'onClick': {
-			                label: 'Click handler',
-			                type: 'raw',
-			                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
-			            },
-			    }
-		}
-
-		interface DropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface AutocompleteSuggestion {
-			
-				
-				'id': string
-				
-				'label': string
-				/** On click handler. */
-				'onClick'?: ((id: string) => void | Promise<void>)| undefined | null
-		}
-
-		interface AutocompleteSuggestionSchema extends SpruceSchema.Schema {
-			id: 'autocompleteSuggestion',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'label': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** On click handler. */
-			            'onClick': {
-			                label: 'On click handler',
-			                type: 'raw',
-			                options: {valueType: `(id: string) => void | Promise<void>`,}
-			            },
-			    }
-		}
-
-		interface AutocompleteSuggestionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface AutocompleteInput {
-			
-				
-				'id'?: string| undefined | null
-				
-				'value'?: string| undefined | null
-				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
-				/** Label. */
-				'label'?: string| undefined | null
-				/** Hint. */
-				'hint'?: string| undefined | null
-				/** Required. */
-				'isRequired'?: boolean| undefined | null
-				
-				'isInteractive'?: boolean| undefined | null
-				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
-				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
-				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
-				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
-				/** Placeholder. */
-				'placeholder'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
-				
-				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[]| undefined | null
-		}
-
-		interface AutocompleteInputSchema extends SpruceSchema.Schema {
-			id: 'autocompleteInput',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Autocomplete input',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'value': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-			            'renderedValue': {
-			                type: 'raw',
-			                hint: 'If you need the text input to render a value other than what is stored (a person\'s name vs. their id).',
-			                options: {valueType: `any`,}
-			            },
-			            /** Label. */
-			            'label': {
-			                label: 'Label',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Hint. */
-			            'hint': {
-			                label: 'Hint',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Required. */
-			            'isRequired': {
-			                label: 'Required',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** . */
-			            'isInteractive': {
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** On change handler. */
-			            'onChange': {
-			                label: 'On change handler',
-			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
-			            },
-			            /** On changed rendered value handler. */
-			            'onChangeRenderedValue': {
-			                label: 'On changed rendered value handler',
-			                type: 'raw',
-			                options: {valueType: `(value: any) => void | Promise<void | boolean> | boolean`,}
-			            },
-			            /** On focus handler. */
-			            'onFocus': {
-			                label: 'On focus handler',
-			                type: 'raw',
-			                options: {valueType: `() => void | Promise<void>`,}
-			            },
-			            /** On blur handler. */
-			            'onBlur': {
-			                label: 'On blur handler',
-			                type: 'raw',
-			                options: {valueType: `() => void | Promise<void>`,}
-			            },
-			            /** Placeholder. */
-			            'placeholder': {
-			                label: 'Placeholder',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>`,}
-			            },
-			            /** . */
-			            'suggestions': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestionSchema,}
-			            },
-			    }
-		}
-
-		interface AutocompleteInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInputSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface AddressInput {
 			
 				
@@ -6294,6 +6390,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onFocus'?: (() => void | Promise<void>)| undefined | null
 				/** On blur handler. */
 				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
 		}
 
 		interface AddressInputSchema extends SpruceSchema.Schema {
@@ -6371,6 +6469,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'On blur handler',
 			                type: 'raw',
 			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'rightButtons': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
 			            },
 			    }
 		}

@@ -1,6 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
+import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/button.schema'
 import selectInputChoiceSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/selectInputChoice.schema'
 
 const selectInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema  = {
@@ -79,6 +80,12 @@ const selectInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Sele
 	                label: 'On blur handler',
 	                type: 'raw',
 	                options: {valueType: `() => void | Promise<void>`,}
+	            },
+	            /** . */
+	            'rightButtons': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: buttonSchema_v2021_02_11,}
 	            },
 	            /** Placeholder. */
 	            'placeholder': {
