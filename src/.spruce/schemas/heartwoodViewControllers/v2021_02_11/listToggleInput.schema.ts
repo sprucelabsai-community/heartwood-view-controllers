@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import buttonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/button.schema'
+import inputButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/inputButton.schema'
 
 const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInputSchema  = {
 	id: 'listToggleInput',
@@ -84,7 +84,7 @@ const listToggleInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	            'rightButtons': {
 	                type: 'schema',
 	                isArray: true,
-	                options: {schema: buttonSchema_v2021_02_11,}
+	                options: {schema: inputButtonSchema_v2021_02_11,}
 	            },
 	            /** Cell button key down handler. */
 	            'onKeyDown': {

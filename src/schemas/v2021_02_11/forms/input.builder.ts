@@ -1,5 +1,5 @@
-import { buildSchema } from '@sprucelabs/schema'
-import buttonBuilder from '../button.builder'
+import { buildSchema, pickFields } from '@sprucelabs/schema'
+import { buttonFields } from '../../../constants'
 
 export default buildSchema({
 	id: 'input',
@@ -74,7 +74,12 @@ export default buildSchema({
 			type: 'schema',
 			isArray: true,
 			options: {
-				schema: buttonBuilder,
+				schema: buildSchema({
+					id: 'inputButton',
+					fields: {
+						...pickFields(buttonFields, ['id', 'lineIcon', 'onClick']),
+					},
+				}),
 			},
 		},
 	},
