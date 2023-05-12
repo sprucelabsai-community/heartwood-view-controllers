@@ -1,3 +1,10 @@
+# [103.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.1.4...v103.2.0) (2023-05-12)
+
+
+### Features
+
+* rightButtons on all inputs! ([e656dbc](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e656dbc))
+
 ## [103.1.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.1.3...v103.1.4) (2023-05-11)
 
 ## [103.1.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.1.2...v103.1.3) (2023-05-08)
