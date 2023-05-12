@@ -117,17 +117,14 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 		})
 	}
 
-	@test.only('started timing out for some reason???')
+	@test('started timing out for some reason???')
 	protected static async throwsWithSyntaxError() {
 		const err = await assert.doesThrowAsync(async () => {
-			debugger
 			await this.exporter.export({
 				source: importExportSource_syntaxError,
 				destination: this.destination,
 			})
-			debugger
 		})
-		debugger
 
 		errorAssert.assertError(err, 'EXPORT_FAILED')
 		assert.doesInclude(err.message, 'Unexpected keyword')
