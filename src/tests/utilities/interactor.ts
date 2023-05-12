@@ -17,6 +17,7 @@ import LoginViewController from '../../viewControllers/Login.vc'
 import { getVcName, pluckAllFromCard } from './assertSupport'
 import { ButtonViewController } from './ButtonViewController'
 import calendarInteractor from './calendarInteractor'
+import formAssert from './formAssert'
 import vcAssert from './vcAssert'
 
 type CardVc =
@@ -172,6 +173,11 @@ const interactor = {
 
 	async clickDestructiveInFooter(vc: CardVc | FormVc) {
 		return this.clickInFooterWithType(vc, 'destructive')
+	},
+
+	async clickInputButton(vc: FormVc, fieldName: string, id: string) {
+		const button = formAssert.fieldRendersInputButton(vc, fieldName, id)
+		await button.onClick()
 	},
 
 	async clickDestructiveInRow(

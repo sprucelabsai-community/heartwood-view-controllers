@@ -77,7 +77,15 @@ export default buildSchema({
 				schema: buildSchema({
 					id: 'inputButton',
 					fields: {
-						...pickFields(buttonFields, ['id', 'lineIcon', 'onClick']),
+						...pickFields(buttonFields, ['id']),
+						lineIcon: {
+							...buttonFields.lineIcon,
+							isRequired: true,
+						},
+						onClick: {
+							...buttonFields.onClick,
+							isRequired: true,
+						},
 					},
 				}),
 			},

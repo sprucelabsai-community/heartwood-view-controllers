@@ -13,6 +13,7 @@ import {
 	FormBuilderCardViewController,
 	FormInputViewController,
 	FormViewController,
+	InputButton,
 	RenderAsComponent,
 	SkillViewController,
 	ViewController,
@@ -343,6 +344,25 @@ this.Controller(
 				field.renderAs ?? '***default**'
 			}', but I expected it to render as '${expected}'!`
 		)
+	},
+
+	fieldRendersInputButton(vc: FormVc, fieldName: string, id?: string) {
+		const field = vc.getField(fieldName)
+
+		const inputButtons = (field.rightButtons as InputButton[]) || undefined
+		assert.isAbove(
+			inputButtons?.length ?? 0,
+			0,
+			`The field named '${fieldName}' is not rendering a right button! Try setting "rightButtons" in the field of your form!`
+		)
+
+		const match = inputButtons.find((b) => b.id === id)
+		assert.isTruthy(
+			match,
+			`I could not find an input button with the id "${id}"!`
+		)
+
+		return match
 	},
 }
 
