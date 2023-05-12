@@ -24,6 +24,7 @@ export default class ViewControllerExporter {
 
 	public async export(options: ExportOptions): Promise<void> {
 		this.assertValidExportOptions(options)
+		debugger
 
 		const {
 			source,
@@ -55,10 +56,12 @@ export default class ViewControllerExporter {
 		this.willIncrementallyBuildHandler = onWillIncrementallyBuild
 		this.didIncrementallyBuildHandler = onDidIncrementallyBuild
 
+		debugger
 		await this.run({
 			shouldWatch,
 			profilerStatsDestination,
 		})
+		debugger
 	}
 
 	public getCwd(): string {
@@ -88,11 +91,13 @@ export default class ViewControllerExporter {
 		shouldWatch?: boolean
 	}): Promise<Compiler> {
 		const { profilerStatsDestination, shouldWatch } = options
+		debugger
 
 		return new Promise((resolve: any, reject) => {
 			let isFirst = true
-
+			debugger
 			const cb: Callback = (err, stats) => {
+				debugger
 				if (!isFirst) {
 					this.didIncrementallyBuildHandler?.(
 						//@ts-ignore
@@ -102,10 +107,14 @@ export default class ViewControllerExporter {
 				}
 				isFirst = false
 
+				debugger
+
 				if (err) {
 					reject(err)
 					return
 				}
+
+				debugger
 
 				if (stats?.hasErrors()) {
 					reject(
@@ -115,6 +124,7 @@ export default class ViewControllerExporter {
 						})
 					)
 				}
+				debugger
 
 				if (!stats || stats?.compilation.emittedAssets.size === 0) {
 					reject(
@@ -125,6 +135,8 @@ export default class ViewControllerExporter {
 					)
 					return
 				}
+
+				debugger
 
 				if (profilerStatsDestination) {
 					const contents = JSON.stringify(stats.toJson())

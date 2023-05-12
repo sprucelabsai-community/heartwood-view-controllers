@@ -120,6 +120,7 @@ export { default as formBuilderImportExportPageSchema } from '#spruce/schemas/he
 export { default as latLngSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/latLng.schema'
 export { default as mapSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/map.schema'
 export { default as mapPinSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/mapPin.schema'
+export { default as inputButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/inputButton.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
@@ -157,4 +158,5 @@ export { default as listUtil } from './viewControllers/list/list.utility'
 export { default as splitCardsIntoLayouts } from './utilities/splitCardsIntoLayouts'
 export { default as removeUniversalViewOptions } from './utilities/removeUniversalViewOptions'
 export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachine'
+
 export * from './toolBelts/ToolBeltStateMachine'
