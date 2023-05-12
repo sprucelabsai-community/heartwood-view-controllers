@@ -206,6 +206,8 @@ export interface SkillViewControllerLoadOptions<
 }
 
 export type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
+export type InputButton =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton
 
 export interface ThemeManager {
 	setTheme(theme: Theme): void
@@ -531,6 +533,7 @@ export type FieldRenderOptions<S extends Schema> = {
 	hint?: string | null
 	vc?: FormInputViewController
 	fieldDefinition?: FieldDefinitions
+	rightButtons?: InputButton[]
 }
 
 export interface DropdownController {
