@@ -2,7 +2,7 @@ import { assert } from '@sprucelabs/test-utils'
 import { ViewController } from '../../types/heartwood.types'
 
 const toastAssert = {
-	async rendersToast(vc: ViewController<any>, cb: () => void | Promise<void>) {
+	async rendersToast(vc: ViewController<any>, cb: () => any | Promise<any>) {
 		let wasHit = false
 		//@ts-ignore
 		vc.toastHandler = () => {
@@ -19,7 +19,7 @@ const toastAssert = {
 
 	async doesNotRenderToast(
 		vc: ViewController<any>,
-		cb: () => void | Promise<void>
+		cb: () => any | Promise<any>
 	) {
 		try {
 			await this.rendersToast(vc, cb)
