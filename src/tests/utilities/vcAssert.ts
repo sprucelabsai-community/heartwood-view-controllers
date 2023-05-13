@@ -16,9 +16,9 @@ import {
 	Button,
 	List,
 	RowStyle,
+	AlertOptions,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
-import { AlertOptions } from '../../viewControllers/Abstract.vc'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import CalendarViewController from '../../viewControllers/Calendar.vc'
