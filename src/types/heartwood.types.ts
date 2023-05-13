@@ -727,5 +727,5 @@ export type ToolBeltCloseHandler = (
 export interface AlertOptions {
 	title?: string
 	message: string
-	style?: 'info' | 'error' | 'success' | 'toast'
+	style?: 'info' | 'error' | 'success'
 }
