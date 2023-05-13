@@ -1,10 +1,10 @@
-import { assertOptions } from '@sprucelabs/schema'
+import { assertOptions, formatPhoneNumber } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import AbstractViewController from '../../viewControllers/Abstract.vc'
 import SpyDevice from '../SpyDevice'
 
 const deviceAssert = {
-	assertWasVibrated(vc: AbstractViewController<any>) {
+	wasVibrated(vc: AbstractViewController<any>) {
 		assertOptions({ vc }, ['vc'])
 		//@ts-ignore
 		const device = vc.getDevice() as SpyDevice
@@ -15,16 +15,32 @@ const deviceAssert = {
 		)
 	},
 
-	assertWasNotVibrated(vc: AbstractViewController<any>) {
+	wasNotVibrated(vc: AbstractViewController<any>) {
 		assertOptions({ vc }, ['vc'])
 		try {
-			this.assertWasVibrated(vc)
+			this.wasVibrated(vc)
 		} catch {
 			return
 		}
 
 		assert.fail(
 			`You vibrated the device and should not have! Getting a little excited I see!`
+		)
+	},
+
+	madeCall(vc: AbstractViewController<any>, number: string) {
+		//@ts-ignore
+		const device = vc.getDevice() as SpyDevice
+
+		assert.isTruthy(
+			device.lastPhoneCalled,
+			`You didn't call anyone! I expected you to this.getDevice().call(${number}) someone!`
+		)
+
+		assert.isEqual(
+			formatPhoneNumber(device.lastPhoneCalled),
+			formatPhoneNumber(number),
+			`You called ${device.lastPhoneCalled} but I expected you to call ${number}!`
 		)
 	},
 }

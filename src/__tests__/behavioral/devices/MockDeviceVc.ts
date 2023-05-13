@@ -17,6 +17,10 @@ export default class MockDeviceVc extends AbstractViewController<Card> {
 		this.getDevice().vibrate()
 	}
 
+	public makeCall(number: string) {
+		this.getDevice().call(number)
+	}
+
 	public assertVibrateCount(total: number) {
 		assert.isEqual(this.getDevice().vibrateCount, total)
 	}

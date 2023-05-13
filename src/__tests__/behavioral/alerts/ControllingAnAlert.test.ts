@@ -162,8 +162,8 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async renderingAnAlertVibratesTheDevice() {
-		deviceAssert.assertWasNotVibrated(this.vc)
+		deviceAssert.wasNotVibrated(this.vc)
 		await vcAssert.assertRendersDialog(this.vc, () => this.vc.showAnAlert())
-		deviceAssert.assertWasVibrated(this.vc)
+		deviceAssert.wasVibrated(this.vc)
 	}
 }

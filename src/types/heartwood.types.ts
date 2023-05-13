@@ -666,6 +666,7 @@ export type Locale = ILocale
 
 export interface Device {
 	vibrate(): void
+	call(phoneNumber: string): void
 }
 
 export interface AuthorizerCanOptions<
