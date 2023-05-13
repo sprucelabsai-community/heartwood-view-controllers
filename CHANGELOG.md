@@ -1,3 +1,10 @@
+# [103.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.5.0...v103.6.0) (2023-05-13)
+
+
+### Features
+
+* toast handling and asserting ([ced18d4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ced18d4))
+
 # [103.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.4.0...v103.5.0) (2023-05-13)
 
 
