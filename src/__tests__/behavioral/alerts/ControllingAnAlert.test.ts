@@ -1,6 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
-import { AbstractSkillViewController, interactor, vcAssert } from '../../..'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
+import {
+	AbstractSkillViewController,
+	AlertOptions,
+	interactor,
+	vcAssert,
+} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import deviceAssert from '../../../tests/utilities/deviceAssert'
 
@@ -11,6 +16,11 @@ class AlertSkillViewController extends AbstractSkillViewController {
 
 		this.afterAlert = true
 	}
+
+	public async alert(options: AlertOptions) {
+		return super.alert(options)
+	}
+
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
 		return {
 			layouts: [],
@@ -148,15 +158,11 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async successRendersPrimaryButton() {
-		const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
-			//@ts-ignore
-			this.vc.alert({
-				title: 'hey',
-				message: 'hey',
-				style: 'success',
-			})
-		)
-
+		const dlgVc = await this.assertAlertRendersDialog({
+			title: 'hey',
+			message: 'hey',
+			style: 'success',
+		})
 		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'primary')
 	}
 
@@ -165,5 +171,46 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 		deviceAssert.wasNotVibrated(this.vc)
 		await vcAssert.assertRendersDialog(this.vc, () => this.vc.showAnAlert())
 		deviceAssert.wasVibrated(this.vc)
+	}
+
+	@test()
+	protected static async theSameAlertDoesNotRenderMoreThanOnce() {
+		const alert1: AlertOptions = {
+			message: generateId(),
+		}
+
+		const alert2: AlertOptions = {
+			message: generateId(),
+		}
+
+		const alert3: AlertOptions = {
+			...alert2,
+			title: generateId(),
+		}
+
+		const alert4: AlertOptions = {
+			...alert3,
+			style: 'success',
+		}
+
+		await this.assertAlertRendersDialog(alert1)
+		await this.assertAlertDoesNotRenderDialog(alert1)
+		const dlg = await this.assertAlertRendersDialog(alert2)
+		await dlg.hide()
+		await this.assertAlertRendersDialog(alert2)
+		await this.assertAlertRendersDialog(alert3)
+		await this.assertAlertRendersDialog(alert4)
+	}
+
+	private static async assertAlertRendersDialog(alert: AlertOptions) {
+		return await vcAssert.assertRendersDialog(this.vc, () =>
+			this.vc.alert(alert)
+		)
+	}
+
+	private static async assertAlertDoesNotRenderDialog(alert: AlertOptions) {
+		return await vcAssert.assertDoesNotRenderDialog(this.vc, () =>
+			this.vc.alert(alert)
+		)
 	}
 }

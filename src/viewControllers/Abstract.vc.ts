@@ -39,6 +39,7 @@ export default abstract class AbstractViewController<
 	private children: ViewController<any>[] = []
 	private _suspendedRender?: () => void
 	private toastHandler: ToastHandler
+	private activeAlert?: AlertOptions
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -134,11 +135,21 @@ export default abstract class AbstractViewController<
 	}
 
 	protected async alert(options: AlertOptions) {
-		const { title = 'Alert! 🌲🤖' } = options
+		const { title = 'Alert! 🌲🤖', message, style } = options
 
 		const header = {
 			title,
 		}
+
+		if (
+			this.activeAlert?.message === message &&
+			this.activeAlert?.title === title &&
+			this.activeAlert?.style === style
+		) {
+			return
+		}
+
+		this.activeAlert = { ...options, title }
 
 		const dlg = this.renderInDialog({
 			header,
@@ -146,7 +157,7 @@ export default abstract class AbstractViewController<
 				sections: [
 					{
 						text: {
-							content: options.message,
+							content: message,
 						},
 					},
 				],
@@ -155,7 +166,7 @@ export default abstract class AbstractViewController<
 				buttons: [
 					{
 						label: 'Ok',
-						type: this.styleToButtonType(options.style),
+						type: this.styleToButtonType(style),
 						onClick: () => {
 							void dlg.hide()
 						},
@@ -166,6 +177,7 @@ export default abstract class AbstractViewController<
 
 		this.device.vibrate()
 		await dlg.wait()
+		this.activeAlert = undefined
 	}
 
 	private styleToButtonType(
