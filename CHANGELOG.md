@@ -1,3 +1,10 @@
+# [103.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.2.2...v103.3.0) (2023-05-12)
+
+
+### Features
+
+* can check for and click input buttons ([4b63f8f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/4b63f8f))
+
 ## [103.2.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.2.1...v103.2.2) (2023-05-12)
 
 ## [103.2.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.2.0...v103.2.1) (2023-05-12)
