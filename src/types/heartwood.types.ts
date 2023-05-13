@@ -486,7 +486,12 @@ export type VoteOptions =
 		howCoolWouldItBeIf: string
 	}
 
+export interface ToastOptions {
+	message: string
+}
+
 export type VoteHandler = (options: VoteOptions) => Promise<void>
+export type ToastHandler = (options: ToastOptions) => void
 
 export interface FormInputHandlers<View> {
 	getValue: () => any
@@ -510,6 +515,7 @@ export interface ViewControllerOptions {
 	renderInDialogHandler: RenderInDialogHandler
 	confirmHandler: ConfirmHandler
 	voteHandler: VoteHandler
+	toastHandler: ToastHandler
 	device: Device
 	dates: DateUtil
 	maps: MapUtil

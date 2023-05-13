@@ -16,6 +16,7 @@ import {
 	Device,
 	MapUtil,
 	ViewControllerConstructor,
+	ToastHandler,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -27,17 +28,9 @@ export default class ViewControllerFactory {
 	private device: Device
 	private dates: DateUtil
 	private maps: MapUtil
+	private toastHandler: ToastHandler
 
-	public constructor(options: {
-		controllerMap: Record<string, any>
-		renderInDialogHandler: RenderInDialogHandler
-		confirmHandler: ConfirmHandler
-		connectToApi: ConnectToApi
-		voteHandler: VoteHandler
-		device: Device
-		dates?: DateUtil
-		maps?: MapUtil
-	}) {
+	public constructor(options: ViewControllerFactoryConstructorOptions) {
 		const {
 			controllerMap,
 			renderInDialogHandler,
@@ -47,6 +40,7 @@ export default class ViewControllerFactory {
 			device,
 			dates,
 			maps,
+			toastHandler,
 		} = options
 
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
@@ -54,6 +48,7 @@ export default class ViewControllerFactory {
 		this.confirmHandler = confirmHandler
 		this.connectToApi = connectToApi
 		this.voteHandler = voteHandler
+		this.toastHandler = toastHandler
 		this.device = device
 		this.maps = maps ?? mapUtil
 		this.dates = dates ?? dateUtil
@@ -81,6 +76,7 @@ export default class ViewControllerFactory {
 			device,
 			dates,
 			maps,
+			toastHandler,
 		} = assertOptions(options, ['connectToApi', 'device'])
 
 		return new this({
@@ -89,6 +85,7 @@ export default class ViewControllerFactory {
 			device,
 			dates,
 			maps,
+			toastHandler: toastHandler ?? (() => {}),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
 			renderInDialogHandler: renderInDialogHandler
@@ -158,6 +155,7 @@ export default class ViewControllerFactory {
 			connectToApi: this.connectToApi,
 			device: this.device,
 			maps: this.maps,
+			toastHandler: this.toastHandler,
 		}
 
 		const oldController = Class.prototype.Controller
@@ -191,7 +189,20 @@ export interface ViewControllerFactoryOptions {
 	renderInDialogHandler?: RenderInDialogHandler
 	voteHandler?: VoteHandler
 	confirmHandler?: ConfirmHandler
+	toastHandler?: ToastHandler
 	connectToApi: ConnectToApi
+	device: Device
+	dates?: DateUtil
+	maps?: MapUtil
+}
+
+export interface ViewControllerFactoryConstructorOptions {
+	controllerMap: Record<string, any>
+	renderInDialogHandler: RenderInDialogHandler
+	connectToApi: ConnectToApi
+	confirmHandler: ConfirmHandler
+	voteHandler: VoteHandler
+	toastHandler: ToastHandler
 	device: Device
 	dates?: DateUtil
 	maps?: MapUtil

@@ -17,7 +17,7 @@ import {
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory, {
-	ViewControllerFactoryOptions,
+	ViewControllerFactoryConstructorOptions,
 } from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
@@ -27,7 +27,7 @@ import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
 	protected static controllerMap: Record<string, any> = {}
-	private static views?: ViewControllerFactory
+	protected static views?: ViewControllerFactory
 	private static mercuryFixture?: MercuryFixture
 	protected static client: MercuryClient
 	protected static eventFaker: EventFaker
@@ -65,7 +65,9 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		await this.mercuryFixture?.destroy()
 	}
 
-	protected static Factory(options?: Partial<ViewControllerFactoryOptions>) {
+	protected static Factory(
+		options?: Partial<ViewControllerFactoryConstructorOptions>
+	) {
 		const mercury = this.mercury
 
 		return ViewControllerFactory.Factory({

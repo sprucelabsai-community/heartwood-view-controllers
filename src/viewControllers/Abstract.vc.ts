@@ -15,6 +15,8 @@ import {
 	Device,
 	MapUtil,
 	AlertOptions,
+	ToastOptions,
+	ToastHandler,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -36,6 +38,7 @@ export default abstract class AbstractViewController<
 	private device: Device
 	private children: ViewController<any>[] = []
 	private _suspendedRender?: () => void
+	private toastHandler: ToastHandler
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -46,6 +49,7 @@ export default abstract class AbstractViewController<
 		this.device = options.device
 		this.dates = options.dates
 		this.maps = options.maps
+		this.toastHandler = options.toastHandler
 	}
 
 	public abstract render(): ViewModel
@@ -123,6 +127,10 @@ export default abstract class AbstractViewController<
 		}
 		await Promise.all(this.children.map((c) => c.destroy?.()))
 		this.wasDestroyed = true
+	}
+
+	protected toast(options: ToastOptions) {
+		this.toastHandler(options)
 	}
 
 	protected async alert(options: AlertOptions) {

@@ -7,6 +7,7 @@ export const universalViewOptionFields = [
 	'device',
 	'dates',
 	'maps',
+	'toastHandler',
 ] as const
 
 export type UniversalViewOptionFields =
