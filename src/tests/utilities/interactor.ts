@@ -177,7 +177,7 @@ const interactor = {
 
 	async clickInputButton(vc: FormVc, fieldName: string, id: string) {
 		const button = formAssert.fieldRendersInputButton(vc, fieldName, id)
-		await button.onClick()
+		await this.click(button)
 	},
 
 	async clickDestructiveInRow(
