@@ -87,6 +87,9 @@ class GoodWithDialogSkillViewController extends AbstractSkillViewController {
 	}
 }
 
+let alertMessage1 = generateId()
+let alertMessage2 = generateId()
+
 class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 	public afterAlert = false
 
@@ -97,12 +100,14 @@ class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 	}
 
 	public async showAlert() {
-		await this.alert({ message: 'go team!' })
+		alertMessage1 = generateId()
+		await this.alert({ message: alertMessage1 })
 		this.afterAlert = true
 	}
 
 	public async showAlert2() {
-		await this.alert({ message: 'moar team' })
+		alertMessage2 = generateId()
+		await this.alert({ message: alertMessage2 })
 		this.afterAlert = true
 	}
 
@@ -1390,13 +1395,13 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			vcAssert.assertDoesNotRenderAlert(vc, () => vc.showAlert())
 		)
 
-		assert.doesInclude(msg.message, 'go team')
+		assert.doesInclude(msg.message, alertMessage1)
 
 		const msg2 = await assert.doesThrowAsync(() =>
 			vcAssert.assertDoesNotRenderAlert(vc, () => vc.showAlert2())
 		)
 
-		assert.doesInclude(msg2.message, 'moar team')
+		assert.doesInclude(msg2.message, alertMessage2)
 
 		assert.isFalse(vc.afterAlert)
 
