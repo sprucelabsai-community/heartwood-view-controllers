@@ -723,3 +723,9 @@ export interface ToolBeltCloseHandlerOptions {
 export type ToolBeltCloseHandler = (
 	options: ToolBeltCloseHandlerOptions
 ) => Promise<void> | void
+
+export interface AlertOptions {
+	title?: string
+	message: string
+	style?: 'info' | 'error' | 'success' | 'toast'
+}

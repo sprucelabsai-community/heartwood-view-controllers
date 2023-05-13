@@ -14,6 +14,7 @@ import {
 	VoteOptions,
 	Device,
 	MapUtil,
+	AlertOptions,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -184,10 +185,4 @@ export default abstract class AbstractViewController<
 	protected getDevice() {
 		return this.device
 	}
-}
-
-export interface AlertOptions {
-	title?: string
-	message: string
-	style?: 'info' | 'error' | 'success'
 }
