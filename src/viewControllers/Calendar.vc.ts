@@ -9,25 +9,6 @@ import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 import CalendarEventViewControllerImpl from './CalendarEvent.vc'
 
-type CalendarOptions = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
-	'controller' | 'events'
-> & {
-	events?: ConstructorEvent[]
-}
-type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
-type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
-type ConstructorEvent = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent,
-	'isSelected'
->
-type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
-type SelectedDate =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
-
-export type CalendarViewControllerOptions = CalendarOptions
-export type CalendarView = NonNullable<CalendarOptions['view']>
-
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
 	protected model: Omit<CalendarOptions, 'events'>
 	private vcIdsByEventType: Record<string, string> = {}
@@ -498,3 +479,22 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		}
 	}
 }
+
+type CalendarOptions = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar,
+	'controller' | 'events'
+> & {
+	events?: ConstructorEvent[]
+}
+type Time = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
+type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+type ConstructorEvent = Omit<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent,
+	'isSelected'
+>
+type Person = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
+type SelectedDate =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
+
+export type CalendarViewControllerOptions = CalendarOptions
+export type CalendarView = NonNullable<CalendarOptions['view']>
