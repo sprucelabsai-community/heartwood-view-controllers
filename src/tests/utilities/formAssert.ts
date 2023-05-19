@@ -197,7 +197,10 @@ const formAssert = {
 			}
 		}
 
-		assert.isTruthy(form, `Could not find form with the id of ${id}!`)
+		assert.isTruthy(
+			form,
+			`Could not find a form${id ? ` with the id of ${id}` : ''}!`
+		)
 
 		return form!.controller as
 			| FormViewController<any>
