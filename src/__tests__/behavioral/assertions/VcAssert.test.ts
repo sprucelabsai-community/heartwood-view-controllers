@@ -18,6 +18,7 @@ import {
 	ListRow,
 	CriticalError,
 	Card,
+	TriggerRenderHandler,
 } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
@@ -36,6 +37,12 @@ class CardVc extends AbstractViewController<Card> {
 }
 
 class BadSkillViewController {
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
+
+	public triggerRender() {}
+
 	public render() {
 		return {}
 	}
@@ -57,6 +64,9 @@ class GoodSkillViewController implements SkillViewController {
 
 	public async load() {}
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public renderToolBelt() {
 		return null

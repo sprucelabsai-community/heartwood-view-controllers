@@ -3,8 +3,12 @@ import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
-import { vcAssert, ViewController } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import {
+	TriggerRenderHandler,
+	ViewController,
+} from '../../../types/heartwood.types'
 import renderUtil from '../../../utilities/render.utility'
 import CardViewController, {
 	CardViewControllerOptions,
@@ -341,6 +345,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static settingFooterToSomethingFromNothingTriggersRenderForTheWholeCard() {
 		const vc = this.Vc({})
+
 		vc.setFooter({ buttons: [{ label: 'hey!' }] })
 
 		assert.isEqual(this.cardTriggerRenderCount, 1)
@@ -424,9 +429,8 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 	@test()
 	protected static settingFooterBusyTriggersRender() {
 		const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
-		vcAssert.attachTriggerRenderCounter(vc)
 		vc.setFooterIsBusy(true)
-		vcAssert.assertTriggerRenderCount(vc, 1)
+		assert.isEqual(this.cardTriggerRenderCount, 1)
 	}
 
 	@test()
@@ -587,4 +591,7 @@ class SectionVc
 		}
 	}
 	public triggerRender = () => {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 }

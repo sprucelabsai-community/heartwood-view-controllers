@@ -1,6 +1,9 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
-import { ViewController } from '../../types/heartwood.types'
+import {
+	TriggerRenderHandler,
+	ViewController,
+} from '../../types/heartwood.types'
 import listUtil from './list.utility'
 
 type Model = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
@@ -27,6 +30,9 @@ export default class ListCellViewController implements ViewController<Model> {
 		this.getViewModelHandler = getViewModel
 	}
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public async setValue(name: string, value: any) {
 		await this.setValueHandler(name, value)

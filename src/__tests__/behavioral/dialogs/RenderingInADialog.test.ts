@@ -131,9 +131,13 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetBusyOnDialog() {
 		const dlg = this.vc.renderInDialogAndGetDlgVc({})
+
 		vcAssert.attachTriggerRenderCounter(dlg)
+
 		dlg.setIsBusy(true)
+
 		vcAssert.assertTriggerRenderCount(dlg, 1)
+
 		this.assertDialogIsBusy(dlg)
 		dlg.setIsBusy(false)
 		this.assertDialogIsNotBusy(dlg)

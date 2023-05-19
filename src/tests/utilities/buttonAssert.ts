@@ -1,6 +1,11 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import { Button, Card, ViewController } from '../../types/heartwood.types'
+import {
+	Button,
+	Card,
+	TriggerRenderHandler,
+	ViewController,
+} from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import {
@@ -139,6 +144,9 @@ const buttonAssert = {
 				return button
 			},
 			triggerRender() {},
+			setTriggerRenderHandler(handler: TriggerRenderHandler) {
+				this.triggerRender = handler
+			},
 		}))
 	},
 

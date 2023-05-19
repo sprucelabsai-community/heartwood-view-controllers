@@ -10,6 +10,7 @@ import {
 	FormInputHandlers,
 	FormInputOptions,
 	FormInputViewController,
+	TriggerRenderHandler,
 	ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import FormViewController, {
@@ -50,6 +51,10 @@ class NoRenderedValueValueMethods
 	}
 
 	public triggerRender() {}
+
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 }
 
 export default class SettingVcsForFieldRenderingTest extends AbstractViewControllerTest {

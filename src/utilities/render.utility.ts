@@ -67,7 +67,7 @@ const renderUtil = {
 		if (typeof vc?.render !== 'function') {
 			throw new Error(`Your view controller does not have a render function!`)
 		}
-		attachTriggerRenderCounter(vc as any)
+		attachTriggerRenderCounter(vc)
 		const model = vc.render()
 		const rendered = renderItem(model, options)
 

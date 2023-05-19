@@ -1,7 +1,12 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
-import { ListRow, RowValues, ViewController } from '../../types/heartwood.types'
+import {
+	ListRow,
+	RowValues,
+	TriggerRenderHandler,
+	ViewController,
+} from '../../types/heartwood.types'
 import listUtil from './list.utility'
 import ListCellViewController from './ListCell.vc'
 
@@ -58,6 +63,9 @@ export default class ListRowViewController
 	}
 
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public async setValue(name: string, value: any) {
 		await this._setValue(name, value)

@@ -2,6 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import {
 	ButtonController,
+	TriggerRenderHandler,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
@@ -157,6 +158,9 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		const controller: ButtonController = {
 			triggerRender: () => {},
+			setTriggerRenderHandler(handler: TriggerRenderHandler) {
+				this.triggerRender = handler
+			},
 			//@ts-ignore
 			render: () => {
 				this.buttonTriggerRenderHandlers[idx] = controller.triggerRender

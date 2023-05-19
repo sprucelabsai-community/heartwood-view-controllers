@@ -60,7 +60,6 @@ const vcAssert = {
 		this.factory = factory
 	},
 	attachTriggerRenderCounter(vc: Vc) {
-		//@ts-ignore
 		attachTriggerRenderCounter(vc)
 	},
 	assertTriggerRenderCount(vc: Vc, expected: number) {
@@ -1471,7 +1470,7 @@ const vcAssert = {
 		const controller = progress.controller
 
 		const progressModel = renderUtil.render(
-			controller ?? { render: () => ({}) }
+			controller ?? { render: () => ({}), setTriggerRenderHandler: () => {} }
 		)
 
 		if (typeof expectedPercentComplete === 'number') {

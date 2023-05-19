@@ -366,7 +366,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 				}
 			)
 
-			vc.triggerRender = () => this.triggerRender()
+			vc.setTriggerRenderHandler(() => this.triggerRender())
 			this.vcsById[eventId] = vc
 		}
 

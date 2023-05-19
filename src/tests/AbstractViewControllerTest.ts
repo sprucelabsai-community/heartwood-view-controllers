@@ -22,6 +22,7 @@ import ViewControllerFactory, {
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
 import StubStorage from './StubStorage'
+import { Vc } from './utilities/assertSupport'
 import interactor from './utilities/interactor'
 import vcAssert from './utilities/vcAssert'
 
@@ -94,9 +95,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 	) {
 		const vc = this.getFactory().Controller(name, options)
 
-		//vc's have to be rendered once to attach counters
-		//@ts-ignore
-		this.render(vc)
+		this.render(vc as Vc)
 
 		return vc
 	}

@@ -17,6 +17,7 @@ import {
 	AlertOptions,
 	ToastOptions,
 	ToastHandler,
+	TriggerRenderHandler,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -37,9 +38,10 @@ export default abstract class AbstractViewController<
 	private voteHandler: VoteHandler
 	private device: Device
 	private children: ViewController<any>[] = []
-	private _suspendedRender?: () => void
 	private toastHandler: ToastHandler
 	private activeAlert?: AlertOptions
+	private triggerRenderHandler?: TriggerRenderHandler
+	private suspendRenderCount = 0
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -54,7 +56,15 @@ export default abstract class AbstractViewController<
 	}
 
 	public abstract render(): ViewModel
-	public triggerRender() {}
+	public triggerRender() {
+		if (this.suspendRenderCount === 0) {
+			this.triggerRenderHandler?.()
+		}
+	}
+
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRenderHandler = handler
+	}
 
 	protected getVcFactory() {
 		return this.vcFactory
@@ -102,14 +112,11 @@ export default abstract class AbstractViewController<
 	}
 
 	private suspendRendering() {
-		this._suspendedRender = this.triggerRender.bind(this)
-		this.triggerRender = () => {}
+		this.suspendRenderCount++
 	}
 
 	private restoreRendering() {
-		if (this._suspendedRender) {
-			this.triggerRender = this._suspendedRender
-		}
+		this.suspendRenderCount--
 	}
 
 	public async renderOnce(cb: () => any | Promise<any>) {
@@ -196,10 +203,6 @@ export default abstract class AbstractViewController<
 
 	protected async confirm(options: ConfirmOptions) {
 		return this.confirmHandler(options)
-	}
-
-	protected async waitForRender() {
-		await new Promise<void>((resolve) => setTimeout(resolve, 0))
 	}
 
 	protected getDevice() {

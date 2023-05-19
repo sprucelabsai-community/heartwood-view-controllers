@@ -1,7 +1,9 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import {
+	CardSection,
 	CriticalError,
+	TriggerRenderHandler,
 	ViewController,
 	ViewControllerOptions,
 } from '../../types/heartwood.types'
@@ -67,8 +69,11 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
 	private buildSectionVc(idx: number) {
 		if (!this.sectionVcs[idx]) {
-			const sectionVc: any = {
+			const sectionVc: ViewController<CardSection> = {
 				triggerRender: () => {},
+				setTriggerRenderHandler(handler: TriggerRenderHandler) {
+					this.triggerRender = handler
+				},
 				render: () => {
 					this.triggerRenderSections[idx] = sectionVc.triggerRender
 
@@ -91,6 +96,9 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 				this.triggerRenderFooter = footerVc.triggerRender
 				return { ...this.model.footer, controller: this }
 			},
+			setTriggerRenderHandler(handler: TriggerRenderHandler) {
+				this.triggerRender = handler
+			},
 		}
 
 		return {
@@ -104,6 +112,9 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 			render: () => {
 				this.triggerRenderHeader = headerVc.triggerRender
 				return { ...this.model.header, controller: this }
+			},
+			setTriggerRenderHandler(handler: TriggerRenderHandler) {
+				this.triggerRender = handler
 			},
 		}
 

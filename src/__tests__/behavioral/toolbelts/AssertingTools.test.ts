@@ -1,6 +1,10 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, assert } from '@sprucelabs/test-utils'
-import { AbstractViewController } from '../../..'
+import {
+	AbstractViewController,
+	TriggerRenderHandler,
+	toolBeltAssert,
+} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
@@ -51,6 +55,9 @@ class GoodSkillViewController implements SkillViewController {
 
 	public async load() {}
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public renderToolBelt() {
 		return null
@@ -73,6 +80,9 @@ class ToolBeltSkillViewController implements SkillViewController {
 
 	public async load() {}
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public async focusTool(id: string) {
 		this.toolBelt?.focusTool(id)
@@ -213,8 +223,8 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 		})
 
 		vcAssert.assertToolBeltRendersTool(vc, 'add')
-		assert.doesThrow(() => vcAssert.assertToolBeltRendersTool(vc2, 'add'))
-		assert.doesThrow(() => vcAssert.assertToolBeltRendersTool(vc, 'taco'))
+		assert.doesThrow(() => toolBeltAssert.toolBeltRendersTool(vc2, 'add'))
+		assert.doesThrow(() => toolBeltAssert.toolBeltRendersTool(vc, 'taco'))
 		vcAssert.assertToolBeltDoesNotRenderTool(vc, 'taco')
 
 		vcAssert.assertToolBeltRendersTool(vc, randomId)
@@ -487,8 +497,9 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	}
 
 	private static ToolBeltSvc(options?: { tool2Id?: string }) {
-		//@ts-ignore
-		this.swipeVc = this.Controller('swipeCard', {})
+		this.swipeVc = this.Controller('swipe-card', {
+			slides: [],
+		})
 		this.fancyTool = this.Controller('tool', {})
 
 		return this.Controller('toolBeltSvc', {

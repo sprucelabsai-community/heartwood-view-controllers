@@ -7,6 +7,7 @@ import {
 	Router,
 	CardSection,
 	Card,
+	TriggerRenderHandler,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
@@ -50,6 +51,7 @@ export interface AssertRedirectOptions {
 export interface ButtonViewController {
 	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 	triggerRender(): void
+	setTriggerRenderHandler(handler: TriggerRenderHandler): void
 }
 
 export function getVcName(vc: ViewController<any>) {

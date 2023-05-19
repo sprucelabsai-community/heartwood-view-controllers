@@ -1,7 +1,12 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
-import { vcAssert, ViewController, ViewControllerOptions } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import {
+	TriggerRenderHandler,
+	ViewController,
+	ViewControllerOptions,
+} from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
@@ -14,6 +19,9 @@ class MockCardViewController implements ViewController<Card> {
 	}
 
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public render(): Card {
 		return this.model

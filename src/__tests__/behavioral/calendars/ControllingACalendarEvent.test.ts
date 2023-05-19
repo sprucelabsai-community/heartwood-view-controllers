@@ -19,6 +19,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		}
 
 		this.calendarVc.addEvent(this.eventModel)
+
 		this.vc = this.calendarVc.getEventVc(this.eventModel.id)
 
 		vcAssert.attachTriggerRenderCounter(this.vc)
@@ -49,6 +50,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 			this.render(this.vc, { shouldStripControllers: true }),
 			expected
 		)
+
 		assert.isEqualDeep(
 			this.render(this.calendarVc, { shouldStripControllers: true }).events[0],
 			expected

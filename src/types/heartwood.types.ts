@@ -282,8 +282,11 @@ export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 
 export type TriggerRender = () => void
 
+export type TriggerRenderHandler = () => void
+
 export interface ViewController<ViewModel extends Record<string, any>> {
 	render(): ViewModel
+	setTriggerRenderHandler: (handler: TriggerRenderHandler) => void
 	triggerRender: TriggerRender
 	destroy?: () => Promise<void> | void
 	willBlur?: () => void | Promise<void>
@@ -336,6 +339,7 @@ export interface Router {
 export interface ButtonController {
 	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 	triggerRender: () => void
+	setTriggerRenderHandler(handler: TriggerRenderHandler): void
 }
 
 export interface ViewControllerMap {

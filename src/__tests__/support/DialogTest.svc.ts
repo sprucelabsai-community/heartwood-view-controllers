@@ -49,6 +49,5 @@ export default class DialogTestSkillViewController extends AbstractSkillViewCont
 }
 
 function setupController(controller: DialogVc) {
-	controller.triggerRender = () => {}
 	return controller
 }

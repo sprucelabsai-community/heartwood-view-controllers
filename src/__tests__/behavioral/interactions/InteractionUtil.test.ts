@@ -8,7 +8,10 @@ import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER, DEMO_NUMBER2 } from '../../../tests/constants'
 import interactor from '../../../tests/utilities/interactor'
-import { SkillViewController } from '../../../types/heartwood.types'
+import {
+	SkillViewController,
+	TriggerRenderHandler,
+} from '../../../types/heartwood.types'
 import LoginViewController from '../../../viewControllers/Login.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
@@ -25,6 +28,9 @@ class GoodSkillViewController implements SkillViewController {
 
 	public async load() {}
 	public triggerRender() {}
+	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+		this.triggerRender = handler
+	}
 
 	public render() {
 		return this.model
