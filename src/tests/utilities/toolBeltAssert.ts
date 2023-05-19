@@ -222,8 +222,6 @@ const toolBeltAssert = {
 	) {
 		const toolBeltVc = this.rendersToolBelt(svcOrToolBelt)
 
-		debugger
-
 		const model = renderUtil.render(toolBeltVc)
 		const tool = model.tools.find((t) => t.id === toolId)
 
