@@ -1,3 +1,10 @@
+# [104.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.6.18...v104.0.0) (2023-05-19)
+
+
+### Breaking Changes
+
+* setTriggerRenderHandler ([45bdbb0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/45bdbb0))
+
 ## [103.6.18](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.6.17...v103.6.18) (2023-05-19)
 
 ## [103.6.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v103.6.16...v103.6.17) (2023-05-19)
