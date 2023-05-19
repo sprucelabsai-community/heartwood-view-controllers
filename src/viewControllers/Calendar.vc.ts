@@ -340,13 +340,16 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public setControllerForEventType(type: string, vcId: string) {
 		this.vcIdsByEventType[type] = vcId
-		for (const event of this.getEvents()) {
+		const events = this.getEvents()
+		for (const event of events) {
 			if (event.eventTypeSlug === type) {
 				delete this.vcsById[event.id]
 			}
 		}
 
-		this.triggerRender()
+		if (events.length > 0) {
+			this.triggerRender()
+		}
 	}
 
 	public getEventVc(eventId: string): CalendarEventViewController {

@@ -111,7 +111,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set min time 2', { hour: 10, minute: 0 })
 	protected static canSetMinTime(time: CalendarTime) {
 		this.vc.setMinTime(time)
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 
 		assert.isEqualDeep(this.render(this.vc).minTime, time)
 	}
@@ -120,7 +120,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set max time 2', { hour: 17, minute: 0 })
 	protected static canSetMaxTime(time: CalendarTime) {
 		this.vc.setMaxTime(time)
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 
 		assert.isEqualDeep(this.render(this.vc).maxTime, time)
 	}
@@ -138,7 +138,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test('can set timezoneOffset 2', 14 * 60 * 60 * 1000)
 	protected static canSetTimezoneOffset(time: number) {
 		this.vc.setTimezoneOffsetMs(time)
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 		assert.isEqual(this.render(this.vc).timezoneOffsetMs, time)
 		assert.isEqual(this.vc.getTimezoneOffsetMs(), time)
 	}
@@ -169,7 +169,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static canSetView() {
 		this.vc.setView('month')
 		assert.isEqual(this.vc.getView(), 'month')
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 		this.vc.setView('day')
 		assert.isEqual(this.vc.getView(), 'day')
 	}
@@ -213,7 +213,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static addingEventTriggersRender() {
 		this.vc.addEvent(calendarSeeder.generateEventValues())
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -258,7 +258,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = calendarSeeder.generateEventValues()
 		this.vc.addEvent(event)
 		await this.vc.removeEvent(event.id)
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
+		this.assertTriggerRenderCount(2)
 	}
 
 	@test()
@@ -338,7 +338,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static mixinTriggersRender() {
 		this.populateCalendar()
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -413,7 +413,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async selectingEventTriggersRender() {
 		await this.addOneEventAndSelectIt()
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
+		this.assertTriggerRenderCount(2)
 	}
 
 	@test()
@@ -443,7 +443,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async deselectingEventTriggersRender() {
 		await this.addEventSelectAndDeselectIt()
-		vcAssert.assertTriggerRenderCount(this.vc, 3)
+		this.assertTriggerRenderCount(3)
 	}
 
 	@test()
@@ -456,7 +456,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		})
 		await this.vc.deselectEvent()
 		assert.isFalse(wasHit)
-		vcAssert.assertTriggerRenderCount(this.vc, 0)
+		this.assertTriggerRenderCount(0)
 	}
 
 	@test()
@@ -537,7 +537,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async settingStartDateTriggersRender() {
 		await this.vc.setStartDate(getDate())
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -597,7 +597,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 			dateUtil.getEndOfDay()
 		)
 
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test('throws with getting bad event 1', '123')
@@ -685,7 +685,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static updatingEventDoesNotTriggersRender() {
 		const [event] = this.populateCalendar(1)
 		this.vc.updateEvent(event.id, {})
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -713,7 +713,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async addingPersonTriggersRender() {
 		this.addPerson()
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test('cant remove person no there 1', 'aoeu')
@@ -752,7 +752,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static async removingPersonTriggersRender() {
 		const p1 = this.addPerson()
 		this.vc.removePerson(p1.id)
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
+		this.assertTriggerRenderCount(2)
 	}
 
 	@test()
@@ -807,8 +807,16 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static settingViewControllerByTypeTriggersRender() {
+		this.addEvent()
+		this.assertTriggerRenderCount(1)
 		this.vc.setControllerForEventType('test', 'list')
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(2)
+	}
+
+	@test()
+	protected static settingVcDoesNotTriggerRenderIfThereAreNoEvents() {
+		this.vc.setControllerForEventType('test', 'list')
+		this.assertTriggerRenderCount(0)
 	}
 
 	@test()
@@ -906,12 +914,12 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static enablingDisablingAnimationsTriggersRender() {
 		this.vc.enableAnimation()
-		vcAssert.assertTriggerRenderCount(this.vc, 0)
+		this.assertTriggerRenderCount(0)
 		this.vc.disableAnimations()
 		this.vc.disableAnimations()
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 		this.vc.enableAnimation()
-		vcAssert.assertTriggerRenderCount(this.vc, 2)
+		this.assertTriggerRenderCount(2)
 	}
 
 	@test()
@@ -957,7 +965,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static async clearingEventsRendersOnce() {
 		this.populateCalendar(10)
 		this.vc.clearEvents()
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -978,7 +986,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		//@ts-ignore
 		assert.isTrue(event2.id in this.vc.vcsById)
 
-		vcAssert.assertTriggerRenderCount(this.vc, 4)
+		this.assertTriggerRenderCount(4)
 	}
 
 	@test()
@@ -995,7 +1003,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async settingPeopleTriggersRender() {
 		this.vc.setPeople([])
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertTriggerRenderCount(1)
 	}
 
 	@test()
@@ -1011,9 +1019,9 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async removingManyEventsRendersOnce() {
 		const events = this.add3Events()
-		vcAssert.assertTriggerRenderCount(this.vc, 3)
+		this.assertTriggerRenderCount(3)
 		await this.removeEvents(events)
-		vcAssert.assertTriggerRenderCount(this.vc, 4)
+		this.assertTriggerRenderCount(4)
 	}
 
 	private static add3Events(): [any, any, any] {
@@ -1118,6 +1126,10 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	private static async addEventSelectAndDeselectIt() {
 		await this.addOneEventAndSelectIt()
 		await this.vc.deselectEvent()
+	}
+
+	private static assertTriggerRenderCount(expected: number) {
+		vcAssert.assertTriggerRenderCount(this.vc, expected)
 	}
 }
 
