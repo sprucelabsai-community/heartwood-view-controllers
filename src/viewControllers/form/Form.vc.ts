@@ -429,6 +429,8 @@ export default class FormViewController<
 		const name = Object.keys(errorsByField)[0]
 		this.focusInput?.(name)
 
+		this.dirtyFields = {}
+
 		this.triggerRender()
 	}
 

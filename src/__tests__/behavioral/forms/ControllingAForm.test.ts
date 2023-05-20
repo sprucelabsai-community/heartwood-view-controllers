@@ -128,9 +128,16 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static async knowsIfDirty() {
-		assert.isFalse(this.vc.getIsDirty())
-		await this.vc.setValue('first', 'Tay')
-		assert.isTrue(this.vc.getIsDirty())
+		this.assertIsNotDirty()
+		await this.setFirstToRandomValue()
+		this.assertIsDirty()
+	}
+
+	@test()
+	protected static async dirtyResetsOnSubmit() {
+		await this.setFirstToRandomValue()
+		await this.vc.submit()
+		this.assertIsNotDirty()
 	}
 
 	@test()
@@ -1387,6 +1394,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 	}
 
+	private static assertIsDirty() {
+		assert.isTrue(this.vc.getIsDirty())
+	}
+
+	private static assertIsNotDirty() {
+		assert.isFalse(this.vc.getIsDirty())
+	}
+
 	private static assertIsNotRenderingField(fieldName: string) {
 		assert.isFalse(this.vc.isFieldRendering(fieldName as any))
 	}
@@ -1436,5 +1451,9 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 				sections: [{}],
 			})
 		)
+	}
+
+	private static async setFirstToRandomValue() {
+		await this.vc.setValue('first', generateId())
 	}
 }
