@@ -502,6 +502,11 @@ export default class FormViewController<
 	public async reset() {
 		this.setErrorsByField({})
 		await this.setValues(this.originalValues)
+		this.dirtyFields = {}
+	}
+
+	public clearDirty() {
+		this.dirtyFields = {}
 	}
 
 	public addSection(section: Section & { atIndex?: number }) {

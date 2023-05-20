@@ -141,6 +141,17 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
+	protected static async canClearDirty() {
+		await this.setFirstToRandomValue()
+		this.assertIsDirty()
+		this.vc.clearDirty()
+		this.assertIsNotDirty()
+		await this.setFirstToRandomValue()
+		await this.vc.reset()
+		this.assertIsNotDirty()
+	}
+
+	@test()
 	protected static async fieldErrorsRendered() {
 		await this.vc.setValue('first', 'Test')
 
