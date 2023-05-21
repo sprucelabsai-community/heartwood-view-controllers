@@ -38,6 +38,7 @@ export { default as StatsViewController } from './viewControllers/reporting/Stat
 export { default as ProgressViewController } from './viewControllers/reporting/Progress.vc'
 export { default as RatingsViewController } from './viewControllers/Ratings.vc'
 export { default as AbstractCalendarEventViewController } from './viewControllers/AbstractCalendarEvent.vc'
+export * from './viewControllers/AbstractCalendarEvent.vc'
 export { default as AutocompleteInputViewController } from './viewControllers/form/AutocompleteInput.vc'
 export * from './viewControllers/form/AutocompleteInput.vc'
 export { default as AbstractInputViewController } from './viewControllers/form/AbstractInput.vc'

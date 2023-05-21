@@ -4,18 +4,6 @@ import { CalendarEventViewController as CalendarEventVc } from '../types/calenda
 import { ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
-
-type GetEventHandler = () => Event
-type SetEventHandler = (event: Event) => void
-type HasEventHandler = () => boolean
-
-export interface CalendarEventOptions extends Event {
-	getEvent: GetEventHandler
-	setEvent: SetEventHandler
-	hasEvent: HasEventHandler
-}
-
 export default abstract class AbstractCalendarEventViewController
 	extends AbstractViewController<Event>
 	implements CalendarEventVc
@@ -59,4 +47,16 @@ export default abstract class AbstractCalendarEventViewController
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent {
 		return { ...this.getEvent(), controller: this }
 	}
+}
+
+type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+
+type GetEventHandler = () => Event
+type SetEventHandler = (event: Event) => void
+type HasEventHandler = () => boolean
+
+export interface CalendarEventOptions extends Event {
+	getEvent: GetEventHandler
+	setEvent: SetEventHandler
+	hasEvent: HasEventHandler
 }
