@@ -1,3 +1,10 @@
+# [104.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.1.6...v104.2.0) (2023-05-23)
+
+
+### Features
+
+* event meta ([7aec45b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7aec45b))
+
 ## [104.1.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.1.5...v104.1.6) (2023-05-23)
 
 ## [104.1.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.1.4...v104.1.5) (2023-05-22)
