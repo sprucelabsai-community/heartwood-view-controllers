@@ -129,6 +129,11 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                options: undefined
 	            },
 	            /** . */
+	            'meta': {
+	                type: 'raw',
+	                options: {valueType: `Record<string, any>`,}
+	            },
+	            /** . */
 	            'error': {
 	                type: 'raw',
 	                options: {valueType: `Error`,}

@@ -5420,6 +5420,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'totalInRepeating'?: number| undefined | null
 				
+				'meta'?: (Record<string, any>)| undefined | null
+				
 				'error'?: (Error)| undefined | null
 				
 				'isSelected'?: boolean| undefined | null
@@ -5549,6 +5551,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'totalInRepeating': {
 			                type: 'number',
 			                options: undefined
+			            },
+			            /** . */
+			            'meta': {
+			                type: 'raw',
+			                options: {valueType: `Record<string, any>`,}
 			            },
 			            /** . */
 			            'error': {
