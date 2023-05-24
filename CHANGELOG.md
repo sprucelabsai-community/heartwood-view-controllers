@@ -1,3 +1,10 @@
+# [104.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.2.0...v104.3.0) (2023-05-24)
+
+
+### Features
+
+* now calendar colors ([a314746](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a314746))
+
 # [104.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.1.6...v104.2.0) (2023-05-23)
 
 
