@@ -823,6 +823,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'warningColor1'?: string| undefined | null
 				/** Warning color 2. The background used when rendering tarnings. */
 				'warningColor1Inverse'?: string| undefined | null
+				
+				'calendarEvents'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColors| undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -985,6 +987,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'The background used when rendering tarnings.',
 			                options: undefined
+			            },
+			            /** . */
+			            'calendarEvents': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorsSchema,}
 			            },
 			    }
 		}
@@ -3404,6 +3411,160 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface List {
+			
+				
+				'id'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
+				/** Render row dividers. */
+				'shouldRenderRowDividers'?: boolean| undefined | null
+				/** Column widths. */
+				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				/** Row height. */
+				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
+				/** Rows. */
+				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
+		}
+
+		interface ListSchema extends SpruceSchema.Schema {
+			id: 'list',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'list',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ListViewController`,}
+			            },
+			            /** Render row dividers. */
+			            'shouldRenderRowDividers': {
+			                label: 'Render row dividers',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Column widths. */
+			            'columnWidths': {
+			                label: 'Column widths',
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `number | 'fill' | 'content'`,}
+			            },
+			            /** Row height. */
+			            'defaultRowHeight': {
+			                label: 'Row height',
+			                type: 'select',
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
+			            },
+			            /** Rows. */
+			            'rows': {
+			                label: 'Rows',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema,}
+			            },
+			    }
+		}
+
+		interface ListEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'id'?: string| undefined | null
+				
+				'className'?: string| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Text. */
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
+		}
+
+		interface FormSectionSchema extends SpruceSchema.Schema {
+			id: 'formSection',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+			            'fields': {
+			                label: 'Form fields',
+			                type: 'raw',
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
+			                isArray: true,
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
+			            },
+			    }
+		}
+
+		interface FormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface Form<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
@@ -3573,258 +3734,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface FormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface ListRow {
-			
-				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
-				/** Row height. */
-				'height'?: ("standard" | "tall" | "content")| undefined | null
-				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
-				/** Id. */
-				'id': string
-				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
-				/** Selected. */
-				'isSelected'?: boolean| undefined | null
-				/** Style. */
-				'style'?: ("standard" | "warning" | "critical")| undefined | null
-				/** Cells. */
-				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
-		}
-
-		interface ListRowSchema extends SpruceSchema.Schema {
-			id: 'listRow',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Column widths. */
-			            'columnWidths': {
-			                label: 'Column widths',
-			                type: 'raw',
-			                isArray: true,
-			                options: {valueType: `number | 'fill' | 'content'`,}
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
-			            },
-			            /** Row height. */
-			            'height': {
-			                label: 'Row height',
-			                type: 'select',
-			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
-			            },
-			            /** Enabled. */
-			            'isEnabled': {
-			                label: 'Enabled',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Id. */
-			            'id': {
-			                label: 'Id',
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Click handler. */
-			            'onClick': {
-			                label: 'Click handler',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<any> | any`,}
-			            },
-			            /** Selected. */
-			            'isSelected': {
-			                label: 'Selected',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Style. */
-			            'style': {
-			                label: 'Style',
-			                type: 'select',
-			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"warning","label":"Warning"},{"value":"critical","label":"Critical"}],}
-			            },
-			            /** Cells. */
-			            'cells': {
-			                label: 'Cells',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema,}
-			            },
-			    }
-		}
-
-		interface ListRowEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface List {
-			
-				
-				'id'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
-				/** Render row dividers. */
-				'shouldRenderRowDividers'?: boolean| undefined | null
-				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
-				/** Row height. */
-				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
-				/** Rows. */
-				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
-		}
-
-		interface ListSchema extends SpruceSchema.Schema {
-			id: 'list',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'list',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ListViewController`,}
-			            },
-			            /** Render row dividers. */
-			            'shouldRenderRowDividers': {
-			                label: 'Render row dividers',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Column widths. */
-			            'columnWidths': {
-			                label: 'Column widths',
-			                type: 'raw',
-			                isArray: true,
-			                options: {valueType: `number | 'fill' | 'content'`,}
-			            },
-			            /** Row height. */
-			            'defaultRowHeight': {
-			                label: 'Row height',
-			                type: 'select',
-			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
-			            },
-			            /** Rows. */
-			            'rows': {
-			                label: 'Rows',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema,}
-			            },
-			    }
-		}
-
-		interface ListEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'id'?: string| undefined | null
-				
-				'className'?: string| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Text. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
-		}
-
-		interface FormSectionSchema extends SpruceSchema.Schema {
-			id: 'formSection',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Text. */
-			            'text': {
-			                label: 'Text',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
-			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-			            'fields': {
-			                label: 'Form fields',
-			                type: 'raw',
-			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
-			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
-			            },
-			    }
-		}
-
-		interface FormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSectionSchema> {}
 
 	}
 
@@ -4925,6 +4834,104 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface ListRow {
+			
+				/** Column widths. */
+				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
+				/** Row height. */
+				'height'?: ("standard" | "tall" | "content")| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
+				/** Id. */
+				'id': string
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any)| undefined | null
+				/** Selected. */
+				'isSelected'?: boolean| undefined | null
+				/** Style. */
+				'style'?: ("standard" | "warning" | "critical")| undefined | null
+				/** Cells. */
+				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
+		}
+
+		interface ListRowSchema extends SpruceSchema.Schema {
+			id: 'listRow',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Column widths. */
+			            'columnWidths': {
+			                label: 'Column widths',
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `number | 'fill' | 'content'`,}
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ListRowViewController`,}
+			            },
+			            /** Row height. */
+			            'height': {
+			                label: 'Row height',
+			                type: 'select',
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Id. */
+			            'id': {
+			                label: 'Id',
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** Selected. */
+			            'isSelected': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"warning","label":"Warning"},{"value":"critical","label":"Critical"}],}
+			            },
+			            /** Cells. */
+			            'cells': {
+			                label: 'Cells',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema,}
+			            },
+			    }
+		}
+
+		interface ListRowEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CriticalError {
 			
 				
@@ -5045,6 +5052,172 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CalendarEventColors {
+			
+				/** Draft foreground color. */
+				'draftForegroundColor'?: string| undefined | null
+				/** Draft background color. */
+				'draftBackgroundColor'?: string| undefined | null
+				/** Tentative foreground color. */
+				'tentativeForegroundColor'?: string| undefined | null
+				/** Tentative background color. */
+				'tentativeBackgroundColor'?: string| undefined | null
+				/** Upcoming foreground color. */
+				'upcomingForegroundColor'?: string| undefined | null
+				/** Upcoming background color. */
+				'upcomingBackgroundColor'?: string| undefined | null
+				/** Unavailable foreground color. */
+				'unavailableForegroundColor'?: string| undefined | null
+				/** Unavailable background color. */
+				'unavailableBackgroundColor'?: string| undefined | null
+				/** Blocked foreground color. */
+				'blockedForegroundColor'?: string| undefined | null
+				/** Blocked background color. */
+				'blockedBackgroundColor'?: string| undefined | null
+				/** Active foreground color. */
+				'activeForegroundColor'?: string| undefined | null
+				/** Active background color. */
+				'activeBackgroundColor'?: string| undefined | null
+				/** Past foreground color. */
+				'pastForegroundColor'?: string| undefined | null
+				/** Past background color. */
+				'pastBackgroundColor'?: string| undefined | null
+				/** Warning foreground color. */
+				'warnForegroundColor'?: string| undefined | null
+				/** Warning background color. */
+				'warnBackgroundColor'?: string| undefined | null
+				/** Critical foreground color. */
+				'criticalForegroundColor'?: string| undefined | null
+				/** Critical background color. */
+				'criticalBackgroundColor'?: string| undefined | null
+		}
+
+		interface CalendarEventColorsSchema extends SpruceSchema.Schema {
+			id: 'calendarEventColors',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'calendarEventColors',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Draft foreground color. */
+			            'draftForegroundColor': {
+			                label: 'Draft foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Draft background color. */
+			            'draftBackgroundColor': {
+			                label: 'Draft background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Tentative foreground color. */
+			            'tentativeForegroundColor': {
+			                label: 'Tentative foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Tentative background color. */
+			            'tentativeBackgroundColor': {
+			                label: 'Tentative background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Upcoming foreground color. */
+			            'upcomingForegroundColor': {
+			                label: 'Upcoming foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Upcoming background color. */
+			            'upcomingBackgroundColor': {
+			                label: 'Upcoming background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Unavailable foreground color. */
+			            'unavailableForegroundColor': {
+			                label: 'Unavailable foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Unavailable background color. */
+			            'unavailableBackgroundColor': {
+			                label: 'Unavailable background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Blocked foreground color. */
+			            'blockedForegroundColor': {
+			                label: 'Blocked foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Blocked background color. */
+			            'blockedBackgroundColor': {
+			                label: 'Blocked background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Active foreground color. */
+			            'activeForegroundColor': {
+			                label: 'Active foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Active background color. */
+			            'activeBackgroundColor': {
+			                label: 'Active background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Past foreground color. */
+			            'pastForegroundColor': {
+			                label: 'Past foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Past background color. */
+			            'pastBackgroundColor': {
+			                label: 'Past background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Warning foreground color. */
+			            'warnForegroundColor': {
+			                label: 'Warning foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Warning background color. */
+			            'warnBackgroundColor': {
+			                label: 'Warning background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Critical foreground color. */
+			            'criticalForegroundColor': {
+			                label: 'Critical foreground color',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Critical background color. */
+			            'criticalBackgroundColor': {
+			                label: 'Critical background color',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface CalendarEventColorsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorsSchema> {}
 
 	}
 

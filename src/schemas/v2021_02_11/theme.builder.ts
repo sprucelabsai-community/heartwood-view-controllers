@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import calendarEventColorsBuilder from './calendarEventColors.builder'
 
 export default buildSchema({
 	id: 'theme',
@@ -125,6 +126,12 @@ export default buildSchema({
 							type: 'text',
 							label: 'Warning color 2',
 							hint: 'The background used when rendering tarnings.',
+						},
+						calendarEvents: {
+							type: 'schema',
+							options: {
+								schema: calendarEventColorsBuilder,
+							},
 						},
 					},
 				},

@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import calendarEventColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
 
 const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema  = {
 	id: 'themeProps',
@@ -163,6 +163,11 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'text',
 	                hint: 'The background used when rendering tarnings.',
 	                options: undefined
+	            },
+	            /** . */
+	            'calendarEvents': {
+	                type: 'schema',
+	                options: {schema: calendarEventColorsSchema_v2021_02_11,}
 	            },
 	    }
 }
