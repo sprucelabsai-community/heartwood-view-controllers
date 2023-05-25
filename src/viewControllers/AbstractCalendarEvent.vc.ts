@@ -1,6 +1,8 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import { CalendarEventViewController as CalendarEventVc } from '../types/calendar.types'
+import {
+	CalendarEvent,
+	CalendarEventViewController as CalendarEventVc,
+} from '../types/calendar.types'
 import { ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
@@ -35,27 +37,25 @@ export default abstract class AbstractCalendarEventViewController
 		return !this.hasEvent()
 	}
 
-	public mixinChanges(
-		changes: Partial<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent>
-	): void {
+	public mixinChanges(changes: Partial<CalendarEvent>): void {
 		this.setEvent({
 			...this.getEvent(),
 			...changes,
 		})
 	}
 
-	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent {
+	public render(): CalendarEvent {
 		return { ...this.getEvent(), controller: this }
 	}
 }
 
-type Event = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
+type Event = CalendarEvent
 
 type GetEventHandler = () => Event
 type SetEventHandler = (event: Event) => void
 type HasEventHandler = () => boolean
 
-export interface CalendarEventOptions extends Event {
+export interface CalendarEventOptions {
 	getEvent: GetEventHandler
 	setEvent: SetEventHandler
 	hasEvent: HasEventHandler
