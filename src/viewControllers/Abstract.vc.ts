@@ -197,7 +197,7 @@ export default abstract class AbstractViewController<
 			case 'success':
 				return 'primary'
 			default:
-				return 'secondary'
+				return 'primary'
 		}
 	}
 
