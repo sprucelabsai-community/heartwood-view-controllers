@@ -153,7 +153,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 			})
 		)
 
-		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'secondary')
+		vcAssert.assertFooterRendersButtonWithType(dlgVc, 'primary')
 	}
 
 	@test()
