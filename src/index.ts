@@ -83,6 +83,9 @@ export { default as dropdownButtonSchema } from '#spruce/schemas/heartwoodViewCo
 export { default as listCellButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCellButton.schema'
 export { default as listSelectInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
 export { default as listTextInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listTextInput.schema'
+
+export { default as calendarEventColorOverrideSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColorOverride.schema'
+
 export { default as selectInputChoiceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/selectInputChoice.schema'
 export { default as sprucebotTypedMessageAvatarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotTypedMessageAvatar.schema'
 export { default as sprucebotTypedMessageSentenceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotTypedMessageSentence.schema'
