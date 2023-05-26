@@ -13,7 +13,7 @@ export default abstract class AbstractCalendarEventViewController
 	public static id = 'calendar-event'
 	protected setEvent: SetEventHandler
 	protected getEvent: GetEventHandler
-	protected hasEvent: HasEventHandler
+	private hasEvent: HasEventHandler
 
 	public constructor(options: ViewControllerOptions & CalendarEventOptions) {
 		super(options)

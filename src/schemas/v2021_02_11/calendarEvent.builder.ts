@@ -18,6 +18,22 @@ const calendarEventSchema = buildSchema({
 		isSelected: {
 			type: 'boolean',
 		},
+		colors: {
+			type: 'schema',
+			options: {
+				schema: buildSchema({
+					id: 'calendarEventColorOverride',
+					fields: {
+						backgroundColor: {
+							type: 'text',
+						},
+						foregroundColor: {
+							type: 'text',
+						},
+					},
+				}),
+			},
+		},
 		controller: {
 			type: 'raw',
 			options: {
