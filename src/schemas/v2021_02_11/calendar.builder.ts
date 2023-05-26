@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import { personSchema } from '@sprucelabs/spruce-core-schemas'
 import calendarEventBuilder from './calendarEvent.builder'
 
 const timeSchema = buildSchema({
@@ -43,6 +44,7 @@ export default buildSchema({
 							type: 'text',
 							isRequired: true,
 						},
+						avatar: personSchema.fields.avatar,
 					},
 				},
 			},

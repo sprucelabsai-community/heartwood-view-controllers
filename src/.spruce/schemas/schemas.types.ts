@@ -5620,6 +5620,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'id': string
 				
 				'casualName': string
+				/** Avatar src. */
+				'avatar'?: SpruceSchema.ImageFieldValue| undefined | null
 		}
 
 		interface CalendarPersonSchema extends SpruceSchema.Schema {
@@ -5640,6 +5642,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                isRequired: true,
 			                options: undefined
+			            },
+			            /** Avatar src. */
+			            'avatar': {
+			                label: 'Avatar src',
+			                type: 'image',
+			                options: {requiredSizes: ["*"],}
 			            },
 			    }
 		}
