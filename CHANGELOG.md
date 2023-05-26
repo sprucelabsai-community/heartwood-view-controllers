@@ -1,3 +1,10 @@
+# [104.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.5.7...v104.6.0) (2023-05-26)
+
+
+### Features
+
+* rendering on selection of events vs rerendering the full calendar ([5b243a2](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/5b243a2))
+
 ## [104.5.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.5.6...v104.5.7) (2023-05-26)
 
 ## [104.5.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.5.5...v104.5.6) (2023-05-26)
