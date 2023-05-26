@@ -674,7 +674,7 @@ export type TimezoneName = ITimezoneName
  */
 export type Locale = ILocale
 
-export type CachedValue = string | number | Record<string, any> | null
+export type CachedValue = string | number | Record<string, any> | boolean | null
 
 export interface Device {
 	vibrate(): void
