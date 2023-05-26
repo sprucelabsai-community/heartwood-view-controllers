@@ -674,9 +674,13 @@ export type TimezoneName = ITimezoneName
  */
 export type Locale = ILocale
 
+export type CachedValue = string | number | Record<string, any> | null
+
 export interface Device {
 	vibrate(): void
 	call(phoneNumber: string): void
+	setCachedValue(key: string, value: CachedValue): void
+	getCachedValue(key: string): CachedValue
 }
 
 export interface AuthorizerCanOptions<

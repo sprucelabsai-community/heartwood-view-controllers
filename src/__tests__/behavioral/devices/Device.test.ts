@@ -1,8 +1,8 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import SpyDevice from '../../../tests/SpyDevice'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
-export default class ControllingDevicesNativeFeaturesTest extends AbstractDeviceTest {
+export default class DeviceTest extends AbstractDeviceTest {
 	@test()
 	protected static async canGetDevice() {
 		this.vc.assertHasDeviceInstance()
@@ -18,6 +18,14 @@ export default class ControllingDevicesNativeFeaturesTest extends AbstractDevice
 		this.vc.assertVibrateCount(0)
 		this.vc.vibrate()
 		this.vc.assertVibrateCount(1)
+	}
+
+	@test()
+	protected static async canStoreToLocalCache() {
+		const key = generateId()
+		const value = generateId()
+		this.vc.cacheValue(key, value)
+		assert.isEqual(this.vc.getCachedValue(key), value)
 	}
 
 	private static get device() {

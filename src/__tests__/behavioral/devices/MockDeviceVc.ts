@@ -5,6 +5,14 @@ import { Card } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 
 export default class MockDeviceVc extends AbstractViewController<Card> {
+	public cacheValue(key: string, value: string) {
+		this.getDevice().setCachedValue(key, value)
+	}
+
+	public getCachedValue(key: string) {
+		return this.getDevice().getCachedValue(key)
+	}
+
 	public assertHasDeviceInstance() {
 		assert.isTruthy(this.getDevice())
 	}
