@@ -1,3 +1,10 @@
+# [104.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.4.0...v104.5.0) (2023-05-26)
+
+
+### Features
+
+* device can now set and get cache ([3533a65](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3533a65))
+
 # [104.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.3.4...v104.4.0) (2023-05-26)
 
 
