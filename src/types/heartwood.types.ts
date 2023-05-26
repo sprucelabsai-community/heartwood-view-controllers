@@ -268,6 +268,8 @@ export type SkillView =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 export type Calendar =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
+export type CalendarPerson =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 export type CardFooter =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 export type FormBuilder =
