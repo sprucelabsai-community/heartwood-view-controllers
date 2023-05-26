@@ -1,3 +1,10 @@
+# [104.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.3.4...v104.4.0) (2023-05-26)
+
+
+### Features
+
+* calendar color overrides ([7760ffc](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7760ffc))
+
 ## [104.3.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.3.3...v104.3.4) (2023-05-25)
 
 ## [104.3.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.3.2...v104.3.3) (2023-05-25)
