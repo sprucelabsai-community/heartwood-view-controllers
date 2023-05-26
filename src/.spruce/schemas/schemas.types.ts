@@ -5415,6 +5415,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'colors'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorOverride| undefined | null
 				
 				'controller'?: (HeartwoodTypes.CalendarEventViewController)| undefined | null
+				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+				'shouldEnableSwipeNav'?: boolean| undefined | null
 		}
 
 		interface CalendarEventSchema extends SpruceSchema.Schema {
@@ -5564,6 +5566,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}
+			            },
+			            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+			            'shouldEnableSwipeNav': {
+			                type: 'boolean',
+			                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
+			                options: undefined
 			            },
 			    }
 		}

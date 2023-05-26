@@ -91,22 +91,6 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	}
 
 	@test()
-	protected static eventsTriggerRenderByDefaultTriggersCalendarRender() {
-		const event = this.addEvent()
-
-		const vc = this.calendarVc.getEventVc(event.id)
-
-		let wasHit = false
-		this.calendarVc.triggerRender = () => {
-			wasHit = true
-		}
-
-		assert.isFalse(wasHit)
-		vc.triggerRender()
-		assert.isTrue(wasHit)
-	}
-
-	@test()
 	protected static async eventsRenderIsSelectedFalseByDefault() {
 		let event = this.addEvent()
 
@@ -125,6 +109,14 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		await this.calendarVc.selectEvent(e1.id)
 
 		assert.isUndefined(this.getEvent(e2.id).isSelected)
+	}
+
+	@test()
+	protected static selectingDeselectingTriggersRender() {
+		this.vc.select()
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.vc.deselect()
+		vcAssert.assertTriggerRenderCount(this.vc, 2)
 	}
 
 	private static getEvent(eventId: string) {

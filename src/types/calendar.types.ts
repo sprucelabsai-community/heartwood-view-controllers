@@ -40,6 +40,8 @@ export interface CalendarEventViewController
 	mixinChanges(changes: Partial<CalendarEvent>): void
 	setIsBusy(isBusy: boolean): void
 	getIsBusy(): boolean
+	select(): void
+	deselect(): void
 	getToolBeltState?(): ToolBeltState
 }
 

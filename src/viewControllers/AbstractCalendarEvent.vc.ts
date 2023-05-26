@@ -37,6 +37,14 @@ export default abstract class AbstractCalendarEventViewController
 		return !this.hasEvent()
 	}
 
+	public deselect(): void {
+		this.triggerRender()
+	}
+
+	public select() {
+		this.triggerRender()
+	}
+
 	public mixinChanges(changes: Partial<CalendarEvent>): void {
 		this.setEvent({
 			...this.getEvent(),

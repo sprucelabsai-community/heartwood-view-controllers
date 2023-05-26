@@ -1024,6 +1024,40 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.assertTriggerRenderCount(4)
 	}
 
+	@test()
+	protected static async selectingEventInvokesOnSelectOnVc() {
+		this.setSpyCalendarEvent()
+		const event = this.addEvent()
+
+		const calendarEventVc = this.getEventVc(event.id)
+		await this.vc.selectEvent(event.id)
+		assert.isTrue(calendarEventVc.wasSelected)
+	}
+
+	@test()
+	protected static async shouldCallDeselectOnTheDeselectedEvent() {
+		this.setSpyCalendarEvent()
+
+		const event1 = this.addEvent()
+		const event2 = this.addEvent()
+
+		const vc1 = this.getEventVc(event1.id)
+
+		await this.vc.selectEvent(event1.id)
+		assert.isFalse(vc1.wasDeselected)
+
+		await this.vc.selectEvent(event2.id)
+		assert.isTrue(vc1.wasDeselected)
+	}
+
+	private static getEventVc(id: string) {
+		return this.vc.getEventVc(id) as SpyCalendarEvent
+	}
+
+	private static setSpyCalendarEvent() {
+		this.getFactory().setController('calendarEvent', SpyCalendarEvent)
+	}
+
 	private static add3Events(): [any, any, any] {
 		return [this.addEvent(), this.addEvent(), this.addEvent()]
 	}
@@ -1135,4 +1169,18 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 function getDate() {
 	return new Date().getTime()
+}
+
+class SpyCalendarEvent extends AbstractCalendarEventViewController {
+	public wasSelected = false
+	public wasDeselected = false
+	public select(): void {
+		this.wasSelected = true
+		return super.select()
+	}
+
+	public deselect(): void {
+		this.wasDeselected = true
+		return super.deselect()
+	}
 }

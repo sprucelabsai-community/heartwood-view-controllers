@@ -147,6 +147,12 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public async selectEvent(id: string) {
 		const event = this.getEvent(id)
+		const vc = this.getEventVc(id)
+
+		void this.deselectAndOptionallyTriggerRender(false)
+
+		vc.select()
+
 		this.selectedEventId = id
 		this.triggerRender()
 		await this.model?.onSelectEvent?.(event)
@@ -159,6 +165,8 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	private async deselectAndOptionallyTriggerRender(shouldTriggerRender = true) {
 		const event = this.getSelectedEvent()
 		if (event) {
+			const vc = this.getEventVc(event.id)
+			vc.deselect()
 			this.selectedEventId = undefined
 			await this.model.onDeselectEvent?.(event)
 			shouldTriggerRender && this.triggerRender()
@@ -366,7 +374,6 @@ export default class CalendarViewController extends AbstractViewController<Calen
 				}
 			)
 
-			vc.setTriggerRenderHandler(() => this.triggerRender())
 			this.vcsById[eventId] = vc
 		}
 
