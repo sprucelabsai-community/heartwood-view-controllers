@@ -22,6 +22,12 @@ const calendarPersonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.C
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** Avatar src. */
+	            'avatar': {
+	                label: 'Avatar src',
+	                type: 'image',
+	                options: {requiredSizes: ["*"],}
+	            },
 	    }
 }
 
