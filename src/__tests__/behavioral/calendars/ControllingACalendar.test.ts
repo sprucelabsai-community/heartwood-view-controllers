@@ -820,6 +820,20 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static async settingToViewControllerThatAlreadyExistsDoesNothing() {
+		let hitCount = 0
+		this.vc.getEvents = () => {
+			hitCount++
+			return []
+		}
+		this.vc.setControllerForEventType('test', 'list')
+		this.vc.setControllerForEventType('test', 'list')
+		assert.isEqual(hitCount, 1)
+		this.vc.setControllerForEventType('test', 'card')
+		assert.isEqual(hitCount, 2)
+	}
+
+	@test()
 	protected static canSetDefaultVcForEvents() {
 		assert.isFalsy(this.vc.getDefaultControllerForEvents())
 
