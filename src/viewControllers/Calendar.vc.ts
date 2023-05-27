@@ -215,7 +215,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public getSelectedEvent() {
-		return this.eventsById[this.selectedEventId ?? '']
+		return this.selectedEventId && this.eventsById[this.selectedEventId]
+			? this.getEvent(this.selectedEventId)
+			: undefined
 	}
 
 	public getView() {
