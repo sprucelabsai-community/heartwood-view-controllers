@@ -1,3 +1,10 @@
+# [104.8.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.7.0...v104.8.0) (2023-05-27)
+
+
+### Features
+
+* selecting/deselecting event no longer triggers render on the calendar ([e3d04bf](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e3d04bf))
+
 # [104.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.6.4...v104.7.0) (2023-05-27)
 
 
