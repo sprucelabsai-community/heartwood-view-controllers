@@ -411,12 +411,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static async selectingEventTriggersRender() {
-		await this.addOneEventAndSelectIt()
-		this.assertTriggerRenderCount(2)
-	}
-
-	@test()
 	protected static async canDeselectEvent() {
 		await this.addEventSelectAndDeselectIt()
 		assert.isUndefined(this.vc.getSelectedEvent())
@@ -438,12 +432,6 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 		assert.isTruthy(passedEvent)
 		assert.isEqualDeep(passedEvent, { ...event, isSelected: true })
-	}
-
-	@test()
-	protected static async deselectingEventTriggersRender() {
-		await this.addEventSelectAndDeselectIt()
-		this.assertTriggerRenderCount(3)
 	}
 
 	@test()
