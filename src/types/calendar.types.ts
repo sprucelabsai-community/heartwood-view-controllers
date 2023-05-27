@@ -34,6 +34,10 @@ export interface DropEventOptions {
 	blockUpdates?: BlockUpdate[]
 }
 
+export interface SwipeOptions {
+	direction: 'back' | 'forward'
+}
+
 export interface CalendarEventViewController
 	extends ViewController<CalendarEvent> {
 	getIsOrphaned(): boolean

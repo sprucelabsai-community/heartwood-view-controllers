@@ -154,12 +154,6 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}
 	            },
-	            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-	            'shouldEnableSwipeNav': {
-	                type: 'boolean',
-	                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
-	                options: undefined
-	            },
 	    }
 }
 

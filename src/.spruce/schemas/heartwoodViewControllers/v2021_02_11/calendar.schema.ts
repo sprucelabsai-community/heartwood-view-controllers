@@ -165,6 +165,17 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                minArrayLength: 0,
 	                options: {schema: calendarShiftSchema_v2021_02_11,}
 	            },
+	            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+	            'shouldEnableSwipeNav': {
+	                type: 'boolean',
+	                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
+	                options: undefined
+	            },
+	            /** . */
+	            'onSwipe': {
+	                type: 'raw',
+	                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
+	            },
 	    }
 }
 

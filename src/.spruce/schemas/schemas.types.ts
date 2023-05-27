@@ -5415,8 +5415,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'colors'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorOverride| undefined | null
 				
 				'controller'?: (HeartwoodTypes.CalendarEventViewController)| undefined | null
-				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-				'shouldEnableSwipeNav'?: boolean| undefined | null
 		}
 
 		interface CalendarEventSchema extends SpruceSchema.Schema {
@@ -5567,12 +5565,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.CalendarEventViewController`,}
 			            },
-			            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-			            'shouldEnableSwipeNav': {
-			                type: 'boolean',
-			                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
-			                options: undefined
-			            },
 			    }
 		}
 
@@ -5720,6 +5712,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onLongPressView'?: (() => void | boolean)| undefined | null
 				
 				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
+				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+				'shouldEnableSwipeNav'?: boolean| undefined | null
+				
+				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>)| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -5879,6 +5875,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isArray: true,
 			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema,}
+			            },
+			            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+			            'shouldEnableSwipeNav': {
+			                type: 'boolean',
+			                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
+			                options: undefined
+			            },
+			            /** . */
+			            'onSwipe': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
 			            },
 			    }
 		}

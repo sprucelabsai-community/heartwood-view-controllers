@@ -40,10 +40,6 @@ const calendarEventSchema = buildSchema({
 				valueType: 'HeartwoodTypes.CalendarEventViewController',
 			},
 		},
-		shouldEnableSwipeNav: {
-			type: 'boolean',
-			hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
-		},
 	},
 })
 

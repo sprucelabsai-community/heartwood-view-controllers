@@ -251,5 +251,16 @@ export default buildSchema({
 				}),
 			},
 		},
+		shouldEnableSwipeNav: {
+			type: 'boolean',
+			hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
+		},
+		onSwipe: {
+			type: 'raw',
+			options: {
+				valueType:
+					'(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>',
+			},
+		},
 	},
 })
