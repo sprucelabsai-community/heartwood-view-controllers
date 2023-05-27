@@ -1,3 +1,10 @@
+# [104.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.6.4...v104.7.0) (2023-05-27)
+
+
+### Features
+
+* can now simulate swipes ([306bf3a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/306bf3a))
+
 ## [104.6.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.6.3...v104.6.4) (2023-05-27)
 
 ## [104.6.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.6.2...v104.6.3) (2023-05-27)
