@@ -1,15 +1,17 @@
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import {
-	CalendarViewController,
-	CalendarViewControllerOptions,
-	DropEventOptions,
-	vcAssert,
-	ClickEventOptions,
-} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import calendarInteractor from '../../../tests/utilities/calendarInteractor'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
-import interactor from '../../../tests/utilities/interactor'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import {
+	CalendarSwipeDirection,
+	ClickEventOptions,
+	DropEventOptions,
+} from '../../../types/calendar.types'
+import CalendarViewController, {
+	CalendarViewControllerOptions,
+} from '../../../viewControllers/Calendar.vc'
 
 export class InteractingWithCalendarInMonthViewTest extends AbstractViewControllerTest {
 	private static vc: CalendarViewController
@@ -17,14 +19,14 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.Vc()
+		this.reload()
 	}
 
 	@test()
 	protected static async interactingThrowsWhenMissingOptions() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactor.clickCalendarDayView()
+			calendarInteractor.clickDayView()
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['vc', 'dateTimeMs'],
@@ -33,7 +35,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static async throwsWhenClickingCalendarInWrongView() {
-		this.Vc({
+		this.reload({
 			view: 'month',
 		})
 
@@ -117,7 +119,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async cantClickOnEventWhenMissingParams() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
-			interactor.clickCalendarEvent()
+			calendarInteractor.clickEvent()
 		)
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -128,7 +130,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	@test()
 	protected static async cantClickEventThatDoesNotExist() {
 		await assert.doesThrowAsync(
-			() => interactor.clickCalendarEvent(this.vc, 'not-found'),
+			() => calendarInteractor.clickEvent(this.vc, 'not-found'),
 			/not-found/gi
 		)
 	}
@@ -271,13 +273,13 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static hasDragEvent() {
-		assert.isFunction(interactor.dragCalendarEventTo)
+		assert.isFunction(calendarInteractor.dragAndDropEvent)
 	}
 
 	@test()
 	protected static async throwsIfDraggingEventDoesNotExist() {
 		await assert.doesThrowAsync(() =>
-			interactor.dragCalendarEventTo(this.vc, 'aoeu', {
+			calendarInteractor.dragAndDropEvent(this.vc, 'aoeu', {
 				newStartDateTimeMs: 100,
 			})
 		)
@@ -285,14 +287,14 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 	@test()
 	protected static async throwsIfCallbackDoesNotReturnBoolean() {
-		this.Vc({
+		this.reload({
 			onDropEvent: () => {},
 		})
 
 		let [event] = this.addEvents(1)
 
 		await assert.doesThrowAsync(() =>
-			interactor.dragCalendarEventTo(this.vc, event.id, {
+			calendarInteractor.dragAndDropEvent(this.vc, event.id, {
 				newStartDateTimeMs: 100,
 			})
 		)
@@ -303,7 +305,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	protected static async canDragIfReturningBoolFromOnDropEvent(
 		results: boolean
 	) {
-		this.Vc({
+		this.reload({
 			onDropEvent: () => {
 				return results
 			},
@@ -311,9 +313,13 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		let [event] = this.addEvents(1)
 
-		const actual = await interactor.dragCalendarEventTo(this.vc, event.id, {
-			newStartDateTimeMs: 100,
-		})
+		const actual = await calendarInteractor.dragAndDropEvent(
+			this.vc,
+			event.id,
+			{
+				newStartDateTimeMs: 100,
+			}
+		)
 
 		assert.isEqual(actual, results)
 	}
@@ -323,12 +329,12 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		let [event] = this.addEvents(1)
 
 		await assert.doesThrowAsync(() =>
-			interactor.dragCalendarEventTo(this.vc, event.id, {
+			calendarInteractor.dragAndDropEvent(this.vc, event.id, {
 				newStartDateTimeMs: 100,
 			})
 		)
 
-		this.Vc({
+		this.reload({
 			onDropEvent: () => {
 				return true
 			},
@@ -336,7 +342,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		event = this.addEvents(1)[0]
 
-		await interactor.dragCalendarEventTo(this.vc, event.id, {
+		await calendarInteractor.dragAndDropEvent(this.vc, event.id, {
 			newStartDateTimeMs: 100,
 		})
 	}
@@ -352,7 +358,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	) {
 		let wasHit = false
 		let passedOptions: any
-		this.Vc({
+		this.reload({
 			onDropEvent: (options) => {
 				passedOptions = options
 				wasHit = true
@@ -362,7 +368,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 
 		const [event] = this.addEvents(1)
 
-		await interactor.dragCalendarEventTo(this.vc, event.id, updates)
+		await calendarInteractor.dragAndDropEvent(this.vc, event.id, updates)
 
 		delete event.controller
 		delete passedOptions.event.controller
@@ -377,6 +383,34 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 			},
 			...updates,
 		})
+	}
+
+	@test()
+	protected static async throwsWhenTryingToWipeWithoutHandler() {
+		await assert.doesThrowAsync(() =>
+			calendarInteractor.swipe(this.vc, 'forward')
+		)
+	}
+
+	@test('can swipe forward', 'forward')
+	@test('can swipe backward', 'backward')
+	protected static async canSimulateSwipe(expected: CalendarSwipeDirection) {
+		let wasHit = false
+		let direction: CalendarSwipeDirection | undefined
+		this.reload({
+			onSwipe: (options) => {
+				wasHit = true
+				direction = options.direction
+			},
+		})
+
+		await this.swipe(expected)
+		assert.isTrue(wasHit)
+		assert.isEqual(direction, expected)
+	}
+
+	private static async swipe(direction: CalendarSwipeDirection) {
+		await calendarInteractor.swipe(this.vc, direction)
 	}
 
 	private static async addEventsAndClickLast(total: number, blockIdx?: number) {
@@ -394,7 +428,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	}
 
 	private static async clickEvent(eventId: string, blockIdx?: number) {
-		return interactor.clickCalendarEvent(this.vc, eventId, blockIdx)
+		return calendarInteractor.clickEvent(this.vc, eventId, blockIdx)
 	}
 
 	private static VcWithPeople(
@@ -403,7 +437,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 	) {
 		const people = calendarSeeder.generatePeopleValues(totalPeople)
 
-		this.Vc({
+		this.reload({
 			people,
 			...options,
 		})
@@ -411,7 +445,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		return people
 	}
 
-	private static Vc(options?: Partial<CalendarViewControllerOptions>) {
+	private static reload(options?: Partial<CalendarViewControllerOptions>) {
 		this.vc = this.Controller('calendar', {
 			view: 'day',
 			people: [],
@@ -427,7 +461,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
 		personId?: string | null
 		dateTimeMs?: number
 	}): any {
-		return interactor.clickCalendarDayView(
+		return calendarInteractor.clickDayView(
 			this.vc,
 			options?.dateTimeMs ?? new Date().getTime(),
 			options?.personId === null ? undefined : options?.personId ?? `123`

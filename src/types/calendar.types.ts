@@ -34,8 +34,10 @@ export interface DropEventOptions {
 	blockUpdates?: BlockUpdate[]
 }
 
+export type CalendarSwipeDirection = 'back' | 'forward'
+
 export interface SwipeOptions {
-	direction: 'back' | 'forward'
+	direction: CalendarSwipeDirection
 }
 
 export interface CalendarEventViewController

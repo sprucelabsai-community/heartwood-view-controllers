@@ -474,34 +474,7 @@ const interactor = {
 		eventId: string,
 		blockIdx?: number
 	) {
-		assertOptions({ vc, eventId }, ['vc', 'eventId'])
-
-		const { match, model } = findEvent(vc, eventId)
-		const idx = blockIdx ?? 0
-
-		assert.isTruthy(
-			match,
-			`I could not find an event with the id '${eventId}'.`
-		)
-
-		assert.isFunction(
-			model.onClickEvent,
-			`You gotta set 'onClickEvent' on your calendar to click an event!`
-		)
-
-		assert.isTruthy(
-			match.timeBlocks?.[idx],
-			`I could not find block ${idx} in event '${eventId}.'`
-		)
-
-		await model.onClickEvent?.({
-			viewController: match.controller as any,
-			event: match,
-			block: match.timeBlocks[idx],
-			blockIdx: idx,
-		})
-
-		return match
+		return calendarInteractor.clickEvent(vc, eventId, blockIdx)
 	},
 
 	async dragCalendarEventTo(
@@ -509,30 +482,7 @@ const interactor = {
 		eventId: string,
 		updates: Omit<DropEventOptions, 'event' | 'dragEvent'>
 	): Promise<boolean> {
-		const { match, model } = findEvent(vc, eventId)
-
-		assert.isTruthy(
-			match,
-			`I could not find an event with the id of '${eventId}'.`
-		)
-
-		assert.isFunction(
-			model.onDropEvent,
-			`You need to set onDropEvent on your calendar.`
-		)
-
-		const results = await model.onDropEvent({
-			event: match,
-			dragEvent: { ...match, id: 'dragging' },
-			...updates,
-		})
-
-		assert.isTrue(
-			typeof results === 'boolean',
-			'You gotta return true or false from onDropEvent.'
-		)
-
-		return results as boolean
+		return calendarInteractor.dragAndDropEvent(vc, eventId, updates)
 	},
 
 	/**
@@ -545,6 +495,9 @@ const interactor = {
 		return calendarInteractor.clickMonthView(vc, dateTimeMs)
 	},
 
+	/**
+	 * @deprecated interactor.clickCalendarDayView(...) -> calendarInteractor.clickDayView(...)
+	 */
 	async clickCalendarDayView(
 		vc: ViewController<Calendar>,
 		dateTimeMs: number,
@@ -619,15 +572,6 @@ function pluckButtonFromCard(vc: CardVc | FormVc, buttonId: string) {
 		`Could not find a button in '${getVcName(vc)}' with the id '${buttonId}'`
 	)
 	return match
-}
-
-function findEvent(
-	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>,
-	eventId: string
-) {
-	const model = renderUtil.render(vc)
-	const match = model.events?.find((e) => e.id === eventId)
-	return { match, model }
 }
 
 function pluckButtons(
