@@ -23,16 +23,19 @@ type CalendarEvent =
 
 class TestEventViewController extends AbstractCalendarEventViewController {}
 
+class SpyCalendarVc extends CalendarViewController {
+	public clearSelectedEventId() {
+		this.selectedEventId = 'aoeuaoue'
+	}
+}
+
 export default class ControllingACalendarTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		testEvent: TestEventViewController,
+		spyCalendar: SpyCalendarVc,
 	}
-	protected static vc: CalendarViewController
 
-	private static readonly firstPerson = {
-		id: `${new Date().getTime()}`,
-		casualName: 'Tay',
-	}
+	protected static vc: SpyCalendarVc
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -364,7 +367,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static async selectingEventTriggersCallback() {
 		let passedEvent: any
 
-		this.vc = this.Controller('calendar', {
+		this.vc = this.Vc({
 			onSelectEvent: (event) => {
 				passedEvent = event
 			},
@@ -419,7 +422,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async deselectingTriggersCallback() {
 		let passedEvent: any
-		this.vc = this.Controller('calendar', {
+		this.vc = this.Vc({
 			onDeselectEvent: (event) => {
 				passedEvent = event
 			},
@@ -437,7 +440,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async deselectingWithNoSelectedEventHasNoEffect() {
 		let wasHit = false
-		this.vc = this.Controller('calendar', {
+		this.vc = this.Vc({
 			onDeselectEvent: () => {
 				wasHit = true
 			},
@@ -450,7 +453,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	@test()
 	protected static async removingSelectedEventDeselectsIt() {
 		let wasHit = false
-		this.vc = this.Controller('calendar', {
+		this.vc = this.Vc({
 			onDeselectEvent: () => {
 				wasHit = true
 			},
@@ -501,7 +504,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	protected static async settingDateTriggersOnDateChange() {
 		let wasHit = false
 		let passedDate
-		this.vc = this.Controller('calendar', {
+		this.vc = this.Vc({
 			onChangeStartDate: (date) => {
 				passedDate = date
 				wasHit = true
@@ -693,7 +696,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	@test()
 	protected static canRenderEvenWhenStartingWithNoPeople() {
-		this.vc = this.Controller('calendar', {})
+		this.vc = this.Controller('calendar', {}) as SpyCalendarVc
 		const person = this.addPerson()
 		assert.isEqualDeep(this.vc.getPeople(), [person])
 	}
@@ -1038,6 +1041,13 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		assert.isTrue(vc1.wasDeselected)
 	}
 
+	@test()
+	protected static async getSelectedEventsWontCrashIfSelectedEventIdIsBad() {
+		this.addEvent()
+		this.vc.clearSelectedEventId()
+		this.vc.getSelectedEvent()
+	}
+
 	private static getEventVc(id: string) {
 		return this.vc.getEventVc(id) as SpyCalendarEvent
 	}
@@ -1124,11 +1134,11 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	private static Vc(
 		options?: Partial<CalendarViewControllerOptions>
-	): CalendarViewController {
-		return this.Controller('calendar', {
+	): SpyCalendarVc {
+		return this.Controller('spyCalendar' as any, {
 			people: [this.firstPerson],
 			...options,
-		})
+		}) as SpyCalendarVc
 	}
 
 	private static assertChangesArMade(
@@ -1152,6 +1162,11 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 
 	private static assertTriggerRenderCount(expected: number) {
 		vcAssert.assertTriggerRenderCount(this.vc, expected)
+	}
+
+	private static readonly firstPerson = {
+		id: `${new Date().getTime()}`,
+		casualName: 'Tay',
 	}
 }
 

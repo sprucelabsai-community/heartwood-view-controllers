@@ -15,7 +15,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	private vcsById: Record<string, CalendarEventViewController> = {}
 	private eventsById: Record<string, Event> = {}
 	private defaultEventVcId?: string
-	private selectedEventId?: string
+	protected selectedEventId?: string
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -149,7 +149,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		const event = this.getEvent(id)
 		const vc = this.getEventVc(id)
 
-		void this.deselectAndOptionallyTriggerRender()
+		void this.deselectIfSelected()
 
 		vc.select()
 
@@ -159,10 +159,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public async deselectEvent() {
-		await this.deselectAndOptionallyTriggerRender()
+		await this.deselectIfSelected()
 	}
 
-	private async deselectAndOptionallyTriggerRender() {
+	private async deselectIfSelected() {
 		const event = this.getSelectedEvent()
 		if (event) {
 			const vc = this.getEventVc(event.id)
@@ -215,9 +215,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 	}
 
 	public getSelectedEvent() {
-		return this.selectedEventId
-			? this.getEvent(this.selectedEventId)
-			: undefined
+		return this.eventsById[this.selectedEventId ?? '']
 	}
 
 	public getView() {
@@ -250,7 +248,7 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.getEvent(id)
 
 		if (this.selectedEventId === id) {
-			await this.deselectAndOptionallyTriggerRender()
+			await this.deselectIfSelected()
 		}
 
 		delete this.eventsById[id]
