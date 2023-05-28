@@ -8,12 +8,11 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import AbstractCalendarEventViewController from '../../../viewControllers/AbstractCalendarEvent.vc'
-import CalendarViewController, {
-	CalendarViewControllerOptions,
-} from '../../../viewControllers/Calendar.vc'
+import { CalendarViewControllerOptions } from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
+import SpyCalendarVc from './SpyCalendarVc'
 
 type CalendarTime =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
@@ -22,12 +21,6 @@ type CalendarEvent =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
 class TestEventViewController extends AbstractCalendarEventViewController {}
-
-class SpyCalendarVc extends CalendarViewController {
-	public clearSelectedEventId() {
-		this.selectedEventId = 'aoeuaoue'
-	}
-}
 
 export default class ControllingACalendarTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
@@ -1035,6 +1028,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		const event = this.addEvent()
 
 		const calendarEventVc = this.getEventVc(event.id)
+
 		await this.vc.selectEvent(event.id)
 		assert.isTrue(calendarEventVc.wasSelected)
 	}
@@ -1067,7 +1061,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	private static setSpyCalendarEvent() {
-		this.getFactory().setController('calendarEvent', SpyCalendarEvent)
+		this.getFactory().setController('calendar-event', SpyCalendarEvent)
 	}
 
 	private static add3Events(): [any, any, any] {
@@ -1103,7 +1097,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	private static addEventAndGetVc(event?: Partial<CalendarEvent>) {
-		const e = ControllingACalendarTest.addEvent(event)
+		const e = this.addEvent(event)
 
 		const vc = this.vc.getEventVc(e.id)
 

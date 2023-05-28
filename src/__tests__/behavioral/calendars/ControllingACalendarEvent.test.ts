@@ -1,26 +1,28 @@
 import { assert, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { CalendarEvent, CalendarViewController, vcAssert } from '../../..'
+import { CalendarEvent, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import { CalendarEventViewController } from '../../../types/calendar.types'
+import SpyCalendarVc from './SpyCalendarVc'
 
 export default class ControllingACalendarEvent extends AbstractViewControllerTest {
-	private static calendarVc: CalendarViewController
-	private static eventModel: CalendarEvent
+	private static calendarVc: SpyCalendarVc
+	private static event: CalendarEvent
 	private static vc: CalendarEventViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.calendarVc = this.Controller('calendar', {})
-		this.eventModel = {
+		this.getFactory().setController('calendar', SpyCalendarVc)
+		this.calendarVc = this.Controller('calendar', {}) as SpyCalendarVc
+		this.event = {
 			...calendarSeeder.generateEventValues(),
 		}
 
-		this.calendarVc.addEvent(this.eventModel)
+		this.calendarVc.addEvent(this.event)
 
-		this.vc = this.calendarVc.getEventVc(this.eventModel.id)
+		this.vc = this.calendarVc.getEventVc(this.event.id)
 
 		vcAssert.attachTriggerRenderCounter(this.vc)
 	}
@@ -28,9 +30,15 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	@test()
 	protected static throwWithoutGetterAndSetter() {
 		//@ts-ignore
-		const err = assert.doesThrow(() => this.Controller('calendarEvent', {}))
+		const err = assert.doesThrow(() => this.Controller('calendar-event', {}))
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['setEvent', 'getEvent', 'hasEvent'],
+			parameters: [
+				'setEvent',
+				'getEvent',
+				'hasEvent',
+				'setTriggerRenderHandler',
+				'triggerRenderHandler',
+			],
 		})
 	}
 
@@ -42,7 +50,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		this.vc.mixinChanges(changes)
 
 		const expected = {
-			...this.eventModel,
+			...this.event,
 			...changes,
 		}
 
@@ -56,7 +64,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 			expected
 		)
 
-		assert.isEqualDeep(this.calendarVc.getEvent(this.eventModel.id), expected)
+		assert.isEqualDeep(this.calendarVc.getEvent(this.event.id), expected)
 	}
 
 	@test()
@@ -77,7 +85,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
 	@test()
 	protected static async updatingAnEventOnCalendarTriggersRenderOnEvent() {
-		this.calendarVc.updateEvent(this.eventModel.id, { style: 'draft' })
+		this.calendarVc.updateEvent(this.event.id, { style: 'draft' })
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 	}
 
@@ -85,7 +93,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 	protected static async eventKnowsIfBeenDeleted() {
 		assert.isFalse(this.vc.getIsOrphaned())
 
-		await this.calendarVc.removeEvent(this.eventModel.id)
+		await this.calendarVc.removeEvent(this.event.id)
 
 		assert.isTrue(this.vc.getIsOrphaned())
 	}
@@ -117,6 +125,22 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		this.vc.deselect()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static async eventVcsWithSameIdShareTriggerRenders() {
+		let hitCount = 0
+
+		this.vc.setTriggerRenderHandler(() => {
+			hitCount++
+		})
+		this.calendarVc.clearEventVcs()
+		const vc2 = this.calendarVc.getEventVc(this.event.id)
+
+		assert.isEqual(hitCount, 0)
+
+		vc2.triggerRender()
+		assert.isEqual(hitCount, 1)
 	}
 
 	private static getEvent(eventId: string) {

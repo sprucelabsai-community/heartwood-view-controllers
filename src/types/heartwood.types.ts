@@ -17,6 +17,7 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
+import { CalendarEventOptions } from '..'
 import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
@@ -38,6 +39,7 @@ import ButtonGroupViewController, {
 import CalendarViewController, {
 	CalendarViewControllerOptions,
 } from '../viewControllers/Calendar.vc'
+import CalendarEventViewController from '../viewControllers/CalendarEvent.vc'
 import CardViewControllerImpl, {
 	CardViewControllerOptions,
 } from '../viewControllers/card/Card.vc'
@@ -377,6 +379,8 @@ export interface ViewControllerMap {
 	 */
 	'tool-belt': ToolBeltViewController
 	calendar: CalendarViewController
+
+	'calendar-event': CalendarEventViewController
 	/**
 	 * @deprecated 'buttonBar' -> 'button-bar'
 	 */
@@ -429,6 +433,7 @@ export interface ViewControllerOptionsMap {
 	toolBelt: ToolBeltViewControllerOptions
 	'tool-belt': ToolBeltViewControllerOptions
 	calendar: CalendarViewControllerOptions
+	'calendar-event': CalendarEventOptions
 	buttonBar: ButtonBarViewControllerOptions
 	'button-bar': ButtonBarViewControllerOptions
 	talkingSprucebot: TalkingSprucebotViewControllerOptions

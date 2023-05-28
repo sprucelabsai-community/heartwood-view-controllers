@@ -3,7 +3,10 @@ import {
 	CalendarEvent,
 	CalendarEventViewController as CalendarEventVc,
 } from '../types/calendar.types'
-import { ViewControllerOptions } from '../types/heartwood.types'
+import {
+	TriggerRenderHandler,
+	ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
 export default abstract class AbstractCalendarEventViewController
@@ -18,11 +21,25 @@ export default abstract class AbstractCalendarEventViewController
 	public constructor(options: ViewControllerOptions & CalendarEventOptions) {
 		super(options)
 
-		assertOptions(options, ['setEvent', 'getEvent', 'hasEvent'])
+		const {
+			getEvent,
+			setEvent,
+			hasEvent,
+			setTriggerRenderHandler,
+			triggerRenderHandler,
+		} = assertOptions(options, [
+			'setEvent',
+			'getEvent',
+			'hasEvent',
+			'setTriggerRenderHandler',
+			'triggerRenderHandler',
+		])
 
-		this.setEvent = options.setEvent
-		this.getEvent = options.getEvent
-		this.hasEvent = options.hasEvent
+		this.setEvent = setEvent
+		this.getEvent = getEvent
+		this.hasEvent = hasEvent
+		this.setTriggerRenderHandler = setTriggerRenderHandler
+		this.triggerRenderHandler = triggerRenderHandler
 	}
 
 	public setIsBusy(isBusy: boolean): void {
@@ -67,4 +84,6 @@ export interface CalendarEventOptions {
 	getEvent: GetEventHandler
 	setEvent: SetEventHandler
 	hasEvent: HasEventHandler
+	setTriggerRenderHandler: (cb: TriggerRenderHandler) => void
+	triggerRenderHandler: TriggerRenderHandler
 }

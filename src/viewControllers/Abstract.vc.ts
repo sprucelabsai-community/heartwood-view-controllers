@@ -40,7 +40,7 @@ export default abstract class AbstractViewController<
 	private children: ViewController<any>[] = []
 	private toastHandler: ToastHandler
 	private activeAlert?: AlertOptions
-	private triggerRenderHandler?: TriggerRenderHandler
+	protected triggerRenderHandler?: TriggerRenderHandler
 	private suspendRenderCount = 0
 
 	public constructor(options: ViewControllerOptions) {

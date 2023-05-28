@@ -4,18 +4,20 @@ import SpruceError from '../errors/SpruceError'
 import {
 	ViewControllerOptions,
 	CalendarEventViewController,
+	TriggerRenderHandler,
 } from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
-import CalendarEventViewControllerImpl from './CalendarEvent.vc'
 
 export default class CalendarViewController extends AbstractViewController<CalendarOptions> {
 	protected model: Omit<CalendarOptions, 'events'>
 	private vcIdsByEventType: Record<string, string> = {}
-	private vcsById: Record<string, CalendarEventViewController> = {}
+	protected vcsById: Record<string, CalendarEventViewController> = {}
 	private eventsById: Record<string, Event> = {}
 	private defaultEventVcId?: string
 	protected selectedEventId?: string
+	private triggerRenderHandlersByEventId: Record<string, TriggerRenderHandler> =
+		{}
 
 	public constructor(options: CalendarOptions & ViewControllerOptions) {
 		super(options)
@@ -23,8 +25,6 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		const view = options.view ?? 'day'
 
 		this.assertValidMinAndMaxTime(options)
-
-		this.mixinControllers({ calendarEvent: CalendarEventViewControllerImpl })
 
 		let {
 			events = [],
@@ -368,11 +368,15 @@ export default class CalendarViewController extends AbstractViewController<Calen
 			const vc = this.Controller(
 				(this.vcIdsByEventType[event.eventTypeSlug ?? '**missing**'] ??
 					this.defaultEventVcId ??
-					'calendarEvent') as any,
+					'calendar-event') as 'calendar-event',
 				{
 					getEvent: () => this.getEvent(eventId),
 					setEvent: (event: Event) => this.updateEvent(eventId, event),
 					hasEvent: () => this.hasEvent(eventId),
+					setTriggerRenderHandler: (handler: () => void) =>
+						(this.triggerRenderHandlersByEventId[eventId] = handler),
+					triggerRenderHandler: () =>
+						this.triggerRenderHandlersByEventId[eventId]?.(),
 				}
 			)
 

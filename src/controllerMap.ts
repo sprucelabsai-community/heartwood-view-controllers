@@ -4,6 +4,7 @@ import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonBarViewController from './viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
 import CalendarViewController from './viewControllers/Calendar.vc'
+import CalendarEventViewController from './viewControllers/CalendarEvent.vc'
 import CardViewController from './viewControllers/card/Card.vc'
 import ConfirmViewController from './viewControllers/Confirm.vc'
 import DialogViewController from './viewControllers/Dialog.vc'
@@ -52,6 +53,9 @@ export const CORE_CONTROLLER_MAP = {
 	toolBelt: ToolBeltViewController,
 	'tool-belt': ToolBeltViewController,
 	calendar: CalendarViewController,
+
+	'calendar-event': CalendarEventViewController,
+
 	/**
 	 * @deprecated 'buttonBar' -> 'button-bar'
 	 */
