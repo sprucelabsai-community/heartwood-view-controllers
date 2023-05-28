@@ -1,3 +1,10 @@
+# [104.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.8.2...v104.9.0) (2023-05-28)
+
+
+### Features
+
+* trigger render improvements ([8496f2d](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8496f2d))
+
 ## [104.8.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.8.1...v104.8.2) (2023-05-27)
 
 ## [104.8.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.8.0...v104.8.1) (2023-05-27)
