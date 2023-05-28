@@ -143,6 +143,16 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 		assert.isEqual(hitCount, 1)
 	}
 
+	@test()
+	protected static async calendarSelectedEventClearedBeforeDeselectOnEventVc() {
+		this.vc.deselect = () => {
+			assert.isFalsy(this.calendarVc.getSelectedEvent())
+		}
+
+		await this.calendarVc.selectEvent(this.event.id)
+		await this.calendarVc.deselectEvent()
+	}
+
 	private static getEvent(eventId: string) {
 		return this.calendarVc.getEvent(eventId)
 	}
