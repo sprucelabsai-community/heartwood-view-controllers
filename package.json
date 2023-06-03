@@ -85,7 +85,7 @@
     "@sprucelabs/schema": "^28.6.38",
     "@sprucelabs/spruce-core-schemas": "^38.1.35",
     "@sprucelabs/spruce-event-utils": "^37.0.42",
-    "@sprucelabs/spruce-skill-utils": "^29.0.24",
+    "@sprucelabs/spruce-skill-utils": "^29.1.0",
     "@sprucelabs/test-utils": "^3.4.67",
     "@swc/core": "1.2.103",
     "babel-loader": "^9.1.2",

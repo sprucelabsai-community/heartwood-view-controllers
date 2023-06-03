@@ -395,6 +395,29 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqual(hitCount, 2)
 	}
 
+	@test()
+	protected static async stripsOutUndefinedsBeforeCheckingIfChanges() {
+		await this.updateContext({
+			test: {
+				one: 'two',
+			},
+		})
+
+		let hitCount = 0
+		await this.sm.on('did-update-context', () => {
+			hitCount++
+		})
+
+		await this.updateContext({
+			what: undefined,
+			test: {
+				one: 'two',
+			},
+		})
+
+		assert.isEqual(hitCount, 0)
+	}
+
 	private static async assertSettingContextThenUpdatingEquals(
 		starting: Record<string, any>,
 		updates: Record<string, any>,

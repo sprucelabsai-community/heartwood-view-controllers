@@ -1,12 +1,9 @@
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
-import {
-	AbstractViewController,
-	SpruceSchemas,
-	StickyTool,
-	StickyToolPosition,
-	ViewControllerOptions,
-} from '..'
+import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../errors/SpruceError'
+import { StickyTool, StickyToolPosition } from '../types/calendar.types'
+import { ViewControllerOptions } from '../types/heartwood.types'
+import AbstractViewController from './Abstract.vc'
 
 export default class ToolBeltViewController extends AbstractViewController<ViewModel> {
 	private model: ViewModel

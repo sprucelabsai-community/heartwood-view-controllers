@@ -6,6 +6,7 @@ import {
 } from '@sprucelabs/mercury-types'
 import { assertOptions, buildSchema, cloneDeep } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
+import { isEqual } from '@sprucelabs/spruce-skill-utils'
 import set from 'just-safe-set'
 import SpruceError from '../errors/SpruceError'
 import {
@@ -92,7 +93,7 @@ export default class ToolBeltStateMachine<
 		let { newContext, clonedUpdates: expandedUpdates } =
 			this.getContextMixingInUpdates(updates)
 
-		if (deepEqual(this.context, newContext)) {
+		if (isEqual(this.context, newContext)) {
 			return false
 		}
 
@@ -152,35 +153,6 @@ export default class ToolBeltStateMachine<
 		if (errors) {
 			throw errors[0]
 		}
-	}
-}
-
-const deepEqual = function (x: any, y: any) {
-	if (x === y) {
-		return true
-	} else if (
-		typeof x == 'object' &&
-		x != null &&
-		typeof y == 'object' &&
-		y != null
-	) {
-		if (Object.keys(x).length != Object.keys(y).length) {
-			return false
-		}
-
-		for (let prop in x) {
-			if (Object.prototype.hasOwnProperty.call(y, prop)) {
-				if (!deepEqual(x[prop], y[prop])) {
-					return false
-				}
-			} else {
-				return false
-			}
-		}
-
-		return true
-	} else {
-		return false
 	}
 }
 
