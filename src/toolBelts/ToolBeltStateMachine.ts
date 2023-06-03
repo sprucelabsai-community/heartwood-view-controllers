@@ -90,7 +90,7 @@ export default class ToolBeltStateMachine<
 	}
 
 	private async _updateContext(updates: Partial<Context>): Promise<boolean> {
-		let { newContext, clonedUpdates: expandedUpdates } =
+		let { newContext, expandedUpdates } =
 			this.getContextMixingInUpdates(updates)
 
 		if (isEqual(this.context, newContext)) {
@@ -101,7 +101,7 @@ export default class ToolBeltStateMachine<
 
 		let results = await this.emit('will-update-context', {
 			current: this.context,
-			updates,
+			updates: expandedUpdates,
 		})
 
 		this.assertNoErrorsInResponse(results)
@@ -127,21 +127,26 @@ export default class ToolBeltStateMachine<
 	private getContextMixingInUpdates(updates: Partial<Context>): {
 		newContext: Context
 		clonedUpdates: Partial<Context>
+		expandedUpdates: Partial<Context>
 	} {
 		let clonedUpdates = clone(updates)
 
+		const expandedUpdates: Partial<Context> = {}
 		const newContext = { ...clone(this.context ?? {}) } as Context
 
 		for (const key of Object.keys(clonedUpdates)) {
 			if (key.includes('.')) {
+				set(expandedUpdates, key, clonedUpdates[key])
 				set(newContext, key, clonedUpdates[key])
 			} else {
 				//@ts-ignore
 				newContext[key] = clonedUpdates[key]
+				//@ts-ignore
+				expandedUpdates[key] = clonedUpdates[key]
 			}
 		}
 
-		return { newContext, clonedUpdates }
+		return { newContext, clonedUpdates, expandedUpdates }
 	}
 
 	private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {

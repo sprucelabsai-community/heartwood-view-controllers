@@ -1,6 +1,7 @@
 import { cloneDeep } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
+import set from 'just-safe-set'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltStateMachine, {
 	ToolBeltState,
@@ -424,6 +425,19 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		expected: Record<string, any>
 	) {
 		await this.updateContext(starting)
+		let expectedUpdates = {}
+		for (const key of Object.keys(updates)) {
+			if (key.includes('.')) {
+				set(expectedUpdates, key, updates[key])
+			} else {
+				//@ts-ignore
+				expectedUpdates[key] = updates[key]
+			}
+		}
+
+		await this.sm.on('did-update-context', ({ updates }) => {
+			assert.isEqualDeep(updates, expectedUpdates)
+		})
 
 		const actual = this.sm.getContext(updates)
 		assert.isEqualDeep(
