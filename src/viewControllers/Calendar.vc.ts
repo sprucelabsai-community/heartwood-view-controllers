@@ -151,9 +151,9 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 		void this.deselectIfSelected()
 
-		vc.select()
-
 		this.selectedEventId = id
+
+		vc.select()
 
 		await this.model?.onSelectEvent?.(event)
 	}

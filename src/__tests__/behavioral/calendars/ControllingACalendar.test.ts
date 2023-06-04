@@ -375,6 +375,17 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	}
 
 	@test()
+	protected static async selectedEventIsSetBeforeSelectInvokedOnVc() {
+		const event = this.addEvent()
+		const vc = this.vc.getEventVc(event.id)
+		vc.select = () => {
+			assert.isEqual(this.vc.getSelectedEvent()?.id, event.id)
+		}
+
+		await this.vc.selectEvent(event.id)
+	}
+
+	@test()
 	protected static async updatingASelectedEventReflectsChanges() {
 		const event = await this.addOneEventAndSelectIt()
 		const updates = {
