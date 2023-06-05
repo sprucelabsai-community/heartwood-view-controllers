@@ -63,7 +63,7 @@ export default class ToolBeltStateMachine<
 	}
 
 	public getContext(updatesToMixin?: Partial<Context>): Context {
-		return updatesToMixin
+		return updatesToMixin && Object.keys(updatesToMixin).length > 0
 			? (this.getContextMixingInUpdates(updatesToMixin).newContext as Context)
 			: (this.context as Context)
 	}

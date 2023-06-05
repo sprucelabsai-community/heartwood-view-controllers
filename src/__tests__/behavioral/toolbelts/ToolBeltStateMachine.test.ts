@@ -472,6 +472,16 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		})
 	}
 
+	@test()
+	protected static async gettingContextMixingInChangesDoesNotMixinIfEmptyObject() {
+		//@ts-ignore
+		this.sm.getContextMixingInUpdates = () =>
+			//@ts-ignore
+			assert.fail('should not be called')
+
+		this.sm.getContext({})
+	}
+
 	private static async mixIntoContextDuringWillUpdate(
 		mixin: Record<string, any>
 	) {
