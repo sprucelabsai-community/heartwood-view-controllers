@@ -1,3 +1,10 @@
+# [104.10.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.9.18...v104.10.0) (2023-06-05)
+
+
+### Features
+
+* you can now mixin context during the "will-update-context" event ([2043624](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2043624))
+
 ## [104.9.18](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.9.17...v104.9.18) (2023-06-04)
 
 ## [104.9.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.9.16...v104.9.17) (2023-06-04)
