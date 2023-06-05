@@ -7,7 +7,6 @@ import {
 import { assertOptions, buildSchema, cloneDeep } from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { isEqual } from '@sprucelabs/spruce-skill-utils'
-import set from 'just-safe-set'
 import SpruceError from '../errors/SpruceError'
 import {
 	ControllerOptions,
@@ -16,6 +15,7 @@ import {
 	ViewControllerMap,
 } from '../types/heartwood.types'
 import ToolBeltViewController from '../viewControllers/ToolBelt.vc'
+const set = require('object-set')
 
 export default class ToolBeltStateMachine<
 	Context extends Record<string, any> = Record<string, any>

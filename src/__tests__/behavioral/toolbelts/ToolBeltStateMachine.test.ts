@@ -1,12 +1,12 @@
 import { cloneDeep } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import set from 'just-safe-set'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltStateMachine, {
 	ToolBeltState,
 	ToolBeltStateMachineOptions,
 } from '../../../toolBelts/ToolBeltStateMachine'
+const set = require('object-set')
 
 export default class ToolBeltStateMachineTest extends AbstractViewControllerTest {
 	private static sm: ToolBeltStateMachine
@@ -480,6 +480,29 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			assert.fail('should not be called')
 
 		this.sm.getContext({})
+	}
+
+	@test()
+	protected static async canMixinValuesWithArraySyntax() {
+		await this.updateContext({
+			hey: {
+				stuff: [
+					{
+						title: 'tay',
+					},
+					{
+						title: 'ry',
+					},
+				],
+			},
+		})
+
+		await this.updateContext({
+			'hey.stuff[0].title': 'mike',
+		})
+
+		const context = this.getContext()
+		assert.isEqual(context.hey.stuff[0].title, 'mike')
 	}
 
 	private static async mixIntoContextDuringWillUpdate(
