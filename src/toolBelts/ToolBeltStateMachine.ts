@@ -106,10 +106,30 @@ export default class ToolBeltStateMachine<
 
 		this.assertNoErrorsInResponse(results)
 
-		if (
-			results.responses.find((r) => r.payload?.shouldAllowUpdates === false)
-		) {
+		let mixin: Partial<Context> | undefined
+		let shouldAllowUpdates = true
+
+		for (const { payload } of results.responses) {
+			if (payload?.mixin) {
+				if (!mixin) {
+					mixin = {}
+				}
+				mixin = { ...mixin, ...payload?.mixin }
+			}
+
+			shouldAllowUpdates =
+				shouldAllowUpdates && payload?.shouldAllowUpdates !== false
+		}
+
+		if (!shouldAllowUpdates) {
 			return false
+		}
+
+		if (mixin) {
+			newContext = {
+				...newContext,
+				...mixin,
+			}
 		}
 
 		this.context = newContext
@@ -233,6 +253,12 @@ const eventContract = buildEventContract({
 					shouldAllowUpdates: {
 						type: 'boolean',
 						defaultValue: true,
+					},
+					mixin: {
+						type: 'raw',
+						options: {
+							valueType: 'Record<string, any>',
+						},
 					},
 				},
 			}),

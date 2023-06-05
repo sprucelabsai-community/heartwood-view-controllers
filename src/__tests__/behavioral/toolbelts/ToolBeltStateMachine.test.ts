@@ -419,6 +419,69 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 		assert.isEqual(hitCount, 0)
 	}
 
+	@test(
+		'can mixin context in will update 1',
+		{
+			hey: 'there',
+		},
+		{
+			hello: 'world',
+		}
+	)
+	@test(
+		'can mixin context in will update 2',
+		{
+			hey: 'there',
+			how: 'now',
+		},
+		{
+			hello: 'world',
+			cow: 'oy oy',
+		}
+	)
+	protected static async canMixinContextInWillUpdate(
+		context: Record<string, any>,
+		mixin: Record<string, any>
+	) {
+		await this.mixIntoContextDuringWillUpdate(mixin)
+		await this.updateContext(context)
+		this.assertContextEquals({
+			...mixin,
+			...context,
+		})
+	}
+
+	@test()
+	protected static async canMixinFromMultipleListeners() {
+		await this.mixIntoContextDuringWillUpdate({
+			hey: 'there',
+		})
+
+		await this.mixIntoContextDuringWillUpdate({
+			how: 'now',
+		})
+
+		await this.updateContext({
+			hello: 'world',
+		})
+
+		this.assertContextEquals({
+			hello: 'world',
+			hey: 'there',
+			how: 'now',
+		})
+	}
+
+	private static async mixIntoContextDuringWillUpdate(
+		mixin: Record<string, any>
+	) {
+		await this.sm.on('will-update-context', () => {
+			return {
+				mixin,
+			}
+		})
+	}
+
 	private static async assertSettingContextThenUpdatingEquals(
 		starting: Record<string, any>,
 		updates: Record<string, any>,
