@@ -497,12 +497,29 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 			},
 		})
 
+		let hitCount = 0
+		await this.sm.on('did-update-context', () => {
+			hitCount++
+		})
+
 		await this.updateContext({
 			'hey.stuff[0].title': 'mike',
 		})
 
+		assert.isEqual(hitCount, 1)
+		this.assertFirstElementInArraysTitleEquals('mike')
+
+		await this.updateContext({
+			'hey.stuff[0].title': 'spike',
+		})
+
+		this.assertFirstElementInArraysTitleEquals('spike')
+		assert.isEqual(hitCount, 2)
+	}
+
+	private static assertFirstElementInArraysTitleEquals(expected: string) {
 		const context = this.getContext()
-		assert.isEqual(context.hey.stuff[0].title, 'mike')
+		assert.isEqual(context.hey.stuff[0].title, expected)
 	}
 
 	private static async mixIntoContextDuringWillUpdate(

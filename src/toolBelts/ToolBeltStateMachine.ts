@@ -152,7 +152,7 @@ export default class ToolBeltStateMachine<
 		let clonedUpdates = clone(updates)
 
 		const expandedUpdates: Partial<Context> = {}
-		const newContext = { ...clone(this.context ?? {}) } as Context
+		const newContext = clone(this.context ?? {}) as Context
 
 		for (const key of Object.keys(clonedUpdates)) {
 			if (key.includes('.')) {
@@ -270,7 +270,7 @@ type EventContract = typeof eventContract
 function clone<Context extends Record<string, any> = Record<string, any>>(
 	updates: Partial<Context>
 ) {
-	const typesToClone = ['Object']
+	const typesToClone = ['Object', 'Array']
 	let clonedUpdates = cloneDeep(updates, (item) => {
 		if (typesToClone.indexOf(item?.__proto__?.constructor?.name) === -1) {
 			return item
