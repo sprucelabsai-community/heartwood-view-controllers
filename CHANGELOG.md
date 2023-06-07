@@ -1,3 +1,10 @@
+# [104.11.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.10.5...v104.11.0) (2023-06-07)
+
+
+### Features
+
+* exposing doesRowExist on active record card and list ([c25a1a5](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c25a1a5))
+
 ## [104.10.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.10.4...v104.10.5) (2023-06-06)
 
 ## [104.10.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.10.3...v104.10.4) (2023-06-06)
