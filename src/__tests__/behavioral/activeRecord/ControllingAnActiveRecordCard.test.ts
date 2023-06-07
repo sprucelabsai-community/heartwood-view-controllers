@@ -727,6 +727,14 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		})
 	}
 
+	@test()
+	protected static async exposesHasRow() {
+		const vc = this.Vc()
+		assert.isFalse(vc.doesRowExist('test'))
+		vc.addRow({ id: 'test', cells: [] })
+		assert.isTrue(vc.doesRowExist('test'))
+	}
+
 	private static async assertListLoadingClearsCustomRow(
 		vc: SpyActiveRecordCard
 	) {

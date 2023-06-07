@@ -65,6 +65,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		})
 	}
 
+	public doesRowExist(id: string): boolean {
+		return this.listVc.doesRowExist(id)
+	}
+
 	public setCriticalError(error: CriticalError) {
 		this.cardVc.setCriticalError(error)
 	}

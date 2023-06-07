@@ -84,6 +84,10 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		await this.listVc.renderOnce(() => this.fetchResults())
 	}
 
+	public doesRowExist(id: string) {
+		return this.listVc.doesRowExist(id)
+	}
+
 	private async fetchResults() {
 		let responseKeyError: any
 
