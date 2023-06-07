@@ -1,3 +1,10 @@
+# [104.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.11.0...v104.12.0) (2023-06-07)
+
+
+### Features
+
+* renderAs signature ([7f56f87](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7f56f87))
+
 # [104.11.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.10.5...v104.11.0) (2023-06-07)
 
 
