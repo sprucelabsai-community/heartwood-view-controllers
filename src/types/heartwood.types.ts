@@ -540,6 +540,7 @@ export type RenderAsComponent =
 	| 'checkbox'
 	| 'autocomplete'
 	| 'tags'
+	| 'signature'
 
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>
