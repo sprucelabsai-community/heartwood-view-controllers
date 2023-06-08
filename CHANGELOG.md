@@ -1,3 +1,10 @@
+# [104.13.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.12.0...v104.13.0) (2023-06-08)
+
+
+### Features
+
+* renderNavigation introduced on a skillviewcontroller, can only be set to null for start ([4b43093](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/4b43093))
+
 # [104.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.11.0...v104.12.0) (2023-06-07)
 
 
