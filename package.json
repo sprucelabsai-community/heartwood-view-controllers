@@ -92,7 +92,7 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "dot-prop": "^8.0.0",
     "dotenv": "^16.1.4",
-    "esbuild": "^0.17.19",
+    "esbuild": "^0.18.0",
     "object-set": "^1.0.1",
     "terser-webpack-plugin": "5.3.1",
     "uglify-js": "^3.17.4",
