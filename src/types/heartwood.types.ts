@@ -372,7 +372,11 @@ export interface ViewControllerMap {
 	bigForm: BigFormViewController<any>
 	'big-form': BigFormViewController<any>
 	confirm: ConfirmViewController
+	/**
+	 * @deprecated 'formBuilderCard' -> 'form-builder-card'
+	 */
 	formBuilderCard: FormBuilderCardViewController
+	'form-builder-card': FormBuilderCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
 	/**
