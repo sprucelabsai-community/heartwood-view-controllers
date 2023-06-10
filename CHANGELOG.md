@@ -1,3 +1,23 @@
+## [104.13.12](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.11...v104.13.12) (2023-06-10)
+
+## [104.13.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.10...v104.13.11) (2023-06-10)
+
+## [104.13.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.9...v104.13.10) (2023-06-10)
+
+## [104.13.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.8...v104.13.9) (2023-06-09)
+
+## [104.13.8](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.7...v104.13.8) (2023-06-09)
+
+## [104.13.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.6...v104.13.7) (2023-06-09)
+
+## [104.13.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.5...v104.13.6) (2023-06-09)
+
+## [104.13.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.4...v104.13.5) (2023-06-09)
+
+## [104.13.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.3...v104.13.4) (2023-06-09)
+
+## [104.13.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.2...v104.13.3) (2023-06-08)
+
 ## [104.13.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.1...v104.13.2) (2023-06-08)
 
 ## [104.13.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v104.13.0...v104.13.1) (2023-06-08)
