@@ -1,5 +1,6 @@
 import { IFieldDefinition, buildSchema } from '@sprucelabs/schema'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
+import buildForm from '../../../builders/buildForm'
 import { FormBuilderFieldType, formBuilderFieldTypes } from '../../../constants'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
@@ -139,7 +140,7 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 
 		await firstRow.setValue('fieldType', 'signature')
 
-		await interactor.submitForm(this.editSectionVc.getFormVc())
+		await this.submitEditSectionForm()
 
 		assert.isEqualDeep(passedSection?.fields, [
 			{
@@ -155,6 +156,8 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 
 	@test()
 	protected static async editSectionVcSelectsSignatureFieldOnTheWayIn() {
+		let passedSection: SimpleSection | undefined
+
 		this.editSectionVc = this.builderVc.EditSectionVc({
 			editingSection: {
 				title: generateId(),
@@ -162,6 +165,7 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 				fields: [
 					{
 						type: 'image',
+						label: 'Signature',
 						renderOptions: {
 							name: 'field1' as never,
 							renderAs: 'signature',
@@ -169,11 +173,69 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 					},
 				],
 			},
-			onDone: () => {},
+			onDone: (section) => {
+				passedSection = section
+			},
 		})
 
 		const firstRow = this.getFirstRowOfEditSectionFieldList()
 		assert.isEqual(firstRow.getValue('fieldType'), 'signature')
+
+		await this.submitEditSectionForm()
+
+		assert.isEqualDeep(passedSection?.fields, [
+			{
+				type: 'image',
+				label: 'Signature',
+				renderOptions: {
+					name: 'field1' as never,
+					renderAs: 'signature',
+				},
+			},
+		])
+	}
+
+	@test()
+	protected static async addingSignatureFieldToFormUpdatesSchemaAndSectionAsExpected() {
+		const formVc = this.Controller(
+			'form',
+			buildForm({
+				schema: signatureTestSchema,
+				sections: [{ title: 'Section 1', fields: [] }],
+			})
+		)
+
+		formVc.addFields({
+			sectionIdx: 0,
+			fields: {
+				newSignatureField: {
+					type: 'image',
+					label: 'Signature',
+					renderOptions: {
+						renderAs: 'signature',
+					},
+				},
+			},
+		})
+
+		const schema = formVc.getSchema()
+		const newSigField = schema.fields.newSignatureField
+		assert.isEqualDeep(newSigField, {
+			type: 'image',
+			label: 'Signature',
+		})
+
+		const section = formVc.getSection(0)
+		assert.isEqualDeep(section.fields, [
+			{
+				name: 'newSignatureField',
+				renderAs: 'signature',
+			},
+		])
+	}
+
+	private static async submitEditSectionForm() {
+		await interactor.submitForm(this.editSectionVc.getFormVc())
 	}
 
 	private static getFirstRowOfEditSectionFieldList() {

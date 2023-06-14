@@ -152,6 +152,8 @@ export default class EditFormBuilderSectionCardViewController extends CardViewCo
 			}
 		}
 
+		console.log('EditFormBuilderSectionCard.handleSubmit', { values })
+
 		await this.onDoneHandler(values)
 	}
 

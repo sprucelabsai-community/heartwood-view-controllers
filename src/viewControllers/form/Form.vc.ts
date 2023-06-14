@@ -7,7 +7,6 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 	validateSchemaValues,
-	SchemaFieldsByName,
 	SchemaValues,
 	FieldDefinitions,
 	SchemaError,
@@ -805,17 +804,11 @@ export default class FormViewController<
 
 	public addFields(options: {
 		sectionIdx: number
-		fields: SchemaFieldsByName
+		fields: SchemaFieldsByNameWithRenderOptions
 	}) {
 		const { sectionIdx, fields } = options
 
 		assertOptions({ sectionIdx, fields }, ['sectionIdx', 'fields'])
-
-		const schema = this.getClonedSchema()
-		schema.fields = {
-			...schema.fields,
-			...fields,
-		}
 
 		const section = this.getSection(sectionIdx)
 
@@ -823,9 +816,16 @@ export default class FormViewController<
 			section.fields = []
 		}
 
+		const schema = this.getClonedSchema()
+
 		for (const field of Object.keys(fields)) {
+			const { renderOptions, ...rest } = fields[field]
+
 			//@ts-ignore
-			section.fields.push({ name: field })
+			schema.fields[field] = rest
+
+			//@ts-ignore
+			section.fields.push({ name: field, ...renderOptions })
 		}
 
 		this.setSchema(schema)
@@ -940,4 +940,10 @@ interface UpdateFieldOptions {
 	newName?: string
 	fieldDefinition?: FieldDefinitions
 	renderOptions?: Partial<FieldRenderOptions<Schema>>
+}
+
+export interface SchemaFieldsByNameWithRenderOptions {
+	[fieldName: string]: FieldDefinitions & {
+		renderOptions?: Partial<FieldRenderOptions<any>>
+	}
 }
