@@ -13,7 +13,6 @@ Spruce XP Documentation
 <p align="center">
 <img align="center" width="80%" src="https://raw.githubusercontent.com/sprucelabsai/heartwood-view-controllers/master/docs/images/sprucebot-message.png">
 </p>
-
 <br />
 <p align="center">
 <a href="https://developer.spruce.ai/#/"><img width="250" src="https://raw.githubusercontent.com/sprucelabsai/heartwood-view-controllers/master/docs/images/read-full-docs.png" /></a>
