@@ -63,13 +63,10 @@ export default abstract class AbstractInputViewController<
 			return
 		}
 
-		debugger
 		this.setModelHandler?.({
 			...this.model,
 			renderedValue,
 		})
-
-		debugger
 
 		await this.model.onChangeRenderedValue?.(renderedValue)
 
@@ -77,7 +74,6 @@ export default abstract class AbstractInputViewController<
 	}
 
 	public getRenderedValue() {
-		debugger
 		return this.model.renderedValue
 	}
 
