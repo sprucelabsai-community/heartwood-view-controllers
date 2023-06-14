@@ -7,23 +7,22 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import formAssert from '../../tests/utilities/formAssert'
 import interactor from '../../tests/utilities/interactor'
 import FormViewController from '../../viewControllers/form/Form.vc'
-import {
-	EditFormBuilderFieldCardViewController,
+import EditFormBuilderFieldCardViewController, {
 	EditFormBuilderFieldOptions,
 } from '../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderField: EditFormBuilderFieldCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		['edit-form-builder-field']: EditFormBuilderFieldCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	@test()
 	protected static async throwsWhenMissingParameters() {
 		const err = assert.doesThrow(() =>
 			//@ts-ignore
-			this.Controller('editFormBuilderField', {})
+			this.Controller('edit-form-builder-field', {})
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['name', 'field', 'onDone'],
@@ -245,7 +244,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	}
 
 	private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {
-		return this.Controller('editFormBuilderField', {
+		return this.Controller('edit-form-builder-field', {
 			name: 'firstName',
 			onDone: () => {},
 			//@ts-ignore
@@ -272,10 +271,10 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 
 declare module '../../types/heartwood.types' {
 	interface ViewControllerMap {
-		editFormBuilderField: EditFormBuilderFieldCardViewController
+		'edit-form-builder-field': EditFormBuilderFieldCardViewController
 	}
 
 	export interface ViewControllerOptionsMap {
-		editFormBuilderField: EditFormBuilderFieldOptions
+		'edit-form-builder-field': EditFormBuilderFieldOptions
 	}
 }

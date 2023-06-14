@@ -17,7 +17,7 @@ import {
 import CardViewController from '../card/Card.vc'
 import FormViewController from '../form/Form.vc'
 
-export class EditFormBuilderFieldCardViewController extends CardViewController {
+export default class EditFormBuilderFieldCardViewController extends CardViewController {
 	private formVc: FormViewController<EditFieldFormSchema>
 	public constructor(
 		options: ViewControllerOptions & EditFormBuilderFieldOptions
@@ -35,7 +35,17 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 				...field,
 			} as FieldDefinitions)
 
-		this.formVc = this.Controller(
+		this.formVc = this.FormVc(values, field, options)
+	}
+
+	private FormVc(
+		values: Record<string, any>,
+		field: Partial<FieldDefinitions>,
+		options: EditFormBuilderFieldOptions
+	) {
+		const { name } = options
+
+		return this.Controller(
 			'form',
 			buildForm({
 				schema: editFieldFormSchema,
@@ -44,8 +54,10 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 				submitButtonLabel: 'Save',
 				values,
 				onSubmit: async ({ values }) => {
-					this.formValuesToOptions(values, field)
-					await options.onDone(values as any)
+					await options.onDone(
+						//@ts-ignore
+						...this.formValuesToOptions(values, field, name)
+					)
 				},
 				sections: this.buildSections(field?.type ?? 'text'),
 			})
@@ -54,7 +66,8 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 
 	private formValuesToOptions(
 		values: Record<string, any>,
-		field: Partial<FieldDefinitions>
+		field: Partial<FieldDefinitions>,
+		name: string
 	) {
 		if (values.selectOptions) {
 			//@ts-ignore
@@ -67,8 +80,20 @@ export class EditFormBuilderFieldCardViewController extends CardViewController {
 			}
 		}
 
+		let renderOptions: FieldRenderOptions<Schema> | null = null
+
+		if (values.type === 'signature') {
+			values.type = 'image'
+			renderOptions = {
+				name: name as never,
+				renderAs: 'signature',
+			}
+		}
+
 		values.options = { ...field.options, ...values.options }
 		delete values.selectOptions
+
+		return [values, renderOptions]
 	}
 
 	private optionsToFormValues(field: FieldDefinitions) {
@@ -165,7 +190,8 @@ export interface EditFormBuilderFieldOptions {
 	name: string
 	field: Partial<FieldDefinitions>
 	onDone: (
-		fieldDefinition: FieldDefinitions & FieldRenderOptions<Schema>
+		fieldDefinition: FieldDefinitions,
+		renderOptions?: FieldRenderOptions<Schema> | null
 	) => void | Promise<void>
 }
 

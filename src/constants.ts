@@ -565,6 +565,7 @@ export const formBuilderFieldTypes = {
 	address: 'Address',
 	date: 'Date',
 	dateTime: 'Date & Time',
+	signature: 'Signature',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(
@@ -574,3 +575,5 @@ export const fieldTypeChoices: SelectChoice[] = Object.keys(
 	label: formBuilderFieldTypes[key],
 	value: key,
 }))
+
+export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes

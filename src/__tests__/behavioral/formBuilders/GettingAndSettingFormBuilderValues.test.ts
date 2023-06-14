@@ -8,7 +8,7 @@ import FormBuilderCardViewController, {
 
 export default class GettingFormBuilderValuesTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {
-		formBuilderCard: FormBuilderCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	private static readonly singlePageForm: FormBuilder = {
@@ -246,6 +246,6 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
 	}
 
 	private static Vc(options?: FormBuilderCardViewControllerOptions) {
-		return this.Controller('formBuilderCard', { ...options })
+		return this.Controller('form-builder-card', { ...options })
 	}
 }

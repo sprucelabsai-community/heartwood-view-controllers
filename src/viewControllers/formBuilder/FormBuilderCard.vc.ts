@@ -13,7 +13,7 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import renderUtil from '../../utilities/render.utility'
 import AbstractViewController from '../Abstract.vc'
 import SwipeCardViewController from '../SwipeCard.vc'
-import { EditFormBuilderFieldCardViewController } from './EditFormBuilderFieldCard.vc'
+import EditFormBuilderFieldCardViewController from './EditFormBuilderFieldCard.vc'
 import EditFormBuilderSectionCardViewController, {
 	EditFormBuilderSectionOptions,
 	SimpleSection,
@@ -23,18 +23,6 @@ import {
 	FormBuilderPageViewControllerImpl,
 } from './FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from './ManagePageTitlesCard.vc'
-
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card & {
-	shouldAllowEditing?: boolean
-}
-
-export interface FormBuilderCardViewControllerOptions {
-	header?: Card['header']
-	footer?: Card['footer']
-	shouldAllowEditing?: boolean
-	id?: string
-	isBusy?: boolean
-}
 
 export default class FormBuilderCardViewController extends AbstractViewController<Card> {
 	private swipeVc: SwipeCardViewController
@@ -73,12 +61,9 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		}
 
 		this.mixinControllers({
-			//@ts-ignore
-			editFormBuilderSection: EditFormBuilderSectionCardViewController,
-			//@ts-ignore
-			managePageTitles: ManagePageTitlesCardViewController,
-			//@ts-ignore
-			editFormBuilderField: EditFormBuilderFieldCardViewController,
+			'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+			'manage-page-titles': ManagePageTitlesCardViewController,
+			'edit-form-builder-field': EditFormBuilderFieldCardViewController,
 		})
 	}
 
@@ -316,7 +301,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}
 
 	public handleClickPageTitles() {
-		const vc = this.Controller('managePageTitles' as any, {
+		const vc = this.Controller('manage-page-titles' as any, {
 			onDone: () => {
 				void dialog.hide()
 			},
@@ -332,7 +317,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	}) {
 		const { onDone, editingSection } = options
 
-		const editSectionVc = this.Controller('editFormBuilderSection' as any, {
+		const editSectionVc = this.Controller('edit-form-builder-section' as any, {
 			onDone,
 			pageSchema: this.getPresentPageVc().getSchema(),
 			editSection: editingSection,
@@ -347,12 +332,11 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 
 		const field = pageVc.getField(fieldName as never) as any
 
-		const vc = this.Controller('editFormBuilderField' as any, {
+		const vc = this.Controller('edit-form-builder-field' as any, {
 			name: field.name,
 			label: field.label,
 			type: field.type,
 			field: {
-				//@ts-ignore
 				...field,
 			},
 			onDone: (options: any) => {
@@ -425,4 +409,16 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 			shouldAllowEditing: this.shouldAllowEditing,
 		}
 	}
+}
+
+type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card & {
+	shouldAllowEditing?: boolean
+}
+
+export interface FormBuilderCardViewControllerOptions {
+	header?: Card['header']
+	footer?: Card['footer']
+	shouldAllowEditing?: boolean
+	id?: string
+	isBusy?: boolean
 }

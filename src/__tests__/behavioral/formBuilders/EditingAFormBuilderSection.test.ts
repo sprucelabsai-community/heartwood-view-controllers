@@ -12,13 +12,13 @@ import FormBuilderCardViewController from '../../../viewControllers/formBuilder/
 export default class EditingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	private static formBuilderVc: FormBuilderCardViewController
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.formBuilderVc = this.Controller('formBuilderCard', {})
+		this.formBuilderVc = this.Controller('form-builder-card', {})
 	}
 
 	@test()

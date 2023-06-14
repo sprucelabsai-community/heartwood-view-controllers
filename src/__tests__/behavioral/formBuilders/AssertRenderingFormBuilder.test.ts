@@ -27,7 +27,7 @@ class GenericSkillViewController extends AbstractSkillViewController {
 export default class AssertRenderingFormBuilderTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		generic: GenericSkillViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	@test()
@@ -43,7 +43,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 
 	@test()
 	protected static canFindFormBuilderInFirstCardOfFirstLayout() {
-		const builder = this.Controller('formBuilderCard', {
+		const builder = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 		})
 
@@ -75,7 +75,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 
 	@test()
 	protected static canFindInOtherLayoutAndCard() {
-		const builder = this.Controller('formBuilderCard', {
+		const builder = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 		})
 
@@ -93,7 +93,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 
 	@test()
 	protected static throwsIfNotMatchingOnId() {
-		const builder = this.Controller('formBuilderCard', {
+		const builder = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 			id: 'not-found',
 		})
@@ -112,7 +112,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 
 	@test()
 	protected static canMatchBasedOnId() {
-		const builder = this.Controller('formBuilderCard', {
+		const builder = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 			id: 'look',
 		})
@@ -131,7 +131,7 @@ export default class AssertRenderingFormBuilderTest extends AbstractViewControll
 
 	@test()
 	protected static async returnFormBuilder() {
-		const builder = this.Controller('formBuilderCard', {
+		const builder = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 			id: 'look',
 		})

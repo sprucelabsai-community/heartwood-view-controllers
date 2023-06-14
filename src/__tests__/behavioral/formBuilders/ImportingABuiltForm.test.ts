@@ -6,15 +6,15 @@ import FormBuilderCardViewController from '../../../viewControllers/formBuilder/
 
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 	private static vc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			header: {
 				title: 'My title',
 				subtitle: 'why now?',

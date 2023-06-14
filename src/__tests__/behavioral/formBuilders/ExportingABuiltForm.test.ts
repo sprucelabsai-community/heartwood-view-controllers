@@ -5,15 +5,15 @@ import FormBuilderCardViewController from '../../../viewControllers/formBuilder/
 
 export default class ExportingABuiltFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 	private static vc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			header: {
 				title: 'My title',
 				subtitle: 'why now?',
@@ -29,7 +29,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
 	@test('header title set 1', 'My title', 'why now?')
 	@test('header title set 1', 'My title!', 'why not?')
 	protected static async exportsBasicToStart(title: string, subtitle: string) {
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			header: {
 				title,
 				subtitle,

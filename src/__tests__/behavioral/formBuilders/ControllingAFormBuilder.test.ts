@@ -12,20 +12,20 @@ import formAssert from '../../../tests/utilities/formAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert.utility'
 import renderUtil from '../../../utilities/render.utility'
-import { EditFormBuilderFieldCardViewController } from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
+import EditFormBuilderFieldCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 import { FormBuilderPageViewController } from '../../../viewControllers/formBuilder/FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
 export default class BuildingAFormTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		formBuilderCard: FormBuilderCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 	private static vc: FormBuilderCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('formBuilderCard', {})
+		this.vc = this.Controller('form-builder-card', {})
 	}
 
 	@test()
@@ -57,7 +57,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canSetShouldAllowEditing() {
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			shouldAllowEditing: true,
 		})
 
@@ -76,7 +76,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canDisableFormEditing() {
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			shouldAllowEditing: false,
 		})
 
@@ -467,7 +467,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canSetHeaderDuringCostruction() {
-		const vc = this.Controller('formBuilderCard', {
+		const vc = this.Controller('form-builder-card', {
 			header: { title: 'Hey', subtitle: 'Hey2' },
 		})
 		const model = this.render(vc)
@@ -786,7 +786,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 		}
 
 		//@ts-ignore
-		this.vc = this.Controller('formBuilderCard', { footer })
+		this.vc = this.Controller('form-builder-card', { footer })
 
 		const model = this.render(this.vc, {
 			shouldStripControllers: true,
@@ -806,7 +806,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static canStartIsBusy() {
-		this.vc = this.Controller('formBuilderCard', {
+		this.vc = this.Controller('form-builder-card', {
 			isBusy: true,
 		})
 

@@ -9,21 +9,16 @@ import ManagePageTitlesCardViewController, {
 	ManagePageTitlesCardViewControllerOptions,
 } from '../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
-declare module '../../types/heartwood.types' {
-	interface ViewControllerMap {
-		managePageTitles: ManagePageTitlesCardViewController
-	}
-
-	export interface ViewControllerOptionsMap {
-		managePageTitles: ManagePageTitlesCardViewControllerOptions
-	}
-}
-
 export default class ManagePageTitlesViewControllerTest extends AbstractViewControllerTest {
+	protected static controllerMap = {
+		'manage-page-titles': ManagePageTitlesCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
+	}
+
 	private static _vc: ManagePageTitlesCardViewController
 	private static get vc(): ManagePageTitlesCardViewController {
 		if (!this._vc) {
-			this._vc = this.Controller('managePageTitles', {
+			this._vc = this.Controller('manage-page-titles', {
 				onDone: () => {
 					this.wasOnDoneInvoked = true
 				},
@@ -42,19 +37,14 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		//@ts-ignore
 		this._vc = null
 		this.wasOnDoneInvoked = false
-		this.formBuilderVc = this.Controller('formBuilderCard', {})
-	}
-
-	protected static controllerMap = {
-		managePageTitles: ManagePageTitlesCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		this.formBuilderVc = this.Controller('form-builder-card', {})
 	}
 
 	@test()
 	protected static needsRequiredParams() {
 		const err = assert.doesThrow(() =>
 			//@ts-ignore
-			this.Controller('managePageTitles', {})
+			this.Controller('manage-page-titles', {})
 		)
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
 			parameters: ['onDone', 'formBuilderVc'],
@@ -160,5 +150,15 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
 		vcAssert.assertListRendersRows(this.vc.getListVc(), 2)
+	}
+}
+
+declare module '../../types/heartwood.types' {
+	interface ViewControllerMap {
+		'manage-page-titles': ManagePageTitlesCardViewController
+	}
+
+	export interface ViewControllerOptionsMap {
+		'manage-page-titles': ManagePageTitlesCardViewControllerOptions
 	}
 }

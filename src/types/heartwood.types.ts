@@ -373,9 +373,9 @@ export interface ViewControllerMap {
 	'big-form': BigFormViewController<any>
 	confirm: ConfirmViewController
 	/**
-	 * @deprecated 'formBuilderCard' -> 'form-builder-card'
+	 * @deprecated 'form-builder-card' -> 'form-builder-card'
 	 */
-	formBuilderCard: FormBuilderCardViewController
+	'form-builder-card': FormBuilderCardViewController
 	'form-builder-card': FormBuilderCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
@@ -432,7 +432,7 @@ export interface ViewControllerOptionsMap {
 	bigForm: BigFormViewControllerOptions<Schema>
 	'big-form': BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
-	formBuilderCard: FormBuilderCardViewControllerOptions
+	'form-builder-card': FormBuilderCardViewControllerOptions
 	'form-builder-card': FormBuilderCardViewControllerOptions
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions

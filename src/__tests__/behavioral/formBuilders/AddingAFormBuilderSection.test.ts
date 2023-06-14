@@ -16,18 +16,18 @@ import ListViewController from '../../../viewControllers/list/List.vc'
 
 declare module '../../../types/heartwood.types' {
 	interface ViewControllerMap {
-		editFormBuilderSection: EditFormBuilderSectionCardViewController
+		'edit-form-builder-section': EditFormBuilderSectionCardViewController
 	}
 
 	export interface ViewControllerOptionsMap {
-		editFormBuilderSection: EditFormBuilderSectionOptions
+		'edit-form-builder-section': EditFormBuilderSectionOptions
 	}
 }
 
 export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		editFormBuilderSection: EditFormBuilderSectionCardViewController,
-		formBuilderCard: FormBuilderCardViewController,
+		'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	private static formBuilderVc: FormBuilderCardViewController
@@ -38,7 +38,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.formBuilderVc = this.Controller('formBuilderCard', {})
+		this.formBuilderVc = this.Controller('form-builder-card', {})
 		const { dialogVc, builderSectionVc } = await this.simulateAddSectionClick()
 		this.vc = builderSectionVc
 		this.dialogVc = dialogVc
@@ -55,7 +55,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	protected static throwsWithMissinParams() {
 		const err = assert.doesThrow(() =>
 			//@ts-ignore
-			this.Controller('editFormBuilderSection', {})
+			this.Controller('edit-form-builder-section', {})
 		)
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
