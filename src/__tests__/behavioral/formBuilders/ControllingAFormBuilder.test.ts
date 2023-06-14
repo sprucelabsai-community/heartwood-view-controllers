@@ -841,7 +841,6 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc,
 			async () => this.vc.handleClickEditField(oldFieldName),
 			async (dialogVc) => {
-				debugger
 				assert.isTrue(
 					dialogVc.getCardVc() instanceof EditFormBuilderFieldCardViewController
 				)
