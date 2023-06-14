@@ -40,30 +40,41 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 	) {
 		super(options)
 
-		this.footerOverride = options.footer
-		this.shouldAllowEditing = options.shouldAllowEditing ?? true
+		const { isBusy, footer, header, shouldAllowEditing, id } = options
 
-		this.swipeVc = this.Controller('swipeCard', {
-			id: options.id,
-			isBusy: options.isBusy,
-			header: {
-				title: 'Building your form',
-				...options.header,
-			},
-			slides: [this.buildSlideForNewPage()],
-			footer: this.buildFooter(),
-		})
+		this.footerOverride = footer
+		this.shouldAllowEditing = shouldAllowEditing ?? true
+
+		this.swipeVc = this.SwipeCardVC(id, isBusy, header)
 
 		functionDelegationUtil.delegateFunctionCalls(this, this.swipeVc)
 
-		this.swipeVc.triggerRender = () => {
-			this.triggerRender()
-		}
+		this.swipeVc.setTriggerRenderHandler(() => this.triggerRender())
 
 		this.mixinControllers({
 			'edit-form-builder-section': EditFormBuilderSectionCardViewController,
 			'manage-page-titles': ManagePageTitlesCardViewController,
 			'edit-form-builder-field': EditFormBuilderFieldCardViewController,
+		})
+	}
+
+	private SwipeCardVC(
+		id: string | undefined,
+		isBusy: boolean | undefined,
+		header:
+			| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
+			| null
+			| undefined
+	): SwipeCardViewController {
+		return this.Controller('swipeCard', {
+			id,
+			isBusy,
+			header: {
+				title: 'Building your form',
+				...header,
+			},
+			slides: [this.buildSlideForNewPage()],
+			footer: this.buildFooter(),
 		})
 	}
 
@@ -283,8 +294,9 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		const section = { ...pageVc.getSection(clickedSectionIdx) }
 
 		const fields = normalizeFormSectionFieldNamesUtil
-			.toNames(section.fields ?? [])
-			.map((f) => pageVc.getField(f))
+			//@ts-ignore
+			.toNames<any>(section.fields ?? [])
+			.map((f) => pageVc.getField(f as never))
 
 		//@ts-ignore
 		section.fields = fields
@@ -329,23 +341,24 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 
 	public handleClickEditField(fieldName: string) {
 		const pageVc = this.getPresentPageVc()
-
 		const field = pageVc.getField(fieldName as never) as any
 
-		const vc = this.Controller('edit-form-builder-field' as any, {
-			name: field.name,
+		const vc = this.Controller('edit-form-builder-field', {
+			name: fieldName,
 			label: field.label,
 			type: field.type,
+			renderOptions: field.renderOptions,
 			field: {
 				...field,
 			},
-			onDone: (options: any) => {
-				const { name, ...fieldDefinition } = options
+			onDone: (fieldDefinition, renderOptions) => {
 				void dialog.hide()
-				//@ts-ignore
-				pageVc.updateField(fieldName, {
+				const { name } = renderOptions
+
+				pageVc.updateField(fieldName as never, {
 					newName: name,
 					fieldDefinition,
+					renderOptions,
 				})
 			},
 		})
@@ -374,7 +387,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
 		}
 	}
 
-	public async importObject(imported: FormBuilder) {
+	public async importObject(imported: FormBuilder<any>) {
 		this.swipeVc.setHeaderTitle(imported.title)
 		imported.subtitle && this.swipeVc.setHeaderSubtitle(imported.subtitle)
 		this.swipeVc.setSections([])

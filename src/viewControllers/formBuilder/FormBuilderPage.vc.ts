@@ -52,16 +52,18 @@ export class FormBuilderPageViewControllerImpl
 		sectionIdx: number,
 		options?: { name?: string; type?: string; label?: string }
 	): void {
+		const { name, ...rest } = options ?? {}
+
 		const totalFields = this.getTotalFields()
-		const fieldName = options?.name ?? this.buildNextFieldName(totalFields)
+		const fieldName = name ?? this.buildNextFieldName(totalFields)
 
 		const fieldDefinition = { ...this.fieldBuilder(totalFields) }
 
-		for (const key of Object.keys(options ?? {})) {
+		for (const key of Object.keys(rest ?? {})) {
 			//@ts-ignore
-			if (options[key]) {
+			if (rest[key]) {
 				//@ts-ignore
-				fieldDefinition[key] = options[key]
+				fieldDefinition[key] = rest[key]
 			}
 		}
 
@@ -154,14 +156,13 @@ export class FormBuilderPageViewControllerImpl
 				simpleSection.fields = []
 			}
 
-			//@ts-ignore
+			const name = field.renderOptions.name
+
 			simpleSection.fields.push({
-				//@ts-ignore
-				name: field.name,
-				label: field.label ?? field.name,
-				//@ts-ignore
+				name,
+				label: field.label ?? name,
 				type: field.type,
-			})
+			} as any)
 		}
 
 		return simpleSection
@@ -169,7 +170,9 @@ export class FormBuilderPageViewControllerImpl
 
 	private addFieldsToSection(sectionIdx: number, fields: SimpleRow[]) {
 		for (const field of fields) {
-			let fieldName = field.label ? namesUtil.toCamel(field.label) : field.name
+			let fieldName = field.label
+				? namesUtil.toCamel(field.label)
+				: field.renderOptions?.name
 
 			//@ts-ignore
 			let type = field.type ?? 'text'

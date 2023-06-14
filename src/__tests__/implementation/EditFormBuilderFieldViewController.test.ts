@@ -127,6 +127,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 	@test()
 	protected static async retainsOptionsNotSupported() {
 		let submittedResults: any
+
 		const formVc = this.Vc({
 			name: 'firstName2',
 			field: {
@@ -145,10 +146,9 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 
 		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, {
-			name: 'firstName2',
-			isRequired: undefined,
 			label: 'First name2',
 			type: 'text',
+			isRequired: undefined,
 			options: {
 				anythingGoes: true,
 			},
@@ -176,10 +176,9 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 
 		await interactor.submitForm(formVc)
 		assert.isEqualDeep(submittedResults, {
-			name: 'firstName2',
 			label: 'First name2',
-			isRequired: undefined,
 			type: 'select',
+			isRequired: undefined,
 			options: {
 				anythingGoes: true,
 				choices: [{ value: 'one', label: 'One' }],
@@ -205,6 +204,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
 		}).getFormVc()
 
 		formAssert.formRendersField(formVc, 'isRequired')
+
 		await formVc.setValue('isRequired', true)
 
 		await interactor.submitForm(formVc)

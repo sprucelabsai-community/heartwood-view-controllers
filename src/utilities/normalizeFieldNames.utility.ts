@@ -5,32 +5,31 @@ import {
 	FieldType,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { FieldRenderOptions } from '../types/heartwood.types'
+import { FieldRenderOptions, FormSection } from '../types/heartwood.types'
+
+type NormalizedField<S extends Schema> = Partial<FieldDefinitions> & {
+	type: FieldType
+	renderedValue?: any | null
+	renderOptions: FieldRenderOptions<S>
+}
 
 const normalizeFormSectionFieldNamesUtil = {
 	toObjects<S extends Schema = Schema>(
-		fields: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>['fields'],
+		fields: FormSection<S>['fields'],
 		schema?: Schema
-	): (FieldRenderOptions<S> &
-		Partial<FieldDefinitions> & {
-			type: FieldType
-			renderedValue?: any | null
-		})[] {
-		const normalized =
-			fields?.map((field) => {
-				let f = typeof field === 'string' ? { name: field } : field
+	): NormalizedField<S>[] {
+		const normalized: NormalizedField<S>[] = []
 
-				if (schema?.fields?.[f.name]) {
-					f = {
-						...schema?.fields?.[f.name],
-						...f,
-					}
-				}
+		fields?.forEach((field) => {
+			let f = typeof field === 'string' ? { name: field } : field
+			const match = schema?.fields?.[f.name]
+			normalized.push({
+				...match!,
+				renderOptions: f,
+			})
+		})
 
-				return f
-			}) ?? []
-
-		return normalized as any
+		return normalized
 	},
 	toNames<S extends Schema = Schema>(
 		fields: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>['fields']

@@ -1,31 +1,42 @@
-import { IFieldDefinition, Schema } from '@sprucelabs/schema'
+import { IFieldDefinition, buildSchema } from '@sprucelabs/schema'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { FormBuilderFieldType, formBuilderFieldTypes } from '../../../constants'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
-import { FieldRenderOptions } from '../../../types/heartwood.types'
+import vcAssert from '../../../tests/utilities/vcAssert'
+import { FieldRenderOptions, FormBuilder } from '../../../types/heartwood.types'
 import EditFormBuilderFieldCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
+import EditFormBuilderSectionCardViewController, {
+	SimpleSection,
+} from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
+import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class AddingASignatureFieldTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
 		'edit-form-builder-field': EditFormBuilderFieldCardViewController,
+		'form-builder-card': FormBuilderCardViewController,
 	}
 
 	private static passedOptions: IFieldDefinition | undefined
-	private static passedRenderOptions:
-		| FieldRenderOptions<Schema>
-		| undefined
-		| null
-	private static vc: EditFormBuilderFieldCardViewController
+	private static passedRenderOptions: FieldRenderOptions<any> | undefined | null
+	private static editFieldVc: EditFormBuilderFieldCardViewController
+	private static builderVc: FormBuilderCardViewController
+	private static editSectionVc: EditFormBuilderSectionCardViewController
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.passedOptions = undefined
 		this.passedRenderOptions = undefined
 
-		this.reset('sig', {
+		this.resetEditFieldVc('sig', {
 			type: 'text',
 		})
+
+		this.builderVc = this.Controller('form-builder-card', {
+			shouldAllowEditing: true,
+		})
+
+		await this.builderVc.importObject(builtTestForm)
 	}
 
 	@test()
@@ -37,7 +48,7 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 	protected static async passesBackRenderAsOptionsWhenEditingField() {
 		const name = generateId()
 
-		this.reset(name, {
+		this.resetEditFieldVc(name, {
 			type: 'text',
 		})
 
@@ -53,28 +64,208 @@ export default class AddingASignatureFieldTest extends AbstractViewControllerTes
 	@test()
 	protected static async didNotBreakRenderOptionsForOtherFields() {
 		await this.selectTypeAndSave('text')
-		assert.isFalsy(this.passedRenderOptions)
+		assert.isEqualDeep(this.passedRenderOptions, { name: 'sig' })
+	}
+
+	@test()
+	protected static async editFieldVcSelectsSignatureFieldOnTheWayIn() {
+		this.resetEditFieldVc(
+			'signature',
+			{
+				type: 'image',
+			},
+			{
+				renderAs: 'signature',
+			}
+		)
+		assert.isEqual(this.editFieldFormVc.getValue('type'), 'signature')
+	}
+
+	@test()
+	protected static async selectsImageFieldWithoutRenderOptions() {
+		this.resetEditFieldVc(
+			'signatuer',
+			{
+				type: 'image',
+			},
+			{}
+		)
+		assert.isEqual(this.editFieldFormVc.getValue('type'), 'image')
+	}
+
+	@test()
+	protected static async signatureRenderOptionsPassedBackFromEdit() {
+		await this.clickEditField('toSignature')
+		await this.selectNewFieldTypeAndSubmit('signature')
+		const field = this.getFieldFromBuilder('toSignature')
+
+		assert.isEqual(field.type, 'image')
+		assert.isEqualDeep(field.renderOptions, {
+			renderAs: 'signature',
+			name: 'toSignature',
+		})
+	}
+
+	@test()
+	protected static async switchingFromSignatureRemovesRenderAs() {
+		await this.clickEditField('fromSignature')
+		await this.selectNewFieldTypeAndSubmit('text')
+
+		const field = this.getFieldFromBuilder('fromSignature')
+
+		assert.isEqual(field.type, 'text')
+		assert.isEqualDeep(field.renderOptions, {
+			name: 'fromSignature',
+		})
+	}
+
+	@test()
+	protected static async renderOptionsPassedToEditFieldVc() {
+		await this.clickEditField('fromSignature')
+		const values = this.editFieldFormVc.getValues()
+		assert.isEqual(values.type, 'signature')
+	}
+
+	@test()
+	protected static async selectingSignatureFieldFromEditSectionSetsRenderOptions() {
+		let passedSection: SimpleSection | undefined
+		this.editSectionVc = this.builderVc.EditSectionVc({
+			onDone: (section) => {
+				passedSection = section
+			},
+		})
+
+		const firstRow = this.getFirstRowOfEditSectionFieldList()
+
+		await firstRow.setValue('fieldType', 'signature')
+
+		await interactor.submitForm(this.editSectionVc.getFormVc())
+
+		assert.isEqualDeep(passedSection?.fields, [
+			{
+				type: 'image',
+				label: 'Field 1',
+				renderOptions: {
+					name: 'field1' as never,
+					renderAs: 'signature',
+				},
+			},
+		])
+	}
+
+	@test()
+	protected static async editSectionVcSelectsSignatureFieldOnTheWayIn() {
+		this.editSectionVc = this.builderVc.EditSectionVc({
+			editingSection: {
+				title: generateId(),
+				type: 'form',
+				fields: [
+					{
+						type: 'image',
+						renderOptions: {
+							name: 'field1' as never,
+							renderAs: 'signature',
+						},
+					},
+				],
+			},
+			onDone: () => {},
+		})
+
+		const firstRow = this.getFirstRowOfEditSectionFieldList()
+		assert.isEqual(firstRow.getValue('fieldType'), 'signature')
+	}
+
+	private static getFirstRowOfEditSectionFieldList() {
+		const listVc = this.editSectionVc.getFieldListVc()
+		const firstRow = listVc.getRowVc(0)
+		return firstRow
+	}
+
+	private static getFieldFromBuilder(fieldName: string) {
+		const pageVc = this.builderVc.getPresentPageVc()
+		const field = pageVc.getField(fieldName as never) as any
+		return field
+	}
+
+	private static async selectNewFieldTypeAndSubmit(type: string) {
+		await this.selectNewFieldType(type)
+		await this.submitEditFieldForm()
+	}
+
+	private static async clickEditField(fieldName: string) {
+		const dlg = await vcAssert.assertRendersDialog(this.builderVc, () =>
+			this.builderVc.handleClickEditField(fieldName)
+		)
+
+		this.editFieldVc = vcAssert.assertRendersAsInstanceOf(
+			dlg.getCardVc(),
+			EditFormBuilderFieldCardViewController
+		)
 	}
 
 	private static async selectTypeAndSave(type: FormBuilderFieldType) {
-		const formVc = await this.selectType(type)
-		await interactor.submitForm(formVc)
+		await this.selectNewFieldType(type)
+		await this.submitEditFieldForm()
 	}
 
-	private static async selectType(type: string) {
-		const formVc = this.vc.getFormVc()
-		await formVc.setValue('type', type)
-		return formVc
+	private static async submitEditFieldForm() {
+		await interactor.submitForm(this.editFieldFormVc)
 	}
 
-	private static reset(name: string, definition: FieldDefinition) {
-		this.vc = this.Controller('edit-form-builder-field', {
+	private static get editFieldFormVc() {
+		return this.editFieldVc.getFormVc()
+	}
+
+	private static async selectNewFieldType(type: string) {
+		await this.editFieldFormVc.setValue('type', type)
+	}
+
+	private static resetEditFieldVc(
+		name: string,
+		definition: IFieldDefinition,
+		renderOptions?: Partial<FieldRenderOptions<any>>
+	) {
+		this.editFieldVc = this.Controller('edit-form-builder-field', {
 			name,
 			field: definition as any,
+			renderOptions,
 			onDone: (options, renderOptions) => {
 				this.passedOptions = options
 				this.passedRenderOptions = renderOptions
 			},
 		})
 	}
+}
+
+const signatureTestSchema = buildSchema({
+	id: 'addingSigFieldTestForm1',
+	fields: {
+		toSignature: {
+			type: 'text',
+		},
+		fromSignature: {
+			type: 'image',
+		},
+	},
+})
+
+type SigFieldAsTextSchema = typeof signatureTestSchema
+
+const builtTestForm: FormBuilder<SigFieldAsTextSchema> = {
+	title: generateId(),
+	pages: [
+		{
+			schema: signatureTestSchema,
+			title: generateId(),
+			sections: [
+				{
+					fields: [
+						'toSignature',
+						{ name: 'fromSignature', renderAs: 'signature' },
+					],
+				},
+			],
+		},
+	],
 }

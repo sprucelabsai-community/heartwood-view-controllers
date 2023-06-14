@@ -113,7 +113,7 @@ const formAssert = {
 				section.fields,
 				schema
 			)
-			const match = fields.find((n) => n.name === fieldName)
+			const match = fields.find((n) => n.renderOptions.name === fieldName)
 
 			if (match) {
 				if (fieldDefinition) {
@@ -339,20 +339,22 @@ this.Controller(
 		assertOptions({ vc, fieldName, expected }, ['vc', 'fieldName', 'expected'])
 
 		const field = vc.getField(fieldName)
+		const { renderOptions } = field
 
 		assert.isEqual(
-			field.renderAs,
+			renderOptions.renderAs,
 			expected,
 			`The field named '${fieldName}' is rendering as '${
-				field.renderAs ?? '***default**'
+				renderOptions ?? '***default**'
 			}', but I expected it to render as '${expected}'!`
 		)
 	},
 
 	fieldRendersInputButton(vc: FormVc, fieldName: string, id?: string) {
-		const field = vc.getField(fieldName)
+		const { renderOptions } = vc.getField(fieldName)
 
-		const inputButtons = (field.rightButtons as InputButton[]) || undefined
+		const inputButtons =
+			(renderOptions.rightButtons as InputButton[]) || undefined
 		assert.isAbove(
 			inputButtons?.length ?? 0,
 			0,

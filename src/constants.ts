@@ -566,6 +566,7 @@ export const formBuilderFieldTypes = {
 	date: 'Date',
 	dateTime: 'Date & Time',
 	signature: 'Signature',
+	image: 'Image',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(

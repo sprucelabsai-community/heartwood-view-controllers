@@ -18,7 +18,7 @@ import {
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { CalendarEventOptions } from '..'
-import { fancyIcons, formBuilderFieldTypes, lineIcons } from '../constants'
+import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
@@ -274,8 +274,8 @@ export type CalendarPerson =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 export type CardFooter =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
-export type FormBuilder =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject
+export type FormBuilder<S extends Schema = Schema> =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject<S>
 export type FormBuilderPage =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
 
@@ -375,7 +375,7 @@ export interface ViewControllerMap {
 	/**
 	 * @deprecated 'form-builder-card' -> 'form-builder-card'
 	 */
-	'form-builder-card': FormBuilderCardViewController
+	formBuilderCard: FormBuilderCardViewController
 	'form-builder-card': FormBuilderCardViewController
 	list: ListViewController
 	toolBelt: ToolBeltViewController
@@ -432,7 +432,7 @@ export interface ViewControllerOptionsMap {
 	bigForm: BigFormViewControllerOptions<Schema>
 	'big-form': BigFormViewControllerOptions<Schema>
 	confirm: ConfirmViewControllerOptions
-	'form-builder-card': FormBuilderCardViewControllerOptions
+	formBuilderCard: FormBuilderCardViewControllerOptions
 	'form-builder-card': FormBuilderCardViewControllerOptions
 	list: ListViewControllerOptions
 	toolBelt: ToolBeltViewControllerOptions
@@ -662,8 +662,6 @@ export type KeyboardKey =
 	| 'Tab'
 	| 'Enter'
 	| 'Escape'
-
-export type FormBuilderFieldType = keyof typeof formBuilderFieldTypes
 
 export interface CellInputKeyDownOptions {
 	rowVc: ListRowViewController

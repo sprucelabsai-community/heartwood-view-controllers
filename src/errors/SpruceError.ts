@@ -12,6 +12,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				break
 
 			case 'INVALID_VIEW_CONTROLLER_NAME':
+				options.validNames.sort()
 				message = `Couldn't find a view controller called "${
 					options.name
 				}". Try one of the following (or run 'spruce create.view' if testing!):\n\n${options.validNames.join(

@@ -7,7 +7,6 @@ import {
 	assertOptions,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
 import { fieldTypeChoices, formBuilderFieldTypes } from '../../constants'
 import {
@@ -16,15 +15,30 @@ import {
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
 import FormViewController from '../form/Form.vc'
+import FieldUpdater from './FieldUpdater'
 
 export default class EditFormBuilderFieldCardViewController extends CardViewController {
 	private formVc: FormViewController<EditFieldFormSchema>
+	private fieldBuilder: FieldUpdater
+	private onDoneHandler: DoneHandler
 	public constructor(
 		options: ViewControllerOptions & EditFormBuilderFieldOptions
 	) {
 		super(options)
 
-		const { field } = options
+		const {
+			field: { ...field },
+			onDone,
+			renderOptions,
+		} = options
+
+		if (field.type === 'image' && renderOptions?.renderAs === 'signature') {
+			//@ts-ignore
+			field.type = 'signature'
+		}
+
+		this.onDoneHandler = onDone
+		this.fieldBuilder = FieldUpdater.Handler()
 
 		this.assertRequiredParameters(options)
 		this.assertSupportedFieldType(field.type ?? 'text')
@@ -35,16 +49,13 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
 				...field,
 			} as FieldDefinitions)
 
-		this.formVc = this.FormVc(values, field, options)
+		this.formVc = this.FormVc(values, field)
 	}
 
 	private FormVc(
 		values: Record<string, any>,
-		field: Partial<FieldDefinitions>,
-		options: EditFormBuilderFieldOptions
+		field: Partial<FieldDefinitions>
 	) {
-		const { name } = options
-
 		return this.Controller(
 			'form',
 			buildForm({
@@ -54,9 +65,9 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
 				submitButtonLabel: 'Save',
 				values,
 				onSubmit: async ({ values }) => {
-					await options.onDone(
+					await this.onDoneHandler(
 						//@ts-ignore
-						...this.formValuesToOptions(values, field, name)
+						...this.formValuesToOptions(values, field)
 					)
 				},
 				sections: this.buildSections(field?.type ?? 'text'),
@@ -66,34 +77,13 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
 
 	private formValuesToOptions(
 		values: Record<string, any>,
-		field: Partial<FieldDefinitions>,
-		name: string
+		field: Partial<FieldDefinitions>
 	) {
-		if (values.selectOptions) {
-			//@ts-ignore
-			values.options = {
-				//@ts-ignore
-				choices: values.selectOptions.split('\n').map((label) => ({
-					label: label.trim(),
-					value: namesUtil.toCamel(label),
-				})),
-			}
-		}
-
-		let renderOptions: FieldRenderOptions<Schema> | null = null
-
-		if (values.type === 'signature') {
-			values.type = 'image'
-			renderOptions = {
-				name: name as never,
-				renderAs: 'signature',
-			}
-		}
-
-		values.options = { ...field.options, ...values.options }
-		delete values.selectOptions
-
-		return [values, renderOptions]
+		return this.fieldBuilder.update(
+			this.formVc.getValue('name')!,
+			field,
+			values
+		)
 	}
 
 	private optionsToFormValues(field: FieldDefinitions) {
@@ -186,13 +176,16 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
 	}
 }
 
+type DoneHandler = (
+	fieldDefinition: FieldDefinitions,
+	renderOptions: FieldRenderOptions<Schema>
+) => void | Promise<void>
+
 export interface EditFormBuilderFieldOptions {
 	name: string
 	field: Partial<FieldDefinitions>
-	onDone: (
-		fieldDefinition: FieldDefinitions,
-		renderOptions?: FieldRenderOptions<Schema> | null
-	) => void | Promise<void>
+	renderOptions?: Partial<FieldRenderOptions<Schema>> | null
+	onDone: DoneHandler
 }
 
 const editFieldFormSchema = buildSchema({
@@ -232,3 +225,4 @@ const editFieldFormSchema = buildSchema({
 })
 
 type EditFieldFormSchema = typeof editFieldFormSchema
+export type EditFieldValues = SchemaValues<EditFieldFormSchema>

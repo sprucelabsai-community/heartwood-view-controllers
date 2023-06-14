@@ -305,6 +305,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 
 		const section = pageVc.getSection(1)
 		assert.isLength(section.fields, 1)
+
 		assert.isEqualDeep(section.fields, [
 			//@ts-ignore
 			{ name: 'field2', label: 'Field 2', type: 'text' },
@@ -746,6 +747,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canUpdateSelectOptions() {
 		const pageVc = this.vc.getPageVc(0)
+
 		pageVc.addField(0)
 		pageVc.addField(0)
 
@@ -839,6 +841,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
 			this.vc,
 			async () => this.vc.handleClickEditField(oldFieldName),
 			async (dialogVc) => {
+				debugger
 				assert.isTrue(
 					dialogVc.getCardVc() instanceof EditFormBuilderFieldCardViewController
 				)

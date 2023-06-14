@@ -237,7 +237,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 		assert.isEqualDeep(fieldOptions, {
 			type: 'select',
 			//@ts-ignore
-			name: 'field1',
+			renderOptions: { name: 'field1' },
 			label: 'Field 1',
 			options: {
 				choices: [{ value: 'one', label: 'One' }],

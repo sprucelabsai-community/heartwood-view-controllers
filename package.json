@@ -147,12 +147,13 @@
       [
         "@sprucelabs/jest-sheets-reporter",
         {
-          "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
-          "worksheetId": 889384139,
+          "sheetId": "1krALwa0VKyyqfKsD1_bqlOqZrCTgjAb9eCEOv0kx72g",
+          "worksheetId": 0,
           "testMap": {
-            "canMakeDotSyntaxUpdates3": "H10",
-            "noPendingSetInRenderedValueIfNotAlreadySet": "H6",
-            "cancellingWillChangeTriggersRender": "J2"
+            "signatureRenderOptionsPassedBackFromEdit": "N4",
+            "editFieldVcSelectsSignatureFieldOnTheWayIn": "N5",
+            "selectingSignatureFieldFromEditSectionSetsRenderOptions": "H6",
+            "switchingFromSignatureRemovesRenderAs": "N7"
           }
         }
       ]

@@ -116,6 +116,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 	@test()
 	protected static async defaultSectionTitleIncrementsWithSectionInTheCurrentPage() {
 		const pageVc = this.formBuilderVc.getPageVc(0)
+
 		pageVc.addSection()
 
 		const formVc = this.formBuilderVc
@@ -174,8 +175,9 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			{
 				label: 'Waka',
 				type: 'phone',
-				//@ts-ignore
-				name: 'field1',
+				renderOptions: {
+					name: 'field1' as never,
+				},
 			},
 		])
 	}
@@ -219,11 +221,11 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			assert.isEqualDeep(values, {
 				fields: [
 					//@ts-ignore
-					{ label: 'Field 1', type: 'text', name: 'field1' },
+					{ label: 'Field 1', type: 'text', renderOptions: { name: 'field1' } },
 					//@ts-ignore
-					{ label: 'Field 2', type: 'text', name: 'field2' },
+					{ label: 'Field 2', type: 'text', renderOptions: { name: 'field2' } },
 					//@ts-ignore
-					{ label: 'Field 4', type: 'text', name: 'field4' },
+					{ label: 'Field 4', type: 'text', renderOptions: { name: 'field4' } },
 				],
 				shouldRenderAsGrid: false,
 				title: 'Section 2',
@@ -275,17 +277,17 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			fields: [
 				{
 					label: 'Field 1',
-					name: 'field1',
+					renderOptions: { name: 'field1' },
 					type: 'text',
 				},
 				{
 					label: 'Field 2',
-					name: 'field2',
+					renderOptions: { name: 'field2' },
 					type: 'text',
 				},
 				{
 					label: 'Field 3',
-					name: 'field3',
+					renderOptions: { name: 'field3' },
 					type: 'text',
 				},
 			],
@@ -308,22 +310,22 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 			fields: [
 				{
 					label: 'Field 1',
-					name: 'field1',
+					renderOptions: { name: 'field1' },
 					type: 'text',
 				},
 				{
 					label: 'Field 2',
-					name: 'field2',
+					renderOptions: { name: 'field2' },
 					type: 'text',
 				},
 				{
 					label: 'Field 3',
-					name: 'field3',
+					renderOptions: { name: 'field3' },
 					type: 'text',
 				},
 				{
 					label: 'Field 4',
-					name: 'field4',
+					renderOptions: { name: 'field4' },
 					type: 'text',
 				},
 			],

@@ -106,7 +106,7 @@ export default class FormViewController<
 					setModel: (model) => {
 						delete model.value
 						this.updateField(name, {
-							renderOptions: model,
+							fieldDefinition: model,
 						})
 					},
 				})
@@ -260,8 +260,9 @@ export default class FormViewController<
 	}
 
 	private _getFieldVc(fieldName: SchemaFieldNames<S>) {
-		const field = this.getField(fieldName)
-		const vc = field.vc
+		const { renderOptions } = this.getField(fieldName)
+
+		const vc = renderOptions.vc
 		return vc as FormInputViewController & {
 			_originalSetValue?: FormInputViewController['setValue']
 		}
@@ -537,7 +538,8 @@ export default class FormViewController<
 		fieldName: SchemaFieldNames<S>,
 		updates: UpdateFieldOptions
 	) {
-		const { newName } = updates ?? {}
+		const { newName, fieldDefinition, renderOptions } = updates ?? {}
+
 		let passedFieldName = fieldName
 
 		assertOptions({ fieldName, updates }, ['fieldName', 'updates'])
@@ -557,24 +559,24 @@ export default class FormViewController<
 			schema.fields = {}
 		}
 
-		if (newName) {
+		if (newName && newName !== passedFieldName) {
 			schema.fields[newName] = schema.fields[passedFieldName]
 			delete schema.fields[passedFieldName]
 			passedFieldName = newName as any
 		}
 
-		if (updates.fieldDefinition) {
-			this.updateFieldDefinition(passedFieldName, updates.fieldDefinition)
+		if (fieldDefinition) {
+			this.updateFieldDefinition(passedFieldName, fieldDefinition)
 		}
 
-		if (updates.renderOptions || newName) {
+		if (renderOptions || newName) {
 			let { sectionIdx, fieldIdx } =
 				this.getSectionAndFieldForFieldNamed(fieldName)
 
 			const newFields = [...(this.getSection(sectionIdx).fields ?? [])]
 
 			newFields.splice(fieldIdx, 1, {
-				...updates.renderOptions,
+				...renderOptions,
 				name: passedFieldName,
 			})
 
@@ -603,14 +605,10 @@ export default class FormViewController<
 			this.throwFieldNotFound<N>(fieldName)
 		}
 
-		const renderOptions = normalizeFormSectionFieldNamesUtil.toObjects(
+		const options = normalizeFormSectionFieldNamesUtil.toObjects(
 			this.getSection(sectionIdx).fields ?? [],
 			this.getSchema()
 		)?.[fieldIdx]
-
-		const options = {
-			...renderOptions,
-		}
 
 		const isInPending = fieldName in this.pendingSets
 
@@ -618,7 +616,7 @@ export default class FormViewController<
 			options.renderedValue = this.pendingSets[fieldName]
 		}
 
-		return options as CompiledFieldOptions<S, N>
+		return options as any
 	}
 
 	private throwFieldNotFound<N extends SchemaFieldNames<S>>(fieldName: N) {
@@ -637,7 +635,7 @@ export default class FormViewController<
 				s.fields ?? []
 			)
 
-			fieldIdx = normalized.findIndex((n) => n.name === fieldName)
+			fieldIdx = normalized.findIndex((n) => n.renderOptions.name === fieldName)
 
 			return fieldIdx > -1
 		})
@@ -792,6 +790,9 @@ export default class FormViewController<
 		fieldName: N,
 		fieldDefinition: FieldDefinitions
 	) {
+		//@ts-ignore never pass through render options this way
+		delete fieldDefinition.renderOptions
+
 		const schema = this.getClonedSchema()
 		//@ts-ignore
 		schema.fields[fieldName] = fieldDefinition
@@ -931,7 +932,9 @@ type GetValueOptions = {
 type CompiledFieldOptions<
 	S extends Schema,
 	N extends SchemaFieldNames<S>
-> = S['fields'][N] & FieldRenderOptions<S>
+> = S['fields'][N] & {
+	renderOptions: FieldRenderOptions<S>
+}
 
 interface UpdateFieldOptions {
 	newName?: string
