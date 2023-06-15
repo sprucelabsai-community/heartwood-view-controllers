@@ -138,6 +138,7 @@ export default class EditFormBuilderSectionCardViewController extends CardViewCo
 		const text = this.formVc.getValue('text')
 		if (text) {
 			values.text = text
+			values.fields = undefined
 		}
 
 		for (const field of values.fields ?? []) {
@@ -151,8 +152,6 @@ export default class EditFormBuilderSectionCardViewController extends CardViewCo
 				}
 			}
 		}
-
-		console.log('EditFormBuilderSectionCard.handleSubmit', { values })
 
 		await this.onDoneHandler(values)
 	}
