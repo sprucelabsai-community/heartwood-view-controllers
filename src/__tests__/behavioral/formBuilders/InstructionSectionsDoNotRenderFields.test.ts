@@ -50,4 +50,7 @@ export default class InstructionSectionsDoNotRenderFieldsTest extends AbstractVi
 
 		assert.isFalsy(passedValues?.fields)
 	}
+
+	@test()
+	protected static async whenSettingBackToFieldsItDropsInFirstFieldInSchema() {}
 }

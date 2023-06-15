@@ -294,8 +294,6 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 		})
 
 		await this.formVc.setValue('title', 'go again')
-		await this.formVc.setValue('type', 'text')
-		await this.formVc.setValue('text', 'how are you?')
 		await this.formVc.setValue('shouldRenderAsGrid', false)
 
 		this.vc.addField()
@@ -304,9 +302,8 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
 
 		assert.isEqualDeep(onDoneValues, {
 			title: 'go again',
-			type: 'text',
+			type: 'form',
 			shouldRenderAsGrid: false,
-			text: 'how are you?',
 			fields: [
 				{
 					label: 'Field 1',
