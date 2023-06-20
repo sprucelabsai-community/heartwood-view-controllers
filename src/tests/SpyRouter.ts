@@ -30,4 +30,8 @@ export default class SpyRouter implements Router {
 	> {
 		return undefined
 	}
+
+	public getNamespace(): string {
+		return 'heartwood'
+	}
 }

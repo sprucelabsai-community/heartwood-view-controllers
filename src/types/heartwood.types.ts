@@ -339,6 +339,7 @@ export interface Router {
 		options?: RedirectOptions
 	): Promise<SkillViewControllerMap[Id]>
 	back(): Promise<SkillViewController | undefined>
+	getNamespace?(): string
 }
 
 export interface ButtonController {

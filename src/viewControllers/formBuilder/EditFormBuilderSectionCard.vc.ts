@@ -308,6 +308,21 @@ export default class EditFormBuilderSectionCardViewController extends CardViewCo
 	private handleFormChange() {
 		this.formVc.setSections(this.buildFormSections())
 		this.formVc.setFooter(this.buildFooter())
+
+		if (this.formVc.getValue('type') === 'form') {
+			if (this.fieldListVc.getTotalRows() === 0) {
+				this.fieldListVc.addRow(
+					this.renderRow({
+						idx: 0,
+						label: 'New field',
+						renderOptions: {
+							name: 'field' as never,
+						},
+						type: 'text',
+					})
+				)
+			}
+		}
 	}
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
