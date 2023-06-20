@@ -1,3 +1,10 @@
+# [105.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.24...v105.1.0) (2023-06-20)
+
+
+### Features
+
+* getNamespace on router ([8a77b31](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8a77b31))
+
 ## [105.0.24](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.23...v105.0.24) (2023-06-20)
 
 ## [105.0.23](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.22...v105.0.23) (2023-06-19)
