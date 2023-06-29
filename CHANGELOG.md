@@ -1,3 +1,22 @@
+## [105.1.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.5...v105.1.6) (2023-06-22)
+
+## [105.1.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.4...v105.1.5) (2023-06-22)
+
+## [105.1.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.3...v105.1.4) (2023-06-22)
+
+## [105.1.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.2...v105.1.3) (2023-06-21)
+
+## [105.1.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.1...v105.1.2) (2023-06-20)
+
+## [105.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.1.0...v105.1.1) (2023-06-20)
+
+# [105.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.24...v105.1.0) (2023-06-20)
+
+
+### Features
+
+* getNamespace on router ([8a77b31](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8a77b31))
+
 ## [105.0.24](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.23...v105.0.24) (2023-06-20)
 
 ## [105.0.23](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v105.0.22...v105.0.23) (2023-06-19)
