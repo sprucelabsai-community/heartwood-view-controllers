@@ -127,7 +127,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
 		if (responseKeyError) {
 			throw new Error(
-				`The key '${responseKeyError}' was not found in response!`
+				`The key '${this.responseKey}' was not found in response or no records were returned!`
 			)
 		}
 
