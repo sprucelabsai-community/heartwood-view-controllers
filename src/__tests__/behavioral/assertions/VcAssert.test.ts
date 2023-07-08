@@ -36,7 +36,7 @@ class CardVc extends AbstractViewController<Card> {
 	}
 }
 
-class BadSkillViewController {
+class BadSkillViewController extends AbstractSkillViewController {
 	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
 		this.triggerRender = handler
 	}
@@ -44,7 +44,9 @@ class BadSkillViewController {
 	public triggerRender() {}
 
 	public render() {
-		return {}
+		return {
+			layouts: [],
+		}
 	}
 }
 
@@ -54,6 +56,7 @@ class GoodSkillViewController implements SkillViewController {
 
 	public constructor(model: SkillView) {
 		this.model = model
+
 		//@ts-ignore
 		this.isLoginRequired = model.isLoginRequired
 	}
@@ -80,15 +83,12 @@ class GoodSkillViewController implements SkillViewController {
 class GoodWithDialogSkillViewController extends AbstractSkillViewController {
 	private model: SkillView
 
-	//@ts-ignore
-	public constructor(model: SkillView) {
-		//@ts-ignore
+	public constructor(model: any) {
 		super(model)
 		this.model = model
 	}
 
 	public async load() {
-		//@ts-ignore
 		this.renderInDialog({})
 	}
 
@@ -103,9 +103,7 @@ let alertMessage2 = generateId()
 class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 	public afterAlert = false
 
-	//@ts-ignore
 	public constructor(model: any) {
-		//@ts-ignore
 		super(model)
 	}
 
@@ -133,9 +131,7 @@ class GoodWithAlertSkillViewController extends AbstractSkillViewController {
 class GoodWithConfirm extends AbstractSkillViewController {
 	public confirmResults?: boolean
 
-	//@ts-ignore
 	public constructor(model: any) {
-		//@ts-ignore
 		super(model)
 	}
 
@@ -154,16 +150,14 @@ class GoodWithConfirm extends AbstractSkillViewController {
 class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewController {
 	private model: SkillView
 
-	//@ts-ignore
-	public constructor(model: SkillView) {
-		//@ts-ignore
+	public constructor(model: any) {
 		super(model)
-		this.model = model
+		this.model = model as SkillView
 	}
 
 	public async load() {
 		await new Promise((resolve) => setTimeout(resolve, 100))
-		//@ts-ignore
+
 		await this.renderInDialog({}).wait()
 	}
 
@@ -190,16 +184,15 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 	protected static knowsIfNotRenderingCard() {
 		assert.isFunction(vcAssert.assertSkillViewRendersCard)
 		const vc = this.BadController()
-		//@ts-ignore
+
 		assert.doesThrow(() => vcAssert.assertSkillViewRendersCard(vc))
-		//@ts-ignore
 		assert.doesThrow(() => vcAssert.assertSkillViewRendersCards(vc))
 	}
 
 	@test()
 	protected static canAssertNumberOfCards() {
 		const vc = this.BadController()
-		//@ts-ignore
+
 		let cardVcs = vcAssert.assertSkillViewRendersCards(vc, 0)
 		assert.isLength(cardVcs, 0)
 
@@ -215,16 +208,11 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		assert.doesThrow(() =>
-			//@ts-ignore
-			vcAssert.assertSkillViewRendersCards(goodVc, 0)
-		)
+		assert.doesThrow(() => vcAssert.assertSkillViewRendersCards(goodVc, 0))
 
-		//@ts-ignore
 		cardVcs = vcAssert.assertSkillViewRendersCards(goodVc, 1)
 		assert.isLength(cardVcs, 1)
 
-		//@ts-ignore
 		cardVcs = vcAssert.assertSkillViewRendersCards(goodVc)
 		assert.isLength(cardVcs, 1)
 	}
@@ -243,7 +231,6 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		//@ts-ignore
 		const matchVc = vcAssert.assertSkillViewRendersCard(goodVc)
 
 		assert.isEqual(matchVc, cardVc)
@@ -263,7 +250,6 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		//@ts-ignore
 		const cardVcs = vcAssert.assertSkillViewRendersCards(goodVc, 1)
 
 		assert.isEqual(cardVcs[0], cardVc)
@@ -285,7 +271,6 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		//@ts-ignore
 		const cardVc = vcAssert.assertSkillViewRendersCard(vc)
 
 		assert.isEqual(cardVc.getHeaderTitle(), 'go!')
@@ -308,7 +293,6 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			],
 		})
 
-		//@ts-ignore
 		const cardVc = vcAssert.assertSkillViewRendersCard(vc)
 
 		assert.isEqual(cardVc.getHeaderTitle(), 'go2!')
@@ -588,7 +572,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 		}
 
 		while (
-			//@ts-ignore
+			// @ts-ignore
 			model.layouts[layoutIdx].cards[cardIdx].body.sections.length <= sectionIdx
 		) {
 			//@ts-ignore
@@ -1254,8 +1238,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			body: {
 				sections: [
 					{
-						//@ts-ignore
-						talkingSprucebot: { controller: expected },
+						talkingSprucebot: expected.render(),
 					},
 				],
 			},
@@ -1272,8 +1255,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 					{},
 					{},
 					{
-						//@ts-ignore
-						talkingSprucebot: { controller: expected },
+						talkingSprucebot: expected.render(),
 					},
 				],
 			},
