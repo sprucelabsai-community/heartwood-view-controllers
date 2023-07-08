@@ -114,6 +114,7 @@ export default class ViewControllerExporter {
 							originalError: stats?.compilation.errors[0],
 						})
 					)
+					return
 				}
 
 				if (!stats || stats?.compilation.emittedAssets.size === 0) {
