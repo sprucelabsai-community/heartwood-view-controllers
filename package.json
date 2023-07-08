@@ -21,6 +21,7 @@
     },
     "upgradeIgnoreList": [
       "terser-webpack-plugin",
+      "webpack",
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/spruce-event-plugin",
       "@sprucelabs/spruce-skill-booter",
@@ -95,7 +96,7 @@
     "object-set": "^1.0.1",
     "terser-webpack-plugin": "5.3.1",
     "uglify-js": "^3.17.4",
-    "webpack": "^5.88.1"
+    "webpack": "5.70.0"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^5.0.31",
