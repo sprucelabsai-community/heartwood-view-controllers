@@ -165,10 +165,26 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		return this.listVc.getListVc()
 	}
 
+	public selectRow(row: string | number) {
+		this.listVc.selectRow(row)
+	}
+
+	public deselectRow(row: string | number) {
+		this.listVc.deselectRow(row)
+	}
+
+	public isRowSelected(row: string | number): boolean {
+		return this.listVc.isRowSelected(row)
+	}
+
 	public addRow(
 		row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 	) {
 		this.listVc.addRow(row)
+	}
+
+	public setSelectedRows(rows: (string | number)[]) {
+		this.listVc.setSelectedRows(rows)
 	}
 
 	public getValues() {

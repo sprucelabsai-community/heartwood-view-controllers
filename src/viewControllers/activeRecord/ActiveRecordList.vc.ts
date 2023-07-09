@@ -178,6 +178,22 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 		return this.isLoaded
 	}
 
+	public isRowSelected(id: string | number) {
+		return this.listVc.isRowSelected(id)
+	}
+
+	public selectRow(id: string | number) {
+		this.listVc.selectRow(id)
+	}
+
+	public setSelectedRows(rows: (string | number)[]) {
+		this.listVc.setSelectedRows(rows)
+	}
+
+	public deselectRow(id: string | number) {
+		this.listVc.deselectRow(id)
+	}
+
 	public getRecords() {
 		if (!this.isLoaded) {
 			throw new Error(

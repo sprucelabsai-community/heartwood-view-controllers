@@ -11,6 +11,7 @@ import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardFooter, CriticalError } from '../../../types/heartwood.types'
 import ActiveRecordCardViewController, {
@@ -733,6 +734,49 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 		assert.isFalse(vc.doesRowExist('test'))
 		vc.addRow({ id: 'test', cells: [] })
 		assert.isTrue(vc.doesRowExist('test'))
+	}
+
+	@test()
+	protected static async exposesRowSelectionMethods() {
+		const [{ id: id1 }, { id: id2 }, { id: id3 }] =
+			await this.seedOrganizations()
+
+		const vc = this.Vc()
+		await vc.load()
+
+		const listVc = vc.getListVc()
+
+		assert.isFalse(vc.isRowSelected(id1))
+
+		listAssert.rowIsNotSelected(listVc, id1)
+
+		vc.selectRow(id1)
+
+		listAssert.rowIsSelected(listVc, id1)
+
+		assert.isTrue(vc.isRowSelected(id1))
+
+		vc.selectRow(id2)
+		listAssert.rowIsSelected(listVc, id2)
+
+		vc.deselectRow(id1)
+		listAssert.rowIsNotSelected(listVc, id1)
+
+		vc.deselectRow(id2)
+		listAssert.rowIsNotSelected(listVc, id2)
+
+		vc.setSelectedRows([id1, id2])
+
+		listAssert.rowIsSelected(listVc, id1)
+		listAssert.rowIsSelected(listVc, id2)
+
+		vc.setSelectedRows([id3])
+
+		assert.isTrue(vc.isRowSelected(id3))
+
+		listAssert.rowIsNotSelected(listVc, id1)
+		listAssert.rowIsNotSelected(listVc, id2)
+		listAssert.rowIsSelected(listVc, id3)
 	}
 
 	private static async assertListLoadingClearsCustomRow(
