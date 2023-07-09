@@ -1,3 +1,10 @@
+# [106.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.0.5...v106.1.0) (2023-07-09)
+
+
+### Features
+
+* active record card now exposes row selection methods! ([495de5c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/495de5c))
+
 ## [106.0.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.0.4...v106.0.5) (2023-07-08)
 
 ## [106.0.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.0.3...v106.0.4) (2023-07-08)
