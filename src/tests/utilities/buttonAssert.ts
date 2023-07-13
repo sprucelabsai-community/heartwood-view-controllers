@@ -169,6 +169,14 @@ const buttonAssert = {
 			`The button '${id}' is not enabled! Try setting 'isEnabled' to true.`
 		)
 	},
+
+	buttonIsSelected(vc: ViewController<Card>, id: string) {
+		const button = this.cardRendersButton(vc, id)
+		assert.isTrue(
+			button.render().isSelected,
+			`The button '${id}' is not selected and should be!`
+		)
+	},
 }
 
 export default buttonAssert
