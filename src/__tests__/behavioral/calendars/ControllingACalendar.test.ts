@@ -1115,6 +1115,7 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 	) {
 		const { enabledDays: actual } = this.render(this.vc)
 		assert.isEqualDeep(actual, expected)
+		assert.isEqualDeep(this.vc.getEnabledDays(), expected)
 	}
 
 	private static getEventVc(id: string) {

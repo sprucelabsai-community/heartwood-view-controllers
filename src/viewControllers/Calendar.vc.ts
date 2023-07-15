@@ -351,6 +351,10 @@ export default class CalendarViewController extends AbstractViewController<Calen
 		this.triggerRender()
 	}
 
+	public getEnabledDays() {
+		return this.model.enabledDays
+	}
+
 	public setControllerForEventType(type: string, vcId: string) {
 		if (this.vcIdsByEventType[type] === vcId) {
 			return
