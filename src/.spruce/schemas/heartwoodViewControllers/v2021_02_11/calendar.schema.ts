@@ -176,6 +176,13 @@ const calendarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calenda
 	                type: 'raw',
 	                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
 	            },
+	            /** . */
+	            'enabledDays': {
+	                type: 'schema',
+	                isArray: true,
+	                minArrayLength: 0,
+	                options: {schema: calendarSelectedDateSchema_v2021_02_11,}
+	            },
 	    }
 }
 

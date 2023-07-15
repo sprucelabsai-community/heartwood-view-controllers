@@ -254,6 +254,8 @@ export type SimpleViewControllerFactory = Pick<
 	ViewControllerFactory,
 	'Controller'
 >
+export type CalendarSelectedDate =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
 export type FormSection<S extends Schema> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>
 export type Map = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map

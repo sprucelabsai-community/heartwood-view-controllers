@@ -1,6 +1,7 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { personSchema } from '@sprucelabs/spruce-core-schemas'
 import calendarEventBuilder from './calendarEvent.builder'
+import calendarSelectedDateBuilder from './calendarSelectedDate.builder'
 
 const timeSchema = buildSchema({
 	id: 'calendarTime',
@@ -105,23 +106,7 @@ export default buildSchema({
 			type: 'schema',
 			isArray: true,
 			options: {
-				schema: {
-					id: 'calendarSelectedDate',
-					fields: {
-						day: {
-							type: 'number',
-							isRequired: true,
-						},
-						month: {
-							type: 'number',
-							isRequired: true,
-						},
-						year: {
-							type: 'number',
-							isRequired: true,
-						},
-					},
-				},
+				schema: calendarSelectedDateBuilder,
 			},
 		},
 		timezoneOffsetMs: {
@@ -260,6 +245,14 @@ export default buildSchema({
 			options: {
 				valueType:
 					'(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>',
+			},
+		},
+		enabledDays: {
+			type: 'schema',
+			isArray: true,
+			minArrayLength: 0,
+			options: {
+				schema: calendarSelectedDateBuilder,
 			},
 		},
 	},

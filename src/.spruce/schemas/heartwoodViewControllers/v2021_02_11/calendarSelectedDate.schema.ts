@@ -7,7 +7,7 @@ const calendarSelectedDateSchema: SpruceSchemas.HeartwoodViewControllers.v2021_0
 	id: 'calendarSelectedDate',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: '',
+	name: 'calendar selected date',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */

@@ -5293,7 +5293,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			id: 'calendarSelectedDate',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
-			name: '',
+			name: 'calendar selected date',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -5716,6 +5716,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldEnableSwipeNav'?: boolean| undefined | null
 				
 				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>)| undefined | null
+				
+				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -5886,6 +5888,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onSwipe': {
 			                type: 'raw',
 			                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'enabledDays': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
 			            },
 			    }
 		}

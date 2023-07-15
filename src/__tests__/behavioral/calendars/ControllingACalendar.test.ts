@@ -7,18 +7,13 @@ import calendarSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { CalendarSelectedDate } from '../../../types/heartwood.types'
 import AbstractCalendarEventViewController from '../../../viewControllers/AbstractCalendarEvent.vc'
 import { CalendarViewControllerOptions } from '../../../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../../../viewControllers/CalendarEvent.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 import SpyCalendarVc from './SpyCalendarVc'
-
-type CalendarTime =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
-
-type CalendarEvent =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent
 
 class TestEventViewController extends AbstractCalendarEventViewController {}
 
@@ -1067,6 +1062,61 @@ export default class ControllingACalendarTest extends AbstractViewControllerTest
 		this.vc.getSelectedEvent()
 	}
 
+	@test()
+	protected static async canSetEnabledDays() {
+		const expected = [
+			{
+				day: 1,
+				month: 0,
+				year: 2020,
+			},
+		]
+
+		this.vc = this.Vc({
+			enabledDays: expected,
+		})
+
+		this.assertRenderedEnabledDaysEquals(expected)
+	}
+
+	@test()
+	protected static async settingEnabledDaysTriggersRenderAndSetsToViewModel() {
+		let expected = [
+			{
+				day: 1,
+				month: 0,
+				year: 2020,
+			},
+		]
+
+		this.vc.setEnabledDays(expected)
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+		this.assertRenderedEnabledDaysEquals(expected)
+
+		expected = [
+			{
+				day: 2,
+				month: 5,
+				year: 2022,
+			},
+			{
+				day: 3,
+				month: 2,
+				year: 2030,
+			},
+		]
+
+		this.vc.setEnabledDays(expected)
+		this.assertRenderedEnabledDaysEquals(expected)
+	}
+
+	private static assertRenderedEnabledDaysEquals(
+		expected: CalendarSelectedDate[]
+	) {
+		const { enabledDays: actual } = this.render(this.vc)
+		assert.isEqualDeep(actual, expected)
+	}
+
 	private static getEventVc(id: string) {
 		return this.vc.getEventVc(id) as SpyCalendarEvent
 	}
@@ -1206,3 +1256,9 @@ class SpyCalendarEvent extends AbstractCalendarEventViewController {
 		return super.deselect()
 	}
 }
+
+type CalendarTime =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime
+
+type CalendarEvent =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent

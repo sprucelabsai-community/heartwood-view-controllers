@@ -5,6 +5,7 @@ import {
 	ViewControllerOptions,
 	CalendarEventViewController,
 	TriggerRenderHandler,
+	CalendarSelectedDate,
 } from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
@@ -343,6 +344,11 @@ export default class CalendarViewController extends AbstractViewController<Calen
 
 	public setDefaultControllerForEvents(vcId: string) {
 		this.defaultEventVcId = vcId
+	}
+
+	public setEnabledDays(expected: CalendarSelectedDate[]) {
+		this.model.enabledDays = expected
+		this.triggerRender()
 	}
 
 	public setControllerForEventType(type: string, vcId: string) {
