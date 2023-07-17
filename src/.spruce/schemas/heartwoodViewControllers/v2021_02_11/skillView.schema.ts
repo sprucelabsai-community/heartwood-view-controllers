@@ -55,7 +55,6 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	            'layouts': {
 	                label: 'Layout',
 	                type: 'schema',
-	                isRequired: true,
 	                isArray: true,
 	                options: {schema: layoutSchema_v2021_02_11,}
 	            },

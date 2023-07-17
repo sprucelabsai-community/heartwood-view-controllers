@@ -318,7 +318,7 @@ export interface SkillViewController<
 	getScope?(): ScopeFlag[]
 	blur?(): Promise<void>
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
-	renderToolBelt(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
+	renderToolBelt?(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
 	renderNavigation?(): null | undefined
 	getTitle?(): string | undefined
 	getSubtitle?(): string | undefined

@@ -16,14 +16,20 @@ import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
+import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import {
 	getVcName,
 	pluckAllFromCard,
 	SelectViewController,
 } from './assertSupport'
 import interactor from './interactor'
+import { pullCardsFromSkillView } from './vcAssert'
 
 const listAssert = {
+	views: {} as SimpleFactory,
+	_setVcFactory(views: SimpleFactory) {
+		this.views = views
+	},
 	listRendersRows(
 		listVc: ViewController<List>,
 		expectedRows?: number | string[]
@@ -249,13 +255,11 @@ const listAssert = {
 	skillViewRendersSwipeCard(vc: SkillViewController): SwipeCardViewController {
 		assertOptions({ vc }, ['vc'])
 
-		const model = renderUtil.render(vc)
+		const cards = pullCardsFromSkillView(vc, this.views)
 
-		for (const layout of model.layouts) {
-			for (const card of layout.cards ?? []) {
-				if (card.controller instanceof SwipeCardViewControllerImp) {
-					return card.controller
-				}
+		for (const vc of cards) {
+			if (vc instanceof SwipeCardViewControllerImp) {
+				return vc
 			}
 		}
 		assert.fail(`I could not find a swipe view in '${getVcName(vc)}'!`)
@@ -520,3 +524,5 @@ function getListVc(listVc: ViewController<List>): ListViewController {
 	)
 	return controller
 }
+
+type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>

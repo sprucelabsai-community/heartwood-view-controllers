@@ -10,10 +10,10 @@ export default function buildSkillViewLayout(
 		...cards,
 	}
 }
-interface SkillViewLayoutCards {
-	leftCards: Card[]
-	rightCards: Card[]
-	topCards: Card[]
-	bottomCards: Card[]
-	topLeftCards: Card[]
+export interface SkillViewLayoutCards {
+	leftCards?: Card[]
+	rightCards?: Card[]
+	topCards?: Card[]
+	bottomCards?: Card[]
+	topLeftCards?: Card[]
 }

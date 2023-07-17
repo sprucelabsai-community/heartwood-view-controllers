@@ -652,13 +652,12 @@ const vcAssert = {
 	): SwipeCardViewController {
 		assertOptions({ vc }, ['vc'])
 
-		const model = renderUtil.render(vc)
+		//@ts-ignore
+		const cards = pullCardsFromSkillView(vc, this.factory)
 
-		for (const layout of model.layouts) {
-			for (const card of layout.cards ?? []) {
-				if (card.controller instanceof SwipeCardViewController) {
-					return card.controller
-				}
+		for (const vc of cards ?? []) {
+			if (vc instanceof SwipeCardViewController) {
+				return vc
 			}
 		}
 		assert.fail(`I could not find a swipe view in '${getVcName(vc)}'!`)
@@ -1584,16 +1583,22 @@ const vcAssert = {
 
 export default vcAssert
 
-function getViewId(c: ViewController<any>) {
+export function getViewId(c: ViewController<any>) {
 	return renderUtil.render(c).id
 }
 
-function pullCardsFromSkillView(
+export function pullCardsFromSkillView(
 	vc: SkillViewController<Record<string, any>>,
 	factory: any
 ) {
 	const model = renderUtil.render(vc)
-	const cards: CardViewController[] = []
+	const cards: CardViewController[] = [
+		...(model.topCards?.map((c) => c.controller!) ?? []),
+		...(model.leftCards?.map((c) => c.controller!) ?? []),
+		...(model.rightCards?.map((c) => c.controller!) ?? []),
+		...(model.bottomCards?.map((c) => c.controller!) ?? []),
+		...(model.topLeftCards?.map((c) => c.controller!) ?? []),
+	]
 	for (const layout of model?.layouts ?? []) {
 		for (const card of layout.cards ?? []) {
 			if (card) {

@@ -38,7 +38,6 @@ export default buildSchema({
 		layouts: {
 			type: 'schema',
 			label: 'Layout',
-			isRequired: true,
 			isArray: true,
 			options: {
 				schema: layoutBuilder,

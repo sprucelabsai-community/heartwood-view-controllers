@@ -23,7 +23,9 @@ import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
 import StubStorage from './StubStorage'
 import { Vc } from './utilities/assertSupport'
+import formAssert from './utilities/formAssert'
 import interactor from './utilities/interactor'
+import listAssert from './utilities/listAssert'
 import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
@@ -45,7 +47,11 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 		await super.beforeEach()
 		Authenticator.reset()
 		Authenticator.setStorage(new StubStorage())
+
 		vcAssert._setVcFactory(this.Factory())
+		formAssert._setVcFactory(this.Factory())
+		listAssert._setVcFactory(this.Factory())
+
 		SchemaRegistry.getInstance().forgetAllSchemas()
 		this.mercuryFixture = undefined
 		SwipeCardViewController.swipeDelay = 0

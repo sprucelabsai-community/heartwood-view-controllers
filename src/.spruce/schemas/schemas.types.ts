@@ -1453,7 +1453,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'description'?: string| undefined | null
 				/** Layout. */
-				'layouts': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]
+				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
 				
 				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
@@ -1519,7 +1519,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'layouts': {
 			                label: 'Layout',
 			                type: 'schema',
-			                isRequired: true,
 			                isArray: true,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
 			            },

@@ -557,6 +557,10 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			layouts: [],
 		}
 
+		if (!model.layouts) {
+			model.layouts = []
+		}
+
 		while (model.layouts.length <= layoutIdx) {
 			model.layouts.push({
 				cards: [],

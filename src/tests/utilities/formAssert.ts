@@ -24,6 +24,7 @@ import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { pluckAllFromCard } from './assertSupport'
+import { getViewId, pullCardsFromSkillView } from './vcAssert'
 
 const formAssert = {
 	views: {} as SimpleFactory,
@@ -310,15 +311,12 @@ this.Controller(
 		vc: SkillViewController,
 		id?: string
 	): FormBuilderCardViewController {
-		const model = renderUtil.render(vc)
+		const cards = pullCardsFromSkillView(vc, this.views)
 
-		for (const layout of model.layouts) {
-			for (const card of layout.cards ?? []) {
-				const vc = card?.controller
-				//@ts-ignore
-				if (vc && vc.__isFormBuilder && (!id || card.id === id)) {
-					return vc as any
-				}
+		for (const vc of cards) {
+			//@ts-ignore
+			if (vc && vc.__isFormBuilder && (!id || getViewId(vc) === id)) {
+				return vc as any
 			}
 		}
 
@@ -393,7 +391,7 @@ function BuildFormVc(
 	)
 }
 
-type FormAssert = Omit<typeof formAssert, 'views' | '_setVcFactory'>
+type FormAssert = Omit<typeof formAssert, 'views'>
 
 export default formAssert as FormAssert
 
