@@ -284,6 +284,9 @@ export type FormBuilderPage =
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
+export type LayoutStyle = NonNullable<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
+>
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 
 export type TriggerRender = () => void

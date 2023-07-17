@@ -21,6 +21,7 @@ export * from './viewControllers/form/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
 export * from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
+
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
  */
@@ -162,6 +163,7 @@ export { default as mapInteractor } from './tests/utilities/mapInteractor'
 export * from './utilities/render.utility'
 export { default as listUtil } from './viewControllers/list/list.utility'
 export { default as splitCardsIntoLayouts } from './utilities/splitCardsIntoLayouts'
+export { default as buildSkillViewLayout } from './utilities/buildSkillViewLayout'
 export { default as removeUniversalViewOptions } from './utilities/removeUniversalViewOptions'
 export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachine'
 

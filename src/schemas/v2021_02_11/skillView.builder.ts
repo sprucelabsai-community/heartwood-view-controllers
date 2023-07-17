@@ -44,5 +44,73 @@ export default buildSchema({
 				schema: layoutBuilder,
 			},
 		},
+		leftCards: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		rightCards: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		topCards: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		bottomCards: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		topLeftCards: {
+			type: 'schema',
+			isArray: true,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		layout: {
+			type: 'select',
+			options: {
+				choices: [
+					{
+						value: 'big-left',
+						label: 'Big left',
+					},
+					{
+						value: 'big-right',
+						label: 'Big right',
+					},
+					{
+						value: 'big-top',
+						label: 'Big top',
+					},
+					{
+						value: 'big-top-left',
+						label: 'Big top left',
+					},
+				],
+			},
+		},
 	},
 })
