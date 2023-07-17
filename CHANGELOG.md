@@ -1,3 +1,10 @@
+# [106.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.3.1...v106.4.0) (2023-07-17)
+
+
+### Features
+
+* skill view layout syle support ([73b247f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/73b247f))
+
 ## [106.3.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.3.0...v106.3.1) (2023-07-15)
 
 # [106.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.2.4...v106.3.0) (2023-07-15)
