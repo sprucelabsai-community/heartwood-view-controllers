@@ -1,3 +1,10 @@
+# [107.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.4.0...v107.0.0) (2023-07-17)
+
+
+### Breaking Changes
+
+* better support for layouts but breaking changes in listAssert ([3cdcc6a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3cdcc6a))
+
 # [106.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v106.3.1...v106.4.0) (2023-07-17)
 
 
