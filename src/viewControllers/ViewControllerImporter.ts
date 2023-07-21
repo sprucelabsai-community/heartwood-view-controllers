@@ -2,9 +2,11 @@ import SpruceError from '../errors/SpruceError'
 import { ImportedViewController } from '../types/heartwood.types'
 
 export default class ViewControllerImporter {
+	public static Class?: typeof ViewControllerImporter
 	private constructor() {}
+
 	public static Importer() {
-		return new this()
+		return new (this.Class ?? this)()
 	}
 
 	public import(script: string): ImportedViewController[] {

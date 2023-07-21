@@ -113,6 +113,17 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static async throwsIfAssertsAlertTwice() {
+		await vcAssert.assertRendersAlert(this.vc, () =>
+			this.vc.operationAfterAlert()
+		)
+
+		await assert.doesThrowAsync(() =>
+			vcAssert.assertRendersAlert(this.vc, () => this.vc.operationAfterAlert())
+		)
+	}
+
 	private static Vc() {
 		return this.Controller(
 			'success.root' as any,
