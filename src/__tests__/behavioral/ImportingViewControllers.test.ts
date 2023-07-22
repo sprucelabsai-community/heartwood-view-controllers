@@ -139,6 +139,14 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		assert.isEqual(vc.getValueSetInConstructor(), 'set!')
 	}
 
+	@test()
+	protected static canExtendViewControllerImport() {
+		ViewControllerImporter.Class = SpyViewControllerImporter
+		const instance = ViewControllerImporter.Importer()
+		//@ts-ignore
+		assert.isInstanceOf(instance, SpyViewControllerImporter)
+	}
+
 	private static importAndGetFactory() {
 		const controllers = this.importControllers()
 		const factory = this.Factory()
@@ -168,3 +176,5 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		return controllers
 	}
 }
+
+class SpyViewControllerImporter extends ViewControllerImporter {}
