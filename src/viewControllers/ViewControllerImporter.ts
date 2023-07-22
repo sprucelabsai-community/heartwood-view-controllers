@@ -3,6 +3,7 @@ import { ImportedViewController } from '../types/heartwood.types'
 
 export default class ViewControllerImporter {
 	public static Class?: typeof ViewControllerImporter
+
 	private constructor() {}
 
 	public static Importer() {
