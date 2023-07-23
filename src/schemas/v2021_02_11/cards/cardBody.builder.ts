@@ -24,6 +24,10 @@ export default buildSchema({
 			type: 'boolean',
 			label: 'Swipe',
 		},
+		shouldSwipeBreakIntoCardsOnLandscape: {
+			type: 'boolean',
+			label: 'Swipe break into cards on landscape',
+		},
 		onSelectSlideTitle: {
 			type: 'raw',
 			label: 'Select slide title handler',

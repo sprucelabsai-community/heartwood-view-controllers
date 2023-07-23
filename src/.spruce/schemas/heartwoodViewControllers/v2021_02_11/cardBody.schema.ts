@@ -35,6 +35,12 @@ const cardBodySchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBod
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Swipe break into cards on landscape. */
+	            'shouldSwipeBreakIntoCardsOnLandscape': {
+	                label: 'Swipe break into cards on landscape',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Select slide title handler. */
 	            'onSelectSlideTitle': {
 	                label: 'Select slide title handler',

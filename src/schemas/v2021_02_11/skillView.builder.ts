@@ -108,6 +108,18 @@ export default buildSchema({
 						value: 'big-top-left',
 						label: 'Big top left',
 					},
+					{
+						value: 'one-col',
+						label: 'One column',
+					},
+					{
+						value: 'two-col',
+						label: 'Two column',
+					},
+					{
+						value: 'three-col',
+						label: 'Three left',
+					},
 				],
 			},
 		},

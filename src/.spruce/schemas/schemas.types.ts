@@ -1465,7 +1465,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'topLeftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left")| undefined | null
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "one-col" | "two-col" | "three-col")| undefined | null
 		}
 
 		interface SkillViewSchema extends SpruceSchema.Schema {
@@ -1555,7 +1555,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'layout': {
 			                type: 'select',
-			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"}],}
+			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"one-col","label":"One column"},{"value":"two-col","label":"Two column"},{"value":"three-col","label":"Three left"}],}
 			            },
 			    }
 		}
@@ -1718,6 +1718,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
 				/** Swipe. */
 				'shouldEnableSectionSwiping'?: boolean| undefined | null
+				/** Swipe break into cards on landscape. */
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
 				/** Select slide title handler. */
 				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
 				/** Slide change callback. */
@@ -1755,6 +1757,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Swipe. */
 			            'shouldEnableSectionSwiping': {
 			                label: 'Swipe',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe break into cards on landscape. */
+			            'shouldSwipeBreakIntoCardsOnLandscape': {
+			                label: 'Swipe break into cards on landscape',
 			                type: 'boolean',
 			                options: undefined
 			            },

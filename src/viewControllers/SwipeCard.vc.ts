@@ -32,7 +32,13 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 	) {
 		super(options)
 
-		const { slides, onSlideChange, isBusy, ...rest } = options
+		const {
+			slides,
+			onSlideChange,
+			shouldBreakIntoCardsOnLandscape,
+			isBusy,
+			...rest
+		} = options
 
 		this.slideChangeHandler = onSlideChange
 
@@ -41,6 +47,7 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 			body: {
 				isBusy,
 				sections: slides,
+				shouldSwipeBreakIntoCardsOnLandscape: shouldBreakIntoCardsOnLandscape,
 				swipeController: (controller) => (this.swipeController = controller),
 				onSelectSlideTitle: this.jumpToSlide.bind(this),
 				onChangeSlide: this.handleSlideChange.bind(this),
@@ -165,6 +172,7 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 
 export type SwipeViewControllerOptions = {
 	slides: Slide[]
+	shouldBreakIntoCardsOnLandscape?: boolean
 	onSlideChange?: (slide: number) => void
 	isBusy?: boolean
 } & Omit<Card, 'body'>

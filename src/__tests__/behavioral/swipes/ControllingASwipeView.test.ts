@@ -90,6 +90,20 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		})
 	}
 
+	@test('should break into cards true', true)
+	@test('should break into cards false', false)
+	protected static async canSetBreakIntoCardsOnLandscape(
+		shouldBreakIntoCardsOnLandscape: boolean
+	) {
+		let vc = this.Vc({
+			shouldBreakIntoCardsOnLandscape,
+			slides: [],
+		})
+
+		const model = this.render(vc)
+		assert.isTrue(model.body?.shouldSwipeBreakIntoCardsOnLandscape)
+	}
+
 	@test()
 	protected static async canSetSlide() {
 		const vc = this.Vc({
