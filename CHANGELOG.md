@@ -1,3 +1,10 @@
+# [107.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.0.6...v107.1.0) (2023-07-23)
+
+
+### Features
+
+* shouldBreakIntoCardsOnLandscape ([b528461](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b528461))
+
 ## [107.0.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.0.5...v107.0.6) (2023-07-22)
 
 ## [107.0.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.0.4...v107.0.5) (2023-07-22)
