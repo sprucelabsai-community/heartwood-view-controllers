@@ -62,18 +62,28 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	            'leftCards': {
 	                type: 'schema',
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */
 	            'rightCards': {
 	                type: 'schema',
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */
 	            'topCards': {
 	                type: 'schema',
 	                isArray: true,
+	                minArrayLength: 0,
+	                options: {schema: cardSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'cards': {
+	                type: 'schema',
+	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */
@@ -86,6 +96,7 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	            'topLeftCards': {
 	                type: 'schema',
 	                isArray: true,
+	                minArrayLength: 0,
 	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */

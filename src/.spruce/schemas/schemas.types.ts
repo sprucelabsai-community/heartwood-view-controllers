@@ -1461,6 +1461,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
 				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
 				'topLeftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
@@ -1526,18 +1528,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'leftCards': {
 			                type: 'schema',
 			                isArray: true,
+			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */
 			            'rightCards': {
 			                type: 'schema',
 			                isArray: true,
+			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */
 			            'topCards': {
 			                type: 'schema',
 			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'cards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */
@@ -1550,6 +1562,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'topLeftCards': {
 			                type: 'schema',
 			                isArray: true,
+			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */

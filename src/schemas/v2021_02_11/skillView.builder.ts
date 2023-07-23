@@ -45,6 +45,7 @@ export default buildSchema({
 		},
 		leftCards: {
 			type: 'schema',
+			minArrayLength: 0,
 			isArray: true,
 			options: {
 				schemaId: {
@@ -55,6 +56,7 @@ export default buildSchema({
 		rightCards: {
 			type: 'schema',
 			isArray: true,
+			minArrayLength: 0,
 			options: {
 				schemaId: {
 					id: 'card',
@@ -64,6 +66,17 @@ export default buildSchema({
 		topCards: {
 			type: 'schema',
 			isArray: true,
+			minArrayLength: 0,
+			options: {
+				schemaId: {
+					id: 'card',
+				},
+			},
+		},
+		cards: {
+			type: 'schema',
+			isArray: true,
+			minArrayLength: 0,
 			options: {
 				schemaId: {
 					id: 'card',
@@ -82,6 +95,7 @@ export default buildSchema({
 		topLeftCards: {
 			type: 'schema',
 			isArray: true,
+			minArrayLength: 0,
 			options: {
 				schemaId: {
 					id: 'card',
