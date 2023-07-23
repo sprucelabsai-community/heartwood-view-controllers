@@ -101,7 +101,10 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		})
 
 		const model = this.render(vc)
-		assert.isTrue(model.body?.shouldSwipeBreakIntoCardsOnLandscape)
+		assert.isEqual(
+			model.body?.shouldSwipeBreakIntoCardsOnLandscape,
+			shouldBreakIntoCardsOnLandscape
+		)
 	}
 
 	@test()
