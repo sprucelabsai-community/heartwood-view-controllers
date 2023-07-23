@@ -1465,8 +1465,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
-				'topLeftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
 				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "one-col" | "two-col" | "three-col")| undefined | null
 		}
 
@@ -1556,13 +1554,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'bottomCards': {
 			                type: 'schema',
 			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'topLeftCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
 			            },
 			            /** . */

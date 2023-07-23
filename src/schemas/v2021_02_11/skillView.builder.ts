@@ -92,16 +92,6 @@ export default buildSchema({
 				},
 			},
 		},
-		topLeftCards: {
-			type: 'schema',
-			isArray: true,
-			minArrayLength: 0,
-			options: {
-				schemaId: {
-					id: 'card',
-				},
-			},
-		},
 		layout: {
 			type: 'select',
 			options: {

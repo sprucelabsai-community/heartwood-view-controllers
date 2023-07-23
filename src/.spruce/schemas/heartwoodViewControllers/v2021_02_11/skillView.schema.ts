@@ -93,13 +93,6 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                options: {schema: cardSchema_v2021_02_11,}
 	            },
 	            /** . */
-	            'topLeftCards': {
-	                type: 'schema',
-	                isArray: true,
-	                minArrayLength: 0,
-	                options: {schema: cardSchema_v2021_02_11,}
-	            },
-	            /** . */
 	            'layout': {
 	                type: 'select',
 	                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"one-col","label":"One column"},{"value":"two-col","label":"Two column"},{"value":"three-col","label":"Three left"}],}
