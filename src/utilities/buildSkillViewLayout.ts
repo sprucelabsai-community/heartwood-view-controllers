@@ -14,6 +14,6 @@ export interface SkillViewLayoutCards {
 	leftCards?: Card[]
 	rightCards?: Card[]
 	topCards?: Card[]
+	cards?: Card[]
 	bottomCards?: Card[]
-	topLeftCards?: Card[]
 }
