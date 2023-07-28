@@ -306,6 +306,10 @@ export interface ViewController<ViewModel extends Record<string, any>> {
 
 export type ScopeFlag = 'location' | 'organization' | 'employed' | 'none'
 
+export type ButtonGroupButton = Omit<Button, 'onClick' | 'onClickHintIcon'> & {
+	id: string
+}
+
 export interface SkillViewController<
 	Args extends Record<string, any> = Record<string, any>
 > extends ViewController<SkillView> {

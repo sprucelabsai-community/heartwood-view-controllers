@@ -1,53 +1,49 @@
 import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import { ButtonGroupButton } from '../../../types/heartwood.types'
+import ButtonBarViewController from '../../../viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 
 export default class ControllingAButtonBarTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
+	private static vc: ButtonBarViewController
 
 	@test()
 	protected static async canCreateAButtonBar() {
-		const vc = this.Controller('buttonBar', {
-			buttons: [],
-		})
-		assert.isTruthy(vc)
-		assert.isEqualDeep(this.render(vc).buttons, [])
-		assert.isEqualDeep(this.render(vc.getButtonGroupVc()), [])
+		this.vc = this.ButtonBarWithButtons([])
+		assert.isTruthy(this.vc)
+		assert.isEqualDeep(this.renderedButtons, [])
+		assert.isEqualDeep(this.render(this.vc.getButtonGroupVc()), [])
 	}
 
 	@test()
 	protected static shouldRenderButtonsItsPassed() {
-		const vc = this.Controller('buttonBar', {
-			buttons: [
-				{
-					id: 'first',
-					label: 'what the?',
-				},
-			],
-		})
+		this.setButtons([
+			{
+				id: 'first',
+				label: 'what the?',
+			},
+		])
 
-		const model = this.render(vc)
-		assert.isEqual(model.controller, vc)
-		assert.isEqual(model.buttons[0].label, 'what the?')
+		assert.isEqual(this.render(this.vc).controller, this.vc)
+		assert.isEqual(this.renderedButtons[0].label, 'what the?')
 	}
 
 	@test()
 	protected static rendersButtonsUsingButtonGroup() {
-		const vc = this.Controller('buttonBar', {
-			buttons: [
-				{
-					id: 'first',
-					label: 'what the?',
-				},
-				{
-					id: 'second',
-					label: 'what the 2',
-				},
-			],
-		})
+		this.setButtons([
+			{
+				id: 'first',
+				label: 'what the?',
+			},
+			{
+				id: 'second',
+				label: 'what the 2',
+			},
+		])
 
-		assert.isTruthy(this.render(vc).buttons[0].controller)
-		assert.isFunction(this.render(vc).buttons[0].controller?.render)
+		assert.isTruthy(this.renderedButtons[0].controller)
+		assert.isFunction(this.renderedButtons[0].controller?.render)
 	}
 
 	@test()
@@ -82,7 +78,6 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		for (const button of rendered) {
 			if (button?.controller) {
 				const btn = this.render(button.controller)
-
 				renderedButtons.push(btn)
 			}
 		}
@@ -111,25 +106,37 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 				id: 'second',
 				label: 'what the 2',
 			},
+			{
+				id: 'third',
+				label: 'what the 3',
+			},
 		]
 
-		const vc = this.Controller('buttonBar', {
-			buttons,
-		})
+		this.setButtons(buttons)
 
 		assert.isEqual(
-			vc.getSelectedButtons(),
-			vc.getButtonGroupVc().getSelectedButtons()
+			this.vc.getSelectedButtons(),
+			this.buttonGroupVc.getSelectedButtons()
 		)
 
-		await vc.selectButton(id)
-		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [id])
+		await this.vc.selectButton(id)
+		this.assertSelectedButtonGroupButtonsEqual([id])
 
-		await vc.selectButtons(['second'])
-		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), ['second'])
+		await this.vc.selectButtons(['second'])
+		this.assertSelectedButtonGroupButtonsEqual(['second'])
 
-		await vc.deselectButton('second')
-		assert.isEqualDeep(vc.getButtonGroupVc().getSelectedButtons(), [])
+		await this.vc.deselectButton('second')
+		this.assertSelectedButtonGroupButtonsEqual([])
+
+		await this.vc.setSelectedButtons(['second'])
+		this.assertSelectedButtonGroupButtonsEqual(['second'])
+
+		await this.vc.setSelectedButtons(['third'])
+		this.assertSelectedButtonGroupButtonsEqual(['third'])
+	}
+
+	private static assertSelectedButtonGroupButtonsEqual(expected: string[]) {
+		assert.isEqualDeep(this.buttonGroupVc.getSelectedButtons(), expected)
 	}
 
 	@test()
@@ -151,5 +158,23 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 		await this.wait(0)
 
 		assert.isTrue(wasHit)
+	}
+
+	private static setButtons(buttons: { id: string; label: string }[]) {
+		this.vc = this.ButtonBarWithButtons(buttons)
+	}
+
+	private static get buttonGroupVc() {
+		return this.vc.getButtonGroupVc()
+	}
+
+	private static get renderedButtons() {
+		return this.render(this.vc).buttons
+	}
+
+	private static ButtonBarWithButtons(buttons: ButtonGroupButton[]) {
+		return this.Controller('buttonBar', {
+			buttons,
+		})
 	}
 }

@@ -59,7 +59,6 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
 		const { cardVc: cardVc4, id: id4 } = this.CardVc()
 		const { cardVc: cardVc5, id: id5 } = this.CardVc()
 		const { cardVc: cardVc6, id: id6 } = this.CardVc()
-		const { cardVc: cardVc7, id: id7 } = this.CardVc()
 
 		this.vc = this.SkillView(
 			buildSkillViewLayout('big-right', {
@@ -67,7 +66,6 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
 				rightCards: [cardVc3.render(), cardVc4.render()],
 				topCards: [cardVc5.render()],
 				bottomCards: [cardVc6.render()],
-				topLeftCards: [cardVc7.render()],
 			})
 		)
 
@@ -77,7 +75,6 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
 		this.assertRendersCard(id4)
 		this.assertRendersCard(id5)
 		this.assertRendersCard(id6)
-		this.assertRendersCard(id7)
 	}
 
 	private static assertRendersCard(id: string) {

@@ -314,7 +314,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 			},
 		})
 
-		await this.multiSelectVc.selectButtons(['first', 'second'])
+		await this.multiSelectVc.setSelectedButtons(['first', 'second'])
 
 		assert.isEqualDeep(passedSelected, [])
 		assert.isEqualDeep(passedChanges, {

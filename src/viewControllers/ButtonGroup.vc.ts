@@ -2,52 +2,14 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import {
 	ButtonController,
+	ButtonGroupButton,
 	TriggerRenderHandler,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-type Button = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button,
-	'onClick' | 'onClickHintIcon'
-> & {
-	id: string
-}
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
-
-export interface ButtonGroupChanges {
-	added: string[]
-	removed: string[]
-}
-
-export interface ButtonGroupPendingChanges {
-	adding: string[]
-	removing: string[]
-}
-
-export type SelectionChangeHandler = (
-	selected: string[],
-	changed: ButtonGroupChanges
-) => void | Promise<void>
-
-export type WillChangeSelectionHandler = (
-	selected: string[],
-	changes: ButtonGroupPendingChanges
-) => void | boolean | Promise<void | boolean>
-
-type HintClickHandler = (selected: string) => void
-
-export interface ButtonGroupViewControllerOptions {
-	buttons: Button[]
-	onSelectionChange?: SelectionChangeHandler
-	onWillChangeSelection?: WillChangeSelectionHandler
-	onClickHintIcon?: HintClickHandler
-	shouldAllowMultiSelect?: boolean
-	selected?: string[]
-}
-
 export default class ButtonGroupViewController extends AbstractViewController<ViewModel> {
-	private buttons: Button[]
+	private buttons: ButtonGroupButton[]
 	private selectedButtonIds: string[] = []
 	private selectionChangeHandler?: SelectionChangeHandler
 	private shouldAllowMultiSelect: boolean
@@ -79,7 +41,14 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}
 	}
 
-	public async selectButtons(ids: string[]) {
+	/**
+	 * @decrecated vc.selectButtons -> vc.setSelectedButtons
+	 */
+	public selectButtons(ids: string[]) {
+		return this.setSelectedButtons(ids)
+	}
+
+	public async setSelectedButtons(ids: string[]) {
 		let addingIds = ids.filter((id, idx) => ids.indexOf(id) === idx)
 
 		if (!this.shouldAllowMultiSelect && ids[0]) {
@@ -120,7 +89,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 	public async selectButton(id: string) {
 		const selected = [...this.selectedButtonIds, id]
-		await this.selectButtons(selected)
+		await this.setSelectedButtons(selected)
 	}
 
 	private async didSelectHandler(changes: ButtonGroupChanges) {
@@ -142,7 +111,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 	public async deselectButton(id: string) {
 		const selected = this.selectedButtonIds.filter((i) => i !== id)
-		await this.selectButtons(selected)
+		await this.setSelectedButtons(selected)
 	}
 
 	private rebuildButtons() {
@@ -151,7 +120,10 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		}))
 	}
 
-	private buildButtonController(button: Button, idx: number): ButtonController {
+	private buildButtonController(
+		button: ButtonGroupButton,
+		idx: number
+	): ButtonController {
 		if (!button.id) {
 			assertOptions(button, ['id'])
 		}
@@ -201,4 +173,37 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 	public render(): ViewModel {
 		return this.buttonControllers
 	}
+}
+
+type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+
+export interface ButtonGroupChanges {
+	added: string[]
+	removed: string[]
+}
+
+export interface ButtonGroupPendingChanges {
+	adding: string[]
+	removing: string[]
+}
+
+export type SelectionChangeHandler = (
+	selected: string[],
+	changed: ButtonGroupChanges
+) => void | Promise<void>
+
+export type WillChangeSelectionHandler = (
+	selected: string[],
+	changes: ButtonGroupPendingChanges
+) => void | boolean | Promise<void | boolean>
+
+type HintClickHandler = (selected: string) => void
+
+export interface ButtonGroupViewControllerOptions {
+	buttons: ButtonGroupButton[]
+	onSelectionChange?: SelectionChangeHandler
+	onWillChangeSelection?: WillChangeSelectionHandler
+	onClickHintIcon?: HintClickHandler
+	shouldAllowMultiSelect?: boolean
+	selected?: string[]
 }
