@@ -1465,7 +1465,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
 				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "one-col" | "two-col" | "three-col")| undefined | null
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
 		}
 
 		interface SkillViewSchema extends SpruceSchema.Schema {
@@ -1559,7 +1559,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'layout': {
 			                type: 'select',
-			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"one-col","label":"One column"},{"value":"two-col","label":"Two column"},{"value":"three-col","label":"Three left"}],}
+			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
 			            },
 			    }
 		}
