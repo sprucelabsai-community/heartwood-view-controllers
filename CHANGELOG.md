@@ -1,3 +1,10 @@
+# [107.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.1.37...v107.2.0) (2023-08-18)
+
+
+### Features
+
+* can get and set present slide by id ([94c616b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/94c616b))
+
 ## [107.1.37](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.1.36...v107.1.37) (2023-08-18)
 
 ## [107.1.36](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.1.35...v107.1.36) (2023-08-18)
