@@ -10,8 +10,16 @@ import SwipeCardViewController, {
 export default class SwipingThroughSlidesTest extends AbstractViewControllerTest {
 	protected static controllerMap = {}
 	private static vc: SwipeCardViewController
+	private static slide1Id: string
+	private static slide2Id: string
+	private static slide3Id: string
+
 	protected static async beforeEach() {
 		await super.beforeEach()
+
+		this.slide1Id = generateId()
+		this.slide2Id = generateId()
+		this.slide3Id = generateId()
 
 		this.vc = this.Vc({
 			header: {
@@ -19,12 +27,15 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 			},
 			slides: [
 				{
+					id: this.slide1Id,
 					title: 'step 1',
 				},
 				{
+					id: this.slide2Id,
 					title: 'step 2',
 				},
 				{
+					id: this.slide3Id,
 					title: 'step 3',
 				},
 			],
@@ -386,7 +397,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static async cantJumpToSlideWithNonNumericIndex() {
+	protected static async cantJumpToBadId() {
 		//@ts-ignore
 		const err = await assert.doesThrowAsync(() => this.vc.jumpToSlide('taco'))
 		errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -466,6 +477,41 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 		const vc = this.renderAndGetFooterVc()
 		const vc2 = this.renderAndGetFooterVc()
 		assert.isEqual(vc, vc2)
+	}
+
+	@test()
+	protected static async throwsWhenGettingBadSlide() {
+		const err = assert.doesThrow(() => this.vc.getSlide(generateId()))
+		errorAssert.assertError(err, 'INVALID_PARAMETERS')
+	}
+
+	@test()
+	protected static async jumpToSlideWithBadIdThrows() {
+		const err = await assert.doesThrowAsync(() =>
+			this.vc.jumpToSlide(generateId())
+		)
+		errorAssert.assertError(err, 'INVALID_PARAMETERS')
+	}
+
+	@test()
+	protected static async jumpToSlideWithGoodId() {
+		await this.jumpToSlide(this.slide2Id)
+		assert.isEqual(this.vc.getPresentSlide(), 1)
+	}
+
+	@test()
+	protected static async canGetPresentSlideId() {
+		this.assertSelectedSlideId(this.slide1Id)
+		await this.jumpToSlide(this.slide2Id)
+		this.assertSelectedSlideId(this.slide2Id)
+	}
+
+	private static async jumpToSlide(id: string) {
+		await this.vc.jumpToSlide(id)
+	}
+
+	private static assertSelectedSlideId(expected: string) {
+		assert.isEqual(this.vc.getPresentSlideId(), expected)
 	}
 
 	private static renderAndGetFooterVc() {

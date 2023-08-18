@@ -2020,6 +2020,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ReceiptLineItem {
 			
 				
+				'id'?: string| undefined | null
+				
 				'name': string
 				
 				'description'?: string| undefined | null
@@ -2036,6 +2038,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'name': {
 			                type: 'text',

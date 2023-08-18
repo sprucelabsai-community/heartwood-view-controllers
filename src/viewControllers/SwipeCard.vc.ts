@@ -62,16 +62,21 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 		}
 	}
 
-	public async jumpToSlide(slide: number) {
-		if (typeof slide !== 'number') {
+	public async jumpToSlide(slide: number | string) {
+		const normalized = sectionIdOrIdxToIdx(this.getSlides(), slide)
+
+		if (normalized === -1 && typeof slide !== 'number') {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['slideIndex'],
 			})
+		} else if (normalized === -1) {
+			return
 		}
 
-		this.swipeController?.swipeTo(slide)
-		await this.handleSlideChange(slide)
+		this.swipeController?.swipeTo(normalized)
+
+		await this.handleSlideChange(normalized)
 	}
 
 	private async handleSlideChange(slide: number) {
@@ -88,6 +93,10 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 
 	public getPresentSlide() {
 		return this.presentSlide
+	}
+
+	public getPresentSlideId() {
+		return this.getSlide(this.getPresentSlide()).id
 	}
 
 	public setSlide(idOrIdx: number | string, slide: Partial<Slide>) {

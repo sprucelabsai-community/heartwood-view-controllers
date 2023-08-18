@@ -37,6 +37,9 @@ export default buildSchema({
 								schema: buildSchema({
 									id: 'receiptLineItem',
 									fields: {
+										id: {
+											type: 'id',
+										},
 										name: {
 											type: 'text',
 											isRequired: true,

@@ -11,6 +11,11 @@ const receiptLineItemSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
+	            /** . */
 	            'name': {
 	                type: 'text',
 	                isRequired: true,

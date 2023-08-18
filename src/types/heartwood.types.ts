@@ -266,6 +266,7 @@ export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+export type Receipt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt
 export type Slide =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
