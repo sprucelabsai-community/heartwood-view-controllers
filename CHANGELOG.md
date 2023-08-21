@@ -1,3 +1,5 @@
+## [107.2.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.5...v107.2.6) (2023-08-21)
+
 ## [107.2.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.4...v107.2.5) (2023-08-21)
 
 ## [107.2.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.3...v107.2.4) (2023-08-21)
