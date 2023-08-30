@@ -6,7 +6,7 @@ import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
 export default class BigFormViewController<
 	S extends Schema,
-	V extends ViewModel<S> = ViewModel<S>
+	V extends ViewModel<S> = ViewModel<S>,
 > extends FormViewController<S, V> {
 	public isSlideValid(idx: number) {
 		const slide = this.model.sections[idx]
