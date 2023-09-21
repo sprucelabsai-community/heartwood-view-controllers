@@ -23,7 +23,7 @@ import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
 
 export default abstract class AbstractViewController<
-	ViewModel extends Record<string, any>,
+	ViewModel extends Record<string, any>
 > implements ViewController<ViewModel>
 {
 	private vcFactory: ViewControllerFactory

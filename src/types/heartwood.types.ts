@@ -125,7 +125,7 @@ export interface AuthenticatorStatic {
 
 export interface TypedFieldError<
 	S extends Schema,
-	N extends SchemaFieldNames<S> = SchemaFieldNames<S>,
+	N extends SchemaFieldNames<S> = SchemaFieldNames<S>
 > extends FieldError {
 	name: N
 	code: 'INVALID_PARAMETER' | 'MISSING_PARAMETER'
@@ -196,7 +196,7 @@ export interface Scope {
 }
 
 export interface SkillViewControllerLoadOptions<
-	Args extends Record<string, any> = Record<string, any>,
+	Args extends Record<string, any> = Record<string, any>
 > {
 	router: Router
 	args: Args
@@ -312,7 +312,7 @@ export type ButtonGroupButton = Omit<Button, 'onClick' | 'onClickHintIcon'> & {
 }
 
 export interface SkillViewController<
-	Args extends Record<string, any> = Record<string, any>,
+	Args extends Record<string, any> = Record<string, any>
 > extends ViewController<SkillView> {
 	getIsLoginRequired?(): Promise<boolean>
 	focus?(): Promise<void>
@@ -472,7 +472,7 @@ export interface SkillViewControllerArgsMap {}
 
 export type ControllerOptions<
 	N extends ViewControllerId,
-	O extends ViewControllerOptionsMap = ViewControllerOptionsMap,
+	O extends ViewControllerOptionsMap = ViewControllerOptionsMap
 > = Omit<
 	N extends keyof O ? O[N] : Record<string, never>,
 	UniversalViewOptionFields
@@ -486,7 +486,7 @@ export interface OpenNavigationOptions {
 
 export type SkillViewControllerArgs<
 	N extends SkillViewControllerId,
-	O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap,
+	O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap
 > = N extends keyof O ? O[N] : Record<string, never>
 
 export type Client = MercuryClient
@@ -707,7 +707,7 @@ export interface Device {
 
 export interface AuthorizerCanOptions<
 	ContractId extends PermissionContractId,
-	Ids extends PermissionId<ContractId> = PermissionId<ContractId>,
+	Ids extends PermissionId<ContractId> = PermissionId<ContractId>
 > {
 	contractId: ContractId
 	permissionIds: Ids[]
@@ -721,7 +721,7 @@ type SavePermissionsTarget = Omit<
 
 export interface SavePermissionsOptions<
 	ContractId extends PermissionContractId,
-	Ids extends PermissionId<ContractId>,
+	Ids extends PermissionId<ContractId>
 > {
 	target: SavePermissionsTarget & { personId?: string; skillId?: string }
 	contractId: ContractId
@@ -734,13 +734,13 @@ export interface SavePermissionsOptions<
 export interface Authorizer {
 	can<
 		ContractId extends PermissionContractId,
-		Ids extends PermissionId<ContractId>,
+		Ids extends PermissionId<ContractId>
 	>(
 		options: AuthorizerCanOptions<ContractId, Ids>
 	): Promise<Record<Ids, boolean>>
 	savePermissions<
 		ContractId extends PermissionContractId,
-		Ids extends PermissionId<ContractId>,
+		Ids extends PermissionId<ContractId>
 	>(
 		options: SavePermissionsOptions<ContractId, Ids>
 	): Promise<void>

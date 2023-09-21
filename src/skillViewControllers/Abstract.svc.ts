@@ -10,7 +10,7 @@ type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 type ToolBelt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 
 export default abstract class AbstractSkillViewController<
-		Args extends Record<string, any> = Record<string, any>,
+		Args extends Record<string, any> = Record<string, any>
 	>
 	extends AbstractViewController<SkillView>
 	implements SkillViewController
