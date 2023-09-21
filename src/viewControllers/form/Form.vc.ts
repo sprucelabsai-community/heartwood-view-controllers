@@ -33,7 +33,7 @@ import AbstractViewController from '../Abstract.vc'
 
 export default class FormViewController<
 		S extends Schema,
-		V extends ViewModel<S> = ViewModel<S>
+		V extends ViewModel<S> = ViewModel<S>,
 	>
 	extends AbstractViewController<V>
 	implements ViewController<V>
@@ -931,7 +931,7 @@ type GetValueOptions = {
 
 type CompiledFieldOptions<
 	S extends Schema,
-	N extends SchemaFieldNames<S>
+	N extends SchemaFieldNames<S>,
 > = S['fields'][N] & {
 	renderOptions: FieldRenderOptions<S>
 }

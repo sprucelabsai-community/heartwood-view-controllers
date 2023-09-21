@@ -18,7 +18,7 @@ import ToolBeltViewController from '../viewControllers/ToolBelt.vc'
 const set = require('object-set')
 
 export default class ToolBeltStateMachine<
-	Context extends Record<string, any> = Record<string, any>
+	Context extends Record<string, any> = Record<string, any>,
 > extends AbstractEventEmitter<EventContract> {
 	private state?: ToolBeltState
 	private toolBeltVc: ToolBeltViewController
@@ -188,7 +188,7 @@ export interface ToolBeltState {
 }
 
 export interface ToolBeltStateMachineOptions<
-	Context extends Record<string, any> = Record<string, any>
+	Context extends Record<string, any> = Record<string, any>,
 > {
 	toolBeltVc: ToolBeltViewController
 	vcFactory: SimpleViewControllerFactory
@@ -198,7 +198,7 @@ export interface ToolBeltStateMachineOptions<
 
 type ControllerFactory = <
 	N extends ViewControllerId,
-	O extends ControllerOptions<N>
+	O extends ControllerOptions<N>,
 >(
 	name: N,
 	options: O
