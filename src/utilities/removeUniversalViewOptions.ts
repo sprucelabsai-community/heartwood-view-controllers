@@ -14,7 +14,7 @@ export type UniversalViewOptionFields =
 	(typeof universalViewOptionFields)[number]
 
 export default function removeUniversalViewOptions<
-	R extends Record<string, any>
+	R extends Record<string, any>,
 >(rendered: R): Omit<R, UniversalViewOptionFields> {
 	const { ...options } = rendered
 
