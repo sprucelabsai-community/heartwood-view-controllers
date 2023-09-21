@@ -77,6 +77,18 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
 		this.assertRendersCard(id6)
 	}
 
+	@test()
+	protected static async canGetCardsFromGrid() {
+		const { cardVc, id } = this.CardVc()
+		this.vc = this.SkillView(
+			buildSkillViewLayout('grid', {
+				cards: [cardVc.render()],
+			})
+		)
+
+		this.assertRendersCard(id)
+	}
+
 	private static assertRendersCard(id: string) {
 		vcAssert.assertSkillViewRendersCard(this.vc, id)
 	}

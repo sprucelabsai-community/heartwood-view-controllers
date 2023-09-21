@@ -1597,6 +1597,7 @@ export function pullCardsFromSkillView(
 		...(model.leftCards?.map((c) => c.controller!) ?? []),
 		...(model.rightCards?.map((c) => c.controller!) ?? []),
 		...(model.bottomCards?.map((c) => c.controller!) ?? []),
+		...(model.cards?.map((c) => c.controller!) ?? []),
 	]
 	for (const layout of model?.layouts ?? []) {
 		for (const card of layout.cards ?? []) {
