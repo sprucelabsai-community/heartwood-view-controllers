@@ -128,14 +128,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.cardVc.setIsBusy(isBusy)
 	}
 
-	/**
-	 * We need to stop accessing the card, use methods on the active vc, if it
-	 * cannot do what you want consider adding the appropriate method to the
-	 * ActiveRecordCardViewController in heartwood-view-controllers to minimize
-	 * refactor on internal changes
-	 *
-	 * @deprecated activeVc.getCard().setIsBusy(...) -> activeVc.setIsBusy(...)
-	 */
 	public getCardVc() {
 		return this.cardVc
 	}
@@ -158,9 +150,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 		this.cardVc.setHeaderSubtitle(subtitle)
 	}
 
-	/**
-	 * @deprecated - don't use this anymore, use active record card directly or subclass and create a spy
-	 */
 	public getListVc() {
 		return this.listVc.getListVc()
 	}
