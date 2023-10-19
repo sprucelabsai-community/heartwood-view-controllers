@@ -709,6 +709,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		this.vc.updateField('first', {
 			fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
 		})
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
 		assert.isNotEqual(schema, this.vc.getSchema())
 	}
 

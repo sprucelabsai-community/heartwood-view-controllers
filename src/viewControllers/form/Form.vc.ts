@@ -584,6 +584,8 @@ export default class FormViewController<
 				fields: newFields,
 			})
 		}
+
+		this.triggerRender()
 	}
 
 	public isFieldRendering<N extends SchemaFieldNames<S>>(
