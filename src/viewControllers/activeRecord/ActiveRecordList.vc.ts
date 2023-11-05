@@ -9,22 +9,6 @@ import {
 import AbstractViewController from '../Abstract.vc'
 import ListViewController from '../list/List.vc'
 
-export interface ActiveRecordListViewControllerOptions {
-	eventName: string
-	responseKey: string
-	rowTransformer: (record: Record<string, any>) => ListRow
-	noResultsRow?: Omit<ListRow, 'id'>
-	payload?: Record<string, any>
-	target?: Record<string, any>
-	id?: string
-	columnWidths?: string[]
-	shouldRenderRowDividers?: boolean
-	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
-	filter?: (record: Record<string, any>) => boolean
-	onWillFetch?: () => Promise<void> | void
-	onDidFetch?: () => Promise<void> | void
-}
-
 export default class ActiveRecordListViewController extends AbstractViewController<List> {
 	private listVc: ListViewController
 	private noResultsRow?: Omit<ListRow, 'id'>
@@ -285,4 +269,20 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 	public render(): List {
 		return this.listVc.render()
 	}
+}
+
+export interface ActiveRecordListViewControllerOptions {
+	eventName: string
+	responseKey: string
+	rowTransformer: (record: Record<string, any>) => ListRow
+	noResultsRow?: Omit<ListRow, 'id'>
+	payload?: Record<string, any>
+	target?: Record<string, any>
+	id?: string
+	columnWidths?: string[]
+	shouldRenderRowDividers?: boolean
+	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
+	filter?: (record: Record<string, any>) => boolean
+	onWillFetch?: () => Promise<void> | void
+	onDidFetch?: () => Promise<void> | void
 }
