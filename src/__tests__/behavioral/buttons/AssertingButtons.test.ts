@@ -1,9 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
+import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import buttonAssert from '../../../tests/utilities/buttonAssert'
 import { Button, CardViewController } from '../../../types/heartwood.types'
+import { testFormSchema } from '../forms/testFormOptions'
 
 export default class AssertingButtonsTest extends AbstractViewControllerTest {
 	private static vc: CardViewController
@@ -173,6 +175,44 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 		assert.doesThrow(() => this.assertButtonIsSelected('button-2'))
 		this.assertButtonIsSelected(selectedId1)
 		assert.doesThrow(() => this.assertButtonIsSelected(id2))
+	}
+
+	@test('can find button if in form 1', 'test', 'cheesy')
+	@test('can find button if in form 2', 'test2', 'burrito')
+	protected static async canFindButtonIfItsInAForm(
+		buttonId: string,
+		buttonId2: string
+	) {
+		const formVc = this.Controller(
+			'form',
+			buildForm({
+				schema: testFormSchema,
+				sections: [],
+				footer: {
+					buttons: [
+						{ id: buttonId, label: 'Go!' },
+						{ id: buttonId2, label: 'Go!' },
+					],
+				},
+			})
+		)
+
+		this.vc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						form: formVc.render(),
+					},
+				],
+			},
+		})
+
+		buttonAssert.cardRendersButton(this.vc, buttonId)
+		buttonAssert.cardRendersButton(this.vc, buttonId2)
+
+		assert.doesThrow(() =>
+			buttonAssert.cardRendersButton(this.vc, generateId())
+		)
 	}
 
 	private static assertButtonIsSelected(id: string) {

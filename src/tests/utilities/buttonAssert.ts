@@ -196,6 +196,10 @@ export function checkForButtons(
 		}
 	})
 
+	pluckAllFromCard(model, 'form').forEach((f) => {
+		buttons.push(...(f?.footer?.buttons ?? []))
+	})
+
 	const missing: string[] = []
 	const found: string[] = []
 	const foundButtons: Button[] = []
