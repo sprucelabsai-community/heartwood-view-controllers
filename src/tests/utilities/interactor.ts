@@ -14,7 +14,8 @@ import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
-import { getVcName, pluckAllFromCard } from './assertSupport'
+import { getVcName } from './assertSupport'
+import { checkForButtons } from './buttonAssert'
 import { ButtonViewController } from './ButtonViewController'
 import calendarInteractor from './calendarInteractor'
 import formAssert from './formAssert'
@@ -561,11 +562,8 @@ const interactor = {
 export default interactor
 
 function pluckButtonFromCard(vc: CardVc | FormVc, buttonId: string) {
-	const model = renderUtil.render(vc) as any
-	const buttons: any[] = [...(model.footer?.buttons ?? [])]
-
-	pluckAllFromCard(model, 'buttons').map((b) => b && buttons.push(...b))
-	const match = buttons.find((b) => b.id === buttonId)
+	const { foundButtons } = checkForButtons(vc, [buttonId])
+	const match = foundButtons[0]
 
 	assert.isTruthy(
 		match,

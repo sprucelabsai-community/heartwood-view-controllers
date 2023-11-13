@@ -3,10 +3,12 @@ import { assert } from '@sprucelabs/test-utils'
 import {
 	Button,
 	Card,
+	FormViewController,
 	TriggerRenderHandler,
 	ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
+import BigFormViewController from '../../viewControllers/BigForm.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import {
 	ButtonViewController,
@@ -182,21 +184,27 @@ const buttonAssert = {
 export default buttonAssert
 
 export function checkForButtons(
-	vc: ViewController<Card>,
+	vc:
+		| ViewController<Card>
+		| FormViewController<any>
+		| BigFormViewController<any>,
 	ids: string[]
 ): { found: string[]; missing: string[]; foundButtons: Button[] } {
 	assertOptions({ vc, ids }, ['vc', 'ids'])
 
 	const model = renderUtil.render(vc)
-	const buttons = [...(model.footer?.buttons ?? [])]
+	const buttons = [
+		//@ts-ignore
+		...(model.criticalError?.buttons ?? model.footer?.buttons ?? []),
+	]
 
-	pluckAllFromCard(model, 'buttons').forEach((b) => {
+	pluckAllFromCard(model as any, 'buttons').forEach((b) => {
 		if (b) {
 			buttons.push(...b)
 		}
 	})
 
-	pluckAllFromCard(model, 'form').forEach((f) => {
+	pluckAllFromCard(model as any, 'form').forEach((f) => {
 		buttons.push(...(f?.footer?.buttons ?? []))
 	})
 

@@ -1,7 +1,10 @@
 import { assert, test } from '@sprucelabs/test-utils'
+import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import buttonAssert from '../../../tests/utilities/buttonAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { testFormSchema } from '../forms/testFormOptions'
 
 export default class InteractingWithButtonsTest extends AbstractViewControllerTest {
 	@test()
@@ -27,6 +30,43 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
 
 		const btn = vcAssert.assertCardRendersButton(vc, 'test')
 		await interactor.click(btn)
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async canClickButtonInForm() {
+		let wasHit = false
+		const formVc = this.Controller(
+			'form',
+			buildForm({
+				schema: testFormSchema,
+				sections: [],
+				footer: {
+					buttons: [
+						{
+							id: 'test',
+							label: 'Go!',
+							onClick: () => {
+								wasHit = true
+							},
+						},
+					],
+				},
+			})
+		)
+
+		const vc = this.Controller('card', {
+			body: {
+				sections: [
+					{
+						form: formVc.render(),
+					},
+				],
+			},
+		})
+
+		await interactor.clickButton(vc, 'test')
+
 		assert.isTrue(wasHit)
 	}
 }
