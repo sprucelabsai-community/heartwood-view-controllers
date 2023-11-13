@@ -1,7 +1,6 @@
 import { assert, test } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import buttonAssert from '../../../tests/utilities/buttonAssert'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { testFormSchema } from '../forms/testFormOptions'
