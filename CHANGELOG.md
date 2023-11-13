@@ -1,3 +1,10 @@
+# [108.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.109...v108.0.0) (2023-11-13)
+
+
+### Breaking Changes
+
+* improved form enable/disable functionality (no longer locks whole footer) ([5474459](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/5474459))
+
 ## [107.2.109](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.108...v107.2.109) (2023-11-13)
 
 ## [107.2.108](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v107.2.107...v107.2.108) (2023-11-13)
