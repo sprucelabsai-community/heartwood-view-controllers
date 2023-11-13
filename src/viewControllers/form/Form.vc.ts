@@ -83,13 +83,6 @@ export default class FormViewController<
 		//@ts-ignore
 		this.originalValues = { ...(this.model.values ?? {}) }
 
-		if (options.isEnabled === false) {
-			this.model.footer = {
-				...this.model.footer,
-				isEnabled: false,
-			}
-		}
-
 		this.decorateFieldVcs()
 	}
 
@@ -383,18 +376,12 @@ export default class FormViewController<
 	}
 
 	public disable() {
-		this.model.footer = {
-			...this.model.footer,
-			isEnabled: false,
-		}
+		this.model.isEnabled = false
 		this.triggerRender()
 	}
 
 	public enable() {
-		this.model.footer = {
-			...this.model.footer,
-			isEnabled: true,
-		}
+		this.model.isEnabled = true
 		this.triggerRender()
 	}
 
@@ -875,15 +862,15 @@ export default class FormViewController<
 		}
 	}
 
-	public isEnabled() {
-		return this.model.footer?.isEnabled !== false
+	public getIsEnabled() {
+		return this.model.isEnabled !== false
 	}
 
 	public render(): V {
 		const view: V = {
 			...this.model,
 			onSubmit: async () => {
-				if (this.isEnabled()) {
+				if (this.getIsEnabled()) {
 					await this.submit()
 				}
 			},

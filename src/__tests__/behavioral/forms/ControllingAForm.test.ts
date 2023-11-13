@@ -946,24 +946,15 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	@test()
 	protected static canStartOffDisabled() {
-		const vc = this.Controller(
-			'form',
-			buildForm({
-				id: 'onChangeForm',
-				isEnabled: false,
-				schema: buildSchema({
-					id: 'changeForm',
-					fields: {
-						firstName: {
-							type: 'text',
-						},
-					},
-				}),
-				sections: [{}],
-			})
-		)
-
+		const vc = this.DisabledForm()
 		formAssert.formIsDisabled(vc)
+	}
+
+	@test()
+	protected static disablingFormDoesNotDisableFooter() {
+		const vc = this.DisabledForm()
+		const { footer = {} } = this.render(vc) ?? { footer: {} }
+		assert.isFalse('isEnabled' in footer!)
 	}
 
 	@test('is valid if required field is set', { name: 'test' }, [['name']], true)
@@ -1467,5 +1458,24 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
 	private static async setFirstToRandomValue() {
 		await this.vc.setValue('first', generateId())
+	}
+
+	private static DisabledForm() {
+		return this.Controller(
+			'form',
+			buildForm({
+				id: 'onChangeForm',
+				isEnabled: false,
+				schema: buildSchema({
+					id: 'changeForm',
+					fields: {
+						firstName: {
+							type: 'text',
+						},
+					},
+				}),
+				sections: [{}],
+			})
+		)
 	}
 }

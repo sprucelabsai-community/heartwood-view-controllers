@@ -148,14 +148,14 @@ const formAssert = {
 
 	formIsDisabled(vc: FormVc) {
 		assert.isFalse(
-			vc.isEnabled(),
+			vc.getIsEnabled(),
 			'Your form is enabled and it should not be! Try this.formVc.disable()'
 		)
 	},
 
 	formIsEnabled(vc: FormVc) {
 		assert.isTrue(
-			vc.isEnabled(),
+			vc.getIsEnabled(),
 			'Your form is not yet enabled! Try this.formVc.enable()'
 		)
 	},
