@@ -603,22 +603,25 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static canSetThenHideFooterButtons() {
+	protected static hidingSubmitControlsDoesNotImpactFooter() {
+		const label = 'What the?'
 		this.vc.setFooter({
 			buttons: [
 				{
-					label: 'What the?',
+					label,
 				},
 			],
 		})
 
-		let model = this.render(this.vc)
-		assert.isEqual(model.footer?.buttons?.[0].label, 'What the?')
+		let { footer } = this.render(this.vc)
+		assert.isEqual(footer?.buttons?.[0].label, label)
 
+		assert.isTrue(this.vc.getShouldRenderSubmitControls())
 		this.vc.hideSubmitControls()
+		assert.isFalse(this.vc.getShouldRenderSubmitControls())
 
-		model = this.render(this.vc)
-		assert.isFalsy(model.footer)
+		const model = this.render(this.vc)
+		assert.isEqualDeep(model.footer, footer)
 	}
 
 	@test()
@@ -951,7 +954,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 	}
 
 	@test()
-	protected static disablingFormDoesNotDisableFooter() {
+	protected static disablingFormDoesNotDisableEntireFooter() {
 		const vc = this.DisabledForm()
 		const { footer = {} } = this.render(vc) ?? { footer: {} }
 		assert.isFalse('isEnabled' in footer!)

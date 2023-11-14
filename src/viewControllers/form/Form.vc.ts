@@ -877,7 +877,7 @@ export default class FormViewController<
 		}
 
 		if (!this.getShouldShowSubmitControls()) {
-			delete view.footer
+			// delete view.footer
 		}
 
 		return view
