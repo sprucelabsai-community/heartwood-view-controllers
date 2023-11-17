@@ -1,3 +1,10 @@
+# [108.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.0.11...v108.1.0) (2023-11-17)
+
+
+### Features
+
+* cancel button label ([d8caa8f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d8caa8f))
+
 ## [108.0.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.0.10...v108.0.11) (2023-11-17)
 
 ## [108.0.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.0.9...v108.0.10) (2023-11-17)
