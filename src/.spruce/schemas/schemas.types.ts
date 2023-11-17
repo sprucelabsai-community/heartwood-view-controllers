@@ -2870,6 +2870,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldShowCancelButton'?: boolean| undefined | null
 				/** Submit button label. */
 				'submitButtonLabel'?: string| undefined | null
+				/** Cancel button label. */
+				'cancelButtonLabel'?: string| undefined | null
 				/** Busy. */
 				'isBusy'?: boolean| undefined | null
 				/** Enabled. */
@@ -2975,6 +2977,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Submit button label',
 			                type: 'text',
 			                defaultValue: "Go!",
+			                options: undefined
+			            },
+			            /** Cancel button label. */
+			            'cancelButtonLabel': {
+			                label: 'Cancel button label',
+			                type: 'text',
+			                defaultValue: "Cancel",
 			                options: undefined
 			            },
 			            /** Busy. */
@@ -3658,6 +3667,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldShowCancelButton'?: boolean| undefined | null
 				/** Submit button label. */
 				'submitButtonLabel'?: string| undefined | null
+				/** Cancel button label. */
+				'cancelButtonLabel'?: string| undefined | null
 				/** Busy. */
 				'isBusy'?: boolean| undefined | null
 				/** Enabled. */
@@ -3759,6 +3770,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Submit button label',
 			                type: 'text',
 			                defaultValue: "Go!",
+			                options: undefined
+			            },
+			            /** Cancel button label. */
+			            'cancelButtonLabel': {
+			                label: 'Cancel button label',
+			                type: 'text',
+			                defaultValue: "Cancel",
 			                options: undefined
 			            },
 			            /** Busy. */

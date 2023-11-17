@@ -18,6 +18,7 @@ import {
 	FormSection,
 	FormViewController,
 } from '../../../types/heartwood.types'
+import { FormViewControllerOptions } from '../../../viewControllers/form/Form.vc'
 import { testFormOptions, TestFormSchema } from './testFormOptions'
 
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
@@ -1383,6 +1384,17 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		)
 	}
 
+	@test()
+	protected static async canSetCancelButtonLabel() {
+		const label = generateId()
+		this.vc = this.TestFormVc({
+			cancelButtonLabel: label,
+		})
+
+		const { cancelButtonLabel } = this.render(this.vc)
+		assert.isEqual(cancelButtonLabel, label)
+	}
+
 	private static assertAddingFieldWithDefinitionSetsToSchema(
 		definition: FieldDefinitions,
 		fieldName = 'fieldNotPartOfSection'
@@ -1427,9 +1439,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		return this.vc.getSection(sectionIdOrIdx)
 	}
 
-	private static TestFormVc() {
+	private static TestFormVc(
+		options?: Partial<FormViewControllerOptions<TestFormSchema>>
+	) {
 		return this.Controller('form', {
 			...this.testForm,
+			...options,
 		}) as FormViewController<TestFormSchema>
 	}
 

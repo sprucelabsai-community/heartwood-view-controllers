@@ -1,5 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { defaultSubmitButtonLabel } from '../../../constants'
+import {
+	defaultCancelButtonLabel,
+	defaultSubmitButtonLabel,
+} from '../../../constants'
 import {
 	buildLocalTypesImport,
 	buildRemoteTypesImport,
@@ -95,6 +98,11 @@ export default buildSchema({
 			type: 'text',
 			label: 'Submit button label',
 			defaultValue: defaultSubmitButtonLabel,
+		},
+		cancelButtonLabel: {
+			type: 'text',
+			label: 'Cancel button label',
+			defaultValue: defaultCancelButtonLabel,
 		},
 		isBusy: {
 			type: 'boolean',

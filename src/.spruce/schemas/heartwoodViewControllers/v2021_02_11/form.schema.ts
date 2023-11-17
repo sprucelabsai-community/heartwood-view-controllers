@@ -95,6 +95,13 @@ const formSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema 
 	                defaultValue: "Go!",
 	                options: undefined
 	            },
+	            /** Cancel button label. */
+	            'cancelButtonLabel': {
+	                label: 'Cancel button label',
+	                type: 'text',
+	                defaultValue: "Cancel",
+	                options: undefined
+	            },
 	            /** Busy. */
 	            'isBusy': {
 	                label: 'Busy',

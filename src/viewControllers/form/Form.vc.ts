@@ -876,10 +876,6 @@ export default class FormViewController<
 			},
 		}
 
-		if (!this.getShouldShowSubmitControls()) {
-			// delete view.footer
-		}
-
 		return view
 	}
 }
@@ -899,6 +895,7 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
 	| 'shouldShowCancelButton'
 	| 'shouldShowSubmitControls'
 	| 'submitButtonLabel'
+	| 'cancelButtonLabel'
 	| 'values'
 	| 'footer'
 	| 'isBusy'
