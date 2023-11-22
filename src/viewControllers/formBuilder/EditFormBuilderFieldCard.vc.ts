@@ -160,7 +160,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
 
 	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
 		return {
-			...super.model,
+			...this.model,
 			header: {
 				title: 'Edit field',
 			},
