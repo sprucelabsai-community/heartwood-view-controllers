@@ -37,6 +37,11 @@ export default buildSchema({
 							label: 'Color 2',
 							hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
 						},
+						color2Compliment: {
+							type: 'text',
+							label: 'Color 2 (compliment)',
+							hint: 'The color of headers in card bodies and lists. Defaults to color2.',
+						},
 						color2Transparent: {
 							type: 'text',
 							label: 'Color 2',

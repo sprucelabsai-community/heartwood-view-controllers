@@ -787,6 +787,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color1InverseGradient'?: string| undefined | null
 				/** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
 				'color2'?: string| undefined | null
+				/** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */
+				'color2Compliment'?: string| undefined | null
 				/** Color 2. The color of overlays ontop of a card. */
 				'color2Transparent'?: string| undefined | null
 				/** Color. Background color of cards. */
@@ -860,6 +862,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Color 2',
 			                type: 'text',
 			                hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
+			                options: undefined
+			            },
+			            /** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */
+			            'color2Compliment': {
+			                label: 'Color 2 (compliment)',
+			                type: 'text',
+			                hint: 'The color of headers in card bodies and lists. Defaults to color2.',
 			                options: undefined
 			            },
 			            /** Color 2. The color of overlays ontop of a card. */
