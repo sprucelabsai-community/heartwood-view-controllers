@@ -106,6 +106,10 @@ export default class FormViewController<
 		})
 	}
 
+	public getId() {
+		return this.model.id
+	}
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public focusInput(named: string) {}
 

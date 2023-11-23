@@ -1395,6 +1395,15 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 		assert.isEqual(cancelButtonLabel, label)
 	}
 
+	@test()
+	protected static async canGetFormId() {
+		const expected = generateId()
+		this.vc = this.TestFormVc({ id: expected })
+		const { id } = this.render(this.vc)
+		assert.isEqual(id, expected)
+		assert.isEqual(this.vc.getId(), expected)
+	}
+
 	private static assertAddingFieldWithDefinitionSetsToSchema(
 		definition: FieldDefinitions,
 		fieldName = 'fieldNotPartOfSection'
