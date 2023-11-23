@@ -785,7 +785,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color1Inverse'?: string| undefined | null
 				/** Color 1 Gradient (inverse). Background griedent applied to view. */
 				'color1InverseGradient'?: string| undefined | null
-				/** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
+				/** Color 2. The color of text inside of cards and lists. */
 				'color2'?: string| undefined | null
 				/** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */
 				'color2Compliment'?: string| undefined | null
@@ -857,11 +857,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'Background griedent applied to view.',
 			                options: undefined
 			            },
-			            /** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
+			            /** Color 2. The color of text inside of cards and lists. */
 			            'color2': {
 			                label: 'Color 2',
 			                type: 'text',
-			                hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
+			                hint: 'The color of text inside of cards and lists.',
 			                options: undefined
 			            },
 			            /** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */

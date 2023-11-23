@@ -31,11 +31,11 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Background griedent applied to view.',
 	                options: undefined
 	            },
-	            /** Color 2. The color of anything overlayed on the background of a card (color2Inverse) */
+	            /** Color 2. The color of text inside of cards and lists. */
 	            'color2': {
 	                label: 'Color 2',
 	                type: 'text',
-	                hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
+	                hint: 'The color of text inside of cards and lists.',
 	                options: undefined
 	            },
 	            /** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */

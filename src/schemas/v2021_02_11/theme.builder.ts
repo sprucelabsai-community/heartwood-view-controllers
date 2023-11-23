@@ -35,7 +35,7 @@ export default buildSchema({
 						color2: {
 							type: 'text',
 							label: 'Color 2',
-							hint: 'The color of anything overlayed on the background of a card (color2Inverse)',
+							hint: 'The color of text inside of cards and lists.',
 						},
 						color2Compliment: {
 							type: 'text',
