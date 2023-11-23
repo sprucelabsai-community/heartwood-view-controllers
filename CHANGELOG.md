@@ -1,3 +1,10 @@
+# [108.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.1.10...v108.2.0) (2023-11-23)
+
+
+### Features
+
+* new color2Compliment for headers inside card bodies ([7df7cce](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7df7cce))
+
 ## [108.1.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.1.9...v108.1.10) (2023-11-23)
 
 ## [108.1.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.1.8...v108.1.9) (2023-11-22)
