@@ -1,8 +1,8 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
-import { ButtonGroupButton, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
+import { ButtonGroupButton } from '../../../types/heartwood.types'
 import ButtonGroupViewController, {
 	ButtonGroupPendingChanges,
 	ButtonGroupViewControllerOptions,
