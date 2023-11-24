@@ -1,3 +1,10 @@
+# [108.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.3.4...v108.4.0) (2023-11-24)
+
+
+### Features
+
+* can now assert button groups! ([c25c9b9](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c25c9b9))
+
 ## [108.3.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.3.3...v108.3.4) (2023-11-24)
 
 ## [108.3.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.3.2...v108.3.3) (2023-11-24)
