@@ -10,6 +10,7 @@ import {
 import renderUtil from '../../utilities/render.utility'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
+import ButtonGroupViewController from '../../viewControllers/ButtonGroup.vc'
 import {
 	ButtonViewController,
 	checkForCardSection,
@@ -66,9 +67,18 @@ const buttonAssert = {
 	cardRendersButtonGroup(cardVc: ViewController<Card>) {
 		const model = renderUtil.render(cardVc)
 		const [match] = pluckFirstFromCard(model, 'buttons') ?? []
+		const groupVc = match?.controller?.getParentController?.()
 		assert.isTruthy(
-			match?.controller?.getParentController?.(),
+			groupVc,
 			'I could not find a button group in your card or your button group does not render any buttons.'
+		)
+		return groupVc
+	},
+
+	buttonGroupIsMultiSelect(buttonGroupVc: ButtonGroupViewController) {
+		assert.isTrue(
+			buttonGroupVc.getIsMultiSelect(),
+			'Your button group should allow multi-select.'
 		)
 	},
 

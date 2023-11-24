@@ -8,7 +8,7 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-export default class ButtonGroupViewController extends AbstractViewController<ViewModel> {
+export default class ButtonGroupViewController extends AbstractViewController<Buttons> {
 	private buttons: ButtonGroupButton[]
 	private selectedButtonIds: string[] = []
 	private selectionChangeHandler?: SelectionChangeHandler
@@ -39,6 +39,10 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		for (const handler of this.buttonTriggerRenderHandlers) {
 			handler()
 		}
+	}
+
+	public getIsMultiSelect(): boolean {
+		return this.shouldAllowMultiSelect ?? false
 	}
 
 	/**
@@ -171,12 +175,12 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 		return this.selectedButtonIds
 	}
 
-	public render(): ViewModel {
+	public render(): Buttons {
 		return this.buttonControllers
 	}
 }
 
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+type Buttons = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 
 export interface ButtonGroupChanges {
 	added: string[]

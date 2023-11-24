@@ -5,6 +5,7 @@ import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import buttonAssert from '../../../tests/utilities/buttonAssert'
 import { Button, CardViewController } from '../../../types/heartwood.types'
+import { ButtonGroupViewControllerOptions } from '../../../viewControllers/ButtonGroup.vc'
 import { testFormSchema } from '../forms/testFormOptions'
 
 export default class AssertingButtonsTest extends AbstractViewControllerTest {
@@ -244,12 +245,26 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 			},
 		})
 
-		buttonAssert.cardRendersButtonGroup(this.vc)
+		const actual = buttonAssert.cardRendersButtonGroup(this.vc)
+		assert.isEqual(actual, buttonGroup)
 	}
 
-	private static ButtonGroup() {
+	@test()
+	protected static async canAssertIsMultiSelect() {
+		assert.doesThrow(() =>
+			buttonAssert.buttonGroupIsMultiSelect(this.ButtonGroup())
+		)
+		buttonAssert.buttonGroupIsMultiSelect(
+			this.ButtonGroup({ shouldAllowMultiSelect: true })
+		)
+	}
+
+	private static ButtonGroup(
+		options?: Partial<ButtonGroupViewControllerOptions>
+	) {
 		return this.Controller('button-group', {
 			buttons: [{ id: 'test' }],
+			...options,
 		})
 	}
 
