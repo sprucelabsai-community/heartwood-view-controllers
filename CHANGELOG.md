@@ -1,3 +1,10 @@
+# [108.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.5.0...v108.6.0) (2023-11-24)
+
+
+### Features
+
+* grid size!! ([a815fba](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a815fba))
+
 # [108.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.4.0...v108.5.0) (2023-11-24)
 
 
