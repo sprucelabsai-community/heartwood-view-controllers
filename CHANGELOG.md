@@ -1,3 +1,10 @@
+# [108.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.4.0...v108.5.0) (2023-11-24)
+
+
+### Features
+
+* can assert button group is multiselect ([de70102](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/de70102))
+
 # [108.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.3.4...v108.4.0) (2023-11-24)
 
 
