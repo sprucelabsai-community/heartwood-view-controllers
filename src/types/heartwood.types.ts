@@ -356,6 +356,7 @@ export interface ButtonController {
 	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 	triggerRender: () => void
 	setTriggerRenderHandler(handler: TriggerRenderHandler): void
+	getParentController?(): ButtonGroupViewController
 }
 
 export interface ViewControllerMap {

@@ -130,6 +130,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Vi
 
 		const controller: ButtonController = {
 			triggerRender: () => {},
+			getParentController: () => this,
 			setTriggerRenderHandler(handler: TriggerRenderHandler) {
 				this.triggerRender = handler
 			},

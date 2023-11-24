@@ -15,6 +15,7 @@ import {
 	checkForCardSection,
 	getVcName,
 	pluckAllFromCard,
+	pluckFirstFromCard,
 } from './assertSupport'
 
 const buttonAssert = {
@@ -60,6 +61,15 @@ const buttonAssert = {
 		assert.isTruthy(match, `Your card does not render a button bar.`)
 
 		return match.buttonBar?.controller as any
+	},
+
+	cardRendersButtonGroup(cardVc: ViewController<Card>) {
+		const model = renderUtil.render(cardVc)
+		const [match] = pluckFirstFromCard(model, 'buttons') ?? []
+		assert.isTruthy(
+			match?.controller?.getParentController?.(),
+			'I could not find a button group in your card or your button group does not render any buttons.'
+		)
 	},
 
 	cardSectionRendersButton(

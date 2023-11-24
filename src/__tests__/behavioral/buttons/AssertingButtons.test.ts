@@ -215,6 +215,52 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static async throwsWhenNoButtonGroupFound() {
+		this.vc = this.Controller('card', {})
+		this.assertThrowsBecauseNoButtonGroup()
+		this.vc = this.Vc([{ id: 'test' }])
+		this.assertThrowsBecauseNoButtonGroup()
+	}
+
+	@test()
+	protected static async canFindButtonGroup() {
+		const buttonGroup = this.ButtonGroup()
+		this.vc = this.Vc(buttonGroup.render())
+		this.assertCardRendersButtonGroup()
+	}
+
+	@test()
+	protected static async canFindButtonGroupInSecondSection() {
+		const buttonGroup = this.ButtonGroup()
+		this.vc = this.Controller('card', {
+			body: {
+				sections: [
+					{},
+					{
+						buttons: buttonGroup.render(),
+					},
+				],
+			},
+		})
+
+		buttonAssert.cardRendersButtonGroup(this.vc)
+	}
+
+	private static ButtonGroup() {
+		return this.Controller('button-group', {
+			buttons: [{ id: 'test' }],
+		})
+	}
+
+	private static assertCardRendersButtonGroup() {
+		buttonAssert.cardRendersButtonGroup(this.vc)
+	}
+
+	private static assertThrowsBecauseNoButtonGroup() {
+		assert.doesThrow(() => buttonAssert.cardRendersButtonGroup(this.vc))
+	}
+
 	private static assertButtonIsSelected(id: string) {
 		buttonAssert.buttonIsSelected(this.vc, id)
 	}
