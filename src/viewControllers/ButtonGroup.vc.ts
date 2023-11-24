@@ -91,6 +91,11 @@ export default class ButtonGroupViewController extends AbstractViewController<Bu
 		await this.didSelectHandler(changes)
 	}
 
+	public setButtons(buttons: ButtonGroupButton[]) {
+		this.buttons = [...buttons]
+		this.rebuildAndTriggerRender()
+	}
+
 	public async selectButton(id: string) {
 		const selected = [...this.selectedButtonIds, id]
 		await this.setSelectedButtons(selected)
@@ -144,7 +149,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Bu
 
 				this.hasBeenRendered[idx] = true
 
-				const options = {
+				const view = {
 					...button,
 					controller,
 					isSelected: this.isSelected(button.id),
@@ -160,7 +165,7 @@ export default class ButtonGroupViewController extends AbstractViewController<Bu
 					},
 				}
 
-				return options
+				return view
 			},
 		}
 

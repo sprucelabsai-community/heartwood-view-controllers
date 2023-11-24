@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
+import { ButtonGroupButton, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import ButtonGroupViewController, {
@@ -94,7 +95,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 
 		assert.isLength(this.onSelectInvocations, 2)
 
-		let buttons = this.render(this.singleSelectVc)
+		let buttons = this.renderSingleSelectVc()
 		assert.doesNotInclude(buttons, { isSelected: true })
 	}
 
@@ -323,6 +324,33 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test('can set buttons 1', [{ id: 'hello', label: 'world' }])
+	@test('can set buttons 2', [
+		{ id: 'hello', label: 'world' },
+		{ id: 'hello2', label: 'world2' },
+	])
+	protected static async canSetButtons(expected: ButtonGroupButton[]) {
+		this.setButtonsOnSingleSelect(expected)
+		const buttons = this.renderSingleSelectVc()
+		assert.doesInclude(buttons, expected)
+	}
+
+	@test()
+	protected static async settingButtonsTriggersRender() {
+		let wasHit = false
+		// view is an array of buttons, so no actual controller is returned.
+		// people have to call "triggerRender" on the card
+		this.singleSelectVc.triggerRender = () => {
+			wasHit = true
+		}
+		this.setButtonsOnSingleSelect([])
+		assert.isTrue(wasHit)
+	}
+
+	private static setButtonsOnSingleSelect(expected: ButtonGroupButton[]) {
+		this.singleSelectVc.setButtons(expected)
+	}
+
 	private static assertFirstButtonSelected(
 		buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 	) {
@@ -359,6 +387,10 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 			],
 			...options,
 		})
+	}
+
+	private static renderSingleSelectVc() {
+		return this.render(this.singleSelectVc)
 	}
 
 	private static SingleSelectVc(
