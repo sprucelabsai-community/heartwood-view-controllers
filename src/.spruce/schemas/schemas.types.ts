@@ -2354,6 +2354,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
+				/** Grid size. */
+				'gridSize'?: ("small" | "medium" | "large")| undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right")| undefined | null
 		}
@@ -2507,6 +2509,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: false,
 			                options: undefined
+			            },
+			            /** Grid size. */
+			            'gridSize': {
+			                label: 'Grid size',
+			                type: 'select',
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 			            },
 			            /** Alignment. */
 			            'alignment': {

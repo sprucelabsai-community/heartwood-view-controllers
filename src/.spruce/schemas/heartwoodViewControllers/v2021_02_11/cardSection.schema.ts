@@ -166,6 +166,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                defaultValue: false,
 	                options: undefined
 	            },
+	            /** Grid size. */
+	            'gridSize': {
+	                label: 'Grid size',
+	                type: 'select',
+	                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+	            },
 	            /** Alignment. */
 	            'alignment': {
 	                label: 'Alignment',

@@ -162,6 +162,26 @@ export default buildSchema({
 			label: 'Grid',
 			defaultValue: false,
 		},
+		gridSize: {
+			type: 'select',
+			label: 'Grid size',
+			options: {
+				choices: [
+					{
+						value: 'small',
+						label: 'Small',
+					},
+					{
+						value: 'medium',
+						label: 'Medium',
+					},
+					{
+						value: 'large',
+						label: 'Large',
+					},
+				],
+			},
+		},
 		alignment: {
 			type: 'select',
 			label: 'Alignment',
