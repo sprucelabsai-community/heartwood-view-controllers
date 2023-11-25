@@ -1,3 +1,10 @@
+# [108.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.6.1...v108.7.0) (2023-11-24)
+
+
+### Features
+
+* can set buttons ([00532c0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/00532c0))
+
 ## [108.6.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.6.0...v108.6.1) (2023-11-24)
 
 # [108.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.5.0...v108.6.0) (2023-11-24)
