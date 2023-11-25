@@ -548,6 +548,30 @@ export const buttonFields: SchemaFieldsByName = {
 			...(lineIconFields.name.options as any),
 		},
 	},
+	selectedLineIcon: {
+		type: 'select',
+		label: 'Selected line icon',
+		hint: 'Only applies when the button is selected. Will override line icon if one is set.',
+		options: {
+			...(lineIconFields.name.options as any),
+		},
+	},
+	lineIconPosition: {
+		type: 'select',
+		label: 'Line icon position',
+		options: {
+			choices: [
+				{
+					value: 'left',
+					label: 'Left',
+				},
+				{
+					value: 'bottom',
+					label: 'Bottom',
+				},
+			],
+		},
+	},
 	onClick: {
 		type: 'raw',
 		label: 'Click handler',
