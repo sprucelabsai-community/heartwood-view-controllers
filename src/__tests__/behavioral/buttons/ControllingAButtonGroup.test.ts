@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import { ButtonGroupButton } from '../../../types/heartwood.types'
@@ -345,6 +345,35 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
 		}
 		this.setButtonsOnSingleSelect([])
 		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async settingLineIconOptionsPassesToButtons() {
+		const expected = this.generateRandomLineIconOptions()
+		this.singleSelectVc = this.SingleSelectVc(expected)
+
+		const [button] = this.renderSingleSelectVc()
+		assert.doesInclude(button, expected)
+	}
+
+	@test()
+	protected static async iconOptionsOnButtonBeatOptionsOnGroup() {
+		const expected = this.generateRandomLineIconOptions()
+		this.singleSelectVc = this.SingleSelectVc({
+			...this.generateRandomLineIconOptions(),
+			buttons: [{ id: 'first', label: 'first', ...expected }],
+		})
+
+		const [button] = this.renderSingleSelectVc()
+		assert.doesInclude(button, expected)
+	}
+
+	private static generateRandomLineIconOptions() {
+		return {
+			lineIcon: generateId() as any,
+			selectedLineIcon: generateId() as any,
+			lineIconPosition: generateId() as any,
+		}
 	}
 
 	private static setButtonsOnSingleSelect(expected: ButtonGroupButton[]) {

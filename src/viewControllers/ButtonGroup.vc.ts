@@ -1,8 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import {
+	Button,
 	ButtonController,
 	ButtonGroupButton,
+	LineIcon,
+	LineIconPosition,
 	TriggerRenderHandler,
 	ViewControllerOptions,
 } from '../types/heartwood.types'
@@ -18,19 +21,37 @@ export default class ButtonGroupViewController extends AbstractViewController<Bu
 	private hasBeenRendered: boolean[] = []
 	private clickHintHandler?: HintClickHandler
 	private willChangeSelectionHandler?: WillChangeSelectionHandler
+	private buttonMixinOptions: Partial<Button> = {}
 
 	public constructor(
 		options: ButtonGroupViewControllerOptions & ViewControllerOptions
 	) {
 		super(options)
 
-		this.buttons = options.buttons
-		this.selectionChangeHandler = options.onSelectionChange
-		this.willChangeSelectionHandler = options.onWillChangeSelection
+		const {
+			buttons,
+			onSelectionChange,
+			onWillChangeSelection,
+			shouldAllowMultiSelect,
+			onClickHintIcon,
+			selected,
+			lineIcon,
+			lineIconPosition,
+			selectedLineIcon,
+		} = options
 
-		this.shouldAllowMultiSelect = options.shouldAllowMultiSelect ?? false
-		this.clickHintHandler = options.onClickHintIcon
-		this.selectedButtonIds = options.selected ?? []
+		this.buttons = buttons
+		this.selectionChangeHandler = onSelectionChange
+		this.willChangeSelectionHandler = onWillChangeSelection
+		this.buttonMixinOptions = {
+			lineIcon,
+			lineIconPosition,
+			selectedLineIcon,
+		}
+
+		this.shouldAllowMultiSelect = shouldAllowMultiSelect ?? false
+		this.clickHintHandler = onClickHintIcon
+		this.selectedButtonIds = selected ?? []
 
 		this.rebuildButtons()
 	}
@@ -143,13 +164,11 @@ export default class ButtonGroupViewController extends AbstractViewController<Bu
 			setTriggerRenderHandler(handler: TriggerRenderHandler) {
 				this.triggerRender = handler
 			},
-			//@ts-ignore
 			render: () => {
 				this.buttonTriggerRenderHandlers[idx] = controller.triggerRender
-
 				this.hasBeenRendered[idx] = true
-
 				const view = {
+					...this.buttonMixinOptions,
 					...button,
 					controller,
 					isSelected: this.isSelected(button.id),
@@ -216,4 +235,7 @@ export interface ButtonGroupViewControllerOptions {
 	onClickHintIcon?: HintClickHandler
 	shouldAllowMultiSelect?: boolean
 	selected?: string[]
+	lineIcon?: LineIcon
+	selectedLineIcon?: LineIcon
+	lineIconPosition?: LineIconPosition
 }

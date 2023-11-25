@@ -311,6 +311,8 @@ export type ButtonGroupButton = Omit<Button, 'onClick' | 'onClickHintIcon'> & {
 	id: string
 }
 
+export type LineIconPosition = NonNullable<Button['lineIconPosition']>
+
 export interface SkillViewController<
 	Args extends Record<string, any> = Record<string, any>,
 > extends ViewController<SkillView> {
