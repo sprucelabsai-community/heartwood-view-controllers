@@ -1,3 +1,10 @@
+# [108.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.8.3...v108.9.0) (2023-11-26)
+
+
+### Features
+
+* card corner style ([c53f963](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c53f963))
+
 ## [108.8.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.8.2...v108.8.3) (2023-11-26)
 
 ## [108.8.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.8.1...v108.8.2) (2023-11-26)
