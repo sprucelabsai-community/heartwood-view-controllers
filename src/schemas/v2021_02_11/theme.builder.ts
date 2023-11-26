@@ -17,6 +17,26 @@ export default buildSchema({
 				schema: {
 					id: 'themeProps',
 					fields: {
+						cardCornerStyle: {
+							type: 'select',
+							label: 'Card corner style',
+							options: {
+								choices: [
+									{
+										value: 'rounded',
+										label: 'Rounded',
+									},
+									{
+										value: 'square',
+										label: 'Square',
+									},
+									{
+										value: 'diagonalUpperRight',
+										label: 'Diagonal Upper Right',
+									},
+								],
+							},
+						},
 						color1: {
 							type: 'text',
 							label: 'Color 1',

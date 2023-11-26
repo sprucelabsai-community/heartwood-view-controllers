@@ -779,6 +779,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ThemeProps {
 			
+				/** Card corner style. */
+				'cardCornerStyle'?: ("rounded" | "square" | "diagonalUpperRight")| undefined | null
 				/** Color 1. Used to color anything overlayed on the background (color1Inverse or color1InverseGradient). */
 				'color1'?: string| undefined | null
 				/** Color 1 (inverse). Background color of the view if color1InverseGradient is not set */
@@ -836,6 +838,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** Card corner style. */
+			            'cardCornerStyle': {
+			                label: 'Card corner style',
+			                type: 'select',
+			                options: {choices: [{"value":"rounded","label":"Rounded"},{"value":"square","label":"Square"},{"value":"diagonalUpperRight","label":"Diagonal Upper Right"}],}
+			            },
 			            /** Color 1. Used to color anything overlayed on the background (color1Inverse or color1InverseGradient). */
 			            'color1': {
 			                label: 'Color 1',
