@@ -13,6 +13,7 @@ import {
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
+import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
@@ -275,6 +276,46 @@ const listAssert = {
 		const rowVc = listVc.getRowVc(row)
 
 		rowVc.getValue(inputName)
+	},
+
+	inputIsInteractive(
+		vc: ViewController<List>,
+		row: string | number,
+		inputName: string
+	) {
+		const rowVc = getListVc(vc).getRowVc(row)
+		const model = renderUtil.render(rowVc)
+
+		for (const cell of model.cells ?? []) {
+			const input = listUtil.getInputFromCell(cell, inputName)
+			if (input) {
+				assert.isTruthy(
+					input.isInteractive ?? true,
+					`Input ${inputName} in row ${row} is not interactive and it should be! Try isInteractive: true!`
+				)
+				return
+			}
+		}
+
+		assert.fail(
+			`I could not find an input named '${inputName}' in row '${row}'!`
+		)
+	},
+
+	inputIsNotInteractive(
+		vc: ViewController<List>,
+		row: string | number,
+		inputName: string
+	) {
+		try {
+			this.inputIsInteractive(vc, row, inputName)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`Input ${inputName} in row ${row} is interactive and it should not be! Try isInteractive: false!`
+		)
 	},
 
 	rowDoesNotRenderInput(

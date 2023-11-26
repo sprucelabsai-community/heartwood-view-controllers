@@ -153,6 +153,115 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static async canAssertInputIsNotInteractive() {
+		const id = generateId()
+		const inputName = generateId()
+
+		this.addRow({
+			id,
+			cells: [
+				{
+					textInput: {
+						name: inputName,
+						isInteractive: false,
+					},
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			listAssert.inputIsInteractive(this.vc, id, inputName)
+		)
+		listAssert.inputIsNotInteractive(this.vc, id, inputName)
+	}
+
+	@test()
+	protected static async canAssertInputIsInteractive() {
+		const id = generateId()
+		const inputName = generateId()
+
+		this.addRow({
+			id,
+			cells: [
+				{
+					textInput: {
+						name: inputName,
+						isInteractive: true,
+					},
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			listAssert.inputIsNotInteractive(this.vc, id, inputName)
+		)
+		listAssert.inputIsInteractive(this.vc, id, inputName)
+		assert.doesThrow(() =>
+			listAssert.inputIsInteractive(this.vc, id, generateId())
+		)
+	}
+
+	@test()
+	protected static async canCheckInteractiveOnCellThatIsNotTheFirst() {
+		const id = generateId()
+		const inputName = generateId()
+		const input2Name = generateId()
+
+		this.addRow({
+			id,
+			cells: [
+				{
+					textInput: {
+						name: inputName,
+						isInteractive: true,
+					},
+				},
+				{
+					textInput: {
+						name: input2Name,
+						isInteractive: false,
+					},
+				},
+			],
+		})
+
+		listAssert.inputIsNotInteractive(this.vc, id, input2Name)
+	}
+
+	@test()
+	protected static async canCheckOtherInputTypesForInteractive() {
+		const id = generateId()
+		const inputName = generateId()
+		const inputName2 = generateId()
+
+		this.addRow({
+			id,
+			cells: [
+				{
+					checkboxInput: {
+						name: inputName,
+						isInteractive: true,
+					},
+				},
+				{
+					dateInput: {
+						name: inputName2,
+						isInteractive: false,
+					},
+				},
+			],
+		})
+
+		listAssert.inputIsInteractive(this.vc, id, inputName)
+		assert.doesThrow(() =>
+			listAssert.inputIsNotInteractive(this.vc, id, inputName)
+		)
+		assert.doesThrow(() =>
+			listAssert.inputIsInteractive(this.vc, id, inputName2)
+		)
+	}
+
 	private static assertAssertingInputThrows(msg: string) {
 		assert.doesThrow(() => listAssert.rowRendersInput(this.vc, 0, 'name'), msg)
 		listAssert.rowDoesNotRenderInput(this.vc, 0, 'name')
