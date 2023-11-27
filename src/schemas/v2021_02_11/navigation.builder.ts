@@ -37,6 +37,21 @@ export default buildSchema({
 							type: 'id',
 							isRequired: true,
 						},
+						destinationSVc: {
+							type: 'schema',
+							label: 'Destination skill view controller',
+							options: {
+								schema: buildSchema({
+									id: 'destinationSkillViewController',
+									fields: {
+										id: {
+											type: 'id',
+											isRequired: true,
+										},
+									},
+								}),
+							},
+						},
 						...pickFields(buttonFields, ['isEnabled', 'label', 'onClick']),
 					},
 				}),
