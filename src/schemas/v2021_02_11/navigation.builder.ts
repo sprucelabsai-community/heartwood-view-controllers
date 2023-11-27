@@ -29,13 +29,15 @@ export default buildSchema({
 				schema: buildSchema({
 					id: 'navigationButton',
 					fields: {
-						...pickFields(buttonFields, [
-							'id',
-							'lineIcon',
-							'isEnabled',
-							'label',
-							'onClick',
-						]),
+						lineIcon: {
+							...buttonFields.lineIcon,
+							isRequired: true,
+						},
+						id: {
+							type: 'id',
+							isRequired: true,
+						},
+						...pickFields(buttonFields, ['isEnabled', 'label', 'onClick']),
 					},
 				}),
 			},
