@@ -71,6 +71,7 @@ import LoginViewController, {
 import MapViewController, {
 	MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
+import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
@@ -93,7 +94,6 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
-import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
