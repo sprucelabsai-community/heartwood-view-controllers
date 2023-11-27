@@ -17,7 +17,7 @@ export default buildSchema({
 				schema: {
 					id: 'themeProps',
 					fields: {
-						cardCornerStyle: {
+						borderRadius: {
 							type: 'select',
 							label: 'Card corner style',
 							options: {
@@ -29,10 +29,6 @@ export default buildSchema({
 									{
 										value: 'square',
 										label: 'Square',
-									},
-									{
-										value: 'diagonalUpperRight',
-										label: 'Diagonal Upper Right',
 									},
 								],
 							},
