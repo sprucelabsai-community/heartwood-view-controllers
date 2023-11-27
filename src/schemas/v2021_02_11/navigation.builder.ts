@@ -48,6 +48,12 @@ export default buildSchema({
 											type: 'id',
 											isRequired: true,
 										},
+										args: {
+											type: 'raw',
+											options: {
+												valueType: 'Record<string, any>',
+											},
+										},
 									},
 								}),
 							},

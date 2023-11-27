@@ -170,5 +170,6 @@ export { default as removeUniversalViewOptions } from './utilities/removeUnivers
 export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachine'
 export { default as navigationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigation.schema'
 export { default as navigationButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButton.schema'
+export { default as destinationSkillViewControllerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

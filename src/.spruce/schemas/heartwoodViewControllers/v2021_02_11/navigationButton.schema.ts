@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import destinationSkillViewControllerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
 
 const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema  = {
 	id: 'navigationButton',
@@ -22,6 +22,12 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'id',
 	                isRequired: true,
 	                options: undefined
+	            },
+	            /** Destination skill view controller. */
+	            'destinationSVc': {
+	                label: 'Destination skill view controller',
+	                type: 'schema',
+	                options: {schema: destinationSkillViewControllerSchema_v2021_02_11,}
 	            },
 	            /** Selected. */
 	            'isEnabled': {
