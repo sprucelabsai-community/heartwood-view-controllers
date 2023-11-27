@@ -8,7 +8,6 @@ import {
 	CardSection,
 	Card,
 	TriggerRenderHandler,
-	Navigation,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
