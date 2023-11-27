@@ -93,6 +93,7 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
+import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
@@ -281,6 +282,10 @@ export type FormBuilder<S extends Schema = Schema> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject<S>
 export type FormBuilderPage =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
+export type Navigation =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
+export type NavigationButton =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
 
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -326,7 +331,7 @@ export interface SkillViewController<
 	blur?(): Promise<void>
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 	renderToolBelt?(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
-	renderNavigation?(): null | undefined
+	renderNavigation?(): null | undefined | Navigation
 	getTitle?(): string | undefined
 	getSubtitle?(): string | undefined
 }
@@ -431,6 +436,7 @@ export interface ViewControllerMap {
 	'autocomplete-input': AutocompleteInputViewController
 	map: MapViewController
 	feed: FeedViewController
+	navigation: NavigationViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -468,6 +474,7 @@ export interface ViewControllerOptionsMap {
 	'autocomplete-input': AutocompleteInputViewControllerOptions
 	map: MapViewControllerOptions
 	feed: FeedViewControllerOptions
+	navigation: Navigation
 }
 
 export interface SkillViewControllerMap {}
