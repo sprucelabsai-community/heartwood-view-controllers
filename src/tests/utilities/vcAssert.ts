@@ -39,7 +39,7 @@ import {
 	Vc,
 	ConfirmViewController,
 	pluckFirstFromCard,
-	pluckAllFromCard,
+	pluckAllFromView,
 	ButtonViewController,
 	AssertRedirectOptions,
 	SelectViewController,
@@ -440,7 +440,7 @@ const vcAssert = {
 		id?: string
 	): ListViewController {
 		const model = renderUtil.render(vc)
-		const lists = pluckAllFromCard(
+		const lists = pluckAllFromView(
 			//@ts-ignore
 			model.body ? model : { body: model },
 			'list'
@@ -1094,7 +1094,7 @@ const vcAssert = {
 		id?: string
 	): TalkingSprucebotViewController {
 		const model = renderUtil.render(vc)
-		const sprucebots = pluckAllFromCard(model, 'talkingSprucebot')
+		const sprucebots = pluckAllFromView(model, 'talkingSprucebot')
 
 		const sprucebot = sprucebots.find((sb) => sb?.id === id)
 

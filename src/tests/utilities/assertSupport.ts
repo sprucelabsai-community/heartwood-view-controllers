@@ -8,6 +8,7 @@ import {
 	CardSection,
 	Card,
 	TriggerRenderHandler,
+	Navigation,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
@@ -20,7 +21,7 @@ export interface ConfirmViewController {
 	options: ConfirmOptions
 }
 
-export function pluckAllFromCard<K extends keyof CardSection>(
+export function pluckAllFromView<K extends keyof CardSection>(
 	model: Card,
 	key: K
 ): CardSection[K][] {
@@ -31,7 +32,7 @@ export function pluckFirstFromCard<K extends keyof CardSection>(
 	model: Card,
 	key: K
 ) {
-	return pluckAllFromCard(model, key)[0] as CardSection[K]
+	return pluckAllFromView(model, key)[0] as CardSection[K]
 }
 
 export interface SelectViewController {

@@ -5,6 +5,8 @@ import {
 	ClickCalendarViewOptions,
 	DropEventOptions,
 	KeyboardKey,
+	Navigation,
+	SkillViewController,
 	ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
@@ -15,21 +17,12 @@ import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import LoginViewController from '../../viewControllers/Login.vc'
 import { getVcName } from './assertSupport'
-import { checkForButtons } from './buttonAssert'
+import { pluckButtons } from './buttonAssert'
 import { ButtonViewController } from './ButtonViewController'
 import calendarInteractor from './calendarInteractor'
 import formAssert from './formAssert'
+import navigationAssert from './navigationAssert'
 import vcAssert from './vcAssert'
-
-type CardVc =
-	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
-type ButtonBarVc =
-	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
-type ButtonGroupVc = ViewController<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
->
-type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
-type FormVc = FormViewController<any> | BigFormViewController<any>
 
 const interactor = {
 	async click(
@@ -91,7 +84,7 @@ const interactor = {
 		)
 	},
 
-	async clickButton(vc: CardVc | FormVc, buttonId: string) {
+	async clickButton(vc: CardVc | FormVc | NavVc, buttonId: string) {
 		const match = pluckButtonFromCard(vc, buttonId)
 		await this.click(match)
 	},
@@ -147,7 +140,9 @@ const interactor = {
 		type: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button['type']
 	) {
 		const model = renderUtil.render(vc)
-		const primary = pluckButtons(model).find((b) => b.type === type)
+		const primary = pluckErrorAndFooterButtons(model).find(
+			(b) => b.type === type
+		)
 
 		//@ts-ignore
 		if (!primary && model.shouldShowSubmitControls) {
@@ -548,6 +543,21 @@ const interactor = {
 		await this.click(button)
 	},
 
+	async clickNavButton(vc: SkillViewController | NavVc, buttonId: string) {
+		const navVc = (vc as SkillViewController).load
+			? navigationAssert.skillViewRendersNavigation(vc as SkillViewController)
+			: vc
+		const { foundButtons } = pluckButtons(navVc, [buttonId])
+		const match = foundButtons[0]
+
+		assert.isTruthy(
+			match,
+			`I could not find a button with the id '${buttonId}' in your nav!`
+		)
+
+		return this.click(match)
+	},
+
 	/**
 	 * @deprecated interactor.longPressDropOnMonthView() -> calendarInteractor.longPressDropOnMonthView()
 	 */
@@ -561,8 +571,8 @@ const interactor = {
 
 export default interactor
 
-function pluckButtonFromCard(vc: CardVc | FormVc, buttonId: string) {
-	const { foundButtons } = checkForButtons(vc, [buttonId])
+function pluckButtonFromCard(vc: CardVc | FormVc | NavVc, buttonId: string) {
+	const { foundButtons } = pluckButtons(vc, [buttonId])
 	const match = foundButtons[0]
 
 	assert.isTruthy(
@@ -572,7 +582,7 @@ function pluckButtonFromCard(vc: CardVc | FormVc, buttonId: string) {
 	return match
 }
 
-function pluckButtons(
+function pluckErrorAndFooterButtons(
 	model:
 		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 		| SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>
@@ -582,3 +592,14 @@ function pluckButtons(
 		model.footer?.buttons ??
 		[]) as SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
 }
+
+type CardVc =
+	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
+type ButtonBarVc =
+	ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar>
+type ButtonGroupVc = ViewController<
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
+>
+type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
+type FormVc = FormViewController<any> | BigFormViewController<any>
+type NavVc = ViewController<Navigation>

@@ -1,8 +1,8 @@
 import { test, assert } from '@sprucelabs/test-utils'
-import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { Navigation } from '../../../types/heartwood.types'
+import AbstractNavigationTest from './AbstractNavigationTest'
 
-export default class ControllingNavigationTest extends AbstractViewControllerTest {
+export default class ControllingNavigationTest extends AbstractNavigationTest {
 	@test()
 	protected static async canCreateNavigation() {
 		this.NavigationVc()
@@ -23,9 +23,5 @@ export default class ControllingNavigationTest extends AbstractViewControllerTes
 		const { controller, ...rest } = vc.render()
 		assert.isEqual(controller, vc)
 		assert.isEqualDeep(rest, options)
-	}
-
-	private static NavigationVc(navigation?: Navigation) {
-		return this.Controller('navigation', { ...navigation })
 	}
 }

@@ -4,6 +4,7 @@ import {
 	Button,
 	Card,
 	FormViewController,
+	Navigation,
 	TriggerRenderHandler,
 	ViewController,
 } from '../../types/heartwood.types'
@@ -15,7 +16,7 @@ import {
 	ButtonViewController,
 	checkForCardSection,
 	getVcName,
-	pluckAllFromCard,
+	pluckAllFromView,
 	pluckFirstFromCard,
 } from './assertSupport'
 
@@ -128,7 +129,7 @@ const buttonAssert = {
 			return
 		}
 
-		const { found } = checkForButtons(vc, ids)
+		const { found } = pluckButtons(vc, ids)
 
 		assert.fail(
 			`I did not expect your card to render buttons:\n\n${found.join(', ')}`
@@ -151,7 +152,7 @@ const buttonAssert = {
 		vc: ViewController<Card>,
 		ids: string[]
 	): ButtonViewController[] {
-		const { missing, foundButtons } = checkForButtons(vc, ids)
+		const { missing, foundButtons } = pluckButtons(vc, ids)
 
 		if (missing.length > 0) {
 			assert.fail(
@@ -203,9 +204,10 @@ const buttonAssert = {
 
 export default buttonAssert
 
-export function checkForButtons(
+export function pluckButtons(
 	vc:
 		| ViewController<Card>
+		| ViewController<Navigation>
 		| FormViewController<any>
 		| BigFormViewController<any>,
 	ids: string[]
@@ -218,13 +220,17 @@ export function checkForButtons(
 		...(model.criticalError?.buttons ?? model.footer?.buttons ?? []),
 	]
 
-	pluckAllFromCard(model as any, 'buttons').forEach((b) => {
+	if ((model as Navigation).buttons) {
+		buttons.push(...(model as Navigation).buttons!)
+	}
+
+	pluckAllFromView(model as any, 'buttons').forEach((b) => {
 		if (b) {
 			buttons.push(...b)
 		}
 	})
 
-	pluckAllFromCard(model as any, 'form').forEach((f) => {
+	pluckAllFromView(model as any, 'form').forEach((f) => {
 		buttons.push(...(f?.footer?.buttons ?? []))
 	})
 

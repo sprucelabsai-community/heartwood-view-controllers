@@ -20,7 +20,7 @@ import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import {
 	getVcName,
-	pluckAllFromCard,
+	pluckAllFromView,
 	SelectViewController,
 } from './assertSupport'
 import interactor from './interactor'
@@ -85,7 +85,7 @@ const listAssert = {
 		id?: string
 	): ListViewController {
 		const model = renderUtil.render(vc)
-		const lists = pluckAllFromCard(
+		const lists = pluckAllFromView(
 			//@ts-ignore
 			model.body ? model : { body: model },
 			'list'

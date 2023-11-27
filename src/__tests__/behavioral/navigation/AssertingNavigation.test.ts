@@ -1,13 +1,9 @@
 import { test, assert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
-import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
-import {
-	Navigation,
-	NavigationButton,
-	ViewControllerOptions,
-} from '../../../types/heartwood.types'
-import NavigationViewController from '../../../viewControllers/navigation/Navigation.vc'
+import { NavigationButton } from '../../../types/heartwood.types'
+import AbstractNavigationTest from './AbstractNavigationTest'
+import HasNavSkillView from './HasNavSkillView'
 
 class NoNavigationSkillView extends AbstractSkillViewController {
 	public render() {
@@ -15,24 +11,7 @@ class NoNavigationSkillView extends AbstractSkillViewController {
 	}
 }
 
-class HasNavSkillView extends AbstractSkillViewController {
-	public nav: NavigationViewController
-
-	public constructor(options: ViewControllerOptions) {
-		super(options)
-		this.nav = this.Controller('navigation', {})
-	}
-
-	public renderNavigation() {
-		return this.nav.render()
-	}
-
-	public render() {
-		return {}
-	}
-}
-
-export default class AssertingNavigationTest extends AbstractViewControllerTest {
+export default class AssertingNavigationTest extends AbstractNavigationTest {
 	protected static controllerMap = {
 		noNav: NoNavigationSkillView,
 		hasNav: HasNavSkillView,
@@ -86,9 +65,5 @@ export default class AssertingNavigationTest extends AbstractViewControllerTest 
 		const svc = this.Controller('hasNav' as any, {})
 		const nav = navigationAssert.skillViewRendersNavigation(svc)
 		assert.isEqual(nav, svc.nav)
-	}
-
-	private static NavigationVc(navigation?: Navigation) {
-		return this.Controller('navigation', { ...navigation })
 	}
 }

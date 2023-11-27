@@ -23,7 +23,7 @@ import renderUtil from '../../utilities/render.utility'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
-import { pluckAllFromCard } from './assertSupport'
+import { pluckAllFromView } from './assertSupport'
 import { getViewId, pullCardsFromSkillView } from './vcAssert'
 
 const formAssert = {
@@ -180,9 +180,9 @@ const formAssert = {
 	) {
 		const model = renderUtil.render(vc)
 
-		const bigForms = pluckAllFromCard(model, 'bigForm')
+		const bigForms = pluckAllFromView(model, 'bigForm')
 		const forms =
-			bigForms.length > 0 ? bigForms : pluckAllFromCard(model, 'form')
+			bigForms.length > 0 ? bigForms : pluckAllFromView(model, 'form')
 
 		let form: Form | undefined | null
 		for (const match of forms) {
