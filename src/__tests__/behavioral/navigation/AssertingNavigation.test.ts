@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import { NavigationButton } from '../../../types/heartwood.types'
@@ -83,5 +83,100 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 		const svc = this.Controller('hasNav' as any, {})
 		const nav = navigationAssert.skillViewRendersNavigation(svc)
 		assert.isEqual(nav, svc.nav)
+	}
+
+	@test()
+	protected static async throwsWhenNotFindingDestination() {
+		const destinationId = generateId()
+		const vc = this.NavigationVc({
+			buttons: [
+				{ id: 'test', lineIcon: 'tag' },
+				{
+					id: 'test2',
+					lineIcon: 'alarm',
+					destination: {
+						id: generateId(),
+					},
+				},
+				{
+					id: 'another',
+					lineIcon: 'alarm',
+					destination: {
+						id: destinationId,
+						args: {
+							hello: 'world',
+						},
+					},
+				},
+			],
+		})
+		assert.doesThrow(() =>
+			navigationAssert.buttonRedirectsTo({
+				vc,
+				button: 'test',
+				destination: { id: generateId() },
+			})
+		)
+		assert.doesThrow(() =>
+			navigationAssert.buttonRedirectsTo({
+				vc,
+				button: generateId(),
+				destination: { id: generateId() },
+			})
+		)
+
+		assert.doesThrow(() =>
+			navigationAssert.buttonRedirectsTo({
+				vc,
+				button: 'test2',
+				destination: { id: generateId() },
+			})
+		)
+
+		assert.doesThrow(() =>
+			navigationAssert.buttonRedirectsTo({
+				vc,
+				button: 'another',
+				destination: { id: destinationId, args: {} },
+			})
+		)
+	}
+
+	@test()
+	protected static async canCheckDestination() {
+		const args = {
+			[generateId()]: generateId(),
+		}
+		const vc = this.NavigationVc({
+			buttons: [
+				{
+					id: 'test',
+					lineIcon: 'tag',
+					destination: {
+						id: 'test',
+					},
+				},
+				{
+					id: 'lastly',
+					lineIcon: 'tag',
+					destination: {
+						id: 'okay',
+						args,
+					},
+				},
+			],
+		})
+
+		navigationAssert.buttonRedirectsTo({
+			vc,
+			button: 'test',
+			destination: { id: 'test' },
+		})
+
+		navigationAssert.buttonRedirectsTo({
+			vc,
+			button: 'lastly',
+			destination: { id: 'okay', args },
+		})
 	}
 }

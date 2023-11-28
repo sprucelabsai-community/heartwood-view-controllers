@@ -8,14 +8,41 @@ import renderUtil from '../../utilities/render.utility'
 
 const navigationAssert = {
 	rendersButton(vc: ViewController<Navigation>, id: string) {
-		const model = renderUtil.render(vc)
+		getButtonFromNav(vc, id)
+	},
 
-		const buttons = model.buttons
-		const button = buttons?.find((b) => b.id === id)
+	buttonRedirectsTo(options: {
+		vc: ViewController<Navigation>
+		button: string
+		destination: {
+			id: string
+			args?: Record<string, any>
+		}
+	}) {
+		const { vc, button, destination } = options
+
+		const model = getButtonFromNav(vc, button)
+
 		assert.isTruthy(
-			button,
-			`I could not find a button with the id "${id}" in your navigation!`
+			model.destination,
+			`Your navigation button "${button}" does not have a redirect!`
 		)
+
+		assert.isEqual(
+			model.destination?.id,
+			destination.id,
+			`Your navigation button "${button}" does not redirect to the correct destination. Expected "${destination.id}" but got "${model.destination?.id}"`
+		)
+
+		if (destination.args) {
+			assert.isEqualDeep(
+				model.destination?.args,
+				destination.args,
+				`Your navigation button "${button}" does not redirect to the correct destination. Expected args "${JSON.stringify(
+					destination.args
+				)}" but got "${JSON.stringify(model.destination?.args)}"`
+			)
+		}
 	},
 
 	rendersButtons(vc: ViewController<Navigation>, ids: string[]) {
@@ -42,3 +69,18 @@ const navigationAssert = {
 }
 
 export default navigationAssert
+function getButtonFromNav(
+	vc: ViewController<
+		import('/Users/taylorromero/Development/SpruceLabs/heartwood-view-controllers/src/index').SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
+	>,
+	id: string
+) {
+	const model = renderUtil.render(vc)
+	const buttons = model.buttons
+	const button = buttons?.find((b) => b.id === id)
+	assert.isTruthy(
+		button,
+		`I could not find a button with the id "${id}" in your navigation!`
+	)
+	return button
+}

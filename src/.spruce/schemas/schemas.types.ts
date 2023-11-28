@@ -1513,7 +1513,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				/** Destination skill view controller. */
-				'destinationSVc'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewController| undefined | null
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewController| undefined | null
 				/** Selected. */
 				'isEnabled'?: boolean| undefined | null
 				/** Label. */
@@ -1543,7 +1543,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: undefined
 			            },
 			            /** Destination skill view controller. */
-			            'destinationSVc': {
+			            'destination': {
 			                label: 'Destination skill view controller',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema,}

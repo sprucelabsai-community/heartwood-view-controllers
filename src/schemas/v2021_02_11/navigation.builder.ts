@@ -37,7 +37,7 @@ export default buildSchema({
 							type: 'id',
 							isRequired: true,
 						},
-						destinationSVc: {
+						destination: {
 							type: 'schema',
 							label: 'Destination skill view controller',
 							options: {

@@ -24,7 +24,7 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                options: undefined
 	            },
 	            /** Destination skill view controller. */
-	            'destinationSVc': {
+	            'destination': {
 	                label: 'Destination skill view controller',
 	                type: 'schema',
 	                options: {schema: destinationSkillViewControllerSchema_v2021_02_11,}
