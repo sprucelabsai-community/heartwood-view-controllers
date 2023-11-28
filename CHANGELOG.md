@@ -1,3 +1,10 @@
+# [108.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.11.1...v108.12.0) (2023-11-28)
+
+
+### Features
+
+* assert many nav buttons at once ([6369be3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/6369be3))
+
 ## [108.11.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.11.0...v108.11.1) (2023-11-27)
 
 # [108.11.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.10.1...v108.11.0) (2023-11-27)
