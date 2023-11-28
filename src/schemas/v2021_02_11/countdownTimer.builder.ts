@@ -17,6 +17,9 @@ export default buildSchema({
 				valueType: '() => void',
 			},
 		},
+		endDateMs: {
+			type: 'dateTime',
+		},
 		setStartHandler: {
 			type: 'raw',
 			isRequired: true,

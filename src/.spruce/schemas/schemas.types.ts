@@ -5381,6 +5381,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onComplete'?: (() => void)| undefined | null
 				
+				'endDateMs'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				
 				'setStartHandler': ((handler: (to: number) => void) => void)
 		}
 
@@ -5400,6 +5402,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onComplete': {
 			                type: 'raw',
 			                options: {valueType: `() => void`,}
+			            },
+			            /** . */
+			            'endDateMs': {
+			                type: 'dateTime',
+			                options: undefined
 			            },
 			            /** . */
 			            'setStartHandler': {

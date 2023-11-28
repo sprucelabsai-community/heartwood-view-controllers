@@ -23,8 +23,9 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
 		assert.isEqual(this.model.controller, this.vc)
 	}
 
-	@test()
-	protected static async clickingStartOnTimerCallsHandler() {
+	@test('passes expected end 1', 1)
+	@test('passes expected end 2', 2)
+	protected static async clickingStartOnTimerCallsHandler(toMs: number) {
 		let wasHit = false
 		let passedToMs: number | undefined
 
@@ -33,11 +34,12 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
 			wasHit = true
 		})
 
-		const toMsn = 1
-		this.vc.start(toMsn)
+		this.vc.start(toMs)
 
 		assert.isTrue(wasHit)
-		assert.isEqual(passedToMs, toMsn)
+		assert.isEqual(passedToMs, toMs)
+
+		assert.isEqual(this.render(this.vc).endDateMs, toMs)
 	}
 
 	@test()
@@ -49,6 +51,16 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
 		})
 
 		assert.isEqual(this.model.onComplete, onComplete)
+	}
+
+	@test(`passes end date ms through options to rendered model 1`, 0)
+	@test(`passes end date ms through options to rendered model 2`, 1)
+	@test(`passes end date ms through options to rendered model 3`, 2)
+	protected static async passesEndDateMsThroughOptionsToRenderedModel(
+		endDateMs: number
+	) {
+		this.reload({ endDateMs })
+		assert.isEqual(this.model.endDateMs, endDateMs)
 	}
 
 	private static reload(

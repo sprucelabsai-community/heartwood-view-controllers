@@ -21,6 +21,11 @@ const countdownTimerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.C
 	                options: {valueType: `() => void`,}
 	            },
 	            /** . */
+	            'endDateMs': {
+	                type: 'dateTime',
+	                options: undefined
+	            },
+	            /** . */
 	            'setStartHandler': {
 	                type: 'raw',
 	                isRequired: true,
