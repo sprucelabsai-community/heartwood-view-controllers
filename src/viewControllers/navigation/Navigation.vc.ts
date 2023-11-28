@@ -9,6 +9,16 @@ export default class NavigationViewController extends AbstractViewController<Nav
 		this.model = removeUniversalViewOptions(options)
 	}
 
+	public hide() {
+		this.model.isVisible = false
+		this.triggerRender()
+	}
+
+	public show() {
+		this.model.isVisible = true
+		this.triggerRender()
+	}
+
 	public render(): Navigation {
 		return { controller: this, ...this.model }
 	}
