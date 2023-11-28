@@ -22,6 +22,8 @@ export * from './viewControllers/form/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
 export * from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
+export { default as CountdownTimerViewController } from './viewControllers/countdownTimer/CountdownTimer.vc'
+export * from './viewControllers/countdownTimer/CountdownTimer.vc'
 
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
