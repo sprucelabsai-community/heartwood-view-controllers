@@ -2,6 +2,7 @@ import { buildSchema } from '@sprucelabs/schema'
 import buttonBuilder from '../button.builder'
 import buttonBarBuilder from '../buttonBar.builder'
 import calendarBuilder from '../calendar.builder'
+import countdownTimerBuilder from '../countdownTimer.builder'
 import feedBuilder from '../feed.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
@@ -127,6 +128,13 @@ export default buildSchema({
 			label: 'Stats',
 			options: {
 				schema: statsBuilder,
+			},
+		},
+		countdownTimer: {
+			type: 'schema',
+			label: 'Countdown timer',
+			options: {
+				schema: countdownTimerBuilder,
 			},
 		},
 		progress: {

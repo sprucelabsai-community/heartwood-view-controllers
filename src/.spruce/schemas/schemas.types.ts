@@ -2517,6 +2517,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
 				/** Stats. */
 				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
+				/** Countdown timer. */
+				'countdownTimer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer| undefined | null
 				/** Progress. */
 				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
 				/** Ratings. */
@@ -2651,6 +2653,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Stats',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
+			            },
+			            /** Countdown timer. */
+			            'countdownTimer': {
+			                label: 'Countdown timer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimerSchema,}
 			            },
 			            /** Progress. */
 			            'progress': {
