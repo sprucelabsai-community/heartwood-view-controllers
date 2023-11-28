@@ -14,7 +14,7 @@ const destinationSkillViewControllerSchema: SpruceSchemas.HeartwoodViewControlle
 	            'id': {
 	                type: 'raw',
 	                isRequired: true,
-	                options: {valueType: `HeartwoodTypes.ViewControllerId`,}
+	                options: {valueType: `HeartwoodTypes.SkillViewControllerId`,}
 	            },
 	            /** . */
 	            'args': {
