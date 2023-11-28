@@ -171,5 +171,6 @@ export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachin
 export { default as navigationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigation.schema'
 export { default as navigationButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButton.schema'
 export { default as destinationSkillViewControllerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
+export { default as countdownTimerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/countdownTimer.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

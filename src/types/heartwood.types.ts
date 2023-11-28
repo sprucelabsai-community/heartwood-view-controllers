@@ -46,6 +46,9 @@ import CardViewControllerImpl, {
 import ConfirmViewController, {
 	ConfirmViewControllerOptions,
 } from '../viewControllers/Confirm.vc'
+import CountdownTimerViewController, {
+	CountdownTimerViewControllerOptions,
+} from '../viewControllers/countdownTimer/CountdownTimer.vc'
 import DialogViewController, {
 	DialogViewControllerOptions,
 } from '../viewControllers/Dialog.vc'
@@ -286,6 +289,8 @@ export type Navigation =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
 export type NavigationButton =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
+export type CountdownTimer =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
 
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -437,6 +442,7 @@ export interface ViewControllerMap {
 	map: MapViewController
 	feed: FeedViewController
 	navigation: NavigationViewController
+	'countdown-timer': CountdownTimerViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -475,6 +481,7 @@ export interface ViewControllerOptionsMap {
 	map: MapViewControllerOptions
 	feed: FeedViewControllerOptions
 	navigation: Navigation
+	'countdown-timer': CountdownTimerViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

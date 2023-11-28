@@ -1472,7 +1472,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface DestinationSkillViewController {
 			
 				
-				'id': (HeartwoodTypes.ViewControllerId)
+				'id': (HeartwoodTypes.SkillViewControllerId)
 				
 				'args'?: (Record<string, any>)| undefined | null
 		}
@@ -1488,7 +1488,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'id': {
 			                type: 'raw',
 			                isRequired: true,
-			                options: {valueType: `HeartwoodTypes.ViewControllerId`,}
+			                options: {valueType: `HeartwoodTypes.SkillViewControllerId`,}
 			            },
 			            /** . */
 			            'args': {
@@ -1887,234 +1887,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface FancyIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface CardSection {
-			
-				
-				'id'?: string| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Complete. When being rendered as a slide, this will signify the step is complete. */
-				'isComplete'?: boolean| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
-				/** Padding. */
-				'shouldBePadded'?: boolean| undefined | null
-				/** Center content. */
-				'shouldContentBeCentered'?: boolean| undefined | null
-				/** Card section item. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Image. */
-				'image'?: string| undefined | null
-				/** Avatar. */
-				'avatar'?: string| undefined | null
-				/** Form. */
-				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
-				/** Talking Sprucebot. */
-				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
-				/** Big form. */
-				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
-				/** Map. */
-				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map| undefined | null
-				/** Buttons. */
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
-				/** Button bar. */
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
-				/** Calendar. */
-				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
-				/** Stats. */
-				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
-				/** Progress. */
-				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
-				/** Ratings. */
-				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
-				/** Receipt. */
-				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
-				/** Feed. */
-				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
-				/** Grid. */
-				'shouldRenderContentsAsGrid'?: boolean| undefined | null
-				/** Grid size. */
-				'gridSize'?: ("small" | "medium" | "large")| undefined | null
-				/** Alignment. */
-				'alignment'?: ("left" | "center" | "right")| undefined | null
-		}
-
-		interface CardSectionSchema extends SpruceSchema.Schema {
-			id: 'cardSection',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
-			            'isComplete': {
-			                label: 'Complete',
-			                type: 'boolean',
-			                hint: 'When being rendered as a slide, this will signify the step is complete.',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
-			            },
-			            /** Padding. */
-			            'shouldBePadded': {
-			                label: 'Padding',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Center content. */
-			            'shouldContentBeCentered': {
-			                label: 'Center content',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Card section item. */
-			            'text': {
-			                label: 'Card section item',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Avatar. */
-			            'avatar': {
-			                label: 'Avatar',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Form. */
-			            'form': {
-			                label: 'Form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
-			            },
-			            /** Talking Sprucebot. */
-			            'talkingSprucebot': {
-			                label: 'Talking Sprucebot',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
-			            },
-			            /** Big form. */
-			            'bigForm': {
-			                label: 'Big form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
-			            },
-			            /** Map. */
-			            'map': {
-			                label: 'Map',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema,}
-			            },
-			            /** Buttons. */
-			            'buttons': {
-			                label: 'Buttons',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
-			            },
-			            /** Button bar. */
-			            'buttonBar': {
-			                label: 'Button bar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
-			            },
-			            /** Calendar. */
-			            'calendar': {
-			                label: 'Calendar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
-			            },
-			            /** Stats. */
-			            'stats': {
-			                label: 'Stats',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
-			            },
-			            /** Progress. */
-			            'progress': {
-			                label: 'Progress',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
-			            },
-			            /** Ratings. */
-			            'ratings': {
-			                label: 'Ratings',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
-			            },
-			            /** Receipt. */
-			            'receipt': {
-			                label: 'Receipt',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema,}
-			            },
-			            /** Feed. */
-			            'feed': {
-			                label: 'Feed',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderContentsAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Grid size. */
-			            'gridSize': {
-			                label: 'Grid size',
-			                type: 'select',
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** Alignment. */
-			            'alignment': {
-			                label: 'Alignment',
-			                type: 'select',
-			                defaultValue: "left",
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
-			            },
-			    }
-		}
-
-		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
 
 	}
 
@@ -2700,6 +2472,234 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ProgressEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardSection {
+			
+				
+				'id'?: string| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Complete. When being rendered as a slide, this will signify the step is complete. */
+				'isComplete'?: boolean| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
+				/** Padding. */
+				'shouldBePadded'?: boolean| undefined | null
+				/** Center content. */
+				'shouldContentBeCentered'?: boolean| undefined | null
+				/** Card section item. */
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Image. */
+				'image'?: string| undefined | null
+				/** Avatar. */
+				'avatar'?: string| undefined | null
+				/** Form. */
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
+				/** Talking Sprucebot. */
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				/** Big form. */
+				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
+				/** Map. */
+				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map| undefined | null
+				/** Buttons. */
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				/** Button bar. */
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Calendar. */
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
+				/** Stats. */
+				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
+				/** Progress. */
+				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
+				/** Ratings. */
+				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
+				/** Receipt. */
+				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
+				/** Feed. */
+				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
+				/** Grid. */
+				'shouldRenderContentsAsGrid'?: boolean| undefined | null
+				/** Grid size. */
+				'gridSize'?: ("small" | "medium" | "large")| undefined | null
+				/** Alignment. */
+				'alignment'?: ("left" | "center" | "right")| undefined | null
+		}
+
+		interface CardSectionSchema extends SpruceSchema.Schema {
+			id: 'cardSection',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
+			            'isComplete': {
+			                label: 'Complete',
+			                type: 'boolean',
+			                hint: 'When being rendered as a slide, this will signify the step is complete.',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                isPrivate: true,
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
+			            },
+			            /** Padding. */
+			            'shouldBePadded': {
+			                label: 'Padding',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Center content. */
+			            'shouldContentBeCentered': {
+			                label: 'Center content',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Card section item. */
+			            'text': {
+			                label: 'Card section item',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Form. */
+			            'form': {
+			                label: 'Form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
+			            },
+			            /** Talking Sprucebot. */
+			            'talkingSprucebot': {
+			                label: 'Talking Sprucebot',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
+			            },
+			            /** Big form. */
+			            'bigForm': {
+			                label: 'Big form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
+			            },
+			            /** Map. */
+			            'map': {
+			                label: 'Map',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema,}
+			            },
+			            /** Buttons. */
+			            'buttons': {
+			                label: 'Buttons',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			            /** Button bar. */
+			            'buttonBar': {
+			                label: 'Button bar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Calendar. */
+			            'calendar': {
+			                label: 'Calendar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
+			            },
+			            /** Stats. */
+			            'stats': {
+			                label: 'Stats',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
+			            },
+			            /** Progress. */
+			            'progress': {
+			                label: 'Progress',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
+			            },
+			            /** Ratings. */
+			            'ratings': {
+			                label: 'Ratings',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
+			            },
+			            /** Receipt. */
+			            'receipt': {
+			                label: 'Receipt',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema,}
+			            },
+			            /** Feed. */
+			            'feed': {
+			                label: 'Feed',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderContentsAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Grid size. */
+			            'gridSize': {
+			                label: 'Grid size',
+			                type: 'select',
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** Alignment. */
+			            'alignment': {
+			                label: 'Alignment',
+			                type: 'select',
+			                defaultValue: "left",
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+			            },
+			    }
+		}
+
+		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
 
 	}
 
@@ -5359,6 +5359,50 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CountdownTimer {
+			
+				
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>)| undefined | null
+				
+				'onComplete'?: (() => void)| undefined | null
+				
+				'setStartHandler': ((handler: (to: number) => void) => void)
+		}
+
+		interface CountdownTimerSchema extends SpruceSchema.Schema {
+			id: 'countdownTimer',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Countdown Timer',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>`,}
+			            },
+			            /** . */
+			            'onComplete': {
+			                type: 'raw',
+			                options: {valueType: `() => void`,}
+			            },
+			            /** . */
+			            'setStartHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `(handler: (to: number) => void) => void`,}
+			            },
+			    }
+		}
+
+		interface CountdownTimerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimerSchema> {}
 
 	}
 

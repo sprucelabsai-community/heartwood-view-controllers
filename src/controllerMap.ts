@@ -7,6 +7,7 @@ import CalendarViewController from './viewControllers/Calendar.vc'
 import CalendarEventViewController from './viewControllers/CalendarEvent.vc'
 import CardViewController from './viewControllers/card/Card.vc'
 import ConfirmViewController from './viewControllers/Confirm.vc'
+import CountdownTimerViewController from './viewControllers/countdownTimer/CountdownTimer.vc'
 import DialogViewController from './viewControllers/Dialog.vc'
 import FeedViewController from './viewControllers/Feed.vc'
 import AutocompleteInputViewController from './viewControllers/form/AutocompleteInput.vc'
@@ -89,4 +90,5 @@ export const CORE_CONTROLLER_MAP = {
 	map: MapViewController,
 	feed: FeedViewController,
 	navigation: NavigationViewController,
+	'countdown-timer': CountdownTimerViewController,
 }
