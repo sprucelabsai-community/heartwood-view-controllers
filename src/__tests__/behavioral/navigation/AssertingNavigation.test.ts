@@ -179,7 +179,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 		navigationAssert.buttonRedirectsTo({
 			vc,
 			button: 'lastly',
-			destination: { id: 'okay', args },
+			destination: { id: 'button-bar', args },
 		})
 	}
 }
