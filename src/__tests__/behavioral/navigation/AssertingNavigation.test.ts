@@ -23,17 +23,35 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 		assert.doesThrow(() => navigationAssert.rendersButton(vc, 'test'))
 	}
 
-	@test('can find first button 1', [{ id: 'test' }], 'test')
-	@test('can find first button 2', [{ id: 'test2' }], 'test2')
-	@test('can find second button 1', [{ id: 'test' }, { id: 'test2' }], 'test2')
+	@test()
+	protected static async doesNotFindIfNotFindingAllButtons() {
+		const vc = this.NavigationVc({ buttons: [{ id: 'test', lineIcon: 'tag' }] })
+		assert.doesThrow(() =>
+			navigationAssert.rendersButtons(vc, ['test', 'test2'])
+		)
+	}
+
+	@test('can find first button 1', [{ id: 'test' }], ['test'])
+	@test('can find first button 2', [{ id: 'test2' }], ['test2'])
+	@test(
+		'can find second button 1',
+		[{ id: 'test' }, { id: 'test2' }],
+		['test2']
+	)
+	@test(
+		'can find multiple buttons 1',
+		[{ id: 'test' }, { id: 'test2' }],
+		['test', 'test2']
+	)
 	protected static async canFindButtons(
 		buttons: NavigationButton[],
-		id: string
+		ids: string[]
 	) {
 		const vc = this.NavigationVc({
 			buttons,
 		})
-		navigationAssert.rendersButton(vc, id)
+		navigationAssert.rendersButton(vc, ids[0])
+		navigationAssert.rendersButtons(vc, ids)
 	}
 
 	@test()

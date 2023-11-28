@@ -18,6 +18,10 @@ const navigationAssert = {
 		)
 	},
 
+	rendersButtons(vc: ViewController<Navigation>, ids: string[]) {
+		ids.forEach((id) => this.rendersButton(vc, id))
+	},
+
 	rendersButtonLabels(vc: ViewController<Navigation>) {
 		const model = renderUtil.render(vc)
 		assert.isTrue(
