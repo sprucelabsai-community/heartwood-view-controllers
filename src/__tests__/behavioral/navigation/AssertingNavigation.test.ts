@@ -1,7 +1,10 @@
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
-import { NavigationButton } from '../../../types/heartwood.types'
+import {
+	NavigationButton,
+	ViewControllerId,
+} from '../../../types/heartwood.types'
 import AbstractNavigationTest from './AbstractNavigationTest'
 import HasNavSkillView from './HasNavSkillView'
 
@@ -87,7 +90,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
 	@test()
 	protected static async throwsWhenNotFindingDestination() {
-		const destinationId = generateId()
+		const destinationId = generateId() as ViewControllerId
 		const vc = this.NavigationVc({
 			buttons: [
 				{ id: 'test', lineIcon: 'tag' },
@@ -95,7 +98,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 					id: 'test2',
 					lineIcon: 'alarm',
 					destination: {
-						id: generateId(),
+						id: generateId() as ViewControllerId,
 					},
 				},
 				{
@@ -160,7 +163,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 					id: 'lastly',
 					lineIcon: 'tag',
 					destination: {
-						id: 'okay',
+						id: 'button-bar',
 						args,
 					},
 				},

@@ -45,8 +45,11 @@ export default buildSchema({
 									id: 'destinationSkillViewController',
 									fields: {
 										id: {
-											type: 'id',
+											type: 'raw',
 											isRequired: true,
+											options: {
+												valueType: 'HeartwoodTypes.ViewControllerId',
+											},
 										},
 										args: {
 											type: 'raw',

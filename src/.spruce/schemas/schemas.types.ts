@@ -1472,7 +1472,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface DestinationSkillViewController {
 			
 				
-				'id': string
+				'id': (HeartwoodTypes.ViewControllerId)
 				
 				'args'?: (Record<string, any>)| undefined | null
 		}
@@ -1486,9 +1486,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    fields: {
 			            /** . */
 			            'id': {
-			                type: 'id',
+			                type: 'raw',
 			                isRequired: true,
-			                options: undefined
+			                options: {valueType: `HeartwoodTypes.ViewControllerId`,}
 			            },
 			            /** . */
 			            'args': {

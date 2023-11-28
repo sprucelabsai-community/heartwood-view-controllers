@@ -12,9 +12,9 @@ const destinationSkillViewControllerSchema: SpruceSchemas.HeartwoodViewControlle
 	    fields: {
 	            /** . */
 	            'id': {
-	                type: 'id',
+	                type: 'raw',
 	                isRequired: true,
-	                options: undefined
+	                options: {valueType: `HeartwoodTypes.ViewControllerId`,}
 	            },
 	            /** . */
 	            'args': {
