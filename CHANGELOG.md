@@ -1,3 +1,10 @@
+# [108.14.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.13.3...v108.14.0) (2023-11-28)
+
+
+### Features
+
+* can hide/show navigation ([fdb4d47](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fdb4d47))
+
 ## [108.13.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.13.2...v108.13.3) (2023-11-28)
 
 ## [108.13.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.13.1...v108.13.2) (2023-11-28)
