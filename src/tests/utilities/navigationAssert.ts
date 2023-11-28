@@ -69,12 +69,7 @@ const navigationAssert = {
 }
 
 export default navigationAssert
-function getButtonFromNav(
-	vc: ViewController<
-		import('/Users/taylorromero/Development/SpruceLabs/heartwood-view-controllers/src/index').SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
-	>,
-	id: string
-) {
+function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
 	const model = renderUtil.render(vc)
 	const buttons = model.buttons
 	const button = buttons?.find((b) => b.id === id)
