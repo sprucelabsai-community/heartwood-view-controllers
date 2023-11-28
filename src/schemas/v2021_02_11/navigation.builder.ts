@@ -48,7 +48,7 @@ export default buildSchema({
 											type: 'raw',
 											isRequired: true,
 											options: {
-												valueType: 'HeartwoodTypes.ViewControllerId',
+												valueType: 'HeartwoodTypes.SkillViewControllerId',
 											},
 										},
 										args: {
