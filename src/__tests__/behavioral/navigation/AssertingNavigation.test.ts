@@ -3,7 +3,7 @@ import AbstractSkillViewController from '../../../skillViewControllers/Abstract.
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
 	NavigationButton,
-	ViewControllerId,
+	SkillViewControllerId,
 } from '../../../types/heartwood.types'
 import AbstractNavigationTest from './AbstractNavigationTest'
 import HasNavSkillView from './HasNavSkillView'
@@ -90,7 +90,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
 	@test()
 	protected static async throwsWhenNotFindingDestination() {
-		const destinationId = generateId() as ViewControllerId
+		const destinationId = generateId() as SkillViewControllerId
 		const vc = this.NavigationVc({
 			buttons: [
 				{ id: 'test', lineIcon: 'tag' },
@@ -98,7 +98,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 					id: 'test2',
 					lineIcon: 'alarm',
 					destination: {
-						id: generateId() as ViewControllerId,
+						id: generateId() as SkillViewControllerId,
 					},
 				},
 				{
@@ -156,14 +156,14 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 					id: 'test',
 					lineIcon: 'tag',
 					destination: {
-						id: 'test',
+						id: 'test' as SkillViewControllerId,
 					},
 				},
 				{
 					id: 'lastly',
 					lineIcon: 'tag',
 					destination: {
-						id: 'button-bar',
+						id: 'button-bar' as SkillViewControllerId,
 						args,
 					},
 				},
