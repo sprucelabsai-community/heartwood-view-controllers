@@ -1,3 +1,14 @@
+## [108.13.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.13.1...v108.13.2) (2023-11-28)
+
+## [108.13.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.13.0...v108.13.1) (2023-11-28)
+
+# [108.13.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.12.0...v108.13.0) (2023-11-28)
+
+
+### Features
+
+* navigation assert can now check for redirects ([d47db58](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d47db58))
+
 # [108.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.11.1...v108.12.0) (2023-11-28)
 
 
