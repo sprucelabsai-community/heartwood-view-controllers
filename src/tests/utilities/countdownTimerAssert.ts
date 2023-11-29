@@ -53,13 +53,13 @@ const countdownTimerAssert = {
 		}
 
 		assert.isAbove(
-			endDateMs - 1,
+			endDateMs,
 			bottomMs,
 			`The dateMs you sent to this.countdownVc.start(...) is too low! It should be between ${bottomMs} and ${topMs} and you sent ${endDateMs}!`
 		)
 
 		assert.isBelow(
-			endDateMs + 1,
+			endDateMs,
 			topMs,
 			`The dateMs you sent to this.countdownVc.start(...) is too high! It should be between ${bottomMs} and ${topMs} and sent ${endDateMs}!`
 		)
