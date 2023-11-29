@@ -156,6 +156,7 @@ export { default as autocompleteInteractor } from './tests/utilities/autocomplet
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'
 export { default as calendarInteractor } from './tests/utilities/calendarInteractor'
+export { default as countdownTimerAssert } from './tests/utilities/countdownTimerAssert'
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as calendarSeeder } from './tests/utilities/calendarSeeder'
 export { default as confirmTestPatcher } from './tests/utilities/confirmTestPatcher'

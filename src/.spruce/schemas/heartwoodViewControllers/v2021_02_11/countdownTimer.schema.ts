@@ -11,6 +11,11 @@ const countdownTimerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.C
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
+	            /** . */
 	            'controller': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>`,}

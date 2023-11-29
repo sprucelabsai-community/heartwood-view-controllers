@@ -4,6 +4,9 @@ export default buildSchema({
 	id: 'countdownTimer',
 	name: 'Countdown Timer',
 	fields: {
+		id: {
+			type: 'id',
+		},
 		controller: {
 			type: 'raw',
 			options: {

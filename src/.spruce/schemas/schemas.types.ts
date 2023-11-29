@@ -5377,6 +5377,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CountdownTimer {
 			
 				
+				'id'?: string| undefined | null
+				
 				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>)| undefined | null
 				
 				'onComplete'?: (() => void)| undefined | null
@@ -5393,6 +5395,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Countdown Timer',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** . */
 			            'controller': {
 			                type: 'raw',
