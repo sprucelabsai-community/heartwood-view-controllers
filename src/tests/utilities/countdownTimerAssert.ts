@@ -48,13 +48,17 @@ const countdownTimerAssert = {
 			`Timer was not started! Try 'this.countdownVc.start(...)'`
 		)
 
-		assert.isBelow(
+		if (model.endDateMs === bottomMs || model.endDateMs === topMs) {
+			return
+		}
+
+		assert.isAbove(
 			endDateMs - 1,
 			bottomMs,
 			`The dateMs you sent to this.countdownVc.start(...) is too low! It should be between ${bottomMs} and ${topMs} and you sent ${endDateMs}!`
 		)
 
-		assert.isAbove(
+		assert.isBelow(
 			endDateMs + 1,
 			topMs,
 			`The dateMs you sent to this.countdownVc.start(...) is too high! It should be between ${bottomMs} and ${topMs} and sent ${endDateMs}!`
