@@ -34,6 +34,32 @@ const countdownTimerAssert = {
 			`Timer was started with wrong end date! Expected '${endDateMs}' but got '${model.endDateMs}'!`
 		)
 	},
+
+	timerStartedWithEndDateInRangeInclusive: (
+		vc: ViewController<CountdownTimer>,
+		bottomMs: number,
+		topMs: number
+	) => {
+		const model = renderUtil.render(vc)
+		const endDateMs = model.endDateMs
+
+		assert.isTruthy(
+			endDateMs,
+			`Timer was not started! Try 'this.countdownVc.start(...)'`
+		)
+
+		assert.isBelow(
+			endDateMs - 1,
+			bottomMs,
+			`The dateMs you sent to this.countdownVc.start(...) is too low! It should be between ${bottomMs} and ${topMs} and you sent ${endDateMs}!`
+		)
+
+		assert.isAbove(
+			endDateMs + 1,
+			topMs,
+			`The dateMs you sent to this.countdownVc.start(...) is too high! It should be between ${bottomMs} and ${topMs} and sent ${endDateMs}!`
+		)
+	},
 }
 
 export default countdownTimerAssert
