@@ -1,3 +1,10 @@
+# [108.20.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.19.0...v108.20.0) (2023-11-30)
+
+
+### Features
+
+* progressNavigatorAssert can assert step is not complete ([d2fa349](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d2fa349))
+
 # [108.19.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.18.1...v108.19.0) (2023-11-30)
 
 
