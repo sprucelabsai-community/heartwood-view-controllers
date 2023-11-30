@@ -15,7 +15,7 @@ const progressNavigatorAssert = {
 			navigator,
 			`Skill view controller ${getVcName(
 				vc
-			)} does not render a progress navigator.`
+			)} does not render a progress navigator. Make sure to implement 'public renderProgressNavigator()' in your skill view controller.`
 		)
 
 		assert.isTruthy(
