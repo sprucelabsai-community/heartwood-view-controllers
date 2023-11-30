@@ -1,3 +1,10 @@
+# [108.19.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.18.1...v108.19.0) (2023-11-30)
+
+
+### Features
+
+* progressNavigatorAssert can assert for steps ([fe2fa2c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fe2fa2c))
+
 ## [108.18.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.18.0...v108.18.1) (2023-11-30)
 
 # [108.18.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.17.1...v108.18.0) (2023-11-30)
