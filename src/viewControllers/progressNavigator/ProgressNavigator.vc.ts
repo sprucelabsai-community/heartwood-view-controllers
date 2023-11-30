@@ -49,7 +49,9 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
 				parameters: ['stepId'],
-				friendlyMessage: `You can't complete a step that doesn't exist!`,
+				friendlyMessage: `You can't get a step that doesn't exist! You asked for "${stepId}" but I only have "${this.model.steps
+					.map((s) => s.id)
+					.join(', ')}"`,
 			})
 		}
 		return step
