@@ -24,6 +24,8 @@ export * from './viewControllers/Login.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
 export { default as CountdownTimerViewController } from './viewControllers/countdownTimer/CountdownTimer.vc'
 export * from './viewControllers/countdownTimer/CountdownTimer.vc'
+export { default as ProgressNavigatorViewController } from './viewControllers/progressNavigator/ProgressNavigator.vc'
+export * from './viewControllers/progressNavigator/ProgressNavigator.vc'
 
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
@@ -157,6 +159,8 @@ export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'
 export { default as calendarInteractor } from './tests/utilities/calendarInteractor'
 export { default as countdownTimerAssert } from './tests/utilities/countdownTimerAssert'
+export { default as progressNavigatorAssert } from './tests/utilities/progressNavigatorAssert'
+
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as calendarSeeder } from './tests/utilities/calendarSeeder'
 export { default as confirmTestPatcher } from './tests/utilities/confirmTestPatcher'
@@ -175,5 +179,7 @@ export { default as navigationSchema } from '#spruce/schemas/heartwoodViewContro
 export { default as navigationButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButton.schema'
 export { default as destinationSkillViewControllerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
 export { default as countdownTimerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/countdownTimer.schema'
+export { default as progressNavigatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigator.schema'
+export { default as progressNavigatorStepSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigatorStep.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

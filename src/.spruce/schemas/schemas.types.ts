@@ -1136,142 +1136,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface SkillView {
-			
-				
-				'id'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
-				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
-				/** Full screen. */
-				'isFullScreen'?: boolean| undefined | null
-				
-				'title'?: string| undefined | null
-				
-				'subtitle'?: string| undefined | null
-				
-				'description'?: string| undefined | null
-				/** Layout. */
-				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
-				
-				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
-		}
-
-		interface SkillViewSchema extends SpruceSchema.Schema {
-			id: 'skillView',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Skill view',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SkillViewController`,}
-			            },
-			            /** Center vertically. */
-			            'shouldCenterVertically': {
-			                label: 'Center vertically',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Full screen. */
-			            'isFullScreen': {
-			                label: 'Full screen',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** . */
-			            'title': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'subtitle': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'description': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Layout. */
-			            'layouts': {
-			                label: 'Layout',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
-			            },
-			            /** . */
-			            'leftCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'rightCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'topCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'cards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'bottomCards': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'layout': {
-			                type: 'select',
-			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
-			            },
-			    }
-		}
-
-		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface SelectInput {
 			
 				
@@ -1406,6 +1270,118 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface SelectInputEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ProgressNavigatorStep {
+			
+				
+				'id': string
+				
+				'label': string
+				
+				'isComplete'?: boolean| undefined | null
+				
+				'hasError'?: boolean| undefined | null
+		}
+
+		interface ProgressNavigatorStepSchema extends SpruceSchema.Schema {
+			id: 'progressNavigatorStep',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'isComplete': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'hasError': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface ProgressNavigatorStepEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStepSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ProgressNavigator {
+			
+				
+				'currentStepId'?: string| undefined | null
+				
+				'processLabel'?: string| undefined | null
+				/** Line icon. */
+				'lineIcon'?: ("sprucebot" | "add-circle" | "chevron-left" | "document-text" | "link-angle" | "play-circle" | "star" | "add-square" | "chevron-right" | "download-cloud" | "link-flat" | "present" | "sun" | "add" | "chevron-up" | "download" | "loader" | "refresh-circle" | "tag" | "alarm" | "clipboard" | "edit-box" | "location-pin" | "refresh" | "time" | "arrow-back" | "clock" | "edit-line" | "lock" | "repeat" | "tool" | "arrow-down-circle" | "close-circle" | "email" | "map" | "restricted" | "trending-down" | "arrow-down" | "close-square" | "emoji-happy" | "message-circle" | "rotate" | "trending-up" | "arrow-next" | "close" | "emoji-sad" | "message-square" | "search-no" | "triangle" | "arrow-up-circle" | "code" | "external-link" | "mic-off" | "search" | "unlock" | "arrow-up" | "coffee" | "fav-heart" | "mic-on" | "selector-checked" | "upload-cloud" | "attachment" | "command" | "flag" | "minus-circle" | "selector-circle-filled" | "upload" | "award-badge" | "corner-down-left" | "flip-01" | "minus-square" | "selector-circle" | "user-add" | "binoculars" | "corner-down-right" | "flip-02" | "money-sign" | "send" | "user-delete" | "bolt" | "corner-left-down" | "folder" | "more-horizontal" | "settings-filled" | "user" | "book-open" | "corner-left-up" | "globe" | "more-vertical" | "settings" | "users" | "book" | "corner-right-down" | "hash-tag" | "notification-off" | "share" | "video-off" | "bookmark" | "corner-right-up" | "headphones" | "notification-on" | "shopping-bag" | "video" | "calendar-add" | "corner-up-left" | "help-buoy" | "object" | "shopping-cart" | "warning" | "calendar" | "corner-up-right" | "help-circle" | "pause-circle" | "sort-filter-down" | "wifi" | "camera" | "crop" | "home" | "phone-unavailable" | "sort-filter-up" | "zoom-in" | "cellphone" | "delete" | "info" | "phone" | "sound-off" | "zoom-out" | "checkmark" | "document-blank" | "jump" | "photo" | "sound-on" | "chevron-down" | "document-new" | "layers" | "picked" | "star-filled")| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator>)| undefined | null
+				
+				'steps': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep[]
+		}
+
+		interface ProgressNavigatorSchema extends SpruceSchema.Schema {
+			id: 'progressNavigator',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Progress Navigator',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'currentStepId': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'processLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                options: {choices: [{"value":"sprucebot","label":"sprucebot"},{"value":"add-circle","label":"add-circle"},{"value":"chevron-left","label":"chevron-left"},{"value":"document-text","label":"document-text"},{"value":"link-angle","label":"link-angle"},{"value":"play-circle","label":"play-circle"},{"value":"star","label":"star"},{"value":"add-square","label":"add-square"},{"value":"chevron-right","label":"chevron-right"},{"value":"download-cloud","label":"download-cloud"},{"value":"link-flat","label":"link-flat"},{"value":"present","label":"present"},{"value":"sun","label":"sun"},{"value":"add","label":"add"},{"value":"chevron-up","label":"chevron-up"},{"value":"download","label":"download"},{"value":"loader","label":"loader"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"tag","label":"tag"},{"value":"alarm","label":"alarm"},{"value":"clipboard","label":"clipboard"},{"value":"edit-box","label":"edit-box"},{"value":"location-pin","label":"location-pin"},{"value":"refresh","label":"refresh"},{"value":"time","label":"time"},{"value":"arrow-back","label":"arrow-back"},{"value":"clock","label":"clock"},{"value":"edit-line","label":"edit-line"},{"value":"lock","label":"lock"},{"value":"repeat","label":"repeat"},{"value":"tool","label":"tool"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"close-circle","label":"close-circle"},{"value":"email","label":"email"},{"value":"map","label":"map"},{"value":"restricted","label":"restricted"},{"value":"trending-down","label":"trending-down"},{"value":"arrow-down","label":"arrow-down"},{"value":"close-square","label":"close-square"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"message-circle","label":"message-circle"},{"value":"rotate","label":"rotate"},{"value":"trending-up","label":"trending-up"},{"value":"arrow-next","label":"arrow-next"},{"value":"close","label":"close"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"message-square","label":"message-square"},{"value":"search-no","label":"search-no"},{"value":"triangle","label":"triangle"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"code","label":"code"},{"value":"external-link","label":"external-link"},{"value":"mic-off","label":"mic-off"},{"value":"search","label":"search"},{"value":"unlock","label":"unlock"},{"value":"arrow-up","label":"arrow-up"},{"value":"coffee","label":"coffee"},{"value":"fav-heart","label":"fav-heart"},{"value":"mic-on","label":"mic-on"},{"value":"selector-checked","label":"selector-checked"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"attachment","label":"attachment"},{"value":"command","label":"command"},{"value":"flag","label":"flag"},{"value":"minus-circle","label":"minus-circle"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"upload","label":"upload"},{"value":"award-badge","label":"award-badge"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"flip-01","label":"flip-01"},{"value":"minus-square","label":"minus-square"},{"value":"selector-circle","label":"selector-circle"},{"value":"user-add","label":"user-add"},{"value":"binoculars","label":"binoculars"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"flip-02","label":"flip-02"},{"value":"money-sign","label":"money-sign"},{"value":"send","label":"send"},{"value":"user-delete","label":"user-delete"},{"value":"bolt","label":"bolt"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"folder","label":"folder"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"settings-filled","label":"settings-filled"},{"value":"user","label":"user"},{"value":"book-open","label":"book-open"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"globe","label":"globe"},{"value":"more-vertical","label":"more-vertical"},{"value":"settings","label":"settings"},{"value":"users","label":"users"},{"value":"book","label":"book"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"hash-tag","label":"hash-tag"},{"value":"notification-off","label":"notification-off"},{"value":"share","label":"share"},{"value":"video-off","label":"video-off"},{"value":"bookmark","label":"bookmark"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"headphones","label":"headphones"},{"value":"notification-on","label":"notification-on"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"video","label":"video"},{"value":"calendar-add","label":"calendar-add"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"help-buoy","label":"help-buoy"},{"value":"object","label":"object"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"warning","label":"warning"},{"value":"calendar","label":"calendar"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"help-circle","label":"help-circle"},{"value":"pause-circle","label":"pause-circle"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"wifi","label":"wifi"},{"value":"camera","label":"camera"},{"value":"crop","label":"crop"},{"value":"home","label":"home"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"cellphone","label":"cellphone"},{"value":"delete","label":"delete"},{"value":"info","label":"info"},{"value":"phone","label":"phone"},{"value":"sound-off","label":"sound-off"},{"value":"zoom-out","label":"zoom-out"},{"value":"checkmark","label":"checkmark"},{"value":"document-blank","label":"document-blank"},{"value":"jump","label":"jump"},{"value":"photo","label":"photo"},{"value":"sound-on","label":"sound-on"},{"value":"chevron-down","label":"chevron-down"},{"value":"document-new","label":"document-new"},{"value":"layers","label":"layers"},{"value":"picked","label":"picked"},{"value":"star-filled","label":"star-filled"}],}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator>`,}
+			            },
+			            /** . */
+			            'steps': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStepSchema,}
+			            },
+			    }
+		}
+
+		interface ProgressNavigatorEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorSchema> {}
 
 	}
 
@@ -1754,6 +1730,142 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface SkillView {
+			
+				
+				'id'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
+				/** Center vertically. */
+				'shouldCenterVertically'?: boolean| undefined | null
+				/** Full screen. */
+				'isFullScreen'?: boolean| undefined | null
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+				
+				'description'?: string| undefined | null
+				/** Layout. */
+				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
+				
+				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
+		}
+
+		interface SkillViewSchema extends SpruceSchema.Schema {
+			id: 'skillView',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Skill view',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SkillViewController`,}
+			            },
+			            /** Center vertically. */
+			            'shouldCenterVertically': {
+			                label: 'Center vertically',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Full screen. */
+			            'isFullScreen': {
+			                label: 'Full screen',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'description': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Layout. */
+			            'layouts': {
+			                label: 'Layout',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
+			            },
+			            /** . */
+			            'leftCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'rightCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'topCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'cards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'bottomCards': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'layout': {
+			                type: 'select',
+			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
+			            },
+			    }
+		}
+
+		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface FormBuilderImportExportPage<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				/** Page title. */
@@ -1887,6 +1999,242 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface FancyIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardSection {
+			
+				
+				'id'?: string| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Complete. When being rendered as a slide, this will signify the step is complete. */
+				'isComplete'?: boolean| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
+				/** Padding. */
+				'shouldBePadded'?: boolean| undefined | null
+				/** Center content. */
+				'shouldContentBeCentered'?: boolean| undefined | null
+				/** Card section item. */
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Image. */
+				'image'?: string| undefined | null
+				/** Avatar. */
+				'avatar'?: string| undefined | null
+				/** Form. */
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
+				/** Talking Sprucebot. */
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				/** Big form. */
+				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
+				/** Map. */
+				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map| undefined | null
+				/** Buttons. */
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				/** Button bar. */
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Calendar. */
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
+				/** Stats. */
+				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
+				/** Countdown timer. */
+				'countdownTimer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer| undefined | null
+				/** Progress. */
+				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
+				/** Ratings. */
+				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
+				/** Receipt. */
+				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
+				/** Feed. */
+				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
+				/** Grid. */
+				'shouldRenderContentsAsGrid'?: boolean| undefined | null
+				/** Grid size. */
+				'gridSize'?: ("small" | "medium" | "large")| undefined | null
+				/** Alignment. */
+				'alignment'?: ("left" | "center" | "right")| undefined | null
+		}
+
+		interface CardSectionSchema extends SpruceSchema.Schema {
+			id: 'cardSection',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
+			            'isComplete': {
+			                label: 'Complete',
+			                type: 'boolean',
+			                hint: 'When being rendered as a slide, this will signify the step is complete.',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                isPrivate: true,
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
+			            },
+			            /** Padding. */
+			            'shouldBePadded': {
+			                label: 'Padding',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Center content. */
+			            'shouldContentBeCentered': {
+			                label: 'Center content',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Card section item. */
+			            'text': {
+			                label: 'Card section item',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Form. */
+			            'form': {
+			                label: 'Form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
+			            },
+			            /** Talking Sprucebot. */
+			            'talkingSprucebot': {
+			                label: 'Talking Sprucebot',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
+			            },
+			            /** Big form. */
+			            'bigForm': {
+			                label: 'Big form',
+			                type: 'schema',
+			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
+			            },
+			            /** Map. */
+			            'map': {
+			                label: 'Map',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema,}
+			            },
+			            /** Buttons. */
+			            'buttons': {
+			                label: 'Buttons',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
+			            },
+			            /** Button bar. */
+			            'buttonBar': {
+			                label: 'Button bar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Calendar. */
+			            'calendar': {
+			                label: 'Calendar',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
+			            },
+			            /** Stats. */
+			            'stats': {
+			                label: 'Stats',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
+			            },
+			            /** Countdown timer. */
+			            'countdownTimer': {
+			                label: 'Countdown timer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimerSchema,}
+			            },
+			            /** Progress. */
+			            'progress': {
+			                label: 'Progress',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
+			            },
+			            /** Ratings. */
+			            'ratings': {
+			                label: 'Ratings',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
+			            },
+			            /** Receipt. */
+			            'receipt': {
+			                label: 'Receipt',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema,}
+			            },
+			            /** Feed. */
+			            'feed': {
+			                label: 'Feed',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderContentsAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Grid size. */
+			            'gridSize': {
+			                label: 'Grid size',
+			                type: 'select',
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** Alignment. */
+			            'alignment': {
+			                label: 'Alignment',
+			                type: 'select',
+			                defaultValue: "left",
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+			            },
+			    }
+		}
+
+		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
 
 	}
 
@@ -2472,242 +2820,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ProgressEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface CardSection {
-			
-				
-				'id'?: string| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Complete. When being rendered as a slide, this will signify the step is complete. */
-				'isComplete'?: boolean| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
-				/** Padding. */
-				'shouldBePadded'?: boolean| undefined | null
-				/** Center content. */
-				'shouldContentBeCentered'?: boolean| undefined | null
-				/** Card section item. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Image. */
-				'image'?: string| undefined | null
-				/** Avatar. */
-				'avatar'?: string| undefined | null
-				/** Form. */
-				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
-				/** Talking Sprucebot. */
-				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
-				/** Big form. */
-				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
-				/** Map. */
-				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map| undefined | null
-				/** Buttons. */
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
-				/** Button bar. */
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
-				/** Calendar. */
-				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
-				/** Stats. */
-				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
-				/** Countdown timer. */
-				'countdownTimer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer| undefined | null
-				/** Progress. */
-				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
-				/** Ratings. */
-				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
-				/** Receipt. */
-				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
-				/** Feed. */
-				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
-				/** Grid. */
-				'shouldRenderContentsAsGrid'?: boolean| undefined | null
-				/** Grid size. */
-				'gridSize'?: ("small" | "medium" | "large")| undefined | null
-				/** Alignment. */
-				'alignment'?: ("left" | "center" | "right")| undefined | null
-		}
-
-		interface CardSectionSchema extends SpruceSchema.Schema {
-			id: 'cardSection',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Complete. When being rendered as a slide, this will signify the step is complete. */
-			            'isComplete': {
-			                label: 'Complete',
-			                type: 'boolean',
-			                hint: 'When being rendered as a slide, this will signify the step is complete.',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                isPrivate: true,
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>`,}
-			            },
-			            /** Padding. */
-			            'shouldBePadded': {
-			                label: 'Padding',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Center content. */
-			            'shouldContentBeCentered': {
-			                label: 'Center content',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Card section item. */
-			            'text': {
-			                label: 'Card section item',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Avatar. */
-			            'avatar': {
-			                label: 'Avatar',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Form. */
-			            'form': {
-			                label: 'Form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSchema,}
-			            },
-			            /** Talking Sprucebot. */
-			            'talkingSprucebot': {
-			                label: 'Talking Sprucebot',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
-			            },
-			            /** Big form. */
-			            'bigForm': {
-			                label: 'Big form',
-			                type: 'schema',
-			                options: {typeSuffix: `<any>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema,}
-			            },
-			            /** Map. */
-			            'map': {
-			                label: 'Map',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema,}
-			            },
-			            /** Buttons. */
-			            'buttons': {
-			                label: 'Buttons',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSchema,}
-			            },
-			            /** Button bar. */
-			            'buttonBar': {
-			                label: 'Button bar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema,}
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
-			            },
-			            /** Calendar. */
-			            'calendar': {
-			                label: 'Calendar',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema,}
-			            },
-			            /** Stats. */
-			            'stats': {
-			                label: 'Stats',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsSchema,}
-			            },
-			            /** Countdown timer. */
-			            'countdownTimer': {
-			                label: 'Countdown timer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimerSchema,}
-			            },
-			            /** Progress. */
-			            'progress': {
-			                label: 'Progress',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema,}
-			            },
-			            /** Ratings. */
-			            'ratings': {
-			                label: 'Ratings',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsSchema,}
-			            },
-			            /** Receipt. */
-			            'receipt': {
-			                label: 'Receipt',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema,}
-			            },
-			            /** Feed. */
-			            'feed': {
-			                label: 'Feed',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderContentsAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Grid size. */
-			            'gridSize': {
-			                label: 'Grid size',
-			                type: 'select',
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** Alignment. */
-			            'alignment': {
-			                label: 'Alignment',
-			                type: 'select',
-			                defaultValue: "left",
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
-			            },
-			    }
-		}
-
-		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
 
 	}
 

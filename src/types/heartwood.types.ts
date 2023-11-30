@@ -75,6 +75,9 @@ import MapViewController, {
 	MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
 import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
+import ProgressNavigatorViewController, {
+	ProgressNavigatorViewControllerOptions,
+} from '../viewControllers/progressNavigator/ProgressNavigator.vc'
 import RatingsViewController, {
 	RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
@@ -291,6 +294,10 @@ export type NavigationButton =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
 export type CountdownTimer =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
+export type ProgressNavigator =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigator
+export type ProgressNavigatorStep =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep
 
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -337,6 +344,7 @@ export interface SkillViewController<
 	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
 	renderToolBelt?(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
 	renderNavigation?(): null | undefined | Navigation
+	renderProgressNavigator?(): null | undefined | ProgressNavigator
 	getTitle?(): string | undefined
 	getSubtitle?(): string | undefined
 }
@@ -443,6 +451,7 @@ export interface ViewControllerMap {
 	feed: FeedViewController
 	navigation: NavigationViewController
 	'countdown-timer': CountdownTimerViewController
+	'progress-navigator': ProgressNavigatorViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -482,6 +491,7 @@ export interface ViewControllerOptionsMap {
 	feed: FeedViewControllerOptions
 	navigation: Navigation
 	'countdown-timer': CountdownTimerViewControllerOptions
+	'progress-navigator': ProgressNavigatorViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
