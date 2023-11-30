@@ -29,13 +29,20 @@ const progressNavigatorAssert = {
 	},
 
 	stepIsComplete(vc: ViewController<ProgressNavigator>, stepId: string) {
-		const model = renderUtil.render(vc)
-		const step = model.steps.find((s) => s.id === stepId)
+		const step = getStep(vc, stepId)
 
 		assert.isTrue(
 			step?.isComplete,
 			`Step ${stepId} is not complete! Try this.progressNavigator.completeStep('${stepId}')!`
 		)
+	},
+
+	rendersStep(vc: ViewController<ProgressNavigator>, stepId: string) {
+		getStep(vc, stepId)
+	},
+
+	rendersSteps(vc: ViewController<ProgressNavigator>, stepIds: string[]) {
+		stepIds.forEach((id) => this.rendersStep(vc, id))
 	},
 
 	currentStep(vc: ViewController<ProgressNavigator>, stepId: string) {
@@ -49,3 +56,9 @@ const progressNavigatorAssert = {
 }
 
 export default progressNavigatorAssert
+function getStep(vc: ViewController<ProgressNavigator>, stepId: string) {
+	const model = renderUtil.render(vc)
+	const step = model.steps.find((s) => s.id === stepId)
+	assert.isTruthy(step, `Step "${stepId}" does not exist in your progress nav!`)
+	return step
+}

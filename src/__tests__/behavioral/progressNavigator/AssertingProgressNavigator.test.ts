@@ -45,10 +45,6 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 		this.assertStepCompleteThrows(generateId())
 	}
 
-	private static assertStepCompleteThrows(stepId: string) {
-		assert.doesThrow(() => this.assertStepIsComplete(stepId))
-	}
-
 	@test()
 	protected static async passesWhenStepComplete() {
 		const { step1, step2 } = this.NavigatorWith2Steps()
@@ -62,8 +58,8 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 	@test()
 	protected static async throwsWhenCurrentStepNotMatched() {
 		const { step2 } = this.NavigatorWith2Steps()
-		this.assertAssertinGCurrentStepThrows(generateId())
-		this.assertAssertinGCurrentStepThrows(step2.id)
+		this.assertAssertingCurrentStepThrows(generateId())
+		this.assertAssertingCurrentStepThrows(step2.id)
 	}
 
 	@test()
@@ -74,7 +70,39 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 		this.assertCurrentStep(step2.id)
 	}
 
-	private static assertAssertinGCurrentStepThrows(id: string) {
+	@test()
+	protected static async throwsWhenNotRenderingStep() {
+		this.NavigatorWith2Steps()
+		assert.doesThrow(() => this.assertRendersStep(generateId()))
+		this.assertingRenderStepsThrows([generateId()])
+	}
+
+	@test()
+	public static async passesWhenRenderingStep() {
+		const { step1, step2 } = this.NavigatorWith2Steps()
+
+		this.assertRendersStep(step1.id)
+		this.assertRendersStep(step2.id)
+		this.assertRendersSteps([step1.id])
+		this.assertingRenderStepsThrows([step1.id, generateId()])
+	}
+
+	private static assertingRenderStepsThrows(buttons: string[]) {
+		assert.doesThrow(() => this.assertRendersSteps(buttons))
+	}
+
+	protected static assertRendersStep(button: string) {
+		return progressNavigatorAssert.rendersStep(this.vc, button)
+	}
+	protected static assertRendersSteps(buttons: string[]) {
+		return progressNavigatorAssert.rendersSteps(this.vc, buttons)
+	}
+
+	private static assertStepCompleteThrows(stepId: string) {
+		assert.doesThrow(() => this.assertStepIsComplete(stepId))
+	}
+
+	private static assertAssertingCurrentStepThrows(id: string) {
 		assert.doesThrow(() => this.assertCurrentStep(id))
 	}
 
