@@ -37,6 +37,15 @@ const progressNavigatorAssert = {
 		)
 	},
 
+	stepIsNotComplete(vc: ViewController<ProgressNavigator>, stepId: string) {
+		const step = getStep(vc, stepId)
+
+		assert.isFalsy(
+			step?.isComplete,
+			`Step ${stepId} is complete and it should not be! Try this.progressNavigator.resetStep('${stepId}') or call this.progressNavigator.completeStep('${stepId}') later in your Skill View!`
+		)
+	},
+
 	rendersStep(vc: ViewController<ProgressNavigator>, stepId: string) {
 		getStep(vc, stepId)
 	},

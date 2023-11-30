@@ -38,11 +38,13 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 	protected static async throwsWhenStepNotComplete() {
 		const step1 = this.generatRandomStep()
 		const step2 = this.generatRandomStep()
+		const step3 = this.generatRandomStep()
 		this.reload({
-			steps: [step1, step2],
+			steps: [step1, step2, step3],
 		})
 
-		this.assertStepCompleteThrows(generateId())
+		this.assertStepCompleteThrows(step2.id)
+		this.assertStepCompleteThrows(step3.id)
 	}
 
 	@test()
@@ -100,6 +102,7 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 
 	private static assertStepCompleteThrows(stepId: string) {
 		assert.doesThrow(() => this.assertStepIsComplete(stepId))
+		progressNavigatorAssert.stepIsNotComplete(this.vc, stepId)
 	}
 
 	private static assertAssertingCurrentStepThrows(id: string) {
@@ -107,7 +110,7 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 	}
 
 	private static assertCurrentStep(id: string): any {
-		return progressNavigatorAssert.currentStep(this.vc, id)
+		progressNavigatorAssert.currentStep(this.vc, id)
 	}
 
 	private static NavigatorWith2Steps() {
@@ -120,8 +123,11 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
 		return { step1, step2 }
 	}
 
-	private static assertStepIsComplete(stepId: string): any {
-		return progressNavigatorAssert.stepIsComplete(this.vc, stepId)
+	private static assertStepIsComplete(stepId: string) {
+		progressNavigatorAssert.stepIsComplete(this.vc, stepId)
+		assert.doesThrow(() =>
+			progressNavigatorAssert.stepIsNotComplete(this.vc, stepId)
+		)
 	}
 
 	private static assertDoesNotRenderProgressNavigator(id: string) {
