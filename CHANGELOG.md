@@ -1,3 +1,10 @@
+# [108.18.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.17.1...v108.18.0) (2023-11-30)
+
+
+### Features
+
+* progress navigator! ([08282c7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/08282c7))
+
 ## [108.17.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.17.0...v108.17.1) (2023-11-29)
 
 # [108.17.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.16.0...v108.17.0) (2023-11-29)
