@@ -40,6 +40,10 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		this.triggerRender()
 	}
 
+	public isStepComplete(id: string): boolean {
+		return !!this.getStepOrThrow(id).isComplete
+	}
+
 	public openStep(id: string) {
 		const step = this.getStepOrThrow(id)
 		if (!step.isComplete) {

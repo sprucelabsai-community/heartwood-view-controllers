@@ -286,12 +286,16 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 
 	private static assertStepAtIdxIsComplete(idx: number) {
 		let model = this.renderVc()
-		assert.isTrue(model.steps[idx].isComplete, `Step at ${idx} is not complete`)
+		const step = model.steps[idx]
+		assert.isTrue(step.isComplete, `Step at ${idx} is not complete`)
+		assert.isTrue(this.vc.isStepComplete(step.id))
 	}
 
 	private static assertStepAtIdxIsNotComplete(idx: number) {
 		let model = this.renderVc()
-		assert.isFalse(model.steps[idx].isComplete)
+		const step = model.steps[idx]
+		assert.isFalse(step.isComplete)
+		assert.isFalse(this.vc.isStepComplete(step.id))
 	}
 
 	private static renderVc() {
