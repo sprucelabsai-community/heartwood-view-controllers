@@ -32,8 +32,31 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async renderOnceSyncLimitsToOneRender() {
+		this.vc.renderOnceSync(async () => {
+			this.triggerRender()
+			this.triggerRender()
+			this.triggerRender()
+		})
+
+		this.assertHitCountEquals(1)
+	}
+
+	@test()
 	protected static async settingTriggerRenderHandlerWhileRenderingOnceStillRendersOnce() {
 		await this.vc.renderOnce(async () => {
+			this.setTriggerRenderHandler()
+			this.triggerRender()
+			this.triggerRender()
+		})
+		this.assertHitCountEquals(1)
+		this.triggerRender()
+		this.assertHitCountEquals(2)
+	}
+
+	@test()
+	protected static async settingTriggerRenderHandlerWhileRenderingOnceSyncStillRendersOnce() {
+		this.vc.renderOnceSync(async () => {
 			this.setTriggerRenderHandler()
 			this.triggerRender()
 			this.triggerRender()
@@ -48,6 +71,20 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
 		await this.vc.renderOnce(async () => {
 			this.triggerRender()
 			await this.vc.renderOnce(async () => {
+				this.triggerRender()
+				this.triggerRender()
+			})
+			this.triggerRender()
+		})
+
+		this.assertHitCountEquals(1)
+	}
+
+	@test()
+	protected static async nestedRenderOnceSyncStillLimitsToOneRender() {
+		this.vc.renderOnceSync(async () => {
+			this.triggerRender()
+			this.vc.renderOnceSync(async () => {
 				this.triggerRender()
 				this.triggerRender()
 			})
