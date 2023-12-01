@@ -42,7 +42,7 @@ const progressNavigatorAssert = {
 
 		assert.isFalsy(
 			step?.isComplete,
-			`Step ${stepId} is complete and it should not be! Try this.progressNavigator.resetStep('${stepId}') or call this.progressNavigator.completeStep('${stepId}') later in your Skill View!`
+			`Step ${stepId} is complete and it should not be! Try this.progressNavigator.open('${stepId}') or call this.progressNavigator.completeStep('${stepId}') later!`
 		)
 	},
 
