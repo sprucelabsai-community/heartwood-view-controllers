@@ -153,7 +153,6 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 	protected static async canOpenStepAndEverythingAfter() {
 		const steps = this.reloadWithTotalSteps(4)
 		const id = steps[0].id
-		this.assertThrowsStepNotComplete(() => this.openStepsAndAllAfter(id), id)
 
 		this.completeStep(id)
 		this.openStepsAndAllAfter(id)

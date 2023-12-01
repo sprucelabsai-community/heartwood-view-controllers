@@ -58,16 +58,12 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 
 	public openStepAndAllAfter(id: string) {
 		this.renderOnceSync(() => {
-			this.openStep(id)
-
 			const idx = this.steps.findIndex((s) => s.id === id)
-			const startingIdx = idx + 1
-
-			this.closeOpenStepsStartingAt(startingIdx)
+			this.openCompletedStepsStartingAt(idx)
 		})
 	}
 
-	private closeOpenStepsStartingAt(startingIdx: number) {
+	private openCompletedStepsStartingAt(startingIdx: number) {
 		const total = this.steps.length
 		for (let i = startingIdx; i < total; i++) {
 			const step = this.model.steps[i]
@@ -79,7 +75,7 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 
 	public reset() {
 		this.renderOnceSync(() => {
-			this.closeOpenStepsStartingAt(0)
+			this.openCompletedStepsStartingAt(0)
 			this.setCurrentStep(this.steps[0].id)
 		})
 	}
