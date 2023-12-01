@@ -1,3 +1,10 @@
+# [108.24.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.23.1...v108.24.0) (2023-12-01)
+
+
+### Features
+
+* can set current step and complete previous ([998e6a6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/998e6a6))
+
 ## [108.23.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.23.0...v108.23.1) (2023-12-01)
 
 # [108.23.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.22.0...v108.23.0) (2023-12-01)
