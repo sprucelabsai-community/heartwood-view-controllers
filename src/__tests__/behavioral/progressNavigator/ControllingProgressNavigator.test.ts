@@ -155,7 +155,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		const id = steps[0].id
 
 		this.completeStep(id)
-		this.openStepsAndAllAfter(id)
+		this.openStepAndAllAfter(id)
 		this.assertStepAtIdxIsNotComplete(0)
 
 		this.completeStep(id)
@@ -166,7 +166,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		this.assertStepAtIdxIsComplete(2)
 		this.assertStepAtIdxIsComplete(3)
 
-		this.openStepsAndAllAfter(steps[2].id)
+		this.openStepAndAllAfter(steps[2].id)
 
 		this.assertStepAtIdxIsComplete(1)
 		this.assertStepAtIdxIsNotComplete(2)
@@ -212,7 +212,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 
 		this.assertEpectedRenderCount(4)
 
-		this.openStepsAndAllAfter(steps[0].id)
+		this.openStepAndAllAfter(steps[0].id)
 
 		this.assertEpectedRenderCount(5)
 	}
@@ -230,11 +230,48 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		this.assertEpectedRenderCount(2)
 	}
 
+	@test()
+	protected static async canSetCurrentStepAndCompleteAllBefore() {
+		const steps = this.reloadWithTotalSteps(4)
+
+		const id = steps[3].id
+		this.setCurrentStepAndCompletePrevious(id)
+		this.assertCurrentStep(id)
+
+		this.assertStepAtIdxIsComplete(0)
+		this.assertStepAtIdxIsComplete(1)
+		this.assertStepAtIdxIsComplete(2)
+		this.assertStepAtIdxIsNotComplete(3)
+
+		this.setCurrentStepAndCompletePrevious(steps[2].id)
+		this.assertCurrentStep(steps[2].id)
+
+		this.assertStepAtIdxIsComplete(0)
+		this.assertStepAtIdxIsComplete(1)
+		this.assertStepAtIdxIsNotComplete(2)
+	}
+
+	@test()
+	protected static async setCurrentStepAndCompleteAllBeforeTriggersRenderOnce() {
+		const steps = this.reloadWithTotalSteps(4)
+
+		const id = steps[3].id
+		this.setCurrentStepAndCompletePrevious(id)
+		this.assertEpectedRenderCount(1)
+
+		this.setCurrentStepAndCompletePrevious(steps[2].id)
+		this.assertEpectedRenderCount(2)
+	}
+
+	private static setCurrentStepAndCompletePrevious(id: string) {
+		this.vc.setCurrentStepAndCompletePrevious(id)
+	}
+
 	private static reset() {
 		this.vc.reset()
 	}
 
-	private static openStepsAndAllAfter(id: any) {
+	private static openStepAndAllAfter(id: any) {
 		return this.vc.openStepAndAllAfter(id)
 	}
 
@@ -294,7 +331,10 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 	private static assertStepAtIdxIsNotComplete(idx: number) {
 		let model = this.renderVc()
 		const step = model.steps[idx]
-		assert.isFalse(step.isComplete)
+		assert.isFalsy(
+			step.isComplete,
+			`Step at ${idx} is complete and should not be`
+		)
 		assert.isFalse(this.vc.isStepComplete(step.id))
 	}
 

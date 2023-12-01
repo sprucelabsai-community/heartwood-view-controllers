@@ -41,6 +41,21 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		this.triggerRender()
 	}
 
+	public setCurrentStepAndCompletePrevious(id: string) {
+		this.renderOnceSync(() => {
+			this.setCurrentStep(id)
+			const idx = this.getStepIdx(id)
+			for (let i = 0; i < this.steps.length; i++) {
+				const step = this.steps[i]
+				if (i < idx) {
+					this.completeStep(step.id)
+				} else if (step.isComplete) {
+					this.openStep(step.id)
+				}
+			}
+		})
+	}
+
 	public isStepComplete(id: string): boolean {
 		return !!this.getStepOrThrow(id).isComplete
 	}
@@ -63,9 +78,13 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 
 	public openStepAndAllAfter(id: string) {
 		this.renderOnceSync(() => {
-			const idx = this.steps.findIndex((s) => s.id === id)
+			const idx = this.getStepIdx(id)
 			this.openCompletedStepsStartingAt(idx)
 		})
+	}
+
+	private getStepIdx(id: string) {
+		return this.steps.findIndex((s) => s.id === id)
 	}
 
 	private openCompletedStepsStartingAt(startingIdx: number) {
