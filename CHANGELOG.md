@@ -1,3 +1,10 @@
+# [108.23.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.22.0...v108.23.0) (2023-12-01)
+
+
+### Features
+
+* new renderOnceSync and progress navigator updated to be sync ([db5fac7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/db5fac7))
+
 # [108.22.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.21.0...v108.22.0) (2023-12-01)
 
 
