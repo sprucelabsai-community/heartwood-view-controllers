@@ -31,6 +31,7 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		}
 
 		this.model.currentStepId = currentStepId ?? steps[0].id
+
 		this.getStepOrThrow(this.model.currentStepId)
 	}
 
