@@ -128,6 +128,15 @@ export default abstract class AbstractViewController<
 		this.triggerRender()
 	}
 
+	public renderOnceSync(cb: () => any) {
+		this.suspendRendering()
+
+		cb()
+
+		this.restoreRendering()
+		this.triggerRender()
+	}
+
 	public async destroy() {
 		if (this.wasDestroyed) {
 			//@ts-ignore

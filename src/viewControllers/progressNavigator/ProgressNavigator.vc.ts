@@ -56,8 +56,8 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		return this.model.steps
 	}
 
-	public async openStepAndAllAfter(id: string) {
-		await this.renderOnce(() => {
+	public openStepAndAllAfter(id: string) {
+		this.renderOnceSync(() => {
 			this.openStep(id)
 
 			const idx = this.steps.findIndex((s) => s.id === id)
@@ -77,8 +77,8 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		}
 	}
 
-	public async reset() {
-		await this.renderOnce(() => {
+	public reset() {
+		this.renderOnceSync(() => {
 			this.closeOpenStepsStartingAt(0)
 			this.setCurrentStep(this.steps[0].id)
 		})

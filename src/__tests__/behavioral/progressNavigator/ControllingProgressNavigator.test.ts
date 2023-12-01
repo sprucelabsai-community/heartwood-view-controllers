@@ -122,7 +122,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		const { step1 } = this.reloadWith2Steps()
 
 		this.assertActionThrowsInvalidStepId(() => this.openStep(generateId()))
-		await this.assertOpenStepNotCompletedThrows(step1.id)
+		this.assertOpenStepNotCompletedThrows(step1.id)
 		this.completeStep(step1.id)
 		this.openStep(step1.id)
 	}
@@ -153,13 +153,10 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 	protected static async canOpenStepAndEverythingAfter() {
 		const steps = this.reloadWithTotalSteps(4)
 		const id = steps[0].id
-		await this.assertThrowsStepNotComplete(
-			() => this.openStepsAndAllAfter(id),
-			id
-		)
+		this.assertThrowsStepNotComplete(() => this.openStepsAndAllAfter(id), id)
 
 		this.completeStep(id)
-		await this.openStepsAndAllAfter(id)
+		this.openStepsAndAllAfter(id)
 		this.assertStepAtIdxIsNotComplete(0)
 
 		this.completeStep(id)
@@ -170,7 +167,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		this.assertStepAtIdxIsComplete(2)
 		this.assertStepAtIdxIsComplete(3)
 
-		await this.openStepsAndAllAfter(steps[2].id)
+		this.openStepsAndAllAfter(steps[2].id)
 
 		this.assertStepAtIdxIsComplete(1)
 		this.assertStepAtIdxIsNotComplete(2)
@@ -186,7 +183,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		this.completeStep(steps[2].id)
 		this.completeStep(steps[3].id)
 
-		await this.reset()
+		this.reset()
 
 		this.assertStepAtIdxIsNotComplete(0)
 		this.assertStepAtIdxIsNotComplete(1)
@@ -200,7 +197,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 
 		this.setCurrentStep(steps[3].id)
 
-		await this.reset()
+		this.reset()
 
 		this.assertCurrentStep(steps[0].id)
 	}
@@ -216,7 +213,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 
 		this.assertEpectedRenderCount(4)
 
-		await this.openStepsAndAllAfter(steps[0].id)
+		this.openStepsAndAllAfter(steps[0].id)
 
 		this.assertEpectedRenderCount(5)
 	}
@@ -229,16 +226,16 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 
 		this.assertEpectedRenderCount(1)
 
-		await this.reset()
+		this.reset()
 
 		this.assertEpectedRenderCount(2)
 	}
 
-	private static async reset() {
-		await this.vc.reset()
+	private static reset() {
+		this.vc.reset()
 	}
 
-	private static async openStepsAndAllAfter(id: any) {
+	private static openStepsAndAllAfter(id: any) {
 		return this.vc.openStepAndAllAfter(id)
 	}
 
@@ -256,15 +253,15 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
 		return steps
 	}
 
-	private static async assertOpenStepNotCompletedThrows(stepId: string) {
-		await this.assertThrowsStepNotComplete(() => this.openStep(stepId), stepId)
+	private static assertOpenStepNotCompletedThrows(stepId: string) {
+		this.assertThrowsStepNotComplete(() => this.openStep(stepId), stepId)
 	}
 
-	private static async assertThrowsStepNotComplete(
+	private static assertThrowsStepNotComplete(
 		action: () => any,
 		stepId: string
 	) {
-		const err = await assert.doesThrowAsync(action)
+		const err = assert.doesThrow(action)
 		errorAssert.assertError(err, 'STEP_NOT_COMPLETE', {
 			stepId,
 		})
