@@ -52,8 +52,40 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 		this.triggerRender()
 	}
 
+	private get steps() {
+		return this.model.steps
+	}
+
+	public async openStepAndAllAfter(id: string) {
+		await this.renderOnce(() => {
+			this.openStep(id)
+
+			const idx = this.steps.findIndex((s) => s.id === id)
+			const startingIdx = idx + 1
+
+			this.closeOpenStepsStartingAt(startingIdx)
+		})
+	}
+
+	private closeOpenStepsStartingAt(startingIdx: number) {
+		const total = this.steps.length
+		for (let i = startingIdx; i < total; i++) {
+			const step = this.model.steps[i]
+			if (step.isComplete) {
+				this.openStep(step.id)
+			}
+		}
+	}
+
+	public async reset() {
+		await this.renderOnce(() => {
+			this.closeOpenStepsStartingAt(0)
+			this.setCurrentStep(this.steps[0].id)
+		})
+	}
+
 	private getStepOrThrow(stepId: string) {
-		const step = this.model.steps.find((s) => s.id === stepId)
+		const step = this.steps.find((s) => s.id === stepId)
 		if (!step) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',
