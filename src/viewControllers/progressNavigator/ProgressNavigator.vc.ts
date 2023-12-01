@@ -1,4 +1,5 @@
 import { SchemaError, assertOptions } from '@sprucelabs/schema'
+import SpruceError from '../../errors/SpruceError'
 import {
 	ProgressNavigator,
 	ViewControllerOptions,
@@ -35,12 +36,20 @@ export default class ProgressNavigatorViewController extends AbstractViewControl
 
 	public completeStep(stepId: string) {
 		const step = this.getStepOrThrow(stepId)
-
 		step.isComplete = true
-
 		this.triggerRender()
+	}
 
-		return
+	public openStep(id: string) {
+		const step = this.getStepOrThrow(id)
+		if (!step.isComplete) {
+			throw new SpruceError({
+				code: 'STEP_NOT_COMPLETE',
+				stepId: id,
+			})
+		}
+		step.isComplete = false
+		this.triggerRender()
 	}
 
 	private getStepOrThrow(stepId: string) {

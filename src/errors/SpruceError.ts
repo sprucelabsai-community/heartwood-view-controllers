@@ -90,6 +90,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 				message = `You tried to get a view controller for '${options.fieldName}', but one was not set!`
 				break
 
+			case 'STEP_NOT_COMPLETE':
+				message = `You tried to open step '${options.stepId}', but it's not complete!`
+				break
+
 			default:
 				message = super.friendlyMessage()
 		}

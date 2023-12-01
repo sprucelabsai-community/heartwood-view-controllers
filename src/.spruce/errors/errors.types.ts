@@ -71,6 +71,36 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
+	export interface StepNotComplete {
+		
+			
+			'stepId': string
+	}
+
+	export interface StepNotCompleteSchema extends SpruceSchema.Schema {
+		id: 'stepNotComplete',
+		namespace: 'HeartwoodViewControllers',
+		name: ' Step not complete',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'stepId': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type StepNotCompleteEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.StepNotCompleteSchema>
+
+}
+
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
 	export interface SlideNotFound {
 		
 			
