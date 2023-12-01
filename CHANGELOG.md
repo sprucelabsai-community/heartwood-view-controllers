@@ -1,3 +1,10 @@
+# [108.22.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.21.0...v108.22.0) (2023-12-01)
+
+
+### Features
+
+* progress navigator can be reset and open steps after step ([a537bcd](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a537bcd))
+
 # [108.21.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.20.1...v108.21.0) (2023-12-01)
 
 
