@@ -159,6 +159,7 @@ export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'
 export { default as calendarInteractor } from './tests/utilities/calendarInteractor'
 export { default as countdownTimerAssert } from './tests/utilities/countdownTimerAssert'
+export { default as countdownTimerInteractor } from './tests/utilities/countdownTimerInteractor'
 export { default as progressNavigatorAssert } from './tests/utilities/progressNavigatorAssert'
 
 export { default as interactionUtil } from './tests/utilities/interaction.utility'

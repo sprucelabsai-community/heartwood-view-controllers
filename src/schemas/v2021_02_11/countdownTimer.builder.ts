@@ -17,7 +17,7 @@ export default buildSchema({
 		onComplete: {
 			type: 'raw',
 			options: {
-				valueType: '() => void',
+				valueType: '() => void | Promise<void>',
 			},
 		},
 		endDateMs: {

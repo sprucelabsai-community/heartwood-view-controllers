@@ -5493,7 +5493,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>)| undefined | null
 				
-				'onComplete'?: (() => void)| undefined | null
+				'onComplete'?: (() => void | Promise<void>)| undefined | null
 				
 				'endDateMs'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				
@@ -5520,7 +5520,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'onComplete': {
 			                type: 'raw',
-			                options: {valueType: `() => void`,}
+			                options: {valueType: `() => void | Promise<void>`,}
 			            },
 			            /** . */
 			            'endDateMs': {

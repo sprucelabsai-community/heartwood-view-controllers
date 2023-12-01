@@ -23,7 +23,7 @@ const countdownTimerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.C
 	            /** . */
 	            'onComplete': {
 	                type: 'raw',
-	                options: {valueType: `() => void`,}
+	                options: {valueType: `() => void | Promise<void>`,}
 	            },
 	            /** . */
 	            'endDateMs': {
