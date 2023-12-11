@@ -58,6 +58,23 @@ const listAssert = {
 		return getListVc(listVc).getRowVc(row)
 	},
 
+	assertRowDoesNotRenderCheckbox(
+		listVc: ViewController<List>,
+		row: string | number,
+		name?: string
+	) {
+		try {
+			this.rowRendersCheckBox(listVc, row, name)
+		} catch {
+			return
+		}
+
+		assert.fail(
+			`I found a checkbox${
+				name ? ` named '${name}'` : ''
+			} in row '${row}' and I didn't expect to!`
+		)
+	},
 	rowRendersCheckBox(
 		listVc: ViewController<List>,
 		row: string | number,

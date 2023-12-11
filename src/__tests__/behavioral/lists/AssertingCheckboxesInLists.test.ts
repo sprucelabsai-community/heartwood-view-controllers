@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
 export default class AssertingCheckboxesInListsTest extends AbstractViewControllerTest {
@@ -72,6 +73,8 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 			vcAssert.assertRowRendersCheckBox(listVc, row, name)
 		)
 
+		listAssert.assertRowDoesNotRenderCheckbox(listVc, row, name)
+
 		if (expectedError) {
 			assert.doesInclude(err.message, expectedError)
 		}
@@ -86,5 +89,9 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 			rows,
 		})
 		vcAssert.assertRowRendersCheckBox(listVc, row, name)
+
+		assert.doesThrow(() =>
+			listAssert.assertRowDoesNotRenderCheckbox(listVc, row, name)
+		)
 	}
 }
