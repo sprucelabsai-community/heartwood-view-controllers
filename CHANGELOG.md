@@ -1,3 +1,10 @@
+# [108.26.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.25.17...v108.26.0) (2023-12-12)
+
+
+### Features
+
+* row does not render checkbox ([234bd3f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/234bd3f))
+
 ## [108.25.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.25.16...v108.25.17) (2023-12-10)
 
 ## [108.25.16](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.25.15...v108.25.16) (2023-12-09)
