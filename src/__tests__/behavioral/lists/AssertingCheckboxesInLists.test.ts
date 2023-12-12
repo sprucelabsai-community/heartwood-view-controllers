@@ -73,7 +73,7 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 			vcAssert.assertRowRendersCheckBox(listVc, row, name)
 		)
 
-		listAssert.assertRowDoesNotRenderCheckbox(listVc, row, name)
+		listAssert.rowDoesNotRenderCheckbox(listVc, row, name)
 
 		if (expectedError) {
 			assert.doesInclude(err.message, expectedError)
@@ -91,7 +91,7 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
 		vcAssert.assertRowRendersCheckBox(listVc, row, name)
 
 		assert.doesThrow(() =>
-			listAssert.assertRowDoesNotRenderCheckbox(listVc, row, name)
+			listAssert.rowDoesNotRenderCheckbox(listVc, row, name)
 		)
 	}
 }

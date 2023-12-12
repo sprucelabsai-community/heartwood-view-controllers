@@ -58,7 +58,7 @@ const listAssert = {
 		return getListVc(listVc).getRowVc(row)
 	},
 
-	assertRowDoesNotRenderCheckbox(
+	rowDoesNotRenderCheckbox(
 		listVc: ViewController<List>,
 		row: string | number,
 		name?: string
