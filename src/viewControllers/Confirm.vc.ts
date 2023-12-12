@@ -49,7 +49,7 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
 					? {
 							title: options.title,
 							subtitle: options.subtitle,
-					  }
+						}
 					: null,
 			body,
 			footer: {

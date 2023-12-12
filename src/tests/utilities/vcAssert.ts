@@ -239,9 +239,9 @@ const vcAssert = {
 		//@ts-ignore
 		let oldAlert = vc._originalAlert
 			? //@ts-ignore
-			  vc._originalAlert.bind(vc)
+				vc._originalAlert.bind(vc)
 			: //@ts-ignore
-			  vc.alert?.bind(vc)
+				vc.alert?.bind(vc)
 
 		let message = ''
 

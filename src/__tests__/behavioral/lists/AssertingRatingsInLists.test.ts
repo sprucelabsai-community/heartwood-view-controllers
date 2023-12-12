@@ -12,7 +12,7 @@ function buildRows(total: number, rowIdxForRatings?: number, cellIdx?: number) {
 				rowIdx === rowIdxForRatings && cIdx === _idx
 					? {
 							name: 'feelings',
-					  }
+						}
 					: undefined,
 		})),
 	}))

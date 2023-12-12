@@ -187,24 +187,24 @@ export default class LoginViewController
 								'Get started',
 								`Time to log in!`,
 								`Let's do this! 💪`,
-						  ])
+							])
 						: randomUtil.rand([
 								'Almost there!',
 								'Enter your pin below!',
 								'Last step!',
-						  ]),
+							]),
 				subtitle:
 					this.currentSlide === 0
 						? randomUtil.rand([
 								'Login or signup below!',
 								"One text and one pin and you're in!",
 								"I'm so excited!",
-						  ])
+							])
 						: randomUtil.rand([
 								'Last step!',
 								`So close I can taste it!`,
 								`You got this!`,
-						  ]),
+							]),
 			},
 			body: {
 				sections: [
