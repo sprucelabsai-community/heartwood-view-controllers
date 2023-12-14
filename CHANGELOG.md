@@ -1,3 +1,10 @@
+# [108.27.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.7...v108.27.0) (2023-12-14)
+
+
+### Features
+
+* can set stats card value to string ([bcfdf09](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/bcfdf09))
+
 ## [108.26.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.6...v108.26.7) (2023-12-14)
 
 ## [108.26.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.5...v108.26.6) (2023-12-14)
