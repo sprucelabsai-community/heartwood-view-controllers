@@ -1404,7 +1404,11 @@ const vcAssert = {
 		return match.controller as StatsViewController
 	},
 
-	assertStatsRendersValue(vc: StatsViewController, idx: number, value: number) {
+	assertStatsRendersValue(
+		vc: StatsViewController,
+		idx: number,
+		value: number | string
+	) {
 		const model = renderUtil.render(vc)
 		const expected = model.stats[idx]?.value
 		assert.isEqual(

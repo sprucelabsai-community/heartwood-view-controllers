@@ -12,8 +12,8 @@ const statsStatSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsS
 	    fields: {
 	            /** . */
 	            'value': {
-	                type: 'number',
-	                options: undefined
+	                type: 'raw',
+	                options: {valueType: `number | string`,}
 	            },
 	            /** . */
 	            'label': {

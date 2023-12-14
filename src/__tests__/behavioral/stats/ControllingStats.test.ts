@@ -74,7 +74,8 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
 	@test('can set idx 0', 0, 100)
 	@test('can set idx 2', 2, 100)
 	@test('can set idx 2b', 2, 75)
-	protected static canHaveNoStatToStart(idx: number, value: number) {
+	@test('can set idx 0 to strting', 0, 'hello')
+	protected static canHaveNoStatToStart(idx: number, value: number | string) {
 		const vc = this.Vc({
 			stats: [
 				{

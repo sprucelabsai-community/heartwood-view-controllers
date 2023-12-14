@@ -22,7 +22,7 @@ export default class StatsViewController extends AbstractViewController<Stats> {
 		}
 	}
 
-	public setValue(idx: number, value: number) {
+	public setValue(idx: number, value: number | string) {
 		if (idx < 0 || idx > 2) {
 			throw new SchemaError({
 				code: 'INVALID_PARAMETERS',

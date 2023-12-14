@@ -2830,7 +2830,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface StatsStat {
 			
 				
-				'value'?: number| undefined | null
+				'value'?: (number | string)| undefined | null
 				
 				'label'?: string| undefined | null
 		}
@@ -2844,8 +2844,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    fields: {
 			            /** . */
 			            'value': {
-			                type: 'number',
-			                options: undefined
+			                type: 'raw',
+			                options: {valueType: `number | string`,}
 			            },
 			            /** . */
 			            'label': {

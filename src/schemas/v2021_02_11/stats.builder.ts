@@ -31,7 +31,10 @@ export default buildSchema({
 					id: 'statsStat',
 					fields: {
 						value: {
-							type: 'number',
+							type: 'raw',
+							options: {
+								valueType: 'number | string',
+							},
 						},
 						label: {
 							type: 'text',
