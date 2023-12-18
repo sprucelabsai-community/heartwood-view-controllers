@@ -1,3 +1,30 @@
+## [108.27.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.9...v108.27.10) (2023-12-18)
+
+## [108.27.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.8...v108.27.9) (2023-12-18)
+
+## [108.27.8](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.7...v108.27.8) (2023-12-18)
+
+## [108.27.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.6...v108.27.7) (2023-12-16)
+
+## [108.27.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.5...v108.27.6) (2023-12-16)
+
+## [108.27.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.4...v108.27.5) (2023-12-16)
+
+## [108.27.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.3...v108.27.4) (2023-12-15)
+
+## [108.27.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.2...v108.27.3) (2023-12-15)
+
+## [108.27.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.1...v108.27.2) (2023-12-15)
+
+## [108.27.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.0...v108.27.1) (2023-12-15)
+
+# [108.27.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.7...v108.27.0) (2023-12-14)
+
+
+### Features
+
+* can set stats card value to string ([bcfdf09](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/bcfdf09))
+
 ## [108.26.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.6...v108.26.7) (2023-12-14)
 
 ## [108.26.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.26.5...v108.26.6) (2023-12-14)
