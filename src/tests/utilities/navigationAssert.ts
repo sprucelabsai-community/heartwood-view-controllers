@@ -66,6 +66,14 @@ const navigationAssert = {
 
 		return nav.controller!
 	},
+
+	skillViewDoesNotRenderNavigation(vc: SkillViewController) {
+		const nav = vc.renderNavigation?.()
+		assert.isNull(
+			nav,
+			`Your skill view should not render a navigation! Implement renderNavigation() and return null.`
+		)
+	},
 }
 
 export default navigationAssert

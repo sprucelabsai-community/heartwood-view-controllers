@@ -14,10 +14,20 @@ class NoNavigationSkillView extends AbstractSkillViewController {
 	}
 }
 
+class NullNavigationSkillView extends AbstractSkillViewController {
+	public renderNavigation() {
+		return null
+	}
+	public render() {
+		return {}
+	}
+}
+
 export default class AssertingNavigationTest extends AbstractNavigationTest {
 	protected static controllerMap = {
 		noNav: NoNavigationSkillView,
 		hasNav: HasNavSkillView,
+		nullNav: NullNavigationSkillView,
 	}
 
 	@test()
@@ -79,6 +89,16 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 	protected static async throwsWhenNotRenderingNavigation() {
 		const svc = this.Controller('noNav' as any, {})
 		assert.doesThrow(() => navigationAssert.skillViewRendersNavigation(svc))
+		assert.doesThrow(() =>
+			navigationAssert.skillViewDoesNotRenderNavigation(svc)
+		)
+	}
+
+	@test()
+	protected static async nullNavCountsAsNotRenderingNav() {
+		const svc = this.Controller('nullNav' as any, {})
+		assert.doesThrow(() => navigationAssert.skillViewRendersNavigation(svc))
+		navigationAssert.skillViewDoesNotRenderNavigation(svc)
 	}
 
 	@test()
@@ -86,6 +106,9 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 		const svc = this.Controller('hasNav' as any, {})
 		const nav = navigationAssert.skillViewRendersNavigation(svc)
 		assert.isEqual(nav, svc.nav)
+		assert.doesThrow(() =>
+			navigationAssert.skillViewDoesNotRenderNavigation(svc)
+		)
 	}
 
 	@test()
