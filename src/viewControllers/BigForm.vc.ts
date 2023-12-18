@@ -121,4 +121,4 @@ type ViewModel<S extends Schema> =
 export type BigFormViewControllerOptions<S extends Schema> =
 	FormViewControllerOptions<S> & {
 		onSubmitSlide?: ViewModel<S>['onSubmitSlide']
-	}
+	} & Pick<ViewModel<S>, 'shouldRenderFirstFieldsLabel' | 'sprucebotAvatar'>
