@@ -1,3 +1,10 @@
+# [108.28.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.10...v108.28.0) (2023-12-18)
+
+
+### Features
+
+* can assert no navigation ([a1dc4d7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a1dc4d7))
+
 ## [108.27.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.9...v108.27.10) (2023-12-18)
 
 ## [108.27.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.8...v108.27.9) (2023-12-18)
