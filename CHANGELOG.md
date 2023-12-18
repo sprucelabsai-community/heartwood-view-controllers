@@ -1,3 +1,10 @@
+# [108.29.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.28.0...v108.29.0) (2023-12-18)
+
+
+### Features
+
+* big form enhancements, renderAs password ([cc00657](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/cc00657))
+
 # [108.28.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.27.10...v108.28.0) (2023-12-18)
 
 
