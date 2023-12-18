@@ -4,6 +4,7 @@ import {
 	buildRemoteTypesImport,
 } from '../../../utilities/importBuilder'
 import formSectionBuilder from '../formSection.builder'
+import sprucebotAvatarBuilder from '../sprucebotAvatar.builder'
 import formBuilder from './form.builder'
 
 export default buildSchema({
@@ -14,6 +15,15 @@ export default buildSchema({
 	typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
 	fields: {
 		...formBuilder.fields,
+		sprucebotAvatar: {
+			type: 'schema',
+			options: {
+				schema: sprucebotAvatarBuilder,
+			},
+		},
+		shouldRenderFirstFieldsLabel: {
+			type: 'boolean',
+		},
 		sections: {
 			...formBuilder.fields.sections,
 			options: {

@@ -584,6 +584,7 @@ export type RenderAsComponent =
 	| 'autocomplete'
 	| 'tags'
 	| 'signature'
+	| 'password'
 
 export type FieldRenderOptions<S extends Schema> = {
 	name: SchemaFieldNames<S>

@@ -3192,6 +3192,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
 				/** Footer. */
 				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				
+				'sprucebotAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
+				
+				'shouldRenderFirstFieldsLabel'?: boolean| undefined | null
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number| undefined | null
 				/** Submit handler. */
@@ -3329,6 +3333,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Footer',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** . */
+			            'sprucebotAvatar': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
+			            },
+			            /** . */
+			            'shouldRenderFirstFieldsLabel': {
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Present slide. The slide showing now! */
 			            'presentSlide': {
