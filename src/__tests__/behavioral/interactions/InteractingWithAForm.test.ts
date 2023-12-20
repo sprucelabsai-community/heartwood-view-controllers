@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -52,14 +52,6 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static async submittingBigFormOnNotLastSlideThrows() {
-		await assert.doesThrowAsync(
-			() => interactor.submitForm(this.bigFormVc),
-			'last slide'
-		)
-	}
-
-	@test()
 	protected static async submitSlideThrowsWhenMissing() {
 		const err = await assert.doesThrowAsync(() =>
 			//@ts-ignore
@@ -72,20 +64,14 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 	}
 
 	@test()
-	protected static async submitSlideThrowsWithoutOnSubmits() {
-		await assert.doesThrowAsync(
-			() =>
-				//@ts-ignore
-				interactor.submitBigFormSlide(this.bigFormVc),
-			'onSubmitSlide'
-		)
-	}
-
-	@test()
 	protected static async submittingSlideTriggersCallback() {
 		let wasHit = false
 
-		await this.submitSlide({
+		await this.submitSlideOnNewBigForm({
+			values: {
+				first: generateId(),
+				nickname: generateId(),
+			},
 			onSubmitSlide: () => {
 				wasHit = true
 			},
@@ -98,7 +84,11 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 	protected static async passesExpectedParamsToOnSubmitSlide() {
 		let passedOptions: BigFormOnSubmitOptions<any> | undefined
 
-		await this.submitSlide({
+		await this.submitSlideOnNewBigForm({
+			values: {
+				first: generateId(),
+				nickname: generateId(),
+			},
 			onSubmitSlide(options) {
 				//@ts-ignore
 				passedOptions = options
@@ -107,6 +97,12 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 
 		//@ts-ignore
 		const { options } = this.bigFormVc.buildOnSubmitOptions()
+		options.presentSlide = 0
+
+		//@ts-ignore
+		delete options.controller
+		//@ts-ignore
+		delete passedOptions?.controller
 
 		//@ts-ignore
 		assert.isEqualDeep(passedOptions, options)
@@ -114,7 +110,11 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 
 	@test()
 	protected static async onSubmitSlideWithOnSubmitHandlerDoesNotThrow() {
-		await this.submitSlide({
+		await this.submitSlideOnNewBigForm({
+			values: {
+				first: generateId(),
+				nickname: generateId(),
+			},
 			sections: [{ fields: ['first'] }],
 			onSubmit() {},
 		})
@@ -125,7 +125,11 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 		let onSubmitCount = 0
 		let onSubmitSlideCount = 0
 
-		await this.submitSlide({
+		await this.submitSlideOnNewBigForm({
+			values: {
+				first: generateId(),
+				nickname: generateId(),
+			},
 			onSubmit() {
 				onSubmitCount++
 			},
@@ -138,15 +142,27 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 		assert.isEqual(onSubmitSlideCount, 1)
 
 		await this.bigFormVc.jumpToSlide(this.bigFormVc.getTotalSlides() - 1)
-		await this.submitBigForm()
+		await this.submitSlide()
 
 		assert.isEqual(onSubmitCount, 1)
 		assert.isEqual(onSubmitSlideCount, 2)
 
-		await this.submitBigForm()
+		await this.submitSlide()
 
 		assert.isEqual(onSubmitCount, 2)
 		assert.isEqual(onSubmitSlideCount, 3)
+	}
+
+	@test()
+	protected static async submittingOnFirstSlideThrowsIfRequiredFieldsNotCompleted() {
+		this.bigFormVc = this.BigFormVc({})
+		await assert.doesThrowAsync(() => this.submitSlide())
+
+		await this.bigFormVc.setValue('first', generateId())
+
+		await this.submitSlide()
+
+		assert.isEqual(this.bigFormVc.getPresentSlide(), 1)
 	}
 
 	@test()
@@ -262,14 +278,14 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 		return this.Controller('noFocus' as any, {})
 	}
 
-	private static async submitSlide(
+	private static async submitSlideOnNewBigForm(
 		options?: Partial<BigFormViewControllerOptions<TestFormSchema>>
 	) {
 		this.bigFormVc = this.BigFormVc(options)
-		await this.submitBigForm()
+		await this.submitSlide()
 	}
 
-	private static async submitBigForm() {
+	private static async submitSlide() {
 		await interactor.submitBigFormSlide(this.bigFormVc)
 	}
 

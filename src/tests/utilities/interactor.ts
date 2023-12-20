@@ -216,19 +216,18 @@ const interactor = {
 	async submitBigFormSlide(vc: BigFormViewController<any>) {
 		assertOptions({ vc }, ['vc'])
 
-		const model = renderUtil.render(vc)
-
-		if (vc.getIsLastSlide()) {
-			return this.submitForm(vc)
-		} else {
-			assert.isTruthy(
-				model.onSubmitSlide,
-				`I really want to submit this big form, but first you gotta pass 'onSubmitSlide' to your view controller. Or, you can 'vc.jumpToSlide(this.vc.getTotalSlides() - 1)' to jump to the last slide and submit again, which will submit the entire form (including all slides).`
+		if (!vc.isPresentSlideValid()) {
+			const errors = vc.getErrorsByField()
+			assert.fail(
+				`The slide you are trying to submit is not valid! Here are the errors: ${JSON.stringify(
+					errors,
+					null,
+					2
+				)}`
 			)
-
-			//@ts-ignore
-			await model.onSubmitSlide?.(vc.buildOnSubmitOptions().options)
 		}
+
+		await this.submitForm(vc)
 	},
 
 	async submitForm(vc: FormVc) {
@@ -236,15 +235,6 @@ const interactor = {
 
 		if (!vc.getIsEnabled()) {
 			assert.fail(`You can't submit a form that is disabled!`)
-		}
-
-		if ((vc as BigFormViewController<any>).getTotalSlides) {
-			const bigFormVc = vc as BigFormViewController<any>
-			const onLastSlide = bigFormVc.getIsLastSlide()
-			assert.isTrue(
-				onLastSlide,
-				`You tried to submit a big form that wasn't on the last slide. Try 'vc.jumpToSlide(...)' or 'interactor.submitBigFormSlide(...)' to get there!`
-			)
 		}
 
 		//@ts-ignore

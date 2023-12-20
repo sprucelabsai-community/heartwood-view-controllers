@@ -87,6 +87,7 @@ export default class BigFormViewController<
 
 	private buildOnSubmitOptions() {
 		const errorsByField = this.validate()
+
 		const options: BigFormOnSubmitOptions<S> = {
 			values: this.getValues(),
 			presentSlide: this.getPresentSlide(),
@@ -101,7 +102,7 @@ export default class BigFormViewController<
 		return this.getPresentSlide() === this.getTotalSlides() - 1
 	}
 
-	private isPresentSlideValid() {
+	public isPresentSlideValid() {
 		return this.isSlideValid(this.getPresentSlide())
 	}
 
