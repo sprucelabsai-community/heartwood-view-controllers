@@ -217,7 +217,7 @@ const interactor = {
 		assertOptions({ vc }, ['vc'])
 
 		if (!vc.isPresentSlideValid()) {
-			const errors = vc.getErrorsByField()
+			const errors = vc.validate()
 			assert.fail(
 				`The slide you are trying to submit is not valid! Here are the errors: ${JSON.stringify(
 					errors,
