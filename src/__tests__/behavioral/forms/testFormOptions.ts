@@ -1,4 +1,4 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { SchemaValues, buildSchema } from '@sprucelabs/schema'
 import buildForm from '../../../builders/buildForm'
 
 export const testFormSchema = buildSchema({
@@ -28,7 +28,7 @@ export const testFormSchema = buildSchema({
 })
 
 export type TestFormSchema = typeof testFormSchema
-
+export type TestFormValues = SchemaValues<TestFormSchema>
 export const testFormOptions = buildForm({
 	id: 'testForm',
 	schema: testFormSchema,

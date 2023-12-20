@@ -12,6 +12,7 @@ import {
 	testFormOptions,
 	TestFormSchema,
 	testFormSchema,
+	TestFormValues,
 } from '../forms/testFormOptions'
 
 class NoFocusViewController extends AbstractViewController<Card> {
@@ -20,7 +21,7 @@ class NoFocusViewController extends AbstractViewController<Card> {
 	}
 }
 
-export default class InteractingWithAFormTest extends AbstractViewControllerTest {
+export default class InteractingWithABigFormTest extends AbstractViewControllerTest {
 	protected static bigFormVc: BigFormViewController<TestFormSchema>
 	protected static controllerMap: Record<string, any> = {
 		noFocus: NoFocusViewController,
@@ -272,6 +273,56 @@ export default class InteractingWithAFormTest extends AbstractViewControllerTest
 		const vc = this.NoFocusVc()
 		vc.didBlur = () => {}
 		await interactor.blur(vc)
+	}
+
+	@test()
+	protected static async canStepThroughEntireBigForm() {
+		let wasHit = false
+
+		this.bigFormVc = this.BigFormVc({
+			onSubmit: () => {
+				wasHit = true
+			},
+			sections: [
+				{
+					fields: ['first', 'last'],
+				},
+				{
+					fields: ['nickname'],
+				},
+				{
+					fields: ['anotherField'],
+				},
+			],
+		})
+
+		await this.assertSubmittingThrows()
+
+		await this.setValues({
+			first: generateId(),
+		})
+
+		await this.submitSlide()
+
+		await this.assertSubmittingThrows()
+
+		await this.setValues({
+			nickname: generateId(),
+		})
+
+		await this.submitSlide()
+
+		assert.isFalse(wasHit)
+		await this.submitSlide()
+		assert.isTrue(wasHit)
+	}
+
+	private static async setValues(values: Partial<TestFormValues>) {
+		await this.bigFormVc.setValues(values)
+	}
+
+	private static async assertSubmittingThrows() {
+		await assert.doesThrowAsync(() => this.submitSlide())
 	}
 
 	private static NoFocusVc() {
