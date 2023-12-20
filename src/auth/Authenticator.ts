@@ -3,22 +3,6 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import SpruceError from '../errors/SpruceError'
 import { Authenticator } from '../types/heartwood.types'
 
-type Person = SpruceSchemas.Spruce.v2020_07_22.Person
-
-type DidLoginPayload = (payload: { token: string; person: Person }) => void
-type DidLogoutPayload = (payload: { person: Person }) => void
-
-export interface Storage {
-	removeItem(key: string): void
-	setItem(key: string, value: string): void
-	getItem(key: string): string | null
-}
-
-interface Payloads {
-	'did-login': DidLoginPayload
-	'did-logout': DidLogoutPayload
-}
-
 export default class AuthenticatorImpl implements Authenticator {
 	private static instance: Authenticator | null
 	private static storage: Storage | null
@@ -86,4 +70,20 @@ export default class AuthenticatorImpl implements Authenticator {
 	) {
 		this.eventEmitter.addListener(name, cb)
 	}
+}
+
+type Person = SpruceSchemas.Spruce.v2020_07_22.Person
+
+type DidLoginPayload = (payload: { token: string; person: Person }) => void
+type DidLogoutPayload = (payload: { person: Person }) => void
+
+export interface Storage {
+	removeItem(key: string): void
+	setItem(key: string, value: string): void
+	getItem(key: string): string | null
+}
+
+interface Payloads {
+	'did-login': DidLoginPayload
+	'did-logout': DidLogoutPayload
 }
