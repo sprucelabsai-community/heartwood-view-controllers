@@ -1,3 +1,10 @@
+# [108.30.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.29.10...v108.30.0) (2023-12-20)
+
+
+### Features
+
+* big form testing just got a whole lot easier and more intuitive! ([32b8181](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/32b8181))
+
 ## [108.29.10](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.29.9...v108.29.10) (2023-12-20)
 
 ## [108.29.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.29.8...v108.29.9) (2023-12-20)
