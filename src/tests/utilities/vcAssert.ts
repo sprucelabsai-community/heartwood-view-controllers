@@ -226,7 +226,10 @@ const vcAssert = {
 			)}, but it wasn't!`
 		)
 
-		return dlgVc as DialogViewController & {
+		return dlgVc as unknown as Pick<
+			DialogViewController,
+			'hide' | 'getIsVisible' | 'getShouldShowCloseButton' | 'wait' | 'render'
+		> & {
 			alertOptions: AlertOptions
 		}
 	},
