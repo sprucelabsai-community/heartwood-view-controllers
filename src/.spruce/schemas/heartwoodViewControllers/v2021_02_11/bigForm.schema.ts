@@ -4,6 +4,7 @@ import { SpruceSchemas } from '../../schemas.types'
 import bigFormSectionSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigFormSection.schema'
 import cardFooterSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardFooter.schema'
 import sprucebotAvatarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotAvatar.schema'
+import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 
 const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema  = {
 	id: 'bigForm',
@@ -146,6 +147,11 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	            'shouldRenderFirstFieldsLabel': {
 	                type: 'boolean',
 	                options: undefined
+	            },
+	            /** . */
+	            'talkingSprucebot': {
+	                type: 'schema',
+	                options: {schema: talkingSprucebotSchema_v2021_02_11,}
 	            },
 	            /** Present slide. The slide showing now! */
 	            'presentSlide': {

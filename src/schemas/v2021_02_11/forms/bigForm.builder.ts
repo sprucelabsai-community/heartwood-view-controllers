@@ -5,6 +5,7 @@ import {
 } from '../../../utilities/importBuilder'
 import formSectionBuilder from '../formSection.builder'
 import sprucebotAvatarBuilder from '../sprucebotAvatar.builder'
+import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import formBuilder from './form.builder'
 
 export default buildSchema({
@@ -23,6 +24,12 @@ export default buildSchema({
 		},
 		shouldRenderFirstFieldsLabel: {
 			type: 'boolean',
+		},
+		talkingSprucebot: {
+			type: 'schema',
+			options: {
+				schema: talkingSprucebotBuilder,
+			},
 		},
 		sections: {
 			...formBuilder.fields.sections,

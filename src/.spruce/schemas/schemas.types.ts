@@ -3151,223 +3151,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
-		
-		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'id': string
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
-				
-				'schema': (S)
-				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
-				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>)| undefined | null
-				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
-				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
-				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
-				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
-				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean| undefined | null
-				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean| undefined | null
-				/** Submit button label. */
-				'submitButtonLabel'?: string| undefined | null
-				/** Cancel button label. */
-				'cancelButtonLabel'?: string| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
-				/** Set value handler. */
-				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
-				/** Form sections. */
-				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
-				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
-				
-				'sprucebotAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
-				
-				'shouldRenderFirstFieldsLabel'?: boolean| undefined | null
-				/** Present slide. The slide showing now! */
-				'presentSlide'?: number| undefined | null
-				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>)| undefined | null
-		}
-
-		interface BigFormSchema extends SpruceSchema.Schema {
-			id: 'bigForm',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Big form',
-			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
-			            },
-			            /** . */
-			            'schema': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `S`,}
-			            },
-			            /** Submit handler. */
-			            'onSubmit': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
-			            },
-			            /** Cancel handler. */
-			            'onCancel': {
-			                label: 'Cancel handler',
-			                type: 'raw',
-			                options: {valueType: `() => void | Promise<void>`,}
-			            },
-			            /** Will change handler. */
-			            'onWillChange': {
-			                label: 'Will change handler',
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
-			            },
-			            /** Change handler. */
-			            'onChange': {
-			                label: 'Change handler',
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
-			            },
-			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-			            'values': {
-			                label: 'Values',
-			                type: 'raw',
-			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
-			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
-			            },
-			            /** Errors by field. */
-			            'errorsByField': {
-			                label: 'Errors by field',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
-			            },
-			            /** Show submit controls. */
-			            'shouldShowSubmitControls': {
-			                label: 'Show submit controls',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Show cancel button. */
-			            'shouldShowCancelButton': {
-			                label: 'Show cancel button',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Submit button label. */
-			            'submitButtonLabel': {
-			                label: 'Submit button label',
-			                type: 'text',
-			                defaultValue: "Go!",
-			                options: undefined
-			            },
-			            /** Cancel button label. */
-			            'cancelButtonLabel': {
-			                label: 'Cancel button label',
-			                type: 'text',
-			                defaultValue: "Cancel",
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Enabled. */
-			            'isEnabled': {
-			                label: 'Enabled',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Set value handler. */
-			            'setValue': {
-			                label: 'Set value handler',
-			                type: 'raw',
-			                isPrivate: true,
-			                isRequired: true,
-			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
-			            },
-			            /** Form sections. */
-			            'sections': {
-			                label: 'Form sections',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
-			            },
-			            /** . */
-			            'sprucebotAvatar': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
-			            },
-			            /** . */
-			            'shouldRenderFirstFieldsLabel': {
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Present slide. The slide showing now! */
-			            'presentSlide': {
-			                label: 'Present slide',
-			                type: 'number',
-			                hint: 'The slide showing now!',
-			                defaultValue: 0,
-			                options: undefined
-			            },
-			            /** Submit handler. */
-			            'onSubmitSlide': {
-			                label: 'Submit handler',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SubmitSlideHandler<S>`,}
-			            },
-			    }
-		}
-
-		interface BigFormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
 		/** Avatar that makes size optional for use with the Sprucebot Typed Message component */
 		interface SprucebotTypedMessageAvatar {
 			
@@ -3546,6 +3329,230 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'id': string
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
+				
+				'schema': (S)
+				/** Submit handler. */
+				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				/** Cancel handler. */
+				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				/** Will change handler. */
+				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
+				/** Change handler. */
+				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
+				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				/** Errors by field. */
+				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
+				/** Show submit controls. */
+				'shouldShowSubmitControls'?: boolean| undefined | null
+				/** Show cancel button. */
+				'shouldShowCancelButton'?: boolean| undefined | null
+				/** Submit button label. */
+				'submitButtonLabel'?: string| undefined | null
+				/** Cancel button label. */
+				'cancelButtonLabel'?: string| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Enabled. */
+				'isEnabled'?: boolean| undefined | null
+				/** Set value handler. */
+				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
+				/** Form sections. */
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
+				/** Footer. */
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				
+				'sprucebotAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
+				
+				'shouldRenderFirstFieldsLabel'?: boolean| undefined | null
+				
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				/** Present slide. The slide showing now! */
+				'presentSlide'?: number| undefined | null
+				/** Submit handler. */
+				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>)| undefined | null
+		}
+
+		interface BigFormSchema extends SpruceSchema.Schema {
+			id: 'bigForm',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Big form',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.BigFormViewController<S>`,}
+			            },
+			            /** . */
+			            'schema': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `S`,}
+			            },
+			            /** Submit handler. */
+			            'onSubmit': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitHandler<S>`,}
+			            },
+			            /** Cancel handler. */
+			            'onCancel': {
+			                label: 'Cancel handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Will change handler. */
+			            'onWillChange': {
+			                label: 'Will change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined`,}
+			            },
+			            /** Change handler. */
+			            'onChange': {
+			                label: 'Change handler',
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void`,}
+			            },
+			            /** Values. The values you want the form to have. Control is given to the FormViewController after render. */
+			            'values': {
+			                label: 'Values',
+			                type: 'raw',
+			                hint: 'The values you want the form to have. Control is given to the FormViewController after render.',
+			                options: {valueType: `SpruceSchema.SchemaPartialValues<S>`,}
+			            },
+			            /** Errors by field. */
+			            'errorsByField': {
+			                label: 'Errors by field',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
+			            },
+			            /** Show submit controls. */
+			            'shouldShowSubmitControls': {
+			                label: 'Show submit controls',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Show cancel button. */
+			            'shouldShowCancelButton': {
+			                label: 'Show cancel button',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Submit button label. */
+			            'submitButtonLabel': {
+			                label: 'Submit button label',
+			                type: 'text',
+			                defaultValue: "Go!",
+			                options: undefined
+			            },
+			            /** Cancel button label. */
+			            'cancelButtonLabel': {
+			                label: 'Cancel button label',
+			                type: 'text',
+			                defaultValue: "Cancel",
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Enabled. */
+			            'isEnabled': {
+			                label: 'Enabled',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Set value handler. */
+			            'setValue': {
+			                label: 'Set value handler',
+			                type: 'raw',
+			                isPrivate: true,
+			                isRequired: true,
+			                options: {valueType: `(name: SpruceSchema.SchemaFieldNames<S>, value: any) => void`,}
+			            },
+			            /** Form sections. */
+			            'sections': {
+			                label: 'Form sections',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {typeSuffix: `<S>`,schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** . */
+			            'sprucebotAvatar': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema,}
+			            },
+			            /** . */
+			            'shouldRenderFirstFieldsLabel': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'talkingSprucebot': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
+			            },
+			            /** Present slide. The slide showing now! */
+			            'presentSlide': {
+			                label: 'Present slide',
+			                type: 'number',
+			                hint: 'The slide showing now!',
+			                defaultValue: 0,
+			                options: undefined
+			            },
+			            /** Submit handler. */
+			            'onSubmitSlide': {
+			                label: 'Submit handler',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SubmitSlideHandler<S>`,}
+			            },
+			    }
+		}
+
+		interface BigFormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema> {}
 
 	}
 
