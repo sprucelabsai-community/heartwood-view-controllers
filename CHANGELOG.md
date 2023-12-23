@@ -1,3 +1,10 @@
+# [108.33.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.32.1...v108.33.0) (2023-12-23)
+
+
+### Features
+
+* can assert buttons in row are enabled or disabled ([1d69140](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1d69140))
+
 ## [108.32.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.32.0...v108.32.1) (2023-12-23)
 
 # [108.32.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.31.0...v108.32.0) (2023-12-23)
