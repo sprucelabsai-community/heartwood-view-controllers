@@ -486,7 +486,7 @@ const listAssert = {
 		}
 
 		assert.fail(
-			`I expected row '${row}' to be disabled, but it was actually enabled!`
+			`I expected row '${row}' to be disabled, but it was actually enabled! Try 'isEnabled: false' in your button!`
 		)
 	},
 
