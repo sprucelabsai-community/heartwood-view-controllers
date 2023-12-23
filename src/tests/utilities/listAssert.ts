@@ -221,6 +221,7 @@ const listAssert = {
 		buttonId: string
 	) {
 		const rowVc = this.listRendersRow(listVc, row)
+
 		const model = renderUtil.render(rowVc)
 
 		for (const cell of model.cells ?? []) {
