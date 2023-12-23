@@ -225,12 +225,42 @@ const listAssert = {
 
 		for (const cell of model.cells ?? []) {
 			if (cell.button?.id === buttonId) {
-				return
+				return cell.button!
 			}
 		}
 
 		assert.fail(
 			`Your list does not render a button with the id of '${buttonId}' in row '${row}'.`
+		)
+
+		return {} as NonNullable<ListCell['button']>
+	},
+
+	buttonInRowIsDisabled(
+		listVc: ViewController<List>,
+		row: string | number,
+		buttonId: string
+	) {
+		this.rowRendersButton(listVc, row, buttonId)
+
+		try {
+			this.buttonInRowIsEnabled(listVc, row, buttonId)
+		} catch {
+			return
+		}
+
+		assert.fail(`The button '${buttonId}' in row '${row}' is not disabled!`)
+	},
+
+	buttonInRowIsEnabled(
+		listVc: ViewController<List>,
+		row: string | number,
+		buttonId: string
+	) {
+		const button = this.rowRendersButton(listVc, row, buttonId)
+		assert.isTruthy(
+			button.isEnabled ?? true,
+			`The button '${buttonId}' in row '${row}' is not enabled!`
 		)
 	},
 

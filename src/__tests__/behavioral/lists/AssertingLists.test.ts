@@ -14,7 +14,7 @@ import ListViewController from '../../../viewControllers/list/List.vc'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
-class ListVc extends AbstractViewController<Card> {
+class ListCard extends AbstractViewController<Card> {
 	private cardVc: CardViewController
 	public constructor(options: ViewControllerOptions & { listIds: string[] }) {
 		super(options)
@@ -42,7 +42,7 @@ class ListVc extends AbstractViewController<Card> {
 
 export default class AssertingListsTest extends AbstractViewControllerTest {
 	protected static controllerMap = {
-		listVc: ListVc,
+		listVc: ListCard,
 	}
 	private static vc: ListViewController
 
@@ -262,6 +262,97 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		)
 	}
 
+	@test()
+	protected static knowsIfButtonIsEnabledOrDisabled() {
+		const enabledId = generateId()
+		const disabledId = generateId()
+		const secondDisabledId = generateId()
+		const secondRowId = generateId()
+		const secondEnabledId = generateId()
+
+		this.addRow({
+			cells: [
+				{
+					button: {
+						id: enabledId,
+						isEnabled: true,
+					},
+				},
+				{
+					button: {
+						id: disabledId,
+						isEnabled: false,
+					},
+				},
+			],
+		})
+
+		this.addRow({
+			id: secondRowId,
+			cells: [
+				{
+					button: {
+						id: secondDisabledId,
+						isEnabled: false,
+					},
+				},
+				{
+					button: {
+						id: secondEnabledId,
+					},
+				},
+			],
+		})
+
+		listAssert.buttonInRowIsEnabled(this.vc, 0, enabledId)
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsDisabled(this.vc, 0, enabledId)
+		)
+
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsEnabled(this.vc, 0, 'second')
+		)
+		listAssert.buttonInRowIsDisabled(this.vc, 0, disabledId)
+
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsEnabled(this.vc, secondRowId, secondDisabledId)
+		)
+
+		listAssert.buttonInRowIsDisabled(this.vc, secondRowId, secondDisabledId)
+
+		listAssert.buttonInRowIsEnabled(this.vc, secondRowId, secondEnabledId)
+
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsDisabled(this.vc, secondRowId, secondEnabledId)
+		)
+	}
+
+	@test()
+	protected static async buttonInRowIsDisabledThrowsWithBadRowsAndButtonIds() {
+		const rowId = generateId()
+		const buttonId = generateId()
+
+		this.addRow({
+			id: rowId,
+			cells: [
+				{
+					button: {
+						id: 'first',
+						isEnabled: false,
+					},
+				},
+			],
+		})
+
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsDisabled(this.vc, generateId(), buttonId)
+		)
+
+		assert.doesThrow(() =>
+			listAssert.buttonInRowIsDisabled(this.vc, rowId, generateId())
+		)
+	}
+
 	private static assertAssertingInputThrows(msg: string) {
 		assert.doesThrow(() => listAssert.rowRendersInput(this.vc, 0, 'name'), msg)
 		listAssert.rowDoesNotRenderInput(this.vc, 0, 'name')
@@ -293,7 +384,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 		this.vc.addRow({ cells: [], id: generateId(), ...view })
 	}
 
-	protected static Vc(listIds: string[]): ListVc {
+	protected static Vc(listIds: string[]): ListCard {
 		//@ts-ignore
 		return this.Controller('listVc', { listIds })
 	}
