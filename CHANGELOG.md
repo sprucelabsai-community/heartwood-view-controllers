@@ -1,3 +1,10 @@
+# [108.32.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.31.0...v108.32.0) (2023-12-23)
+
+
+### Features
+
+* device can now open url ([0600039](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/0600039))
+
 # [108.31.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.30.3...v108.31.0) (2023-12-21)
 
 
