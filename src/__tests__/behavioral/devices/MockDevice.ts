@@ -1,13 +1,12 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert } from '@sprucelabs/test-utils'
 import SpyDevice from '../../../tests/SpyDevice'
-import { Card } from '../../../types/heartwood.types'
+import { CachedValue, Card } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 
-export default class MockDeviceVc extends AbstractViewController<Card> {
-	public openUrl(url: string) {
-		this.getDevice().openUrl(url)
-	}
+export default class MockDeviceViewController extends AbstractViewController<Card> {
+	public call(_phoneNumber: string): void {}
+	public setCachedValue(_key: string, _value: CachedValue): void {}
 	public cacheValue(key: string, value: string) {
 		this.getDevice().setCachedValue(key, value)
 	}

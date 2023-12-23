@@ -43,6 +43,22 @@ const deviceAssert = {
 			`You called ${device.lastPhoneCalled} but I expected you to call ${number}!`
 		)
 	},
+
+	openedUrl(vc: AbstractViewController<any>, url: string) {
+		//@ts-ignore
+		const device = vc.getDevice() as SpyDevice
+		const openedUrl = device.openedUrl
+		assert.isTruthy(
+			openedUrl,
+			`You didn't open any urls! Try 'this.device.openUrl(...)'`
+		)
+
+		assert.isEqual(
+			openedUrl,
+			url,
+			`You opened ${openedUrl} but I expected you to open ${url}!`
+		)
+	},
 }
 
 export default deviceAssert

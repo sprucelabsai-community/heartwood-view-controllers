@@ -727,6 +727,7 @@ export type Locale = ILocale
 export type CachedValue = string | number | Record<string, any> | boolean | null
 
 export interface Device {
+	openUrl(url: string): void
 	vibrate(): void
 	call(phoneNumber: string): void
 	setCachedValue(key: string, value: CachedValue): void

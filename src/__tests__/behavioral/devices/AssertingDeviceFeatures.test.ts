@@ -68,6 +68,27 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
 		this.assertMadeCall(formatPhoneNumber('555-555-5500'))
 	}
 
+	@test()
+	protected static async knowsWhenOpenedUrl() {
+		const url = 'https://spruce.ai'
+		this.assertOpenedUrlThrows(url)
+		this.openUrl(url)
+		this.assertOpenedUrl(url)
+		this.assertOpenedUrlThrows('https://spruce.ai/other')
+	}
+
+	private static assertOpenedUrlThrows(url: string) {
+		assert.doesThrow(() => this.assertOpenedUrl(url))
+	}
+
+	private static openUrl(url: string) {
+		this.vc.openUrl(url)
+	}
+
+	private static assertOpenedUrl(url: string): any {
+		return deviceAssert.openedUrl(this.vc, url)
+	}
+
 	private static assertMadeCall(number: string): any {
 		return deviceAssert.madeCall(this.vc, number)
 	}
