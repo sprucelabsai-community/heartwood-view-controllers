@@ -338,7 +338,16 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 			vcAssert.assertSkillViewRendersCards(vc, [id2, 'not-found'])
 		)
 
-		vcAssert.assertSkillViewDoesNotRenderCards(vc, [id2, 'not-found'])
+		vcAssert.assertSkillViewDoesNotRenderCards(vc, [generateId(), 'not-found'])
+		vcAssert.assertSkillViewDoesNotRenderCards(vc, [
+			'not-found',
+			generateId(),
+			'not-found',
+		])
+
+		assert.doesThrow(() =>
+			vcAssert.assertSkillViewDoesNotRenderCards(vc, [generateId(), id2])
+		)
 
 		vcAssert.assertSkillViewRendersCard(vc, id)
 

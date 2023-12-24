@@ -688,12 +688,6 @@ const vcAssert = {
 		vc: SkillViewController,
 		expected?: number | string[]
 	) {
-		try {
-			this.assertSkillViewRendersCards(vc, expected)
-		} catch {
-			return
-		}
-
 		//@ts-ignore
 		const cards: CardViewController[] = pullCardsFromSkillView(vc, this.factory)
 		const matches: string[] = []
@@ -707,7 +701,9 @@ const vcAssert = {
 			}
 		}
 
-		assert.fail(
+		assert.isLength(
+			matches,
+			0,
 			`I didn't expect to find cards with the ids:\n\n${matches.join('\n')}`
 		)
 	},
