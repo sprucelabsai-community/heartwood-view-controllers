@@ -1,3 +1,10 @@
+# [108.34.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.33.22...v108.34.0) (2024-01-08)
+
+
+### Features
+
+* can render sections as grid ([160b902](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/160b902))
+
 ## [108.33.22](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.33.21...v108.33.22) (2024-01-08)
 
 ## [108.33.21](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.33.20...v108.33.21) (2024-01-07)
