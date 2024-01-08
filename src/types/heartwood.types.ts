@@ -299,6 +299,9 @@ export type ProgressNavigator =
 export type ProgressNavigatorStep =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep
 
+export type Progress =
+	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
+
 export type Form<S extends Schema = any> =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 

@@ -1,9 +1,8 @@
 import { SchemaError } from '@sprucelabs/schema'
-import { SpruceSchemas, ViewControllerOptions } from '../..'
+import { Progress, ViewControllerOptions } from '../../types/heartwood.types'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../Abstract.vc'
 
-type Progress = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
 export type ProgressViewControllerOptions = Progress
 
 export default class ProgressViewController extends AbstractViewController<Progress> {
