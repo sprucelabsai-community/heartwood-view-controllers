@@ -42,6 +42,10 @@ export default buildSchema({
 				valueType: '(slide: number) => void',
 			},
 		},
+		shouldRenderSectionsAsGrid: {
+			type: 'boolean',
+			label: 'Render sections as grid',
+		},
 		sections: {
 			type: 'schema',
 			label: 'Sections',

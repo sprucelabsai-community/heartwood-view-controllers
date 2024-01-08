@@ -2258,6 +2258,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
 				/** Slide change callback. */
 				'onChangeSlide'?: ((slide: number) => void)| undefined | null
+				/** Render sections as grid. */
+				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
 				/** Sections. */
 				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
 		}
@@ -2311,6 +2313,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Slide change callback',
 			                type: 'raw',
 			                options: {valueType: `(slide: number) => void`,}
+			            },
+			            /** Render sections as grid. */
+			            'shouldRenderSectionsAsGrid': {
+			                label: 'Render sections as grid',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Sections. */
 			            'sections': {

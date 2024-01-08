@@ -53,6 +53,12 @@ const cardBodySchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBod
 	                type: 'raw',
 	                options: {valueType: `(slide: number) => void`,}
 	            },
+	            /** Render sections as grid. */
+	            'shouldRenderSectionsAsGrid': {
+	                label: 'Render sections as grid',
+	                type: 'boolean',
+	                options: undefined
+	            },
 	            /** Sections. */
 	            'sections': {
 	                label: 'Sections',
