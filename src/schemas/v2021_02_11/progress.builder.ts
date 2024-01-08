@@ -4,6 +4,9 @@ export default buildSchema({
 	id: 'progress',
 	name: 'Progress',
 	fields: {
+		id: {
+			type: 'id',
+		},
 		title: {
 			type: 'text',
 			label: 'Title',

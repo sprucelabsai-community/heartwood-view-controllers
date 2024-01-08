@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
@@ -76,6 +76,19 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 		const vc = this.ProgressVc({ percentComplete })
 		vcAssert.assertCardRendersProgress(vc, percentComplete)
 		vcAssert.assertCardRendersProgress(vc)
+	}
+
+	@test()
+	protected static async throwsWhenMissingId() {
+		const id = 'whatever'
+		const vc = this.ProgressVc({
+			id,
+		})
+		assert.doesThrow(() =>
+			vcAssert.assertCardRendersProgress(vc, 0.5, generateId())
+		)
+
+		vcAssert.assertCardRendersProgress(vc, 0.5, id)
 	}
 
 	private static ProgressVc(options?: ProgressViewControllerOptions) {

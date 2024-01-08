@@ -182,5 +182,6 @@ export { default as destinationSkillViewControllerSchema } from '#spruce/schemas
 export { default as countdownTimerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/countdownTimer.schema'
 export { default as progressNavigatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigator.schema'
 export { default as progressNavigatorStepSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigatorStep.schema'
+export { default as progressDetailsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressDetails.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

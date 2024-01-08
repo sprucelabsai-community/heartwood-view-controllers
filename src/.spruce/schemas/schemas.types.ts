@@ -2833,6 +2833,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface Progress {
 			
+				
+				'id'?: string| undefined | null
 				/** Title. Rendered in the center of the circle indicator! */
 				'title'?: string| undefined | null
 				/** Percent complete. A number from zero to 1 */
@@ -2848,6 +2850,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Progress',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
 			            /** Title. Rendered in the center of the circle indicator! */
 			            'title': {
 			                label: 'Title',

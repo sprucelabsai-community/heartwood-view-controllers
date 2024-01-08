@@ -1458,7 +1458,8 @@ const vcAssert = {
 
 	assertCardRendersProgress(
 		vc: ViewController<Card>,
-		expectedPercentComplete?: number
+		expectedPercentComplete?: number,
+		id?: string
 	): ProgressViewController {
 		const model = renderUtil.render(vc)
 
@@ -1467,6 +1468,14 @@ const vcAssert = {
 			progress,
 			`I expected your card to render progress view, but it didn't!`
 		)
+
+		if (id) {
+			assert.isEqual(
+				progress.id,
+				id,
+				`I expected your progress view to have the id '${id}', but it has '${progress.id}'`
+			)
+		}
 
 		//@ts-ignore
 		const controller = progress.controller

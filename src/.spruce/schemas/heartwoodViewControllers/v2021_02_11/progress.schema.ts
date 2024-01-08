@@ -10,6 +10,11 @@ const progressSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progres
 	name: 'Progress',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
+	            },
 	            /** Title. Rendered in the center of the circle indicator! */
 	            'title': {
 	                label: 'Title',
