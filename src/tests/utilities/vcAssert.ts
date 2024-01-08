@@ -1463,18 +1463,28 @@ const vcAssert = {
 	): ProgressViewController {
 		const model = renderUtil.render(vc)
 
-		const progress = pluckFirstFromCard(model, 'progress')
-		assert.isTruthy(
-			progress,
+		const progresses = pluckAllFromView(model, 'progress')
+		assert.isAbove(
+			progresses.length,
+			0,
 			`I expected your card to render progress view, but it didn't!`
 		)
 
+		let progress: any | undefined
+
 		if (id) {
-			assert.isEqual(
-				progress.id,
-				id,
+			for (const p of progresses) {
+				if (p?.id === id) {
+					progress = p
+				}
+			}
+
+			assert.isTruthy(
+				progress,
 				`I expected your progress view to have the id '${id}', but it has '${progress.id}'`
 			)
+		} else {
+			progress = progresses[0]
 		}
 
 		//@ts-ignore

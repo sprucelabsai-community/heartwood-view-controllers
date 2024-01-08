@@ -64,7 +64,7 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static throwsWhenAssertPercentCompleteIsWrong() {
-		const vc = this.ProgressVc()
+		const vc = this.CardWithProgressVc()
 		assert.doesThrow(() => vcAssert.assertCardRendersProgress(vc, 1))
 	}
 
@@ -73,15 +73,15 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 	protected static passesWhenFindingPercentThatMatches(
 		percentComplete: number
 	) {
-		const vc = this.ProgressVc({ percentComplete })
+		const vc = this.CardWithProgressVc({ percentComplete })
 		vcAssert.assertCardRendersProgress(vc, percentComplete)
 		vcAssert.assertCardRendersProgress(vc)
 	}
 
 	@test()
-	protected static async throwsWhenMissingId() {
+	protected static async throwsWhenIdDoesNotMatch() {
 		const id = 'whatever'
-		const vc = this.ProgressVc({
+		const vc = this.CardWithProgressVc({
 			id,
 		})
 		assert.doesThrow(() =>
@@ -91,11 +91,24 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 		vcAssert.assertCardRendersProgress(vc, 0.5, id)
 	}
 
-	private static ProgressVc(options?: ProgressViewControllerOptions) {
-		const progressVc = this.Controller('progress', {
-			percentComplete: 0.5,
-			...options,
+	@test()
+	protected static async canMatchOnSecondId() {
+		const vc = this.CardWithProgressVc({
+			id: generateId(),
 		})
+
+		const id = generateId()
+
+		vc.addSection({
+			progress: this.ProgressVc({ id }).render(),
+		})
+
+		vcAssert.assertCardRendersProgress(vc, 0.5, id)
+		assert.doesThrow(() => vcAssert.assertCardRendersProgress(vc, 0.2, id))
+	}
+
+	private static CardWithProgressVc(options?: ProgressViewControllerOptions) {
+		const progressVc = this.ProgressVc(options)
 		const vc = this.CardVc({
 			body: {
 				sections: [
@@ -106,6 +119,13 @@ export default class AssertingProgressTest extends AbstractViewControllerTest {
 			},
 		})
 		return vc
+	}
+
+	private static ProgressVc(options?: ProgressViewControllerOptions) {
+		return this.Controller('progress', {
+			percentComplete: 0.5,
+			...options,
+		})
 	}
 
 	private static CardVc(options?: CardViewControllerOptions) {
