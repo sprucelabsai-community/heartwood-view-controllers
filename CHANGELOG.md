@@ -1,3 +1,11 @@
+# [108.35.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.34.0...v108.35.0) (2024-01-08)
+
+
+### Features
+
+* can assert progress by id ([744287e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/744287e))
+* progress has optional details ([49b77cd](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/49b77cd))
+
 # [108.34.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.33.22...v108.34.0) (2024-01-08)
 
 
