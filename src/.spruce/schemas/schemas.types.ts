@@ -2795,12 +2795,50 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface ProgressDetails {
+			
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+		}
+
+		interface ProgressDetailsSchema extends SpruceSchema.Schema {
+			id: 'progressDetails',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface ProgressDetailsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressDetailsSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface Progress {
 			
 				/** Title. Rendered in the center of the circle indicator! */
 				'title'?: string| undefined | null
 				/** Percent complete. A number from zero to 1 */
 				'percentComplete'?: number| undefined | null
+				/** Details. */
+				'details'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressDetails| undefined | null
 		}
 
 		interface ProgressSchema extends SpruceSchema.Schema {
@@ -2823,6 +2861,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'number',
 			                hint: 'A number from zero to 1',
 			                options: undefined
+			            },
+			            /** Details. */
+			            'details': {
+			                label: 'Details',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressDetailsSchema,}
 			            },
 			    }
 		}
@@ -3159,190 +3203,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
-		/** Avatar that makes size optional for use with the Sprucebot Typed Message component */
-		interface SprucebotTypedMessageAvatar {
-			
-				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** State of mind. */
-				'stateOfMind': ("chill" | "contemplative" | "accomplished")
-		}
-
-		interface SprucebotTypedMessageAvatarSchema extends SpruceSchema.Schema {
-			id: 'sprucebotTypedMessageAvatar',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Typed message avatar',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			description: 'Avatar that makes size optional for use with the Sprucebot Typed Message component',
-			    fields: {
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                defaultValue: "medium",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** State of mind. */
-			            'stateOfMind': {
-			                label: 'State of mind',
-			                type: 'select',
-			                isRequired: true,
-			                defaultValue: "chill",
-			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
-			            },
-			    }
-		}
-
-		interface SprucebotTypedMessageAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface TalkingSprucebot {
-			
-				
-				'id'?: string| undefined | null
-				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
-				/** Default avatar. How should Sprucebot be rendered by default */
-				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
-				/** Start delay. How long should I wait before starting to type? */
-				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
-				/** Loop. */
-				'shouldLoop'?: boolean| undefined | null
-				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
-				/** Playing. */
-				'isPlaying'?: boolean| undefined | null
-				/** Completion handler. */
-				'onComplete'?: (() => Promise<void> | void)| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController)| undefined | null
-		}
-
-		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
-			id: 'talkingSprucebot',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Talking sprucebot',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
-			            'sentences': {
-			                label: 'Sentences',
-			                type: 'schema',
-			                isRequired: true,
-			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
-			            },
-			            /** Default avatar. How should Sprucebot be rendered by default */
-			            'avatar': {
-			                label: 'Default avatar',
-			                type: 'schema',
-			                hint: 'How should Sprucebot be rendered by default',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
-			            },
-			            /** Start delay. How long should I wait before starting to type? */
-			            'startDelay': {
-			                label: 'Start delay',
-			                type: 'duration',
-			                hint: 'How long should I wait before starting to type?',
-			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
-			                options: undefined
-			            },
-			            /** Loop. */
-			            'shouldLoop': {
-			                label: 'Loop',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                defaultValue: "small",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** Playing. */
-			            'isPlaying': {
-			                label: 'Playing',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Completion handler. */
-			            'onComplete': {
-			                label: 'Completion handler',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<void> | void`,}
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.TalkingSprucebotViewController`,}
-			            },
-			    }
-		}
-
-		interface TalkingSprucebotEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface SprucebotAvatar {
-			
-				/** Size. */
-				'size': ("small" | "medium" | "large")
-				/** State of mind. */
-				'stateOfMind': ("chill" | "contemplative" | "accomplished")
-		}
-
-		interface SprucebotAvatarSchema extends SpruceSchema.Schema {
-			id: 'sprucebotAvatar',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Sprucebot avatar',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Size. */
-			            'size': {
-			                label: 'Size',
-			                type: 'select',
-			                isRequired: true,
-			                defaultValue: "medium",
-			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
-			            },
-			            /** State of mind. */
-			            'stateOfMind': {
-			                label: 'State of mind',
-			                type: 'select',
-			                isRequired: true,
-			                defaultValue: "chill",
-			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
-			            },
-			    }
-		}
-
-		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
 		
 		interface BigForm<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
@@ -3561,6 +3421,190 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface BigFormEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		/** Avatar that makes size optional for use with the Sprucebot Typed Message component */
+		interface SprucebotTypedMessageAvatar {
+			
+				/** Size. */
+				'size'?: ("small" | "medium" | "large")| undefined | null
+				/** State of mind. */
+				'stateOfMind': ("chill" | "contemplative" | "accomplished")
+		}
+
+		interface SprucebotTypedMessageAvatarSchema extends SpruceSchema.Schema {
+			id: 'sprucebotTypedMessageAvatar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Typed message avatar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			description: 'Avatar that makes size optional for use with the Sprucebot Typed Message component',
+			    fields: {
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                defaultValue: "medium",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** State of mind. */
+			            'stateOfMind': {
+			                label: 'State of mind',
+			                type: 'select',
+			                isRequired: true,
+			                defaultValue: "chill",
+			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
+			            },
+			    }
+		}
+
+		interface SprucebotTypedMessageAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface TalkingSprucebot {
+			
+				
+				'id'?: string| undefined | null
+				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
+				/** Default avatar. How should Sprucebot be rendered by default */
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				/** Start delay. How long should I wait before starting to type? */
+				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				/** Loop. */
+				'shouldLoop'?: boolean| undefined | null
+				/** Size. */
+				'size'?: ("small" | "medium" | "large")| undefined | null
+				/** Playing. */
+				'isPlaying'?: boolean| undefined | null
+				/** Completion handler. */
+				'onComplete'?: (() => Promise<void> | void)| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController)| undefined | null
+		}
+
+		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
+			id: 'talkingSprucebot',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Talking sprucebot',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
+			            'sentences': {
+			                label: 'Sentences',
+			                type: 'schema',
+			                isRequired: true,
+			                hint: 'Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold)',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentenceSchema,}
+			            },
+			            /** Default avatar. How should Sprucebot be rendered by default */
+			            'avatar': {
+			                label: 'Default avatar',
+			                type: 'schema',
+			                hint: 'How should Sprucebot be rendered by default',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatarSchema,}
+			            },
+			            /** Start delay. How long should I wait before starting to type? */
+			            'startDelay': {
+			                label: 'Start delay',
+			                type: 'duration',
+			                hint: 'How long should I wait before starting to type?',
+			                defaultValue: {"hours":0,"minutes":0,"seconds":1,"ms":0},
+			                options: undefined
+			            },
+			            /** Loop. */
+			            'shouldLoop': {
+			                label: 'Loop',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                defaultValue: "small",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** Playing. */
+			            'isPlaying': {
+			                label: 'Playing',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Completion handler. */
+			            'onComplete': {
+			                label: 'Completion handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void> | void`,}
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.TalkingSprucebotViewController`,}
+			            },
+			    }
+		}
+
+		interface TalkingSprucebotEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface SprucebotAvatar {
+			
+				/** Size. */
+				'size': ("small" | "medium" | "large")
+				/** State of mind. */
+				'stateOfMind': ("chill" | "contemplative" | "accomplished")
+		}
+
+		interface SprucebotAvatarSchema extends SpruceSchema.Schema {
+			id: 'sprucebotAvatar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Sprucebot avatar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Size. */
+			            'size': {
+			                label: 'Size',
+			                type: 'select',
+			                isRequired: true,
+			                defaultValue: "medium",
+			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** State of mind. */
+			            'stateOfMind': {
+			                label: 'State of mind',
+			                type: 'select',
+			                isRequired: true,
+			                defaultValue: "chill",
+			                options: {choices: [{"value":"chill","label":"Chill - Sprucebot is saying something informative or a salutation"},{"value":"contemplative","label":"Contemplative - Sprucebot is loading or sending data"},{"value":"accomplished","label":"Accomplished - Sprucebot is celebrating because a process has finished"}],}
+			            },
+			    }
+		}
+
+		interface SprucebotAvatarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatarSchema> {}
 
 	}
 

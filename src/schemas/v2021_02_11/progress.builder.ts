@@ -14,5 +14,22 @@ export default buildSchema({
 			label: 'Percent complete',
 			hint: 'A number from zero to 1',
 		},
+		details: {
+			type: 'schema',
+			label: 'Details',
+			options: {
+				schema: buildSchema({
+					id: 'progressDetails',
+					fields: {
+						title: {
+							type: 'text',
+						},
+						subtitle: {
+							type: 'text',
+						},
+					},
+				}),
+			},
+		},
 	},
 })

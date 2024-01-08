@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import progressDetailsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressDetails.schema'
 
 const progressSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressSchema  = {
 	id: 'progress',
@@ -23,6 +23,12 @@ const progressSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progres
 	                type: 'number',
 	                hint: 'A number from zero to 1',
 	                options: undefined
+	            },
+	            /** Details. */
+	            'details': {
+	                label: 'Details',
+	                type: 'schema',
+	                options: {schema: progressDetailsSchema_v2021_02_11,}
 	            },
 	    }
 }
