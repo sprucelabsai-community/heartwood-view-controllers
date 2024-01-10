@@ -190,9 +190,20 @@ export default buildSchema({
 				],
 			},
 		},
-		portalHtml: {
-			type: 'text',
-			hint: 'Will render HTML (including body) in an iframe in the body of the card.',
+		portal: {
+			type: 'schema',
+			hint: 'Will render content in an iframe in the body of the card.',
+			options: {
+				schema: buildSchema({
+					id: 'portal',
+					fields: {
+						html: {
+							type: 'text',
+							label: 'HTML',
+						},
+					},
+				}),
+			},
 		},
 		alignment: {
 			type: 'select',

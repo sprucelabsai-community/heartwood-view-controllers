@@ -2006,6 +2006,155 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Dialog {
+			
+				
+				'id'?: string| undefined | null
+				
+				'className'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
+				/** Header. */
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
+				/** Critical error. */
+				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
+				/** Fade in. */
+				'shouldFadeIn'?: boolean| undefined | null
+				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
+				/** Footer. */
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				/** Visible. */
+				'isVisible'?: boolean| undefined | null
+				/** Show close button. */
+				'shouldShowCloseButton'?: boolean| undefined | null
+				/** Card controller. */
+				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
+				/** Close callback. */
+				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
+		}
+
+		interface DialogSchema extends SpruceSchema.Schema {
+			id: 'dialog',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Dialog',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
+			            },
+			            /** Header. */
+			            'header': {
+			                label: 'Header',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
+			            },
+			            /** Critical error. */
+			            'criticalError': {
+			                label: 'Critical error',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema,}
+			            },
+			            /** Fade in. */
+			            'shouldFadeIn': {
+			                label: 'Fade in',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
+			            'body': {
+			                label: 'Body',
+			                type: 'schema',
+			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
+			            },
+			            /** Footer. */
+			            'footer': {
+			                label: 'Footer',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
+			            },
+			            /** Visible. */
+			            'isVisible': {
+			                label: 'Visible',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Show close button. */
+			            'shouldShowCloseButton': {
+			                label: 'Show close button',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Card controller. */
+			            'cardController': {
+			                label: 'Card controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
+			            },
+			            /** Close callback. */
+			            'onClose': {
+			                label: 'Close callback',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
+			            },
+			    }
+		}
+
+		interface DialogEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Portal {
+			
+				/** HTML. */
+				'html'?: string| undefined | null
+		}
+
+		interface PortalSchema extends SpruceSchema.Schema {
+			id: 'portal',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** HTML. */
+			            'html': {
+			                label: 'HTML',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface PortalEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CardSection {
 			
 				
@@ -2058,8 +2207,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Grid size. */
 				'gridSize'?: ("small" | "medium" | "large")| undefined | null
-				/** . Will render HTML (including body) in an iframe in the body of the card. */
-				'portalHtml'?: string| undefined | null
+				/** . Will render content in an iframe in the body of the card. */
+				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal| undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right")| undefined | null
 		}
@@ -2226,11 +2375,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'select',
 			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 			            },
-			            /** . Will render HTML (including body) in an iframe in the body of the card. */
-			            'portalHtml': {
-			                type: 'text',
-			                hint: 'Will render HTML (including body) in an iframe in the body of the card.',
-			                options: undefined
+			            /** . Will render content in an iframe in the body of the card. */
+			            'portal': {
+			                type: 'schema',
+			                hint: 'Will render content in an iframe in the body of the card.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema,}
 			            },
 			            /** Alignment. */
 			            'alignment': {
@@ -2339,125 +2488,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Dialog {
-			
-				
-				'id'?: string| undefined | null
-				
-				'className'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
-				/** Header. */
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
-				/** Critical error. */
-				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
-				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
-				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
-				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
-				/** Visible. */
-				'isVisible'?: boolean| undefined | null
-				/** Show close button. */
-				'shouldShowCloseButton'?: boolean| undefined | null
-				/** Card controller. */
-				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
-				/** Close callback. */
-				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
-		}
-
-		interface DialogSchema extends SpruceSchema.Schema {
-			id: 'dialog',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Dialog',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>`,}
-			            },
-			            /** Header. */
-			            'header': {
-			                label: 'Header',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema,}
-			            },
-			            /** Critical error. */
-			            'criticalError': {
-			                label: 'Critical error',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalErrorSchema,}
-			            },
-			            /** Fade in. */
-			            'shouldFadeIn': {
-			                label: 'Fade in',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-			            'body': {
-			                label: 'Body',
-			                type: 'schema',
-			                hint: 'Card bodies are comprised of sections. You will want at least 1 to get started.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema,}
-			            },
-			            /** Footer. */
-			            'footer': {
-			                label: 'Footer',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema,}
-			            },
-			            /** Visible. */
-			            'isVisible': {
-			                label: 'Visible',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Show close button. */
-			            'shouldShowCloseButton': {
-			                label: 'Show close button',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Card controller. */
-			            'cardController': {
-			                label: 'Card controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
-			            },
-			            /** Close callback. */
-			            'onClose': {
-			                label: 'Close callback',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
-			            },
-			    }
-		}
-
-		interface DialogEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSchema> {}
 
 	}
 

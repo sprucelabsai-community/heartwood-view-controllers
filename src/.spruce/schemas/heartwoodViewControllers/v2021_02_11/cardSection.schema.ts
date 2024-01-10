@@ -16,6 +16,7 @@ import progressSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers
 import ratingsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
 import receiptSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receipt.schema'
 import feedSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
+import portalSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/portal.schema'
 
 const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema  = {
 	id: 'cardSection',
@@ -179,11 +180,11 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                type: 'select',
 	                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 	            },
-	            /** . Will render HTML (including body) in an iframe in the body of the card. */
-	            'portalHtml': {
-	                type: 'text',
-	                hint: 'Will render HTML (including body) in an iframe in the body of the card.',
-	                options: undefined
+	            /** . Will render content in an iframe in the body of the card. */
+	            'portal': {
+	                type: 'schema',
+	                hint: 'Will render content in an iframe in the body of the card.',
+	                options: {schema: portalSchema_v2021_02_11,}
 	            },
 	            /** Alignment. */
 	            'alignment': {
