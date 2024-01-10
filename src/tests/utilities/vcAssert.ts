@@ -1456,6 +1456,20 @@ const vcAssert = {
 		}
 	},
 
+	assertCardDoesNotRenderProgress(
+		vc: ViewController<Card>,
+		expectedPercentComplete?: number,
+		id?: string
+	) {
+		try {
+			this.assertCardRendersProgress(vc, expectedPercentComplete, id)
+		} catch {
+			return
+		}
+
+		assert.fail(`I found a progress card with a percent I did not expect!`)
+	},
+
 	assertCardRendersProgress(
 		vc: ViewController<Card>,
 		expectedPercentComplete?: number,
