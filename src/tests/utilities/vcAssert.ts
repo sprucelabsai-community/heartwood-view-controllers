@@ -1463,7 +1463,11 @@ const vcAssert = {
 			return
 		}
 
-		assert.fail(`I found a progress card with a percent I did not expect!`)
+		assert.fail(
+			`I found a progress card ${
+				id ? `with id "${id}" ` : ' '
+			}and I did not expect to!`
+		)
 	},
 
 	assertCardRendersProgress(
