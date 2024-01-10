@@ -2058,6 +2058,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Grid size. */
 				'gridSize'?: ("small" | "medium" | "large")| undefined | null
+				/** . Will render HTML (including body) in an iframe in the body of the card. */
+				'portalHtml'?: string| undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right")| undefined | null
 		}
@@ -2223,6 +2225,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Grid size',
 			                type: 'select',
 			                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
+			            },
+			            /** . Will render HTML (including body) in an iframe in the body of the card. */
+			            'portalHtml': {
+			                type: 'text',
+			                hint: 'Will render HTML (including body) in an iframe in the body of the card.',
+			                options: undefined
 			            },
 			            /** Alignment. */
 			            'alignment': {

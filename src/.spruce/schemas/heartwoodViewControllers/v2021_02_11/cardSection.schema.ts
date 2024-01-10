@@ -179,6 +179,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                type: 'select',
 	                options: {choices: [{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],}
 	            },
+	            /** . Will render HTML (including body) in an iframe in the body of the card. */
+	            'portalHtml': {
+	                type: 'text',
+	                hint: 'Will render HTML (including body) in an iframe in the body of the card.',
+	                options: undefined
+	            },
 	            /** Alignment. */
 	            'alignment': {
 	                label: 'Alignment',
