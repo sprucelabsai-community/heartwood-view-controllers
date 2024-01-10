@@ -1,3 +1,10 @@
+# [108.37.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.36.1...v108.37.0) (2024-01-10)
+
+
+### Features
+
+* portalHtml in a card section ([ae5c524](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ae5c524))
+
 ## [108.36.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.36.0...v108.36.1) (2024-01-10)
 
 # [108.36.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.35.7...v108.36.0) (2024-01-10)
