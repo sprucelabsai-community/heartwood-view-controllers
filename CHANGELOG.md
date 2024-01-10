@@ -1,3 +1,10 @@
+# [108.36.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.35.7...v108.36.0) (2024-01-10)
+
+
+### Features
+
+* can assert card does NOT render progress ([3c109d0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3c109d0))
+
 ## [108.35.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.35.6...v108.35.7) (2024-01-09)
 
 ## [108.35.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.35.5...v108.35.6) (2024-01-09)
