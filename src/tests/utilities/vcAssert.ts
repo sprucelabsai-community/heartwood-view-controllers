@@ -1456,13 +1456,9 @@ const vcAssert = {
 		}
 	},
 
-	assertCardDoesNotRenderProgress(
-		vc: ViewController<Card>,
-		expectedPercentComplete?: number,
-		id?: string
-	) {
+	assertCardDoesNotRenderProgress(vc: ViewController<Card>, id?: string) {
 		try {
-			this.assertCardRendersProgress(vc, expectedPercentComplete, id)
+			this.assertCardRendersProgress(vc, undefined, id)
 		} catch {
 			return
 		}
