@@ -1,3 +1,10 @@
+# [108.38.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.37.1...v108.38.0) (2024-01-11)
+
+
+### Features
+
+* Portal can have a uri ([8e5448f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8e5448f))
+
 ## [108.37.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.37.0...v108.37.1) (2024-01-10)
 
 # [108.37.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.36.1...v108.37.0) (2024-01-10)
