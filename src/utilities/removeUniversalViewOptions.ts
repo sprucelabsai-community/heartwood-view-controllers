@@ -8,6 +8,7 @@ export const universalViewOptionFields = [
 	'dates',
 	'maps',
 	'toastHandler',
+	'log',
 ] as const
 
 export type UniversalViewOptionFields =

@@ -1,6 +1,7 @@
 import { DateUtil, dateUtil } from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { assertOptions } from '@sprucelabs/schema'
+import { Log, buildLog } from '@sprucelabs/spruce-skill-utils'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
 import SpruceError from '../errors/SpruceError'
 import mapUtil from '../maps/map.utility'
@@ -29,6 +30,7 @@ export default class ViewControllerFactory {
 	private dates: DateUtil
 	private maps: MapUtil
 	private toastHandler: ToastHandler
+	private log: Log
 
 	public constructor(options: ViewControllerFactoryConstructorOptions) {
 		const {
@@ -41,6 +43,7 @@ export default class ViewControllerFactory {
 			dates,
 			maps,
 			toastHandler,
+			log,
 		} = options
 
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
@@ -52,6 +55,7 @@ export default class ViewControllerFactory {
 		this.device = device
 		this.maps = maps ?? mapUtil
 		this.dates = dates ?? dateUtil
+		this.log = log ?? buildLog()
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -77,6 +81,7 @@ export default class ViewControllerFactory {
 			dates,
 			maps,
 			toastHandler,
+			log,
 		} = assertOptions(options, ['connectToApi', 'device'])
 
 		return new this({
@@ -85,6 +90,7 @@ export default class ViewControllerFactory {
 			device,
 			dates,
 			maps,
+			log,
 			toastHandler: toastHandler ?? (() => {}),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
@@ -155,6 +161,7 @@ export default class ViewControllerFactory {
 			connectToApi: this.connectToApi,
 			device: this.device,
 			maps: this.maps,
+			log: this.log.buildLog(name),
 			toastHandler: this.toastHandler,
 		}
 
@@ -194,6 +201,7 @@ export interface ViewControllerFactoryOptions {
 	device: Device
 	dates?: DateUtil
 	maps?: MapUtil
+	log?: Log
 }
 
 export interface ViewControllerFactoryConstructorOptions {
@@ -206,4 +214,5 @@ export interface ViewControllerFactoryConstructorOptions {
 	device: Device
 	dates?: DateUtil
 	maps?: MapUtil
+	log?: Log
 }

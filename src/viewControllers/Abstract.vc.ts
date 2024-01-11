@@ -1,4 +1,5 @@
 import { DateUtil } from '@sprucelabs/calendar-utils'
+import { Log } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
 import {
 	Client,
@@ -30,7 +31,6 @@ export default abstract class AbstractViewController<
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
 	private wasDestroyed = false
-
 	private activeDialog?: any
 	protected connectToApi: () => Promise<Client>
 	protected dates: DateUtil
@@ -42,6 +42,7 @@ export default abstract class AbstractViewController<
 	private activeAlert?: AlertOptions
 	protected triggerRenderHandler?: TriggerRenderHandler
 	private suspendRenderCount = 0
+	protected log: Log
 
 	public constructor(options: ViewControllerOptions) {
 		this.vcFactory = options.vcFactory
@@ -53,6 +54,7 @@ export default abstract class AbstractViewController<
 		this.dates = options.dates
 		this.maps = options.maps
 		this.toastHandler = options.toastHandler
+		this.log = options.log
 	}
 
 	public abstract render(): ViewModel

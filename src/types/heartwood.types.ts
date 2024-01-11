@@ -17,6 +17,7 @@ import {
 	SchemaFieldNames,
 	SchemaPartialValues,
 } from '@sprucelabs/schema'
+import { Log } from '@sprucelabs/spruce-skill-utils'
 import { CalendarEventOptions } from '..'
 import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
@@ -576,6 +577,7 @@ export interface ViewControllerOptions {
 	device: Device
 	dates: DateUtil
 	maps: MapUtil
+	log: Log
 }
 
 export type RenderAsComponent =
