@@ -16,6 +16,12 @@ const portalSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSch
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** URI. */
+	            'uri': {
+	                label: 'URI',
+	                type: 'text',
+	                options: undefined
+	            },
 	    }
 }
 

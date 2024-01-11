@@ -201,6 +201,10 @@ export default buildSchema({
 							type: 'text',
 							label: 'HTML',
 						},
+						uri: {
+							type: 'text',
+							label: 'URI',
+						},
 					},
 				}),
 			},

@@ -2129,6 +2129,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** HTML. */
 				'html'?: string| undefined | null
+				/** URI. */
+				'uri'?: string| undefined | null
 		}
 
 		interface PortalSchema extends SpruceSchema.Schema {
@@ -2141,6 +2143,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** HTML. */
 			            'html': {
 			                label: 'HTML',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** URI. */
+			            'uri': {
+			                label: 'URI',
 			                type: 'text',
 			                options: undefined
 			            },
