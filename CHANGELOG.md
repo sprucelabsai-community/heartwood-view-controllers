@@ -1,3 +1,10 @@
+# [108.40.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.39.0...v108.40.0) (2024-01-11)
+
+
+### Features
+
+* can log ([8bd257e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8bd257e))
+
 # [108.39.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.38.3...v108.39.0) (2024-01-11)
 
 
