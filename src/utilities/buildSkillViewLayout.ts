@@ -1,5 +1,4 @@
-import { LayoutStyle } from '..'
-import { Card } from '../__tests__/behavioral/SplittingCardsIntoLayouts.test'
+import { Card, LayoutStyle } from '../types/heartwood.types'
 
 export default function buildSkillViewLayout(
 	layout: LayoutStyle,

@@ -30,7 +30,7 @@ export default class ViewControllerFactory {
 	private dates: DateUtil
 	private maps: MapUtil
 	private toastHandler: ToastHandler
-	private log: Log
+	private log?: Log
 
 	public constructor(options: ViewControllerFactoryConstructorOptions) {
 		const {
@@ -55,7 +55,7 @@ export default class ViewControllerFactory {
 		this.device = device
 		this.maps = maps ?? mapUtil
 		this.dates = dates ?? dateUtil
-		this.log = log ?? buildLog()
+		this.log = log
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -161,7 +161,7 @@ export default class ViewControllerFactory {
 			connectToApi: this.connectToApi,
 			device: this.device,
 			maps: this.maps,
-			log: this.log.buildLog(name),
+			log: this.log ?? buildLog(name),
 			toastHandler: this.toastHandler,
 		}
 

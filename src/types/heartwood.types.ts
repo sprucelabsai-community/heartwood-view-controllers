@@ -258,6 +258,7 @@ export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type ToolBelt =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 export type Feed = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed
+export type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
 export type SimpleViewControllerFactory = Pick<
 	ViewControllerFactory,
 	'Controller'

@@ -1,12 +1,8 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
-import { LayoutStyle } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
+import { Card, Layout, LayoutStyle } from '../../types/heartwood.types'
 import buildSkillViewLayout from '../../utilities/buildSkillViewLayout'
 import splitCardsIntoLayouts from '../../utilities/splitCardsIntoLayouts'
-
-export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
 
 function buildCards(total: number) {
 	return new Array(total).fill(0).map(() => ({}))
