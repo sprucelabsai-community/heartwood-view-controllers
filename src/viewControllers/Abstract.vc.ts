@@ -144,7 +144,10 @@ export default abstract class AbstractViewController<
 			//@ts-ignore
 			throw new SpruceError({ code: 'VIEW_ALREADY_DESTROYED', viewId: this.id })
 		}
-		await Promise.all(this.children.map((c) => c.destroy?.()))
+		await Promise.all(
+			//@ts-ignore
+			this.children.map((c) => !c.wasDestroyed && c.destroy?.())
+		)
 		this.wasDestroyed = true
 	}
 

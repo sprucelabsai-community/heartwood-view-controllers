@@ -86,14 +86,12 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 	@test()
 	protected static async destroyWithNoChildren() {
 		const vc = this.Controller('noChildren', {})
-
-		//@ts-ignore
 		await vc.destroy()
 	}
 
 	@test()
 	protected static async destroysChildEvenWithoutLocalReference() {
-		const vc = this.Controller('noDestroy', {})
+		const vc = this.Vc()
 		const card = vc.cardVc
 
 		//@ts-ignore
@@ -111,10 +109,21 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async callingDestroyTwiceThrows() {
-		const vc = this.Controller('noDestroy', {})
+		const vc = this.Vc()
 		await vc.destroy()
 		const err = await assert.doesThrowAsync(() => vc.destroy())
 
 		errorAssert.assertError(err, 'VIEW_ALREADY_DESTROYED')
+	}
+
+	@test()
+	protected static async doesNotDoubleDestroyChildren() {
+		const vc = this.Vc()
+		await vc.cardVc.destroy()
+		await vc.destroy()
+	}
+
+	private static Vc() {
+		return this.Controller('noDestroy', {})
 	}
 }
