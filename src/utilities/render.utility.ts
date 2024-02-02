@@ -57,10 +57,9 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
 }
 
 const renderUtil = {
-	render<VC extends ViewController<any>>(
-		vc: VC,
-		options?: RenderOptions
-	): ReturnType<VC['render']> {
+	render<
+		VC extends Pick<ViewController<any>, 'render' | 'setTriggerRenderHandler'>,
+	>(vc: VC, options?: RenderOptions): ReturnType<VC['render']> {
 		if (!vc) {
 			throw new Error('You tried to render something falsy!')
 		}

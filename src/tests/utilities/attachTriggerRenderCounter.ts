@@ -1,6 +1,8 @@
 import { Vc } from './assertSupport'
 
-export function attachTriggerRenderCounter(vc: Vc) {
+export function attachTriggerRenderCounter(
+	vc: Pick<Vc, 'setTriggerRenderHandler'>
+) {
 	//@ts-ignore
 	if (!vc.__triggerRenderPatched) {
 		//@ts-ignore
