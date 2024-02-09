@@ -342,9 +342,9 @@ this.Controller(
 		assert.isEqual(
 			renderOptions.renderAs,
 			expected,
-			`The field named '${fieldName}' is rendering as '${
+			`The field named '${fieldName}' is rendering as '${JSON.stringify(
 				renderOptions ?? '***default**'
-			}', but I expected it to render as '${expected}'!`
+			)}', but I expected it to render as '${expected}'!`
 		)
 	},
 
