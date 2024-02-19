@@ -226,12 +226,7 @@ const vcAssert = {
 			)}, but it wasn't!`
 		)
 
-		return dlgVc as unknown as Pick<
-			DialogViewController,
-			'hide' | 'getIsVisible' | 'getShouldShowCloseButton' | 'wait' | 'render'
-		> & {
-			alertOptions: AlertOptions
-		}
+		return dlgVc as unknown as AlertViewController
 	},
 
 	async assertDoesNotRenderAlert(
@@ -1676,4 +1671,11 @@ function findControllerInModel(VcClass: any, model: any) {
 	}
 
 	return null
+}
+
+export type AlertViewController = Pick<
+	DialogViewController,
+	'hide' | 'getIsVisible' | 'getShouldShowCloseButton' | 'wait' | 'render'
+> & {
+	alertOptions: AlertOptions
 }
