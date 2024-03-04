@@ -1,4 +1,4 @@
-import { buildLog } from '@sprucelabs/spruce-skill-utils'
+import { LoggableType, buildLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { Card, ViewControllerId } from '../../types/heartwood.types'
@@ -7,7 +7,7 @@ import AbstractViewController from '../../viewControllers/Abstract.vc'
 export default class LoggingInAViewTest extends AbstractViewControllerTest {
 	@test()
 	protected static async canSetLog() {
-		let errors: string[] = []
+		let errors: LoggableType[] = []
 
 		this.views = this.Factory({
 			log: {
