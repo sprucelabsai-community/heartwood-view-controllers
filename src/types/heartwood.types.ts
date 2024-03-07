@@ -569,6 +569,7 @@ export interface FormInputViewController<View extends Record<string, any> = any>
 }
 
 export interface ViewControllerOptions {
+	plugins: ViewControllerPlugins
 	vcFactory: ViewControllerFactory
 	connectToApi: () => Promise<Client>
 	renderInDialogHandler: RenderInDialogHandler
@@ -800,3 +801,5 @@ export interface AlertOptions {
 	message: string
 	style?: 'info' | 'error' | 'success'
 }
+
+export interface ViewControllerPlugins {}

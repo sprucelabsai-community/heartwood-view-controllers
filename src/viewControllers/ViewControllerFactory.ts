@@ -18,6 +18,7 @@ import {
 	MapUtil,
 	ViewControllerConstructor,
 	ToastHandler,
+	ViewControllerPlugins,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -31,6 +32,7 @@ export default class ViewControllerFactory {
 	private maps: MapUtil
 	private toastHandler: ToastHandler
 	private log?: Log
+	private plugins: ViewControllerPlugins = {}
 
 	public constructor(options: ViewControllerFactoryConstructorOptions) {
 		const {
@@ -137,6 +139,11 @@ export default class ViewControllerFactory {
 		this.dates = dates
 	}
 
+	public addPlugin(named: string, plugin: any) {
+		//@ts-ignore
+		this.plugins[named] = plugin
+	}
+
 	public Controller<N extends ViewControllerId, O extends ControllerOptions<N>>(
 		name: N,
 		options: O
@@ -150,7 +157,7 @@ export default class ViewControllerFactory {
 				validNames: Object.keys(this.controllerMap),
 			})
 		}
-
+		debugger
 		const constructorOptions = {
 			...options,
 			vcFactory: this,
@@ -163,6 +170,7 @@ export default class ViewControllerFactory {
 			maps: this.maps,
 			log: this.log ?? buildLog(name),
 			toastHandler: this.toastHandler,
+			plugins: this.plugins,
 		}
 
 		const oldController = Class.prototype.Controller

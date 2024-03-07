@@ -19,6 +19,7 @@ import {
 	ToastOptions,
 	ToastHandler,
 	TriggerRenderHandler,
+	ViewControllerPlugins,
 } from '../types/heartwood.types'
 import { DialogViewControllerOptions } from './Dialog.vc'
 import ViewControllerFactory from './ViewControllerFactory'
@@ -42,9 +43,11 @@ export default abstract class AbstractViewController<
 	private activeAlert?: AlertOptions
 	protected triggerRenderHandler?: TriggerRenderHandler
 	private suspendRenderCount = 0
+	protected plugins: ViewControllerPlugins = {}
 	protected log: Log
 
 	public constructor(options: ViewControllerOptions) {
+		debugger
 		this.vcFactory = options.vcFactory
 		this.renderInDialogHandler = options.renderInDialogHandler
 		this.confirmHandler = options.confirmHandler
@@ -55,6 +58,7 @@ export default abstract class AbstractViewController<
 		this.maps = options.maps
 		this.toastHandler = options.toastHandler
 		this.log = options.log
+		this.plugins = options.plugins
 	}
 
 	public abstract render(): ViewModel
