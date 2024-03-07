@@ -47,7 +47,6 @@ export default abstract class AbstractViewController<
 	protected log: Log
 
 	public constructor(options: ViewControllerOptions) {
-		debugger
 		this.vcFactory = options.vcFactory
 		this.renderInDialogHandler = options.renderInDialogHandler
 		this.confirmHandler = options.confirmHandler

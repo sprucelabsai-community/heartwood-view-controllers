@@ -157,7 +157,7 @@ export default class ViewControllerFactory {
 				validNames: Object.keys(this.controllerMap),
 			})
 		}
-		debugger
+
 		const constructorOptions = {
 			...options,
 			vcFactory: this,
