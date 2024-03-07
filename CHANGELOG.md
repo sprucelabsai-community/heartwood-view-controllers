@@ -1,3 +1,10 @@
+# [108.41.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.40.136...v108.41.0) (2024-03-07)
+
+
+### Features
+
+* view controllers now have plugins! ([57f951d](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/57f951d))
+
 ## [108.40.136](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.40.135...v108.40.136) (2024-03-07)
 
 ## [108.40.135](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.40.134...v108.40.135) (2024-03-07)
