@@ -1,3 +1,10 @@
+# [109.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.41.7...v109.0.0) (2024-03-10)
+
+
+### Breaking Changes
+
+* view plugin support ([8e270a8](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8e270a8))
+
 ## [108.41.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.41.6...v108.41.7) (2024-03-10)
 
 ## [108.41.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v108.41.5...v108.41.6) (2024-03-10)
