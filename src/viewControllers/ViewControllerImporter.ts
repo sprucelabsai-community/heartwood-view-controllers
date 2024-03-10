@@ -1,5 +1,8 @@
 import SpruceError from '../errors/SpruceError'
-import { ImportedViewController } from '../types/heartwood.types'
+import {
+	ImportedViewController,
+	ViewControllerPluginConstructor,
+} from '../types/heartwood.types'
 
 export default class ViewControllerImporter {
 	public static Class?: typeof ViewControllerImporter
@@ -10,9 +13,14 @@ export default class ViewControllerImporter {
 		return new (this.Class ?? this)()
 	}
 
-	public import(script: string): ImportedViewController[] {
+	public import(script: string): {
+		controllers: ImportedViewController[]
+		plugins: Record<string, ViewControllerPluginConstructor>
+	} {
 		try {
 			let exports = {}
+			let plugins = {}
+
 			const globals = Object.keys(global)
 			const resets = globals
 				.filter(
@@ -37,8 +45,9 @@ var utils = {
 }
 var global = {}
 var globalThis = {}
-function heartwood(vcs) {
+function heartwood(vcs, pluginClasses) {
 	exports = vcs
+	plugins = pluginClasses || {}
 }
 
 
@@ -48,10 +57,15 @@ ${script}`
 
 			this.validateImported(exports)
 
-			return Object.values(exports).map((C: any) => {
+			const controllers = Object.values(exports).map((C: any) => {
 				C.__imported = true
 				return C
 			}) as any
+
+			return {
+				controllers,
+				plugins,
+			}
 		} catch (err: any) {
 			throw new SpruceError({
 				code: 'INVALID_VIEW_CONTROLLER_SOURCE',
@@ -60,7 +74,7 @@ ${script}`
 		}
 	}
 
-	private shouldOverideGlobalNamed(name: string): unknown {
+	private shouldOverideGlobalNamed(name: string): boolean {
 		return name.search(/[^0-9a-zA-Z_]/) === -1 && name.search(/^\d/) === -1
 	}
 

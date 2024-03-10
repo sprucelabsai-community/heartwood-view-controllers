@@ -19,6 +19,7 @@ import {
 	ViewControllerConstructor,
 	ToastHandler,
 	ViewControllerPlugins,
+	ViewControllerPluginConstructor,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -119,10 +120,18 @@ export default class ViewControllerFactory {
 		}
 	}
 
-	public importControllers<Vc extends ImportedViewController>(Vcs: Vc[]) {
+	public importControllers<Vc extends ImportedViewController>(
+		Vcs: Vc[],
+		plugins?: Record<string, ViewControllerPluginConstructor>
+	) {
 		for (const Vc of Vcs) {
 			//@ts-ignore
 			this.controllerMap[Vc.id] = Vc
+		}
+
+		for (const plugin in plugins ?? []) {
+			//@ts-ignore
+			this.plugins[plugin] = new plugins[plugin]()
 		}
 	}
 

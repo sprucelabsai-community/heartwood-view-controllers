@@ -14,10 +14,10 @@ import {
 	importExportSource_nodeModulesImport,
 	importExportSource_syntaxError,
 	importExportSource_withDefines,
-} from '../../tests/constants'
+} from '../../../tests/constants'
 import ViewControllerExporter, {
 	ExportOptions,
-} from '../../viewControllers/ViewControllerExporter'
+} from '../../../viewControllers/ViewControllerExporter'
 
 export default class ViewControllerExporterTest extends AbstractSpruceTest {
 	private static readonly source = importExportSource

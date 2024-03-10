@@ -1,10 +1,10 @@
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import * as constants from '../../tests/constants'
-import ViewControllerExporter from '../../viewControllers/ViewControllerExporter'
-import ViewControllerImporter from '../../viewControllers/ViewControllerImporter'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import * as constants from '../../../tests/constants'
+import ViewControllerExporter from '../../../viewControllers/ViewControllerExporter'
+import ViewControllerImporter from '../../../viewControllers/ViewControllerImporter'
 
 export default class ViewControllerImporterTest extends AbstractViewControllerTest {
 	protected static controllerMap: Record<string, any> = {}
@@ -147,8 +147,8 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		assert.isInstanceOf(instance, SpyViewControllerImporter)
 	}
 
-	private static importAndGetFactory() {
-		const controllers = this.importControllers()
+	private static importAndGetFactory(suffix?: ImportExportSuffix) {
+		const controllers = this.importControllers(suffix)
 		const factory = this.Factory()
 
 		factory.importControllers(controllers)
@@ -165,16 +165,18 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 		return model
 	}
 
-	private static importControllers(suffix: '' | '_noIds' = '') {
+	private static importControllers(suffix: ImportExportSuffix = '') {
 		const contents = diskUtil.readFile(
 			//@ts-ignore
 			constants[`importExportDestination${suffix}`]
 		)
 
-		const controllers = this.importer.import(contents)
+		const { controllers } = this.importer.import(contents)
 
 		return controllers
 	}
 }
 
 class SpyViewControllerImporter extends ViewControllerImporter {}
+
+type ImportExportSuffix = '' | '_noIds' | '_plugins1'

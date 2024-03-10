@@ -92,3 +92,31 @@ export const importExportSource_withDefines = diskUtil.resolvePath(
 	'views',
 	'views.ts'
 )
+
+export const importExportSource_plugins1 = diskUtil.resolvePath(
+	__dirname,
+	'..',
+	'..',
+	'src',
+	'__tests__',
+	'testDirsAndFiles',
+	'skill_with_plugins_1',
+	'src',
+	'.spruce',
+	'views',
+	'views.ts'
+)
+
+export const importExportSource_plugins2 = diskUtil.resolvePath(
+	__dirname,
+	'..',
+	'..',
+	'src',
+	'__tests__',
+	'testDirsAndFiles',
+	'skill_with_plugins_2',
+	'src',
+	'.spruce',
+	'views',
+	'views.ts'
+)
