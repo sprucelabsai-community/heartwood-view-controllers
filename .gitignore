@@ -12,6 +12,7 @@ pids
 
 # Dependency directories
 node_modules/
+!/src/__tests__/testDirsAndFiles/skill_import_from_node_module/node_modules
 
 # Optional npm cache directory
 .npm
