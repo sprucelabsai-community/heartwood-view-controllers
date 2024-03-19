@@ -3,7 +3,7 @@ import {
 	Locale as ILocale,
 	TimezoneName as ITimezoneName,
 } from '@sprucelabs/calendar-utils'
-import { MercuryClient } from '@sprucelabs/mercury-client'
+import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
 import {
 	PermissionContractId,
 	PermissionId,
@@ -805,7 +805,9 @@ export interface AlertOptions {
 
 export interface ViewControllerPlugins {}
 
-export type ViewControllerPluginConstructor = new () => ViewControllerPlugin
+export type ViewControllerPluginConstructor = new (
+	options: ViewControllerPluginOptions
+) => ViewControllerPlugin
 
 export interface ViewControllerPlugin {}
 
@@ -813,3 +815,14 @@ export type ViewControllerPluginsByName = Record<
 	string,
 	ViewControllerPluginConstructor
 >
+
+export interface ViewControllerPluginOptions {
+	connectToApi: MercuryClientFactory
+	device: Device
+	dates: DateUtil
+	maps: MapUtil
+	log: Log
+	plugins: ViewControllerPlugins
+}
+
+export type ConnectToApi = () => Promise<MercuryClient>

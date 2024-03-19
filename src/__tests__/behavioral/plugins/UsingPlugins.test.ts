@@ -1,6 +1,13 @@
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { Card, ViewControllerPlugins } from '../../../types/heartwood.types'
+import {
+	Card,
+	ViewControllerOptions,
+	ViewControllerPlugin,
+	ViewControllerPluginOptions,
+	ViewControllerPlugins,
+} from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 
@@ -36,6 +43,29 @@ export default class UsingPluginsTest extends AbstractViewControllerTest {
 		})
 	}
 
+	@test()
+	protected static pluginGetsExpectedConstructorOptions() {
+		//@ts-ignore
+		this.views.log = buildLog('test')
+
+		this.views.importControllers([], {
+			spy: SpyPlugin,
+		})
+
+		this.Vc()
+
+		const expectedOptions: ViewControllerPluginOptions = {
+			connectToApi: PluginTestViewController.constructorOptions!.connectToApi,
+			device: PluginTestViewController.constructorOptions!.device,
+			dates: PluginTestViewController.constructorOptions!.dates,
+			log: PluginTestViewController.constructorOptions!.log,
+			maps: PluginTestViewController.constructorOptions!.maps,
+			plugins: PluginTestViewController.constructorOptions!.plugins,
+		}
+
+		assert.isEqualDeep(SpyPlugin.constructorOptions, expectedOptions)
+	}
+
 	private static addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
 		this.addPlugin(name, plugin)
 		//@ts-ignore
@@ -58,11 +88,26 @@ export default class UsingPluginsTest extends AbstractViewControllerTest {
 }
 
 class PluginTestViewController extends AbstractViewController<Card> {
+	public static constructorOptions?: ViewControllerOptions
+
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+		PluginTestViewController.constructorOptions = options
+	}
+
 	public getPlugins() {
 		return this.plugins
 	}
 
 	public render(): Card {
 		return {}
+	}
+}
+
+class SpyPlugin implements ViewControllerPlugin {
+	public static constructorOptions?: ViewControllerPluginOptions
+
+	public constructor(options: ViewControllerPluginOptions) {
+		SpyPlugin.constructorOptions = options
 	}
 }

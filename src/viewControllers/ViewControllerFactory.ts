@@ -1,5 +1,4 @@
 import { DateUtil, dateUtil } from '@sprucelabs/calendar-utils'
-import { MercuryClient } from '@sprucelabs/mercury-client'
 import { assertOptions } from '@sprucelabs/schema'
 import { Log, buildLog } from '@sprucelabs/spruce-skill-utils'
 import { CORE_CONTROLLER_MAP } from '../controllerMap'
@@ -20,6 +19,7 @@ import {
 	ToastHandler,
 	ViewControllerPlugins,
 	ViewControllerPluginsByName,
+	ConnectToApi,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -131,8 +131,10 @@ export default class ViewControllerFactory {
 		}
 
 		for (const plugin in plugins ?? []) {
-			//@ts-ignore
-			this.plugins[plugin] = new plugins[plugin]()
+			this.addPlugin(
+				plugin,
+				new plugins![plugin](this.sharedConstructorOptions())
+			)
 		}
 	}
 
@@ -171,16 +173,11 @@ export default class ViewControllerFactory {
 		const constructorOptions = {
 			...options,
 			vcFactory: this,
-			dates: this.dates,
+			...this.sharedConstructorOptions(name),
 			renderInDialogHandler: this.renderInDialogHandler,
 			confirmHandler: this.confirmHandler,
 			voteHandler: options?.voteHandler ?? this.voteHandler,
-			connectToApi: this.connectToApi,
-			device: this.device,
-			maps: this.maps,
-			log: this.log ?? buildLog(name),
 			toastHandler: this.toastHandler,
-			plugins: this.plugins,
 		}
 
 		const oldController = Class.prototype.Controller
@@ -205,9 +202,17 @@ export default class ViewControllerFactory {
 		//@ts-ignore
 		return instance
 	}
+	private sharedConstructorOptions(name?: string) {
+		return {
+			connectToApi: this.connectToApi,
+			dates: this.dates,
+			device: this.device,
+			log: this.log ?? buildLog(name),
+			maps: this.maps,
+			plugins: this.plugins,
+		}
+	}
 }
-
-type ConnectToApi = () => Promise<MercuryClient>
 
 export interface ViewControllerFactoryOptions {
 	controllerMap?: Record<string, any>
