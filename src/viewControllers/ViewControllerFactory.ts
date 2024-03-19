@@ -23,6 +23,7 @@ import {
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
+	public static Class?: typeof ViewControllerFactory
 	private controllerMap: Record<string, any>
 	private renderInDialogHandler: RenderInDialogHandler
 	private confirmHandler: ConfirmHandler
@@ -87,7 +88,7 @@ export default class ViewControllerFactory {
 			log,
 		} = assertOptions(options, ['connectToApi', 'device'])
 
-		return new this({
+		return new (this.Class ?? this)({
 			controllerMap,
 			connectToApi,
 			device,
