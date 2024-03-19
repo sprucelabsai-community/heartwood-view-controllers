@@ -1,3 +1,10 @@
+# [109.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.3.0...v109.4.0) (2024-03-19)
+
+
+### Features
+
+* vc plugin assert ([48e6d09](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/48e6d09))
+
 # [109.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.2.3...v109.3.0) (2024-03-19)
 
 
