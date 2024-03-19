@@ -19,6 +19,7 @@ import {
 	ViewControllerConstructor,
 	ToastHandler,
 	ViewControllerPlugins,
+	ViewControllerPluginsByName,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
