@@ -1,3 +1,10 @@
+# [109.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.4.0...v109.5.0) (2024-03-19)
+
+
+### Features
+
+* ViewControllerFactory.BuildPlugin exposed for the world ([c59c212](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c59c212))
+
 # [109.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.3.0...v109.4.0) (2024-03-19)
 
 
