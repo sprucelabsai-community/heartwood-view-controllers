@@ -22,7 +22,7 @@ export default class AbstractPluginTest extends AbstractViewControllerTest {
 		this.views.setController('card', PluginTestViewController)
 	}
 
-	protected static mixinSpy(name = 'spy') {
+	protected static mixinPlugin(name = 'spy') {
 		this.views.importControllers([], {
 			[name]: SpyPlugin,
 		})

@@ -20,6 +20,8 @@ import {
 	ViewControllerPlugins,
 	ViewControllerPluginsByName,
 	ConnectToApi,
+	ViewControllerPlugin,
+	ViewControllerPluginOptions,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -131,11 +133,15 @@ export default class ViewControllerFactory {
 		}
 
 		for (const plugin in plugins ?? []) {
-			this.addPlugin(
-				plugin,
-				new plugins![plugin](this.sharedConstructorOptions())
-			)
+			const Plugin = plugins![plugin]
+			this.addPlugin(plugin, this.BuildPlugin(Plugin))
 		}
+	}
+
+	public BuildPlugin<P extends ViewControllerPlugin>(
+		Plugin: new (options: ViewControllerPluginOptions) => P
+	): P {
+		return new Plugin(this.sharedConstructorOptions())
 	}
 
 	public hasController(name: string): boolean {

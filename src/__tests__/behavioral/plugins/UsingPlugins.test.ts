@@ -31,7 +31,7 @@ export default class UsingPluginsTest extends AbstractPluginTest {
 		//@ts-ignore
 		this.views.log = buildLog('test')
 
-		this.mixinSpy()
+		this.mixinPlugin()
 
 		this.Vc()
 

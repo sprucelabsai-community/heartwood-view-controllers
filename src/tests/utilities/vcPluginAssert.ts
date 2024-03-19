@@ -1,15 +1,15 @@
 import { assert } from '@sprucelabs/test-utils'
 import {
 	ViewController,
-	ViewControllerPluginConstructor,
+	ViewControllerPlugin,
 } from '../../types/heartwood.types'
 
 const vcPluginAssert = {
-	pluginIsInstalled: (
+	pluginIsInstalled<Plugin extends ViewControllerPlugin>(
 		vc: ViewController<any>,
 		named: string,
-		PluginClass?: ViewControllerPluginConstructor
-	) => {
+		PluginClass?: new (options: any) => Plugin
+	): Plugin {
 		//@ts-ignore
 		const plugin = vc.plugins[named]
 		assert.isTruthy(
@@ -20,6 +20,8 @@ const vcPluginAssert = {
 		if (PluginClass) {
 			assert.isInstanceOf(plugin, PluginClass)
 		}
+
+		return plugin
 	},
 }
 

@@ -14,22 +14,33 @@ export default class AssertViewControllerPluginsTest extends AbstractPluginTest 
 
 	@test()
 	protected static async passesWhenPluginSet() {
-		this.mixinSpy()
+		this.mixinPlugin()
 		this.assertPluginInstalled('spy')
 	}
 
 	@test()
 	protected static async canFindByProperName() {
-		this.mixinSpy('whatever')
+		this.mixinPlugin('whatever')
 		this.assertPluginInstalledThrows()
 		this.assertPluginInstalled('whatever')
 	}
 
 	@test()
 	protected static async canCheckInstanceOf() {
-		this.mixinSpy()
+		this.mixinPlugin()
 		this.assertPluginInstalledThrows('spy', StubPlugin)
 		this.assertPluginInstalled('spy', SpyPlugin)
+	}
+
+	@test()
+	protected static async returnsThePlugin() {
+		this.mixinPlugin()
+
+		const { plugin, vc } = this.assertPluginInstalled()
+
+		assert.isTruthy(plugin)
+		//@ts-ignore
+		assert.isEqual(plugin, vc.plugins.spy)
 	}
 
 	private static assertPluginInstalledThrows(
@@ -40,10 +51,12 @@ export default class AssertViewControllerPluginsTest extends AbstractPluginTest 
 	}
 
 	private static assertPluginInstalled(
-		named: string,
+		named: string = 'spy',
 		Plugin?: ViewControllerPluginConstructor
-	): any {
-		return vcPluginAssert.pluginIsInstalled(this.Vc(), named, Plugin)
+	) {
+		const vc = this.Vc()
+		const plugin = vcPluginAssert.pluginIsInstalled(vc, named, Plugin)
+		return { plugin, vc }
 	}
 }
 
