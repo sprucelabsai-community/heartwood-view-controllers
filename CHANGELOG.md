@@ -1,3 +1,10 @@
+# [109.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.1.1...v109.2.0) (2024-03-19)
+
+
+### Features
+
+* can override view controller factory class ([98b9abb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/98b9abb))
+
 ## [109.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.1.0...v109.1.1) (2024-03-19)
 
 # [109.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.0.28...v109.1.0) (2024-03-19)
