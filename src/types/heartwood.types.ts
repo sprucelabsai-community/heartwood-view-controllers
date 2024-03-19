@@ -808,3 +808,8 @@ export interface ViewControllerPlugins {}
 export type ViewControllerPluginConstructor = new () => ViewControllerPlugin
 
 export interface ViewControllerPlugin {}
+
+export type ViewControllerPluginsByName = Record<
+	string,
+	ViewControllerPluginConstructor
+>

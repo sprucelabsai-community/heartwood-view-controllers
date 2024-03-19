@@ -1,7 +1,7 @@
 import SpruceError from '../errors/SpruceError'
 import {
 	ImportedViewController,
-	ViewControllerPluginConstructor,
+	ViewControllerPluginsByName,
 } from '../types/heartwood.types'
 
 export default class ViewControllerImporter {
@@ -15,7 +15,7 @@ export default class ViewControllerImporter {
 
 	public import(script: string): {
 		controllers: ImportedViewController[]
-		plugins: Record<string, ViewControllerPluginConstructor>
+		plugins: ViewControllerPluginsByName
 	} {
 		try {
 			let exports = {}
