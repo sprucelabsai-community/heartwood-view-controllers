@@ -1,10 +1,12 @@
 import { CachedValue, Device } from '../types/heartwood.types'
 
 export default class SpyDevice implements Device {
+	public lastCommand?: string
 	public vibrateCount = 0
 	public lastPhoneCalled?: string
 	private cachedValues: Record<string, CachedValue> = {}
 	public openedUrl?: string
+	public lastCommandPayload?: Record<string, any>
 
 	public setCachedValue(key: string, value: CachedValue): void {
 		this.cachedValues[key] = value
@@ -24,5 +26,8 @@ export default class SpyDevice implements Device {
 		this.lastPhoneCalled = phoneNumber
 	}
 
-	public sendCommand(_command: string, _payload: Record<string, any>): void {}
+	public sendCommand(command: string, payload: Record<string, any>): void {
+		this.lastCommand = command
+		this.lastCommandPayload = payload
+	}
 }

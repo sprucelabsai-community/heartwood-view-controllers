@@ -28,6 +28,17 @@ export default class DeviceTest extends AbstractDeviceTest {
 		assert.isEqual(this.vc.getCachedValue(key), value)
 	}
 
+	@test('can get last url 1', {})
+	@test('can get last url 2', { url: 'https://sprucebot.com' })
+	protected static async canGetLastCommandSent(payload: Record<string, any>) {
+		const command = generateId()
+
+		this.device.sendCommand(command, payload)
+
+		assert.isEqual(this.device.lastCommand, command)
+		assert.isEqualDeep(this.device.lastCommandPayload, payload)
+	}
+
 	private static get device() {
 		return this.vc.getDevice() as SpyDevice
 	}
