@@ -1,3 +1,16 @@
+## [109.6.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.2...v109.6.3) (2024-03-21)
+
+## [109.6.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.1...v109.6.2) (2024-03-21)
+
+## [109.6.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.0...v109.6.1) (2024-03-21)
+
+# [109.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.5.0...v109.6.0) (2024-03-20)
+
+
+### Features
+
+* spy device tracks last command ([554e3e1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/554e3e1))
+
 # [109.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.4.0...v109.5.0) (2024-03-19)
 
 
