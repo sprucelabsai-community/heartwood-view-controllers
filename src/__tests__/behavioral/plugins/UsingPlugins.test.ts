@@ -1,10 +1,17 @@
 import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test-utils'
-import { ViewControllerPluginOptions } from '../../../types/heartwood.types'
+import {
+	ViewControllerPlugin,
+	ViewControllerPluginOptions,
+	ViewControllerPluginsByName,
+} from '../../../types/heartwood.types'
+import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 import AbstractPluginTest, {
 	PluginTestViewController,
 	SpyPlugin,
 } from './AbstractPluginTest'
+
+export class SpyPlugin2 implements ViewControllerPlugin {}
 
 export default class UsingPluginsTest extends AbstractPluginTest {
 	@test()
@@ -47,6 +54,55 @@ export default class UsingPluginsTest extends AbstractPluginTest {
 		assert.isEqualDeep(SpyPlugin.constructorOptions, expectedOptions)
 	}
 
+	@test(
+		'can pass plugins to factory constructor 1',
+		{
+			hey: SpyPlugin,
+		},
+		'hey',
+		SpyPlugin
+	)
+	@test(
+		'can pass plugins to factory constructor 2',
+		{
+			hey: SpyPlugin2,
+		},
+		'hey',
+		SpyPlugin2
+	)
+	@test(
+		'can pass plugins to factory constructor 3',
+		{
+			there: SpyPlugin,
+			hey: SpyPlugin2,
+		},
+		'hey',
+		SpyPlugin2
+	)
+	@test(
+		'can pass plugins to factory constructor 4',
+		{
+			there: SpyPlugin,
+			hey: SpyPlugin2,
+		},
+		'there',
+		SpyPlugin
+	)
+	protected static async canPassPluginsToFactoryConstructor(
+		pluginsByName: ViewControllerPluginsByName,
+		key: string,
+		Expected: any
+	) {
+		ViewControllerFactory.Class = SpyViewControllerFactory
+
+		const views = this.Factory({
+			pluginsByName,
+		}) as SpyViewControllerFactory
+
+		//@ts-ignore
+		assert.isInstanceOf(views.getPlugins()[key], Expected)
+	}
+
 	private static addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
 		this.addPlugin(name, plugin)
 		//@ts-ignore
@@ -58,5 +114,11 @@ export default class UsingPluginsTest extends AbstractPluginTest {
 
 	private static addPlugin(name: string, plugin: any) {
 		this.views.addPlugin(name, plugin)
+	}
+}
+
+class SpyViewControllerFactory extends ViewControllerFactory {
+	public getPlugins() {
+		return this.plugins
 	}
 }

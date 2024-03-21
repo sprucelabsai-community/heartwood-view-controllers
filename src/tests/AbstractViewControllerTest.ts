@@ -45,6 +45,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
 	protected static async beforeEach() {
 		await super.beforeEach()
+
+		delete ViewControllerFactory.Class
 		Authenticator.reset()
 		Authenticator.setStorage(new StubStorage())
 

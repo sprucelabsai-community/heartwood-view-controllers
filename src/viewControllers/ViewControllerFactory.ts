@@ -36,7 +36,7 @@ export default class ViewControllerFactory {
 	private maps: MapUtil
 	private toastHandler: ToastHandler
 	private log?: Log
-	private plugins: ViewControllerPlugins = {}
+	protected plugins: ViewControllerPlugins = {}
 
 	public constructor(options: ViewControllerFactoryConstructorOptions) {
 		const {
@@ -50,6 +50,7 @@ export default class ViewControllerFactory {
 			maps,
 			toastHandler,
 			log,
+			pluginsByName,
 		} = options
 
 		this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
@@ -62,6 +63,7 @@ export default class ViewControllerFactory {
 		this.maps = maps ?? mapUtil
 		this.dates = dates ?? dateUtil
 		this.log = log
+		this.importPlugins(pluginsByName)
 	}
 
 	public setRenderInDialogHandler(handler: RenderInDialogHandler) {
@@ -88,6 +90,7 @@ export default class ViewControllerFactory {
 			maps,
 			toastHandler,
 			log,
+			pluginsByName,
 		} = assertOptions(options, ['connectToApi', 'device'])
 
 		return new (this.Class ?? this)({
@@ -97,6 +100,7 @@ export default class ViewControllerFactory {
 			dates,
 			maps,
 			log,
+			pluginsByName,
 			toastHandler: toastHandler ?? (() => {}),
 			confirmHandler: confirmHandler ? confirmHandler : async () => false,
 			voteHandler: voteHandler ? voteHandler : async () => {},
@@ -132,8 +136,14 @@ export default class ViewControllerFactory {
 			this.controllerMap[Vc.id] = Vc
 		}
 
-		for (const plugin in plugins ?? []) {
-			const Plugin = plugins![plugin]
+		this.importPlugins(plugins)
+	}
+
+	private importPlugins(
+		pluginsByName: ViewControllerPluginsByName | undefined
+	) {
+		for (const plugin in pluginsByName ?? []) {
+			const Plugin = pluginsByName![plugin]
 			this.addPlugin(plugin, this.BuildPlugin(Plugin))
 		}
 	}
@@ -231,6 +241,7 @@ export interface ViewControllerFactoryOptions {
 	dates?: DateUtil
 	maps?: MapUtil
 	log?: Log
+	pluginsByName?: ViewControllerPluginsByName
 }
 
 export interface ViewControllerFactoryConstructorOptions {
@@ -244,4 +255,5 @@ export interface ViewControllerFactoryConstructorOptions {
 	dates?: DateUtil
 	maps?: MapUtil
 	log?: Log
+	pluginsByName?: ViewControllerPluginsByName
 }
