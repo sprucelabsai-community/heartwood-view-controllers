@@ -1,3 +1,10 @@
+# [109.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.6...v109.7.0) (2024-03-21)
+
+
+### Features
+
+* toolbelt renderAs and iconLabel ([ad0ce97](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ad0ce97))
+
 ## [109.6.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.5...v109.6.6) (2024-03-21)
 
 ## [109.6.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.6.4...v109.6.5) (2024-03-21)
