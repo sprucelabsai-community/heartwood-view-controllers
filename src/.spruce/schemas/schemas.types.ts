@@ -725,6 +725,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldRenderAllToolsAtOnce'?: boolean| undefined | null
 				
 				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler)| undefined | null
+				
+				'iconLabel'?: string| undefined | null
+				
+				'renderAs'?: ("default" | "icon")| undefined | null
 				/** Tools. */
 				'tools': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
 		}
@@ -757,6 +761,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onCloseToolBelt': {
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.ToolBeltCloseHandler`,}
+			            },
+			            /** . */
+			            'iconLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'renderAs': {
+			                type: 'select',
+			                options: {choices: [{"value":"default","label":"Default"},{"value":"icon","label":"Icon"}],}
 			            },
 			            /** Tools. */
 			            'tools': {

@@ -29,6 +29,24 @@ export default buildSchema({
 				valueType: 'HeartwoodTypes.ToolBeltCloseHandler',
 			},
 		},
+		iconLabel: {
+			type: 'text',
+		},
+		renderAs: {
+			type: 'select',
+			options: {
+				choices: [
+					{
+						value: 'default',
+						label: 'Default',
+					},
+					{
+						value: 'icon',
+						label: 'Icon',
+					},
+				],
+			},
+		},
 		tools: {
 			type: 'schema',
 			label: 'Tools',

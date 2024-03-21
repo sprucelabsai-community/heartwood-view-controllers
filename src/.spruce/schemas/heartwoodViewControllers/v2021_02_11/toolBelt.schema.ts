@@ -32,6 +32,16 @@ const toolBeltSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBel
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ToolBeltCloseHandler`,}
 	            },
+	            /** . */
+	            'iconLabel': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'renderAs': {
+	                type: 'select',
+	                options: {choices: [{"value":"default","label":"Default"},{"value":"icon","label":"Icon"}],}
+	            },
 	            /** Tools. */
 	            'tools': {
 	                label: 'Tools',
