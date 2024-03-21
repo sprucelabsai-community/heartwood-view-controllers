@@ -14,7 +14,7 @@ const vcPluginAssert = {
 		const plugin = vc.plugins[named]
 		assert.isTruthy(
 			plugin,
-			`Plugin '${named}' is not installed. Try running 'spruce create.plugin' to get started.`
+			`Plugin '${named}' is not installed. Try running 'spruce create.view.plugin' to get started.`
 		)
 
 		if (PluginClass) {
