@@ -167,7 +167,7 @@ export default class ViewControllerFactory {
 		this.dates = dates
 	}
 
-	public addPlugin(named: string, plugin: any) {
+	public addPlugin(named: string, plugin: ViewControllerPlugin) {
 		//@ts-ignore
 		this.plugins[named] = plugin
 	}
