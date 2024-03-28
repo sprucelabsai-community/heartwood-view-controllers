@@ -126,14 +126,14 @@ const toolBeltAssert = {
 		if (svcOrToolBelt instanceof ToolBeltViewController) {
 			toolBelt = svcOrToolBelt.render()
 		} else {
-			const svc = svcOrToolBelt
-			assert.isFunction(
-				svc.renderToolBelt,
+			toolBelt = svcOrToolBelt?.renderToolBelt?.()
+
+			assert.isTruthy(
+				toolBelt,
 				`Your skill view '${getVcName(
-					svc
+					svcOrToolBelt
 				)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
 			)
-			toolBelt = svc.renderToolBelt()
 		}
 
 		if (assertHasAtLeast1Tool) {

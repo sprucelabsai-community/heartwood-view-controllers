@@ -156,6 +156,15 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 	}
 
 	@test()
+	protected static async renderingNullToolBeltThrows() {
+		const vc = this.Controller('good', {})
+		assert.doesThrow(
+			() => toolBeltAssert.rendersToolBelt(vc),
+			'public renderToolBelt'
+		)
+	}
+
+	@test()
 	protected static async passeBackToolWhenCheckingForTool() {
 		const randomId = `${new Date().getTime() * Math.random()}`
 
