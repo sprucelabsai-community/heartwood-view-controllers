@@ -6,7 +6,8 @@
   ],
   "writer": {
     "skipped": [
-      ".nvmrc"
+      ".nvmrc",
+      ".gitignore"
     ],
     "skips": [
       "src/index.ts"
