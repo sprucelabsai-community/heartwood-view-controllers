@@ -1,247 +1,251 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
-	Card,
-	SkillViewController,
-	StickyToolPosition,
-	ToolBelt,
-	ViewController,
+    Card,
+    SkillViewController,
+    StickyToolPosition,
+    ToolBelt,
+    ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ToolBeltViewController, {
-	OpenToolBeltOptions,
+    OpenToolBeltOptions,
 } from '../../viewControllers/ToolBelt.vc'
 import { assertToolInstanceOf, getVcName, wait } from './assertSupport'
 
 const toolBeltAssert = {
-	async actionFocusesTool(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		toolId: string,
-		action: () => Promise<any> | any
-	) {
-		const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
+    async actionFocusesTool(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        toolId: string,
+        action: () => Promise<any> | any
+    ) {
+        const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
 
-		let passedToolId: any
+        let passedToolId: any
 
-		toolBeltVc.focusTool = (id: string) => {
-			passedToolId = id
-		}
+        toolBeltVc.focusTool = (id: string) => {
+            passedToolId = id
+        }
 
-		await wait(action())
+        await wait(action())
 
-		this.toolBeltRendersTool(svcOrToolBelt, toolId)
+        this.toolBeltRendersTool(svcOrToolBelt, toolId)
 
-		assert.isTruthy(
-			passedToolId,
-			`I expected you to focus the tool '${toolId}', but you didn't! Try 'this.toolBeltVc.focusTool('${toolId}')'`
-		)
+        assert.isTruthy(
+            passedToolId,
+            `I expected you to focus the tool '${toolId}', but you didn't! Try 'this.toolBeltVc.focusTool('${toolId}')'`
+        )
 
-		assert.isEqual(
-			passedToolId,
-			toolId,
-			`You did not focus the tool I expected. I was waiting for '${toolId}' but got '${passedToolId}'.`
-		)
-	},
+        assert.isEqual(
+            passedToolId,
+            toolId,
+            `You did not focus the tool I expected. I was waiting for '${toolId}' but got '${passedToolId}'.`
+        )
+    },
 
-	async actionOpensToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		action: () => Promise<any> | any,
-		options?: OpenToolBeltOptions
-	) {
-		const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
-		let wasForced = false
+    async actionOpensToolBelt(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        action: () => Promise<any> | any,
+        options?: OpenToolBeltOptions
+    ) {
+        const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
+        let wasForced = false
 
-		toolBeltVc.open = (actualOptions) => {
-			if (options) {
-				assert.isEqualDeep(
-					actualOptions,
-					options,
-					`The options passed to 'toolBeltSvc.show(...) did not match what I expected.' `
-				)
-			}
-			wasForced = true
-		}
+        toolBeltVc.open = (actualOptions) => {
+            if (options) {
+                assert.isEqualDeep(
+                    actualOptions,
+                    options,
+                    `The options passed to 'toolBeltSvc.show(...) did not match what I expected.' `
+                )
+            }
+            wasForced = true
+        }
 
-		await action()
+        await action()
 
-		assert.isTrue(
-			wasForced,
-			`I expected you to call 'toolBeltVc.open()', but you didn't!`
-		)
-	},
+        assert.isTrue(
+            wasForced,
+            `I expected you to call 'toolBeltVc.open()', but you didn't!`
+        )
+    },
 
-	async actionDoesNotOpenToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		action: () => Promise<any> | any
-	) {
-		try {
-			await this.actionOpensToolBelt(svcOrToolBelt, action)
-		} catch {
-			return
-		}
+    async actionDoesNotOpenToolBelt(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        action: () => Promise<any> | any
+    ) {
+        try {
+            await this.actionOpensToolBelt(svcOrToolBelt, action)
+        } catch {
+            return
+        }
 
-		assert.fail(`I didn't expect you to call 'toolBeltVc.open()', but you did!`)
-	},
+        assert.fail(
+            `I didn't expect you to call 'toolBeltVc.open()', but you did!`
+        )
+    },
 
-	async actionClosesToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		action: () => Promise<any> | any
-	) {
-		const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
-		let wasForced = false
+    async actionClosesToolBelt(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        action: () => Promise<any> | any
+    ) {
+        const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
+        let wasForced = false
 
-		toolBeltVc.close = () => {
-			wasForced = true
-		}
+        toolBeltVc.close = () => {
+            wasForced = true
+        }
 
-		await action()
+        await action()
 
-		assert.isTrue(
-			wasForced,
-			`I expected you to call 'toolBeltVc.close()', but you didn't!`
-		)
-	},
+        assert.isTrue(
+            wasForced,
+            `I expected you to call 'toolBeltVc.close()', but you didn't!`
+        )
+    },
 
-	async actionDoesNotCloseToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		action: () => Promise<any> | any
-	) {
-		try {
-			await this.actionClosesToolBelt(svcOrToolBelt, action)
-		} catch {
-			return
-		}
+    async actionDoesNotCloseToolBelt(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        action: () => Promise<any> | any
+    ) {
+        try {
+            await this.actionClosesToolBelt(svcOrToolBelt, action)
+        } catch {
+            return
+        }
 
-		assert.fail(
-			`I didn't expect you to call 'toolBeltVc.close()', but you did!`
-		)
-	},
+        assert.fail(
+            `I didn't expect you to call 'toolBeltVc.close()', but you did!`
+        )
+    },
 
-	rendersToolBelt(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		assertHasAtLeast1Tool = true
-	) {
-		let toolBelt: ToolBelt | undefined | null
+    rendersToolBelt(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        assertHasAtLeast1Tool = true
+    ) {
+        let toolBelt: ToolBelt | undefined | null
 
-		if (svcOrToolBelt instanceof ToolBeltViewController) {
-			toolBelt = svcOrToolBelt.render()
-		} else {
-			toolBelt = svcOrToolBelt?.renderToolBelt?.()
+        if (svcOrToolBelt instanceof ToolBeltViewController) {
+            toolBelt = svcOrToolBelt.render()
+        } else {
+            toolBelt = svcOrToolBelt?.renderToolBelt?.()
 
-			assert.isTruthy(
-				toolBelt,
-				`Your skill view '${getVcName(
-					svcOrToolBelt
-				)}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
-			)
-		}
+            assert.isTruthy(
+                toolBelt,
+                `Your skill view '${getVcName(
+                    svcOrToolBelt
+                )}' needs\n\n'public renderToolBelt() { return this.toolBeltVc.render() }'`
+            )
+        }
 
-		if (assertHasAtLeast1Tool) {
-			assert.isTrue(
-				(toolBelt?.tools?.length ?? 0) > 0,
-				'Your tool belt does not render any tools! You can try toolBeltVc.addTool(...)?'
-			)
-		}
+        if (assertHasAtLeast1Tool) {
+            assert.isTrue(
+                (toolBelt?.tools?.length ?? 0) > 0,
+                'Your tool belt does not render any tools! You can try toolBeltVc.addTool(...)?'
+            )
+        }
 
-		return toolBelt?.controller as ToolBeltViewController
-	},
+        return toolBelt?.controller as ToolBeltViewController
+    },
 
-	toolBeltDoesNotRenderStickyTools(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController
-	) {
-		const vc = this.rendersToolBelt(svcOrToolBelt, false)
+    toolBeltDoesNotRenderStickyTools(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController
+    ) {
+        const vc = this.rendersToolBelt(svcOrToolBelt, false)
 
-		assert.isFalsy(
-			vc.getStickyTools().top ?? vc.getStickyTools().bottom,
-			`Your tool belt renders sticky tools and I did not expect it to!`
-		)
-	},
+        assert.isFalsy(
+            vc.getStickyTools().top ?? vc.getStickyTools().bottom,
+            `Your tool belt renders sticky tools and I did not expect it to!`
+        )
+    },
 
-	toolInstanceOf(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		toolId: string,
-		Class: any
-	): ViewController<any> {
-		const vc = this.rendersToolBelt(svcOrToolBelt)
-		const tool = vc.getTool(toolId)
-		assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
+    toolInstanceOf(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        toolId: string,
+        Class: any
+    ): ViewController<any> {
+        const vc = this.rendersToolBelt(svcOrToolBelt)
+        const tool = vc.getTool(toolId)
+        assert.isTruthy(tool, `The tool '${toolId}' does not exist!`)
 
-		const match = assertToolInstanceOf(tool, Class)
-		assert.isTruthy(
-			match,
-			`The tool '${toolId}' wasn't an instance of a '${Class.name}'`
-		)
+        const match = assertToolInstanceOf(tool, Class)
+        assert.isTruthy(
+            match,
+            `The tool '${toolId}' wasn't an instance of a '${Class.name}'`
+        )
 
-		return match
-	},
+        return match
+    },
 
-	toolBeltDoesNotRenderTool(
-		svc: SkillViewController | ToolBeltViewController,
-		toolId: string
-	) {
-		try {
-			this.toolBeltRendersTool(svc, toolId)
-		} catch {
-			return
-		}
-		assert.fail(`You rendered the tool '${toolId}' and should not have!`)
-	},
+    toolBeltDoesNotRenderTool(
+        svc: SkillViewController | ToolBeltViewController,
+        toolId: string
+    ) {
+        try {
+            this.toolBeltRendersTool(svc, toolId)
+        } catch {
+            return
+        }
+        assert.fail(`You rendered the tool '${toolId}' and should not have!`)
+    },
 
-	toolBeltStickyToolInstanceOf(options: {
-		toolBeltVc: ToolBeltViewController
-		position: StickyToolPosition
-		Class: any
-	}) {
-		const { position, toolBeltVc, Class } = assertOptions(options, [
-			'toolBeltVc',
-			'position',
-			'Class',
-		])
+    toolBeltStickyToolInstanceOf(options: {
+        toolBeltVc: ToolBeltViewController
+        position: StickyToolPosition
+        Class: any
+    }) {
+        const { position, toolBeltVc, Class } = assertOptions(options, [
+            'toolBeltVc',
+            'position',
+            'Class',
+        ])
 
-		//@ts-ignore
-		const tool = toolBeltVc.getStickyTools()[position]
+        //@ts-ignore
+        const tool = toolBeltVc.getStickyTools()[position]
 
-		assert.isTruthy(
-			tool,
-			`It appears you have no sticky tool set in position '${position}'! try 'this.toolBeltVc.addStickyTool(...)'!`
-		)
+        assert.isTruthy(
+            tool,
+            `It appears you have no sticky tool set in position '${position}'! try 'this.toolBeltVc.addStickyTool(...)'!`
+        )
 
-		const match = assertToolInstanceOf(tool, Class)
+        const match = assertToolInstanceOf(tool, Class)
 
-		assert.isTruthy(
-			match,
-			`The sticky tool at the ${position} is not an instance of '${Class.name}'`
-		)
+        assert.isTruthy(
+            match,
+            `The sticky tool at the ${position} is not an instance of '${Class.name}'`
+        )
 
-		return match
-	},
+        return match
+    },
 
-	toolBeltRendersTool(
-		svcOrToolBelt: SkillViewController | ToolBeltViewController,
-		toolId: string
-	) {
-		const toolBeltVc = this.rendersToolBelt(svcOrToolBelt)
+    toolBeltRendersTool(
+        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        toolId: string
+    ) {
+        const toolBeltVc = this.rendersToolBelt(svcOrToolBelt)
 
-		const model = renderUtil.render(toolBeltVc)
-		const tool = model.tools.find((t) => t.id === toolId)
+        const model = renderUtil.render(toolBeltVc)
+        const tool = model.tools.find((t) => t.id === toolId)
 
-		assert.isTruthy(
-			tool,
-			`I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
-		)
+        assert.isTruthy(
+            tool,
+            `I could not find a tool with the id of '${toolId}' in your ToolBelt. Try this.toolBeltVc.addTool({...}).`
+        )
 
-		return tool.card.controller as ViewController<Card>
-	},
+        return tool.card.controller as ViewController<Card>
+    },
 
-	doesNotRenderToolBelt(svc: SkillViewController) {
-		try {
-			this.rendersToolBelt(svc)
-		} catch {
-			return
-		}
+    doesNotRenderToolBelt(svc: SkillViewController) {
+        try {
+            this.rendersToolBelt(svc)
+        } catch {
+            return
+        }
 
-		assert.fail(`Your skill view should not be rendering a toolbelt with tools`)
-	},
+        assert.fail(
+            `Your skill view should not be rendering a toolbelt with tools`
+        )
+    },
 }
 
 export default toolBeltAssert

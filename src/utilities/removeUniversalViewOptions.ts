@@ -1,28 +1,28 @@
 export const universalViewOptionFields = [
-	'vcFactory',
-	'renderInDialogHandler',
-	'confirmHandler',
-	'voteHandler',
-	'connectToApi',
-	'device',
-	'dates',
-	'maps',
-	'toastHandler',
-	'log',
-	'plugins',
+    'vcFactory',
+    'renderInDialogHandler',
+    'confirmHandler',
+    'voteHandler',
+    'connectToApi',
+    'device',
+    'dates',
+    'maps',
+    'toastHandler',
+    'log',
+    'plugins',
 ] as const
 
 export type UniversalViewOptionFields =
-	(typeof universalViewOptionFields)[number]
+    (typeof universalViewOptionFields)[number]
 
 export default function removeUniversalViewOptions<
-	R extends Record<string, any>,
+    R extends Record<string, any>,
 >(rendered: R): Omit<R, UniversalViewOptionFields> {
-	const { ...options } = rendered
+    const { ...options } = rendered
 
-	for (const key of universalViewOptionFields) {
-		delete options[key]
-	}
+    for (const key of universalViewOptionFields) {
+        delete options[key]
+    }
 
-	return options
+    return options
 }

@@ -1,21 +1,21 @@
 import {
-	DateUtil,
-	Locale as ILocale,
-	TimezoneName as ITimezoneName,
+    DateUtil,
+    Locale as ILocale,
+    TimezoneName as ITimezoneName,
 } from '@sprucelabs/calendar-utils'
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
 import {
-	PermissionContractId,
-	PermissionId,
-	SpruceSchemas,
+    PermissionContractId,
+    PermissionId,
+    SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import {
-	AddressFieldValue,
-	FieldDefinitions,
-	FieldError,
-	Schema,
-	SchemaFieldNames,
-	SchemaPartialValues,
+    AddressFieldValue,
+    FieldDefinitions,
+    FieldError,
+    Schema,
+    SchemaFieldNames,
+    SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { Log } from '@sprucelabs/spruce-skill-utils'
 import { CalendarEventOptions } from '..'
@@ -23,80 +23,80 @@ import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
-	ActiveRecordCardViewControllerOptions,
+    ActiveRecordCardViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController, {
-	ActiveRecordListViewControllerOptions,
+    ActiveRecordListViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordList.vc'
 import BigFormViewControllerImpl, {
-	BigFormViewControllerOptions,
+    BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
 import ButtonBarViewController, {
-	ButtonBarViewControllerOptions,
+    ButtonBarViewControllerOptions,
 } from '../viewControllers/ButtonBar.vc'
 import ButtonGroupViewController, {
-	ButtonGroupViewControllerOptions,
+    ButtonGroupViewControllerOptions,
 } from '../viewControllers/ButtonGroup.vc'
 import CalendarViewController, {
-	CalendarViewControllerOptions,
+    CalendarViewControllerOptions,
 } from '../viewControllers/Calendar.vc'
 import CalendarEventViewController from '../viewControllers/CalendarEvent.vc'
 import CardViewControllerImpl, {
-	CardViewControllerOptions,
+    CardViewControllerOptions,
 } from '../viewControllers/card/Card.vc'
 import ConfirmViewController, {
-	ConfirmViewControllerOptions,
+    ConfirmViewControllerOptions,
 } from '../viewControllers/Confirm.vc'
 import CountdownTimerViewController, {
-	CountdownTimerViewControllerOptions,
+    CountdownTimerViewControllerOptions,
 } from '../viewControllers/countdownTimer/CountdownTimer.vc'
 import DialogViewController, {
-	DialogViewControllerOptions,
+    DialogViewControllerOptions,
 } from '../viewControllers/Dialog.vc'
 import FeedViewController, {
-	FeedViewControllerOptions,
+    FeedViewControllerOptions,
 } from '../viewControllers/Feed.vc'
 import AutocompleteInputViewController, {
-	AutocompleteInputViewControllerOptions,
+    AutocompleteInputViewControllerOptions,
 } from '../viewControllers/form/AutocompleteInput.vc'
 import FormViewControllerImpl, {
-	FormViewControllerOptions,
+    FormViewControllerOptions,
 } from '../viewControllers/form/Form.vc'
 import FormBuilderPageViewControllerImpl, {
-	FormBuilderCardViewControllerOptions,
+    FormBuilderCardViewControllerOptions,
 } from '../viewControllers/formBuilder/FormBuilderCard.vc'
 import ListViewController, {
-	ListViewControllerOptions,
+    ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
 import ListRowViewController from '../viewControllers/list/ListRow.vc'
 import LoginViewController, {
-	LoginViewControllerOptions,
+    LoginViewControllerOptions,
 } from '../viewControllers/Login.vc'
 import MapViewController, {
-	MapViewControllerOptions,
+    MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
 import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
 import ProgressNavigatorViewController, {
-	ProgressNavigatorViewControllerOptions,
+    ProgressNavigatorViewControllerOptions,
 } from '../viewControllers/progressNavigator/ProgressNavigator.vc'
 import RatingsViewController, {
-	RatingsViewControllerOptions,
+    RatingsViewControllerOptions,
 } from '../viewControllers/Ratings.vc'
 import ProgressViewController, {
-	ProgressViewControllerOptions,
+    ProgressViewControllerOptions,
 } from '../viewControllers/reporting/Progress.vc'
 import StatsViewController, {
-	StatsViewControllerOptions,
+    StatsViewControllerOptions,
 } from '../viewControllers/reporting/Stats.vc'
 import SwipeCardViewControllerImpl, {
-	SwipeCardPassthroughMethods,
-	SwipeViewControllerOptions,
+    SwipeCardPassthroughMethods,
+    SwipeViewControllerOptions,
 } from '../viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController, {
-	TalkingSprucebotViewControllerOptions,
+    TalkingSprucebotViewControllerOptions,
 } from '../viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController, {
-	ToolBeltViewControllerOptions,
+    ToolBeltViewControllerOptions,
 } from '../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
@@ -111,162 +111,162 @@ type DidLoginPayload = (payload: { token: string; person: Person }) => void
 type DidLogoutPayload = (payload: { person: Person }) => void
 
 interface Payloads {
-	'did-login': DidLoginPayload
-	'did-logout': DidLogoutPayload
+    'did-login': DidLoginPayload
+    'did-logout': DidLogoutPayload
 }
 
 export interface Authenticator {
-	getPerson(): Person | null
-	setSessionToken(token: string, person: Person): void
-	getSessionToken(): string | null
-	isLoggedIn(): boolean
-	clearSession(): void
-	addEventListener<N extends 'did-login' | 'did-logout'>(
-		name: N,
-		cb: Payloads[N]
-	): void
+    getPerson(): Person | null
+    setSessionToken(token: string, person: Person): void
+    getSessionToken(): string | null
+    isLoggedIn(): boolean
+    clearSession(): void
+    addEventListener<N extends 'did-login' | 'did-logout'>(
+        name: N,
+        cb: Payloads[N]
+    ): void
 }
 
 export interface AuthenticatorStatic {
-	getInstance(): Authenticator
+    getInstance(): Authenticator
 }
 
 export interface TypedFieldError<
-	S extends Schema,
-	N extends SchemaFieldNames<S> = SchemaFieldNames<S>,
+    S extends Schema,
+    N extends SchemaFieldNames<S> = SchemaFieldNames<S>,
 > extends FieldError {
-	name: N
-	code: 'INVALID_PARAMETER' | 'MISSING_PARAMETER'
+    name: N
+    code: 'INVALID_PARAMETER' | 'MISSING_PARAMETER'
 }
 
 export interface WithErrorHandler {
-	onError?: ErrorHandler
+    onError?: ErrorHandler
 }
 
 export type LineIcon = (typeof lineIcons)[number]
 export type FancyIcon = (typeof fancyIcons)[number]
 
 export type RowValues = Record<string, any> & {
-	rowId?: string
+    rowId?: string
 }
 
 export type RowStyle = NonNullable<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow['style']
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow['style']
 >
 
 export type FormErrorsByField<S extends Schema = Schema> = Partial<
-	Record<SchemaFieldNames<S>, TypedFieldError<S>[]>
+    Record<SchemaFieldNames<S>, TypedFieldError<S>[]>
 >
 
 export interface FormOnChangeOptions<S extends Schema = Schema> {
-	values: SchemaPartialValues<S>
-	controller: FormViewController<S>
-	errorsByField: FormErrorsByField<S>
-	isValid: boolean
+    values: SchemaPartialValues<S>
+    controller: FormViewController<S>
+    errorsByField: FormErrorsByField<S>
+    isValid: boolean
 }
 
 export type FormWillChangeOptions<S extends Schema> = FormOnChangeOptions<S> & {
-	changes: SchemaPartialValues<S>
+    changes: SchemaPartialValues<S>
 }
 
 export type FormOnSubmitOptions<S extends Schema = Schema> =
-	FormOnChangeOptions<S>
+    FormOnChangeOptions<S>
 
 export type BigFormOnSubmitOptions<S extends Schema = Schema> =
-	FormOnChangeOptions<S> & {
-		presentSlide: number
-		controller: BigFormViewController<S>
-	}
+    FormOnChangeOptions<S> & {
+        presentSlide: number
+        controller: BigFormViewController<S>
+    }
 
 type OnSubmitResponse = void | boolean
 
 export type SubmitHandler<S extends Schema = Schema> = (
-	options: FormOnChangeOptions<S>
+    options: FormOnChangeOptions<S>
 ) => Promise<OnSubmitResponse> | OnSubmitResponse
 
 export type SubmitSlideHandler<S extends Schema = Schema> = (
-	options: BigFormOnSubmitOptions<S>
+    options: BigFormOnSubmitOptions<S>
 ) => Promise<OnSubmitResponse> | OnSubmitResponse
 
 export interface SwipeController {
-	swipeTo(idx: number): void
+    swipeTo(idx: number): void
 }
 
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
 type Location = SpruceSchemas.Spruce.v2020_07_22.Location
 
 export interface Scope {
-	getCurrentOrganization(): Promise<Organization | null>
-	setCurrentOrganization(id: string | null): void
-	getCurrentLocation(): Promise<Location | null>
-	setCurrentLocation(id: string | null): void
-	clearSession(): void
+    getCurrentOrganization(): Promise<Organization | null>
+    setCurrentOrganization(id: string | null): void
+    getCurrentLocation(): Promise<Location | null>
+    setCurrentLocation(id: string | null): void
+    clearSession(): void
 }
 
 export interface SkillViewControllerLoadOptions<
-	Args extends Record<string, any> = Record<string, any>,
+    Args extends Record<string, any> = Record<string, any>,
 > {
-	router: Router
-	args: Args
-	authenticator: Authenticator
-	authorizer: Authorizer
-	locale: ILocale
-	scope: Scope
-	themes: ThemeManager
+    router: Router
+    args: Args
+    authenticator: Authenticator
+    authorizer: Authorizer
+    locale: ILocale
+    scope: Scope
+    themes: ThemeManager
 }
 
 export type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 export type InputButton =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton
 
 export interface ThemeManager {
-	setTheme(theme: Theme): void
-	getTheme(): Theme
+    setTheme(theme: Theme): void
+    getTheme(): Theme
 }
 
 export type CardViewController = CardViewControllerImpl
 
 type CardUniversals = Pick<
-	CardViewController,
-	| 'setCriticalError'
-	| 'getHasCriticalError'
-	| 'clearCriticalError'
-	| 'setIsBusy'
-	| 'isBusy'
+    CardViewController,
+    | 'setCriticalError'
+    | 'getHasCriticalError'
+    | 'clearCriticalError'
+    | 'setIsBusy'
+    | 'isBusy'
 >
 
 export type FormInputOptions = Omit<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Input,
-	'name' | 'value'
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Input,
+    'name' | 'value'
 >
 export type FormBuilderCardViewController = FormBuilderPageViewControllerImpl &
-	CardUniversals
+    CardUniversals
 export type SwipeCardViewController = SwipeCardViewControllerImpl &
-	SwipeCardPassthroughMethods &
-	CardUniversals
+    SwipeCardPassthroughMethods &
+    CardUniversals
 export type FormViewController<S extends Schema> = FormViewControllerImpl<S>
 export type BigFormViewController<S extends Schema> =
-	BigFormViewControllerImpl<S>
+    BigFormViewControllerImpl<S>
 export type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 export type CardSection =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type CardBody =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 export type CardHeader =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
 export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type ToolBelt =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 export type Feed = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed
 export type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
 export type SimpleViewControllerFactory = Pick<
-	ViewControllerFactory,
-	'Controller'
+    ViewControllerFactory,
+    'Controller'
 >
 export type CalendarSelectedDate =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
 export type FormSection<S extends Schema> =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>
 export type Map = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map
 export type MapZoom = NonNullable<Map['zoom']>
 export type MapPin = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin
@@ -274,41 +274,41 @@ export type LatLng = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng
 export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 export type Receipt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt
 export type Slide =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 export type Calendar =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 export type CalendarPerson =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 export type CardFooter =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
 export type FormBuilder<S extends Schema = Schema> =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject<S>
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject<S>
 export type FormBuilderPage =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage
 export type Navigation =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
 export type NavigationButton =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
 export type CountdownTimer =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
 export type ProgressNavigator =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigator
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigator
 export type ProgressNavigatorStep =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep
 
 export type Progress =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
 
 export type Form<S extends Schema = any> =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
 export type LayoutStyle = NonNullable<
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
 >
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 
@@ -317,409 +317,409 @@ export type TriggerRender = () => void
 export type TriggerRenderHandler = () => void
 
 export interface ViewController<ViewModel extends Record<string, any>> {
-	render(): ViewModel
-	setTriggerRenderHandler: (handler: TriggerRenderHandler) => void
-	triggerRender: TriggerRender
-	destroy?: () => Promise<void> | void
-	willBlur?: () => void | Promise<void>
-	didBlur?: () => void | Promise<void>
-	willFocus?: () => void | Promise<void>
-	didFocus?: () => void | Promise<void>
+    render(): ViewModel
+    setTriggerRenderHandler: (handler: TriggerRenderHandler) => void
+    triggerRender: TriggerRender
+    destroy?: () => Promise<void> | void
+    willBlur?: () => void | Promise<void>
+    didBlur?: () => void | Promise<void>
+    willFocus?: () => void | Promise<void>
+    didFocus?: () => void | Promise<void>
 }
 
 export type ScopeFlag = 'location' | 'organization' | 'employed' | 'none'
 
 export type ButtonGroupButton = Omit<Button, 'onClick' | 'onClickHintIcon'> & {
-	id: string
+    id: string
 }
 
 export type LineIconPosition = NonNullable<Button['lineIconPosition']>
 
 export interface SkillViewController<
-	Args extends Record<string, any> = Record<string, any>,
+    Args extends Record<string, any> = Record<string, any>,
 > extends ViewController<SkillView> {
-	getIsLoginRequired?(): Promise<boolean>
-	focus?(): Promise<void>
-	/**
-	 * @deprecated -> use getScope() => ['location']
-	 */
-	getScopedBy?(): ScopedBy
-	getScope?(): ScopeFlag[]
-	blur?(): Promise<void>
-	load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
-	renderToolBelt?(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
-	renderNavigation?(): null | undefined | Navigation
-	renderProgressNavigator?(): null | undefined | ProgressNavigator
-	getTitle?(): string | undefined
-	getSubtitle?(): string | undefined
+    getIsLoginRequired?(): Promise<boolean>
+    focus?(): Promise<void>
+    /**
+     * @deprecated -> use getScope() => ['location']
+     */
+    getScopedBy?(): ScopedBy
+    getScope?(): ScopeFlag[]
+    blur?(): Promise<void>
+    load(options: SkillViewControllerLoadOptions<Args>): Promise<void>
+    renderToolBelt?(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt | null
+    renderNavigation?(): null | undefined | Navigation
+    renderProgressNavigator?(): null | undefined | ProgressNavigator
+    getTitle?(): string | undefined
+    getSubtitle?(): string | undefined
 }
 
 export type ImportedViewController = (new () =>
-	| ViewController<any>
-	| SkillViewController) & {
-	id: string
+    | ViewController<any>
+    | SkillViewController) & {
+    id: string
 }
 
 export type ViewControllerId = keyof ViewControllerMap
 export type SkillViewControllerId = keyof SkillViewControllerMap
 
 export interface RedirectOptions {
-	shouldTrackHistory?: boolean
+    shouldTrackHistory?: boolean
 }
 
 export interface Router {
-	redirect<Id extends SkillViewControllerId>(
-		id: Id,
-		args?: SkillViewControllerArgs<Id>,
-		options?: RedirectOptions
-	): Promise<SkillViewControllerMap[Id]>
-	back(): Promise<SkillViewController | undefined>
-	getNamespace?(): string
+    redirect<Id extends SkillViewControllerId>(
+        id: Id,
+        args?: SkillViewControllerArgs<Id>,
+        options?: RedirectOptions
+    ): Promise<SkillViewControllerMap[Id]>
+    back(): Promise<SkillViewController | undefined>
+    getNamespace?(): string
 }
 
 export interface ButtonController {
-	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-	triggerRender: () => void
-	setTriggerRenderHandler(handler: TriggerRenderHandler): void
-	getParentController?(): ButtonGroupViewController
+    render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+    triggerRender: () => void
+    setTriggerRenderHandler(handler: TriggerRenderHandler): void
+    getParentController?(): ButtonGroupViewController
 }
 
 export interface ViewControllerMap {
-	form: FormViewController<any>
-	/**
-	 * @deprecated 'login' -> 'login-card'
-	 */
-	login: LoginViewController
-	'login-card': LoginViewController
-	/**
-	 * @deprecated 'swipeCard' -> 'swipe-card'
-	 */
-	swipeCard: SwipeCardViewController
-	'swipe-card': SwipeCardViewController
-	/**
-	 * @deprecated 'buttonGroup' -> 'button-group'
-	 */
-	buttonGroup: ButtonGroupViewController
-	'button-group': ButtonGroupViewController
-	card: CardViewController
-	dialog: DialogViewController
-	/**
-	 * @deprecated 'bigForm' -> 'big-form'
-	 */
-	bigForm: BigFormViewController<any>
-	'big-form': BigFormViewController<any>
-	confirm: ConfirmViewController
-	/**
-	 * @deprecated 'form-builder-card' -> 'form-builder-card'
-	 */
-	formBuilderCard: FormBuilderCardViewController
-	'form-builder-card': FormBuilderCardViewController
-	list: ListViewController
-	toolBelt: ToolBeltViewController
-	/**
-	 * @deprecated 'toolBelt' -> 'tool-belt'
-	 */
-	'tool-belt': ToolBeltViewController
-	calendar: CalendarViewController
+    form: FormViewController<any>
+    /**
+     * @deprecated 'login' -> 'login-card'
+     */
+    login: LoginViewController
+    'login-card': LoginViewController
+    /**
+     * @deprecated 'swipeCard' -> 'swipe-card'
+     */
+    swipeCard: SwipeCardViewController
+    'swipe-card': SwipeCardViewController
+    /**
+     * @deprecated 'buttonGroup' -> 'button-group'
+     */
+    buttonGroup: ButtonGroupViewController
+    'button-group': ButtonGroupViewController
+    card: CardViewController
+    dialog: DialogViewController
+    /**
+     * @deprecated 'bigForm' -> 'big-form'
+     */
+    bigForm: BigFormViewController<any>
+    'big-form': BigFormViewController<any>
+    confirm: ConfirmViewController
+    /**
+     * @deprecated 'form-builder-card' -> 'form-builder-card'
+     */
+    formBuilderCard: FormBuilderCardViewController
+    'form-builder-card': FormBuilderCardViewController
+    list: ListViewController
+    toolBelt: ToolBeltViewController
+    /**
+     * @deprecated 'toolBelt' -> 'tool-belt'
+     */
+    'tool-belt': ToolBeltViewController
+    calendar: CalendarViewController
 
-	'calendar-event': CalendarEventViewController
-	/**
-	 * @deprecated 'buttonBar' -> 'button-bar'
-	 */
-	buttonBar: ButtonBarViewController
-	'button-bar': ButtonBarViewController
-	/**
-	 * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
-	 */
-	talkingSprucebot: TalkingSprucebotViewController
-	'talking-sprucebot': TalkingSprucebotViewController
-	/**
-	 * @deprecated 'activeRecordCard' -> 'activeRecordCard'
-	 */
-	activeRecordCard: ActiveRecordCardViewController
-	'active-record-card': ActiveRecordCardViewController
+    'calendar-event': CalendarEventViewController
+    /**
+     * @deprecated 'buttonBar' -> 'button-bar'
+     */
+    buttonBar: ButtonBarViewController
+    'button-bar': ButtonBarViewController
+    /**
+     * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
+     */
+    talkingSprucebot: TalkingSprucebotViewController
+    'talking-sprucebot': TalkingSprucebotViewController
+    /**
+     * @deprecated 'activeRecordCard' -> 'activeRecordCard'
+     */
+    activeRecordCard: ActiveRecordCardViewController
+    'active-record-card': ActiveRecordCardViewController
 
-	/**
-	 * @deprecated 'activeRecordList' -> 'active-record-list'
-	 */
-	activeRecordList: ActiveRecordListViewController
-	'active-record-list': ActiveRecordListViewController
-	stats: StatsViewController
-	progress: ProgressViewController
-	ratings: RatingsViewController
-	/**
-	 * @deprecated 'autocompleteInput' -> 'autocomplete-input'
-	 */
-	autocompleteInput: AutocompleteInputViewController
-	'autocomplete-input': AutocompleteInputViewController
-	map: MapViewController
-	feed: FeedViewController
-	navigation: NavigationViewController
-	'countdown-timer': CountdownTimerViewController
-	'progress-navigator': ProgressNavigatorViewController
+    /**
+     * @deprecated 'activeRecordList' -> 'active-record-list'
+     */
+    activeRecordList: ActiveRecordListViewController
+    'active-record-list': ActiveRecordListViewController
+    stats: StatsViewController
+    progress: ProgressViewController
+    ratings: RatingsViewController
+    /**
+     * @deprecated 'autocompleteInput' -> 'autocomplete-input'
+     */
+    autocompleteInput: AutocompleteInputViewController
+    'autocomplete-input': AutocompleteInputViewController
+    map: MapViewController
+    feed: FeedViewController
+    navigation: NavigationViewController
+    'countdown-timer': CountdownTimerViewController
+    'progress-navigator': ProgressNavigatorViewController
 }
 
 export interface ViewControllerOptionsMap {
-	form: FormViewControllerOptions<any>
-	login: LoginViewControllerOptions
-	'login-card': LoginViewControllerOptions
-	swipeCard: SwipeViewControllerOptions
-	'swipe-card': SwipeViewControllerOptions
-	buttonGroup: ButtonGroupViewControllerOptions
-	'button-group': ButtonGroupViewControllerOptions
-	card: CardViewControllerOptions
-	dialog: DialogViewControllerOptions
-	bigForm: BigFormViewControllerOptions<Schema>
-	'big-form': BigFormViewControllerOptions<Schema>
-	confirm: ConfirmViewControllerOptions
-	formBuilderCard: FormBuilderCardViewControllerOptions
-	'form-builder-card': FormBuilderCardViewControllerOptions
-	list: ListViewControllerOptions
-	toolBelt: ToolBeltViewControllerOptions
-	'tool-belt': ToolBeltViewControllerOptions
-	calendar: CalendarViewControllerOptions
-	'calendar-event': CalendarEventOptions
-	buttonBar: ButtonBarViewControllerOptions
-	'button-bar': ButtonBarViewControllerOptions
-	talkingSprucebot: TalkingSprucebotViewControllerOptions
-	'talking-sprucebot': TalkingSprucebotViewControllerOptions
-	activeRecordCard: ActiveRecordCardViewControllerOptions
-	'active-record-card': ActiveRecordCardViewControllerOptions
-	activeRecordList: ActiveRecordListViewControllerOptions
-	'active-record-list': ActiveRecordListViewControllerOptions
-	stats: StatsViewControllerOptions
-	progress: ProgressViewControllerOptions
-	ratings: RatingsViewControllerOptions
-	autocompleteInput: AutocompleteInputViewControllerOptions
-	'autocomplete-input': AutocompleteInputViewControllerOptions
-	map: MapViewControllerOptions
-	feed: FeedViewControllerOptions
-	navigation: Navigation
-	'countdown-timer': CountdownTimerViewControllerOptions
-	'progress-navigator': ProgressNavigatorViewControllerOptions
+    form: FormViewControllerOptions<any>
+    login: LoginViewControllerOptions
+    'login-card': LoginViewControllerOptions
+    swipeCard: SwipeViewControllerOptions
+    'swipe-card': SwipeViewControllerOptions
+    buttonGroup: ButtonGroupViewControllerOptions
+    'button-group': ButtonGroupViewControllerOptions
+    card: CardViewControllerOptions
+    dialog: DialogViewControllerOptions
+    bigForm: BigFormViewControllerOptions<Schema>
+    'big-form': BigFormViewControllerOptions<Schema>
+    confirm: ConfirmViewControllerOptions
+    formBuilderCard: FormBuilderCardViewControllerOptions
+    'form-builder-card': FormBuilderCardViewControllerOptions
+    list: ListViewControllerOptions
+    toolBelt: ToolBeltViewControllerOptions
+    'tool-belt': ToolBeltViewControllerOptions
+    calendar: CalendarViewControllerOptions
+    'calendar-event': CalendarEventOptions
+    buttonBar: ButtonBarViewControllerOptions
+    'button-bar': ButtonBarViewControllerOptions
+    talkingSprucebot: TalkingSprucebotViewControllerOptions
+    'talking-sprucebot': TalkingSprucebotViewControllerOptions
+    activeRecordCard: ActiveRecordCardViewControllerOptions
+    'active-record-card': ActiveRecordCardViewControllerOptions
+    activeRecordList: ActiveRecordListViewControllerOptions
+    'active-record-list': ActiveRecordListViewControllerOptions
+    stats: StatsViewControllerOptions
+    progress: ProgressViewControllerOptions
+    ratings: RatingsViewControllerOptions
+    autocompleteInput: AutocompleteInputViewControllerOptions
+    'autocomplete-input': AutocompleteInputViewControllerOptions
+    map: MapViewControllerOptions
+    feed: FeedViewControllerOptions
+    navigation: Navigation
+    'countdown-timer': CountdownTimerViewControllerOptions
+    'progress-navigator': ProgressNavigatorViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
 export interface SkillViewControllerArgsMap {}
 
 export type ControllerOptions<
-	N extends ViewControllerId,
-	O extends ViewControllerOptionsMap = ViewControllerOptionsMap,
+    N extends ViewControllerId,
+    O extends ViewControllerOptionsMap = ViewControllerOptionsMap,
 > = Omit<
-	N extends keyof O ? O[N] : Record<string, never>,
-	UniversalViewOptionFields
+    N extends keyof O ? O[N] : Record<string, never>,
+    UniversalViewOptionFields
 >
 
 export type MapUtil = typeof mapUtil
 
 export interface OpenNavigationOptions {
-	to: AddressFieldValue
+    to: AddressFieldValue
 }
 
 export type SkillViewControllerArgs<
-	N extends SkillViewControllerId,
-	O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap,
+    N extends SkillViewControllerId,
+    O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap,
 > = N extends keyof O ? O[N] : Record<string, never>
 
 export type Client = MercuryClient
 
-export type OnRenderHandler = {
-	onRender?(): void
+export interface OnRenderHandler {
+    onRender?(): void
 }
 
 export type RenderInDialogHandler = (
-	options: DialogViewControllerOptions
+    options: DialogViewControllerOptions
 ) => void
 
 export interface ConfirmOptions {
-	title?: string
-	subtitle?: string
-	message?: string
-	isDestructive?: boolean
-	body?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
+    title?: string
+    subtitle?: string
+    message?: string
+    isDestructive?: boolean
+    body?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
 }
 
 export type ConfirmHandler = (options: ConfirmOptions) => Promise<boolean>
 export type VoteOptions =
-	SpruceSchemas.Mercury.v2020_12_25.VoteForFeatureEmitPayload & {
-		howCoolWouldItBeIf: string
-	}
+    SpruceSchemas.Mercury.v2020_12_25.VoteForFeatureEmitPayload & {
+        howCoolWouldItBeIf: string
+    }
 
 export interface ToastOptions {
-	message: string
+    message: string
 }
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
 export type ToastHandler = (options: ToastOptions) => void
 
 export interface FormInputHandlers<View> {
-	getValue: () => any
-	setValue: (value: any) => Promise<void>
-	setModel: (model: View) => void
-	getModel: () => View
+    getValue: () => any
+    setValue: (value: any) => Promise<void>
+    setModel: (model: View) => void
+    getModel: () => View
 }
 
 export interface FormInputViewController<View extends Record<string, any> = any>
-	extends ViewController<View> {
-	setHandlers(options: FormInputHandlers<View>): void
-	setValue(value: any, renderedValue?: any): Promise<void>
-	getValue(): any
-	setRenderedValue: (renderedValue: any) => Promise<void>
-	getRenderedValue: () => any
+    extends ViewController<View> {
+    setHandlers(options: FormInputHandlers<View>): void
+    setValue(value: any, renderedValue?: any): Promise<void>
+    getValue(): any
+    setRenderedValue: (renderedValue: any) => Promise<void>
+    getRenderedValue: () => any
 }
 
 export interface ViewControllerOptions {
-	plugins: ViewControllerPlugins
-	vcFactory: ViewControllerFactory
-	connectToApi: () => Promise<Client>
-	renderInDialogHandler: RenderInDialogHandler
-	confirmHandler: ConfirmHandler
-	voteHandler: VoteHandler
-	toastHandler: ToastHandler
-	device: Device
-	dates: DateUtil
-	maps: MapUtil
-	log: Log
+    plugins: ViewControllerPlugins
+    vcFactory: ViewControllerFactory
+    connectToApi: () => Promise<Client>
+    renderInDialogHandler: RenderInDialogHandler
+    confirmHandler: ConfirmHandler
+    voteHandler: VoteHandler
+    toastHandler: ToastHandler
+    device: Device
+    dates: DateUtil
+    maps: MapUtil
+    log: Log
 }
 
 export type RenderAsComponent =
-	| 'colorPicker'
-	| 'number'
-	| 'textarea'
-	| 'ratings'
-	| 'checkbox'
-	| 'autocomplete'
-	| 'tags'
-	| 'signature'
-	| 'password'
+    | 'colorPicker'
+    | 'number'
+    | 'textarea'
+    | 'ratings'
+    | 'checkbox'
+    | 'autocomplete'
+    | 'tags'
+    | 'signature'
+    | 'password'
 
-export type FieldRenderOptions<S extends Schema> = {
-	name: SchemaFieldNames<S>
-	renderAs?: RenderAsComponent
-	renderHintAs?: 'subtitle' | 'tooltip'
-	placeholder?: string | null
-	label?: string | null
-	hint?: string | null
-	vc?: FormInputViewController
-	fieldDefinition?: FieldDefinitions
-	rightButtons?: InputButton[]
+export interface FieldRenderOptions<S extends Schema> {
+    name: SchemaFieldNames<S>
+    renderAs?: RenderAsComponent
+    renderHintAs?: 'subtitle' | 'tooltip'
+    placeholder?: string | null
+    label?: string | null
+    hint?: string | null
+    vc?: FormInputViewController
+    fieldDefinition?: FieldDefinitions
+    rightButtons?: InputButton[]
 }
 
 export interface DropdownController {
-	hide: () => void
-	show: () => void
+    hide: () => void
+    show: () => void
 }
 
 export type KeyboardKey =
-	| ' '
-	| '!'
-	| '"'
-	| '#'
-	| '$'
-	| '%'
-	| '&'
-	| '('
-	| ')'
-	| '*'
-	| '+'
-	| ','
-	| '-'
-	| '.'
-	| '/'
-	| '0'
-	| '1'
-	| '2'
-	| '3'
-	| '4'
-	| '5'
-	| '6'
-	| '7'
-	| '8'
-	| '9'
-	| ':'
-	| ';'
-	| '<'
-	| '='
-	| '>'
-	| '?'
-	| '@'
-	| 'A'
-	| 'B'
-	| 'C'
-	| 'D'
-	| 'E'
-	| 'F'
-	| 'G'
-	| 'H'
-	| 'I'
-	| 'J'
-	| 'K'
-	| 'L'
-	| 'M'
-	| 'N'
-	| 'O'
-	| 'P'
-	| 'Q'
-	| 'R'
-	| 'S'
-	| 'T'
-	| 'U'
-	| 'V'
-	| 'W'
-	| 'X'
-	| 'Y'
-	| 'Z'
-	| '['
-	| '\\'
-	| ']'
-	| '^'
-	| '_'
-	| '`'
-	| 'a'
-	| 'b'
-	| 'c'
-	| 'd'
-	| 'e'
-	| 'f'
-	| 'g'
-	| 'h'
-	| 'i'
-	| 'j'
-	| 'k'
-	| 'l'
-	| 'm'
-	| 'n'
-	| 'o'
-	| 'p'
-	| 'q'
-	| 'r'
-	| 's'
-	| 't'
-	| 'u'
-	| 'v'
-	| 'w'
-	| 'x'
-	| 'y'
-	| 'z'
-	| '{'
-	| '|'
-	| '}'
-	| '~'
-	| 'Tab'
-	| 'Enter'
-	| 'Escape'
+    | ' '
+    | '!'
+    | '"'
+    | '#'
+    | '$'
+    | '%'
+    | '&'
+    | '('
+    | ')'
+    | '*'
+    | '+'
+    | ','
+    | '-'
+    | '.'
+    | '/'
+    | '0'
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | ':'
+    | ';'
+    | '<'
+    | '='
+    | '>'
+    | '?'
+    | '@'
+    | 'A'
+    | 'B'
+    | 'C'
+    | 'D'
+    | 'E'
+    | 'F'
+    | 'G'
+    | 'H'
+    | 'I'
+    | 'J'
+    | 'K'
+    | 'L'
+    | 'M'
+    | 'N'
+    | 'O'
+    | 'P'
+    | 'Q'
+    | 'R'
+    | 'S'
+    | 'T'
+    | 'U'
+    | 'V'
+    | 'W'
+    | 'X'
+    | 'Y'
+    | 'Z'
+    | '['
+    | '\\'
+    | ']'
+    | '^'
+    | '_'
+    | '`'
+    | 'a'
+    | 'b'
+    | 'c'
+    | 'd'
+    | 'e'
+    | 'f'
+    | 'g'
+    | 'h'
+    | 'i'
+    | 'j'
+    | 'k'
+    | 'l'
+    | 'm'
+    | 'n'
+    | 'o'
+    | 'p'
+    | 'q'
+    | 'r'
+    | 's'
+    | 't'
+    | 'u'
+    | 'v'
+    | 'w'
+    | 'x'
+    | 'y'
+    | 'z'
+    | '{'
+    | '|'
+    | '}'
+    | '~'
+    | 'Tab'
+    | 'Enter'
+    | 'Escape'
 
 export interface CellInputKeyDownOptions {
-	rowVc: ListRowViewController
-	key: KeyboardKey
+    rowVc: ListRowViewController
+    key: KeyboardKey
 }
 
 export type ScopedBy = 'none' | 'organization' | 'location'
 export type CriticalError =
-	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
 
 export type OnSubmitFeedMessageHandler = (
-	message: string
+    message: string
 ) => void | boolean | Promise<void | boolean>
 
 /**
@@ -734,95 +734,95 @@ export type Locale = ILocale
 export type CachedValue = string | number | Record<string, any> | boolean | null
 
 export interface Device {
-	openUrl(url: string): void
-	vibrate(): void
-	call(phoneNumber: string): void
-	setCachedValue(key: string, value: CachedValue): void
-	getCachedValue(key: string): CachedValue
-	sendCommand(command: string, payload?: Record<string, any>): void
+    openUrl(url: string): void
+    vibrate(): void
+    call(phoneNumber: string): void
+    setCachedValue(key: string, value: CachedValue): void
+    getCachedValue(key: string): CachedValue
+    sendCommand(command: string, payload?: Record<string, any>): void
 }
 
 export interface AuthorizerCanOptions<
-	ContractId extends PermissionContractId,
-	Ids extends PermissionId<ContractId> = PermissionId<ContractId>,
+    ContractId extends PermissionContractId,
+    Ids extends PermissionId<ContractId> = PermissionId<ContractId>,
 > {
-	contractId: ContractId
-	permissionIds: Ids[]
-	target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
+    contractId: ContractId
+    permissionIds: Ids[]
+    target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
 }
 
 type SavePermissionsTarget = Omit<
-	SpruceSchemas.Mercury.v2020_12_25.SavePermissionsEmitTarget,
-	'permissionPersonId' | 'permissionContractId' | 'permissionSkillId'
+    SpruceSchemas.Mercury.v2020_12_25.SavePermissionsEmitTarget,
+    'permissionPersonId' | 'permissionContractId' | 'permissionSkillId'
 >
 
 export interface SavePermissionsOptions<
-	ContractId extends PermissionContractId,
-	Ids extends PermissionId<ContractId>,
+    ContractId extends PermissionContractId,
+    Ids extends PermissionId<ContractId>,
 > {
-	target: SavePermissionsTarget & { personId?: string; skillId?: string }
-	contractId: ContractId
-	permissions: {
-		id: Ids
-		can: StatusFlag
-	}[]
+    target: SavePermissionsTarget & { personId?: string; skillId?: string }
+    contractId: ContractId
+    permissions: {
+        id: Ids
+        can: StatusFlag
+    }[]
 }
 
 export interface Authorizer {
-	can<
-		ContractId extends PermissionContractId,
-		Ids extends PermissionId<ContractId>,
-	>(
-		options: AuthorizerCanOptions<ContractId, Ids>
-	): Promise<Record<Ids, boolean>>
-	savePermissions<
-		ContractId extends PermissionContractId,
-		Ids extends PermissionId<ContractId>,
-	>(
-		options: SavePermissionsOptions<ContractId, Ids>
-	): Promise<void>
+    can<
+        ContractId extends PermissionContractId,
+        Ids extends PermissionId<ContractId>,
+    >(
+        options: AuthorizerCanOptions<ContractId, Ids>
+    ): Promise<Record<Ids, boolean>>
+    savePermissions<
+        ContractId extends PermissionContractId,
+        Ids extends PermissionId<ContractId>,
+    >(
+        options: SavePermissionsOptions<ContractId, Ids>
+    ): Promise<void>
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
-	options: any
+    options: any
 ) => Vc
 
 type StatusFlag = SpruceSchemas.Mercury.v2020_12_25.StatusFlags
 
 export interface ToolBeltCloseHandlerOptions {
-	isDrawer: boolean
+    isDrawer: boolean
 }
 
 export type ToolBeltCloseHandler = (
-	options: ToolBeltCloseHandlerOptions
+    options: ToolBeltCloseHandlerOptions
 ) => Promise<void> | void
 
 export interface AlertOptions {
-	title?: string
-	message: string
-	style?: 'info' | 'error' | 'success'
+    title?: string
+    message: string
+    style?: 'info' | 'error' | 'success'
 }
 
 export interface ViewControllerPlugins {}
 
 export type ViewControllerPluginConstructor = new (
-	options: ViewControllerPluginOptions
+    options: ViewControllerPluginOptions
 ) => ViewControllerPlugin
 
 export interface ViewControllerPlugin {}
 
 export type ViewControllerPluginsByName = Record<
-	string,
-	ViewControllerPluginConstructor
+    string,
+    ViewControllerPluginConstructor
 >
 
 export interface ViewControllerPluginOptions {
-	connectToApi: MercuryClientFactory
-	device: Device
-	dates: DateUtil
-	maps: MapUtil
-	log: Log
-	plugins: ViewControllerPlugins
+    connectToApi: MercuryClientFactory
+    device: Device
+    dates: DateUtil
+    maps: MapUtil
+    log: Log
+    plugins: ViewControllerPlugins
 }
 
 export type ConnectToApi = () => Promise<MercuryClient>

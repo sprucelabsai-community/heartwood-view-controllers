@@ -5,63 +5,63 @@ import EditFormBuilderSectionCardViewController from '../../../viewControllers/f
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
-	protected static controllerMap = {
-		'edit-form-builder-section': EditFormBuilderSectionCardViewController,
-		'form-builder-card': FormBuilderCardViewController,
-	}
-	private static vc: FormBuilderCardViewController
+    protected static controllerMap = {
+        'edit-form-builder-section': EditFormBuilderSectionCardViewController,
+        'form-builder-card': FormBuilderCardViewController,
+    }
+    private static vc: FormBuilderCardViewController
 
-	protected static async beforeEach() {
-		await super.beforeEach()
+    protected static async beforeEach() {
+        await super.beforeEach()
 
-		this.vc = this.Controller('form-builder-card', {
-			header: {
-				title: 'My title',
-				subtitle: 'why now?',
-			},
-		})
-	}
+        this.vc = this.Controller('form-builder-card', {
+            header: {
+                title: 'My title',
+                subtitle: 'why now?',
+            },
+        })
+    }
 
-	@test()
-	protected static hasImportFromObject() {
-		assert.isFunction(this.vc.importObject)
-	}
+    @test()
+    protected static hasImportFromObject() {
+        assert.isFunction(this.vc.importObject)
+    }
 
-	@test()
-	protected static async canImportCustomObject() {
-		const simpleImport: FormBuilder = {
-			title: 'Building your form',
-			subtitle: 'a subtitle',
-			pages: [
-				{
-					title: 'Page 1',
-					schema: {
-						id: 'formBuilder1',
-						fields: {
-							firstName: {
-								type: 'text',
-								label: 'First name',
-							},
-						},
-					},
-					sections: [
-						{
-							title: 'Personal Information',
-							shouldRenderAsGrid: false,
-							fields: [
-								{
-									//@ts-ignore
-									name: 'firstName',
-								},
-							],
-						},
-					],
-				},
-			],
-		}
+    @test()
+    protected static async canImportCustomObject() {
+        const simpleImport: FormBuilder = {
+            title: 'Building your form',
+            subtitle: 'a subtitle',
+            pages: [
+                {
+                    title: 'Page 1',
+                    schema: {
+                        id: 'formBuilder1',
+                        fields: {
+                            firstName: {
+                                type: 'text',
+                                label: 'First name',
+                            },
+                        },
+                    },
+                    sections: [
+                        {
+                            title: 'Personal Information',
+                            shouldRenderAsGrid: false,
+                            fields: [
+                                {
+                                    //@ts-ignore
+                                    name: 'firstName',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        }
 
-		await this.vc.importObject(simpleImport)
+        await this.vc.importObject(simpleImport)
 
-		assert.isEqualDeep(await this.vc.toObject(), simpleImport)
-	}
+        assert.isEqualDeep(await this.vc.toObject(), simpleImport)
+    }
 }

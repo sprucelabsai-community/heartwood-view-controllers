@@ -5,47 +5,47 @@ import NavigationViewController from '../../../viewControllers/navigation/Naviga
 import AbstractNavigationTest from './AbstractNavigationTest'
 
 export default class ControllingNavigationTest extends AbstractNavigationTest {
-	@test()
-	protected static async canCreateNavigation() {
-		this.NavigationVc()
-	}
+    @test()
+    protected static async canCreateNavigation() {
+        this.NavigationVc()
+    }
 
-	@test('renders empty navigation 1', {
-		isVisible: true,
-		buttons: [],
-		shouldRenderButtonLabels: false,
-	})
-	@test('renders empty navigation 2', {
-		isVisible: false,
-		buttons: [{ id: 'yay' }],
-		shouldRenderButtonLabels: false,
-	})
-	protected static async passesViewModelsThrough(options: Navigation) {
-		const vc = this.NavigationVc(options)
-		const { controller, ...rest } = vc.render()
-		assert.isEqual(controller, vc)
-		assert.isEqualDeep(rest, options)
-	}
+    @test('renders empty navigation 1', {
+        isVisible: true,
+        buttons: [],
+        shouldRenderButtonLabels: false,
+    })
+    @test('renders empty navigation 2', {
+        isVisible: false,
+        buttons: [{ id: 'yay' }],
+        shouldRenderButtonLabels: false,
+    })
+    protected static async passesViewModelsThrough(options: Navigation) {
+        const vc = this.NavigationVc(options)
+        const { controller, ...rest } = vc.render()
+        assert.isEqual(controller, vc)
+        assert.isEqualDeep(rest, options)
+    }
 
-	@test()
-	protected static async canShowHideNavigation() {
-		const vc = this.NavigationVc()
-		vc.hide()
-		this.assertNavIsVisible(vc, false)
-	}
+    @test()
+    protected static async canShowHideNavigation() {
+        const vc = this.NavigationVc()
+        vc.hide()
+        this.assertNavIsVisible(vc, false)
+    }
 
-	@test()
-	protected static async canHideNavigation() {
-		const vc = this.NavigationVc({ isVisible: false })
-		vc.show()
-		this.assertNavIsVisible(vc, true)
-	}
+    @test()
+    protected static async canHideNavigation() {
+        const vc = this.NavigationVc({ isVisible: false })
+        vc.show()
+        this.assertNavIsVisible(vc, true)
+    }
 
-	private static assertNavIsVisible(
-		vc: NavigationViewController,
-		expected: boolean
-	) {
-		assert.isEqual(vc.render().isVisible, expected)
-		vcAssert.assertTriggerRenderCount(vc, 1)
-	}
+    private static assertNavIsVisible(
+        vc: NavigationViewController,
+        expected: boolean
+    ) {
+        assert.isEqual(vc.render().isVisible, expected)
+        vcAssert.assertTriggerRenderCount(vc, 1)
+    }
 }

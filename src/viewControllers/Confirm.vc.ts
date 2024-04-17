@@ -4,84 +4,84 @@ import DialogViewController, { DialogOptions } from './Dialog.vc'
 
 export type Dialog = DialogOptions
 export type ConfirmViewControllerOptions = ConfirmOptions & {
-	onAccept: () => void
-	onDecline: () => void
+    onAccept: () => void
+    onDecline: () => void
 }
 
 export default class ConfirmViewController extends AbstractViewController<Dialog> {
-	private dialogVc: DialogViewController
-	private acceptHandler: () => void
-	private declineHandler: () => void
+    private dialogVc: DialogViewController
+    private acceptHandler: () => void
+    private declineHandler: () => void
 
-	public constructor(
-		options: ConfirmOptions &
-			ViewControllerOptions &
-			ConfirmViewControllerOptions
-	) {
-		super(options)
+    public constructor(
+        options: ConfirmOptions &
+            ViewControllerOptions &
+            ConfirmViewControllerOptions
+    ) {
+        super(options)
 
-		this.acceptHandler = options.onAccept
-		this.declineHandler = options.onDecline
+        this.acceptHandler = options.onAccept
+        this.declineHandler = options.onDecline
 
-		let body: any
+        let body: any
 
-		if (options.body) {
-			body = options.body
-		}
+        if (options.body) {
+            body = options.body
+        }
 
-		if (options.message) {
-			if (!body) {
-				body = {
-					sections: [],
-				}
-			}
+        if (options.message) {
+            if (!body) {
+                body = {
+                    sections: [],
+                }
+            }
 
-			body.sections.unshift({
-				title: options.message,
-			})
-		}
+            body.sections.unshift({
+                title: options.message,
+            })
+        }
 
-		this.dialogVc = this.Controller('dialog', {
-			isVisible: true,
-			shouldShowCloseButton: false,
-			header:
-				options.title || options.subtitle
-					? {
-							title: options.title,
-							subtitle: options.subtitle,
-						}
-					: null,
-			body,
-			footer: {
-				buttons: [
-					{
-						type: 'secondary',
-						label: 'No',
-						onClick: this.handleDecline.bind(this),
-					},
-					{
-						label: 'Yes',
-						type: options.isDestructive ? 'destructive' : 'primary',
-						onClick: this.handleAccept.bind(this),
-					},
-				],
-			},
-		})
-	}
+        this.dialogVc = this.Controller('dialog', {
+            isVisible: true,
+            shouldShowCloseButton: false,
+            header:
+                options.title || options.subtitle
+                    ? {
+                          title: options.title,
+                          subtitle: options.subtitle,
+                      }
+                    : null,
+            body,
+            footer: {
+                buttons: [
+                    {
+                        type: 'secondary',
+                        label: 'No',
+                        onClick: this.handleDecline.bind(this),
+                    },
+                    {
+                        label: 'Yes',
+                        type: options.isDestructive ? 'destructive' : 'primary',
+                        onClick: this.handleAccept.bind(this),
+                    },
+                ],
+            },
+        })
+    }
 
-	public handleDecline() {
-		this.declineHandler()
-	}
+    public handleDecline() {
+        this.declineHandler()
+    }
 
-	public handleAccept() {
-		this.acceptHandler()
-	}
+    public handleAccept() {
+        this.acceptHandler()
+    }
 
-	public async hide() {
-		return this.dialogVc.hide()
-	}
+    public async hide() {
+        return this.dialogVc.hide()
+    }
 
-	public render(): DialogOptions {
-		return this.dialogVc.render()
-	}
+    public render(): DialogOptions {
+        return this.dialogVc.render()
+    }
 }

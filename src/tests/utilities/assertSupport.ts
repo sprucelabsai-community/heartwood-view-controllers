@@ -2,12 +2,12 @@ import { SelectChoice } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test-utils'
 import {
-	ConfirmOptions,
-	ViewController,
-	Router,
-	CardSection,
-	Card,
-	TriggerRenderHandler,
+    ConfirmOptions,
+    ViewController,
+    Router,
+    CardSection,
+    Card,
+    TriggerRenderHandler,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
@@ -15,106 +15,106 @@ import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 export type Vc = ViewController<any>
 export const WAIT_TIMEOUT = 5000
 export interface ConfirmViewController {
-	accept: () => any | Promise<any>
-	decline: () => any | Promise<any>
-	options: ConfirmOptions
+    accept: () => any | Promise<any>
+    decline: () => any | Promise<any>
+    options: ConfirmOptions
 }
 
 export function pluckAllFromView<K extends keyof CardSection>(
-	model: Card,
-	key: K
+    model: Card,
+    key: K
 ): CardSection[K][] {
-	return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
+    return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
 }
 
 export function pluckFirstFromCard<K extends keyof CardSection>(
-	model: Card,
-	key: K
+    model: Card,
+    key: K
 ) {
-	return pluckAllFromView(model, key)[0] as CardSection[K]
+    return pluckAllFromView(model, key)[0] as CardSection[K]
 }
 
 export interface SelectViewController {
-	getChoices: () => SelectChoice[]
-	getIsRequired: () => boolean
+    getChoices: () => SelectChoice[]
+    getIsRequired: () => boolean
 }
 
 export interface AssertRedirectOptions {
-	router: Router
-	action: () => Promise<any> | any
-	destination?: {
-		id?: string
-		args?: Record<string, any>
-	}
+    router: Router
+    action: () => Promise<any> | any
+    destination?: {
+        id?: string
+        args?: Record<string, any>
+    }
 }
 
 export interface ButtonViewController {
-	render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
-	triggerRender(): void
-	setTriggerRenderHandler(handler: TriggerRenderHandler): void
+    render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+    triggerRender(): void
+    setTriggerRenderHandler(handler: TriggerRenderHandler): void
 }
 
 export function getVcName(vc: ViewController<any>) {
-	return (
-		//@ts-ignore
-		vc.id ??
-		Object.getPrototypeOf(vc)?.constructor?.name ??
-		//@ts-ignore
-		vc.costructor?.name ??
-		`view controller`
-	)
+    return (
+        //@ts-ignore
+        vc.id ??
+        Object.getPrototypeOf(vc)?.constructor?.name ??
+        //@ts-ignore
+        vc.costructor?.name ??
+        `view controller`
+    )
 }
 
 export async function wait(...promises: (Promise<any> | undefined | any)[]) {
-	return new Promise<any>((resolve, reject) => {
-		let isDone = false
+    return new Promise<any>((resolve, reject) => {
+        let isDone = false
 
-		const done = () => {
-			if (!isDone) {
-				isDone = true
-				clearTimeout(timeout)
+        const done = () => {
+            if (!isDone) {
+                isDone = true
+                clearTimeout(timeout)
 
-				setTimeout(() => {
-					//@ts-ignore
-					resolve()
-				}, 0)
-			}
+                setTimeout(() => {
+                    //@ts-ignore
+                    resolve()
+                }, 0)
+            }
 
-			isDone = true
-		}
+            isDone = true
+        }
 
-		const catcher = (err: any) => {
-			clearTimeout(timeout)
-			if (!isDone) {
-				isDone = true
-				reject(err)
-			} else {
-				throw err
-			}
-		}
+        const catcher = (err: any) => {
+            clearTimeout(timeout)
+            if (!isDone) {
+                isDone = true
+                reject(err)
+            } else {
+                throw err
+            }
+        }
 
-		const timeout = setTimeout(done, WAIT_TIMEOUT)
+        const timeout = setTimeout(done, WAIT_TIMEOUT)
 
-		for (const promise of promises) {
-			promise?.catch?.(catcher)?.then?.(done)
-		}
-	})
+        for (const promise of promises) {
+            promise?.catch?.(catcher)?.then?.(done)
+        }
+    })
 }
 
 export function assertToolInstanceOf(
-	tool: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool,
-	Class: any
+    tool: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool,
+    Class: any
 ): ViewController<any> {
-	const checks = [
-		tool?.card?.controller,
-		//@ts-ignore
-		tool?.card?.controller?.getParent?.(),
-	]
+    const checks = [
+        tool?.card?.controller,
+        //@ts-ignore
+        tool?.card?.controller?.getParent?.(),
+    ]
 
-	let anyControllersFound = !!checks.find((c) => !!c)
+    let anyControllersFound = !!checks.find((c) => !!c)
 
-	if (!anyControllersFound) {
-		assert.fail(`You are not rendering a good card. Make sure you are rendering a controller, like:
+    if (!anyControllersFound) {
+        assert.fail(`You are not rendering a good card. Make sure you are rendering a controller, like:
 
 public render() { 
 	return { controller: this }
@@ -127,43 +127,43 @@ public render() {
 }
 
 `)
-	}
+    }
 
-	for (const check of checks) {
-		const match = isVcInstanceOf(check, Class)
-		if (match) {
-			return match as any
-		}
-	}
+    for (const check of checks) {
+        const match = isVcInstanceOf(check, Class)
+        if (match) {
+            return match as any
+        }
+    }
 
-	return null as any
+    return null as any
 }
 
 export function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
-	if (vc) {
-		if (vc instanceof Class) {
-			return vc
-		} else if (vc?.getParent?.() instanceof Class) {
-			return vc.getParent()
-		} else if (vc?.getParent?.()?.getParent?.() instanceof Class) {
-			return vc?.getParent?.()?.getParent?.()
-		}
-	}
+    if (vc) {
+        if (vc instanceof Class) {
+            return vc
+        } else if (vc?.getParent?.() instanceof Class) {
+            return vc.getParent()
+        } else if (vc?.getParent?.()?.getParent?.() instanceof Class) {
+            return vc?.getParent?.()?.getParent?.()
+        }
+    }
 
-	return false
+    return false
 }
 
 export function checkForCardSection(
-	vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
-	sectionIdOrIdx: string | number
+    vc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>,
+    sectionIdOrIdx: string | number
 ) {
-	const model = renderUtil.render(vc)
-	const sections = model.body?.sections ?? []
-	const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
-	const match = sections[idx]
-	assert.isTruthy(
-		match,
-		`I could not find a section called '${sectionIdOrIdx}' in your card!`
-	)
-	return match
+    const model = renderUtil.render(vc)
+    const sections = model.body?.sections ?? []
+    const idx = sectionIdOrIdxToIdx(sections, sectionIdOrIdx)
+    const match = sections[idx]
+    assert.isTruthy(
+        match,
+        `I could not find a section called '${sectionIdOrIdx}' in your card!`
+    )
+    return match
 }

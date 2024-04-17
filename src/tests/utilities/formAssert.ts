@@ -1,22 +1,22 @@
 import {
-	assertOptions,
-	buildSchema,
-	FieldDefinitions,
+    assertOptions,
+    buildSchema,
+    FieldDefinitions,
 } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../builders/buildForm'
 import {
-	BigFormViewController,
-	Card,
-	Form,
-	FormBuilderCardViewController,
-	FormInputViewController,
-	FormViewController,
-	InputButton,
-	RenderAsComponent,
-	SkillViewController,
-	ViewController,
+    BigFormViewController,
+    Card,
+    Form,
+    FormBuilderCardViewController,
+    FormInputViewController,
+    FormViewController,
+    InputButton,
+    RenderAsComponent,
+    SkillViewController,
+    ViewController,
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
@@ -27,224 +27,224 @@ import { pluckAllFromView } from './assertSupport'
 import { getViewId, pullCardsFromSkillView } from './vcAssert'
 
 const formAssert = {
-	views: {} as SimpleFactory,
-	_setVcFactory(views: SimpleFactory) {
-		this.views = views
-	},
+    views: {} as SimpleFactory,
+    _setVcFactory(views: SimpleFactory) {
+        this.views = views
+    },
 
-	async inputVcIsValid(inputVc: FormInputViewController) {
-		assert.isFunction(
-			inputVc.getValue,
-			`You gotta create a 'getValue()' method on your input! Or consider having your vc extend AbstractFormInputViewController and be done! 💪`
-		)
+    async inputVcIsValid(inputVc: FormInputViewController) {
+        assert.isFunction(
+            inputVc.getValue,
+            `You gotta create a 'getValue()' method on your input! Or consider having your vc extend AbstractFormInputViewController and be done! 💪`
+        )
 
-		assert.isFunction(
-			inputVc.setValue,
-			`You gotta create a 'setValue()' method on your input!`
-		)
+        assert.isFunction(
+            inputVc.setValue,
+            `You gotta create a 'setValue()' method on your input!`
+        )
 
-		assert.isFunction(
-			inputVc.setHandlers,
-			`You need to create a 'setHandlers(...)' method that conforms to FormInputViewController. Consider extending AbstractFormInputViewController to skip all this.`
-		)
+        assert.isFunction(
+            inputVc.setHandlers,
+            `You need to create a 'setHandlers(...)' method that conforms to FormInputViewController. Consider extending AbstractFormInputViewController to skip all this.`
+        )
 
-		const formVc = BuildFormVc(this.views, inputVc)
-		let value = generateId()
+        const formVc = BuildFormVc(this.views, inputVc)
+        let value = generateId()
 
-		await inputVc.setValue(value)
+        await inputVc.setValue(value)
 
-		assert.isEqual(
-			formVc.getValue('field'),
-			value,
-			`You need to make sure 'setValue()' returns 'this.setValueHandler()' from your input.`
-		)
+        assert.isEqual(
+            formVc.getValue('field'),
+            value,
+            `You need to make sure 'setValue()' returns 'this.setValueHandler()' from your input.`
+        )
 
-		value = generateId()
+        value = generateId()
 
-		await formVc.setValue('field', value)
+        await formVc.setValue('field', value)
 
-		assert.isEqual(
-			inputVc.getValue(),
-			value,
-			`You need to make sure 'getValue()' returns 'this.getValueHandler()' from your input.`
-		)
+        assert.isEqual(
+            inputVc.getValue(),
+            value,
+            `You need to make sure 'getValue()' returns 'this.getValueHandler()' from your input.`
+        )
 
-		assert.isFunction(
-			inputVc.getRenderedValue,
-			`You need to implement 'getRenderedValue(...)' on your input!`
-		)
+        assert.isFunction(
+            inputVc.getRenderedValue,
+            `You need to implement 'getRenderedValue(...)' on your input!`
+        )
 
-		assert.isFunction(
-			inputVc.setRenderedValue,
-			`You need to implement 'setRenderedValue(...)' on your input!`
-		)
-	},
+        assert.isFunction(
+            inputVc.setRenderedValue,
+            `You need to implement 'setRenderedValue(...)' on your input!`
+        )
+    },
 
-	formRendersSection(formVc: FormVc, sectionId: string) {
-		const model = renderUtil.render(formVc)
-		const match = model.sections.find((s) => s.id === sectionId)
-		assert.isTruthy(
-			match,
-			`I could not find section '${sectionId}' in your form!`
-		)
-	},
+    formRendersSection(formVc: FormVc, sectionId: string) {
+        const model = renderUtil.render(formVc)
+        const match = model.sections.find((s) => s.id === sectionId)
+        assert.isTruthy(
+            match,
+            `I could not find section '${sectionId}' in your form!`
+        )
+    },
 
-	formDoesNotRendersSection(formVc: FormVc, sectionId: string) {
-		try {
-			this.formRendersSection(formVc, sectionId)
-		} catch {
-			return
-		}
+    formDoesNotRendersSection(formVc: FormVc, sectionId: string) {
+        try {
+            this.formRendersSection(formVc, sectionId)
+        } catch {
+            return
+        }
 
-		assert.fail(
-			`I found section '${sectionId}' in your form and did not expect to!`
-		)
-	},
+        assert.fail(
+            `I found section '${sectionId}' in your form and did not expect to!`
+        )
+    },
 
-	formRendersField(
-		formVc: FormVc,
-		fieldName: string,
-		fieldDefinition?: Partial<FieldDefinitions>
-	) {
-		const model = renderUtil.render(formVc)
-		const schema = formVc.getSchema()
+    formRendersField(
+        formVc: FormVc,
+        fieldName: string,
+        fieldDefinition?: Partial<FieldDefinitions>
+    ) {
+        const model = renderUtil.render(formVc)
+        const schema = formVc.getSchema()
 
-		for (const section of model.sections) {
-			const fields = normalizeFormSectionFieldNamesUtil.toObjects(
-				section.fields,
-				schema
-			)
-			const match = fields.find((n) => n.renderOptions.name === fieldName)
+        for (const section of model.sections) {
+            const fields = normalizeFormSectionFieldNamesUtil.toObjects(
+                section.fields,
+                schema
+            )
+            const match = fields.find((n) => n.renderOptions.name === fieldName)
 
-			if (match) {
-				if (fieldDefinition) {
-					assert.doesInclude(match, fieldDefinition)
-				}
+            if (match) {
+                if (fieldDefinition) {
+                    assert.doesInclude(match, fieldDefinition)
+                }
 
-				return
-			}
-		}
+                return
+            }
+        }
 
-		assert.fail(
-			`Form does not render field named '${fieldName}'. Make sure it's in your form's schema and set in 'form.sections.fields'.`
-		)
-	},
+        assert.fail(
+            `Form does not render field named '${fieldName}'. Make sure it's in your form's schema and set in 'form.sections.fields'.`
+        )
+    },
 
-	formDoesNotRenderField(formVc: FormVc, fieldName: string) {
-		try {
-			this.formRendersField(formVc, fieldName)
-		} catch {
-			return
-		}
+    formDoesNotRenderField(formVc: FormVc, fieldName: string) {
+        try {
+            this.formRendersField(formVc, fieldName)
+        } catch {
+            return
+        }
 
-		assert.fail(`Form should not be rendering '${fieldName}', but it is.`)
-	},
+        assert.fail(`Form should not be rendering '${fieldName}', but it is.`)
+    },
 
-	formRendersFields(formVc: FormVc, fields: string[]) {
-		for (const field of fields) {
-			this.formRendersField(formVc, field)
-		}
-	},
+    formRendersFields(formVc: FormVc, fields: string[]) {
+        for (const field of fields) {
+            this.formRendersField(formVc, field)
+        }
+    },
 
-	formIsDisabled(vc: FormVc) {
-		assert.isFalse(
-			vc.getIsEnabled(),
-			'Your form is enabled and it should not be! Try this.formVc.disable()'
-		)
-	},
+    formIsDisabled(vc: FormVc) {
+        assert.isFalse(
+            vc.getIsEnabled(),
+            'Your form is enabled and it should not be! Try this.formVc.disable()'
+        )
+    },
 
-	formIsEnabled(vc: FormVc) {
-		assert.isTrue(
-			vc.getIsEnabled(),
-			'Your form is not yet enabled! Try this.formVc.enable()'
-		)
-	},
+    formIsEnabled(vc: FormVc) {
+        assert.isTrue(
+            vc.getIsEnabled(),
+            'Your form is not yet enabled! Try this.formVc.enable()'
+        )
+    },
 
-	formIsBusy(vc: FormVc) {
-		assert.isTrue(
-			vc.getIsBusy(),
-			'Your form is not busy and should be! Try this.formVc.setIsBusy(true).'
-		)
-	},
+    formIsBusy(vc: FormVc) {
+        assert.isTrue(
+            vc.getIsBusy(),
+            'Your form is not busy and should be! Try this.formVc.setIsBusy(true).'
+        )
+    },
 
-	formIsNotBusy(vc: FormVc) {
-		assert.isFalse(
-			vc.getIsBusy(),
-			'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
-		)
-	},
+    formIsNotBusy(vc: FormVc) {
+        assert.isFalse(
+            vc.getIsBusy(),
+            'Your form is still busy. Try this.formVc.setIsBusy(false) to stop it!'
+        )
+    },
 
-	cardRendersForm(
-		vc: ViewController<Card> | DialogViewController,
-		id?: string
-	) {
-		const model = renderUtil.render(vc)
+    cardRendersForm(
+        vc: ViewController<Card> | DialogViewController,
+        id?: string
+    ) {
+        const model = renderUtil.render(vc)
 
-		const bigForms = pluckAllFromView(model, 'bigForm')
-		const forms =
-			bigForms.length > 0 ? bigForms : pluckAllFromView(model, 'form')
+        const bigForms = pluckAllFromView(model, 'bigForm')
+        const forms =
+            bigForms.length > 0 ? bigForms : pluckAllFromView(model, 'form')
 
-		let form: Form | undefined | null
-		for (const match of forms) {
-			assert.isTrue(
-				match!.controller instanceof FormViewControllerImpl,
-				"Expected to find a form inside your CardViewController, but didn't find one!"
-			)
+        let form: Form | undefined | null
+        for (const match of forms) {
+            assert.isTrue(
+                match!.controller instanceof FormViewControllerImpl,
+                "Expected to find a form inside your CardViewController, but didn't find one!"
+            )
 
-			if (!id) {
-				form = match
-			} else if (id && renderUtil.render(match!.controller!).id === id) {
-				form = match
-			}
-		}
+            if (!id) {
+                form = match
+            } else if (id && renderUtil.render(match!.controller!).id === id) {
+                form = match
+            }
+        }
 
-		assert.isTruthy(
-			form,
-			`Could not find a form${id ? ` with the id of ${id}` : ''}!`
-		)
+        assert.isTruthy(
+            form,
+            `Could not find a form${id ? ` with the id of ${id}` : ''}!`
+        )
 
-		return form!.controller as
-			| FormViewController<any>
-			| BigFormViewController<any>
-	},
+        return form!.controller as
+            | FormViewController<any>
+            | BigFormViewController<any>
+    },
 
-	cardRendersForms(vc: ViewController<Card>, count: number) {
-		const model = renderUtil.render(vc)
-		const forms =
-			model.body?.sections
-				?.map((s) => s.form?.controller ?? s.bigForm?.controller)
-				.filter((s) => !!s) ?? []
+    cardRendersForms(vc: ViewController<Card>, count: number) {
+        const model = renderUtil.render(vc)
+        const forms =
+            model.body?.sections
+                ?.map((s) => s.form?.controller ?? s.bigForm?.controller)
+                .filter((s) => !!s) ?? []
 
-		if (forms.length !== count) {
-			assert.fail(
-				`Expected your card to render ${count} form${
-					count === 1 ? '' : 's'
-				}, but I found ${forms.length === 0 ? 'none' : forms.length}!`
-			)
-		}
+        if (forms.length !== count) {
+            assert.fail(
+                `Expected your card to render ${count} form${
+                    count === 1 ? '' : 's'
+                }, but I found ${forms.length === 0 ? 'none' : forms.length}!`
+            )
+        }
 
-		return forms as FormViewController<any>[] | BigFormViewController<any>[]
-	},
+        return forms as FormViewController<any>[] | BigFormViewController<any>[]
+    },
 
-	formFieldRendersUsingInputVc(
-		vc: FormVc,
-		fieldName: string,
-		inputVc: FormInputViewController
-	) {
-		try {
-			vc.getField(fieldName)
-		} catch {
-			assert.fail(
-				`I could not find a field called '${fieldName}' on your form!`
-			)
-		}
+    formFieldRendersUsingInputVc(
+        vc: FormVc,
+        fieldName: string,
+        inputVc: FormInputViewController
+    ) {
+        try {
+            vc.getField(fieldName)
+        } catch {
+            assert.fail(
+                `I could not find a field called '${fieldName}' on your form!`
+            )
+        }
 
-		const match = vc.getFieldVc(fieldName)
+        const match = vc.getFieldVc(fieldName)
 
-		assert.isEqual(
-			match,
-			inputVc,
-			`Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
+        assert.isEqual(
+            match,
+            inputVc,
+            `Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
 		
 		
 		
@@ -264,27 +264,27 @@ this.Controller(
 		],
 	})
 )`
-		)
-	},
+        )
+    },
 
-	fieldRendersUsingInstanceOf(
-		vc: FormVc,
-		fieldName: string,
-		Class: new (options: any) => FormInputViewController
-	) {
-		try {
-			vc.getField(fieldName)
-		} catch {
-			assert.fail(
-				`I could not find a field called '${fieldName}' on your form!`
-			)
-		}
+    fieldRendersUsingInstanceOf(
+        vc: FormVc,
+        fieldName: string,
+        Class: new (options: any) => FormInputViewController
+    ) {
+        try {
+            vc.getField(fieldName)
+        } catch {
+            assert.fail(
+                `I could not find a field called '${fieldName}' on your form!`
+            )
+        }
 
-		const match = vc.getFieldVc(fieldName)
+        const match = vc.getFieldVc(fieldName)
 
-		assert.isTrue(
-			match instanceof Class,
-			`Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
+        assert.isTrue(
+            match instanceof Class,
+            `Your field did not render using the input vc you passed. Make sure you are setting the vc when creating your form vc!
 		
 		
 		
@@ -304,91 +304,95 @@ this.Controller(
 		],
 	})
 )`
-		)
-	},
+        )
+    },
 
-	skillViewRendersFormBuilder(
-		vc: SkillViewController,
-		id?: string
-	): FormBuilderCardViewController {
-		const cards = pullCardsFromSkillView(vc, this.views)
+    skillViewRendersFormBuilder(
+        vc: SkillViewController,
+        id?: string
+    ): FormBuilderCardViewController {
+        const cards = pullCardsFromSkillView(vc, this.views)
 
-		for (const vc of cards) {
-			//@ts-ignore
-			if (vc && vc.__isFormBuilder && (!id || getViewId(vc) === id)) {
-				return vc as any
-			}
-		}
+        for (const vc of cards) {
+            //@ts-ignore
+            if (vc && vc.__isFormBuilder && (!id || getViewId(vc) === id)) {
+                return vc as any
+            }
+        }
 
-		assert.fail(
-			`Could not find a form builder${
-				id ? ` with the id ${id}` : ''
-			} in your skill view!`
-		)
+        assert.fail(
+            `Could not find a form builder${
+                id ? ` with the id ${id}` : ''
+            } in your skill view!`
+        )
 
-		return {} as any
-	},
+        return {} as any
+    },
 
-	formFieldRendersAs(
-		vc: FormVc,
-		fieldName: string,
-		expected: RenderAsComponent
-	) {
-		assertOptions({ vc, fieldName, expected }, ['vc', 'fieldName', 'expected'])
+    formFieldRendersAs(
+        vc: FormVc,
+        fieldName: string,
+        expected: RenderAsComponent
+    ) {
+        assertOptions({ vc, fieldName, expected }, [
+            'vc',
+            'fieldName',
+            'expected',
+        ])
 
-		const field = vc.getField(fieldName)
-		const { renderOptions } = field
+        const field = vc.getField(fieldName)
+        const { renderOptions } = field
 
-		assert.isEqual(
-			renderOptions.renderAs,
-			expected,
-			`The field named '${fieldName}' is rendering as '${JSON.stringify(
-				renderOptions ?? '***default**'
-			)}', but I expected it to render as '${expected}'!`
-		)
-	},
+        assert.isEqual(
+            renderOptions.renderAs,
+            expected,
+            `The field named '${fieldName}' is rendering as '${JSON.stringify(
+                renderOptions ?? '***default**'
+            )}', but I expected it to render as '${expected}'!`
+        )
+    },
 
-	fieldRendersInputButton(vc: FormVc, fieldName: string, id?: string) {
-		const { renderOptions } = vc.getField(fieldName)
+    fieldRendersInputButton(vc: FormVc, fieldName: string, id?: string) {
+        const { renderOptions } = vc.getField(fieldName)
 
-		const inputButtons =
-			(renderOptions.rightButtons as InputButton[]) || undefined
-		assert.isAbove(
-			inputButtons?.length ?? 0,
-			0,
-			`The field named '${fieldName}' is not rendering a right button! Try setting "rightButtons" in the field of your form!`
-		)
+        const inputButtons =
+            (renderOptions.rightButtons as InputButton[]) || undefined
+        assert.isAbove(
+            inputButtons?.length ?? 0,
+            0,
+            `The field named '${fieldName}' is not rendering a right button! Try setting "rightButtons" in the field of your form!`
+        )
 
-		const match = inputButtons.find((b) => b.id === id)
-		assert.isTruthy(
-			match,
-			`I could not find an input button with the id "${id}"!`
-		)
+        const match = inputButtons.find((b) => b.id === id)
+        assert.isTruthy(
+            match,
+            `I could not find an input button with the id "${id}"!`
+        )
 
-		return match
-	},
+        return match
+    },
 }
 
 function BuildFormVc(
-	views: SimpleFactory,
-	inputVc: FormInputViewController
+    views: SimpleFactory,
+    inputVc: FormInputViewController
 ): FormViewController<FormSchema> {
-	return views.Controller(
-		'form',
-		buildForm({
-			schema: formSchema,
-			sections: [
-				{
-					fields: [
-						{
-							name: 'field',
-							vc: inputVc,
-						},
-					],
-				},
-			],
-		})
-	)
+    return views.Controller(
+        'form',
+        buildForm({
+            schema: formSchema,
+            sections: [
+                {
+                    fields: [
+                        {
+                            name: 'field',
+                            vc: inputVc,
+                        },
+                    ],
+                },
+            ],
+        })
+    )
 }
 
 type FormAssert = Omit<typeof formAssert, 'views'>
@@ -396,12 +400,12 @@ type FormAssert = Omit<typeof formAssert, 'views'>
 export default formAssert as FormAssert
 
 const formSchema = buildSchema({
-	id: 'formAssertTest',
-	fields: {
-		field: {
-			type: 'text',
-		},
-	},
+    id: 'formAssertTest',
+    fields: {
+        field: {
+            type: 'text',
+        },
+    },
 })
 
 type FormSchema = typeof formSchema

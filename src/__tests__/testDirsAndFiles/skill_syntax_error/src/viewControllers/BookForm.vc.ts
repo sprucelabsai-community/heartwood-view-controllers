@@ -1,3 +1,3 @@
 export default class BookFormViewController {
-	public static id = 'book-form'
+    public static id = 'book-form'
 }

@@ -1,7 +1,7 @@
 import {
-	MercuryClient,
-	MercuryClientFactory,
-	MercuryTestClient,
+    MercuryClient,
+    MercuryClientFactory,
+    MercuryTestClient,
 } from '@sprucelabs/mercury-client'
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
@@ -10,14 +10,14 @@ import AbstractSpruceTest from '@sprucelabs/test-utils'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
-	ControllerOptions,
-	ViewController,
-	ViewControllerMap,
+    ControllerOptions,
+    ViewController,
+    ViewControllerMap,
 } from '../types/heartwood.types'
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory, {
-	ViewControllerFactoryConstructorOptions,
+    ViewControllerFactoryConstructorOptions,
 } from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
@@ -29,97 +29,97 @@ import listAssert from './utilities/listAssert'
 import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
-	protected static controllerMap: Record<string, any> = {}
-	protected static views?: ViewControllerFactory
-	private static mercuryFixture?: MercuryFixture
-	protected static client: MercuryClient
-	protected static eventFaker: EventFaker
+    protected static controllerMap: Record<string, any> = {}
+    protected static views?: ViewControllerFactory
+    private static mercuryFixture?: MercuryFixture
+    protected static client: MercuryClient
+    protected static eventFaker: EventFaker
 
-	protected static get mercury() {
-		if (!this.mercuryFixture) {
-			this.mercuryFixture = new MercuryFixture(this.cwd)
-		}
+    protected static get mercury() {
+        if (!this.mercuryFixture) {
+            this.mercuryFixture = new MercuryFixture(this.cwd)
+        }
 
-		return this.mercuryFixture
-	}
+        return this.mercuryFixture
+    }
 
-	protected static async beforeEach() {
-		await super.beforeEach()
+    protected static async beforeEach() {
+        await super.beforeEach()
 
-		delete ViewControllerFactory.Class
-		Authenticator.reset()
-		Authenticator.setStorage(new StubStorage())
+        delete ViewControllerFactory.Class
+        Authenticator.reset()
+        Authenticator.setStorage(new StubStorage())
 
-		vcAssert._setVcFactory(this.Factory())
-		formAssert._setVcFactory(this.Factory())
-		listAssert._setVcFactory(this.Factory())
+        vcAssert._setVcFactory(this.Factory())
+        formAssert._setVcFactory(this.Factory())
+        listAssert._setVcFactory(this.Factory())
 
-		SchemaRegistry.getInstance().forgetAllSchemas()
-		this.mercuryFixture = undefined
-		SwipeCardViewController.swipeDelay = 0
-		this.views = undefined
-		await MercuryFixture.beforeEach()
+        SchemaRegistry.getInstance().forgetAllSchemas()
+        this.mercuryFixture = undefined
+        SwipeCardViewController.swipeDelay = 0
+        this.views = undefined
+        await MercuryFixture.beforeEach()
 
-		MercuryClientFactory.setIsTestMode(true)
-		MercuryTestClient.setShouldRequireLocalListeners(true)
+        MercuryClientFactory.setIsTestMode(true)
+        MercuryTestClient.setShouldRequireLocalListeners(true)
 
-		this.client = MercuryTestClient.getInternalEmitter(
-			eventContractUtil.unifyContracts(coreEventContracts as any)
-		) as any
-		this.eventFaker = new EventFaker(this.client)
-	}
+        this.client = MercuryTestClient.getInternalEmitter(
+            eventContractUtil.unifyContracts(coreEventContracts as any)
+        ) as any
+        this.eventFaker = new EventFaker(this.client)
+    }
 
-	protected static async afterEach() {
-		await super.afterEach()
-		await this.mercuryFixture?.destroy()
-	}
+    protected static async afterEach() {
+        await super.afterEach()
+        await this.mercuryFixture?.destroy()
+    }
 
-	protected static Factory(
-		options?: Partial<ViewControllerFactoryConstructorOptions>
-	) {
-		const mercury = this.mercury
+    protected static Factory(
+        options?: Partial<ViewControllerFactoryConstructorOptions>
+    ) {
+        const mercury = this.mercury
 
-		return ViewControllerFactory.Factory({
-			controllerMap: this.controllerMap,
-			device: new SpyDevice(),
-			connectToApi: () => {
-				return mercury.connectToApi()
-			},
-			...options,
-		})
-	}
+        return ViewControllerFactory.Factory({
+            controllerMap: this.controllerMap,
+            device: new SpyDevice(),
+            connectToApi: () => {
+                return mercury.connectToApi()
+            },
+            ...options,
+        })
+    }
 
-	protected static getFactory() {
-		if (!this.views) {
-			this.views = this.Factory()
-		}
+    protected static getFactory() {
+        if (!this.views) {
+            this.views = this.Factory()
+        }
 
-		return this.views
-	}
+        return this.views
+    }
 
-	protected static Controller<N extends keyof ViewControllerMap>(
-		name: N,
-		options: ControllerOptions<N>
-	) {
-		const vc = this.getFactory().Controller(name, options)
+    protected static Controller<N extends keyof ViewControllerMap>(
+        name: N,
+        options: ControllerOptions<N>
+    ) {
+        const vc = this.getFactory().Controller(name, options)
 
-		this.render(vc as Vc)
+        this.render(vc as Vc)
 
-		return vc
-	}
+        return vc
+    }
 
-	protected static render<Vc extends ViewController<any>>(
-		vc: Vc,
-		options?: RenderOptions
-	) {
-		return renderUtil.render(vc, options)
-	}
+    protected static render<Vc extends ViewController<any>>(
+        vc: Vc,
+        options?: RenderOptions
+    ) {
+        return renderUtil.render(vc, options)
+    }
 
-	protected static click(
-		button?: {
-			onClick?: (() => void | Promise<void>) | null | undefined
-		} | null
-	) {
-		return interactor.click(button)
-	}
+    protected static click(
+        button?: {
+            onClick?: (() => void | Promise<void>) | null | undefined
+        } | null
+    ) {
+        return interactor.click(button)
+    }
 }

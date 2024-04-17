@@ -1,89 +1,89 @@
 import { assert } from '@sprucelabs/test-utils'
 import {
-	Navigation,
-	SkillViewController,
-	ViewController,
+    Navigation,
+    SkillViewController,
+    ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 
 const navigationAssert = {
-	rendersButton(vc: ViewController<Navigation>, id: string) {
-		getButtonFromNav(vc, id)
-	},
+    rendersButton(vc: ViewController<Navigation>, id: string) {
+        getButtonFromNav(vc, id)
+    },
 
-	buttonRedirectsTo(options: {
-		vc: ViewController<Navigation>
-		button: string
-		destination: {
-			id: string
-			args?: Record<string, any>
-		}
-	}) {
-		const { vc, button, destination } = options
+    buttonRedirectsTo(options: {
+        vc: ViewController<Navigation>
+        button: string
+        destination: {
+            id: string
+            args?: Record<string, any>
+        }
+    }) {
+        const { vc, button, destination } = options
 
-		const model = getButtonFromNav(vc, button)
+        const model = getButtonFromNav(vc, button)
 
-		assert.isTruthy(
-			model.destination,
-			`Your navigation button "${button}" does not have a redirect!`
-		)
+        assert.isTruthy(
+            model.destination,
+            `Your navigation button "${button}" does not have a redirect!`
+        )
 
-		assert.isEqual(
-			model.destination?.id,
-			destination.id,
-			`Your navigation button "${button}" does not redirect to the correct destination. Expected "${destination.id}" but got "${model.destination?.id}"`
-		)
+        assert.isEqual(
+            model.destination?.id,
+            destination.id,
+            `Your navigation button "${button}" does not redirect to the correct destination. Expected "${destination.id}" but got "${model.destination?.id}"`
+        )
 
-		if (destination.args) {
-			assert.isEqualDeep(
-				model.destination?.args,
-				destination.args,
-				`Your navigation button "${button}" does not redirect to the correct destination. Expected args "${JSON.stringify(
-					destination.args
-				)}" but got "${JSON.stringify(model.destination?.args)}"`
-			)
-		}
-	},
+        if (destination.args) {
+            assert.isEqualDeep(
+                model.destination?.args,
+                destination.args,
+                `Your navigation button "${button}" does not redirect to the correct destination. Expected args "${JSON.stringify(
+                    destination.args
+                )}" but got "${JSON.stringify(model.destination?.args)}"`
+            )
+        }
+    },
 
-	rendersButtons(vc: ViewController<Navigation>, ids: string[]) {
-		ids.forEach((id) => this.rendersButton(vc, id))
-	},
+    rendersButtons(vc: ViewController<Navigation>, ids: string[]) {
+        ids.forEach((id) => this.rendersButton(vc, id))
+    },
 
-	rendersButtonLabels(vc: ViewController<Navigation>) {
-		const model = renderUtil.render(vc)
-		assert.isTrue(
-			model.shouldRenderButtonLabels,
-			`Your navigation should render button labels but it is not! Try shouldRenderButtonLabels: true`
-		)
-	},
+    rendersButtonLabels(vc: ViewController<Navigation>) {
+        const model = renderUtil.render(vc)
+        assert.isTrue(
+            model.shouldRenderButtonLabels,
+            `Your navigation should render button labels but it is not! Try shouldRenderButtonLabels: true`
+        )
+    },
 
-	skillViewRendersNavigation(vc: SkillViewController) {
-		const nav = vc.renderNavigation?.()
-		assert.isTruthy(
-			nav,
-			`Your skill view did not render a navigation! Implement renderNavigation() and use this.Controller('navigation', {}) to render one.`
-		)
+    skillViewRendersNavigation(vc: SkillViewController) {
+        const nav = vc.renderNavigation?.()
+        assert.isTruthy(
+            nav,
+            `Your skill view did not render a navigation! Implement renderNavigation() and use this.Controller('navigation', {}) to render one.`
+        )
 
-		return nav.controller!
-	},
+        return nav.controller!
+    },
 
-	skillViewDoesNotRenderNavigation(vc: SkillViewController) {
-		const nav = vc.renderNavigation?.()
-		assert.isNull(
-			nav,
-			`Your skill view should not render a navigation! Implement renderNavigation() and return null.`
-		)
-	},
+    skillViewDoesNotRenderNavigation(vc: SkillViewController) {
+        const nav = vc.renderNavigation?.()
+        assert.isNull(
+            nav,
+            `Your skill view should not render a navigation! Implement renderNavigation() and return null.`
+        )
+    },
 }
 
 export default navigationAssert
 function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
-	const model = renderUtil.render(vc)
-	const buttons = model.buttons
-	const button = buttons?.find((b) => b.id === id)
-	assert.isTruthy(
-		button,
-		`I could not find a button with the id "${id}" in your navigation!`
-	)
-	return button
+    const model = renderUtil.render(vc)
+    const buttons = model.buttons
+    const button = buttons?.find((b) => b.id === id)
+    assert.isTruthy(
+        button,
+        `I could not find a button with the id "${id}" in your navigation!`
+    )
+    return button
 }

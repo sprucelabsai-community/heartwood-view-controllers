@@ -3,113 +3,113 @@ import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
-	TriggerRenderHandler,
-	ViewController,
-	ViewControllerOptions,
+    TriggerRenderHandler,
+    ViewController,
+    ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class MockCardViewController implements ViewController<Card> {
-	private model: Card
+    private model: Card
 
-	public constructor(options: ViewControllerOptions & Card) {
-		this.model = removeUniversalViewOptions(options)
-	}
+    public constructor(options: ViewControllerOptions & Card) {
+        this.model = removeUniversalViewOptions(options)
+    }
 
-	public triggerRender() {}
-	public setTriggerRenderHandler(handler: TriggerRenderHandler) {
-		this.triggerRender = handler
-	}
+    public triggerRender() {}
+    public setTriggerRenderHandler(handler: TriggerRenderHandler) {
+        this.triggerRender = handler
+    }
 
-	public render(): Card {
-		return this.model
-	}
+    public render(): Card {
+        return this.model
+    }
 }
 
 export default class AssertingStatsTest extends AbstractViewControllerTest {
-	protected static controllerMap = {
-		mockCard: MockCardViewController,
-	}
+    protected static controllerMap = {
+        mockCard: MockCardViewController,
+    }
 
-	@test()
-	protected static throwsIfNotRenderingStats() {
-		const vc = this.Card()
-		assert.doesThrow(() => vcAssert.assertCardRendersStats(vc))
-	}
+    @test()
+    protected static throwsIfNotRenderingStats() {
+        const vc = this.Card()
+        assert.doesThrow(() => vcAssert.assertCardRendersStats(vc))
+    }
 
-	@test()
-	protected static knowsIfStatsAreInFirstSection() {
-		const vc = this.Card({
-			body: {
-				sections: [
-					{
-						stats: {
-							stats: [
-								{
-									value: 123,
-									label: 'hey',
-								},
-							],
-						},
-					},
-				],
-			},
-		})
+    @test()
+    protected static knowsIfStatsAreInFirstSection() {
+        const vc = this.Card({
+            body: {
+                sections: [
+                    {
+                        stats: {
+                            stats: [
+                                {
+                                    value: 123,
+                                    label: 'hey',
+                                },
+                            ],
+                        },
+                    },
+                ],
+            },
+        })
 
-		vcAssert.assertCardRendersStats(vc)
-	}
+        vcAssert.assertCardRendersStats(vc)
+    }
 
-	@test()
-	protected static knowsIfStatsInAnotherSection() {
-		const vc = this.Card({
-			body: {
-				sections: [
-					{},
-					{},
-					{
-						stats: {
-							stats: [
-								{
-									value: 123,
-									label: 'hey',
-								},
-							],
-						},
-					},
-				],
-			},
-		})
+    @test()
+    protected static knowsIfStatsInAnotherSection() {
+        const vc = this.Card({
+            body: {
+                sections: [
+                    {},
+                    {},
+                    {
+                        stats: {
+                            stats: [
+                                {
+                                    value: 123,
+                                    label: 'hey',
+                                },
+                            ],
+                        },
+                    },
+                ],
+            },
+        })
 
-		vcAssert.assertCardRendersStats(vc)
-	}
+        vcAssert.assertCardRendersStats(vc)
+    }
 
-	@test()
-	protected static returnsController() {
-		const statsVc = this.Controller('stats', {
-			stats: [
-				{
-					value: 100,
-				},
-			],
-		})
-		const vc = this.Card({
-			body: {
-				sections: [
-					{
-						stats: statsVc.render(),
-					},
-				],
-			},
-		})
+    @test()
+    protected static returnsController() {
+        const statsVc = this.Controller('stats', {
+            stats: [
+                {
+                    value: 100,
+                },
+            ],
+        })
+        const vc = this.Card({
+            body: {
+                sections: [
+                    {
+                        stats: statsVc.render(),
+                    },
+                ],
+            },
+        })
 
-		const matchVc = vcAssert.assertCardRendersStats(vc)
-		assert.isEqual(matchVc, statsVc)
-	}
+        const matchVc = vcAssert.assertCardRendersStats(vc)
+        assert.isEqual(matchVc, statsVc)
+    }
 
-	private static Card(options: Card = {}) {
-		//@ts-ignore
-		return this.Controller('mockCard', options) as MockCardViewController
-	}
+    private static Card(options: Card = {}) {
+        //@ts-ignore
+        return this.Controller('mockCard', options) as MockCardViewController
+    }
 }

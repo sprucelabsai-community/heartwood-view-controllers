@@ -1,62 +1,62 @@
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import {
-	Card,
-	ViewControllerOptions,
-	ViewControllerPlugin,
-	ViewControllerPluginOptions,
-	ViewControllerPlugins,
+    Card,
+    ViewControllerOptions,
+    ViewControllerPlugin,
+    ViewControllerPluginOptions,
+    ViewControllerPlugins,
 } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 
 export default class AbstractPluginTest extends AbstractViewControllerTest {
-	protected static views: ViewControllerFactory
-	protected static expectedPlugins: ViewControllerPlugins = {}
+    protected static views: ViewControllerFactory
+    protected static expectedPlugins: ViewControllerPlugins = {}
 
-	protected static async beforeEach() {
-		await super.beforeEach()
+    protected static async beforeEach() {
+        await super.beforeEach()
 
-		this.expectedPlugins = {}
+        this.expectedPlugins = {}
 
-		this.views = this.getFactory()
-		this.views.setController('card', PluginTestViewController)
-	}
+        this.views = this.getFactory()
+        this.views.setController('card', PluginTestViewController)
+    }
 
-	protected static mixinPlugin(name = 'spy') {
-		this.views.importControllers([], {
-			[name]: SpyPlugin,
-		})
-	}
+    protected static mixinPlugin(name = 'spy') {
+        this.views.importControllers([], {
+            [name]: SpyPlugin,
+        })
+    }
 
-	protected static Vc() {
-		return this.views.Controller(
-			'card',
-			{}
-		) as unknown as PluginTestViewController
-	}
+    protected static Vc() {
+        return this.views.Controller(
+            'card',
+            {}
+        ) as unknown as PluginTestViewController
+    }
 }
 
 export class PluginTestViewController extends AbstractViewController<Card> {
-	public static constructorOptions?: ViewControllerOptions
+    public static constructorOptions?: ViewControllerOptions
 
-	public constructor(options: ViewControllerOptions) {
-		super(options)
-		PluginTestViewController.constructorOptions = options
-	}
+    public constructor(options: ViewControllerOptions) {
+        super(options)
+        PluginTestViewController.constructorOptions = options
+    }
 
-	public getPlugins() {
-		return this.plugins
-	}
+    public getPlugins() {
+        return this.plugins
+    }
 
-	public render(): Card {
-		return {}
-	}
+    public render(): Card {
+        return {}
+    }
 }
 
 export class SpyPlugin implements ViewControllerPlugin {
-	public static constructorOptions?: ViewControllerPluginOptions
+    public static constructorOptions?: ViewControllerPluginOptions
 
-	public constructor(options: ViewControllerPluginOptions) {
-		SpyPlugin.constructorOptions = options
-	}
+    public constructor(options: ViewControllerPluginOptions) {
+        SpyPlugin.constructorOptions = options
+    }
 }

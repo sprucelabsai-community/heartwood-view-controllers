@@ -1,124 +1,125 @@
 import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { test, assert } from '@sprucelabs/test-utils'
 import {
-	ViewControllerPlugin,
-	ViewControllerPluginOptions,
-	ViewControllerPluginsByName,
+    ViewControllerPlugin,
+    ViewControllerPluginOptions,
+    ViewControllerPluginsByName,
 } from '../../../types/heartwood.types'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 import AbstractPluginTest, {
-	PluginTestViewController,
-	SpyPlugin,
+    PluginTestViewController,
+    SpyPlugin,
 } from './AbstractPluginTest'
 
 export class SpyPlugin2 implements ViewControllerPlugin {}
 
 export default class UsingPluginsTest extends AbstractPluginTest {
-	@test()
-	protected static async canAddPluginToFactory() {
-		this.addPlugin('test', {
-			hello: 'world',
-		})
-	}
+    @test()
+    protected static async canAddPluginToFactory() {
+        this.addPlugin('test', {
+            hello: 'world',
+        })
+    }
 
-	@test()
-	protected static async pluginIsAvailableInTheViewController() {
-		this.addPluginAndAssertSetOnNewVc('test', {
-			what: 'the!?',
-		})
+    @test()
+    protected static async pluginIsAvailableInTheViewController() {
+        this.addPluginAndAssertSetOnNewVc('test', {
+            what: 'the!?',
+        })
 
-		this.addPluginAndAssertSetOnNewVc('test2', {
-			what: 'the!?',
-			hey: 'there',
-		})
-	}
+        this.addPluginAndAssertSetOnNewVc('test2', {
+            what: 'the!?',
+            hey: 'there',
+        })
+    }
 
-	@test()
-	protected static pluginGetsExpectedConstructorOptions() {
-		//@ts-ignore
-		this.views.log = buildLog('test')
+    @test()
+    protected static pluginGetsExpectedConstructorOptions() {
+        //@ts-ignore
+        this.views.log = buildLog('test')
 
-		this.mixinPlugin()
+        this.mixinPlugin()
 
-		this.Vc()
+        this.Vc()
 
-		const expectedOptions: ViewControllerPluginOptions = {
-			connectToApi: PluginTestViewController.constructorOptions!.connectToApi,
-			device: PluginTestViewController.constructorOptions!.device,
-			dates: PluginTestViewController.constructorOptions!.dates,
-			log: PluginTestViewController.constructorOptions!.log,
-			maps: PluginTestViewController.constructorOptions!.maps,
-			plugins: PluginTestViewController.constructorOptions!.plugins,
-		}
+        const expectedOptions: ViewControllerPluginOptions = {
+            connectToApi:
+                PluginTestViewController.constructorOptions!.connectToApi,
+            device: PluginTestViewController.constructorOptions!.device,
+            dates: PluginTestViewController.constructorOptions!.dates,
+            log: PluginTestViewController.constructorOptions!.log,
+            maps: PluginTestViewController.constructorOptions!.maps,
+            plugins: PluginTestViewController.constructorOptions!.plugins,
+        }
 
-		assert.isEqualDeep(SpyPlugin.constructorOptions, expectedOptions)
-	}
+        assert.isEqualDeep(SpyPlugin.constructorOptions, expectedOptions)
+    }
 
-	@test(
-		'can pass plugins to factory constructor 1',
-		{
-			hey: SpyPlugin,
-		},
-		'hey',
-		SpyPlugin
-	)
-	@test(
-		'can pass plugins to factory constructor 2',
-		{
-			hey: SpyPlugin2,
-		},
-		'hey',
-		SpyPlugin2
-	)
-	@test(
-		'can pass plugins to factory constructor 3',
-		{
-			there: SpyPlugin,
-			hey: SpyPlugin2,
-		},
-		'hey',
-		SpyPlugin2
-	)
-	@test(
-		'can pass plugins to factory constructor 4',
-		{
-			there: SpyPlugin,
-			hey: SpyPlugin2,
-		},
-		'there',
-		SpyPlugin
-	)
-	protected static async canPassPluginsToFactoryConstructor(
-		pluginsByName: ViewControllerPluginsByName,
-		key: string,
-		Expected: any
-	) {
-		ViewControllerFactory.Class = SpyViewControllerFactory
+    @test(
+        'can pass plugins to factory constructor 1',
+        {
+            hey: SpyPlugin,
+        },
+        'hey',
+        SpyPlugin
+    )
+    @test(
+        'can pass plugins to factory constructor 2',
+        {
+            hey: SpyPlugin2,
+        },
+        'hey',
+        SpyPlugin2
+    )
+    @test(
+        'can pass plugins to factory constructor 3',
+        {
+            there: SpyPlugin,
+            hey: SpyPlugin2,
+        },
+        'hey',
+        SpyPlugin2
+    )
+    @test(
+        'can pass plugins to factory constructor 4',
+        {
+            there: SpyPlugin,
+            hey: SpyPlugin2,
+        },
+        'there',
+        SpyPlugin
+    )
+    protected static async canPassPluginsToFactoryConstructor(
+        pluginsByName: ViewControllerPluginsByName,
+        key: string,
+        Expected: any
+    ) {
+        ViewControllerFactory.Class = SpyViewControllerFactory
 
-		const views = this.Factory({
-			pluginsByName,
-		}) as SpyViewControllerFactory
+        const views = this.Factory({
+            pluginsByName,
+        }) as SpyViewControllerFactory
 
-		//@ts-ignore
-		assert.isInstanceOf(views.getPlugins()[key], Expected)
-	}
+        //@ts-ignore
+        assert.isInstanceOf(views.getPlugins()[key], Expected)
+    }
 
-	private static addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
-		this.addPlugin(name, plugin)
-		//@ts-ignore
-		this.expectedPlugins[name] = plugin
+    private static addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
+        this.addPlugin(name, plugin)
+        //@ts-ignore
+        this.expectedPlugins[name] = plugin
 
-		const vc = this.Vc()
-		assert.isEqualDeep(vc.getPlugins(), this.expectedPlugins)
-	}
+        const vc = this.Vc()
+        assert.isEqualDeep(vc.getPlugins(), this.expectedPlugins)
+    }
 
-	private static addPlugin(name: string, plugin: any) {
-		this.views.addPlugin(name, plugin)
-	}
+    private static addPlugin(name: string, plugin: any) {
+        this.views.addPlugin(name, plugin)
+    }
 }
 
 class SpyViewControllerFactory extends ViewControllerFactory {
-	public getPlugins() {
-		return this.plugins
-	}
+    public getPlugins() {
+        return this.plugins
+    }
 }

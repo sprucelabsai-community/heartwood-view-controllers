@@ -7,82 +7,82 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 class CalVc extends AbstractViewController<Calendar> {
-	private calendarVc?: CalendarViewController
-	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar {
-		return this.getCalendarVc().render()
-	}
+    private calendarVc?: CalendarViewController
+    public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar {
+        return this.getCalendarVc().render()
+    }
 
-	public getCalendarVc() {
-		if (!this.calendarVc) {
-			this.calendarVc = this.Controller('calendar', {
-				people: [],
-			})
-		}
+    public getCalendarVc() {
+        if (!this.calendarVc) {
+            this.calendarVc = this.Controller('calendar', {
+                people: [],
+            })
+        }
 
-		return this.calendarVc
-	}
+        return this.calendarVc
+    }
 }
 
 class CalendarPage extends AbstractSkillViewController {
-	private calVc?: CalVc
-	public getCalVc() {
-		if (!this.calVc) {
-			this.calVc = this.Controller('calVc' as any, {}) as CalVc
-		}
+    private calVc?: CalVc
+    public getCalVc() {
+        if (!this.calVc) {
+            this.calVc = this.Controller('calVc' as any, {}) as CalVc
+        }
 
-		return this.calVc
-	}
+        return this.calVc
+    }
 
-	public CardVc() {
-		return this.Controller('card', {
-			body: {
-				sections: [{ calendar: this.getCalVc().render() }],
-			},
-		})
-	}
+    public CardVc() {
+        return this.Controller('card', {
+            body: {
+                sections: [{ calendar: this.getCalVc().render() }],
+            },
+        })
+    }
 
-	public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
-		return {
-			layouts: [
-				{
-					cards: [this.CardVc().render()],
-				},
-			],
-		}
-	}
+    public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
+        return {
+            layouts: [
+                {
+                    cards: [this.CardVc().render()],
+                },
+            ],
+        }
+    }
 }
 
 export default class AssertingCalendarsTest extends AbstractViewControllerTest {
-	protected static controllerMap = {
-		cal: CalendarPage,
-		calVc: CalVc,
-	}
-	private static vc: CalendarPage
+    protected static controllerMap = {
+        cal: CalendarPage,
+        calVc: CalVc,
+    }
+    private static vc: CalendarPage
 
-	protected static async beforeEach() {
-		await super.beforeEach()
-		this.vc = this.Controller('cal' as any, {}) as CalendarPage
-	}
+    protected static async beforeEach() {
+        await super.beforeEach()
+        this.vc = this.Controller('cal' as any, {}) as CalendarPage
+    }
 
-	@test()
-	protected static assertingCalendarReturnsController() {
-		const match = vcAssert.assertSkillViewRendersCalendar(this.vc)
+    @test()
+    protected static assertingCalendarReturnsController() {
+        const match = vcAssert.assertSkillViewRendersCalendar(this.vc)
 
-		assert.isTruthy(match)
-		assert.isEqual(match, this.vc.getCalVc().getCalendarVc())
-		vcAssert.assertRendersAsInstanceOf(match, CalVc)
-	}
+        assert.isTruthy(match)
+        assert.isEqual(match, this.vc.getCalVc().getCalendarVc())
+        vcAssert.assertRendersAsInstanceOf(match, CalVc)
+    }
 
-	@test()
-	protected static canAssertCardRendersCalendar() {
-		const vc = this.Controller('card', {})
+    @test()
+    protected static canAssertCardRendersCalendar() {
+        const vc = this.Controller('card', {})
 
-		assert.doesThrow(() => vcAssert.assertCardRendersCalendar(vc))
-		vcAssert.assertCardDoesNotRenderCalendar(vc)
+        assert.doesThrow(() => vcAssert.assertCardRendersCalendar(vc))
+        vcAssert.assertCardDoesNotRenderCalendar(vc)
 
-		const cardVc = this.vc.CardVc()
+        const cardVc = this.vc.CardVc()
 
-		vcAssert.assertCardRendersCalendar(cardVc)
-		assert.doesThrow(() => vcAssert.assertCardDoesNotRenderCalendar(cardVc))
-	}
+        vcAssert.assertCardRendersCalendar(cardVc)
+        assert.doesThrow(() => vcAssert.assertCardDoesNotRenderCalendar(cardVc))
+    }
 }

@@ -2,5 +2,5 @@ import { CalendarEventViewController as CalendarEventVc } from '../types/calenda
 import AbstractCalendarEventViewController from './AbstractCalendarEvent.vc'
 
 export default class CalendarEventViewController
-	extends AbstractCalendarEventViewController
-	implements CalendarEventVc {}
+    extends AbstractCalendarEventViewController
+    implements CalendarEventVc {}

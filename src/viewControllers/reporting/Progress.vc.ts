@@ -6,53 +6,54 @@ import AbstractViewController from '../Abstract.vc'
 export type ProgressViewControllerOptions = Progress
 
 export default class ProgressViewController extends AbstractViewController<Progress> {
-	private model: Progress
+    private model: Progress
 
-	public constructor(options: ViewControllerOptions & Progress) {
-		super(options)
+    public constructor(options: ViewControllerOptions & Progress) {
+        super(options)
 
-		const percentComplete = options.percentComplete
-		this.assertValidPercentComplete(percentComplete)
+        const percentComplete = options.percentComplete
+        this.assertValidPercentComplete(percentComplete)
 
-		this.model = {
-			...removeUniversalViewOptions(options),
-		}
-	}
+        this.model = {
+            ...removeUniversalViewOptions(options),
+        }
+    }
 
-	private assertValidPercentComplete(
-		percentComplete: number | null | undefined
-	) {
-		if (
-			typeof percentComplete == 'number' &&
-			(percentComplete < 0 || percentComplete > 1)
-		) {
-			throw new SchemaError({
-				code: 'INVALID_PARAMETERS',
-				parameters: ['percentComplete'],
-				friendlyMessage: 'percentComplete must be a number between 0 and 1',
-			})
-		}
-	}
-	public setPercentComplete(percentComplete: number) {
-		this.assertValidPercentComplete(percentComplete)
-		this.model.percentComplete = percentComplete
-		this.triggerRender()
-	}
+    private assertValidPercentComplete(
+        percentComplete: number | null | undefined
+    ) {
+        if (
+            typeof percentComplete == 'number' &&
+            (percentComplete < 0 || percentComplete > 1)
+        ) {
+            throw new SchemaError({
+                code: 'INVALID_PARAMETERS',
+                parameters: ['percentComplete'],
+                friendlyMessage:
+                    'percentComplete must be a number between 0 and 1',
+            })
+        }
+    }
+    public setPercentComplete(percentComplete: number) {
+        this.assertValidPercentComplete(percentComplete)
+        this.model.percentComplete = percentComplete
+        this.triggerRender()
+    }
 
-	public setTitle(title: string) {
-		this.model.title = title
-		this.triggerRender()
-	}
+    public setTitle(title: string) {
+        this.model.title = title
+        this.triggerRender()
+    }
 
-	public getPercentComplete() {
-		return this.model.percentComplete
-	}
+    public getPercentComplete() {
+        return this.model.percentComplete
+    }
 
-	public render(): Progress {
-		return {
-			//@ts-ignore
-			controller: this,
-			...this.model,
-		}
-	}
+    public render(): Progress {
+        return {
+            //@ts-ignore
+            controller: this,
+            ...this.model,
+        }
+    }
 }

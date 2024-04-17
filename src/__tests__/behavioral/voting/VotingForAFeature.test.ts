@@ -6,88 +6,88 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class VotingForAFeature extends AbstractViewController<Card> {
-	public render(): Card {
-		return {}
-	}
+    public render(): Card {
+        return {}
+    }
 }
 
 export default class VotingForAFeatureTest extends AbstractViewControllerTest {
-	protected static controllerMap = {
-		vote: VotingForAFeature,
-	}
+    protected static controllerMap = {
+        vote: VotingForAFeature,
+    }
 
-	@test()
-	protected static async askForVoteIsAFunction() {
-		const vc = this.VoteVc()
-		assert.isFunction(vc.askForAVote)
-	}
+    @test()
+    protected static async askForVoteIsAFunction() {
+        const vc = this.VoteVc()
+        assert.isFunction(vc.askForAVote)
+    }
 
-	@test()
-	protected static async invokesVoteHandler() {
-		const vc = this.VoteVc()
-		let wasHit = false
-		vc.voteHandler = () => {
-			wasHit = true
-		}
-		await vc.askForAVote()
+    @test()
+    protected static async invokesVoteHandler() {
+        const vc = this.VoteVc()
+        let wasHit = false
+        vc.voteHandler = () => {
+            wasHit = true
+        }
+        await vc.askForAVote()
 
-		assert.isTrue(wasHit)
-	}
+        assert.isTrue(wasHit)
+    }
 
-	@test()
-	protected static async canAskForVoteWithoutHandler() {
-		const vc = this.VoteVc()
-		await vc.askForAVote()
-	}
+    @test()
+    protected static async canAskForVoteWithoutHandler() {
+        const vc = this.VoteVc()
+        await vc.askForAVote()
+    }
 
-	@test()
-	protected static async passesOptions() {
-		const vc = this.VoteVc()
-		const actual = {
-			when: true,
-		}
+    @test()
+    protected static async passesOptions() {
+        const vc = this.VoteVc()
+        const actual = {
+            when: true,
+        }
 
-		let options: any
+        let options: any
 
-		vc.voteHandler = (o: any) => {
-			options = o
-		}
+        vc.voteHandler = (o: any) => {
+            options = o
+        }
 
-		await vc.askForAVote(actual)
+        await vc.askForAVote(actual)
 
-		assert.isEqual(actual, options)
-	}
+        assert.isEqual(actual, options)
+    }
 
-	@test()
-	protected static canPassVoteHandlerThroughOnConstruction() {
-		const voteHandler = async () => {}
-		const vc = this.Controller('vote' as any, {
-			voteHandler,
-		})
+    @test()
+    protected static canPassVoteHandlerThroughOnConstruction() {
+        const voteHandler = async () => {}
+        const vc = this.Controller('vote' as any, {
+            voteHandler,
+        })
 
-		assert.isEqual(vc.voteHandler, voteHandler)
-	}
+        assert.isEqual(vc.voteHandler, voteHandler)
+    }
 
-	@test()
-	protected static async waitsForVote() {
-		let wasHit = false
-		const vc = this.Controller('vote' as any, {
-			voteHandler: async () => {
-				await this.wait(10)
-				wasHit = true
-			},
-		})
+    @test()
+    protected static async waitsForVote() {
+        let wasHit = false
+        const vc = this.Controller('vote' as any, {
+            voteHandler: async () => {
+                await this.wait(10)
+                wasHit = true
+            },
+        })
 
-		const promise = vc.askForAVote()
+        const promise = vc.askForAVote()
 
-		assert.isFalse(wasHit)
+        assert.isFalse(wasHit)
 
-		await promise
+        await promise
 
-		assert.isTrue(wasHit)
-	}
+        assert.isTrue(wasHit)
+    }
 
-	private static VoteVc() {
-		return this.Controller('vote' as any, {})
-	}
+    private static VoteVc() {
+        return this.Controller('vote' as any, {})
+    }
 }

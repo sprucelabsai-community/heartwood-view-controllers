@@ -5,48 +5,48 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import { FormViewController } from '../../../types/heartwood.types'
 
 export default class ControllingFormFooterTest extends AbstractViewControllerTest {
-	@test()
-	protected static async canSetFooterRenderer() {
-		const vc = this.Vc()
-		let wasHit = false
+    @test()
+    protected static async canSetFooterRenderer() {
+        const vc = this.Vc()
+        let wasHit = false
 
-		vc.setTriggerRenderForFooter(() => {
-			wasHit = true
-		})
+        vc.setTriggerRenderForFooter(() => {
+            wasHit = true
+        })
 
-		assert.isFalse(wasHit)
-		await vc.setValue('firstName', generateId())
-		assert.isTrue(wasHit)
-	}
+        assert.isFalse(wasHit)
+        await vc.setValue('firstName', generateId())
+        assert.isTrue(wasHit)
+    }
 
-	private static Vc(): FormViewController<FormSchema> {
-		return this.Controller(
-			'form',
-			buildForm({
-				schema: formSchema,
-				sections: [
-					{
-						id: generateId(),
-					},
-					{
-						id: generateId(),
-					},
-				],
-			})
-		)
-	}
+    private static Vc(): FormViewController<FormSchema> {
+        return this.Controller(
+            'form',
+            buildForm({
+                schema: formSchema,
+                sections: [
+                    {
+                        id: generateId(),
+                    },
+                    {
+                        id: generateId(),
+                    },
+                ],
+            })
+        )
+    }
 }
 
 const formSchema = buildSchema({
-	id: 'schema',
-	fields: {
-		firstName: {
-			type: 'text',
-		},
-		lastName: {
-			type: 'text',
-		},
-	},
+    id: 'schema',
+    fields: {
+        firstName: {
+            type: 'text',
+        },
+        lastName: {
+            type: 'text',
+        },
+    },
 })
 
 type FormSchema = typeof formSchema

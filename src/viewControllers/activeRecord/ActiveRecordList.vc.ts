@@ -2,287 +2,289 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import {
-	List,
-	ListRow,
-	ViewControllerOptions,
+    List,
+    ListRow,
+    ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import ListViewController from '../list/List.vc'
 
 export default class ActiveRecordListViewController extends AbstractViewController<List> {
-	private listVc: ListViewController
-	private noResultsRow?: Omit<ListRow, 'id'>
-	private rowTransformer: (record: Record<string, any>) => ListRow
-	private eventName: string
-	private responseKey: string
-	private emitPayload?: Record<string, any>
-	private emitTarget?: Record<string, any>
-	private isLoaded = false
-	private filter?: (record: Record<string, any>) => boolean
+    private listVc: ListViewController
+    private noResultsRow?: Omit<ListRow, 'id'>
+    private rowTransformer: (record: Record<string, any>) => ListRow
+    private eventName: string
+    private responseKey: string
+    private emitPayload?: Record<string, any>
+    private emitTarget?: Record<string, any>
+    private isLoaded = false
+    private filter?: (record: Record<string, any>) => boolean
 
-	private static shouldThrowOnResponseError = false
-	private willFetchHandler?: () => void | Promise<void>
-	private didFetchHandler?: () => void | Promise<void>
-	public static setShouldThrowOnResponseError(shouldThrow: boolean) {
-		this.shouldThrowOnResponseError = shouldThrow
-	}
+    private static shouldThrowOnResponseError = false
+    private willFetchHandler?: () => void | Promise<void>
+    private didFetchHandler?: () => void | Promise<void>
+    public static setShouldThrowOnResponseError(shouldThrow: boolean) {
+        this.shouldThrowOnResponseError = shouldThrow
+    }
 
-	private records: any[] = []
+    private records: any[] = []
 
-	public constructor(
-		options: ViewControllerOptions & ActiveRecordListViewControllerOptions
-	) {
-		super(options)
+    public constructor(
+        options: ViewControllerOptions & ActiveRecordListViewControllerOptions
+    ) {
+        super(options)
 
-		assertOptions(options, ['eventName', 'rowTransformer', 'responseKey'])
+        assertOptions(options, ['eventName', 'rowTransformer', 'responseKey'])
 
-		this.noResultsRow = options.noResultsRow
-		this.rowTransformer = options.rowTransformer
-		this.eventName = options.eventName
-		this.responseKey = options.responseKey
-		this.emitPayload = options.payload
-		this.emitTarget = options.target
-		this.filter = options.filter
-		this.willFetchHandler = options.onWillFetch
-		this.didFetchHandler = options.onDidFetch
+        this.noResultsRow = options.noResultsRow
+        this.rowTransformer = options.rowTransformer
+        this.eventName = options.eventName
+        this.responseKey = options.responseKey
+        this.emitPayload = options.payload
+        this.emitTarget = options.target
+        this.filter = options.filter
+        this.willFetchHandler = options.onWillFetch
+        this.didFetchHandler = options.onDidFetch
 
-		this.listVc = this.ListVc(options)
-	}
+        this.listVc = this.ListVc(options)
+    }
 
-	private ListVc(
-		options: ActiveRecordListViewControllerOptions
-	): ListViewController {
-		return this.Controller('list', {
-			id: options.id,
-			columnWidths: options.columnWidths as any,
-			defaultRowHeight: options.defaultRowHeight,
-			shouldRenderRowDividers: options.shouldRenderRowDividers,
-		})
-	}
+    private ListVc(
+        options: ActiveRecordListViewControllerOptions
+    ): ListViewController {
+        return this.Controller('list', {
+            id: options.id,
+            columnWidths: options.columnWidths as any,
+            defaultRowHeight: options.defaultRowHeight,
+            shouldRenderRowDividers: options.shouldRenderRowDividers,
+        })
+    }
 
-	public async load() {
-		if (this.isLoaded) {
-			throw new Error(`You can't load your active record twice!`)
-		}
+    public async load() {
+        if (this.isLoaded) {
+            throw new Error(`You can't load your active record twice!`)
+        }
 
-		await this.listVc.renderOnce(() => this.fetchResults())
-	}
+        await this.listVc.renderOnce(() => this.fetchResults())
+    }
 
-	public doesRowExist(id: string) {
-		return this.listVc.doesRowExist(id)
-	}
+    public doesRowExist(id: string) {
+        return this.listVc.doesRowExist(id)
+    }
 
-	private async fetchResults() {
-		let responseKeyError: any
+    private async fetchResults() {
+        let responseKeyError: any
 
-		await this.willFetchHandler?.()
+        await this.willFetchHandler?.()
 
-		try {
-			const client = await this.connectToApi()
+        try {
+            const client = await this.connectToApi()
 
-			const [responsePayload] = await client.emitAndFlattenResponses(
-				this.eventName as any,
-				this.buildTargetAndPayload() as any
-			)
+            const [responsePayload] = await client.emitAndFlattenResponses(
+                this.eventName as any,
+                this.buildTargetAndPayload() as any
+            )
 
-			const records = responsePayload[this.responseKey] as any[]
+            const records = responsePayload[this.responseKey] as any[]
 
-			if (!records) {
-				responseKeyError = true
-			} else {
-				this.records = records.filter(
-					(r: any) => !this.filter || this.filter(r)
-				)
+            if (!records) {
+                responseKeyError = true
+            } else {
+                this.records = records.filter(
+                    (r: any) => !this.filter || this.filter(r)
+                )
 
-				if (this.records.length === 0) {
-					this.listVc.setRows([this.renderNoResultsRow()])
-				} else {
-					this.listVc.setRows(
-						this.records.map((record) => this.rowTransformer(record))
-					)
-				}
-			}
-		} catch (err: any) {
-			if (ActiveRecordListViewController.shouldThrowOnResponseError) {
-				throw err
-			}
-			this.listVc.setRows([this.buildErrorRow(err)])
-		}
+                if (this.records.length === 0) {
+                    this.listVc.setRows([this.renderNoResultsRow()])
+                } else {
+                    this.listVc.setRows(
+                        this.records.map((record) =>
+                            this.rowTransformer(record)
+                        )
+                    )
+                }
+            }
+        } catch (err: any) {
+            if (ActiveRecordListViewController.shouldThrowOnResponseError) {
+                throw err
+            }
+            this.listVc.setRows([this.buildErrorRow(err)])
+        }
 
-		if (responseKeyError) {
-			throw new Error(
-				`The key '${this.responseKey}' was not found in response or no records were returned!`
-			)
-		}
+        if (responseKeyError) {
+            throw new Error(
+                `The key '${this.responseKey}' was not found in response or no records were returned!`
+            )
+        }
 
-		this.isLoaded = true
-		await this.didFetchHandler?.()
-	}
+        this.isLoaded = true
+        await this.didFetchHandler?.()
+    }
 
-	private renderNoResultsRow(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow & {
-		atIndex?: number | undefined
-	} {
-		return {
-			id: 'no-results',
-			cells: [
-				{
-					text: {
-						content: 'No results found!',
-					},
-				},
-			],
-			...this.noResultsRow,
-		}
-	}
+    private renderNoResultsRow(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow & {
+        atIndex?: number | undefined
+    } {
+        return {
+            id: 'no-results',
+            cells: [
+                {
+                    text: {
+                        content: 'No results found!',
+                    },
+                },
+            ],
+            ...this.noResultsRow,
+        }
+    }
 
-	private buildErrorRow(err: any): ListRow {
-		return {
-			id: 'error',
-			height: 'content',
-			cells: [
-				{
-					text: {
-						content: randomUtil.rand([
-							'Oh no! Something is not right!',
-							"Hmm, this isn't great.",
-							'Oops! Major error!',
-							'Error. Error. Error',
-							'Something went wrong! 🤬',
-						]),
-					},
-					subText: {
-						content: err.message,
-					},
-				},
-			],
-		}
-	}
+    private buildErrorRow(err: any): ListRow {
+        return {
+            id: 'error',
+            height: 'content',
+            cells: [
+                {
+                    text: {
+                        content: randomUtil.rand([
+                            'Oh no! Something is not right!',
+                            "Hmm, this isn't great.",
+                            'Oops! Major error!',
+                            'Error. Error. Error',
+                            'Something went wrong! 🤬',
+                        ]),
+                    },
+                    subText: {
+                        content: err.message,
+                    },
+                },
+            ],
+        }
+    }
 
-	public getIsLoaded() {
-		return this.isLoaded
-	}
+    public getIsLoaded() {
+        return this.isLoaded
+    }
 
-	public isRowSelected(id: string | number) {
-		return this.listVc.isRowSelected(id)
-	}
+    public isRowSelected(id: string | number) {
+        return this.listVc.isRowSelected(id)
+    }
 
-	public selectRow(id: string | number) {
-		this.listVc.selectRow(id)
-	}
+    public selectRow(id: string | number) {
+        this.listVc.selectRow(id)
+    }
 
-	public setSelectedRows(rows: (string | number)[]) {
-		this.listVc.setSelectedRows(rows)
-	}
+    public setSelectedRows(rows: (string | number)[]) {
+        this.listVc.setSelectedRows(rows)
+    }
 
-	public deselectRow(id: string | number) {
-		this.listVc.deselectRow(id)
-	}
+    public deselectRow(id: string | number) {
+        this.listVc.deselectRow(id)
+    }
 
-	public getRecords() {
-		if (!this.isLoaded) {
-			throw new Error(
-				`You have to load your activeRecordList before you can get records from it.`
-			)
-		}
-		return this.records
-	}
+    public getRecords() {
+        if (!this.isLoaded) {
+            throw new Error(
+                `You have to load your activeRecordList before you can get records from it.`
+            )
+        }
+        return this.records
+    }
 
-	public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
-		if (!this.isLoaded) {
-			throw new Error(
-				`You have to load your activeRecordCard before you can upsert a row.`
-			)
-		}
+    public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
+        if (!this.isLoaded) {
+            throw new Error(
+                `You have to load your activeRecordCard before you can upsert a row.`
+            )
+        }
 
-		this.listVc.upsertRow(id, { ...row })
-	}
-	private buildTargetAndPayload() {
-		const targetAndPayload: Record<string, any> = {}
+        this.listVc.upsertRow(id, { ...row })
+    }
+    private buildTargetAndPayload() {
+        const targetAndPayload: Record<string, any> = {}
 
-		if (this.emitTarget) {
-			//@ts-ignore
-			targetAndPayload.target = this.emitTarget
-		}
+        if (this.emitTarget) {
+            //@ts-ignore
+            targetAndPayload.target = this.emitTarget
+        }
 
-		if (this.emitPayload) {
-			//@ts-ignore
-			targetAndPayload.payload = this.emitPayload
-		}
-		return Object.keys(targetAndPayload).length === 0
-			? undefined
-			: targetAndPayload
-	}
+        if (this.emitPayload) {
+            //@ts-ignore
+            targetAndPayload.payload = this.emitPayload
+        }
+        return Object.keys(targetAndPayload).length === 0
+            ? undefined
+            : targetAndPayload
+    }
 
-	public getTarget() {
-		return this.emitTarget
-	}
+    public getTarget() {
+        return this.emitTarget
+    }
 
-	public setTarget(target?: Record<string, any>) {
-		this.emitTarget = target
-	}
+    public setTarget(target?: Record<string, any>) {
+        this.emitTarget = target
+    }
 
-	public setPayload(payload?: Record<string, any>) {
-		this.emitPayload = payload
-	}
+    public setPayload(payload?: Record<string, any>) {
+        this.emitPayload = payload
+    }
 
-	public deleteRow(id: string | number) {
-		this.listVc.deleteRow(id)
-		if (this.listVc.getTotalRows() === 0) {
-			this.listVc.addRow(this.renderNoResultsRow())
-		}
-	}
+    public deleteRow(id: string | number) {
+        this.listVc.deleteRow(id)
+        if (this.listVc.getTotalRows() === 0) {
+            this.listVc.addRow(this.renderNoResultsRow())
+        }
+    }
 
-	public async refresh() {
-		if (!this.isLoaded) {
-			throw new Error(
-				`You can't refresh your active record card until it's been loaded.`
-			)
-		}
+    public async refresh() {
+        if (!this.isLoaded) {
+            throw new Error(
+                `You can't refresh your active record card until it's been loaded.`
+            )
+        }
 
-		await this.listVc.renderOnce(async () => {
-			await this.fetchResults()
-		})
-	}
+        await this.listVc.renderOnce(async () => {
+            await this.fetchResults()
+        })
+    }
 
-	public getValues() {
-		return this.listVc.getValues()
-	}
+    public getValues() {
+        return this.listVc.getValues()
+    }
 
-	public addRow(
-		row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
-	) {
-		this.listVc.addRow(row)
-	}
+    public addRow(
+        row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+    ) {
+        this.listVc.addRow(row)
+    }
 
-	public getRowVc(row: number | string) {
-		return this.listVc.getRowVc(row)
-	}
+    public getRowVc(row: number | string) {
+        return this.listVc.getRowVc(row)
+    }
 
-	public getPayload() {
-		return this.emitPayload
-	}
+    public getPayload() {
+        return this.emitPayload
+    }
 
-	public getListVc() {
-		return this.listVc
-	}
+    public getListVc() {
+        return this.listVc
+    }
 
-	public render(): List {
-		return this.listVc.render()
-	}
+    public render(): List {
+        return this.listVc.render()
+    }
 }
 
 export interface ActiveRecordListViewControllerOptions {
-	eventName: string
-	responseKey: string
-	rowTransformer: (record: Record<string, any>) => ListRow
-	noResultsRow?: Omit<ListRow, 'id'>
-	payload?: Record<string, any>
-	target?: Record<string, any>
-	id?: string
-	columnWidths?: string[]
-	shouldRenderRowDividers?: boolean
-	defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
-	filter?: (record: Record<string, any>) => boolean
-	onWillFetch?: () => Promise<void> | void
-	onDidFetch?: () => Promise<void> | void
+    eventName: string
+    responseKey: string
+    rowTransformer: (record: Record<string, any>) => ListRow
+    noResultsRow?: Omit<ListRow, 'id'>
+    payload?: Record<string, any>
+    target?: Record<string, any>
+    id?: string
+    columnWidths?: string[]
+    shouldRenderRowDividers?: boolean
+    defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
+    filter?: (record: Record<string, any>) => boolean
+    onWillFetch?: () => Promise<void> | void
+    onDidFetch?: () => Promise<void> | void
 }

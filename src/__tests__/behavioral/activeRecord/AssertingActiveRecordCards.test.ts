@@ -10,123 +10,127 @@ import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOp
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
 declare module '../../../types/heartwood.types' {
-	interface ViewControllerMap {
-		genericSkillView: GenericSkillView
-	}
+    interface ViewControllerMap {
+        genericSkillView: GenericSkillView
+    }
 
-	interface ViewControllerOptionsMap {
-		genericSkillView: SkillView
-	}
+    interface ViewControllerOptionsMap {
+        genericSkillView: SkillView
+    }
 }
 
 class GenericSkillView extends AbstractSkillViewController {
-	private model: SkillView
+    private model: SkillView
 
-	public constructor(options: ViewControllerOptions & SkillView) {
-		super(options)
-		this.model = removeUniversalViewOptions(options)
-	}
+    public constructor(options: ViewControllerOptions & SkillView) {
+        super(options)
+        this.model = removeUniversalViewOptions(options)
+    }
 
-	public render(): SkillView {
-		return this.model
-	}
+    public render(): SkillView {
+        return this.model
+    }
 }
 
 export default class AssertingActiveRecordCardsTest extends AbstractViewControllerTest {
-	protected static controllerMap = {
-		genericSkillView: GenericSkillView,
-	}
+    protected static controllerMap = {
+        genericSkillView: GenericSkillView,
+    }
 
-	@test()
-	protected static throwsIfNoActiveRecord() {
-		const vc = this.Controller('genericSkillView', {
-			layouts: [],
-		})
+    @test()
+    protected static throwsIfNoActiveRecord() {
+        const vc = this.Controller('genericSkillView', {
+            layouts: [],
+        })
 
-		assert.doesThrow(() => vcAssert.assertSkillViewRendersActiveRecordCard(vc))
-	}
+        assert.doesThrow(() =>
+            vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        )
+    }
 
-	@test()
-	protected static canTellIfHasActiveRecord() {
-		const vc = this.Controller('genericSkillView', {
-			layouts: [
-				{
-					cards: [
-						this.renderActiveRecordCard(),
-						this.renderActiveRecordCard('test'),
-					],
-				},
-			],
-		})
+    @test()
+    protected static canTellIfHasActiveRecord() {
+        const vc = this.Controller('genericSkillView', {
+            layouts: [
+                {
+                    cards: [
+                        this.renderActiveRecordCard(),
+                        this.renderActiveRecordCard('test'),
+                    ],
+                },
+            ],
+        })
 
-		vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        vcAssert.assertSkillViewRendersActiveRecordCard(vc)
 
-		assert.doesThrow(() =>
-			vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test2')
-		)
+        assert.doesThrow(() =>
+            vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test2')
+        )
 
-		vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test')
-	}
+        vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test')
+    }
 
-	@test()
-	protected static canTellIfPlainCardPassed() {
-		const cardVc = this.Controller('card', {})
-		const vc = this.Controller('genericSkillView', {
-			layouts: [
-				{
-					cards: [cardVc.render()],
-				},
-			],
-		})
+    @test()
+    protected static canTellIfPlainCardPassed() {
+        const cardVc = this.Controller('card', {})
+        const vc = this.Controller('genericSkillView', {
+            layouts: [
+                {
+                    cards: [cardVc.render()],
+                },
+            ],
+        })
 
-		assert.doesThrow(() => vcAssert.assertSkillViewRendersActiveRecordCard(vc))
-		assert.doesThrow(() => vcAssert.assertIsActiveRecordCard(cardVc))
-	}
+        assert.doesThrow(() =>
+            vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        )
+        assert.doesThrow(() => vcAssert.assertIsActiveRecordCard(cardVc))
+    }
 
-	@test()
-	protected static returnsActiveCardControllerInstance() {
-		const active = this.ActiveRecordCard()
-		const vc = this.Controller('genericSkillView', {
-			layouts: [
-				{
-					cards: [active.render()],
-				},
-			],
-		})
+    @test()
+    protected static returnsActiveCardControllerInstance() {
+        const active = this.ActiveRecordCard()
+        const vc = this.Controller('genericSkillView', {
+            layouts: [
+                {
+                    cards: [active.render()],
+                },
+            ],
+        })
 
-		const match = vcAssert.assertSkillViewRendersActiveRecordCard(vc)
-		assert.isEqual(active, match)
+        const match = vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        assert.isEqual(active, match)
 
-		assert.isTrue(match instanceof ActiveRecordCardViewController)
-		vcAssert.assertIsActiveRecordCard(match)
-		vcAssert.assertIsActiveRecordCard(match.getCardVc())
-	}
+        assert.isTrue(match instanceof ActiveRecordCardViewController)
+        vcAssert.assertIsActiveRecordCard(match)
+        vcAssert.assertIsActiveRecordCard(match.getCardVc())
+    }
 
-	@test()
-	protected static matchesWhenCardRendersActiveRecordCard() {
-		const active = this.ActiveRecordCard()
-		const vc = this.Controller('card', {})
-		vc.render = () => {
-			return active.render()
-		}
-		vcAssert.assertIsActiveRecordCard(vc)
-	}
+    @test()
+    protected static matchesWhenCardRendersActiveRecordCard() {
+        const active = this.ActiveRecordCard()
+        const vc = this.Controller('card', {})
+        vc.render = () => {
+            return active.render()
+        }
+        vcAssert.assertIsActiveRecordCard(vc)
+    }
 
-	private static renderActiveRecordCard(
-		id?: string
-	): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
-		return this.ActiveRecordCard(id).render()
-	}
+    private static renderActiveRecordCard(
+        id?: string
+    ): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
+        return this.ActiveRecordCard(id).render()
+    }
 
-	private static ActiveRecordCard(id?: string) {
-		return this.Controller(
-			'activeRecordCard',
-			buildActiveRecordCard({
-				id,
-				eventName: 'list-organizations::v2020_12_25',
-				responseKey: 'organizations',
-				rowTransformer: (o) => ({ id: o.id, cells: [] }),
-			})
-		)
-	}
+    private static ActiveRecordCard(id?: string) {
+        return this.Controller(
+            'activeRecordCard',
+            buildActiveRecordCard({
+                id,
+                eventName: 'list-organizations::v2020_12_25',
+                responseKey: 'organizations',
+                rowTransformer: (o) => ({ id: o.id, cells: [] }),
+            })
+        )
+    }
 }

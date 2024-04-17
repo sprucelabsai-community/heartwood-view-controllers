@@ -4,48 +4,52 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import vcAssert from '../../../tests/utilities/vcAssert'
 
 export default class AssertingButtonBars extends AbstractViewControllerTest {
-	protected static controllerMap = {}
+    protected static controllerMap = {}
 
-	@test()
-	protected static throwsWhenMissingParams() {
-		//@ts-ignore
-		const err = assert.doesThrow(() => vcAssert.assertButtonBarRendersButton())
+    @test()
+    protected static throwsWhenMissingParams() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            vcAssert.assertButtonBarRendersButton()
+        )
 
-		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['buttonBarVc', 'buttonId'],
-		})
-	}
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['buttonBarVc', 'buttonId'],
+        })
+    }
 
-	@test('finds first button', 'first')
-	@test('finds second button', 'second')
-	protected static findsButton(buttonId: string) {
-		const vc = this.Controller('buttonBar', {
-			buttons: [
-				{
-					id: 'first',
-					label: 'Hey!',
-				},
-				{
-					id: 'second',
-					label: 'There!',
-				},
-			],
-		})
+    @test('finds first button', 'first')
+    @test('finds second button', 'second')
+    protected static findsButton(buttonId: string) {
+        const vc = this.Controller('buttonBar', {
+            buttons: [
+                {
+                    id: 'first',
+                    label: 'Hey!',
+                },
+                {
+                    id: 'second',
+                    label: 'There!',
+                },
+            ],
+        })
 
-		vcAssert.assertButtonBarRendersButton(vc, buttonId)
-	}
+        vcAssert.assertButtonBarRendersButton(vc, buttonId)
+    }
 
-	@test()
-	protected static thowsWhenNoButton() {
-		const vc = this.Controller('buttonBar', {
-			buttons: [
-				{
-					id: 'first',
-					label: 'Hey!',
-				},
-			],
-		})
+    @test()
+    protected static thowsWhenNoButton() {
+        const vc = this.Controller('buttonBar', {
+            buttons: [
+                {
+                    id: 'first',
+                    label: 'Hey!',
+                },
+            ],
+        })
 
-		assert.doesThrow(() => vcAssert.assertButtonBarRendersButton(vc, 'second'))
-	}
+        assert.doesThrow(() =>
+            vcAssert.assertButtonBarRendersButton(vc, 'second')
+        )
+    }
 }
