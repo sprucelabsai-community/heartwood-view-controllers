@@ -8,12 +8,12 @@ import AbstractSpruceTest, {
 } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
-    buildCwd_nodeModulesImport,
+    buildCwdNodeModulesImport,
     importExportCwd,
     importExportSource,
-    importExportSource_nodeModulesImport,
-    importExportSource_syntaxError,
-    importExportSource_withDefines,
+    importExportSourceNodeModulesImport,
+    importExportSourceSyntaxError,
+    importExportSourceWithDefines,
 } from '../../../tests/constants'
 import ViewControllerExporter, {
     ExportOptions,
@@ -121,7 +121,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     protected static async throwsWithSyntaxError() {
         const err = await assert.doesThrowAsync(async () => {
             await this.exporter.export({
-                source: importExportSource_syntaxError,
+                source: importExportSourceSyntaxError,
                 destination: this.destination,
             })
         })
@@ -160,11 +160,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         diskUtil.writeFile(destination, contents)
 
         this.exporter = ViewControllerExporter.Exporter(
-            buildCwd_nodeModulesImport
+            buildCwdNodeModulesImport
         )
 
         await this.exporter.export({
-            source: importExportSource_nodeModulesImport,
+            source: importExportSourceNodeModulesImport,
             destination: this.destination,
         })
     }
@@ -251,7 +251,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         value: string
     ) {
         await this.exporter.export({
-            source: importExportSource_withDefines,
+            source: importExportSourceWithDefines,
             destination: this.destination,
             defines: { [key]: value },
         })

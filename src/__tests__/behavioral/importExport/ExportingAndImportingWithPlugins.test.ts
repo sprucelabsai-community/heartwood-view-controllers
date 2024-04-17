@@ -2,8 +2,8 @@ import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import {
-    importExportSource_plugins1,
-    importExportSource_plugins2,
+    importExportSourcePlugins1,
+    importExportSourcePlugins2,
 } from '../../../tests/constants'
 import ViewControllerExporter from '../../../viewControllers/ViewControllerExporter'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
@@ -32,7 +32,7 @@ export default class ExportingAndImportingWithPluginsTest extends AbstractViewCo
 
     @test()
     protected static async canExportAndImportPlugins1() {
-        await this.exportAndThenImport(importExportSource_plugins1)
+        await this.exportAndThenImport(importExportSourcePlugins1)
 
         const pluginsFromVc = this.getPluginsFrom()
 
@@ -45,7 +45,7 @@ export default class ExportingAndImportingWithPluginsTest extends AbstractViewCo
 
     @test()
     protected static async canExportAndImportPlugins2() {
-        await this.exportAndThenImport(importExportSource_plugins2)
+        await this.exportAndThenImport(importExportSourcePlugins2)
         const pluginsFromVc = this.getPluginsFrom('reserve-card')
 
         assert.isFalsy(pluginsFromVc.plugin1, 'Plugin1 found on vc.')

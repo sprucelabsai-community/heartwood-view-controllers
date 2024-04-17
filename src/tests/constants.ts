@@ -23,7 +23,7 @@ export const importExportSource =
     pathUtil.sep +
     diskUtil.resolvePath('src', '.spruce', 'views', 'views.ts')
 
-export const importExportSource_noIds = diskUtil.resolvePath(
+export const importExportSourceNoIds = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',
@@ -37,12 +37,12 @@ export const importExportSource_noIds = diskUtil.resolvePath(
     'views.ts'
 )
 
-export const importExportDestination_noIds = diskUtil.resolvePath(
+export const importExportDestinationNoIds = diskUtil.resolvePath(
     diskUtil.createRandomTempDir(),
     'bundle.js'
 )
 
-export const importExportSource_syntaxError = diskUtil.resolvePath(
+export const importExportSourceSyntaxError = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',
@@ -61,7 +61,7 @@ export const importExportDestination = diskUtil.resolvePath(
     'bundle.js'
 )
 
-export const buildCwd_nodeModulesImport = diskUtil.resolvePath(
+export const buildCwdNodeModulesImport = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',
@@ -71,15 +71,15 @@ export const buildCwd_nodeModulesImport = diskUtil.resolvePath(
     'skill_import_from_node_module'
 )
 
-export const importExportSource_nodeModulesImport = diskUtil.resolvePath(
-    buildCwd_nodeModulesImport,
+export const importExportSourceNodeModulesImport = diskUtil.resolvePath(
+    buildCwdNodeModulesImport,
     'src',
     '.spruce',
     'views',
     'views.ts'
 )
 
-export const importExportSource_withDefines = diskUtil.resolvePath(
+export const importExportSourceWithDefines = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',
@@ -93,7 +93,7 @@ export const importExportSource_withDefines = diskUtil.resolvePath(
     'views.ts'
 )
 
-export const importExportSource_plugins1 = diskUtil.resolvePath(
+export const importExportSourcePlugins1 = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',
@@ -107,7 +107,7 @@ export const importExportSource_plugins1 = diskUtil.resolvePath(
     'views.ts'
 )
 
-export const importExportSource_plugins2 = diskUtil.resolvePath(
+export const importExportSourcePlugins2 = diskUtil.resolvePath(
     __dirname,
     '..',
     '..',

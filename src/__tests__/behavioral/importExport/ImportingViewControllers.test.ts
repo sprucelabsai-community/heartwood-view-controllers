@@ -23,8 +23,8 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         })
 
         await exporter.export({
-            source: constants.importExportSource_noIds,
-            destination: constants.importExportDestination_noIds,
+            source: constants.importExportSourceNoIds,
+            destination: constants.importExportDestinationNoIds,
         })
     }
 
