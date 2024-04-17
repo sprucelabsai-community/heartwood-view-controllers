@@ -47,7 +47,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
     @test()
     protected static throwsIfMissingPublicStaticIdOnVc() {
-        const err = assert.doesThrow(() => this.importControllers('_noIds'))
+        const err = assert.doesThrow(() => this.importControllers('noIds'))
         errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
         assert.doesInclude(err.message, 'public static readonly id =')
     }
@@ -181,4 +181,4 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
 class SpyViewControllerImporter extends ViewControllerImporter {}
 
-type ImportExportSuffix = '' | '_noIds' | '_plugins1'
+type ImportExportSuffix = '' | 'noIds' | 'plugins1'
