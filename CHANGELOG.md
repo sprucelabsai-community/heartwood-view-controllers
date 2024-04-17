@@ -1,3 +1,10 @@
+# [110.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.7.42...v110.0.0) (2024-04-17)
+
+
+### Breaking Changes
+
+* upgrade ([3f83bf7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3f83bf7))
+
 ## [109.7.42](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.7.41...v109.7.42) (2024-04-05)
 
 ## [109.7.41](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v109.7.40...v109.7.41) (2024-04-04)
