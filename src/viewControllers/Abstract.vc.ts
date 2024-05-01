@@ -162,7 +162,7 @@ export default abstract class AbstractViewController<
     }
 
     protected async alert(options: AlertOptions) {
-        const { title = 'Alert! 🌲🤖', message, style } = options
+        const { title = 'Alert!', message, style } = options
 
         const header = {
             title,
