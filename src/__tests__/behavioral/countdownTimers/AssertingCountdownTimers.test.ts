@@ -83,6 +83,21 @@ export default class AssertingCountdownTimersTest extends AbstractViewController
         this.timerStartedWithEndDateInRangeInclusive(99, 150)
     }
 
+    @test()
+    protected static async throwsWhenStopNotCalled() {
+        this.start(100)
+        assert.doesThrow(() =>
+            countdownTimerAssert.timerIsStopped(this.countdownVc)
+        )
+    }
+
+    @test()
+    protected static knowsWhenTimerIsStopped() {
+        this.start(100)
+        this.countdownVc.stop()
+        countdownTimerAssert.timerIsStopped(this.countdownVc)
+    }
+
     private static asserthThrowsWhenStartedOutsideOfRange(
         bottomMs: number,
         topMs: number

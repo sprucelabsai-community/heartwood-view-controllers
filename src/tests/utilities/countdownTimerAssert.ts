@@ -38,6 +38,14 @@ const countdownTimerAssert = {
         )
     },
 
+    timerIsStopped: (vc: ViewController<CountdownTimer>) => {
+        const model = renderUtil.render(vc)
+        assert.isFalsy(
+            model.endDateMs,
+            `Timer was not stopped! Try 'this.countdownVc.stop()'`
+        )
+    },
+
     timerStartedWithEndDateInRangeInclusive: (
         vc: ViewController<CountdownTimer>,
         bottomMs: number,
