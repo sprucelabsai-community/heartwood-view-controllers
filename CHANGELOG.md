@@ -1,3 +1,10 @@
+# [110.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.1.0...v110.2.0) (2024-05-08)
+
+
+### Features
+
+* timer knows if stopped ([0b3d6c0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/0b3d6c0))
+
 # [110.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.0.40...v110.1.0) (2024-05-08)
 
 
