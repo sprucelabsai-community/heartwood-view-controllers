@@ -63,6 +63,32 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
         assert.isEqual(this.model.endDateMs, endDateMs)
     }
 
+    @test()
+    protected static async setStopHandlerIsAFunction() {
+        assert.isFunction(this.model.setStopHandler)
+    }
+
+    @test()
+    protected static async callingStopCallsStopHandler() {
+        let wasHit = false
+
+        this.model.setStopHandler(() => {
+            wasHit = true
+        })
+
+        this.vc.stop()
+
+        assert.isTrue(wasHit)
+    }
+
+    @test()
+    protected static async returnsNullEndDateMsIfStopped() {
+        this.vc.start(Date.now() + 1000)
+        this.vc.stop()
+        const model = this.render(this.vc)
+        assert.isNull(model.endDateMs)
+    }
+
     private static reload(
         options?: Partial<CountdownTimerViewControllerOptions>
     ) {

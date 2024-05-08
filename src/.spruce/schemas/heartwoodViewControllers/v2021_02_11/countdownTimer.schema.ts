@@ -36,6 +36,12 @@ const countdownTimerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.C
 	                isRequired: true,
 	                options: {valueType: `(handler: (to: number) => void) => void`,}
 	            },
+	            /** . */
+	            'setStopHandler': {
+	                type: 'raw',
+	                isRequired: true,
+	                options: {valueType: `(handler: () => void) => void`,}
+	            },
 	    }
 }
 

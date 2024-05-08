@@ -30,5 +30,12 @@ export default buildSchema({
                 valueType: '(handler: (to: number) => void) => void',
             },
         },
+        setStopHandler: {
+            type: 'raw',
+            isRequired: true,
+            options: {
+                valueType: '(handler: () => void) => void',
+            },
+        },
     },
 })

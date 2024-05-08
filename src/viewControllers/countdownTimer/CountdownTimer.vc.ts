@@ -6,6 +6,7 @@ import AbstractViewController from '../Abstract.vc'
 
 export default class CountdownTimerViewController extends AbstractViewController<CountdownTimer> {
     private startHandler?: (to: number) => void
+    private stopHandler?: () => void
     private onCompleteHandler?: (() => void) | null | undefined
     private endDateMs?: number | null
 
@@ -23,6 +24,11 @@ export default class CountdownTimerViewController extends AbstractViewController
         this.startHandler?.(toMs)
     }
 
+    public stop() {
+        this.endDateMs = null
+        this.stopHandler?.()
+    }
+
     public render(): CountdownTimer {
         return {
             controller: this,
@@ -31,11 +37,14 @@ export default class CountdownTimerViewController extends AbstractViewController
             setStartHandler: (handler) => {
                 this.startHandler = handler
             },
+            setStopHandler: (handler) => {
+                this.stopHandler = handler
+            },
         }
     }
 }
 
 export type CountdownTimerViewControllerOptions = Omit<
     CountdownTimer,
-    'controller' | 'setStartHandler'
+    'controller' | 'setStartHandler' | 'setStopHandler'
 >

@@ -5640,6 +5640,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'endDateMs'?: SpruceSchema.DateTimeFieldValue| undefined | null
 				
 				'setStartHandler': ((handler: (to: number) => void) => void)
+				
+				'setStopHandler': ((handler: () => void) => void)
 		}
 
 		interface CountdownTimerSchema extends SpruceSchema.Schema {
@@ -5674,6 +5676,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                isRequired: true,
 			                options: {valueType: `(handler: (to: number) => void) => void`,}
+			            },
+			            /** . */
+			            'setStopHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `(handler: () => void) => void`,}
 			            },
 			    }
 		}
