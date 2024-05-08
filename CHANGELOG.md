@@ -1,3 +1,10 @@
+# [110.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.0.40...v110.1.0) (2024-05-08)
+
+
+### Features
+
+* countdown timers can be stopped! ([fcbe3cb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fcbe3cb))
+
 ## [110.0.40](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.0.39...v110.0.40) (2024-05-08)
 
 ## [110.0.39](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.0.38...v110.0.39) (2024-05-08)
