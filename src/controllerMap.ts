@@ -16,6 +16,7 @@ import ListViewController from './viewControllers/list/List.vc'
 import LoginViewController from './viewControllers/Login.vc'
 import MapViewController from './viewControllers/Map.vc'
 import NavigationViewController from './viewControllers/navigation/Navigation.vc'
+import PolarAreaViewController from './viewControllers/PolarAreaViewController.vc'
 import ProgressNavigatorViewController from './viewControllers/progressNavigator/ProgressNavigator.vc'
 import RatingsViewController from './viewControllers/Ratings.vc'
 import ProgressViewController from './viewControllers/reporting/Progress.vc'
@@ -93,4 +94,5 @@ export const CORE_CONTROLLER_MAP = {
     navigation: NavigationViewController,
     'countdown-timer': CountdownTimerViewController,
     'progress-navigator': ProgressNavigatorViewController,
+    'polar-area': PolarAreaViewController,
 }

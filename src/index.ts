@@ -51,6 +51,8 @@ export { default as AbstractInputViewController } from './viewControllers/form/A
 export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 export { default as buildActiveRecordList } from './builders/buildActiveRecordList'
 
+export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'
+
 export { default as AuthenticatorImpl } from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
@@ -133,6 +135,8 @@ export { default as latLngSchema } from '#spruce/schemas/heartwoodViewController
 export { default as mapSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/map.schema'
 export { default as mapPinSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/mapPin.schema'
 export { default as inputButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/inputButton.schema'
+export { default as polarAreaSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarArea.schema'
+export { default as polarAreaDataItemSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarAreaDataItem.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

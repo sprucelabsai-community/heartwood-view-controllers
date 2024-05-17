@@ -76,6 +76,9 @@ import MapViewController, {
     MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
 import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
+import PolarAreaViewController, {
+    PolarAreaViewControllerOptions,
+} from '../viewControllers/PolarAreaViewController.vc'
 import ProgressNavigatorViewController, {
     ProgressNavigatorViewControllerOptions,
 } from '../viewControllers/progressNavigator/ProgressNavigator.vc'
@@ -303,6 +306,8 @@ export type ProgressNavigatorStep =
 
 export type Progress =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
+export type PolarArea =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea
 
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -457,6 +462,7 @@ export interface ViewControllerMap {
     navigation: NavigationViewController
     'countdown-timer': CountdownTimerViewController
     'progress-navigator': ProgressNavigatorViewController
+    'polar-area': PolarAreaViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -497,6 +503,7 @@ export interface ViewControllerOptionsMap {
     navigation: Navigation
     'countdown-timer': CountdownTimerViewControllerOptions
     'progress-navigator': ProgressNavigatorViewControllerOptions
+    'polar-area': PolarAreaViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
