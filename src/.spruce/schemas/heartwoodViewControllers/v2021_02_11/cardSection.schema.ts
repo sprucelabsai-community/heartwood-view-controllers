@@ -15,6 +15,7 @@ import countdownTimerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewContr
 import progressSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progress.schema'
 import ratingsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
 import receiptSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receipt.schema'
+import polarAreaSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarArea.schema'
 import feedSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
 import portalSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/portal.schema'
 
@@ -160,6 +161,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                label: 'Receipt',
 	                type: 'schema',
 	                options: {schema: receiptSchema_v2021_02_11,}
+	            },
+	            /** Polar radar. */
+	            'polarRadar': {
+	                label: 'Polar radar',
+	                type: 'schema',
+	                options: {schema: polarAreaSchema_v2021_02_11,}
 	            },
 	            /** Feed. */
 	            'feed': {

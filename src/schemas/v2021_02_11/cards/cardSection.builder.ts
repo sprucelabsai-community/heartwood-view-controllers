@@ -8,6 +8,7 @@ import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
 import mapBuilder from '../map.builder'
+import polarAreaBuilder from '../polarArea.builder'
 import progressBuilder from '../progress.builder'
 import ratingsBuilder from '../ratings.builder'
 import receiptBuilder from '../receipt.builder'
@@ -158,6 +159,13 @@ export default buildSchema({
                 schema: receiptBuilder,
             },
         },
+        polarRadar: {
+            type: 'schema',
+            label: 'Polar radar',
+            options: {
+                schema: polarAreaBuilder,
+            },
+        },
         feed: {
             type: 'schema',
             label: 'Feed',
@@ -165,6 +173,7 @@ export default buildSchema({
                 schema: feedBuilder,
             },
         },
+
         shouldRenderContentsAsGrid: {
             type: 'boolean',
             label: 'Grid',
