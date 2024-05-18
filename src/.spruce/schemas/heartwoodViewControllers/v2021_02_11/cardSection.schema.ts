@@ -163,7 +163,7 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                options: {schema: receiptSchema_v2021_02_11,}
 	            },
 	            /** Polar radar. */
-	            'polarRadar': {
+	            'polarArea': {
 	                label: 'Polar radar',
 	                type: 'schema',
 	                options: {schema: polarAreaSchema_v2021_02_11,}

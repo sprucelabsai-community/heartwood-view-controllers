@@ -2226,7 +2226,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Receipt. */
 				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
 				/** Polar radar. */
-				'polarRadar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea| undefined | null
+				'polarArea'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea| undefined | null
 				/** Feed. */
 				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
 				/** Grid. */
@@ -2383,7 +2383,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema,}
 			            },
 			            /** Polar radar. */
-			            'polarRadar': {
+			            'polarArea': {
 			                label: 'Polar radar',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaSchema,}

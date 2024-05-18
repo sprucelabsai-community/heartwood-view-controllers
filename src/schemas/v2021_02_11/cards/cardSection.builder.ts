@@ -159,7 +159,7 @@ export default buildSchema({
                 schema: receiptBuilder,
             },
         },
-        polarRadar: {
+        polarArea: {
             type: 'schema',
             label: 'Polar radar',
             options: {
