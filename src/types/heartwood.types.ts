@@ -309,6 +309,9 @@ export type Progress =
 export type PolarArea =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea
 
+export type PolarAreaDataItem =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem
+
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
