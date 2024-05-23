@@ -1,4 +1,8 @@
-import { PolarArea, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    PolarArea,
+    PolarAreaDataItem,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
 export default class PolarAreaViewController extends AbstractViewController<PolarArea> {
@@ -14,6 +18,11 @@ export default class PolarAreaViewController extends AbstractViewController<Pola
         this.model = {
             data,
         }
+    }
+
+    public setData(data: PolarAreaDataItem[]) {
+        this.model.data = [...data]
+        this.triggerRender()
     }
 
     public render(): PolarArea {
