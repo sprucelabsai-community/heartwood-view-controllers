@@ -1,3 +1,10 @@
+# [110.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.2.85...v110.3.0) (2024-06-07)
+
+
+### Features
+
+* can assert rendedring button with id without passing id ([87342e2](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/87342e2))
+
 ## [110.2.85](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.2.84...v110.2.85) (2024-06-07)
 
 ## [110.2.84](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.2.83...v110.2.84) (2024-06-07)
