@@ -225,7 +225,7 @@ const listAssert = {
     rowRendersButton(
         listVc: ViewController<List>,
         row: string | number,
-        buttonId: string
+        buttonId?: string
     ) {
         const rowVc = this.listRendersRow(listVc, row)
 
@@ -287,7 +287,7 @@ const listAssert = {
     rowDoesNotRenderButton(
         listVc: ViewController<List>,
         row: string | number,
-        buttonId: string
+        buttonId?: string
     ) {
         try {
             this.rowRendersButton(listVc, row, buttonId)
@@ -295,7 +295,9 @@ const listAssert = {
             return
         }
         assert.fail(
-            `Your list renders a button with the id of '${buttonId}' in row '${row}' and it should not!`
+            buttonId
+                ? `Your list renders a button with the id of '${buttonId}' in row '${row}' and it should not!`
+                : `Your list renders a button in row '${row}' and it should not!`
         )
     },
 
