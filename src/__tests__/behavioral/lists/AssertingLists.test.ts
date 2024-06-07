@@ -364,6 +364,23 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected static async canAssertButtonWithIdWithoutPassingId() {
+        this.addRow({
+            id: 'test',
+            cells: [
+                {
+                    button: {
+                        id: generateId(),
+                        label: 'hey',
+                    },
+                },
+            ],
+        })
+
+        listAssert.rowRendersButton(this.vc, 'test')
+    }
+
     private static assertAssertingInputThrows(msg: string) {
         assert.doesThrow(
             () => listAssert.rowRendersInput(this.vc, 0, 'name'),

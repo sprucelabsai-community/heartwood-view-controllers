@@ -232,13 +232,15 @@ const listAssert = {
         const model = renderUtil.render(rowVc)
 
         for (const cell of model.cells ?? []) {
-            if (cell.button?.id === buttonId) {
+            if ((!buttonId && cell.button) || cell.button?.id === buttonId) {
                 return cell.button!
             }
         }
 
         assert.fail(
-            `Your list does not render a button with the id of '${buttonId}' in row '${row}'.`
+            buttonId
+                ? `Your list does not render a button with the id of '${buttonId}' in row '${row}'.`
+                : `Your list does not render a button in row '${row}'.`
         )
 
         return {} as NonNullable<ListCell['button']>
