@@ -1,3 +1,10 @@
+# [110.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.3.12...v110.4.0) (2024-06-11)
+
+
+### Features
+
+* didHide lifecycle event for dialogs ([cab4ebd](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/cab4ebd))
+
 ## [110.3.12](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.3.11...v110.3.12) (2024-06-11)
 
 ## [110.3.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.3.10...v110.3.11) (2024-06-11)
