@@ -203,6 +203,16 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
         assert.isFalse(this.vc.wasDidHideHit)
     }
 
+    @test()
+    protected static async hidingDoesNotBlowUpIfDialogDoesNotHaveParentMethod() {
+        const dlg = await this.vc.renderCardInDialog()
+
+        //@ts-ignore
+        delete dlg.getParent
+
+        await dlg.hide()
+    }
+
     private static assertDialogIsBusy(dlg: DialogViewController) {
         const model = this.render(dlg)
         assert.isTrue(model.body?.isBusy)
