@@ -62,6 +62,17 @@ export default class DialogViewController extends AbstractViewController<Dialog>
 
         this.closeResolver?.()
         this.triggerRender()
+
+        await this.cardVc?.didHide?.()
+
+        //@ts-ignore
+        const cardParent = this.cardVc?.getParent?.()
+        //@ts-ignore
+        const myParent = this.getParent()
+
+        if (cardParent && cardParent !== myParent) {
+            await cardParent.didHide?.()
+        }
     }
 
     public getCardVc() {

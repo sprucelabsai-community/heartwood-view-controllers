@@ -10,6 +10,8 @@ declare module '../../types/heartwood.types' {
 
 export default class DialogTestSkillViewController extends AbstractSkillViewController {
     private readonly dialog = { header: { title: 'coming soon' } }
+    public wasDidHideHit = false
+
     public loadInvocations: SkillViewControllerLoadOptions[] = []
 
     public async showTermsOfService() {
@@ -28,9 +30,18 @@ export default class DialogTestSkillViewController extends AbstractSkillViewCont
         return controller
     }
 
+    public async renderCardInDialog() {
+        const controller = this.Controller('card', {})
+        return this.renderInDialog({ ...controller.render() })
+    }
+
     public async renderInDialogAndWait() {
         const dlgVc = this.renderInDialogAndGetDlgVc()
         await dlgVc.wait()
+    }
+
+    public async didHide() {
+        this.wasDidHideHit = true
     }
 
     public async load(options: SkillViewControllerLoadOptions) {

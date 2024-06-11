@@ -523,6 +523,10 @@ const interactor = {
         await vc.didFocus?.()
     },
 
+    async hide(vc: ViewController<any>) {
+        await vc.didHide?.()
+    },
+
     async blur(vc: ViewController<any>) {
         assertOptions({ vc }, ['vc'])
 

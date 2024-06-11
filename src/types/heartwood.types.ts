@@ -333,6 +333,7 @@ export interface ViewController<ViewModel extends Record<string, any>> {
     didBlur?: () => void | Promise<void>
     willFocus?: () => void | Promise<void>
     didFocus?: () => void | Promise<void>
+    didHide?: () => void | Promise<void>
 }
 
 export type ScopeFlag = 'location' | 'organization' | 'employed' | 'none'
