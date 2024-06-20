@@ -317,11 +317,11 @@ const vcAssert = {
 
                         dialogVc = oldRenderInDialog(...args)
 
-                        //@ts-ignore
-                        dialogVc.getParent = () => {
-                            //@ts-ignore
-                            return dialogVc?.getCardVc().getParent()
-                        }
+                        // //@ts-ignore
+                        // dialogVc.getParent = () => {
+                        //     //@ts-ignore
+                        //     return dialogVc?.getCardVc().getParent()
+                        // }
 
                         resolve(undefined)
 
@@ -1397,6 +1397,10 @@ const vcAssert = {
         vc: ViewController<any>,
         Class: new (...args: any[]) => Controller
     ): Controller {
+        if (vc instanceof DialogViewController) {
+            vc = vc.getCardVc()
+        }
+
         const model = renderUtil.render(vc)
         assert.isTruthy(
             model.controller,

@@ -4,6 +4,8 @@ import {
     AbstractSkillViewController,
     AbstractViewController,
     ActiveRecordCardViewController,
+    SkillViewControllerId,
+    ViewControllerId,
     vcAssert,
 } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
@@ -72,8 +74,10 @@ class DialogSkillViewController extends AbstractSkillViewController {
     private dialogCardVc: DialogCardViewController
     public constructor(options: any) {
         super(options)
-        //@ts-ignore
-        this.dialogCardVc = this.Controller('dialogCard', {}) as any
+        this.dialogCardVc = this.Controller(
+            'dialogCard' as ViewControllerId,
+            {}
+        ) as any
     }
 
     public async showDialog() {
@@ -193,9 +197,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 
     @test()
     protected static canGetCardFromSkillView() {
-        //@ts-ignore
-        const svc = this.Controller('activeSvc', {})
-        //@ts-ignore
+        const svc = this.Controller('activeSvc' as SkillViewControllerId, {})
         const match = vcAssert.assertSkillViewRendersCard(svc, 'active')
         vcAssert.assertRendersAsInstanceOf(match, ActiveCard)
     }
@@ -203,8 +205,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     @test()
     protected static async canAssertDialogRendersAsInstanceOf() {
         const svc = this.Controller(
-            //@ts-ignore
-            'dialogSvc',
+            'dialogSvc' as ViewControllerId,
             {}
         ) as DialogSkillViewController
         const dialogVc = await vcAssert.assertRendersDialog(svc, () =>
