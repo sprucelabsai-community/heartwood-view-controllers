@@ -40,7 +40,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 break
 
             case 'DUPLICATE_ROW_ID':
-                message = `A row with the id '${options.rowId}' already exists.`
+                message = `A row with the id '${options.rowId}' already exists in your list view.`
                 break
 
             case 'DUPLICATE_TOOL_ID':
