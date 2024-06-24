@@ -1,4 +1,3 @@
-import { durationUtil } from '@sprucelabs/calendar-utils'
 import { assertOptions, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test-utils'
@@ -1654,15 +1653,6 @@ const vcAssert = {
         style: RowStyle
     ) {
         return listAssert.rowIsStyle(vc, row, style)
-    },
-
-    durationUtilIsConfiguredForVc(vc: ViewController<any>) {
-        assert.isEqual(
-            durationUtil.dates,
-            //@ts-ignore
-            vc.dates,
-            'durationUtil is not configured for your vc. Try `durationUtil.dates = this.dates` in your view controller.'
-        )
     },
 }
 
