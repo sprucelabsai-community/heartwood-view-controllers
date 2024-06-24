@@ -1,3 +1,10 @@
+# [110.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.4.45...v110.5.0) (2024-06-24)
+
+
+### Features
+
+* vcAssert.durationUtilIsConfiguredForVc() ([01e4848](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/01e4848))
+
 ## [110.4.45](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.4.44...v110.4.45) (2024-06-21)
 
 ## [110.4.44](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.4.43...v110.4.44) (2024-06-21)
