@@ -16,7 +16,7 @@ const vcDurationAssert = {
     durationUtilIsConfiguredForVc(vc: ViewController<any>) {
         assert.isTrue(
             isConfiguredBeforeEach,
-            'You have to call `vcDurationAssert.beforeEach(this.views)` in your test.'
+            'You have to call `vcDurationAssert.beforeEach(this.views.getFactory())` in your test.'
         )
         assert.isEqual(
             durationUtil.dates,

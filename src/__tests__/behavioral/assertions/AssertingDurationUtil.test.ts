@@ -18,6 +18,7 @@ export default class AssertingDurationUtilTest extends AbstractViewControllerTes
     @test()
     protected static async throwsWhenDurationUtilsNotConfiguredToVc() {
         vcDurationAssert.beforeEach(this.getFactory())
+
         assert.doesThrow(
             () => vcDurationAssert.durationUtilIsConfiguredForVc(this.Vc()),
             'durationUtil.dates = this.dates'
