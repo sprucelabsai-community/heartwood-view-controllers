@@ -37,7 +37,7 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import {
     Vc,
-    ConfirmViewController,
+    AssertConfirmViewController,
     pluckFirstFromCard,
     pluckAllFromView,
     ButtonViewController,
@@ -88,7 +88,7 @@ const vcAssert = {
         vc: ViewController<any>,
         action: () => any | Promise<any>
     ) {
-        let confirmVc: ConfirmViewController = {
+        let confirmVc: AssertConfirmViewController = {
             //@ts-ignore
             id: 'confirm',
             accept: async () => {},

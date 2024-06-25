@@ -14,7 +14,7 @@ import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 
 export type Vc = ViewController<any>
 export const WAIT_TIMEOUT = 5000
-export interface ConfirmViewController {
+export interface AssertConfirmViewController {
     accept: () => any | Promise<any>
     decline: () => any | Promise<any>
     options: ConfirmOptions
