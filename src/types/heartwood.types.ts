@@ -119,11 +119,17 @@ interface Payloads {
 }
 
 export interface Authenticator {
+    //Get the logged in person, if someone is logged in
     getPerson(): Person | null
+    //Log a person in by setting their token and Person record.
     setSessionToken(token: string, person: Person): void
+    //Get the session token of a logged in person
     getSessionToken(): string | null
+    //Check if someone is logged in
     isLoggedIn(): boolean
+    //Clear the session, logging the person out
     clearSession(): void
+    //Add an event listener for when someone logs in or out to take some action
     addEventListener<N extends 'did-login' | 'did-logout'>(
         name: N,
         cb: Payloads[N]
@@ -780,12 +786,14 @@ export interface SavePermissionsOptions<
 }
 
 export interface Authorizer {
+    //Check if the current person has a permission
     can<
         ContractId extends PermissionContractId,
         Ids extends PermissionId<ContractId>,
     >(
         options: AuthorizerCanOptions<ContractId, Ids>
     ): Promise<Record<Ids, boolean>>
+    //Save permissions for a person. Note: the person must have the permission to save permissions
     savePermissions<
         ContractId extends PermissionContractId,
         Ids extends PermissionId<ContractId>,
