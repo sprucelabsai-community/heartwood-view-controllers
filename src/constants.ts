@@ -1,4 +1,4 @@
-import { lineIcons } from '@sprucelabs/calendar-utils'
+import { lineIconChoices } from '@sprucelabs/calendar-utils'
 import { SchemaFieldsByName, SelectChoice } from '@sprucelabs/schema'
 import textBuilder from './schemas/v2021_02_11/text.builder'
 export { lineIcons } from '@sprucelabs/calendar-utils'
@@ -450,11 +450,6 @@ export const fancyIcons = [
 
 export const defaultSubmitButtonLabel = 'Go!'
 export const defaultCancelButtonLabel = 'Cancel'
-
-export const lineIconChoices = lineIcons.map((i) => ({
-    value: i,
-    label: i,
-}))
 
 export const lineIconFields: SchemaFieldsByName = {
     name: {

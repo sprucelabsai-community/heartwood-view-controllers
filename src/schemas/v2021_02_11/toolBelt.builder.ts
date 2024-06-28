@@ -1,5 +1,5 @@
+import { lineIconChoices } from '@sprucelabs/calendar-utils'
 import { buildSchema } from '@sprucelabs/schema'
-import { lineIconChoices } from '../../constants'
 import cardBuilder from './cards/card.builder'
 
 export default buildSchema({

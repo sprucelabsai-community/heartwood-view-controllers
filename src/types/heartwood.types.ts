@@ -617,8 +617,10 @@ export interface RatingsComponent {
     leftLabel?: string
     rightLabel?: string
     middleLabel?: string
-    lineIcon?: LineIcon
+    icon?: RatingsComponentIcon
 }
+
+export type RatingsComponentIcon = 'star' | 'heart'
 
 export interface FieldRenderOptions<S extends Schema> {
     name: SchemaFieldNames<S>
