@@ -609,6 +609,16 @@ export type RenderAsComponent =
     | 'tags'
     | 'signature'
     | 'password'
+    | RatingsComponent
+
+export interface RatingsComponent {
+    type: 'ratings'
+    steps?: number
+    leftLabel?: string
+    rightLabel?: string
+    middleLabel?: string
+    lineIcon?: LineIcon
+}
 
 export interface FieldRenderOptions<S extends Schema> {
     name: SchemaFieldNames<S>
