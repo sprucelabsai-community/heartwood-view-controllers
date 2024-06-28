@@ -1,3 +1,10 @@
+# [110.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.6.18...v110.7.0) (2024-06-28)
+
+
+### Features
+
+* renderAs can handle ratings component with more configurations ([490f8fb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/490f8fb))
+
 ## [110.6.18](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.6.17...v110.6.18) (2024-06-28)
 
 ## [110.6.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.6.16...v110.6.17) (2024-06-28)
