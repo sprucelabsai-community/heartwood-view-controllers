@@ -97,12 +97,6 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
 	            },
-	            /** Stars or Smilies. */
-	            'renderAs': {
-	                label: 'Stars or Smilies',
-	                type: 'select',
-	                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
-	            },
 	            /** Cell button key down handler. */
 	            'onKeyDown': {
 	                label: 'Cell button key down handler',

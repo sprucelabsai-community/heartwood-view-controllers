@@ -27,21 +27,5 @@ export default buildSchema({
                     'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>',
             },
         },
-        renderAs: {
-            type: 'select',
-            label: 'Stars or Smilies',
-            options: {
-                choices: [
-                    {
-                        value: 'stars',
-                        label: 'Stars',
-                    },
-                    {
-                        value: 'smilies',
-                        label: 'Smilies',
-                    },
-                ],
-            },
-        },
     },
 })

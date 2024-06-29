@@ -34,12 +34,6 @@ const ratingsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RatingsS
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}
 	            },
-	            /** Stars or Smilies. */
-	            'renderAs': {
-	                label: 'Stars or Smilies',
-	                type: 'select',
-	                options: {choices: [{"value":"stars","label":"Stars"},{"value":"smilies","label":"Smilies"}],}
-	            },
 	    }
 }
 
