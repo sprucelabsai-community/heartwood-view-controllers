@@ -599,7 +599,7 @@ export interface ViewControllerOptions {
     log: Log
 }
 
-export type RenderAsComponent =
+export type RenderAsComponentType =
     | 'colorPicker'
     | 'number'
     | 'textarea'
@@ -609,7 +609,8 @@ export type RenderAsComponent =
     | 'tags'
     | 'signature'
     | 'password'
-    | RatingsComponent
+
+export type RenderAsComponent = RenderAsComponentType | RatingsComponent
 
 export interface RatingsComponent {
     type: 'ratings'
