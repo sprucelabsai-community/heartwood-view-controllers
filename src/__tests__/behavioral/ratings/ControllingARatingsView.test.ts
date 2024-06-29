@@ -2,6 +2,7 @@ import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { RatingsInputComponentIcon } from '../../../types/heartwood.types'
 import RatingsViewController, {
     RatingsViewControllerOptions,
 } from '../../../viewControllers/Ratings.vc'
@@ -74,38 +75,35 @@ export default class ControllingARatingsViewTest extends AbstractViewControllerT
     @test()
     protected static throwsWithBadRendersAs() {
         //@ts-ignore
-        const err = assert.doesThrow(() => this.Vc({ renderAs: 'aoeu' }))
+        const err = assert.doesThrow(() => this.Vc({ icon: 'aoeu' }))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-            parameters: ['renderAs'],
+            parameters: ['icon'],
         })
     }
 
     @test()
-    protected static canSetToValidRenderAs() {
-        assert.isEqual(this.Vc().getRenderAs(), undefined)
-        let vc = this.Vc({ renderAs: 'stars' })
-        assert.isEqual(vc.getRenderAs(), 'stars')
-        assert.isEqual(
-            this.render(this.Vc({ renderAs: 'smilies' })).renderAs,
-            'smilies'
-        )
+    protected static canSetToValidIcon() {
+        assert.isEqual(this.Vc().getIcon(), undefined)
+        let vc = this.Vc({ icon: 'star' })
+        assert.isEqual(vc.getIcon(), 'star')
+        assert.isEqual(this.render(this.Vc({ icon: 'radio' })).icon, 'radio')
     }
 
     @test()
     protected static throwsWhenSettingRenderAsToInvalidValueLater() {
         //@ts-ignore
-        const err = assert.doesThrow(() => this.Vc().setRenderAs('aoeu'))
+        const err = assert.doesThrow(() => this.Vc().setIcon('aoeu'))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
-            parameters: ['renderAs'],
+            parameters: ['icon'],
         })
     }
 
-    @test('can set to smilies later', 'smilies')
-    @test('can set to stars later', 'stars')
-    protected static canSetValidRenderAsLater(renderAs: any) {
-        this.vc.setRenderAs(renderAs)
+    @test('can set to radio later', 'radio')
+    @test('can set to star later', 'star')
+    protected static canSetValidRenderAsLater(icon: RatingsInputComponentIcon) {
+        this.vc.setIcon(icon)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
-        assert.isEqual(this.render(this.vc).renderAs, renderAs)
+        assert.isEqual(this.render(this.vc).icon, icon)
     }
 
     @test()

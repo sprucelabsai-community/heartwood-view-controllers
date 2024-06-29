@@ -93,6 +93,31 @@ const listRatingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                options: undefined
 	            },
 	            /** . */
+	            'steps': {
+	                type: 'number',
+	                options: undefined
+	            },
+	            /** . */
+	            'leftLabel': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'rightLabel': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'middleLabel': {
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** . */
+	            'icon': {
+	                type: 'select',
+	                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio"}],}
+	            },
+	            /** . */
 	            'controller': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>`,}

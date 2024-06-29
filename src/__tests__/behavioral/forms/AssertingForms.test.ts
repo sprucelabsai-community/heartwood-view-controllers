@@ -4,7 +4,10 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
-import { FormSection, RenderAsComponent } from '../../../types/heartwood.types'
+import {
+    FormSection,
+    RenderAsInputComponentType,
+} from '../../../types/heartwood.types'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 import { TestFormSchema, testFormSchema } from './testFormOptions'
 
@@ -36,8 +39,8 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     @test('throws with missmatch 2', 'first', 'textarea', 'checkbox')
     protected static throwsWhenRenderAsMissMatches(
         fieldName: any,
-        actual: RenderAsComponent,
-        expected: RenderAsComponent
+        actual: RenderAsInputComponentType,
+        expected: RenderAsInputComponentType
     ) {
         this.setupFormWithField(fieldName, actual)
 
@@ -51,7 +54,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     @test('passes on match 2', 'last', 'textarea')
     protected static passesWithMatch(
         fieldName: any,
-        expected: RenderAsComponent
+        expected: RenderAsInputComponentType
     ) {
         this.setupFormWithField(fieldName, expected)
         formAssert.formFieldRendersAs(this.vc, fieldName, expected)
@@ -129,7 +132,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
 
     private static setupFormWithField(
         fieldName: SchemaFieldNames<TestFormSchema>,
-        renderAs: RenderAsComponent
+        renderAs: RenderAsInputComponentType
     ) {
         this.setSections([
             {

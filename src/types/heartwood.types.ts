@@ -599,7 +599,7 @@ export interface ViewControllerOptions {
     log: Log
 }
 
-export type RenderAsComponentType =
+export type RenderAsInputComponentType =
     | 'colorPicker'
     | 'number'
     | 'textarea'
@@ -610,22 +610,24 @@ export type RenderAsComponentType =
     | 'signature'
     | 'password'
 
-export type RenderAsComponent = RenderAsComponentType | RatingsComponent
+export type RenderAsInputComponent =
+    | RenderAsInputComponentType
+    | RatingsInputComponent
 
-export interface RatingsComponent {
+export type RatingsInputComponent = Pick<
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings,
+    'steps' | 'leftLabel' | 'rightLabel' | 'middleLabel' | 'icon'
+> & {
     type: 'ratings'
-    steps?: number
-    leftLabel?: string
-    rightLabel?: string
-    middleLabel?: string
-    icon?: RatingsComponentIcon
 }
 
-export type RatingsComponentIcon = 'star' | 'heart'
+export type RatingsInputComponentIcon = NonNullable<
+    RatingsInputComponent['icon']
+>
 
 export interface FieldRenderOptions<S extends Schema> {
     name: SchemaFieldNames<S>
-    renderAs?: RenderAsComponent
+    renderAs?: RenderAsInputComponent
     renderHintAs?: 'subtitle' | 'tooltip'
     placeholder?: string | null
     label?: string | null

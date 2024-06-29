@@ -14,7 +14,7 @@ import {
     FormInputViewController,
     FormViewController,
     InputButton,
-    RenderAsComponent,
+    RenderAsInputComponent,
     SkillViewController,
     ViewController,
 } from '../../types/heartwood.types'
@@ -332,7 +332,7 @@ this.Controller(
     formFieldRendersAs(
         vc: FormVc,
         fieldName: string,
-        expected: RenderAsComponent
+        expected: RenderAsInputComponent
     ) {
         assertOptions({ vc, fieldName, expected }, [
             'vc',

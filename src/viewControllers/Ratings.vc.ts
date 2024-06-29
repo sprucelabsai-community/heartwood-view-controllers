@@ -12,9 +12,9 @@ export default class RatingsViewController extends AbstractViewController<Rating
         super(options)
 
         const value = options.value
-        const renderAs = options.renderAs
+        const icon = options.icon
 
-        this.assertValidRenderAs(renderAs)
+        this.assertValidIcon(icon)
         this.assertValueInRange(value)
 
         this.model = {
@@ -23,12 +23,12 @@ export default class RatingsViewController extends AbstractViewController<Rating
         }
     }
 
-    private assertValidRenderAs(renderAs: string | null | undefined) {
-        if (renderAs && renderAs !== 'stars' && renderAs !== 'smilies') {
+    private assertValidIcon(icon: string | null | undefined) {
+        if (icon && icon !== 'star' && icon !== 'radio') {
             throw new SchemaError({
                 code: 'INVALID_PARAMETERS',
-                parameters: ['renderAs'],
-                friendlyMessage: `Render as can only be 'stars' or 'smilies'.`,
+                parameters: ['icon'],
+                friendlyMessage: `Render as can only be 'star' or 'radio'.`,
             })
         }
     }
@@ -43,14 +43,14 @@ export default class RatingsViewController extends AbstractViewController<Rating
         }
     }
 
-    public setRenderAs(renderAs: NonNullable<Ratings['renderAs']>) {
-        this.assertValidRenderAs(renderAs)
-        this.model.renderAs = renderAs
+    public setIcon(icon: NonNullable<Ratings['icon']>) {
+        this.assertValidIcon(icon)
+        this.model.icon = icon
         this.triggerRender()
     }
 
-    public getRenderAs() {
-        return this.model.renderAs
+    public getIcon() {
+        return this.model.icon
     }
 
     public setCanBeChanged(canBeChanged: boolean) {

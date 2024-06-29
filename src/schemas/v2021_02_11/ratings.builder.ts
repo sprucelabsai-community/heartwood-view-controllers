@@ -20,6 +20,27 @@ export default buildSchema({
                 valueType: '(value: number) => any',
             },
         },
+        steps: {
+            type: 'number',
+        },
+        leftLabel: { type: 'text' },
+        rightLabel: { type: 'text' },
+        middleLabel: { type: 'text' },
+        icon: {
+            type: 'select',
+            options: {
+                choices: [
+                    {
+                        value: 'star',
+                        label: 'Star',
+                    },
+                    {
+                        value: 'radio',
+                        label: 'Radio',
+                    },
+                ],
+            },
+        },
         controller: {
             type: 'raw',
             options: {

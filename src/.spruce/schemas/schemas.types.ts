@@ -305,6 +305,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				
+				'steps'?: number| undefined | null
+				
+				'leftLabel'?: string| undefined | null
+				
+				'rightLabel'?: string| undefined | null
+				
+				'middleLabel'?: string| undefined | null
+				
+				'icon'?: ("star" | "radio")| undefined | null
+				
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 		}
 
@@ -396,6 +406,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Can be changed',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'steps': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'leftLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'rightLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'middleLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'icon': {
+			                type: 'select',
+			                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio"}],}
 			            },
 			            /** . */
 			            'controller': {
@@ -2888,6 +2923,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Callback. */
 				'onChange'?: ((value: number) => any)| undefined | null
 				
+				'steps'?: number| undefined | null
+				
+				'leftLabel'?: string| undefined | null
+				
+				'rightLabel'?: string| undefined | null
+				
+				'middleLabel'?: string| undefined | null
+				
+				'icon'?: ("star" | "radio")| undefined | null
+				
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 		}
 
@@ -2916,6 +2961,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Callback',
 			                type: 'raw',
 			                options: {valueType: `(value: number) => any`,}
+			            },
+			            /** . */
+			            'steps': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'leftLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'rightLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'middleLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'icon': {
+			                type: 'select',
+			                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio"}],}
 			            },
 			            /** . */
 			            'controller': {
@@ -4400,6 +4470,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Can be changed. */
 				'canBeChanged'?: boolean| undefined | null
 				
+				'steps'?: number| undefined | null
+				
+				'leftLabel'?: string| undefined | null
+				
+				'rightLabel'?: string| undefined | null
+				
+				'middleLabel'?: string| undefined | null
+				
+				'icon'?: ("star" | "radio")| undefined | null
+				
 				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
 				/** Cell button key down handler. */
 				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
@@ -4495,6 +4575,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Can be changed',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'steps': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'leftLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'rightLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'middleLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'icon': {
+			                type: 'select',
+			                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio"}],}
 			            },
 			            /** . */
 			            'controller': {
