@@ -1,3 +1,10 @@
+# [110.8.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.7.43...v110.8.0) (2024-07-08)
+
+
+### Features
+
+* ratings field added to form builder (WIP) ([b8cf8fc](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b8cf8fc))
+
 ## [110.7.43](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.7.42...v110.7.43) (2024-07-08)
 
 ## [110.7.42](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.7.41...v110.7.42) (2024-07-08)
