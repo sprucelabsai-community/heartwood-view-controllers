@@ -577,16 +577,17 @@ export const buttonFields: SchemaFieldsByName = {
 }
 
 export const formBuilderFieldTypes = {
-    text: 'Text',
-    boolean: 'Toggle',
-    select: 'Dropdown',
-    phone: 'Phone',
-    number: 'Number',
     address: 'Address',
     date: 'Date',
     dateTime: 'Date & Time',
-    signature: 'Signature',
+    select: 'Dropdown',
     image: 'Image',
+    number: 'Number',
+    phone: 'Phone',
+    signature: 'Signature',
+    ratings: 'Ratings',
+    text: 'Text',
+    boolean: 'Toggle',
 }
 
 export const fieldTypeChoices: SelectChoice[] = Object.keys(

@@ -621,6 +621,10 @@ export type RatingsInputComponent = Pick<
     type: 'ratings'
 }
 
+export interface InputComponent {
+    type: string
+}
+
 export type RatingsInputComponentIcon = NonNullable<
     RatingsInputComponent['icon']
 >

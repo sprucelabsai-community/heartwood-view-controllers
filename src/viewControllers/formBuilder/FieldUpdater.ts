@@ -4,7 +4,7 @@ import { FieldRenderOptions } from '../../types/heartwood.types'
 import { EditFieldValues } from './EditFormBuilderFieldCard.vc'
 
 export default class FieldUpdater {
-    public static Handler() {
+    public static Updater() {
         return new this()
     }
 
@@ -13,6 +13,7 @@ export default class FieldUpdater {
         field: Partial<IFieldDefinition>,
         updates: Partial<EditFieldValues>
     ) {
+        debugger
         const { selectOptions, ...changes } = updates
         delete changes.name
 
@@ -31,7 +32,7 @@ export default class FieldUpdater {
             }
         }
 
-        let renderOptions: FieldRenderOptions<Schema> = {
+        const renderOptions: FieldRenderOptions<Schema> = {
             name: name as never,
         }
 

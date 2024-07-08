@@ -5,12 +5,15 @@ import {
     SchemaError,
     SchemaValues,
     assertOptions,
+    pickFields,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import ratingsInputSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratingsInput.schema'
 import buildForm from '../../builders/buildForm'
 import { fieldTypeChoices, formBuilderFieldTypes } from '../../constants'
 import {
     FieldRenderOptions,
+    InputComponent,
     ViewControllerOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
@@ -19,7 +22,7 @@ import FieldUpdater from './FieldUpdater'
 
 export default class EditFormBuilderFieldCardViewController extends CardViewController {
     private formVc: FormViewController<EditFieldFormSchema>
-    private fieldBuilder: FieldUpdater
+    private fieldUpdater: FieldUpdater
     private onDoneHandler: DoneHandler
     public constructor(
         options: ViewControllerOptions & EditFormBuilderFieldOptions
@@ -31,12 +34,15 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         const { ...field } = f ?? {}
 
         if (field.type === 'image' && renderOptions?.renderAs === 'signature') {
-            //@ts-ignore
-            field.type = 'signature'
+            field.type = 'signature' as any
+        } else if (
+            (renderOptions?.renderAs as InputComponent)?.type === 'ratings'
+        ) {
+            field.type = 'ratings' as any
         }
 
         this.onDoneHandler = onDone
-        this.fieldBuilder = FieldUpdater.Handler()
+        this.fieldUpdater = FieldUpdater.Updater()
 
         this.assertRequiredParameters(options)
         this.assertSupportedFieldType(field.type ?? 'text')
@@ -77,7 +83,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         values: Record<string, any>,
         field: Partial<FieldDefinitions>
     ) {
-        return this.fieldBuilder.update(
+        return this.fieldUpdater.update(
             this.formVc.getValue('name')!,
             field,
             values
@@ -151,7 +157,19 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
                     },
                 ],
             })
+            //@ts-ignore
+        } else if (type === 'ratings') {
+            sections.push({
+                fields: [
+                    { name: 'steps' },
+                    { name: 'leftLabel' },
+                    { name: 'rightLabel' },
+                    { name: 'middleLabel' },
+                    { name: 'icon' },
+                ],
+            })
         }
+
         return sections
     }
 
@@ -222,6 +240,13 @@ const editFieldFormSchema = buildSchema({
             // isRequired: true,
             hint: "Put each choice on it's own line!",
         },
+        ...pickFields(ratingsInputSchema.fields, [
+            'steps',
+            'leftLabel',
+            'rightLabel',
+            'middleLabel',
+            'icon',
+        ]),
     },
 })
 
