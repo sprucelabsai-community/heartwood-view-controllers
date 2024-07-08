@@ -32,7 +32,6 @@ export const editFieldFormSchema = buildSchema({
         selectOptions: {
             type: 'text',
             label: 'Dropdown options',
-            // isRequired: true,
             hint: "Put each choice on it's own line!",
         },
         ...pickFields(ratingsInputSchema.fields, [

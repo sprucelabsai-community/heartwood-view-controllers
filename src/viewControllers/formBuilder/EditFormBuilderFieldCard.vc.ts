@@ -20,7 +20,7 @@ import FieldOptionsMapper from './FieldOptionsMapper'
 
 export default class EditFormBuilderFieldCardViewController extends CardViewController {
     private formVc: FormViewController<EditFieldFormSchema>
-    private fieldUpdater: FieldOptionsMapper
+    private fieldOptionsMapper: FieldOptionsMapper
     private onDoneHandler: DoneHandler
     public constructor(
         options: ViewControllerOptions & EditFormBuilderFieldOptions
@@ -28,7 +28,6 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         super(options)
 
         const { field: f, onDone, renderOptions } = options
-
         const { ...field } = f ?? {}
 
         if (field.type === 'image' && renderOptions?.renderAs === 'signature') {
@@ -40,7 +39,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         }
 
         this.onDoneHandler = onDone
-        this.fieldUpdater = FieldOptionsMapper.Updater()
+        this.fieldOptionsMapper = FieldOptionsMapper.Updater()
 
         this.assertRequiredParameters(options)
         this.assertSupportedFieldType(field.type ?? 'text')
@@ -84,7 +83,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         values: Record<string, any>,
         field: Partial<FieldDefinitions>
     ) {
-        return this.fieldUpdater.editFormValuesToDefinition(
+        return this.fieldOptionsMapper.editFormValuesToDefinition(
             this.formVc.getValue('name')!,
             field,
             values
@@ -95,7 +94,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         field: FieldDefinitions,
         renderOptions?: FieldRenderOptions<Schema>
     ) {
-        return this.fieldUpdater.definitionToEditFormValues(
+        return this.fieldOptionsMapper.definitionToEditFormValues(
             field,
             renderOptions
         )
@@ -125,43 +124,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
     }
 
     private buildSections(forType: FieldDefinitions['type']) {
-        const sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<EditFieldFormSchema>[] =
-            [
-                {
-                    fields: [
-                        { name: 'name' },
-                        { name: 'label' },
-                        { name: 'isRequired' },
-                        { name: 'type' },
-                    ],
-                },
-            ]
-
-        const type = forType
-        if (type === 'select') {
-            sections.push({
-                fields: [
-                    {
-                        name: 'selectOptions',
-                        placeholder: 'Option 1\nOption 2',
-                        renderAs: 'textarea',
-                    },
-                ],
-            })
-            //@ts-ignore
-        } else if (type === 'ratings') {
-            sections.push({
-                fields: [
-                    { name: 'steps' },
-                    { name: 'leftLabel' },
-                    { name: 'rightLabel' },
-                    { name: 'middleLabel' },
-                    { name: 'icon' },
-                ],
-            })
-        }
-
-        return sections
+        return this.fieldOptionsMapper.buildEditFormSections(forType)
     }
 
     public getFormVc() {

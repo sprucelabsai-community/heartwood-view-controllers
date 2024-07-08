@@ -1,3 +1,4 @@
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import {
     Schema,
     IFieldDefinition,
@@ -21,6 +22,46 @@ export default class FieldOptionsMapper {
         return new this()
     }
 
+    public buildEditFormSections(type: FieldDefinitions['type']) {
+        const sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<EditFieldFormSchema>[] =
+            [
+                {
+                    fields: [
+                        { name: 'name' },
+                        { name: 'label' },
+                        { name: 'isRequired' },
+                        { name: 'type' },
+                    ],
+                },
+            ]
+
+        if (type === 'select') {
+            sections.push({
+                fields: [
+                    {
+                        name: 'selectOptions',
+                        placeholder: 'Option 1\nOption 2',
+                        renderAs: 'textarea',
+                    },
+                ],
+            })
+            //@ts-ignore
+        } else if (type === 'ratings') {
+            sections.push({
+                title: 'Ratings Options',
+                fields: [
+                    { name: 'steps' },
+                    { name: 'leftLabel' },
+                    { name: 'rightLabel' },
+                    { name: 'middleLabel' },
+                    { name: 'icon' },
+                ],
+            })
+        }
+
+        return sections
+    }
+
     public definitionToEditFormValues(
         field: FieldDefinitions,
         renderOptions?: FieldRenderOptions<Schema>
@@ -40,6 +81,7 @@ export default class FieldOptionsMapper {
                 //@ts-ignore
                 .map((c) => c.label)
                 .join('\n')
+
             values.selectOptions = selectOptions
         }
 
