@@ -1,30 +1,26 @@
 import {
     Schema,
-    buildSchema,
     FieldDefinitions,
     SchemaError,
     SchemaValues,
     assertOptions,
-    pickFields,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import ratingsSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
-import ratingsInputSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratingsInput.schema'
 import buildForm from '../../builders/buildForm'
-import { fieldTypeChoices, formBuilderFieldTypes } from '../../constants'
+import { formBuilderFieldTypes } from '../../constants'
 import {
     FieldRenderOptions,
     InputComponent,
-    RatingsInputComponent,
     ViewControllerOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
 import FormViewController from '../form/Form.vc'
-import FieldUpdater from './FieldUpdater'
+import { EditFieldFormSchema, editFieldFormSchema } from './editFormSchema'
+import FieldOptionsMapper from './FieldOptionsMapper'
 
 export default class EditFormBuilderFieldCardViewController extends CardViewController {
     private formVc: FormViewController<EditFieldFormSchema>
-    private fieldUpdater: FieldUpdater
+    private fieldUpdater: FieldOptionsMapper
     private onDoneHandler: DoneHandler
     public constructor(
         options: ViewControllerOptions & EditFormBuilderFieldOptions
@@ -44,7 +40,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         }
 
         this.onDoneHandler = onDone
-        this.fieldUpdater = FieldUpdater.Updater()
+        this.fieldUpdater = FieldOptionsMapper.Updater()
 
         this.assertRequiredParameters(options)
         this.assertSupportedFieldType(field.type ?? 'text')
@@ -88,7 +84,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         values: Record<string, any>,
         field: Partial<FieldDefinitions>
     ) {
-        return this.fieldUpdater.update(
+        return this.fieldUpdater.editFormValuesToDefinition(
             this.formVc.getValue('name')!,
             field,
             values
@@ -99,34 +95,10 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         field: FieldDefinitions,
         renderOptions?: FieldRenderOptions<Schema>
     ) {
-        const values: Partial<SchemaValues<EditFieldFormSchema>> = {}
-        const { renderAs } = renderOptions ?? {}
-
-        Object.keys(editFieldFormSchema.fields).forEach((name) => {
-            //@ts-ignore
-            values[name] = field[name]
-        })
-
-        //@ts-ignore
-        if (field.options?.choices) {
-            //@ts-ignore
-            const selectOptions = field.options.choices
-                //@ts-ignore
-                .map((c) => c.label)
-                .join('\n')
-            values.selectOptions = selectOptions
-        }
-
-        const ratingsRenderAs = renderAs as RatingsInputComponent
-        if (ratingsRenderAs?.type === 'ratings') {
-            const fieldsToTransfer = Object.keys(ratingsSchema.fields)
-            fieldsToTransfer.forEach((field) => {
-                //@ts-ignore
-                values[field] = ratingsRenderAs[field]
-            })
-        }
-
-        return values
+        return this.fieldUpdater.definitionToEditFormValues(
+            field,
+            renderOptions
+        )
     }
 
     private assertSupportedFieldType(type: FieldDefinitions['type']) {
@@ -225,49 +197,3 @@ export interface EditFormBuilderFieldOptions {
     renderOptions?: Partial<FieldRenderOptions<Schema>> | null
     onDone: DoneHandler
 }
-
-const editFieldFormSchema = buildSchema({
-    id: 'editFieldForm',
-    fields: {
-        name: {
-            type: 'text',
-            label: 'Name',
-            // isRequired: true,
-            hint: 'This is how the name is saved in the database, you can usually ignore this.',
-        },
-        label: {
-            type: 'text',
-            label: 'Label',
-            // isRequired: true,
-            hint: 'This is what people will see when filling out the form.',
-        },
-        isRequired: {
-            type: 'boolean',
-            label: 'Required',
-        },
-        type: {
-            type: 'select',
-            label: 'Type',
-            isRequired: true,
-            options: {
-                choices: fieldTypeChoices,
-            },
-        },
-        selectOptions: {
-            type: 'text',
-            label: 'Dropdown options',
-            // isRequired: true,
-            hint: "Put each choice on it's own line!",
-        },
-        ...pickFields(ratingsInputSchema.fields, [
-            'steps',
-            'leftLabel',
-            'rightLabel',
-            'middleLabel',
-            'icon',
-        ]),
-    },
-})
-
-type EditFieldFormSchema = typeof editFieldFormSchema
-export type EditFieldValues = SchemaValues<EditFieldFormSchema>

@@ -1,15 +1,61 @@
-import { Schema, IFieldDefinition } from '@sprucelabs/schema'
+import {
+    Schema,
+    IFieldDefinition,
+    FieldDefinitions,
+    SchemaValues,
+} from '@sprucelabs/schema'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import ratingsSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
-import { FieldRenderOptions } from '../../types/heartwood.types'
-import { EditFieldValues } from './EditFormBuilderFieldCard.vc'
+import {
+    FieldRenderOptions,
+    RatingsInputComponent,
+} from '../../types/heartwood.types'
+import {
+    EditFieldFormSchema,
+    editFieldFormSchema,
+    EditFieldValues,
+} from './editFormSchema'
 
-export default class FieldUpdater {
+export default class FieldOptionsMapper {
     public static Updater() {
         return new this()
     }
 
-    public update(
+    public definitionToEditFormValues(
+        field: FieldDefinitions,
+        renderOptions?: FieldRenderOptions<Schema>
+    ) {
+        const values: Partial<SchemaValues<EditFieldFormSchema>> = {}
+        const { renderAs } = renderOptions ?? {}
+
+        Object.keys(editFieldFormSchema.fields).forEach((name) => {
+            //@ts-ignore
+            values[name] = field[name]
+        })
+
+        //@ts-ignore
+        if (field.options?.choices) {
+            //@ts-ignore
+            const selectOptions = field.options.choices
+                //@ts-ignore
+                .map((c) => c.label)
+                .join('\n')
+            values.selectOptions = selectOptions
+        }
+
+        const ratingsRenderAs = renderAs as RatingsInputComponent
+        if (ratingsRenderAs?.type === 'ratings') {
+            const fieldsToTransfer = Object.keys(ratingsSchema.fields)
+            fieldsToTransfer.forEach((field) => {
+                //@ts-ignore
+                values[field] = ratingsRenderAs[field]
+            })
+        }
+
+        return values
+    }
+
+    public editFormValuesToDefinition(
         name: string,
         field: Partial<IFieldDefinition>,
         updates: Partial<EditFieldValues>
