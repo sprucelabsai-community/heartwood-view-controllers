@@ -28,25 +28,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
         this.label = generateId()
         delete this.submittedField
 
-        this.editFieldVc = this.Controller('edit-form-builder-field', {
-            name: 'test',
-            field: {
-                type: 'number',
-                label: this.label,
-                isRequired: false,
-            },
-            onDone: (fieldDefinition, renderOptions) => {
-                this.submittedField = {
-                    fieldDefinition: fieldDefinition as NumberFieldDefinition,
-                    renderOptions,
-                }
-            },
-            renderOptions: {
-                renderAs: {
-                    type: 'ratings',
-                },
-            },
-        })
+        this.editFieldVc = this.EditFieldVc()
     }
 
     @test()
@@ -116,6 +98,78 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
             rightLabel: 'right',
             middleLabel: 'middle',
             icon: 'star',
+        })
+    }
+
+    @test('can start with steps at 10', 10)
+    @test('can start with steps at 20', 20)
+    protected static async renderAsOptionsPopulateForm(steps: number) {
+        this.editFieldVc = this.EditFieldVc({
+            steps,
+        })
+
+        this.assertFieldEquals('steps', steps)
+    }
+
+    @test()
+    protected static async canSetStartingLeftLabel() {
+        const leftLabel = generateId()
+        this.editFieldVc = this.EditFieldVc({
+            leftLabel,
+        })
+
+        this.assertFieldEquals('leftLabel', leftLabel)
+    }
+
+    @test()
+    protected static async canSetMultipleToStart() {
+        const leftLabel = generateId()
+        const rightLabel = generateId()
+        const middleLabel = generateId()
+        const icon = 'star'
+
+        this.editFieldVc = this.EditFieldVc({
+            leftLabel,
+            rightLabel,
+            middleLabel,
+            icon,
+        })
+
+        this.assertFieldEquals('leftLabel', leftLabel)
+        this.assertFieldEquals('rightLabel', rightLabel)
+        this.assertFieldEquals('middleLabel', middleLabel)
+        this.assertFieldEquals('icon', icon)
+    }
+
+    private static assertFieldEquals(
+        field: keyof RatingsInputComponent,
+        expected: number | string
+    ) {
+        assert.isEqual(this.editFieldFormVc.getValue(field), expected)
+    }
+
+    private static EditFieldVc(
+        renderAs?: Partial<RatingsInputComponent>
+    ): EditFormBuilderFieldCardViewController {
+        return this.Controller('edit-form-builder-field', {
+            name: 'test',
+            field: {
+                type: 'number',
+                label: this.label,
+                isRequired: false,
+            },
+            onDone: (fieldDefinition, renderOptions) => {
+                this.submittedField = {
+                    fieldDefinition: fieldDefinition as NumberFieldDefinition,
+                    renderOptions,
+                }
+            },
+            renderOptions: {
+                renderAs: {
+                    type: 'ratings',
+                    ...renderAs,
+                },
+            },
         })
     }
 

@@ -8,12 +8,14 @@ import {
     pickFields,
 } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import ratingsSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratings.schema'
 import ratingsInputSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/ratingsInput.schema'
 import buildForm from '../../builders/buildForm'
 import { fieldTypeChoices, formBuilderFieldTypes } from '../../constants'
 import {
     FieldRenderOptions,
     InputComponent,
+    RatingsInputComponent,
     ViewControllerOptions,
 } from '../../types/heartwood.types'
 import CardViewController from '../card/Card.vc'
@@ -48,10 +50,13 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         this.assertSupportedFieldType(field.type ?? 'text')
 
         const values: Partial<SchemaValues<EditFieldFormSchema>> =
-            this.optionsToFormValues({
-                ...options,
-                ...field,
-            } as FieldDefinitions)
+            this.optionsToFormValues(
+                {
+                    ...options,
+                    ...field,
+                } as FieldDefinitions,
+                renderOptions as FieldRenderOptions<Schema>
+            )
 
         this.formVc = this.FormVc(values, field)
     }
@@ -90,8 +95,12 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         )
     }
 
-    private optionsToFormValues(field: FieldDefinitions) {
+    private optionsToFormValues(
+        field: FieldDefinitions,
+        renderOptions?: FieldRenderOptions<Schema>
+    ) {
         const values: Partial<SchemaValues<EditFieldFormSchema>> = {}
+        const { renderAs } = renderOptions ?? {}
 
         Object.keys(editFieldFormSchema.fields).forEach((name) => {
             //@ts-ignore
@@ -107,6 +116,16 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
                 .join('\n')
             values.selectOptions = selectOptions
         }
+
+        const ratingsRenderAs = renderAs as RatingsInputComponent
+        if (ratingsRenderAs?.type === 'ratings') {
+            const fieldsToTransfer = Object.keys(ratingsSchema.fields)
+            fieldsToTransfer.forEach((field) => {
+                //@ts-ignore
+                values[field] = ratingsRenderAs[field]
+            })
+        }
+
         return values
     }
 

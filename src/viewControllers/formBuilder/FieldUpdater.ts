@@ -14,7 +14,6 @@ export default class FieldUpdater {
         field: Partial<IFieldDefinition>,
         updates: Partial<EditFieldValues>
     ) {
-        debugger
         const { selectOptions, ...changes } = updates
         delete changes.name
 
