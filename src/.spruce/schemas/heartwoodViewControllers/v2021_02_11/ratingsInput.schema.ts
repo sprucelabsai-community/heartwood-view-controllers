@@ -92,30 +92,40 @@ const ratingsInputSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Rat
 	                type: 'boolean',
 	                options: undefined
 	            },
-	            /** . */
+	            /** Steps. How many choices does a person have? Defaults to 5. */
 	            'steps': {
+	                label: 'Steps',
 	                type: 'number',
+	                hint: 'How many choices does a person have? Defaults to 5.',
 	                options: undefined
 	            },
-	            /** . */
+	            /** Left Label. The label on the left side of the ratings. Usually assocatiated with the lowest rating. */
 	            'leftLabel': {
+	                label: 'Left Label',
 	                type: 'text',
+	                hint: 'The label on the left side of the ratings. Usually assocatiated with the lowest rating.',
 	                options: undefined
 	            },
-	            /** . */
+	            /** Right Label. The label on the right side of the ratings. Usually associated with the highest rating. */
 	            'rightLabel': {
+	                label: 'Right Label',
 	                type: 'text',
+	                hint: 'The label on the right side of the ratings. Usually associated with the highest rating.',
 	                options: undefined
 	            },
-	            /** . */
+	            /** Middle Label. The label in the middle of the ratings. Something neutral like "average" or "ok" is pretty common. */
 	            'middleLabel': {
+	                label: 'Middle Label',
 	                type: 'text',
+	                hint: 'The label in the middle of the ratings. Something neutral like "average" or "ok" is pretty common.',
 	                options: undefined
 	            },
-	            /** . */
+	            /** Style. How should I render the ratings? Defaults to 'Star'. */
 	            'icon': {
+	                label: 'Style',
 	                type: 'select',
-	                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio"}],}
+	                hint: 'How should I render the ratings? Defaults to \'Star\'.',
+	                options: {choices: [{"value":"star","label":"Star"},{"value":"radio","label":"Radio Buttons"}],}
 	            },
 	            /** . */
 	            'controller': {

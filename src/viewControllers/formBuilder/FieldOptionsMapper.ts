@@ -92,6 +92,7 @@ export default class FieldOptionsMapper {
             }
 
             const fieldsToTransfer = Object.keys(ratingsSchema.fields)
+
             fieldsToTransfer.forEach((field) => {
                 //@ts-ignore
                 if (newDefinition[field]) {
