@@ -71,7 +71,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
                 onSubmit: async ({ values }) => {
                     await this.onDoneHandler(
                         //@ts-ignore
-                        ...this.formValuesToOptions(values, field)
+                        ...this.formValuesToFieldOptions(values, field)
                     )
                 },
                 sections: this.buildSections(field?.type ?? 'text'),
@@ -79,7 +79,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
         )
     }
 
-    private formValuesToOptions(
+    private formValuesToFieldOptions(
         values: Record<string, any>,
         field: Partial<FieldDefinitions>
     ) {
