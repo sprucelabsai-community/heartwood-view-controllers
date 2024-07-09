@@ -86,7 +86,6 @@ export default class FormViewController<
                 }),
         }
 
-        debugger
         this.model.values = this.normalizeValues(this.model.values)
 
         //@ts-ignore
