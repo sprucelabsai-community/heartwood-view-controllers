@@ -1415,6 +1415,54 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         assert.isEqual(this.vc.getId(), expected)
     }
 
+    @test()
+    protected static async formDoesNotHonorFieldsNotPartOfSchema() {
+        this.vc = this.TestFormVc({
+            sections: [
+                {
+                    fields: ['last'],
+                },
+            ],
+        })
+
+        await this.vc.setValues({
+            [generateId()]: generateId(),
+        })
+        assert.isTrue(this.vc.isValid())
+        this.vc.validate()
+    }
+
+    @test()
+    protected static async formDoesNotHonorFieldsNotPartOfSchemaUsingConstructor() {
+        this.vc = this.TestFormVc({
+            values: {
+                [generateId()]: generateId(),
+            },
+            sections: [
+                {
+                    fields: ['last'],
+                },
+            ],
+        })
+
+        assert.isTrue(this.vc.isValid())
+        this.vc.validate()
+    }
+
+    @test()
+    protected static async fieldsComeBackNormalized() {
+        this.vc = this.TestFormVc({
+            sections: [
+                {
+                    fields: ['favoriteNumber'],
+                },
+            ],
+        })
+
+        await this.vc.setValue('favoriteNumber', '5' as any)
+        assert.isEqualDeep(this.vc.getValues(), { favoriteNumber: 5 })
+    }
+
     private static assertAddingFieldWithDefinitionSetsToSchema(
         definition: FieldDefinitions,
         fieldName = 'fieldNotPartOfSection'

@@ -12,6 +12,7 @@ import {
     SchemaError,
     assertOptions,
     cloneDeep,
+    normalizeSchemaValues,
 } from '@sprucelabs/schema'
 import { defaultSubmitButtonLabel } from '../../constants'
 import SpruceError from '../../errors/SpruceError'
@@ -84,6 +85,9 @@ export default class FormViewController<
                     shouldSetRenderedValueIfExists: true,
                 }),
         }
+
+        debugger
+        this.model.values = this.normalizeValues(this.model.values)
 
         //@ts-ignore
         this.originalValues = { ...(this.model.values ?? {}) }
@@ -305,12 +309,30 @@ export default class FormViewController<
             return
         }
 
-        this.model.values = { ...values }
+        this.model.values = this.normalizeValues(values)
         const errorsByField = this.validateDirtyFields()
 
         await this.emitOnChange(errorsByField)
 
         this.triggerRender()
+    }
+
+    private normalizeValues(
+        values: SchemaPartialValues<S>,
+        fields?: SchemaFieldNames<S>[]
+    ): (SchemaPartialValues<S, false> | null | undefined) &
+        SchemaPartialValues<S> {
+        if (!this.model.schema) {
+            return values
+        }
+        return normalizeSchemaValues(
+            this.model.schema,
+            { ...values },
+            {
+                shouldValidate: false,
+                fields,
+            }
+        )
     }
 
     private validateDirtyFields() {
@@ -869,7 +891,10 @@ export default class FormViewController<
                     : this.model.values[field]
         }
 
-        return values as SchemaPartialValues<S>
+        return this.normalizeValues(
+            values,
+            visibleFields
+        ) as SchemaPartialValues<S>
     }
 
     public setFooter(
