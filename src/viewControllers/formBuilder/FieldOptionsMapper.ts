@@ -52,8 +52,8 @@ export default class FieldOptionsMapper {
                 fields: [
                     { name: 'steps' },
                     { name: 'leftLabel' },
-                    { name: 'rightLabel' },
                     { name: 'middleLabel' },
+                    { name: 'rightLabel' },
                     { name: 'icon' },
                 ],
             })
