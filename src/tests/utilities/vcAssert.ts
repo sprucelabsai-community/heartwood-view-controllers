@@ -1693,7 +1693,9 @@ export function normalizeScopeFromVc(
     vc: SkillViewController<Record<string, any>>
 ) {
     const actual = vc.getScopedBy?.()
-    const actualAsArray: ScopeFlag[] = actual ? [actual] : vc.getScope?.() ?? []
+    const actualAsArray: ScopeFlag[] = actual
+        ? [actual]
+        : (vc.getScope?.() ?? [])
     if (actualAsArray.length === 0) {
         actualAsArray.push('none')
     }

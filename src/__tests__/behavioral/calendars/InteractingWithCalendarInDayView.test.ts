@@ -470,7 +470,9 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
         return calendarInteractor.clickDayView(
             this.vc,
             options?.dateTimeMs ?? new Date().getTime(),
-            options?.personId === null ? undefined : options?.personId ?? `123`
+            options?.personId === null
+                ? undefined
+                : (options?.personId ?? `123`)
         )
     }
 }
