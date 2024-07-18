@@ -23,7 +23,7 @@ import { testFormOptions, TestFormSchema } from './testFormOptions'
 
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
     protected static controllerMap = {}
-    private static vc: FormViewController<(typeof testFormOptions)['schema']>
+    private static vc: FormViewController<TestFormSchema>
 
     private static readonly testForm = testFormOptions
 
@@ -52,7 +52,6 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test()
     protected static rendersValidForm() {
         const view = this.vc.render()
-
         validateSchemaValues(formSchema, view)
     }
 
@@ -1461,6 +1460,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
         await this.vc.setValue('favoriteNumber', '5' as any)
         assert.isEqualDeep(this.vc.getValues(), { favoriteNumber: 5 })
+    }
+
+    @test()
+    protected static async notSettingRequiredValuesDoesntThrow() {
+        await this.vc.setValues({
+            last: 'cheesey',
+        })
     }
 
     private static assertAddingFieldWithDefinitionSetsToSchema(
