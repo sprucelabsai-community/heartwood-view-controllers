@@ -197,7 +197,7 @@ const vcAssert = {
             dlgVc = await this.assertRendersDialog(vc, action)
         } catch (err: any) {
             assert.fail(
-                `Expected this.alert() to be called in your view '${getVcName(
+                `Expected await this.alert() to be called in your view '${getVcName(
                     vc
                 )}' within 5 seconds and it wasn't.${
                     err.stack.includes('renderInDialog(')
@@ -209,7 +209,7 @@ const vcAssert = {
 
         assert.isTrue(
             wasAlertTriggered,
-            `Expected this.alert() to be called in '${getVcName(
+            `Expected await this.alert() to be called in '${getVcName(
                 vc
             )}' within 5 seconds and it wasn't.`
         )
@@ -221,7 +221,7 @@ const vcAssert = {
         assert.isEqual(
             passedStyle,
             style,
-            `I expected this.alert({ type: '${style}' }) to be called in ${getVcName(
+            `I expected await this.alert({ type: '${style}' }) to be called in ${getVcName(
                 vc
             )}, but it wasn't!`
         )
