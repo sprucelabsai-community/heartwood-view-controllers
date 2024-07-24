@@ -221,7 +221,7 @@ const vcAssert = {
         assert.isEqual(
             passedStyle,
             style,
-            `I expected await this.alert({ type: '${style}' }) to be called in ${getVcName(
+            `I expected await this.alert({ style: '${style}' }) to be called in ${getVcName(
                 vc
             )}, but it wasn't!`
         )
