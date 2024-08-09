@@ -434,6 +434,45 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
         this.assertValueEquals(undefined)
     }
 
+    @test()
+    protected static async throwsWhenManySuggestionsDontMatch() {
+        assert.doesThrow(() => this.assertSuggestionsAreShowing(['test']))
+        this.showSuggestions([{ id: 'wakawaka', label: 'Hey!' }])
+        this.vc.hideSuggestions()
+        assert.doesThrow(() => this.assertSuggestionsAreShowing(['wakawaka']))
+        this.showSuggestions([
+            { id: 'wakawaka', label: 'Hey!' },
+            { id: 'test', label: 'Hey!' },
+        ])
+
+        assert.doesThrow(() => this.assertSuggestionsAreShowing(['wakawaka']))
+        assert.doesThrow(() => this.assertSuggestionsAreShowing(['test']))
+    }
+
+    @test()
+    protected static async canAssertManyOptionsWhenShowing() {
+        this.showSuggestions([
+            { id: 'test', label: 'Hey!' },
+            { id: 'test2', label: 'what the!?' },
+        ])
+
+        this.assertSuggestionsAreShowing(['test', 'test2'])
+
+        const id = generateId()
+        this.showSuggestions([
+            {
+                id,
+                label: 'Hey',
+            },
+        ])
+
+        this.assertSuggestionsAreShowing([id])
+    }
+
+    private static assertSuggestionsAreShowing(suggestions: string[]): any {
+        return autocompleteAssert.suggestionsAreShowing(this.vc, suggestions)
+    }
+
     protected static async setValueOnForm(value: string) {
         const { setValue } = this.render(this.formVc)
         await setValue('firstName', value)

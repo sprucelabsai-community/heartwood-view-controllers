@@ -85,6 +85,24 @@ const autocompleteAssert = {
         )
     },
 
+    suggestionsAreShowing(
+        vc: AutocompleteInputViewController,
+        suggestionIds: string[]
+    ) {
+        assert.isTrue(
+            vc.getIsShowingSuggestions(),
+            "You aren't showing an suggestions. Try 'vc.showSuggestions(...)' to show suggestions!"
+        )
+
+        const { suggestions } = renderUtil.render(vc)
+        const ids = suggestions?.map((s) => s.id) || []
+        assert.isEqualDeep(
+            ids,
+            suggestionIds,
+            `The suggestions you passed do not match what I expected!`
+        )
+    },
+
     suggestionIsShowing(
         vc: AutocompleteInputViewController,
         suggestionId: string
