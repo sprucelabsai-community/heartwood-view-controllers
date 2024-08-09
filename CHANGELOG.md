@@ -1,3 +1,10 @@
+# [110.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.8.73...v110.9.0) (2024-08-09)
+
+
+### Features
+
+* `autocompleteAssert.suggestionsAreShowing` ([c6f3f0e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c6f3f0e))
+
 ## [110.8.73](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.8.72...v110.8.73) (2024-07-31)
 
 ## [110.8.72](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.8.71...v110.8.72) (2024-07-27)
