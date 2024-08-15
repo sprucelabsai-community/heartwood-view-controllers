@@ -1,6 +1,6 @@
 import {
     EventContract,
-    EventNames,
+    EventName,
     EventSignature,
     SkillEventContract,
     SpruceSchemas,
@@ -13,9 +13,8 @@ type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
 type ActiveRecordCardBuilder<Contract extends EventContract> = <
-    EventName extends EventNames<Contract> = EventNames<Contract>,
-    IEventSignature extends
-        EventSignature = Contract['eventSignatures'][EventName],
+    Fqen extends EventName<Contract> = EventName<Contract>,
+    IEventSignature extends EventSignature = Contract['eventSignatures'][Fqen],
     EmitSchema extends
         Schema = IEventSignature['emitPayloadSchema'] extends Schema
         ? IEventSignature['emitPayloadSchema']
@@ -29,7 +28,7 @@ type ActiveRecordCardBuilder<Contract extends EventContract> = <
     ResponseKey extends keyof Response = keyof Response,
 >(options: {
     id?: string
-    eventName: EventName
+    eventName: Fqen
     responseKey: ResponseKey
     rowTransformer: (record: Response[ResponseKey][number]) => Row
     noResultsRow?: Omit<Row, 'id'>
