@@ -1,3 +1,10 @@
+# [110.10.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.9.30...v110.10.0) (2024-08-17)
+
+
+### Features
+
+* page vc! ([47f29aa](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/47f29aa))
+
 ## [110.9.30](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.9.29...v110.9.30) (2024-08-17)
 
 ## [110.9.29](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.9.28...v110.9.29) (2024-08-17)
