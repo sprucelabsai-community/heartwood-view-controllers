@@ -60,7 +60,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private ListVc(
         options: ActiveRecordCardViewControllerOptions
     ): ActiveRecordListViewController {
-        return this.Controller('activeRecordList', {
+        return this.Controller('active-record-list', {
             ...options,
             onWillFetch: () => this.cardVc.setIsBusy(true),
             onDidFetch: () => this.cardVc.setIsBusy(false),

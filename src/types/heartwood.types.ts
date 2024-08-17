@@ -18,7 +18,7 @@ import {
     SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { Log } from '@sprucelabs/spruce-skill-utils'
-import { CalendarEventOptions } from '..'
+import { CalendarEventOptions, PagerViewController } from '..'
 import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
@@ -76,6 +76,7 @@ import MapViewController, {
     MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
 import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
+import { PagerViewControllerOptions } from '../viewControllers/pagers/Pager.vc'
 import PolarAreaViewController, {
     PolarAreaViewControllerOptions,
 } from '../viewControllers/PolarAreaViewController.vc'
@@ -105,6 +106,7 @@ import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
 
+export { default as PagerViewController } from '../viewControllers/pagers/Pager.vc'
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
 export type ErrorHandler = (message: string) => void
@@ -285,6 +287,7 @@ export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
 export type Receipt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt
+export type Pager = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager
 export type Slide =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
@@ -473,6 +476,7 @@ export interface ViewControllerMap {
     'countdown-timer': CountdownTimerViewController
     'progress-navigator': ProgressNavigatorViewController
     'polar-area': PolarAreaViewController
+    pager: PagerViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -514,6 +518,7 @@ export interface ViewControllerOptionsMap {
     'countdown-timer': CountdownTimerViewControllerOptions
     'progress-navigator': ProgressNavigatorViewControllerOptions
     'polar-area': PolarAreaViewControllerOptions
+    pager: PagerViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

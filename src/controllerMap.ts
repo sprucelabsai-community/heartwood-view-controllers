@@ -1,3 +1,4 @@
+import { PagerViewController } from '.'
 import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController from './viewControllers/activeRecord/ActiveRecordList.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
@@ -95,4 +96,5 @@ export const CORE_CONTROLLER_MAP = {
     'countdown-timer': CountdownTimerViewController,
     'progress-navigator': ProgressNavigatorViewController,
     'polar-area': PolarAreaViewController,
+    pager: PagerViewController,
 }

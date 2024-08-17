@@ -26,6 +26,8 @@ export { default as CountdownTimerViewController } from './viewControllers/count
 export * from './viewControllers/countdownTimer/CountdownTimer.vc'
 export { default as ProgressNavigatorViewController } from './viewControllers/progressNavigator/ProgressNavigator.vc'
 export * from './viewControllers/progressNavigator/ProgressNavigator.vc'
+export { default as PagerViewController } from './viewControllers/pagers/Pager.vc'
+export * from './viewControllers/pagers/Pager.vc'
 
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
@@ -137,6 +139,7 @@ export { default as mapPinSchema } from '#spruce/schemas/heartwoodViewController
 export { default as inputButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/inputButton.schema'
 export { default as polarAreaSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarArea.schema'
 export { default as polarAreaDataItemSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarAreaDataItem.schema'
+export { default as pagerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
