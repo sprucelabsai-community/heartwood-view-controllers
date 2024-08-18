@@ -1,12 +1,9 @@
 import {
-    MercuryClient,
     MercuryClientFactory,
     MercuryTestClient,
 } from '@sprucelabs/mercury-client'
-import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
-import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
@@ -20,7 +17,7 @@ import ActiveRecordCardViewController, {
 
 class SpyActiveRecordCard extends ActiveRecordCardViewController {
     public getListVc() {
-        return this.listVc.getListVc()
+        return this.listVc!.getListVc()
     }
 
     public getCardVc() {
@@ -33,8 +30,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         activeRecordCard: SpyActiveRecordCard,
     }
 
-    protected static organizations: Organization[] = []
-    protected static client: MercuryClient
+    private static organizations: Organization[] = []
 
     protected static async beforeEach() {
         await super.beforeEach()
@@ -42,23 +38,11 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         MercuryTestClient.setShouldRequireLocalListeners(true)
         MercuryClientFactory.setIsTestMode(true)
 
-        const client = MercuryTestClient.getInternalEmitter(
-            eventContractUtil.unifyContracts(coreEventContracts as any)
-        )
-
-        this.client = client as any
-
-        await client.on('list-organizations::v2020_12_25', () => {
-            return {
-                organizations: this.organizations,
-            }
+        await this.eventFaker.fakeListOrganizations(() => {
+            return this.organizations
         })
 
-        await client.on('list-locations::v2020_12_25', () => {
-            return {
-                locations: [],
-            }
-        })
+        await this.eventFaker.fakeListLocations()
 
         this.organizations = []
     }
@@ -617,11 +601,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test()
     protected static async errorRemovesCustomRows() {
-        await this.client.on('list-organizations::v2020_12_25', () =>
-            //@ts-ignore
-            assert.fail('persosly failing')
-        )
-
+        await this.eventFaker.fakeListOrganizations(() => assert.fail('nope'))
         const vc = this.Vc()
         await this.assertListLoadingClearsCustomRow(vc)
     }
@@ -869,7 +849,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
                 },
             }),
             ...options,
-        })
+        }) as SpyActiveRecordCard
     }
 
     private static async fakeListOrgsNoResultsAndLoad(

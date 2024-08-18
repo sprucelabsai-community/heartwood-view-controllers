@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { buttonFields } from '../../../constants'
+import pagerBuilder from '../pager.builder'
 
 export default buildSchema({
     id: 'cardFooter',
@@ -37,6 +38,13 @@ export default buildSchema({
             type: 'boolean',
             label: 'Loading',
             defaultValue: true,
+        },
+        pager: {
+            type: 'schema',
+            label: 'Pager',
+            options: {
+                schema: pagerBuilder,
+            },
         },
         shouldRenderBorder: {
             type: 'boolean',

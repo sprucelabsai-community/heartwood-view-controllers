@@ -6,11 +6,13 @@ import {
     SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues } from '@sprucelabs/schema'
+import { Card, List, ListRow } from '../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 
-type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
+export interface ActiveRecordPagingOptions {
+    shouldPageClientSide?: boolean
+    pageSize?: number
+}
 
 type ActiveRecordCardBuilder<Contract extends EventContract> = <
     Fqen extends EventName<Contract> = EventName<Contract>,
@@ -30,8 +32,8 @@ type ActiveRecordCardBuilder<Contract extends EventContract> = <
     id?: string
     eventName: Fqen
     responseKey: ResponseKey
-    rowTransformer: (record: Response[ResponseKey][number]) => Row
-    noResultsRow?: Omit<Row, 'id'>
+    rowTransformer: (record: Response[ResponseKey][number]) => ListRow
+    noResultsRow?: Omit<ListRow, 'id'>
     /** @ts-ignore */
     payload?: SchemaValues<EmitSchema>['payload']
     /** @ts-ignore */
@@ -42,6 +44,7 @@ type ActiveRecordCardBuilder<Contract extends EventContract> = <
     shouldRenderRowDividers?: boolean
     filter?: (record: Response[ResponseKey][number]) => boolean
     defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
+    paging?: ActiveRecordPagingOptions
 }) => ActiveRecordCardViewControllerOptions
 
 /** @ts-ignore */

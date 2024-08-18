@@ -2059,102 +2059,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface CardBody {
-			
-				/** Show section separators. This will make each section render with a border. */
-				'shouldShowSectionSeparators'?: boolean| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
-				/** Swipe. */
-				'shouldEnableSectionSwiping'?: boolean| undefined | null
-				/** Swipe break into cards on landscape. */
-				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
-				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
-				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void)| undefined | null
-				/** Render sections as grid. */
-				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
-				/** Sections. */
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
-		}
-
-		interface CardBodySchema extends SpruceSchema.Schema {
-			id: 'cardBody',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Show section separators. This will make each section render with a border. */
-			            'shouldShowSectionSeparators': {
-			                label: 'Show section separators',
-			                type: 'boolean',
-			                hint: 'This will make each section render with a border.',
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe controller. */
-			            'swipeController': {
-			                label: 'Swipe controller',
-			                type: 'raw',
-			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
-			            },
-			            /** Swipe. */
-			            'shouldEnableSectionSwiping': {
-			                label: 'Swipe',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe break into cards on landscape. */
-			            'shouldSwipeBreakIntoCardsOnLandscape': {
-			                label: 'Swipe break into cards on landscape',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Select slide title handler. */
-			            'onSelectSlideTitle': {
-			                label: 'Select slide title handler',
-			                type: 'raw',
-			                options: {valueType: `(id: number) => void`,}
-			            },
-			            /** Slide change callback. */
-			            'onChangeSlide': {
-			                label: 'Slide change callback',
-			                type: 'raw',
-			                options: {valueType: `(slide: number) => void`,}
-			            },
-			            /** Render sections as grid. */
-			            'shouldRenderSectionsAsGrid': {
-			                label: 'Render sections as grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Sections. */
-			            'sections': {
-			                label: 'Sections',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
-			            },
-			    }
-		}
-
-		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface Dialog {
 			
 				
@@ -2305,72 +2209,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface PortalEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Pager {
-			
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>)| undefined | null
-				
-				'id'?: string| undefined | null
-				
-				'totalPages'?: number| undefined | null
-				
-				'currentPage'?: number| undefined | null
-				
-				'onChangePage'?: ((page: number) => Promise<any> | any)| undefined | null
-				
-				'setCurrentPage': ((page: number) => Promise<any> | any)
-		}
-
-		interface PagerSchema extends SpruceSchema.Schema {
-			id: 'pager',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Pager',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>`,}
-			            },
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'totalPages': {
-			                type: 'number',
-			                options: undefined
-			            },
-			            /** . */
-			            'currentPage': {
-			                type: 'number',
-			                options: undefined
-			            },
-			            /** . */
-			            'onChangePage': {
-			                type: 'raw',
-			                options: {valueType: `(page: number) => Promise<any> | any`,}
-			            },
-			            /** . */
-			            'setCurrentPage': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `(page: number) => Promise<any> | any`,}
-			            },
-			    }
-		}
-
-		interface PagerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PagerSchema> {}
 
 	}
 
@@ -2638,6 +2476,102 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface CardBody {
+			
+				/** Show section separators. This will make each section render with a border. */
+				'shouldShowSectionSeparators'?: boolean| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Swipe controller. */
+				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
+				/** Swipe. */
+				'shouldEnableSectionSwiping'?: boolean| undefined | null
+				/** Swipe break into cards on landscape. */
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
+				/** Select slide title handler. */
+				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
+				/** Slide change callback. */
+				'onChangeSlide'?: ((slide: number) => void)| undefined | null
+				/** Render sections as grid. */
+				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
+				/** Sections. */
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
+		}
+
+		interface CardBodySchema extends SpruceSchema.Schema {
+			id: 'cardBody',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Show section separators. This will make each section render with a border. */
+			            'shouldShowSectionSeparators': {
+			                label: 'Show section separators',
+			                type: 'boolean',
+			                hint: 'This will make each section render with a border.',
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe controller. */
+			            'swipeController': {
+			                label: 'Swipe controller',
+			                type: 'raw',
+			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
+			            },
+			            /** Swipe. */
+			            'shouldEnableSectionSwiping': {
+			                label: 'Swipe',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe break into cards on landscape. */
+			            'shouldSwipeBreakIntoCardsOnLandscape': {
+			                label: 'Swipe break into cards on landscape',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Select slide title handler. */
+			            'onSelectSlideTitle': {
+			                label: 'Select slide title handler',
+			                type: 'raw',
+			                options: {valueType: `(id: number) => void`,}
+			            },
+			            /** Slide change callback. */
+			            'onChangeSlide': {
+			                label: 'Slide change callback',
+			                type: 'raw',
+			                options: {valueType: `(slide: number) => void`,}
+			            },
+			            /** Render sections as grid. */
+			            'shouldRenderSectionsAsGrid': {
+			                label: 'Render sections as grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Sections. */
+			            'sections': {
+			                label: 'Sections',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
+			            },
+			    }
+		}
+
+		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface Feed {
 			
 				
@@ -2820,51 +2754,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface Receipt {
-			
-				
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader| undefined | null
-				
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[]| undefined | null
-				
-				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[]| undefined | null
-		}
-
-		interface ReceiptSchema extends SpruceSchema.Schema {
-			id: 'receipt',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Receipt',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'header': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
-			            },
-			            /** . */
-			            'sections': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
-			            },
-			            /** . */
-			            'totals': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
-			            },
-			    }
-		}
-
-		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface ReceiptLineItem {
 			
 				
@@ -2991,6 +2880,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ReceiptHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Receipt {
+			
+				
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader| undefined | null
+				
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[]| undefined | null
+				
+				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[]| undefined | null
+		}
+
+		interface ReceiptSchema extends SpruceSchema.Schema {
+			id: 'receipt',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Receipt',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'header': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
+			            },
+			            /** . */
+			            'sections': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
+			            },
+			            /** . */
+			            'totals': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
+			            },
+			    }
+		}
+
+		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
 
 	}
 
@@ -3970,6 +3904,72 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Pager {
+			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>)| undefined | null
+				
+				'id'?: string| undefined | null
+				
+				'totalPages'?: number| undefined | null
+				
+				'currentPage'?: number| undefined | null
+				
+				'onChangePage'?: ((page: number) => Promise<any> | any)| undefined | null
+				
+				'setCurrentPage': ((page: number) => Promise<any> | any)
+		}
+
+		interface PagerSchema extends SpruceSchema.Schema {
+			id: 'pager',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Pager',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>`,}
+			            },
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'totalPages': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'currentPage': {
+			                type: 'number',
+			                options: undefined
+			            },
+			            /** . */
+			            'onChangePage': {
+			                type: 'raw',
+			                options: {valueType: `(page: number) => Promise<any> | any`,}
+			            },
+			            /** . */
+			            'setCurrentPage': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `(page: number) => Promise<any> | any`,}
+			            },
+			    }
+		}
+
+		interface PagerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PagerSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CardFooterButton {
 			
 				
@@ -4133,6 +4133,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isSticky'?: boolean| undefined | null
 				/** Loading. */
 				'isEnabled'?: boolean| undefined | null
+				/** Pager. */
+				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager| undefined | null
 				/** Show border. */
 				'shouldRenderBorder'?: boolean| undefined | null
 		}
@@ -4175,6 +4177,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** Pager. */
+			            'pager': {
+			                label: 'Pager',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PagerSchema,}
 			            },
 			            /** Show border. */
 			            'shouldRenderBorder': {

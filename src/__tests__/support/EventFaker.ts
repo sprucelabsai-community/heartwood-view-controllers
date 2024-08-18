@@ -1,5 +1,9 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import {
+    Location,
+    Organization,
+    SpruceSchemas,
+} from '@sprucelabs/spruce-core-schemas'
 import { generateId } from '@sprucelabs/test-utils'
 
 export default class EventFaker {
@@ -14,6 +18,36 @@ export default class EventFaker {
                 challenge: challenge ?? generateId(),
             }
         })
+    }
+
+    public async fakeListLocations(
+        cb?: (
+            targetAndPayload: ListLocationsTargetAndPayload
+        ) => void | Location[]
+    ) {
+        await this.client.on(
+            'list-locations::v2020_12_25',
+            (targetAndPayload) => {
+                return {
+                    locations: cb?.(targetAndPayload) ?? [],
+                }
+            }
+        )
+    }
+
+    public async fakeListOrganizations(
+        cb?: (
+            targetAndPayload: ListOrganizationsTargetAndPayload
+        ) => void | Organization[]
+    ) {
+        await this.client.on(
+            'list-organizations::v2020_12_25',
+            (targetAndPayload) => {
+                return {
+                    organizations: cb?.(targetAndPayload) ?? [],
+                }
+            }
+        )
     }
 
     public async fakeConfirmPin(options?: {
@@ -37,3 +71,9 @@ export default class EventFaker {
         })
     }
 }
+
+export type ListLocationsTargetAndPayload =
+    SpruceSchemas.Mercury.v2020_12_25.ListLocationsEmitTargetAndPayload
+
+export type ListOrganizationsTargetAndPayload =
+    SpruceSchemas.Mercury.v2020_12_25.ListOrganizationsEmitTargetAndPayload

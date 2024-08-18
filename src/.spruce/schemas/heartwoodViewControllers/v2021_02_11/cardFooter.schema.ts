@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import cardFooterButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardFooterButton.schema'
+import pagerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
 
 const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema  = {
 	id: 'cardFooter',
@@ -41,6 +42,12 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	                type: 'boolean',
 	                defaultValue: true,
 	                options: undefined
+	            },
+	            /** Pager. */
+	            'pager': {
+	                label: 'Pager',
+	                type: 'schema',
+	                options: {schema: pagerSchema_v2021_02_11,}
 	            },
 	            /** Show border. */
 	            'shouldRenderBorder': {

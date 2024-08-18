@@ -4,17 +4,38 @@ import {
     CardViewController,
     CriticalError,
     ListRow,
+    SwipeCardViewController,
     ViewControllerOptions,
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import { CardViewControllerOptions } from '../card/Card.vc'
+import PagerViewController from '../pagers/Pager.vc'
 import ActiveRecordListViewController, {
     ActiveRecordListViewControllerOptions,
 } from './ActiveRecordList.vc'
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
-    protected cardVc: CardViewController
-    protected listVc: ActiveRecordListViewController
+    protected cardVc: Pick<
+        CardViewController,
+        | 'setCriticalError'
+        | 'setIsBusy'
+        | 'getHasCriticalError'
+        | 'clearCriticalError'
+        | 'setHeaderTitle'
+        | 'setHeaderSubtitle'
+        | 'disableFooter'
+        | 'enableFooter'
+        | 'render'
+        | 'setFooter'
+        | 'isBusy'
+        | 'getHeaderTitle'
+        | 'getHeaderSubtitle'
+        | 'setTriggerRenderHandler'
+        | 'triggerRender'
+    >
+    protected listVc?: ActiveRecordListViewController
+    private pagerVc?: PagerViewController
+    private swipeVc?: SwipeCardViewController
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.setShouldThrowOnResponseError(
@@ -27,37 +48,71 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ) {
         super(options)
 
-        this.listVc = this.ListVc(options)
-        this.cardVc = this.CardVc(options)
+        const { paging } = options
+
+        if (paging) {
+            this.pagerVc = this.PagerVc()
+            this.swipeVc = this.SwipeVc()
+            this.cardVc = this.swipeVc
+        } else {
+            this.listVc = this.ActiveRecordListVc(options)
+            this.cardVc = this.CardVc(options)
+        }
 
         //@ts-ignore
         this.cardVc.__isActiveRecord = true
+
         //@ts-ignore
         this.cardVc.__activeRecordParent = this
     }
 
+    private SwipeVc(): SwipeCardViewController {
+        return this.Controller('swipe-card', {
+            slides: [
+                {
+                    list: this.Controller('list', {}).render(),
+                },
+            ],
+            footer: {
+                pager: this.pagerVc?.render(),
+            },
+        })
+    }
+
+    private PagerVc(): PagerViewController {
+        return this.Controller('pager', {
+            id: 'active-pager',
+        })
+    }
+
     private CardVc(
-        options: ActiveRecordCardViewControllerOptions
+        options: Pick<
+            ActiveRecordCardViewControllerOptions,
+            'header' | 'footer' | 'id'
+        >
     ): CardViewController {
+        const { header, footer, id } = options
         const model: CardViewControllerOptions = {
-            header: options.header,
-            footer: options.footer,
+            header,
+            footer,
             body: {
                 isBusy: true,
                 sections: [
                     {
-                        list: this.listVc.render(),
+                        list: this.listVc!.render(),
                     },
                 ],
             },
         }
-        if (options.id) {
-            model.id = options.id
+
+        if (id) {
+            model.id = id
         }
+
         return this.Controller('card', model)
     }
 
-    private ListVc(
+    private ActiveRecordListVc(
         options: ActiveRecordCardViewControllerOptions
     ): ActiveRecordListViewController {
         return this.Controller('active-record-list', {
@@ -68,7 +123,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public doesRowExist(id: string): boolean {
-        return this.listVc.doesRowExist(id)
+        return this.listVc ? this.listVc.doesRowExist(id) : false
     }
 
     public setCriticalError(error: CriticalError) {
@@ -80,11 +135,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public async load() {
-        await this.listVc.load()
+        await this.listVc?.load()
     }
 
     public getIsLoaded() {
-        return this.listVc.getIsLoaded()
+        return this.listVc?.getIsLoaded()
     }
 
     public clearCriticalError() {
@@ -97,7 +152,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 `You have to load your activeRecordCard before you can get records from it.`
             )
         }
-        return this.listVc.getRecords()
+        return this.listVc?.getRecords() ?? []
     }
 
     public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
@@ -107,23 +162,23 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             )
         }
 
-        this.listVc.upsertRow(id, { ...row })
+        this.listVc?.upsertRow(id, { ...row })
     }
 
     public getTarget() {
-        return this.listVc.getTarget()
+        return this.listVc?.getTarget()
     }
 
     public setTarget(target?: Record<string, any>) {
-        this.listVc.setTarget(target)
+        this.listVc?.setTarget(target)
     }
 
     public setPayload(payload?: Record<string, any>) {
-        this.listVc.setPayload(payload)
+        this.listVc?.setPayload(payload)
     }
 
     public deleteRow(id: string | number) {
-        this.listVc.deleteRow(id)
+        this.listVc?.deleteRow(id)
     }
 
     public setIsBusy(isBusy: boolean) {
@@ -141,7 +196,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             )
         }
 
-        await this.listVc.refresh()
+        await this.listVc?.refresh()
     }
 
     public setHeaderTitle(title: string) {
@@ -153,41 +208,41 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public getListVc() {
-        return this.listVc.getListVc()
+        return this.listVc?.getListVc()
     }
 
     public selectRow(row: string | number) {
-        this.listVc.selectRow(row)
+        this.listVc?.selectRow(row)
     }
 
     public deselectRow(row: string | number) {
-        this.listVc.deselectRow(row)
+        this.listVc?.deselectRow(row)
     }
 
     public isRowSelected(row: string | number): boolean {
-        return this.listVc.isRowSelected(row)
+        return this.listVc ? this.listVc?.isRowSelected(row) : false
     }
 
     public addRow(
         row: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
     ) {
-        this.listVc.addRow(row)
+        this.listVc?.addRow(row)
     }
 
     public setSelectedRows(rows: (string | number)[]) {
-        this.listVc.setSelectedRows(rows)
+        this.listVc?.setSelectedRows(rows)
     }
 
     public getValues() {
-        return this.listVc.getValues()
+        return this.listVc?.getValues()
     }
 
     public getPayload() {
-        return this.listVc.getPayload()
+        return this.listVc?.getPayload()
     }
 
     public getRowVc(row: string | number) {
-        return this.listVc.getRowVc(row)
+        return this.listVc?.getRowVc(row)
     }
 
     public setFooter(footer: CardFooter | null) {
@@ -203,7 +258,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public render(): Card {
-        return this.cardVc.render()
+        return this.swipeVc?.render() ?? this.cardVc.render()
     }
 }
 

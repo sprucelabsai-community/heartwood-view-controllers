@@ -12,6 +12,10 @@ const pagerAssert = {
         const model = renderUtil.render(vc)
         const pagers = pluckAllFromView(model, 'pager')
 
+        if (model.footer?.pager) {
+            pagers.push(model.footer.pager)
+        }
+
         assert.isAbove(pagers.length, 0, `Your card is not rendering a pager!`)
 
         if (id) {
@@ -27,9 +31,23 @@ const pagerAssert = {
         return pagers[0]?.controller as PagerViewController
     },
 
+    cardDoesNotRenderPager(vc: ViewController<Card>, id?: string) {
+        assertOptions({ vc }, ['vc'])
+
+        try {
+            this.cardRendersPager(vc, id)
+        } catch {
+            return
+        }
+
+        assert.fail(`Your card is rendering a pager and should not be!`)
+    },
+
     totalPages(vc: ViewController<Pager>, expected: number) {
         assertOptions({ vc, expected }, ['vc', 'expected'])
+
         const model = renderUtil.render(vc)
+
         assert.isEqual(
             model.totalPages,
             expected,

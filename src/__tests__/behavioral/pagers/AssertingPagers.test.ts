@@ -98,6 +98,33 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
         this.assertTotalPages(10)
     }
 
+    @test()
+    protected static async cardDoesNotRenderPagerThrowsWhenMissingRequired() {
+        //@ts-ignore
+        const err = assert.doesThrow(() => pagerAssert.cardDoesNotRenderPager())
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenPagerIsRendered() {
+        this.addSectionWithPager()
+        assert.doesThrow(
+            () => pagerAssert.cardDoesNotRenderPager(this.vc),
+            'pager'
+        )
+    }
+
+    @test()
+    protected static async canFindPageInFooter() {
+        this.vc.setFooter({
+            pager: this.pagerVc.render(),
+        })
+
+        this.assertCardRendersPager()
+    }
+
     private static assertTotalPagesThrows(expected: number) {
         assert.doesThrow(() => this.assertTotalPages(expected), 'pages')
     }
@@ -115,6 +142,8 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
             () => this.assertCardRendersPager(id),
             id ? 'id' : 'pager'
         )
+
+        pagerAssert.cardDoesNotRenderPager(this.vc, id)
     }
 
     private static addSection(section: CardSection) {
