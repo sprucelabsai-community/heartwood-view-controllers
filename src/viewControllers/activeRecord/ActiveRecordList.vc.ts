@@ -16,13 +16,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     private listVc: ListViewController
     private noResultsRow?: Omit<ListRow, 'id'>
     private rowTransformer: (record: Record<string, any>) => ListRow
-    private eventName: string
-    private responseKey: string
-    private emitPayload?: Record<string, any>
-    private emitTarget?: Record<string, any>
     private isLoaded = false
-    private filter?: (record: Record<string, any>) => boolean
-
     private static shouldThrowOnResponseError = false
     private willFetchHandler?: () => void | Promise<void>
     private didFetchHandler?: () => void | Promise<void>
@@ -38,31 +32,17 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const {
-            noResultsRow,
-            onWillFetch,
-            onDidFetch,
-            eventName,
-            rowTransformer,
-            responseKey,
-            payload,
-            target,
-            filter,
-        } = assertOptions(options, [
-            'eventName',
-            'rowTransformer',
-            'responseKey',
-        ])
+        const { noResultsRow, onWillFetch, onDidFetch, rowTransformer } =
+            assertOptions(options, [
+                'eventName',
+                'rowTransformer',
+                'responseKey',
+            ])
 
         this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
 
         this.noResultsRow = noResultsRow
         this.rowTransformer = rowTransformer
-        this.eventName = eventName
-        this.responseKey = responseKey
-        this.emitPayload = payload
-        this.emitTarget = target
-        this.filter = filter
         this.willFetchHandler = onWillFetch
         this.didFetchHandler = onDidFetch
 
@@ -94,48 +74,27 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     }
 
     private async fetchResults() {
-        let responseKeyError: any
-
         await this.willFetchHandler?.()
 
         try {
-            const client = await this.connectToApi()
+            this.records = await this.fetcher.fetchRecords()
 
-            const [responsePayload] = await client.emitAndFlattenResponses(
-                this.eventName as any,
-                this.buildTargetAndPayload() as any
-            )
-
-            const records = responsePayload[this.responseKey] as any[]
-
-            if (!records) {
-                responseKeyError = true
+            if (this.records.length === 0) {
+                this.listVc.setRows([this.renderNoResultsRow()])
             } else {
-                this.records = records.filter(
-                    (r: any) => !this.filter || this.filter(r)
+                this.listVc.setRows(
+                    this.records.map((record) => this.rowTransformer(record))
                 )
-
-                if (this.records.length === 0) {
-                    this.listVc.setRows([this.renderNoResultsRow()])
-                } else {
-                    this.listVc.setRows(
-                        this.records.map((record) =>
-                            this.rowTransformer(record)
-                        )
-                    )
-                }
             }
         } catch (err: any) {
+            if (err.options?.code === 'INVALID_PARAMETERS') {
+                throw err
+            }
+
             if (ActiveRecordListViewController.shouldThrowOnResponseError) {
                 throw err
             }
             this.listVc.setRows([this.buildErrorRow(err)])
-        }
-
-        if (responseKeyError) {
-            throw new Error(
-                `The key '${this.responseKey}' was not found in response or no records were returned!`
-            )
         }
 
         this.isLoaded = true
@@ -220,33 +179,16 @@ export default class ActiveRecordListViewController extends AbstractViewControll
         this.listVc.upsertRow(id, { ...row })
     }
 
-    private buildTargetAndPayload() {
-        const targetAndPayload: Record<string, any> = {}
-
-        if (this.emitTarget) {
-            //@ts-ignore
-            targetAndPayload.target = this.emitTarget
-        }
-
-        if (this.emitPayload) {
-            //@ts-ignore
-            targetAndPayload.payload = this.emitPayload
-        }
-        return Object.keys(targetAndPayload).length === 0
-            ? undefined
-            : targetAndPayload
-    }
-
     public getTarget() {
-        return this.emitTarget
+        return this.fetcher.getTarget()
     }
 
     public setTarget(target?: Record<string, any>) {
-        this.emitTarget = target
+        this.fetcher.setTarget(target)
     }
 
     public setPayload(payload?: Record<string, any>) {
-        this.emitPayload = payload
+        this.fetcher.setPayload(payload)
     }
 
     public deleteRow(id: string | number) {
@@ -283,7 +225,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     }
 
     public getPayload() {
-        return this.emitPayload
+        return this.fetcher.getPayload()
     }
 
     public getListVc() {

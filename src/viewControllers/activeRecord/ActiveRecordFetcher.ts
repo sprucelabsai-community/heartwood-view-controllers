@@ -1,5 +1,6 @@
 import { MercuryConnectFactory } from '@sprucelabs/mercury-client'
 import { EventName } from '@sprucelabs/mercury-types'
+import { SchemaError } from '@sprucelabs/schema'
 import { ListRow } from '../../types/heartwood.types'
 
 export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
@@ -43,9 +44,11 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
         const records = responsePayload[this.responseKey] as any[]
 
         if (!records) {
-            throw new Error(
-                `The key '${this.responseKey}' was not found in response or no records were returned!`
-            )
+            throw new SchemaError({
+                code: 'INVALID_PARAMETERS',
+                parameters: ['responseKey'],
+                friendlyMessage: `The key '${this.responseKey}' was not found in response or no records were returned!`,
+            })
         }
 
         return records.filter((r: any) => !this.filter || this.filter(r))
@@ -76,12 +79,21 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
     public setPayload(payload: Record<string, any>): void {
         this.emitPayload = payload
     }
+
+    public getTarget(): Record<string, any> | undefined {
+        return this.emitTarget
+    }
+    public getPayload(): Record<string, any> | undefined {
+        return this.emitPayload
+    }
 }
 
 export interface ActiveRecordFetcher {
-    fetchRecords(): Promise<Record<string, any>>
-    setTarget(target: Record<string, any>): void
-    setPayload(payload: Record<string, any>): void
+    fetchRecords(): Promise<Record<string, any>[]>
+    setTarget(target?: Record<string, any>): void
+    setPayload(payload?: Record<string, any>): void
+    getTarget(): Record<string, any> | undefined
+    getPayload(): Record<string, any> | undefined
 }
 
 interface FetcherOptions {

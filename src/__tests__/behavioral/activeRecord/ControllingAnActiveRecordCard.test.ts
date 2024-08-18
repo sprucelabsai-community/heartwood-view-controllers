@@ -396,7 +396,10 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
             },
         })
 
-        await assert.doesThrowAsync(() => vc.load())
+        const err = await assert.doesThrowAsync(() => vc.load())
+        errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+            parameters: ['responseKey'],
+        })
         assert.isEqualDeep(vc.getTarget(), {
             organizationId: organization.id,
         })
