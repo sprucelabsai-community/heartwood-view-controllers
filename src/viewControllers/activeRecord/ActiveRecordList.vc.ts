@@ -1,4 +1,4 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { EventName, SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import {
@@ -8,6 +8,9 @@ import {
 } from '../../types/heartwood.types'
 import AbstractViewController from '../Abstract.vc'
 import ListViewController from '../list/List.vc'
+import ActiveRecordFetcherImpl, {
+    ActiveRecordFetcher,
+} from './ActiveRecordFetcher'
 
 export default class ActiveRecordListViewController extends AbstractViewController<List> {
     private listVc: ListViewController
@@ -23,6 +26,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     private static shouldThrowOnResponseError = false
     private willFetchHandler?: () => void | Promise<void>
     private didFetchHandler?: () => void | Promise<void>
+    private fetcher: ActiveRecordFetcher
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         this.shouldThrowOnResponseError = shouldThrow
     }
@@ -34,29 +38,46 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     ) {
         super(options)
 
-        assertOptions(options, ['eventName', 'rowTransformer', 'responseKey'])
+        const {
+            noResultsRow,
+            onWillFetch,
+            onDidFetch,
+            eventName,
+            rowTransformer,
+            responseKey,
+            payload,
+            target,
+            filter,
+        } = assertOptions(options, [
+            'eventName',
+            'rowTransformer',
+            'responseKey',
+        ])
 
-        this.noResultsRow = options.noResultsRow
-        this.rowTransformer = options.rowTransformer
-        this.eventName = options.eventName
-        this.responseKey = options.responseKey
-        this.emitPayload = options.payload
-        this.emitTarget = options.target
-        this.filter = options.filter
-        this.willFetchHandler = options.onWillFetch
-        this.didFetchHandler = options.onDidFetch
+        this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
+
+        this.noResultsRow = noResultsRow
+        this.rowTransformer = rowTransformer
+        this.eventName = eventName
+        this.responseKey = responseKey
+        this.emitPayload = payload
+        this.emitTarget = target
+        this.filter = filter
+        this.willFetchHandler = onWillFetch
+        this.didFetchHandler = onDidFetch
 
         this.listVc = this.ListVc(options)
     }
 
-    private ListVc(
-        options: ActiveRecordListViewControllerOptions
-    ): ListViewController {
+    private ListVc(options: Omit<List, 'rows'>): ListViewController {
+        const { id, columnWidths, shouldRenderRowDividers, defaultRowHeight } =
+            options
+
         return this.Controller('list', {
-            id: options.id,
-            columnWidths: options.columnWidths as any,
-            defaultRowHeight: options.defaultRowHeight,
-            shouldRenderRowDividers: options.shouldRenderRowDividers,
+            id,
+            columnWidths,
+            defaultRowHeight,
+            shouldRenderRowDividers,
         })
     }
 
@@ -198,6 +219,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
         this.listVc.upsertRow(id, { ...row })
     }
+
     private buildTargetAndPayload() {
         const targetAndPayload: Record<string, any> = {}
 
@@ -274,14 +296,14 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 }
 
 export interface ActiveRecordListViewControllerOptions {
-    eventName: string
+    eventName: EventName
     responseKey: string
     rowTransformer: (record: Record<string, any>) => ListRow
     noResultsRow?: Omit<ListRow, 'id'>
     payload?: Record<string, any>
     target?: Record<string, any>
     id?: string
-    columnWidths?: string[]
+    columnWidths?: List['columnWidths']
     shouldRenderRowDividers?: boolean
     defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
     filter?: (record: Record<string, any>) => boolean
