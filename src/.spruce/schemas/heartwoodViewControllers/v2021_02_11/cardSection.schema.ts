@@ -17,6 +17,7 @@ import ratingsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/
 import receiptSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/receipt.schema'
 import polarAreaSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarArea.schema'
 import feedSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/feed.schema'
+import pagerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
 import portalSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/portal.schema'
 
 const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema  = {
@@ -173,6 +174,12 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                label: 'Feed',
 	                type: 'schema',
 	                options: {schema: feedSchema_v2021_02_11,}
+	            },
+	            /** Pager. */
+	            'pager': {
+	                label: 'Pager',
+	                type: 'schema',
+	                options: {schema: pagerSchema_v2021_02_11,}
 	            },
 	            /** Grid. */
 	            'shouldRenderContentsAsGrid': {

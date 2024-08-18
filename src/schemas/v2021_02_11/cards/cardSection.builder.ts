@@ -8,6 +8,7 @@ import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
 import listBuilder from '../list.builder'
 import mapBuilder from '../map.builder'
+import pagerBuilder from '../pager.builder'
 import polarAreaBuilder from '../polarArea.builder'
 import progressBuilder from '../progress.builder'
 import ratingsBuilder from '../ratings.builder'
@@ -173,7 +174,13 @@ export default buildSchema({
                 schema: feedBuilder,
             },
         },
-
+        pager: {
+            type: 'schema',
+            label: 'Pager',
+            options: {
+                schema: pagerBuilder,
+            },
+        },
         shouldRenderContentsAsGrid: {
             type: 'boolean',
             label: 'Grid',

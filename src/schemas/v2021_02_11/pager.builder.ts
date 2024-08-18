@@ -12,6 +12,9 @@ export default buildSchema({
                     'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>',
             },
         },
+        id: {
+            type: 'id',
+        },
         totalPages: {
             type: 'number',
         },

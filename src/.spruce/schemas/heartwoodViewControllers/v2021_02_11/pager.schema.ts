@@ -14,7 +14,12 @@ const pagerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PagerSchem
 	            'controller': {
 	                label: 'Controller',
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.PagerViewController`,}
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>`,}
+	            },
+	            /** . */
+	            'id': {
+	                type: 'id',
+	                options: undefined
 	            },
 	            /** . */
 	            'totalPages': {
