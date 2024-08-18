@@ -1,8 +1,9 @@
 import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { PagerViewController } from '../../../types/heartwood.types'
-import { PagerViewControllerOptions } from '../../../viewControllers/pagers/Pager.vc'
+import PagerViewController, {
+    PagerViewControllerOptions,
+} from '../../../viewControllers/pagers/Pager.vc'
 
 export default class ControllingAPagerTest extends AbstractViewControllerTest {
     private static vc: PagerViewController
