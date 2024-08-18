@@ -1,6 +1,6 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import { ViewController, Card } from '../../types/heartwood.types'
+import { ViewController, Card, Pager } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import PagerViewController from '../../viewControllers/pagers/Pager.vc'
 import { pluckAllFromView } from './assertSupport'
@@ -25,6 +25,16 @@ const pagerAssert = {
         }
 
         return pagers[0]?.controller as PagerViewController
+    },
+
+    totalPages(vc: ViewController<Pager>, expected: number) {
+        assertOptions({ vc, expected }, ['vc', 'expected'])
+        const model = renderUtil.render(vc)
+        assert.isEqual(
+            model.totalPages,
+            expected,
+            `Total pages did not match expected! Try 'this.pagerVc.setTotalPages(${expected})'!`
+        )
     },
 }
 

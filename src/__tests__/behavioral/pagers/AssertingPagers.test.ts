@@ -75,6 +75,37 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
         assert.isEqual(vc, this.pagerVc)
     }
 
+    @test()
+    protected static async totalPagersThrowsIfMissingRequired() {
+        //@ts-ignore
+        const err = assert.doesThrow(() => pagerAssert.totalPages())
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'expected'],
+        })
+    }
+
+    @test()
+    protected static async throwsIfTotalPagesDoesNotMatch() {
+        this.setupPager({ totalPages: 10 })
+        this.assertTotalPagesThrows(11)
+        this.setupPager({ totalPages: 11 })
+        this.assertTotalPagesThrows(10)
+    }
+
+    @test()
+    protected static async matchesOnTotalPages() {
+        this.setupPager({ totalPages: 10 })
+        this.assertTotalPages(10)
+    }
+
+    private static assertTotalPagesThrows(expected: number) {
+        assert.doesThrow(() => this.assertTotalPages(expected), 'pages')
+    }
+
+    private static assertTotalPages(expected: number): any {
+        return pagerAssert.totalPages(this.pagerVc, expected)
+    }
+
     private static setupPager(options?: PagerViewControllerOptions) {
         this.pagerVc = this.Controller('pager', { ...options })
     }
