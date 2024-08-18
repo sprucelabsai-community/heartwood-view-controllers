@@ -97,6 +97,44 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
         this.assertSetCurrentPageCallbackPassesPageThrough(3)
     }
 
+    @test()
+    protected static async canGetTotalpages() {
+        this.setTotalPages(5)
+        this.assertGetTotalPagesReturns(5)
+
+        this.setTotalPages(10)
+        this.assertGetTotalPagesReturns(10)
+    }
+
+    @test()
+    protected static async canGetCurrentPage() {
+        this.setTotalPages(10)
+        this.setCurrentPage(5)
+
+        this.assertGetCurrentPageReturns(5)
+
+        this.setCurrentPage(3)
+        this.assertGetCurrentPageReturns(3)
+    }
+
+    @test()
+    protected static async getTotalPagesReturnsNegativeOneIfNotSet() {
+        this.assertGetTotalPagesReturns(-1)
+    }
+
+    @test()
+    protected static async getCurrentPageReturnsNegativeOneIfNotSet() {
+        this.assertGetCurrentPageReturns(-1)
+    }
+
+    private static assertGetCurrentPageReturns(expected: number) {
+        assert.isEqual(this.vc.getCurrentPage(), expected)
+    }
+
+    private static assertGetTotalPagesReturns(expected: number) {
+        assert.isEqual(this.vc.getTotalPages(), expected)
+    }
+
     private static assertSetCurrentPageCallbackPassesPageThrough(page: number) {
         this.model.setCurrentPage(page)
         assert.isEqual(this.onChangePagePage, page)

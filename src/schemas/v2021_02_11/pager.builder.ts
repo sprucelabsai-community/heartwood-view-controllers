@@ -8,7 +8,8 @@ export default buildSchema({
             type: 'raw',
             label: 'Controller',
             options: {
-                valueType: 'HeartwoodTypes.PagerViewController',
+                valueType:
+                    'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>',
             },
         },
         totalPages: {

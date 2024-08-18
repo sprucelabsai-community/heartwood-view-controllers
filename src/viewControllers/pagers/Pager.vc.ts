@@ -42,6 +42,14 @@ export default class PagerViewController extends AbstractViewController<Pager> {
         }
     }
 
+    public getTotalPages() {
+        return this.model.totalPages ?? -1
+    }
+
+    public getCurrentPage() {
+        return this.model.currentPage ?? -1
+    }
+
     public render(): Pager {
         return {
             controller: this,

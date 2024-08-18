@@ -106,7 +106,6 @@ import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
 
-export { default as PagerViewController } from '../viewControllers/pagers/Pager.vc'
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
 export type ErrorHandler = (message: string) => void
