@@ -6,7 +6,6 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
     private connectToApi: MercuryConnectFactory
     private eventName: EventName
     private responseKey: string
-    private rowTransformer: (record: Record<string, any>) => ListRow
     private filter?: (record: Record<string, any>) => boolean
     private emitTarget?: Record<string, any> | undefined
     private emitPayload?: Record<string, any> | undefined
@@ -16,7 +15,6 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
             connectToApi,
             eventName,
             responseKey,
-            rowTransformer,
             filter,
             target,
             payload,
@@ -25,7 +23,6 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
         this.connectToApi = connectToApi
         this.eventName = eventName
         this.responseKey = responseKey
-        this.rowTransformer = rowTransformer
         this.filter = filter
         this.emitTarget = target
         this.emitPayload = payload
@@ -36,38 +33,22 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
     }
 
     public async fetchRecords() {
-        let responseKeyError: any
+        const client = await this.connectToApi()
 
-        let records: Record<string, any> = []
+        const [responsePayload] = await client.emitAndFlattenResponses(
+            this.eventName,
+            this.buildTargetAndPayload() as any
+        )
 
-        try {
-            const client = await this.connectToApi()
+        const records = responsePayload[this.responseKey] as any[]
 
-            const [responsePayload] = await client.emitAndFlattenResponses(
-                this.eventName,
-                this.buildTargetAndPayload() as any
-            )
-
-            records = responsePayload[this.responseKey] as any[]
-
-            if (!records) {
-                responseKeyError = true
-            } else {
-                records = records.filter(
-                    (r: any) => !this.filter || this.filter(r)
-                )
-
-                return records.map((record: any) => this.rowTransformer(record))
-            }
-        } catch (err: any) {
-            return err
-        }
-
-        if (responseKeyError) {
+        if (!records) {
             throw new Error(
                 `The key '${this.responseKey}' was not found in response or no records were returned!`
             )
         }
+
+        return records.filter((r: any) => !this.filter || this.filter(r))
     }
 
     private buildTargetAndPayload() {
@@ -98,7 +79,7 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
 }
 
 export interface ActiveRecordFetcher {
-    fetchRecords(): Promise<void>
+    fetchRecords(): Promise<Record<string, any>>
     setTarget(target: Record<string, any>): void
     setPayload(payload: Record<string, any>): void
 }
@@ -106,7 +87,6 @@ export interface ActiveRecordFetcher {
 interface FetcherOptions {
     eventName: EventName
     responseKey: string
-    rowTransformer: (record: Record<string, any>) => ListRow
     noResultsRow?: Omit<ListRow, 'id'>
     payload?: Record<string, any>
     target?: Record<string, any>
