@@ -128,6 +128,15 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
         this.assertGetCurrentPageReturns(-1)
     }
 
+    @test()
+    protected static async doesNotTriggerOnChangePageIfCurrentPageIsSetToSameValue() {
+        this.setTotalPages(2)
+        this.setCurrentPage(1)
+        delete this.onChangePagePage
+        this.setCurrentPage(1)
+        assert.isUndefined(this.onChangePagePage)
+    }
+
     private static assertGetCurrentPageReturns(expected: number) {
         assert.isEqual(this.vc.getCurrentPage(), expected)
     }

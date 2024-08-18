@@ -21,6 +21,9 @@ export default class PagerViewController extends AbstractViewController<Pager> {
     }
 
     public setCurrentPage(page: number) {
+        if (this.model.currentPage === page) {
+            return
+        }
         this.assertValidCurrentPage(page)
         this.model.currentPage = page
         this.onChangeHandler?.(page)
