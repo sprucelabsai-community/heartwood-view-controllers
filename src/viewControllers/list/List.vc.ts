@@ -258,9 +258,12 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         }
     }
 
-    public doesRowExist(id: string) {
+    public doesRowExist(idOrIdx: string | number) {
         const model = this.model
-        const match = this.doesRowIdExistInModel(model, id)
+        const match =
+            typeof idOrIdx === 'number'
+                ? this.model.rows[idOrIdx]
+                : this.doesRowIdExistInModel(model, idOrIdx)
         return !!match
     }
 

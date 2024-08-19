@@ -1221,6 +1221,17 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
         assert.isEqual(listValue, onChangedValue)
     }
 
+    @test()
+    protected static async canCheckIfRowExistsByIdx() {
+        this.vc.addRow({
+            id: generateId(),
+            cells: [],
+        })
+
+        assert.isTrue(this.vc.doesRowExist(0))
+        assert.isFalse(this.vc.doesRowExist(1))
+    }
+
     private static assertSettingColumnWidthsRendersExpected(
         widths: ListColumnWidth[]
     ) {

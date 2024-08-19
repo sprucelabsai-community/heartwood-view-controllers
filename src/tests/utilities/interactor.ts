@@ -6,6 +6,7 @@ import {
     DropEventOptions,
     KeyboardKey,
     Navigation,
+    Pager,
     SkillViewController,
     ViewController,
 } from '../../types/heartwood.types'
@@ -22,6 +23,7 @@ import { ButtonViewController } from './ButtonViewController'
 import calendarInteractor from './calendarInteractor'
 import formAssert from './formAssert'
 import navigationAssert from './navigationAssert'
+import pagerAssert from './pagerAssert'
 import vcAssert from './vcAssert'
 
 const interactor = {
@@ -248,6 +250,38 @@ const interactor = {
 
         //@ts-ignore
         await renderUtil.render(vc).onSubmit?.()
+    },
+
+    async clickPagerButton(vc: ViewController<Pager>, button: PagerButton) {
+        assertOptions(
+            {
+                vc,
+                button,
+            },
+            ['vc', 'button']
+        )
+
+        pagerAssert.pagingConfigured(vc)
+
+        const { totalPages, currentPage, setCurrentPage } =
+            renderUtil.render(vc)
+
+        assert.isFalse(
+            currentPage === 0 && button === 'previous',
+            `You cannot click 'previous' on the first page!`
+        )
+
+        assert.isFalse(
+            button === 'next' && currentPage! + 1 === totalPages,
+            `You cannot click 'next' on the last page!`
+        )
+
+        if (typeof button === 'number') {
+            await setCurrentPage(button)
+        } else {
+            const direction = button === 'next' ? 1 : -1
+            await setCurrentPage(currentPage! + direction)
+        }
     },
 
     async submitLoginForm(vc: LoginViewController, demoNumber: string) {
@@ -618,3 +652,5 @@ type ButtonGroupVc = ViewController<
 type Calendar = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 type FormVc = FormViewController<any> | BigFormViewController<any>
 type NavVc = ViewController<Navigation>
+
+export type PagerButton = 'previous' | 'next' | number

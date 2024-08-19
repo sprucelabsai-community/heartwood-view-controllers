@@ -23,13 +23,17 @@ class SpyActiveRecordCard extends ActiveRecordCardViewController {
     public getCardVc() {
         return this.cardVc
     }
+
+    public isRowSelected(row: string | number): boolean {
+        return this.listVc ? this.listVc?.isRowSelected(row) : false
+    }
+
+    public getRowVc(row: string | number) {
+        return this.listVc?.getRowVc(row)
+    }
 }
 
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
-        activeRecordCard: SpyActiveRecordCard,
-    }
-
     private static organizations: Organization[] = []
 
     protected static async beforeEach() {
@@ -42,6 +46,10 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
             return this.organizations
         })
 
+        this.getFactory().setController(
+            'active-record-card',
+            SpyActiveRecordCard
+        )
         await this.eventFaker.fakeListLocations()
 
         this.organizations = []
@@ -729,14 +737,6 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async exposesHasRow() {
-        const vc = this.Vc()
-        assert.isFalse(vc.doesRowExist('test'))
-        vc.addRow({ id: 'test', cells: [] })
-        assert.isTrue(vc.doesRowExist('test'))
-    }
-
-    @test()
     protected static async exposesRowSelectionMethods() {
         const [{ id: id1 }, { id: id2 }, { id: id3 }] =
             await this.seedOrganizations()
@@ -831,7 +831,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     private static Vc(
         options?: Partial<ActiveRecordCardViewControllerOptions>
     ): SpyActiveRecordCard {
-        return this.Controller('activeRecordCard', {
+        return this.Controller('active-record-card', {
             ...buildActiveRecordCard({
                 eventName: 'list-organizations::v2020_12_25',
                 responseKey: 'organizations',

@@ -67,6 +67,9 @@ export default class SwipeCardViewController extends AbstractViewController<Card
     }
 
     public async jumpToSlide(slide: number | string) {
+        if (slide === this.getPresentSlide()) {
+            return
+        }
         const normalized = sectionIdOrIdxToIdx(this.getSlides(), slide)
 
         if (normalized === -1 && typeof slide !== 'number') {

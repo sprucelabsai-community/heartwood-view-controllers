@@ -103,7 +103,8 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 
         assert.isTrue(match instanceof ActiveRecordCardViewController)
         vcAssert.assertIsActiveRecordCard(match)
-        vcAssert.assertIsActiveRecordCard(match.getCardVc())
+        //@ts-ignore
+        vcAssert.assertIsActiveRecordCard(match.cardVc)
     }
 
     @test()

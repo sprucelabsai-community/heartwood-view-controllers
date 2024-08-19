@@ -54,6 +54,56 @@ const pagerAssert = {
             `Total pages did not match expected! Try 'this.pagerVc.setTotalPages(${expected})'!`
         )
     },
+
+    currentPage(vc: ViewController<Pager>, expected: number) {
+        assertOptions(
+            {
+                vc,
+                expected,
+            },
+            ['vc', 'expected']
+        )
+
+        const model = renderUtil.render(vc)
+
+        assert.isEqual(
+            model.currentPage,
+            expected,
+            `Current page did not match! Try 'this.pagerVc.setCurrentPage(${expected})'!`
+        )
+    },
+
+    pagingNotConfigured(vc: ViewController<Pager>) {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+
+        assert.isUndefined(
+            model.currentPage,
+            `Your Pager is configured and should not be! Try 'this.pagerVc.clear()'!`
+        )
+
+        assert.isUndefined(
+            model.totalPages,
+            `Your Pager is configured and should not be! Try 'this.pagerVc.clear()'!`
+        )
+    },
+
+    pagingConfigured(vc: ViewController<Pager>) {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+
+        assert.isNumber(
+            model.currentPage,
+            `Your pager is not configured, and it should be. This involves calling 'this.pagerVc.setTotalPages()' and 'this.pagerVc.setCurrentPage()'!`
+        )
+
+        assert.isNumber(
+            model.totalPages,
+            `Your pager is not configured, and it should be. This involves calling 'this.pagerVc.setTotalPages()' and 'this.pagerVc.setCurrentPage()'!`
+        )
+    },
 }
 
 export default pagerAssert

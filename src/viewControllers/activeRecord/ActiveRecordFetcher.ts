@@ -33,7 +33,7 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
         return new this(options)
     }
 
-    public async fetchRecords() {
+    public async fetchRecords(): Promise<Record<string, any>[]> {
         const client = await this.connectToApi()
 
         const [responsePayload] = await client.emitAndFlattenResponses(
@@ -72,11 +72,11 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
             : targetAndPayload
     }
 
-    public setTarget(target: Record<string, any>): void {
+    public setTarget(target: Record<string, any> | undefined): void {
         this.emitTarget = target
     }
 
-    public setPayload(payload: Record<string, any>): void {
+    public setPayload(payload: Record<string, any> | undefined): void {
         this.emitPayload = payload
     }
 

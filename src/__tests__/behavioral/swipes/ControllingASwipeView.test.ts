@@ -516,7 +516,23 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
         this.assertSelectedSlideId(this.slide2Id)
     }
 
-    private static async jumpToSlide(id: string) {
+    @test()
+    protected static async jumpingToSameSlideDoesNotSwipeToOnSwipeController() {
+        const model = this.renderVc()
+        let hitCount = 0
+        model.body?.swipeController?.({
+            swipeTo: () => {
+                hitCount++
+            },
+        })
+
+        await this.jumpToSlide(1)
+        assert.isEqual(hitCount, 1)
+        await this.jumpToSlide(1)
+        assert.isEqual(hitCount, 1)
+    }
+
+    private static async jumpToSlide(id: string | number) {
         await this.vc.jumpToSlide(id)
     }
 

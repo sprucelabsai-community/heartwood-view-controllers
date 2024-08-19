@@ -12,6 +12,23 @@ export default class EventFaker {
         this.client = client
     }
 
+    public generateLocationValues() {
+        return {
+            id: generateId(),
+            dateCreated: Date.now(),
+            slug: generateId(),
+            name: generateId(),
+            organizationId: generateId(),
+            address: {
+                city: generateId(),
+                country: generateId(),
+                province: generateId(),
+                street1: generateId(),
+                zip: generateId(),
+            },
+        }
+    }
+
     public async fakeRequestPin(challenge?: string) {
         await this.client.on('request-pin::v2020_12_25', () => {
             return {

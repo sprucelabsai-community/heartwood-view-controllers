@@ -40,13 +40,19 @@ export default class PagerViewController extends AbstractViewController<Pager> {
                 friendlyMessage:
                     totalPages === undefined
                         ? 'You must set the total pages before setting the current page.'
-                        : `Your current page must be greater than -1 and less than ${this.model.totalPages}.`,
+                        : `Your current page must be greater than -1 and less than ${this.model.totalPages}. You passed ${page}.`,
             })
         }
     }
 
     public getTotalPages() {
         return this.model.totalPages ?? -1
+    }
+
+    public clear() {
+        this.model.currentPage = undefined
+        this.model.totalPages = undefined
+        this.triggerRender()
     }
 
     public getCurrentPage() {

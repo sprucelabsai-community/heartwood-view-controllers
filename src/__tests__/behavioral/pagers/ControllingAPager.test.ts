@@ -137,6 +137,25 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
         assert.isUndefined(this.onChangePagePage)
     }
 
+    @test()
+    protected static canClearPagingSettings() {
+        this.setTotalPages(10)
+        this.setCurrentPage(5)
+        this.clear()
+        assert.isUndefined(this.model.currentPage)
+        assert.isUndefined(this.model.totalPages)
+    }
+
+    @test()
+    protected static clearTriggerRender() {
+        this.clear()
+        this.assertTriggerRenderCount(1)
+    }
+
+    private static clear() {
+        this.vc.clear()
+    }
+
     private static assertGetCurrentPageReturns(expected: number) {
         assert.isEqual(this.vc.getCurrentPage(), expected)
     }

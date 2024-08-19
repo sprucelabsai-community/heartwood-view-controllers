@@ -1358,7 +1358,7 @@ const vcAssert = {
         )
 
         //@ts-ignore
-        return cardVc.__activeRecordParent
+        return cardVc.__activeRecordParent as ActiveRecordCardViewController
     },
 
     assertIsActiveRecordCard(vc: ViewController<Card>) {
