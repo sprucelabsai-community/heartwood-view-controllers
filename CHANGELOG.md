@@ -1,3 +1,10 @@
+# [110.11.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.10.17...v110.11.0) (2024-08-19)
+
+
+### Features
+
+* ActiveRecordCard supports client side paging ([14b2ee2](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/14b2ee2))
+
 ## [110.10.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.10.16...v110.10.17) (2024-08-19)
 
 ## [110.10.16](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.10.15...v110.10.16) (2024-08-19)
