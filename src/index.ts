@@ -52,6 +52,7 @@ export * from './viewControllers/form/AutocompleteInput.vc'
 export { default as AbstractInputViewController } from './viewControllers/form/AbstractInput.vc'
 export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 export { default as buildActiveRecordList } from './builders/buildActiveRecordList'
+export { default as activeRecordCardAssert } from './tests/utilities/activeRecordCardAssert'
 export { default as MockActiveRecordCard } from './tests/MockActiveRecordCard'
 
 export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'

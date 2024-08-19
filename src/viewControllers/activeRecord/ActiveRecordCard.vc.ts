@@ -1,3 +1,4 @@
+import { ActiveRecordPagingOptions } from '../../builders/buildActiveRecordCard'
 import {
     Card,
     CardFooter,
@@ -39,6 +40,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     protected listVcs: ListViewController[] = []
     protected pagerVc?: PagerViewController
     protected swipeVc?: SwipeCardViewController
+    protected pagingOptions?: ActiveRecordPagingOptions
     private fetcher?: ActiveRecordFetcherImpl
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
@@ -61,6 +63,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.rowTransformer = rowTransformer
 
         if (paging) {
+            this.pagingOptions = paging
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
             this.pageSize = paging.pageSize

@@ -19,7 +19,6 @@ import {
     AlertOptions,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
-import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
 import CalendarViewController from '../../viewControllers/Calendar.vc'
 import DialogViewController from '../../viewControllers/Dialog.vc'
@@ -35,6 +34,7 @@ import ToolBeltViewController, {
     OpenToolBeltOptions,
 } from '../../viewControllers/ToolBelt.vc'
 import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
+import activeRecordCardAssert from './activeRecordCardAssert'
 import {
     Vc,
     AssertConfirmViewController,
@@ -1345,33 +1345,21 @@ const vcAssert = {
         return listAssert.rowRendersRatings(listVc, row)
     },
 
+    /**
+     * @deprecated vcAssert.assertSkillViewRendersActiveRecordCard(...) -> activeRecordCardAssert.skillViewRendersActiveRecordCard(...)
+     */
     assertSkillViewRendersActiveRecordCard(
         svc: SkillViewController,
         id?: string
     ) {
-        const cardVc = this.assertSkillViewRendersCard(svc, id)
-
-        assert.isTruthy(
-            //@ts-ignore
-            cardVc.__isActiveRecord,
-            `I expected to find an active record card with the id of ${id}, but I didn't!`
-        )
-
-        //@ts-ignore
-        return cardVc.__activeRecordParent as ActiveRecordCardViewController
+        return activeRecordCardAssert.skillViewRendersActiveRecordCard(svc, id)
     },
 
+    /**
+     * @deprecated vcAssert.assertIsActiveRecordCard(...) -> activeRecordCardAssert.isActiveRecordCard(...)
+     */
     assertIsActiveRecordCard(vc: ViewController<Card>) {
-        const rendered = renderUtil.render(vc)
-        assert.isTruthy(
-            vc instanceof ActiveRecordCardViewController ||
-                //@ts-ignore
-                vc.__activeRecordParent ||
-                //@ts-ignore
-                rendered?.controller?.getParent?.() instanceof
-                    ActiveRecordCardViewController,
-            `The card you sent was not an active record card!`
-        )
+        return activeRecordCardAssert.isActiveRecordCard(vc)
     },
 
     assertControllerInstanceOf<Controller extends ViewController<any>>(

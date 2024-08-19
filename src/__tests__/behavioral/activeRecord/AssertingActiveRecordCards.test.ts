@@ -1,23 +1,14 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
-import { ActiveRecordCardViewController, vcAssert } from '../../..'
-import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
+import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import buildActiveRecordCard, {
+    ActiveRecordPagingOptions,
+} from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import activeRecordCardAssert from '../../../tests/utilities/activeRecordCardAssert'
 import { ViewControllerOptions } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
-
-type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
-
-declare module '../../../types/heartwood.types' {
-    interface ViewControllerMap {
-        genericSkillView: GenericSkillView
-    }
-
-    interface ViewControllerOptionsMap {
-        genericSkillView: SkillView
-    }
-}
+import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 class GenericSkillView extends AbstractSkillViewController {
     private model: SkillView
@@ -33,8 +24,13 @@ class GenericSkillView extends AbstractSkillViewController {
 }
 
 export default class AssertingActiveRecordCardsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
-        genericSkillView: GenericSkillView,
+    private static cardVc: ActiveRecordCardViewController
+
+    protected static async beforeEach() {
+        await super.beforeEach()
+
+        this.getFactory().setController('genericSkillView', GenericSkillView)
+        this.cardVc = this.ActiveRecordCard()
     }
 
     @test()
@@ -44,7 +40,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         })
 
         assert.doesThrow(() =>
-            vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+            activeRecordCardAssert.skillViewRendersActiveRecordCard(vc)
         )
     }
 
@@ -61,13 +57,13 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
             ],
         })
 
-        vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        activeRecordCardAssert.skillViewRendersActiveRecordCard(vc)
 
         assert.doesThrow(() =>
-            vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test2')
+            activeRecordCardAssert.skillViewRendersActiveRecordCard(vc, 'test2')
         )
 
-        vcAssert.assertSkillViewRendersActiveRecordCard(vc, 'test')
+        activeRecordCardAssert.skillViewRendersActiveRecordCard(vc, 'test')
     }
 
     @test()
@@ -82,9 +78,11 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         })
 
         assert.doesThrow(() =>
-            vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+            activeRecordCardAssert.skillViewRendersActiveRecordCard(vc)
         )
-        assert.doesThrow(() => vcAssert.assertIsActiveRecordCard(cardVc))
+        assert.doesThrow(() =>
+            activeRecordCardAssert.isActiveRecordCard(cardVc)
+        )
     }
 
     @test()
@@ -98,13 +96,14 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
             ],
         })
 
-        const match = vcAssert.assertSkillViewRendersActiveRecordCard(vc)
+        const match =
+            activeRecordCardAssert.skillViewRendersActiveRecordCard(vc)
         assert.isEqual(active, match)
 
         assert.isTrue(match instanceof ActiveRecordCardViewController)
-        vcAssert.assertIsActiveRecordCard(match)
+        activeRecordCardAssert.isActiveRecordCard(match)
         //@ts-ignore
-        vcAssert.assertIsActiveRecordCard(match.cardVc)
+        activeRecordCardAssert.isActiveRecordCard(match.cardVc)
     }
 
     @test()
@@ -114,7 +113,88 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         vc.render = () => {
             return active.render()
         }
-        vcAssert.assertIsActiveRecordCard(vc)
+        activeRecordCardAssert.isActiveRecordCard(vc)
+    }
+
+    @test()
+    protected static async assertPagingOptionsThrowsWhenMissingRequired() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            activeRecordCardAssert.assertPagingOptionsEqual()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'expected'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenPagingOptionsDontMatch() {
+        this.assertPagingOptionsEqualThrows({
+            pageSize: 10,
+            shouldPageClientSide: true,
+            errorMessage: 'paging',
+        })
+
+        this.setupCardWithPaging({
+            pageSize: 11,
+            shouldPageClientSide: true,
+        })
+
+        this.assertPagingOptionsEqualThrows({
+            pageSize: 20,
+            shouldPageClientSide: false,
+            errorMessage: 'equal',
+        })
+
+        this.assertPagingOptionsEqualThrows({
+            pageSize: 11,
+            shouldPageClientSide: true,
+            errorMessage: 'equal',
+        })
+    }
+
+    @test()
+    protected static async assertingPagingSettingsMatch() {
+        this.setupPagingAndAssertEqualExpected({
+            pageSize: 10,
+            shouldPageClientSide: true,
+        })
+
+        this.setupPagingAndAssertEqualExpected({
+            pageSize: 20,
+            shouldPageClientSide: false,
+        })
+    }
+
+    private static setupPagingAndAssertEqualExpected(
+        expected: ActiveRecordPagingOptions
+    ) {
+        this.setupCardWithPaging(expected)
+        activeRecordCardAssert.assertPagingOptionsEqual(this.cardVc, expected)
+    }
+
+    private static setupCardWithPaging(expected: ActiveRecordPagingOptions) {
+        this.cardVc = this.ActiveRecordCard(generateId(), expected)
+    }
+
+    private static assertPagingOptionsEqualThrows(expected: {
+        pageSize: number
+        shouldPageClientSide: boolean
+        errorMessage?: string
+    }) {
+        const { errorMessage, ...rest } = expected
+        assert.doesThrow(
+            () => this.assertPagingOptions(rest),
+            errorMessage ?? 'match'
+        )
+    }
+
+    private static assertPagingOptions(expected: ActiveRecordPagingOptions) {
+        return activeRecordCardAssert.assertPagingOptionsEqual(
+            this.cardVc,
+            expected
+        )
     }
 
     private static renderActiveRecordCard(
@@ -123,7 +203,10 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         return this.ActiveRecordCard(id).render()
     }
 
-    private static ActiveRecordCard(id?: string) {
+    private static ActiveRecordCard(
+        id?: string,
+        pagingOptions?: ActiveRecordPagingOptions
+    ) {
         return this.Controller(
             'activeRecordCard',
             buildActiveRecordCard({
@@ -131,7 +214,20 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
                 eventName: 'list-organizations::v2020_12_25',
                 responseKey: 'organizations',
                 rowTransformer: (o) => ({ id: o.id, cells: [] }),
+                paging: pagingOptions,
             })
         )
+    }
+}
+
+type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+
+declare module '../../../types/heartwood.types' {
+    interface ViewControllerMap {
+        genericSkillView: GenericSkillView
+    }
+
+    interface ViewControllerOptionsMap {
+        genericSkillView: SkillView
     }
 }
