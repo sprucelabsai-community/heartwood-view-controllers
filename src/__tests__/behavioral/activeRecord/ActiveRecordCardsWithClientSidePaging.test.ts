@@ -3,7 +3,7 @@ import interactor from '../../../tests/utilities/interactor'
 import listAssert from '../../../tests/utilities/listAssert'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { ListRow } from '../../../types/heartwood.types'
+import { CardHeader, ListRow } from '../../../types/heartwood.types'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
@@ -533,6 +533,29 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['rowId'],
         })
+    }
+
+    @test('passes through header 1', {
+        title: 'passes through header',
+    })
+    @test('passes through header 2', {
+        subtitle: 'and a subheader',
+    })
+    @test('passes through header 3', {
+        title: 'go dogs',
+        icon: 'add',
+    })
+    protected static async passesHeaderToSwipeCard(header: CardHeader) {
+        this.setupCardVc({
+            header,
+            paging: {
+                shouldPageClientSide: true,
+                pageSize: 10,
+            },
+        })
+
+        const model = this.render(this.vc)
+        assert.doesInclude(model.header, header)
     }
 
     private static assertRowVcEqualsSameFromListAtIndex(
