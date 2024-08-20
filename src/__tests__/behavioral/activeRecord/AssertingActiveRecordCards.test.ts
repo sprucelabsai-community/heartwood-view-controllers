@@ -138,7 +138,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         })
 
         this.setupCardWithPaging({
-            pageSize: 11,
+            pageSize: 12,
             shouldPageClientSide: true,
         })
 
