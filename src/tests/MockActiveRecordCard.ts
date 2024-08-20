@@ -104,16 +104,8 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         return this.swipeVc!
     }
 
-    public getListVc() {
-        return this.listVc!
-    }
-
     public getCardVc() {
         return this.cardVc!
-    }
-
-    public getRowVc(row: string | number) {
-        return this.listVc?.getRowVc(row)
     }
 
     public getListVcs() {

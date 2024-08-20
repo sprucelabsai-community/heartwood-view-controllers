@@ -1,3 +1,4 @@
+import { SchemaError } from '@sprucelabs/schema'
 import { ActiveRecordPagingOptions } from '../../builders/buildActiveRecordCard'
 import {
     Card,
@@ -335,6 +336,23 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         }
     }
 
+    public getRowVc(row: string | number) {
+        if (this.listVc) {
+            return this.listVc.getRowVc(row)
+        }
+        for (const vc of this.listVcs) {
+            if (vc.doesRowExist(row)) {
+                return vc.getRowVc(row)
+            }
+        }
+
+        throw new SchemaError({
+            code: 'INVALID_PARAMETERS',
+            parameters: ['rowId'],
+            friendlyMessage: `Could not find row with id ${row}`,
+        })
+    }
+
     public getValues() {
         return this.listVc?.getValues()
     }
@@ -357,6 +375,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
     public render(): Card {
         return this.swipeVc?.render() ?? this.cardVc.render()
+    }
+
+    public getListVc() {
+        return this.listVc!.getListVc()
+    }
+
+    public getCardVc() {
+        return this.cardVc!
     }
 }
 

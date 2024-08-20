@@ -1,4 +1,4 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import interactor from '../../../tests/utilities/interactor'
 import listAssert from '../../../tests/utilities/listAssert'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
@@ -27,7 +27,8 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async doesNotCreateListIfPaging() {
-        assert.isUndefined(this.vc.getListVc())
+        //@ts-ignore
+        assert.isUndefined(this.vc.listVc)
     }
 
     @test()
@@ -501,6 +502,50 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         const id = generateId()
         this.upsertRow(id, { cells: [] })
         this.assertListRendersRow('list-0', id)
+    }
+
+    @test()
+    protected static async canGetFirstRowVcFromFirstList() {
+        await this.loadWithFakedLocations(4)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locations[0].id, 0)
+    }
+
+    @test()
+    protected static async canGetFirstRowVcFromSecondList() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+
+        await this.loadWithFakedLocations(4)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locations[2].id, 1)
+    }
+
+    @test()
+    protected static async canGetSecondRowInFirstVc() {
+        await this.loadWithFakedLocations(4)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locations[1].id, 0)
+    }
+
+    @test()
+    protected static async throwsIfRowVcNotFound() {
+        await this.loadWithFakedLocations(4)
+        const err = assert.doesThrow(() => this.getRowVc(generateId()))
+        errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+            parameters: ['rowId'],
+        })
+    }
+
+    private static assertRowVcEqualsSameFromListAtIndex(
+        id: string,
+        listIdx: number
+    ) {
+        const listVc = this.getRowVc(id)
+        const expected = this.vc.getListVcs()[listIdx].getRowVc(id)
+        assert.isEqual(listVc, expected)
+    }
+
+    private static getRowVc(id: string) {
+        return this.vc.getRowVc(id)
     }
 
     private static upsertRowAndAssertAddedToSecondList(row: ListRow) {

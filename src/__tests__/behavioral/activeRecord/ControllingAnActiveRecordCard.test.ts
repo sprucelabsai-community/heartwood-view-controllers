@@ -27,10 +27,6 @@ class SpyActiveRecordCard extends ActiveRecordCardViewController {
     public isRowSelected(row: string | number): boolean {
         return this.listVc ? this.listVc?.isRowSelected(row) : false
     }
-
-    public getRowVc(row: string | number) {
-        return this.listVc?.getRowVc(row)
-    }
 }
 
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
