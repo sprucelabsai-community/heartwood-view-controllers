@@ -51,7 +51,7 @@ const activeRecordCardAssert = {
             `You have not enabled paging on your ActiveRecordCard!`
         )
 
-        assert.isEqual(
+        assert.isEqualDeep(
             //@ts-ignore
             vc.pagingOptions,
             expected,

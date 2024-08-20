@@ -145,13 +145,13 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         this.assertPagingOptionsEqualThrows({
             pageSize: 20,
             shouldPageClientSide: false,
-            errorMessage: 'equal',
+            errorMessage: 'not match',
         })
 
         this.assertPagingOptionsEqualThrows({
             pageSize: 11,
             shouldPageClientSide: true,
-            errorMessage: 'equal',
+            errorMessage: 'not match',
         })
     }
 
@@ -172,7 +172,9 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         expected: ActiveRecordPagingOptions
     ) {
         this.setupCardWithPaging(expected)
-        activeRecordCardAssert.assertPagingOptionsEqual(this.cardVc, expected)
+        activeRecordCardAssert.assertPagingOptionsEqual(this.cardVc, {
+            ...expected,
+        })
     }
 
     private static setupCardWithPaging(expected: ActiveRecordPagingOptions) {
