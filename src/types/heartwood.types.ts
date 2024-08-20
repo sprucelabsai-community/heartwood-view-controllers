@@ -868,3 +868,8 @@ export interface ViewControllerPluginOptions {
 }
 
 export type ConnectToApi = () => Promise<MercuryClient>
+
+export interface ActiveRecordPagingOptions {
+    shouldPageClientSide?: boolean
+    pageSize?: number
+}

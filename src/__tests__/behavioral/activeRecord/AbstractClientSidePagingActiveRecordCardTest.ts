@@ -1,10 +1,9 @@
 import { Location } from '@sprucelabs/spruce-core-schemas'
 import { RecursivePartial } from '@sprucelabs/test-utils'
-import buildActiveRecordCard, {
-    ActiveRecordPagingOptions,
-} from '../../../builders/buildActiveRecordCard'
+import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockActiveRecordCard from '../../../tests/MockActiveRecordCard'
+import { ActiveRecordPagingOptions } from '../../../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 

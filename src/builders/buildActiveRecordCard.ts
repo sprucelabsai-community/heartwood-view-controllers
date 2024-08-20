@@ -6,13 +6,13 @@ import {
     SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues } from '@sprucelabs/schema'
-import { Card, List, ListRow } from '../types/heartwood.types'
+import {
+    ActiveRecordPagingOptions,
+    Card,
+    List,
+    ListRow,
+} from '../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
-
-export interface ActiveRecordPagingOptions {
-    shouldPageClientSide?: boolean
-    pageSize?: number
-}
 
 type ActiveRecordCardBuilder<Contract extends EventContract> = <
     Fqen extends EventName<Contract> = EventName<Contract>,

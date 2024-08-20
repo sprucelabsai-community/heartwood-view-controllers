@@ -1,10 +1,10 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import { ActiveRecordPagingOptions } from '../../builders/buildActiveRecordCard'
 import {
     ViewController,
     Card,
     SkillViewController,
+    ActiveRecordPagingOptions,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ActiveRecordCardViewController from '../../viewControllers/activeRecord/ActiveRecordCard.vc'

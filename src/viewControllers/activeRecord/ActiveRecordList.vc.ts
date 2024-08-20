@@ -1,8 +1,8 @@
 import { EventName, SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
-import { ActiveRecordPagingOptions } from '../../builders/buildActiveRecordCard'
 import {
+    ActiveRecordPagingOptions,
     List,
     ListRow,
     ViewControllerOptions,

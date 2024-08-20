@@ -1,6 +1,6 @@
 import { SchemaError } from '@sprucelabs/schema'
-import { ActiveRecordPagingOptions } from '../../builders/buildActiveRecordCard'
 import {
+    ActiveRecordPagingOptions,
     Card,
     CardFooter,
     CardViewController,

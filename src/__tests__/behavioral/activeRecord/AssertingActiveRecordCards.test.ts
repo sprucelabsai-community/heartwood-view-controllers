@@ -1,12 +1,13 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
-import buildActiveRecordCard, {
-    ActiveRecordPagingOptions,
-} from '../../../builders/buildActiveRecordCard'
+import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import activeRecordCardAssert from '../../../tests/utilities/activeRecordCardAssert'
-import { ViewControllerOptions } from '../../../types/heartwood.types'
+import {
+    ActiveRecordPagingOptions,
+    ViewControllerOptions,
+} from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
