@@ -73,7 +73,7 @@ const pagerAssert = {
         )
     },
 
-    pagingNotConfigured(vc: ViewController<Pager>) {
+    pagerIsCleared(vc: ViewController<Pager>) {
         assertOptions({ vc }, ['vc'])
 
         const model = renderUtil.render(vc)
@@ -89,7 +89,7 @@ const pagerAssert = {
         )
     },
 
-    pagingConfigured(vc: ViewController<Pager>) {
+    pagerIsConfigured(vc: ViewController<Pager>) {
         assertOptions({ vc }, ['vc'])
 
         const model = renderUtil.render(vc)

@@ -168,8 +168,26 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     private async loadPagedResults() {
-        this.records = await this.fetcher!.fetchRecords()
-        this.rebuildSlidesForPaging()
+        try {
+            this.records = await this.fetcher!.fetchRecords()
+            this.rebuildSlidesForPaging()
+        } catch (err: any) {
+            this.pagerVc?.clear()
+            this.swipeVc?.setSections([])
+            const listVc = this.addList(0)
+            listVc.addRow({
+                id: 'error',
+                cells: [
+                    {
+                        text: {
+                            content:
+                                err.message ?? 'Failed to load paged results',
+                        },
+                    },
+                ],
+            })
+            this.log.error('Failed to load paged results', err.stack ?? err)
+        }
     }
 
     private rebuildSlidesForPaging() {

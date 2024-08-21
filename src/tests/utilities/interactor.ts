@@ -261,7 +261,7 @@ const interactor = {
             ['vc', 'button']
         )
 
-        pagerAssert.pagingConfigured(vc)
+        pagerAssert.pagerIsConfigured(vc)
 
         const { totalPages, currentPage, setCurrentPage } =
             renderUtil.render(vc)

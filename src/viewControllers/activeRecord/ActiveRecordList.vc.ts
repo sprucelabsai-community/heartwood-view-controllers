@@ -95,7 +95,8 @@ export default class ActiveRecordListViewController extends AbstractViewControll
             if (ActiveRecordListViewController.shouldThrowOnResponseError) {
                 throw err
             }
-            this.listVc.setRows([this.buildErrorRow(err)])
+
+            this.listVc.setRows([this.renderErrorRow(err)])
         }
 
         this.isLoaded = true
@@ -118,7 +119,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
         }
     }
 
-    private buildErrorRow(err: any): ListRow {
+    private renderErrorRow(err: any): ListRow {
         return {
             id: 'error',
             height: 'content',

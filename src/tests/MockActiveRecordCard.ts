@@ -55,7 +55,7 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
     }
 
     public assertPagerNotConfigured() {
-        pagerAssert.pagingNotConfigured(this.pagerVc!)
+        pagerAssert.pagerIsCleared(this.pagerVc!)
     }
 
     public assertRendersRow(id: string) {
@@ -67,6 +67,19 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         }
 
         assert.fail(`I could not find a list that renders row "${id}"!`)
+    }
+
+    public assertRowRendersContent(row: string, content: string) {
+        for (const listVc of this.normalizedListVcs) {
+            try {
+                listAssert.rowRendersContent(listVc, row, content)
+                return
+            } catch {}
+        }
+
+        assert.fail(
+            `I could not find a list that renders row "${row}" with the content: ${content}!`
+        )
     }
 
     private get normalizedListVcs() {
@@ -98,6 +111,10 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
             const expected = `list-${i}`
             listAssert.cardRendersList(this.swipeVc!, expected)
         }
+    }
+
+    public assertPagerIsCleared() {
+        pagerAssert.pagerIsCleared(this.pagerVc!)
     }
 
     public getSwipeVc() {

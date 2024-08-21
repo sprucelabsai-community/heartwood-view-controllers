@@ -165,7 +165,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     @test()
     protected static async assertRouterNotConfiguredThrowsIfMissingRequired() {
         //@ts-ignore
-        const err = assert.doesThrow(() => pagerAssert.pagingNotConfigured())
+        const err = assert.doesThrow(() => pagerAssert.pagerIsCleared())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
             parameters: ['vc'],
         })
@@ -202,7 +202,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     @test()
     protected static async isConfiguredThrowsIfMissingRequired() {
         //@ts-ignore
-        const err = assert.doesThrow(() => pagerAssert.pagingConfigured())
+        const err = assert.doesThrow(() => pagerAssert.pagerIsConfigured())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
             parameters: ['vc'],
         })
@@ -232,7 +232,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     private static assertPagingConfigured(): any {
-        return pagerAssert.pagingConfigured(this.pagerVc)
+        return pagerAssert.pagerIsConfigured(this.pagerVc)
     }
 
     private static assertPagerOptionsNotSetThrows() {
@@ -240,7 +240,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     private static assertPagerPagingIsNotConfigured(): any {
-        return pagerAssert.pagingNotConfigured(this.pagerVc)
+        return pagerAssert.pagerIsCleared(this.pagerVc)
     }
 
     private static assertCurrentPageThrows(expected: number) {

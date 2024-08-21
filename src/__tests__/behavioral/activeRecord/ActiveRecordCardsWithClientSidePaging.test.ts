@@ -564,6 +564,50 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.isEqual(model.id, this.id)
     }
 
+    @test()
+    protected static async eventThrowingAddsErrorRowToFirstList() {
+        const msg = generateId()
+
+        await this.makeListLocationsThrow(msg)
+        await this.load()
+
+        this.assertRendersErrorRow()
+        this.vc.assertRowRendersContent('error', msg)
+    }
+
+    @test()
+    protected static async errorOnRefreshClearsOutPastLists() {
+        this.addFakedLocations(30)
+
+        await this.load()
+        await this.makeListLocationsThrow()
+        await this.refresh()
+        this.assertRendersErrorRow()
+        this.vc.assertTotalSlides(1)
+    }
+
+    @test()
+    protected static async pagerGoesAwayIfError() {
+        this.addFakedLocations(30)
+        await this.load()
+        await this.makeListLocationsThrow()
+        await this.refresh()
+        this.vc.assertPagerIsCleared()
+    }
+
+    private static assertRendersErrorRow() {
+        this.vc.assertRendersRow('error')
+    }
+
+    private static async makeListLocationsThrow(msg?: string) {
+        await this.client.on('list-locations::v2020_12_25', () => {
+            assert.fail(msg ?? 'Oh no!')
+            return {
+                locations: [],
+            }
+        })
+    }
+
     private static assertRowVcEqualsSameFromListAtIndex(
         id: string,
         listIdx: number
