@@ -616,6 +616,12 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         vcAssert.assertSkillViewRendersCard(vc, id)
     }
 
+    @test()
+    protected static async gettingTheListVcThrowsHelpfulErrorWithPaging() {
+        this.setupCardWithPaging()
+        assert.doesThrow(() => this.vc.getListVc(), 'paging')
+    }
+
     private static assertRendersErrorRow() {
         this.vc.assertRendersRow('error')
     }

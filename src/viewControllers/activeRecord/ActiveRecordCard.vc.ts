@@ -403,6 +403,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public getListVc() {
+        if (!this.listVc) {
+            throw new Error(
+                `You cannot call getListVc() on your ActiveRecordCard when paging is enabled. Consider using the MockActiveCard to make assertions on your card.`
+            )
+        }
         return this.listVc!.getListVc()
     }
 
