@@ -3,6 +3,7 @@ import renderUtil from '../utilities/render.utility'
 import ActiveRecordCardViewController from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 import listAssert from './utilities/listAssert'
 import pagerAssert from './utilities/pagerAssert'
+import { getViewId } from './utilities/vcAssert'
 
 export default class MockActiveRecordCard extends ActiveRecordCardViewController {
     public assertRowIsNotSelected(id: string) {
@@ -66,7 +67,9 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
             } catch {}
         }
 
-        assert.fail(`I could not find a list that renders row "${id}"!`)
+        assert.fail(
+            `I could not find a list that renders row "${id}" inside your ActiveRecordCard (${getViewId(this)})!`
+        )
     }
 
     public assertRowRendersContent(row: string, content: string) {
@@ -78,7 +81,7 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         }
 
         assert.fail(
-            `I could not find a list that renders row "${row}" with the content: ${content}!`
+            `I could not find a list that renders row "${row}" with the content "${content}" in your ActiveRecordCard (${getViewId(this)})!`
         )
     }
 
@@ -95,7 +98,7 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         }
 
         assert.fail(
-            `I found a list that renders row "${id}" and I didn't expect to!`
+            `Your ActiveRecordCard (${getViewId(this)}) renders the row "${id}" and it def should not!`
         )
     }
 
