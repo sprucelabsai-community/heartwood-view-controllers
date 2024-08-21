@@ -1,9 +1,18 @@
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
+import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import interactor from '../../../tests/utilities/interactor'
 import listAssert from '../../../tests/utilities/listAssert'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { CardHeader, ListRow } from '../../../types/heartwood.types'
+import {
+    CardHeader,
+    ListRow,
+    SkillView,
+    SkillViewControllerId,
+    ViewControllerOptions,
+} from '../../../types/heartwood.types'
+import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
@@ -595,6 +604,18 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.vc.assertPagerIsCleared()
     }
 
+    @test()
+    protected static async canUseCardAssertToFindCardByIdWhenPaging() {
+        const id = generateId()
+        this.getFactory().setController('testing', TestSkillView)
+        const vc = this.Controller('testing' as SkillViewControllerId, {
+            //@ts-ignore
+            activeCardId: id,
+        }) as TestSkillView
+
+        vcAssert.assertSkillViewRendersCard(vc, id)
+    }
+
     private static assertRendersErrorRow() {
         this.vc.assertRendersRow('error')
     }
@@ -766,5 +787,39 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static assertRendersRow(id: string) {
         this.vc.assertRendersRow(id)
+    }
+}
+
+class TestSkillView extends AbstractSkillViewController {
+    private activeCardVc: ActiveRecordCardViewController
+
+    public constructor(
+        options: ViewControllerOptions & { activeCardId: string }
+    ) {
+        super(options)
+        const { activeCardId } = options
+        this.activeCardVc = this.Controller(
+            'active-record-card',
+            buildActiveRecordCard({
+                id: activeCardId,
+                eventName: 'list-skills::v2020_12_25',
+                responseKey: 'skills',
+                rowTransformer: (skill) => ({ id: skill.id, cells: [] }),
+                paging: {
+                    shouldPageClientSide: true,
+                    pageSize: 10,
+                },
+            })
+        )
+    }
+
+    public render(): SkillView {
+        return {
+            layouts: [
+                {
+                    cards: [this.activeCardVc.render()],
+                },
+            ],
+        }
     }
 }

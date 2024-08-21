@@ -47,7 +47,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
     private records: Record<string, any>[] = []
-    private pageSize?: number
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.setShouldThrowOnResponseError(
@@ -68,7 +67,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.pagingOptions = paging
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
-            this.pageSize = paging.pageSize
             this.swipeVc = this.SwipeVc(options)
             this.cardVc = this.swipeVc
         } else {
@@ -214,6 +212,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.pagerVc?.setTotalPages(totalPages)
         const currentPage = this.pagerVc!.getCurrentPage()
         this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
+    }
+
+    private get pageSize() {
+        return this.pagingOptions?.pageSize
     }
 
     private addList(i: number) {
@@ -396,16 +398,16 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.enableFooter()
     }
 
-    public render(): Card {
-        return this.swipeVc?.render() ?? this.cardVc.render()
-    }
-
     public getListVc() {
         return this.listVc!.getListVc()
     }
 
     public getCardVc() {
         return this.cardVc!
+    }
+
+    public render(): Card {
+        return this.swipeVc?.render() ?? this.cardVc.render()
     }
 }
 
