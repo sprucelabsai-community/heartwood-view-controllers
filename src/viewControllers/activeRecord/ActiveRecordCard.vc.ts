@@ -60,7 +60,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const { paging, rowTransformer, header } = options
+        const { paging, rowTransformer } = options
 
         this.rowTransformer = rowTransformer
 
@@ -69,7 +69,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
             this.pageSize = paging.pageSize
-            this.swipeVc = this.SwipeVc(header)
+            this.swipeVc = this.SwipeVc(options)
             this.cardVc = this.swipeVc
         } else {
             this.listVc = this.ActiveRecordListVc(options)
@@ -83,14 +83,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.__activeRecordParent = this
     }
 
-    private SwipeVc(header?: CardHeader | null): SwipeCardViewController {
+    private SwipeVc(options: {
+        header?: CardHeader | null
+        id?: string
+    }): SwipeCardViewController {
         return this.Controller('swipe-card', {
             slides: [],
             onSlideChange: this.handleSlideChange.bind(this),
-            header,
             footer: {
                 pager: this.pagerVc?.render(),
             },
+            ...options,
         })
     }
 

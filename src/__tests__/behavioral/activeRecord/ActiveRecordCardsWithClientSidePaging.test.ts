@@ -558,6 +558,12 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.doesInclude(model.header, header)
     }
 
+    @test()
+    protected static async passesThroughId() {
+        const model = this.render(this.vc)
+        assert.isEqual(model.id, this.id)
+    }
+
     private static assertRowVcEqualsSameFromListAtIndex(
         id: string,
         listIdx: number

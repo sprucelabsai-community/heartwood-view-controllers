@@ -1,5 +1,5 @@
 import { Location } from '@sprucelabs/spruce-core-schemas'
-import { RecursivePartial } from '@sprucelabs/test-utils'
+import { generateId, RecursivePartial } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockActiveRecordCard from '../../../tests/MockActiveRecordCard'
@@ -11,6 +11,8 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
     protected static vc: MockActiveRecordCard
     protected static locations: Location[] = []
     protected static listLocationsTargetAndPayload?: ListLocationsTargetAndPayload
+    protected static id: string
+
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
@@ -20,6 +22,8 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         )
 
         this.clearFakedLocations()
+        this.id = generateId()
+
         delete this.listLocationsTargetAndPayload
 
         await this.eventFaker.fakeListLocations((targetAndPayload) => {
@@ -61,6 +65,7 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         this.vc = this.Controller(
             'active-record-card',
             buildActiveRecordCard({
+                id: this.id,
                 eventName: 'list-locations::v2020_12_25',
                 responseKey: 'locations',
                 //@ts-ignore
