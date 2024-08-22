@@ -1,4 +1,3 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
