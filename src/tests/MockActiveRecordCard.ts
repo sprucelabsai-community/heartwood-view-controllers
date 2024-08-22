@@ -3,7 +3,7 @@ import renderUtil from '../utilities/render.utility'
 import ActiveRecordCardViewController from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 import listAssert from './utilities/listAssert'
 import pagerAssert from './utilities/pagerAssert'
-import { getViewId } from './utilities/vcAssert'
+import vcAssert, { getViewId } from './utilities/vcAssert'
 
 export default class MockActiveRecordCard extends ActiveRecordCardViewController {
     public assertRowIsNotSelected(id: string) {
@@ -57,6 +57,14 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
 
     public assertPagerNotConfigured() {
         pagerAssert.pagerIsCleared(this.pagerVc!)
+    }
+
+    public assertRendersPager() {
+        pagerAssert.cardRendersPager(this.cardVc)
+    }
+
+    public assertDoesNotRenderPage() {
+        pagerAssert.cardDoesNotRenderPager(this.cardVc)
     }
 
     public assertRendersRow(id: string) {
@@ -118,6 +126,14 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
 
     public assertPagerIsCleared() {
         pagerAssert.pagerIsCleared(this.pagerVc!)
+    }
+
+    public assertDoesNotRenderFooter() {
+        vcAssert.assertCardDoesNotRenderFooter(this.cardVc)
+    }
+
+    public assertRendersFooter() {
+        vcAssert.assertCardRendersFooter(this.cardVc)
     }
 
     public getSwipeVc() {

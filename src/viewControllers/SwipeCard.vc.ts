@@ -27,6 +27,7 @@ export default class SwipeCardViewController extends AbstractViewController<Card
     public setSections!: CardViewController['setSections']
     public getHeaderTitle!: CardViewController['getHeaderTitle']
     public getHeaderSubtitle!: CardViewController['getHeaderSubtitle']
+    public getFooter!: CardViewController['getFooter']
     private cardBeforeNull?: CardSnapshot
 
     public constructor(

@@ -532,18 +532,23 @@ const vcAssert = {
         )
     },
 
-    assertCardRendersHeader(
-        cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
-    ) {
+    assertCardRendersHeader(cardVc: ViewController<Card>) {
         const model = renderUtil.render(cardVc)
         assert.isObject(model.header, `Your card did not render a header!`)
     },
 
-    assertCardRendersFooter(
-        cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
-    ) {
+    assertCardRendersFooter(cardVc: ViewController<Card>) {
         const model = renderUtil.render(cardVc)
         assert.isObject(model.footer, `Your card did not render a footer!`)
+    },
+
+    assertCardDoesNotRenderFooter(cardVc: ViewController<Card>) {
+        assertOptions({ cardVc }, ['cardVc'])
+        const model = renderUtil.render(cardVc)
+        assert.isFalsy(
+            model.footer,
+            `Your card is rendering a footer and should not. Try 'this.cardVc.setFooter(null)'!`
+        )
     },
 
     /**

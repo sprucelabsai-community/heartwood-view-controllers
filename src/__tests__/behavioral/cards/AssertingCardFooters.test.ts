@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, errorAssert, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardFooter, CardViewController } from '../../../types/heartwood.types'
@@ -31,6 +31,33 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
         this.assertFooterIsEnabled()
     }
 
+    @test()
+    protected static async assertFooterIsNotRenderedThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            vcAssert.assertCardDoesNotRenderFooter()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['cardVc'],
+        })
+    }
+
+    @test()
+    protected static async assertFooterThrowsIfRendersFooter() {
+        this.setFooter({})
+        assert.doesThrow(
+            () => vcAssert.assertCardDoesNotRenderFooter(this.vc),
+            'footer'
+        )
+    }
+
+    @test()
+    protected static async assertFooterNotRendered() {
+        this.setFooter(null)
+        vcAssert.assertCardDoesNotRenderFooter(this.vc)
+    }
+
     private static assertFooterIsDisabled() {
         vcAssert.assertCardFooterIsDisabled(this.vc)
     }
@@ -39,7 +66,7 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
         vcAssert.assertCardFooterIsEnabled(this.vc)
     }
 
-    private static setFooter(footer: CardFooter) {
+    private static setFooter(footer: CardFooter | null) {
         this.vc = this.Controller('card', {
             footer,
         })

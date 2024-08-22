@@ -6,6 +6,7 @@ import listAssert from '../../../tests/utilities/listAssert'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
+    CardFooter,
     CardHeader,
     ListRow,
     SkillView,
@@ -93,7 +94,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async firstListRendersMultpleRows() {
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
 
         this.assertRendersRow(this.locations[0].id)
         this.assertRendersRow(this.locations[1].id)
@@ -117,7 +118,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
 
         this.assertTotalPages(2)
     }
@@ -128,7 +129,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
 
         this.assertListRendersRow('list-1', this.locations[2].id)
 
@@ -147,14 +148,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canGetRecords() {
-        await this.loadWithFakedLocations(10)
+        await this.fakeLocationsAndLoad(10)
         const records = this.vc.getRecords()
         assert.isEqualDeep(records, this.locations)
     }
 
     @test()
     protected static async clickingAPageSwitchesThePresentSlide() {
-        await this.loadWithFakedLocations(20)
+        await this.fakeLocationsAndLoad(20)
         this.assertTotalPages(2)
         await this.clickPagerButton(1)
         this.vc.assertCurrentPage(1)
@@ -174,7 +175,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         this.clearFakedLocations()
         this.addFakedLocations(2)
@@ -186,7 +187,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async loadingOnlyRendersSwipeOnce() {
-        await this.loadWithFakedLocations(30)
+        await this.fakeLocationsAndLoad(30)
         this.assertTriggerRenderCountForSwipe(1)
         await this.refresh()
         this.assertTriggerRenderCountForSwipe(2)
@@ -194,7 +195,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canRemoveRowFromFirstList() {
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
         const id = this.locations[0].id
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
@@ -203,7 +204,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canRemoveSecondRowFromFirstList() {
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
         const id = this.locations[1].id
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
@@ -216,7 +217,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         const id = this.locations[2].id
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
@@ -229,7 +230,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(3)
+        await this.fakeLocationsAndLoad(3)
         const id = this.locations[2].id
         this.deleteRow(id)
         this.assertTotalPages(1)
@@ -237,7 +238,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async jumpingToSlideUpdatesPager() {
-        await this.loadWithFakedLocations(40)
+        await this.fakeLocationsAndLoad(40)
         await this.jumpToSlide(1)
         this.assertCurrentPage(1)
         await this.jumpToSlide(0)
@@ -250,7 +251,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         await this.jumpToSlide(1)
 
@@ -261,7 +262,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async selectRowsInFirstList() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.selectRowAndAssertSelected(this.locations[0].id)
         this.selectRowAndAssertSelected(this.locations[1].id)
     }
@@ -271,13 +272,13 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.setupCardWithPaging({
             pageSize: 5,
         })
-        await this.loadWithFakedLocations(10)
+        await this.fakeLocationsAndLoad(10)
         this.selectRowAndAssertSelected(this.locations[5].id)
     }
 
     @test()
     protected static async canDeselectRowInFirstList() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.selectRow(this.locations[0].id)
         this.deselectRowAndAssertNotSelected(this.locations[0].id)
 
@@ -290,7 +291,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.setupCardWithPaging({
             pageSize: 5,
         })
-        await this.loadWithFakedLocations(10)
+        await this.fakeLocationsAndLoad(10)
         this.selectRow(this.locations[5].id)
         this.deselectRowAndAssertNotSelected(this.locations[5].id)
     }
@@ -323,7 +324,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async deleteRowShouldOnlyRenderOnce() {
-        await this.loadWithFakedLocations(20)
+        await this.fakeLocationsAndLoad(20)
         this.assertTriggerRenderCountForSwipe(1)
         this.deleteRow(this.locations[0].id)
         this.assertTriggerRenderCountForSwipe(2)
@@ -331,7 +332,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async addingRowGoesToFirstListIfOnlyList() {
-        await this.loadWithFakedLocations(5)
+        await this.fakeLocationsAndLoad(5)
         const id = generateId()
         this.addRow(id)
         this.assertListRendersRow('list-0', id)
@@ -343,7 +344,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         const id = generateId()
 
         this.addRow(id)
@@ -377,7 +378,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canSetSelectedRowsInFirstList() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.setSelectedRows([this.locations[0].id, this.locations[1].id])
 
         this.assertRowIsSelected(this.locations[0].id)
@@ -394,7 +395,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 5,
         })
 
-        await this.loadWithFakedLocations(10)
+        await this.fakeLocationsAndLoad(10)
 
         this.setSelectedRows([this.locations[5].id])
         this.assertRowIsSelected(this.locations[5].id)
@@ -406,7 +407,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         this.setSelectedRows([this.locations[0].id, this.locations[2].id])
 
@@ -416,7 +417,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canUpsertRowIntoFirstList() {
-        await this.loadWithFakedLocations(5)
+        await this.fakeLocationsAndLoad(5)
 
         const row: Omit<ListRow, 'id'> = {
             cells: [
@@ -437,7 +438,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         const row: Omit<ListRow, 'id'> = {
             columnWidths: ['content', 'fill'],
@@ -459,7 +460,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         const id = this.locations[2].id
 
         this.upsertRow(id, { cells: [] })
@@ -472,7 +473,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         const row: ListRow = {
             id: generateId(),
@@ -489,7 +490,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
 
         const row: ListRow = {
             id: generateId(),
@@ -508,7 +509,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async addsToFirstListIfOnlyOneList() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         const id = generateId()
         this.upsertRow(id, { cells: [] })
         this.assertListRendersRow('list-0', id)
@@ -516,7 +517,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async canGetFirstRowVcFromFirstList() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.assertRowVcEqualsSameFromListAtIndex(this.locations[0].id, 0)
     }
 
@@ -526,19 +527,19 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.assertRowVcEqualsSameFromListAtIndex(this.locations[2].id, 1)
     }
 
     @test()
     protected static async canGetSecondRowInFirstVc() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         this.assertRowVcEqualsSameFromListAtIndex(this.locations[1].id, 0)
     }
 
     @test()
     protected static async throwsIfRowVcNotFound() {
-        await this.loadWithFakedLocations(4)
+        await this.fakeLocationsAndLoad(4)
         const err = assert.doesThrow(() => this.getRowVc(generateId()))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['rowId'],
@@ -587,22 +588,74 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async errorOnRefreshClearsOutPastLists() {
-        this.addFakedLocations(30)
-
-        await this.load()
+        await this.fakeLocationsAndLoad(30)
         await this.makeListLocationsThrow()
         await this.refresh()
+
         this.assertRendersErrorRow()
         this.vc.assertTotalSlides(1)
     }
 
     @test()
-    protected static async pagerGoesAwayIfError() {
-        this.addFakedLocations(30)
-        await this.load()
+    protected static async footerAndPageGoAwayIfError() {
+        await this.fakeLocationsAndLoad(30)
         await this.makeListLocationsThrow()
         await this.refresh()
+
         this.vc.assertPagerIsCleared()
+        this.assertDoesNotRenderFooter()
+    }
+
+    @test()
+    protected static async doesNotRenderFooterIfOnlyOnePage() {
+        await this.fakeLocationsAndLoad(5)
+        this.assertRendersFooter()
+    }
+
+    @test()
+    protected static async footerOptionsArePassedThrough() {
+        const footer = this.setupWithPagingAndFooter({
+            isEnabled: true,
+            isSticky: true,
+            buttons: [
+                {
+                    id: generateId(),
+                },
+            ],
+        })
+
+        await this.fakeLocationsAndLoad(5)
+        this.assertRendersFooter()
+
+        this.assertRenderedFooterIncludes(footer)
+    }
+
+    @test()
+    protected static async footerMixesInWithPager() {
+        const footer = this.setupWithPagingAndFooter({
+            isEnabled: false,
+            isSticky: false,
+            buttons: [],
+        })
+
+        await this.fakeLocationsAndLoad(30)
+        this.assertRendersFooter()
+        this.assertRendersPager()
+        this.assertRenderedFooterIncludes(footer)
+    }
+
+    @test()
+    protected static async stillRendersFooterIfButtonsPassedOnError() {
+        const footer = this.setupWithPagingAndFooter({
+            isEnabled: false,
+            isSticky: false,
+            buttons: [],
+        })
+        await this.makeListLocationsThrow()
+        await this.fakeLocationsAndLoad(30)
+
+        this.assertRendersFooter()
+        this.assertRenderedFooterIncludes(footer)
     }
 
     @test()
@@ -678,6 +731,27 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertDoesNotRenderRow('no-records')
     }
 
+    private static assertRendersPager() {
+        this.vc.assertRendersPager()
+    }
+
+    private static assertRenderedFooterIncludes(footer: CardFooter) {
+        const actual = this.render(this.vc).footer
+        assert.doesInclude(actual, footer)
+    }
+
+    private static setupWithPagingAndFooter(footer: CardFooter) {
+        this.setupCardVc({
+            footer,
+            paging: {
+                pageSize: 10,
+                shouldPageClientSide: true,
+            },
+        })
+
+        return footer
+    }
+
     private static assertNoResultsRowRendersAs(noResultsRow: NoResultsRow) {
         const {
             rows: [model],
@@ -710,6 +784,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         const listVc = this.getRowVc(id)
         const expected = this.listVcs[listIdx].getRowVc(id)
         assert.isEqual(listVc, expected)
+    }
+
+    private static assertDoesNotRenderFooter() {
+        this.vc.assertDoesNotRenderFooter()
     }
 
     private static getRowVc(id: string) {
@@ -792,7 +870,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertRowIsNotSelected(id)
     }
 
-    private static async loadWithFakedLocations(total: number) {
+    private static async fakeLocationsAndLoad(total: number) {
         this.addFakedLocations(total)
         await this.load()
     }
@@ -857,6 +935,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static assertTotalPages(expected: number) {
         this.vc.assertTotalPages(expected)
+    }
+
+    private static assertRendersFooter() {
+        this.vc.assertRendersFooter()
     }
 
     private static assertRendersRow(id: string) {

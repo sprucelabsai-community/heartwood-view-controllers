@@ -38,6 +38,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         | 'getHeaderSubtitle'
         | 'setTriggerRenderHandler'
         | 'triggerRender'
+        | 'getFooter'
     >
     protected listVc?: ActiveRecordListViewController
     protected listVcs: ListViewController[] = []
@@ -95,14 +96,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private SwipeVc(options: {
         header?: CardHeader | null
         id?: string
+        footer?: CardFooter | null
     }): SwipeCardViewController {
+        const { footer, ...rest } = options
         return this.Controller('swipe-card', {
             slides: [],
             onSlideChange: this.handleSlideChange.bind(this),
             footer: {
+                ...footer,
                 pager: this.pagerVc?.render(),
             },
-            ...options,
+            ...rest,
         })
     }
 
@@ -182,6 +186,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.rebuildSlidesForPaging()
         } catch (err: any) {
             this.pagerVc?.clear()
+            if (!this.cardVc.getFooter()?.buttons) {
+                this.swipeVc?.setFooter(null)
+            }
             this.dropInErrorRow(err)
             this.log.error('Failed to load paged results', err.stack ?? err)
         }
