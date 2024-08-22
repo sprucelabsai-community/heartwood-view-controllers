@@ -1,7 +1,7 @@
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
-import interactor from '../../../tests/utilities/interactor'
+import interactor, { PagerButton } from '../../../tests/utilities/interactor'
 import listAssert from '../../../tests/utilities/listAssert'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -17,9 +17,17 @@ import ActiveRecordCardViewController from '../../../viewControllers/activeRecor
 import { NoResultsRow } from '../../../viewControllers/activeRecord/ActiveRecordList.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
-import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
+import AbstractClientSidePagingActiveRecordCard, {
+    SpyPager,
+    SpySwipeCard,
+} from './AbstractClientSidePagingActiveRecordCardTest'
 
 export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractClientSidePagingActiveRecordCard {
+    protected static async beforeEach(): Promise<void> {
+        await super.beforeEach()
+        SwipeCardViewController.swipeDelay = 0
+    }
+
     @test()
     protected static async rendersPagerIfPagingEnabled() {
         pagerAssert.cardRendersPager(this.vc, 'active-pager')
@@ -736,6 +744,65 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertDoesNotRenderFooter()
     }
 
+    @test()
+    protected static async elegantlyHandlesDelayedSwipeChange() {
+        await this.fakeLocationsLoadAndResetPagingCounts()
+        await this.clickPagerButtonAndWait('next')
+        this.assertChangeCounts(1)
+
+        await this.clickPagerButtonAndWait('previous')
+        this.assertChangeCounts(2)
+    }
+
+    @test()
+    protected static async elegantlyHandlePageChange() {
+        await this.fakeLocationsLoadAndResetPagingCounts()
+        await this.jumpToSlideAndWait(1)
+        this.assertChangeCounts(1)
+    }
+
+    private static async jumpToSlideAndWait(expected: number) {
+        await this.jumpToSlide(expected)
+        await this.wait(5)
+    }
+
+    private static assertChangeCounts(expected: number) {
+        this.assertJumpToSlideCount(expected)
+        this.assertSetCurrentPageCount(expected)
+    }
+
+    private static async fakeLocationsLoadAndResetPagingCounts() {
+        await this.fakeLocationsAndLoad(30)
+        await this.wait(10)
+        this.resetPagingCounts()
+    }
+
+    private static async clickPagerButtonAndWait(button: PagerButton) {
+        await this.clickPagerButton(button)
+        await this.wait(5)
+    }
+
+    private static resetPagingCounts() {
+        this.swipeVc.jumpToSlideCount = 0
+        this.pagerVc.setCurrentPageCount = 0
+    }
+
+    private static assertSetCurrentPageCount(expected: number) {
+        assert.isEqual(
+            this.pagerVc.setCurrentPageCount,
+            expected,
+            'pagerVc.setCurrentPageCount(...) was called the wrong amount of times'
+        )
+    }
+
+    private static assertJumpToSlideCount(expected: number) {
+        assert.isEqual(
+            this.swipeVc.jumpToSlideCount,
+            expected,
+            `this.swipeVc.jumpToSlide(...) was called the wrong amount of times`
+        )
+    }
+
     private static assertRendersPager() {
         this.vc.assertRendersPager()
     }
@@ -913,16 +980,20 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         vcAssert.assertTriggerRenderCount(this.swipeVc, expected)
     }
 
-    private static get swipeVc(): SwipeCardViewController {
-        return this.vc.getSwipeVc()
+    private static get swipeVc() {
+        return this.vc.getSwipeVc() as unknown as SpySwipeCard
     }
 
     private static async refresh() {
         await this.vc.refresh()
     }
 
-    private static async clickPagerButton(button: number) {
-        await interactor.clickPagerButton(this.vc.getPagerVc(), button)
+    private static async clickPagerButton(button: PagerButton) {
+        await interactor.clickPagerButton(this.pagerVc, button)
+    }
+
+    private static get pagerVc(): SpyPager {
+        return this.vc.getPagerVc() as SpyPager
     }
 
     private static get isLoaded(): boolean {

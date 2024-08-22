@@ -110,7 +110,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         })
     }
 
+    private changedBy: string | null = null
     private async handleSlideChange(slide: number) {
+        if (this.changedBy === 'pager') {
+            this.changedBy = null
+            return
+        }
+        this.changedBy = 'slide'
         this.pagerVc?.setCurrentPage(slide)
     }
 
@@ -122,7 +128,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     private async handlePageChange(page: number) {
+        if (this.changedBy === 'slide') {
+            this.changedBy = null
+            return
+        }
+
+        this.changedBy = 'pager'
         await this.swipeVc?.jumpToSlide(page)
+        this.changedBy = null
     }
 
     private CardVc(

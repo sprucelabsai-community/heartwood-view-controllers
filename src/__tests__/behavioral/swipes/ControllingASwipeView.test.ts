@@ -13,6 +13,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     private static slide1Id: string
     private static slide2Id: string
     private static slide3Id: string
+    private static changeHandlerHitCount = 0
 
     protected static async beforeEach() {
         await super.beforeEach()
@@ -20,10 +21,14 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
         this.slide1Id = generateId()
         this.slide2Id = generateId()
         this.slide3Id = generateId()
+        this.changeHandlerHitCount = 0
 
         this.vc = this.Vc({
             header: {
                 title: generateId(),
+            },
+            onSlideChange: async () => {
+                this.changeHandlerHitCount++
             },
             slides: [
                 {
@@ -530,6 +535,29 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
         assert.isEqual(hitCount, 1)
         await this.jumpToSlide(1)
         assert.isEqual(hitCount, 1)
+    }
+
+    @test()
+    protected static async slideChangeHandlerDebounces() {
+        SwipeCardViewController.swipeDelay = 10
+        await Promise.all([
+            this.jumpToSlide(1),
+            this.jumpToSlide(2),
+            this.jumpToSlide(3),
+        ])
+
+        this.assertChangeHandlerHitCount(1)
+        await this.jumpToSlide(1)
+
+        this.assertChangeHandlerHitCount(2)
+
+        await Promise.all([this.jumpToSlide(2), this.jumpToSlide(3)])
+
+        this.assertChangeHandlerHitCount(3)
+    }
+
+    private static assertChangeHandlerHitCount(expected: number) {
+        assert.isEqual(this.changeHandlerHitCount, expected)
     }
 
     private static async jumpToSlide(id: string | number) {

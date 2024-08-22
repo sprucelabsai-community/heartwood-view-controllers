@@ -29,6 +29,8 @@ export default class SwipeCardViewController extends AbstractViewController<Card
     public getHeaderSubtitle!: CardViewController['getHeaderSubtitle']
     public getFooter!: CardViewController['getFooter']
     private cardBeforeNull?: CardSnapshot
+    private timeout?: NodeJS.Timeout
+    private didChangeResolve?: (value: void | PromiseLike<void>) => void
 
     public constructor(
         options: SwipeViewControllerOptions & ViewControllerOptions
@@ -89,10 +91,14 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 
     private async handleSlideChange(slide: number) {
         if (this.presentSlide !== slide) {
+            clearTimeout(this.timeout!)
+            this.didChangeResolve?.()
             this.presentSlide = slide
             await new Promise<void>((resolve) => {
-                setTimeout(async () => {
+                this.didChangeResolve = resolve
+                this.timeout = setTimeout(async () => {
                     await this.slideChangeHandler?.(slide)
+                    delete this.didChangeResolve
                     resolve()
                 }, SwipeCardViewController.swipeDelay)
             })

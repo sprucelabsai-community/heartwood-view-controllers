@@ -1,5 +1,6 @@
 import { Location } from '@sprucelabs/spruce-core-schemas'
 import { generateId, RecursivePartial } from '@sprucelabs/test-utils'
+import { PagerViewController, SwipeCardViewControllerImpl } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockActiveRecordCard from '../../../tests/MockActiveRecordCard'
@@ -20,6 +21,9 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
             'active-record-card',
             MockActiveRecordCard
         )
+
+        this.getFactory().setController('pager', SpyPager)
+        this.getFactory().setController('swipe-card', SpySwipeCard)
 
         this.clearFakedLocations()
         this.id = generateId()
@@ -81,5 +85,23 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
 
     protected static addFakedLocations(length: number) {
         Array.from({ length }).forEach(() => this.addFakedLocation())
+    }
+}
+
+//@ts-ignore
+export class SpySwipeCard extends SwipeCardViewControllerImpl {
+    public jumpToSlideCount = 0
+
+    public async jumpToSlide(slide: number | string): Promise<void> {
+        this.jumpToSlideCount++
+        await super.jumpToSlide(slide)
+    }
+}
+
+export class SpyPager extends PagerViewController {
+    public setCurrentPageCount = 0
+    public setCurrentPage(page: number): void {
+        this.setCurrentPageCount++
+        super.setCurrentPage(page)
     }
 }
