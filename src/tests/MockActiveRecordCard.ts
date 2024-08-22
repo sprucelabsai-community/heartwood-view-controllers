@@ -106,7 +106,7 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         }
 
         assert.fail(
-            `Your ActiveRecordCard (${getViewId(this)}) renders the row "${id}" and it def should not!`
+            `Your ActiveRecordCard (${getViewId(this)}) renders the row "${id}" and it def should not be!`
         )
     }
 

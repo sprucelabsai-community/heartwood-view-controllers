@@ -533,12 +533,18 @@ const vcAssert = {
 
     assertCardRendersHeader(cardVc: ViewController<Card>) {
         const model = renderUtil.render(cardVc)
-        assert.isObject(model.header, `Your card did not render a header!`)
+        assert.isObject(
+            model.header,
+            `Your card did not render a header and should have!`
+        )
     },
 
     assertCardRendersFooter(cardVc: ViewController<Card>) {
         const model = renderUtil.render(cardVc)
-        assert.isObject(model.footer, `Your card did not render a footer!`)
+        assert.isObject(
+            model.footer,
+            `Your card did not render a footer and should have!`
+        )
     },
 
     assertCardDoesNotRenderFooter(cardVc: ViewController<Card>) {

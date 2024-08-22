@@ -102,13 +102,13 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     @test()
-    protected static async pagingIsExpectedWith1Item() {
-        this.addFakedLocation()
+    protected static async pagingIsExpectedWith2Pages() {
+        this.addFakedLocations(15)
         this.vc.assertPagerNotConfigured()
 
         await this.load()
 
-        this.assertTotalPages(1)
+        this.assertTotalPages(2)
         this.assertCurrentPage(0)
     }
 
@@ -609,7 +609,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async doesNotRenderFooterIfOnlyOnePage() {
         await this.fakeLocationsAndLoad(5)
-        this.assertRendersFooter()
+        this.assertDoesNotRenderFooter()
     }
 
     @test()
@@ -626,7 +626,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         await this.fakeLocationsAndLoad(5)
         this.assertRendersFooter()
-
         this.assertRenderedFooterIncludes(footer)
     }
 
@@ -729,6 +728,12 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         await this.makeListLocationsThrow()
         await this.load()
         this.assertDoesNotRenderRow('no-records')
+    }
+
+    @test()
+    protected static async doNotRenderFooterIfOnlyOnePage() {
+        await this.fakeLocationsAndLoad(5)
+        this.assertDoesNotRenderFooter()
     }
 
     private static assertRendersPager() {

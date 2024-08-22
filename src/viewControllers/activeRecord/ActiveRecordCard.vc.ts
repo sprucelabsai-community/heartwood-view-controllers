@@ -186,12 +186,20 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.rebuildSlidesForPaging()
         } catch (err: any) {
             this.pagerVc?.clear()
-            if (!this.cardVc.getFooter()?.buttons) {
-                this.swipeVc?.setFooter(null)
-            }
+            this.clearFooterIfNoButtons()
             this.dropInErrorRow(err)
             this.log.error('Failed to load paged results', err.stack ?? err)
         }
+    }
+
+    private clearFooterIfNoButtons() {
+        if (!this.cardVc.getFooter()?.buttons) {
+            this.clearFooter()
+        }
+    }
+
+    private clearFooter() {
+        this.swipeVc?.setFooter(null)
     }
 
     private dropInErrorRow(err: any) {
@@ -236,6 +244,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 id: 'no-records',
                 ...this.noResultsRow,
             })
+        }
+
+        if (totalPages === 1) {
+            this.clearFooterIfNoButtons()
         }
 
         this.pagerVc?.setTotalPages(totalPages)
