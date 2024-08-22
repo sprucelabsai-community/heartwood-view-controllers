@@ -243,7 +243,7 @@ export interface ActiveRecordListViewControllerOptions {
     eventName: EventName
     responseKey: string
     rowTransformer: (record: Record<string, any>) => ListRow
-    noResultsRow?: Omit<ListRow, 'id'>
+    noResultsRow?: NoResultsRow
     payload?: Record<string, any>
     target?: Record<string, any>
     id?: string
@@ -255,3 +255,5 @@ export interface ActiveRecordListViewControllerOptions {
     onDidFetch?: () => Promise<void> | void
     paging?: ActiveRecordPagingOptions
 }
+
+export type NoResultsRow = Omit<ListRow, 'id'>

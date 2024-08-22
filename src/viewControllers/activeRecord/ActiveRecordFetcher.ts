@@ -41,6 +41,10 @@ export default class ActiveRecordFetcherImpl implements ActiveRecordFetcher {
             this.buildTargetAndPayload() as any
         )
 
+        if (!responsePayload) {
+            return []
+        }
+
         const records = responsePayload[this.responseKey] as any[]
 
         if (!records) {

@@ -1,3 +1,4 @@
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
@@ -13,6 +14,7 @@ import {
     ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
+import { NoResultsRow } from '../../../viewControllers/activeRecord/ActiveRecordList.vc'
 import SwipeCardViewController from '../../../viewControllers/SwipeCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
@@ -622,8 +624,75 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.doesThrow(() => this.vc.getListVc(), 'paging')
     }
 
+    @test('renders no results row 1', { cells: [] })
+    @test('renders no results row 2', {
+        cells: [{ text: { content: generateId() } }],
+        columnWidths: ['content'],
+    })
+    protected static async rendersNoRecordsRowIfNoRecords(
+        noResultsRow: NoResultsRow
+    ) {
+        this.setupCardVc({
+            noResultsRow,
+            paging: {
+                shouldPageClientSide: true,
+                pageSize: 10,
+            },
+        })
+
+        this.client.emit = async () => ({
+            responses: [],
+            totalErrors: 0,
+            totalContracts: 0,
+            totalResponses: 0,
+        })
+
+        await this.load()
+        this.assertRendersRow('no-records')
+        this.assertDoesNotRenderRow('error')
+
+        this.assertNoResultsRowRendersAs(noResultsRow)
+    }
+
+    @test()
+    protected static async defaultNoResultsRowRendersAsExpected() {
+        await this.client.on('list-locations::v2020_12_25', () => ({
+            locations: [],
+        }))
+
+        await this.load()
+        this.assertNoResultsRowRendersAs({
+            cells: [
+                {
+                    text: {
+                        content: 'No results found!',
+                    },
+                },
+            ],
+        })
+    }
+
+    @test()
+    protected static async doesNotRenderNoResultsRowOnError() {
+        await this.makeListLocationsThrow()
+        await this.load()
+        this.assertDoesNotRenderRow('no-records')
+    }
+
+    private static assertNoResultsRowRendersAs(noResultsRow: NoResultsRow) {
+        const {
+            rows: [model],
+        } = this.render(this.listVcs[0])
+
+        assert.doesInclude(model, noResultsRow)
+    }
+
     private static assertRendersErrorRow() {
         this.vc.assertRendersRow('error')
+    }
+
+    private static get listVcs() {
+        return this.vc.getListVcs()
     }
 
     private static async makeListLocationsThrow(msg?: string) {
@@ -640,7 +709,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         listIdx: number
     ) {
         const listVc = this.getRowVc(id)
-        const expected = this.vc.getListVcs()[listIdx].getRowVc(id)
+        const expected = this.listVcs[listIdx].getRowVc(id)
         assert.isEqual(listVc, expected)
     }
 
@@ -670,7 +739,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     private static renderRow(listIdx: number, rowIdx: number) {
-        const model = this.render(this.vc.getListVcs()[listIdx])
+        const model = this.render(this.listVcs[listIdx])
         delete model.rows[rowIdx].controller
         delete model.rows[rowIdx].cells?.[0]?.controller
         return model.rows[rowIdx]

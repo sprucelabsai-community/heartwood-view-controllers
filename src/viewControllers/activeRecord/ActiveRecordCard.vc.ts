@@ -17,6 +17,7 @@ import PagerViewController from '../pagers/Pager.vc'
 import ActiveRecordFetcherImpl from './ActiveRecordFetcher'
 import ActiveRecordListViewController, {
     ActiveRecordListViewControllerOptions,
+    NoResultsRow,
 } from './ActiveRecordList.vc'
 
 export default class ActiveRecordCardViewController extends AbstractViewController<Card> {
@@ -47,6 +48,15 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
     private records: Record<string, any>[] = []
+    private noResultsRow: NoResultsRow = {
+        cells: [
+            {
+                text: {
+                    content: 'No results found!',
+                },
+            },
+        ],
+    }
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.setShouldThrowOnResponseError(
@@ -59,11 +69,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const { paging, rowTransformer } = options
+        const { paging, rowTransformer, noResultsRow } = options
 
         this.rowTransformer = rowTransformer
 
         if (paging) {
+            this.noResultsRow = noResultsRow ?? this.noResultsRow
             this.pagingOptions = paging
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
@@ -211,6 +222,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             for (const record of records) {
                 listVc.addRow(this.rowTransformer(record))
             }
+        }
+
+        if (this.records.length === 0) {
+            this.listVcs[0].addRow({
+                id: 'no-records',
+                ...this.noResultsRow,
+            })
         }
 
         this.pagerVc?.setTotalPages(totalPages)
