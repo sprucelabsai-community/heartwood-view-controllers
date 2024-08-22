@@ -44,6 +44,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     protected listVcs: ListViewController[] = []
     protected pagerVc?: PagerViewController
     protected swipeVc?: SwipeCardViewController
+    private changedBy: string | null = null
     protected pagingOptions?: ActiveRecordPagingOptions
     private fetcher?: ActiveRecordFetcherImpl
     private rowTransformer: (record: Record<string, any>) => ListRow
@@ -110,7 +111,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         })
     }
 
-    private changedBy: string | null = null
     private async handleSlideChange(slide: number) {
         if (this.changedBy === 'pager') {
             this.changedBy = null
