@@ -236,7 +236,7 @@ const loginSchema = buildSchema({
             type: 'phone',
             isRequired: true,
             label: 'Phone',
-            hint: "I'm gonna send you a pin. Texting rates may apply.",
+            hint: "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply.",
         },
         code: {
             type: 'text',
