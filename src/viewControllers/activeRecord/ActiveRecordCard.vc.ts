@@ -61,9 +61,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
-        ActiveRecordListViewController.setShouldThrowOnResponseError(
-            shouldThrow
-        )
+        ActiveRecordListViewController.shouldThrowOnResponseError = shouldThrow
     }
 
     public constructor(
@@ -198,6 +196,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.records = await this.fetcher!.fetchRecords()
             this.rebuildSlidesForPaging()
         } catch (err: any) {
+            if (ActiveRecordListViewController.shouldThrowOnResponseError) {
+                throw err
+            }
+
             this.pagerVc?.clear()
             this.clearFooterIfNoButtons()
             this.dropInErrorRow(err)

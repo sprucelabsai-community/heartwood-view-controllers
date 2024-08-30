@@ -26,6 +26,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         SwipeCardViewController.swipeDelay = 0
+        ActiveRecordCardViewController.setShouldThrowOnResponseError(false)
     }
 
     @test()
@@ -759,6 +760,18 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         await this.fakeLocationsLoadAndResetPagingCounts()
         await this.jumpToSlideAndWait(1)
         this.assertChangeCounts(1)
+    }
+
+    @test()
+    protected static async shouldThrowErrorIfSetToWithPageClientSide() {
+        ActiveRecordCardViewController.setShouldThrowOnResponseError(true)
+        await this.eventFaker.fakeListLocations(() =>
+            assert.fail('forced fail')
+        )
+
+        this.setupCardWithPaging({})
+
+        await assert.doesThrowAsync(() => this.load())
     }
 
     private static async jumpToSlideAndWait(expected: number) {

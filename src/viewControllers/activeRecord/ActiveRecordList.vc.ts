@@ -18,13 +18,10 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     private noResultsRow?: Omit<ListRow, 'id'>
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
-    private static shouldThrowOnResponseError = false
+    public static shouldThrowOnResponseError = false
     private willFetchHandler?: () => void | Promise<void>
     private didFetchHandler?: () => void | Promise<void>
     private fetcher: ActiveRecordFetcher
-    public static setShouldThrowOnResponseError(shouldThrow: boolean) {
-        this.shouldThrowOnResponseError = shouldThrow
-    }
 
     private records: any[] = []
 
