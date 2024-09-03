@@ -1,3 +1,10 @@
+# [110.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.11.85...v110.12.0) (2024-09-03)
+
+
+### Features
+
+* card headers can have forms ([8d71433](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8d71433))
+
 ## [110.11.85](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.11.84...v110.11.85) (2024-09-03)
 
 ## [110.11.84](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.11.83...v110.11.84) (2024-09-03)
