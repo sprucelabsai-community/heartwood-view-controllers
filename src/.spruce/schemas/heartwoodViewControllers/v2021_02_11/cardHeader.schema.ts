@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import formSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 
 const cardHeaderSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeaderSchema  = {
 	id: 'cardHeader',
@@ -48,6 +48,12 @@ const cardHeaderSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardH
 	                hint: 'How should the header image be rendered',
 	                defaultValue: "cover",
 	                options: {choices: [{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],}
+	            },
+	            /** Form. */
+	            'form': {
+	                label: 'Form',
+	                type: 'schema',
+	                options: {typeSuffix: `<any>`,schema: formSchema_v2021_02_11,}
 	            },
 	            /** Close handler. Meant for use inside React components directly. */
 	            'closeHandler': {

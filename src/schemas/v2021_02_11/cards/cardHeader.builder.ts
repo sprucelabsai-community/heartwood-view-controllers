@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { fancyIcons } from '../../../constants'
+import formBuilder from '../forms/form.builder'
 
 export default buildSchema({
     id: 'cardHeader',
@@ -51,6 +52,14 @@ export default buildSchema({
                         label: 'Contain',
                     },
                 ],
+            },
+        },
+        form: {
+            type: 'schema',
+            label: 'Form',
+            options: {
+                typeSuffix: '<any>',
+                schema: formBuilder,
             },
         },
         closeHandler: {

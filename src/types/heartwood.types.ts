@@ -613,6 +613,7 @@ export type RenderAsInputComponentType =
     | 'tags'
     | 'signature'
     | 'password'
+    | 'search'
 
 export type RenderAsInputComponent =
     | RenderAsInputComponentType

@@ -91,16 +91,16 @@ export default abstract class AbstractInputViewController<
         return this.getValueHandler?.() ?? null
     }
 
-    public render(): Model {
-        return this.model
-    }
-
     protected get model() {
         return this.getModelHandler?.() ?? ({} as any)
     }
 
     protected set model(model: Model) {
         this.setModelHandler?.(model)
+    }
+
+    public render(): Model {
+        return this.model
     }
 }
 
