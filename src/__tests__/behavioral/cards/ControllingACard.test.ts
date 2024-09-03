@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -69,21 +69,6 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(model.header?.title, 'A header')
     }
 
-    protected static renderCard(vc = this.vc) {
-        const card = renderUtil.render(vc)
-
-        //@ts-ignore
-        if (!vc._isTracking) {
-            //@ts-ignore
-            vc._isTracking = true
-            this.beginTrackingFooterRender(vc)
-            this.beginTrackingHeaderRender(vc)
-            this.beginTrackingSectionRender(vc)
-        }
-
-        return card as any
-    }
-
     @test()
     protected static canUpdateFooterAndDoesNotCauseFullRender() {
         const vc = this.Vc({ footer: { buttons: [{ label: 'hey' }] } })
@@ -108,7 +93,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 1)
-        assert.isEqual(this.headerTriggerRenderCount, 0)
+        this.assertHeaderTriggerRenderCount(0)
     }
 
     @test()
@@ -133,7 +118,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(model.header?.title, 'you got this')
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 0)
-        assert.isEqual(this.headerTriggerRenderCount, 1)
+        this.assertHeaderTriggerRenderCount(1)
     }
 
     @test()
@@ -162,7 +147,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 0)
-        assert.isEqual(this.headerTriggerRenderCount, 0)
+        this.assertHeaderTriggerRenderCount(0)
         assert.isEqual(this.sectionTriggerRenderCounts[0], 1)
         assert.isUndefined(this.sectionTriggerRenderCounts[1])
     }
@@ -193,16 +178,17 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test()
     protected static canSetHeaderImage() {
-        this.vc.setHeaderImage('test.jpg')
+        const image = generateId()
+        this.setHeaderImage(image)
         const model = this.renderCard()
-        assert.isEqual(model.header?.image, 'test.jpg')
+        assert.isEqual(model.header?.image, image)
     }
 
     @test()
     protected static canRemoveHeaderImage() {
         this.vc.setHeaderTitle(null)
-        this.vc.setHeaderImage('test.jpg')
-        this.vc.setHeaderImage(null)
+        this.setHeaderImage('test.jpg')
+        this.setHeaderImage(null)
         const model = this.renderCard()
         assert.isFalsy(model.header)
     }
@@ -210,8 +196,8 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     @test()
     protected static removingHeaderRetainsTitle() {
         this.vc.setHeaderSubtitle('Waka waka')
-        this.vc.setHeaderImage('test.jpg')
-        this.vc.setHeaderImage(null)
+        this.setHeaderImage('test.jpg')
+        this.setHeaderImage(null)
         const model = this.renderCard()
         assert.isTruthy(model.header)
         assert.isEqual(model.header.subtitle, 'Waka waka')
@@ -383,7 +369,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         vc.setHeader({ title: 'wha!?' })
 
-        assert.isEqual(this.headerTriggerRenderCount, 1)
+        this.assertHeaderTriggerRenderCount(1)
         assert.isEqual(this.cardTriggerRenderCount, 0)
     }
 
@@ -398,7 +384,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.renderCard(vc)
         vc.setHeader(null)
 
-        assert.isEqual(this.headerTriggerRenderCount, 0)
+        this.assertHeaderTriggerRenderCount(0)
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
@@ -411,7 +397,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
             title: 'hey',
         })
 
-        assert.isEqual(this.headerTriggerRenderCount, 0)
+        this.assertHeaderTriggerRenderCount(0)
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
@@ -534,6 +520,26 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(this.cardTriggerRenderCount, 0)
     }
 
+    @test()
+    protected static async settingHeaderImageTriggersRender() {
+        this.beginTrackingHeaderRender()
+        this.setHeaderImage(generateId())
+
+        assert.isEqual(this.cardTriggerRenderCount, 0)
+        this.assertHeaderTriggerRenderCount(1)
+
+        this.setHeaderImage(null)
+        this.assertHeaderTriggerRenderCount(2)
+    }
+
+    private static setHeaderImage(image: string | null) {
+        this.vc.setHeaderImage(image)
+    }
+
+    private static assertHeaderTriggerRenderCount(expected: number) {
+        assert.isEqual(this.headerTriggerRenderCount, expected)
+    }
+
     private static setVcWith3Sections() {
         this.vc = this.Vc({
             body: {
@@ -580,6 +586,21 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
                 }
             }
         )
+    }
+
+    protected static renderCard(vc = this.vc) {
+        const card = renderUtil.render(vc)
+
+        //@ts-ignore
+        if (!vc._isTracking) {
+            //@ts-ignore
+            vc._isTracking = true
+            this.beginTrackingFooterRender(vc)
+            this.beginTrackingHeaderRender(vc)
+            this.beginTrackingSectionRender(vc)
+        }
+
+        return card as any
     }
 }
 

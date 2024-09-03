@@ -171,6 +171,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
     public setHeaderImage(image: string | null) {
         if (image === null) {
             this.unsetHeaderField('image')
+            this.triggerRenderHeader?.()
             return
         }
 
