@@ -125,6 +125,21 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         })
     }
 
+    @test()
+    protected static async searchingIsCaseInsensitive() {
+        await this.fakeLocationsAndLoad(1)
+        await this.setSearchValueAndWait(this.locations[0].name.toUpperCase())
+        this.assertRendersRow(this.locations[0].id)
+    }
+
+    @test()
+    protected static async canSearchMultipleTimes() {
+        await this.fakeLocationsAndLoad(10)
+        await this.setSearchValueAndWait(this.locations[0].name)
+        await this.setSearchValueAndWait(this.locations[1].name)
+        this.assertRendersRow(this.locations[1].id)
+    }
+
     private static setSearchDebounce() {
         ActiveRecordCardViewController.searchDebounceMs = 100
     }

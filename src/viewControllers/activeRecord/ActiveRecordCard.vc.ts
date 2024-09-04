@@ -63,7 +63,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             },
         ],
     }
-    private oldRecords?: Record<string, any>[]
+    private allRecords: Record<string, any>[] = []
     private searchTimeout?: any
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
@@ -132,15 +132,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         if (search) {
             this.filterRecords(search)
         } else {
-            this.records = this.oldRecords ?? []
+            this.records = this.allRecords ?? []
         }
         this.rebuildSlidesForPaging()
     }
 
     private filterRecords(search: string) {
-        this.oldRecords = [...this.records]
         const matches = []
-        for (const record of this.records) {
+        for (const record of this.allRecords) {
             const doesMatch = this.doesRecordMatch(record, search)
             if (doesMatch) {
                 matches.push(record)
@@ -150,8 +149,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     private doesRecordMatch(record: Record<string, any>, search: string) {
-        const searchable = Object.values(record).join('')
-        const doesMatch = searchable.includes(search)
+        const searchable = Object.values(record).join('').toLowerCase()
+        const doesMatch = searchable.includes(search.toLowerCase())
         return doesMatch
     }
 
@@ -261,6 +260,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private async loadPagedResults() {
         try {
             this.records = await this.fetcher!.fetchRecords()
+            this.allRecords = [...this.records]
             this.rebuildSlidesForPaging()
         } catch (err: any) {
             if (ActiveRecordListViewController.shouldThrowOnResponseError) {
