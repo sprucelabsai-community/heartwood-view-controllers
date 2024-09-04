@@ -140,6 +140,23 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         this.assertRendersRow(this.locations[1].id)
     }
 
+    @test()
+    protected static async canSetClientSideSearchPlaceholder() {
+        const placeholder = generateId()
+        this.setupWithPagingAndSearch({
+            paging: {
+                searchPlaceholder: placeholder,
+            },
+        })
+
+        const search = this.searchFormVc.getField('search')
+        assert.isEqual(
+            search.renderOptions.placeholder,
+            placeholder,
+            'Placeholder not set'
+        )
+    }
+
     private static setSearchDebounce() {
         ActiveRecordCardViewController.searchDebounceMs = 100
     }
@@ -173,12 +190,13 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         options?: RecursivePartial<ActiveRecordCardViewControllerOptions>
     ) {
         this.setupCardVc({
+            ...options,
             paging: {
                 shouldPageClientSide: true,
                 pageSize: 10,
                 shouldRenderSearch: true,
+                ...options?.paging,
             },
-            ...options,
         })
     }
 }

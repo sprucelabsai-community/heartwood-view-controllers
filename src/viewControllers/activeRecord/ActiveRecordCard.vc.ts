@@ -102,10 +102,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.__activeRecordParent = this
     }
 
-    private SearchFormVc(): FormViewController<{
-        id: string
-        fields: { search: { type: 'text' } }
-    }> {
+    private SearchFormVc() {
         return this.Controller(
             'form',
             buildForm({
@@ -113,7 +110,16 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 schema: searchFormSchema,
                 onChange: this.handleChangeSearchForm.bind(this),
                 sections: [
-                    { fields: [{ name: 'search', renderAs: 'search' }] },
+                    {
+                        fields: [
+                            {
+                                name: 'search',
+                                renderAs: 'search',
+                                placeholder:
+                                    this.pagingOptions?.searchPlaceholder,
+                            },
+                        ],
+                    },
                 ],
             })
         )
@@ -139,6 +145,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
     private filterRecords(search: string) {
         const matches = []
+
         for (const record of this.allRecords) {
             const doesMatch = this.doesRecordMatch(record, search)
             if (doesMatch) {
