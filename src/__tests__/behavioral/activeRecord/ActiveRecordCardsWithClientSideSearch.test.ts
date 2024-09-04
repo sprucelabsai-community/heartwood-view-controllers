@@ -1,6 +1,13 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    assert,
+    generateId,
+    RecursivePartial,
+} from '@sprucelabs/test-utils'
 import formAssert from '../../../tests/utilities/formAssert'
-import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
+import ActiveRecordCardViewController, {
+    ActiveRecordCardViewControllerOptions,
+} from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
 
 export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractClientSidePagingActiveRecordCard {
@@ -12,7 +19,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
 
     @test()
     protected static async enablingClientSidePagingAndSearchingEnablesSearchForm() {
-        formAssert.cardRendersForm(this.vc, 'search')
+        this.assertRendersSearchForm()
     }
 
     @test()
@@ -109,6 +116,15 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         this.assertRendersRow(this.locations[1].id)
     }
 
+    @test()
+    protected static async rendersSearchEvenIfHeaderPassed() {
+        this.setupWithPagingAndSearch({
+            header: {
+                title: 'Go dogs go!',
+            },
+        })
+    }
+
     private static setSearchDebounce() {
         ActiveRecordCardViewController.searchDebounceMs = 100
     }
@@ -119,6 +135,10 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
 
     private static async waitForSearchDebounce() {
         await this.wait(ActiveRecordCardViewController.searchDebounceMs)
+    }
+
+    private static assertRendersSearchForm() {
+        formAssert.cardRendersForm(this.vc, 'search')
     }
 
     private static async setSearchValueAndWait(value: string | null) {
@@ -134,9 +154,16 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         return this.vc.getSearchFormVc()
     }
 
-    private static setupWithPagingAndSearch() {
-        this.setupCardWithPaging({
-            shouldRenderSearch: true,
+    private static setupWithPagingAndSearch(
+        options?: RecursivePartial<ActiveRecordCardViewControllerOptions>
+    ) {
+        this.setupCardVc({
+            paging: {
+                shouldPageClientSide: true,
+                pageSize: 10,
+                shouldRenderSearch: true,
+            },
+            ...options,
         })
     }
 }

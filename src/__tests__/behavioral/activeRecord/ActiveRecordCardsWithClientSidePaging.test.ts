@@ -31,13 +31,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     @test()
     protected static async rendersPagerIfPagingEnabled() {
+        this.assertRendersPager()
         pagerAssert.cardRendersPager(this.vc, 'active-pager')
     }
 
     @test()
     protected static async doesNotRenderPagerIfPagingDisabled() {
         this.setupCardVc()
-        pagerAssert.cardDoesNotRenderPager(this.vc)
+        this.assertDoesNotRenderPager()
     }
 
     @test()
@@ -184,14 +185,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             pageSize: 2,
         })
 
-        await this.fakeLocationsAndLoad(4)
+        await this.fakeLocationsAndLoad(6)
 
         this.clearFakedLocations()
-        this.addFakedLocations(2)
+        this.addFakedLocations(4)
 
         await this.refresh()
 
-        this.assertTotalPages(1)
+        this.assertTotalPages(2)
     }
 
     @test()
@@ -667,6 +668,22 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     @test()
+    protected static async pagerIsNotRenderedIfOnlyOnePageAndFooterButtons() {
+        this.setupWithPagingAndFooter({
+            isEnabled: true,
+            isSticky: true,
+            buttons: [
+                {
+                    id: generateId(),
+                },
+            ],
+        })
+
+        await this.fakeLocationsAndLoad(5)
+        this.vc.assertPagerIsCleared()
+    }
+
+    @test()
     protected static async canUseCardAssertToFindCardByIdWhenPaging() {
         const id = generateId()
         this.getFactory().setController('testing', TestSkillView)
@@ -1027,6 +1044,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static assertRendersFooter() {
         this.vc.assertRendersFooter()
+    }
+
+    private static assertDoesNotRenderPager() {
+        this.vc.assertDoesNotRenderPager()
     }
 }
 

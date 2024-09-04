@@ -43,7 +43,11 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
             this.pagerVc,
             `You have not enabled paging in your ActiveRecordCard!`
         )
-        pagerAssert.totalPages(this.pagerVc!, expected)
+        if (expected === 1) {
+            pagerAssert.pagerIsCleared(this.pagerVc!)
+        } else {
+            pagerAssert.totalPages(this.pagerVc!, expected)
+        }
         this.assertTotalSlides(expected)
     }
 
@@ -66,10 +70,10 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
     }
 
     public assertRendersPager() {
-        pagerAssert.cardRendersPager(this.cardVc)
+        pagerAssert.cardRendersPager(this.cardVc, 'active-pager')
     }
 
-    public assertDoesNotRenderPage() {
+    public assertDoesNotRenderPager() {
         pagerAssert.cardDoesNotRenderPager(this.cardVc)
     }
 

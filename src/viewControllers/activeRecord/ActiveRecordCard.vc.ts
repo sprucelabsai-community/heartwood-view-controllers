@@ -160,11 +160,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         id?: string
         footer?: CardFooter | null
     }): SwipeCardViewController {
-        const { footer, ...rest } = options
+        const { footer, header, ...rest } = options
         return this.Controller('swipe-card', {
             slides: [],
             onSlideChange: this.handleSlideChange.bind(this),
             header: {
+                ...header,
                 form: this.searchFormVc?.render(),
             },
             footer: {
@@ -331,9 +332,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.clearFooterIfNoButtons()
         }
 
-        this.pagerVc?.setTotalPages(totalPages)
-        const currentPage = this.pagerVc!.getCurrentPage()
-        this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
+        if (totalPages === 1) {
+            this.pagerVc?.clear()
+        } else {
+            this.pagerVc?.setTotalPages(totalPages)
+            const currentPage = this.pagerVc!.getCurrentPage()
+            this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
+        }
     }
 
     private clear() {
