@@ -1,4 +1,5 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { buildSchema, SchemaError } from '@sprucelabs/schema'
+import buildForm from '../../builders/buildForm'
 import {
     ActiveRecordPagingOptions,
     Card,
@@ -6,6 +7,7 @@ import {
     CardHeader,
     CardViewController,
     CriticalError,
+    FormViewController,
     ListRow,
     SwipeCardViewController,
     ViewControllerOptions,
@@ -40,12 +42,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         | 'triggerRender'
         | 'getFooter'
     >
+    public static searchDebounceMs = 200
     protected listVc?: ActiveRecordListViewController
     protected listVcs: ListViewController[] = []
     protected pagerVc?: PagerViewController
     protected swipeVc?: SwipeCardViewController
-    private changedBy: string | null = null
     protected pagingOptions?: ActiveRecordPagingOptions
+    protected searchFormVc?: FormViewController<SearchFormSchema>
+    private changedBy: string | null = null
     private fetcher?: ActiveRecordFetcherImpl
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
@@ -59,6 +63,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             },
         ],
     }
+    private oldRecords?: Record<string, any>[]
+    private searchTimeout?: any
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.shouldThrowOnResponseError = shouldThrow
@@ -76,6 +82,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         if (paging) {
             this.noResultsRow = noResultsRow ?? this.noResultsRow
             this.pagingOptions = paging
+
+            if (paging.shouldRenderSearch) {
+                this.searchFormVc = this.SearchFormVc()
+            }
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
             this.swipeVc = this.SwipeVc(options)
@@ -92,6 +102,59 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.__activeRecordParent = this
     }
 
+    private SearchFormVc(): FormViewController<{
+        id: string
+        fields: { search: { type: 'text' } }
+    }> {
+        return this.Controller(
+            'form',
+            buildForm({
+                id: 'search',
+                schema: searchFormSchema,
+                onChange: this.handleChangeSearchForm.bind(this),
+                sections: [
+                    { fields: [{ name: 'search', renderAs: 'search' }] },
+                ],
+            })
+        )
+    }
+
+    private async handleChangeSearchForm() {
+        clearTimeout(this.searchTimeout)
+
+        this.searchTimeout = setTimeout(() => {
+            this.executeSearch()
+        }, ActiveRecordCardViewController.searchDebounceMs)
+    }
+
+    private executeSearch() {
+        const search = this.searchFormVc?.getValue('search')
+        if (search) {
+            this.filterRecords(search)
+        } else {
+            this.records = this.oldRecords ?? []
+        }
+        this.rebuildSlidesForPaging()
+    }
+
+    private filterRecords(search: string) {
+        this.oldRecords = [...this.records]
+        const matches = []
+        for (const record of this.records) {
+            const doesMatch = this.doesRecordMatch(record, search)
+            if (doesMatch) {
+                matches.push(record)
+            }
+        }
+        this.records = matches
+    }
+
+    private doesRecordMatch(record: Record<string, any>, search: string) {
+        const searchable = Object.values(record).join('')
+        const doesMatch = searchable.includes(search)
+        return doesMatch
+    }
+
     private SwipeVc(options: {
         header?: CardHeader | null
         id?: string
@@ -101,6 +164,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         return this.Controller('swipe-card', {
             slides: [],
             onSlideChange: this.handleSlideChange.bind(this),
+            header: {
+                form: this.searchFormVc?.render(),
+            },
             footer: {
                 ...footer,
                 pager: this.pagerVc?.render(),
@@ -218,7 +284,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     private dropInErrorRow(err: any) {
-        this.swipeVc?.setSections([])
+        this.clear()
         const listVc = this.addList(0)
         listVc.addRow({
             id: 'error',
@@ -233,11 +299,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         })
     }
 
-    private rebuildSlidesForPaging() {
+    protected rebuildSlidesForPaging() {
         if (!this.pagerVc) {
             return
         }
-        this.swipeVc?.setSections([])
+        this.clear()
 
         const totalPages = Math.max(
             1,
@@ -268,6 +334,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.pagerVc?.setTotalPages(totalPages)
         const currentPage = this.pagerVc!.getCurrentPage()
         this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
+    }
+
+    private clear() {
+        this.swipeVc?.setSections([])
+        this.listVcs = []
     }
 
     private get pageSize() {
@@ -483,3 +554,14 @@ const chunkArray = <T>(arr: T[], chunkSize: number): T[][] =>
     Array.from({ length: Math.ceil(arr.length / chunkSize) }, (_, i) =>
         arr.slice(i * chunkSize, (i + 1) * chunkSize)
     )
+
+const searchFormSchema = buildSchema({
+    id: 'activeRecordSearch',
+    fields: {
+        search: {
+            type: 'text',
+        },
+    },
+})
+
+export type SearchFormSchema = typeof searchFormSchema

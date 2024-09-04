@@ -118,6 +118,20 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
         formAssert.cardRendersForm(vc, 'test2')
     }
 
+    @test()
+    protected static async canFindFormInHeader() {
+        const id = generateId()
+        const vc = this.Controller('card', {
+            header: {
+                form: this.Vc([], id).render(),
+            },
+        })
+
+        formAssert.cardRendersForm(vc)
+        assert.doesThrow(() => formAssert.cardRendersForm(vc, generateId()))
+        formAssert.cardRendersForm(vc, id)
+    }
+
     private static assertRendersSection(sectionId: string): any {
         return formAssert.formRendersSection(this.vc, sectionId)
     }

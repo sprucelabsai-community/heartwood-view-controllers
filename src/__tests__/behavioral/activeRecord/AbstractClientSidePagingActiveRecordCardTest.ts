@@ -39,16 +39,26 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         this.setupCardWithPaging()
     }
 
+    protected static async fakeLocationsAndLoad(total: number) {
+        this.addFakedLocations(total)
+        await this.load()
+    }
+
     protected static clearFakedLocations() {
         this.locations = []
     }
 
     protected static async load() {
         await this.vc.load()
+        this.vc.resetRebuildSlideCount()
     }
 
     protected static addFakedLocation() {
         this.locations.push(this.eventFaker.generateLocationValues())
+    }
+
+    protected static assertRendersRow(id: string) {
+        this.vc.assertRendersRow(id)
     }
 
     protected static setupCardWithPaging(
@@ -61,6 +71,10 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
                 ...pagingOptions,
             },
         })
+    }
+
+    protected static assertDoesNotRenderRow(id: string) {
+        this.vc.assertDoesNotRenderRow(id)
     }
 
     protected static setupCardVc(

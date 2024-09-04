@@ -227,6 +227,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
         return this.fetcher.getPayload()
     }
 
+    //@deprecated - do not use directly
     public getListVc() {
         return this.listVc
     }

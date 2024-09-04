@@ -346,9 +346,11 @@ this.Controller(
         assert.isEqual(
             renderOptions.renderAs,
             expected,
-            `The field named '${fieldName}' is rendering as '${JSON.stringify(
-                renderOptions ?? '***default**'
-            )}', but I expected it to render as '${expected}'!`
+            `The field named '${fieldName}' is rendering as ${
+                renderOptions.renderAs
+                    ? `'${JSON.stringify(renderOptions.renderAs)}'`
+                    : "it's default type"
+            }, but I expected it to render as '${expected}' Try setting 'renderAs' in 'sections.fields[].renderAs'!`
         )
     },
 

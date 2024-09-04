@@ -774,6 +774,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         await assert.doesThrowAsync(() => this.load())
     }
 
+    @test()
+    protected static async doesNotContinuouslyBuildUpListVcs() {
+        await this.fakeLocationsAndLoad(30)
+        await this.refresh()
+        await this.refresh()
+        assert.isLength(this.vc.getListVcs(), 3)
+    }
+
     private static async jumpToSlideAndWait(expected: number) {
         await this.jumpToSlide(expected)
         await this.wait(5)
@@ -955,11 +963,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertRowIsNotSelected(id)
     }
 
-    private static async fakeLocationsAndLoad(total: number) {
-        this.addFakedLocations(total)
-        await this.load()
-    }
-
     private static selectRowAndAssertSelected(id: string) {
         this.selectRow(id)
         this.assertRowIsSelected(id)
@@ -979,10 +982,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static async jumpToSlide(side: number) {
         await this.swipeVc.jumpToSlide(side)
-    }
-
-    private static assertDoesNotRenderRow(id: string) {
-        this.vc.assertDoesNotRenderRow(id)
     }
 
     private static deleteRow(id: string) {
@@ -1028,10 +1027,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static assertRendersFooter() {
         this.vc.assertRendersFooter()
-    }
-
-    private static assertRendersRow(id: string) {
-        this.vc.assertRendersRow(id)
     }
 }
 

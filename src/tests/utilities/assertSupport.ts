@@ -24,7 +24,13 @@ export function pluckAllFromView<K extends keyof CardSection>(
     model: Card,
     key: K
 ): CardSection[K][] {
-    return model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
+    const matches =
+        model.body?.sections?.map((s) => s?.[key]).filter((k) => !!k) ?? []
+    //@ts-ignore
+    if (model.header?.[key]) {
+        matches.push(model.header[key])
+    }
+    return matches
 }
 
 export function pluckFirstFromCard<K extends keyof CardSection>(

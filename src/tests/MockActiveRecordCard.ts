@@ -6,6 +6,12 @@ import pagerAssert from './utilities/pagerAssert'
 import vcAssert, { getViewId } from './utilities/vcAssert'
 
 export default class MockActiveRecordCard extends ActiveRecordCardViewController {
+    private rebuildSlidesCount = 0
+
+    public getSearchFormVc() {
+        return this.searchFormVc!
+    }
+
     public assertRowIsNotSelected(id: string) {
         for (const listVc of this.normalizedListVcs) {
             try {
@@ -122,6 +128,12 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
             const expected = `list-${i}`
             listAssert.cardRendersList(this.swipeVc!, expected)
         }
+
+        assert.isLength(
+            this.listVcs,
+            expected,
+            `Total number of lists did not match expected!`
+        )
     }
 
     public assertPagerIsCleared() {
@@ -146,5 +158,22 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
 
     public getListVcs() {
         return this.listVcs
+    }
+
+    public rebuildSlidesForPaging() {
+        this.rebuildSlidesCount++
+        return super.rebuildSlidesForPaging()
+    }
+
+    public assertRebuildSlideCountEquals(expected: number) {
+        assert.isEqual(
+            this.rebuildSlidesCount,
+            expected,
+            `Rebuild slide count did not match expected!`
+        )
+    }
+
+    public resetRebuildSlideCount() {
+        this.rebuildSlidesCount = 0
     }
 }
