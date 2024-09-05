@@ -1,3 +1,4 @@
+import { Location } from '@sprucelabs/spruce-core-schemas'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
@@ -70,7 +71,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         await this.load()
 
-        const id = this.locations[0].id
+        const id = this.locationIds[0]
         this.assertRendersRow(id)
     }
 
@@ -106,9 +107,9 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     protected static async firstListRendersMultpleRows() {
         await this.fakeLocationsAndLoad(3)
 
-        this.assertRendersRow(this.locations[0].id)
-        this.assertRendersRow(this.locations[1].id)
-        this.assertRendersRow(this.locations[2].id)
+        this.assertRendersRow(this.locationIds[0])
+        this.assertRendersRow(this.locationIds[1])
+        this.assertRendersRow(this.locationIds[2])
     }
 
     @test()
@@ -141,10 +142,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         await this.fakeLocationsAndLoad(3)
 
-        this.assertListRendersRow('list-1', this.locations[2].id)
+        this.assertListRendersRow('list-1', this.locationIds[2])
 
         const listVc = listAssert.cardRendersList(this.vc, 'list-0')
-        listAssert.listDoesNotRenderRow(listVc, this.locations[2].id)
+        listAssert.listDoesNotRenderRow(listVc, this.locationIds[2])
     }
 
     @test()
@@ -206,19 +207,19 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async canRemoveRowFromFirstList() {
         await this.fakeLocationsAndLoad(3)
-        const id = this.locations[0].id
+        const id = this.locationIds[0]
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
-        this.assertRendersRow(this.locations[1].id)
+        this.assertRendersRow(this.locationIds[1])
     }
 
     @test()
     protected static async canRemoveSecondRowFromFirstList() {
         await this.fakeLocationsAndLoad(3)
-        const id = this.locations[1].id
+        const id = this.locationIds[1]
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
-        this.assertRendersRow(this.locations[0].id)
+        this.assertRendersRow(this.locationIds[0])
     }
 
     @test()
@@ -228,10 +229,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         })
 
         await this.fakeLocationsAndLoad(4)
-        const id = this.locations[2].id
+        const id = this.locationIds[2]
         this.deleteRow(id)
         this.assertDoesNotRenderRow(id)
-        this.assertRendersRow(this.locations[0].id)
+        this.assertRendersRow(this.locationIds[0])
     }
 
     @test()
@@ -241,7 +242,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         })
 
         await this.fakeLocationsAndLoad(3)
-        const id = this.locations[2].id
+        const id = this.locationIds[2]
         this.deleteRow(id)
         this.assertTotalPages(1)
     }
@@ -273,8 +274,8 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async selectRowsInFirstList() {
         await this.fakeLocationsAndLoad(4)
-        this.selectRowAndAssertSelected(this.locations[0].id)
-        this.selectRowAndAssertSelected(this.locations[1].id)
+        this.selectRowAndAssertSelected(this.locationIds[0])
+        this.selectRowAndAssertSelected(this.locationIds[1])
     }
 
     @test()
@@ -289,11 +290,11 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async canDeselectRowInFirstList() {
         await this.fakeLocationsAndLoad(4)
-        this.selectRow(this.locations[0].id)
-        this.deselectRowAndAssertNotSelected(this.locations[0].id)
+        this.selectRow(this.locationIds[0])
+        this.deselectRowAndAssertNotSelected(this.locationIds[0])
 
-        this.selectRow(this.locations[1].id)
-        this.deselectRowAndAssertNotSelected(this.locations[1].id)
+        this.selectRow(this.locationIds[1])
+        this.deselectRowAndAssertNotSelected(this.locationIds[1])
     }
 
     @test()
@@ -336,7 +337,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     protected static async deleteRowShouldOnlyRenderOnce() {
         await this.fakeLocationsAndLoad(20)
         this.assertTriggerRenderCountForSwipe(1)
-        this.deleteRow(this.locations[0].id)
+        this.deleteRow(this.locationIds[0])
         this.assertTriggerRenderCountForSwipe(2)
     }
 
@@ -389,14 +390,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async canSetSelectedRowsInFirstList() {
         await this.fakeLocationsAndLoad(4)
-        this.setSelectedRows([this.locations[0].id, this.locations[1].id])
+        this.setSelectedRows([this.locationIds[0], this.locationIds[1]])
 
-        this.assertRowIsSelected(this.locations[0].id)
-        this.assertRowIsSelected(this.locations[1].id)
+        this.assertRowIsSelected(this.locationIds[0])
+        this.assertRowIsSelected(this.locationIds[1])
 
-        this.setSelectedRows([this.locations[2].id])
-        this.assertRowIsSelected(this.locations[2].id)
-        this.assertRowIsNotSelected(this.locations[0].id)
+        this.setSelectedRows([this.locationIds[2]])
+        this.assertRowIsSelected(this.locationIds[2])
+        this.assertRowIsNotSelected(this.locationIds[0])
     }
 
     @test()
@@ -419,10 +420,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         await this.fakeLocationsAndLoad(4)
 
-        this.setSelectedRows([this.locations[0].id, this.locations[2].id])
+        this.setSelectedRows([this.locationIds[0], this.locationIds[2]])
 
-        this.assertRowIsSelected(this.locations[0].id)
-        this.assertRowIsSelected(this.locations[2].id)
+        this.assertRowIsSelected(this.locationIds[0])
+        this.assertRowIsSelected(this.locationIds[2])
     }
 
     @test()
@@ -437,7 +438,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             ],
         }
 
-        const id = this.locations[0].id
+        const id = this.locationIds[0]
         this.upsertRow(id, row)
         this.assertRowEquals(0, 0, id, row)
     }
@@ -459,7 +460,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
             ],
         }
 
-        const id = this.locations[2].id
+        const id = this.locationIds[2]
         this.upsertRow(id, row)
         this.assertRowEquals(1, 0, id, row)
     }
@@ -471,7 +472,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         })
 
         await this.fakeLocationsAndLoad(4)
-        const id = this.locations[2].id
+        const id = this.locationIds[2]
 
         this.upsertRow(id, { cells: [] })
         this.assertListDoesNotRenderRow('list-0', id)
@@ -528,7 +529,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     @test()
     protected static async canGetFirstRowVcFromFirstList() {
         await this.fakeLocationsAndLoad(4)
-        this.assertRowVcEqualsSameFromListAtIndex(this.locations[0].id, 0)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locationIds[0], 0)
     }
 
     @test()
@@ -538,13 +539,13 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         })
 
         await this.fakeLocationsAndLoad(4)
-        this.assertRowVcEqualsSameFromListAtIndex(this.locations[2].id, 1)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locationIds[2], 1)
     }
 
     @test()
     protected static async canGetSecondRowInFirstVc() {
         await this.fakeLocationsAndLoad(4)
-        this.assertRowVcEqualsSameFromListAtIndex(this.locations[1].id, 0)
+        this.assertRowVcEqualsSameFromListAtIndex(this.locationIds[1], 0)
     }
 
     @test()
@@ -799,6 +800,77 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.isLength(this.vc.getListVcs(), 3)
     }
 
+    @test()
+    protected static async canSetValueOnFirstList() {
+        const name = generateId()
+        const value = generateId()
+
+        this.setupVcWithInput({ shouldPageClientSide: true, name })
+
+        await this.fakeLocationsAndLoad(2)
+        await this.assertSettingRowValueSetsCorrectly(0, name, value)
+        await this.assertSettingRowValueSetsCorrectly(1, name, value)
+    }
+
+    @test()
+    protected static async canSetValueOnSecondList() {
+        this.setupVcWithInput({ shouldPageClientSide: true, name: 'myInput' })
+        await this.fakeLocationsAndLoad(20)
+        await this.assertSettingRowValueSetsCorrectly(15, 'myInput', 'go dogs')
+    }
+
+    private static setupVcWithInput(options: {
+        shouldPageClientSide: boolean
+        name: string
+    }) {
+        const { shouldPageClientSide, name } = options
+        this.setupCardVc({
+            paging: {
+                shouldPageClientSide,
+                pageSize: 10,
+            },
+            rowTransformer: (location: Location) => {
+                return {
+                    id: location.id,
+                    cells: [
+                        {
+                            textInput: {
+                                name,
+                            },
+                        },
+                    ],
+                } as ListRow
+            },
+        })
+    }
+
+    private static async assertSettingRowValueSetsCorrectly(
+        idx: number,
+        name: string,
+        value: string
+    ) {
+        await this.setValue(idx, name, value)
+        this.assertRowValueEquals(idx, name, value)
+    }
+
+    private static assertRowValueEquals(
+        idx: number,
+        name: string,
+        value: string
+    ) {
+        const vc = this.vc.getRowVc(this.locationIds[idx])
+        const actual = vc.getValue(name)
+        assert.isEqual(
+            actual,
+            value,
+            `The value of ${name} was not set correctly in row ${idx}`
+        )
+    }
+
+    private static async setValue(rowIdx: number, name: string, value: string) {
+        await this.vc.setValue(this.locationIds[rowIdx], name, value)
+    }
+
     private static async jumpToSlideAndWait(expected: number) {
         await this.jumpToSlide(expected)
         await this.wait(5)
@@ -923,6 +995,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
     private static upsertRow(id: string, newCell: Omit<ListRow, 'id'>) {
         this.vc.upsertRow(id, newCell)
+    }
+
+    private static get locationIds() {
+        return this.locations.map((l) => l.id)
     }
 
     private static renderRow(listIdx: number, rowIdx: number) {
