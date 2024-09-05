@@ -65,6 +65,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
     private allRecords: Record<string, any>[] = []
     private searchTimeout?: any
+    private footer?: CardFooter | null
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.shouldThrowOnResponseError = shouldThrow
@@ -75,8 +76,13 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const { paging, rowTransformer, noResultsRow, shouldRenderSearch } =
-            options
+        const {
+            paging,
+            rowTransformer,
+            noResultsRow,
+            shouldRenderSearch,
+            footer,
+        } = options
 
         this.rowTransformer = rowTransformer
 
@@ -87,6 +93,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             if (shouldRenderSearch) {
                 this.searchFormVc = this.SearchFormVc()
             }
+            this.footer = footer
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
             this.swipeVc = this.SwipeVc(options)
@@ -168,6 +175,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         footer?: CardFooter | null
     }): SwipeCardViewController {
         const { footer, header, ...rest } = options
+
         return this.Controller('swipe-card', {
             slides: [],
             onSlideChange: this.handleSlideChange.bind(this),
@@ -338,11 +346,12 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
         if (totalPages === 1) {
             this.clearFooterIfNoButtons()
-        }
-
-        if (totalPages === 1) {
             this.pagerVc?.clear()
         } else {
+            this.swipeVc?.setFooter({
+                pager: this.pagerVc?.render(),
+                ...this.footer,
+            })
             this.pagerVc?.setTotalPages(totalPages)
             const currentPage = this.pagerVc!.getCurrentPage()
             this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)

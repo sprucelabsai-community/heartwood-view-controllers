@@ -1,10 +1,13 @@
 import { Location } from '@sprucelabs/spruce-core-schemas'
-import { generateId, RecursivePartial } from '@sprucelabs/test-utils'
+import { assert, generateId, RecursivePartial } from '@sprucelabs/test-utils'
 import { PagerViewController, SwipeCardViewControllerImpl } from '../../..'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockActiveRecordCard from '../../../tests/MockActiveRecordCard'
-import { ActiveRecordPagingOptions } from '../../../types/heartwood.types'
+import {
+    ActiveRecordPagingOptions,
+    CardFooter,
+} from '../../../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 
@@ -37,6 +40,10 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         })
 
         this.setupCardWithPaging()
+    }
+
+    protected static assertRendersPager() {
+        this.vc.assertRendersPager()
     }
 
     protected static async fakeLocationsAndLoad(total: number) {
@@ -99,6 +106,11 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
 
     protected static addFakedLocations(length: number) {
         Array.from({ length }).forEach(() => this.addFakedLocation())
+    }
+
+    protected static assertRenderedFooterIncludes(footer: CardFooter) {
+        const actual = this.render(this.vc).footer
+        assert.doesInclude(actual, footer)
     }
 }
 

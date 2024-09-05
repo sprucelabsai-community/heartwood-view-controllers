@@ -969,15 +969,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         )
     }
 
-    private static assertRendersPager() {
-        this.vc.assertRendersPager()
-    }
-
-    private static assertRenderedFooterIncludes(footer: CardFooter) {
-        const actual = this.render(this.vc).footer
-        assert.doesInclude(actual, footer)
-    }
-
     private static setupWithPagingAndFooter(footer: CardFooter) {
         this.setupCardVc({
             footer,

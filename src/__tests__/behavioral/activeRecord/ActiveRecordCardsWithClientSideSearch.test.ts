@@ -157,6 +157,32 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         )
     }
 
+    @test()
+    protected static async searchingDownToOnePageThenClearingSearchBringsBackPager() {
+        await this.fakeLocationsAndLoad(20)
+        await this.setSearchValueAndWait(this.locations[0].name)
+        this.assertRebuildSlideCountEquals(1)
+        await this.setSearchValueAndWait('')
+        this.assertRebuildSlideCountEquals(2)
+        this.assertRendersPager()
+    }
+
+    @test()
+    protected static async retainsCustoButtonsWhenSearchingAndClearingSearch() {
+        await this.fakeLocationsAndLoad(20)
+        const footer = {
+            buttons: [{ id: generateId() }],
+        }
+        this.setupWithPagingAndSearch({
+            footer,
+        })
+
+        await this.setSearchValueAndWait(this.locations[0].name)
+        await this.setSearchValueAndWait('')
+
+        this.assertRenderedFooterIncludes(footer)
+    }
+
     private static setSearchDebounce() {
         ActiveRecordCardViewController.searchDebounceMs = 100
     }
