@@ -44,6 +44,7 @@ type ActiveRecordCardBuilder<Contract extends EventContract> = <
     shouldRenderRowDividers?: boolean
     filter?: (record: Response[ResponseKey][number]) => boolean
     defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
+    shouldRenderSearch?: boolean
     paging?: ActiveRecordPagingOptions
 }) => ActiveRecordCardViewControllerOptions
 
