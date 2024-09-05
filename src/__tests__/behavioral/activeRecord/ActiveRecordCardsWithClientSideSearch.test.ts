@@ -191,10 +191,10 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     ) {
         this.setupCardVc({
             ...options,
+            shouldRenderSearch: true,
             paging: {
                 shouldPageClientSide: true,
                 pageSize: 10,
-                shouldRenderSearch: true,
                 ...options?.paging,
             },
         })

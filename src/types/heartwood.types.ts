@@ -873,6 +873,5 @@ export type ConnectToApi = () => Promise<MercuryClient>
 export interface ActiveRecordPagingOptions {
     shouldPageClientSide?: boolean
     pageSize?: number
-    shouldRenderSearch?: boolean
     searchPlaceholder?: string
 }

@@ -75,7 +75,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const { paging, rowTransformer, noResultsRow } = options
+        const { paging, rowTransformer, noResultsRow, shouldRenderSearch } =
+            options
 
         this.rowTransformer = rowTransformer
 
@@ -83,7 +84,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.noResultsRow = noResultsRow ?? this.noResultsRow
             this.pagingOptions = paging
 
-            if (paging.shouldRenderSearch) {
+            if (shouldRenderSearch) {
                 this.searchFormVc = this.SearchFormVc()
             }
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
