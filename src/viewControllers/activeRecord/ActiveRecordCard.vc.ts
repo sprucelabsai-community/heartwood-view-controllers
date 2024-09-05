@@ -518,11 +518,19 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public getValues() {
-        return this.listVc?.getValues()
+        return (
+            this.listVc?.getValues() ?? [
+                ...this.listVcs.map((vc) => vc.getValues()).flat(),
+            ]
+        )
     }
 
     public async setValue(rowId: string, name: string, value: any) {
         await this.getRowVc(rowId).setValue(name, value)
+    }
+
+    public getValue(rowId: string, name: string) {
+        return this.getRowVc(rowId).getValue(name)
     }
 
     public getPayload() {
@@ -541,7 +549,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.enableFooter()
     }
 
-    // @deprecated - use MockActiveCard to get access to the internals, this may not be set based on certain configurations
+    // @deprecated - use MockActiveCard to get access to the listVc,
+    // this may not be set based on certain configurations.
+    // you can use getRowVc() or setValue/getValue to interact with the list
     public getListVc() {
         if (!this.listVc) {
             throw new Error(

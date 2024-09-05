@@ -10,6 +10,7 @@ import {
     CardFooter,
     CardHeader,
     ListRow,
+    RowValues,
     SkillView,
     SkillViewControllerId,
     ViewControllerOptions,
@@ -819,6 +820,50 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         await this.assertSettingRowValueSetsCorrectly(15, 'myInput', 'go dogs')
     }
 
+    @test()
+    protected static async getValuesReturnsValuesFromFirstListAndFirstRow() {
+        const name = generateId()
+        const value = generateId()
+
+        this.setupVcWithInput({ shouldPageClientSide: true, name })
+        await this.fakeLocationsAndLoad(1)
+
+        await this.setValue(0, name, value)
+        this.assertListValuesEqual([
+            { rowId: this.locationIds[0], [name]: value },
+        ])
+    }
+
+    @test()
+    protected static async getValuesMixesInSecondListValues() {
+        this.setupVcWithInput({ shouldPageClientSide: true, name: 'inputName' })
+        await this.fakeLocationsAndLoad(20)
+
+        const expected = this.locations.map((location) => ({
+            rowId: location.id,
+            inputName: undefined,
+        })) as RowValues[]
+
+        const value1 = generateId()
+        const value2 = generateId()
+
+        await this.setValue(1, 'inputName', value1)
+        await this.setValue(15, 'inputName', value2)
+
+        expected[1].inputName = value1
+        expected[15].inputName = value2
+
+        this.assertListValuesEqual(expected)
+    }
+
+    private static assertListValuesEqual(expected: RowValues[]) {
+        assert.isEqualDeep(this.listValues, expected)
+    }
+
+    private static get listValues() {
+        return this.vc.getValues()
+    }
+
     private static setupVcWithInput(options: {
         shouldPageClientSide: boolean
         name: string
@@ -859,11 +904,22 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         value: string
     ) {
         const vc = this.vc.getRowVc(this.locationIds[idx])
-        const actual = vc.getValue(name)
+        const actualFromRowVc = vc.getValue(name)
         assert.isEqual(
-            actual,
+            actualFromRowVc,
             value,
             `The value of ${name} was not set correctly in row ${idx}`
+        )
+
+        const actualFromActiveCard = this.vc.getValue(
+            this.locationIds[idx],
+            name
+        )
+
+        assert.isEqual(
+            actualFromActiveCard,
+            value,
+            `The value returned from the active card was not correct for ${name}`
         )
     }
 
