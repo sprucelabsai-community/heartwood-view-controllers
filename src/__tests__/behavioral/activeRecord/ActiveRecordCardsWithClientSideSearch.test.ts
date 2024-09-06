@@ -42,11 +42,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
 
     @test()
     protected static async searchFiltersFirstRow() {
-        await this.fakeLocationsAndLoad(1)
-        await this.setSearchValueAndWait(generateId())
-        this.assertDoesNotRenderRow(this.locations[0].id)
-        await this.setSearchValueAndWait(null)
-        this.assertRendersRow(this.locations[0].id)
+        await this.assertSearchFiltersFirstRow()
     }
 
     @test()
@@ -72,10 +68,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
 
     @test()
     protected static async canMatchSecondRowOnName() {
-        await this.fakeLocationsAndLoad(2)
-        await this.setSearchValueAndWait(this.locations[1].name)
-        this.assertDoesNotRenderRow(this.locations[0].id)
-        this.assertRendersRow(this.locations[1].id)
+        await this.assertSearchCanMatchSecondRow()
     }
 
     @test()
@@ -168,7 +161,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     }
 
     @test()
-    protected static async retainsCustoButtonsWhenSearchingAndClearingSearch() {
+    protected static async retainsCustomButtonsWhenSearchingAndClearingSearch() {
         await this.fakeLocationsAndLoad(20)
         const footer = {
             buttons: [{ id: generateId() }],
@@ -181,6 +174,55 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         await this.setSearchValueAndWait('')
 
         this.assertRenderedFooterIncludes(footer)
+    }
+
+    @test()
+    protected static async canSearchWithoutPaging() {
+        this.setupCardWithSearch()
+
+        await this.fakeLocationsAndLoad(5)
+        await this.setSearchValueAndWait(this.locations[0].name)
+    }
+
+    @test()
+    protected static async searchCanMatchFirstRowWithoutPaging() {
+        this.setupCardWithSearch()
+        await this.assertSearchFiltersFirstRow()
+    }
+
+    @test()
+    protected static async searchCanMatchSecondRowWithoutPaging() {
+        this.setupCardWithSearch()
+        await this.assertSearchCanMatchSecondRow()
+    }
+
+    @test()
+    protected static async searchCanMatchMultpleRowsWithoutPaging() {
+        const name = generateId()
+        this.addFakedLocations(5)
+
+        this.locations[0].name = name
+        this.locations[1].name = name
+
+        this.setupCardWithSearch()
+        await this.load()
+
+        await this.setSearchValueAndWait(name)
+        this.assertRendersRow(this.locations[0].id)
+        this.assertRendersRow(this.locations[1].id)
+    }
+
+    private static async assertSearchCanMatchSecondRow() {
+        await this.fakeLocationsAndLoad(2)
+        await this.setSearchValueAndWait(this.locations[1].name)
+        this.assertDoesNotRenderRow(this.locations[0].id)
+        this.assertRendersRow(this.locations[1].id)
+    }
+
+    private static setupCardWithSearch() {
+        this.setupCardVc({
+            shouldRenderSearch: true,
+        })
     }
 
     private static setSearchDebounce() {
@@ -209,7 +251,17 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     }
 
     private static get searchFormVc() {
-        return this.vc.getSearchFormVc()
+        const formVc = this.vc.getSearchFormVc()
+        assert.isTruthy(formVc, `Search form not found`)
+        return formVc
+    }
+
+    private static async assertSearchFiltersFirstRow() {
+        await this.fakeLocationsAndLoad(1)
+        await this.setSearchValueAndWait(generateId())
+        this.assertDoesNotRenderRow(this.locations[0].id)
+        await this.setSearchValueAndWait(null)
+        this.assertRendersRow(this.locations[0].id)
     }
 
     private static setupWithPagingAndSearch(

@@ -85,14 +85,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         } = options
 
         this.rowTransformer = rowTransformer
+        this.pagingOptions = paging
+
+        if (shouldRenderSearch) {
+            this.searchFormVc = this.SearchFormVc()
+        }
 
         if (paging) {
             this.noResultsRow = noResultsRow ?? this.noResultsRow
-            this.pagingOptions = paging
-
-            if (shouldRenderSearch) {
-                this.searchFormVc = this.SearchFormVc()
-            }
             this.footer = footer
             this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
             this.pagerVc = this.PagerVc()
@@ -148,6 +148,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         } else {
             this.records = this.allRecords ?? []
         }
+
+        this.listVc?.setRowsBasedOnRecords(this.records)
         this.rebuildSlidesForPaging()
     }
 
@@ -270,7 +272,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 await this.loadPagedResults()
             })
         }
-        await this.listVc?.load()
+
+        if (this.listVc) {
+            await this.listVc?.load()
+            this.allRecords = this.listVc.getRecords()
+        }
     }
 
     private async loadPagedResults() {

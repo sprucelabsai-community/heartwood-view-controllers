@@ -80,9 +80,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
             if (this.records.length === 0) {
                 this.listVc.setRows([this.renderNoResultsRow()])
             } else {
-                this.listVc.setRows(
-                    this.records.map((record) => this.rowTransformer(record))
-                )
+                this.setRows(this.records)
             }
         } catch (err: any) {
             if (err.options?.code === 'INVALID_PARAMETERS') {
@@ -98,6 +96,16 @@ export default class ActiveRecordListViewController extends AbstractViewControll
 
         this.isLoaded = true
         await this.didFetchHandler?.()
+    }
+
+    private setRows(records: any[]) {
+        this.listVc.setRows(
+            records.map((record) => this.rowTransformer(record))
+        )
+    }
+
+    public setRowsBasedOnRecords(records: Record<string, any>[]) {
+        this.setRows(records)
     }
 
     private renderNoResultsRow(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow & {
