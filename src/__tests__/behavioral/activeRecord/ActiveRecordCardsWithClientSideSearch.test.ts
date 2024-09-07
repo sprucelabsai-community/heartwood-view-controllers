@@ -137,9 +137,8 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     protected static async canSetClientSideSearchPlaceholder() {
         const placeholder = generateId()
         this.setupWithPagingAndSearch({
-            paging: {
-                searchPlaceholder: placeholder,
-            },
+            searchPlaceholder: placeholder,
+            paging: {},
         })
 
         const search = this.searchFormVc.getField('search')

@@ -15,20 +15,6 @@ import ActiveRecordCardViewController, {
     ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
-class SpyActiveRecordCard extends ActiveRecordCardViewController {
-    public getListVc() {
-        return this.listVc!.getListVc()
-    }
-
-    public getCardVc() {
-        return this.cardVc
-    }
-
-    public isRowSelected(row: string | number): boolean {
-        return this.listVc ? this.listVc?.isRowSelected(row) : false
-    }
-}
-
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
     private static organizations: Organization[] = []
 
@@ -883,3 +869,17 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 }
 
 type Organization = SpruceSchemas.Spruce.v2020_07_22.Organization
+
+class SpyActiveRecordCard extends ActiveRecordCardViewController {
+    public getListVc() {
+        return this.listVc!.getListVc()
+    }
+
+    public getCardVc() {
+        return this.cardVc
+    }
+
+    public isRowSelected(row: string | number): boolean {
+        return this.listVc ? this.listVc?.isRowSelected(row) : false
+    }
+}

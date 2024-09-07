@@ -104,7 +104,7 @@ export default class ActiveRecordListViewController extends AbstractViewControll
         )
     }
 
-    public setRowsBasedOnRecords(records: Record<string, any>[]) {
+    public setRecords(records: Record<string, any>[]) {
         this.setRows(records)
     }
 
@@ -260,6 +260,7 @@ export interface ActiveRecordListViewControllerOptions {
     onWillFetch?: () => Promise<void> | void
     onDidFetch?: () => Promise<void> | void
     shouldRenderSearch?: boolean
+    searchPlaceholder?: string
     paging?: ActiveRecordPagingOptions
 }
 
