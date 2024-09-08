@@ -147,12 +147,12 @@ public render() {
 
 export function isVcInstanceOf<C>(vc: any, Class: new () => C): C | false {
     if (vc) {
-        if (vc instanceof Class) {
-            return vc
-        } else if (vc?.getParent?.() instanceof Class) {
-            return vc.getParent()
-        } else if (vc?.getParent?.()?.getParent?.() instanceof Class) {
-            return vc?.getParent?.()?.getParent?.()
+        let parent = vc
+        while (parent) {
+            if (parent instanceof Class) {
+                return parent
+            }
+            parent = parent.getParent?.()
         }
     }
 

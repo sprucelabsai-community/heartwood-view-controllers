@@ -173,7 +173,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
 
     @test()
     protected static canCheckIfRendersAsInstanceOf() {
-        const vc = this.Controller('fancy', {}) as FancyCardViewController
+        const vc = this.FancyVc()
 
         assert.doesThrow(() =>
             vcAssert.assertRendersAsInstanceOf(vc, FormViewController)
@@ -226,5 +226,21 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
             () => vcAssert.assertRendersAsInstanceOf(vc, CardViewController),
             'does not return'
         )
+    }
+
+    @test()
+    protected static async canMatchInstanceOfSeveralLevelsDeep() {
+        const vc = this.FancyVc()
+        vc.cardVc = vc.Controller('activeCard' as ViewControllerId, {})
+        const match = vcAssert.assertRendersAsInstanceOf(
+            vc.cardVc,
+            FancyCardViewController
+        )
+
+        assert.isEqual(match, vc)
+    }
+
+    private static FancyVc() {
+        return this.Controller('fancy', {}) as FancyCardViewController
     }
 }
