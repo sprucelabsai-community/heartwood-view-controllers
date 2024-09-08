@@ -9,6 +9,7 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 import {
     CardFooter,
     CardHeader,
+    List,
     ListRow,
     RowValues,
     SkillView,
@@ -854,6 +855,25 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         expected[15].inputName = value2
 
         this.assertListValuesEqual(expected)
+    }
+
+    @test('passes through column widths 1', ['content', 'fill'])
+    @test('passes through column widths 2', ['fill', 'content'])
+    protected static async columnWidthsPassedThroughToLists(
+        columnWidths: List['columnWidths']
+    ) {
+        this.setupCardVc({
+            columnWidths,
+            paging: {
+                shouldPageClientSide: true,
+                pageSize: 10,
+            },
+        })
+
+        await this.fakeLocationsAndLoad(4)
+
+        const model = this.render(this.listVcs[0])
+        assert.isEqualDeep(model.columnWidths, columnWidths)
     }
 
     private static assertListValuesEqual(expected: RowValues[]) {

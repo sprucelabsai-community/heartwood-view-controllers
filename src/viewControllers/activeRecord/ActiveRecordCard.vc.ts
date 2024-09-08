@@ -8,6 +8,7 @@ import {
     CardViewController,
     CriticalError,
     FormViewController,
+    List,
     ListRow,
     SwipeCardViewController,
     ViewControllerOptions,
@@ -66,6 +67,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private allRecords: Record<string, any>[] = []
     private searchTimeout?: any
     private footer?: CardFooter | null
+    private columnWidths?: List['columnWidths']
 
     public static setShouldThrowOnResponseError(shouldThrow: boolean) {
         ActiveRecordListViewController.shouldThrowOnResponseError = shouldThrow
@@ -83,6 +85,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             shouldRenderSearch,
             searchPlaceholder,
             footer,
+            columnWidths,
         } = options
 
         this.rowTransformer = rowTransformer
@@ -90,6 +93,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
         this.noResultsRow = noResultsRow ?? this.noResultsRow
         this.footer = footer
+        this.columnWidths = columnWidths
 
         if (shouldRenderSearch) {
             this.searchFormVc = this.SearchFormVc(searchPlaceholder)
@@ -376,6 +380,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
     private addList(i: number) {
         const listVc = this.Controller('list', {
+            columnWidths: this.columnWidths,
             id: `list-${i}`,
         })
 
