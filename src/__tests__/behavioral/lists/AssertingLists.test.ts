@@ -1,9 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
+import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
+    FormSection,
     ListRow,
     RowStyle,
     ViewControllerOptions,
@@ -11,11 +13,12 @@ import {
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
+import { TestFormSchema, testFormSchema } from '../forms/testFormOptions'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class ListCard extends AbstractViewController<Card> {
-    private cardVc: CardViewController
+    public cardVc: CardViewController
     public constructor(options: ViewControllerOptions & { listIds: string[] }) {
         super(options)
 
@@ -35,6 +38,47 @@ class ListCard extends AbstractViewController<Card> {
         })
     }
 
+    public dropInFormWithList(options: DropInFormOptions) {
+        const formSections = this.buildFormSections(options)
+
+        const formVc = this.Controller(
+            'form',
+            buildForm({
+                schema: testFormSchema,
+                sections: formSections,
+            })
+        )
+
+        const { sectionIdx } = options
+        const cardSections = Array.from({ length: sectionIdx + 1 }, () => ({}))
+        cardSections[sectionIdx] = {
+            form: formVc.render(),
+        }
+
+        this.cardVc.setSections(cardSections)
+    }
+
+    private buildFormSections(options: {
+        sectionIdx: number
+        formSectionIdx: number
+        listVc?: ListViewController
+    }) {
+        const { sectionIdx, formSectionIdx, listVc } = options
+
+        const formSections: FormSection<TestFormSchema>[] = Array.from(
+            { length: sectionIdx + 1 },
+            (_, idx) => ({
+                title: `Section ${idx}`,
+            })
+        )
+
+        formSections[formSectionIdx] = {
+            list: listVc?.render(),
+        }
+
+        return formSections
+    }
+
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card {
         return this.cardVc.render()
     }
@@ -45,10 +89,14 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         listVc: ListCard,
     }
     private static vc: ListViewController
+    private static listId: string
 
     protected static async beforeEach() {
         await super.beforeEach()
-        this.vc = this.Controller('list', {})
+        this.listId = generateId()
+        this.vc = this.Controller('list', {
+            id: this.listId,
+        })
     }
 
     @test()
@@ -326,7 +374,6 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         )
 
         listAssert.buttonInRowIsDisabled(this.vc, secondRowId, secondDisabledId)
-
         listAssert.buttonInRowIsEnabled(this.vc, secondRowId, secondEnabledId)
 
         assert.doesThrow(() =>
@@ -381,6 +428,76 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         listAssert.rowRendersButton(this.vc, 'test')
     }
 
+    @test('can find list in section[0] formSection[0]', 0, 0)
+    @test('can find list in section[0] formSection[1]', 0, 1)
+    @test('can find list in section[1] formSection[0]', 1, 0)
+    protected static canAssertIfListRenderedInFormSection(
+        sectionIdx: number,
+        formSectionIdx: number
+    ) {
+        const vc = this.Vc([])
+        vc.dropInFormWithList({
+            sectionIdx,
+            formSectionIdx,
+            listVc: this.vc,
+        })
+
+        const match = listAssert.cardRendersList(vc)
+        assert.isEqual(match, this.vc)
+    }
+
+    @test()
+    protected static async assertCardRendersListThrowsIfListInFormDoesNotMatchId() {
+        const vc = this.Vc([])
+        vc.dropInFormWithList({
+            sectionIdx: 0,
+            formSectionIdx: 0,
+            listVc: this.vc,
+        })
+
+        assert.doesThrow(() => listAssert.cardRendersList(vc, generateId()))
+    }
+
+    @test()
+    protected static async canMatchListInFormWithId() {
+        const vc = this.Vc([])
+        vc.dropInFormWithList({
+            sectionIdx: 0,
+            formSectionIdx: 0,
+            listVc: this.vc,
+        })
+
+        listAssert.cardRendersList(vc, this.listId)
+    }
+
+    @test()
+    protected static async canFindListInTheSecondForm() {
+        const vc = this.Vc([])
+
+        vc.dropInFormWithList({
+            sectionIdx: 0,
+            formSectionIdx: 1,
+        })
+
+        const formVc = this.Controller(
+            'form',
+            buildForm({
+                schema: testFormSchema,
+                sections: [
+                    {
+                        list: this.vc.render(),
+                    },
+                ],
+            })
+        )
+
+        vc.cardVc.addSection({
+            form: formVc.render(),
+        })
+
+        listAssert.cardRendersList(vc, this.listId)
+    }
+
     private static assertAssertingInputThrows(msg: string) {
         assert.doesThrow(
             () => listAssert.rowRendersInput(this.vc, 0, 'name'),
@@ -390,7 +507,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     private static assertRowStyle(row: number | string, style: RowStyle) {
-        vcAssert.assertRowIsStyle(this.vc, row, style)
+        listAssert.rowIsStyle(this.vc, row, style)
     }
 
     private static getRow(row: number | string) {
@@ -419,4 +536,10 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         //@ts-ignore
         return this.Controller('listVc', { listIds })
     }
+}
+
+interface DropInFormOptions {
+    sectionIdx: number
+    formSectionIdx: number
+    listVc?: ListViewController
 }

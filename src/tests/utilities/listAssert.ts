@@ -105,32 +105,27 @@ const listAssert = {
         vc: ViewController<Card> | FormViewController<any>,
         id?: string
     ): ListViewController {
-        const model = renderUtil.render(vc)
-        const lists = pluckAllFromView(
-            //@ts-ignore
-            model.body ? model : { body: model },
-            'list'
-        )
+        let { match, foundById } = findList(vc, id)
 
-        let foundList = false
-        let foundById = false
-        let match: any
-
-        for (const list of lists) {
-            if (!match && list?.controller instanceof ListViewController) {
-                foundList = true
-                match = list
-            }
-
-            if (id && list?.id === id) {
-                foundById = true
-                match = list
-                break
+        if (!match) {
+            const forms = pluckAllFromView(
+                renderUtil.render(vc) as Card,
+                'form'
+            )
+            for (const form of forms) {
+                if (form?.controller) {
+                    const formMatch = findList(form.controller, id)
+                    if (formMatch.match) {
+                        match = formMatch.match
+                        foundById = formMatch.foundById
+                        break
+                    }
+                }
             }
         }
 
-        assert.isTrue(
-            foundList,
+        assert.isTruthy(
+            match,
             "Expected to find a list inside your CardViewController, but didn't find one!"
         )
 
@@ -618,6 +613,34 @@ const listAssert = {
 }
 
 export default listAssert
+
+function findList(
+    vc: ViewController<Card> | FormViewController<any>,
+    id: string | undefined
+) {
+    const model = renderUtil.render(vc)
+    const lists = pluckAllFromView(
+        //@ts-ignore
+        model.body ? model : { body: model },
+        'list'
+    )
+
+    let foundById = false
+    let match: any
+
+    for (const list of lists) {
+        if (!match && list?.controller instanceof ListViewController) {
+            match = list
+        }
+
+        if (id && list?.id === id) {
+            foundById = true
+            match = list
+            break
+        }
+    }
+    return { match, foundById }
+}
 
 function renderCellContent(cell: ListCell) {
     return `${cell.subText?.content ?? ''}
