@@ -1369,7 +1369,7 @@ const vcAssert = {
      * @deprecated vcAssert.assertIsActiveRecordCard(...) -> activeRecordCardAssert.isActiveRecordCard(...)
      */
     assertIsActiveRecordCard(vc: ViewController<Card>) {
-        return activeRecordCardAssert.isActiveRecordCard(vc)
+        return activeRecordCardAssert.rendersAsActiveRecordCard(vc)
     },
 
     assertControllerInstanceOf<Controller extends ViewController<any>>(

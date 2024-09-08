@@ -11,7 +11,7 @@ import ActiveRecordCardViewController from '../../viewControllers/activeRecord/A
 import vcAssert from './vcAssert'
 
 const activeRecordCardAssert = {
-    isActiveRecordCard(vc: ViewController<Card>) {
+    rendersAsActiveRecordCard(vc: ViewController<Card>) {
         const rendered = renderUtil.render(vc)
         assert.isTruthy(
             vc instanceof ActiveRecordCardViewController ||

@@ -82,7 +82,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
             activeRecordCardAssert.skillViewRendersActiveRecordCard(vc)
         )
         assert.doesThrow(() =>
-            activeRecordCardAssert.isActiveRecordCard(cardVc)
+            activeRecordCardAssert.rendersAsActiveRecordCard(cardVc)
         )
     }
 
@@ -102,9 +102,9 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         assert.isEqual(active, match)
 
         assert.isTrue(match instanceof ActiveRecordCardViewController)
-        activeRecordCardAssert.isActiveRecordCard(match)
+        activeRecordCardAssert.rendersAsActiveRecordCard(match)
         //@ts-ignore
-        activeRecordCardAssert.isActiveRecordCard(match.cardVc)
+        activeRecordCardAssert.rendersAsActiveRecordCard(match.cardVc)
     }
 
     @test()
@@ -114,7 +114,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         vc.render = () => {
             return active.render()
         }
-        activeRecordCardAssert.isActiveRecordCard(vc)
+        activeRecordCardAssert.rendersAsActiveRecordCard(vc)
     }
 
     @test()
