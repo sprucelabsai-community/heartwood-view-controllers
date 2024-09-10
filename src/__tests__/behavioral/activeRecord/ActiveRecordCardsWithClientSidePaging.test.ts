@@ -876,6 +876,31 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.isEqualDeep(model.columnWidths, columnWidths)
     }
 
+    @test()
+    protected static async canCheckIfRowExistsAcrossPages() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+
+        await this.fakeLocationsAndLoad(4)
+
+        this.assertRowExists(this.locationIds[0])
+        this.assertRowDoesNotExist(generateId())
+        this.assertRowExists(this.locationIds[3])
+    }
+
+    private static assertRowExists(id: string) {
+        assert.isTrue(this.doesRowExist(id))
+    }
+
+    private static assertRowDoesNotExist(id: string) {
+        assert.isFalse(this.doesRowExist(id))
+    }
+
+    private static doesRowExist(id: string): boolean | null | undefined {
+        return this.vc.doesRowExist(id)
+    }
+
     private static assertListValuesEqual(expected: RowValues[]) {
         assert.isEqualDeep(this.listValues, expected)
     }

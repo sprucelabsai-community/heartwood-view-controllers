@@ -583,6 +583,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         return this.listVc!.getListVc()
     }
 
+    public doesRowExist(id: string): boolean {
+        if (this.listVc) {
+            return this.listVc.doesRowExist(id)
+        }
+
+        return this.listVcs.some((vc) => vc.doesRowExist(id))
+    }
+
     public getCardVc() {
         return this.cardVc!
     }

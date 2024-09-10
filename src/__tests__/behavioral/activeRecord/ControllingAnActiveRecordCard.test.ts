@@ -761,6 +761,15 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         listAssert.rowIsSelected(listVc, id3)
     }
 
+    @test()
+    protected static async canCheckIfRowExists() {
+        await this.seedOrganization()
+        const vc = this.Vc()
+        await vc.load()
+        assert.isFalse(vc.doesRowExist(generateId()))
+        assert.isTrue(vc.doesRowExist(this.organizations[0].id))
+    }
+
     private static async assertListLoadingClearsCustomRow(
         vc: SpyActiveRecordCard
     ) {
