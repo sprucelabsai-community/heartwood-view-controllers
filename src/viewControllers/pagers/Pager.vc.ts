@@ -55,6 +55,13 @@ export default class PagerViewController extends AbstractViewController<Pager> {
         this.triggerRender()
     }
 
+    public shouldRender() {
+        return (
+            this.model.currentPage !== undefined &&
+            this.model.totalPages !== undefined
+        )
+    }
+
     public getCurrentPage() {
         return this.model.currentPage ?? -1
     }

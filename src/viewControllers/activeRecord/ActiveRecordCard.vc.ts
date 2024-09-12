@@ -307,7 +307,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     private clearFooter() {
-        this.swipeVc?.setFooter(null)
+        this.setFooter(null)
     }
 
     private dropInErrorRow(err: any) {
@@ -353,17 +353,16 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         }
 
         if (totalPages === 1) {
-            this.clearFooterIfNoButtons()
             this.pagerVc?.clear()
         } else {
-            this.swipeVc?.setFooter({
-                pager: this.pagerVc?.render(),
-                ...this.footer,
-            })
             this.pagerVc?.setTotalPages(totalPages)
             const currentPage = this.pagerVc!.getCurrentPage()
             this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
         }
+
+        this.setFooter({
+            ...this.footer,
+        })
     }
 
     private clear() {
@@ -557,7 +556,20 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public setFooter(footer: CardFooter | null) {
-        this.cardVc.setFooter(footer)
+        let f: CardFooter | null = footer
+
+        if (this.pagerVc?.shouldRender() && this.pagerVc.getTotalPages() > 1) {
+            f = {
+                ...footer,
+                pager: this.pagerVc?.render(),
+            }
+        }
+
+        if (Object.keys(f ?? {}).length === 0) {
+            f = null
+        }
+
+        this.cardVc.setFooter(f)
     }
 
     public disableFooter() {

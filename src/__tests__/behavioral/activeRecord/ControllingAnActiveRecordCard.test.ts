@@ -656,7 +656,9 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
             passedFooter = footer
         }
 
-        const footer = {}
+        const footer: CardFooter = {
+            isBusy: true,
+        }
 
         vc.setFooter(footer)
         assert.isEqual(passedFooter, footer)

@@ -889,6 +889,21 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertRowExists(this.locationIds[3])
     }
 
+    @test()
+    protected static async settingFooterRetainsPager() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+
+        await this.fakeLocationsAndLoad(4)
+
+        this.vc.setFooter({
+            isBusy: true,
+        })
+
+        this.assertRendersPager()
+    }
+
     private static assertRowExists(id: string) {
         assert.isTrue(this.doesRowExist(id))
     }
