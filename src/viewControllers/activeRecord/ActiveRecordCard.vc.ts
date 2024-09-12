@@ -342,7 +342,6 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         for (let i = 0; i < totalPages; i++) {
             const records = chunkedRecords[i] ?? []
             const listVc = this.addList(i)
-
             listVc.setRows(records.map((record) => this.rowTransformer(record)))
         }
 
