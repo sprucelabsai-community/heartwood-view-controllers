@@ -94,8 +94,6 @@ export async function wait(...promises: (Promise<any> | undefined | any)[]) {
             if (!isDone) {
                 isDone = true
                 reject(err)
-            } else {
-                throw err
             }
         }
 
