@@ -28,6 +28,7 @@ export { default as ProgressNavigatorViewController } from './viewControllers/pr
 export * from './viewControllers/progressNavigator/ProgressNavigator.vc'
 export { default as PagerViewController } from './viewControllers/pagers/Pager.vc'
 export * from './viewControllers/pagers/Pager.vc'
+export { AssertConfirmViewController } from './tests/utilities/assertSupport'
 
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
