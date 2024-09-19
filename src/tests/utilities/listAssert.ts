@@ -108,10 +108,11 @@ const listAssert = {
         let { match, foundById } = findList(vc, id)
 
         if (!match) {
-            const forms = pluckAllFromView(
-                renderUtil.render(vc) as Card,
-                'form'
-            )
+            const card = renderUtil.render(vc) as Card
+            const forms = [
+                ...pluckAllFromView(card, 'form'),
+                ...pluckAllFromView(card, 'bigForm'),
+            ]
             for (const form of forms) {
                 if (form?.controller) {
                     const formMatch = findList(form.controller, id)

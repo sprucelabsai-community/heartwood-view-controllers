@@ -38,11 +38,14 @@ class ListCard extends AbstractViewController<Card> {
         })
     }
 
-    public dropInFormWithList(options: DropInFormOptions) {
+    public dropInFormWithList(
+        options: DropInFormOptions,
+        type: 'form' | 'bigForm' = 'form'
+    ) {
         const formSections = this.buildFormSections(options)
 
         const formVc = this.Controller(
-            'form',
+            type,
             buildForm({
                 schema: testFormSchema,
                 sections: formSections,
@@ -52,7 +55,7 @@ class ListCard extends AbstractViewController<Card> {
         const { sectionIdx } = options
         const cardSections = Array.from({ length: sectionIdx + 1 }, () => ({}))
         cardSections[sectionIdx] = {
-            form: formVc.render(),
+            [type]: formVc.render(),
         }
 
         this.cardVc.setSections(cardSections)
@@ -468,6 +471,27 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
             formSectionIdx: 0,
             listVc: this.vc,
         })
+
+        listAssert.cardRendersList(vc, this.listId)
+        assert.doesThrow(() =>
+            listAssert.cardDoesNotRenderList(vc, this.listId)
+        )
+    }
+
+    @test('can match list in second section of form', 'form')
+    @test('can match list in second section of big form', 'bigForm')
+    protected static async canMatchListInSecondSectionOfSecondForm(
+        type: 'form' | 'bigForm'
+    ) {
+        const vc = this.Vc([])
+        vc.dropInFormWithList(
+            {
+                sectionIdx: 1,
+                formSectionIdx: 1,
+                listVc: this.vc,
+            },
+            type
+        )
 
         listAssert.cardRendersList(vc, this.listId)
         assert.doesThrow(() =>
