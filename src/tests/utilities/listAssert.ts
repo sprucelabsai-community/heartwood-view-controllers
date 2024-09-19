@@ -139,6 +139,21 @@ const listAssert = {
         return match?.controller
     },
 
+    cardDoesNotRenderList(
+        vc: ViewController<Card> | FormViewController<any>,
+        id?: string
+    ) {
+        try {
+            this.cardRendersList(vc, id)
+        } catch {
+            return
+        }
+
+        assert.fail(
+            `I found a list inside your CardViewController and I didn't expect to!`
+        )
+    },
+
     rowRendersCalendar(listVc: ListViewController, row: string | number) {
         assertOptions({ listVc, row }, ['listVc', 'row'])
 

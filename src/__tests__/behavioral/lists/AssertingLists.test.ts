@@ -444,6 +444,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
         const match = listAssert.cardRendersList(vc)
         assert.isEqual(match, this.vc)
+        assert.doesThrow(() => listAssert.cardDoesNotRenderList(vc))
     }
 
     @test()
@@ -456,6 +457,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         })
 
         assert.doesThrow(() => listAssert.cardRendersList(vc, generateId()))
+        listAssert.cardDoesNotRenderList(vc, generateId())
     }
 
     @test()
@@ -468,6 +470,9 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         })
 
         listAssert.cardRendersList(vc, this.listId)
+        assert.doesThrow(() =>
+            listAssert.cardDoesNotRenderList(vc, this.listId)
+        )
     }
 
     @test()
