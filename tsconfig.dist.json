@@ -6,6 +6,7 @@
             "es2020",
             "dom"
         ],
+        "skipLibCheck": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
         "declaration": true,

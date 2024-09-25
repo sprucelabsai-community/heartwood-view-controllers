@@ -240,7 +240,7 @@ export default class ViewControllerExporter {
                                 plugins: [
                                     '@babel/plugin-transform-runtime',
                                     [
-                                        '@babel/plugin-proposal-class-properties',
+                                        '@babel/plugin-transform-class-properties',
                                         { loose: false },
                                     ],
                                     [
