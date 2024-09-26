@@ -2,6 +2,7 @@ import { assert } from '@sprucelabs/test-utils'
 import {
     Navigation,
     SkillViewController,
+    SkillViewControllerId,
     ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
@@ -15,7 +16,7 @@ const navigationAssert = {
         vc: ViewController<Navigation>
         button: string
         destination: {
-            id: string
+            id: SkillViewControllerId
             args?: Record<string, any>
         }
     }) {
