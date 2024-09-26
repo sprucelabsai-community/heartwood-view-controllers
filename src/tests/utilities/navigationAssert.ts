@@ -26,7 +26,7 @@ const navigationAssert = {
 
         assert.isTruthy(
             model.destination,
-            `Your navigation button "${button}" does not have a redirect!`
+            `Your navigation button "${button}" does not have a destination set!`
         )
 
         assert.isEqual(
