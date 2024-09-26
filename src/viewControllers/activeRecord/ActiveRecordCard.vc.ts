@@ -270,6 +270,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 
     public async load() {
+        this.cardVc.setIsBusy(true)
         this.isLoaded = true
         if (this.fetcher) {
             await this.swipeVc?.renderOnce(async () => {
@@ -281,6 +282,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             await this.listVc?.load()
             this.allRecords = this.listVc.getRecords()
         }
+        this.cardVc.setIsBusy(false)
     }
 
     private async fetchRecordsAndDropInRows() {

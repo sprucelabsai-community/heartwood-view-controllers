@@ -40,13 +40,13 @@ export default class EventFaker {
     public async fakeListLocations(
         cb?: (
             targetAndPayload: ListLocationsTargetAndPayload
-        ) => void | Location[]
+        ) => void | Location[] | Promise<void | Location[]>
     ) {
         await this.client.on(
             'list-locations::v2020_12_25',
-            (targetAndPayload) => {
+            async (targetAndPayload) => {
                 return {
-                    locations: cb?.(targetAndPayload) ?? [],
+                    locations: (await cb?.(targetAndPayload)) ?? [],
                 }
             }
         )

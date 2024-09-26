@@ -26,6 +26,7 @@ import AbstractClientSidePagingActiveRecordCard, {
 } from './AbstractClientSidePagingActiveRecordCardTest'
 
 export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractClientSidePagingActiveRecordCard {
+    private static busyCardRenderCount = 2
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         SwipeCardViewController.swipeDelay = 0
@@ -904,6 +905,24 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         this.assertRendersPager()
     }
 
+    @test()
+    protected static async candIsBusyDuringLoad() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+
+        await this.eventFaker.fakeListLocations(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 10))
+        })
+
+        const promise = this.fakeLocationsAndLoad(4)
+        vcAssert.assertCardIsBusy(this.vc)
+        await promise
+        vcAssert.assertCardIsNotBusy(this.vc)
+
+        this.assertRendersPager()
+    }
+
     private static assertRowExists(id: string) {
         assert.isTrue(this.doesRowExist(id))
     }
@@ -1189,7 +1208,10 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     private static assertTriggerRenderCountForSwipe(expected: number) {
-        vcAssert.assertTriggerRenderCount(this.swipeVc, expected)
+        vcAssert.assertTriggerRenderCount(
+            this.swipeVc,
+            expected + this.busyCardRenderCount
+        )
     }
 
     private static get swipeVc() {
