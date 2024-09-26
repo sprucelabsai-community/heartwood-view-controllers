@@ -142,14 +142,14 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
             navigationAssert.buttonRedirectsTo({
                 vc,
                 button: 'test',
-                destination: { id: generateId() },
+                destination: { id: generateId() as never },
             })
         )
         assert.doesThrow(() =>
             navigationAssert.buttonRedirectsTo({
                 vc,
                 button: generateId(),
-                destination: { id: generateId() },
+                destination: { id: generateId() as never },
             })
         )
 
@@ -157,7 +157,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
             navigationAssert.buttonRedirectsTo({
                 vc,
                 button: 'test2',
-                destination: { id: generateId() },
+                destination: { id: generateId() as never },
             })
         )
 
@@ -198,13 +198,13 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         navigationAssert.buttonRedirectsTo({
             vc,
             button: 'test',
-            destination: { id: 'test' },
+            destination: { id: 'test' as never },
         })
 
         navigationAssert.buttonRedirectsTo({
             vc,
             button: 'lastly',
-            destination: { id: 'button-bar', args },
+            destination: { id: 'button-bar' as never, args },
         })
     }
 }
