@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import destinationSkillViewControllerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
+import dropdownSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/dropdown.schema'
 
 const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema  = {
 	id: 'navigationButton',
@@ -47,6 +48,12 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                label: 'Click handler',
 	                type: 'raw',
 	                options: {valueType: `() => Promise<any> | any`,}
+	            },
+	            /** Dropdown. */
+	            'dropdown': {
+	                label: 'Dropdown',
+	                type: 'schema',
+	                options: {schema: dropdownSchema_v2021_02_11,}
 	            },
 	    }
 }

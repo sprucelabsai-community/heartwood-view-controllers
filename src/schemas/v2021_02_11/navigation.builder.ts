@@ -1,5 +1,6 @@
 import { buildSchema, pickFields } from '@sprucelabs/schema'
 import { buttonFields } from '../../constants'
+import dropdownBuilder from './dropdown.builder'
 
 export default buildSchema({
     id: 'navigation',
@@ -69,6 +70,13 @@ export default buildSchema({
                             'label',
                             'onClick',
                         ]),
+                        dropdown: {
+                            type: 'schema',
+                            label: 'Dropdown',
+                            options: {
+                                schema: dropdownBuilder,
+                            },
+                        },
                     },
                 }),
             },
