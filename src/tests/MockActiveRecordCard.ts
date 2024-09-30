@@ -1,6 +1,7 @@
 import { assert } from '@sprucelabs/test-utils'
 import renderUtil from '../utilities/render.utility'
 import ActiveRecordCardViewController from '../viewControllers/activeRecord/ActiveRecordCard.vc'
+import formAssert from './utilities/formAssert'
 import listAssert from './utilities/listAssert'
 import pagerAssert from './utilities/pagerAssert'
 import vcAssert, { getViewId } from './utilities/vcAssert'
@@ -10,6 +11,14 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
 
     public getSearchFormVc() {
         return this.searchFormVc!
+    }
+
+    public assertRendersSearchForm() {
+        formAssert.cardRendersForm(this, 'search')
+    }
+
+    public assertDoesNotRenderSearchForm() {
+        formAssert.cardDoesNotRenderForm(this, 'search')
     }
 
     public assertRowIsNotSelected(id: string) {

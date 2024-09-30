@@ -25,7 +25,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     @test()
     protected static async shouldNotRenderSearchFormIfNotEnabled() {
         this.setupCardWithPaging({})
-        assert.doesThrow(() => formAssert.cardRendersForm(this.vc, 'search'))
+        this.vc.assertDoesNotRenderSearchForm()
     }
 
     @test()
@@ -237,7 +237,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     }
 
     private static assertRendersSearchForm() {
-        formAssert.cardRendersForm(this.vc, 'search')
+        this.vc.assertRendersSearchForm()
     }
 
     private static async setSearchValueAndWait(value: string | null) {
