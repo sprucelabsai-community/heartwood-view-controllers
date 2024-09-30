@@ -226,6 +226,18 @@ const formAssert = {
         return forms as FormViewController<any>[] | BigFormViewController<any>[]
     },
 
+    cardDoesNotRenderForm(vc: ViewController<Card>, id: string) {
+        try {
+            this.cardRendersForm(vc, id)
+        } catch {
+            return
+        }
+
+        assert.fail(
+            `I found a form with the id of ${id} and did not expect to!`
+        )
+    },
+
     formFieldRendersUsingInputVc(
         vc: FormVc,
         fieldName: string,

@@ -113,9 +113,16 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
             },
         })
         assert.doesThrow(() => formAssert.cardRendersForm(vc, 'test3'))
+        formAssert.cardDoesNotRenderForm(vc, 'test3')
+
         formAssert.cardRendersForm(vc, 'test1')
+        assert.doesThrow(() => formAssert.cardDoesNotRenderForm(vc, 'test1'))
+
         assert.doesThrow(() => formAssert.cardRendersForm(vc, generateId()))
+        formAssert.cardDoesNotRenderForm(vc, generateId())
+
         formAssert.cardRendersForm(vc, 'test2')
+        assert.doesThrow(() => formAssert.cardDoesNotRenderForm(vc, 'test2'))
     }
 
     @test()
