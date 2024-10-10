@@ -6,6 +6,7 @@ import AbstractViewController from '../Abstract.vc'
 export default class PagerViewController extends AbstractViewController<Pager> {
     private model: PagerViewControllerOptions
     private onChangeHandler?: Pager['onChangePage']
+
     public constructor(
         options: ViewControllerOptions & PagerViewControllerOptions
     ) {
