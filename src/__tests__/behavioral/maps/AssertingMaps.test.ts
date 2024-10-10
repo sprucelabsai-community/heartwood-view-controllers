@@ -56,6 +56,7 @@ export default class AssertingMapsTest extends AbstractViewControllerTest {
     protected static async canFindPinMatchingAnything() {
         const pin = generatePinValues()
         this.mapVc.addPin(pin)
+
         this.assertHasPin({ title: pin.title })
         this.assertDoesNotHavePin({ title: generateId() })
         this.assertHasPin({ address: pin.address })
