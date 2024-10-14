@@ -112,6 +112,34 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         )
     }
 
+    public assertRowRendersButton(row: string, buttonId?: string) {
+        for (const listVc of this.normalizedListVcs) {
+            try {
+                listAssert.rowRendersButton(listVc, row, buttonId)
+                return
+            } catch {}
+        }
+
+        assert.fail(
+            `I could not find a list that renders row "${row}" with the button "${buttonId ?? 'any id'}" in your ActiveRecordCard (${getViewId(this)})!`
+        )
+    }
+
+    public assertRowDoesNotRenderButton(row: string, buttonId?: string) {
+        let foundRow = false
+        for (const listVc of this.normalizedListVcs) {
+            if (listVc.doesRowExist(row)) {
+                listAssert.rowDoesNotRenderButton(listVc, row, buttonId)
+                foundRow = true
+            }
+        }
+
+        assert.isTrue(
+            foundRow,
+            `I could not find a row "${row}" in your ActiveRecordCard (${getViewId(this)})!`
+        )
+    }
+
     private get normalizedListVcs() {
         return this.listVc ? [this.listVc] : this.listVcs
     }

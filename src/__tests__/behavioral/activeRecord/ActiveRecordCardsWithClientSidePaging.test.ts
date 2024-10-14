@@ -149,6 +149,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         const listVc = listAssert.cardRendersList(this.vc, 'list-0')
         listAssert.listDoesNotRenderRow(listVc, this.locationIds[2])
+        this.vc.assertDoesNotRenderRow(this.locationIds[2])
     }
 
     @test()
@@ -906,7 +907,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     @test()
-    protected static async candIsBusyDuringLoad() {
+    protected static async canAssertIsBusyDuringLoad() {
         this.setupCardWithPaging({
             pageSize: 2,
         })
@@ -921,6 +922,77 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         vcAssert.assertCardIsNotBusy(this.vc)
 
         this.assertRendersPager()
+    }
+
+    @test()
+    protected static async mockCanAssertIfButtonIsRenderedInRow() {
+        const button1Id = generateId()
+        const button2Id = generateId()
+
+        this.setupCardWithPaging(
+            {
+                pageSize: 2,
+            },
+            {
+                rowTransformer: (record: Location) => {
+                    return {
+                        id: record.id,
+                        cells: [
+                            {
+                                button: {
+                                    id: button1Id,
+                                },
+                            },
+                            {
+                                button: {
+                                    id: button2Id,
+                                },
+                            },
+                        ],
+                    }
+                },
+            }
+        )
+
+        await this.fakeLocationsAndLoad(4)
+
+        assert.doesThrow(() => this.vc.assertRowRendersButton(generateId()))
+        assert.doesThrow(() =>
+            this.assertRowRendersButton(this.locationIds[0], generateId())
+        )
+        assert.doesThrow(() =>
+            this.assertRowRendersButton(this.locationIds[3], generateId())
+        )
+
+        this.assertRowRendersButton(this.locationIds[0])
+        this.assertRowRendersButton(this.locationIds[1])
+        this.assertRowRendersButton(this.locationIds[2])
+        this.assertRowRendersButton(this.locationIds[3])
+        this.assertRowRendersButton(this.locationIds[3], button1Id)
+        this.assertRowRendersButton(this.locationIds[1], button2Id)
+
+        this.assertRowDoesNotRenderButton(this.locationIds[0], generateId())
+        this.assertRowDoesNotRenderButton(this.locationIds[3], generateId())
+        assert.doesThrow(() =>
+            this.assertRowDoesNotRenderButton(this.locationIds[3], button1Id)
+        )
+        assert.doesThrow(() =>
+            this.assertRowDoesNotRenderButton(this.locationIds[0], button2Id)
+        )
+        assert.doesThrow(() =>
+            this.assertRowDoesNotRenderButton(this.locationIds[2], button1Id)
+        )
+    }
+
+    private static assertRowRendersButton(rowId: string, button?: string) {
+        return this.vc.assertRowRendersButton(rowId, button)
+    }
+
+    private static assertRowDoesNotRenderButton(
+        rowId: string,
+        button?: string
+    ) {
+        return this.vc.assertRowDoesNotRenderButton(rowId, button)
     }
 
     private static assertRowExists(id: string) {
@@ -1237,6 +1309,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     private static assertListRendersRow(listId: string, row: string) {
         const listVc = listAssert.cardRendersList(this.vc, listId)
         listAssert.listRendersRow(listVc, row)
+        this.vc.assertRendersRow(row)
     }
 
     private static assertCurrentPage(expected: number) {

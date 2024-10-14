@@ -211,7 +211,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         pagingOptions?: ActiveRecordPagingOptions
     ) {
         return this.Controller(
-            'activeRecordCard',
+            'active-record-card',
             buildActiveRecordCard({
                 id,
                 eventName: 'list-organizations::v2020_12_25',

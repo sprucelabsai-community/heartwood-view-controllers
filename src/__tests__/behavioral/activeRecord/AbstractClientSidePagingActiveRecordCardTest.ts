@@ -69,7 +69,8 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
     }
 
     protected static setupCardWithPaging(
-        pagingOptions?: ActiveRecordPagingOptions
+        pagingOptions?: ActiveRecordPagingOptions,
+        activeOptions?: RecursivePartial<ActiveRecordCardViewControllerOptions>
     ) {
         this.setupCardVc({
             paging: {
@@ -77,6 +78,7 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
                 pageSize: 10,
                 ...pagingOptions,
             },
+            ...activeOptions,
         })
     }
 
