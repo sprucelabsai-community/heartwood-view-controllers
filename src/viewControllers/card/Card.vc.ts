@@ -325,6 +325,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         return this.model.footer?.isEnabled ?? true
     }
 
+    public getIsfooterBusy(): boolean {
+        return this.model.footer?.isBusy ?? false
+    }
+
     public disableFooter() {
         this.model.footer = {
             ...this.model.footer,
