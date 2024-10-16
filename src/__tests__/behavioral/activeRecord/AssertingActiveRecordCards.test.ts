@@ -194,10 +194,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
     }
 
     private static assertPagingOptions(expected: ActiveRecordPagingOptions) {
-        return activeRecordCardAssert.pagingOptionsEqual(
-            this.cardVc,
-            expected
-        )
+        return activeRecordCardAssert.pagingOptionsEqual(this.cardVc, expected)
     }
 
     private static renderActiveRecordCard(
