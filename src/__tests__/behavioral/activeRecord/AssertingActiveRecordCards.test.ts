@@ -121,7 +121,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
     protected static async assertPagingOptionsThrowsWhenMissingRequired() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
-            activeRecordCardAssert.assertPagingOptionsEqual()
+            activeRecordCardAssert.pagingOptionsEqual()
         )
 
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -172,7 +172,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         expected: ActiveRecordPagingOptions
     ) {
         this.setupCardWithPaging(expected)
-        activeRecordCardAssert.assertPagingOptionsEqual(this.cardVc, {
+        activeRecordCardAssert.pagingOptionsEqual(this.cardVc, {
             ...expected,
         })
     }
@@ -194,7 +194,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
     }
 
     private static assertPagingOptions(expected: ActiveRecordPagingOptions) {
-        return activeRecordCardAssert.assertPagingOptionsEqual(
+        return activeRecordCardAssert.pagingOptionsEqual(
             this.cardVc,
             expected
         )

@@ -149,7 +149,6 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
 
         const listVc = listAssert.cardRendersList(this.vc, 'list-0')
         listAssert.listDoesNotRenderRow(listVc, this.locationIds[2])
-        this.vc.assertDoesNotRenderRow(this.locationIds[2])
     }
 
     @test()
@@ -982,6 +981,25 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         assert.doesThrow(() =>
             this.assertRowDoesNotRenderButton(this.locationIds[2], button1Id)
         )
+    }
+
+    @test()
+    protected static async rendersListRightAwayForBackwardsCompatibility() {
+        listAssert.cardRendersList(this.vc)
+    }
+
+    @test()
+    protected static async doesNotRenderRowDoesNotThrowIfNoLists() {
+        this.assertDoesNotRenderRow(generateId())
+    }
+
+    @test()
+    protected static async throwsIfRendersRowInSecondListAndShouldNot() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+        await this.fakeLocationsAndLoad(4)
+        assert.doesThrow(() => this.assertDoesNotRenderRow(this.locationIds[3]))
     }
 
     private static assertRowRendersButton(rowId: string, button?: string) {

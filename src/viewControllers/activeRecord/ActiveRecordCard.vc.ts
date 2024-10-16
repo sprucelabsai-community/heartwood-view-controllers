@@ -183,7 +183,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         const { footer, header, ...rest } = options
 
         return this.Controller('swipe-card', {
-            slides: [],
+            slides: [
+                {
+                    list: this.Controller('list', {}).render(),
+                },
+            ],
             onSlideChange: this.handleSlideChange.bind(this),
             header: {
                 ...header,

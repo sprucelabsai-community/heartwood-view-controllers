@@ -148,13 +148,12 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         for (const listVc of this.normalizedListVcs) {
             try {
                 listAssert.listDoesNotRenderRow(listVc, id)
-                return
-            } catch {}
+            } catch {
+                assert.fail(
+                    `Your ActiveRecordCard (${getViewId(this)}) renders the row "${id}" and it def should not be!`
+                )
+            }
         }
-
-        assert.fail(
-            `Your ActiveRecordCard (${getViewId(this)}) renders the row "${id}" and it def should not be!`
-        )
     }
 
     public assertTotalSlides(expected: number) {

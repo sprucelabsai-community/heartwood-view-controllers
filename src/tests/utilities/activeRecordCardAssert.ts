@@ -37,7 +37,7 @@ const activeRecordCardAssert = {
         return cardVc.__activeRecordParent as ActiveRecordCardViewController
     },
 
-    assertPagingOptionsEqual(
+    pagingOptionsEqual(
         vc: ActiveRecordCardViewController,
         expected: ActiveRecordPagingOptions
     ) {

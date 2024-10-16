@@ -1657,7 +1657,7 @@ const vcAssert = {
 export default vcAssert
 
 export function getViewId(c: ViewController<any>) {
-    return renderUtil.render(c).id
+    return renderUtil.render(c).id ?? '**no-id**'
 }
 
 export function pullCardsFromSkillView(
