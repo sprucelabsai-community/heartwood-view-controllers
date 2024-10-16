@@ -152,6 +152,27 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     @test()
+    protected static async ifOnlyOnePageOfResultsListVcReturnsFirstList() {
+        this.setupCardWithPaging({
+            pageSize: 4,
+        })
+
+        await this.fakeLocationsAndLoad(3)
+        const listVc = listAssert.cardRendersList(this.vc, 'list-0')
+        assert.isEqual(listVc, this.vc.getListVc())
+    }
+
+    @test()
+    protected static async throwsIfMultiplePages() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+
+        await this.fakeLocationsAndLoad(3)
+        assert.doesThrow(() => this.vc.getListVc())
+    }
+
+    @test()
     protected static async knowsWhenLoaded() {
         assert.isFalse(this.isLoaded)
 

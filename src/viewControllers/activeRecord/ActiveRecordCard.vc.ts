@@ -586,16 +586,14 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.enableFooter()
     }
 
-    // @deprecated - use MockActiveCard to get access to the listVc,
-    // this may not be set based on certain configurations.
-    // you can use getRowVc() or setValue/getValue to interact with the list
     public getListVc() {
-        if (!this.listVc) {
+        const listVc = this.listVc?.getListVc() ?? this.listVcs[0]
+        if (!listVc || this.listVcs.length > 1) {
             throw new Error(
                 `You cannot call getListVc() on your ActiveRecordCard when paging is enabled. Consider using the MockActiveCard to make assertions on your card.`
             )
         }
-        return this.listVc!.getListVc()
+        return listVc
     }
 
     public doesRowExist(id: string): boolean {
