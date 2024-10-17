@@ -353,7 +353,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
         if (this.records.length === 0) {
             this.listVcs[0].addRow({
-                id: 'no-records',
+                id: 'no-results',
                 ...this.noResultsRow,
             })
         }

@@ -750,7 +750,7 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         })
 
         await this.load()
-        this.assertRendersRow('no-records')
+        this.assertRendersRow('no-results')
         this.assertDoesNotRenderRow('error')
 
         this.assertNoResultsRowRendersAs(noResultsRow)
