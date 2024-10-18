@@ -874,3 +874,8 @@ export interface ActiveRecordPagingOptions {
     shouldPageClientSide?: boolean
     pageSize?: number
 }
+
+export interface ActiveRecordSearchOptions {
+    shouldSearchClientSide?: boolean
+    placeholder?: string
+}

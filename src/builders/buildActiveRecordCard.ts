@@ -12,6 +12,7 @@ import {
     List,
     ListRow,
 } from '../types/heartwood.types'
+import { ActiveRecordSearchOptions } from '../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 type ActiveRecordCardBuilder<Contract extends EventContract> = <
@@ -44,8 +45,7 @@ type ActiveRecordCardBuilder<Contract extends EventContract> = <
     shouldRenderRowDividers?: boolean
     filter?: (record: Response[ResponseKey][number]) => boolean
     defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
-    shouldRenderSearch?: boolean
-    searchPlaceholder?: string
+    search?: ActiveRecordSearchOptions
     paging?: ActiveRecordPagingOptions
 }) => ActiveRecordCardViewControllerOptions
 

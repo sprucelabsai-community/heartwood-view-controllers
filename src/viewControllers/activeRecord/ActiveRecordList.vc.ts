@@ -3,6 +3,7 @@ import { assertOptions } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import {
     ActiveRecordPagingOptions,
+    ActiveRecordSearchOptions,
     List,
     ListRow,
     ViewControllerOptions,
@@ -264,8 +265,3 @@ export interface ActiveRecordListViewControllerOptions {
 }
 
 export type NoResultsRow = Omit<ListRow, 'id'>
-
-interface ActiveRecordSearchOptions {
-    shouldSearchClientSide?: boolean
-    placeholder?: string
-}
