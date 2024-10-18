@@ -259,11 +259,13 @@ export interface ActiveRecordListViewControllerOptions {
     filter?: (record: Record<string, any>) => boolean
     onWillFetch?: () => Promise<void> | void
     onDidFetch?: () => Promise<void> | void
-    search?: {
-        shouldSearchClientSide?: boolean
-        placeholder?: string
-    }
+    search?: ActiveRecordSearchOptions
     paging?: ActiveRecordPagingOptions
 }
 
 export type NoResultsRow = Omit<ListRow, 'id'>
+
+interface ActiveRecordSearchOptions {
+    shouldSearchClientSide?: boolean
+    placeholder?: string
+}
