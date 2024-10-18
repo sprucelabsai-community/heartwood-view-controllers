@@ -176,7 +176,8 @@ const formAssert = {
 
     cardRendersForm(
         vc: ViewController<Card> | DialogViewController,
-        id?: string
+        id?: string,
+        errorMessage?: string
     ) {
         const model = renderUtil.render(vc)
 
@@ -200,7 +201,7 @@ const formAssert = {
 
         assert.isTruthy(
             form,
-            `Could not find a form${id ? ` with the id of ${id}` : ''}!`
+            `${errorMessage ? `${errorMessage}\n\n` : ''}Could not find a form${id ? ` with the id of ${id}` : ''}!`
         )
 
         return form!.controller as
