@@ -259,8 +259,10 @@ export interface ActiveRecordListViewControllerOptions {
     filter?: (record: Record<string, any>) => boolean
     onWillFetch?: () => Promise<void> | void
     onDidFetch?: () => Promise<void> | void
-    shouldRenderSearch?: boolean
-    searchPlaceholder?: string
+    search?: {
+        shouldSearchClientSide?: boolean
+        placeholder?: string
+    }
     paging?: ActiveRecordPagingOptions
 }
 

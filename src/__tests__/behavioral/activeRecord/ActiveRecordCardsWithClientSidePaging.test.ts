@@ -34,6 +34,11 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
     }
 
     @test()
+    protected static async startsBusy() {
+        vcAssert.assertCardIsBusy(this.vc)
+    }
+
+    @test()
     protected static async rendersPagerIfPagingEnabled() {
         this.assertRendersPager()
         pagerAssert.cardRendersPager(this.vc, 'active-pager')
@@ -942,6 +947,14 @@ export default class ActiveRecordCardsWithClientSidePagingTest extends AbstractC
         vcAssert.assertCardIsNotBusy(this.vc)
 
         this.assertRendersPager()
+    }
+
+    @test()
+    protected static async isBusyDuringRefresh() {
+        this.setupCardWithPaging({
+            pageSize: 2,
+        })
+        await this.fakeLocationsAndLoad(4)
     }
 
     @test()

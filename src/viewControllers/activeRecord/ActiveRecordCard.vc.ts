@@ -82,8 +82,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             paging,
             rowTransformer,
             noResultsRow,
-            shouldRenderSearch,
-            searchPlaceholder,
+            search,
             footer,
             columnWidths,
         } = options
@@ -94,9 +93,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.noResultsRow = noResultsRow ?? this.noResultsRow
         this.footer = footer
         this.columnWidths = columnWidths
+        const { shouldSearchClientSide, placeholder } = search ?? {}
 
-        if (shouldRenderSearch) {
-            this.searchFormVc = this.SearchFormVc(searchPlaceholder)
+        if (shouldSearchClientSide) {
+            this.searchFormVc = this.SearchFormVc(placeholder)
         }
 
         if (paging) {
@@ -189,6 +189,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 },
             ],
             onSlideChange: this.handleSlideChange.bind(this),
+            isBusy: true,
             header: {
                 ...header,
                 form: this.searchFormVc?.render(),

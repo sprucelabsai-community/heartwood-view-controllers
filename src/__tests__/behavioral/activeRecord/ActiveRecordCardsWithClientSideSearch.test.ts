@@ -137,7 +137,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     protected static async canSetClientSideSearchPlaceholder() {
         const placeholder = generateId()
         this.setupWithPagingAndSearch({
-            searchPlaceholder: placeholder,
+            search: { placeholder },
             paging: {},
         })
 
@@ -220,7 +220,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
 
     private static setupCardWithSearch() {
         this.setupCardVc({
-            shouldRenderSearch: true,
+            search: { shouldSearchClientSide: true },
         })
     }
 
@@ -268,7 +268,7 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
     ) {
         this.setupCardVc({
             ...options,
-            shouldRenderSearch: true,
+            search: { shouldSearchClientSide: true, ...options?.search },
             paging: {
                 shouldPageClientSide: true,
                 pageSize: 10,
