@@ -126,6 +126,12 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
+    protected static async formIsNotBuysByDefault() {
+        const vc = this.Vc([], 'test1')
+        formAssert.formIsNotBusy(vc)
+    }
+
+    @test()
     protected static async canFindFormInHeader() {
         const id = generateId()
         const vc = this.Controller('card', {

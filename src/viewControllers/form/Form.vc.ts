@@ -419,7 +419,7 @@ export default class FormViewController<
     }
 
     public getIsBusy() {
-        return this.model.isBusy
+        return this.model.isBusy ?? false
     }
 
     public setIsBusy(isBusy: boolean) {
