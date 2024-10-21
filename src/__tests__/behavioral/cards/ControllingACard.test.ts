@@ -405,14 +405,14 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     protected static canSetFooterAsBusy() {
         const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
 
-        assert.isFalse(vc.getIsfooterBusy(), `Footer should not be busy`)
+        assert.isFalse(vc.getIsFooterBusy(), `Footer should not be busy`)
         vc.setFooterIsBusy(true)
         assert.isTrue(this.render(vc).footer?.isBusy)
-        assert.isTrue(vc.getIsfooterBusy(), `Footer should be busy`)
+        assert.isTrue(vc.getIsFooterBusy(), `Footer should be busy`)
 
         vc.setFooterIsBusy(false)
         assert.isFalse(this.render(vc).footer?.isBusy)
-        assert.isFalse(vc.getIsfooterBusy(), `Footer should not be busy`)
+        assert.isFalse(vc.getIsFooterBusy(), `Footer should not be busy`)
     }
 
     @test()
