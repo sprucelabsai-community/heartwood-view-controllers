@@ -1,3 +1,10 @@
+# [110.13.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.12.196...v110.13.0) (2024-10-24)
+
+
+### Features
+
+* navigation permissions ([7d5f6ef](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7d5f6ef))
+
 ## [110.12.196](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.12.195...v110.12.196) (2024-10-22)
 
 ## [110.12.195](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.12.194...v110.12.195) (2024-10-22)
