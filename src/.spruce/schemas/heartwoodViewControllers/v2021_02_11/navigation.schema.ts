@@ -8,6 +8,7 @@ const navigationSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navig
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
 	name: 'Navigation',
+	importsWhenRemote: ['import * as MercuryTypes from \'@sprucelabs/mercury-types\'',],
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Render button labels. Should the button labels be rendered? */

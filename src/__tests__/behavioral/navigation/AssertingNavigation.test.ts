@@ -1,4 +1,5 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { PermissionContractId } from '@sprucelabs/mercury-types'
+import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
@@ -206,5 +207,121 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
             button: 'lastly',
             destination: { id: 'button-bar' as never, args },
         })
+    }
+
+    @test()
+    protected static async assertViewPermissionContractFailsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            navigationAssert.buttonRequiresViewPermissions()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'button', 'permissionContractId'],
+        })
+    }
+
+    @test()
+    protected static async assertPermissionsThrowsIfButtonNotFound() {
+        const vc = this.NavigationVc({
+            buttons: [{ id: generateId(), lineIcon: 'tag' }],
+        })
+
+        assert.doesThrow(
+            () =>
+                navigationAssert.buttonRequiresViewPermissions(
+                    vc,
+                    generateId(),
+                    'feed-contract'
+                ),
+            'not find a button'
+        )
+    }
+
+    @test(
+        'fails on permission contract on first button feed-contract != chatbot-contract',
+        'feed-contract',
+        'chatbot-contract'
+    )
+    @test(
+        'fails on permission contract on first button a-check != a-fail',
+        'a-check',
+        'a-fail'
+    )
+    protected static async assertPermissionsThrowsIfPermissionsDontMatch(
+        buttonPermissionId: PermissionContractId,
+        checkPermissionId: PermissionContractId
+    ) {
+        const id = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id,
+                    lineIcon: 'tag',
+                    viewPermissionContract: {
+                        id: buttonPermissionId,
+                    },
+                },
+            ],
+        })
+
+        assert.doesThrow(
+            () =>
+                navigationAssert.buttonRequiresViewPermissions(
+                    vc,
+                    id,
+                    checkPermissionId
+                ),
+            'permission'
+        )
+    }
+
+    @test(
+        'matches on feed-contract permission on first button',
+        'feed-contract'
+    )
+    @test(
+        'matches on chatbot-contract permission on first button',
+        'chatbot-contract'
+    )
+    protected static async assertPermissionsMatchesWhenPermissionsMatch(
+        permissionId: PermissionContractId
+    ) {
+        const id = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id,
+                    lineIcon: 'tag',
+                    viewPermissionContract: {
+                        id: permissionId,
+                    },
+                },
+            ],
+        })
+
+        navigationAssert.buttonRequiresViewPermissions(vc, id, permissionId)
+    }
+
+    @test()
+    protected static async canAssertPermissionOnSecondButton() {
+        const id = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id: generateId(),
+                    lineIcon: 'tag',
+                },
+                {
+                    id,
+                    lineIcon: 'tag',
+                    viewPermissionContract: {
+                        id: 'feed-contract',
+                    },
+                },
+            ],
+        })
+
+        navigationAssert.buttonRequiresViewPermissions(vc, id, 'feed-contract')
     }
 }

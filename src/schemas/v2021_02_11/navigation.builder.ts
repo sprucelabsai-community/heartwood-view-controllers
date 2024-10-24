@@ -5,6 +5,12 @@ import dropdownBuilder from './dropdown.builder'
 export default buildSchema({
     id: 'navigation',
     name: 'Navigation',
+    importsWhenLocal: [
+        `import * as MercuryTypes from '@sprucelabs/mercury-types'`,
+    ],
+    importsWhenRemote: [
+        `import * as MercuryTypes from '@sprucelabs/mercury-types'`,
+    ],
     fields: {
         shouldRenderButtonLabels: {
             type: 'boolean',
@@ -38,6 +44,23 @@ export default buildSchema({
                         id: {
                             type: 'id',
                             isRequired: true,
+                        },
+                        viewPermissionContract: {
+                            type: 'schema',
+                            options: {
+                                schema: buildSchema({
+                                    id: 'permissionContractReference',
+                                    fields: {
+                                        id: {
+                                            type: 'raw',
+                                            options: {
+                                                valueType:
+                                                    'MercuryTypes.PermissionContractId',
+                                            },
+                                        },
+                                    },
+                                }),
+                            },
                         },
                         destination: {
                             type: 'schema',

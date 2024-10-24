@@ -1,3 +1,5 @@
+import { PermissionContractId } from '@sprucelabs/mercury-types'
+import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
     Navigation,
@@ -73,6 +75,26 @@ const navigationAssert = {
         assert.isNull(
             nav,
             `Your skill view should not render a navigation! Implement renderNavigation() and return null.`
+        )
+    },
+
+    buttonRequiresViewPermissions(
+        vc: ViewController<Navigation>,
+        button: string,
+        permissionContractId: PermissionContractId
+    ) {
+        assertOptions({ vc, button, permissionContractId }, [
+            'vc',
+            'button',
+            'permissionContractId',
+        ])
+
+        const match = getButtonFromNav(vc, button)
+
+        assert.isEqual(
+            match.viewPermissionContract?.id,
+            permissionContractId,
+            'Your button did not have the view permission contract set to what I expected!'
         )
     },
 }
