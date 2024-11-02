@@ -17,6 +17,7 @@ export { default as ListRowViewController } from './viewControllers/list/ListRow
 export { default as ListCellViewController } from './viewControllers/list/ListCell.vc'
 export { default as FormViewControllerImpl } from './viewControllers/form/Form.vc'
 export { default as ToolBeltViewController } from './viewControllers/ToolBelt.vc'
+export { default as BarChartViewController } from './viewControllers/BarChart.vc'
 export * from './viewControllers/ToolBelt.vc'
 export * from './viewControllers/form/Form.vc'
 export { default as LoginViewController } from './viewControllers/Login.vc'
@@ -175,6 +176,7 @@ export { default as calendarInteractor } from './tests/utilities/calendarInterac
 export { default as countdownTimerAssert } from './tests/utilities/countdownTimerAssert'
 export { default as countdownTimerInteractor } from './tests/utilities/countdownTimerInteractor'
 export { default as progressNavigatorAssert } from './tests/utilities/progressNavigatorAssert'
+export { default as barChartAssert } from './tests/utilities/barChartAssert'
 
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as calendarSeeder } from './tests/utilities/calendarSeeder'
@@ -198,5 +200,8 @@ export { default as countdownTimerSchema } from '#spruce/schemas/heartwoodViewCo
 export { default as progressNavigatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigator.schema'
 export { default as progressNavigatorStepSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigatorStep.schema'
 export { default as progressDetailsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressDetails.schema'
+export { default as barChartSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChart.schema'
+export { default as barChartDataPointSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChartDataPoint.schema'
+export { default as barChartDataSetSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChartDataSet.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

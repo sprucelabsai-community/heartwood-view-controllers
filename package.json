@@ -26,7 +26,8 @@
       "@sprucelabs/spruce-event-plugin",
       "@sprucelabs/spruce-skill-booter",
       "@swc/core"
-    ]
+    ],
+    "version": "v2021_02_11"
   },
   "keywords": [
     "node",

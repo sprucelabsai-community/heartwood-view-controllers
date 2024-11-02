@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import barChartBuilder from '../barChart.builder'
 import buttonBuilder from '../button.builder'
 import buttonBarBuilder from '../buttonBar.builder'
 import calendarBuilder from '../calendar.builder'
@@ -179,6 +180,13 @@ export default buildSchema({
             label: 'Pager',
             options: {
                 schema: pagerBuilder,
+            },
+        },
+        barChart: {
+            type: 'schema',
+            label: 'Bar chart',
+            options: {
+                schema: barChartBuilder,
             },
         },
         shouldRenderContentsAsGrid: {

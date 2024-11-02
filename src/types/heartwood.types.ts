@@ -18,7 +18,11 @@ import {
     SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { Log } from '@sprucelabs/spruce-skill-utils'
-import { CalendarEventOptions, PagerViewController } from '..'
+import {
+    BarChartViewController,
+    CalendarEventOptions,
+    PagerViewController,
+} from '..'
 import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
@@ -28,6 +32,7 @@ import ActiveRecordCardViewController, {
 import ActiveRecordListViewController, {
     ActiveRecordListViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordList.vc'
+import { BarChartViewControllerOptions } from '../viewControllers/BarChart.vc'
 import BigFormViewControllerImpl, {
     BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -311,14 +316,14 @@ export type ProgressNavigator =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigator
 export type ProgressNavigatorStep =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep
-
 export type Progress =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress
 export type PolarArea =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea
-
 export type PolarAreaDataItem =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem
+export type BarChart =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart
 
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
@@ -476,6 +481,7 @@ export interface ViewControllerMap {
     'progress-navigator': ProgressNavigatorViewController
     'polar-area': PolarAreaViewController
     pager: PagerViewController
+    'bar-chart': BarChartViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -518,6 +524,7 @@ export interface ViewControllerOptionsMap {
     'progress-navigator': ProgressNavigatorViewControllerOptions
     'polar-area': PolarAreaViewControllerOptions
     pager: PagerViewControllerOptions
+    'bar-chart': BarChartViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

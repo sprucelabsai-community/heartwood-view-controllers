@@ -2105,6 +2105,102 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface CardBody {
+			
+				/** Show section separators. This will make each section render with a border. */
+				'shouldShowSectionSeparators'?: boolean| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Swipe controller. */
+				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
+				/** Swipe. */
+				'shouldEnableSectionSwiping'?: boolean| undefined | null
+				/** Swipe break into cards on landscape. */
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
+				/** Select slide title handler. */
+				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
+				/** Slide change callback. */
+				'onChangeSlide'?: ((slide: number) => void)| undefined | null
+				/** Render sections as grid. */
+				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
+				/** Sections. */
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
+		}
+
+		interface CardBodySchema extends SpruceSchema.Schema {
+			id: 'cardBody',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Show section separators. This will make each section render with a border. */
+			            'shouldShowSectionSeparators': {
+			                label: 'Show section separators',
+			                type: 'boolean',
+			                hint: 'This will make each section render with a border.',
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe controller. */
+			            'swipeController': {
+			                label: 'Swipe controller',
+			                type: 'raw',
+			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
+			            },
+			            /** Swipe. */
+			            'shouldEnableSectionSwiping': {
+			                label: 'Swipe',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe break into cards on landscape. */
+			            'shouldSwipeBreakIntoCardsOnLandscape': {
+			                label: 'Swipe break into cards on landscape',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Select slide title handler. */
+			            'onSelectSlideTitle': {
+			                label: 'Select slide title handler',
+			                type: 'raw',
+			                options: {valueType: `(id: number) => void`,}
+			            },
+			            /** Slide change callback. */
+			            'onChangeSlide': {
+			                label: 'Slide change callback',
+			                type: 'raw',
+			                options: {valueType: `(slide: number) => void`,}
+			            },
+			            /** Render sections as grid. */
+			            'shouldRenderSectionsAsGrid': {
+			                label: 'Render sections as grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Sections. */
+			            'sections': {
+			                label: 'Sections',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
+			            },
+			    }
+		}
+
+		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface Dialog {
 			
 				
@@ -2262,6 +2358,52 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Feed {
+			
+				
+				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
+		}
+
+		interface FeedSchema extends SpruceSchema.Schema {
+			id: 'feed',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Feed',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . */
+			            'onSubmitMessage': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
+			            },
+			    }
+		}
+
+		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CardSection {
 			
 				
@@ -2314,6 +2456,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
 				/** Pager. */
 				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager| undefined | null
+				/** Bar chart. */
+				'barChart'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart| undefined | null
 				/** Grid. */
 				'shouldRenderContentsAsGrid'?: boolean| undefined | null
 				/** Grid size. */
@@ -2485,6 +2629,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PagerSchema,}
 			            },
+			            /** Bar chart. */
+			            'barChart': {
+			                label: 'Bar chart',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartSchema,}
+			            },
 			            /** Grid. */
 			            'shouldRenderContentsAsGrid': {
 			                label: 'Grid',
@@ -2515,148 +2665,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface CardBody {
-			
-				/** Show section separators. This will make each section render with a border. */
-				'shouldShowSectionSeparators'?: boolean| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
-				/** Swipe. */
-				'shouldEnableSectionSwiping'?: boolean| undefined | null
-				/** Swipe break into cards on landscape. */
-				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
-				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
-				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void)| undefined | null
-				/** Render sections as grid. */
-				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
-				/** Sections. */
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
-		}
-
-		interface CardBodySchema extends SpruceSchema.Schema {
-			id: 'cardBody',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Show section separators. This will make each section render with a border. */
-			            'shouldShowSectionSeparators': {
-			                label: 'Show section separators',
-			                type: 'boolean',
-			                hint: 'This will make each section render with a border.',
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe controller. */
-			            'swipeController': {
-			                label: 'Swipe controller',
-			                type: 'raw',
-			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
-			            },
-			            /** Swipe. */
-			            'shouldEnableSectionSwiping': {
-			                label: 'Swipe',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe break into cards on landscape. */
-			            'shouldSwipeBreakIntoCardsOnLandscape': {
-			                label: 'Swipe break into cards on landscape',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Select slide title handler. */
-			            'onSelectSlideTitle': {
-			                label: 'Select slide title handler',
-			                type: 'raw',
-			                options: {valueType: `(id: number) => void`,}
-			            },
-			            /** Slide change callback. */
-			            'onChangeSlide': {
-			                label: 'Slide change callback',
-			                type: 'raw',
-			                options: {valueType: `(slide: number) => void`,}
-			            },
-			            /** Render sections as grid. */
-			            'shouldRenderSectionsAsGrid': {
-			                label: 'Render sections as grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Sections. */
-			            'sections': {
-			                label: 'Sections',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
-			            },
-			    }
-		}
-
-		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Feed {
-			
-				
-				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
-				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
-				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
-		}
-
-		interface FeedSchema extends SpruceSchema.Schema {
-			id: 'feed',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Feed',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
-			            },
-			            /** . */
-			            'onSubmitMessage': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
-			            },
-			            /** . */
-			            'controller': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
-			            },
-			    }
-		}
-
-		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
 
 	}
 
@@ -3398,6 +3406,94 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface MapEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
+			
+				
+				'id'?: string| undefined | null
+				
+				'className'?: string| undefined | null
+				/** Title. */
+				'title'?: string| undefined | null
+				/** Text. */
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Grid. */
+				'shouldRenderAsGrid'?: boolean| undefined | null
+				/** List. */
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
+				
+				'shouldShowSubmitButton'?: boolean| undefined | null
+		}
+
+		interface BigFormSectionSchema extends SpruceSchema.Schema {
+			id: 'bigFormSection',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'className': {
+			                type: 'text',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Text. */
+			            'text': {
+			                label: 'Text',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Grid. */
+			            'shouldRenderAsGrid': {
+			                label: 'Grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** List. */
+			            'list': {
+			                label: 'List',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
+			            },
+			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
+			            'fields': {
+			                label: 'Form fields',
+			                type: 'raw',
+			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
+			                isArray: true,
+			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
+			            },
+			            /** . */
+			            'shouldShowSubmitButton': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface BigFormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema> {}
 
 	}
 
@@ -4473,167 +4569,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardFooterEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface List {
-			
-				
-				'id'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
-				/** Render row dividers. */
-				'shouldRenderRowDividers'?: boolean| undefined | null
-				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
-				/** Row height. */
-				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
-				/** Rows. */
-				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
-		}
-
-		interface ListSchema extends SpruceSchema.Schema {
-			id: 'list',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'list',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ListViewController`,}
-			            },
-			            /** Render row dividers. */
-			            'shouldRenderRowDividers': {
-			                label: 'Render row dividers',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Column widths. */
-			            'columnWidths': {
-			                label: 'Column widths',
-			                type: 'raw',
-			                isArray: true,
-			                options: {valueType: `number | 'fill' | 'content'`,}
-			            },
-			            /** Row height. */
-			            'defaultRowHeight': {
-			                label: 'Row height',
-			                type: 'select',
-			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
-			            },
-			            /** Rows. */
-			            'rows': {
-			                label: 'Rows',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema,}
-			            },
-			    }
-		}
-
-		interface ListEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
-			
-				
-				'id'?: string| undefined | null
-				
-				'className'?: string| undefined | null
-				/** Title. */
-				'title'?: string| undefined | null
-				/** Text. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
-				/** Grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
-				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
-				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
-				
-				'shouldShowSubmitButton'?: boolean| undefined | null
-		}
-
-		interface BigFormSectionSchema extends SpruceSchema.Schema {
-			id: 'bigFormSection',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			importsWhenRemote: ['import * as HeartwoodTypes from \'@sprucelabs/heartwood-view-controllers\'',],
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			typeSuffix: '<S extends SpruceSchema.Schema = SpruceSchema.Schema>',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'className': {
-			                type: 'text',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Text. */
-			            'text': {
-			                label: 'Text',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
-			            },
-			            /** Grid. */
-			            'shouldRenderAsGrid': {
-			                label: 'Grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** List. */
-			            'list': {
-			                label: 'List',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema,}
-			            },
-			            /** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-			            'fields': {
-			                label: 'Form fields',
-			                type: 'raw',
-			                hint: 'Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name.',
-			                isArray: true,
-			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
-			            },
-			            /** . */
-			            'shouldShowSubmitButton': {
-			                type: 'boolean',
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface BigFormSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSectionSchema> {}
 
 	}
 
@@ -5967,6 +5902,79 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface List {
+			
+				
+				'id'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
+				/** Render row dividers. */
+				'shouldRenderRowDividers'?: boolean| undefined | null
+				/** Column widths. */
+				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				/** Row height. */
+				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
+				/** Rows. */
+				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
+		}
+
+		interface ListSchema extends SpruceSchema.Schema {
+			id: 'list',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'list',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ListViewController`,}
+			            },
+			            /** Render row dividers. */
+			            'shouldRenderRowDividers': {
+			                label: 'Render row dividers',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Column widths. */
+			            'columnWidths': {
+			                label: 'Column widths',
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `number | 'fill' | 'content'`,}
+			            },
+			            /** Row height. */
+			            'defaultRowHeight': {
+			                label: 'Row height',
+			                type: 'select',
+			                options: {choices: [{"label":"Standard","value":"standard"},{"label":"Tall","value":"tall"},{"label":"Content","value":"content"}],}
+			            },
+			            /** Rows. */
+			            'rows': {
+			                label: 'Rows',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRowSchema,}
+			            },
+			    }
+		}
+
+		interface ListEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CountdownTimer {
 			
 				
@@ -6292,6 +6300,253 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CalendarSelectedDateEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Calendar {
+			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>)| undefined | null
+				/** People. */
+				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]| undefined | null
+				/** Minimum time. The earliest time to show in the calendar. */
+				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				/** Maximum time. The latest time to show in the calendar. */
+				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				/** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
+				'startDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				/** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
+				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				/** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
+				'defaultEndTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				
+				'events': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
+				
+				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
+				
+				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
+				/** Timezone offset. In milliseconds */
+				'timezoneOffsetMs'?: number| undefined | null
+				/** Enable animations. */
+				'shouldEnableAnimations'?: boolean| undefined | null
+				/** View. */
+				'view'?: ("day" | "month")| undefined | null
+				/** Render header. */
+				'shouldRenderHeader'?: boolean| undefined | null
+				
+				'onChangeStartDate'?: ((date: number) => void | Promise<void>)| undefined | null
+				
+				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				
+				'onLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				
+				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				
+				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
+				
+				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
+				
+				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>)| undefined | null
+				
+				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				
+				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				
+				'onLongPressView'?: (() => void | boolean)| undefined | null
+				
+				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
+				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+				'shouldEnableSwipeNav'?: boolean| undefined | null
+				
+				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>)| undefined | null
+				
+				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
+		}
+
+		interface CalendarSchema extends SpruceSchema.Schema {
+			id: 'calendar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Calendar',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>`,}
+			            },
+			            /** People. */
+			            'people': {
+			                label: 'People',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPersonSchema,}
+			            },
+			            /** Minimum time. The earliest time to show in the calendar. */
+			            'minTime': {
+			                label: 'Minimum time',
+			                type: 'schema',
+			                hint: 'The earliest time to show in the calendar.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
+			            },
+			            /** Maximum time. The latest time to show in the calendar. */
+			            'maxTime': {
+			                label: 'Maximum time',
+			                type: 'schema',
+			                hint: 'The latest time to show in the calendar.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
+			            },
+			            /** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
+			            'startDate': {
+			                label: 'date',
+			                type: 'dateTime',
+			                hint: 'The date the calendar will start on. First of month or first of week. Is in ms from epoch.',
+			                options: undefined
+			            },
+			            /** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
+			            'defaultStartTime': {
+			                label: 'Default start time',
+			                type: 'schema',
+			                hint: 'Any time before this will be dimmed out. Only applies if people have no schedules.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
+			            },
+			            /** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
+			            'defaultEndTime': {
+			                label: 'Default end time',
+			                type: 'schema',
+			                hint: 'Any time after this will be dimmed out. Only applies if people have no schedules.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
+			            },
+			            /** . */
+			            'events': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
+			            },
+			            /** . */
+			            'selectedEvent': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
+			            },
+			            /** . */
+			            'selectedDates': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
+			            },
+			            /** Timezone offset. In milliseconds */
+			            'timezoneOffsetMs': {
+			                label: 'Timezone offset',
+			                type: 'number',
+			                hint: 'In milliseconds',
+			                options: undefined
+			            },
+			            /** Enable animations. */
+			            'shouldEnableAnimations': {
+			                label: 'Enable animations',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** View. */
+			            'view': {
+			                label: 'View',
+			                type: 'select',
+			                defaultValue: "day",
+			                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
+			            },
+			            /** Render header. */
+			            'shouldRenderHeader': {
+			                label: 'Render header',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'onChangeStartDate': {
+			                type: 'raw',
+			                options: {valueType: `(date: number) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onClickView': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onLongPressViewDrop': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onTapView': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onClickEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onLongPressEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onDropEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>`,}
+			            },
+			            /** . */
+			            'onDeselectEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onSelectEvent': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'onLongPressView': {
+			                type: 'raw',
+			                options: {valueType: `() => void | boolean`,}
+			            },
+			            /** . */
+			            'shifts': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema,}
+			            },
+			            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
+			            'shouldEnableSwipeNav': {
+			                type: 'boolean',
+			                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
+			                options: undefined
+			            },
+			            /** . */
+			            'onSwipe': {
+			                type: 'raw',
+			                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'enabledDays': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
+			            },
+			    }
+		}
+
+		interface CalendarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema> {}
 
 	}
 
@@ -6634,253 +6889,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface Calendar {
-			
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>)| undefined | null
-				/** People. */
-				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]| undefined | null
-				/** Minimum time. The earliest time to show in the calendar. */
-				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
-				/** Maximum time. The latest time to show in the calendar. */
-				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
-				/** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
-				'startDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
-				/** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
-				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
-				/** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
-				'defaultEndTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
-				
-				'events': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
-				
-				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
-				
-				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
-				/** Timezone offset. In milliseconds */
-				'timezoneOffsetMs'?: number| undefined | null
-				/** Enable animations. */
-				'shouldEnableAnimations'?: boolean| undefined | null
-				/** View. */
-				'view'?: ("day" | "month")| undefined | null
-				/** Render header. */
-				'shouldRenderHeader'?: boolean| undefined | null
-				
-				'onChangeStartDate'?: ((date: number) => void | Promise<void>)| undefined | null
-				
-				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
-				
-				'onLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
-				
-				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
-				
-				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
-				
-				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
-				
-				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>)| undefined | null
-				
-				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
-				
-				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
-				
-				'onLongPressView'?: (() => void | boolean)| undefined | null
-				
-				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
-				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-				'shouldEnableSwipeNav'?: boolean| undefined | null
-				
-				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>)| undefined | null
-				
-				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
-		}
-
-		interface CalendarSchema extends SpruceSchema.Schema {
-			id: 'calendar',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Calendar',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>`,}
-			            },
-			            /** People. */
-			            'people': {
-			                label: 'People',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPersonSchema,}
-			            },
-			            /** Minimum time. The earliest time to show in the calendar. */
-			            'minTime': {
-			                label: 'Minimum time',
-			                type: 'schema',
-			                hint: 'The earliest time to show in the calendar.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
-			            },
-			            /** Maximum time. The latest time to show in the calendar. */
-			            'maxTime': {
-			                label: 'Maximum time',
-			                type: 'schema',
-			                hint: 'The latest time to show in the calendar.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
-			            },
-			            /** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
-			            'startDate': {
-			                label: 'date',
-			                type: 'dateTime',
-			                hint: 'The date the calendar will start on. First of month or first of week. Is in ms from epoch.',
-			                options: undefined
-			            },
-			            /** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
-			            'defaultStartTime': {
-			                label: 'Default start time',
-			                type: 'schema',
-			                hint: 'Any time before this will be dimmed out. Only applies if people have no schedules.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
-			            },
-			            /** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
-			            'defaultEndTime': {
-			                label: 'Default end time',
-			                type: 'schema',
-			                hint: 'Any time after this will be dimmed out. Only applies if people have no schedules.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTimeSchema,}
-			            },
-			            /** . */
-			            'events': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
-			            },
-			            /** . */
-			            'selectedEvent': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema,}
-			            },
-			            /** . */
-			            'selectedDates': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
-			            },
-			            /** Timezone offset. In milliseconds */
-			            'timezoneOffsetMs': {
-			                label: 'Timezone offset',
-			                type: 'number',
-			                hint: 'In milliseconds',
-			                options: undefined
-			            },
-			            /** Enable animations. */
-			            'shouldEnableAnimations': {
-			                label: 'Enable animations',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** View. */
-			            'view': {
-			                label: 'View',
-			                type: 'select',
-			                defaultValue: "day",
-			                options: {choices: [{"label":"Day","value":"day"},{"label":"Month","value":"month"}],}
-			            },
-			            /** Render header. */
-			            'shouldRenderHeader': {
-			                label: 'Render header',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'onChangeStartDate': {
-			                type: 'raw',
-			                options: {valueType: `(date: number) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onClickView': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onLongPressViewDrop': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onTapView': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onClickEvent': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onLongPressEvent': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onDropEvent': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>`,}
-			            },
-			            /** . */
-			            'onDeselectEvent': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onSelectEvent': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.CalendarEvent) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'onLongPressView': {
-			                type: 'raw',
-			                options: {valueType: `() => void | boolean`,}
-			            },
-			            /** . */
-			            'shifts': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShiftSchema,}
-			            },
-			            /** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-			            'shouldEnableSwipeNav': {
-			                type: 'boolean',
-			                hint: 'Enable the ability to swipe to change days. Only works when viewing a single person.',
-			                options: undefined
-			            },
-			            /** . */
-			            'onSwipe': {
-			                type: 'raw',
-			                options: {valueType: `(options: HeartwoodTypes.SwipeOptions) => void | Promise<void>`,}
-			            },
-			            /** . */
-			            'enabledDays': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDateSchema,}
-			            },
-			    }
-		}
-
-		interface CalendarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface ButtonBar {
 			
 				/** Controller. */
@@ -6914,51 +6922,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ButtonBarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Dropdown {
-			
-				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
-				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
-				
-				'card'?: (HeartwoodTypes.Card)| undefined | null
-		}
-
-		interface DropdownSchema extends SpruceSchema.Schema {
-			id: 'dropdown',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Dropdown',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.Card`,}
-			            },
-			    }
-		}
-
-		interface DropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema> {}
 
 	}
 
@@ -7452,6 +7415,173 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface DropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Dropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
+				
+				'card'?: (HeartwoodTypes.Card)| undefined | null
+		}
+
+		interface DropdownSchema extends SpruceSchema.Schema {
+			id: 'dropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Dropdown',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface DropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface BarChart {
+			
+				
+				'id'?: string| undefined | null
+				
+				'controller'?: (HeartwoodTypes.BarChartViewController)| undefined | null
+				
+				'dataSets': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSet[]
+		}
+
+		interface BarChartSchema extends SpruceSchema.Schema {
+			id: 'barChart',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Bar chart',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.BarChartViewController`,}
+			            },
+			            /** . */
+			            'dataSets': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSetSchema,}
+			            },
+			    }
+		}
+
+		interface BarChartEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface BarChartDataPoint {
+			
+				
+				'label'?: string| undefined | null
+				
+				'value': number
+		}
+
+		interface BarChartDataPointSchema extends SpruceSchema.Schema {
+			id: 'barChartDataPoint',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'value': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface BarChartDataPointEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPointSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface BarChartDataSet {
+			
+				
+				'label'?: string| undefined | null
+				
+				'dataPoints': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPoint[]
+		}
+
+		interface BarChartDataSetSchema extends SpruceSchema.Schema {
+			id: 'barChartDataSet',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'dataPoints': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPointSchema,}
+			            },
+			    }
+		}
+
+		interface BarChartDataSetEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSetSchema> {}
 
 	}
 

@@ -1,6 +1,7 @@
 import { PagerViewController } from '.'
 import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController from './viewControllers/activeRecord/ActiveRecordList.vc'
+import BarChartViewController from './viewControllers/BarChart.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonBarViewController from './viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
@@ -97,4 +98,5 @@ export const CORE_CONTROLLER_MAP = {
     'progress-navigator': ProgressNavigatorViewController,
     'polar-area': PolarAreaViewController,
     pager: PagerViewController,
+    'bar-chart': BarChartViewController,
 }
