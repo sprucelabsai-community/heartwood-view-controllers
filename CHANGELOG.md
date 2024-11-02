@@ -1,3 +1,10 @@
+# [110.14.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.13.30...v110.14.0) (2024-11-02)
+
+
+### Features
+
+* bar chart and asserts ([85b936b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/85b936b))
+
 ## [110.13.30](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.13.29...v110.13.30) (2024-11-02)
 
 ## [110.13.29](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.13.28...v110.13.29) (2024-11-02)
