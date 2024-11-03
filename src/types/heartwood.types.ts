@@ -795,10 +795,16 @@ export interface AuthorizerCanOptions<
     Ids extends PermissionId<ContractId> = PermissionId<ContractId>,
 > {
     contractId: ContractId
-    permissionIds: Ids[]
     target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
+    permissionIds: Ids[]
 }
 
+export interface AuthorizerDoesHonorOptions<
+    ContractId extends PermissionContractId,
+> {
+    contractId: ContractId
+    target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
+}
 type SavePermissionsTarget = Omit<
     SpruceSchemas.Mercury.v2020_12_25.SavePermissionsEmitTarget,
     'permissionPersonId' | 'permissionContractId' | 'permissionSkillId'
@@ -824,6 +830,7 @@ export interface Authorizer {
     >(
         options: AuthorizerCanOptions<ContractId, Ids>
     ): Promise<Record<Ids, boolean>>
+
     //Save permissions for a person. Note: the person must have the permission to save permissions
     savePermissions<
         ContractId extends PermissionContractId,
@@ -831,6 +838,10 @@ export interface Authorizer {
     >(
         options: SavePermissionsOptions<ContractId, Ids>
     ): Promise<void>
+
+    doesHonorPermissionContract<ContractId extends PermissionContractId>(
+        options: AuthorizerDoesHonorOptions<ContractId>
+    ): Promise<boolean>
 }
 
 export type ViewControllerConstructor<Vc extends ViewController<any>> = new (
