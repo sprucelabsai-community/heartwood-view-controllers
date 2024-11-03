@@ -1,3 +1,10 @@
+# [111.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.14.0...v111.0.0) (2024-11-03)
+
+
+### Breaking Changes
+
+* authorizer does honor perms update ([addb863](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/addb863))
+
 # [110.14.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v110.13.30...v110.14.0) (2024-11-02)
 
 
