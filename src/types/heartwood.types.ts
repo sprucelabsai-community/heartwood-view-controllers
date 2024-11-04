@@ -803,7 +803,7 @@ export interface AuthorizerDoesHonorOptions<
     ContractId extends PermissionContractId,
 > {
     contractId: ContractId
-    target?: SpruceSchemas.Mercury.v2020_12_25.GetResolvedPermissionsContractEmitTarget
+    target?: SpruceSchemas.Mercury.v2020_12_25.DoesHonorPermissionContractEmitTarget
 }
 type SavePermissionsTarget = Omit<
     SpruceSchemas.Mercury.v2020_12_25.SavePermissionsEmitTarget,
