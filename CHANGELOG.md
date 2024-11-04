@@ -1,3 +1,10 @@
+# [111.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.0.4...v111.1.0) (2024-11-04)
+
+
+### Features
+
+* app controller interface added ([719ea17](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/719ea17))
+
 ## [111.0.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.0.3...v111.0.4) (2024-11-04)
 
 ## [111.0.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.0.2...v111.0.3) (2024-11-04)
