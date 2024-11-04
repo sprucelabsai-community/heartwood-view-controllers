@@ -897,3 +897,18 @@ export interface ActiveRecordSearchOptions {
     shouldSearchClientSide?: boolean
     placeholder?: string
 }
+
+export interface AppController {
+    renderNavigation?(): Navigation | null | undefined
+    renderToolBelt?(): ToolBelt | null | undefined
+    load(options: AppControllerLoadOptions): Promise<void>
+}
+
+export interface AppControllerLoadOptions {
+    router: Router
+    authenticator: Authenticator
+    authorizer: Authorizer
+    locale: ILocale
+    scope: Scope
+    themes: ThemeManager
+}
