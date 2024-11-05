@@ -898,13 +898,13 @@ export interface ActiveRecordSearchOptions {
     placeholder?: string
 }
 
-export interface AppController {
+export interface AppViewController {
     renderNavigation?(): Navigation | null | undefined
     renderToolBelt?(): ToolBelt | null | undefined
-    load(options: AppControllerLoadOptions): Promise<void>
+    load(options: AppViewControllerLoadOptions): Promise<void>
 }
 
-export interface AppControllerLoadOptions {
+export interface AppViewControllerLoadOptions {
     router: Router
     authenticator: Authenticator
     authorizer: Authorizer
