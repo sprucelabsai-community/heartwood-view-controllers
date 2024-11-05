@@ -901,7 +901,7 @@ export interface ActiveRecordSearchOptions {
 export interface AppViewController {
     renderNavigation?(): Navigation | null | undefined
     renderToolBelt?(): ToolBelt | null | undefined
-    load(options: AppViewControllerLoadOptions): Promise<void>
+    load?(options: AppViewControllerLoadOptions): Promise<void>
 }
 
 export interface AppViewControllerLoadOptions {
