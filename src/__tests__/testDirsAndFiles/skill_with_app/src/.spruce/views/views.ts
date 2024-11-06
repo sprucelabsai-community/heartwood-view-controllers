@@ -1,5 +1,6 @@
 import BookSkillViewController from '../../skillViewControllers/Book.svc'
-import BookFormViewController from '../../viewControllers/Book.vc'
+import BookFormViewController from '../../viewControllers/BookForm.vc'
+import AppViewController from '../../App.avc'
 
 const vcs = {
     BookSkillViewController,
@@ -7,6 +8,6 @@ const vcs = {
 }
 
 //@ts-ignore
-heartwood({ vcs})
+heartwood({ vcs, App: AppViewController })
 
 export default vcs

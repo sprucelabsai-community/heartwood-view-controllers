@@ -823,7 +823,6 @@ export interface SavePermissionsOptions<
 }
 
 export interface Authorizer {
-    //Check if the current person has a permission
     can<
         ContractId extends PermissionContractId,
         Ids extends PermissionId<ContractId>,
@@ -831,7 +830,6 @@ export interface Authorizer {
         options: AuthorizerCanOptions<ContractId, Ids>
     ): Promise<Record<Ids, boolean>>
 
-    //Save permissions for a person. Note: the person must have the permission to save permissions
     savePermissions<
         ContractId extends PermissionContractId,
         Ids extends PermissionId<ContractId>,
@@ -903,6 +901,10 @@ export interface AppViewController {
     renderToolBelt?(): ToolBelt | null | undefined
     load?(options: AppViewControllerLoadOptions): Promise<void>
 }
+
+export type AppViewControllerConstructor = new (
+    options: ViewControllerOptions
+) => AppViewController
 
 export interface AppViewControllerLoadOptions {
     router: Router

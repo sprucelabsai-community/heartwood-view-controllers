@@ -1,5 +1,6 @@
 import SpruceError from '../errors/SpruceError'
 import {
+    AppViewControllerConstructor,
     ImportedViewController,
     ViewControllerPluginsByName,
 } from '../types/heartwood.types'
@@ -13,13 +14,11 @@ export default class ViewControllerImporter {
         return new (this.Class ?? this)()
     }
 
-    public import(script: string): {
-        controllers: ImportedViewController[]
-        plugins: ViewControllerPluginsByName
-    } {
+    public import(script: string): ImportResults {
         try {
             let exports = {}
             let plugins = {}
+            let AppClass: AppViewControllerConstructor | undefined
 
             const globals = Object.keys(global)
             const resets = globals
@@ -45,7 +44,10 @@ var utils = {
 }
 var global = {}
 var globalThis = {}
-function heartwood(vcs, pluginClasses) {
+function heartwood(options) {
+    const { vcs, pluginClasses, App } = options
+
+    AppClass = App
 	exports = vcs
 	plugins = pluginClasses || {}
 }
@@ -65,6 +67,7 @@ ${script}`
             return {
                 controllers,
                 plugins,
+                App: AppClass,
             }
         } catch (err: any) {
             throw new SpruceError({
@@ -94,4 +97,10 @@ ${script}`
             }
         })
     }
+}
+
+interface ImportResults {
+    controllers: ImportedViewController[]
+    App?: AppViewControllerConstructor
+    plugins: ViewControllerPluginsByName
 }

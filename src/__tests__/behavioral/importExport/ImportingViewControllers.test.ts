@@ -26,6 +26,11 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
             source: constants.importExportSourceNoIds,
             destination: constants.importExportDestinationNoIds,
         })
+
+        await exporter.export({
+            source: constants.importExportSourceApp,
+            destination: constants.importExportDestinationApp,
+        })
     }
 
     protected static async beforeEach() {
@@ -54,7 +59,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
     @test()
     protected static importingValidScripts() {
-        const controllers = this.importControllers()
+        const { controllers } = this.importControllers()
 
         assert.isArray(controllers)
         assert.isLength(controllers, 2)
@@ -149,8 +154,17 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         assert.isInstanceOf(instance, SpyViewControllerImporter)
     }
 
+    @test()
+    protected static async canImportAppViewController() {
+        const { App } = this.importControllers('App')
+        assert.isTruthy(App)
+        const app = new App({} as any)
+        //@ts-ignore
+        assert.isEqual(app.render(), 'go-team')
+    }
+
     private static importAndGetFactory(suffix?: ImportExportSuffix) {
-        const controllers = this.importControllers(suffix)
+        const { controllers } = this.importControllers(suffix)
         const factory = this.Factory()
 
         factory.importControllers(controllers)
@@ -173,12 +187,12 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
             constants[`importExportDestination${suffix}`]
         )
 
-        const { controllers } = this.importer.import(contents)
+        const { controllers, App } = this.importer.import(contents)
 
-        return controllers
+        return { controllers, App }
     }
 }
 
 class SpyViewControllerImporter extends ViewControllerImporter {}
 
-type ImportExportSuffix = '' | 'NoIds' | 'Plugins1'
+type ImportExportSuffix = '' | 'NoIds' | 'Plugins1' | 'App'

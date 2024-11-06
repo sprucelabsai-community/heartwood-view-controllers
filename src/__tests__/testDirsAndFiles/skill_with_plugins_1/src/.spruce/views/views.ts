@@ -12,6 +12,6 @@ export const pluginClasses = {
 }
 
 //@ts-ignore
-heartwood(vcs, pluginClasses)
+heartwood({ vcs, pluginClasses })
 
 export default vcs

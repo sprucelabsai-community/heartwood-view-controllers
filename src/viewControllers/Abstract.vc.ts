@@ -60,7 +60,6 @@ export default abstract class AbstractViewController<
         this.plugins = options.plugins
     }
 
-    public abstract render(): ViewModel
     public triggerRender() {
         if (this.suspendRenderCount === 0) {
             this.triggerRenderHandler?.()
@@ -71,7 +70,14 @@ export default abstract class AbstractViewController<
         this.triggerRenderHandler = handler
     }
 
+    /**
+     * @deprecated this.getVcFactory() -> this.views()
+     */
     protected getVcFactory() {
+        return this.vcFactory
+    }
+
+    protected views() {
         return this.vcFactory
     }
 
@@ -193,7 +199,7 @@ export default abstract class AbstractViewController<
                 buttons: [
                     {
                         label: 'Ok',
-                        type: this.styleToButtonType(style),
+                        type: buttonStyleToType(style),
                         onClick: () => {
                             void dlg.hide()
                         },
@@ -207,25 +213,27 @@ export default abstract class AbstractViewController<
         this.activeAlert = undefined
     }
 
-    private styleToButtonType(
-        style: AlertOptions['style']
-    ): 'primary' | 'secondary' | 'destructive' {
-        switch (style) {
-            case 'error':
-            case undefined:
-                return 'destructive'
-            case 'success':
-                return 'primary'
-            default:
-                return 'primary'
-        }
-    }
-
     protected async confirm(options: ConfirmOptions) {
         return this.confirmHandler(options)
     }
 
     protected getDevice() {
         return this.device
+    }
+
+    public abstract render(): ViewModel
+}
+
+function buttonStyleToType(
+    style: AlertOptions['style']
+): 'primary' | 'secondary' | 'destructive' {
+    switch (style) {
+        case 'error':
+        case undefined:
+            return 'destructive'
+        case 'success':
+            return 'primary'
+        default:
+            return 'primary'
     }
 }

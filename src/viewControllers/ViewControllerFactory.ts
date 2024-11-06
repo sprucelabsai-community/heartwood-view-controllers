@@ -22,6 +22,8 @@ import {
     ConnectToApi,
     ViewControllerPlugin,
     ViewControllerPluginOptions,
+    ViewControllerOptions,
+    AppViewController,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -35,7 +37,7 @@ export default class ViewControllerFactory {
     private dates: DateUtil
     private maps: MapUtil
     private toastHandler: ToastHandler
-    private log?: Log
+    protected log?: Log
     protected plugins: ViewControllerPlugins = {}
 
     public constructor(options: ViewControllerFactoryConstructorOptions) {
@@ -154,6 +156,12 @@ export default class ViewControllerFactory {
         return new Plugin(this.sharedConstructorOptions())
     }
 
+    public BuildApp<A extends AppViewController>(
+        App: new (options: ViewControllerOptions) => A
+    ): A {
+        return new App(this.buildViewContructorOptions('App')) as A
+    }
+
     public hasController(name: string): boolean {
         //@ts-ignore
         return !!this.controllerMap[name]
@@ -186,15 +194,10 @@ export default class ViewControllerFactory {
             })
         }
 
-        const constructorOptions = {
-            ...options,
-            vcFactory: this,
-            ...this.sharedConstructorOptions(name),
-            renderInDialogHandler: this.renderInDialogHandler,
-            confirmHandler: this.confirmHandler,
-            voteHandler: options?.voteHandler ?? this.voteHandler,
-            toastHandler: this.toastHandler,
-        }
+        const constructorOptions = this.buildViewContructorOptions(
+            name,
+            options
+        )
 
         const oldController = Class.prototype.Controller
 
@@ -218,6 +221,22 @@ export default class ViewControllerFactory {
         //@ts-ignore
         return instance
     }
+
+    protected buildViewContructorOptions(
+        name: string,
+        options?: Record<string, any>
+    ): ViewControllerOptions {
+        return {
+            ...options,
+            vcFactory: this,
+            ...this.sharedConstructorOptions(name),
+            renderInDialogHandler: this.renderInDialogHandler,
+            confirmHandler: this.confirmHandler,
+            voteHandler: options?.voteHandler ?? this.voteHandler,
+            toastHandler: this.toastHandler,
+        }
+    }
+
     private sharedConstructorOptions(name?: string) {
         return {
             connectToApi: this.connectToApi,

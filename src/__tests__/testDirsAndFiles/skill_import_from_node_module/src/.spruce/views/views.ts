@@ -7,6 +7,6 @@ const vcs = {
 }
 
 //@ts-ignore
-heartwood(vcs)
+heartwood({ vcs })
 
 export default vcs
