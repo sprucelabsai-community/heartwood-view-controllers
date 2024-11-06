@@ -44,8 +44,8 @@ var utils = {
 }
 var global = {}
 var globalThis = {}
-function heartwood(options) {
-    const { vcs, pluginClasses, App } = options
+function heartwood(...args) {
+    const { vcs, pluginClasses, App } = args[0].vcs ? args[0] : { vcs: args[0], pluginClasses: args[1] }
 
     AppClass = App
 	exports = vcs
