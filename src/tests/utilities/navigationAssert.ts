@@ -60,7 +60,9 @@ const navigationAssert = {
         )
     },
 
-    skillViewRendersNavigation(vc: SkillViewController) {
+    skillViewRendersNavigation(
+        vc: Pick<SkillViewController, 'renderNavigation'>
+    ) {
         const nav = vc.renderNavigation?.()
         assert.isTruthy(
             nav,
@@ -70,7 +72,9 @@ const navigationAssert = {
         return nav.controller!
     },
 
-    skillViewDoesNotRenderNavigation(vc: SkillViewController) {
+    skillViewDoesNotRenderNavigation(
+        vc: Pick<SkillViewController, 'renderNavigation'>
+    ) {
         const nav = vc.renderNavigation?.()
         assert.isNull(
             nav,
