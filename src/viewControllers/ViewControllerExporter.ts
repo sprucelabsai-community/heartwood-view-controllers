@@ -318,7 +318,7 @@ export interface ExportOptions {
     source: string
     destination: string
     profilerStatsDestination?: string
-    defines?: any
+    defines?: Record<string, string>
     onDidIncrementallyBuild?: DidIncrementallyBuildHandler
     onWillIncrementallyBuild?: DidIncrementallyBuildHandler
     shouldWatch?: boolean
