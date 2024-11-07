@@ -241,6 +241,10 @@ export function pluckButtons(
         buttons.push(...(f?.footer?.buttons ?? []))
     })
 
+    pluckAllFromView(model as any, 'buttonBar').forEach((f) => {
+        buttons.push(...(f?.buttons ?? []))
+    })
+
     const missing: string[] = []
     const found: string[] = []
     const foundButtons: Button[] = []
