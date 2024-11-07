@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test } from '@sprucelabs/test-utils'
 import { importExportSourceApp } from '../../../tests/constants'
 import AbstractExportAndImportTest from './AbstractExportAndImportTest'
 
