@@ -7,11 +7,11 @@ const vcs = {
     ReserveCardViewController
 }
 
-export const pluginClasses = {
+export const pluginsByName = {
     plugin1: Plugin1
 }
 
 //@ts-ignore
-heartwood({ vcs, pluginClasses })
+heartwood({ vcs, pluginsByName })
 
 export default vcs

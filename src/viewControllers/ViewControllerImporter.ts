@@ -45,11 +45,11 @@ var utils = {
 var global = {}
 var globalThis = {}
 function heartwood(...args) {
-    const { vcs, pluginClasses, App } = args[0].vcs ? args[0] : { vcs: args[0], pluginClasses: args[1] }
+    const { vcs, pluginsByName, App } = args[0].vcs ? args[0] : { vcs: args[0], pluginsByName: args[1] }
 
     AppClass = App
 	exports = vcs
-	plugins = pluginClasses || {}
+	plugins = pluginsByName || {}
 }
 
 

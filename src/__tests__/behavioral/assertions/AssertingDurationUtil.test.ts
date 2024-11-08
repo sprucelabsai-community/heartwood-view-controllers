@@ -1,5 +1,6 @@
-import { durationUtil } from '@sprucelabs/calendar-utils'
+import { dateUtil, durationUtil } from '@sprucelabs/calendar-utils'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { cloneDeep } from '@sprucelabs/schema'
 import { test, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcDurationAssert from '../../../tests/utilities/vcDurationAssert'
@@ -32,10 +33,27 @@ export default class AssertingDurationUtilTest extends AbstractViewControllerTes
         vcDurationAssert.durationUtilIsConfiguredForVc(this.Vc())
     }
 
+    @test()
+    protected static async mockDateUtil() {
+        const methods = Object.keys(dateUtil)
+        for (const method of methods) {
+            //@ts-ignore
+            if (typeof dateUtil[method] === 'function') {
+                assert.isFunction(
+                    //@ts-ignore
+                    mockDateUtil[method],
+                    `dateUtil.${method} is not a function`
+                )
+            }
+        }
+    }
+
     private static Vc() {
         return this.Controller('card', {})
     }
 }
+
+const mockDateUtil = cloneDeep(dateUtil)
 
 class ConfiguredViewController extends AbstractViewController<Card> {
     public constructor(options: ViewControllerOptions) {
