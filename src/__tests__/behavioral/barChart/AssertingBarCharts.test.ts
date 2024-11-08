@@ -97,6 +97,37 @@ export default class AssertingBarChartsTest extends AbstractViewControllerTest {
     }
 
     @test()
+    protected static async assertRendersBarChartReturnsBarChart() {
+        const vc = this.ChartVc({})
+        const cardVc = this.CardVc([
+            {
+                barChart: vc.render(),
+            },
+        ])
+
+        const barChart = barChartAssert.cardRendersBarChart(cardVc)
+        assert.isEqual(barChart, vc)
+    }
+
+    @test()
+    protected static async returnsBarChartWhenMatchingId() {
+        const id = generateId()
+        const vc = this.ChartVc({ id })
+        const vc2 = this.ChartVc({})
+        const cardVc = this.CardVc([
+            {
+                barChart: vc2.render(),
+            },
+            {
+                barChart: vc.render(),
+            },
+        ])
+
+        const barChart = barChartAssert.cardRendersBarChart(cardVc, id)
+        assert.isEqual(barChart, vc)
+    }
+
+    @test()
     protected static async matchesIfIdInSecondSection() {
         const id = generateId()
         const vc = this.ChartVc({ id })
@@ -115,13 +146,61 @@ export default class AssertingBarChartsTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected static async throwsWhenCheckingDataSets() {
+        //@ts-ignore
+        const err = assert.doesThrow(() => barChartAssert.dataSetsEqual())
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['chartVc', 'dataSets'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenDataSetsDoNotMatch() {
+        const vc = this.ChartVc({
+            dataSets: [{ dataPoints: [], label: generateId() }],
+        })
+
+        assert.doesThrow(
+            () => barChartAssert.dataSetsEqual(vc, []),
+            'not match'
+        )
+    }
+
+    @test()
+    protected static async matchesOnFirstDataSet() {
+        const label = generateId()
+        const expected = [
+            { dataPoints: [{ label: generateId(), value: 10 }], label },
+        ]
+        const vc = this.ChartVc({
+            dataSets: expected,
+        })
+
+        barChartAssert.dataSetsEqual(vc, expected)
+    }
+
+    @test()
+    protected static async matchesOnSecondDataSet() {
+        const label = generateId()
+        const expected = [
+            { dataPoints: [{ label: generateId(), value: 10 }], label },
+            { dataPoints: [{ label: generateId(), value: 10 }], label },
+        ]
+        const vc = this.ChartVc({
+            dataSets: expected,
+        })
+
+        barChartAssert.dataSetsEqual(vc, expected)
+    }
+
     private static ChartVc(options: BarChartViewControllerOptions) {
         return this.Controller('bar-chart', options)
     }
 
     private static assertRendersBarChart(sections: CardSection[], id?: string) {
         const cardVc = this.CardVc(sections)
-        this.assertCardRenderingBarChart(cardVc, id)
+        return this.assertCardRenderingBarChart(cardVc, id)
     }
 
     private static assertNotRenderingBarChart(
@@ -144,7 +223,7 @@ export default class AssertingBarChartsTest extends AbstractViewControllerTest {
         cardVc: CardViewController,
         id?: string
     ) {
-        barChartAssert.cardRendersBarChart(cardVc, id)
+        return barChartAssert.cardRendersBarChart(cardVc, id)
     }
 
     private static assertCardNotRenderingBarChart(
