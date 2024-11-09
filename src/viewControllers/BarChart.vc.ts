@@ -24,7 +24,8 @@ export default class BarChartViewController extends AbstractViewController<BarCh
     }
 
     public setDataSets(dataSets: BarChartDataSet[]) {
-        this.model = assertOptions({ dataSets }, ['dataSets'])
+        assertOptions({ dataSets }, ['dataSets'])
+        this.model.dataSets = dataSets
         this.triggerRender()
     }
 

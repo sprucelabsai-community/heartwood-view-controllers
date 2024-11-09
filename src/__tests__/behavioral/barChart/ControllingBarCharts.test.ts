@@ -93,6 +93,14 @@ export default class ControllingBarChartsTest extends AbstractViewControllerTest
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
+    @test()
+    protected static async settingDataSetsDoesNotLoseId() {
+        const id = generateId()
+        this.setDataSets({ dataSets: [] })
+        const model = this.render(this.vc)
+        assert.isEqual(model.id, id)
+    }
+
     private static assertSettingDataRendersAsExpected(actual: BarChart) {
         this.setDataSets(actual)
         this.assertRenderedEquals(actual)
