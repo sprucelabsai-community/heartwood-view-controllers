@@ -55,9 +55,7 @@ export default class ControllingBarChartsTest extends AbstractViewControllerTest
 
     @test()
     protected static async settingDataSetsWithRequiredPasses() {
-        this.vc.setDataSets({
-            dataSets: [],
-        })
+        this.vc.setDataSets([])
     }
 
     @test()
@@ -103,7 +101,7 @@ export default class ControllingBarChartsTest extends AbstractViewControllerTest
     private static setDataSets(
         actual: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart
     ) {
-        this.vc.setDataSets(actual)
+        this.vc.setDataSets(actual.dataSets)
     }
 
     private static assertConstructedWithRendersExpected(expected: BarChart) {

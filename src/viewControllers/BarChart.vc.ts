@@ -1,5 +1,9 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { BarChart, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    BarChart,
+    BarChartDataSet,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
@@ -19,8 +23,8 @@ export default class BarChartViewController extends AbstractViewController<BarCh
         }
     }
 
-    public setDataSets(options: BarChart) {
-        this.model = assertOptions(options, ['dataSets'])
+    public setDataSets(dataSets: BarChartDataSet[]) {
+        this.model = assertOptions({ dataSets }, ['dataSets'])
         this.triggerRender()
     }
 

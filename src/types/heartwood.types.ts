@@ -324,7 +324,10 @@ export type PolarAreaDataItem =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem
 export type BarChart =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart
-
+export type BarChartDataSet =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSet
+export type BarChartDataPoint =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPoint
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
