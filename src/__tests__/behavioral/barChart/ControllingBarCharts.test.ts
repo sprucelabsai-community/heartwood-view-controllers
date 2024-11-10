@@ -96,6 +96,7 @@ export default class ControllingBarChartsTest extends AbstractViewControllerTest
     @test()
     protected static async settingDataSetsDoesNotLoseId() {
         const id = generateId()
+        this.setup({ id, dataSets: [] })
         this.setDataSets({ dataSets: [] })
         const model = this.render(this.vc)
         assert.isEqual(model.id, id)
