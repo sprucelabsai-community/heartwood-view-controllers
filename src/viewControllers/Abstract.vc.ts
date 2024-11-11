@@ -77,7 +77,7 @@ export default abstract class AbstractViewController<
         return this.vcFactory
     }
 
-    protected views() {
+    protected get views() {
         return this.vcFactory
     }
 
