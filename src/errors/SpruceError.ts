@@ -95,6 +95,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = `You tried to open step '${options.stepId}', but it's not complete!`
                 break
 
+            case 'APP_NOT_FOUND':
+                message = `I could not find an App with the namespace '${options.namespace}'!`
+                break
+
             default:
                 message = super.friendlyMessage()
         }

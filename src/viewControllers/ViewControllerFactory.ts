@@ -24,6 +24,7 @@ import {
     ViewControllerPluginOptions,
     ViewControllerOptions,
     AppViewController,
+    AppViewControllerConstructor,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -39,6 +40,7 @@ export default class ViewControllerFactory {
     private toastHandler: ToastHandler
     protected log?: Log
     protected plugins: ViewControllerPlugins = {}
+    private AppMap: Record<string, AppViewControllerConstructor> = {}
 
     public constructor(options: ViewControllerFactoryConstructorOptions) {
         const {
@@ -131,11 +133,17 @@ export default class ViewControllerFactory {
 
     public importControllers<Vc extends ImportedViewController>(
         Vcs: Vc[],
-        plugins?: ViewControllerPluginsByName
+        plugins?: ViewControllerPluginsByName,
+        App?: AppViewControllerConstructor
     ) {
         for (const Vc of Vcs) {
             //@ts-ignore
             this.controllerMap[Vc.id] = Vc
+        }
+
+        if (App) {
+            //@ts-ignore
+            this.AppMap[App.id] = App
         }
 
         this.importPlugins(plugins)
@@ -180,24 +188,34 @@ export default class ViewControllerFactory {
         this.plugins[named] = plugin
     }
 
+    public App(namespace: string) {
+        const App = this.AppMap[namespace]
+
+        if (!App) {
+            throw new SpruceError({
+                code: 'APP_NOT_FOUND',
+                namespace,
+            })
+        }
+
+        return this.BuildApp(App)
+    }
+
     public Controller<
         N extends ViewControllerId,
         O extends ControllerOptions<N>,
-    >(name: N, options: O): ViewControllerMap[N] {
-        const Class = this.controllerMap[name]
+    >(id: N, options: O): ViewControllerMap[N] {
+        const Class = this.controllerMap[id]
 
         if (!Class) {
             throw new SpruceError({
                 code: 'INVALID_VIEW_CONTROLLER_NAME',
-                name,
+                name: id,
                 validNames: Object.keys(this.controllerMap),
             })
         }
 
-        const constructorOptions = this.buildViewContructorOptions(
-            name,
-            options
-        )
+        const constructorOptions = this.buildViewContructorOptions(id, options)
 
         const oldController = Class.prototype.Controller
 
@@ -211,12 +229,12 @@ export default class ViewControllerFactory {
             throw new SpruceError({
                 code: 'INVALID_SKILL_VIEW_CONTROLLER',
                 friendlyMessage: `Property \`id\` is reserved. Please rename it to \`_id\`.`,
-                id: name,
+                id,
             })
         }
 
         //@ts-ignore
-        instance.id = name
+        instance.id = id
 
         //@ts-ignore
         return instance

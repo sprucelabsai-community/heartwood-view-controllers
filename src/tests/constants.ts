@@ -51,6 +51,20 @@ export const importExportSourceApp = diskUtil.resolvePath(
     'views.ts'
 )
 
+export const importExportSourceApp2 = diskUtil.resolvePath(
+    __dirname,
+    '..',
+    '..',
+    'src',
+    '__tests__',
+    'testDirsAndFiles',
+    'skill_with_app_2',
+    'src',
+    '.spruce',
+    'views',
+    'views.ts'
+)
+
 export const importExportDestinationApp = diskUtil.resolvePath(
     diskUtil.createRandomTempDir(),
     'bundle.js'

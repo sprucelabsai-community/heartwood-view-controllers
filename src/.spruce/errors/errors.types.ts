@@ -23,6 +23,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
@@ -580,6 +581,35 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type CellDeletedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.CellDeletedSchema>
+
+}
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface AppNotFound {
+		
+			
+			'namespace': string
+	}
+
+	export interface AppNotFoundSchema extends SpruceSchema.Schema {
+		id: 'appNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'App not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'namespace': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type AppNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.AppNotFoundSchema>
 
 }
 

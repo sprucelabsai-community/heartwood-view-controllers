@@ -23,8 +23,9 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
 
     protected static import() {
         const contents = diskUtil.readFile(this.destination)
-        const { controllers, plugins } = this.importer.import(contents)
-        this.views.importControllers(controllers, plugins)
+        const { controllers, plugins, App } = this.importer.import(contents)
+        debugger
+        this.views.importControllers(controllers, plugins, App)
     }
 
     protected static async export(sourcePath: string) {
@@ -38,6 +39,7 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
 
     protected static async exportAndThenImport(sourcePath: string) {
         await this.export(sourcePath)
+        debugger
         this.import()
     }
 }
