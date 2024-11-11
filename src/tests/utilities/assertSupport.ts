@@ -8,6 +8,7 @@ import {
     CardSection,
     Card,
     TriggerRenderHandler,
+    RedirectDestination,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
@@ -48,10 +49,7 @@ export interface SelectViewController {
 export interface AssertRedirectOptions {
     router: Router
     action: () => Promise<any> | any
-    destination?: {
-        id?: string
-        args?: Record<string, any>
-    }
+    destination?: RedirectDestination
 }
 
 export interface ButtonViewController {

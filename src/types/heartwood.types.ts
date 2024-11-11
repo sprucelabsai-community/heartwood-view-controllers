@@ -392,6 +392,11 @@ export interface RedirectOptions {
     shouldTrackHistory?: boolean
 }
 
+export interface RedirectDestination {
+    id: SkillViewControllerId
+    args?: Record<string, any>
+}
+
 export interface Router {
     redirect<Id extends SkillViewControllerId>(
         id: Id,
