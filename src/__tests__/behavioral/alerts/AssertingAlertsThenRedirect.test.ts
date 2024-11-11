@@ -1,6 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert } from '@sprucelabs/test-utils'
-import { AbstractSkillViewController, vcAssert, Router } from '../../..'
+import {
+    AbstractSkillViewController,
+    vcAssert,
+    Router,
+    SkillViewControllerId,
+} from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import SpyRouter from '../../../tests/SpyRouter'
 
@@ -94,7 +99,7 @@ export default class AssertAlertAndRedirectTest extends AbstractViewControllerTe
             vc: this.vc,
             router: this.router,
             destination: {
-                id: 'taco',
+                id: 'taco' as SkillViewControllerId,
                 args: {
                     bravo: true,
                 },

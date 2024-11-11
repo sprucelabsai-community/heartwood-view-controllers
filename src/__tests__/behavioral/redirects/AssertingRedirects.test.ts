@@ -1,5 +1,5 @@
 import { test, assert } from '@sprucelabs/test-utils'
-import { Router } from '../../..'
+import { Router, SkillViewControllerId } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import SpyRouter from '../../../tests/SpyRouter'
 import routerTestPatcher from '../../../tests/utilities/routerTestPatcher'
@@ -82,7 +82,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
                 return this.router.redirect('taco')
             },
             destination: {
-                id: 'tester',
+                id: 'tester' as SkillViewControllerId,
             },
         }
         await assert.doesThrowAsync(() =>
@@ -101,7 +101,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
                 await this.router.redirect('tester')
             },
             destination: {
-                id: 'tester',
+                id: 'tester' as SkillViewControllerId,
             },
         })
     }
@@ -116,7 +116,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
                     await this.router.redirect('tester')
                 },
                 destination: {
-                    id: 'tester',
+                    id: 'tester' as SkillViewControllerId,
                     args: {
                         cheesy: 'burrito',
                     },
@@ -134,7 +134,7 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
                 await this.router.redirect('tester', { cheesy: 'burrito' })
             },
             destination: {
-                id: 'tester',
+                id: 'tester' as SkillViewControllerId,
                 args: {
                     cheesy: 'burrito',
                 },
@@ -150,12 +150,12 @@ export default class AssertingRedirectsTest extends AbstractViewControllerTest {
                 action: async () => {
                     //@ts-ignore
                     await this.router.redirect('tester', {
-                        cheesy: 'burrito',
+                        cheesy: 'burprito',
                         waka: 'taco',
                     })
                 },
                 destination: {
-                    id: 'tester',
+                    id: 'tester' as SkillViewControllerId,
                     args: {
                         cheesy: 'burrito',
                     },
