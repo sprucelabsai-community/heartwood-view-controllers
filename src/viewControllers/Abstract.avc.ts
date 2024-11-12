@@ -6,5 +6,6 @@ import {
 export default abstract class AbstractAppViewController
     implements AppViewController
 {
+    public static id: string
     public constructor(_options: ViewControllerOptions) {}
 }

@@ -28,6 +28,7 @@ export default abstract class AbstractViewController<
     ViewModel extends Record<string, any>,
 > implements ViewController<ViewModel>
 {
+    public static id: string
     private vcFactory: ViewControllerFactory
     private renderInDialogHandler: RenderInDialogHandler
     private confirmHandler: ConfirmHandler
