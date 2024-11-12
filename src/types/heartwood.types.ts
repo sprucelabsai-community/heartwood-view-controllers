@@ -379,9 +379,9 @@ export interface SkillViewController<
     getSubtitle?(): string | undefined
 }
 
-export type ImportedViewController = (new () =>
-    | ViewController<any>
-    | SkillViewController) & {
+export type ImportedViewController = (new (
+    options: ViewControllerOptions
+) => ViewController<any> | SkillViewController) & {
     id: string
 }
 
