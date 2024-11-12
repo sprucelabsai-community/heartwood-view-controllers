@@ -1,5 +1,5 @@
 import { buildLog, Log } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import {
     AppViewControllerLoadOptions,
@@ -28,6 +28,21 @@ export default class UsingAppViewControllerTest extends AbstractViewControllerTe
         const app = this.App()
         const expected = this.spyFactory.getExpectedConstructorOptions()
         assert.isEqualDeep(app.constructorOptions, expected)
+    }
+
+    @test()
+    protected static async knowsIfHasApp() {
+        assert.isFalse(this.hasApp(generateId()))
+
+        SpyApp.id = generateId()
+        this.spyFactory.importControllers([], undefined, SpyApp)
+
+        assert.isTrue(this.hasApp(SpyApp.id))
+        assert.isFalse(this.hasApp(generateId()))
+    }
+
+    private static hasApp(id: string): boolean | null | undefined {
+        return this.spyFactory.hasApp(id)
     }
 
     private static App() {

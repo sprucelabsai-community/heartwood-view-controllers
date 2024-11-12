@@ -910,9 +910,9 @@ export interface AppViewController {
     load?(options: AppViewControllerLoadOptions): Promise<void>
 }
 
-export type AppViewControllerConstructor = new (
+export type AppViewControllerConstructor = (new (
     options: ViewControllerOptions
-) => AppViewController
+) => AppViewController) & { id: string }
 
 export interface AppViewControllerLoadOptions {
     router: Router

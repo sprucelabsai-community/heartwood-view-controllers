@@ -137,12 +137,10 @@ export default class ViewControllerFactory {
         App?: AppViewControllerConstructor
     ) {
         for (const Vc of Vcs) {
-            //@ts-ignore
             this.controllerMap[Vc.id] = Vc
         }
 
         if (App) {
-            //@ts-ignore
             this.AppMap[App.id] = App
         }
 
@@ -173,6 +171,10 @@ export default class ViewControllerFactory {
     public hasController(name: string): boolean {
         //@ts-ignore
         return !!this.controllerMap[name]
+    }
+
+    public hasApp(namespace: string): boolean {
+        return !!this.AppMap[namespace]
     }
 
     public getController<N extends ViewControllerId>(name: N) {
