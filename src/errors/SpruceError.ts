@@ -99,6 +99,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = `I could not find an App with the namespace '${options.namespace}'!`
                 break
 
+            case 'INVALID_APP_CONTROLLER':
+                message = 'A Invalid app controller just happened!'
+                break
+
             default:
                 message = super.friendlyMessage()
         }

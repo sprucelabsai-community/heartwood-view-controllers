@@ -155,7 +155,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canImportAppViewController() {
+    protected static async canImportAppController() {
         const { App } = this.importControllers('App')
         assert.isTruthy(App)
         const app = new App({} as any)

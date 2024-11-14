@@ -1,14 +1,14 @@
 import { buildLog, Log } from '@sprucelabs/spruce-skill-utils'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import {
-    AppViewControllerLoadOptions,
+    AppControllerLoadOptions,
     ViewControllerOptions,
 } from '../../../types/heartwood.types'
-import AbstractAppViewController from '../../../viewControllers/Abstract.avc'
+import AbstractAppController from '../../../viewControllers/Abstract.ac'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 
-export default class UsingAppViewControllerTest extends AbstractViewControllerTest {
+export default class UsingAppControllerTest extends AbstractViewControllerTest {
     private static spyFactory: SpyViewFactory
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -41,6 +41,24 @@ export default class UsingAppViewControllerTest extends AbstractViewControllerTe
         assert.isFalse(this.hasApp(generateId()))
     }
 
+    @test()
+    protected static async havingAnIdProperyOnAppThrows() {
+        HasIdApp.id = generateId()
+        this.spyFactory.importControllers([], undefined, HasIdApp)
+        const err = assert.doesThrow(() => this.spyFactory.App(HasIdApp.id))
+        errorAssert.assertError(err, 'INVALID_APP_CONTROLLER', {
+            id: HasIdApp.id,
+        })
+    }
+
+    @test()
+    protected static async attachesIdToAppInstance() {
+        SpyApp.id = generateId()
+        this.spyFactory.importControllers([], undefined, SpyApp)
+        const app = this.spyFactory.App(SpyApp.id)
+        assert.isEqual(app.id, SpyApp.id)
+    }
+
     private static hasApp(id: string): boolean | null | undefined {
         return this.spyFactory.hasApp(id)
     }
@@ -50,14 +68,14 @@ export default class UsingAppViewControllerTest extends AbstractViewControllerTe
     }
 }
 
-class SpyApp extends AbstractAppViewController {
+class SpyApp extends AbstractAppController {
     public constructorOptions: ViewControllerOptions
     public constructor(options: ViewControllerOptions) {
         super(options)
         this.constructorOptions = options
     }
 
-    public async load(_options: AppViewControllerLoadOptions) {}
+    public async load(_options: AppControllerLoadOptions) {}
 }
 
 class SpyViewFactory extends ViewControllerFactory {
@@ -65,4 +83,8 @@ class SpyViewFactory extends ViewControllerFactory {
     public getExpectedConstructorOptions() {
         return this.buildViewContructorOptions('app')
     }
+}
+
+class HasIdApp extends AbstractAppController {
+    public id = generateId()
 }

@@ -34,6 +34,9 @@ export interface InvalidViewControllerNameErrorOptions extends SpruceErrors.Hear
 export interface InvalidSkillViewControllerErrorOptions extends SpruceErrors.HeartwoodViewControllers.InvalidSkillViewController, ISpruceErrorOptions {
 	code: 'INVALID_SKILL_VIEW_CONTROLLER'
 }
+export interface InvalidAppControllerErrorOptions extends SpruceErrors.HeartwoodViewControllers.InvalidAppController, ISpruceErrorOptions {
+	code: 'INVALID_APP_CONTROLLER'
+}
 export interface ExportFailedErrorOptions extends SpruceErrors.HeartwoodViewControllers.ExportFailed, ISpruceErrorOptions {
 	code: 'EXPORT_FAILED'
 }
@@ -62,6 +65,6 @@ export interface AppNotFoundErrorOptions extends SpruceErrors.HeartwoodViewContr
 	code: 'APP_NOT_FOUND'
 }
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | AppNotFoundErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | InvalidAppControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | AppNotFoundErrorOptions 
 
 export default ErrorOptions

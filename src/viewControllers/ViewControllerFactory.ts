@@ -23,8 +23,8 @@ import {
     ViewControllerPlugin,
     ViewControllerPluginOptions,
     ViewControllerOptions,
-    AppViewController,
-    AppViewControllerConstructor,
+    AppController,
+    AppControllerConstructor,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -40,7 +40,7 @@ export default class ViewControllerFactory {
     private toastHandler: ToastHandler
     protected log?: Log
     protected plugins: ViewControllerPlugins = {}
-    private AppMap: Record<string, AppViewControllerConstructor> = {}
+    private AppMap: Record<string, AppControllerConstructor> = {}
 
     public constructor(options: ViewControllerFactoryConstructorOptions) {
         const {
@@ -134,7 +134,7 @@ export default class ViewControllerFactory {
     public importControllers<Vc extends ImportedViewController>(
         Vcs: Vc[],
         plugins?: ViewControllerPluginsByName,
-        App?: AppViewControllerConstructor
+        App?: AppControllerConstructor
     ) {
         for (const Vc of Vcs) {
             this.controllerMap[Vc.id] = Vc
@@ -162,10 +162,26 @@ export default class ViewControllerFactory {
         return new Plugin(this.sharedConstructorOptions())
     }
 
-    public BuildApp<A extends AppViewController>(
+    public BuildApp<A extends AppController>(
         App: new (options: ViewControllerOptions) => A
-    ): A {
-        return new App(this.buildViewContructorOptions('App')) as A
+    ): A & { id: string } {
+        const app = new App(this.buildViewContructorOptions('App')) as A & {
+            id: string
+        }
+        //@ts-ignore
+        if (app.id) {
+            throw new SpruceError({
+                code: 'INVALID_APP_CONTROLLER',
+                friendlyMessage: `Property \`id\` is reserved in your AppController. Please rename it to \`_id\`.`,
+                //@ts-ignore
+                id: App.id,
+            })
+        }
+
+        //@ts-ignore
+        app.id = App.id
+
+        return app
     }
 
     public hasController(name: string): boolean {
@@ -230,7 +246,7 @@ export default class ViewControllerFactory {
         if (instance.id) {
             throw new SpruceError({
                 code: 'INVALID_SKILL_VIEW_CONTROLLER',
-                friendlyMessage: `Property \`id\` is reserved. Please rename it to \`_id\`.`,
+                friendlyMessage: `Property \`id\` is reserved in your ViewController. Please rename it to \`_id\`.`,
                 id,
             })
         }

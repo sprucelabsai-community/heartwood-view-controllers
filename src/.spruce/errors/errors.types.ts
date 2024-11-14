@@ -24,6 +24,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
@@ -333,6 +334,35 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type InvalidSkillViewControllerEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidSkillViewControllerSchema>
+
+}
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface InvalidAppController {
+		
+			
+			'id': string
+	}
+
+	export interface InvalidAppControllerSchema extends SpruceSchema.Schema {
+		id: 'invalidAppController',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Invalid app controller',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type InvalidAppControllerEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidAppControllerSchema>
 
 }
 

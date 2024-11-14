@@ -904,17 +904,17 @@ export interface ActiveRecordSearchOptions {
     placeholder?: string
 }
 
-export interface AppViewController {
+export interface AppController {
     renderNavigation?(): Navigation | null | undefined
     renderToolBelt?(): ToolBelt | null | undefined
-    load?(options: AppViewControllerLoadOptions): Promise<void>
+    load?(options: AppControllerLoadOptions): Promise<void>
 }
 
-export type AppViewControllerConstructor = (new (
+export type AppControllerConstructor = (new (
     options: ViewControllerOptions
-) => AppViewController) & { id: string }
+) => AppController) & { id: string }
 
-export interface AppViewControllerLoadOptions {
+export interface AppControllerLoadOptions {
     router: Router
     authenticator: Authenticator
     authorizer: Authorizer

@@ -5,7 +5,7 @@ export * from '#spruce/schemas/schemas.types'
 
 export { default as AbstractSkillViewController } from './skillViewControllers/Abstract.svc'
 export { default as AbstractViewController } from './viewControllers/Abstract.vc'
-export { default as AbstractAppViewController } from './viewControllers/Abstract.avc'
+export { default as AbstractAppController } from './viewControllers/Abstract.ac'
 export * from './viewControllers/BigForm.vc'
 export { default as ButtonGroupViewController } from './viewControllers/ButtonGroup.vc'
 export * from './viewControllers/ButtonGroup.vc'
