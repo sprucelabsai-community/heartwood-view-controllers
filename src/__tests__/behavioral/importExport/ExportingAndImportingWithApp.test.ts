@@ -17,6 +17,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
         await this.importFirstApp()
         await this.importSecondApp()
 
+        //@ts-ignore
         const app = this.views.App('another-namespace')
         //@ts-ignore
         assert.isEqual(app.render(), 'another-team')
@@ -27,6 +28,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
     @test()
     protected static async throwsNiceErrorIfNoAppForNamespace() {
         const namespace = generateId()
+        //@ts-ignore
         const err = assert.doesThrow(() => this.views.App(namespace))
         errorAssert.assertError(err, 'APP_NOT_FOUND', {
             namespace,
@@ -43,6 +45,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
             return app
         }
 
+        //@ts-ignore
         const builtApp = this.views.App('namespace')
         assert.isEqual(builtApp, app)
     }
@@ -56,6 +59,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
     }
 
     private static assertFirstAppRendersAsExpected() {
+        //@ts-ignore
         const app = this.views.App('namespace')
         //@ts-ignore
         assert.isEqual(app.render(), 'go-team')

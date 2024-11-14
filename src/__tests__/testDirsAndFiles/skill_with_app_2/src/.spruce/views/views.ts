@@ -1,6 +1,6 @@
 import BookSkillViewController from '../../skillViewControllers/Book.svc'
 import BookFormViewController from '../../viewControllers/BookForm.vc'
-import AppController from '../../App.avc'
+import AppController from '../../App.ac'
 
 const vcs = {
     BookSkillViewController,

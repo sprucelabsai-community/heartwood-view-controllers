@@ -387,6 +387,7 @@ export type ImportedViewController = (new (
 
 export type ViewControllerId = keyof ViewControllerMap
 export type SkillViewControllerId = keyof SkillViewControllerMap
+export type AppControllerId = keyof AppControllerMap
 
 export interface RedirectOptions {
     shouldTrackHistory?: boolean
@@ -537,6 +538,7 @@ export interface ViewControllerOptionsMap {
 
 export interface SkillViewControllerMap {}
 export interface SkillViewControllerArgsMap {}
+export interface AppControllerMap {}
 
 export type ControllerOptions<
     N extends ViewControllerId,
@@ -909,6 +911,8 @@ export interface AppController {
     renderToolBelt?(): ToolBelt | null | undefined
     load?(options: AppControllerLoadOptions): Promise<void>
 }
+
+export type BuiltAppController = AppController & { id: string }
 
 export type AppControllerConstructor = (new (
     options: ViewControllerOptions

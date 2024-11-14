@@ -25,6 +25,8 @@ import {
     ViewControllerOptions,
     AppController,
     AppControllerConstructor,
+    AppControllerId,
+    AppControllerMap,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -206,7 +208,7 @@ export default class ViewControllerFactory {
         this.plugins[named] = plugin
     }
 
-    public App(namespace: string) {
+    public App<Id extends AppControllerId>(namespace: Id) {
         const App = this.AppMap[namespace]
 
         if (!App) {
@@ -216,7 +218,9 @@ export default class ViewControllerFactory {
             })
         }
 
-        return this.BuildApp(App)
+        return this.BuildApp(App) as AppControllerMap[Id] & {
+            id: Id
+        }
     }
 
     public Controller<

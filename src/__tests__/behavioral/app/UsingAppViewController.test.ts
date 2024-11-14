@@ -45,6 +45,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     protected static async havingAnIdProperyOnAppThrows() {
         HasIdApp.id = generateId()
         this.spyFactory.importControllers([], undefined, HasIdApp)
+        //@ts-ignore
         const err = assert.doesThrow(() => this.spyFactory.App(HasIdApp.id))
         errorAssert.assertError(err, 'INVALID_APP_CONTROLLER', {
             id: HasIdApp.id,
@@ -55,6 +56,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     protected static async attachesIdToAppInstance() {
         SpyApp.id = generateId()
         this.spyFactory.importControllers([], undefined, SpyApp)
+        //@ts-ignore
         const app = this.spyFactory.App(SpyApp.id)
         assert.isEqual(app.id, SpyApp.id)
     }
@@ -87,4 +89,10 @@ class SpyViewFactory extends ViewControllerFactory {
 
 class HasIdApp extends AbstractAppController {
     public id = generateId()
+}
+
+declare module '../../../types/heartwood.types' {
+    interface AppControllerMap {
+        test: SpyApp
+    }
 }
