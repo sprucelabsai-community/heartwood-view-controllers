@@ -2,6 +2,7 @@ import { PermissionContractId } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
+    AppController,
     Navigation,
     SkillViewController,
     SkillViewControllerId,
@@ -61,15 +62,32 @@ const navigationAssert = {
     },
 
     skillViewRendersNavigation(
-        vc: Pick<SkillViewController, 'renderNavigation'>
+        vc: Pick<SkillViewController, 'renderNavigation'>,
+        msg?: string
     ) {
         const nav = vc.renderNavigation?.()
         assert.isTruthy(
             nav,
-            `Your skill view did not render a navigation! Implement renderNavigation() and use this.Controller('navigation', {}) to render one.`
+            msg ??
+                `Your skill view did not render a navigation! Implement renderNavigation() and use this.Controller('navigation', {}) to render one.`
         )
 
         return nav.controller!
+    },
+
+    appRendersNavigation(vc: Pick<AppController, 'renderNavigation'>) {
+        return this.skillViewRendersNavigation(
+            vc,
+            `Your AppController did not render a navigation! Implement renderNavigation() and use this.Controller('navigation', {}) to render one.`
+        )
+    },
+
+    appDoesNotRenderNavigation(vc: Pick<AppController, 'renderNavigation'>) {
+        const nav = vc.renderNavigation?.()
+        assert.isNull(
+            nav,
+            `Your AppController should not render a navigation! Implement renderNavigation() and return null.`
+        )
     },
 
     skillViewDoesNotRenderNavigation(
