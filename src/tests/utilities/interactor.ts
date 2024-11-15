@@ -90,7 +90,7 @@ const interactor = {
     },
 
     async clickButton(vc: CardVc | FormVc | NavVc, buttonId: string) {
-        const match = pluckButtonFromCard(vc, buttonId)
+        const match = pluckButtonFromView(vc, buttonId)
         await this.click(match)
     },
 
@@ -119,7 +119,7 @@ const interactor = {
     async clickButtonHint(vc: CardVc | FormVc, buttonId: string) {
         assertOptions({ vc, buttonId }, ['vc', 'buttonId'])
 
-        const button = pluckButtonFromCard(vc, buttonId)
+        const button = pluckButtonFromView(vc, buttonId)
 
         assert.isTrue(
             button.shouldShowHintIcon,
@@ -620,7 +620,10 @@ const interactor = {
 
 export default interactor
 
-function pluckButtonFromCard(vc: CardVc | FormVc | NavVc, buttonId: string) {
+function pluckButtonFromView(
+    vc: CardVc | FormVc | NavVc | SkillViewController,
+    buttonId: string
+) {
     const { foundButtons } = pluckButtons(vc, [buttonId])
     const match = foundButtons[0]
 

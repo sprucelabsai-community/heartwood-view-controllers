@@ -1,3 +1,4 @@
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
@@ -5,6 +6,7 @@ import {
     Card,
     FormViewController,
     Navigation,
+    SkillViewController,
     TriggerRenderHandler,
     ViewController,
 } from '../../types/heartwood.types'
@@ -216,12 +218,41 @@ export function pluckButtons(
         | ViewController<Card>
         | ViewController<Navigation>
         | FormViewController<any>
-        | BigFormViewController<any>,
+        | BigFormViewController<any>
+        | SkillViewController,
     ids: string[]
 ): { found: string[]; missing: string[]; foundButtons: Button[] } {
     assertOptions({ vc, ids }, ['vc', 'ids'])
 
     const model = renderUtil.render(vc)
+
+    //@ts-ignore
+    if (model.layouts) {
+        const sv =
+            model as SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+        for (const layout of sv.layouts ?? []) {
+            const cards = layout?.cards
+            for (const card of cards ?? []) {
+                const results = pluckButtonsFromViewModel(card, ids)
+                if (results.found.length > 0) {
+                    return results
+                }
+            }
+        }
+    }
+
+    return pluckButtonsFromViewModel(model, ids)
+}
+
+function pluckButtonsFromViewModel(
+    model:
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>,
+    ids: string[]
+) {
     const buttons = [
         //@ts-ignore
         ...(model.criticalError?.buttons ?? model.footer?.buttons ?? []),
