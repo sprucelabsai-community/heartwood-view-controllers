@@ -2,12 +2,13 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/text.schema'
+import permissionContractReferenceSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/permissionContractReference.schema'
 
-const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButtonSchema  = {
-	id: 'dropdownButton',
+const navigationDropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema  = {
+	id: 'navigationDropdownButton',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: 'Dropdown button',
+	name: 'Navigation dropdown button',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -107,9 +108,14 @@ const dropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.D
 	                type: 'raw',
 	                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
 	            },
+	            /** . */
+	            'viewPermissionContract': {
+	                type: 'schema',
+	                options: {schema: permissionContractReferenceSchema_v2021_02_11,}
+	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(dropdownButtonSchema)
+SchemaRegistry.getInstance().trackSchema(navigationDropdownButtonSchema)
 
-export default dropdownButtonSchema
+export default navigationDropdownButtonSchema

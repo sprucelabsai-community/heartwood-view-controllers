@@ -7,7 +7,7 @@ const permissionContractReferenceSchema: SpruceSchemas.HeartwoodViewControllers.
 	id: 'permissionContractReference',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: '',
+	name: 'Permission contract reference',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */

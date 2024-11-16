@@ -1190,6 +1190,142 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface SkillView {
+			
+				
+				'id'?: string| undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
+				/** Center vertically. */
+				'shouldCenterVertically'?: boolean| undefined | null
+				/** Full screen. */
+				'isFullScreen'?: boolean| undefined | null
+				
+				'title'?: string| undefined | null
+				
+				'subtitle'?: string| undefined | null
+				
+				'description'?: string| undefined | null
+				/** Layout. */
+				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
+				
+				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
+		}
+
+		interface SkillViewSchema extends SpruceSchema.Schema {
+			id: 'skillView',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Skill view',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.SkillViewController`,}
+			            },
+			            /** Center vertically. */
+			            'shouldCenterVertically': {
+			                label: 'Center vertically',
+			                type: 'boolean',
+			                defaultValue: false,
+			                options: undefined
+			            },
+			            /** Full screen. */
+			            'isFullScreen': {
+			                label: 'Full screen',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'title': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'subtitle': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'description': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Layout. */
+			            'layouts': {
+			                label: 'Layout',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
+			            },
+			            /** . */
+			            'leftCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'rightCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'topCards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'cards': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'bottomCards': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
+			            },
+			            /** . */
+			            'layout': {
+			                type: 'select',
+			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
+			            },
+			    }
+		}
+
+		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface SelectInput {
 			
 				
@@ -1443,6 +1579,204 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface NavigationButtonDropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[]| undefined | null
+				
+				'card'?: (HeartwoodTypes.Card)| undefined | null
+		}
+
+		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
+			id: 'navigationButtonDropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface DestinationSkillViewController {
+			
+				
+				'id': (HeartwoodTypes.SkillViewControllerId)
+				
+				'args'?: (Record<string, any>)| undefined | null
+		}
+
+		interface DestinationSkillViewControllerSchema extends SpruceSchema.Schema {
+			id: 'destinationSkillViewController',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `HeartwoodTypes.SkillViewControllerId`,}
+			            },
+			            /** . */
+			            'args': {
+			                type: 'raw',
+			                options: {valueType: `Record<string, any>`,}
+			            },
+			    }
+		}
+
+		interface DestinationSkillViewControllerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface PermissionContractReference {
+			
+				
+				'id'?: (MercuryTypes.PermissionContractId)| undefined | null
+		}
+
+		interface PermissionContractReferenceSchema extends SpruceSchema.Schema {
+			id: 'permissionContractReference',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Permission contract reference',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'raw',
+			                options: {valueType: `MercuryTypes.PermissionContractId`,}
+			            },
+			    }
+		}
+
+		interface PermissionContractReferenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface NavigationButton {
+			
+				/** Line icon. */
+				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
+				
+				'id': string
+				
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				/** Destination skill view controller. */
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewController| undefined | null
+				/** Selected. */
+				'isEnabled'?: boolean| undefined | null
+				/** Label. */
+				'label'?: string| undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any)| undefined | null
+				/** Dropdown. */
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown| undefined | null
+		}
+
+		interface NavigationButtonSchema extends SpruceSchema.Schema {
+			id: 'navigationButton',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Navigation button',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                isRequired: true,
+			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
+			            },
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'viewPermissionContract': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
+			            },
+			            /** Destination skill view controller. */
+			            'destination': {
+			                label: 'Destination skill view controller',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema,}
+			            },
+			            /** Selected. */
+			            'isEnabled': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** Dropdown. */
+			            'dropdown': {
+			                label: 'Dropdown',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface Navigation {
 			
 				/** Render button labels. Should the button labels be rendered? */
@@ -1500,128 +1834,54 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface DestinationSkillViewController {
+		interface NavigationDropdownButton {
 			
 				
-				'id': (HeartwoodTypes.SkillViewControllerId)
-				
-				'args'?: (Record<string, any>)| undefined | null
-		}
-
-		interface DestinationSkillViewControllerSchema extends SpruceSchema.Schema {
-			id: 'destinationSkillViewController',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `HeartwoodTypes.SkillViewControllerId`,}
-			            },
-			            /** . */
-			            'args': {
-			                type: 'raw',
-			                options: {valueType: `Record<string, any>`,}
-			            },
-			    }
-		}
-
-		interface DestinationSkillViewControllerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface PermissionContractReference {
-			
-				
-				'id'?: (MercuryTypes.PermissionContractId)| undefined | null
-		}
-
-		interface PermissionContractReferenceSchema extends SpruceSchema.Schema {
-			id: 'permissionContractReference',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'raw',
-			                options: {valueType: `MercuryTypes.PermissionContractId`,}
-			            },
-			    }
-		}
-
-		interface PermissionContractReferenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface NavigationButton {
-			
-				/** Line icon. */
-				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
-				
-				'id': string
-				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
-				/** Destination skill view controller. */
-				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewController| undefined | null
-				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'id'?: string| undefined | null
 				/** Label. */
 				'label'?: string| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				/** Selected. */
+				'isSelected'?: boolean| undefined | null
+				/** Selected. */
+				'isEnabled'?: boolean| undefined | null
+				/** Add to fade-in queue.. Fade in effect could change. */
+				'shouldQueueShow'?: boolean| undefined | null
+				/** Show hint icon. */
+				'shouldShowHintIcon'?: boolean| undefined | null
+				/** Click handler for hint icon. */
+				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				/** Type. */
+				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				/** Image. */
+				'image'?: string| undefined | null
+				/** Avatar. */
+				'avatar'?: string| undefined | null
+				/** Line icon. */
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				/** Line icon position. */
+				'lineIconPosition'?: ("left" | "bottom")| undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
-				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown| undefined | null
+				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
+				
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
 		}
 
-		interface NavigationButtonSchema extends SpruceSchema.Schema {
-			id: 'navigationButton',
+		interface NavigationDropdownButtonSchema extends SpruceSchema.Schema {
+			id: 'navigationDropdownButton',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
-			name: '',
+			name: 'Navigation dropdown button',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** Line icon. */
-			            'lineIcon': {
-			                label: 'Line icon',
-			                type: 'select',
-			                isRequired: true,
-			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
-			            },
 			            /** . */
 			            'id': {
 			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'viewPermissionContract': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
-			            },
-			            /** Destination skill view controller. */
-			            'destination': {
-			                label: 'Destination skill view controller',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema,}
-			            },
-			            /** Selected. */
-			            'isEnabled': {
-			                label: 'Selected',
-			                type: 'boolean',
-			                defaultValue: true,
 			                options: undefined
 			            },
 			            /** Label. */
@@ -1630,22 +1890,101 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                options: undefined
 			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ButtonController`,}
+			            },
+			            /** Selected. */
+			            'isSelected': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Selected. */
+			            'isEnabled': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Add to fade-in queue.. Fade in effect could change. */
+			            'shouldQueueShow': {
+			                label: 'Add to fade-in queue.',
+			                type: 'boolean',
+			                hint: 'Fade in effect could change.',
+			                options: undefined
+			            },
+			            /** Show hint icon. */
+			            'shouldShowHintIcon': {
+			                label: 'Show hint icon',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Click handler for hint icon. */
+			            'onClickHintIcon': {
+			                label: 'Click handler for hint icon',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** . */
+			            'hint': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema,}
+			            },
+			            /** Type. */
+			            'type': {
+			                label: 'Type',
+			                type: 'select',
+			                defaultValue: "secondary",
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
+			            },
+			            /** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
+			            'selectedLineIcon': {
+			                label: 'Selected line icon',
+			                type: 'select',
+			                hint: 'Only applies when the button is selected. Will override line icon if one is set.',
+			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
+			            },
+			            /** Line icon position. */
+			            'lineIconPosition': {
+			                label: 'Line icon position',
+			                type: 'select',
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"bottom","label":"Bottom"}],}
+			            },
 			            /** Click handler. */
 			            'onClick': {
 			                label: 'Click handler',
 			                type: 'raw',
-			                options: {valueType: `() => Promise<any> | any`,}
+			                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
 			            },
-			            /** Dropdown. */
-			            'dropdown': {
-			                label: 'Dropdown',
+			            /** . */
+			            'viewPermissionContract': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
 			            },
 			    }
 		}
 
-		interface NavigationButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema> {}
+		interface NavigationDropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema> {}
 
 	}
 
@@ -1829,142 +2168,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface SkillView {
-			
-				
-				'id'?: string| undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
-				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
-				/** Full screen. */
-				'isFullScreen'?: boolean| undefined | null
-				
-				'title'?: string| undefined | null
-				
-				'subtitle'?: string| undefined | null
-				
-				'description'?: string| undefined | null
-				/** Layout. */
-				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
-				
-				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
-				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
-		}
-
-		interface SkillViewSchema extends SpruceSchema.Schema {
-			id: 'skillView',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Skill view',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.SkillViewController`,}
-			            },
-			            /** Center vertically. */
-			            'shouldCenterVertically': {
-			                label: 'Center vertically',
-			                type: 'boolean',
-			                defaultValue: false,
-			                options: undefined
-			            },
-			            /** Full screen. */
-			            'isFullScreen': {
-			                label: 'Full screen',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** . */
-			            'title': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'subtitle': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'description': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Layout. */
-			            'layouts': {
-			                label: 'Layout',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LayoutSchema,}
-			            },
-			            /** . */
-			            'leftCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'rightCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'topCards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'cards': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'bottomCards': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema,}
-			            },
-			            /** . */
-			            'layout': {
-			                type: 'select',
-			                options: {choices: [{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
-			            },
-			    }
-		}
-
-		interface SkillViewEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface FormBuilderImportExportPage<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				/** Page title. */
@@ -2098,102 +2301,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface FancyIconEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FancyIconSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface CardBody {
-			
-				/** Show section separators. This will make each section render with a border. */
-				'shouldShowSectionSeparators'?: boolean| undefined | null
-				/** Busy. */
-				'isBusy'?: boolean| undefined | null
-				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
-				/** Swipe. */
-				'shouldEnableSectionSwiping'?: boolean| undefined | null
-				/** Swipe break into cards on landscape. */
-				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
-				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
-				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void)| undefined | null
-				/** Render sections as grid. */
-				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
-				/** Sections. */
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
-		}
-
-		interface CardBodySchema extends SpruceSchema.Schema {
-			id: 'cardBody',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Show section separators. This will make each section render with a border. */
-			            'shouldShowSectionSeparators': {
-			                label: 'Show section separators',
-			                type: 'boolean',
-			                hint: 'This will make each section render with a border.',
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe controller. */
-			            'swipeController': {
-			                label: 'Swipe controller',
-			                type: 'raw',
-			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
-			            },
-			            /** Swipe. */
-			            'shouldEnableSectionSwiping': {
-			                label: 'Swipe',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe break into cards on landscape. */
-			            'shouldSwipeBreakIntoCardsOnLandscape': {
-			                label: 'Swipe break into cards on landscape',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Select slide title handler. */
-			            'onSelectSlideTitle': {
-			                label: 'Select slide title handler',
-			                type: 'raw',
-			                options: {valueType: `(id: number) => void`,}
-			            },
-			            /** Slide change callback. */
-			            'onChangeSlide': {
-			                label: 'Slide change callback',
-			                type: 'raw',
-			                options: {valueType: `(slide: number) => void`,}
-			            },
-			            /** Render sections as grid. */
-			            'shouldRenderSectionsAsGrid': {
-			                label: 'Render sections as grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Sections. */
-			            'sections': {
-			                label: 'Sections',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
-			            },
-			    }
-		}
-
-		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
 
 	}
 
@@ -2351,52 +2458,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface PortalEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Feed {
-			
-				
-				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
-				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
-				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
-		}
-
-		interface FeedSchema extends SpruceSchema.Schema {
-			id: 'feed',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Feed',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
-			            },
-			            /** . */
-			            'onSubmitMessage': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
-			            },
-			            /** . */
-			            'controller': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
-			            },
-			    }
-		}
-
-		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
 
 	}
 
@@ -2665,6 +2726,148 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CardSectionEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardBody {
+			
+				/** Show section separators. This will make each section render with a border. */
+				'shouldShowSectionSeparators'?: boolean| undefined | null
+				/** Busy. */
+				'isBusy'?: boolean| undefined | null
+				/** Swipe controller. */
+				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
+				/** Swipe. */
+				'shouldEnableSectionSwiping'?: boolean| undefined | null
+				/** Swipe break into cards on landscape. */
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
+				/** Select slide title handler. */
+				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
+				/** Slide change callback. */
+				'onChangeSlide'?: ((slide: number) => void)| undefined | null
+				/** Render sections as grid. */
+				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
+				/** Sections. */
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
+		}
+
+		interface CardBodySchema extends SpruceSchema.Schema {
+			id: 'cardBody',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Show section separators. This will make each section render with a border. */
+			            'shouldShowSectionSeparators': {
+			                label: 'Show section separators',
+			                type: 'boolean',
+			                hint: 'This will make each section render with a border.',
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe controller. */
+			            'swipeController': {
+			                label: 'Swipe controller',
+			                type: 'raw',
+			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
+			            },
+			            /** Swipe. */
+			            'shouldEnableSectionSwiping': {
+			                label: 'Swipe',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe break into cards on landscape. */
+			            'shouldSwipeBreakIntoCardsOnLandscape': {
+			                label: 'Swipe break into cards on landscape',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Select slide title handler. */
+			            'onSelectSlideTitle': {
+			                label: 'Select slide title handler',
+			                type: 'raw',
+			                options: {valueType: `(id: number) => void`,}
+			            },
+			            /** Slide change callback. */
+			            'onChangeSlide': {
+			                label: 'Slide change callback',
+			                type: 'raw',
+			                options: {valueType: `(slide: number) => void`,}
+			            },
+			            /** Render sections as grid. */
+			            'shouldRenderSectionsAsGrid': {
+			                label: 'Render sections as grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Sections. */
+			            'sections': {
+			                label: 'Sections',
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
+			            },
+			    }
+		}
+
+		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Feed {
+			
+				
+				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
+		}
+
+		interface FeedSchema extends SpruceSchema.Schema {
+			id: 'feed',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Feed',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . */
+			            'onSubmitMessage': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
+			            },
+			    }
+		}
+
+		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
 
 	}
 
@@ -7311,7 +7514,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			id: 'dropdownButton',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
-			name: '',
+			name: 'Dropdown button',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */

@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { buttonFields } from '../../constants'
+import dropdownButtonBuilder from './dropdownButton.builder'
 
 export default buildSchema({
     id: 'dropdown',
@@ -34,20 +34,7 @@ export default buildSchema({
             type: 'schema',
             isArray: true,
             options: {
-                schema: {
-                    id: 'dropdownButton',
-                    fields: {
-                        ...buttonFields,
-                        onClick: {
-                            type: 'raw',
-                            label: 'Click handler',
-                            options: {
-                                valueType:
-                                    '(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void',
-                            },
-                        },
-                    },
-                },
+                schema: dropdownButtonBuilder,
             },
         },
         card: {

@@ -3,13 +3,13 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import permissionContractReferenceSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/permissionContractReference.schema'
 import destinationSkillViewControllerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
-import dropdownSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/dropdown.schema'
+import navigationButtonDropdownSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButtonDropdown.schema'
 
 const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema  = {
 	id: 'navigationButton',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: '',
+	name: 'Navigation button',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** Line icon. */
@@ -59,7 +59,7 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	            'dropdown': {
 	                label: 'Dropdown',
 	                type: 'schema',
-	                options: {schema: dropdownSchema_v2021_02_11,}
+	                options: {schema: navigationButtonDropdownSchema_v2021_02_11,}
 	            },
 	    }
 }

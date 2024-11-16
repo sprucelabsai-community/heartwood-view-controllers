@@ -204,5 +204,7 @@ export { default as progressDetailsSchema } from '#spruce/schemas/heartwoodViewC
 export { default as barChartSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChart.schema'
 export { default as barChartDataPointSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChartDataPoint.schema'
 export { default as barChartDataSetSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChartDataSet.schema'
+export { default as navigationButtonDropdownSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButtonDropdown.schema'
+export { default as navigationDropdownButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationDropdownButton.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'
