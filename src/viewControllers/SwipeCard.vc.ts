@@ -207,6 +207,8 @@ const PASSTHROUGH_METHODS = [
     'disableFooter',
     'getIsFooterEnabled',
     'setHeader',
+    'setFooterIsBusy',
+    'getIsFooterBusy',
 ] as const
 
 export type SwipeCardPassthroughMethods = {
