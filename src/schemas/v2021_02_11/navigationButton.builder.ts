@@ -3,6 +3,7 @@ import { buttonFields } from '../../constants'
 import dropdownBuilder from './dropdown.builder'
 import navigationDropdownButtonBuilder from './navigationDropdownButton.builder'
 import permissionContractReferenceBuilder from './permissionContractReference.builder'
+import routerDestinationBuilder from './routerDestination.builder'
 
 export default buildSchema({
     id: 'navigationButton',
@@ -26,25 +27,7 @@ export default buildSchema({
             type: 'schema',
             label: 'Destination skill view controller',
             options: {
-                schema: buildSchema({
-                    id: 'destinationSkillViewController',
-                    fields: {
-                        id: {
-                            type: 'raw',
-                            isRequired: true,
-                            options: {
-                                valueType:
-                                    'HeartwoodTypes.SkillViewControllerId',
-                            },
-                        },
-                        args: {
-                            type: 'raw',
-                            options: {
-                                valueType: 'Record<string, any>',
-                            },
-                        },
-                    },
-                }),
+                schema: routerDestinationBuilder,
             },
         },
         ...pickFields(buttonFields, ['isEnabled', 'label', 'onClick']),

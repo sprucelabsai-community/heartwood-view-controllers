@@ -1624,7 +1624,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface DestinationSkillViewController {
+		interface RouterDestination {
 			
 				
 				'id': (HeartwoodTypes.SkillViewControllerId)
@@ -1632,11 +1632,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'args'?: (Record<string, any>)| undefined | null
 		}
 
-		interface DestinationSkillViewControllerSchema extends SpruceSchema.Schema {
-			id: 'destinationSkillViewController',
+		interface RouterDestinationSchema extends SpruceSchema.Schema {
+			id: 'routerDestination',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
-			name: '',
+			name: 'router destination',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
 			            /** . */
@@ -1653,7 +1653,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		interface DestinationSkillViewControllerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema> {}
+		interface RouterDestinationEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema> {}
 
 	}
 
@@ -1699,7 +1699,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
 				/** Destination skill view controller. */
-				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewController| undefined | null
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination| undefined | null
 				/** Selected. */
 				'isEnabled'?: boolean| undefined | null
 				/** Label. */
@@ -1739,7 +1739,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'destination': {
 			                label: 'Destination skill view controller',
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
 			            },
 			            /** Selected. */
 			            'isEnabled': {
@@ -1870,6 +1870,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
 				
 				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				/** Destination skill view controller. */
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination| undefined | null
 		}
 
 		interface NavigationDropdownButtonSchema extends SpruceSchema.Schema {
@@ -1980,6 +1982,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'viewPermissionContract': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
+			            },
+			            /** Destination skill view controller. */
+			            'destination': {
+			                label: 'Destination skill view controller',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
 			            },
 			    }
 		}

@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const destinationSkillViewControllerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DestinationSkillViewControllerSchema  = {
-	id: 'destinationSkillViewController',
+const routerDestinationSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema  = {
+	id: 'routerDestination',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: '',
+	name: 'router destination',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -24,6 +24,6 @@ const destinationSkillViewControllerSchema: SpruceSchemas.HeartwoodViewControlle
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(destinationSkillViewControllerSchema)
+SchemaRegistry.getInstance().trackSchema(routerDestinationSchema)
 
-export default destinationSkillViewControllerSchema
+export default routerDestinationSchema

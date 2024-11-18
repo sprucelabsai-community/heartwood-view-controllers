@@ -196,7 +196,6 @@ export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachin
 export { default as navigationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigation.schema'
 export { default as navigationButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButton.schema'
 export { default as permissionContractReferenceSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/permissionContractReference.schema'
-export { default as destinationSkillViewControllerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
 export { default as countdownTimerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/countdownTimer.schema'
 export { default as progressNavigatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigator.schema'
 export { default as progressNavigatorStepSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/progressNavigatorStep.schema'
@@ -206,5 +205,6 @@ export { default as barChartDataPointSchema } from '#spruce/schemas/heartwoodVie
 export { default as barChartDataSetSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/barChartDataSet.schema'
 export { default as navigationButtonDropdownSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButtonDropdown.schema'
 export { default as navigationDropdownButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationDropdownButton.schema'
+export { default as routerDestinationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

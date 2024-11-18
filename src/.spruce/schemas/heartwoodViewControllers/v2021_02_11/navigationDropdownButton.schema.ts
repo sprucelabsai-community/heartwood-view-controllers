@@ -3,6 +3,7 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/text.schema'
 import permissionContractReferenceSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/permissionContractReference.schema'
+import routerDestinationSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
 
 const navigationDropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema  = {
 	id: 'navigationDropdownButton',
@@ -112,6 +113,12 @@ const navigationDropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v20
 	            'viewPermissionContract': {
 	                type: 'schema',
 	                options: {schema: permissionContractReferenceSchema_v2021_02_11,}
+	            },
+	            /** Destination skill view controller. */
+	            'destination': {
+	                label: 'Destination skill view controller',
+	                type: 'schema',
+	                options: {schema: routerDestinationSchema_v2021_02_11,}
 	            },
 	    }
 }

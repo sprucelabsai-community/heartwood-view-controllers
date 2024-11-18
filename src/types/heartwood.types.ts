@@ -393,10 +393,8 @@ export interface RedirectOptions {
     shouldTrackHistory?: boolean
 }
 
-export interface RedirectDestination {
-    id: SkillViewControllerId
-    args?: Record<string, any>
-}
+export type RouterDestination =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination
 
 export interface Router {
     redirect<Id extends SkillViewControllerId>(

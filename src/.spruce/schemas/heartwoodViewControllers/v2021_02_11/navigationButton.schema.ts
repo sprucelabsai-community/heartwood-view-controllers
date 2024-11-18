@@ -2,7 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import permissionContractReferenceSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/permissionContractReference.schema'
-import destinationSkillViewControllerSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/destinationSkillViewController.schema'
+import routerDestinationSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
 import navigationButtonDropdownSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButtonDropdown.schema'
 
 const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema  = {
@@ -34,7 +34,7 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	            'destination': {
 	                label: 'Destination skill view controller',
 	                type: 'schema',
-	                options: {schema: destinationSkillViewControllerSchema_v2021_02_11,}
+	                options: {schema: routerDestinationSchema_v2021_02_11,}
 	            },
 	            /** Selected. */
 	            'isEnabled': {
