@@ -135,18 +135,17 @@ export default class ViewControllerFactory {
 
     public importControllers<Vc extends ImportedViewController>(
         Vcs: Vc[],
-        plugins?: ViewControllerPluginsByName,
-        App?: AppControllerConstructor
+        plugins?: ViewControllerPluginsByName
     ) {
         for (const Vc of Vcs) {
             this.controllerMap[Vc.id] = Vc
         }
 
-        if (App) {
-            this.AppMap[App.id] = App
-        }
-
         this.importPlugins(plugins)
+    }
+
+    public setAppController(App: AppControllerConstructor) {
+        this.AppMap[App.id] = App
     }
 
     private importPlugins(

@@ -24,8 +24,10 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
     protected static import() {
         const contents = diskUtil.readFile(this.destination)
         const { controllers, plugins, App } = this.importer.import(contents)
-        debugger
-        this.views.importControllers(controllers, plugins, App)
+        this.views.importControllers(controllers, plugins)
+        if (App) {
+            this.views.setAppController(App)
+        }
     }
 
     protected static async export(sourcePath: string) {

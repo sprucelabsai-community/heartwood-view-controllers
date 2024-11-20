@@ -43,7 +43,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         assert.isFalse(this.hasApp(generateId()))
 
         SpyApp.id = generateId()
-        this.spyFactory.importControllers([], undefined, SpyApp)
+        this.spyFactory.setAppController(SpyApp)
 
         assert.isTrue(this.hasApp(SpyApp.id))
         assert.isFalse(this.hasApp(generateId()))
@@ -52,7 +52,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     @test()
     protected static async havingAnIdProperyOnAppThrows() {
         HasIdApp.id = generateId()
-        this.spyFactory.importControllers([], undefined, HasIdApp)
+        this.spyFactory.setAppController(HasIdApp)
         //@ts-ignore
         const err = assert.doesThrow(() => this.spyFactory.App(HasIdApp.id))
         errorAssert.assertError(err, 'INVALID_APP_CONTROLLER', {
@@ -63,7 +63,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     @test()
     protected static async attachesIdToAppInstance() {
         SpyApp.id = generateId()
-        this.spyFactory.importControllers([], undefined, SpyApp)
+        this.spyFactory.setAppController(SpyApp)
         //@ts-ignore
         const app = this.spyFactory.App(SpyApp.id)
         assert.isEqual(app.id, SpyApp.id)
