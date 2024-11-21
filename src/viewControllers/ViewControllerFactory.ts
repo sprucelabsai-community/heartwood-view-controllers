@@ -166,10 +166,8 @@ export default class ViewControllerFactory {
 
     public BuildApp<A extends AppController>(
         App: new (options: ViewControllerOptions) => A
-    ): A & { id: string } {
-        const app = new App(this.buildViewContructorOptions('App')) as A & {
-            id: string
-        }
+    ): A {
+        const app = new App(this.buildViewContructorOptions('App')) as A
         //@ts-ignore
         if (app.id) {
             throw new SpruceError({
@@ -218,9 +216,7 @@ export default class ViewControllerFactory {
             })
         }
 
-        return this.BuildApp(App) as AppControllerMap[Id] & {
-            id: Id
-        }
+        return this.BuildApp(App) as AppControllerMap[Id]
     }
 
     public Controller<

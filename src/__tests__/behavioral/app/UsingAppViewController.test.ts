@@ -66,6 +66,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         this.spyFactory.setAppController(SpyApp)
         //@ts-ignore
         const app = this.spyFactory.App(SpyApp.id)
+        //@ts-ignore
         assert.isEqual(app.id, SpyApp.id)
     }
 
