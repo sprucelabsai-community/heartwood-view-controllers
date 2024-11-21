@@ -389,4 +389,55 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
         navigationAssert.hasAdditionalValidRoutes(vc, expected)
     }
+
+    @test()
+    protected static async canAssertButtonsNestedInDropdown() {
+        const id = generateId()
+        const id2 = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id: 'my-button',
+                    lineIcon: 'add',
+                    dropdown: {
+                        items: [
+                            {
+                                id,
+                                label: 'Hey there!',
+                            },
+                            {
+                                id: id2,
+                                label: 'Hey there!',
+                            },
+                        ],
+                    },
+                },
+            ],
+        })
+
+        navigationAssert.rendersButton(vc, id)
+        navigationAssert.rendersButton(vc, id2)
+    }
+
+    @test()
+    protected static async throwsWhenButtonNotInDropdown() {
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id: 'my-button',
+                    lineIcon: 'add',
+                    dropdown: {
+                        items: [
+                            {
+                                id: generateId(),
+                                label: 'Hey there!',
+                            },
+                        ],
+                    },
+                },
+            ],
+        })
+
+        assert.doesThrow(() => navigationAssert.rendersButton(vc, generateId()))
+    }
 }
