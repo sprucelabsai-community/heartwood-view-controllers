@@ -145,6 +145,7 @@ export default class ViewControllerFactory {
     }
 
     public setAppController(App: AppControllerConstructor) {
+        //@ts-ignore
         this.AppMap[App.id] = App
     }
 

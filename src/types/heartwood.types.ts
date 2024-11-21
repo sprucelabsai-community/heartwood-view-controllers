@@ -912,9 +912,9 @@ export interface AppController {
 
 export type BuiltAppController = AppController & { id: string }
 
-export type AppControllerConstructor = (new (
+export type AppControllerConstructor = new (
     options: ViewControllerOptions
-) => AppController) & { id: string }
+) => AppController
 
 export interface AppControllerLoadOptions {
     router: Router
