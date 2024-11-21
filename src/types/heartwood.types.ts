@@ -331,6 +331,9 @@ export type BarChartDataPoint =
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
+export type NavigationRoute =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute
+
 export type LayoutStyle = NonNullable<
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
 >

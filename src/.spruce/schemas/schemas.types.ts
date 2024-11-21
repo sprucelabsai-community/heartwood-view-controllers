@@ -1690,6 +1690,43 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface NavigationRoute {
+			
+				
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				
+				'destination': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination
+		}
+
+		interface NavigationRouteSchema extends SpruceSchema.Schema {
+			id: 'navigationRoute',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'viewPermissionContract': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
+			            },
+			            /** . */
+			            'destination': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
+			            },
+			    }
+		}
+
+		interface NavigationRouteEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface NavigationButton {
 			
 				/** Line icon. */
@@ -1787,6 +1824,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>)| undefined | null
 				
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton[]| undefined | null
+				
+				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[]| undefined | null
 		}
 
 		interface NavigationSchema extends SpruceSchema.Schema {
@@ -1822,6 +1861,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                isArray: true,
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema,}
+			            },
+			            /** . */
+			            'additionalValidRoutes': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema,}
 			            },
 			    }
 		}

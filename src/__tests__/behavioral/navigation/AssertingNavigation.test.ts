@@ -1,9 +1,11 @@
 import { PermissionContractId } from '@sprucelabs/mercury-types'
+import { cloneDeep } from '@sprucelabs/schema'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
     NavigationButton,
+    NavigationRoute,
     SkillViewControllerId,
 } from '../../../types/heartwood.types'
 import AbstractNavigationTest from './AbstractNavigationTest'
@@ -323,5 +325,68 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         })
 
         navigationAssert.buttonRequiresViewPermissions(vc, id, 'feed-contract')
+    }
+
+    @test()
+    protected static rendersButtonsThrowsWithMissing() {
+        //@ts-ignore
+        const err = assert.doesThrow(() => navigationAssert.rendersButtons())
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'buttons'],
+        })
+    }
+
+    @test()
+    protected static async assertAdditionalRoutesThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            navigationAssert.hasAdditionalValidRoutes()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'routes'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenValidRoutesDoNotMatch() {
+        const vc = this.NavigationVc({
+            buttons: [],
+        })
+
+        assert.doesThrow(
+            () =>
+                navigationAssert.hasAdditionalValidRoutes(vc, [
+                    {
+                        destination: {
+                            id: 'test' as SkillViewControllerId,
+                        },
+                    },
+                ]),
+            'valid routes'
+        )
+    }
+
+    @test()
+    protected static async passesIfValidRoutesMatch() {
+        const actual: NavigationRoute[] = [
+            {
+                destination: {
+                    id: generateId() as SkillViewControllerId,
+                },
+                viewPermissionContract: {
+                    id: 'feed-contract',
+                },
+            },
+        ]
+
+        const expected = cloneDeep(actual)
+
+        const vc = this.NavigationVc({
+            buttons: [],
+            additionalValidRoutes: actual,
+        })
+
+        navigationAssert.hasAdditionalValidRoutes(vc, expected)
     }
 }

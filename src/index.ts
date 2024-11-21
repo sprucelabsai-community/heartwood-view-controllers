@@ -206,5 +206,6 @@ export { default as barChartDataSetSchema } from '#spruce/schemas/heartwoodViewC
 export { default as navigationButtonDropdownSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButtonDropdown.schema'
 export { default as navigationDropdownButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationDropdownButton.schema'
 export { default as routerDestinationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
+export { default as navigationRouteSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationRoute.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'

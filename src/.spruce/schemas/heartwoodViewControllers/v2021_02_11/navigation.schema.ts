@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import navigationButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationButton.schema'
+import navigationRouteSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationRoute.schema'
 
 const navigationSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationSchema  = {
 	id: 'navigation',
@@ -36,6 +37,13 @@ const navigationSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navig
 	                type: 'schema',
 	                isArray: true,
 	                options: {schema: navigationButtonSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'additionalValidRoutes': {
+	                type: 'schema',
+	                isArray: true,
+	                minArrayLength: 0,
+	                options: {schema: navigationRouteSchema_v2021_02_11,}
 	            },
 	    }
 }

@@ -4,6 +4,7 @@ import { assert } from '@sprucelabs/test-utils'
 import {
     AppController,
     Navigation,
+    NavigationRoute,
     SkillViewController,
     SkillViewControllerId,
     ViewController,
@@ -50,6 +51,7 @@ const navigationAssert = {
     },
 
     rendersButtons(vc: ViewController<Navigation>, ids: string[]) {
+        assertOptions({ vc, buttons: ids }, ['vc', 'buttons'])
         ids.forEach((id) => this.rendersButton(vc, id))
     },
 
@@ -117,6 +119,20 @@ const navigationAssert = {
             match.viewPermissionContract?.id,
             permissionContractId,
             'Your button did not have the view permission contract set to what I expected!'
+        )
+    },
+
+    hasAdditionalValidRoutes(
+        vc: ViewController<Navigation>,
+        routes: NavigationRoute[]
+    ) {
+        assertOptions({ vc, routes }, ['vc', 'routes'])
+
+        const model = renderUtil.render(vc)
+        assert.isEqualDeep(
+            model.additionalValidRoutes,
+            routes,
+            `I did not find the valid routes I expected. Make sure you set 'additionalValidRoutes' in your navigation's view model (constructor options).`
         )
     },
 }

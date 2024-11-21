@@ -1,5 +1,7 @@
 import { buildSchema } from '@sprucelabs/schema'
 import navigationButtonBuilder from './navigationButton.builder'
+import permissionContractReferenceBuilder from './permissionContractReference.builder'
+import routerDestinationBuilder from './routerDestination.builder'
 
 export default buildSchema({
     id: 'navigation',
@@ -34,6 +36,31 @@ export default buildSchema({
             isArray: true,
             options: {
                 schema: navigationButtonBuilder,
+            },
+        },
+        additionalValidRoutes: {
+            type: 'schema',
+            isArray: true,
+            minArrayLength: 0,
+            options: {
+                schema: buildSchema({
+                    id: 'navigationRoute',
+                    fields: {
+                        viewPermissionContract: {
+                            type: 'schema',
+                            options: {
+                                schema: permissionContractReferenceBuilder,
+                            },
+                        },
+                        destination: {
+                            type: 'schema',
+                            isRequired: true,
+                            options: {
+                                schema: routerDestinationBuilder,
+                            },
+                        },
+                    },
+                }),
             },
         },
     },
