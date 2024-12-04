@@ -13,6 +13,7 @@ import {
     assertOptions,
     cloneDeep,
     normalizeSchemaValues,
+    ValuesWithPaths,
 } from '@sprucelabs/schema'
 import { defaultSubmitButtonLabel } from '../../constants'
 import SpruceError from '../../errors/SpruceError'
@@ -326,7 +327,7 @@ export default class FormViewController<
         }
         return normalizeSchemaValues(
             this.model.schema,
-            { ...values },
+            { ...values } as ValuesWithPaths<SchemaPartialValues<S>>,
             {
                 shouldValidate: false,
                 fields,
