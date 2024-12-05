@@ -1,3 +1,13 @@
+## [112.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.1.0...v112.1.1) (2024-12-05)
+
+# [112.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.0.1...v112.1.0) (2024-12-05)
+
+
+### Features
+
+* lock screen assert ([a001fda](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a001fda))
+* locks creen tracks own visibility ([1cd3dcf](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1cd3dcf))
+
 ## [112.0.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.0.0...v112.0.1) (2024-12-05)
 
 # [112.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.1.66...v112.0.0) (2024-12-05)
