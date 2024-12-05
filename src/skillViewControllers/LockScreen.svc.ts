@@ -22,7 +22,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
         this.skillViewController = controller as SkillViewController
     }
 
-    public setHideHindler(hideHandler: HideDialogHandler) {
+    public setHideHandler(hideHandler: HideDialogHandler) {
         this.hideHandler = hideHandler
     }
 

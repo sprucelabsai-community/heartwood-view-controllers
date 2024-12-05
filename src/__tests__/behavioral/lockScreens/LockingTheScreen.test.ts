@@ -111,7 +111,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
 
         let wasHit = false
 
-        vc.setHideHindler(() => {
+        vc.setHideHandler(() => {
             wasHit = true
         })
 
