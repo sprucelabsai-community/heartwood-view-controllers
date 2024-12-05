@@ -80,10 +80,18 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>`,}
 	            },
-	            /** Close callback. */
+	            /** Close callback. Called when the dialog is closed */
 	            'onClose': {
 	                label: 'Close callback',
 	                type: 'raw',
+	                hint: 'Called when the dialog is closed',
+	                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
+	            },
+	            /** Close handler. Called to actually close the dialog */
+	            'closeHandler': {
+	                label: 'Close handler',
+	                type: 'raw',
+	                hint: 'Called to actually close the dialog',
 	                options: {valueType: `() => Promise<void | boolean> | void | boolean`,}
 	            },
 	    }

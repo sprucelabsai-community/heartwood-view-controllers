@@ -25,6 +25,9 @@ import {
 } from '..'
 import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
+import LockScreenSkillViewController, {
+    LockScreenSkillViewControllerOptions,
+} from '../skillViewControllers/LockScreen.svc'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
 import ActiveRecordCardViewController, {
     ActiveRecordCardViewControllerOptions,
@@ -290,12 +293,15 @@ export type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
 export type ListRow = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 export type ListCell =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell
+export type Dialog = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
 export type Receipt = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt
 export type Pager = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager
 export type Slide =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 export type SkillView =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
+export type LockScreen =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockScreen
 export type Calendar =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar
 export type CalendarPerson =
@@ -365,7 +371,8 @@ export type LineIconPosition = NonNullable<Button['lineIconPosition']>
 
 export interface SkillViewController<
     Args extends Record<string, any> = Record<string, any>,
-> extends ViewController<SkillView> {
+    ViewModel extends Record<string, any> = SkillView,
+> extends ViewController<ViewModel> {
     getIsLoginRequired?(): Promise<boolean>
     focus?(): Promise<void>
     /**
@@ -492,6 +499,7 @@ export interface ViewControllerMap {
     'polar-area': PolarAreaViewController
     pager: PagerViewController
     'bar-chart': BarChartViewController
+    'lock-screen': LockScreenSkillViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -535,6 +543,7 @@ export interface ViewControllerOptionsMap {
     'polar-area': PolarAreaViewControllerOptions
     pager: PagerViewControllerOptions
     'bar-chart': BarChartViewControllerOptions
+    'lock-screen': LockScreenSkillViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}
@@ -569,6 +578,8 @@ export interface OnRenderHandler {
 export type RenderInDialogHandler = (
     options: DialogViewControllerOptions
 ) => void
+
+export type RenderLockScreenHandler = (options: LockScreen) => void
 
 export interface ConfirmOptions {
     title?: string
@@ -612,6 +623,7 @@ export interface ViewControllerOptions {
     vcFactory: ViewControllerFactory
     connectToApi: () => Promise<Client>
     renderInDialogHandler: RenderInDialogHandler
+    renderLockScreenHandler: RenderLockScreenHandler
     confirmHandler: ConfirmHandler
     voteHandler: VoteHandler
     toastHandler: ToastHandler

@@ -17,7 +17,7 @@ import {
 import renderUtil, { RenderOptions } from '../utilities/render.utility'
 import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory, {
-    ViewControllerFactoryConstructorOptions,
+    ViewControllerFactoryOptions,
 } from '../viewControllers/ViewControllerFactory'
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
@@ -74,9 +74,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         await this.mercuryFixture?.destroy()
     }
 
-    protected static Factory(
-        options?: Partial<ViewControllerFactoryConstructorOptions>
-    ) {
+    protected static Factory(options?: Partial<ViewControllerFactoryOptions>) {
         const mercury = this.mercury
 
         return ViewControllerFactory.Factory({

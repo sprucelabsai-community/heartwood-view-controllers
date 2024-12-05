@@ -34,6 +34,15 @@ export default buildSchema({
         onClose: {
             type: 'raw',
             label: 'Close callback',
+            hint: 'Called when the dialog is closed',
+            options: {
+                valueType: '() => Promise<void | boolean> | void | boolean',
+            },
+        },
+        closeHandler: {
+            type: 'raw',
+            label: 'Close handler',
+            hint: 'Called to actually close the dialog',
             options: {
                 valueType: '() => Promise<void | boolean> | void | boolean',
             },

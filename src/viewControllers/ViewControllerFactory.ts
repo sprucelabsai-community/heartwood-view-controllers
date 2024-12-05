@@ -27,6 +27,7 @@ import {
     AppControllerConstructor,
     AppControllerId,
     AppControllerMap,
+    RenderLockScreenHandler,
 } from '../types/heartwood.types'
 
 export default class ViewControllerFactory {
@@ -43,11 +44,13 @@ export default class ViewControllerFactory {
     protected log?: Log
     protected plugins: ViewControllerPlugins = {}
     private AppMap: Record<string, AppControllerConstructor> = {}
+    private renderLockScreenHandler: RenderLockScreenHandler
 
     public constructor(options: ViewControllerFactoryConstructorOptions) {
         const {
             controllerMap,
             renderInDialogHandler,
+            renderLockScreenHandler,
             confirmHandler,
             connectToApi,
             voteHandler,
@@ -61,6 +64,7 @@ export default class ViewControllerFactory {
 
         this.controllerMap = { ...controllerMap, ...CORE_CONTROLLER_MAP }
         this.renderInDialogHandler = renderInDialogHandler
+        this.renderLockScreenHandler = renderLockScreenHandler
         this.confirmHandler = confirmHandler
         this.connectToApi = connectToApi
         this.voteHandler = voteHandler
@@ -88,6 +92,7 @@ export default class ViewControllerFactory {
         const {
             controllerMap = {},
             renderInDialogHandler,
+            renderLockScreenHandler,
             confirmHandler,
             connectToApi,
             voteHandler,
@@ -108,11 +113,10 @@ export default class ViewControllerFactory {
             log,
             pluginsByName,
             toastHandler: toastHandler ?? (() => {}),
-            confirmHandler: confirmHandler ? confirmHandler : async () => false,
-            voteHandler: voteHandler ? voteHandler : async () => {},
-            renderInDialogHandler: renderInDialogHandler
-                ? renderInDialogHandler
-                : () => {},
+            confirmHandler: confirmHandler ?? (async () => false),
+            voteHandler: voteHandler ?? (async () => {}),
+            renderInDialogHandler: renderInDialogHandler ?? (() => {}),
+            renderLockScreenHandler: renderLockScreenHandler ?? (() => {}),
         })
     }
 
@@ -268,6 +272,7 @@ export default class ViewControllerFactory {
             ...this.sharedConstructorOptions(name),
             renderInDialogHandler: this.renderInDialogHandler,
             confirmHandler: this.confirmHandler,
+            renderLockScreenHandler: this.renderLockScreenHandler,
             voteHandler: options?.voteHandler ?? this.voteHandler,
             toastHandler: this.toastHandler,
         }
@@ -288,6 +293,7 @@ export default class ViewControllerFactory {
 export interface ViewControllerFactoryOptions {
     controllerMap?: Record<string, any>
     renderInDialogHandler?: RenderInDialogHandler
+    renderLockScreenHandler?: RenderLockScreenHandler
     voteHandler?: VoteHandler
     confirmHandler?: ConfirmHandler
     toastHandler?: ToastHandler
@@ -302,6 +308,7 @@ export interface ViewControllerFactoryOptions {
 export interface ViewControllerFactoryConstructorOptions {
     controllerMap: Record<string, any>
     renderInDialogHandler: RenderInDialogHandler
+    renderLockScreenHandler: RenderLockScreenHandler
     connectToApi: ConnectToApi
     confirmHandler: ConfirmHandler
     voteHandler: VoteHandler

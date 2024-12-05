@@ -10,6 +10,7 @@ export const universalViewOptionFields = [
     'toastHandler',
     'log',
     'plugins',
+    'renderLockScreenHandler',
 ] as const
 
 export type UniversalViewOptionFields =

@@ -3,15 +3,6 @@ import { CardViewControllerImpl } from '..'
 import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-export type DialogOptions =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
-        SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog & {
-            closeHandler?: () => void
-        }
-
-export type Dialog = DialogOptions
-export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
-
 export default class DialogViewController extends AbstractViewController<Dialog> {
     private closeResolver?: () => void
     private closePromise?: Promise<unknown>
@@ -109,3 +100,10 @@ export default class DialogViewController extends AbstractViewController<Dialog>
         }
     }
 }
+
+export type DialogOptions =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
+        SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
+
+export type Dialog = DialogOptions
+export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>

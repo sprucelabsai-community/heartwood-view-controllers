@@ -1,12 +1,11 @@
-import { ConfirmOptions, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    CardBody,
+    ConfirmOptions,
+    Dialog,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
-import DialogViewController, { DialogOptions } from './Dialog.vc'
-
-export type Dialog = DialogOptions
-export type ConfirmViewControllerOptions = ConfirmOptions & {
-    onAccept: () => void
-    onDecline: () => void
-}
+import DialogViewController from './Dialog.vc'
 
 export default class ConfirmViewController extends AbstractViewController<Dialog> {
     private dialogVc: DialogViewController
@@ -41,7 +40,18 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
             })
         }
 
-        this.dialogVc = this.Controller('dialog', {
+        this.dialogVc = this.DialogVc(options, body)
+    }
+
+    private DialogVc(
+        options: ConfirmOptions &
+            ViewControllerOptions & {
+                onAccept: () => void
+                onDecline: () => void
+            },
+        body?: CardBody
+    ): DialogViewController {
+        return this.Controller('dialog', {
             isVisible: true,
             shouldShowCloseButton: false,
             header:
@@ -81,7 +91,12 @@ export default class ConfirmViewController extends AbstractViewController<Dialog
         return this.dialogVc.hide()
     }
 
-    public render(): DialogOptions {
+    public render(): Dialog {
         return this.dialogVc.render()
     }
+}
+
+export type ConfirmViewControllerOptions = ConfirmOptions & {
+    onAccept: () => void
+    onDecline: () => void
 }

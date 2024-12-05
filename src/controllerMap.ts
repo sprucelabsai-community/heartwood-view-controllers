@@ -1,4 +1,5 @@
 import { PagerViewController } from '.'
+import LockScreenSkillViewController from './skillViewControllers/LockScreen.svc'
 import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController from './viewControllers/activeRecord/ActiveRecordList.vc'
 import BarChartViewController from './viewControllers/BarChart.vc'
@@ -99,4 +100,5 @@ export const CORE_CONTROLLER_MAP = {
     'polar-area': PolarAreaViewController,
     pager: PagerViewController,
     'bar-chart': BarChartViewController,
+    'lock-screen': LockScreenSkillViewController,
 }
