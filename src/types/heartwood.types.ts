@@ -577,9 +577,7 @@ export type RenderInDialogHandler = (
     options: DialogViewControllerOptions
 ) => void
 
-export type RenderLockScreenHandler = (
-    options: LockScreenSkillViewControllerOptions
-) => void
+export type RenderLockScreenHandler = (options: LockScreen) => void
 
 export interface ConfirmOptions {
     title?: string
