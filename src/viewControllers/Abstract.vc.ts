@@ -1,8 +1,8 @@
 import { DateUtil } from '@sprucelabs/calendar-utils'
+import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Log } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
 import {
-    Client,
     ConfirmHandler,
     RenderInDialogHandler,
     ViewController,
@@ -34,7 +34,7 @@ export default abstract class AbstractViewController<
     private confirmHandler: ConfirmHandler
     private wasDestroyed = false
     private activeDialog?: any
-    protected connectToApi: () => Promise<Client>
+    protected connectToApi: () => Promise<MercuryClient>
     protected dates: DateUtil
     protected maps: MapUtil
     private voteHandler: VoteHandler

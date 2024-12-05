@@ -569,8 +569,6 @@ export type SkillViewControllerArgs<
     O extends SkillViewControllerArgsMap = SkillViewControllerArgsMap,
 > = N extends keyof O ? O[N] : Record<string, never>
 
-export type Client = MercuryClient
-
 export interface OnRenderHandler {
     onRender?(): void
 }
@@ -621,7 +619,7 @@ export interface FormInputViewController<View extends Record<string, any> = any>
 export interface ViewControllerOptions {
     plugins: ViewControllerPlugins
     vcFactory: ViewControllerFactory
-    connectToApi: () => Promise<Client>
+    connectToApi: () => Promise<MercuryClient>
     renderInDialogHandler: RenderInDialogHandler
     renderLockScreenHandler: RenderLockScreenHandler
     confirmHandler: ConfirmHandler

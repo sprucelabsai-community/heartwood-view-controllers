@@ -105,6 +105,14 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         assert.doesInclude(this.render(card).header, options.header)
     }
 
+    @test()
+    protected static async canConnectToApi() {
+        assert.isEqual(
+            this.app.getConnectToApi(),
+            this.spyFactory.getConnectToApi()
+        )
+    }
+
     private static hasApp(id: string): boolean | null | undefined {
         return this.spyFactory.hasApp(id)
     }
@@ -131,6 +139,10 @@ class SpyApp extends AbstractAppController {
     public renderNavigation() {
         return this.nav?.render() ?? null
     }
+
+    public getConnectToApi() {
+        return this.connectToApi
+    }
 }
 
 class SpyViewFactory extends ViewControllerFactory {
@@ -138,6 +150,9 @@ class SpyViewFactory extends ViewControllerFactory {
     public plugins: ViewControllerPlugins = {}
     public getExpectedConstructorOptions() {
         return this.buildViewContructorOptions('app')
+    }
+    public getConnectToApi() {
+        return this.connectToApi
     }
 }
 

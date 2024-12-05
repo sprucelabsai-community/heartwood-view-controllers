@@ -2,6 +2,7 @@ import { assertOptions, validateSchemaValues } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import { CORE_CONTROLLER_MAP } from '../../controllerMap'
+import LockScreenSkillViewController from '../../skillViewControllers/LockScreen.svc'
 import {
     ConfirmOptions,
     LineIcon,
@@ -1397,6 +1398,8 @@ const vcAssert = {
     ): Controller {
         if (vc instanceof DialogViewController) {
             vc = vc.getCardVc()
+        } else if (vc instanceof LockScreenSkillViewController) {
+            vc = vc.getSkillViewVc() as ViewController<any>
         }
 
         const model = renderUtil.render(vc)

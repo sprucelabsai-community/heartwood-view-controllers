@@ -1,6 +1,8 @@
 import { SelectChoice } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test-utils'
+import AppController from '../../__tests__/testDirsAndFiles/skill_with_app/src/App.ac'
+import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import {
     ConfirmOptions,
     ViewController,
@@ -11,6 +13,7 @@ import {
     RouterDestination,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
+import AbstractAppController from '../../viewControllers/Abstract.ac'
 import sectionIdOrIdxToIdx from '../../viewControllers/card/sectionIdOrIdxToIdx'
 
 export type Vc = ViewController<any>
@@ -58,7 +61,9 @@ export interface ButtonViewController {
     setTriggerRenderHandler(handler: TriggerRenderHandler): void
 }
 
-export function getVcName(vc: ViewController<any>) {
+export function getVcName(
+    vc: ViewController<any> | AbstractAppController | AppController
+) {
     return (
         //@ts-ignore
         vc.id ??
@@ -67,6 +72,16 @@ export function getVcName(vc: ViewController<any>) {
         vc.costructor?.name ??
         `view controller`
     )
+}
+
+export function getControllerType(
+    vc: ViewController<any> | AbstractAppController | AppController
+) {
+    return vc instanceof AbstractAppController
+        ? 'App'
+        : vc instanceof AbstractSkillViewController
+          ? 'SkillView'
+          : 'ViewController'
 }
 
 export async function wait(...promises: (Promise<any> | undefined | any)[]) {

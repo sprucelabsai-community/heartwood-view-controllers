@@ -27,6 +27,10 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
         await this.onHideHandler?.()
     }
 
+    public getSkillViewVc() {
+        return this.skillViewController
+    }
+
     public render(): LockScreen {
         return {
             controller: this,

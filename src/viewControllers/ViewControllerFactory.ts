@@ -32,17 +32,19 @@ import {
 
 export default class ViewControllerFactory {
     public static Class?: typeof ViewControllerFactory
+
+    protected connectToApi: ConnectToApi
+    protected log?: Log
+    protected plugins: ViewControllerPlugins = {}
+
     private controllerMap: Record<string, any>
     private renderInDialogHandler: RenderInDialogHandler
     private confirmHandler: ConfirmHandler
-    private connectToApi: ConnectToApi
     private voteHandler: VoteHandler
     private device: Device
     private dates: DateUtil
     private maps: MapUtil
     private toastHandler: ToastHandler
-    protected log?: Log
-    protected plugins: ViewControllerPlugins = {}
     private AppMap: Record<string, AppControllerConstructor> = {}
     private renderLockScreenHandler: RenderLockScreenHandler
 
