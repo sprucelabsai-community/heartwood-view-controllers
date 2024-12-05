@@ -14,7 +14,9 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
     private hideHandler?: HideDialogHandler
     private isVisible = true
 
-    public constructor(options: ViewControllerOptions & LockScreen) {
+    public constructor(
+        options: ViewControllerOptions & LockScreenSkillViewControllerOptions
+    ) {
         super(options)
         const { controller } = options
         this.skillViewController = controller as SkillViewController
