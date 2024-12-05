@@ -1402,6 +1402,26 @@ const vcAssert = {
             vc = vc.getSkillViewVc() as ViewController<any>
         }
 
+        assert.isTruthy(
+            vc,
+            `ViewController missing. It may help to check your ViewController's render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
+
+1. Rendering a SubView:
+
+    public render() {
+        return this.cardVc.render()
+    }
+
+3. Rendering as yourself (e.g. in a SkillViewController):
+
+    public render() {
+        return {
+            controller: this
+        }
+    }
+`
+        )
+
         const model = renderUtil.render(vc)
         assert.isTruthy(
             model.controller,

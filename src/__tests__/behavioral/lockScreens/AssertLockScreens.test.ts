@@ -14,6 +14,11 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.views = this.Factory({})
+
+        this.views.setController(
+            'odin.no-controller-lock',
+            NoControllerLockScreen
+        )
         this.views.setController('odin.root', LockingSkillView)
         this.views.setController('odin.lock', LockScreen)
 
@@ -72,6 +77,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     @test()
     protected static async canStillAccessLockSvcFromRenderLockScreen() {
         let returnedLockScreen: LockScreenSkillViewController | undefined
+
         const lockVc = await this.assertRendersLockScreen(() => {
             returnedLockScreen = this.renderLockScreen()
         })
@@ -103,9 +109,7 @@ class LockingSkillView extends AbstractSkillViewController {
     }
 
     public render(): SkillView {
-        return {
-            controller: this,
-        }
+        return {}
     }
 }
 
@@ -114,5 +118,11 @@ class LockScreen extends AbstractSkillViewController {
         return {
             controller: this,
         }
+    }
+}
+
+class NoControllerLockScreen extends AbstractSkillViewController {
+    public render() {
+        return {}
     }
 }
