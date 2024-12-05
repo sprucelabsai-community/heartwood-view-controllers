@@ -11,7 +11,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
     LockScreen
 > {
     private skillViewController?: SkillViewController
-    private hideHandler?: HideHandler
+    private hideHandler?: HideDialogHandler
     private isVisible = true
 
     public constructor(options: ViewControllerOptions & LockScreen) {
@@ -20,7 +20,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
         this.skillViewController = controller as SkillViewController
     }
 
-    public setHideHindler(hideHandler: HideHandler) {
+    public setHideHindler(hideHandler: HideDialogHandler) {
         this.hideHandler = hideHandler
     }
 
@@ -47,5 +47,4 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
 }
 
 export type LockScreenSkillViewControllerOptions = SkillView
-
-type HideHandler = () => Promise<void> | void
+export type HideDialogHandler = () => Promise<void> | void
