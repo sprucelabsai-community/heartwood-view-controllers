@@ -4,6 +4,7 @@ import {
     SkillViewController,
     ViewControllerOptions,
 } from '../types/heartwood.types'
+import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractSkillViewController from './Abstract.svc'
 
 export default class LockScreenSkillViewController extends AbstractSkillViewController<
@@ -13,6 +14,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
     private skillViewController?: SkillViewController
     private hideHandler?: HideDialogHandler
     private isVisible = true
+    private model: Partial<LockScreen>
 
     public constructor(
         options: ViewControllerOptions & LockScreenSkillViewControllerOptions
@@ -20,6 +22,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
         super(options)
         const { controller } = options
         this.skillViewController = controller as SkillViewController
+        this.model = removeUniversalViewOptions(options)
     }
 
     public setHideHandler(hideHandler: HideDialogHandler) {
@@ -41,6 +44,7 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
 
     public render(): LockScreen {
         return {
+            ...this.model,
             controller: this,
             skillViewController:
                 this.skillViewController ?? (this as SkillViewController),

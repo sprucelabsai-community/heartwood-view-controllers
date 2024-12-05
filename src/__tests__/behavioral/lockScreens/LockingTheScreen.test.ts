@@ -162,6 +162,17 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
         assert.isFalse(vc.getIsVisible(), `Lock screen should be hidden`)
     }
 
+    @test()
+    protected static async rendersModelPassedToRenderIfNotSkillViewBeingRendered() {
+        const actual = {
+            id: generateId(),
+            layouts: [],
+        }
+        const model = this.renderLockScreen(actual)
+
+        assert.doesInclude(model, actual)
+    }
+
     private static assertPassesThroughSkillViewToLockScreen() {
         const svc = this.Svc()
         const vc = this.callRenderLockScreen(svc.render())
