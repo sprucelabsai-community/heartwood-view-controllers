@@ -1,3 +1,10 @@
+# [112.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.1.66...v112.0.0) (2024-12-05)
+
+
+### Breaking Changes
+
+* lock screen base functionality ([d52b564](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d52b564))
+
 ## [111.1.66](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.1.65...v111.1.66) (2024-12-05)
 
 ## [111.1.65](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v111.1.64...v111.1.65) (2024-12-05)
