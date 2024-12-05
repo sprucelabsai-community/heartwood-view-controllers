@@ -13,6 +13,7 @@ export { default as CardViewControllerImpl } from './viewControllers/card/Card.v
 export { default as ConfirmViewController } from './viewControllers/Confirm.vc'
 export { default as DialogViewController } from './viewControllers/Dialog.vc'
 export { default as LockScreenSkillViewController } from './skillViewControllers/LockScreen.svc'
+export * from './skillViewControllers/LockScreen.svc'
 export { default as NavigationViewController } from './viewControllers/navigation/Navigation.vc'
 export { default as ListViewController } from './viewControllers/list/List.vc'
 export { default as ListRowViewController } from './viewControllers/list/ListRow.vc'
