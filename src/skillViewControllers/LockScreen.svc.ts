@@ -11,7 +11,8 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
     LockScreen
 > {
     private skillViewController?: SkillViewController
-    private onHideHandler?: OnHideHandler
+    private hideHandler?: HideHandler
+    private isVisible = true
 
     public constructor(options: ViewControllerOptions & LockScreen) {
         super(options)
@@ -19,16 +20,21 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
         this.skillViewController = controller as SkillViewController
     }
 
-    public setOnHideHandler(onHideHandler: OnHideHandler) {
-        this.onHideHandler = onHideHandler
+    public setHideHindler(hideHandler: HideHandler) {
+        this.hideHandler = hideHandler
     }
 
     public async hide() {
-        await this.onHideHandler?.()
+        await this.hideHandler?.()
+        this.isVisible = false
     }
 
     public getSkillViewVc() {
         return this.skillViewController
+    }
+
+    public getIsVisible(): boolean {
+        return this.isVisible
     }
 
     public render(): LockScreen {
@@ -42,4 +48,4 @@ export default class LockScreenSkillViewController extends AbstractSkillViewCont
 
 export type LockScreenSkillViewControllerOptions = SkillView
 
-type OnHideHandler = () => Promise<void> | void
+type HideHandler = () => Promise<void> | void

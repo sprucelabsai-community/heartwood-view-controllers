@@ -111,7 +111,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
 
         let wasHit = false
 
-        vc.setOnHideHandler(() => {
+        vc.setHideHindler(() => {
             wasHit = true
         })
 
@@ -152,6 +152,14 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     protected static async passesThroughSkillViewControllerIfPassedToRenderInApp() {
         this.dropInApp()
         this.assertPassesThroughSkillViewToLockScreen()
+    }
+
+    @test()
+    protected static async lockScreenKnowsIfHidden() {
+        const vc = this.callRenderLockScreen()
+        assert.isTrue(vc.getIsVisible(), `Lock screen should start visible`)
+        await vc.hide()
+        assert.isFalse(vc.getIsVisible(), `Lock screen should be hidden`)
     }
 
     private static assertPassesThroughSkillViewToLockScreen() {
