@@ -1412,7 +1412,7 @@ const vcAssert = {
 
         assert.isTruthy(
             vc,
-            `ViewController missing. It may help to check your ViewController's render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
+            `The view you sent me is missing a controller. It may help to check your render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
 
 1. Rendering a SubView:
 
