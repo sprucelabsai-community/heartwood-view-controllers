@@ -8,7 +8,7 @@ import { getControllerType, getVcName } from './assertSupport'
 const lockScreenAssert = {
     async actionRendersLockScreen(
         svcOrApp: AbstractSkillViewController | AbstractAppController,
-        action: () => Promise<void> | void
+        action: () => Promise<any> | any
     ) {
         assertOptions(
             {
