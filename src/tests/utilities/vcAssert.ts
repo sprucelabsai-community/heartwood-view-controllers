@@ -1398,8 +1398,16 @@ const vcAssert = {
     ): Controller {
         if (vc instanceof DialogViewController) {
             vc = vc.getCardVc()
+            assert.isTruthy(
+                vc,
+                `Your dialog is not rendering a card! Try 'this.renderDialog(cardVc.render())'`
+            )
         } else if (vc instanceof LockScreenSkillViewController) {
             vc = vc.getSkillViewVc() as ViewController<any>
+            assert.isTruthy(
+                vc,
+                `Your LockScreen is not rendering a skill view! Try 'this.renderLockScreen(lockSvc.render())'`
+            )
         }
 
         assert.isTruthy(
