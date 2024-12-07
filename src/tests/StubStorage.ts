@@ -1,4 +1,4 @@
-import { Storage } from '../auth/Authenticator'
+import { Storage } from '../types/heartwood.types'
 
 export default class StubStorage implements Storage {
     private items: Record<string, string> = {}
