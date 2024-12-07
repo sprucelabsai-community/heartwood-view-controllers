@@ -13,8 +13,8 @@ export default class AuthenticatorImpl implements Authenticator {
     private static instance: Authenticator | null
     private static storage: Storage | null
 
-    private eventEmitter: EventEmitter
-    private storage: Storage
+    protected eventEmitter: EventEmitter
+    protected storage: Storage
 
     private constructor(storage: Storage) {
         this.eventEmitter = new EventEmitter()
