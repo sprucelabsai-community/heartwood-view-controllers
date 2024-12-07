@@ -129,6 +129,11 @@ export interface AuthenticatorEventPayloads {
 }
 
 export type AuthenticatorEventName = keyof AuthenticatorEventPayloads
+export interface Storage {
+    removeItem(key: string): void
+    setItem(key: string, value: string): void
+    getItem(key: string): string | null
+}
 
 export interface Authenticator {
     //Get the logged in person, if someone is logged in

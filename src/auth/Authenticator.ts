@@ -5,6 +5,7 @@ import {
     Authenticator,
     AuthenticatorEventName,
     AuthenticatorEventPayloads,
+    Storage,
 } from '../types/heartwood.types'
 
 export default class AuthenticatorImpl implements Authenticator {
@@ -77,10 +78,4 @@ export default class AuthenticatorImpl implements Authenticator {
     ) {
         this.eventEmitter.addListener(name, cb)
     }
-}
-
-export interface Storage {
-    removeItem(key: string): void
-    setItem(key: string, value: string): void
-    getItem(key: string): string | null
 }
