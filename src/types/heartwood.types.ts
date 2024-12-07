@@ -122,10 +122,13 @@ type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 type DidLoginPayload = (payload: { token: string; person: Person }) => void
 type DidLogoutPayload = (payload: { person: Person }) => void
 
-interface Payloads {
+export interface AuthenticatorEventPayloads {
     'did-login': DidLoginPayload
+    'will-logout': DidLoginPayload
     'did-logout': DidLogoutPayload
 }
+
+export type AuthenticatorEventName = keyof AuthenticatorEventPayloads
 
 export interface Authenticator {
     //Get the logged in person, if someone is logged in
@@ -139,9 +142,9 @@ export interface Authenticator {
     //Clear the session, logging the person out
     clearSession(): void
     //Add an event listener for when someone logs in or out to take some action
-    addEventListener<N extends 'did-login' | 'did-logout'>(
+    addEventListener<N extends 'did-login' | 'did-logout' | 'will-logout'>(
         name: N,
-        cb: Payloads[N]
+        cb: AuthenticatorEventPayloads[N]
     ): void
 }
 

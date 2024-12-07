@@ -1,3 +1,4 @@
+import { Person } from '@sprucelabs/spruce-core-schemas'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
@@ -49,10 +50,6 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         const auth2 = Authenticator.getInstance()
         //@ts-ignore
         assert.isTrue(auth2.__patched)
-    }
-
-    private static Auth() {
-        return Authenticator.getInstance()
     }
 
     @test()
@@ -133,22 +130,39 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected static emitsOnLogOut() {
         const auth = this.Auth()
-        let hit = false
-        let p
+        let passedPerson: Person | undefined
 
         auth.addEventListener('did-logout', ({ person }) => {
-            hit = true
-            p = person
+            passedPerson = person
         })
 
         auth.setSessionToken('123abc', this.person)
-        assert.isFalse(hit)
+        assert.isFalsy(passedPerson)
 
         auth.clearSession()
 
-        assert.isTrue(hit)
+        assert.isEqualDeep(passedPerson, this.person)
+    }
 
-        assert.isEqualDeep(p, this.person)
+    @test()
+    protected static async emitsWillLogoutBeforeActuallyClearingSession() {
+        const auth = this.Auth()
+        const token = generateId()
+
+        auth.setSessionToken(token, this.person)
+
+        let passedPerson: Person | undefined
+        auth.addEventListener('will-logout', ({ person }) => {
+            passedPerson = person
+            assert.isEqual(
+                auth.getSessionToken(),
+                token,
+                `Token should still be set`
+            )
+        })
+
+        auth.clearSession()
+        assert.isEqualDeep(passedPerson, this.person)
     }
 
     @test()
@@ -262,6 +276,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         await formVc.submit()
 
         assert.isFalse(wasHit)
+    }
+
+    private static Auth() {
+        return Authenticator.getInstance()
     }
 
     private static LoginVc() {

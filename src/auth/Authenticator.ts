@@ -1,9 +1,15 @@
 import EventEmitter from 'events'
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { Person } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../errors/SpruceError'
-import { Authenticator } from '../types/heartwood.types'
+import {
+    Authenticator,
+    AuthenticatorEventName,
+    AuthenticatorEventPayloads,
+} from '../types/heartwood.types'
 
 export default class AuthenticatorImpl implements Authenticator {
+    public static Class?: new (storage: Storage) => Authenticator
+
     private static instance: Authenticator | null
     private static storage: Storage | null
 
@@ -21,7 +27,7 @@ export default class AuthenticatorImpl implements Authenticator {
         }
 
         if (!this.instance) {
-            this.instance = new this(this.storage)
+            this.instance = new (this.Class ?? this)(this.storage)
         }
 
         return this.instance
@@ -57,6 +63,7 @@ export default class AuthenticatorImpl implements Authenticator {
 
     public clearSession() {
         const person = JSON.parse(this.storage.getItem('person') ?? '{}')
+        this.eventEmitter.emit('will-logout', { person })
 
         this.storage.removeItem('sessionToken')
         this.storage.removeItem('person')
@@ -64,26 +71,16 @@ export default class AuthenticatorImpl implements Authenticator {
         this.eventEmitter.emit('did-logout', { person })
     }
 
-    public addEventListener<N extends 'did-login' | 'did-logout'>(
+    public addEventListener<N extends AuthenticatorEventName>(
         name: N,
-        cb: Payloads[N]
+        cb: AuthenticatorEventPayloads[N]
     ) {
         this.eventEmitter.addListener(name, cb)
     }
 }
 
-type Person = SpruceSchemas.Spruce.v2020_07_22.Person
-
-type DidLoginPayload = (payload: { token: string; person: Person }) => void
-type DidLogoutPayload = (payload: { person: Person }) => void
-
 export interface Storage {
     removeItem(key: string): void
     setItem(key: string, value: string): void
     getItem(key: string): string | null
-}
-
-interface Payloads {
-    'did-login': DidLoginPayload
-    'did-logout': DidLogoutPayload
 }
