@@ -16,7 +16,7 @@ export default class AuthenticatorImpl implements Authenticator {
     protected eventEmitter: EventEmitter
     protected storage: Storage
 
-    private constructor(storage: Storage) {
+    protected constructor(storage: Storage) {
         this.eventEmitter = new EventEmitter()
         this.storage = storage
     }
