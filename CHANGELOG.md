@@ -1,3 +1,10 @@
+# [112.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.1.8...v112.2.0) (2024-12-07)
+
+
+### Features
+
+* authenticator emits will-logout before actual logout ([80c9057](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/80c9057))
+
 ## [112.1.8](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.1.7...v112.1.8) (2024-12-07)
 
 ## [112.1.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.1.6...v112.1.7) (2024-12-06)
