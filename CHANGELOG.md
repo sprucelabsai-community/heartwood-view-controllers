@@ -1,3 +1,10 @@
+# [112.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.2.3...v112.3.0) (2024-12-08)
+
+
+### Features
+
+* assert does not render lock screen ([c142f01](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c142f01))
+
 ## [112.2.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.2.2...v112.2.3) (2024-12-08)
 
 ## [112.2.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v112.2.1...v112.2.2) (2024-12-08)
