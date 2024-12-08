@@ -44,7 +44,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static async authenticatorInstanceTheSameOne() {
-        const auth = this.Auth()
+        const auth = this.auth
         //@ts-ignore
         auth.__patched = true
         const auth2 = Authenticator.getInstance()
@@ -54,25 +54,23 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static async tokenAndPersonEmptyToStart() {
-        assert.isFalsy(this.Auth().getSessionToken())
-        assert.isFalsy(this.Auth().getPerson())
+        assert.isFalsy(this.auth.getSessionToken())
+        assert.isFalsy(this.auth.getPerson())
     }
 
     @test()
     protected static async canSetToken() {
-        const auth = this.Auth()
+        this.auth.setSessionToken('1234abc', this.person)
 
-        auth.setSessionToken('1234abc', this.person)
-
-        const token = auth.getSessionToken()
+        const token = this.auth.getSessionToken()
 
         assert.isEqual(token, '1234abc')
-        assert.isEqualDeep(this.person, auth.getPerson())
+        assert.isEqualDeep(this.person, this.auth.getPerson())
     }
 
     @test()
     protected static async setsLocalStorage() {
-        const auth = this.Auth()
+        const auth = this.auth
         auth.setSessionToken('123abc', this.person)
 
         const token = this.storage.getItem('sessionToken')
@@ -81,12 +79,12 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static isLoggedInIsFalseToStart() {
-        assert.isFalse(this.Auth().isLoggedIn())
+        assert.isFalse(this.auth.isLoggedIn())
     }
 
     @test()
     protected static isLoggedInIsTrueAfterTokenSet() {
-        const auth = this.Auth()
+        const auth = this.auth
         auth.setSessionToken('abc123', this.person)
 
         assert.isTrue(auth.isLoggedIn())
@@ -94,7 +92,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static canClearToken() {
-        const auth = this.Auth()
+        const auth = this.auth
 
         auth.setSessionToken('123abc', this.person)
 
@@ -108,7 +106,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static emitsOnLoginWhenSettingToken() {
-        const auth = this.Auth()
+        const auth = this.auth
 
         let hit = false
         let t
@@ -129,7 +127,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static emitsOnLogOut() {
-        const auth = this.Auth()
+        const auth = this.auth
         let passedPerson: Person | undefined
 
         auth.addEventListener('did-logout', ({ person }) => {
@@ -146,7 +144,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected static async emitsWillLogoutBeforeActuallyClearingSession() {
-        const auth = this.Auth()
+        const auth = this.auth
         const token = generateId()
 
         auth.setSessionToken(token, this.person)
@@ -278,7 +276,17 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         assert.isFalse(wasHit)
     }
 
-    private static Auth() {
+    @test()
+    protected static async doesNotEmitLogoutEventsIfClearingSessionAndNotLoggedIn() {
+        let wasHit = false
+        this.auth.addEventListener('will-logout', () => {
+            wasHit = true
+        })
+        this.auth.clearSession()
+        assert.isFalse(wasHit, 'Should not emit logout events if not logged in')
+    }
+
+    private static get auth() {
         return Authenticator.getInstance()
     }
 

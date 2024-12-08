@@ -63,6 +63,9 @@ export default class AuthenticatorImpl implements Authenticator {
     }
 
     public clearSession() {
+        if (!this.isLoggedIn()) {
+            return
+        }
         const person = JSON.parse(this.storage.getItem('person') ?? '{}')
         this.eventEmitter.emit('will-logout', { person })
 
