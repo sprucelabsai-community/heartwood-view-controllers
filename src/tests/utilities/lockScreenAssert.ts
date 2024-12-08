@@ -7,7 +7,7 @@ import { getControllerType, getVcName } from './assertSupport'
 
 const lockScreenAssert = {
     async actionRendersLockScreen(
-        svcOrApp: AbstractSkillViewController | AbstractAppController,
+        svcOrApp: SvcOrApp,
         action: () => Promise<any> | any
     ) {
         assertOptions(
@@ -39,6 +39,29 @@ const lockScreenAssert = {
 
         return lockScreen!
     },
+
+    async actionDoesNotRenderLockScreen(
+        svcOrApp: SvcOrApp,
+        action: () => Promise<any> | any
+    ) {
+        assertOptions(
+            {
+                svcOrApp,
+                action,
+            },
+            ['svcOrApp', 'action']
+        )
+
+        try {
+            await this.actionRendersLockScreen(svcOrApp, action)
+        } catch {
+            return
+        }
+
+        assert.fail('You rendered a lock screen when you should not have!')
+    },
 }
 
 export default lockScreenAssert
+
+type SvcOrApp = AbstractSkillViewController | AbstractAppController

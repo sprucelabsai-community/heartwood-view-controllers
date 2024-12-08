@@ -29,10 +29,22 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWithMissing() {
+    protected static async doesRenderThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             lockScreenAssert.actionRendersLockScreen()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['svcOrApp', 'action'],
+        })
+    }
+
+    @test()
+    protected static async doesNotRenderThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            lockScreenAssert.actionDoesNotRenderLockScreen()
         )
 
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -50,14 +62,19 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
                 ),
             'renderLockScreen'
         )
+
+        await this.assertDoesNotRenderLockScreen(() => {})
     }
 
     @test()
     protected static async doesNotThrowIfActionRendersLockScreen() {
-        const action = () => {
+        await this.assertRendersLockScreen(() => {
             this.renderLockScreen()
-        }
-        await this.assertRendersLockScreen(action)
+        })
+
+        await assert.doesThrowAsync(() =>
+            this.assertDoesNotRenderLockScreen(() => this.renderLockScreen())
+        )
     }
 
     @test()
@@ -86,6 +103,13 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
             returnedLockScreen,
             lockVc,
             'LockScreen instance not returned from renderLockScreen'
+        )
+    }
+
+    private static async assertDoesNotRenderLockScreen(action: () => void) {
+        await lockScreenAssert.actionDoesNotRenderLockScreen(
+            this.rootSvc,
+            action
         )
     }
 

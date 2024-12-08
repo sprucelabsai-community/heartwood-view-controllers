@@ -14,11 +14,11 @@ export default class AuthenticatorImpl implements Authenticator {
     private static instance: Authenticator | null
     private static storage: Storage | null
 
-    protected eventEmitter: EventEmitter
+    protected eventEmitter: EventEmitter<EmitterMap>
     protected storage: Storage
 
     protected constructor(storage: Storage) {
-        this.eventEmitter = new EventEmitter()
+        this.eventEmitter = new EventEmitter<EmitterMap>()
         this.storage = storage
     }
 
@@ -76,6 +76,20 @@ export default class AuthenticatorImpl implements Authenticator {
         name: N,
         cb: AuthenticatorEventPayloads[N]
     ) {
+        //@ts-ignore
         this.eventEmitter.addListener(name, cb)
     }
+}
+
+interface EmitterMap {
+    'did-login': {
+        token: string
+        person: Person
+    }[]
+    'will-logout': {
+        person: Person
+    }[]
+    'did-logout': {
+        person: Person
+    }[]
 }
