@@ -1448,7 +1448,21 @@ const vcAssert = {
                     'view controller'
                 } to render a controller that is an instance of ${
                     Class.name
-                }, but it didn't!`
+                }, but it didn't! Make sure the view you're expecting is rendering itself as the controller (or another view controller). e.g.
+
+1. Rendering a SubView:
+
+    public render() {
+        return this.cardVc.render()
+    }
+
+3. Rendering as yourself (e.g. in a SkillViewController):
+
+    public render() {
+        return {
+            controller: this
+        }
+    } `
             )
         }
 
