@@ -52,7 +52,7 @@ export interface SelectViewController {
 export interface AssertRedirectOptions {
     router: Router
     action: () => Promise<any> | any
-    destination?: RouterDestination
+    destination?: Partial<RouterDestination>
 }
 
 export interface ButtonViewController {
