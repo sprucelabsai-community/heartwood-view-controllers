@@ -143,7 +143,7 @@ function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
 
     const buttons = model.buttons?.reduce((acc, b) => {
         if (b.dropdown) {
-            return [...acc, ...(b?.dropdown?.items ?? [])]
+            return [...acc, b, ...(b?.dropdown?.items ?? [])]
         }
         return [...acc, b]
     }, [] as any[])

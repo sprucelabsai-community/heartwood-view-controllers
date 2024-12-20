@@ -444,6 +444,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     @test()
     protected static async canFindDropdownOnSecondButton() {
         const id = generateId()
+        const id2 = generateId()
         const vc = this.NavigationVc({
             buttons: [
                 {
@@ -451,7 +452,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
                     lineIcon: 'add',
                 },
                 {
-                    id: 'my-button',
+                    id: id2,
                     lineIcon: 'add',
                     dropdown: {
                         items: [
@@ -466,5 +467,6 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         })
 
         navigationAssert.rendersButton(vc, id)
+        navigationAssert.rendersButton(vc, id2)
     }
 }
