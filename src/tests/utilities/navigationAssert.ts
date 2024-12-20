@@ -141,14 +141,6 @@ export default navigationAssert
 function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
     const model = renderUtil.render(vc)
 
-    if (model.buttons?.[0].dropdown) {
-        const button = model.buttons[0].dropdown?.items?.find(
-            (b) => b.id === id
-        )
-        assert.isTruthy(button)
-        return
-    }
-
     const buttons = model.buttons?.reduce((acc, b) => {
         if (b.dropdown) {
             return [...acc, ...(b?.dropdown?.items ?? [])]

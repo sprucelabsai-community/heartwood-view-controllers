@@ -440,4 +440,31 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
         assert.doesThrow(() => navigationAssert.rendersButton(vc, generateId()))
     }
+
+    @test()
+    protected static async canFindDropdownOnSecondButton() {
+        const id = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    id: generateId(),
+                    lineIcon: 'add',
+                },
+                {
+                    id: 'my-button',
+                    lineIcon: 'add',
+                    dropdown: {
+                        items: [
+                            {
+                                id,
+                                label: 'Hey there!',
+                            },
+                        ],
+                    },
+                },
+            ],
+        })
+
+        navigationAssert.rendersButton(vc, id)
+    }
 }
