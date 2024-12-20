@@ -96,7 +96,7 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 break
 
             case 'APP_NOT_FOUND':
-                message = `I could not find an App with the namespace '${options.namespace}'!`
+                message = `I could not find an App with the namespace '${options.namespace}'! If you're testing, try 'spruce create.app'!`
                 break
 
             case 'INVALID_APP_CONTROLLER':
