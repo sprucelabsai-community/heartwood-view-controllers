@@ -22,7 +22,7 @@ import { pluckButtons } from './buttonAssert'
 import { ButtonViewController } from './ButtonViewController'
 import calendarInteractor from './calendarInteractor'
 import formAssert from './formAssert'
-import navigationAssert from './navigationAssert'
+import navigationAssert, { getButtonFromNav } from './navigationAssert'
 import pagerAssert from './pagerAssert'
 import vcAssert from './vcAssert'
 
@@ -596,13 +596,7 @@ const interactor = {
                   vc as SkillViewController
               )
             : vc
-        const { foundButtons } = pluckButtons(navVc, [buttonId])
-        const match = foundButtons[0]
-
-        assert.isTruthy(
-            match,
-            `I could not find a button with the id '${buttonId}' in your nav!`
-        )
+        const match = getButtonFromNav(navVc, buttonId)
 
         return this.click(match)
     },

@@ -1,5 +1,4 @@
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import { NavigationButton } from '../../..'
 import interactor from '../../../tests/utilities/interactor'
 import AbstractNavigationTest from './AbstractNavigationTest'
 import HasNavSkillView from './HasNavSkillView'
@@ -63,24 +62,23 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
         idToClick: string
     ) {
         let hitCount = 0
-        const buttons: NavigationButton[] = [
-            {
-                id: id1,
-                lineIcon: 'home',
-                onClick: () => {
-                    hitCount++
-                },
-            },
-            {
-                id: id2,
-                lineIcon: 'home',
-                onClick: () => {
-                    hitCount++
-                },
-            },
-        ]
         const vc = this.NavigationVc({
-            buttons,
+            buttons: [
+                {
+                    id: id1,
+                    lineIcon: 'home',
+                    onClick: () => {
+                        hitCount++
+                    },
+                },
+                {
+                    id: id2,
+                    lineIcon: 'home',
+                    onClick: () => {
+                        hitCount++
+                    },
+                },
+            ],
         })
 
         this.hasNavVc.setNav(vc)
@@ -89,5 +87,33 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
         assert.isEqual(hitCount, 1)
         await interactor.clickButton(vc, idToClick)
         assert.isEqual(hitCount, 2)
+    }
+
+    @test()
+    protected static async canClickDropdownButton() {
+        let hitCount = 0
+        const id = generateId()
+        const vc = this.NavigationVc({
+            buttons: [
+                {
+                    lineIcon: 'home',
+                    id: generateId(),
+                    dropdown: {
+                        items: [
+                            {
+                                id,
+                                label: 'Test',
+                                onClick: () => {
+                                    hitCount++
+                                },
+                            },
+                        ],
+                    },
+                },
+            ],
+        })
+
+        await interactor.clickNavButton(vc, id)
+        assert.isEqual(hitCount, 1)
     }
 }

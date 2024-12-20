@@ -138,7 +138,7 @@ const navigationAssert = {
 }
 
 export default navigationAssert
-function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
+export function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
     const model = renderUtil.render(vc)
 
     const buttons = model.buttons?.reduce((acc, b) => {
