@@ -23,31 +23,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ToggleInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: boolean| undefined | null
+				'value'?: boolean | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
 
 		interface ToggleInputSchema extends SpruceSchema.Schema {
@@ -147,33 +147,33 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface TextInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: string| undefined | null
+				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 		}
 
 		interface TextInputSchema extends SpruceSchema.Schema {
@@ -278,45 +278,45 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface RatingsInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: number| undefined | null
+				'value'?: number | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
+				'onChange'?: ((value: number) => any | Promise<any>) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Can be changed. */
-				'canBeChanged'?: boolean| undefined | null
+				'canBeChanged'?: boolean | undefined | null
 				/** Steps. How many choices does a person have? Defaults to 5. */
-				'steps'?: number| undefined | null
+				'steps'?: number | undefined | null
 				/** Left Label. The label on the left side of the ratings. Usually assocatiated with the lowest rating. */
-				'leftLabel'?: string| undefined | null
+				'leftLabel'?: string | undefined | null
 				/** Right Label. The label on the right side of the ratings. Usually associated with the highest rating. */
-				'rightLabel'?: string| undefined | null
+				'rightLabel'?: string | undefined | null
 				/** Middle Label. The label in the middle of the ratings. Something neutral like "average" or "ok" is pretty common. */
-				'middleLabel'?: string| undefined | null
+				'middleLabel'?: string | undefined | null
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
-				'icon'?: ("star" | "radio")| undefined | null
+				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
 		}
 
 		interface RatingsInputSchema extends SpruceSchema.Schema {
@@ -462,31 +462,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PhoneInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: (any)| undefined | null
+				'value'?: (any) | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
 
 		interface PhoneInputSchema extends SpruceSchema.Schema {
@@ -585,31 +585,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Input {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: (any)| undefined | null
+				'value'?: (any) | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
 
 		interface InputSchema extends SpruceSchema.Schema {
@@ -758,17 +758,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ToolBelt {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ToolBeltViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ToolBeltViewController) | undefined | null
 				/** Icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				
-				'shouldRenderAllToolsAtOnce'?: boolean| undefined | null
+				'shouldRenderAllToolsAtOnce'?: boolean | undefined | null
 				
-				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler)| undefined | null
+				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler) | undefined | null
 				
-				'iconLabel'?: string| undefined | null
+				'iconLabel'?: string | undefined | null
 				
-				'renderAs'?: ("default" | "icon")| undefined | null
+				'renderAs'?: ("default" | "icon") | undefined | null
 				/** Tools. */
 				'tools': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
 		}
@@ -834,55 +834,55 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ThemeProps {
 			
 				/** Card corner style. */
-				'borderRadius'?: ("rounded" | "square")| undefined | null
+				'borderRadius'?: ("rounded" | "square") | undefined | null
 				/** Color 1. Used to color anything overlayed on the background (color1Inverse or color1InverseGradient). */
-				'color1'?: string| undefined | null
+				'color1'?: string | undefined | null
 				/** Color 1 (inverse). Background color of the view if color1InverseGradient is not set */
-				'color1Inverse'?: string| undefined | null
+				'color1Inverse'?: string | undefined | null
 				/** Color 1 Gradient (inverse). Background griedent applied to view. */
-				'color1InverseGradient'?: string| undefined | null
+				'color1InverseGradient'?: string | undefined | null
 				/** Color 2. The color of text inside of cards and lists. */
-				'color2'?: string| undefined | null
+				'color2'?: string | undefined | null
 				/** Color 2 (compliment). The color of headers in card bodies and lists. Defaults to color2. */
-				'color2Compliment'?: string| undefined | null
+				'color2Compliment'?: string | undefined | null
 				/** Color 2. The color of overlays ontop of a card. */
-				'color2Transparent'?: string| undefined | null
+				'color2Transparent'?: string | undefined | null
 				/** Color. Background color of cards. */
-				'color2Inverse'?: string| undefined | null
+				'color2Inverse'?: string | undefined | null
 				/** Color 2 (inverse with transparency). Background color used when some transparency is needed for context. */
-				'color2InverseTransparent'?: string| undefined | null
+				'color2InverseTransparent'?: string | undefined | null
 				/** Color 3. Titles of cards. */
-				'color3'?: string| undefined | null
+				'color3'?: string | undefined | null
 				/** Color 3 (compliment). Subtitles of cards. */
-				'color3Compliment'?: string| undefined | null
+				'color3Compliment'?: string | undefined | null
 				/** Color 3 (inverse). Background for headers of cards. */
-				'color3Inverse'?: string| undefined | null
+				'color3Inverse'?: string | undefined | null
 				/** Color 4. Foreground for buttons and menu items. */
-				'color4'?: string| undefined | null
+				'color4'?: string | undefined | null
 				/** Color 4 (compliment). Borders for buttons and menu items. */
-				'color4Compliment'?: string| undefined | null
+				'color4Compliment'?: string | undefined | null
 				/** Color 4 (compliment, transparent). Lighter version of borders, outlines, and highlights */
-				'color4ComplimentTransparent'?: string| undefined | null
+				'color4ComplimentTransparent'?: string | undefined | null
 				/** Color 4 (inverse). Background for buttons and menu items. */
-				'color4Inverse'?: string| undefined | null
+				'color4Inverse'?: string | undefined | null
 				/** Color 4 (inverse, compliment). Background for buttons and menu items */
-				'color4InverseCompliment'?: string| undefined | null
+				'color4InverseCompliment'?: string | undefined | null
 				/** Control bar color 1. The foreground color of the control bar. */
-				'controlBarColor1'?: string| undefined | null
+				'controlBarColor1'?: string | undefined | null
 				/** Control bar color 2. The background color of the control bar. */
-				'controlBarColor2'?: string| undefined | null
+				'controlBarColor2'?: string | undefined | null
 				/** Tool belt color 2. The background color of the tool belts. */
-				'toolBeltColor2'?: string| undefined | null
+				'toolBeltColor2'?: string | undefined | null
 				/** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
-				'errorColor1'?: string| undefined | null
+				'errorColor1'?: string | undefined | null
 				/** Error color 2. The background used when rendering errors. */
-				'errorColor1Inverse'?: string| undefined | null
+				'errorColor1Inverse'?: string | undefined | null
 				/** Warning color 1. Warnings overlayed on a background colored with warningColor1Inverse. */
-				'warningColor1'?: string| undefined | null
+				'warningColor1'?: string | undefined | null
 				/** Warning color 2. The background used when rendering tarnings. */
-				'warningColor1Inverse'?: string| undefined | null
+				'warningColor1Inverse'?: string | undefined | null
 				
-				'calendarEvents'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColors| undefined | null
+				'calendarEvents'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColors | undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -1118,15 +1118,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar | undefined | null
 				/** Start delay. How long should I wait before starting to type? */
-				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				'startDelay'?: SpruceSchema.DurationFieldValue | undefined | null
 				/** Loop. */
-				'shouldLoop'?: boolean| undefined | null
+				'shouldLoop'?: boolean | undefined | null
 				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
+				'size'?: ("small" | "medium" | "large") | undefined | null
 				/** Playing. */
-				'isPlaying'?: boolean| undefined | null
+				'isPlaying'?: boolean | undefined | null
 		}
 
 		interface SprucebotTypedMessageSchema extends SpruceSchema.Schema {
@@ -1193,33 +1193,33 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SkillView {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.SkillViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.SkillViewController) | undefined | null
 				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
+				'shouldCenterVertically'?: boolean | undefined | null
 				/** Full screen. */
-				'isFullScreen'?: boolean| undefined | null
+				'isFullScreen'?: boolean | undefined | null
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 				
-				'description'?: string| undefined | null
+				'description'?: string | undefined | null
 				/** Layout. */
-				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
+				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[] | undefined | null
 				
-				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid") | undefined | null
 		}
 
 		interface SkillViewSchema extends SpruceSchema.Schema {
@@ -1329,33 +1329,33 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SelectInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: (any)| undefined | null
+				'value'?: (any) | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 		}
@@ -1474,9 +1474,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'label': string
 				
-				'isComplete'?: boolean| undefined | null
+				'isComplete'?: boolean | undefined | null
 				
-				'hasError'?: boolean| undefined | null
+				'hasError'?: boolean | undefined | null
 		}
 
 		interface ProgressNavigatorStepSchema extends SpruceSchema.Schema {
@@ -1522,13 +1522,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ProgressNavigator {
 			
 				
-				'currentStepId'?: string| undefined | null
+				'currentStepId'?: string | undefined | null
 				
-				'processLabel'?: string| undefined | null
+				'processLabel'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator>) | undefined | null
 				
 				'steps': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep[]
 		}
@@ -1582,11 +1582,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface NavigationButtonDropdown {
 			
 				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
+				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
 				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[]| undefined | null
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
 				
-				'card'?: (HeartwoodTypes.Card)| undefined | null
+				'card'?: (HeartwoodTypes.Card) | undefined | null
 		}
 
 		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
@@ -1629,7 +1629,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': (HeartwoodTypes.SkillViewControllerId)
 				
-				'args'?: (Record<string, any>)| undefined | null
+				'args'?: (Record<string, any>) | undefined | null
 		}
 
 		interface RouterDestinationSchema extends SpruceSchema.Schema {
@@ -1664,7 +1664,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PermissionContractReference {
 			
 				
-				'id'?: (MercuryTypes.PermissionContractId)| undefined | null
+				'id'?: (MercuryTypes.PermissionContractId) | undefined | null
 		}
 
 		interface PermissionContractReferenceSchema extends SpruceSchema.Schema {
@@ -1693,7 +1693,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface NavigationRoute {
 			
 				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				
 				'destination': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination
 		}
@@ -1734,17 +1734,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				/** Destination skill view controller. */
-				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination| undefined | null
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown| undefined | null
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown | undefined | null
 		}
 
 		interface NavigationButtonSchema extends SpruceSchema.Schema {
@@ -1817,15 +1817,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Navigation {
 			
 				/** Render button labels. Should the button labels be rendered? */
-				'shouldRenderButtonLabels'?: boolean| undefined | null
+				'shouldRenderButtonLabels'?: boolean | undefined | null
 				/** Is visible. Should the navigation be visible? Defaults to true. */
-				'isVisible'?: boolean| undefined | null
+				'isVisible'?: boolean | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>) | undefined | null
 				
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton[] | undefined | null
 				
-				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[]| undefined | null
+				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[] | undefined | null
 		}
 
 		interface NavigationSchema extends SpruceSchema.Schema {
@@ -1883,41 +1883,41 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface NavigationDropdownButton {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
-				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
+				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
 				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference| undefined | null
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				/** Destination skill view controller. */
-				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination| undefined | null
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
 		}
 
 		interface NavigationDropdownButtonSchema extends SpruceSchema.Schema {
@@ -2080,21 +2080,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Card {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.CardViewController) | undefined | null
 				/** Header. */
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader | undefined | null
 				/** Critical error. */
-				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
+				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError | undefined | null
 				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
+				'shouldFadeIn'?: boolean | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | undefined | null
 		}
 
 		interface CardSchema extends SpruceSchema.Schema {
@@ -2167,13 +2167,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Layout {
 			
 				/** Card. Will render a card in this section */
-				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Grid. Will force cards to render as grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
+				'shouldRenderAsGrid'?: boolean | undefined | null
 				/** Width. */
-				'width'?: ("wide" | "tight" | "full")| undefined | null
+				'width'?: ("wide" | "tight" | "full") | undefined | null
 		}
 
 		interface LayoutSchema extends SpruceSchema.Schema {
@@ -2225,35 +2225,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface LockScreen {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockScreen>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockScreen>) | undefined | null
 				/** Center vertically. */
-				'shouldCenterVertically'?: boolean| undefined | null
+				'shouldCenterVertically'?: boolean | undefined | null
 				/** Full screen. */
-				'isFullScreen'?: boolean| undefined | null
+				'isFullScreen'?: boolean | undefined | null
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 				
-				'description'?: string| undefined | null
+				'description'?: string | undefined | null
 				/** Layout. */
-				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[]| undefined | null
+				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout[] | undefined | null
 				
-				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'leftCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'rightCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'topCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'cards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[]| undefined | null
+				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
-				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid")| undefined | null
+				'layout'?: ("big-left" | "big-right" | "big-top" | "big-top-left" | "grid") | undefined | null
 				/** Card controller. */
-				'skillViewController'?: (HeartwoodTypes.SkillViewController)| undefined | null
+				'skillViewController'?: (HeartwoodTypes.SkillViewController) | undefined | null
 		}
 
 		interface LockScreenSchema extends SpruceSchema.Schema {
@@ -2422,7 +2422,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. */
 				'title': string
 				/** Subtitle. */
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 				/** Pages. */
 				'pages': (SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>)[]
 		}
@@ -2472,7 +2472,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Name. */
 				'name': ("accesibility" | "add" | "address_book" | "administrator" | "airbrush" | "airplane" | "alarm" | "alien" | "american_express" | "analysis" | "analysis_1" | "archive" | "art_palette" | "artificial_intelligence" | "artificial_intelligence_1" | "at" | "atm" | "attachment" | "audio" | "audio_knob" | "auricular_phone" | "back" | "backup" | "balance" | "band_aid" | "bank" | "barcode" | "basketball" | "battery" | "beer" | "bell" | "bicycle" | "bill" | "binoculars" | "birthday" | "bitcoin" | "blog" | "bluetooth" | "bomb" | "book" | "bookmark" | "box" | "brain" | "brainstorm" | "briefcase" | "briefcase_money" | "broken_heart" | "broken_link" | "brush_tip" | "bus" | "cake" | "calculator" | "calendar" | "car" | "cat" | "certificate" | "champagne" | "chat" | "chat_1" | "check" | "check_1" | "chip" | "cirrus" | "city" | "city_1" | "citybank" | "clicker" | "clip" | "clipboard" | "clock" | "cloud" | "cloud_1" | "cloud_computing" | "cloud_computing_1" | "cloudy" | "cocktail" | "code" | "coffee_cup" | "coin_dollar" | "coin_pound" | "coins" | "coinstack" | "collaboration" | "command" | "company" | "compass" | "compose" | "computer_graphics" | "connection" | "contract" | "contract_1" | "contrast" | "control" | "control_game" | "copy" | "costumer" | "coupon" | "crash" | "creative" | "credit_card" | "credit_card1" | "credit_card_2" | "cross" | "cursor" | "dashboard" | "database" | "delete" | "dentistry" | "diary" | "diet" | "digital_campaing" | "digital_key" | "diners_club" | "disc" | "discount" | "dish" | "dish_1" | "dislike" | "divider" | "doctor" | "dog" | "dollar_coin" | "dollar_sign" | "dowload" | "down_arrow" | "download" | "edit" | "edit_file" | "editor" | "education" | "eject" | "emergency" | "employed" | "encrypted_database" | "encrypted_folder" | "encrypted_internet_conection" | "encrypted_mail" | "encryption" | "encypted_terminal" | "enterprice" | "equal" | "erase_file" | "erase_sabe" | "error_database" | "error_search" | "error_terminal" | "euro_sign" | "exit" | "external_link" | "facebook" | "feedback" | "file" | "fill" | "finger_print" | "firewall" | "flag" | "flash" | "flash_auto" | "flash_red_eye" | "flashlight" | "folder_gallery" | "folder" | "football" | "forbidden" | "french_fries" | "funnel" | "gallery" | "game_control" | "games_card_clubs" | "games_card_diamonds" | "games_card_hearts" | "games_card_spades" | "gift" | "girl" | "gmail" | "gold" | "graduated" | "group" | "hamburguer" | "hand" | "hand_note" | "hand_point" | "hand_shake" | "headphones" | "heart" | "heart_1" | "help" | "hide" | "high_five" | "hold" | "home" | "homework" | "hotel" | "hourglass" | "house" | "icon" | "id_card" | "idea" | "infinity" | "info" | "information" | "innovation" | "instagram" | "internet" | "internet_1" | "internet_error" | "key" | "key_1" | "kiss" | "lamp" | "laptop" | "layers" | "layers_1" | "layout" | "left_arrow" | "light_bulb" | "like" | "like_1" | "line_chart" | "link" | "linkeding" | "list" | "local_network" | "location" | "locked" | "magazine" | "magic_wand" | "magnet" | "mail" | "mail_account" | "mail_error" | "map_location" | "maps" | "marker" | "master_data" | "mastercard" | "medicine" | "menu" | "mic" | "microphone" | "microphone_1" | "microscope" | "money_bag" | "money" | "money_1" | "money_report" | "money_report_1" | "monitor" | "more" | "multiple_user" | "multiple_users" | "music_library" | "music_player" | "music_volume_high" | "music_volume_low" | "music_volume_medium" | "music_volume_mute" | "musical_note" | "mute_mic" | "network" | "newspaper" | "note" | "notebook" | "notification" | "old_phone" | "online_pay" | "open_book" | "open_box" | "open_hand" | "p2p" | "pallete" | "paper_plane" | "paper_plane_1" | "passage_of_time" | "pause" | "payment" | "paypal" | "pen_drive" | "perspective" | "pet_paw_print" | "phone_book" | "phone_receiver" | "photo_camera" | "picture" | "pie_chart" | "piggy_bank" | "pinterest" | "piracy" | "pizza" | "placeholder" | "plan" | "plane" | "play_buttom" | "plus" | "police_car" | "power_on_off" | "presentation" | "preview" | "preview_1" | "previous" | "price_tag" | "print_fax" | "project_management" | "project_management_1" | "promotion" | "purse" | "quality" | "radar" | "radioactive" | "rainy" | "rating" | "receipt" | "recluitment" | "recognition" | "record" | "recycle" | "red_eye" | "reload" | "reload_1" | "repair" | "report" | "research" | "responsive" | "restaurant" | "resume" | "reunion" | "right_arrow" | "risk" | "rotate" | "route" | "runner_man" | "sabe" | "sabe_error" | "safety_box_open" | "satellite" | "school" | "scissors" | "screw" | "search" | "send" | "send_file" | "send_file_1" | "send_money" | "send_package" | "server" | "settings" | "settings_1" | "share" | "shield" | "ship" | "shipped" | "shop" | "shopping" | "shopping_bag" | "shopping_car" | "shuffle" | "sign" | "sketch" | "sketch_1" | "skip" | "smartphone" | "snapchat" | "sniffer" | "social_media" | "spam" | "speech_bubble" | "spray" | "star" | "start_up" | "stats_line_chart" | "stethoscope" | "stop" | "stop_watch" | "storage" | "street" | "student" | "study" | "sun_glasses" | "suppport" | "switch" | "tablet" | "tabs" | "tap_gesture" | "target" | "telephone_call" | "television" | "terminal" | "terminal_2" | "think" | "toast" | "toast_1" | "tools" | "traffic_light" | "transfer_data" | "trash" | "treasure_chest" | "trojan" | "twitter" | "two_players" | "university" | "unlock" | "up_arrow" | "upload" | "vector" | "view" | "vintage_phone" | "visa" | "volume_control" | "wallet" | "wallet_1" | "warning" | "warning_briefcase" | "warning_chemistry" | "warning_database" | "warning_dowload" | "warning_folder" | "warning_location" | "warning_mail" | "warning_package" | "warning_search" | "warning_shipped" | "warning_terminal" | "warning_trash" | "web_design" | "web_domain_registration" | "web_search" | "web_search_1" | "website" | "weight" | "whatsapp" | "wheelchair" | "wifi" | "windows" | "wine_cup" | "wordpress" | "worldwide" | "youtube" | "zcash" | "zipped_folder" | "zoom_in" | "zoom_out" | "loading")
 				/** Size. */
-				'size'?: ("medium" | "extraLarge")| undefined | null
+				'size'?: ("medium" | "extraLarge") | undefined | null
 		}
 
 		interface FancyIconSchema extends SpruceSchema.Schema {
@@ -2509,23 +2509,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardBody {
 			
 				/** Show section separators. This will make each section render with a border. */
-				'shouldShowSectionSeparators'?: boolean| undefined | null
+				'shouldShowSectionSeparators'?: boolean | undefined | null
 				/** Busy. */
-				'isBusy'?: boolean| undefined | null
+				'isBusy'?: boolean | undefined | null
 				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void)| undefined | null
+				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void) | undefined | null
 				/** Swipe. */
-				'shouldEnableSectionSwiping'?: boolean| undefined | null
+				'shouldEnableSectionSwiping'?: boolean | undefined | null
 				/** Swipe break into cards on landscape. */
-				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean| undefined | null
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean | undefined | null
 				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void)| undefined | null
+				'onSelectSlideTitle'?: ((id: number) => void) | undefined | null
 				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void)| undefined | null
+				'onChangeSlide'?: ((slide: number) => void) | undefined | null
 				/** Render sections as grid. */
-				'shouldRenderSectionsAsGrid'?: boolean| undefined | null
+				'shouldRenderSectionsAsGrid'?: boolean | undefined | null
 				/** Sections. */
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]| undefined | null
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[] | undefined | null
 		}
 
 		interface CardBodySchema extends SpruceSchema.Schema {
@@ -2605,31 +2605,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Dialog {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>) | undefined | null
 				/** Header. */
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader| undefined | null
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader | undefined | null
 				/** Critical error. */
-				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError| undefined | null
+				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError | undefined | null
 				/** Fade in. */
-				'shouldFadeIn'?: boolean| undefined | null
+				'shouldFadeIn'?: boolean | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
-				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody| undefined | null
+				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | undefined | null
 				/** Visible. */
-				'isVisible'?: boolean| undefined | null
+				'isVisible'?: boolean | undefined | null
 				/** Show close button. */
-				'shouldShowCloseButton'?: boolean| undefined | null
+				'shouldShowCloseButton'?: boolean | undefined | null
 				/** Card controller. */
-				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>)| undefined | null
+				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>) | undefined | null
 				/** Close callback. Called when the dialog is closed */
-				'onClose'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
+				'onClose'?: (() => Promise<void | boolean> | void | boolean) | undefined | null
 				/** Close handler. Called to actually close the dialog */
-				'closeHandler'?: (() => Promise<void | boolean> | void | boolean)| undefined | null
+				'closeHandler'?: (() => Promise<void | boolean> | void | boolean) | undefined | null
 		}
 
 		interface DialogSchema extends SpruceSchema.Schema {
@@ -2734,9 +2734,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Portal {
 			
 				/** HTML. */
-				'html'?: string| undefined | null
+				'html'?: string | undefined | null
 				/** URI. */
-				'uri'?: string| undefined | null
+				'uri'?: string | undefined | null
 		}
 
 		interface PortalSchema extends SpruceSchema.Schema {
@@ -2774,9 +2774,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
 				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler)| undefined | null
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler) | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>) | undefined | null
 		}
 
 		interface FeedSchema extends SpruceSchema.Schema {
@@ -2856,9 +2856,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PolarArea {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.PolarAreaViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.PolarAreaViewController) | undefined | null
 				
 				'data': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem[]
 		}
@@ -2906,9 +2906,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value': string
 				
-				'shouldBeEmphasized'?: boolean| undefined | null
+				'shouldBeEmphasized'?: boolean | undefined | null
 				
-				'shouldBeCalledOut'?: boolean| undefined | null
+				'shouldBeCalledOut'?: boolean | undefined | null
 		}
 
 		interface ReceiptTotalSchema extends SpruceSchema.Schema {
@@ -2954,11 +2954,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Receipt {
 			
 				
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader| undefined | null
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader | undefined | null
 				
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[]| undefined | null
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[] | undefined | null
 				
-				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[]| undefined | null
+				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[] | undefined | null
 		}
 
 		interface ReceiptSchema extends SpruceSchema.Schema {
@@ -2999,65 +2999,65 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardSection {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Title. */
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				/** Complete. When being rendered as a slide, this will signify the step is complete. */
-				'isComplete'?: boolean| undefined | null
+				'isComplete'?: boolean | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>) | undefined | null
 				/** Padding. */
-				'shouldBePadded'?: boolean| undefined | null
+				'shouldBePadded'?: boolean | undefined | null
 				/** Center content. */
-				'shouldContentBeCentered'?: boolean| undefined | null
+				'shouldContentBeCentered'?: boolean | undefined | null
 				/** Card section item. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Form. */
-				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any> | undefined | null
 				/** Talking Sprucebot. */
-				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot | undefined | null
 				/** Big form. */
-				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>| undefined | null
+				'bigForm'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any> | undefined | null
 				/** Map. */
-				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map| undefined | null
+				'map'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Map | undefined | null
 				/** Buttons. */
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[] | undefined | null
 				/** Button bar. */
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar | undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List | undefined | null
 				/** Calendar. */
-				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar | undefined | null
 				/** Stats. */
-				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats| undefined | null
+				'stats'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats | undefined | null
 				/** Countdown timer. */
-				'countdownTimer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer| undefined | null
+				'countdownTimer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer | undefined | null
 				/** Progress. */
-				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress| undefined | null
+				'progress'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progress | undefined | null
 				/** Ratings. */
-				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings| undefined | null
+				'ratings'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings | undefined | null
 				/** Receipt. */
-				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt| undefined | null
+				'receipt'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Receipt | undefined | null
 				/** Polar radar. */
-				'polarArea'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea| undefined | null
+				'polarArea'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarArea | undefined | null
 				/** Feed. */
-				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed| undefined | null
+				'feed'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed | undefined | null
 				/** Pager. */
-				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager| undefined | null
+				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager | undefined | null
 				/** Bar chart. */
-				'barChart'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart| undefined | null
+				'barChart'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart | undefined | null
 				/** Grid. */
-				'shouldRenderContentsAsGrid'?: boolean| undefined | null
+				'shouldRenderContentsAsGrid'?: boolean | undefined | null
 				/** Grid size. */
-				'gridSize'?: ("small" | "medium" | "large")| undefined | null
+				'gridSize'?: ("small" | "medium" | "large") | undefined | null
 				/** . Will render content in an iframe in the body of the card. */
-				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal| undefined | null
+				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal | undefined | null
 				/** Alignment. */
-				'alignment'?: ("left" | "center" | "right")| undefined | null
+				'alignment'?: ("left" | "center" | "right") | undefined | null
 		}
 
 		interface CardSectionSchema extends SpruceSchema.Schema {
@@ -3267,11 +3267,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ReceiptLineItem {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'description'?: string| undefined | null
+				'description'?: string | undefined | null
 				
 				'quantity': string
 				
@@ -3327,9 +3327,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ReceiptSection {
 			
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'lineItems'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptLineItem[]| undefined | null
+				'lineItems'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptLineItem[] | undefined | null
 		}
 
 		interface ReceiptSectionSchema extends SpruceSchema.Schema {
@@ -3364,9 +3364,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ReceiptHeader {
 			
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 		}
 
 		interface ReceiptHeaderSchema extends SpruceSchema.Schema {
@@ -3400,23 +3400,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Ratings {
 			
 				/** Value. A number between 0-1. */
-				'value'?: number| undefined | null
+				'value'?: number | undefined | null
 				/** Can be changed. */
-				'canBeChanged'?: boolean| undefined | null
+				'canBeChanged'?: boolean | undefined | null
 				/** Callback. */
-				'onChange'?: ((value: number) => any)| undefined | null
+				'onChange'?: ((value: number) => any) | undefined | null
 				/** Steps. How many choices does a person have? Defaults to 5. */
-				'steps'?: number| undefined | null
+				'steps'?: number | undefined | null
 				/** Left Label. The label on the left side of the ratings. Usually assocatiated with the lowest rating. */
-				'leftLabel'?: string| undefined | null
+				'leftLabel'?: string | undefined | null
 				/** Right Label. The label on the right side of the ratings. Usually associated with the highest rating. */
-				'rightLabel'?: string| undefined | null
+				'rightLabel'?: string | undefined | null
 				/** Middle Label. The label in the middle of the ratings. Something neutral like "average" or "ok" is pretty common. */
-				'middleLabel'?: string| undefined | null
+				'middleLabel'?: string | undefined | null
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
-				'icon'?: ("star" | "radio")| undefined | null
+				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
 		}
 
 		interface RatingsSchema extends SpruceSchema.Schema {
@@ -3499,9 +3499,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ProgressDetails {
 			
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 		}
 
 		interface ProgressDetailsSchema extends SpruceSchema.Schema {
@@ -3535,13 +3535,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Progress {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Title. Rendered in the center of the circle indicator! */
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				/** Percent complete. A number from zero to 1 */
-				'percentComplete'?: number| undefined | null
+				'percentComplete'?: number | undefined | null
 				/** Details. */
-				'details'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressDetails| undefined | null
+				'details'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressDetails | undefined | null
 		}
 
 		interface ProgressSchema extends SpruceSchema.Schema {
@@ -3590,9 +3590,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface StatsStat {
 			
 				
-				'value'?: (number | string)| undefined | null
+				'value'?: (number | string) | undefined | null
 				
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 		}
 
 		interface StatsStatSchema extends SpruceSchema.Schema {
@@ -3626,11 +3626,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Stats {
 			
 				/** Prefix. Will be rendered before the value. Could be a $ or something else. */
-				'valuePrefix'?: string| undefined | null
+				'valuePrefix'?: string | undefined | null
 				/** Format values. Add commas to numbers. */
-				'shouldFormatValues'?: boolean| undefined | null
+				'shouldFormatValues'?: boolean | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>) | undefined | null
 				/** Stats. */
 				'stats': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStat[]
 		}
@@ -3683,13 +3683,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface MapPin {
 			
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 				
 				'address': SpruceSchema.AddressFieldValue
 				
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[] | undefined | null
 		}
 
 		interface MapPinSchema extends SpruceSchema.Schema {
@@ -3774,13 +3774,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Map {
 			
 				
-				'center'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng| undefined | null
+				'center'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LatLng | undefined | null
 				
-				'zoom'?: ("house" | "block" | "longWalk" | "shortDrive" | "city" | "state")| undefined | null
+				'zoom'?: ("house" | "block" | "longWalk" | "shortDrive" | "city" | "state") | undefined | null
 				
-				'pins'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin[]| undefined | null
+				'pins'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin[] | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.MapViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.MapViewController) | undefined | null
 		}
 
 		interface MapSchema extends SpruceSchema.Schema {
@@ -3827,21 +3827,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BigFormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Title. */
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
+				'shouldRenderAsGrid'?: boolean | undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List | undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[] | undefined | null
 				
-				'shouldShowSubmitButton'?: boolean| undefined | null
+				'shouldShowSubmitButton'?: boolean | undefined | null
 		}
 
 		interface BigFormSectionSchema extends SpruceSchema.Schema {
@@ -3915,7 +3915,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotTypedMessageAvatar {
 			
 				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
+				'size'?: ("small" | "medium" | "large") | undefined | null
 				/** State of mind. */
 				'stateOfMind': ("chill" | "contemplative" | "accomplished")
 		}
@@ -3957,23 +3957,23 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface TalkingSprucebot {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Sentences. Sprucebot will type out these sentences one at a time preserving what is similar between each one (in bold) */
 				'sentences': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence[]
 				/** Default avatar. How should Sprucebot be rendered by default */
-				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageAvatar | undefined | null
 				/** Start delay. How long should I wait before starting to type? */
-				'startDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				'startDelay'?: SpruceSchema.DurationFieldValue | undefined | null
 				/** Loop. */
-				'shouldLoop'?: boolean| undefined | null
+				'shouldLoop'?: boolean | undefined | null
 				/** Size. */
-				'size'?: ("small" | "medium" | "large")| undefined | null
+				'size'?: ("small" | "medium" | "large") | undefined | null
 				/** Playing. */
-				'isPlaying'?: boolean| undefined | null
+				'isPlaying'?: boolean | undefined | null
 				/** Completion handler. */
-				'onComplete'?: (() => Promise<void> | void)| undefined | null
+				'onComplete'?: (() => Promise<void> | void) | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController) | undefined | null
 		}
 
 		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
@@ -4101,51 +4101,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.BigFormViewController<S>)| undefined | null
+				'controller'?: (HeartwoodTypes.BigFormViewController<S>) | undefined | null
 				
 				'schema': (S)
 				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>) | undefined | null
 				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				'onCancel'?: (() => void | Promise<void>) | undefined | null
 				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
+				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined) | undefined | null
 				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
+				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void) | undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				'values'?: (SpruceSchema.SchemaPartialValues<S>) | undefined | null
 				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
+				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
 				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean| undefined | null
+				'shouldShowSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean| undefined | null
+				'shouldShowCancelButton'?: boolean | undefined | null
 				/** Submit button label. */
-				'submitButtonLabel'?: string| undefined | null
+				'submitButtonLabel'?: string | undefined | null
 				/** Cancel button label. */
-				'cancelButtonLabel'?: string| undefined | null
+				'cancelButtonLabel'?: string | undefined | null
 				/** Busy. */
-				'isBusy'?: boolean| undefined | null
+				'isBusy'?: boolean | undefined | null
 				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
 				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
 				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | undefined | null
 				
-				'sprucebotAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
+				'sprucebotAvatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar | undefined | null
 				
-				'shouldRenderFirstFieldsLabel'?: boolean| undefined | null
+				'shouldRenderFirstFieldsLabel'?: boolean | undefined | null
 				
-				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot| undefined | null
+				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot | undefined | null
 				/** Present slide. The slide showing now! */
-				'presentSlide'?: number| undefined | null
+				'presentSlide'?: number | undefined | null
 				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>)| undefined | null
+				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>) | undefined | null
 		}
 
 		interface BigFormSchema extends SpruceSchema.Schema {
@@ -4323,11 +4323,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SprucebotTypedMessageSentence {
 			
 				/** . A way to override the Sprucebot avatar for this sentence */
-				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar| undefined | null
+				'avatar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotAvatar | undefined | null
 				/** Words. The words being typed out */
 				'words': string
 				/** End delay. How long should I hold on this sentence after it's typed? */
-				'endDelay'?: SpruceSchema.DurationFieldValue| undefined | null
+				'endDelay'?: SpruceSchema.DurationFieldValue | undefined | null
 		}
 
 		interface SprucebotTypedMessageSentenceSchema extends SpruceSchema.Schema {
@@ -4372,11 +4372,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CriticalError {
 			
 				
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				
-				'message'?: string| undefined | null
+				'message'?: string | undefined | null
 				
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[] | undefined | null
 		}
 
 		interface CriticalErrorSchema extends SpruceSchema.Schema {
@@ -4418,41 +4418,41 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormViewController<S>)| undefined | null
+				'controller'?: (HeartwoodTypes.FormViewController<S>) | undefined | null
 				
 				'schema': (S)
 				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>)| undefined | null
+				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>) | undefined | null
 				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>)| undefined | null
+				'onCancel'?: (() => void | Promise<void>) | undefined | null
 				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined)| undefined | null
+				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined) | undefined | null
 				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void)| undefined | null
+				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void) | undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>)| undefined | null
+				'values'?: (SpruceSchema.SchemaPartialValues<S>) | undefined | null
 				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>)| undefined | null
+				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
 				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean| undefined | null
+				'shouldShowSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean| undefined | null
+				'shouldShowCancelButton'?: boolean | undefined | null
 				/** Submit button label. */
-				'submitButtonLabel'?: string| undefined | null
+				'submitButtonLabel'?: string | undefined | null
 				/** Cancel button label. */
-				'cancelButtonLabel'?: string| undefined | null
+				'cancelButtonLabel'?: string | undefined | null
 				/** Busy. */
-				'isBusy'?: boolean| undefined | null
+				'isBusy'?: boolean | undefined | null
 				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Set value handler. */
 				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
 				/** Form sections. */
 				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>[]
 				/** Footer. */
-				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter| undefined | null
+				'footer'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter | undefined | null
 		}
 
 		interface FormSchema extends SpruceSchema.Schema {
@@ -4601,21 +4601,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardHeader {
 			
 				/** Title. */
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>) | undefined | null
 				/** Subtitle. */
-				'subtitle'?: string| undefined | null
+				'subtitle'?: string | undefined | null
 				/** Icon. */
-				'icon'?: ("accesibility" | "add" | "address_book" | "administrator" | "airbrush" | "airplane" | "alarm" | "alien" | "american_express" | "analysis" | "analysis_1" | "archive" | "art_palette" | "artificial_intelligence" | "artificial_intelligence_1" | "at" | "atm" | "attachment" | "audio" | "audio_knob" | "auricular_phone" | "back" | "backup" | "balance" | "band_aid" | "bank" | "barcode" | "basketball" | "battery" | "beer" | "bell" | "bicycle" | "bill" | "binoculars" | "birthday" | "bitcoin" | "blog" | "bluetooth" | "bomb" | "book" | "bookmark" | "box" | "brain" | "brainstorm" | "briefcase" | "briefcase_money" | "broken_heart" | "broken_link" | "brush_tip" | "bus" | "cake" | "calculator" | "calendar" | "car" | "cat" | "certificate" | "champagne" | "chat" | "chat_1" | "check" | "check_1" | "chip" | "cirrus" | "city" | "city_1" | "citybank" | "clicker" | "clip" | "clipboard" | "clock" | "cloud" | "cloud_1" | "cloud_computing" | "cloud_computing_1" | "cloudy" | "cocktail" | "code" | "coffee_cup" | "coin_dollar" | "coin_pound" | "coins" | "coinstack" | "collaboration" | "command" | "company" | "compass" | "compose" | "computer_graphics" | "connection" | "contract" | "contract_1" | "contrast" | "control" | "control_game" | "copy" | "costumer" | "coupon" | "crash" | "creative" | "credit_card" | "credit_card1" | "credit_card_2" | "cross" | "cursor" | "dashboard" | "database" | "delete" | "dentistry" | "diary" | "diet" | "digital_campaing" | "digital_key" | "diners_club" | "disc" | "discount" | "dish" | "dish_1" | "dislike" | "divider" | "doctor" | "dog" | "dollar_coin" | "dollar_sign" | "dowload" | "down_arrow" | "download" | "edit" | "edit_file" | "editor" | "education" | "eject" | "emergency" | "employed" | "encrypted_database" | "encrypted_folder" | "encrypted_internet_conection" | "encrypted_mail" | "encryption" | "encypted_terminal" | "enterprice" | "equal" | "erase_file" | "erase_sabe" | "error_database" | "error_search" | "error_terminal" | "euro_sign" | "exit" | "external_link" | "facebook" | "feedback" | "file" | "fill" | "finger_print" | "firewall" | "flag" | "flash" | "flash_auto" | "flash_red_eye" | "flashlight" | "folder_gallery" | "folder" | "football" | "forbidden" | "french_fries" | "funnel" | "gallery" | "game_control" | "games_card_clubs" | "games_card_diamonds" | "games_card_hearts" | "games_card_spades" | "gift" | "girl" | "gmail" | "gold" | "graduated" | "group" | "hamburguer" | "hand" | "hand_note" | "hand_point" | "hand_shake" | "headphones" | "heart" | "heart_1" | "help" | "hide" | "high_five" | "hold" | "home" | "homework" | "hotel" | "hourglass" | "house" | "icon" | "id_card" | "idea" | "infinity" | "info" | "information" | "innovation" | "instagram" | "internet" | "internet_1" | "internet_error" | "key" | "key_1" | "kiss" | "lamp" | "laptop" | "layers" | "layers_1" | "layout" | "left_arrow" | "light_bulb" | "like" | "like_1" | "line_chart" | "link" | "linkeding" | "list" | "local_network" | "location" | "locked" | "magazine" | "magic_wand" | "magnet" | "mail" | "mail_account" | "mail_error" | "map_location" | "maps" | "marker" | "master_data" | "mastercard" | "medicine" | "menu" | "mic" | "microphone" | "microphone_1" | "microscope" | "money_bag" | "money" | "money_1" | "money_report" | "money_report_1" | "monitor" | "more" | "multiple_user" | "multiple_users" | "music_library" | "music_player" | "music_volume_high" | "music_volume_low" | "music_volume_medium" | "music_volume_mute" | "musical_note" | "mute_mic" | "network" | "newspaper" | "note" | "notebook" | "notification" | "old_phone" | "online_pay" | "open_book" | "open_box" | "open_hand" | "p2p" | "pallete" | "paper_plane" | "paper_plane_1" | "passage_of_time" | "pause" | "payment" | "paypal" | "pen_drive" | "perspective" | "pet_paw_print" | "phone_book" | "phone_receiver" | "photo_camera" | "picture" | "pie_chart" | "piggy_bank" | "pinterest" | "piracy" | "pizza" | "placeholder" | "plan" | "plane" | "play_buttom" | "plus" | "police_car" | "power_on_off" | "presentation" | "preview" | "preview_1" | "previous" | "price_tag" | "print_fax" | "project_management" | "project_management_1" | "promotion" | "purse" | "quality" | "radar" | "radioactive" | "rainy" | "rating" | "receipt" | "recluitment" | "recognition" | "record" | "recycle" | "red_eye" | "reload" | "reload_1" | "repair" | "report" | "research" | "responsive" | "restaurant" | "resume" | "reunion" | "right_arrow" | "risk" | "rotate" | "route" | "runner_man" | "sabe" | "sabe_error" | "safety_box_open" | "satellite" | "school" | "scissors" | "screw" | "search" | "send" | "send_file" | "send_file_1" | "send_money" | "send_package" | "server" | "settings" | "settings_1" | "share" | "shield" | "ship" | "shipped" | "shop" | "shopping" | "shopping_bag" | "shopping_car" | "shuffle" | "sign" | "sketch" | "sketch_1" | "skip" | "smartphone" | "snapchat" | "sniffer" | "social_media" | "spam" | "speech_bubble" | "spray" | "star" | "start_up" | "stats_line_chart" | "stethoscope" | "stop" | "stop_watch" | "storage" | "street" | "student" | "study" | "sun_glasses" | "suppport" | "switch" | "tablet" | "tabs" | "tap_gesture" | "target" | "telephone_call" | "television" | "terminal" | "terminal_2" | "think" | "toast" | "toast_1" | "tools" | "traffic_light" | "transfer_data" | "trash" | "treasure_chest" | "trojan" | "twitter" | "two_players" | "university" | "unlock" | "up_arrow" | "upload" | "vector" | "view" | "vintage_phone" | "visa" | "volume_control" | "wallet" | "wallet_1" | "warning" | "warning_briefcase" | "warning_chemistry" | "warning_database" | "warning_dowload" | "warning_folder" | "warning_location" | "warning_mail" | "warning_package" | "warning_search" | "warning_shipped" | "warning_terminal" | "warning_trash" | "web_design" | "web_domain_registration" | "web_search" | "web_search_1" | "website" | "weight" | "whatsapp" | "wheelchair" | "wifi" | "windows" | "wine_cup" | "wordpress" | "worldwide" | "youtube" | "zcash" | "zipped_folder" | "zoom_in" | "zoom_out" | "loading")| undefined | null
+				'icon'?: ("accesibility" | "add" | "address_book" | "administrator" | "airbrush" | "airplane" | "alarm" | "alien" | "american_express" | "analysis" | "analysis_1" | "archive" | "art_palette" | "artificial_intelligence" | "artificial_intelligence_1" | "at" | "atm" | "attachment" | "audio" | "audio_knob" | "auricular_phone" | "back" | "backup" | "balance" | "band_aid" | "bank" | "barcode" | "basketball" | "battery" | "beer" | "bell" | "bicycle" | "bill" | "binoculars" | "birthday" | "bitcoin" | "blog" | "bluetooth" | "bomb" | "book" | "bookmark" | "box" | "brain" | "brainstorm" | "briefcase" | "briefcase_money" | "broken_heart" | "broken_link" | "brush_tip" | "bus" | "cake" | "calculator" | "calendar" | "car" | "cat" | "certificate" | "champagne" | "chat" | "chat_1" | "check" | "check_1" | "chip" | "cirrus" | "city" | "city_1" | "citybank" | "clicker" | "clip" | "clipboard" | "clock" | "cloud" | "cloud_1" | "cloud_computing" | "cloud_computing_1" | "cloudy" | "cocktail" | "code" | "coffee_cup" | "coin_dollar" | "coin_pound" | "coins" | "coinstack" | "collaboration" | "command" | "company" | "compass" | "compose" | "computer_graphics" | "connection" | "contract" | "contract_1" | "contrast" | "control" | "control_game" | "copy" | "costumer" | "coupon" | "crash" | "creative" | "credit_card" | "credit_card1" | "credit_card_2" | "cross" | "cursor" | "dashboard" | "database" | "delete" | "dentistry" | "diary" | "diet" | "digital_campaing" | "digital_key" | "diners_club" | "disc" | "discount" | "dish" | "dish_1" | "dislike" | "divider" | "doctor" | "dog" | "dollar_coin" | "dollar_sign" | "dowload" | "down_arrow" | "download" | "edit" | "edit_file" | "editor" | "education" | "eject" | "emergency" | "employed" | "encrypted_database" | "encrypted_folder" | "encrypted_internet_conection" | "encrypted_mail" | "encryption" | "encypted_terminal" | "enterprice" | "equal" | "erase_file" | "erase_sabe" | "error_database" | "error_search" | "error_terminal" | "euro_sign" | "exit" | "external_link" | "facebook" | "feedback" | "file" | "fill" | "finger_print" | "firewall" | "flag" | "flash" | "flash_auto" | "flash_red_eye" | "flashlight" | "folder_gallery" | "folder" | "football" | "forbidden" | "french_fries" | "funnel" | "gallery" | "game_control" | "games_card_clubs" | "games_card_diamonds" | "games_card_hearts" | "games_card_spades" | "gift" | "girl" | "gmail" | "gold" | "graduated" | "group" | "hamburguer" | "hand" | "hand_note" | "hand_point" | "hand_shake" | "headphones" | "heart" | "heart_1" | "help" | "hide" | "high_five" | "hold" | "home" | "homework" | "hotel" | "hourglass" | "house" | "icon" | "id_card" | "idea" | "infinity" | "info" | "information" | "innovation" | "instagram" | "internet" | "internet_1" | "internet_error" | "key" | "key_1" | "kiss" | "lamp" | "laptop" | "layers" | "layers_1" | "layout" | "left_arrow" | "light_bulb" | "like" | "like_1" | "line_chart" | "link" | "linkeding" | "list" | "local_network" | "location" | "locked" | "magazine" | "magic_wand" | "magnet" | "mail" | "mail_account" | "mail_error" | "map_location" | "maps" | "marker" | "master_data" | "mastercard" | "medicine" | "menu" | "mic" | "microphone" | "microphone_1" | "microscope" | "money_bag" | "money" | "money_1" | "money_report" | "money_report_1" | "monitor" | "more" | "multiple_user" | "multiple_users" | "music_library" | "music_player" | "music_volume_high" | "music_volume_low" | "music_volume_medium" | "music_volume_mute" | "musical_note" | "mute_mic" | "network" | "newspaper" | "note" | "notebook" | "notification" | "old_phone" | "online_pay" | "open_book" | "open_box" | "open_hand" | "p2p" | "pallete" | "paper_plane" | "paper_plane_1" | "passage_of_time" | "pause" | "payment" | "paypal" | "pen_drive" | "perspective" | "pet_paw_print" | "phone_book" | "phone_receiver" | "photo_camera" | "picture" | "pie_chart" | "piggy_bank" | "pinterest" | "piracy" | "pizza" | "placeholder" | "plan" | "plane" | "play_buttom" | "plus" | "police_car" | "power_on_off" | "presentation" | "preview" | "preview_1" | "previous" | "price_tag" | "print_fax" | "project_management" | "project_management_1" | "promotion" | "purse" | "quality" | "radar" | "radioactive" | "rainy" | "rating" | "receipt" | "recluitment" | "recognition" | "record" | "recycle" | "red_eye" | "reload" | "reload_1" | "repair" | "report" | "research" | "responsive" | "restaurant" | "resume" | "reunion" | "right_arrow" | "risk" | "rotate" | "route" | "runner_man" | "sabe" | "sabe_error" | "safety_box_open" | "satellite" | "school" | "scissors" | "screw" | "search" | "send" | "send_file" | "send_file_1" | "send_money" | "send_package" | "server" | "settings" | "settings_1" | "share" | "shield" | "ship" | "shipped" | "shop" | "shopping" | "shopping_bag" | "shopping_car" | "shuffle" | "sign" | "sketch" | "sketch_1" | "skip" | "smartphone" | "snapchat" | "sniffer" | "social_media" | "spam" | "speech_bubble" | "spray" | "star" | "start_up" | "stats_line_chart" | "stethoscope" | "stop" | "stop_watch" | "storage" | "street" | "student" | "study" | "sun_glasses" | "suppport" | "switch" | "tablet" | "tabs" | "tap_gesture" | "target" | "telephone_call" | "television" | "terminal" | "terminal_2" | "think" | "toast" | "toast_1" | "tools" | "traffic_light" | "transfer_data" | "trash" | "treasure_chest" | "trojan" | "twitter" | "two_players" | "university" | "unlock" | "up_arrow" | "upload" | "vector" | "view" | "vintage_phone" | "visa" | "volume_control" | "wallet" | "wallet_1" | "warning" | "warning_briefcase" | "warning_chemistry" | "warning_database" | "warning_dowload" | "warning_folder" | "warning_location" | "warning_mail" | "warning_package" | "warning_search" | "warning_shipped" | "warning_terminal" | "warning_trash" | "web_design" | "web_domain_registration" | "web_search" | "web_search_1" | "website" | "weight" | "whatsapp" | "wheelchair" | "wifi" | "windows" | "wine_cup" | "wordpress" | "worldwide" | "youtube" | "zcash" | "zipped_folder" | "zoom_in" | "zoom_out" | "loading") | undefined | null
 				/** Image. The absolute url to any image you want shown in the header. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Image size. How should the header image be rendered */
-				'imageSize'?: ("cover" | "contain")| undefined | null
+				'imageSize'?: ("cover" | "contain") | undefined | null
 				/** Form. */
-				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>| undefined | null
+				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any> | undefined | null
 				/** Close handler. Meant for use inside React components directly. */
-				'closeHandler'?: (() => Promise<void> | void)| undefined | null
+				'closeHandler'?: (() => Promise<void> | void) | undefined | null
 		}
 
 		interface CardHeaderSchema extends SpruceSchema.Schema {
@@ -4692,15 +4692,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Pager {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>) | undefined | null
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'totalPages'?: number| undefined | null
+				'totalPages'?: number | undefined | null
 				
-				'currentPage'?: number| undefined | null
+				'currentPage'?: number | undefined | null
 				
-				'onChangePage'?: ((page: number) => Promise<any> | any)| undefined | null
+				'onChangePage'?: ((page: number) => Promise<any> | any) | undefined | null
 				
 				'setCurrentPage': ((page: number) => Promise<any> | any)
 		}
@@ -4758,37 +4758,37 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardFooterButton {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 		}
 
 		interface CardFooterButtonSchema extends SpruceSchema.Schema {
@@ -4909,19 +4909,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardFooter {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>) | undefined | null
 				/** Buttons. */
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButton[]| undefined | null
+				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButton[] | undefined | null
 				/** Loading. */
-				'isBusy'?: boolean| undefined | null
+				'isBusy'?: boolean | undefined | null
 				/** Sticky. */
-				'isSticky'?: boolean| undefined | null
+				'isSticky'?: boolean | undefined | null
 				/** Loading. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Pager. */
-				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager| undefined | null
+				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager | undefined | null
 				/** Show border. */
-				'shouldRenderBorder'?: boolean| undefined | null
+				'shouldRenderBorder'?: boolean | undefined | null
 		}
 
 		interface CardFooterSchema extends SpruceSchema.Schema {
@@ -4990,19 +4990,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface FormSection<S extends SpruceSchema.Schema = SpruceSchema.Schema> {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'className'?: string| undefined | null
+				'className'?: string | undefined | null
 				/** Title. */
-				'title'?: string| undefined | null
+				'title'?: string | undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Grid. */
-				'shouldRenderAsGrid'?: boolean| undefined | null
+				'shouldRenderAsGrid'?: boolean | undefined | null
 				/** List. */
-				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List| undefined | null
+				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List | undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[]| undefined | null
+				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[] | undefined | null
 		}
 
 		interface FormSectionSchema extends SpruceSchema.Schema {
@@ -5071,49 +5071,49 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListRatingsInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: number| undefined | null
+				'value'?: number | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: number) => any | Promise<any>)| undefined | null
+				'onChange'?: ((value: number) => any | Promise<any>) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Can be changed. */
-				'canBeChanged'?: boolean| undefined | null
+				'canBeChanged'?: boolean | undefined | null
 				/** Steps. How many choices does a person have? Defaults to 5. */
-				'steps'?: number| undefined | null
+				'steps'?: number | undefined | null
 				/** Left Label. The label on the left side of the ratings. Usually assocatiated with the lowest rating. */
-				'leftLabel'?: string| undefined | null
+				'leftLabel'?: string | undefined | null
 				/** Right Label. The label on the right side of the ratings. Usually associated with the highest rating. */
-				'rightLabel'?: string| undefined | null
+				'rightLabel'?: string | undefined | null
 				/** Middle Label. The label in the middle of the ratings. Something neutral like "average" or "ok" is pretty common. */
-				'middleLabel'?: string| undefined | null
+				'middleLabel'?: string | undefined | null
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
-				'icon'?: ("star" | "radio")| undefined | null
+				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				
-				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: number) => Promise<any> | any) | undefined | null
 		}
 
 		interface ListRatingsInputSchema extends SpruceSchema.Schema {
@@ -5270,35 +5270,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListToggleInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: boolean| undefined | null
+				'value'?: boolean | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				
-				'setValue'?: ((name: string, value: boolean) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: boolean) => Promise<any> | any) | undefined | null
 		}
 
 		interface ListToggleInputSchema extends SpruceSchema.Schema {
@@ -5447,39 +5447,39 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListSelectInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: (any)| undefined | null
+				'value'?: (any) | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				
-				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: string) => Promise<any> | any) | undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -5602,37 +5602,37 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListDateInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: string| undefined | null
+				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				
-				'setValue'?: ((name: string, value: number) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: number) => Promise<any> | any) | undefined | null
 		}
 
 		interface ListDateInputSchema extends SpruceSchema.Schema {
@@ -5748,37 +5748,37 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListTextInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: string| undefined | null
+				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				
-				'setValue'?: ((name: string, value: string) => Promise<any> | any)| undefined | null
+				'setValue'?: ((name: string, value: string) => Promise<any> | any) | undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -5894,41 +5894,41 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListCellButton {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Cell button click handler. */
-				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>)| undefined | null
+				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>) | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>)| undefined | null
+				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown| undefined | null
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown | undefined | null
 		}
 
 		interface ListCellButtonSchema extends SpruceSchema.Schema {
@@ -6061,39 +6061,39 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListCell {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListCellViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ListCellViewController) | undefined | null
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Text. */
-				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Subtext. */
-				'subText'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'subText'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Image url. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatars. */
-				'avatars'?: (string | null | undefined)[]| undefined | null
+				'avatars'?: (string | null | undefined)[] | undefined | null
 				/** Button. */
-				'button'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButton| undefined | null
+				'button'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButton | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				
-				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar| undefined | null
+				'calendar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar | undefined | null
 				
-				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar| undefined | null
+				'buttonBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBar | undefined | null
 				/** Text input. */
-				'textInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput| undefined | null
+				'textInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListTextInput | undefined | null
 				/** Date input. */
-				'dateInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInput| undefined | null
+				'dateInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListDateInput | undefined | null
 				/** Select input. */
-				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput| undefined | null
+				'selectInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSelectInput | undefined | null
 				/** Toggle input. */
-				'toggleInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput| undefined | null
+				'toggleInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput | undefined | null
 				/** Checkbox input. */
-				'checkboxInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput| undefined | null
+				'checkboxInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListToggleInput | undefined | null
 				/** Ratings input. */
-				'ratingsInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput| undefined | null
+				'ratingsInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput | undefined | null
 		}
 
 		interface ListCellSchema extends SpruceSchema.Schema {
@@ -6218,21 +6218,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListRow {
 			
 				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				'columnWidths'?: (number | 'fill' | 'content')[] | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListRowViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ListRowViewController) | undefined | null
 				/** Row height. */
-				'height'?: ("standard" | "tall" | "content")| undefined | null
+				'height'?: ("standard" | "tall" | "content") | undefined | null
 				/** Enabled. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Id. */
 				'id': string
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Style. */
-				'style'?: ("standard" | "warning" | "critical")| undefined | null
+				'style'?: ("standard" | "warning" | "critical") | undefined | null
 				/** Cells. */
 				'cells': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCell[]
 		}
@@ -6316,15 +6316,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface List {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ListViewController) | undefined | null
 				/** Render row dividers. */
-				'shouldRenderRowDividers'?: boolean| undefined | null
+				'shouldRenderRowDividers'?: boolean | undefined | null
 				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[]| undefined | null
+				'columnWidths'?: (number | 'fill' | 'content')[] | undefined | null
 				/** Row height. */
-				'defaultRowHeight'?: ("standard" | "tall" | "content")| undefined | null
+				'defaultRowHeight'?: ("standard" | "tall" | "content") | undefined | null
 				/** Rows. */
 				'rows': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
 		}
@@ -6389,13 +6389,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CountdownTimer {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>) | undefined | null
 				
-				'onComplete'?: (() => void | Promise<void>)| undefined | null
+				'onComplete'?: (() => void | Promise<void>) | undefined | null
 				
-				'endDateMs'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				'endDateMs'?: SpruceSchema.DateTimeFieldValue | undefined | null
 				
 				'setStartHandler': ((handler: (to: number) => void) => void)
 				
@@ -6455,41 +6455,41 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CalendarEventColors {
 			
 				/** Draft foreground color. */
-				'draftForegroundColor'?: string| undefined | null
+				'draftForegroundColor'?: string | undefined | null
 				/** Draft background color. */
-				'draftBackgroundColor'?: string| undefined | null
+				'draftBackgroundColor'?: string | undefined | null
 				/** Tentative foreground color. */
-				'tentativeForegroundColor'?: string| undefined | null
+				'tentativeForegroundColor'?: string | undefined | null
 				/** Tentative background color. */
-				'tentativeBackgroundColor'?: string| undefined | null
+				'tentativeBackgroundColor'?: string | undefined | null
 				/** Upcoming foreground color. */
-				'upcomingForegroundColor'?: string| undefined | null
+				'upcomingForegroundColor'?: string | undefined | null
 				/** Upcoming background color. */
-				'upcomingBackgroundColor'?: string| undefined | null
+				'upcomingBackgroundColor'?: string | undefined | null
 				/** Unavailable foreground color. */
-				'unavailableForegroundColor'?: string| undefined | null
+				'unavailableForegroundColor'?: string | undefined | null
 				/** Unavailable background color. */
-				'unavailableBackgroundColor'?: string| undefined | null
+				'unavailableBackgroundColor'?: string | undefined | null
 				/** Blocked foreground color. */
-				'blockedForegroundColor'?: string| undefined | null
+				'blockedForegroundColor'?: string | undefined | null
 				/** Blocked background color. */
-				'blockedBackgroundColor'?: string| undefined | null
+				'blockedBackgroundColor'?: string | undefined | null
 				/** Active foreground color. */
-				'activeForegroundColor'?: string| undefined | null
+				'activeForegroundColor'?: string | undefined | null
 				/** Active background color. */
-				'activeBackgroundColor'?: string| undefined | null
+				'activeBackgroundColor'?: string | undefined | null
 				/** Past foreground color. */
-				'pastForegroundColor'?: string| undefined | null
+				'pastForegroundColor'?: string | undefined | null
 				/** Past background color. */
-				'pastBackgroundColor'?: string| undefined | null
+				'pastBackgroundColor'?: string | undefined | null
 				/** Warning foreground color. */
-				'warnForegroundColor'?: string| undefined | null
+				'warnForegroundColor'?: string | undefined | null
 				/** Warning background color. */
-				'warnBackgroundColor'?: string| undefined | null
+				'warnBackgroundColor'?: string | undefined | null
 				/** Critical foreground color. */
-				'criticalForegroundColor'?: string| undefined | null
+				'criticalForegroundColor'?: string | undefined | null
 				/** Critical background color. */
-				'criticalBackgroundColor'?: string| undefined | null
+				'criticalBackgroundColor'?: string | undefined | null
 		}
 
 		interface CalendarEventColorsSchema extends SpruceSchema.Schema {
@@ -6721,61 +6721,61 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Calendar {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>)| undefined | null
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>) | undefined | null
 				/** People. */
-				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[]| undefined | null
+				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[] | undefined | null
 				/** Minimum time. The earliest time to show in the calendar. */
-				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				'minTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime | undefined | null
 				/** Maximum time. The latest time to show in the calendar. */
-				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				'maxTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime | undefined | null
 				/** date. The date the calendar will start on. First of month or first of week. Is in ms from epoch. */
-				'startDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				'startDate'?: SpruceSchema.DateTimeFieldValue | undefined | null
 				/** Default start time. Any time before this will be dimmed out. Only applies if people have no schedules. */
-				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				'defaultStartTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime | undefined | null
 				/** Default end time. Any time after this will be dimmed out. Only applies if people have no schedules. */
-				'defaultEndTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime| undefined | null
+				'defaultEndTime'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarTime | undefined | null
 				
 				'events': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent[]
 				
-				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent| undefined | null
+				'selectedEvent'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEvent | undefined | null
 				
-				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
+				'selectedDates'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[] | undefined | null
 				/** Timezone offset. In milliseconds */
-				'timezoneOffsetMs'?: number| undefined | null
+				'timezoneOffsetMs'?: number | undefined | null
 				/** Enable animations. */
-				'shouldEnableAnimations'?: boolean| undefined | null
+				'shouldEnableAnimations'?: boolean | undefined | null
 				/** View. */
-				'view'?: ("day" | "month")| undefined | null
+				'view'?: ("day" | "month") | undefined | null
 				/** Render header. */
-				'shouldRenderHeader'?: boolean| undefined | null
+				'shouldRenderHeader'?: boolean | undefined | null
 				
-				'onChangeStartDate'?: ((date: number) => void | Promise<void>)| undefined | null
+				'onChangeStartDate'?: ((date: number) => void | Promise<void>) | undefined | null
 				
-				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
 				
-				'onLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				'onLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
 				
-				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>)| undefined | null
+				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
 				
-				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
+				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>) | undefined | null
 				
-				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>)| undefined | null
+				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>) | undefined | null
 				
-				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>)| undefined | null
+				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>) | undefined | null
 				
-				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>) | undefined | null
 				
-				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>)| undefined | null
+				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>) | undefined | null
 				
-				'onLongPressView'?: (() => void | boolean)| undefined | null
+				'onLongPressView'?: (() => void | boolean) | undefined | null
 				
-				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]| undefined | null
+				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[] | undefined | null
 				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
-				'shouldEnableSwipeNav'?: boolean| undefined | null
+				'shouldEnableSwipeNav'?: boolean | undefined | null
 				
-				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>)| undefined | null
+				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>) | undefined | null
 				
-				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]| undefined | null
+				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[] | undefined | null
 		}
 
 		interface CalendarSchema extends SpruceSchema.Schema {
@@ -6968,9 +6968,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CalendarEventColorOverride {
 			
 				
-				'backgroundColor'?: string| undefined | null
+				'backgroundColor'?: string | undefined | null
 				
-				'foregroundColor'?: string| undefined | null
+				'foregroundColor'?: string | undefined | null
 		}
 
 		interface CalendarEventColorOverrideSchema extends SpruceSchema.Schema {
@@ -7010,51 +7010,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'calendarId': string
 				
-				'eventTypeSlug'?: string| undefined | null
+				'eventTypeSlug'?: string | undefined | null
 				
 				'startDateTimeMs': SpruceSchema.DateTimeFieldValue
 				
-				'isBusy'?: boolean| undefined | null
+				'isBusy'?: boolean | undefined | null
 				
-				'isResizeable'?: boolean| undefined | null
+				'isResizeable'?: boolean | undefined | null
 				
-				'style'?: ("draft" | "tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical")| undefined | null
+				'style'?: ("draft" | "tentative" | "upcoming" | "unavailable" | "blocked" | "active" | "past" | "warn" | "critical") | undefined | null
 				
-				'groupId'?: string| undefined | null
+				'groupId'?: string | undefined | null
 				
 				'timeBlocks': SpruceSchemas.CalendarUtils.v2021_05_19.EventTimeBlock[]
 				
-				'repeats'?: ("weekly" | "monthly" | "daily")| undefined | null
+				'repeats'?: ("weekly" | "monthly" | "daily") | undefined | null
 				
-				'daysOfWeek'?: ("sun" | "mon" | "tue" | "wed" | "thur" | "fri" | "sat")[]| undefined | null
+				'daysOfWeek'?: ("sun" | "mon" | "tue" | "wed" | "thur" | "fri" | "sat")[] | undefined | null
 				
-				'daysOfMonth'?: ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" | "30" | "31")[]| undefined | null
+				'daysOfMonth'?: ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" | "30" | "31")[] | undefined | null
 				
-				'repeatsUntil'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				'repeatsUntil'?: SpruceSchema.DateTimeFieldValue | undefined | null
 				
-				'occurrences'?: number| undefined | null
+				'occurrences'?: number | undefined | null
 				
-				'interval'?: number| undefined | null
+				'interval'?: number | undefined | null
 				
-				'nthOccurrences'?: number[]| undefined | null
+				'nthOccurrences'?: number[] | undefined | null
 				
-				'activeUntilDate'?: SpruceSchema.DateTimeFieldValue| undefined | null
+				'activeUntilDate'?: SpruceSchema.DateTimeFieldValue | undefined | null
 				
-				'exclusionDates'?: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDate[]| undefined | null
+				'exclusionDates'?: SpruceSchemas.CalendarUtils.v2021_05_19.EventExclusionDate[] | undefined | null
 				
-				'nthInRepeating'?: number| undefined | null
+				'nthInRepeating'?: number | undefined | null
 				
-				'totalInRepeating'?: number| undefined | null
+				'totalInRepeating'?: number | undefined | null
 				
-				'meta'?: (Record<string, any>)| undefined | null
+				'meta'?: (Record<string, any>) | undefined | null
 				
-				'error'?: (Error)| undefined | null
+				'error'?: (Error) | undefined | null
 				
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				
-				'colors'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorOverride| undefined | null
+				'colors'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorOverride | undefined | null
 				
-				'controller'?: (HeartwoodTypes.CalendarEventViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.CalendarEventViewController) | undefined | null
 		}
 
 		interface CalendarEventSchema extends SpruceSchema.Schema {
@@ -7261,7 +7261,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'casualName': string
 				/** Avatar src. */
-				'avatar'?: SpruceSchema.ImageFieldValue| undefined | null
+				'avatar'?: SpruceSchema.ImageFieldValue | undefined | null
 		}
 
 		interface CalendarPersonSchema extends SpruceSchema.Schema {
@@ -7303,7 +7303,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ButtonBar {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ButtonBarViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonBarViewController) | undefined | null
 				/** Buttons. */
 				'buttons': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton[]
 		}
@@ -7343,11 +7343,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Text {
 			
 				/** Text. */
-				'content'?: string| undefined | null
+				'content'?: string | undefined | null
 				/** Html. */
-				'html'?: string| undefined | null
+				'html'?: string | undefined | null
 				/** Align. */
-				'align'?: ("left" | "right" | "center")| undefined | null
+				'align'?: ("left" | "right" | "center") | undefined | null
 		}
 
 		interface TextSchema extends SpruceSchema.Schema {
@@ -7392,31 +7392,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 		}
 
 		interface ButtonBarButtonSchema extends SpruceSchema.Schema {
@@ -7526,39 +7526,39 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Button {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any)| undefined | null
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown| undefined | null
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown | undefined | null
 		}
 
 		interface ButtonSchema extends SpruceSchema.Schema {
@@ -7685,37 +7685,37 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface DropdownButton {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController)| undefined | null
+				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
 				/** Selected. */
-				'isSelected'?: boolean| undefined | null
+				'isSelected'?: boolean | undefined | null
 				/** Selected. */
-				'isEnabled'?: boolean| undefined | null
+				'isEnabled'?: boolean | undefined | null
 				/** Add to fade-in queue.. Fade in effect could change. */
-				'shouldQueueShow'?: boolean| undefined | null
+				'shouldQueueShow'?: boolean | undefined | null
 				/** Show hint icon. */
-				'shouldShowHintIcon'?: boolean| undefined | null
+				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any)| undefined | null
+				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
 				
-				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text| undefined | null
+				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive")| undefined | null
+				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
 				/** Image. */
-				'image'?: string| undefined | null
+				'image'?: string | undefined | null
 				/** Avatar. */
-				'avatar'?: string| undefined | null
+				'avatar'?: string | undefined | null
 				/** Line icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Selected line icon. Only applies when the button is selected. Will override line icon if one is set. */
-				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")| undefined | null
+				'selectedLineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				/** Line icon position. */
-				'lineIconPosition'?: ("left" | "bottom")| undefined | null
+				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
-				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void)| undefined | null
+				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
 		}
 
 		interface DropdownButtonSchema extends SpruceSchema.Schema {
@@ -7836,11 +7836,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Dropdown {
 			
 				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left")| undefined | null
+				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
 				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[]| undefined | null
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[] | undefined | null
 				
-				'card'?: (HeartwoodTypes.Card)| undefined | null
+				'card'?: (HeartwoodTypes.Card) | undefined | null
 		}
 
 		interface DropdownSchema extends SpruceSchema.Schema {
@@ -7881,9 +7881,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BarChart {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.BarChartViewController)| undefined | null
+				'controller'?: (HeartwoodTypes.BarChartViewController) | undefined | null
 				
 				'dataSets': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSet[]
 		}
@@ -7927,7 +7927,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BarChartDataPoint {
 			
 				
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
 				'value': number
 		}
@@ -7964,7 +7964,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface BarChartDataSet {
 			
 				
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				
 				'dataPoints': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPoint[]
 		}
@@ -8007,7 +8007,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'label': string
 				/** On click handler. */
-				'onClick'?: ((id: string) => void | Promise<void>)| undefined | null
+				'onClick'?: ((id: string) => void | Promise<void>) | undefined | null
 		}
 
 		interface AutocompleteSuggestionSchema extends SpruceSchema.Schema {
@@ -8049,7 +8049,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface InputButton {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				/** Line icon. */
 				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
 				/** Click handler. */
@@ -8096,35 +8096,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface AutocompleteInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
-				'value'?: string| undefined | null
+				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
-				'placeholder'?: string| undefined | null
+				'placeholder'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>)| undefined | null
+				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>) | undefined | null
 				
-				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[]| undefined | null
+				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[] | undefined | null
 		}
 
 		interface AutocompleteInputSchema extends SpruceSchema.Schema {
@@ -8235,31 +8235,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface AddressInput {
 			
 				
-				'id'?: string| undefined | null
+				'id'?: string | undefined | null
 				
 				'name': string
 				
-				'value'?: (any)| undefined | null
+				'value'?: (any) | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any)| undefined | null
+				'renderedValue'?: (any) | undefined | null
 				/** Label. */
-				'label'?: string| undefined | null
+				'label'?: string | undefined | null
 				/** Hint. */
-				'hint'?: string| undefined | null
+				'hint'?: string | undefined | null
 				/** Required. */
-				'isRequired'?: boolean| undefined | null
+				'isRequired'?: boolean | undefined | null
 				
-				'isInteractive'?: boolean| undefined | null
+				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean)| undefined | null
+				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>)| undefined | null
+				'onFocus'?: (() => void | Promise<void>) | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>)| undefined | null
+				'onBlur'?: (() => void | Promise<void>) | undefined | null
 				
-				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[]| undefined | null
+				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
 
 		interface AddressInputSchema extends SpruceSchema.Schema {
