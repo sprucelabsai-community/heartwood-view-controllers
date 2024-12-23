@@ -3,6 +3,8 @@ import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
+    ToastHandler,
+    ToastOptions,
     ViewControllerOptions,
     ViewControllerPlugins,
 } from '../../../types/heartwood.types'
@@ -80,6 +82,24 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
+    protected static async toastSentToToastHandler() {
+        let passedOptions: ToastOptions | undefined
+        this.spyFactory.toastHandler = (options) => {
+            passedOptions = options
+        }
+        const app = this.App()
+        const expected = {
+            message: generateId(),
+        }
+        app.toast(expected)
+        assert.isEqual(
+            passedOptions,
+            expected,
+            'Toast options not passed to handler'
+        )
+    }
+
+    @test()
     protected static async canRenderNavigation() {
         const app = this.App()
         navigationAssert.appRendersNavigation(app)
@@ -136,6 +156,10 @@ class SpyApp extends AbstractAppController {
         delete this.nav
     }
 
+    public toast(options: ToastOptions) {
+        super.toast(options)
+    }
+
     public renderNavigation() {
         return this.nav?.render() ?? null
     }
@@ -148,6 +172,8 @@ class SpyApp extends AbstractAppController {
 class SpyViewFactory extends ViewControllerFactory {
     public log?: Log
     public plugins: ViewControllerPlugins = {}
+    public toastHandler!: ToastHandler
+
     public getExpectedConstructorOptions() {
         return this.buildViewContructorOptions('app')
     }

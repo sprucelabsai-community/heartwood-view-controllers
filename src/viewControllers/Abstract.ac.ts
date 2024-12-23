@@ -6,6 +6,8 @@ import {
     AppControllerLoadOptions,
     ControllerOptions,
     RenderLockScreenHandler,
+    ToastHandler,
+    ToastOptions,
     ViewControllerId,
     ViewControllerMap,
     ViewControllerOptions,
@@ -19,12 +21,19 @@ export default abstract class AbstractAppController implements AppController {
     private views: ViewControllerFactory
     private renderLockScreenHandler: RenderLockScreenHandler
     protected connectToApi: () => Promise<MercuryClient>
+    private toastHandler: ToastHandler
 
     public constructor(options: ViewControllerOptions) {
-        const { plugins, vcFactory, renderLockScreenHandler, connectToApi } =
-            options
+        const {
+            plugins,
+            vcFactory,
+            renderLockScreenHandler,
+            connectToApi,
+            toastHandler,
+        } = options
         this.plugins = plugins
         this.views = vcFactory
+        this.toastHandler = toastHandler
         this.renderLockScreenHandler = renderLockScreenHandler
         this.connectToApi = connectToApi
     }
@@ -35,6 +44,10 @@ export default abstract class AbstractAppController implements AppController {
         const controller = this.Controller('lock-screen', { ...options })
         this.renderLockScreenHandler?.(controller.render())
         return controller
+    }
+
+    protected toast(options: ToastOptions) {
+        this.toastHandler(options)
     }
 
     public Controller<

@@ -36,6 +36,7 @@ export default class ViewControllerFactory {
     protected connectToApi: ConnectToApi
     protected log?: Log
     protected plugins: ViewControllerPlugins = {}
+    protected toastHandler: ToastHandler
 
     private controllerMap: Record<string, any>
     private renderInDialogHandler: RenderInDialogHandler
@@ -44,7 +45,6 @@ export default class ViewControllerFactory {
     private device: Device
     private dates: DateUtil
     private maps: MapUtil
-    private toastHandler: ToastHandler
     private AppMap: Record<string, AppControllerConstructor> = {}
     private renderLockScreenHandler: RenderLockScreenHandler
 
