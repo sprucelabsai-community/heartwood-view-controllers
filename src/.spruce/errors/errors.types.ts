@@ -118,7 +118,7 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	export interface SlideNotFound {
 		
 			
-			'id'?: string| undefined | null
+			'id'?: string | undefined | null
 	}
 
 	export interface SlideNotFoundSchema extends SpruceSchema.Schema {
