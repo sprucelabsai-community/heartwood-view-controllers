@@ -14,11 +14,11 @@ export default class AuthenticatorImpl implements Authenticator {
     private static instance: Authenticator | null
     private static storage: Storage | null
 
-    protected eventEmitter: EventEmitter<EmitterMap>
+    protected eventEmitter: EventEmitter<AuthenticatorEmitterMap>
     protected storage: Storage
 
     protected constructor(storage: Storage) {
-        this.eventEmitter = new EventEmitter<EmitterMap>()
+        this.eventEmitter = new EventEmitter<AuthenticatorEmitterMap>()
         this.storage = storage
     }
 
@@ -84,7 +84,7 @@ export default class AuthenticatorImpl implements Authenticator {
     }
 }
 
-interface EmitterMap {
+export interface AuthenticatorEmitterMap {
     'did-login': {
         token: string
         person: Person

@@ -64,6 +64,7 @@ export { default as lockScreenAssert } from './tests/utilities/lockScreenAssert'
 export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'
 
 export { default as AuthenticatorImpl } from './auth/Authenticator'
+export * from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
