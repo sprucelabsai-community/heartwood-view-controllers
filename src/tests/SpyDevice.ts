@@ -7,6 +7,7 @@ export default class SpyDevice implements Device {
     private cachedValues: Record<string, CachedValue> = {}
     public openedUrl?: string
     public lastCommandPayload?: Record<string, any>
+    public allCommands: TrackedCommand[] = []
 
     public setCachedValue(key: string, value: CachedValue): void {
         this.cachedValues[key] = value
@@ -15,9 +16,11 @@ export default class SpyDevice implements Device {
     public openUrl(url: string): void {
         this.openedUrl = url
     }
+
     public getCachedValue(key: string): CachedValue {
         return this.cachedValues[key]
     }
+
     public vibrate(): void {
         this.vibrateCount++
     }
@@ -26,8 +29,14 @@ export default class SpyDevice implements Device {
         this.lastPhoneCalled = phoneNumber
     }
 
-    public sendCommand(command: string, payload: Record<string, any>): void {
+    public sendCommand(command: string, payload?: Record<string, any>): void {
         this.lastCommand = command
         this.lastCommandPayload = payload
+        this.allCommands.push({ command, payload })
     }
+}
+
+interface TrackedCommand {
+    command: string
+    payload?: Record<string, any>
 }
