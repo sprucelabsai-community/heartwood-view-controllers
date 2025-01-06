@@ -1,3 +1,10 @@
+# [113.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.0.12...v113.1.0) (2025-01-06)
+
+
+### Features
+
+* spy device can track all commands, not just the last ([d71b0de](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d71b0de))
+
 ## [113.0.12](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.0.11...v113.0.12) (2025-01-02)
 
 ## [113.0.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.0.10...v113.0.11) (2025-01-02)
