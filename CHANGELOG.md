@@ -1,3 +1,10 @@
+# [114.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.1.1...v114.0.0) (2025-01-06)
+
+
+### Breaking Changes
+
+* device api change ([f681a19](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/f681a19))
+
 ## [113.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.1.0...v113.1.1) (2025-01-06)
 
 # [113.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v113.0.12...v113.1.0) (2025-01-06)
