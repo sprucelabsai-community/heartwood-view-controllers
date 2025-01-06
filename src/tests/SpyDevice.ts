@@ -29,7 +29,7 @@ export default class SpyDevice implements Device {
         this.lastPhoneCalled = phoneNumber
     }
 
-    public sendCommand(command: string, payload?: Record<string, any>): void {
+    public async sendCommand(command: string, payload?: Record<string, any>) {
         this.lastCommand = command
         this.lastCommandPayload = payload
         this.allCommands.push({ command, payload })

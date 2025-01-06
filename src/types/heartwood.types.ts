@@ -816,7 +816,10 @@ export interface Device {
     call(phoneNumber: string): void
     setCachedValue(key: string, value: CachedValue): void
     getCachedValue(key: string): CachedValue
-    sendCommand(command: string, payload?: Record<string, any>): void
+    sendCommand(
+        command: string,
+        payload?: Record<string, any>
+    ): Promise<Record<string, any> | void>
 }
 
 export interface AuthorizerCanOptions<
