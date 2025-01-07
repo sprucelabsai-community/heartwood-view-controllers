@@ -65,6 +65,33 @@ export default class DeviceTest extends AbstractDeviceTest {
         assert.isEqualDeep(this.device.allCommands, commands)
     }
 
+    @test()
+    protected static async canWorkWithKioskMode() {
+        await this.assertKioskModeIsOff()
+
+        this.setKioskMode(true)
+
+        assert.isTrue(
+            await this.device.getIsKioskModeEnabled(),
+            'kiosk mode should be on'
+        )
+
+        this.setKioskMode(false)
+
+        await this.assertKioskModeIsOff()
+    }
+
+    private static setKioskMode(on: boolean) {
+        this.device.setIsKioskModeEnabled(on)
+    }
+
+    private static async assertKioskModeIsOff() {
+        assert.isFalse(
+            await this.device.getIsKioskModeEnabled(),
+            'kiosk mode should be off'
+        )
+    }
+
     private static async sendCommand(
         command: string,
         payload?: Record<string, any>

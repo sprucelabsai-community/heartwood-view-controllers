@@ -817,6 +817,8 @@ export interface Device {
     setCachedValue(key: string, value: CachedValue): void
     getCachedValue(key: string): CachedValue
     sendCommand(command: string, payload?: Record<string, any>): void
+    getIsKioskModeEnabled(): Promise<boolean>
+    setIsKioskModeEnabled(isKiosk: boolean): void
 }
 
 export interface AuthorizerCanOptions<
