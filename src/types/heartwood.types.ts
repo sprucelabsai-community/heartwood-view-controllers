@@ -817,7 +817,9 @@ export interface Device {
     setCachedValue(key: string, value: CachedValue): void
     getCachedValue(key: string): CachedValue
     sendCommand(command: string, payload?: Record<string, any>): void
+    // used when running in Electron Theatre, ignored on all others
     getIsKioskModeEnabled(): Promise<boolean>
+    // used when running in Electron Theatre, ignored on all others
     setIsKioskModeEnabled(isKiosk: boolean): void
 }
 
