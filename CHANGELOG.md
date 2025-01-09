@@ -1,3 +1,10 @@
+# [116.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v115.0.4...v116.0.0) (2025-01-09)
+
+
+### Breaking Changes
+
+* device changes for theatre settings ([77784cd](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/77784cd))
+
 ## [115.0.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v115.0.3...v115.0.4) (2025-01-09)
 
 ## [115.0.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v115.0.2...v115.0.3) (2025-01-09)
