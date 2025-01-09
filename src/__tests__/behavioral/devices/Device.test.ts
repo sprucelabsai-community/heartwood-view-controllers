@@ -1,5 +1,9 @@
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import SpyDevice from '../../../tests/SpyDevice'
+import {
+    TheaterSettingValueTypes,
+    TheatreSettingName,
+} from '../../../types/heartwood.types'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
 export default class DeviceTest extends AbstractDeviceTest {
@@ -33,7 +37,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     protected static async canGetLastCommandSent(payload: Record<string, any>) {
         const command = generateId()
 
-        await this.sendCommand(command, payload)
+        this.sendCommand(command, payload)
 
         assert.isEqual(this.device.lastCommand, command)
         assert.isEqualDeep(this.device.lastCommandPayload, payload)
@@ -67,12 +71,12 @@ export default class DeviceTest extends AbstractDeviceTest {
 
     @test()
     protected static async canWorkWithKioskMode() {
-        await this.assertKioskModeIsOff()
+        assert.isNull(await this.getKioskModeSetting())
 
         this.setKioskMode(true)
 
         assert.isTrue(
-            await this.device.getIsKioskModeEnabled(),
+            await this.getKioskModeSetting(),
             'kiosk mode should be on'
         )
 
@@ -81,22 +85,35 @@ export default class DeviceTest extends AbstractDeviceTest {
         await this.assertKioskModeIsOff()
     }
 
+    @test('can set kiosk-mode true', 'kiosk-mode', true)
+    @test('can set kiosk-mode false', 'kiosk-mode', false)
+    @test('can set load-url', 'load-url', generateId())
+    protected static async canSetTheatreSettingsUsingSpy(
+        name: TheatreSettingName,
+        value: TheaterSettingValueTypes[TheatreSettingName]
+    ) {
+        this.device.setTheatreSetting(name, value)
+        const actual = await this.device.getTheatreSetting(name)
+        assert.isEqual(actual, value)
+    }
+
     private static setKioskMode(on: boolean) {
-        this.device.setIsKioskModeEnabled(on)
+        this.device.setTheatreSetting('kiosk-mode', on)
     }
 
     private static async assertKioskModeIsOff() {
         assert.isFalse(
-            await this.device.getIsKioskModeEnabled(),
+            await this.getKioskModeSetting(),
             'kiosk mode should be off'
         )
     }
 
-    private static async sendCommand(
-        command: string,
-        payload?: Record<string, any>
-    ) {
-        await this.device.sendCommand(command, payload)
+    private static async getKioskModeSetting() {
+        return await this.device.getTheatreSetting('kiosk-mode')
+    }
+
+    private static sendCommand(command: string, payload?: Record<string, any>) {
+        this.device.sendCommand(command, payload)
     }
 
     private static get device() {

@@ -810,6 +810,13 @@ export type Locale = ILocale
 
 export type CachedValue = string | number | Record<string, any> | boolean | null
 
+export type TheatreSettingName = 'kiosk-mode' | 'load-url' | 'log-destination'
+export interface TheaterSettingValueTypes {
+    'kiosk-mode': boolean
+    'load-url': string
+    'log-destination': 'console' | 'file'
+}
+
 export interface Device {
     openUrl(url: string): void
     vibrate(): void
@@ -817,10 +824,13 @@ export interface Device {
     setCachedValue(key: string, value: CachedValue): void
     getCachedValue(key: string): CachedValue
     sendCommand(command: string, payload?: Record<string, any>): void
-    // used when running in Electron Theatre, ignored on all others
-    getIsKioskModeEnabled(): Promise<boolean>
-    // used when running in Electron Theatre, ignored on all others
-    setIsKioskModeEnabled(isKiosk: boolean): void
+    setTheatreSetting<N extends TheatreSettingName>(
+        name: N,
+        value: TheaterSettingValueTypes[N]
+    ): void
+    getTheatreSetting<N extends TheatreSettingName>(
+        name: N
+    ): Promise<TheaterSettingValueTypes[N] | null>
 }
 
 export interface AuthorizerCanOptions<

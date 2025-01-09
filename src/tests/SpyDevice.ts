@@ -1,4 +1,9 @@
-import { CachedValue, Device } from '../types/heartwood.types'
+import {
+    CachedValue,
+    Device,
+    TheaterSettingValueTypes,
+    TheatreSettingName,
+} from '../types/heartwood.types'
 
 export default class SpyDevice implements Device {
     public lastCommand?: string
@@ -8,7 +13,9 @@ export default class SpyDevice implements Device {
     public openedUrl?: string
     public lastCommandPayload?: Record<string, any>
     public allCommands: TrackedCommand[] = []
-    private isKioskMode = false
+    private kioskSettings: Partial<
+        Record<TheatreSettingName, TheaterSettingValueTypes[TheatreSettingName]>
+    > = {}
 
     public setCachedValue(key: string, value: CachedValue): void {
         this.cachedValues[key] = value
@@ -36,12 +43,20 @@ export default class SpyDevice implements Device {
         this.allCommands.push({ command, payload })
     }
 
-    public async getIsKioskModeEnabled(): Promise<boolean> {
-        return this.isKioskMode
+    public setTheatreSetting<N extends TheatreSettingName>(
+        name: N,
+        value: TheaterSettingValueTypes[N]
+    ): void {
+        this.kioskSettings[name] = value
     }
 
-    public setIsKioskModeEnabled(isKiosk: boolean): void {
-        this.isKioskMode = isKiosk
+    public async getTheatreSetting<N extends TheatreSettingName>(
+        name: N
+    ): Promise<TheaterSettingValueTypes[N] | null> {
+        return (
+            (this.kioskSettings[name] as TheaterSettingValueTypes[N] | null) ??
+            null
+        )
     }
 }
 
