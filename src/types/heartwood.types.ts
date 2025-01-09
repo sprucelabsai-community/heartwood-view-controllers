@@ -814,7 +814,7 @@ export type TheatreSettingName = 'kiosk-mode' | 'load-url' | 'log-destination'
 export interface TheaterSettingValueTypes {
     'kiosk-mode': boolean
     'load-url': string
-    'log-destination': 'console' | 'file'
+    'log-destination': string
 }
 
 export interface Device {
