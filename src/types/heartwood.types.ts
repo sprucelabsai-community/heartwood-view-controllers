@@ -812,9 +812,9 @@ export type CachedValue = string | number | Record<string, any> | boolean | null
 
 export type TheatreSettingName = 'kiosk-mode' | 'load-url' | 'log-destination'
 export interface TheaterSettingValueTypes {
-    'kiosk-mode': boolean
-    'load-url': string
-    'log-destination': string
+    'kiosk-mode': boolean | null
+    'load-url': string | null
+    'log-destination': string | null
 }
 
 export interface Device {
