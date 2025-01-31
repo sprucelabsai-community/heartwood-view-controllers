@@ -215,6 +215,12 @@ export default class ViewControllerExporter {
                     timers: false,
                     process: false,
                 },
+                alias: {
+                    'google-logging-utils': pathUtil.resolve(
+                        __dirname,
+                        'noop.js'
+                    ),
+                },
             },
             output: {
                 path: destinationDirname,

@@ -209,6 +209,23 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         assert.doesNotInclude(contents, 'chalk')
     }
 
+    @test()
+    protected static async configNoopsGoogleLoggingUtils() {
+        await this.export()
+        const config = this.exporter.getConfig()
+        assert.isEqual(
+            //@ts-ignore
+            config.resolve?.alias?.['google-logging-utils'],
+            this.resolvePath('build/viewControllers/noop.js')
+        )
+    }
+
+    @test()
+    protected static async haveNoopFileThatReturnsEmptyObject() {
+        const { default: noop } = require('../../../viewControllers/noop')
+        assert.isEqualDeep(noop, {})
+    }
+
     @test('can use define webpack plugin 1', {
         'process.env.TACO': JSON.stringify('ninja'),
     })
