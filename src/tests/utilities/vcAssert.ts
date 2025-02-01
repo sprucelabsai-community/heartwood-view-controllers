@@ -1416,7 +1416,7 @@ const vcAssert = {
 
 1. Render your card into the dialog:
 
-    this.renderInDialog(this.views.Controller('my-card', {}).render())
+    this.renderInDialog(this.Controller('my-card', {}).render())
 
 2. Rendering a SubView:
 
@@ -1456,7 +1456,7 @@ const vcAssert = {
 
 1. Render your card into the dialog:
 
-    this.renderInDialog(this.views.Controller('my-card', {}).render())
+    this.renderInDialog(this.Controller('my-card', {}).render())
 
 2. Rendering a SubView:
 
