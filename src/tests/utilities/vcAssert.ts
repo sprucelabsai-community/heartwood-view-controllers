@@ -1414,7 +1414,11 @@ const vcAssert = {
             vc,
             `The view you sent me is missing a controller. It may help to check your render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
 
-1. Rendering a SubView:
+1. Render your card into the dialog
+
+    this.renderInDialog(this.views.Controller('my-card', {}).render())
+
+2. Rendering a SubView:
 
     public render() {
         return this.cardVc.render()
@@ -1450,7 +1454,11 @@ const vcAssert = {
                     Class.name
                 }, but it didn't! Make sure the view you're expecting is rendering itself as the controller (or another view controller). e.g.
 
-1. Rendering a SubView:
+1. Render your card into the dialog
+
+    this.renderInDialog(this.views.Controller('my-card', {}).render())
+
+2. Rendering a SubView:
 
     public render() {
         return this.cardVc.render()
