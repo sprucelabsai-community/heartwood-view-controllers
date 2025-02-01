@@ -12,6 +12,14 @@ export default class EventFaker {
         this.client = client
     }
 
+    public async fakeListPeople(cb?: () => void | ListPerson[]) {
+        await this.client.on('list-people::v2020_12_25', () => {
+            return {
+                people: cb?.() ?? [],
+            }
+        })
+    }
+
     public generateLocationValues() {
         return {
             id: generateId(),
@@ -94,3 +102,5 @@ export type ListLocationsTargetAndPayload =
 
 export type ListOrganizationsTargetAndPayload =
     SpruceSchemas.Mercury.v2020_12_25.ListOrganizationsEmitTargetAndPayload
+
+export type ListPerson = SpruceSchemas.Mercury.v2020_12_25.ListPerson

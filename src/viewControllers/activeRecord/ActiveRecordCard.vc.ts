@@ -54,7 +54,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     private fetcher?: ActiveRecordFetcherImpl
     private rowTransformer: (record: Record<string, any>) => ListRow
     private isLoaded = false
-    private records: Record<string, any>[] = []
+    private records: ActiveRecordCardRecord[] = []
     private noResultsRow: NoResultsRow = {
         cells: [
             {
@@ -64,7 +64,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             },
         ],
     }
-    private allRecords: Record<string, any>[] = []
+    private allRecords: ActiveRecordCardRecord[] = []
     private searchTimeout?: any
     private footer?: CardFooter | null
     private columnWidths?: List['columnWidths']
@@ -153,7 +153,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             this.records = this.allRecords ?? []
         }
 
-        this.listVc?.setRecords(this.records)
+        this.listVc?.setRecords(this.records.map((r) => r.values))
         this.rebuildSlidesForPaging()
     }
 
@@ -169,8 +169,8 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.records = matches
     }
 
-    private doesRecordMatch(record: Record<string, any>, search: string) {
-        const searchable = Object.values(record).join('').toLowerCase()
+    private doesRecordMatch(record: ActiveRecordCardRecord, search: string) {
+        const searchable = Object.values(record.values).join('').toLowerCase()
         const doesMatch = searchable.includes(search.toLowerCase())
         return doesMatch
     }
@@ -285,14 +285,17 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
         if (this.listVc) {
             await this.listVc?.load()
-            this.allRecords = this.listVc.getRecords()
+            this.allRecords = this.listVc.getRecords().map((r) => ({
+                values: r,
+            }))
         }
         this.cardVc.setIsBusy(false)
     }
 
     private async fetchRecordsAndDropInRows() {
         try {
-            this.records = await this.fetcher!.fetchRecords()
+            const records = await this.fetcher!.fetchRecords()
+            this.records = records.map((record) => ({ values: record }))
             this.allRecords = [...this.records]
             this.rebuildSlidesForPaging()
         } catch (err: any) {
@@ -349,16 +352,23 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         for (let i = 0; i < totalPages; i++) {
             const records = chunkedRecords[i] ?? []
             const listVc = this.addList(i)
-            listVc.setRows(records.map((record) => this.rowTransformer(record)))
+            listVc.setRows(
+                records.map((record, id) => {
+                    const row = this.rowTransformer(record.values)
+                    records[id].rowId = row.id
+                    return row
+                })
+            )
         }
 
-        if (this.records.length === 0) {
-            this.listVcs[0].addRow({
-                id: 'no-results',
-                ...this.noResultsRow,
-            })
-        }
+        this.optionallyDropInNoResultsRow()
+        this.updatePager(totalPages)
+        this.setFooter({
+            ...this.footer,
+        })
+    }
 
+    private updatePager(totalPages: number) {
         if (totalPages === 1) {
             this.pagerVc?.clear()
         } else {
@@ -366,10 +376,15 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
             const currentPage = this.pagerVc!.getCurrentPage()
             this.pagerVc?.setCurrentPage(currentPage === -1 ? 0 : currentPage)
         }
+    }
 
-        this.setFooter({
-            ...this.footer,
-        })
+    private optionallyDropInNoResultsRow() {
+        if (this.records.length === 0) {
+            this.listVcs[0].addRow({
+                id: 'no-results',
+                ...this.noResultsRow,
+            })
+        }
     }
 
     private clear() {
@@ -409,7 +424,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
                 `You have to load your activeRecordCard before you can get records from it.`
             )
         }
-        return this.listVc?.getRecords() ?? this.records
+        return this.listVc?.getRecords() ?? this.records.map((r) => r.values)
     }
 
     public upsertRow(id: string, row: Omit<ListRow, 'id'>) {
@@ -450,7 +465,9 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
 
     public deleteRow(id: string) {
         this.listVc?.deleteRow(id)
-        this.records = this.records.filter((r) => r.id !== id)
+        this.records = this.records.filter(
+            (r) => r.rowId !== id && r.values.id !== id
+        )
         this.swipeVc?.renderOnceSync(() => this.rebuildSlidesForPaging())
     }
 
@@ -636,3 +653,8 @@ const searchFormSchema = buildSchema({
 })
 
 export type SearchFormSchema = typeof searchFormSchema
+
+interface ActiveRecordCardRecord {
+    rowId?: string
+    values: Record<string, any>
+}
