@@ -5,18 +5,23 @@ import {
 } from '@sprucelabs/calendar-utils'
 import { MercuryClient, MercuryClientFactory } from '@sprucelabs/mercury-client'
 import {
+    buildEventContract,
+    MercuryEventEmitter,
     PermissionContractId,
     PermissionId,
     SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import {
     AddressFieldValue,
+    buildSchema,
     FieldDefinitions,
     FieldError,
     Schema,
     SchemaFieldNames,
     SchemaPartialValues,
+    SchemaValues,
 } from '@sprucelabs/schema'
+import { personSchema } from '@sprucelabs/spruce-core-schemas'
 import { Log } from '@sprucelabs/spruce-skill-utils'
 import {
     BarChartViewController,
@@ -119,21 +124,61 @@ export { default as MapViewController } from '../viewControllers/Map.vc'
 export type ErrorHandler = (message: string) => void
 
 type Person = SpruceSchemas.Spruce.v2020_07_22.Person
-type DidLoginPayload = (payload: { token: string; person: Person }) => void
-type DidLogoutPayload = (payload: { person: Person }) => void
 
-export interface AuthenticatorEventPayloads {
-    'did-login': DidLoginPayload
-    'will-logout': DidLoginPayload
-    'did-logout': DidLogoutPayload
-}
+export const didLoginPayload = buildSchema({
+    id: 'authDidLoginPayload',
+    fields: {
+        token: {
+            type: 'text',
+            isRequired: true,
+        },
+        person: {
+            type: 'schema',
+            isRequired: true,
+            options: {
+                schema: personSchema,
+            },
+        },
+    },
+})
 
-export type AuthenticatorEventName = keyof AuthenticatorEventPayloads
+export const didLogoutPayload = buildSchema({
+    id: 'authDidLogoutPayload',
+    fields: {
+        person: {
+            type: 'schema',
+            isRequired: true,
+            options: {
+                schema: personSchema,
+            },
+        },
+    },
+})
+
+export type DidLoginPayload = SchemaValues<typeof didLoginPayload>
+export type DidLogoutPayload = SchemaValues<typeof didLogoutPayload>
+
 export interface Storage {
     removeItem(key: string): void
     setItem(key: string, value: string): void
     getItem(key: string): string | null
 }
+
+export const authContract = buildEventContract({
+    eventSignatures: {
+        'did-login': {
+            emitPayloadSchema: didLoginPayload,
+        },
+        'will-logout': {
+            emitPayloadSchema: didLogoutPayload,
+        },
+        'did-logout': {
+            emitPayloadSchema: didLogoutPayload,
+        },
+    },
+})
+
+export type AuthContract = typeof authContract
 
 export interface Authenticator {
     //Get the logged in person, if someone is logged in
@@ -145,12 +190,9 @@ export interface Authenticator {
     //Check if someone is logged in
     isLoggedIn(): boolean
     //Clear the session, logging the person out
-    clearSession(): void
+    clearSession(): Promise<void>
     //Add an event listener for when someone logs in or out to take some action
-    addEventListener<N extends 'did-login' | 'did-logout' | 'will-logout'>(
-        name: N,
-        cb: AuthenticatorEventPayloads[N]
-    ): void
+    addEventListener: MercuryEventEmitter<AuthContract>['on']
 }
 
 export interface AuthenticatorStatic {

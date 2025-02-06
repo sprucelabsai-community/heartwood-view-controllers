@@ -91,28 +91,28 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canClearToken() {
+    protected static async canClearToken() {
         const auth = this.auth
 
         auth.setSessionToken('123abc', this.person)
 
         assert.isTrue(auth.isLoggedIn())
 
-        auth.clearSession()
+        await auth.clearSession()
 
         assert.isFalse(auth.isLoggedIn())
         assert.isFalsy(auth.getPerson())
     }
 
     @test()
-    protected static emitsOnLoginWhenSettingToken() {
+    protected static async emitsOnLoginWhenSettingToken() {
         const auth = this.auth
 
         let hit = false
         let t
         let p
 
-        auth.addEventListener('did-login', ({ token, person }) => {
+        await auth.addEventListener('did-login', ({ token, person }) => {
             hit = true
             t = token
             p = person
@@ -126,18 +126,18 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static emitsOnLogOut() {
+    protected static async emitsOnLogOut() {
         const auth = this.auth
         let passedPerson: Person | undefined
 
-        auth.addEventListener('did-logout', ({ person }) => {
+        await auth.addEventListener('did-logout', ({ person }) => {
             passedPerson = person
         })
 
         auth.setSessionToken('123abc', this.person)
         assert.isFalsy(passedPerson)
 
-        auth.clearSession()
+        await auth.clearSession()
 
         assert.isEqualDeep(passedPerson, this.person)
     }
@@ -150,7 +150,8 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         auth.setSessionToken(token, this.person)
 
         let passedPerson: Person | undefined
-        auth.addEventListener('will-logout', ({ person }) => {
+
+        await auth.addEventListener('will-logout', ({ person }) => {
             passedPerson = person
             assert.isEqual(
                 auth.getSessionToken(),
@@ -159,7 +160,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
             )
         })
 
-        auth.clearSession()
+        await auth.clearSession()
         assert.isEqualDeep(passedPerson, this.person)
     }
 
@@ -279,10 +280,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected static async doesNotEmitLogoutEventsIfClearingSessionAndNotLoggedIn() {
         let wasHit = false
-        this.auth.addEventListener('will-logout', () => {
+        await this.auth.addEventListener('will-logout', () => {
             wasHit = true
         })
-        this.auth.clearSession()
+        await this.auth.clearSession()
         assert.isFalse(wasHit, 'Should not emit logout events if not logged in')
     }
 

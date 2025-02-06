@@ -1,10 +1,11 @@
-import EventEmitter from 'events'
+import { AbstractEventEmitter } from '@sprucelabs/mercury-event-emitter'
+import { MercuryEventEmitter } from '@sprucelabs/mercury-types'
 import { Person } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../errors/SpruceError'
 import {
+    AuthContract,
+    authContract,
     Authenticator,
-    AuthenticatorEventName,
-    AuthenticatorEventPayloads,
     Storage,
 } from '../types/heartwood.types'
 
@@ -14,11 +15,11 @@ export default class AuthenticatorImpl implements Authenticator {
     private static instance: Authenticator | null
     private static storage: Storage | null
 
-    protected eventEmitter: EventEmitter<AuthenticatorEmitterMap>
+    protected emitter: MercuryEventEmitter<AuthContract>
     protected storage: Storage
 
     protected constructor(storage: Storage) {
-        this.eventEmitter = new EventEmitter<AuthenticatorEmitterMap>()
+        this.emitter = new AuthEmitter()
         this.storage = storage
     }
 
@@ -46,7 +47,7 @@ export default class AuthenticatorImpl implements Authenticator {
     public setSessionToken(token: string, person: Person) {
         this.storage.setItem('sessionToken', token)
         this.storage.setItem('person', JSON.stringify(person))
-        this.eventEmitter.emit('did-login', { token, person })
+        void this.emitter.emit('did-login', { token, person })
     }
 
     public getSessionToken() {
@@ -62,37 +63,29 @@ export default class AuthenticatorImpl implements Authenticator {
         return !!this.getSessionToken()
     }
 
-    public clearSession() {
+    public async clearSession() {
         if (!this.isLoggedIn()) {
             return
         }
         const person = JSON.parse(this.storage.getItem('person') ?? '{}')
-        this.eventEmitter.emit('will-logout', { person })
+        await this.emitter.emit('will-logout', { person })
 
         this.storage.removeItem('sessionToken')
         this.storage.removeItem('person')
 
-        this.eventEmitter.emit('did-logout', { person })
+        await this.emitter.emit('did-logout', { person })
     }
 
-    public addEventListener<N extends AuthenticatorEventName>(
-        name: N,
-        cb: AuthenticatorEventPayloads[N]
-    ) {
-        //@ts-ignore
-        this.eventEmitter.addListener(name, cb)
+    public addEventListener: MercuryEventEmitter<AuthContract>['on'] = async (
+        name,
+        cb
+    ) => {
+        await this.emitter.on(name, cb)
     }
 }
 
-export interface AuthenticatorEmitterMap {
-    'did-login': {
-        token: string
-        person: Person
-    }[]
-    'will-logout': {
-        person: Person
-    }[]
-    'did-logout': {
-        person: Person
-    }[]
+class AuthEmitter extends AbstractEventEmitter<AuthContract> {
+    public constructor() {
+        super(authContract)
+    }
 }

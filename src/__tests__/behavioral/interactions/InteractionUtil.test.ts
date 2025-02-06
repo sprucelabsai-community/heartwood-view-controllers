@@ -87,7 +87,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
         let loggedInPersonId: string | undefined
         const auth = Authenticator.getInstance()
 
-        auth.addEventListener('did-login', ({ person }) => {
+        await auth.addEventListener('did-login', ({ person }) => {
             loggedInPersonId = person.id
         })
 
