@@ -1,3 +1,10 @@
+# [117.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v116.0.40...v117.0.0) (2025-02-06)
+
+
+### Breaking Changes
+
+* authenticator is now async ([f9d7c2e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/f9d7c2e))
+
 ## [116.0.40](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v116.0.39...v116.0.40) (2025-02-04)
 
 ## [116.0.39](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v116.0.38...v116.0.39) (2025-02-04)
