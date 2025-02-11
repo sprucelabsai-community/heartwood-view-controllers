@@ -344,7 +344,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async canSetSpyExporter() {}
+    protected static async canSetSpyExporter() {
+        const exporter = this.Exporter()
+        assert.isTrue(exporter instanceof SpyViewControllerExporter)
+        assert.isEqual(exporter, SpyViewControllerExporter.instance)
+    }
 
     private static getConfig() {
         return this.exporter.getConfig()
