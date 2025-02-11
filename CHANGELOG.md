@@ -1,3 +1,10 @@
+# [117.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.0.6...v117.1.0) (2025-02-11)
+
+
+### Features
+
+* support for building source maps view controllers ([246a5e8](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/246a5e8))
+
 ## [117.0.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.0.5...v117.0.6) (2025-02-11)
 
 ## [117.0.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.0.4...v117.0.5) (2025-02-11)
