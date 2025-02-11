@@ -212,12 +212,36 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     @test()
     protected static async configNoopsGoogleLoggingUtils() {
         await this.export()
-        const config = this.exporter.getConfig()
+        const config = this.getConfig()
+
         assert.isEqual(
             //@ts-ignore
             config.resolve?.alias?.['google-logging-utils'],
             this.resolvePath('build/viewControllers/noop.js')
         )
+    }
+
+    @test()
+    protected static async exportCanBuildSourceMaps() {
+        await this.export({ shouldBuildSourceMaps: true })
+        const config = this.getConfig()
+        assert.isEqual(config.devtool, 'inline-source-map')
+        assert.isFalse(config.optimization?.minimize)
+        assert.isEqual(
+            //@ts-ignore
+            config.module?.rules?.[0]?.use?.options.sourceMaps,
+            'inline'
+        )
+    }
+
+    @test()
+    protected static async noSourceMapsByDefault() {
+        await this.export()
+        const config = this.getConfig()
+        assert.isFalsy(config.devtool)
+        assert.isTrue(config.optimization?.minimize)
+        //@ts-ignore
+        assert.isFalsy(config.module?.rules?.[0]?.use?.options.sourceMaps)
     }
 
     @test()
@@ -242,7 +266,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
             defines: definePlugin,
         })
 
-        const config = this.exporter.getConfig()
+        const config = this.getConfig()
         assert.doesInclude(config, {
             plugins: [{ definitions: definePlugin }],
         })
@@ -313,6 +337,10 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.buildAndWatchSkillAtRandomDir()
         await this.replaceInBookSvc('go-team', "stop-dude'\n\naoeuaou")
         assert.isTruthy(this.incrementalBuildError)
+    }
+
+    private static getConfig() {
+        return this.exporter.getConfig()
     }
 
     private static assertWillIncremntallyBuildHitCount(expected: number) {

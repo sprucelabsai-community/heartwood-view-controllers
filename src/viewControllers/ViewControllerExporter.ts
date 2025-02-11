@@ -33,6 +33,7 @@ export default class ViewControllerExporter {
             shouldWatch,
             onDidIncrementallyBuild,
             onWillIncrementallyBuild,
+            shouldBuildSourceMaps,
         } = options
 
         this.assertValidSource(source)
@@ -46,6 +47,7 @@ export default class ViewControllerExporter {
             destinationDirname: dirname,
             destinationFilename: filename,
             shouldProfile: !!profilerStatsDestination,
+            shouldBuildSourceMaps,
             defines,
         })
 
@@ -164,25 +166,23 @@ export default class ViewControllerExporter {
         return webpack(this.config)
     }
 
-    private buildConfiguration(options: {
-        entry: string
-        destinationDirname: string
-        destinationFilename: string
-        shouldProfile?: boolean
-        defines?: any
-    }): Configuration {
+    private buildConfiguration(
+        options: BuildConfigurationOptions
+    ): Configuration {
         const {
             entry,
             destinationDirname,
             destinationFilename,
             shouldProfile,
             defines,
+            shouldBuildSourceMaps,
         } = options
 
         return {
             entry,
             context: this.cwd,
             stats: !!shouldProfile,
+            devtool: shouldBuildSourceMaps ? 'inline-source-map' : false,
             resolve: {
                 extensions: ['.ts', '.js'],
                 fallback: {
@@ -235,7 +235,9 @@ export default class ViewControllerExporter {
                             loader: `babel-loader`,
                             options: {
                                 configFile: false,
-                                sourceMaps: false,
+                                sourceMaps: shouldBuildSourceMaps
+                                    ? 'inline'
+                                    : false,
                                 presets: [
                                     [
                                         '@babel/preset-env',
@@ -265,7 +267,7 @@ export default class ViewControllerExporter {
                 ],
             },
             optimization: {
-                minimize: true,
+                minimize: !shouldBuildSourceMaps,
                 minimizer: [new TerserPlugin()],
             },
             plugins: [
@@ -328,8 +330,18 @@ export interface ExportOptions {
     onDidIncrementallyBuild?: DidIncrementallyBuildHandler
     onWillIncrementallyBuild?: DidIncrementallyBuildHandler
     shouldWatch?: boolean
+    shouldBuildSourceMaps?: boolean
 }
 
 type Callback = (err?: null | Error, results?: Stats) => void
 
 type WillIncrementallyBuildHandler = () => void
+
+interface BuildConfigurationOptions {
+    entry: string
+    destinationDirname: string
+    destinationFilename: string
+    shouldProfile?: boolean
+    defines?: any
+    shouldBuildSourceMaps?: boolean
+}
