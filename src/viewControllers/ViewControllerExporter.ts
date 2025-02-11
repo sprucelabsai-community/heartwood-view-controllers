@@ -6,20 +6,22 @@ import { Compiler, Configuration, DefinePlugin, Stats, webpack } from 'webpack'
 import SpruceError from '../errors/SpruceError'
 
 export default class ViewControllerExporter {
+    public static Class?: typeof ViewControllerExporter
+
     private cwd: string
     private compiler?: Compiler
     private isWatching: boolean | undefined = false
     private willIncrementallyBuildHandler?: WillIncrementallyBuildHandler
     private didIncrementallyBuildHandler?: DidIncrementallyBuildHandler
+    protected config: Configuration = {}
 
-    private constructor(cwd: string) {
+    protected constructor(cwd: string) {
         this.cwd = cwd
     }
-    private config: Configuration = {}
 
     public static Exporter(cwd: string) {
         assertOptions({ cwd }, ['cwd'])
-        return new this(cwd)
+        return new (this.Class ?? this)(cwd)
     }
 
     public async export(options: ExportOptions): Promise<void> {
@@ -65,10 +67,6 @@ export default class ViewControllerExporter {
 
     public getCwd(): string {
         return this.cwd
-    }
-
-    public getConfig(): Configuration {
-        return this.config
     }
 
     private splitToFileAndDir(destination: string) {

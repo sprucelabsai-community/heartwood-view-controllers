@@ -60,6 +60,7 @@ export { default as buildActiveRecordList } from './builders/buildActiveRecordLi
 export { default as activeRecordCardAssert } from './tests/utilities/activeRecordCardAssert'
 export { default as MockActiveRecordCard } from './tests/MockActiveRecordCard'
 export { default as lockScreenAssert } from './tests/utilities/lockScreenAssert'
+export { default as SpyViewControllerExporter } from './tests/SpyViewControllerExporter'
 
 export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'
 

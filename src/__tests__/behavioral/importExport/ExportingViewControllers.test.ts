@@ -15,6 +15,7 @@ import {
     importExportSourceSyntaxError,
     importExportSourceWithDefines,
 } from '../../../tests/constants'
+import SpyViewControllerExporter from '../../../tests/SpyViewControllerExporter'
 import ViewControllerExporter, {
     ExportOptions,
 } from '../../../viewControllers/ViewControllerExporter'
@@ -24,7 +25,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     private static buildCwd = importExportCwd
     private static destination: string
 
-    private static exporter: ViewControllerExporter
+    private static exporter: SpyViewControllerExporter
     private static didIncremntallyBuildCount: number
     private static incrementalBuildError: Error | undefined
     private static willIncremntallyBuildCount: number
@@ -37,6 +38,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
             'bundle.js'
         )
 
+        ViewControllerExporter.Class = SpyViewControllerExporter
         this.exporter = this.Exporter()
         this.didIncremntallyBuildCount = 0
         this.willIncremntallyBuildCount = 0
@@ -161,7 +163,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
         this.exporter = ViewControllerExporter.Exporter(
             buildCwdNodeModulesImport
-        )
+        ) as SpyViewControllerExporter
 
         await this.exporter.export({
             source: importExportSourceNodeModulesImport,
@@ -341,6 +343,9 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         assert.isTruthy(this.incrementalBuildError)
     }
 
+    @test()
+    protected static async canSetSpyExporter() {}
+
     private static getConfig() {
         return this.exporter.getConfig()
     }
@@ -406,8 +411,10 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.wait(1000)
     }
 
-    private static Exporter(cwd?: string): ViewControllerExporter {
-        return ViewControllerExporter.Exporter(cwd ?? this.buildCwd)
+    private static Exporter(cwd?: string) {
+        return ViewControllerExporter.Exporter(
+            cwd ?? this.buildCwd
+        ) as SpyViewControllerExporter
     }
 
     private static async export(options?: Partial<ExportOptions>) {
