@@ -180,6 +180,7 @@ export default class ViewControllerExporter {
 
         return {
             entry,
+            mode: shouldBuildSourceMaps ? 'development' : 'production',
             context: this.cwd,
             stats: !!shouldProfile,
             devtool: shouldBuildSourceMaps ? 'inline-source-map' : false,

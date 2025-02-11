@@ -225,6 +225,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     protected static async exportCanBuildSourceMaps() {
         await this.export({ shouldBuildSourceMaps: true })
         const config = this.getConfig()
+        assert.isEqual(config.mode, 'development')
         assert.isEqual(config.devtool, 'inline-source-map')
         assert.isFalse(config.optimization?.minimize)
         assert.isEqual(
@@ -238,6 +239,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     protected static async noSourceMapsByDefault() {
         await this.export()
         const config = this.getConfig()
+        assert.isEqual(config.mode, 'production')
         assert.isFalsy(config.devtool)
         assert.isTrue(config.optimization?.minimize)
         //@ts-ignore
