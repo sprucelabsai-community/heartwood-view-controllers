@@ -1687,6 +1687,22 @@ const vcAssert = {
         )
     },
 
+    assertCardFooterIsNotBusy(vc: ViewController<Card>) {
+        const model = renderUtil.render(vc)
+        assert.isFalse(
+            model.footer?.isBusy,
+            `I expected your footer to not be busy, try setting '{ footer: { isBusy: false } }' or 'cardVc.setFooterIsBusy(false)'`
+        )
+    },
+
+    assertCardFooterIsBusy(vc: ViewController<Card>) {
+        const model = renderUtil.render(vc)
+        assert.isTrue(
+            model.footer?.isBusy,
+            `I expected your footer to be busy, try setting '{ footer: { isBusy: true } }' or 'cardVc.setFooterIsBusy(true)'`
+        )
+    },
+
     assertCardFooterIsEnabled(vc: ViewController<Card>) {
         const model = renderUtil.render(vc)
         assert.isTrue(

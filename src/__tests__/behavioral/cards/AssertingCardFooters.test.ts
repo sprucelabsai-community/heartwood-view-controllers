@@ -58,6 +58,19 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
         vcAssert.assertCardDoesNotRenderFooter(this.vc)
     }
 
+    @test()
+    protected static async assertFooterIsBusy() {
+        assert.doesThrow(() => vcAssert.assertCardFooterIsBusy(this.vc))
+        vcAssert.assertCardFooterIsNotBusy(this.vc)
+    }
+
+    @test()
+    protected static async canAssertNotBusy() {
+        this.setFooter({ isBusy: true })
+        assert.doesThrow(() => vcAssert.assertCardFooterIsNotBusy(this.vc))
+        vcAssert.assertCardFooterIsBusy(this.vc)
+    }
+
     private static assertFooterIsDisabled() {
         vcAssert.assertCardFooterIsDisabled(this.vc)
     }
