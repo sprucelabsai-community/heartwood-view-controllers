@@ -1,3 +1,11 @@
+# [117.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.1.16...v117.2.0) (2025-02-18)
+
+
+### Features
+
+* can assert if footer is busy ([9dc4de5](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9dc4de5))
+* can assert refresh count on active record card ([9cb7722](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9cb7722))
+
 ## [117.1.16](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.1.15...v117.1.16) (2025-02-15)
 
 ## [117.1.15](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.1.14...v117.1.15) (2025-02-15)
