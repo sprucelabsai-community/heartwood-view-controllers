@@ -3,6 +3,7 @@ import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import MockActiveRecordCard from '../../../tests/MockActiveRecordCard'
 import activeRecordCardAssert from '../../../tests/utilities/activeRecordCardAssert'
 import {
     ActiveRecordPagingOptions,
@@ -25,13 +26,18 @@ class GenericSkillView extends AbstractSkillViewController {
 }
 
 export default class AssertingActiveRecordCardsTest extends AbstractViewControllerTest {
-    private static cardVc: ActiveRecordCardViewController
+    private static cardVc: MockActiveRecordCard
 
     protected static async beforeEach() {
         await super.beforeEach()
 
         this.getFactory().setController('genericSkillView', GenericSkillView)
-        this.cardVc = this.ActiveRecordCard()
+
+        this.getFactory().setController(
+            'active-record-card',
+            MockActiveRecordCard
+        )
+        this.cardVc = this.ActiveRecordCard() as MockActiveRecordCard
     }
 
     @test()
@@ -168,6 +174,28 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         })
     }
 
+    @test()
+    protected static async canAssertHasBeenLoaded() {
+        assert.doesThrow(() => this.cardVc.assertIsLoaded())
+        await this.cardVc.load()
+        this.cardVc.assertIsLoaded()
+    }
+
+    @test()
+    protected static async canAssertReloadCount() {
+        await this.cardVc.load()
+        assert.doesThrow(() => this.cardVc.assertRefreshCount(1))
+        await this.refresh()
+        this.cardVc.assertRefreshCount(1)
+        assert.doesThrow(() => this.cardVc.assertRefreshCount(2))
+        await this.refresh()
+        this.cardVc.assertRefreshCount(2)
+    }
+
+    private static async refresh() {
+        await this.cardVc.refresh()
+    }
+
     private static setupPagingAndAssertEqualExpected(
         expected: ActiveRecordPagingOptions
     ) {
@@ -216,7 +244,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
                 rowTransformer: (o) => ({ id: o.id, cells: [] }),
                 paging: pagingOptions,
             })
-        )
+        ) as MockActiveRecordCard
     }
 }
 

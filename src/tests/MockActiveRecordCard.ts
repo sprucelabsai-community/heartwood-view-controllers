@@ -8,6 +8,7 @@ import vcAssert, { getViewId } from './utilities/vcAssert'
 
 export default class MockActiveRecordCard extends ActiveRecordCardViewController {
     private rebuildSlidesCount = 0
+    private refreshCount = 0
 
     public getSearchFormVc() {
         return this.searchFormVc!
@@ -58,6 +59,26 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
             pagerAssert.totalPages(this.pagerVc!, expected)
         }
         this.assertTotalSlides(expected)
+    }
+
+    public assertIsLoaded() {
+        assert.isTrue(
+            this.getIsLoaded(),
+            `Your active record card is not loaded! Try 'this.activeRecordVc.load()' in your view's 'load(...)' method.`
+        )
+    }
+
+    public assertRefreshCount(expected: number) {
+        assert.isEqual(
+            this.refreshCount,
+            expected,
+            `Your active record card has been refreshed the expected times. Try 'this.activeRecordVc.refresh()'.`
+        )
+    }
+
+    public async refresh() {
+        this.refreshCount++
+        await super.refresh()
     }
 
     public assertCurrentPage(expected: number) {
