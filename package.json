@@ -88,7 +88,7 @@
     "@sprucelabs/spruce-skill-utils": "^31.2.60",
     "@sprucelabs/test-utils": "^5.5.14",
     "@swc/core": "1.2.103",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "dot-prop": "^9.0.0",
     "dotenv": "^16.4.7",
