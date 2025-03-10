@@ -131,7 +131,7 @@ const vcAssert = {
 
         assert.isTrue(
             wasHit,
-            `this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
+            `await this.confirm() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
         )
 
         return confirmVc

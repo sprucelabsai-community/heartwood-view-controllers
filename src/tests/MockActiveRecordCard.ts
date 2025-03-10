@@ -72,7 +72,7 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         assert.isEqual(
             this.refreshCount,
             expected,
-            `Your active record card has been refreshed the expected times. Try 'this.activeRecordVc.refresh()'.`
+            `Your active record card has not been refreshed the expected times. Try 'this.activeRecordVc.refresh()'.`
         )
     }
 
