@@ -72,9 +72,9 @@
     "lint.tsc": "tsc -p . --noEmit"
   },
   "dependencies": {
-    "@babel/core": "^7.26.9",
+    "@babel/core": "^7.26.10",
     "@babel/plugin-transform-class-properties": "^7.25.9",
-    "@babel/plugin-transform-runtime": "^7.26.9",
+    "@babel/plugin-transform-runtime": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-typescript": "^7.26.0",
     "@sprucelabs/calendar-utils": "^42.0.650",
