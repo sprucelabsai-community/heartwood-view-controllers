@@ -1,3 +1,10 @@
+# [118.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.2.29...v118.0.0) (2025-03-21)
+
+
+### Breaking Changes
+
+* generalized bar chart components to chart, added line graph using generalized components ([49ef667](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/49ef667))
+
 ## [117.2.29](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.2.28...v117.2.29) (2025-03-18)
 
 ## [117.2.28](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v117.2.27...v117.2.28) (2025-03-17)
