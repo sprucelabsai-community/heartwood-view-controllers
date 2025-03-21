@@ -1,13 +1,17 @@
 import { assertOptions } from '@sprucelabs/schema'
 import {
     BarChart,
-    BarChartDataSet,
+    ChartDataSet,
+    ChartViewController,
     ViewControllerOptions,
-} from '../types/heartwood.types'
-import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
-import AbstractViewController from './Abstract.vc'
+} from '../../types/heartwood.types'
+import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
+import AbstractViewController from '../Abstract.vc'
 
-export default class BarChartViewController extends AbstractViewController<BarChart> {
+export default class BarChartViewController
+    extends AbstractViewController<BarChart>
+    implements ChartViewController<BarChart>
+{
     private model: BarChart
 
     public constructor(
@@ -23,7 +27,7 @@ export default class BarChartViewController extends AbstractViewController<BarCh
         }
     }
 
-    public setDataSets(dataSets: BarChartDataSet[]) {
+    public setDataSets(dataSets: ChartDataSet[]) {
         assertOptions({ dataSets }, ['dataSets'])
         this.model.dataSets = dataSets
         this.triggerRender()

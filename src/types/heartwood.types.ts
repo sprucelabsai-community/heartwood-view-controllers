@@ -40,7 +40,6 @@ import ActiveRecordCardViewController, {
 import ActiveRecordListViewController, {
     ActiveRecordListViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordList.vc'
-import { BarChartViewControllerOptions } from '../viewControllers/BarChart.vc'
 import BigFormViewControllerImpl, {
     BigFormViewControllerOptions,
 } from '../viewControllers/BigForm.vc'
@@ -57,6 +56,10 @@ import CalendarEventViewController from '../viewControllers/CalendarEvent.vc'
 import CardViewControllerImpl, {
     CardViewControllerOptions,
 } from '../viewControllers/card/Card.vc'
+import { BarChartViewControllerOptions } from '../viewControllers/charts/BarChart.vc'
+import LineGraphViewController, {
+    LineGraphViewControllerOptions,
+} from '../viewControllers/charts/LineGraph.vc'
 import ConfirmViewController, {
     ConfirmViewControllerOptions,
 } from '../viewControllers/Confirm.vc'
@@ -380,10 +383,12 @@ export type PolarAreaDataItem =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem
 export type BarChart =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChart
-export type BarChartDataSet =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataSet
-export type BarChartDataPoint =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPoint
+export type LineGraph =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineGraph
+export type ChartDataSet =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataSet
+export type ChartDataPoint =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataPoint
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 
@@ -549,6 +554,7 @@ export interface ViewControllerMap {
     'polar-area': PolarAreaViewController
     pager: PagerViewController
     'bar-chart': BarChartViewController
+    'line-graph': LineGraphViewController
     'lock-screen': LockScreenSkillViewController
 }
 
@@ -593,6 +599,7 @@ export interface ViewControllerOptionsMap {
     'polar-area': PolarAreaViewControllerOptions
     pager: PagerViewControllerOptions
     'bar-chart': BarChartViewControllerOptions
+    'line-graph': LineGraphViewControllerOptions
     'lock-screen': LockScreenSkillViewControllerOptions
 }
 
@@ -1000,4 +1007,9 @@ export interface AppControllerLoadOptions {
     locale: ILocale
     scope: Scope
     themes: ThemeManager
+}
+
+export interface ChartViewController<ViewModel extends Record<string, any>>
+    extends ViewController<ViewModel> {
+    setDataSets(dataSets: ChartDataSet[]): void
 }

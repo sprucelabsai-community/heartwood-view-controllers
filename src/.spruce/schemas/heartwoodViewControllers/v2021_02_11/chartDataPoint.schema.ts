@@ -3,8 +3,8 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const barChartDataPointSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartDataPointSchema  = {
-	id: 'barChartDataPoint',
+const chartDataPointSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataPointSchema  = {
+	id: 'chartDataPoint',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
 	name: '',
@@ -24,6 +24,6 @@ const barChartDataPointSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(barChartDataPointSchema)
+SchemaRegistry.getInstance().trackSchema(chartDataPointSchema)
 
-export default barChartDataPointSchema
+export default chartDataPointSchema

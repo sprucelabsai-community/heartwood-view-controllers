@@ -1,14 +1,14 @@
-import { PagerViewController } from '.'
+import { LineGraphViewController, PagerViewController } from '.'
 import LockScreenSkillViewController from './skillViewControllers/LockScreen.svc'
 import ActiveRecordCardViewController from './viewControllers/activeRecord/ActiveRecordCard.vc'
 import ActiveRecordListViewController from './viewControllers/activeRecord/ActiveRecordList.vc'
-import BarChartViewController from './viewControllers/BarChart.vc'
 import BigFormViewController from './viewControllers/BigForm.vc'
 import ButtonBarViewController from './viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from './viewControllers/ButtonGroup.vc'
 import CalendarViewController from './viewControllers/Calendar.vc'
 import CalendarEventViewController from './viewControllers/CalendarEvent.vc'
 import CardViewController from './viewControllers/card/Card.vc'
+import BarChartViewController from './viewControllers/charts/BarChart.vc'
 import ConfirmViewController from './viewControllers/Confirm.vc'
 import CountdownTimerViewController from './viewControllers/countdownTimer/CountdownTimer.vc'
 import DialogViewController from './viewControllers/Dialog.vc'
@@ -100,5 +100,6 @@ export const CORE_CONTROLLER_MAP = {
     'polar-area': PolarAreaViewController,
     pager: PagerViewController,
     'bar-chart': BarChartViewController,
+    'line-graph': LineGraphViewController,
     'lock-screen': LockScreenSkillViewController,
 }

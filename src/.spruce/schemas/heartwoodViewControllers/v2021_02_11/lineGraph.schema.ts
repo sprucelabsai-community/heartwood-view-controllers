@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import chartDataSetSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/chartDataSet.schema'
 
-const barChartSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChartSchema  = {
-	id: 'barChart',
+const lineGraphSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LineGraphSchema  = {
+	id: 'lineGraph',
 	version: 'v2021_02_11',
 	namespace: 'HeartwoodViewControllers',
-	name: 'Bar chart',
+	name: 'Line graph',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
 	            /** . */
@@ -18,7 +18,7 @@ const barChartSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChar
 	            /** . */
 	            'controller': {
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ChartViewController<HeartwoodTypes.BarChart>`,}
+	                options: {valueType: `HeartwoodTypes.ChartViewController<HeartwoodTypes.LineGraph>`,}
 	            },
 	            /** . */
 	            'dataSets': {
@@ -31,6 +31,6 @@ const barChartSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BarChar
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(barChartSchema)
+SchemaRegistry.getInstance().trackSchema(lineGraphSchema)
 
-export default barChartSchema
+export default lineGraphSchema

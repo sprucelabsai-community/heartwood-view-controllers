@@ -7,6 +7,7 @@ import countdownTimerBuilder from '../countdownTimer.builder'
 import feedBuilder from '../feed.builder'
 import bigFormBuilder from '../forms/bigForm.builder'
 import formBuilder from '../forms/form.builder'
+import lineGraphBuilder from '../lineGraph.builder'
 import listBuilder from '../list.builder'
 import mapBuilder from '../map.builder'
 import pagerBuilder from '../pager.builder'
@@ -187,6 +188,13 @@ export default buildSchema({
             label: 'Bar chart',
             options: {
                 schema: barChartBuilder,
+            },
+        },
+        lineGraph: {
+            type: 'schema',
+            label: 'Line graph',
+            options: {
+                schema: lineGraphBuilder,
             },
         },
         shouldRenderContentsAsGrid: {

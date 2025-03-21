@@ -2,8 +2,8 @@ import { buildSchema } from '@sprucelabs/schema'
 import chartDataSetBuilder from './chartDataSet.builder'
 
 export default buildSchema({
-    id: 'barChart',
-    name: 'Bar chart',
+    id: 'lineGraph',
+    name: 'Line graph',
     fields: {
         id: {
             type: 'id',
@@ -12,7 +12,7 @@ export default buildSchema({
             type: 'raw',
             options: {
                 valueType:
-                    'HeartwoodTypes.ChartViewController<HeartwoodTypes.BarChart>',
+                    'HeartwoodTypes.ChartViewController<HeartwoodTypes.LineGraph>',
             },
         },
         dataSets: {
