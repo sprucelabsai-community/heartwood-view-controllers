@@ -41,9 +41,7 @@ const chartAssert = {
 
 export default chartAssert
 function assertRendersCardRendersCart(
-    cardVc: ViewController<
-        import('/Users/taylorromero/Development/SpruceLabs/heartwood-view-controllers/src/index').SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-    >,
+    cardVc: ViewController<Card>,
     key: keyof CardSection,
     name: string,
     id: string | undefined
