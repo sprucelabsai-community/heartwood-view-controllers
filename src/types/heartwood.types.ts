@@ -952,6 +952,7 @@ export interface AlertOptions {
     title?: string
     message: string
     style?: 'info' | 'error' | 'success'
+    okButtonLabel?: string
 }
 
 export interface ViewControllerPlugins {}
