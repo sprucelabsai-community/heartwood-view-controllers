@@ -41,7 +41,6 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
 
     protected static async exportAndThenImport(sourcePath: string) {
         await this.export(sourcePath)
-        debugger
         this.import()
     }
 }

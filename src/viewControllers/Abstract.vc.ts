@@ -1,4 +1,4 @@
-import { DateUtil } from '@sprucelabs/calendar-utils'
+import { DateUtil, SpruceSchemas } from '@sprucelabs/calendar-utils'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Log } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
@@ -169,7 +169,7 @@ export default abstract class AbstractViewController<
     }
 
     protected async alert(options: AlertOptions) {
-        const { title = 'Alert!', message, style } = options
+        const { title = 'Alert!', message, style, okButtonLabel } = options
 
         const header = {
             title,
@@ -185,21 +185,26 @@ export default abstract class AbstractViewController<
 
         this.activeAlert = { ...options, title }
 
+        const text: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text = {}
+        if (message.includes('<')) {
+            text.html = message
+        } else {
+            text.content = message
+        }
+
         const dlg = this.renderInDialog({
             header,
             body: {
                 sections: [
                     {
-                        text: {
-                            content: message,
-                        },
+                        text,
                     },
                 ],
             },
             footer: {
                 buttons: [
                     {
-                        label: 'Ok',
+                        label: okButtonLabel ?? 'Ok',
                         type: buttonStyleToType(style),
                         onClick: () => {
                             void dlg.hide()

@@ -12,7 +12,10 @@ import deviceAssert from '../../../tests/utilities/deviceAssert'
 class AlertSkillViewController extends AbstractSkillViewController {
     public afterAlert = false
     public async showAnAlert(): Promise<void> {
-        await this.alert({ title: 'oh no!', message: 'what the?' })
+        await this.alert({
+            title: 'oh no!',
+            message: 'what the?',
+        })
 
         this.afterAlert = true
     }
@@ -200,6 +203,37 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
         await this.assertAlertRendersDialog(alert2)
         await this.assertAlertRendersDialog(alert3)
         await this.assertAlertRendersDialog(alert4)
+    }
+
+    @test()
+    protected static async canSetOkButton() {
+        const buttonLabel = generateId()
+
+        const dlgVc = await this.assertAlertRendersDialog({
+            okButtonLabel: buttonLabel,
+            message: generateId(),
+        })
+
+        const model = this.render(dlgVc.getCardVc())
+        assert.isEqual(
+            model.footer?.buttons?.[0].label,
+            buttonLabel,
+            'Did not set ok button label'
+        )
+    }
+
+    @test('renders to html if message is html', '<h1>hello</h1>')
+    @test('renders to html if message is html', 'Hey there! <div>oh no</div>')
+    protected static async rendersToHtmlIfMessageIsHtml(message: string) {
+        const dlgVc = await this.assertAlertRendersDialog({
+            message,
+        })
+
+        assert.isEqual(
+            this.render(dlgVc.getCardVc()).body?.sections?.[0].text?.html,
+            message,
+            'Did not render to html'
+        )
     }
 
     private static async assertAlertRendersDialog(alert: AlertOptions) {
