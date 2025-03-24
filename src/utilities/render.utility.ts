@@ -52,11 +52,19 @@ function renderItem(thisItem: any, options?: RenderOptions): any {
         }
 
         return item
-    } else if (isObjectLike(thisItem)) {
+    } else if (isPlainObject(thisItem)) {
         return renderItems(thisItem, options)
     } else {
         return thisItem
     }
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        value.constructor === Object
+    )
 }
 
 const renderUtil = {
@@ -84,9 +92,6 @@ const renderUtil = {
 
 export default renderUtil
 
-function isObjectLike(value: any) {
-    return typeof value === 'object' && value !== null
-}
 export interface RenderOptions {
     shouldStripPrivateFields?: boolean
     shouldStripControllers?: boolean
