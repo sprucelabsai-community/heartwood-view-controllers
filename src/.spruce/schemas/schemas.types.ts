@@ -2877,6 +2877,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'gridSize'?: ("small" | "medium" | "large") | undefined | null
 				/** . Will render content in an iframe in the body of the card. */
 				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal | undefined | null
+				
+				'webRtcStreamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right") | undefined | null
 		}
@@ -3072,6 +3074,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                hint: 'Will render content in an iframe in the body of the card.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema,}
+			            },
+			            /** . */
+			            'webRtcStreamer': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.WebRtcStreamer`,}
 			            },
 			            /** Alignment. */
 			            'alignment': {

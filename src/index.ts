@@ -71,6 +71,14 @@ export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
 
+export {
+    WebRtcStreamer,
+    default as WebRtcStreamerImpl,
+} from './webRtcStreaming/WebRtcStreamer'
+
+export { default as WebRtcConnection } from './webRtcStreaming/WebRtcConnection'
+export { default as MocRtcPeerConnection } from './tests/MockRtcPeerConnection'
+
 export { default as calendarEventColorsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
 export { default as bigFormSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
 export { default as skillViewSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'

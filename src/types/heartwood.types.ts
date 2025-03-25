@@ -121,6 +121,9 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
+import WebRtcStreamingCardViewController, {
+    WebRtcStreamingCardViewControllerOptions,
+} from '../viewControllers/webRtcStreaming/WebRtcStreamingCard.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
@@ -404,6 +407,8 @@ export type TriggerRender = () => void
 
 export type TriggerRenderHandler = () => void
 
+export { WebRtcStreamer } from '../webRtcStreaming/WebRtcStreamer'
+
 export interface ViewController<ViewModel extends Record<string, any>> {
     render(): ViewModel
     setTriggerRenderHandler: (handler: TriggerRenderHandler) => void
@@ -556,6 +561,7 @@ export interface ViewControllerMap {
     'bar-chart': BarChartViewController
     'line-graph': LineGraphViewController
     'lock-screen': LockScreenSkillViewController
+    'web-rtc-streaming-card': WebRtcStreamingCardViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -601,6 +607,7 @@ export interface ViewControllerOptionsMap {
     'bar-chart': BarChartViewControllerOptions
     'line-graph': LineGraphViewControllerOptions
     'lock-screen': LockScreenSkillViewControllerOptions
+    'web-rtc-streaming-card': WebRtcStreamingCardViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

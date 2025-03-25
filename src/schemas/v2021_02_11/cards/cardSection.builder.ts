@@ -241,6 +241,12 @@ export default buildSchema({
                 }),
             },
         },
+        webRtcStreamer: {
+            type: 'raw',
+            options: {
+                valueType: 'HeartwoodTypes.WebRtcStreamer',
+            },
+        },
         alignment: {
             type: 'select',
             label: 'Alignment',

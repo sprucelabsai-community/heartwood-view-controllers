@@ -27,6 +27,7 @@ import StatsViewController from './viewControllers/reporting/Stats.vc'
 import SwipeCardViewController from './viewControllers/SwipeCard.vc'
 import TalkingSprucebotViewController from './viewControllers/TalkingSprucebot.vc'
 import ToolBeltViewController from './viewControllers/ToolBelt.vc'
+import WebRtcStreamingCardViewController from './viewControllers/webRtcStreaming/WebRtcStreamingCard.vc'
 
 export const CORE_CONTROLLER_MAP = {
     form: FormViewController,
@@ -102,4 +103,5 @@ export const CORE_CONTROLLER_MAP = {
     'bar-chart': BarChartViewController,
     'line-graph': LineGraphViewController,
     'lock-screen': LockScreenSkillViewController,
+    'web-rtc-streaming-card': WebRtcStreamingCardViewController,
 }

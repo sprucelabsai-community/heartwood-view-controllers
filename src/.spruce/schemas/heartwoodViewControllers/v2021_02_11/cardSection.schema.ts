@@ -214,6 +214,11 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                hint: 'Will render content in an iframe in the body of the card.',
 	                options: {schema: portalSchema_v2021_02_11,}
 	            },
+	            /** . */
+	            'webRtcStreamer': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.WebRtcStreamer`,}
+	            },
 	            /** Alignment. */
 	            'alignment': {
 	                label: 'Alignment',
