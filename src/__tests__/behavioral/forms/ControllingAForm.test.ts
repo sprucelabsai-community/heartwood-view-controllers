@@ -658,6 +658,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
+    protected static updatingFooterTriggersRender() {
+        this.vc.setFooter({})
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test()
     protected static cantUpdateWhenMissingEverything() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateField())

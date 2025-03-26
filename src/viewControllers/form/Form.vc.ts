@@ -905,6 +905,8 @@ export default class FormViewController<
         } else {
             this.model.footer = footer
         }
+
+        this.triggerRender()
     }
 
     public getIsEnabled() {
