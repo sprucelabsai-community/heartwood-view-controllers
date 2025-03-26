@@ -236,6 +236,35 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected static async rendersToContentWithErrorStack() {
+        const message = `Error: NOT_IMPLEMENTED: 1742988596907 and then more!
+    at Object.listenerCb (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/packages/spruce-organization-skill/src/__tests__/behavioral/AddingAnOrganization.test.ts:60:19)
+    at InternalEmitter.emitOne (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-event-emitter/build/AbstractEventEmitter.js:82:45)
+    at emitOneAndValidate (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-event-emitter/build/AbstractEventEmitter.js:25:39)
+    at /Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-event-emitter/build/AbstractEventEmitter.js:58:84
+    at Array.map (<anonymous>)
+    at InternalEmitter.emit (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-event-emitter/build/AbstractEventEmitter.js:58:53)
+    at MercuryTestClient.handleEventLocally (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-client/build/clients/MercuryTestClient.js:225:40)
+    at MercuryTestClient.emit (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-client/build/clients/MercuryTestClient.js:120:29)
+    at AddSkillViewController.emit [as handleSubmit] (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/packages/spruce-organization-skill/src/skillViewControllers/Add.svc.ts:63:48)
+    at BigFormViewController.submit (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/heartwood-view-controllers/build/viewControllers/BigForm.vc.js:55:13)
+    at Object.submitForm (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/heartwood-view-controllers/build/tests/utilities/interactor.js:179:9)
+    at Object.submitBigFormSlide (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/heartwood-view-controllers/build/tests/utilities/interactor.js:171:9)
+    at AddingAnOrganizationTest.submitAddForm (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/packages/spruce-organization-skill/src/__tests__/behavioral/AddingAnOrganization.test.ts:156:9)`
+
+        const dlgVc = await this.assertAlertRendersDialog({
+            message,
+        })
+
+        const model = this.render(dlgVc.getCardVc())
+        assert.isEqual(
+            model.body?.sections?.[0].text?.content,
+            message,
+            'Did not render to content'
+        )
+    }
+
     private static async assertAlertRendersDialog(alert: AlertOptions) {
         return await vcAssert.assertRendersDialog(this.vc, () =>
             this.vc.alert(alert)

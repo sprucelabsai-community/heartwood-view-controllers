@@ -186,7 +186,9 @@ export default abstract class AbstractViewController<
         this.activeAlert = { ...options, title }
 
         const text: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text = {}
-        if (message.includes('<')) {
+        const isHtml = message.includes('</')
+
+        if (isHtml) {
             text.html = message
         } else {
             text.content = message
