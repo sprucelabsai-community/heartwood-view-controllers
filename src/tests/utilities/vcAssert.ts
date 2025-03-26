@@ -1788,7 +1788,13 @@ function findControllerInModel(VcClass: any, model: any) {
 
 export type AlertViewController = Pick<
     DialogViewController,
-    'hide' | 'getIsVisible' | 'getShouldShowCloseButton' | 'wait' | 'render'
+    | 'hide'
+    | 'getIsVisible'
+    | 'getShouldShowCloseButton'
+    | 'wait'
+    | 'render'
+    | 'triggerRender'
+    | 'setTriggerRenderHandler'
 > & {
     alertOptions: AlertOptions
 }
