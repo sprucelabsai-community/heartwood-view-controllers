@@ -7,7 +7,7 @@ export default class WebRtcConnection {
     }
 
     public static set RTCPeerConnection(value) {
-        window.RTCPeerConnection = value
+        global.window.RTCPeerConnection = value
     }
 
     public static async createOffer(

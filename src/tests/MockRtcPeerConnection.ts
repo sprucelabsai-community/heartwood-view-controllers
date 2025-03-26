@@ -222,10 +222,3 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
         return true
     }
 }
-
-global.window = {
-    //@ts-ignore
-    RTCPeerConnection: MocRtcPeerConnection as new (
-        options: RTCConfiguration
-    ) => RTCPeerConnection,
-}
