@@ -69,11 +69,11 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 
 const renderUtil = {
     render<
-        VC extends Pick<
+        Vc extends Pick<
             ViewController<any>,
             'render' | 'setTriggerRenderHandler'
         >,
-    >(vc: VC, options?: RenderOptions): ReturnType<VC['render']> {
+    >(vc: Vc, options?: RenderOptions): ReturnType<Vc['render']> {
         if (!vc) {
             throw new Error('You tried to render something falsy!')
         }
