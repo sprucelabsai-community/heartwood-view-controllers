@@ -782,7 +782,7 @@ export default class FormViewController<
             throw new SchemaError({
                 code: 'INVALID_PARAMETERS',
                 parameters: ['fieldName'],
-                friendlyMessage: 'I could not find any field named ${}.',
+                friendlyMessage: `I could not find any field named ${fieldName} in your schema.`,
             })
         }
 
