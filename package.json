@@ -13,7 +13,7 @@
   "sideEffects": false,
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "118.0.22",
+  "version": "118.0.23",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
@@ -77,7 +77,7 @@
     "@babel/plugin-transform-runtime": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-typescript": "^7.27.0",
-    "@sprucelabs/calendar-utils": "^42.0.664",
+    "@sprucelabs/calendar-utils": "^42.0.665",
     "@sprucelabs/error": "^6.0.590",
     "@sprucelabs/globby": "^2.0.502",
     "@sprucelabs/mercury-core-events": "^26.0.47",
