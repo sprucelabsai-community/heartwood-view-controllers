@@ -22,6 +22,14 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
         )
     }
 
+    public assertGeneratedOfferSdpEquals(sdp: string) {
+        assert.isEqualDeep(
+            this.offer.sdp,
+            sdp,
+            'Did not return the generated offer sdp'
+        )
+    }
+
     public assertCreatedWithOptions(expected: {
         sdpSemantics: string
         iceServers: never[]
@@ -135,12 +143,11 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
         throw new Error('Method not implemented.')
     }
 
-    //@ts-ignore
-    public createAnswer(
+    public async createAnswer(
         _successCallback?: unknown,
         _failureCallback?: unknown
-    ): Promise<void> | Promise<RTCSessionDescriptionInit> {
-        return {} as Promise<void> | Promise<RTCSessionDescriptionInit>
+    ) {
+        return {} as any
     }
 
     public createDataChannel(

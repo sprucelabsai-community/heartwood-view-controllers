@@ -25,6 +25,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
@@ -500,6 +501,27 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type DuplicateEventIdEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DuplicateEventIdSchema>
+
+}
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface DidNotGenerateOffer {
+		
+	}
+
+	export interface DidNotGenerateOfferSchema extends SpruceSchema.Schema {
+		id: 'didNotGenerateOffer',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Did not generate offer',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		    }
+	}
+
+	export type DidNotGenerateOfferEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.DidNotGenerateOfferSchema>
 
 }
 

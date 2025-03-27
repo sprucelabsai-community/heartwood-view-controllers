@@ -121,9 +121,9 @@ import ToolBeltViewController, {
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
 import '@sprucelabs/mercury-core-events'
-import WebRtcStreamingCardViewController, {
-    WebRtcStreamingCardViewControllerOptions,
-} from '../viewControllers/webRtcStreaming/WebRtcStreamingCard.vc'
+import WebRtcPlayerViewController, {
+    WebRtcPlayerOptions,
+} from '../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
@@ -394,6 +394,8 @@ export type ChartDataPoint =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataPoint
 export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
+export type WebRtcPlayer =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcPlayer
 
 export type NavigationRoute =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute
@@ -561,7 +563,7 @@ export interface ViewControllerMap {
     'bar-chart': BarChartViewController
     'line-graph': LineGraphViewController
     'lock-screen': LockScreenSkillViewController
-    'web-rtc-streaming-card': WebRtcStreamingCardViewController
+    'web-rtc-player': WebRtcPlayerViewController
 }
 
 export interface ViewControllerOptionsMap {
@@ -607,7 +609,7 @@ export interface ViewControllerOptionsMap {
     'bar-chart': BarChartViewControllerOptions
     'line-graph': LineGraphViewControllerOptions
     'lock-screen': LockScreenSkillViewControllerOptions
-    'web-rtc-streaming-card': WebRtcStreamingCardViewControllerOptions
+    'web-rtc-player': WebRtcPlayerOptions
 }
 
 export interface SkillViewControllerMap {}

@@ -103,6 +103,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = 'A Invalid app controller just happened!'
                 break
 
+            case 'DID_NOT_GENERATE_OFFER':
+                message = `You have to generate an offer before setting an answer for streaming!`
+                break
+
             default:
                 message = super.friendlyMessage()
         }

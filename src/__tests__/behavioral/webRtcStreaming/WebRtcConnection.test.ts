@@ -10,7 +10,8 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
-        WebRtcConnection.RTCPeerConnection = MocRtcPeerConnection as any
+
+        WebRtcConnection.RTCPeerConnection = MocRtcPeerConnection
         this.webRtc = WebRtcConnection
     }
 

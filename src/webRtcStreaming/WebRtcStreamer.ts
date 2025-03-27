@@ -1,13 +1,16 @@
 import { assertOptions } from '@sprucelabs/schema'
 
-export default class WebRtcStreamerImpl {
+export default class WebRtcStreamerImpl implements WebRtcStreamer {
     private connection: RTCPeerConnection
+
+    public static Class?: new (connection: RTCPeerConnection) => WebRtcStreamer
+
     protected constructor(connection: RTCPeerConnection) {
         this.connection = connection
     }
 
     public static Streamer(connection: RTCPeerConnection) {
-        return new WebRtcStreamerImpl(connection)
+        return new (this.Class ?? this)(connection)
     }
 
     public async setAnswer(answerSdp: string) {

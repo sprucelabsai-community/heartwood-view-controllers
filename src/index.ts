@@ -34,6 +34,8 @@ export * from './viewControllers/progressNavigator/ProgressNavigator.vc'
 export { default as PagerViewController } from './viewControllers/pagers/Pager.vc'
 export * from './viewControllers/pagers/Pager.vc'
 export { AssertConfirmViewController } from './tests/utilities/assertSupport'
+export { default as WebRtcPlayerViewController } from './viewControllers/webRtcStreaming/WebRtcPlayer.vc'
+export * from './viewControllers/webRtcStreaming/WebRtcPlayer.vc'
 
 /**
  * @deprecated SwipeViewControllerImpl->SwipeCardViewControllerImpl
@@ -160,6 +162,7 @@ export { default as inputButtonSchema } from '#spruce/schemas/heartwoodViewContr
 export { default as polarAreaSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarArea.schema'
 export { default as polarAreaDataItemSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarAreaDataItem.schema'
 export { default as pagerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
+export { default as webRtcPlayerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcPlayer.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

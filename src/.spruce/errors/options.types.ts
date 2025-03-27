@@ -52,6 +52,9 @@ export interface DuplicateRowIdErrorOptions extends SpruceErrors.HeartwoodViewCo
 export interface DuplicateEventIdErrorOptions extends SpruceErrors.HeartwoodViewControllers.DuplicateEventId, ISpruceErrorOptions {
 	code: 'DUPLICATE_EVENT_ID'
 }
+export interface DidNotGenerateOfferErrorOptions extends SpruceErrors.HeartwoodViewControllers.DidNotGenerateOffer, ISpruceErrorOptions {
+	code: 'DID_NOT_GENERATE_OFFER'
+}
 export interface DateNotSelectedErrorOptions extends SpruceErrors.HeartwoodViewControllers.DateNotSelected, ISpruceErrorOptions {
 	code: 'DATE_NOT_SELECTED'
 }
@@ -65,6 +68,6 @@ export interface AppNotFoundErrorOptions extends SpruceErrors.HeartwoodViewContr
 	code: 'APP_NOT_FOUND'
 }
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | InvalidAppControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | AppNotFoundErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | InvalidAppControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DidNotGenerateOfferErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | AppNotFoundErrorOptions 
 
 export default ErrorOptions

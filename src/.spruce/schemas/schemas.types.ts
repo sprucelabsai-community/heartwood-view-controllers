@@ -706,6 +706,49 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface WebRtcPlayer {
+			
+				
+				'id'?: string | undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>) | undefined | null
+				
+				'streamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
+		}
+
+		interface WebRtcPlayerSchema extends SpruceSchema.Schema {
+			id: 'webRtcPlayer',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>`,}
+			            },
+			            /** . */
+			            'streamer': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.WebRtcStreamer`,}
+			            },
+			    }
+		}
+
+		interface WebRtcPlayerEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcPlayerSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ToolBeltTool {
 			
 				/** Id. */

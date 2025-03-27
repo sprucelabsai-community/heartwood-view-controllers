@@ -1,20 +1,25 @@
 import { assertOptions } from '@sprucelabs/schema'
-import WebRtcStreamerImpl from './WebRtcStreamer'
+import MockRtcPeerConnection from '../tests/MockRtcPeerConnection'
+import WebRtcStreamerImpl, { WebRtcStreamer } from './WebRtcStreamer'
 
 export default class WebRtcConnection {
     public static get RTCPeerConnection() {
         return window.RTCPeerConnection
     }
 
-    public static set RTCPeerConnection(value) {
-        global.window.RTCPeerConnection = value
+    public static set RTCPeerConnection(
+        value: new (
+            config: RTCConfiguration
+        ) => RTCPeerConnection | MockRtcPeerConnection
+    ) {
+        global.window.RTCPeerConnection = value as any
     }
 
     public static async createOffer(
         options: WebRtcVcPluginCreateOfferOptions
     ): Promise<{
         offerSdp: RTCSessionDescriptionInit
-        streamer: WebRtcStreamerImpl
+        streamer: WebRtcStreamer
     }> {
         const { offerOptions } = assertOptions(options, ['offerOptions'])
         const connection = new WebRtcConnection.RTCPeerConnection({
@@ -28,7 +33,9 @@ export default class WebRtcConnection {
 
         return {
             offerSdp: offer,
-            streamer: WebRtcStreamerImpl.Streamer(connection),
+            streamer: WebRtcStreamerImpl.Streamer(
+                connection as RTCPeerConnection
+            ),
         }
     }
 }
