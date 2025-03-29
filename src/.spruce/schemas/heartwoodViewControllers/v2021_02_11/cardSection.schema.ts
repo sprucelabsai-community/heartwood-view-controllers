@@ -215,9 +215,9 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                options: {schema: portalSchema_v2021_02_11,}
 	            },
 	            /** . */
-	            'webRtcStreamer': {
+	            'webRtcPlayer': {
 	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.WebRtcStreamer`,}
+	                options: {valueType: `HeartwoodTypes.WebRtcPlayer`,}
 	            },
 	            /** Alignment. */
 	            'alignment': {

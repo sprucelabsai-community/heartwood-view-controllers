@@ -188,6 +188,8 @@ export { default as buttonAssert } from './tests/utilities/buttonAssert'
 export { default as listAssert } from './tests/utilities/listAssert'
 export { default as autocompleteAssert } from './tests/utilities/autocompleteAssert'
 export { default as formAssert } from './tests/utilities/formAssert'
+export { default as webRtcAssert } from './tests/utilities/webRtcAssert'
+
 export { default as autocompleteInteractor } from './tests/utilities/autocompleteInteractor'
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
 export { default as interactor } from './tests/utilities/interactor'

@@ -1,5 +1,9 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { AbstractViewController, WebRtcConnection } from '../..'
+import {
+    AbstractViewController,
+    removeUniversalViewOptions,
+    WebRtcConnection,
+} from '../..'
 import SpruceError from '../../errors/SpruceError'
 import {
     ViewControllerOptions,
@@ -9,17 +13,19 @@ import { WebRtcStreamer } from '../../webRtcStreaming/WebRtcStreamer'
 
 export default class WebRtcPlayerViewController extends AbstractViewController<WebRtcPlayer> {
     public static id = 'web-rtc-player-card'
-    private streamer?: WebRtcStreamer
+    private model: WebRtcPlayer
 
     public constructor(options: ViewControllerOptions & WebRtcPlayerOptions) {
         super(options)
-        const { streamer } = options
-        this.streamer = streamer ?? undefined
+        this.model = {
+            ...removeUniversalViewOptions(options),
+            controller: this,
+        }
     }
 
     public setStreamer(streamer: WebRtcStreamer) {
         assertOptions({ streamer }, ['streamer'])
-        this.streamer = streamer
+        this.model.streamer = streamer
         this.triggerRender()
     }
 
@@ -33,20 +39,17 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
     }
 
     public async setAnswer(answerSdp: string) {
-        if (!this.streamer) {
+        if (!this.model.streamer) {
             throw new SpruceError({
                 code: 'DID_NOT_GENERATE_OFFER',
             })
         }
 
-        await this.streamer.setAnswer(answerSdp)
+        await this.model.streamer.setAnswer(answerSdp)
     }
 
     public render(): WebRtcPlayer {
-        return {
-            streamer: this.streamer,
-            controller: this,
-        }
+        return this.model
     }
 }
 

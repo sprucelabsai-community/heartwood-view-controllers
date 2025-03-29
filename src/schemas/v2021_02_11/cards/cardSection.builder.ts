@@ -241,10 +241,10 @@ export default buildSchema({
                 }),
             },
         },
-        webRtcStreamer: {
+        webRtcPlayer: {
             type: 'raw',
             options: {
-                valueType: 'HeartwoodTypes.WebRtcStreamer',
+                valueType: 'HeartwoodTypes.WebRtcPlayer',
             },
         },
         alignment: {

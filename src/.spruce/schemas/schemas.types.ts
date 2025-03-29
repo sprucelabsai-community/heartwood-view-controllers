@@ -2921,7 +2921,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** . Will render content in an iframe in the body of the card. */
 				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal | undefined | null
 				
-				'webRtcStreamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
+				'webRtcPlayer'?: (HeartwoodTypes.WebRtcPlayer) | undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right") | undefined | null
 		}
@@ -3119,9 +3119,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PortalSchema,}
 			            },
 			            /** . */
-			            'webRtcStreamer': {
+			            'webRtcPlayer': {
 			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.WebRtcStreamer`,}
+			                options: {valueType: `HeartwoodTypes.WebRtcPlayer`,}
 			            },
 			            /** Alignment. */
 			            'alignment': {
