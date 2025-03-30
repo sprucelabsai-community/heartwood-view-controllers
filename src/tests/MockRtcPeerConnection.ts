@@ -5,7 +5,6 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     private static onCreateOfferHandler?: () => void
 
     private constructorOptions?: RTCConfiguration
-    private offerOptions?: RTCOfferOptions | undefined
     public offer = {
         [generateId()]: generateId(),
     } as unknown as RTCSessionDescription
@@ -228,8 +227,7 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     }
 
     //@ts-ignore
-    public async createOffer(options?: RTCOfferOptions) {
-        this.offerOptions = options
+    public async createOffer(_options?: RTCOfferOptions) {
         MockRtcPeerConnection.onCreateOfferHandler?.()
         return this.offer as any
     }
