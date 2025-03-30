@@ -232,8 +232,13 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
             states.push(state)
         })
 
-        const { streamer } = await this.createOffer()
-        streamer.onTrack(() => {})
+        await this.createOffer()
+
+        assert.isEqualDeep(
+            states,
+            ['createdOffer'],
+            'Did not emit the correct events. Called trackAdded too soon.'
+        )
         this.peerConnection.emitTrackAdded()
 
         assert.isEqualDeep(
@@ -241,6 +246,20 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
             ['createdOffer', 'trackAdded'],
             'Did not emit the correct events'
         )
+    }
+
+    @test()
+    protected static async emittingTrackPassesThroughEvent() {
+        let passedEvent: RTCTrackEvent | undefined
+
+        this.webRtc.onStateChange((_, event) => {
+            passedEvent = event
+        })
+        await this.createOffer()
+
+        const event = {} as any
+        this.peerConnection.emitTrackAdded(event)
+        assert.isEqual(passedEvent, event, 'Event was not passed through')
     }
 
     @test()

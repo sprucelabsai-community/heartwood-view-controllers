@@ -17,7 +17,7 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         global.window.RTCPeerConnection = value as any
     }
 
-    private stateChangeHandlers: WebRtcStateChangeHandler[] = []
+    private stateChangeListeners: WebRtcStateChangeHandler[] = []
 
     public static Connection(): WebRtcConnection {
         return new (this.Class ?? this)()
@@ -52,6 +52,10 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
         void this.emitStateChange('createdOffer')
 
+        connection.addEventListener('track', (event) => {
+            void this.emitStateChange('trackAdded', event as RTCTrackEvent)
+        })
+
         return {
             offerSdp: offer,
             streamer: WebRtcStreamerImpl.Streamer(
@@ -63,18 +67,21 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         }
     }
 
-    private async emitStateChange(state: WebRtcConnectionState) {
-        for (const handler of this.stateChangeHandlers) {
-            await handler(state)
+    private async emitStateChange(
+        state: WebRtcConnectionState,
+        event?: RTCTrackEvent
+    ) {
+        for (const handler of this.stateChangeListeners) {
+            await handler(state, event)
         }
     }
 
     public onStateChange(cb: WebRtcStateChangeHandler) {
-        this.stateChangeHandlers.push(cb)
+        this.stateChangeListeners.push(cb)
     }
 
     public offStateChange(listener: WebRtcStateChangeHandler) {
-        this.stateChangeHandlers = this.stateChangeHandlers.filter(
+        this.stateChangeListeners = this.stateChangeListeners.filter(
             (handler) => handler !== listener
         )
     }
@@ -93,7 +100,8 @@ export type WebRtcConnectionState =
     | 'trackAdded'
 
 export type WebRtcStateChangeHandler = (
-    state: WebRtcConnectionState
+    state: WebRtcConnectionState,
+    event?: RTCTrackEvent
 ) => void | Promise<void>
 
 export interface WebRtcConnection {

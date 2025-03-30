@@ -121,10 +121,10 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         this.onCreateOfferHandler = cb
     }
 
-    public emitTrackAdded() {
+    public emitTrackAdded(event?: RTCTrackEvent) {
         const lastListener = this.lastAddedEventListener
         if (lastListener?.eventName === 'track') {
-            lastListener.listener({})
+            lastListener.listener(event ?? {})
         } else {
             assert.fail(
                 'Did not call connection.addEventListener with track listener'
