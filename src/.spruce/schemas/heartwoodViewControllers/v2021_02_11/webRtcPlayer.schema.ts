@@ -26,6 +26,11 @@ const webRtcPlayerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Web
 	                options: undefined
 	            },
 	            /** . */
+	            'onCrop': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
+	            },
+	            /** . */
 	            'connection': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.WebRtcConnection`,}

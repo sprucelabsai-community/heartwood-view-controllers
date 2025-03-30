@@ -715,6 +715,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'shouldAllowCropping'?: boolean | undefined | null
 				
+				'onCrop'?: (HeartwoodTypes.WebRtcPlayerCropHandler) | undefined | null
+				
 				'connection'?: (HeartwoodTypes.WebRtcConnection) | undefined | null
 				
 				'streamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
@@ -741,6 +743,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'shouldAllowCropping': {
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** . */
+			            'onCrop': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
 			            },
 			            /** . */
 			            'connection': {

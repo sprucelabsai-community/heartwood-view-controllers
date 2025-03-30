@@ -412,6 +412,15 @@ export type TriggerRenderHandler = () => void
 export { WebRtcStreamer } from '../webRtcStreaming/WebRtcStreamer'
 export * from '../webRtcStreaming/WebRtcConnection'
 
+export interface Point {
+    x: number
+    y: number
+    width: number
+    height: number
+}
+
+export type WebRtcPlayerCropHandler = (point: Point) => void
+
 export interface ViewController<ViewModel extends Record<string, any>> {
     render(): ViewModel
     setTriggerRenderHandler: (handler: TriggerRenderHandler) => void

@@ -16,6 +16,12 @@ export default buildSchema({
         shouldAllowCropping: {
             type: 'boolean',
         },
+        onCrop: {
+            type: 'raw',
+            options: {
+                valueType: 'HeartwoodTypes.WebRtcPlayerCropHandler',
+            },
+        },
         connection: {
             type: 'raw',
             options: {
