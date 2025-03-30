@@ -58,6 +58,12 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
     public onStateChange(cb: WebRtcStateChangeHandler) {
         this.stateChangeHandlers.push(cb)
     }
+
+    public offStateChange(listener: WebRtcStateChangeHandler) {
+        this.stateChangeHandlers = this.stateChangeHandlers.filter(
+            (handler) => handler !== listener
+        )
+    }
 }
 
 export interface WebRtcVcPluginCreateOfferOptions {
@@ -77,6 +83,7 @@ export type WebRtcStateChangeHandler = (
 ) => void | Promise<void>
 
 export interface WebRtcConnection {
+    offStateChange(listener: WebRtcStateChangeHandler): void
     createOffer(
         options: WebRtcVcPluginCreateOfferOptions
     ): Promise<WebRtcCreateOfferResponse>

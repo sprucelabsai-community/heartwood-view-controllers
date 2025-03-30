@@ -4,6 +4,7 @@ import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import WebRtcConnectionImpl, {
     WebRtcConnection,
     WebRtcConnectionState,
+    WebRtcStateChangeHandler,
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 
@@ -215,6 +216,38 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
             states,
             ['createdOffer', 'trackAdded'],
             'Did not emit the correct events'
+        )
+    }
+
+    @test()
+    protected static async canRemoveStateChangeListener() {
+        let wasHit = false
+        const listener: WebRtcStateChangeHandler = () => {
+            wasHit = true
+        }
+
+        this.webRtc.onStateChange(listener)
+        this.webRtc.offStateChange(listener)
+        await this.createOffer()
+        assert.isFalse(
+            wasHit,
+            'State change was hit when it should not have been'
+        )
+    }
+
+    @test()
+    protected static async removesCorrectListener() {
+        let wasHit = false
+        const listener: WebRtcStateChangeHandler = () => {
+            wasHit = true
+        }
+
+        this.webRtc.onStateChange(listener)
+        this.webRtc.offStateChange(() => {})
+        await this.createOffer()
+        assert.isTrue(
+            wasHit,
+            'State change was not hit and should have been. Make sure you are removing the correct listener'
         )
     }
 

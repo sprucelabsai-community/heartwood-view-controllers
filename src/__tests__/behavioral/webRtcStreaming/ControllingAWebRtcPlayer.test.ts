@@ -198,4 +198,5 @@ class SpyWebRtcConnection implements WebRtcConnection {
         }
     }
     public onStateChange(_cb: WebRtcStateChangeHandler): void {}
+    public offStateChange(_listener: WebRtcStateChangeHandler): void {}
 }
