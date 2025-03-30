@@ -13,6 +13,9 @@ export default buildSchema({
                     'HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>',
             },
         },
+        shouldAllowCropping: {
+            type: 'boolean',
+        },
         connection: {
             type: 'raw',
             options: {
