@@ -410,6 +410,7 @@ export type TriggerRender = () => void
 export type TriggerRenderHandler = () => void
 
 export { WebRtcStreamer } from '../webRtcStreaming/WebRtcStreamer'
+export * from '../webRtcStreaming/WebRtcConnection'
 
 export interface ViewController<ViewModel extends Record<string, any>> {
     render(): ViewModel

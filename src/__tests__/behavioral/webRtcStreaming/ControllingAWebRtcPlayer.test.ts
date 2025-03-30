@@ -1,6 +1,6 @@
 import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import MocRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
+import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
     Card,
@@ -8,7 +8,12 @@ import {
     WebRtcStreamer,
 } from '../../../types/heartwood.types'
 import WebRtcPlayerViewController from '../../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
-import WebRtcConnection from '../../../webRtcStreaming/WebRtcConnection'
+import WebRtcConnectionImpl, {
+    WebRtcConnection,
+    WebRtcCreateOfferResponse,
+    WebRtcStateChangeHandler,
+    WebRtcVcPluginCreateOfferOptions,
+} from '../../../webRtcStreaming/WebRtcConnection'
 import WebRtcStreamerImpl from '../../../webRtcStreaming/WebRtcStreamer'
 
 class StubWebRtcStreamer implements WebRtcStreamer {
@@ -26,7 +31,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
 
         this.vc = this.Vc(options)
 
-        WebRtcConnection.RTCPeerConnection = MocRtcPeerConnection
+        WebRtcConnectionImpl.RTCPeerConnection = MockRtcPeerConnection
         WebRtcStreamerImpl.Class = SpyWebRtcStreamer
     }
 
@@ -80,9 +85,9 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async returnsGeneratedOffer() {
+    protected static async returnsCreatedOffer() {
         const offerSdp = await this.createOffer()
-        this.peerConnection.assertGeneratedOfferSdpEquals(offerSdp)
+        this.peerConnection.assertCreatedOfferSdpEquals(offerSdp)
     }
 
     @test()
@@ -109,6 +114,19 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         assert.isEqual(this.spyStreamerOnVc.answer, answer)
     }
 
+    @test()
+    protected static async rendersWebRtcConnectionToViewModel() {
+        WebRtcConnectionImpl.Class = SpyWebRtcConnection
+        this.vc = this.Vc({})
+        await this.createOffer()
+        const model = this.render(this.vc)
+        assert.isEqual(
+            model.connection,
+            SpyWebRtcConnection.instance,
+            'Did not return connection from render'
+        )
+    }
+
     private static get spyStreamerOnVc() {
         return SpyWebRtcStreamer.instance
     }
@@ -121,8 +139,8 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         return await this.vc.createOffer(offerOptions ?? {})
     }
 
-    private static get peerConnection(): MocRtcPeerConnection {
-        return MocRtcPeerConnection.instance
+    private static get peerConnection(): MockRtcPeerConnection {
+        return MockRtcPeerConnection.instance
     }
 
     private static assertReturnsStreamerInViewModel() {
@@ -163,4 +181,21 @@ class SpyWebRtcStreamer implements WebRtcStreamer {
     }
 
     public onTrack(_cb: (event: RTCTrackEvent) => void): void {}
+}
+
+class SpyWebRtcConnection implements WebRtcConnection {
+    public static instance: SpyWebRtcConnection
+    public constructor() {
+        SpyWebRtcConnection.instance = this
+    }
+
+    public async createOffer(
+        _options: WebRtcVcPluginCreateOfferOptions
+    ): Promise<WebRtcCreateOfferResponse> {
+        return {
+            offerSdp: {} as any,
+            streamer: new SpyWebRtcStreamer(),
+        }
+    }
+    public onStateChange(_cb: WebRtcStateChangeHandler): void {}
 }

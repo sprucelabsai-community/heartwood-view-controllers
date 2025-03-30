@@ -1,23 +1,27 @@
 import { assertOptions } from '@sprucelabs/schema'
-import {
-    AbstractViewController,
-    removeUniversalViewOptions,
-    WebRtcConnection,
-} from '../..'
+
 import SpruceError from '../../errors/SpruceError'
 import {
     ViewControllerOptions,
+    WebRtcConnection,
     WebRtcPlayer,
 } from '../../types/heartwood.types'
+import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
+import WebRtcConnectionImpl from '../../webRtcStreaming/WebRtcConnection'
 import { WebRtcStreamer } from '../../webRtcStreaming/WebRtcStreamer'
+import AbstractViewController from '../Abstract.vc'
 
 export default class WebRtcPlayerViewController extends AbstractViewController<WebRtcPlayer> {
     public static id = 'web-rtc-player-card'
     private model: WebRtcPlayer
+    private connection: WebRtcConnection
 
     public constructor(options: ViewControllerOptions & WebRtcPlayerOptions) {
         super(options)
+
+        this.connection = WebRtcConnectionImpl.Connection()
         this.model = {
+            connection: this.connection,
             ...removeUniversalViewOptions(options),
             controller: this,
         }
@@ -30,7 +34,7 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
     }
 
     public async createOffer(offerOptions: RTCOfferOptions) {
-        const { offerSdp, streamer } = await WebRtcConnection.createOffer({
+        const { offerSdp, streamer } = await this.connection.createOffer({
             offerOptions,
         })
 

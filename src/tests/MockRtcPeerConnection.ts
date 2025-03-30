@@ -1,20 +1,22 @@
 import { assert, generateId } from '@sprucelabs/test-utils'
 
-export default class MocRtcPeerConnection implements RTCPeerConnection {
-    public static instance: MocRtcPeerConnection
+export default class MockRtcPeerConnection implements RTCPeerConnection {
+    public static instance: MockRtcPeerConnection
+    private static onCreateOfferHandler?: () => void
+
     private constructorOptions?: RTCConfiguration
     private offerOptions?: RTCOfferOptions | undefined
     public offer = {
         [generateId()]: generateId(),
     } as unknown as RTCSessionDescription
-    private lastAddedEventListener?: { eventName: unknown; listener: unknown }
+    private lastAddedEventListener?: { eventName: any; listener: any }
 
     public constructor(options?: RTCConfiguration) {
-        MocRtcPeerConnection.instance = this
+        MockRtcPeerConnection.instance = this
         this.constructorOptions = options
     }
 
-    public assertGeneratedOfferEquals(offer: RTCSessionDescriptionInit) {
+    public assertCreatedOfferEquals(offer: RTCSessionDescriptionInit) {
         assert.isEqualDeep(
             offer,
             this.offer,
@@ -22,7 +24,7 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
         )
     }
 
-    public assertGeneratedOfferSdpEquals(sdp: string) {
+    public assertCreatedOfferSdpEquals(sdp: string) {
         assert.isEqualDeep(
             this.offer.sdp,
             sdp,
@@ -74,6 +76,21 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
             },
             'did not call connection.addEventListener with track listener'
         )
+    }
+
+    public static onCreateOffer(cb?: () => void) {
+        this.onCreateOfferHandler = cb
+    }
+
+    public emitTrackAdded() {
+        const lastListener = this.lastAddedEventListener
+        if (lastListener?.eventName === 'track') {
+            lastListener.listener({})
+        } else {
+            assert.fail(
+                'Did not call connection.addEventListener with track listener'
+            )
+        }
     }
 
     public canTrickleIceCandidates: boolean | null = null
@@ -160,6 +177,7 @@ export default class MocRtcPeerConnection implements RTCPeerConnection {
     //@ts-ignore
     public async createOffer(options?: RTCOfferOptions) {
         this.offerOptions = options
+        MockRtcPeerConnection.onCreateOfferHandler?.()
         return this.offer as any
     }
 

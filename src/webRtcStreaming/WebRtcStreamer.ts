@@ -1,16 +1,29 @@
 import { assertOptions } from '@sprucelabs/schema'
+import { WebRtcStateChangeHandler } from './WebRtcConnection'
 
 export default class WebRtcStreamerImpl implements WebRtcStreamer {
     private connection: RTCPeerConnection
 
-    public static Class?: new (connection: RTCPeerConnection) => WebRtcStreamer
+    public static Class?: new (
+        connection: RTCPeerConnection,
+        stateChangeHandlers?: WebRtcStateChangeHandler
+    ) => WebRtcStreamer
 
-    protected constructor(connection: RTCPeerConnection) {
+    private stateChangeHandler?: WebRtcStateChangeHandler
+
+    protected constructor(
+        connection: RTCPeerConnection,
+        stateChangeHandler?: WebRtcStateChangeHandler
+    ) {
         this.connection = connection
+        this.stateChangeHandler = stateChangeHandler
     }
 
-    public static Streamer(connection: RTCPeerConnection) {
-        return new (this.Class ?? this)(connection)
+    public static Streamer(
+        connection: RTCPeerConnection,
+        stateChangeHandler?: WebRtcStateChangeHandler
+    ) {
+        return new (this.Class ?? this)(connection, stateChangeHandler)
     }
 
     public async setAnswer(answerSdp: string) {
@@ -19,10 +32,13 @@ export default class WebRtcStreamerImpl implements WebRtcStreamer {
             type: 'answer',
             sdp: answerSdp,
         })
+
+        await this.stateChangeHandler?.('suppliedAnswer')
     }
 
     public onTrack(cb: (event: RTCTrackEvent) => void) {
         this.connection.addEventListener('track', cb)
+        void this.stateChangeHandler?.('trackAdded')
     }
 }
 

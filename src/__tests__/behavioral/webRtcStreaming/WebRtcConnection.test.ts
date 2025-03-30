@@ -1,18 +1,20 @@
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import MocRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
-import WebRtcConnection, {
+import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
+import WebRtcConnectionImpl, {
+    WebRtcConnection,
+    WebRtcConnectionState,
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 
 export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
-    private static webRtc: typeof WebRtcConnection
+    private static webRtc: WebRtcConnection
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
-        WebRtcConnection.RTCPeerConnection = MocRtcPeerConnection
-        this.webRtc = WebRtcConnection
+        WebRtcConnectionImpl.RTCPeerConnection = MockRtcPeerConnection
+        this.webRtc = WebRtcConnectionImpl.Connection()
     }
 
     @test()
@@ -75,7 +77,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     @test()
     protected static async createOfferReturnsTheCreatedOffer() {
         const { offerSdp } = await this.createOffer()
-        this.peerConnection.assertGeneratedOfferEquals(offerSdp)
+        this.peerConnection.assertCreatedOfferEquals(offerSdp)
     }
 
     @test()
@@ -113,8 +115,111 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         this.peerConnection.assertTrackListenerSet(listener)
     }
 
-    private static get peerConnection(): MocRtcPeerConnection {
-        return MocRtcPeerConnection.instance
+    @test()
+    protected static async canAddEventListenerForCreatingOffer() {
+        let passedState: WebRtcConnectionState | undefined
+        this.webRtc.onStateChange((state) => {
+            passedState = state
+        })
+
+        assert.isFalsy(
+            passedState,
+            'State change was hit before offer was created'
+        )
+        await this.createOffer()
+        assert.isTruthy(passedState, 'State change was not hit')
+        assert.isEqual(
+            passedState,
+            'createdOffer',
+            'State change was not correct'
+        )
+    }
+
+    @test()
+    protected static async canSetMultipleEventListeners() {
+        let passedState: WebRtcConnectionState | undefined
+        this.webRtc.onStateChange((state) => {
+            passedState = state
+        })
+
+        let secondPassedState: WebRtcConnectionState | undefined
+        this.webRtc.onStateChange((state) => {
+            secondPassedState = state
+        })
+
+        await this.createOffer()
+
+        assert.isTruthy(passedState, 'State change was not hit')
+        assert.isEqual(
+            passedState,
+            'createdOffer',
+            'State change was not correct'
+        )
+        assert.isEqual(
+            secondPassedState,
+            'createdOffer',
+            'Second state change was not correct'
+        )
+    }
+
+    @test()
+    protected static async emitsCreatedOfferAfterActuallyCreatingTheOffer() {
+        const hits: string[] = []
+
+        MockRtcPeerConnection.onCreateOffer(() => {
+            hits.push('onCreateOffer')
+        })
+
+        this.webRtc.onStateChange(() => {
+            hits.push('onStateChange')
+        })
+
+        await this.createOffer()
+
+        assert.isEqualDeep(
+            hits,
+            ['onCreateOffer', 'onStateChange'],
+            'Did not emit the correct events'
+        )
+    }
+
+    @test()
+    protected static async canHookIntoAnswerSupplied() {
+        const states: WebRtcConnectionState[] = []
+        this.webRtc.onStateChange((state) => {
+            states.push(state)
+        })
+
+        const { streamer } = await this.createOffer()
+        await streamer.setAnswer(generateId())
+
+        assert.isEqualDeep(
+            states,
+            ['createdOffer', 'suppliedAnswer'],
+            'Did not emit the correct events'
+        )
+    }
+
+    @test()
+    protected static async emitsWhenReceivingTrack() {
+        const states: WebRtcConnectionState[] = []
+        this.webRtc.onStateChange((state) => {
+            states.push(state)
+        })
+
+        const { streamer } = await this.createOffer()
+        streamer.onTrack(() => {})
+        this.peerConnection.emitTrackAdded()
+
+        assert.isEqualDeep(
+            states,
+            ['createdOffer', 'trackAdded'],
+            'Did not emit the correct events'
+        )
+    }
+
+    private static get peerConnection(): MockRtcPeerConnection {
+        return MockRtcPeerConnection.instance
     }
 
     private static async createOffer(

@@ -713,6 +713,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>) | undefined | null
 				
+				'connection'?: (HeartwoodTypes.WebRtcConnection) | undefined | null
+				
 				'streamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
 		}
 
@@ -732,6 +734,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'controller': {
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>`,}
+			            },
+			            /** . */
+			            'connection': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.WebRtcConnection`,}
 			            },
 			            /** . */
 			            'streamer': {

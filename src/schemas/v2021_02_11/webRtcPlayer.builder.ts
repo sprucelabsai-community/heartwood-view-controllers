@@ -13,6 +13,12 @@ export default buildSchema({
                     'HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>',
             },
         },
+        connection: {
+            type: 'raw',
+            options: {
+                valueType: 'HeartwoodTypes.WebRtcConnection',
+            },
+        },
         streamer: {
             type: 'raw',
             options: {
