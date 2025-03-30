@@ -81,7 +81,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     ) {
         await this.createOffer(offerOptions)
         assert.isTruthy(this.peerConnection, 'Did not attepmt to create offer')
-        this.peerConnection.assertCalledCreateOfferWith(offerOptions)
+        this.peerConnection.assertAddedTranseivers(offerOptions)
     }
 
     @test()

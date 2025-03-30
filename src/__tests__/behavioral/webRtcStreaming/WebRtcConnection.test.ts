@@ -53,7 +53,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     @test()
     protected static async callsCreateOfferOnConnection() {
         await this.createOffer()
-        this.peerConnection.assertCalledCreateOfferWith({})
+        this.peerConnection.assertAddedTranseivers({})
     }
 
     @test()
@@ -66,7 +66,31 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         await this.createOffer({
             offerOptions: expected,
         })
-        this.peerConnection.assertCalledCreateOfferWith(expected)
+        this.peerConnection.assertAddedTranseivers(expected)
+    }
+
+    @test()
+    protected static async createsDataChannnelWhenCreatingOffer() {
+        await this.createOffer()
+        this.peerConnection.assertCreatedDataChannel('dataSendChannel')
+    }
+
+    @test()
+    protected static async callsEverythingInTheExpectedOrderWhenCreatingOffer() {
+        const expected = {
+            offerToReceiveVideo: true,
+            offerToReceiveAudio: true,
+        }
+
+        await this.createOffer({
+            offerOptions: expected,
+        })
+
+        this.peerConnection.assertTranceiversAndDataChannelCreatedInOrder([
+            'addTransceiver:audio',
+            'addTransceiver:video',
+            'createDataChannel:dataSendChannel',
+        ])
     }
 
     @test()

@@ -10,6 +10,12 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         [generateId()]: generateId(),
     } as unknown as RTCSessionDescription
     private lastAddedEventListener?: { eventName: any; listener: any }
+    private addedTransceivers: AddedTransceiver[] = []
+    private lastCreatedDataChannel?: {
+        label: string
+        dataChannelDict?: RTCDataChannelInit
+    }
+    private tranceiverAndDataChannelCalls: string[] = []
 
     public constructor(options?: RTCConfiguration) {
         MockRtcPeerConnection.instance = this
@@ -21,6 +27,28 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
             offer,
             this.offer,
             'Did not return the generated offer'
+        )
+    }
+
+    public assertCreatedDataChannel(
+        label: string,
+        dataChannelDict?: RTCDataChannelInit
+    ) {
+        assert.isEqualDeep(
+            this.lastCreatedDataChannel,
+            {
+                label,
+                dataChannelDict,
+            },
+            'did not create expected data channel'
+        )
+    }
+
+    public assertTranceiversAndDataChannelCreatedInOrder(expected: string[]) {
+        assert.isEqualDeep(
+            this.tranceiverAndDataChannelCalls,
+            expected,
+            'Did not call addTransceiver and createDataChannel in the expected order'
         )
     }
 
@@ -43,11 +71,23 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         )
     }
 
-    public assertCalledCreateOfferWith(expected: RTCOfferOptions) {
+    public assertAddedTranseivers(expected: RTCOfferOptions) {
+        const expectedMapped: AddedTransceiver[] = []
+        for (const key in expected) {
+            const shouldAdd = expected[key as keyof typeof expected]
+            if (shouldAdd) {
+                expectedMapped.push({
+                    trackOrKind:
+                        key === 'offerToReceiveAudio' ? 'audio' : 'video',
+                    init: { direction: 'recvonly' },
+                })
+            }
+        }
+
         assert.isEqualDeep(
-            this.offerOptions,
-            expected,
-            'Did not pass expected options to createOffer'
+            this.addedTransceivers,
+            expectedMapped,
+            'Did not add transceivers to peer connection'
         )
     }
 
@@ -150,9 +190,15 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     }
 
     public addTransceiver(
-        _trackOrKind: unknown,
-        _init?: unknown
+        trackOrKind: MediaStreamTrack | string,
+        init?: RTCRtpTransceiverInit
     ): RTCRtpTransceiver {
+        this.addedTransceivers.push({
+            trackOrKind,
+            init,
+        })
+
+        this.tranceiverAndDataChannelCalls.push(`addTransceiver:${trackOrKind}`)
         return {} as RTCRtpTransceiver
     }
 
@@ -168,9 +214,16 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     }
 
     public createDataChannel(
-        _label: unknown,
-        _dataChannelDict?: unknown
+        label: string,
+        dataChannelDict?: RTCDataChannelInit
     ): RTCDataChannel {
+        this.lastCreatedDataChannel = {
+            label,
+            dataChannelDict,
+        }
+
+        this.tranceiverAndDataChannelCalls.push(`createDataChannel:${label}`)
+
         return {} as RTCDataChannel
     }
 
@@ -246,4 +299,9 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     public dispatchEvent(_event: Event): boolean {
         return true
     }
+}
+
+export interface AddedTransceiver {
+    trackOrKind: MediaStreamTrack | string
+    init?: RTCRtpTransceiverInit
 }

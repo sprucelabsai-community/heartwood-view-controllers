@@ -33,7 +33,21 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
             iceServers: [],
         })
 
-        const offer = await connection.createOffer(offerOptions)
+        const { offerToReceiveAudio, offerToReceiveVideo } = offerOptions
+
+        if (offerToReceiveAudio) {
+            connection.addTransceiver('audio', { direction: 'recvonly' })
+        }
+
+        if (offerToReceiveVideo) {
+            connection.addTransceiver('video', { direction: 'recvonly' })
+        }
+
+        //must create this and add transceivers in order for Google Devices, if changing, make sure this
+        //stays the default behavior
+        connection.createDataChannel('dataSendChannel')
+
+        const offer = await connection.createOffer({})
         await connection.setLocalDescription(offer)
 
         void this.emitStateChange('createdOffer')
