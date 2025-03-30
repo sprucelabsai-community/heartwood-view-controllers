@@ -1,3 +1,10 @@
+# [118.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.0.32...v118.1.0) (2025-03-30)
+
+
+### Features
+
+* web rtc player ([aa69eb7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/aa69eb7))
+
 ## [118.0.32](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.0.31...v118.0.32) (2025-03-30)
 
 ## [118.0.31](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.0.30...v118.0.31) (2025-03-30)
