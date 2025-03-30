@@ -419,7 +419,7 @@ export interface Point {
     height: number
 }
 
-export type WebRtcPlayerCropHandler = (point: Point) => void
+export type WebRtcPlayerCropHandler = (point?: Point) => void
 
 export interface ViewController<ViewModel extends Record<string, any>> {
     render(): ViewModel
