@@ -29,7 +29,7 @@ const webRtcAssert = {
         assert.isAbove(
             players.length,
             0,
-            `Your card is not rendering a webrtc player!. Try:\n\nthis.player = this.Controller('web-rtc-player', {})\nthis.cardVc = this.Controller('card', { webRtcPlayer: this.player.render() })`
+            `Your card is not rendering a webrtc player!. Try:\n\nthis.playerVc = this.Controller('web-rtc-player', {})\nthis.cardVc = this.Controller('card', { webRtcPlayer: this.playerVc.render() })`
         )
 
         if (id) {
