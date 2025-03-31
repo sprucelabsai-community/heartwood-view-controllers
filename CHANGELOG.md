@@ -1,3 +1,10 @@
+# [118.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.1.0...v118.2.0) (2025-03-31)
+
+
+### Features
+
+* webRtcInteractor ([4abc1c1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/4abc1c1))
+
 # [118.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.0.32...v118.1.0) (2025-03-30)
 
 
