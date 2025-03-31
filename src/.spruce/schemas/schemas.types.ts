@@ -706,6 +706,60 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface WebRtcCropPoint {
+			
+				
+				'xPercent': number
+				
+				'yPercent': number
+				
+				'widthPercent': number
+				
+				'heightPercent': number
+		}
+
+		interface WebRtcCropPointSchema extends SpruceSchema.Schema {
+			id: 'webRtcCropPoint',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'xPercent': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'yPercent': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'widthPercent': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'heightPercent': {
+			                type: 'number',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface WebRtcCropPointEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPointSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface WebRtcPlayer {
 			
 				
@@ -716,6 +770,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldAllowCropping'?: boolean | undefined | null
 				
 				'onCrop'?: (HeartwoodTypes.WebRtcPlayerCropHandler) | undefined | null
+				
+				'crop'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPoint | undefined | null
 				
 				'connection'?: (HeartwoodTypes.WebRtcConnection) | undefined | null
 				
@@ -748,6 +804,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onCrop': {
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
+			            },
+			            /** . */
+			            'crop': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPointSchema,}
 			            },
 			            /** . */
 			            'connection': {

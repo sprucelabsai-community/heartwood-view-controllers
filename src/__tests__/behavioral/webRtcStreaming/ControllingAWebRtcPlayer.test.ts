@@ -4,6 +4,7 @@ import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
     Card,
+    WebRtcCropPoint,
     WebRtcPlayer,
     WebRtcStreamer,
 } from '../../../types/heartwood.types'
@@ -15,6 +16,7 @@ import WebRtcConnectionImpl, {
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 import WebRtcStreamerImpl from '../../../webRtcStreaming/WebRtcStreamer'
+import generateCropPointValues from './generateCropPointValues'
 
 class StubWebRtcStreamer implements WebRtcStreamer {
     public async setAnswer(_answerSdp: string): Promise<void> {}
@@ -31,6 +33,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
 
         this.vc = this.Vc(options)
 
+        delete WebRtcConnectionImpl.Class
         WebRtcConnectionImpl.RTCPeerConnection = MockRtcPeerConnection
         WebRtcStreamerImpl.Class = SpyWebRtcStreamer
     }
@@ -125,6 +128,45 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
             SpyWebRtcConnection.instance,
             'Did not return connection from render'
         )
+    }
+
+    @test()
+    protected static async callingOnCropSetsOnVc() {
+        const actual: WebRtcCropPoint = await this.callOnCropInViewModel()
+        const expected = this.vc.getCrop()
+        assert.isEqualDeep(actual, expected, 'Crop point was not set')
+    }
+
+    @test()
+    protected static async stillCallsOnCropPassedToConstructor() {
+        let passedPoint: WebRtcCropPoint | undefined
+
+        this.vc = this.Vc({
+            onCrop: (point) => {
+                passedPoint = point
+            },
+        })
+
+        const actual: WebRtcCropPoint = await this.callOnCropInViewModel()
+        assert.isEqualDeep(
+            actual,
+            passedPoint,
+            'Crop point was not set on passed in onCrop'
+        )
+    }
+
+    @test()
+    protected static async settingCropTriggersRender() {
+        const crop = generateCropPointValues()
+        this.vc.setCrop(crop)
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    private static async callOnCropInViewModel() {
+        const model = this.render(this.vc)
+        const actual: WebRtcCropPoint = generateCropPointValues()
+        await model.onCrop?.(actual)
+        return actual
     }
 
     private static get spyStreamerOnVc() {

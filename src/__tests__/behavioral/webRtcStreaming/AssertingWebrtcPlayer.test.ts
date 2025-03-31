@@ -11,7 +11,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
-        this.playerVc = this.Controller('web-rtc-player', {})
+        this.playerVc = this.Vc()
     }
 
     @test()
@@ -78,10 +78,152 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
         this.assertRendersPlayer(id)
     }
 
+    @test()
+    protected static async generatesOfferThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            webRtcAssert.actionCreatesOffer()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'action'],
+        })
+    }
+
+    @test()
+    protected static async actionCreateOfferThrowsIfBeforeEachNotCalled() {
+        await this.assertCreateOfferThrowsBeforeEach()
+    }
+
+    @test()
+    protected static async callingBeforeEachAllowsGenerateOfferToThrowForNoOfferGenerated() {
+        this.callBeforeEachAndReloadPlayerVc()
+        await assert.doesThrowAsync(
+            () => this.assertCreatesOffer(() => {}),
+            'did not'
+        )
+    }
+
+    @test()
+    protected static async callingBeforeEachWithoutCreatingVcThrows() {
+        this.callBeforeEachOnAssert()
+        await this.assertCreateOfferThrowsBeforeEach()
+    }
+
+    @test()
+    protected static async assertCreateOfferPassesIfActuallyCreatingOffer() {
+        this.callBeforeEachAndReloadPlayerVc()
+        await this.assertCreatesOffer(async () => {
+            await this.playerVc.createOffer({})
+        })
+    }
+
+    @test()
+    protected static async throwsWhenOptionsPassedToCreateOfferDontMatch() {
+        this.callBeforeEachAndReloadPlayerVc()
+        const options: RTCOfferOptions = {
+            offerToReceiveAudio: true,
+        }
+
+        await assert.doesThrowAsync(
+            () =>
+                this.assertCreatesOffer(async () => {
+                    await this.playerVc.createOffer({})
+                }, options),
+            'options'
+        )
+    }
+
+    @test()
+    protected static async assertProvideAnswerThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            webRtcAssert.answerSet()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async throwsIfAnswerNotSet() {
+        this.callBeforeEachAndReloadPlayerVc()
+        await assert.doesThrowAsync(() => this.assertAnswerSet(), 'setAnswer')
+    }
+
+    @test()
+    protected static async answerSetThrowsIfDidNotCallBeforeEach() {
+        await assert.doesThrowAsync(
+            () => webRtcAssert.answerSet(this.playerVc),
+            'beforeEach'
+        )
+    }
+
+    @test()
+    protected static async passesIfSetAnswerCalled() {
+        this.callBeforeEachAndReloadPlayerVc()
+        await this.setAnswerOnPlayerVc(generateId())
+        await this.assertAnswerSet()
+    }
+
+    @test()
+    protected static async throwsIfDifferentAnswerIsPassed() {
+        this.callBeforeEachAndReloadPlayerVc()
+        await this.setAnswerOnPlayerVc(generateId())
+        await assert.doesThrowAsync(
+            () => this.assertAnswerSet('aoeuaou'),
+            'match'
+        )
+    }
+
+    @test()
+    protected static async passesIfAnswerMatches() {
+        this.callBeforeEachAndReloadPlayerVc()
+        const answer = generateId()
+        await this.setAnswerOnPlayerVc(answer)
+        await this.assertAnswerSet(answer)
+    }
+
+    private static async setAnswerOnPlayerVc(answer: string) {
+        await this.playerVc.setAnswer(answer)
+    }
+
+    private static assertAnswerSet(answerSdp?: string) {
+        return webRtcAssert.answerSet(this.playerVc, answerSdp)
+    }
+
+    private static callBeforeEachAndReloadPlayerVc() {
+        this.callBeforeEachOnAssert()
+        this.playerVc = this.Vc()
+    }
+
+    private static async assertCreateOfferThrowsBeforeEach() {
+        await assert.doesThrowAsync(
+            () => this.assertCreatesOffer(() => {}),
+            'beforeEach'
+        )
+    }
+
+    private static callBeforeEachOnAssert() {
+        webRtcAssert.beforeEach(this.getFactory())
+    }
+
+    private static assertCreatesOffer(
+        cb: () => void,
+        offerOptions?: RTCOfferOptions
+    ) {
+        return webRtcAssert.actionCreatesOffer(this.playerVc, cb, offerOptions)
+    }
+
     private static setIdOnplayer(id: string) {
         this.playerVc = this.Controller('web-rtc-player', {
             id,
         })
+    }
+
+    private static Vc(): WebRtcPlayerViewController {
+        return this.Controller('web-rtc-player', {})
     }
 
     private static dropPlayerVcIntoNewSection() {

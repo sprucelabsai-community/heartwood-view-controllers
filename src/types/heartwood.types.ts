@@ -335,7 +335,7 @@ export type Feed = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed
 export type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
 export type SimpleViewControllerFactory = Pick<
     ViewControllerFactory,
-    'Controller'
+    'Controller' | 'setController'
 >
 export type CalendarSelectedDate =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate
@@ -412,14 +412,12 @@ export type TriggerRenderHandler = () => void
 export { WebRtcStreamer } from '../webRtcStreaming/WebRtcStreamer'
 export * from '../webRtcStreaming/WebRtcConnection'
 
-export interface Point {
-    x: number
-    y: number
-    width: number
-    height: number
-}
+export type WebRtcCropPoint =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPoint
 
-export type WebRtcPlayerCropHandler = (point?: Point) => void
+export type WebRtcPlayerCropHandler = (
+    point?: WebRtcCropPoint
+) => void | Promise<void>
 
 export interface ViewController<ViewModel extends Record<string, any>> {
     render(): ViewModel

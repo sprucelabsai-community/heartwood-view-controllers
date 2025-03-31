@@ -4,6 +4,7 @@ import SpruceError from '../../errors/SpruceError'
 import {
     ViewControllerOptions,
     WebRtcConnection,
+    WebRtcCropPoint,
     WebRtcPlayer,
 } from '../../types/heartwood.types'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
@@ -52,8 +53,23 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
         await this.model.streamer.setAnswer(answerSdp)
     }
 
+    public getCrop() {
+        return this.model.crop
+    }
+
+    public setCrop(point?: WebRtcCropPoint) {
+        this.model.crop = point
+        void this.model.onCrop?.(point)
+        this.triggerRender()
+    }
+
     public render(): WebRtcPlayer {
-        return this.model
+        return {
+            ...this.model,
+            onCrop: (point) => {
+                this.setCrop(point)
+            },
+        }
     }
 }
 

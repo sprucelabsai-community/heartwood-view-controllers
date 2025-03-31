@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import webRtcCropPointSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcCropPoint.schema'
 
 const webRtcPlayerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcPlayerSchema  = {
 	id: 'webRtcPlayer',
@@ -29,6 +29,11 @@ const webRtcPlayerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Web
 	            'onCrop': {
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
+	            },
+	            /** . */
+	            'crop': {
+	                type: 'schema',
+	                options: {schema: webRtcCropPointSchema_v2021_02_11,}
 	            },
 	            /** . */
 	            'connection': {

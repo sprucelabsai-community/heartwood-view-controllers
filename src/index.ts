@@ -164,6 +164,7 @@ export { default as polarAreaSchema } from '#spruce/schemas/heartwoodViewControl
 export { default as polarAreaDataItemSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/polarAreaDataItem.schema'
 export { default as pagerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
 export { default as webRtcPlayerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcPlayer.schema'
+export { default as webRtcCropPointSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcCropPoint.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
@@ -190,6 +191,8 @@ export { default as listAssert } from './tests/utilities/listAssert'
 export { default as autocompleteAssert } from './tests/utilities/autocompleteAssert'
 export { default as formAssert } from './tests/utilities/formAssert'
 export { default as webRtcAssert } from './tests/utilities/webRtcAssert'
+export * from './tests/utilities/webRtcAssert'
+export { default as webRtcInteractor } from './tests/utilities/webRtcInteractor'
 
 export { default as autocompleteInteractor } from './tests/utilities/autocompleteInteractor'
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'

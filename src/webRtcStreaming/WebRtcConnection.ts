@@ -3,7 +3,7 @@ import MockRtcPeerConnection from '../tests/MockRtcPeerConnection'
 import WebRtcStreamerImpl, { WebRtcStreamer } from './WebRtcStreamer'
 
 export default class WebRtcConnectionImpl implements WebRtcConnection {
-    public static Class: new () => WebRtcConnection
+    public static Class?: new () => WebRtcConnection
 
     public static get RTCPeerConnection() {
         return window.RTCPeerConnection
