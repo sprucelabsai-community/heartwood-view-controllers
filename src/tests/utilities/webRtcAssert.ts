@@ -4,6 +4,7 @@ import {
     ViewController,
     Card,
     SimpleViewControllerFactory,
+    WebRtcCropPoint,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import WebRtcPlayerViewController from '../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
@@ -82,6 +83,44 @@ const webRtcAssert = {
 
         const assertingVc = assertCalledBeforeEach(vc)
         assertingVc.assertAnswerWasSet(answerSdp)
+    },
+
+    croppingIsEnabled: (vc: WebRtcPlayerViewController) => {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+        const croppingEnabled = model.shouldAllowCropping
+        assert.isTrue(
+            croppingEnabled,
+            `Cropping is not enabled. Make sure you call 'this.playerVc.enableCropping()'`
+        )
+    },
+
+    croppingIsDisabled: (vc: WebRtcPlayerViewController) => {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+        const croppingEnabled = model.shouldAllowCropping
+
+        assert.isFalsy(
+            croppingEnabled,
+            `Cropping is enabled. Make sure you call 'this.playerVc.disableCropping()'`
+        )
+    },
+
+    assertCropEquals: (
+        vc: WebRtcPlayerViewController,
+        expectedCrop?: WebRtcCropPoint
+    ) => {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+
+        assert.isEqualDeep(
+            model.crop,
+            expectedCrop,
+            `Crop does not match, make sure you're calling 'this.playerVc.setCrop(...)'`
+        )
     },
 }
 

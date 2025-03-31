@@ -1,8 +1,12 @@
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import webRtcAssert from '../../../tests/utilities/webRtcAssert'
-import { CardViewController } from '../../../types/heartwood.types'
+import {
+    CardViewController,
+    WebRtcCropPoint,
+} from '../../../types/heartwood.types'
 import WebRtcPlayerViewController from '../../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
+import generateCropPointValues from './generateCropPointValues'
 
 export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTest {
     private static vc: CardViewController
@@ -183,6 +187,113 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
         const answer = generateId()
         await this.setAnswerOnPlayerVc(answer)
         await this.assertAnswerSet(answer)
+    }
+
+    @test()
+    protected static async assertingCropThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            webRtcAssert.assertCropEquals()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async assertingCropThrowsWhenCropDoesNotMatch() {
+        const crop = generateCropPointValues()
+        this.setCrop(crop)
+        const point = generateCropPointValues()
+        await assert.doesThrowAsync(() => this.assertCropEquals(point), 'crop')
+    }
+
+    @test()
+    protected static async assertingCropDoesNotThrowIfMatches() {
+        const crop = generateCropPointValues()
+        this.setCrop(crop)
+        await this.assertCropEquals(crop)
+    }
+
+    @test()
+    protected static async assertIsCroppingEnabledThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            webRtcAssert.croppingIsEnabled()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async assertIsCroppingEnabledThrowsIfNotMatch() {
+        await assert.doesThrowAsync(
+            () => this.assertCroppingIsEnabled(),
+            'enableCropping'
+        )
+
+        this.enableCropping()
+        this.assertCroppingIsEnabled()
+    }
+
+    @test()
+    protected static async assertIsCroppingDisabledThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            webRtcAssert.croppingIsDisabled()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async assertIsCroppingDisabledThrowsIfNotMatch() {
+        this.enableCropping()
+        await assert.doesThrowAsync(
+            () => this.assertCroppingIsDisabled(),
+            'disableCropping'
+        )
+
+        this.disableCropping()
+        this.assertCroppingIsDisabled()
+    }
+
+    @test()
+    protected static async canAssertCropping() {
+        this.assertCroppingIsDisabled()
+        this.enableCropping()
+        this.assertCroppingIsEnabled()
+        this.disableCropping()
+        this.assertCroppingIsDisabled()
+    }
+
+    private static disableCropping() {
+        this.playerVc.disableCropping()
+    }
+
+    private static enableCropping() {
+        this.playerVc.enableCropping()
+    }
+
+    private static assertCroppingIsEnabled(): any {
+        return webRtcAssert.croppingIsEnabled(this.playerVc)
+    }
+
+    private static assertCroppingIsDisabled(): any {
+        return webRtcAssert.croppingIsDisabled(this.playerVc)
+    }
+
+    private static assertCropEquals(point: WebRtcCropPoint): any {
+        return webRtcAssert.assertCropEquals(this.playerVc, point)
+    }
+
+    private static setCrop(crop: WebRtcCropPoint) {
+        this.playerVc.setCrop(crop)
     }
 
     private static async setAnswerOnPlayerVc(answer: string) {
