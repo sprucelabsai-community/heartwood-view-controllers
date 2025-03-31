@@ -162,6 +162,29 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
+    @test()
+    protected static async canEnableCropping() {
+        this.vc.enableCropping()
+        this.assertShouldAllowCroppingEquals(true)
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test()
+    protected static async canDisableCropping() {
+        this.vc.disableCropping()
+        this.assertShouldAllowCroppingEquals(false)
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    private static assertShouldAllowCroppingEquals(expected: boolean) {
+        const model = this.render(this.vc)
+        assert.isEqual(
+            model.shouldAllowCropping,
+            expected,
+            'Should allow cropping is wrong'
+        )
+    }
+
     private static async callOnCropInViewModel() {
         const model = this.render(this.vc)
         const actual: WebRtcCropPoint = generateCropPointValues()

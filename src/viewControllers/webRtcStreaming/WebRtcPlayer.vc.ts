@@ -57,6 +57,16 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
         return this.model.crop
     }
 
+    public enableCropping() {
+        this.model.shouldAllowCropping = true
+        this.triggerRender()
+    }
+
+    public disableCropping() {
+        this.model.shouldAllowCropping = false
+        this.triggerRender()
+    }
+
     public setCrop(point?: WebRtcCropPoint) {
         this.model.crop = point
         void this.model.onCrop?.(point)
