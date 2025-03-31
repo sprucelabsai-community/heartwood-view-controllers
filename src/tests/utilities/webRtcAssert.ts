@@ -74,7 +74,7 @@ const webRtcAssert = {
 
         assert.isTrue(
             wasHit,
-            `You did not create an offer. Try 'const offer = await this.plaperVc.createOffer()'`
+            `You did not create an offer. Try 'const offer = await this.playerVc.createOffer()'`
         )
     },
 
