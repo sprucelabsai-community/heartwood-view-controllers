@@ -1,6 +1,8 @@
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import webRtcAssert from '../../../tests/utilities/webRtcAssert'
+import webRtcAssert, {
+    AssertingWebRtcPlayerViewController,
+} from '../../../tests/utilities/webRtcAssert'
 import {
     CardViewController,
     WebRtcCropPoint,
@@ -270,6 +272,19 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
         this.assertCroppingIsEnabled()
         this.disableCropping()
         this.assertCroppingIsDisabled()
+    }
+
+    @test()
+    protected static async assertingOfferReturnsGeneratedOffer() {
+        this.callBeforeEachAndReloadPlayerVc()
+        const offerSdp = await this.assertCreatesOffer(() =>
+            this.playerVc.createOffer({})
+        )
+
+        assert.isEqual(
+            offerSdp,
+            AssertingWebRtcPlayerViewController.lastGeretateOfferSdp!
+        )
     }
 
     private static disableCropping() {

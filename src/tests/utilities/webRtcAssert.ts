@@ -76,6 +76,8 @@ const webRtcAssert = {
             wasHit,
             `You did not create an offer. Try 'const offer = await this.playerVc.createOffer()'`
         )
+
+        return AssertingWebRtcPlayerViewController.lastGeretateOfferSdp
     },
 
     answerSet: async (vc: WebRtcPlayerViewController, answerSdp?: string) => {
@@ -129,6 +131,7 @@ export default webRtcAssert
 export class AssertingWebRtcPlayerViewController extends WebRtcPlayerViewController {
     private onCreateOfferHandler?: (offerOptions: RTCOfferOptions) => void
     private passedAnswer?: string
+    public static lastGeretateOfferSdp: string
 
     public onCreateOffer(cb: (offerOptions: RTCOfferOptions) => void) {
         this.onCreateOfferHandler = cb
@@ -136,7 +139,8 @@ export class AssertingWebRtcPlayerViewController extends WebRtcPlayerViewControl
 
     public async createOffer(offerOptions: RTCOfferOptions): Promise<string> {
         this.onCreateOfferHandler?.(offerOptions)
-        return generateId()
+        AssertingWebRtcPlayerViewController.lastGeretateOfferSdp = generateId()
+        return AssertingWebRtcPlayerViewController.lastGeretateOfferSdp
     }
 
     public async setAnswer(answerSdp: string): Promise<void> {
@@ -158,6 +162,7 @@ export class AssertingWebRtcPlayerViewController extends WebRtcPlayerViewControl
         }
     }
 }
+
 function assertCalledBeforeEach(vc: WebRtcPlayerViewController) {
     assert.isInstanceOf(
         vc,
