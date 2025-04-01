@@ -8,7 +8,7 @@ import {
     WebRtcCropPoint,
 } from '../../../types/heartwood.types'
 import WebRtcPlayerViewController from '../../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
-import generateCropPointValues from './generateCropPointValues'
+import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 
 export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTest {
     private static vc: CardViewController

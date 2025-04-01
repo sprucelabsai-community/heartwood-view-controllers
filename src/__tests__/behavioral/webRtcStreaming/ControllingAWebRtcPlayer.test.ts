@@ -16,7 +16,7 @@ import WebRtcConnectionImpl, {
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 import WebRtcStreamerImpl from '../../../webRtcStreaming/WebRtcStreamer'
-import generateCropPointValues from './generateCropPointValues'
+import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 
 class StubWebRtcStreamer implements WebRtcStreamer {
     public async setAnswer(_answerSdp: string): Promise<void> {}

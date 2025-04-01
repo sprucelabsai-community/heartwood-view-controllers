@@ -1,4 +1,4 @@
-import { WebRtcCropPoint } from '../../../types/heartwood.types'
+import { WebRtcCropPoint } from '../../types/heartwood.types'
 
 export default function generateCropPointValues(): WebRtcCropPoint {
     return {
