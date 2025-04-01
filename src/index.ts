@@ -193,6 +193,7 @@ export { default as formAssert } from './tests/utilities/formAssert'
 export { default as webRtcAssert } from './tests/utilities/webRtcAssert'
 export * from './tests/utilities/webRtcAssert'
 export { default as webRtcInteractor } from './tests/utilities/webRtcInteractor'
+export { default as generateCropPointValues } from './tests/utilities/webRtcAssert'
 
 export { default as autocompleteInteractor } from './tests/utilities/autocompleteInteractor'
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
