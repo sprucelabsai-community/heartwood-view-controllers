@@ -1,5 +1,6 @@
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 import webRtcAssert, {
     AssertingWebRtcPlayerViewController,
 } from '../../../tests/utilities/webRtcAssert'
@@ -8,7 +9,6 @@ import {
     WebRtcCropPoint,
 } from '../../../types/heartwood.types'
 import WebRtcPlayerViewController from '../../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
-import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 
 export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTest {
     private static vc: CardViewController

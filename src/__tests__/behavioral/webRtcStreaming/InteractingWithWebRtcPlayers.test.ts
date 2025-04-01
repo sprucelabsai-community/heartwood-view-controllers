@@ -1,8 +1,8 @@
 import { test, assert, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 import webRtcInteractor from '../../../tests/utilities/webRtcInteractor'
 import { WebRtcCropPoint } from '../../../types/heartwood.types'
-import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 
 export default class InteractingWithWebRtcPlayersTest extends AbstractViewControllerTest {
     @test()

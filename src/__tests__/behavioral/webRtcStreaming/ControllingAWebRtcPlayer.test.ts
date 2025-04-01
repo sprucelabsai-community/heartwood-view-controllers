@@ -1,6 +1,7 @@
 import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
+import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
     Card,
@@ -16,7 +17,6 @@ import WebRtcConnectionImpl, {
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 import WebRtcStreamerImpl from '../../../webRtcStreaming/WebRtcStreamer'
-import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 
 class StubWebRtcStreamer implements WebRtcStreamer {
     public async setAnswer(_answerSdp: string): Promise<void> {}
