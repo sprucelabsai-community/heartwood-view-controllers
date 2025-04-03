@@ -135,6 +135,31 @@ const navigationAssert = {
             `I did not find the valid routes I expected. Make sure you set 'additionalValidRoutes' in your navigation's view model (constructor options).`
         )
     },
+
+    isHidden(vc: ViewController<Navigation>) {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+
+        assert.isFalse(
+            model.isVisible,
+            `Your navigation should be hidden! Try calling 'this.navigationVc.hide()'.`
+        )
+    },
+
+    isVisible(vc: ViewController<Navigation>) {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+
+        const isVisible =
+            typeof model.isVisible === 'undefined' || model.isVisible
+
+        assert.isTruthy(
+            isVisible,
+            `Your navigation should be visible! Try calling 'this.navigationVc.show()'.`
+        )
+    },
 }
 
 export default navigationAssert

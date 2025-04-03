@@ -108,8 +108,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
     @test()
     protected static async canPassIfFindingsNav() {
-        const svc = this.Controller('hasNav' as any, {})
-        const nav = navigationAssert.skillViewRendersNavigation(svc)
+        const { nav, svc } = this.getNavVc()
         assert.isEqual(nav, svc.nav)
         assert.doesThrow(() =>
             navigationAssert.skillViewDoesNotRenderNavigation(svc)
@@ -468,5 +467,67 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
         navigationAssert.rendersButton(vc, id)
         navigationAssert.rendersButton(vc, id2)
+    }
+
+    @test()
+    protected static async isHiddenThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            navigationAssert.isHidden()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenNavIsNotHidden() {
+        const navVc = this.NavigationVc()
+        assert.doesThrow(
+            () => navigationAssert.isHidden(navVc),
+            'navigationVc.hide()'
+        )
+    }
+
+    @test()
+    protected static async isHiddenPassesWhenHidden() {
+        const navVc = this.NavigationVc()
+        navVc.hide()
+        navigationAssert.isHidden(navVc)
+    }
+
+    @test()
+    protected static async isVisibleThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            navigationAssert.isVisible()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc'],
+        })
+    }
+
+    @test()
+    protected static async throwsWhenNavIsNotVisible() {
+        const navVc = this.NavigationVc()
+        navVc.hide()
+        assert.doesThrow(
+            () => navigationAssert.isVisible(navVc),
+            'navigationVc.show()'
+        )
+    }
+
+    @test()
+    protected static async isVisiblePassesWhenVisible() {
+        const navVc = this.NavigationVc()
+        navigationAssert.isVisible(navVc)
+    }
+
+    private static getNavVc() {
+        const svc = this.Controller('hasNav' as any, {})
+        const nav = navigationAssert.skillViewRendersNavigation(svc)
+        return { nav, svc }
     }
 }
