@@ -28,6 +28,11 @@ class SuccessAlertSkillViewController extends AbstractSkillViewController {
         this.afterAlertWasHit = true
     }
 
+    public async alertThenThrow() {
+        await this.alert({ message: 'should throw next' })
+        throw new Error('should throw')
+    }
+
     public async operationAfterSuccess() {
         await this.alert({ message: 'an alert!', style: 'success' })
         this.afterSuccessWasHit = true
@@ -126,6 +131,15 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
                 this.vc.operationAfterAlert()
             )
         )
+    }
+
+    @test()
+    protected static async hidingAlertThrowsIfCodeAfterHidingThrows() {
+        const alertVc = await vcAssert.assertRendersAlert(this.vc, () =>
+            this.vc.alertThenThrow()
+        )
+
+        await assert.doesThrowAsync(() => alertVc.hide())
     }
 
     private static Vc() {

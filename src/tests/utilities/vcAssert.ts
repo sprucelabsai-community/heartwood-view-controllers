@@ -303,6 +303,7 @@ const vcAssert = {
         return new Promise((resolve, reject) => {
             try {
                 let wasHit = false
+                let actionPromise: Promise<any> | undefined
                 let dialogVc: DialogViewController | undefined
                 let dialogPromise = new Promise((resolve) => {
                     const renderInDialogHandler = (...args: any[]) => {
@@ -328,6 +329,7 @@ const vcAssert = {
                         const oldHide = dialogVc!.hide.bind(dialogVc!)
                         dialogVc!.hide = async () => {
                             await oldHide()
+                            await actionPromise
                             await new Promise((r) => setTimeout(r, 0))
                         }
 
@@ -371,7 +373,8 @@ const vcAssert = {
 
                 run = async () => {
                     try {
-                        await wait(action(), dialogPromise)
+                        actionPromise = action()
+                        await wait(actionPromise, dialogPromise)
 
                         assert.isTrue(
                             wasHit,
