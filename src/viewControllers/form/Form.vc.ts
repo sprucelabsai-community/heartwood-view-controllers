@@ -796,7 +796,6 @@ export default class FormViewController<
             })
         }
 
-        //@ts-ignore
         if (typeof fieldNameOrRenderOptions === 'object') {
             const { atIndex, fieldDefinition, ...options } =
                 fieldNameOrRenderOptions
