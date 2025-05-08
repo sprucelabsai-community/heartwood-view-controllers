@@ -728,14 +728,12 @@ export default class FormViewController<
         return this.assertValidSection(idOrIdx)
     }
 
-    private assertValidSection(idx: number | string) {
-        let section: FormSection<S> | undefined
+    public hasSection(idOrIdx: number | string) {
+        return this._getSection(idOrIdx) !== undefined
+    }
 
-        if (typeof idx === 'string') {
-            section = this.model.sections.find((s) => s.id === idx)
-        } else {
-            section = this.model.sections[idx]
-        }
+    private assertValidSection(idx: number | string) {
+        let section: FormSection<S> | undefined = this._getSection(idx)
 
         if (!section) {
             throw new SchemaError({
@@ -743,6 +741,17 @@ export default class FormViewController<
                 friendlyMessage: `There is no section ${idx}.`,
                 parameters: ['sectionIdOrIdx'],
             })
+        }
+        return section
+    }
+
+    private _getSection(idx: string | number) {
+        let section: FormSection<S> | undefined
+
+        if (typeof idx === 'string') {
+            section = this.model.sections.find((s) => s.id === idx)
+        } else {
+            section = this.model.sections[idx]
         }
         return section
     }

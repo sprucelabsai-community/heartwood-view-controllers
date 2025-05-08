@@ -1475,6 +1475,28 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         })
     }
 
+    @test()
+    protected static async hasSectionReturnsFalseIfSectionDoesNotExist() {
+        const section = generateId()
+        const hasSection = this.hasSection(section)
+        assert.isFalse(hasSection)
+    }
+
+    @test()
+    protected static async hasSectionReturnsTrueIfSectionExists() {
+        const sectionId = generateId()
+        this.vc.addSection({
+            id: sectionId,
+        })
+
+        const hasSection = this.hasSection(sectionId)
+        assert.isTrue(hasSection)
+    }
+
+    private static hasSection(section: string | number) {
+        return this.vc.hasSection(section)
+    }
+
     private static assertAddingFieldWithDefinitionSetsToSchema(
         definition: FieldDefinitions,
         fieldName = 'fieldNotPartOfSection'
