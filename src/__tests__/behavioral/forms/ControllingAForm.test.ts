@@ -1493,6 +1493,24 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         assert.isTrue(hasSection)
     }
 
+    @test()
+    protected static async cantAddTheSameSectionTwiceWithoutIndex() {
+        const sectionId = generateId()
+        this.vc.addSection({
+            id: sectionId,
+        })
+
+        const err = assert.doesThrow(() =>
+            this.vc.addSection({
+                id: sectionId,
+            })
+        )
+
+        errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+            parameters: ['sectionIdOrIdx'],
+        })
+    }
+
     private static hasSection(section: string | number) {
         return this.vc.hasSection(section)
     }

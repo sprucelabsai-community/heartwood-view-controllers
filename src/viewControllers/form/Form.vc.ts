@@ -532,6 +532,15 @@ export default class FormViewController<
 
     public addSection(section: Section<S> & { atIndex?: number }) {
         const { atIndex, ...sec } = section
+
+        if (sec.id && this.hasSection(sec.id)) {
+            throw new SchemaError({
+                code: 'INVALID_PARAMETERS',
+                friendlyMessage: `You can't add a section with the id ${sec.id} because it already exists!`,
+                parameters: ['sectionIdOrIdx'],
+            })
+        }
+
         if (typeof atIndex === 'number') {
             this.model.sections.splice(atIndex, 0, { ...sec })
         } else {
