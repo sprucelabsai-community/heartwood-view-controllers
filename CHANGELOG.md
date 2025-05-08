@@ -1,3 +1,10 @@
+# [118.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.2.25...v118.3.0) (2025-05-08)
+
+
+### Features
+
+* formVc.hasSection() ([cec34d8](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/cec34d8))
+
 ## [118.2.25](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.2.24...v118.2.25) (2025-05-05)
 
 ## [118.2.24](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.2.23...v118.2.24) (2025-04-26)
