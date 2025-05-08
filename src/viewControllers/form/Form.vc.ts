@@ -530,7 +530,7 @@ export default class FormViewController<
         this.dirtyFields = {}
     }
 
-    public addSection(section: Section & { atIndex?: number }) {
+    public addSection(section: Section<S> & { atIndex?: number }) {
         const { atIndex, ...sec } = section
         if (typeof atIndex === 'number') {
             this.model.sections.splice(atIndex, 0, { ...sec })
