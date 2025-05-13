@@ -137,6 +137,11 @@ const listAssert = {
             )
         }
 
+        assert.isTruthy(
+            match.controller,
+            `I found a list, but no controller! Make sure you are rendering a ListViewController using 'this.Controller('list',...)`
+        )
+
         return match?.controller
     },
 

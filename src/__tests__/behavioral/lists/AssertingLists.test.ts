@@ -527,6 +527,24 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         listAssert.cardRendersList(vc, this.listId)
     }
 
+    @test()
+    protected static async throwsIfNoControllerOnListInCard() {
+        const cardVc = this.Controller('card', {
+            body: {
+                sections: [
+                    {
+                        list: {
+                            id: this.listId,
+                            rows: [],
+                        },
+                    },
+                ],
+            },
+        })
+
+        assert.doesThrow(() => listAssert.cardRendersList(cardVc, this.listId))
+    }
+
     private static assertAssertingInputThrows(msg: string) {
         assert.doesThrow(
             () => listAssert.rowRendersInput(this.vc, 0, 'name'),
