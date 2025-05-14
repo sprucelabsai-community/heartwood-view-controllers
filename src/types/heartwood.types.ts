@@ -890,6 +890,8 @@ export interface Device {
     setCachedValue(key: string, value: CachedValue): void
     getCachedValue(key: string): CachedValue
     sendCommand(command: string, payload?: Record<string, any>): void
+    turnTorchOn(brightness?: number): void
+    turnTorchOff(): void
     setTheatreSetting<N extends TheatreSettingName>(
         name: N,
         value: TheaterSettingValueTypes[N]

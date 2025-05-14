@@ -1,4 +1,4 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
     TheaterSettingValueTypes,
@@ -95,6 +95,53 @@ export default class DeviceTest extends AbstractDeviceTest {
         this.device.setTheatreSetting(name, value)
         const actual = await this.device.getTheatreSetting(name)
         assert.isEqual(actual, value)
+    }
+
+    @test()
+    protected static async turningTorchOnForSpySetsBrightnessToOneByDefault() {
+        this.turnTorchOn()
+        this.assertBrightnessOnSpyEquals(1)
+    }
+
+    @test()
+    protected static async setDifferentBrightnessOnSpy() {
+        this.turnTorchOn(0.1)
+        this.assertBrightnessOnSpyEquals(0.1)
+    }
+
+    @test()
+    protected static async brightenessOnSpyIsZeroWhenNotTurnedOnYet() {
+        this.assertBrightnessOnSpyEquals(0)
+    }
+
+    @test()
+    protected static async turningTorchOffOnSpySetsBrightnessToZero() {
+        this.turnTorchOn()
+        this.device.turnTorchOff()
+        this.assertBrightnessOnSpyEquals(0)
+    }
+
+    @test()
+    protected static async throwsWhenBrighteness() {
+        this.assertThrowsWithBadBrightness(1.1)
+        this.assertThrowsWithBadBrightness(1.2)
+        this.assertThrowsWithBadBrightness(-0.1)
+        this.assertThrowsWithBadBrightness(-0.2)
+    }
+
+    private static assertThrowsWithBadBrightness(brightness: number) {
+        const err = assert.doesThrow(() => this.device.turnTorchOn(brightness))
+        errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+            parameters: ['brightness'],
+        })
+    }
+
+    private static assertBrightnessOnSpyEquals(expected: number) {
+        assert.isEqual(this.device.getTorchBrightness(), expected)
+    }
+
+    private static turnTorchOn(brightness?: number) {
+        this.device.turnTorchOn(brightness)
     }
 
     private static setKioskMode(on: boolean) {
