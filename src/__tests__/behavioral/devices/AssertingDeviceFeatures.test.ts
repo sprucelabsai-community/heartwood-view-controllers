@@ -77,6 +77,44 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
         this.assertOpenedUrlThrows('https://spruce.ai/other')
     }
 
+    @test()
+    protected static async knowsIfTorchIsOff() {
+        assert.doesThrow(() => this.assertTorchIsOn())
+        this.assertTorchIsOff()
+    }
+
+    @test()
+    protected static async knowsWhenTorchTurnedOn() {
+        this.turnTorchOn()
+        this.assertTorchIsOn()
+        assert.doesThrow(() => this.assertTorchIsOff())
+    }
+
+    @test()
+    protected static async throwsWhenTorchBrightnessDoesNotMatch() {
+        this.turnTorchOn()
+        assert.doesThrow(() => this.assertTorchIsOn(1.1))
+
+        this.turnTorchOn(0.3)
+        this.assertTorchIsOn(0.3)
+    }
+
+    private static turnTorchOn(brightness?: number) {
+        this.device.turnTorchOn(brightness)
+    }
+
+    private static assertTorchIsOn(brightness?: number) {
+        return deviceAssert.isTorchOn(this.vc, brightness)
+    }
+
+    private static assertTorchIsOff() {
+        deviceAssert.isTorchOff(this.vc)
+    }
+
+    private static get device() {
+        return this.vc.getDevice()
+    }
+
     private static assertOpenedUrlThrows(url: string) {
         assert.doesThrow(() => this.assertOpenedUrl(url))
     }

@@ -59,6 +59,35 @@ const deviceAssert = {
             `You opened ${openedUrl} but I expected you to open ${url}!`
         )
     },
+
+    isTorchOff(vc: AbstractViewController<any>) {
+        //@ts-ignore
+        const device = vc.getDevice() as SpyDevice
+        const brightness = device.getTorchBrightness()
+        assert.isEqual(
+            brightness,
+            0,
+            `Torch is on! Try 'this.device.turnTorchOff()' to turn it off!`
+        )
+    },
+
+    isTorchOn(vc: AbstractViewController<any>, expectedBrightness?: number) {
+        //@ts-ignore
+        const device = vc.getDevice() as SpyDevice
+        const brightness = device.getTorchBrightness()
+        assert.isTruthy(
+            brightness,
+            `Torch is off! Try 'this.device.turnTorchOn(...)' to turn it on!`
+        )
+
+        if (expectedBrightness) {
+            assert.isEqual(
+                brightness,
+                expectedBrightness,
+                `The brightness on your torch is wrong! Try 'this.device.turnTorchOn(${expectedBrightness})'`
+            )
+        }
+    },
 }
 
 export default deviceAssert
