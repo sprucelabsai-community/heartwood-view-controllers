@@ -1,3 +1,10 @@
+# [119.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.3.2...v119.0.0) (2025-05-14)
+
+
+### Breaking Changes
+
+* device torch abilities ([a9c1bb9](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a9c1bb9))
+
 ## [118.3.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.3.1...v118.3.2) (2025-05-13)
 
 ## [118.3.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v118.3.0...v118.3.1) (2025-05-08)
