@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import {
+    AbstractAppController,
     AbstractSkillViewController,
     AlertOptions,
     interactor,
@@ -31,55 +32,78 @@ class AlertSkillViewController extends AbstractSkillViewController {
     }
 }
 
+class AlertAppController extends AbstractAppController {
+    public static id = 'app'
+
+    public afterAlert = false
+    public async showAnAlert(): Promise<void> {
+        await this.alert({
+            title: 'oh no!',
+            message: 'what the?',
+        })
+
+        this.afterAlert = true
+    }
+}
+
 export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     protected static controllerMap = {
         alert: AlertSkillViewController,
     }
 
     private static vc: AlertSkillViewController
+    private static app: AlertAppController
 
     protected static async beforeEach() {
         await super.beforeEach()
+        this.getFactory().setAppController(AlertAppController)
         this.vc = this.Controller('alert' as any, {})
+        this.app = this.getFactory().App('app' as any)
     }
 
-    @test()
-    protected static async hasAlertMethod() {
+    @test('view controllers have alert method', 'vc')
+    @test('app controllers have alert method', 'app')
+    protected static async hasAlertMethod(prop: Prop) {
         //@ts-ignore
-        assert.isFunction(this.vc.alert)
+        assert.isFunction(this[prop].alert)
     }
 
-    @test()
-    protected static async invokingAlertThrowsByDefault() {
-        vcAssert.patchAlertToThrow(this.vc)
-        await assert.doesThrowAsync(() => this.vc.showAnAlert())
+    @test('view invoking alert throws by default', 'vc')
+    @test('app invoking alert throws by default', 'app')
+    protected static async invokingAlertThrowsByDefault(prop: Prop) {
+        vcAssert.patchAlertToThrow(this[prop])
+        await assert.doesThrowAsync(() => this[prop].showAnAlert())
         //@ts-ignore
-        await assert.doesThrowAsync(() => this.vc.alert())
+        await assert.doesThrowAsync(() => this[prop].alert())
     }
 
-    @test()
-    protected static async doesNotThrowWithOtherStylesAlert() {
-        vcAssert.patchAlertToThrow(this.vc)
+    @test('view does not throw with other style alerts', 'vc')
+    @test('app does not throw with other style alerts', 'app')
+    protected static async doesNotThrowWithOtherStyleAlerts(prop: Prop) {
+        vcAssert.patchAlertToThrow(this[prop])
+
         //@ts-ignore
-        await this.vc.alert({
+        await this[prop].alert({
             style: 'info',
             message: 'should not have been called',
         })
+
         //@ts-ignore
-        await this.vc.alert({
+        await this[prop].alert({
             style: 'success',
             message: 'should not have been called',
         })
     }
 
-    @test()
-    protected static async alertRendersDialog() {
+    @test('view alert renders dialog', 'vc')
+    @test('app alert renders dialog', 'app')
+    protected static async alertRendersDialog(prop: Prop) {
         const title = `${new Date().getTime()}`
         const message = `${new Date().getTime() * Math.random()}`
 
-        const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
+        const dlgVc = await vcAssert.assertRendersDialog(this[prop], () =>
             //@ts-ignore
-            this.vc.alert({
+            this[prop].alert({
                 title,
                 message,
             })
@@ -277,3 +301,5 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
         )
     }
 }
+
+type Prop = 'vc' | 'app'

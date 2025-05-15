@@ -137,7 +137,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         return this.spyFactory.hasApp(id)
     }
 
-    private static App() {
+    protected static App() {
         return this.spyFactory.BuildApp(SpyApp)
     }
 }

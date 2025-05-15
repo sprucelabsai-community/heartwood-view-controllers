@@ -115,7 +115,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
         //@ts-ignore
         assert.isTruthy(this.vc.getVcFactory())
         //@ts-ignore
-        assert.isEqual(this.vc.vcFactory, this.vc.getVcFactory())
+        assert.isEqual(this.vc.views, this.vc.getVcFactory())
     }
 
     @test()
@@ -172,7 +172,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
         let wasHit = false
 
         //@ts-ignore
-        vc.vcFactory.Controller = () => {
+        vc.views.Controller = () => {
             wasHit = true
         }
 

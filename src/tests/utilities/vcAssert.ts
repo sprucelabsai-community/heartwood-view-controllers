@@ -17,7 +17,6 @@ import {
     List,
     RowStyle,
     AlertOptions,
-    AppController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
@@ -49,6 +48,7 @@ import {
     WAIT_TIMEOUT,
     isVcInstanceOf,
     checkForCardSection,
+    Controller,
 } from './assertSupport'
 import { attachTriggerRenderCounter } from './attachTriggerRenderCounter'
 import buttonAssert from './buttonAssert'
@@ -85,8 +85,9 @@ const vcAssert = {
             }.`
         )
     },
+
     async assertRendersConfirm(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>
     ) {
         let confirmVc: AssertConfirmViewController = {
@@ -138,7 +139,7 @@ const vcAssert = {
         return confirmVc
     },
     async assertDoesNotRenderConfirm(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>
     ) {
         try {
@@ -153,7 +154,7 @@ const vcAssert = {
     },
 
     async assertDoesNotRenderDialog(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>
     ) {
         try {
@@ -168,14 +169,14 @@ const vcAssert = {
     },
 
     async assertRendersSuccessAlert(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>
     ) {
         return await this.assertRendersAlert(vc, action, 'success')
     },
 
     async assertRendersAlert(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>,
         style: AlertOptions['style'] = 'error'
     ) {
@@ -231,7 +232,7 @@ const vcAssert = {
     },
 
     async assertDoesNotRenderAlert(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>,
         style: AlertOptions['style'] = 'error'
     ) {
@@ -261,10 +262,7 @@ const vcAssert = {
         )
     },
 
-    async assertAsksForAVote(
-        vc: ViewController<any> | AppController,
-        action: () => Promise<any>
-    ) {
+    async assertAsksForAVote(vc: Controller, action: () => Promise<any>) {
         let wasHit = false
         const voteVc = {
             castVote: async () => {},
@@ -295,7 +293,7 @@ const vcAssert = {
     },
 
     async assertRendersDialog(
-        vc: ViewController<any>,
+        vc: Controller,
         action: () => any | Promise<any>,
         dialogHandler?: (dialogVc: DialogViewController) => any | Promise<any>
     ): Promise<DialogViewController> {
@@ -318,12 +316,6 @@ const vcAssert = {
                         vc._currentlyRenderingInDialog = true
 
                         dialogVc = oldRenderInDialog(...args)
-
-                        // //@ts-ignore
-                        // dialogVc.getParent = () => {
-                        //     //@ts-ignore
-                        //     return dialogVc?.getCardVc().getParent()
-                        // }
 
                         resolve(undefined)
 
@@ -379,7 +371,7 @@ const vcAssert = {
 
                         assert.isTrue(
                             wasHit,
-                            `this.renderInDialog() was not invoked in your view controller within ${WAIT_TIMEOUT} milliseconds.`
+                            `this.renderInDialog() was not invoked in your controller.`
                         )
 
                         await dialogHandlerPromise
@@ -1524,7 +1516,7 @@ const vcAssert = {
         })
     },
 
-    patchAlertToThrow(vc: ViewController<any>) {
+    patchAlertToThrow(vc: Controller) {
         //@ts-ignore
         if (!vc._originalAlert) {
             //@ts-ignore
@@ -1535,7 +1527,7 @@ const vcAssert = {
         vc.alert = async (options: AlertOptions) => {
             if (!options.style || options.style === 'error') {
                 assert.fail(
-                    `Skill view '${getVcName(
+                    `Controller '${getVcName(
                         vc
                     )}' unexpectedly rendered an error alert. It reads:\n\n${
                         options.message

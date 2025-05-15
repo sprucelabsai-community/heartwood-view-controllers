@@ -10,6 +10,7 @@ import AbstractSpruceTest from '@sprucelabs/test-utils'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
+    AppControllerId,
     ControllerOptions,
     ViewController,
     ViewControllerMap,
@@ -104,6 +105,13 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         this.render(vc as Vc)
 
         return vc
+    }
+
+    protected static App<N extends AppControllerId>(
+        name: N,
+        options?: Partial<ControllerOptions<N>>
+    ) {
+        return this.getFactory().App<N>(name, options)
     }
 
     protected static render<Vc extends ViewController<any>>(

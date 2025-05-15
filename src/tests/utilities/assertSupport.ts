@@ -61,9 +61,7 @@ export interface ButtonViewController {
     setTriggerRenderHandler(handler: TriggerRenderHandler): void
 }
 
-export function getVcName(
-    vc: ViewController<any> | AbstractAppController | AppController
-) {
+export function getVcName(vc: Controller) {
     return (
         //@ts-ignore
         vc.id ??
@@ -74,9 +72,7 @@ export function getVcName(
     )
 }
 
-export function getControllerType(
-    vc: ViewController<any> | AbstractAppController | AppController
-) {
+export function getControllerType(vc: Controller) {
     return vc instanceof AbstractAppController
         ? 'App'
         : vc instanceof AbstractSkillViewController
@@ -189,3 +185,8 @@ export function checkForCardSection(
     )
     return match
 }
+
+export type Controller =
+    | ViewController<any>
+    | AbstractAppController
+    | AppController
