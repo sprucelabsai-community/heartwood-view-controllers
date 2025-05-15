@@ -6,6 +6,7 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
     private static audio: MockAudioController
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
+        MockAudioController.beforeEach()
         this.audio = new MockAudioController()
     }
 
@@ -56,12 +57,11 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async setVolumeSendsExpectedCommand() {
+    protected static async tracksVolumeLevels() {
         this.setVolume(0.5)
         this.assertVolumeEquals(0.5)
         assert.doesThrow(() => this.assertVolumeEquals(0.1))
 
-        this.device.allCommands = []
         this.setVolume(0.1)
         this.assertVolumeEquals(0.1)
         assert.doesThrow(() => this.assertVolumeEquals(0.5))
@@ -81,6 +81,12 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
         this.audio.setSourceUrl(url)
         this.assertSourceUrlSetTo(url)
         assert.doesThrow(() => this.assertSourceUrlSetTo(generateId()))
+    }
+
+    @test()
+    protected static async tracksLastAudioController() {
+        //@ts-ignore
+        assert.isEqual(this.audio, MockAudioController.lastController)
     }
 
     private static assertSourceUrlSetTo(url: string) {

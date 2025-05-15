@@ -6,7 +6,16 @@ export default class MockAudioController implements AudioController {
     private volume = 0
     private sourceUrl?: string
 
-    public constructor() {}
+    private static lastController?: MockAudioController
+    private static didCallBeforeEach = false
+
+    public constructor() {
+        assert.isTrue(
+            MockAudioController.didCallBeforeEach,
+            `You must call MockAudioController.beforeEach() in your beforeEach() before working with audio.`
+        )
+        MockAudioController.lastController = this
+    }
 
     public setVolume(volume: number): void {
         this.volume = volume
@@ -89,5 +98,19 @@ export default class MockAudioController implements AudioController {
         )
 
         this.status = 'stopped'
+    }
+
+    public static getLastController(): MockAudioController {
+        assert.isTruthy(
+            this.lastController,
+            `No audio controller created yet. Try 'this.device.AudioController()'`
+        )
+
+        return this.lastController!
+    }
+
+    public static beforeEach() {
+        MockAudioController.didCallBeforeEach = true
+        MockAudioController.lastController = undefined
     }
 }
