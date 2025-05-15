@@ -332,6 +332,12 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         this.assertWillIncremntallyBuildHitCount(1)
 
         await this.replaceInBookSvc('stop-dude', 'what-the')
+
+        let tries = 0
+        while (this.didIncremntallyBuildCount === 1 && tries < 100) {
+            await this.wait(100)
+        }
+
         this.assertDidIncremntallyBuildHitCount(2)
         this.assertWillIncremntallyBuildHitCount(2)
     }
@@ -340,6 +346,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     protected static async incrementalBuildgetsErrors() {
         await this.buildAndWatchSkillAtRandomDir()
         await this.replaceInBookSvc('go-team', "stop-dude'\n\naoeuaou")
+
+        let tries = 0
+        while (!this.incrementalBuildError && tries < 100) {
+            await this.wait(100)
+        }
         assert.isTruthy(this.incrementalBuildError)
     }
 
