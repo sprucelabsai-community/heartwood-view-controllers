@@ -17,6 +17,7 @@ import {
     List,
     RowStyle,
     AlertOptions,
+    AppController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
@@ -261,7 +262,7 @@ const vcAssert = {
     },
 
     async assertAsksForAVote(
-        vc: ViewController<any>,
+        vc: ViewController<any> | AppController,
         action: () => Promise<any>
     ) {
         let wasHit = false
@@ -269,7 +270,7 @@ const vcAssert = {
             castVote: async () => {},
         }
 
-        let votePromise = new Promise((resolve: any) => {
+        const votePromise = new Promise((resolve: any) => {
             //@ts-ignores
             vc.voteHandler = async () => {
                 wasHit = true
