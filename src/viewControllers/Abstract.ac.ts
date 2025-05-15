@@ -12,6 +12,8 @@ import {
     ViewControllerMap,
     ViewControllerOptions,
     ViewControllerPlugins,
+    VoteHandler,
+    VoteOptions,
 } from '../types/heartwood.types'
 import ViewControllerFactory from './ViewControllerFactory'
 
@@ -22,6 +24,7 @@ export default abstract class AbstractAppController implements AppController {
     private renderLockScreenHandler: RenderLockScreenHandler
     protected connectToApi: () => Promise<MercuryClient>
     private toastHandler: ToastHandler
+    private voteHandler: VoteHandler
 
     public constructor(options: ViewControllerOptions) {
         const {
@@ -30,10 +33,12 @@ export default abstract class AbstractAppController implements AppController {
             renderLockScreenHandler,
             connectToApi,
             toastHandler,
+            voteHandler,
         } = options
         this.plugins = plugins
         this.views = vcFactory
         this.toastHandler = toastHandler
+        this.voteHandler = voteHandler
         this.renderLockScreenHandler = renderLockScreenHandler
         this.connectToApi = connectToApi
     }
@@ -48,6 +53,10 @@ export default abstract class AbstractAppController implements AppController {
 
     protected toast(options: ToastOptions) {
         this.toastHandler(options)
+    }
+
+    protected async askForAVote(options: VoteOptions) {
+        await this.voteHandler(options)
     }
 
     public Controller<

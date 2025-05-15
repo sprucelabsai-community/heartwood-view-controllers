@@ -171,9 +171,14 @@ export default class ViewControllerFactory {
     }
 
     public BuildApp<A extends AppController>(
-        App: new (options: ViewControllerOptions) => A
+        App: new (options: ViewControllerOptions) => A,
+        options?: Partial<ViewControllerOptions>
     ): A {
-        const app = new App(this.buildViewContructorOptions('App')) as A
+        const app = new App({
+            ...this.buildViewContructorOptions('App'),
+            ...options,
+        }) as A
+
         //@ts-ignore
         if (app.id) {
             throw new SpruceError({
@@ -212,7 +217,10 @@ export default class ViewControllerFactory {
         this.plugins[named] = plugin
     }
 
-    public App<Id extends AppControllerId>(namespace: Id) {
+    public App<Id extends AppControllerId>(
+        namespace: Id,
+        options?: Partial<ViewControllerOptions>
+    ) {
         const App = this.AppMap[namespace]
 
         if (!App) {
@@ -222,7 +230,7 @@ export default class ViewControllerFactory {
             })
         }
 
-        return this.BuildApp(App) as AppControllerMap[Id]
+        return this.BuildApp(App, options) as AppControllerMap[Id]
     }
 
     public Controller<
