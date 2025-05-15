@@ -111,10 +111,6 @@ export default class AssertingDeviceFeaturesTest extends AbstractDeviceTest {
         deviceAssert.isTorchOff(this.vc)
     }
 
-    private static get device() {
-        return this.vc.getDevice()
-    }
-
     private static assertOpenedUrlThrows(url: string) {
         assert.doesThrow(() => this.assertOpenedUrl(url))
     }

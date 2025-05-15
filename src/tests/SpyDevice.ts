@@ -5,6 +5,7 @@ import {
     TheaterSettingValueTypes,
     TheatreSettingName,
 } from '../types/heartwood.types'
+import MockAudioController from './MockAudioController'
 
 export default class SpyDevice implements Device {
     public lastCommand?: string
@@ -80,6 +81,10 @@ export default class SpyDevice implements Device {
 
     public turnTorchOff() {
         this.brightness = 0
+    }
+
+    public AudioController(): MockAudioController {
+        return new MockAudioController()
     }
 }
 

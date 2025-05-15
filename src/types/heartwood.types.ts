@@ -876,12 +876,14 @@ export type Locale = ILocale
 
 export type CachedValue = string | number | Record<string, any> | boolean | null
 
-export type TheatreSettingName = 'kiosk-mode' | 'load-url' | 'log-destination'
 export interface TheaterSettingValueTypes {
     'kiosk-mode': boolean | null
     'load-url': string | null
     'log-destination': string | null
+    'audio-volume': number | null
 }
+
+export type TheatreSettingName = keyof TheaterSettingValueTypes
 
 export interface Device {
     openUrl(url: string): void
@@ -899,6 +901,16 @@ export interface Device {
     getTheatreSetting<N extends TheatreSettingName>(
         name: N
     ): Promise<TheaterSettingValueTypes[N] | null>
+    AudioController(): AudioController
+}
+
+export interface AudioController {
+    play(): void
+    pause(): void
+    stop(): void
+    setVolume(volume: number): void
+    getVolume(): Promise<number | null>
+    setSourceUrl(url: string): void
 }
 
 export interface AuthorizerCanOptions<

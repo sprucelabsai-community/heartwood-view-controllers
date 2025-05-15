@@ -8,6 +8,7 @@ export default class MockDeviceVc extends AbstractViewController<Card> {
     public openUrl(url: string) {
         this.getDevice().openUrl(url)
     }
+
     public cacheValue(key: string, value: string) {
         this.getDevice().setCachedValue(key, value)
     }

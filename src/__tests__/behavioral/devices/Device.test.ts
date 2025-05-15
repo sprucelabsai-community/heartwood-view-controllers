@@ -1,4 +1,5 @@
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
     TheaterSettingValueTypes,
@@ -129,6 +130,12 @@ export default class DeviceTest extends AbstractDeviceTest {
         this.assertThrowsWithBadBrightness(-0.2)
     }
 
+    @test()
+    protected static async getsMockAudioDevice() {
+        const audio = this.device.AudioController()
+        assert.isInstanceOf(audio, MockAudioController)
+    }
+
     private static assertThrowsWithBadBrightness(brightness: number) {
         const err = assert.doesThrow(() => this.device.turnTorchOn(brightness))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -161,9 +168,5 @@ export default class DeviceTest extends AbstractDeviceTest {
 
     private static sendCommand(command: string, payload?: Record<string, any>) {
         this.device.sendCommand(command, payload)
-    }
-
-    private static get device() {
-        return this.vc.getDevice() as SpyDevice
     }
 }
