@@ -1,3 +1,10 @@
+# [119.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.2.1...v119.3.0) (2025-05-16)
+
+
+### Features
+
+* app controller and render dialogs & alerts ([087d312](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/087d312))
+
 ## [119.2.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.2.0...v119.2.1) (2025-05-15)
 
 # [119.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.1.2...v119.2.0) (2025-05-15)
