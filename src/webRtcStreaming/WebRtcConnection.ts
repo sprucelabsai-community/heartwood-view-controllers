@@ -1,9 +1,13 @@
 import { assertOptions } from '@sprucelabs/schema'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
+import SpruceError from '../errors/SpruceError'
 import MockRtcPeerConnection from '../tests/MockRtcPeerConnection'
 import WebRtcStreamerImpl, { WebRtcStreamer } from './WebRtcStreamer'
 
 export default class WebRtcConnectionImpl implements WebRtcConnection {
     public static Class?: new () => WebRtcConnection
+    private log = buildLog('WebRtcConnectionImpl')
+    private rtcPeerConnection?: RTCPeerConnection
 
     public static get RTCPeerConnection() {
         return window.RTCPeerConnection
@@ -23,6 +27,17 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         return new (this.Class ?? this)()
     }
 
+    public getRtcPeerConnection(): RTCPeerConnection {
+        if (!this.rtcPeerConnection) {
+            throw new SpruceError({
+                code: 'DID_NOT_GENERATE_OFFER',
+                friendlyMessage:
+                    'You must create an offer before getting the peer connection!',
+            })
+        }
+        return this.rtcPeerConnection
+    }
+
     public async createOffer(
         options: WebRtcVcPluginCreateOfferOptions
     ): Promise<WebRtcCreateOfferResponse> {
@@ -31,6 +46,12 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
             //@ts-ignore
             sdpSemantics: 'unified-plan',
             iceServers: [],
+        })
+
+        this.rtcPeerConnection = connection as RTCPeerConnection
+
+        connection.addEventListener('connectionstatechange', () => {
+            this.log.info('connectionstatechange', connection.connectionState)
         })
 
         const { offerToReceiveAudio, offerToReceiveVideo } = offerOptions
@@ -58,6 +79,7 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
         return {
             offerSdp: offer,
+            rtcPeerConnection: connection as RTCPeerConnection,
             streamer: WebRtcStreamerImpl.Streamer(
                 connection as RTCPeerConnection,
                 async (status) => {
@@ -110,9 +132,11 @@ export interface WebRtcConnection {
         options: WebRtcVcPluginCreateOfferOptions
     ): Promise<WebRtcCreateOfferResponse>
     onStateChange(cb: WebRtcStateChangeHandler): void
+    getRtcPeerConnection(): RTCPeerConnection
 }
 
 export interface WebRtcCreateOfferResponse {
     offerSdp: RTCSessionDescriptionInit
     streamer: WebRtcStreamer
+    rtcPeerConnection: RTCPeerConnection
 }

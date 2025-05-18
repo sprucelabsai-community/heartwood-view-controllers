@@ -294,6 +294,26 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected static async getConnectionThrowsIfHaventCreatedOffer() {
+        const err = await assert.doesThrowAsync(() => {
+            return this.webRtc.getRtcPeerConnection()
+        })
+
+        errorAssert.assertError(err, 'DID_NOT_GENERATE_OFFER')
+    }
+
+    @test()
+    protected static async getConnectionReturnsPeerConnection() {
+        const { rtcPeerConnection } = await this.createOffer()
+        const connection = this.webRtc.getRtcPeerConnection()
+        assert.isEqual(
+            connection,
+            rtcPeerConnection,
+            'The connection returned was not the peer connection'
+        )
+    }
+
     private static get peerConnection(): MockRtcPeerConnection {
         return MockRtcPeerConnection.instance
     }
