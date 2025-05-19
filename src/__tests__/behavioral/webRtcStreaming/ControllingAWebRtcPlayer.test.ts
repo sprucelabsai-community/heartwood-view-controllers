@@ -254,11 +254,16 @@ class SpyWebRtcConnection implements WebRtcConnection {
         SpyWebRtcConnection.instance = this
     }
 
+    public getRtcPeerConnection(): RTCPeerConnection {
+        return new MockRtcPeerConnection() as any
+    }
+
     public async createOffer(
         _options: WebRtcVcPluginCreateOfferOptions
     ): Promise<WebRtcCreateOfferResponse> {
         return {
             offerSdp: {} as any,
+            rtcPeerConnection: new MockRtcPeerConnection() as any,
             streamer: new SpyWebRtcStreamer(),
         }
     }
