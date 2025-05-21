@@ -1,12 +1,10 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
 import MockRtcPeerConnection from '../tests/MockRtcPeerConnection'
 import WebRtcStreamerImpl, { WebRtcStreamer } from './WebRtcStreamer'
 
 export default class WebRtcConnectionImpl implements WebRtcConnection {
     public static Class?: new () => WebRtcConnection
-    private log = buildLog('WebRtcConnectionImpl')
     private rtcPeerConnection?: RTCPeerConnection
 
     public static get RTCPeerConnection() {
@@ -42,6 +40,7 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         options: WebRtcVcPluginCreateOfferOptions
     ): Promise<WebRtcCreateOfferResponse> {
         const { offerOptions } = assertOptions(options, ['offerOptions'])
+
         const connection = new WebRtcConnectionImpl.RTCPeerConnection({
             //@ts-ignore
             sdpSemantics: 'unified-plan',
@@ -50,8 +49,11 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
         this.rtcPeerConnection = connection as RTCPeerConnection
 
-        connection.addEventListener('connectionstatechange', () => {
-            this.log.info('connectionstatechange', connection.connectionState)
+        connection.addEventListener('connectionstatechange', async () => {
+            if (connection.connectionState === 'failed') {
+                const stats = await connection.getStats()
+                await this.emitStateChange('error', { stats })
+            }
         })
 
         const { offerToReceiveAudio, offerToReceiveVideo } = offerOptions
@@ -91,7 +93,7 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
     private async emitStateChange(
         state: WebRtcConnectionState,
-        event?: RTCTrackEvent
+        event?: WebRtcStateChangeEvent
     ) {
         for (const handler of this.stateChangeListeners) {
             await handler(state, event)
@@ -116,15 +118,24 @@ export interface WebRtcVcPluginCreateOfferOptions {
     }
 }
 
-export type WebRtcConnectionState =
-    | 'createdOffer'
-    | 'suppliedAnswer'
-    | 'trackAdded'
+export interface WebRtcStateEventMap {
+    createdOffer: RTCTrackEvent
+    suppliedAnswer: RTCTrackEvent
+    trackAdded: RTCTrackEvent
+    error: WebRtcErrorEvent
+}
+
+export type WebRtcConnectionState = keyof WebRtcStateEventMap
+export type WebRtcStateChangeEvent = RTCTrackEvent | WebRtcErrorEvent
 
 export type WebRtcStateChangeHandler = (
     state: WebRtcConnectionState,
-    event?: RTCTrackEvent
+    event?: WebRtcStateChangeEvent
 ) => void | Promise<void>
+
+export interface WebRtcErrorEvent {
+    stats: RTCStatsReport
+}
 
 export interface WebRtcConnection {
     offStateChange(listener: WebRtcStateChangeHandler): void

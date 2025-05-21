@@ -4,18 +4,30 @@ import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import WebRtcConnectionImpl, {
     WebRtcConnection,
     WebRtcConnectionState,
+    WebRtcStateChangeEvent,
     WebRtcStateChangeHandler,
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 
 export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     private static webRtc: WebRtcConnection
+    private static stateChanges: WebRtcConnectionState[] = []
+    private static stateChangeEvents: (WebRtcStateChangeEvent | undefined)[] =
+        []
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
+        this.stateChanges = []
+        this.stateChangeEvents = []
+
         WebRtcConnectionImpl.RTCPeerConnection = MockRtcPeerConnection
         this.webRtc = WebRtcConnectionImpl.Connection()
+
+        this.webRtc.onStateChange((state, event) => {
+            this.stateChanges.push(state)
+            this.stateChangeEvents.push(event)
+        })
     }
 
     @test()
@@ -210,16 +222,11 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     @test()
     protected static async canHookIntoAnswerSupplied() {
-        const states: WebRtcConnectionState[] = []
-        this.webRtc.onStateChange((state) => {
-            states.push(state)
-        })
-
         const { streamer } = await this.createOffer()
         await streamer.setAnswer(generateId())
 
         assert.isEqualDeep(
-            states,
+            this.stateChanges,
             ['createdOffer', 'suppliedAnswer'],
             'Did not emit the correct events'
         )
@@ -227,22 +234,17 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     @test()
     protected static async emitsWhenReceivingTrack() {
-        const states: WebRtcConnectionState[] = []
-        this.webRtc.onStateChange((state) => {
-            states.push(state)
-        })
-
         await this.createOffer()
 
         assert.isEqualDeep(
-            states,
+            this.stateChanges,
             ['createdOffer'],
             'Did not emit the correct events. Called trackAdded too soon.'
         )
-        this.peerConnection.emitTrackAdded()
+        await this.emitConnectionEvent('track')
 
         assert.isEqualDeep(
-            states,
+            this.stateChanges,
             ['createdOffer', 'trackAdded'],
             'Did not emit the correct events'
         )
@@ -250,16 +252,15 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     @test()
     protected static async emittingTrackPassesThroughEvent() {
-        let passedEvent: RTCTrackEvent | undefined
-
-        this.webRtc.onStateChange((_, event) => {
-            passedEvent = event
-        })
         await this.createOffer()
 
         const event = {} as any
-        this.peerConnection.emitTrackAdded(event)
-        assert.isEqual(passedEvent, event, 'Event was not passed through')
+        await this.emitConnectionEvent('track', event)
+        assert.isEqual(
+            this.stateChangeEvents.pop(),
+            event,
+            'Event was not passed through'
+        )
     }
 
     @test()
@@ -271,7 +272,9 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
         this.webRtc.onStateChange(listener)
         this.webRtc.offStateChange(listener)
+
         await this.createOffer()
+
         assert.isFalse(
             wasHit,
             'State change was hit when it should not have been'
@@ -287,7 +290,9 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
         this.webRtc.onStateChange(listener)
         this.webRtc.offStateChange(() => {})
+
         await this.createOffer()
+
         assert.isTrue(
             wasHit,
             'State change was not hit and should have been. Make sure you are removing the correct listener'
@@ -314,6 +319,60 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected static async stateChangeFiresOnPeerConnectionStatusChangeFailure() {
+        await this.createOffer()
+
+        this.setConnectionState('failed')
+
+        await this.emitConnectionEvent('connectionstatechange')
+
+        assert.doesInclude(
+            this.stateChanges,
+            'error',
+            'Did not emit the correct events'
+        )
+    }
+
+    @test()
+    protected static async connectionStateChangeNotFailedDoesNotEmitStateChangeEvent() {
+        await this.createOffer()
+
+        this.setConnectionState('connected')
+        await this.emitConnectionEvent('connectionstatechange')
+
+        assert.doesNotInclude(
+            this.stateChanges,
+            'error',
+            'Should not have emitted an error event'
+        )
+    }
+
+    @test('passes through connection stats to fail event 1', [])
+    @test('passes through connection stats to fail event 2', { go: 'team' })
+    protected static async failedPassesThroughConnectionStats(
+        stats: RTCStatsReport
+    ) {
+        await this.createOffer()
+
+        this.peerConnection.setStats(stats)
+
+        this.setConnectionState('failed')
+
+        await this.emitConnectionEvent('connectionstatechange')
+
+        const lastEvent = this.stateChangeEvents.pop()
+        assert.isEqualDeep(
+            lastEvent,
+            { stats },
+            'Stats were not passed through'
+        )
+    }
+
+    private static setConnectionState(state: RTCPeerConnectionState) {
+        this.peerConnection.connectionState = state
+    }
+
     private static get peerConnection(): MockRtcPeerConnection {
         return MockRtcPeerConnection.instance
     }
@@ -325,5 +384,12 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
             offerOptions: {},
             ...options,
         })
+    }
+
+    private static async emitConnectionEvent(
+        eventName: 'track' | 'connectionstatechange',
+        event?: any
+    ) {
+        await this.peerConnection.emitEvent(eventName, event)
     }
 }

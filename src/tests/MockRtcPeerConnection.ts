@@ -9,12 +9,18 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         [generateId()]: generateId(),
     } as unknown as RTCSessionDescription
     private lastAddedEventListener?: { eventName: any; listener: any }
+    private eventListeners: {
+        type: any
+        listener: any
+    }[] = []
+
     private addedTransceivers: AddedTransceiver[] = []
     private lastCreatedDataChannel?: {
         label: string
         dataChannelDict?: RTCDataChannelInit
     }
     private tranceiverAndDataChannelCalls: string[] = []
+    private stats: RTCStatsReport = [] as unknown as RTCStatsReport
 
     public constructor(options?: RTCConfiguration) {
         MockRtcPeerConnection.instance = this
@@ -121,20 +127,8 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         this.onCreateOfferHandler = cb
     }
 
-    public emitTrackAdded(event?: RTCTrackEvent) {
-        const lastListener = this.lastAddedEventListener
-        if (lastListener?.eventName === 'track') {
-            lastListener.listener(event ?? {})
-        } else {
-            assert.fail(
-                'Did not call connection.addEventListener with track listener'
-            )
-        }
-    }
-
     public canTrickleIceCandidates: boolean | null = null
-    public connectionState: RTCPeerConnectionState =
-        {} as RTCPeerConnectionState
+    public connectionState: RTCPeerConnectionState = 'connected'
     public currentLocalDescription: RTCSessionDescription | null = null
     public currentRemoteDescription: RTCSessionDescription | null = null
     public iceConnectionState: RTCIceConnectionState =
@@ -244,13 +238,16 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         return []
     }
 
-    //@ts-ignore
     public async getStats(
         _selector?: unknown,
         _successCallback?: unknown,
         _failureCallback?: unknown
     ) {
-        throw new Error('Method not implemented.')
+        return this.stats
+    }
+
+    public setStats(stats: RTCStatsReport) {
+        this.stats = stats
     }
 
     public getTransceivers(): RTCRtpTransceiver[] {
@@ -284,6 +281,11 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
             eventName: type,
             listener,
         }
+
+        this.eventListeners.push({
+            type,
+            listener,
+        })
     }
 
     public removeEventListener(
@@ -292,6 +294,14 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         _options?: unknown
     ): void {
         throw new Error('Method not implemented.')
+    }
+
+    public async emitEvent(name: string, event?: Event) {
+        for (const listener of this.eventListeners) {
+            if (listener.type === name) {
+                await listener.listener(event)
+            }
+        }
     }
 
     public dispatchEvent(_event: Event): boolean {
