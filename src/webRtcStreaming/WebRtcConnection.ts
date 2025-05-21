@@ -1,10 +1,12 @@
 import { assertOptions } from '@sprucelabs/schema'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
 import MockRtcPeerConnection from '../tests/MockRtcPeerConnection'
 import WebRtcStreamerImpl, { WebRtcStreamer } from './WebRtcStreamer'
 
 export default class WebRtcConnectionImpl implements WebRtcConnection {
     public static Class?: new () => WebRtcConnection
+    private log = buildLog('WebRtcConnectionImpl')
     private rtcPeerConnection?: RTCPeerConnection
 
     public static get RTCPeerConnection() {
@@ -50,6 +52,9 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         this.rtcPeerConnection = connection as RTCPeerConnection
 
         connection.addEventListener('connectionstatechange', async () => {
+            this.log.info(
+                `RTCPeerConnection state changed to ${connection.connectionState}`
+            )
             if (connection.connectionState === 'failed') {
                 const stats = await connection.getStats()
                 await this.emitStateChange('error', { stats })
