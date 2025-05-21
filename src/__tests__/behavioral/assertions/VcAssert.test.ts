@@ -1,6 +1,6 @@
 import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 import buildForm from '../../../builders/buildForm'
@@ -51,7 +51,7 @@ class BadSkillViewController extends AbstractSkillViewController {
 }
 
 class GoodSkillViewController implements SkillViewController {
-    private model: SkillView
+    private model!: SkillView
     private isLoginRequired = false
 
     public constructor(model: SkillView) {
@@ -81,7 +81,7 @@ class GoodSkillViewController implements SkillViewController {
 }
 
 class GoodWithDialogSkillViewController extends AbstractSkillViewController {
-    private model: SkillView
+    private model!: SkillView
 
     public constructor(model: any) {
         super(model)
@@ -148,7 +148,7 @@ class GoodWithConfirm extends AbstractSkillViewController {
 }
 
 class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewController {
-    private model: SkillView
+    private model!: SkillView
 
     public constructor(model: any) {
         super(model)
@@ -168,8 +168,9 @@ class GoodWithDialogThatWaitsSkillViewController extends AbstractSkillViewContro
 
 class NewTestingCardViewController extends CardViewController {}
 
+@suite()
 export default class VcAssertTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         bad: BadSkillViewController,
         good: GoodSkillViewController,
         goodWithDialog: GoodWithDialogSkillViewController,
@@ -181,7 +182,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfNotRenderingCard() {
+    protected knowsIfNotRenderingCard() {
         assert.isFunction(vcAssert.assertSkillViewRendersCard)
         const vc = this.BadController()
 
@@ -190,7 +191,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAssertNumberOfCards() {
+    protected canAssertNumberOfCards() {
         const vc = this.BadController()
 
         let cardVcs = vcAssert.assertSkillViewRendersCards(vc, 0)
@@ -218,7 +219,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static maintainsCardVcsInRendersCard() {
+    protected maintainsCardVcsInRendersCard() {
         const cardVc = this.Controller('card', {
             header: { title: 'test' },
         })
@@ -237,7 +238,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static maintainsCardVcsInRendersCards() {
+    protected maintainsCardVcsInRendersCards() {
         const cardVc = this.Controller('card', {
             header: { title: 'test' },
         })
@@ -256,7 +257,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfCardInFirstLayout() {
+    protected async knowsIfCardInFirstLayout() {
         const vc = this.GoodController({
             layouts: [
                 {
@@ -277,7 +278,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfCardInSecondLayout() {
+    protected async knowsIfCardInSecondLayout() {
         const vc = this.GoodController({
             layouts: [
                 {},
@@ -299,7 +300,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfCardRendersById() {
+    protected knowsIfCardRendersById() {
         const id = `${new Date().getTime()}`
         const id2 = `${new Date().getTime() * Math.random()}`
 
@@ -374,7 +375,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static assertingIfCardBodyIsBusy() {
+    protected assertingIfCardBodyIsBusy() {
         const vc = this.Controller('card', {
             body: {},
         })
@@ -403,7 +404,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
             },
         },
     ])
-    protected static throwsIfRowDoesNotRenderContent(cells: ListCell[]) {
+    protected throwsIfRowDoesNotRenderContent(cells: ListCell[]) {
         const vc = this.Controller('list', {
             rows: [
                 {
@@ -489,7 +490,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         { cells: [{ button: { label: 'Waka' } }] },
         'Waka'
     )
-    protected static knowsIfRowRendersContent(row: ListRow, search: string) {
+    protected knowsIfRowRendersContent(row: ListRow, search: string) {
         const id = generateId()
         const vc = this.Controller('list', {
             rows: [{ ...row, id }],
@@ -502,7 +503,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfSkillViewDoesNotRenderViewController() {
+    protected knowsIfSkillViewDoesNotRenderViewController() {
         const model: SkillView = {
             layouts: [{}],
         }
@@ -523,8 +524,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         layoutIdx: 0,
         cardIdx: 0,
         sectionIdx: 0,
-        bodyGenerator: () => ({
-            form: VcAssertTest.renderEmptyForm(),
+        bodyGenerator: (test: VcAssertTest) => ({
+            form: test.renderEmptyForm(),
         }),
     })
     @test(
@@ -533,8 +534,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
             VcClass: FormViewController,
             cardIdx: 0,
             sectionIdx: 0,
-            bodyGenerator: () => ({
-                form: VcAssertTest.renderEmptyForm(),
+            bodyGenerator: (test: VcAssertTest) => ({
+                form: test.renderEmptyForm(),
             }),
         }
     )
@@ -542,8 +543,8 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         'knows if form rendered in random layout, random card, first section',
         {
             VcClass: FormViewController,
-            bodyGenerator: () => ({
-                form: VcAssertTest.renderEmptyForm(),
+            bodyGenerator: (test: VcAssertTest) => ({
+                form: test.renderEmptyForm(),
             }),
         }
     )
@@ -551,15 +552,15 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         'knows if form rendered in random layout, random card, random section',
         {
             VcClass: FormViewController,
-            bodyGenerator: () => ({
-                form: VcAssertTest.renderEmptyForm(),
+            bodyGenerator: (test: VcAssertTest) => ({
+                form: test.renderEmptyForm(),
             }),
         }
     )
     @test('knows if list is rendered', {
         VcClass: ListViewController,
-        bodyGenerator: () => ({
-            list: VcAssertTest.renderEmptyList(),
+        bodyGenerator: (test: VcAssertTest) => ({
+            list: test.renderEmptyList(),
         }),
     })
     @test('knows if list is not rendered', {
@@ -568,16 +569,18 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         cardIdx: 0,
         sectionIdx: 0,
         shouldPass: false,
-        bodyGenerator: () => ({
-            form: VcAssertTest.renderEmptyForm(),
+        bodyGenerator: (test: VcAssertTest) => ({
+            form: test.renderEmptyForm(),
         }),
     })
-    protected static knowsIfSkillViewRendersViewController(options: {
+    protected knowsIfSkillViewRendersViewController(options: {
         layoutIdx?: number
         cardIdx?: number
         sectionIdx?: number
         shouldPass?: boolean
-        bodyGenerator: () => SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
+        bodyGenerator: (
+            test: VcAssertTest
+        ) => SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
         VcClass: any
     }) {
         const {
@@ -589,7 +592,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
             bodyGenerator,
         } = options
 
-        const bodyModel = { ...bodyGenerator() }
+        const bodyModel = { ...bodyGenerator(this) }
 
         const model: SkillView = {
             layouts: [],
@@ -642,7 +645,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfCardIsOfType() {
+    protected knowsIfCardIsOfType() {
         const vc = this.Controller('good', {
             layouts: [
                 {
@@ -665,7 +668,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfCardIsNotOfType() {
+    protected async knowsIfCardIsNotOfType() {
         const vc = this.Controller('good', {
             layouts: [
                 {
@@ -688,7 +691,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRenderingDialog() {
+    protected async knowsIfRenderingDialog() {
         const vc = this.Controller('goodWithDialog', {})
 
         await vcAssert.assertRendersDialog(vc, () => vc.load())
@@ -699,7 +702,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfNotRenderingDialog() {
+    protected async knowsIfNotRenderingDialog() {
         const vc = this.Controller('good', {
             layouts: [],
         })
@@ -712,7 +715,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static getsDialogById() {
+    protected getsDialogById() {
         const card = this.Controller('card', {
             id: 'test-3',
             header: {
@@ -770,7 +773,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         iconToCheck: 'close',
         shouldPass: true,
     })
-    protected static async knowsIfRowRendersButtonWithIcon(options: {
+    protected async knowsIfRowRendersButtonWithIcon(options: {
         rowIdx: number
         cellIdx: number
         icon?: LineIcon
@@ -814,7 +817,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
     @test('can assert rending forms', 'form')
     @test('can assert rending bigForms', 'bigForm')
-    protected static knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
+    protected knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
         const cardVc = this.Controller('card', {})
         assert.doesThrow(() => formAssert.cardRendersForms(cardVc, 1))
         assert.doesThrow(() => formAssert.cardRendersForm(cardVc))
@@ -842,7 +845,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertCardRendersCriticalError() {
+    protected async assertCardRendersCriticalError() {
         let wasPrimaryHit = false
         let wasSecondaryHit = false
 
@@ -882,7 +885,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertConfirmHoldsOnConfirmUntilClosed() {
+    protected async assertConfirmHoldsOnConfirmUntilClosed() {
         const vc = this.Controller('goodWithConfirm', {})
         const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
             vc.showConfirm()
@@ -896,7 +899,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertDoesNotRenderConfirmThrowsIfRendersConfirm() {
+    protected async assertDoesNotRenderConfirmThrowsIfRendersConfirm() {
         const vc = this.Controller('goodWithConfirm', {})
         await assert.doesThrowAsync(() =>
             vcAssert.assertDoesNotRenderConfirm(vc, () => vc.showConfirm())
@@ -904,13 +907,13 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertDoesNotRenderConfirm() {
+    protected async assertDoesNotRenderConfirm() {
         const vc = this.Controller('goodWithDialogThatWaits', {})
         await vcAssert.assertDoesNotRenderConfirm(vc, () => vc.load())
     }
 
     @test()
-    protected static async canDeclineConfirm() {
+    protected async canDeclineConfirm() {
         const vc = this.Controller('goodWithConfirm', {})
         const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
             vc.showConfirm()
@@ -922,7 +925,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertConfirmVcGetsOptions() {
+    protected async assertConfirmVcGetsOptions() {
         const options = {
             [`${new Date().getTime()}`]: true,
             hello: 'world',
@@ -937,7 +940,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsWhenNotRenderingCalendar() {
+    protected async knowsWhenNotRenderingCalendar() {
         assert.isFunction(vcAssert.assertSkillViewRendersCalendar)
 
         const svc = this.Controller('good', {
@@ -949,7 +952,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRowRenderingButton() {
+    protected async knowsIfRowRenderingButton() {
         const rowVc = this.Controller('list', {
             rows: [
                 {
@@ -1011,7 +1014,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test('knows when rendering in layouts[0] cards[0] sections[0]')
-    protected static knowsWhenRenderingCalendar() {
+    protected knowsWhenRenderingCalendar() {
         const svc = this.Controller('good', {
             layouts: [
                 {
@@ -1040,7 +1043,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsWhenRenderingCalendarInRandomPlaces() {
+    protected knowsWhenRenderingCalendarInRandomPlaces() {
         const section = {
             calendar: {
                 people: [],
@@ -1066,7 +1069,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfFieldsBeingRendered() {
+    protected knowsIfFieldsBeingRendered() {
         const formVc = this.Controller(
             'form',
             buildForm({
@@ -1114,7 +1117,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRenderingDialogThatWaits() {
+    protected async knowsIfRenderingDialogThatWaits() {
         const vc = this.Controller('goodWithDialogThatWaits', {})
 
         await vcAssert.assertRendersDialog(vc, () => vc.load())
@@ -1125,7 +1128,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfCardFooterIsRenderingButtons() {
+    protected async knowsIfCardFooterIsRenderingButtons() {
         const assertDoesNotRenderButton = (vc: any, id: any) => {
             assert.doesThrow(() => vcAssert.assertCardRendersButton(vc, id))
             vcAssert.assertCardDoesNotRenderButton(vc, id)
@@ -1209,7 +1212,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
     @test('knows if rendering button as first section in body', [])
     @test('knows if rendering button as second section in body', [{}, {}])
-    protected static knowsIfRenderingButtonsInBody(emptySections: any[] = []) {
+    protected knowsIfRenderingButtonsInBody(emptySections: any[] = []) {
         const button1Id = `${Math.random()}`
         const button2Id = `${Math.random()}`
         const button3Id = `${Math.random()}`
@@ -1257,7 +1260,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRenderingAlert() {
+    protected async knowsIfRenderingAlert() {
         const vc = this.Controller('goodWithAlert', {})
         const vc2 = this.Controller('goodWithDialog', {})
 
@@ -1265,7 +1268,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async patchingAlertsToThrowDoesntAffectAlertAssertionBehavior() {
+    protected async patchingAlertsToThrowDoesntAffectAlertAssertionBehavior() {
         const vc = this.Controller('goodWithAlert', {})
         const vc2 = this.Controller('goodWithDialog', {})
 
@@ -1278,7 +1281,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfNotRenderingTalkingSprucebot() {
+    protected async knowsIfNotRenderingTalkingSprucebot() {
         assert.isFunction(vcAssert.assertCardRendersTalkingSprucebot)
         assert.isFunction(vcAssert.assertCardDoesNotRenderTalkingSprucebot)
 
@@ -1289,7 +1292,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRenderingTalkingSprucebot() {
+    protected async knowsIfRenderingTalkingSprucebot() {
         const expected = this.Controller('talkingSprucebot', {
             sentences: [
                 {
@@ -1330,7 +1333,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfRowsWithIdRender() {
+    protected knowsIfRowsWithIdRender() {
         const newId = `${new Date().getTime()}`
         const list1 = this.Controller('list', {
             rows: [
@@ -1369,7 +1372,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfRenderingFullScreen() {
+    protected knowsIfRenderingFullScreen() {
         const vc = this.Controller('good', {
             isFullScreen: false,
             layouts: [],
@@ -1387,7 +1390,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRequiresLogin() {
+    protected async knowsIfRequiresLogin() {
         const vc = this.Controller('good', {
             isLoginRequired: false,
             layouts: [],
@@ -1407,19 +1410,19 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         )
     }
 
-    private static BadController() {
+    private BadController() {
         return this.Controller('bad', {}) as BadSkillViewController
     }
 
-    private static GoodController(model: SkillView) {
+    private GoodController(model: SkillView) {
         return this.Controller('good', model) as GoodSkillViewController
     }
 
-    private static renderEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+    private renderEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
         return this.buildEmptyForm(vcId).render()
     }
 
-    private static buildEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+    private buildEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
         return this.Controller(vcId, {
             schema: {
                 fields: {},
@@ -1428,13 +1431,13 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         })
     }
 
-    private static renderEmptyList() {
+    private renderEmptyList() {
         return this.Controller('list', {
             rows: [],
         }).render()
     }
 
-    private static async assertAlerts(
+    private async assertAlerts(
         vc: GoodWithAlertSkillViewController,
         vc2: GoodWithDialogSkillViewController
     ) {

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
     AbstractViewController,
@@ -20,13 +20,14 @@ class TestToolCard extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingStickyToolsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         testToolCard: TestToolCard,
     }
 
     @test()
-    protected static throwsIfMissingParams() {
+    protected throwsIfMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             vcAssert.assertToolBeltStickyToolInstanceOf()
@@ -38,7 +39,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static throwsWhenNoTopStickyTool() {
+    protected throwsWhenNoTopStickyTool() {
         assert.doesThrow(
             () =>
                 vcAssert.assertToolBeltStickyToolInstanceOf({
@@ -51,7 +52,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static throwsWhenClassDoesNotMatch() {
+    protected throwsWhenClassDoesNotMatch() {
         const vc = this.Controller('tool-belt', {})
         const card1 = this.Controller('card', {})
 
@@ -75,7 +76,7 @@ export default class AssertingStickyToolsTest extends AbstractViewControllerTest
     @test('passes in position top', 'top', 'card', CardViewControllerImpl)
     @test('passes in position bottom', 'bottom', 'list', ListViewController)
     @test('passes in position top 2', 'top', 'testToolCard', TestToolCard)
-    protected static passesIfInstanceMatches(
+    protected passesIfInstanceMatches(
         position: StickyToolPosition,
         vcId: ViewControllerId,
         Class: any

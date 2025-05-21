@@ -1,6 +1,6 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -14,15 +14,16 @@ import CardViewController, {
     CardViewControllerOptions,
 } from '../../../viewControllers/card/Card.vc'
 
+@suite()
 export default class ControllingACardTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: CardViewController
-    private static cardTriggerRenderCount = 0
-    private static footerTriggerRenderCount = 0
-    private static headerTriggerRenderCount = 0
-    private static sectionTriggerRenderCounts: number[] = []
+    protected controllerMap = {}
+    private vc!: CardViewController
+    private cardTriggerRenderCount = 0
+    private footerTriggerRenderCount = 0
+    private headerTriggerRenderCount = 0
+    private sectionTriggerRenderCounts: number[] = []
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc({
             header: {
@@ -49,7 +50,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.sectionTriggerRenderCounts = []
     }
 
-    private static Vc(options: CardViewControllerOptions): CardViewController {
+    private Vc(options: CardViewControllerOptions): CardViewController {
         const vc = this.Factory().Controller('card', options)
         vc.triggerRender = () => {
             this.cardTriggerRenderCount++
@@ -59,18 +60,18 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canCreateControllingACard() {
+    protected canCreateControllingACard() {
         assert.isTruthy(this.vc)
     }
 
     @test()
-    protected static renderVc() {
+    protected renderVc() {
         const model = this.renderCard()
         assert.isEqual(model.header?.title, 'A header')
     }
 
     @test()
-    protected static canUpdateFooterAndDoesNotCauseFullRender() {
+    protected canUpdateFooterAndDoesNotCauseFullRender() {
         const vc = this.Vc({ footer: { buttons: [{ label: 'hey' }] } })
         vc.setFooter({ buttons: [{ label: 'Stop team!' }] })
 
@@ -82,7 +83,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static updatingFooterAfterRenderOnlyCallsRenderOnFooter() {
+    protected updatingFooterAfterRenderOnlyCallsRenderOnFooter() {
         const vc = this.Vc({ footer: { buttons: [{ label: 'hey' }] } })
         this.renderCard(vc)
 
@@ -97,7 +98,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canUpdateHeaderTitleBeforeRender() {
+    protected canUpdateHeaderTitleBeforeRender() {
         this.vc.setHeaderTitle('you got this')
 
         const model = this.renderCard()
@@ -108,7 +109,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canUpdateHeaderTitleAfterRender() {
+    protected canUpdateHeaderTitleAfterRender() {
         this.renderCard()
 
         this.vc.setHeaderTitle('you got this')
@@ -122,14 +123,14 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canClearTitle() {
+    protected canClearTitle() {
         this.vc.setHeaderTitle(null)
         const model = this.renderCard()
         assert.isFalsy(model.header)
     }
 
     @test()
-    protected static canUpdateSectionBeforeRender() {
+    protected canUpdateSectionBeforeRender() {
         let model = this.renderCard()
         assert.isEqual(model.body?.sections?.[0].text?.content, 'Hello world')
 
@@ -140,7 +141,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static onlyTriggersRenderInUpdatedSection() {
+    protected onlyTriggersRenderInUpdatedSection() {
         this.renderCard()
 
         this.vc.setSection(0, { text: { content: 'Goodbye world' } })
@@ -153,21 +154,21 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static triggersRenderOnCardWhenSectionsAreSet() {
+    protected triggersRenderOnCardWhenSectionsAreSet() {
         this.renderCard()
         this.vc.setSections([])
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
     @test()
-    protected static async doesNotDropInABody() {
+    protected async doesNotDropInABody() {
         const vc = this.Controller('card', { header: { title: 'Hey friend!' } })
         const model = vc.render()
         assert.isFalsy(model.body)
     }
 
     @test()
-    protected static setHeaderSubtitle() {
+    protected setHeaderSubtitle() {
         this.vc.setHeaderSubtitle('Waka waka')
         let model = this.renderCard()
         assert.isEqual(model.header?.subtitle, 'Waka waka')
@@ -177,7 +178,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetHeaderImage() {
+    protected canSetHeaderImage() {
         const image = generateId()
         this.setHeaderImage(image)
         const model = this.renderCard()
@@ -185,7 +186,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canRemoveHeaderImage() {
+    protected canRemoveHeaderImage() {
         this.vc.setHeaderTitle(null)
         this.setHeaderImage('test.jpg')
         this.setHeaderImage(null)
@@ -194,7 +195,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static removingHeaderRetainsTitle() {
+    protected removingHeaderRetainsTitle() {
         this.vc.setHeaderSubtitle('Waka waka')
         this.setHeaderImage('test.jpg')
         this.setHeaderImage(null)
@@ -204,14 +205,14 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async viewModelValidates() {
+    protected async viewModelValidates() {
         const model = this.renderCard()
 
         validateSchemaValues(cardSchema, model)
     }
 
     @test()
-    protected static canAddFirstSectionByIndex() {
+    protected canAddFirstSectionByIndex() {
         const vc = this.Vc({
             header: {
                 title: 'A header',
@@ -227,7 +228,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantGetInvalidSection() {
+    protected cantGetInvalidSection() {
         const err = assert.doesThrow(() => this.vc.getSection(-1))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['sectionIdx'],
@@ -235,7 +236,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetHeaderTitle() {
+    protected async canGetHeaderTitle() {
         assert.isEqual(this.vc.getHeaderTitle(), 'A header')
         this.vc.setHeaderTitle('A header again')
         assert.isEqual(this.vc.getHeaderTitle(), 'A header again')
@@ -244,21 +245,21 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetSubTitle() {
+    protected async canGetSubTitle() {
         assert.isEqual(this.vc.getHeaderSubtitle(), undefined)
         this.vc.setHeaderSubtitle('taco')
         assert.isEqual(this.vc.getHeaderSubtitle(), 'taco')
     }
 
     @test()
-    protected static isLoadingOnCardBodyIsFalsyByDefault() {
+    protected isLoadingOnCardBodyIsFalsyByDefault() {
         assert.isFalse(this.vc.isBusy())
         const model = this.render(this.vc)
         assert.isFalsy(model.body?.isBusy)
     }
 
     @test()
-    protected static canSetBusyOnBody() {
+    protected canSetBusyOnBody() {
         this.vc.setIsBusy(true)
         assert.isEqual(this.cardTriggerRenderCount, 1)
         assert.isTrue(this.vc.isBusy())
@@ -267,7 +268,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetAndSetCriticalError() {
+    protected canGetAndSetCriticalError() {
         assert.isFalse(this.vc.getHasCriticalError())
 
         this.vc.setCriticalError({
@@ -287,7 +288,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test('can set critical error 1', { title: 'hey', message: 'oh no!' })
     @test('can set critical error 2', { title: 'hey2', message: 'oh no!222' })
-    protected static criticalErrorCanBeSetToStartAndRenders(
+    protected criticalErrorCanBeSetToStartAndRenders(
         criticalError: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError
     ) {
         const vc = this.Vc({ criticalError })
@@ -308,7 +309,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     @test('setting body 2', {
         sections: [],
     })
-    protected static canSetBody(body: any) {
+    protected canSetBody(body: any) {
         const vc = this.Vc({})
         vc.setBody(body)
         assert.isEqual(this.cardTriggerRenderCount, 1)
@@ -317,7 +318,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetFooterToNull() {
+    protected canSetFooterToNull() {
         const vc = this.Vc({ footer: { buttons: [] } })
         vc.setFooter({
             buttons: [],
@@ -329,7 +330,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingFooterToSomethingFromNothingTriggersRenderForTheWholeCard() {
+    protected settingFooterToSomethingFromNothingTriggersRenderForTheWholeCard() {
         const vc = this.Vc({})
 
         vc.setFooter({ buttons: [{ label: 'hey!' }] })
@@ -346,7 +347,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         title: 'what!?',
         subtitle: 'the!!!!',
     })
-    protected static canSetHeader(newHeader: any) {
+    protected canSetHeader(newHeader: any) {
         const vc = this.Vc({})
 
         vc.setHeader(newHeader)
@@ -358,7 +359,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static updatingHeaderTriggersHeaderRender() {
+    protected updatingHeaderTriggersHeaderRender() {
         const vc = this.Vc({
             header: {
                 title: 'hey',
@@ -374,7 +375,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingHeaderToNullTriggersRenderOnCard() {
+    protected settingHeaderToNullTriggersRenderOnCard() {
         const vc = this.Vc({
             header: {
                 title: 'hey',
@@ -389,7 +390,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingAHeaderTriggersBodyRender() {
+    protected addingAHeaderTriggersBodyRender() {
         const vc = this.Vc({})
 
         this.renderCard(vc)
@@ -402,7 +403,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetFooterAsBusy() {
+    protected canSetFooterAsBusy() {
         const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
 
         assert.isFalse(vc.getIsFooterBusy(), `Footer should not be busy`)
@@ -416,28 +417,28 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingFooterBusyTriggersRender() {
+    protected settingFooterBusyTriggersRender() {
         const vc = this.Vc({ footer: { buttons: [{ id: 'go' }] } })
         vc.setFooterIsBusy(true)
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
     @test()
-    protected static async canSetBodyToNull() {
+    protected async canSetBodyToNull() {
         const vc = this.Vc({ body: { sections: [] } })
         vc.setBody(null)
         assert.isNull(this.render(vc).body)
     }
 
     @test()
-    protected static async canSetHeaderToNull() {
+    protected async canSetHeaderToNull() {
         const vc = this.Vc({ header: {} })
         vc.setHeader(null)
         assert.isNull(this.render(vc).header)
     }
 
     @test()
-    protected static async updatingBadSectionThrows() {
+    protected async updatingBadSectionThrows() {
         const vc = this.Vc({})
         const err = assert.doesThrow(() =>
             vc.updateSection(`${new Date().getTime()}`, {})
@@ -449,7 +450,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test('can trigger render on first section', 'test')
     @test('can trigger render on first section', 'new')
-    protected static async updatingSectionTriggersRender(id: string) {
+    protected async updatingSectionTriggersRender(id: string) {
         const vc = this.Vc({
             body: {
                 sections: [
@@ -471,8 +472,8 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test('can get expected section 1', 0, 'first')
     @test('can get expected section 2', 1, 'second')
-    protected static canGetExpectedSection(idx: number, id: string) {
-        ControllingACardTest.setVcWith3Sections()
+    protected canGetExpectedSection(idx: number, id: string) {
+        this.setVcWith3Sections()
 
         const beforeRender = this.vc.getSectionVc(id)
 
@@ -489,9 +490,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test('overridden section controller persists 1', 0)
     @test('overridden section controller persists 1', 1)
-    protected static async overriddenSectionControllersPersist(
-        sectionIdx: number
-    ) {
+    protected async overriddenSectionControllersPersist(sectionIdx: number) {
         this.setVcWith3Sections()
         const sectionVc = new SectionVc()
         this.vc.updateSection(sectionIdx, sectionVc.render())
@@ -499,7 +498,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async overridingControllerAfterRenderPersists() {
+    protected async overridingControllerAfterRenderPersists() {
         this.setVcWith3Sections()
         const originalVc = this.vc.getSectionVc(0)
         const sectionVc = new SectionVc()
@@ -509,7 +508,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static overriddenSectionControllerTriggersRenderOnEntireCard() {
+    protected overriddenSectionControllerTriggersRenderOnEntireCard() {
         this.setVcWith3Sections()
         const sectionVc = new SectionVc()
 
@@ -518,13 +517,13 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async updatingSectionWithoutControllerDoesNotTriggerRenderOnCard() {
+    protected async updatingSectionWithoutControllerDoesNotTriggerRenderOnCard() {
         this.vc.updateSection(0, {})
         assert.isEqual(this.cardTriggerRenderCount, 0)
     }
 
     @test()
-    protected static async settingHeaderImageTriggersRender() {
+    protected async settingHeaderImageTriggersRender() {
         this.beginTrackingHeaderRender()
         this.setHeaderImage(generateId())
 
@@ -535,15 +534,15 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.assertHeaderTriggerRenderCount(2)
     }
 
-    private static setHeaderImage(image: string | null) {
+    private setHeaderImage(image: string | null) {
         this.vc.setHeaderImage(image)
     }
 
-    private static assertHeaderTriggerRenderCount(expected: number) {
+    private assertHeaderTriggerRenderCount(expected: number) {
         assert.isEqual(this.headerTriggerRenderCount, expected)
     }
 
-    private static setVcWith3Sections() {
+    private setVcWith3Sections() {
         this.vc = this.Vc({
             body: {
                 sections: [
@@ -561,7 +560,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         })
     }
 
-    private static beginTrackingFooterRender(vc = this.vc) {
+    private beginTrackingFooterRender(vc = this.vc) {
         this.footerTriggerRenderCount = 0
         //@ts-ignore
         vc.triggerRenderFooter = () => {
@@ -569,7 +568,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         }
     }
 
-    private static beginTrackingHeaderRender(vc = this.vc) {
+    private beginTrackingHeaderRender(vc = this.vc) {
         this.headerTriggerRenderCount = 0
         //@ts-ignore
         vc.triggerRenderHeader = () => {
@@ -577,7 +576,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         }
     }
 
-    private static beginTrackingSectionRender(vc = this.vc) {
+    private beginTrackingSectionRender(vc = this.vc) {
         //@ts-ignore
         vc.triggerRenderSections = this.vc.triggerRenderSections.map(
             (_, idx) => {
@@ -591,7 +590,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         )
     }
 
-    protected static renderCard(vc = this.vc) {
+    protected renderCard(vc = this.vc) {
         const card = renderUtil.render(vc)
 
         //@ts-ignore

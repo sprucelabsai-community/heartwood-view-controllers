@@ -1,16 +1,17 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import buildActiveRecordList from '../../../builders/buildActiveRecordList'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class BuildingAnActiveRecordListTest extends AbstractViewControllerTest {
     @test()
-    protected static builderExists() {
+    protected builderExists() {
         assert.isFunction(buildActiveRecordList)
     }
 
     @test()
-    protected static listBuilderIsTyped() {
+    protected listBuilderIsTyped() {
         buildActiveRecordList({
             eventName: 'list-organizations::v2020_12_25',
             responseKey: 'organizations',
@@ -19,18 +20,18 @@ export default class BuildingAnActiveRecordListTest extends AbstractViewControll
     }
 
     @test()
-    protected static cardBuilderIsTyped() {
+    protected cardBuilderIsTyped() {
         this.buildOptions()
     }
 
     @test()
-    protected static async undefinedTargetAndPayloadIfNeitherAreDefined() {
+    protected async undefinedTargetAndPayloadIfNeitherAreDefined() {
         const vc = this.Controller('activeRecordList', this.buildOptions())
         //@ts-ignore
         assert.isUndefined(vc.fetcher.buildTargetAndPayload())
     }
 
-    private static buildOptions() {
+    private buildOptions() {
         return buildActiveRecordCard({
             eventName: 'list-organizations::v2020_12_25',
             rowTransformer: () => ({ id: 'test', cells: [] }),

@@ -1,11 +1,12 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListRow } from '../../../types/heartwood.types'
 
+@suite()
 export default class SelectingRowsInListsTest extends AbstractViewControllerTest {
     @test()
-    protected static rowNotSelectedByDefault() {
+    protected rowNotSelectedByDefault() {
         const vc = this.Vc()
 
         assert.isEqualDeep(vc.getSelectedRows(), [])
@@ -15,14 +16,14 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static isRowSelectedThrowsWhenPassedBadRow() {
+    protected isRowSelectedThrowsWhenPassedBadRow() {
         const vc = this.Vc()
         assert.doesThrow(() => vc.isRowSelected('last'))
     }
 
     @test('can select first row with id first', 'first')
     @test('can select first row with id first', 'second')
-    protected static canSelectOneRowAtTheStart(rowId: string) {
+    protected canSelectOneRowAtTheStart(rowId: string) {
         const vc = this.Vc([
             {
                 id: rowId,
@@ -39,7 +40,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canSelectAFewRowsToStart() {
+    protected canSelectAFewRowsToStart() {
         const vc = this.Vc([
             {
                 id: 'start',
@@ -71,7 +72,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static assertingSelections() {
+    protected assertingSelections() {
         const vc = this.Vc([
             {
                 id: 'test',
@@ -84,7 +85,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canSelectAndDeselectRows() {
+    protected canSelectAndDeselectRows() {
         const vc = this.Vc([
             {
                 id: 'test',
@@ -110,7 +111,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canSetManySelectedAtOnce() {
+    protected canSetManySelectedAtOnce() {
         const vc = this.Vc([
             {
                 id: 'test',
@@ -142,7 +143,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static settingSelectedOnRowTriggersRender() {
+    protected settingSelectedOnRowTriggersRender() {
         const vc = this.Vc([
             {
                 id: 'test',
@@ -160,7 +161,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static selectedRowsArePersistedBetweenListChanges() {
+    protected selectedRowsArePersistedBetweenListChanges() {
         const vc = this.Vc([
             {
                 id: 'happy',
@@ -184,7 +185,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static rendersIsSelected() {
+    protected rendersIsSelected() {
         const vc = this.Vc([
             {
                 id: 'day',
@@ -203,7 +204,7 @@ export default class SelectingRowsInListsTest extends AbstractViewControllerTest
         assert.isFalse(model.rows[0].isSelected)
     }
 
-    private static Vc(
+    private Vc(
         rows: ListRow[] = [
             {
                 id: 'first',

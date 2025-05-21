@@ -1,4 +1,10 @@
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import WebRtcConnectionImpl, {
@@ -9,13 +15,13 @@ import WebRtcConnectionImpl, {
     WebRtcVcPluginCreateOfferOptions,
 } from '../../../webRtcStreaming/WebRtcConnection'
 
+@suite()
 export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
-    private static webRtc: WebRtcConnection
-    private static stateChanges: WebRtcConnectionState[] = []
-    private static stateChangeEvents: (WebRtcStateChangeEvent | undefined)[] =
-        []
+    private webRtc!: WebRtcConnection
+    private stateChanges: WebRtcConnectionState[] = []
+    private stateChangeEvents: (WebRtcStateChangeEvent | undefined)[] = []
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.stateChanges = []
@@ -31,7 +37,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async createOfferThrowsWithMissing() {
+    protected async createOfferThrowsWithMissing() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => this.webRtc.createOffer())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -40,12 +46,12 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCreateOfferWithRequried() {
+    protected async canCreateOfferWithRequried() {
         await this.createOffer()
     }
 
     @test()
-    protected static async createsPeerConnectionWhenCreatingOffer() {
+    protected async createsPeerConnectionWhenCreatingOffer() {
         await this.createOffer()
         assert.isTruthy(
             this.peerConnection,
@@ -54,7 +60,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passedDefaultOptionsToPeerConnection() {
+    protected async passedDefaultOptionsToPeerConnection() {
         await this.createOffer()
         this.peerConnection.assertCreatedWithOptions({
             sdpSemantics: 'unified-plan',
@@ -63,13 +69,13 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async callsCreateOfferOnConnection() {
+    protected async callsCreateOfferOnConnection() {
         await this.createOffer()
         this.peerConnection.assertAddedTranseivers({})
     }
 
     @test()
-    protected static async passesThroughOfferOptions() {
+    protected async passesThroughOfferOptions() {
         const expected = {
             offerToReceiveAudio: true,
             offerToReceiveVideo: true,
@@ -82,13 +88,13 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async createsDataChannnelWhenCreatingOffer() {
+    protected async createsDataChannnelWhenCreatingOffer() {
         await this.createOffer()
         this.peerConnection.assertCreatedDataChannel('dataSendChannel')
     }
 
     @test()
-    protected static async callsEverythingInTheExpectedOrderWhenCreatingOffer() {
+    protected async callsEverythingInTheExpectedOrderWhenCreatingOffer() {
         const expected = {
             offerToReceiveVideo: true,
             offerToReceiveAudio: true,
@@ -106,19 +112,19 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async setsResponseToConnectionCreateOfferToConnectionLocalDescription() {
+    protected async setsResponseToConnectionCreateOfferToConnectionLocalDescription() {
         await this.createOffer()
         this.peerConnection.assertSetsResponseToConnectionLocalDescription()
     }
 
     @test()
-    protected static async createOfferReturnsTheCreatedOffer() {
+    protected async createOfferReturnsTheCreatedOffer() {
         const { offerSdp } = await this.createOffer()
         this.peerConnection.assertCreatedOfferEquals(offerSdp)
     }
 
     @test()
-    protected static async settingAnswerToStreamerThrowsWithMissing() {
+    protected async settingAnswerToStreamerThrowsWithMissing() {
         const { streamer } = await this.createOffer()
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => streamer.setAnswer())
@@ -128,7 +134,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingAswerToStreamerSetsRemoteDescriptionOnConnection() {
+    protected async settingAswerToStreamerSetsRemoteDescriptionOnConnection() {
         const answerSdp = generateId()
         const { streamer } = await this.createOffer()
         await streamer.setAnswer(answerSdp)
@@ -139,13 +145,13 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async streamerHasOnTrackMethod() {
+    protected async streamerHasOnTrackMethod() {
         const { streamer } = await this.createOffer()
         assert.isFunction(streamer.onTrack)
     }
 
     @test()
-    protected static async onTrackMethodAddsListenerToConnection() {
+    protected async onTrackMethodAddsListenerToConnection() {
         const { streamer } = await this.createOffer()
         const listener = () => {}
         streamer.onTrack(listener)
@@ -153,7 +159,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAddEventListenerForCreatingOffer() {
+    protected async canAddEventListenerForCreatingOffer() {
         let passedState: WebRtcConnectionState | undefined
         this.webRtc.onStateChange((state) => {
             passedState = state
@@ -173,7 +179,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetMultipleEventListeners() {
+    protected async canSetMultipleEventListeners() {
         let passedState: WebRtcConnectionState | undefined
         this.webRtc.onStateChange((state) => {
             passedState = state
@@ -200,7 +206,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emitsCreatedOfferAfterActuallyCreatingTheOffer() {
+    protected async emitsCreatedOfferAfterActuallyCreatingTheOffer() {
         const hits: string[] = []
 
         MockRtcPeerConnection.onCreateOffer(() => {
@@ -221,7 +227,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canHookIntoAnswerSupplied() {
+    protected async canHookIntoAnswerSupplied() {
         const { streamer } = await this.createOffer()
         await streamer.setAnswer(generateId())
 
@@ -233,7 +239,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emitsWhenReceivingTrack() {
+    protected async emitsWhenReceivingTrack() {
         await this.createOffer()
 
         assert.isEqualDeep(
@@ -251,7 +257,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emittingTrackPassesThroughEvent() {
+    protected async emittingTrackPassesThroughEvent() {
         await this.createOffer()
 
         const event = {} as any
@@ -264,7 +270,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRemoveStateChangeListener() {
+    protected async canRemoveStateChangeListener() {
         let wasHit = false
         const listener: WebRtcStateChangeHandler = () => {
             wasHit = true
@@ -282,7 +288,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async removesCorrectListener() {
+    protected async removesCorrectListener() {
         let wasHit = false
         const listener: WebRtcStateChangeHandler = () => {
             wasHit = true
@@ -300,7 +306,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async getConnectionThrowsIfHaventCreatedOffer() {
+    protected async getConnectionThrowsIfHaventCreatedOffer() {
         const err = await assert.doesThrowAsync(() => {
             return this.webRtc.getRtcPeerConnection()
         })
@@ -309,7 +315,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async getConnectionReturnsPeerConnection() {
+    protected async getConnectionReturnsPeerConnection() {
         const { rtcPeerConnection } = await this.createOffer()
         const connection = this.webRtc.getRtcPeerConnection()
         assert.isEqual(
@@ -320,7 +326,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async stateChangeFiresOnPeerConnectionStatusChangeFailure() {
+    protected async stateChangeFiresOnPeerConnectionStatusChangeFailure() {
         await this.createOffer()
 
         this.setConnectionState('failed')
@@ -335,7 +341,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async connectionStateChangeNotFailedDoesNotEmitStateChangeEvent() {
+    protected async connectionStateChangeNotFailedDoesNotEmitStateChangeEvent() {
         await this.createOffer()
 
         this.setConnectionState('connected')
@@ -350,9 +356,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     @test('passes through connection stats to fail event 1', [])
     @test('passes through connection stats to fail event 2', { go: 'team' })
-    protected static async failedPassesThroughConnectionStats(
-        stats: RTCStatsReport
-    ) {
+    protected async failedPassesThroughConnectionStats(stats: RTCStatsReport) {
         await this.createOffer()
 
         this.peerConnection.setStats(stats)
@@ -369,24 +373,22 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         )
     }
 
-    private static setConnectionState(state: RTCPeerConnectionState) {
+    private setConnectionState(state: RTCPeerConnectionState) {
         this.peerConnection.connectionState = state
     }
 
-    private static get peerConnection(): MockRtcPeerConnection {
+    private get peerConnection(): MockRtcPeerConnection {
         return MockRtcPeerConnection.instance
     }
 
-    private static async createOffer(
-        options?: WebRtcVcPluginCreateOfferOptions
-    ) {
+    private async createOffer(options?: WebRtcVcPluginCreateOfferOptions) {
         return await this.webRtc.createOffer({
             offerOptions: {},
             ...options,
         })
     }
 
-    private static async emitConnectionEvent(
+    private async emitConnectionEvent(
         eventName: 'track' | 'connectionstatechange',
         event?: any
     ) {

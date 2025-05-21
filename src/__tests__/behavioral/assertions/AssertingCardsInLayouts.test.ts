@@ -1,4 +1,4 @@
-import { test, generateId } from '@sprucelabs/test-utils'
+import { test, suite, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
@@ -9,7 +9,7 @@ import {
 import buildSkillViewLayout from '../../../utilities/buildSkillViewLayout'
 
 class GoodSkillViewController implements SkillViewController {
-    private model: SkillView
+    private model!: SkillView
 
     public constructor(model: SkillView) {
         this.model = model
@@ -23,14 +23,15 @@ class GoodSkillViewController implements SkillViewController {
     }
 }
 
+@suite()
 export default class AssertingCardsInLayoutsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         good: GoodSkillViewController,
     }
-    private static vc: GoodSkillViewController
+    private vc!: GoodSkillViewController
 
     @test()
-    protected static async canGetCardsInLeft() {
+    protected async canGetCardsInLeft() {
         const { cardVc, id } = this.CardVc()
 
         this.vc = this.SkillView(
@@ -41,7 +42,7 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async canGetCardInRight() {
+    protected async canGetCardInRight() {
         const { cardVc, id } = this.CardVc()
 
         this.vc = this.SkillView(
@@ -52,7 +53,7 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async canGetCardsFromAnywhere() {
+    protected async canGetCardsFromAnywhere() {
         const { cardVc, id } = this.CardVc()
         const { cardVc: cardVc2, id: id2 } = this.CardVc()
         const { cardVc: cardVc3, id: id3 } = this.CardVc()
@@ -78,7 +79,7 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async canGetCardsFromGrid() {
+    protected async canGetCardsFromGrid() {
         const { cardVc, id } = this.CardVc()
         this.vc = this.SkillView(
             buildSkillViewLayout('grid', {
@@ -89,19 +90,17 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
         this.assertRendersCard(id)
     }
 
-    private static assertRendersCard(id: string) {
+    private assertRendersCard(id: string) {
         vcAssert.assertSkillViewRendersCard(this.vc, id)
     }
 
-    private static SkillView(
-        options: Partial<SkillView>
-    ): GoodSkillViewController {
+    private SkillView(options: Partial<SkillView>): GoodSkillViewController {
         return this.Controller('good', {
             ...options,
         }) as any
     }
 
-    private static CardVc() {
+    private CardVc() {
         const id = generateId()
         const cardVc = this.Controller('card', {
             id,

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
     AbstractSkillViewController,
     vcAssert,
@@ -10,7 +10,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import SpyRouter from '../../../tests/SpyRouter'
 
 class DemoSkillViewController extends AbstractSkillViewController {
-    private router: Router
+    private router!: Router
     public constructor(options: any) {
         super(options)
         this.router = options.router
@@ -47,45 +47,46 @@ class DemoSkillViewController extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertAlertAndRedirectTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         demo: DemoSkillViewController,
     }
 
-    private static router: Router
-    private static vc: DemoSkillViewController
+    private router!: Router
+    private vc!: DemoSkillViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.router = new SpyRouter()
         this.vc = this.Vc()
     }
 
     @test()
-    protected static async throwsWhenNotAlerting() {
+    protected async throwsWhenNotAlerting() {
         await assert.doesThrowAsync(() => this.assert(() => this.vc.noAlert()))
     }
 
     @test()
-    protected static async passesWhenAlertAndRedirect() {
+    protected async passesWhenAlertAndRedirect() {
         await this.assert(() => this.vc.alertAndRedirect())
     }
 
     @test()
-    protected static async throwsWhenAlertingButNotRedirecting() {
+    protected async throwsWhenAlertingButNotRedirecting() {
         await assert.doesThrowAsync(() =>
             this.assert(() => this.vc.alertButNoRedirect())
         )
     }
 
     @test()
-    protected static async throwsWhenRedirectingToWrongDestination() {
+    protected async throwsWhenRedirectingToWrongDestination() {
         await assert.doesThrowAsync(() =>
             this.assert(() => this.vc.alertAndBadRedirect())
         )
     }
 
-    private static Vc() {
+    private Vc() {
         //@ts-ignore
         const vc = this.Controller('demo', {
             router: this.router,
@@ -93,7 +94,7 @@ export default class AssertAlertAndRedirectTest extends AbstractViewControllerTe
         return vc as DemoSkillViewController
     }
 
-    private static assert(action: () => Promise<any>): any {
+    private assert(action: () => Promise<any>): any {
         return vcAssert.assertRendersAlertThenRedirects({
             action,
             vc: this.vc,

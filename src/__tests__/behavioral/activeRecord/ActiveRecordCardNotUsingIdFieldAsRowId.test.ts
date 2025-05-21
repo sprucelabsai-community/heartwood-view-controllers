@@ -1,11 +1,12 @@
-import { test, generateId } from '@sprucelabs/test-utils'
+import { test, suite, generateId } from '@sprucelabs/test-utils'
 import { ListRow } from '../../../types/heartwood.types'
 import { ListPerson } from '../../support/EventFaker'
 import AbstractClientSidePagingActiveRecordCard from './AbstractClientSidePagingActiveRecordCardTest'
 
+@suite()
 export default class ActiveRecordCardNotUsingIdFieldAsRowIdTest extends AbstractClientSidePagingActiveRecordCard {
     @test()
-    protected static async canCreateActiveRecordCardNotUsingIdFieldAsRowId() {
+    protected async canCreateActiveRecordCardNotUsingIdFieldAsRowId() {
         const person: ListPerson = {
             id: generateId(),
             casualName: generateId(),

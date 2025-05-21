@@ -1,5 +1,5 @@
 import { SchemaFieldNames } from '@sprucelabs/schema'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -11,15 +11,16 @@ import {
 import FormViewController from '../../../viewControllers/form/Form.vc'
 import { TestFormSchema, testFormSchema } from './testFormOptions'
 
+@suite()
 export default class AssertingFormsTest extends AbstractViewControllerTest {
-    protected static vc: FormViewController<TestFormSchema>
-    protected static async beforeEach() {
+    protected vc!: FormViewController<TestFormSchema>
+    protected async beforeEach() {
         await super.beforeEach()
         this.setupFormWithField('first', 'checkbox')
     }
 
     @test()
-    protected static failsIfRendersAsMissingRequired() {
+    protected failsIfRendersAsMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => formAssert.formFieldRendersAs())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -28,7 +29,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsWhenFieldNotFound() {
+    protected throwsWhenFieldNotFound() {
         assert.doesThrow(
             () => formAssert.formFieldRendersAs(this.vc, 'bad', 'textarea'),
             'field'
@@ -37,7 +38,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
 
     @test('throws with missmatch 1', 'first', 'checkbox', 'textarea')
     @test('throws with missmatch 2', 'first', 'textarea', 'checkbox')
-    protected static throwsWhenRenderAsMissMatches(
+    protected throwsWhenRenderAsMissMatches(
         fieldName: any,
         actual: RenderAsInputComponentType,
         expected: RenderAsInputComponentType
@@ -52,7 +53,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
 
     @test('passes on match 1', 'first', 'checkbox')
     @test('passes on match 2', 'last', 'textarea')
-    protected static passesWithMatch(
+    protected passesWithMatch(
         fieldName: any,
         expected: RenderAsInputComponentType
     ) {
@@ -61,7 +62,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsIfDoesNotRenderSection() {
+    protected throwsIfDoesNotRenderSection() {
         const sectionId = 'test'
         this.setFirstSectionId(generateId())
         assert.doesThrow(
@@ -73,7 +74,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canFindInFirstSection() {
+    protected canFindInFirstSection() {
         this.setFirstSectionId('test')
         this.assertRendersSection('test')
         assert.doesThrow(() =>
@@ -85,7 +86,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canFindSectionIfNotFirst() {
+    protected canFindSectionIfNotFirst() {
         this.setSections([
             {
                 id: 'aoeu',
@@ -99,7 +100,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canFindFormByNameInCard() {
+    protected async canFindFormByNameInCard() {
         const vc = this.Controller('card', {
             body: {
                 sections: [
@@ -126,13 +127,13 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async formIsNotBuysByDefault() {
+    protected async formIsNotBuysByDefault() {
         const vc = this.Vc([], 'test1')
         formAssert.formIsNotBusy(vc)
     }
 
     @test()
-    protected static async canFindFormInHeader() {
+    protected async canFindFormInHeader() {
         const id = generateId()
         const vc = this.Controller('card', {
             header: {
@@ -145,11 +146,11 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
         formAssert.cardRendersForm(vc, id)
     }
 
-    private static assertRendersSection(sectionId: string): any {
+    private assertRendersSection(sectionId: string): any {
         return formAssert.formRendersSection(this.vc, sectionId)
     }
 
-    private static setFirstSectionId(sectionId: string) {
+    private setFirstSectionId(sectionId: string) {
         this.setSections([
             {
                 id: sectionId,
@@ -157,7 +158,7 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
         ])
     }
 
-    private static setupFormWithField(
+    private setupFormWithField(
         fieldName: SchemaFieldNames<TestFormSchema>,
         renderAs: RenderAsInputComponentType
     ) {
@@ -168,11 +169,11 @@ export default class AssertingFormsTest extends AbstractViewControllerTest {
         ])
     }
 
-    private static setSections(sections: FormSection<TestFormSchema>[]) {
+    private setSections(sections: FormSection<TestFormSchema>[]) {
         this.vc = this.Vc(sections)
     }
 
-    private static Vc(sections: FormSection<TestFormSchema>[], id?: string) {
+    private Vc(sections: FormSection<TestFormSchema>[], id?: string) {
         return this.Controller(
             'form',
             buildForm({

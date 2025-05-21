@@ -1,6 +1,6 @@
 import { buildSchema, cloneDeep, SchemaFieldNames } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -24,7 +24,7 @@ class EmailSpyTextFieldInput extends SpyTextFieldInput {}
 class NoRenderedValueValueMethods
     implements FormInputViewController<TextInput>
 {
-    public model: FormInputOptions
+    public model!: FormInputOptions
     private getValueHandler!: () => any
     private setValueHandler!: (value: any) => Promise<void>
 
@@ -57,16 +57,17 @@ class NoRenderedValueValueMethods
     }
 }
 
+@suite()
 export default class SettingVcsForFieldRenderingTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         textInput: SpyTextFieldInput,
         noRenderedValue: NoRenderedValueValueMethods,
     }
-    private static formVc: FormViewController<FormSchema>
-    private static firstNameVc: SpyTextFieldInput
-    private static emailVc: EmailSpyTextFieldInput
+    private formVc!: FormViewController<FormSchema>
+    private firstNameVc!: SpyTextFieldInput
+    private emailVc!: EmailSpyTextFieldInput
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.firstNameVc = this.SpyInputVc()
@@ -80,7 +81,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 
     @test('throws when vc not found 1', 'lastName')
     @test('throws when vc not found 2', 'age')
-    protected static cantGetFieldVcWhenNoVcSet(fieldName: any) {
+    protected cantGetFieldVcWhenNoVcSet(fieldName: any) {
         const err = assert.doesThrow(() => this.formVc.getFieldVc(fieldName))
         errorAssert.assertError(err, 'NO_FIELD_VC_SET', {
             fieldName,
@@ -88,7 +89,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async passesWhenFieldVcSet() {
+    protected async passesWhenFieldVcSet() {
         const vc = this.formVc.getFieldVc('firstName')
         assert.isEqual(vc, this.firstNameVc)
 
@@ -97,14 +98,14 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingValueOnFormCallsSetValueOnFieldVc() {
+    protected async settingValueOnFormCallsSetValueOnFieldVc() {
         const value = generateId()
         await this.formVc.setValue('firstName', value)
         assert.isEqual(this.firstNameVc.getValue(), value)
     }
 
     @test()
-    protected static async assertRequiresGetAndSetValues() {
+    protected async assertRequiresGetAndSetValues() {
         await assert.doesThrowAsync(
             //@ts-ignore
             () => formAssert.inputVcIsValid(this.Controller('card', {})),
@@ -132,7 +133,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 
     @test('form decorates set value 1', 'new value')
     @test('form decorates set value 2', 'another value')
-    protected static async formDecoratesSetValueOnVc(
+    protected async formDecoratesSetValueOnVc(
         name: SchemaFieldNames<FormSchema>,
         value: string
     ) {
@@ -144,14 +145,14 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async formVcCanStillSetRenderedValue() {
+    protected async formVcCanStillSetRenderedValue() {
         const rendered = generateId()
         await this.firstNameVc.setValue('hey', rendered)
         assert.isEqual(this.firstNameVc.renderedValue, rendered)
     }
 
     @test()
-    protected static async settingValueDoesNotClearRenderedValue() {
+    protected async settingValueDoesNotClearRenderedValue() {
         await this.firstNameVc.setRenderedValue('hey!')
         await this.formVc.setValue('firstName', 'waka')
         assert.isEqual(this.firstNameVc.renderedValue, 'hey!')
@@ -159,7 +160,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
 
     @test('setting value from from model sets rendered value 1', generateId())
     @test('setting value from from model sets rendered value 2', '')
-    protected static async settingValueFromFormModelWithRenderedDoesNotDirtyForm(
+    protected async settingValueFromFormModelWithRenderedDoesNotDirtyForm(
         value: string
     ) {
         await this.firstNameVc.setRenderedValue(value)
@@ -178,7 +179,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async assertSetsGetsValuesToViewModel() {
+    protected async assertSetsGetsValuesToViewModel() {
         const vc = this.Controller('card', {})
         //@ts-ignore
         vc.setValue = () => {}
@@ -200,7 +201,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async throwsWithNoRenderedValueGetSet() {
+    protected async throwsWithNoRenderedValueGetSet() {
         const vc = this.Controller(
             'noRenderedValue' as any,
             {}
@@ -223,7 +224,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingRenderedValueToNullRestoresFormModelSetValueBehavior() {
+    protected async settingRenderedValueToNullRestoresFormModelSetValueBehavior() {
         await this.firstNameVc.setRenderedValue(null)
         const model = this.render(this.formVc)
         model.setValue('firstName', 'hey')
@@ -232,13 +233,13 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async dirtySetAsExpectedWhenSettingValueOnField() {
+    protected async dirtySetAsExpectedWhenSettingValueOnField() {
         await this.emailVc.setValue('waka awka')
         assert.isTrue(this.formVc.getIsDirty())
     }
 
     @test()
-    protected static async focusAndBlurHandlersCalled() {
+    protected async focusAndBlurHandlersCalled() {
         let wasBlurHit = false
         let wasFocusHit = false
 
@@ -268,7 +269,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static assertionThrowsWhenFormFieldDoesNotExist() {
+    protected assertionThrowsWhenFormFieldDoesNotExist() {
         assert.doesThrow(
             () =>
                 formAssert.formFieldRendersUsingInputVc(
@@ -291,7 +292,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static assertionFailsIfVcIsNotBeingUsed() {
+    protected assertionFailsIfVcIsNotBeingUsed() {
         assert.doesThrow(
             () =>
                 formAssert.formFieldRendersUsingInputVc(
@@ -314,7 +315,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async passesWhenFieldVcMatches() {
+    protected async passesWhenFieldVcMatches() {
         formAssert.formFieldRendersUsingInputVc(
             this.formVc,
             'firstName',
@@ -323,7 +324,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async renderedValueOfInputPassedToForm() {
+    protected async renderedValueOfInputPassedToForm() {
         const rendered = generateId()
 
         this.firstNameVc = this.SpyInputVc({
@@ -339,7 +340,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async vcGetsInitialValueFromForm() {
+    protected async vcGetsInitialValueFromForm() {
         const firstName = generateId()
         this.formVc = this.FormVc({
             firstName,
@@ -349,7 +350,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingValueOnFormFiresChangeOnField() {
+    protected async settingValueOnFormFiresChangeOnField() {
         let wasHit = false
 
         this.firstNameVc = this.SpyInputVc({
@@ -366,7 +367,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async willChangeOnlyFiredOnceWhenSettingValue() {
+    protected async willChangeOnlyFiredOnceWhenSettingValue() {
         let hitCount = 0
         this.formVc = this.FormVc(
             {},
@@ -382,7 +383,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async valueOnFieldNotPassedToFormSchema() {
+    protected async valueOnFieldNotPassedToFormSchema() {
         this.firstNameVc = this.SpyInputVc({ value: 'there' })
         this.formVc = this.FormVc({
             firstName: 'hey',
@@ -395,7 +396,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingRenderedValueDoesNotTriggerFormChange() {
+    protected async settingRenderedValueDoesNotTriggerFormChange() {
         let hitCount = 0
         this.formVc = this.FormVc(
             {},
@@ -415,13 +416,13 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingFieldVcDoesNotAddToSchema() {
+    protected async settingFieldVcDoesNotAddToSchema() {
         const schema = this.formVc.getSchema()
         assert.isEqualDeep(schema, formSchema)
     }
 
     @test()
-    protected static async settingValueToNullClearsRenderedValue() {
+    protected async settingValueToNullClearsRenderedValue() {
         this.formVc = this.FormVc({
             firstName: 'hey',
         })
@@ -433,7 +434,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingValueToFalseDoesNotClearRenderedValue() {
+    protected async settingValueToFalseDoesNotClearRenderedValue() {
         this.formVc = this.FormVc({
             firstName: 'hey',
         })
@@ -446,7 +447,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
     }
 
     @test()
-    protected static async settingValueToSameValueDoesNotTriggerChange() {
+    protected async settingValueToSameValueDoesNotTriggerChange() {
         let hitCount = 0
         this.firstNameVc = this.SpyInputVc({
             onChange: () => {
@@ -461,7 +462,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
         assert.isEqual(hitCount, 1)
     }
 
-    private static FormVc(
+    private FormVc(
         values: Record<string, any> = {},
         options?: Partial<FormViewControllerOptions<any>>
     ) {
@@ -495,9 +496,7 @@ export default class SettingVcsForFieldRenderingTest extends AbstractViewControl
         )
     }
 
-    private static SpyInputVc(
-        options?: Omit<TextInput, 'name'>
-    ): SpyTextFieldInput {
+    private SpyInputVc(options?: Omit<TextInput, 'name'>): SpyTextFieldInput {
         return this.Controller('textInput' as any, {
             ...options,
         }) as SpyTextFieldInput

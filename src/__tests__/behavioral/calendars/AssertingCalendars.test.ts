@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { AbstractViewController, CalendarViewController } from '../../..'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -52,20 +52,21 @@ class CalendarPage extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingCalendarsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         cal: CalendarPage,
         calVc: CalVc,
     }
-    private static vc: CalendarPage
+    private vc!: CalendarPage
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('cal' as any, {}) as CalendarPage
     }
 
     @test()
-    protected static assertingCalendarReturnsController() {
+    protected assertingCalendarReturnsController() {
         const match = vcAssert.assertSkillViewRendersCalendar(this.vc)
 
         assert.isTruthy(match)
@@ -74,7 +75,7 @@ export default class AssertingCalendarsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAssertCardRendersCalendar() {
+    protected canAssertCardRendersCalendar() {
         const vc = this.Controller('card', {})
 
         assert.doesThrow(() => vcAssert.assertCardRendersCalendar(vc))

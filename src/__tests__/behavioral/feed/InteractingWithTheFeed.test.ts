@@ -1,20 +1,27 @@
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import feedInteractor from '../../../tests/utilities/feedInteractor'
 import FeedViewController, {
     FeedViewControllerOptions,
 } from '../../../viewControllers/Feed.vc'
 
+@suite()
 export default class InteractingWithTheFeedTest extends AbstractViewControllerTest {
-    private static vc: FeedViewController
+    private vc!: FeedViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc()
     }
 
     @test()
-    protected static async throwsWithMissingParams() {
+    protected async throwsWithMissingParams() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             feedInteractor.submitMessage()
@@ -26,7 +33,7 @@ export default class InteractingWithTheFeedTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async throwsWithNoMessageCallback() {
+    protected async throwsWithNoMessageCallback() {
         await assert.doesThrowAsync(
             () => this.submitMessage('hey there!'),
             'onSubmitMessage'
@@ -34,7 +41,7 @@ export default class InteractingWithTheFeedTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async invokesSubmitCallback() {
+    protected async invokesSubmitCallback() {
         let passedMessage: string | undefined
 
         this.vc = this.Vc({
@@ -51,7 +58,7 @@ export default class InteractingWithTheFeedTest extends AbstractViewControllerTe
 
     @test('onSubmit responds with true', true)
     @test('onSubmit responds with false', false)
-    protected static async submittingMessageReturnsResponseFromHandler(
+    protected async submittingMessageReturnsResponseFromHandler(
         expected: boolean
     ) {
         this.vc = this.Vc({
@@ -64,11 +71,11 @@ export default class InteractingWithTheFeedTest extends AbstractViewControllerTe
         assert.isEqual(actual, expected)
     }
 
-    private static submitMessage(message: string): any {
+    private submitMessage(message: string): any {
         return feedInteractor.submitMessage(this.vc, message)
     }
 
-    private static Vc(
+    private Vc(
         options?: Partial<FeedViewControllerOptions>
     ): FeedViewController {
         return this.Controller('feed', { ...options, items: [] })

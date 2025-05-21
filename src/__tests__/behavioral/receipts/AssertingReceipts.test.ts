@@ -1,5 +1,5 @@
 import { assertOptions } from '@sprucelabs/schema'
-import { test, assert, errorAssert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { pluckFirstFromCard } from '../../../tests/utilities/assertSupport'
 import {
@@ -9,9 +9,10 @@ import {
 } from '../../../types/heartwood.types'
 import renderUtil from '../../../utilities/render.utility'
 
+@suite()
 export default class AssertingReceiptsTest extends AbstractViewControllerTest {
     @test()
-    protected static async throwsWithMissing() {
+    protected async throwsWithMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => receiptAssert.cardRendersReceipt())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -20,12 +21,12 @@ export default class AssertingReceiptsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfNoReceipt() {
+    protected async throwsIfNoReceipt() {
         assert.doesThrow(() => this.assertRendersReceipt([]), 'not find')
     }
 
     @test()
-    protected static async passesIfReceiptIsInTheFirstSection() {
+    protected async passesIfReceiptIsInTheFirstSection() {
         this.assertRendersReceipt([
             {
                 receipt: {},
@@ -34,7 +35,7 @@ export default class AssertingReceiptsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesIfInSecondSection() {
+    protected async passesIfInSecondSection() {
         this.assertRendersReceipt([
             {},
             {
@@ -44,7 +45,7 @@ export default class AssertingReceiptsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWithMissingOnAssertingLineItems() {
+    protected async throwsWithMissingOnAssertingLineItems() {
         //@ts-ignore
         const err = assert.doesThrow(() => receiptAssert.cardRendersReceipt())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -52,7 +53,7 @@ export default class AssertingReceiptsTest extends AbstractViewControllerTest {
         })
     }
 
-    private static assertRendersReceipt(sections: CardSection[]) {
+    private assertRendersReceipt(sections: CardSection[]) {
         const vc = this.Controller('card', {
             body: {
                 sections,

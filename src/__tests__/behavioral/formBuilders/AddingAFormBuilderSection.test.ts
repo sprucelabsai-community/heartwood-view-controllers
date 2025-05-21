@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
@@ -24,19 +24,20 @@ declare module '../../../types/heartwood.types' {
     }
 }
 
+@suite()
 export default class AddingAFormBuilderSectionTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'edit-form-builder-section': EditFormBuilderSectionCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
 
-    private static formBuilderVc: FormBuilderCardViewController
-    private static vc: EditFormBuilderSectionCardViewController
-    private static formVc: FormViewController<EditSectionSectionSchema>
-    private static fieldListVc: ListViewController
-    private static dialogVc: DialogViewController
+    private formBuilderVc!: FormBuilderCardViewController
+    private vc!: EditFormBuilderSectionCardViewController
+    private formVc!: FormViewController<EditSectionSectionSchema>
+    private fieldListVc!: ListViewController
+    private dialogVc!: DialogViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.formBuilderVc = this.Controller('form-builder-card', {})
         const { dialogVc, builderSectionVc } =
@@ -48,12 +49,12 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static handlesClickingAddSection() {
+    protected handlesClickingAddSection() {
         assert.isFunction(this.formBuilderVc.handleClickAddSection)
     }
 
     @test()
-    protected static throwsWithMissinParams() {
+    protected throwsWithMissinParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('edit-form-builder-section', {})
@@ -67,7 +68,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     @test('cant click bad section -1', -1)
     @test('cant click bad section 1', 1)
     @test('cant click bad section 2', 2)
-    protected static async cantClickBadSection(sectionIdx: number) {
+    protected async cantClickBadSection(sectionIdx: number) {
         const err = await assert.doesThrowAsync(() =>
             this.formBuilderVc.handleClickAddSection(sectionIdx)
         )
@@ -78,7 +79,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async clickingAddSectionShowsAddSectionDialog() {
+    protected async clickingAddSectionShowsAddSectionDialog() {
         assert.isTruthy(this.vc)
         assert.isTrue(
             this.vc instanceof EditFormBuilderSectionCardViewController
@@ -86,13 +87,13 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static addSectionHasHeaderTtile() {
+    protected addSectionHasHeaderTtile() {
         const model = this.render(this.vc)
         assert.isString(model.header?.title)
     }
 
     @test()
-    protected static async formRendersExpectedFieldsAndSections() {
+    protected async formRendersExpectedFieldsAndSections() {
         assert.isEqual(this.formVc.getValue('title'), 'Section 2')
 
         await this.formVc.setValue('title', 'My new section')
@@ -110,14 +111,14 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async startsWithOneRowInFields() {
+    protected async startsWithOneRowInFields() {
         vcAssert.assertListRendersRows(this.fieldListVc, 1)
         await this.fieldListVc.getRowVc(0).setValue('fieldName', 'what!')
         await this.fieldListVc.getRowVc(0).setValue('fieldType', 'text')
     }
 
     @test()
-    protected static async defaultSectionTitleIncrementsWithSectionInTheCurrentPage() {
+    protected async defaultSectionTitleIncrementsWithSectionInTheCurrentPage() {
         const pageVc = this.formBuilderVc.getPageVc(0)
 
         pageVc.addSection()
@@ -130,7 +131,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static footerShouldHaveAddFieldAndSaveButtons() {
+    protected footerShouldHaveAddFieldAndSaveButtons() {
         const model = this.render(this.formVc)
         assert.isFalse(model.shouldShowCancelButton)
         assert.doesInclude(model.footer?.buttons?.[0].label, 'Add field')
@@ -138,7 +139,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async clickingAddFieldAddsRowToList() {
+    protected async clickingAddFieldAddsRowToList() {
         const model = this.render(this.formVc)
         await this.click(model.footer?.buttons?.[0])
 
@@ -154,7 +155,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async addingFieldsIncrementsNameAndDefaultsToText() {
+    protected async addingFieldsIncrementsNameAndDefaultsToText() {
         this.vc.addField()
         this.vc.addField()
         this.vc.addField()
@@ -169,7 +170,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async updatingFieldNameUpdatesInternalSimpleRows() {
+    protected async updatingFieldNameUpdatesInternalSimpleRows() {
         await this.fieldListVc.getRowVc(0).setValue('fieldName', 'Waka')
         await this.fieldListVc.getRowVc(0).setValue('fieldType', 'phone')
 
@@ -186,7 +187,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async clickingDestructiveInFieldListRemovesField() {
+    protected async clickingDestructiveInFieldListRemovesField() {
         this.vc.addField()
         this.vc.addField()
         this.vc.addField()
@@ -253,7 +254,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async switchingSectionToInstructionsHidesFormRelatedFields() {
+    protected async switchingSectionToInstructionsHidesFormRelatedFields() {
         await this.formVc.setValue('type', 'text')
 
         formAssert.formDoesNotRenderField(this.formVc, 'shouldRenderAsGrid')
@@ -265,7 +266,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async clickingPrimaryInFooterGivesBackSection() {
+    protected async clickingPrimaryInFooterGivesBackSection() {
         await this.formVc.setValue('title', 'My new section')
         await this.formVc.setValue('type', 'form')
         await this.formVc.setValue('shouldRenderAsGrid', true)
@@ -345,7 +346,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async newSectionAddedToFormBuilder() {
+    protected async newSectionAddedToFormBuilder() {
         await this.formVc.setValue('title', 'My new section')
         await this.formVc.setValue('type', 'form')
         await this.formVc.setValue('shouldRenderAsGrid', true)
@@ -391,7 +392,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async differentSectionAddedToFormBuilderAtEnd() {
+    protected async differentSectionAddedToFormBuilderAtEnd() {
         await this.formVc.setValue('title', 'My second section')
         await this.formVc.setValue('type', 'text')
         await this.formVc.setValue('text', 'What is up?')
@@ -417,7 +418,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     }
 
     @test()
-    protected static async sectionAddedToFormBuilderAfterClickedIndex() {
+    protected async sectionAddedToFormBuilderAfterClickedIndex() {
         this.formBuilderVc
             .getPageVc(0)
             .addSection({ title: 'A brand new section!' })
@@ -435,7 +436,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
         assert.isEqual(newSection.title, 'Now second section')
     }
 
-    private static async simulateAddSectionClick(clickedSectionIdx = 0) {
+    private async simulateAddSectionClick(clickedSectionIdx = 0) {
         let builderSectionVc:
             | EditFormBuilderSectionCardViewController
             | undefined

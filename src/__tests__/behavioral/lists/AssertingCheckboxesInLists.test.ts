@@ -1,38 +1,39 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import listAssert from '../../../tests/utilities/listAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
+@suite()
 export default class AssertingCheckboxesInListsTest extends AbstractViewControllerTest {
-    private static readonly cellWithCheckbox = {
+    private readonly cellWithCheckbox = {
         checkboxInput: {
             name: 'test',
         },
     }
 
-    private static readonly rowWithCheckboxInFirstCell = {
+    private readonly rowWithCheckboxInFirstCell = {
         id: 'test',
-        cells: [AssertingCheckboxesInListsTest.cellWithCheckbox],
+        cells: [this.cellWithCheckbox],
     }
 
-    private static readonly rowWithCheckboxInSecondCell = {
+    private readonly rowWithCheckboxInSecondCell = {
         id: 'test',
         cells: [{}, this.cellWithCheckbox],
     }
 
-    private static readonly rowWithoutCheckbox = {
+    private readonly rowWithoutCheckbox = {
         id: 'test-2',
         cells: [{}],
     }
 
     @test()
-    protected static hasCheckboxAssertion() {
+    protected hasCheckboxAssertion() {
         assert.isFunction(vcAssert.assertRowRendersCheckBox)
     }
 
     @test()
-    protected static throwsWhenNoCheckbox() {
+    protected throwsWhenNoCheckbox() {
         this.assertThrows([], 0)
         this.assertThrows([], 1)
         this.assertThrows(
@@ -48,18 +49,18 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static passesWhenCheckboxInFirstRowFirstCell() {
+    protected passesWhenCheckboxInFirstRowFirstCell() {
         this.assertFound([this.rowWithCheckboxInFirstCell], 0)
         this.assertFound([this.rowWithCheckboxInSecondCell], 0)
     }
 
     @test()
-    protected static passesWhenCheckboxHasMatchingName() {
+    protected passesWhenCheckboxHasMatchingName() {
         this.assertFound([this.rowWithCheckboxInFirstCell], 0, 'test')
         this.assertFound([this.rowWithCheckboxInSecondCell], 0, 'test')
     }
 
-    private static assertThrows(
+    private assertThrows(
         rows: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[],
         row: number,
         name?: string,
@@ -80,7 +81,7 @@ export default class AssertingCheckboxesInListsTest extends AbstractViewControll
         }
     }
 
-    private static assertFound(
+    private assertFound(
         rows: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[],
         row: number,
         name?: string

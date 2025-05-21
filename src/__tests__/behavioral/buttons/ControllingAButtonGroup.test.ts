@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import { ButtonGroupButton } from '../../../types/heartwood.types'
@@ -8,14 +8,15 @@ import ButtonGroupViewController, {
     ButtonGroupViewControllerOptions,
 } from '../../../viewControllers/ButtonGroup.vc'
 
+@suite()
 export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
-    private static singleSelectVc: ButtonGroupViewController
-    private static onSelectInvocations: string[][]
-    private static multiSelectVc: ButtonGroupViewController
-    protected static controllerMap = {}
-    private static onClickHintInvocations: string[] = []
+    private singleSelectVc!: ButtonGroupViewController
+    private onSelectInvocations!: string[][]
+    private multiSelectVc!: ButtonGroupViewController
+    protected controllerMap = {}
+    private onClickHintInvocations: string[] = []
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.onSelectInvocations = []
 
@@ -24,12 +25,12 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canCreateUsingAButtonGrid() {
+    protected canCreateUsingAButtonGrid() {
         assert.isTruthy(this.singleSelectVc)
     }
 
     @test()
-    protected static throwsIfButtonsHaveNoIds() {
+    protected throwsIfButtonsHaveNoIds() {
         assert.doesThrow(() =>
             this.Controller('buttonGroup', {
                 buttons: [
@@ -43,7 +44,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static rendersButtons() {
+    protected rendersButtons() {
         const buttons = this.render(this.singleSelectVc)
         assert.isLength(buttons, 3)
         assert.isEqual(buttons[0].label, 'first')
@@ -51,27 +52,27 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static noSelectedButtonsToStart() {
+    protected noSelectedButtonsToStart() {
         const selected = this.singleSelectVc.getSelectedButtons()
         assert.isLength(selected, 0)
     }
 
     @test()
-    protected static isSelectedIsNullIfNothingSelectedAtFirst() {
+    protected isSelectedIsNullIfNothingSelectedAtFirst() {
         const buttons = this.render(this.singleSelectVc)
         assert.doesNotInclude(buttons, { isSelected: true })
         assert.doesNotInclude(buttons, { isSelected: false })
     }
 
     @test()
-    protected static async canSelectButtonAndMarkRestAsDeselected() {
+    protected async canSelectButtonAndMarkRestAsDeselected() {
         await this.singleSelectVc.selectButton('first')
         const buttons = this.render(this.singleSelectVc)
         this.assertFirstButtonSelected(buttons)
     }
 
     @test()
-    protected static async selectingSameButtonMoreThanOnceHasNoNegativeEffect() {
+    protected async selectingSameButtonMoreThanOnceHasNoNegativeEffect() {
         await this.singleSelectVc.selectButton('first')
         await this.singleSelectVc.selectButton('first')
         await this.singleSelectVc.selectButton('first')
@@ -88,7 +89,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async deselectingSameButtonMoreThanOnceHasNoNegativeEffect() {
+    protected async deselectingSameButtonMoreThanOnceHasNoNegativeEffect() {
         await this.singleSelectVc.selectButton('first')
         await this.singleSelectVc.deselectButton('first')
         await this.singleSelectVc.deselectButton('first')
@@ -100,7 +101,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canDeselectButton() {
+    protected async canDeselectButton() {
         await this.singleSelectVc.selectButton('first')
         await this.singleSelectVc.deselectButton('first')
 
@@ -110,7 +111,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingButtonSelectsOneButton() {
+    protected async clickingButtonSelectsOneButton() {
         let buttons = this.render(this.singleSelectVc)
         await buttons[0].onClick?.()
         buttons = this.render(this.singleSelectVc)
@@ -119,7 +120,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async onSelectFiredWhenButtonSelected() {
+    protected async onSelectFiredWhenButtonSelected() {
         await this.singleSelectVc.selectButton('first')
 
         assert.isLength(this.onSelectInvocations, 1)
@@ -127,7 +128,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSelectMoreThanOneButton() {
+    protected async canSelectMoreThanOneButton() {
         await this.multiSelectVc.selectButton('first')
         await this.multiSelectVc.selectButton('second')
 
@@ -141,7 +142,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async onSelectFiredWhenMultiButtonSelectedAndDeselected() {
+    protected async onSelectFiredWhenMultiButtonSelectedAndDeselected() {
         await this.multiSelectVc.selectButton('first')
         await this.multiSelectVc.selectButton('second')
         await this.multiSelectVc.deselectButton('first')
@@ -155,7 +156,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingHintIconTriggersHintCallback() {
+    protected async clickingHintIconTriggersHintCallback() {
         let buttons = this.render(this.singleSelectVc)
 
         await buttons[0].onClickHintIcon?.()
@@ -168,7 +169,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetSelectedButtonsToStart() {
+    protected async canSetSelectedButtonsToStart() {
         const vc = this.MultiSelectVc({
             selected: ['first', 'second'],
         })
@@ -181,7 +182,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCancelChangeToCancelChange() {
+    protected async canCancelChangeToCancelChange() {
         let wasHit = false
         const vc = this.Factory().Controller('buttonGroup', {
             onWillChangeSelection: () => {
@@ -205,7 +206,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCancelChangeDeselect() {
+    protected async canCancelChangeDeselect() {
         let wasHit = false
         const vc = this.Factory().Controller('buttonGroup', {
             selected: ['first'],
@@ -227,7 +228,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async willChangeReceivesExpectedPayload() {
+    protected async willChangeReceivesExpectedPayload() {
         let passedToWillChange:
             | {
                   changes: ButtonGroupPendingChanges
@@ -301,7 +302,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async willChangeHitsOnSettingSelectedButtons() {
+    protected async willChangeHitsOnSettingSelectedButtons() {
         let passedSelected: string[] | undefined
         let passedChanges: ButtonGroupPendingChanges | undefined
 
@@ -329,14 +330,14 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
         { id: 'hello', label: 'world' },
         { id: 'hello2', label: 'world2' },
     ])
-    protected static async canSetButtons(expected: ButtonGroupButton[]) {
+    protected async canSetButtons(expected: ButtonGroupButton[]) {
         this.setButtonsOnSingleSelect(expected)
         const buttons = this.renderSingleSelectVc()
         assert.doesInclude(buttons, expected)
     }
 
     @test()
-    protected static async settingButtonsTriggersRender() {
+    protected async settingButtonsTriggersRender() {
         let wasHit = false
         // view is an array of buttons, so no actual controller is returned.
         // people have to call "triggerRender" on the card
@@ -348,7 +349,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingLineIconOptionsPassesToButtons() {
+    protected async settingLineIconOptionsPassesToButtons() {
         const expected = this.generateRandomLineIconOptions()
         this.singleSelectVc = this.SingleSelectVc(expected)
 
@@ -357,7 +358,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async iconOptionsOnButtonBeatOptionsOnGroup() {
+    protected async iconOptionsOnButtonBeatOptionsOnGroup() {
         const expected = this.generateRandomLineIconOptions()
         this.singleSelectVc = this.SingleSelectVc({
             ...this.generateRandomLineIconOptions(),
@@ -368,7 +369,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
         assert.doesInclude(button, expected)
     }
 
-    private static generateRandomLineIconOptions() {
+    private generateRandomLineIconOptions() {
         return {
             lineIcon: generateId() as any,
             selectedLineIcon: generateId() as any,
@@ -376,11 +377,11 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
         }
     }
 
-    private static setButtonsOnSingleSelect(expected: ButtonGroupButton[]) {
+    private setButtonsOnSingleSelect(expected: ButtonGroupButton[]) {
         this.singleSelectVc.setButtons(expected)
     }
 
-    private static assertFirstButtonSelected(
+    private assertFirstButtonSelected(
         buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
     ) {
         assert.doesInclude(buttons, { isSelected: true })
@@ -388,7 +389,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
         assert.doesInclude(buttons[1], { isSelected: false })
     }
 
-    private static MultiSelectVc(
+    private MultiSelectVc(
         options?: Partial<ButtonGroupViewControllerOptions>
     ): ButtonGroupViewController {
         return this.Factory().Controller('buttonGroup', {
@@ -418,11 +419,11 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
         })
     }
 
-    private static renderSingleSelectVc() {
+    private renderSingleSelectVc() {
         return this.render(this.singleSelectVc)
     }
 
-    private static SingleSelectVc(
+    private SingleSelectVc(
         options?: Partial<ButtonGroupViewControllerOptions>
     ): ButtonGroupViewController {
         return this.Controller('buttonGroup', {

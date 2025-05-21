@@ -1,4 +1,10 @@
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 import webRtcAssert, {
@@ -10,18 +16,19 @@ import {
 } from '../../../types/heartwood.types'
 import WebRtcPlayerViewController from '../../../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
 
+@suite()
 export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
-    private static playerVc: WebRtcPlayerViewController
+    private vc!: CardViewController
+    private playerVc!: WebRtcPlayerViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
         this.playerVc = this.Vc()
     }
 
     @test()
-    protected static throwsWithMissing() {
+    protected throwsWithMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => webRtcAssert.cardRendersPlayer())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -30,18 +37,18 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static throwsWhenCardDoesNotRenderPlayer() {
+    protected throwsWhenCardDoesNotRenderPlayer() {
         assert.doesThrow(() => this.assertRendersPlayer(), 'not rendering')
     }
 
     @test()
-    protected static passesWithWebRtcPlayerInFirstSection() {
+    protected passesWithWebRtcPlayerInFirstSection() {
         this.dropPlayerVcIntoNewSection()
         this.assertRendersPlayer()
     }
 
     @test()
-    protected static returnsWithWebRtcPlayerInFirstSection() {
+    protected returnsWithWebRtcPlayerInFirstSection() {
         this.dropPlayerVcIntoNewSection()
         const vc = this.assertRendersPlayer()
         assert.isEqual(
@@ -52,14 +59,14 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static canFindCardIsSecondSection() {
+    protected canFindCardIsSecondSection() {
         this.vc.addSection({})
         this.dropPlayerVcIntoNewSection()
         this.assertRendersPlayer()
     }
 
     @test()
-    protected static throwsWhenSendingBadId() {
+    protected throwsWhenSendingBadId() {
         this.dropPlayerVcIntoNewSection()
         assert.doesThrow(
             () => this.assertRendersPlayer(generateId()),
@@ -68,7 +75,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static canFindWhenIdMatches() {
+    protected canFindWhenIdMatches() {
         const id = generateId()
         this.setIdOnplayer(id)
         this.dropPlayerVcIntoNewSection()
@@ -76,7 +83,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static canFindInTheSecondSection() {
+    protected canFindInTheSecondSection() {
         const id = generateId()
         this.setIdOnplayer(id)
         this.vc.addSection({})
@@ -85,7 +92,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async generatesOfferThrowsWithMissing() {
+    protected async generatesOfferThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcAssert.actionCreatesOffer()
@@ -97,12 +104,12 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async actionCreateOfferThrowsIfBeforeEachNotCalled() {
+    protected async actionCreateOfferThrowsIfBeforeEachNotCalled() {
         await this.assertCreateOfferThrowsBeforeEach()
     }
 
     @test()
-    protected static async callingBeforeEachAllowsGenerateOfferToThrowForNoOfferGenerated() {
+    protected async callingBeforeEachAllowsGenerateOfferToThrowForNoOfferGenerated() {
         this.callBeforeEachAndReloadPlayerVc()
         await assert.doesThrowAsync(
             () => this.assertCreatesOffer(() => {}),
@@ -111,13 +118,13 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async callingBeforeEachWithoutCreatingVcThrows() {
+    protected async callingBeforeEachWithoutCreatingVcThrows() {
         this.callBeforeEachOnAssert()
         await this.assertCreateOfferThrowsBeforeEach()
     }
 
     @test()
-    protected static async assertCreateOfferPassesIfActuallyCreatingOffer() {
+    protected async assertCreateOfferPassesIfActuallyCreatingOffer() {
         this.callBeforeEachAndReloadPlayerVc()
         await this.assertCreatesOffer(async () => {
             await this.playerVc.createOffer({})
@@ -125,7 +132,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async throwsWhenOptionsPassedToCreateOfferDontMatch() {
+    protected async throwsWhenOptionsPassedToCreateOfferDontMatch() {
         this.callBeforeEachAndReloadPlayerVc()
         const options: RTCOfferOptions = {
             offerToReceiveAudio: true,
@@ -141,7 +148,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertProvideAnswerThrowsWithMissing() {
+    protected async assertProvideAnswerThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcAssert.answerSet()
@@ -153,13 +160,13 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async throwsIfAnswerNotSet() {
+    protected async throwsIfAnswerNotSet() {
         this.callBeforeEachAndReloadPlayerVc()
         await assert.doesThrowAsync(() => this.assertAnswerSet(), 'setAnswer')
     }
 
     @test()
-    protected static async answerSetThrowsIfDidNotCallBeforeEach() {
+    protected async answerSetThrowsIfDidNotCallBeforeEach() {
         await assert.doesThrowAsync(
             () => webRtcAssert.answerSet(this.playerVc),
             'beforeEach'
@@ -167,14 +174,14 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async passesIfSetAnswerCalled() {
+    protected async passesIfSetAnswerCalled() {
         this.callBeforeEachAndReloadPlayerVc()
         await this.setAnswerOnPlayerVc(generateId())
         await this.assertAnswerSet()
     }
 
     @test()
-    protected static async throwsIfDifferentAnswerIsPassed() {
+    protected async throwsIfDifferentAnswerIsPassed() {
         this.callBeforeEachAndReloadPlayerVc()
         await this.setAnswerOnPlayerVc(generateId())
         await assert.doesThrowAsync(
@@ -184,7 +191,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async passesIfAnswerMatches() {
+    protected async passesIfAnswerMatches() {
         this.callBeforeEachAndReloadPlayerVc()
         const answer = generateId()
         await this.setAnswerOnPlayerVc(answer)
@@ -192,7 +199,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertingCropThrowsWithMissing() {
+    protected async assertingCropThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcAssert.assertCropEquals()
@@ -204,7 +211,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertingCropThrowsWhenCropDoesNotMatch() {
+    protected async assertingCropThrowsWhenCropDoesNotMatch() {
         const crop = generateCropPointValues()
         this.setCrop(crop)
         const point = generateCropPointValues()
@@ -212,14 +219,14 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertingCropDoesNotThrowIfMatches() {
+    protected async assertingCropDoesNotThrowIfMatches() {
         const crop = generateCropPointValues()
         this.setCrop(crop)
         await this.assertCropEquals(crop)
     }
 
     @test()
-    protected static async assertIsCroppingEnabledThrowsWithMissing() {
+    protected async assertIsCroppingEnabledThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcAssert.croppingIsEnabled()
@@ -231,7 +238,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertIsCroppingEnabledThrowsIfNotMatch() {
+    protected async assertIsCroppingEnabledThrowsIfNotMatch() {
         await assert.doesThrowAsync(
             () => this.assertCroppingIsEnabled(),
             'enableCropping'
@@ -242,7 +249,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertIsCroppingDisabledThrowsWithMissing() {
+    protected async assertIsCroppingDisabledThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcAssert.croppingIsDisabled()
@@ -254,7 +261,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertIsCroppingDisabledThrowsIfNotMatch() {
+    protected async assertIsCroppingDisabledThrowsIfNotMatch() {
         this.enableCropping()
         await assert.doesThrowAsync(
             () => this.assertCroppingIsDisabled(),
@@ -266,7 +273,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async canAssertCropping() {
+    protected async canAssertCropping() {
         this.assertCroppingIsDisabled()
         this.enableCropping()
         this.assertCroppingIsEnabled()
@@ -275,7 +282,7 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async assertingOfferReturnsGeneratedOffer() {
+    protected async assertingOfferReturnsGeneratedOffer() {
         this.callBeforeEachAndReloadPlayerVc()
         const offerSdp = await this.assertCreatesOffer(() =>
             this.playerVc.createOffer({})
@@ -287,78 +294,75 @@ export default class AssertingWebrtcPlayerTest extends AbstractViewControllerTes
         )
     }
 
-    private static disableCropping() {
+    private disableCropping() {
         this.playerVc.disableCropping()
     }
 
-    private static enableCropping() {
+    private enableCropping() {
         this.playerVc.enableCropping()
     }
 
-    private static assertCroppingIsEnabled(): any {
+    private assertCroppingIsEnabled(): any {
         return webRtcAssert.croppingIsEnabled(this.playerVc)
     }
 
-    private static assertCroppingIsDisabled(): any {
+    private assertCroppingIsDisabled(): any {
         return webRtcAssert.croppingIsDisabled(this.playerVc)
     }
 
-    private static assertCropEquals(point: WebRtcCropPoint): any {
+    private assertCropEquals(point: WebRtcCropPoint): any {
         return webRtcAssert.assertCropEquals(this.playerVc, point)
     }
 
-    private static setCrop(crop: WebRtcCropPoint) {
+    private setCrop(crop: WebRtcCropPoint) {
         this.playerVc.setCrop(crop)
     }
 
-    private static async setAnswerOnPlayerVc(answer: string) {
+    private async setAnswerOnPlayerVc(answer: string) {
         await this.playerVc.setAnswer(answer)
     }
 
-    private static assertAnswerSet(answerSdp?: string) {
+    private assertAnswerSet(answerSdp?: string) {
         return webRtcAssert.answerSet(this.playerVc, answerSdp)
     }
 
-    private static callBeforeEachAndReloadPlayerVc() {
+    private callBeforeEachAndReloadPlayerVc() {
         this.callBeforeEachOnAssert()
         this.playerVc = this.Vc()
     }
 
-    private static async assertCreateOfferThrowsBeforeEach() {
+    private async assertCreateOfferThrowsBeforeEach() {
         await assert.doesThrowAsync(
             () => this.assertCreatesOffer(() => {}),
             'beforeEach'
         )
     }
 
-    private static callBeforeEachOnAssert() {
+    private callBeforeEachOnAssert() {
         webRtcAssert.beforeEach(this.getFactory())
     }
 
-    private static assertCreatesOffer(
-        cb: () => void,
-        offerOptions?: RTCOfferOptions
-    ) {
+    private assertCreatesOffer(cb: () => void, offerOptions?: RTCOfferOptions) {
         return webRtcAssert.actionCreatesOffer(this.playerVc, cb, offerOptions)
     }
 
-    private static setIdOnplayer(id: string) {
+    private setIdOnplayer(id: string) {
         this.playerVc = this.Controller('web-rtc-player', {
             id,
         })
     }
 
-    private static Vc(): WebRtcPlayerViewController {
+    private Vc(): WebRtcPlayerViewController {
         return this.Controller('web-rtc-player', {})
     }
 
-    private static dropPlayerVcIntoNewSection() {
+    private dropPlayerVcIntoNewSection() {
         this.vc.addSection({
             webRtcPlayer: this.playerVc.render(),
         })
     }
 
-    private static assertRendersPlayer(id?: string) {
+    private assertRendersPlayer(id?: string) {
         return webRtcAssert.cardRendersPlayer(this.vc, id)
     }
 }

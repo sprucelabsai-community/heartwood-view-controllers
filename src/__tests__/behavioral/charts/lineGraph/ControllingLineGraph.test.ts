@@ -1,45 +1,46 @@
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import { LineGraph } from '../../../../types/heartwood.types'
 import LineGraphViewController from '../../../../viewControllers/charts/LineGraph.vc'
 import AbstractChartTest from '../AbstractChartTest'
 
+@suite()
 export default class ControllingLineGraphTest extends AbstractChartTest {
     @test()
-    protected static async returnsSelfAsController() {
+    protected async returnsSelfAsController() {
         this.assertRenderControllerAsInstanceOf(LineGraphViewController)
     }
 
     @test()
-    protected static async passesViewModelThroughToRender() {
+    protected async passesViewModelThroughToRender() {
         this.assertRendersAsExpectedWithModelPassedToConstructor()
     }
 
     @test()
-    protected static async setDataSetsThrowsWithMissing() {
+    protected async setDataSetsThrowsWithMissing() {
         this.assertSetDataSetsThrowsWhenMissingRequired()
     }
 
     @test()
-    protected static async settingDataSetsWithRequiredPasses() {
+    protected async settingDataSetsWithRequiredPasses() {
         this.vc.setDataSets([])
     }
 
     @test()
-    protected static async settingDataSetRendersAsExpected() {
+    protected async settingDataSetRendersAsExpected() {
         this.assertSettingDataSetsRendersAsExpected()
     }
 
     @test()
-    protected static async settingDataSetsTriggersRender() {
+    protected async settingDataSetsTriggersRender() {
         this.assertSettingDataTriggersRender()
     }
 
     @test()
-    protected static async settingDataSetsDoesNotLoseId() {
+    protected async settingDataSetsDoesNotLoseId() {
         this.assertRetainsId()
     }
 
-    protected static setup(options?: LineGraph) {
+    protected setup(options?: LineGraph) {
         this.vc = this.Controller('line-graph', options ?? {})
     }
 }

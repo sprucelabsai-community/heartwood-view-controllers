@@ -1,11 +1,12 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class ControllingAListRowTest extends AbstractViewControllerTest {
     @test()
-    protected static rowKnowsIfDeleted() {
+    protected rowKnowsIfDeleted() {
         const { rowVc, listVc } = this.ListVcWithRowVc()
 
         assert.isFalse(rowVc.getIsDeleted())
@@ -16,7 +17,7 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static renderingADeletedRowThrows() {
+    protected renderingADeletedRowThrows() {
         const { rowVc } = this.ListVcWithRowVc()
         rowVc.delete()
         assert.isTrue(rowVc.getIsDeleted())
@@ -27,7 +28,7 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static everyRowKnowsIfItsDeleted() {
+    protected everyRowKnowsIfItsDeleted() {
         const { listVc } = this.ListVcWithRowVc([
             {
                 id: 'second',
@@ -45,7 +46,7 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async allMethodsOnRowVcHonorChangingRowIdxs() {
+    protected async allMethodsOnRowVcHonorChangingRowIdxs() {
         const { listVc } = this.ListVcWithRowVc([
             {
                 id: 'second',
@@ -101,7 +102,7 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
 
     @test('knows if has date input by name', 'dateInput')
     @test('knows if has text input by name', 'textInput')
-    protected static async knowsIfHasInput(input: 'dateInput' | 'textInput') {
+    protected async knowsIfHasInput(input: 'dateInput' | 'textInput') {
         const name = generateId()
         const name2 = generateId()
         const name3 = generateId()
@@ -130,7 +131,7 @@ export default class ControllingAListRowTest extends AbstractViewControllerTest 
         assert.isTrue(rowVc.hasInput(name3))
     }
 
-    private static ListVcWithRowVc(
+    private ListVcWithRowVc(
         rows?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow[]
     ) {
         const listVc = this.Controller('list', {

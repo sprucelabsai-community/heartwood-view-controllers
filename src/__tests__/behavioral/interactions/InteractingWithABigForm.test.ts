@@ -1,4 +1,4 @@
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -21,25 +21,26 @@ class NoFocusViewController extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class InteractingWithABigFormTest extends AbstractViewControllerTest {
-    protected static bigFormVc: BigFormViewController<TestFormSchema>
-    protected static controllerMap: Record<string, any> = {
+    protected bigFormVc!: BigFormViewController<TestFormSchema>
+    protected controllerMap: Record<string, any> = {
         noFocus: NoFocusViewController,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.bigFormVc = this.BigFormVc()
     }
 
     @test()
-    protected static async throwsWhenNoOnCancelHandlerSet() {
+    protected async throwsWhenNoOnCancelHandlerSet() {
         const formVc = this.Controller('form', testFormOptions)
         await assert.doesThrowAsync(() => interactor.cancelForm(formVc))
     }
 
     @test()
-    protected static async callsCancelHandler() {
+    protected async callsCancelHandler() {
         let wasHit = false
         const formVc = this.Controller('form', {
             ...testFormOptions,
@@ -53,7 +54,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async submitSlideThrowsWhenMissing() {
+    protected async submitSlideThrowsWhenMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             interactor.submitBigFormSlide()
@@ -65,7 +66,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async submittingSlideTriggersCallback() {
+    protected async submittingSlideTriggersCallback() {
         let wasHit = false
 
         await this.submitSlideOnNewBigForm({
@@ -82,7 +83,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async passesExpectedParamsToOnSubmitSlide() {
+    protected async passesExpectedParamsToOnSubmitSlide() {
         let passedOptions: BigFormOnSubmitOptions<any> | undefined
 
         await this.submitSlideOnNewBigForm({
@@ -110,7 +111,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async onSubmitSlideWithOnSubmitHandlerDoesNotThrow() {
+    protected async onSubmitSlideWithOnSubmitHandlerDoesNotThrow() {
         await this.submitSlideOnNewBigForm({
             values: {
                 first: generateId(),
@@ -122,7 +123,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async submitListSlideTriggersOnSubmit() {
+    protected async submitListSlideTriggersOnSubmit() {
         let onSubmitCount = 0
         let onSubmitSlideCount = 0
 
@@ -155,7 +156,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async submittingOnFirstSlideThrowsIfRequiredFieldsNotCompleted() {
+    protected async submittingOnFirstSlideThrowsIfRequiredFieldsNotCompleted() {
         this.bigFormVc = this.BigFormVc({})
         await assert.doesThrowAsync(() => this.submitSlide())
 
@@ -167,7 +168,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async focusingFieldWithoutFocusHookThrows() {
+    protected async focusingFieldWithoutFocusHookThrows() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => interactor.focus())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -176,7 +177,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async throwsWhenVcDoesNotImplementFocusEvents() {
+    protected async throwsWhenVcDoesNotImplementFocusEvents() {
         const vc = this.NoFocusVc()
         await assert.doesThrowAsync(
             () => interactor.focus(vc),
@@ -185,7 +186,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async invokesWillFocus() {
+    protected async invokesWillFocus() {
         const vc = this.NoFocusVc()
         let wasHit = false
 
@@ -198,7 +199,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async invokesDidFocusSecond() {
+    protected async invokesDidFocusSecond() {
         const vc = this.NoFocusVc()
 
         let wasHit = ''
@@ -216,14 +217,14 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async doesNotThrowWithOnlyDidFocus() {
+    protected async doesNotThrowWithOnlyDidFocus() {
         const vc = this.NoFocusVc()
         vc.didFocus = () => {}
         await interactor.focus(vc)
     }
 
     @test()
-    protected static async focusingFieldWithoutBlurHookThrows() {
+    protected async focusingFieldWithoutBlurHookThrows() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => interactor.blur())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -232,7 +233,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async throwsWhenVcDoesNotImplementBlurEvents() {
+    protected async throwsWhenVcDoesNotImplementBlurEvents() {
         const vc = this.NoFocusVc()
         await assert.doesThrowAsync(
             () => interactor.blur(vc),
@@ -241,7 +242,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async invokesWillBlur() {
+    protected async invokesWillBlur() {
         const vc = this.NoFocusVc()
         let wasHit = false
 
@@ -254,7 +255,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async invokesDidBlurSecond() {
+    protected async invokesDidBlurSecond() {
         const vc = this.NoFocusVc()
 
         let wasHit = ''
@@ -272,14 +273,14 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async doesNotThrowWithOnlyDidBlur() {
+    protected async doesNotThrowWithOnlyDidBlur() {
         const vc = this.NoFocusVc()
         vc.didBlur = () => {}
         await interactor.blur(vc)
     }
 
     @test()
-    protected static async canStepThroughEntireBigForm() {
+    protected async canStepThroughEntireBigForm() {
         let wasHit = false
 
         this.bigFormVc = this.BigFormVc({
@@ -320,30 +321,30 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
         assert.isTrue(wasHit)
     }
 
-    private static async setValues(values: Partial<TestFormValues>) {
+    private async setValues(values: Partial<TestFormValues>) {
         await this.bigFormVc.setValues(values)
     }
 
-    private static async assertSubmittingThrows() {
+    private async assertSubmittingThrows() {
         await assert.doesThrowAsync(() => this.submitSlide())
     }
 
-    private static NoFocusVc() {
+    private NoFocusVc() {
         return this.Controller('noFocus' as any, {})
     }
 
-    private static async submitSlideOnNewBigForm(
+    private async submitSlideOnNewBigForm(
         options?: Partial<BigFormViewControllerOptions<TestFormSchema>>
     ) {
         this.bigFormVc = this.BigFormVc(options)
         await this.submitSlide()
     }
 
-    private static async submitSlide() {
+    private async submitSlide() {
         await interactor.submitBigFormSlide(this.bigFormVc)
     }
 
-    protected static BigFormVc(
+    protected BigFormVc(
         options?: Partial<BigFormViewControllerOptions<TestFormSchema>>
     ) {
         return this.Controller(

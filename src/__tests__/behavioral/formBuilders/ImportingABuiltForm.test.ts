@@ -1,17 +1,18 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { FormBuilder } from '../../../types/heartwood.types'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
+@suite()
 export default class ImportingABuiltFormTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'edit-form-builder-section': EditFormBuilderSectionCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
-    private static vc: FormBuilderCardViewController
+    private vc!: FormBuilderCardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Controller('form-builder-card', {
@@ -23,12 +24,12 @@ export default class ImportingABuiltFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static hasImportFromObject() {
+    protected hasImportFromObject() {
         assert.isFunction(this.vc.importObject)
     }
 
     @test()
-    protected static async canImportCustomObject() {
+    protected async canImportCustomObject() {
         const simpleImport: FormBuilder = {
             title: 'Building your form',
             subtitle: 'a subtitle',

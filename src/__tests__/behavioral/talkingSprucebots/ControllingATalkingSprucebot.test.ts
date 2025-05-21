@@ -1,5 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import talkingSprucebotSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -9,17 +9,18 @@ import TalkingSprucebotViewController, {
     TalkingSprucebotViewControllerOptions,
 } from '../../../viewControllers/TalkingSprucebot.vc'
 
+@suite()
 export default class ControllingATalkingSprucebotTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: TalkingSprucebotViewController
+    protected controllerMap = {}
+    private vc!: TalkingSprucebotViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.TalkingSprucebot()
     }
 
     @test()
-    protected static mustPassAtLeastOneSentence() {
+    protected mustPassAtLeastOneSentence() {
         const err = assert.doesThrow(() =>
             this.Controller('talkingSprucebot', {
                 sentences: [],
@@ -35,7 +36,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static passesThroughAllOptionsToModel() {
+    protected passesThroughAllOptionsToModel() {
         const key = `${Math.random()}`
 
         this.vc = this.Controller('talkingSprucebot', {
@@ -50,7 +51,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static canCreateATalkingSprucebot() {
+    protected canCreateATalkingSprucebot() {
         const model = this.renderVc()
 
         //@ts-ignore
@@ -65,7 +66,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static async playPauseRestartInvokeHandlers() {
+    protected async playPauseRestartInvokeHandlers() {
         //@ts-ignore
         assert.isFunction(this.vc.playHandler)
         //@ts-ignore
@@ -114,7 +115,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static async onCompleteCalledWhenOnCompleteIsInvoked() {
+    protected async onCompleteCalledWhenOnCompleteIsInvoked() {
         let wasHit = false
 
         this.vc = this.TalkingSprucebot({
@@ -135,7 +136,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static async playHoldsUntilTriggerComplete() {
+    protected async playHoldsUntilTriggerComplete() {
         this.vc = this.TalkingSprucebot({
             sentences: [
                 {
@@ -162,13 +163,13 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static defaultSizeIsMedium() {
+    protected defaultSizeIsMedium() {
         const model = this.renderVc()
         assert.isEqual(model.size, 'medium')
     }
 
     @test()
-    protected static canSetSize() {
+    protected canSetSize() {
         this.vc = this.TalkingSprucebot({
             size: 'small',
             sentences: [
@@ -182,7 +183,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static defaultAvatarChilling() {
+    protected defaultAvatarChilling() {
         const model = this.renderVc()
         assert.isEqualDeep(model.avatar, {
             stateOfMind: 'chill',
@@ -190,7 +191,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static canSetAvatar() {
+    protected canSetAvatar() {
         this.vc = this.TalkingSprucebot({
             size: 'small',
             avatar: {
@@ -211,7 +212,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     }
 
     @test()
-    protected static async knowsWhenPlaying() {
+    protected async knowsWhenPlaying() {
         this.assertIsPlaying()
         this.vc.pause()
         this.assertIsNotPlaying()
@@ -233,27 +234,27 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
             words: 'hey hey',
         },
     ])
-    protected static async canSetNewSententences(updated: Sentence[]) {
+    protected async canSetNewSententences(updated: Sentence[]) {
         this.vc.setSentences(updated)
         const model = this.renderVc()
         assert.isEqualDeep(model.sentences, updated)
     }
 
     @test()
-    protected static async settingSentenceTriggersRender() {
+    protected async settingSentenceTriggersRender() {
         this.vc.setSentences([])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static assertIsNotPlaying() {
+    private assertIsNotPlaying() {
         assert.isFalse(this.vc.getIsPlaying())
     }
 
-    private static assertIsPlaying() {
+    private assertIsPlaying() {
         assert.isTrue(this.vc.getIsPlaying())
     }
 
-    private static TalkingSprucebot(
+    private TalkingSprucebot(
         options?: TalkingSprucebotViewControllerOptions
     ): TalkingSprucebotViewController {
         return this.Controller('talkingSprucebot', {
@@ -266,7 +267,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
         })
     }
 
-    private static renderVc() {
+    private renderVc() {
         return this.render(this.vc)
     }
 }

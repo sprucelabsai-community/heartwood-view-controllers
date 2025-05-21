@@ -1,5 +1,5 @@
 import { cloneDeep } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltStateMachine, {
@@ -8,16 +8,17 @@ import ToolBeltStateMachine, {
 } from '../../../toolBelts/ToolBeltStateMachine'
 const set = require('object-set')
 
+@suite()
 export default class ToolBeltStateMachineTest extends AbstractViewControllerTest {
-    private static sm: ToolBeltStateMachine
+    private sm!: ToolBeltStateMachine
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.sm = this.StateMachine()
     }
 
     @test()
-    protected static throwsWhenMissingStates() {
+    protected throwsWhenMissingStates() {
         //@ts-ignore
         const err = assert.doesThrow(() => new ToolBeltStateMachine())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -26,7 +27,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async needsStateWhenTransitioning() {
+    protected async needsStateWhenTransitioning() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => this.sm.transitionTo())
 
@@ -36,13 +37,13 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canTransitionToState() {
+    protected async canTransitionToState() {
         const state = this.State()
         await this.transitionTo(state)
     }
 
     @test()
-    protected static async callsLoadOnTransition() {
+    protected async callsLoadOnTransition() {
         let wasHit = false
         let passedOptions: any
         const state = this.State({
@@ -60,14 +61,14 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
     @test('can get state id 1', 'taco')
     @test('can get state id 2', 'burrito')
-    protected static async canGetStateId(id: string) {
+    protected async canGetStateId(id: string) {
         const state = this.State({ id })
         await this.transitionTo(state)
         assert.isEqual(this.sm.getStateId(), id)
     }
 
     @test()
-    protected static async catGetToolBeltOffMachine() {
+    protected async catGetToolBeltOffMachine() {
         const vc = this.Controller('tool-belt', {})
         this.sm = this.StateMachine({ toolBeltVc: vc })
 
@@ -75,7 +76,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSetContext() {
+    protected async canSetContext() {
         const state = this.State()
 
         const context = {}
@@ -87,7 +88,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSetPartsOfContext() {
+    protected async canSetPartsOfContext() {
         const context = {
             hello: 'world',
         }
@@ -101,7 +102,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canGetCurrentState() {
+    protected async canGetCurrentState() {
         const state = this.State()
 
         await this.transitionTo(state)
@@ -110,7 +111,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSetStateDuringInstantiating() {
+    protected async canSetStateDuringInstantiating() {
         const context = { hello: 'world' }
 
         this.sm = this.StateMachine({ context })
@@ -119,7 +120,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSubscribeToContextChanges() {
+    protected async canSubscribeToContextChanges() {
         const originalContext = {}
         const updates = { hello: true }
 
@@ -143,7 +144,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     @test('can cancel context update 1', { go: 'buddy' })
     @test('can cancel context update 2', { what: 'the!?' })
     @test('can cancel context update 3', { what: 'the!?' }, { no: 'more' })
-    protected static async canCancelContextUpdates(
+    protected async canCancelContextUpdates(
         current: Record<string, any>,
         updates = { go: 'team' }
     ) {
@@ -172,7 +173,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async updatingContextReturnsTrueByDefault() {
+    protected async updatingContextReturnsTrueByDefault() {
         await this.sm.on('will-update-context', () => {
             return {}
         })
@@ -182,7 +183,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async anyListenerCanCancelUpdates() {
+    protected async anyListenerCanCancelUpdates() {
         await this.sm.on('will-update-context', () => {
             return {}
         })
@@ -196,14 +197,14 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canGetVcFactory() {
+    protected canGetVcFactory() {
         const vcFactory = this.getFactory()
         this.sm = this.StateMachine({ vcFactory })
         assert.isEqual(this.sm.getVcFactory(), vcFactory)
     }
 
     @test()
-    protected static async copiesContextDeep() {
+    protected async copiesContextDeep() {
         class Test {
             public test = 'true'
         }
@@ -237,7 +238,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     @test('does not emit if same 1', { whatever: { pizza: true } })
     @test('does not emit if same 2', { howdy: { ho: false } })
     @test('does not emit if same 3', { cheesy: () => {} })
-    protected static async doesNotEmitIfContextHasNotChanged(updates: any) {
+    protected async doesNotEmitIfContextHasNotChanged(updates: any) {
         await this.sm.updateContext(updates)
 
         let wasDidHit = false
@@ -259,7 +260,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async callsDestroyWhenTransitioningAwayFromState() {
+    protected async callsDestroyWhenTransitioningAwayFromState() {
         let state1DestroyCount = 0
 
         const state1 = this.State({
@@ -278,7 +279,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canWaitUntilContextUpdateIsDone() {
+    protected async canWaitUntilContextUpdateIsDone() {
         let willUpdateHit = false
         let didUpdateHit = false
 
@@ -303,7 +304,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async willUpdateThrowingCausesSmToThrow() {
+    protected async willUpdateThrowingCausesSmToThrow() {
         await this.sm.on('will-update-context', async () => {
             assert.fail('you know it!')
         })
@@ -312,7 +313,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async didUpdateThrowingCausesSmToThrow() {
+    protected async didUpdateThrowingCausesSmToThrow() {
         await this.sm.on('did-update-context', async () => {
             assert.fail('oh you think?')
         })
@@ -321,7 +322,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canMakeDotSyntaxUpdates() {
+    protected async canMakeDotSyntaxUpdates() {
         await this.assertSettingContextThenUpdatingEquals(
             {
                 what: {
@@ -335,7 +336,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canMakeDotSyntaxUpdates2() {
+    protected async canMakeDotSyntaxUpdates2() {
         await this.assertSettingContextThenUpdatingEquals(
             {
                 what: {
@@ -349,7 +350,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canMakeDotSyntaxUpdates3() {
+    protected async canMakeDotSyntaxUpdates3() {
         await this.assertSettingContextThenUpdatingEquals(
             {
                 hey: {
@@ -370,7 +371,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async updatingUsingDotSyntaxTriggersChangeListeners() {
+    protected async updatingUsingDotSyntaxTriggersChangeListeners() {
         await this.sm.updateContext({
             hello: {
                 world: true,
@@ -397,7 +398,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async stripsOutUndefinedsBeforeCheckingIfChanges() {
+    protected async stripsOutUndefinedsBeforeCheckingIfChanges() {
         await this.updateContext({
             test: {
                 one: 'two',
@@ -439,7 +440,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
             cow: 'oy oy',
         }
     )
-    protected static async canMixinContextInWillUpdate(
+    protected async canMixinContextInWillUpdate(
         context: Record<string, any>,
         mixin: Record<string, any>
     ) {
@@ -452,7 +453,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canMixinFromMultipleListeners() {
+    protected async canMixinFromMultipleListeners() {
         await this.mixIntoContextDuringWillUpdate({
             hey: 'there',
         })
@@ -473,7 +474,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async gettingContextMixingInChangesDoesNotMixinIfEmptyObject() {
+    protected async gettingContextMixingInChangesDoesNotMixinIfEmptyObject() {
         //@ts-ignore
         this.sm.getContextMixingInUpdates = () =>
             //@ts-ignore
@@ -483,7 +484,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canMixinValuesWithArraySyntax() {
+    protected async canMixinValuesWithArraySyntax() {
         await this.updateContext({
             hey: {
                 stuff: [
@@ -517,14 +518,12 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         assert.isEqual(hitCount, 2)
     }
 
-    private static assertFirstElementInArraysTitleEquals(expected: string) {
+    private assertFirstElementInArraysTitleEquals(expected: string) {
         const context = this.getContext()
         assert.isEqual(context.hey.stuff[0].title, expected)
     }
 
-    private static async mixIntoContextDuringWillUpdate(
-        mixin: Record<string, any>
-    ) {
+    private async mixIntoContextDuringWillUpdate(mixin: Record<string, any>) {
         await this.sm.on('will-update-context', () => {
             return {
                 mixin,
@@ -532,7 +531,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         })
     }
 
-    private static async assertSettingContextThenUpdatingEquals(
+    private async assertSettingContextThenUpdatingEquals(
         starting: Record<string, any>,
         updates: Record<string, any>,
         expected: Record<string, any>
@@ -563,7 +562,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         this.assertContextEquals(expected)
     }
 
-    private static State(state?: Partial<ToolBeltState>) {
+    private State(state?: Partial<ToolBeltState>) {
         return {
             id: `${new Date().getTime() * Math.random()}`,
             async load() {},
@@ -571,17 +570,15 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         }
     }
 
-    private static async updateContext(context: any) {
+    private async updateContext(context: any) {
         await this.sm.updateContext(context)
     }
 
-    public static getState() {
+    public getState() {
         return this.sm.getState()
     }
 
-    private static StateMachine(
-        options?: Partial<ToolBeltStateMachineOptions>
-    ) {
+    private StateMachine(options?: Partial<ToolBeltStateMachineOptions>) {
         return new ToolBeltStateMachine({
             toolBeltVc: this.Controller('tool-belt', {}),
             vcFactory: this.getFactory(),
@@ -590,29 +587,25 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         })
     }
 
-    private static async transitionTo(state: ToolBeltState) {
+    private async transitionTo(state: ToolBeltState) {
         await this.sm.transitionTo(state)
 
         return this.sm
     }
 
-    private static async assertContextUpdateNotBlocked(updates: {
-        yes: string
-    }) {
+    private async assertContextUpdateNotBlocked(updates: { yes: string }) {
         let response = await this.sm.updateContext(updates)
         assert.isTrue(response)
     }
 
-    private static assertContextEquals(context: Record<string, any>) {
+    private assertContextEquals(context: Record<string, any>) {
         assert.isEqualDeep(this.getContext(), context)
     }
-    private static getContext() {
+    private getContext() {
         return this.sm.getContext()
     }
 
-    private static async assertContextUpdateBlocked(
-        updates: Record<string, any>
-    ) {
+    private async assertContextUpdateBlocked(updates: Record<string, any>) {
         const response = await this.sm.updateContext(updates)
         assert.isFalse(response)
     }

@@ -1,10 +1,11 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
 type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 
+@suite()
 export default class AssertingTalkingSprucebots extends AbstractViewControllerTest {
     @test(
         'throws with miss-matched id',
@@ -30,7 +31,7 @@ export default class AssertingTalkingSprucebots extends AbstractViewControllerTe
         ],
         'test'
     )
-    protected static async throwsWhenNoTalkingSprucebotById(
+    protected async throwsWhenNoTalkingSprucebotById(
         sections: Section[],
         id: string
     ) {
@@ -64,11 +65,11 @@ export default class AssertingTalkingSprucebots extends AbstractViewControllerTe
         ],
         'the'
     )
-    protected static passesWhenFindsById(sections: Section[], id: string) {
+    protected passesWhenFindsById(sections: Section[], id: string) {
         this.assertRendersTalkingSprucebot(sections, id)
     }
 
-    private static assertRendersTalkingSprucebot(
+    private assertRendersTalkingSprucebot(
         sections: Section[],
         idToCheck: string
     ) {
@@ -80,7 +81,7 @@ export default class AssertingTalkingSprucebots extends AbstractViewControllerTe
         )
     }
 
-    private static Vc(
+    private Vc(
         sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]
     ) {
         return this.Controller('card', {

@@ -1,19 +1,26 @@
-import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
+import {
+    assert,
+    errorAssert,
+    generateId,
+    test,
+    suite,
+} from '@sprucelabs/test-utils'
 import {
     importExportSourceApp,
     importExportSourceApp2,
 } from '../../../tests/constants'
 import AbstractExportAndImportTest from './AbstractExportAndImportTest'
 
+@suite()
 export default class ExportingAndImportingWithAppTest extends AbstractExportAndImportTest {
     @test()
-    protected static async canExportAndImportApp() {
+    protected async canExportAndImportApp() {
         await this.importFirstApp()
         this.assertFirstAppRendersAsExpected()
     }
 
     @test()
-    protected static async canImportExportDifferentApp() {
+    protected async canImportExportDifferentApp() {
         await this.importFirstApp()
         await this.importSecondApp()
 
@@ -26,7 +33,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
     }
 
     @test()
-    protected static async throwsNiceErrorIfNoAppForNamespace() {
+    protected async throwsNiceErrorIfNoAppForNamespace() {
         const namespace = generateId()
         //@ts-ignore
         const err = assert.doesThrow(() => this.views.App(namespace))
@@ -36,7 +43,7 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
     }
 
     @test()
-    protected static async usesTheBuildAppBuilderToBuildApp() {
+    protected async usesTheBuildAppBuilderToBuildApp() {
         await this.importFirstApp()
         const app = {}
 
@@ -50,15 +57,15 @@ export default class ExportingAndImportingWithAppTest extends AbstractExportAndI
         assert.isEqual(builtApp, app)
     }
 
-    private static async importSecondApp() {
+    private async importSecondApp() {
         await this.exportAndThenImport(importExportSourceApp2)
     }
 
-    private static async importFirstApp() {
+    private async importFirstApp() {
         await this.exportAndThenImport(importExportSourceApp)
     }
 
-    private static assertFirstAppRendersAsExpected() {
+    private assertFirstAppRendersAsExpected() {
         //@ts-ignore
         const app = this.views.App('namespace')
         //@ts-ignore

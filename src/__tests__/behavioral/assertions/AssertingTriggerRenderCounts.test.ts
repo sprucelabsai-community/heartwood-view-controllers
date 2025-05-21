@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { AbstractViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import CardViewController from '../../../viewControllers/card/Card.vc'
@@ -17,14 +17,15 @@ class RenderViewController extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingTriggerRenderCountsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         card: CardViewController,
         render: RenderViewController,
     }
 
     @test()
-    protected static async canCreateAssertingTriggerRenderCounts() {
+    protected async canCreateAssertingTriggerRenderCounts() {
         const vc = this.Controller('card', {
             header: {
                 title: 'hey!',
@@ -48,7 +49,7 @@ export default class AssertingTriggerRenderCountsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async retainsOriginalTriggerRender() {
+    protected async retainsOriginalTriggerRender() {
         //@ts-ignore
         const vc = this.Controller('render', {})
 

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
     AbstractViewController,
     TriggerRenderHandler,
@@ -40,7 +40,7 @@ class FancyTool extends AbstractViewController<Card> {
 }
 
 class GoodSkillViewController implements SkillViewController {
-    private model: SkillView
+    private model!: SkillView
     private isLoginRequired = false
 
     public constructor(model: SkillView) {
@@ -128,11 +128,12 @@ class FancyCard extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingToolsTest extends AbstractViewControllerTest {
-    private static swipeVc: SwipeCardViewController
-    private static fancyTool: FancyTool
+    private swipeVc!: SwipeCardViewController
+    private fancyTool!: FancyTool
 
-    protected static controllerMap = {
+    protected controllerMap = {
         toolBeltSvc: ToolBeltSkillViewController,
         good: GoodSkillViewController,
         fancy: FancyCard,
@@ -140,13 +141,13 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static hasAssertRendersToolBelt() {
+    protected hasAssertRendersToolBelt() {
         assert.isFunction(vcAssert.assertRendersToolBelt)
     }
 
     @test('throws if given nothing', null)
     @test('throws if given no tools', { tools: [] })
-    protected static throwsIfSkillViewControllerDoesNotRenderToolBelt(
+    protected throwsIfSkillViewControllerDoesNotRenderToolBelt(
         toolBelt: ToolBelt | null
     ) {
         const vc = this.Controller('toolBeltSvc', { toolBelt })
@@ -156,7 +157,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderingNullToolBeltThrows() {
+    protected async renderingNullToolBeltThrows() {
         const vc = this.Controller('good', {})
         assert.doesThrow(
             () => toolBeltAssert.rendersToolBelt(vc),
@@ -165,7 +166,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passeBackToolWhenCheckingForTool() {
+    protected async passeBackToolWhenCheckingForTool() {
         const randomId = `${new Date().getTime() * Math.random()}`
 
         const card1 = this.Controller('card', {
@@ -204,7 +205,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfGivenToolBelt() {
+    protected knowsIfGivenToolBelt() {
         const vc = this.Controller('toolBeltSvc', {
             toolBelt: {
                 tools: [
@@ -223,7 +224,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsWhenASpecificToolIsRendered() {
+    protected knowsWhenASpecificToolIsRendered() {
         const randomId = `${new Date().getTime() * Math.random()}`
         const vc = this.ToolBeltSvc({ tool2Id: randomId })
 
@@ -240,7 +241,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canCheckInstanceOfTool() {
+    protected canCheckInstanceOfTool() {
         let vc = this.ToolBeltSvc()
         const svc = this.ToolBeltSvc()
         assert.isTruthy(svc)
@@ -269,12 +270,12 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canTellToolInstanceOfSubClass() {
+    protected canTellToolInstanceOfSubClass() {
         vcAssert.assertToolInstanceOf(this.ToolBeltSvc(), 'fancy', FancyCard)
     }
 
     @test()
-    protected static canTellParentMostClass() {
+    protected canTellParentMostClass() {
         const toolVc = vcAssert.assertToolInstanceOf(
             this.ToolBeltSvc(),
             'tool',
@@ -285,7 +286,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertToolIsFocusedThrowsIfNoToolBelt() {
+    protected async assertToolIsFocusedThrowsIfNoToolBelt() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertActionFocusesTool(
                 this.Controller('good', { layouts: [] }),
@@ -296,7 +297,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertToolIsFocusedThrowsIfBadToolId() {
+    protected async assertToolIsFocusedThrowsIfBadToolId() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertActionFocusesTool(
                 this.ToolBeltSvc(),
@@ -308,7 +309,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
 
     @test('assert focuses tool 1', 'new-tool')
     @test('assert focuses tool 2', 'new-tool-2')
-    protected static async passesWhenFocusingTool(id: string) {
+    protected async passesWhenFocusingTool(id: string) {
         const svc = this.ToolBeltSvc({ tool2Id: id })
         await vcAssert.assertActionFocusesTool(svc, id, async () =>
             svc.focusTool(id)
@@ -322,7 +323,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesWhenFocusHappensLater() {
+    protected async passesWhenFocusHappensLater() {
         const svc = this.ToolBeltSvc({ tool2Id: 'ten' })
         await vcAssert.assertActionFocusesTool(svc, 'ten', async () =>
             svc.delayedFocusTool('ten')
@@ -330,7 +331,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canFocusWhenToolStartsWithNoTools() {
+    protected async canFocusWhenToolStartsWithNoTools() {
         const svc = this.Controller('toolBeltSvc', {
             toolBelt: {
                 tools: [],
@@ -343,7 +344,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertToolIsFocusedThrowsIfToolIdDoesNotMatch() {
+    protected async assertToolIsFocusedThrowsIfToolIdDoesNotMatch() {
         const svc = this.ToolBeltSvc({ tool2Id: 'new-tool' })
 
         await assert.doesThrowAsync(() =>
@@ -354,7 +355,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canTellIfToolFocusedEvenIfToolAddedLate() {
+    protected async canTellIfToolFocusedEvenIfToolAddedLate() {
         const svc = this.ToolBeltSvc()
         await vcAssert.assertActionFocusesTool(svc, 'new-tool', async () => {
             svc.getToolBeltVc()?.addTool({
@@ -367,14 +368,14 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hasForceOpenAndCloseTheMethods() {
+    protected async hasForceOpenAndCloseTheMethods() {
         const vc = this.ToolBeltVc()
         assert.isFunction(vc.open)
         assert.isFunction(vc.close)
     }
 
     @test()
-    protected static async throwsWhenToolBeltNotForcedOpen() {
+    protected async throwsWhenToolBeltNotForcedOpen() {
         const svc = this.ToolBeltSvc()
         await assert.doesThrowAsync(
             () => vcAssert.assertActionOpensToolBelt(svc, () => {}),
@@ -385,7 +386,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesWhenOpened() {
+    protected async passesWhenOpened() {
         const svc = this.ToolBeltSvc()
         await vcAssert.assertActionOpensToolBelt(svc, () => {
             svc.open()
@@ -401,7 +402,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async openingThrowsWhenOptionsDontMatch() {
+    protected async openingThrowsWhenOptionsDontMatch() {
         const svc = this.ToolBeltSvc()
         await assert.doesThrowAsync(
             () =>
@@ -424,7 +425,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     @test('passes closing when options match 2', {
         shouldStayOpen: false,
     })
-    protected static async worksWhenOpeningWithExpectedOptions(expected: any) {
+    protected async worksWhenOpeningWithExpectedOptions(expected: any) {
         const svc = this.ToolBeltSvc()
         await vcAssert.assertActionOpensToolBelt(
             svc,
@@ -436,7 +437,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenToolBeltNotClosed() {
+    protected async throwsWhenToolBeltNotClosed() {
         const svc = this.ToolBeltSvc()
         await assert.doesThrowAsync(
             () => vcAssert.assertActionClosesToolBelt(svc, () => {}),
@@ -447,7 +448,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesWhenClosed() {
+    protected async passesWhenClosed() {
         const svc = this.ToolBeltSvc()
         await vcAssert.assertActionClosesToolBelt(svc, () => {
             svc.close()
@@ -463,7 +464,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertIfRendersStickyTools() {
+    protected async canAssertIfRendersStickyTools() {
         const vc = this.Controller('tool-belt', {})
 
         vc.setStickyTool({ position: 'bottom', card: {}, lineIcon: 'add' })
@@ -485,7 +486,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
         )
     }
 
-    private static assertToolRendersCard(
+    private assertToolRendersCard(
         vc: ToolBeltSkillViewController,
         card1: CardViewController
     ) {
@@ -499,13 +500,13 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
         assert.isEqual(cardVc2, card1)
     }
 
-    private static ToolBeltVc() {
+    private ToolBeltVc() {
         return this.Controller('tool-belt', {
             tools: [],
         })
     }
 
-    private static ToolBeltSvc(options?: { tool2Id?: string }) {
+    private ToolBeltSvc(options?: { tool2Id?: string }) {
         this.swipeVc = this.Controller('swipe-card', {
             slides: [],
         })

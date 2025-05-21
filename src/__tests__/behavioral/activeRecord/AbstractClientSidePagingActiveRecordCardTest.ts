@@ -12,12 +12,12 @@ import { ActiveRecordCardViewControllerOptions } from '../../../viewControllers/
 import { ListLocationsTargetAndPayload } from '../../support/EventFaker'
 
 export default abstract class AbstractClientSidePagingActiveRecordCard extends AbstractViewControllerTest {
-    protected static vc: MockActiveRecordCard
-    protected static locations: Location[] = []
-    protected static listLocationsTargetAndPayload?: ListLocationsTargetAndPayload
-    protected static id: string
+    protected vc!: MockActiveRecordCard
+    protected locations: Location[] = []
+    protected listLocationsTargetAndPayload?: ListLocationsTargetAndPayload
+    protected id!: string
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.getFactory().setController(
@@ -42,33 +42,33 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         this.setupCardWithPaging()
     }
 
-    protected static assertRendersPager() {
+    protected assertRendersPager() {
         this.vc.assertRendersPager()
     }
 
-    protected static async fakeLocationsAndLoad(total: number) {
+    protected async fakeLocationsAndLoad(total: number) {
         this.addFakedLocations(total)
         await this.load()
     }
 
-    protected static clearFakedLocations() {
+    protected clearFakedLocations() {
         this.locations = []
     }
 
-    protected static async load() {
+    protected async load() {
         await this.vc.load()
         this.vc.resetRebuildSlideCount()
     }
 
-    protected static addFakedLocation() {
+    protected addFakedLocation() {
         this.locations.push(this.eventFaker.generateLocationValues())
     }
 
-    protected static assertRendersRow(id: string) {
+    protected assertRendersRow(id: string) {
         this.vc.assertRendersRow(id)
     }
 
-    protected static setupCardWithPaging(
+    protected setupCardWithPaging(
         pagingOptions?: ActiveRecordPagingOptions,
         activeOptions?: RecursivePartial<ActiveRecordCardViewControllerOptions>
     ) {
@@ -82,11 +82,11 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         })
     }
 
-    protected static assertDoesNotRenderRow(id: string) {
+    protected assertDoesNotRenderRow(id: string) {
         this.vc.assertDoesNotRenderRow(id)
     }
 
-    protected static setupCardVc(
+    protected setupCardVc(
         options?: RecursivePartial<ActiveRecordCardViewControllerOptions>
     ) {
         this.vc = this.Controller(
@@ -106,11 +106,11 @@ export default abstract class AbstractClientSidePagingActiveRecordCard extends A
         ) as MockActiveRecordCard
     }
 
-    protected static addFakedLocations(length: number) {
+    protected addFakedLocations(length: number) {
         Array.from({ length }).forEach(() => this.addFakedLocation())
     }
 
-    protected static assertRenderedFooterIncludes(footer: CardFooter) {
+    protected assertRenderedFooterIncludes(footer: CardFooter) {
         const actual = this.render(this.vc).footer
         assert.doesInclude(actual, footer)
     }

@@ -1,36 +1,37 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class FakingSomethingForInterviewTest extends AbstractViewControllerTest {
-    private static fake: FakingSomethingForInterview
+    private fake!: FakingSomethingForInterview
     @test()
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.fake = new FakingSomethingForInterview()
     }
 
     @test()
-    protected static canReturnTrue() {
+    protected canReturnTrue() {
         this.assertTrue()
     }
 
     @test()
-    protected static canOverrideTrue() {
+    protected canOverrideTrue() {
         this.setResponseTo(false)
         this.assertFalse()
         this.setResponseTo(true)
         this.assertTrue()
     }
 
-    private static setResponseTo(response: boolean) {
+    private setResponseTo(response: boolean) {
         this.fake.setResponseTo(response)
     }
 
-    private static assertTrue() {
+    private assertTrue() {
         assert.isTrue(this.fake.getResults())
     }
 
-    private static assertFalse() {
+    private assertFalse() {
         assert.isFalse(this.fake.getResults())
     }
 }

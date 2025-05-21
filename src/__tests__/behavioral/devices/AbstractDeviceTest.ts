@@ -3,17 +3,17 @@ import SpyDevice from '../../../tests/SpyDevice'
 import MockDeviceVc from './MockDeviceVc'
 
 export default class AbstractDeviceTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         mock: MockDeviceVc,
     }
-    protected static vc: MockDeviceVc
+    protected vc!: MockDeviceVc
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('mock' as any, {}) as MockDeviceVc
     }
 
-    protected static get device() {
+    protected get device() {
         return this.vc.getDevice() as SpyDevice
     }
 }

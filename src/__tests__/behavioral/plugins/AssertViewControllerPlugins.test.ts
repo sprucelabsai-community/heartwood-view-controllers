@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import vcPluginAssert from '../../../tests/utilities/vcPluginAssert'
 import {
     ViewControllerPlugin,
@@ -6,34 +6,35 @@ import {
 } from '../../../types/heartwood.types'
 import AbstractPluginTest, { SpyPlugin } from './AbstractPluginTest'
 
+@suite()
 export default class AssertViewControllerPluginsTest extends AbstractPluginTest {
     @test()
-    protected static async throwsWhenPluginNotSet() {
+    protected async throwsWhenPluginNotSet() {
         this.assertPluginInstalledThrows()
     }
 
     @test()
-    protected static async passesWhenPluginSet() {
+    protected async passesWhenPluginSet() {
         this.mixinPlugin()
         this.assertPluginInstalled('spy')
     }
 
     @test()
-    protected static async canFindByProperName() {
+    protected async canFindByProperName() {
         this.mixinPlugin('whatever')
         this.assertPluginInstalledThrows()
         this.assertPluginInstalled('whatever')
     }
 
     @test()
-    protected static async canCheckInstanceOf() {
+    protected async canCheckInstanceOf() {
         this.mixinPlugin()
         this.assertPluginInstalledThrows('spy', StubPlugin)
         this.assertPluginInstalled('spy', SpyPlugin)
     }
 
     @test()
-    protected static async returnsThePlugin() {
+    protected async returnsThePlugin() {
         this.mixinPlugin()
 
         const { plugin, vc } = this.assertPluginInstalled()
@@ -43,14 +44,14 @@ export default class AssertViewControllerPluginsTest extends AbstractPluginTest 
         assert.isEqual(plugin, vc.plugins.spy)
     }
 
-    private static assertPluginInstalledThrows(
+    private assertPluginInstalledThrows(
         name = 'spy',
         Plugin?: ViewControllerPluginConstructor
     ) {
         assert.doesThrow(() => this.assertPluginInstalled(name, Plugin))
     }
 
-    private static assertPluginInstalled(
+    private assertPluginInstalled(
         named = 'spy',
         Plugin?: ViewControllerPluginConstructor
     ) {

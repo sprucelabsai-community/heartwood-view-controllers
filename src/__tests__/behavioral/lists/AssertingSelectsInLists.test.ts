@@ -1,27 +1,28 @@
 import { selectAssert } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListRow } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertingSelectsInListsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
+    protected controllerMap = {}
 
     @test()
-    protected static hasAssertRowRendersSelect() {
+    protected hasAssertRowRendersSelect() {
         assert.isFunction(vcAssert.assertRowRendersSelect)
     }
 
     @test()
-    protected static throwsIfCantFindRow() {
+    protected throwsIfCantFindRow() {
         const vc = this.ListVc()
 
         assert.doesThrow(() => vcAssert.assertRowRendersSelect(vc, 'not-found'))
     }
 
     @test()
-    protected static canFindSelectInARandomRowId() {
+    protected canFindSelectInARandomRowId() {
         const row1Id = `${new Date().getTime()}`
         const vc = this.ListVc({
             row1Id,
@@ -31,19 +32,19 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static cantFindSelectInRowThatDoesNotHaveOne() {
+    protected cantFindSelectInRowThatDoesNotHaveOne() {
         const vc = this.ListVc({})
         assert.doesThrow(() => vcAssert.assertRowRendersSelect(vc, 'last'))
     }
 
     @test()
-    protected static canFindSelectInCellAfterFirst() {
+    protected canFindSelectInCellAfterFirst() {
         const vc = this.ListVc({})
         vcAssert.assertRowRendersSelect(vc, 'middle')
     }
 
     @test()
-    protected static returnsASelectViewController() {
+    protected returnsASelectViewController() {
         const vc = this.ListVc({})
         const selectVc = vcAssert.assertRowRendersSelect(vc, 'middle')
 
@@ -56,7 +57,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static selectVcKnowsIfRequired() {
+    protected selectVcKnowsIfRequired() {
         const vc = this.ListVc({
             isMiddleRequired: true,
         })
@@ -66,7 +67,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static selectVcKnowsOptions() {
+    protected selectVcKnowsOptions() {
         const vc = this.ListVc({
             isMiddleRequired: true,
         })
@@ -80,7 +81,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static selectVcKnowsOptionsInDifferentRow() {
+    protected selectVcKnowsOptionsInDifferentRow() {
         const vc = this.ListVc({
             isMiddleRequired: true,
         })
@@ -104,7 +105,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
         'time-row-2',
         'eventType'
     )
-    protected static throwsIfRowDoesNotContainSpecifiedSelectInputName(
+    protected throwsIfRowDoesNotContainSpecifiedSelectInputName(
         rowIdOrIdx: string,
         name: string
     ) {
@@ -121,7 +122,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
     @test('findsByMatchingNameInRow 2', 'time-row', 'eventType', 0, 2)
     @test('findsByMatchingNameInRow 3', 'time-row-2', 'notEventType2', 1, 1)
     @test('findsByMatchingNameInRow 4', 1, 'notEventType', 1, 0)
-    protected static findsByMatchingNameInRow(
+    protected findsByMatchingNameInRow(
         idOrIdx: string | number,
         name: string,
         expectedRow: number,
@@ -140,7 +141,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
         selectAssert.assertSelectChoicesMatch(selectVc?.getChoices(), expected)
     }
 
-    private static getChoiceValuesForRowCell(
+    private getChoiceValuesForRowCell(
         rows: ListRow[],
         expectedRow: number,
         expectedCell: number
@@ -152,7 +153,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
         )
     }
 
-    private static generateMultipleRows() {
+    private generateMultipleRows() {
         const rows: ListRow[] = [
             {
                 id: 'time-row',
@@ -196,7 +197,7 @@ export default class AssertingSelectsInListsTest extends AbstractViewControllerT
         return rows
     }
 
-    private static ListVc(options?: {
+    private ListVc(options?: {
         row1Id?: string
         row2Id?: string
         isMiddleRequired?: boolean

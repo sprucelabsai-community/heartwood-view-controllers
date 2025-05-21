@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
@@ -7,12 +7,13 @@ import interactor from '../../../tests/utilities/interactor'
 import { FormSection, InputButton } from '../../../types/heartwood.types'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 
+@suite()
 export default class InputButtonsTest extends AbstractViewControllerTest {
-    private static formVc: FormViewController<FormSchema>
+    private formVc!: FormViewController<FormSchema>
 
     @test('throws with no right button 1', 'firstname')
     @test('throws with no right button 2', 'lastName')
-    protected static async throwsWithNoRigthButton(fieldName: any) {
+    protected async throwsWithNoRigthButton(fieldName: any) {
         this.setupForm([
             {
                 fields: [fieldName],
@@ -23,7 +24,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesWithButton() {
+    protected async passesWithButton() {
         this.assertPassesWithButtons([
             {
                 lineIcon: 'add',
@@ -33,7 +34,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async mustHaveAtLeastOneButton() {
+    protected async mustHaveAtLeastOneButton() {
         this.setupForm([
             {
                 fields: [
@@ -49,7 +50,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesWithMoreThanOneRightButton() {
+    protected async passesWithMoreThanOneRightButton() {
         this.assertPassesWithButtons([
             {
                 lineIcon: 'add',
@@ -63,7 +64,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async failsIfCantFindById() {
+    protected async failsIfCantFindById() {
         this.setupFormWithbuttons([{ lineIcon: 'add', onClick: () => {} }])
         assert.doesThrow(() =>
             this.assertRendersRightButtonsForField('firstName', 'test')
@@ -71,14 +72,14 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesIfCanFindById() {
+    protected async passesIfCanFindById() {
         const id = generateId()
         this.setupFormWithbuttons([{ lineIcon: 'add', onClick: () => {}, id }])
         this.assertRendersRightButtonsForField('firstName', id)
     }
 
     @test()
-    protected static async canFindLaterButton() {
+    protected async canFindLaterButton() {
         const id = generateId()
         this.setupFormWithbuttons([
             { lineIcon: 'add-square', onClick: () => {} },
@@ -89,7 +90,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingThrowsOnBadButton() {
+    protected async clickingThrowsOnBadButton() {
         this.setupFormWithbuttons([
             { lineIcon: 'add-square', onClick: () => {} },
             { lineIcon: 'add', onClick: () => {} },
@@ -101,7 +102,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clicksOnFirstButton() {
+    protected async clicksOnFirstButton() {
         const id = generateId()
         const id2 = generateId()
 
@@ -132,7 +133,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClickDifferentField() {
+    protected async canClickDifferentField() {
         let wasHit = false
         this.setupForm([
             {
@@ -157,12 +158,12 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
         assert.isTrue(wasHit)
     }
 
-    private static assertPassesWithButtons(rightButtons: InputButton[]) {
+    private assertPassesWithButtons(rightButtons: InputButton[]) {
         this.setupFormWithbuttons(rightButtons)
         this.assertRendersRightButtonsForField('firstName')
     }
 
-    private static setupFormWithbuttons(rightButtons: InputButton[]) {
+    private setupFormWithbuttons(rightButtons: InputButton[]) {
         this.setupForm([
             {
                 fields: [
@@ -175,14 +176,11 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
         ])
     }
 
-    private static assertRendersRightButtonsForField(
-        fieldName: string,
-        id?: string
-    ) {
+    private assertRendersRightButtonsForField(fieldName: string, id?: string) {
         formAssert.fieldRendersInputButton(this.formVc, fieldName, id)
     }
 
-    private static assertThrowsNoRightButtons(fieldName: any, id?: string) {
+    private assertThrowsNoRightButtons(fieldName: any, id?: string) {
         assert.doesThrow(
             () =>
                 formAssert.fieldRendersInputButton(this.formVc, fieldName, id),
@@ -190,7 +188,7 @@ export default class InputButtonsTest extends AbstractViewControllerTest {
         )
     }
 
-    private static setupForm(sections: FormSection<FormSchema>[]) {
+    private setupForm(sections: FormSection<FormSchema>[]) {
         this.formVc = this.Controller(
             'form',
             buildForm({

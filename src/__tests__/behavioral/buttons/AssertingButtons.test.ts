@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, suite, test } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -8,10 +8,11 @@ import { Button, CardViewController } from '../../../types/heartwood.types'
 import { ButtonGroupViewControllerOptions } from '../../../viewControllers/ButtonGroup.vc'
 import { testFormSchema } from '../forms/testFormOptions'
 
+@suite()
 export default class AssertingButtonsTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
+    private vc!: CardViewController
     @test()
-    protected static assertCardRendersButtonsThrowsWhenMissing() {
+    protected assertCardRendersButtonsThrowsWhenMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => buttonAssert.cardRendersButtons())
 
@@ -21,13 +22,13 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static returnsStubButtonVc() {
+    protected returnsStubButtonVc() {
         const btnVc = this.assertRendersButton()
         assert.isTruthy(btnVc)
     }
 
     @test()
-    protected static hasRenderMethod() {
+    protected hasRenderMethod() {
         const btnVc = this.assertRendersButton()
         assert.isFunction(btnVc.render)
     }
@@ -54,10 +55,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
         ],
         'test2'
     )
-    protected static renderReturnsButtonModel(
-        buttons: Button[],
-        idToCheck: string
-    ) {
+    protected renderReturnsButtonModel(buttons: Button[], idToCheck: string) {
         const btnVc = this.assertRendersButton(buttons, idToCheck)
         const model = this.render(btnVc)
         const match: any = buttons.find((b) => b.id === idToCheck)
@@ -67,7 +65,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 
     @test(`can find 2 buttons`, ['first', 'third'])
     @test(`can find 3 buttons`, ['first', 'third', 'fourth'])
-    protected static canFindManyButtons(toCheckIds: string[]) {
+    protected canFindManyButtons(toCheckIds: string[]) {
         this.vc = this.Vc([
             {
                 id: 'first',
@@ -88,7 +86,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static laterModelRendersAsExpected() {
+    protected laterModelRendersAsExpected() {
         const vc = this.Vc([
             {
                 id: 'first',
@@ -110,7 +108,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsWhenButtonIsDisabledOrEnabled() {
+    protected knowsWhenButtonIsDisabledOrEnabled() {
         const id = generateId()
         const id2 = generateId()
 
@@ -149,7 +147,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfButtonIsSelected() {
+    protected async knowsIfButtonIsSelected() {
         const selectedId1 = generateId()
         const id2 = generateId()
 
@@ -180,7 +178,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
 
     @test('can find button if in form 1', 'test', 'cheesy')
     @test('can find button if in form 2', 'test2', 'burrito')
-    protected static async canFindButtonIfItsInAForm(
+    protected async canFindButtonIfItsInAForm(
         buttonId: string,
         buttonId2: string
     ) {
@@ -217,7 +215,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenNoButtonGroupFound() {
+    protected async throwsWhenNoButtonGroupFound() {
         this.vc = this.Controller('card', {})
         this.assertThrowsBecauseNoButtonGroup()
         this.vc = this.Vc([{ id: 'test' }])
@@ -225,14 +223,14 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canFindButtonGroup() {
+    protected async canFindButtonGroup() {
         const buttonGroup = this.ButtonGroup()
         this.vc = this.Vc(buttonGroup.render())
         this.assertCardRendersButtonGroup()
     }
 
     @test()
-    protected static async canFindButtonGroupInSecondSection() {
+    protected async canFindButtonGroupInSecondSection() {
         const buttonGroup = this.ButtonGroup()
         this.vc = this.Controller('card', {
             body: {
@@ -250,7 +248,7 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertIsMultiSelect() {
+    protected async canAssertIsMultiSelect() {
         assert.doesThrow(() =>
             buttonAssert.buttonGroupIsMultiSelect(this.ButtonGroup())
         )
@@ -259,35 +257,33 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
         )
     }
 
-    private static ButtonGroup(
-        options?: Partial<ButtonGroupViewControllerOptions>
-    ) {
+    private ButtonGroup(options?: Partial<ButtonGroupViewControllerOptions>) {
         return this.Controller('button-group', {
             buttons: [{ id: 'test' }],
             ...options,
         })
     }
 
-    private static assertCardRendersButtonGroup() {
+    private assertCardRendersButtonGroup() {
         buttonAssert.cardRendersButtonGroup(this.vc)
     }
 
-    private static assertThrowsBecauseNoButtonGroup() {
+    private assertThrowsBecauseNoButtonGroup() {
         assert.doesThrow(() => buttonAssert.cardRendersButtonGroup(this.vc))
     }
 
-    private static assertButtonIsSelected(id: string) {
+    private assertButtonIsSelected(id: string) {
         buttonAssert.buttonIsSelected(this.vc, id)
     }
 
-    private static assertRendersButton(buttons?: Button[], idToCheck = 'test') {
+    private assertRendersButton(buttons?: Button[], idToCheck = 'test') {
         this.vc = this.Vc(buttons)
         const btnVc = buttonAssert.cardRendersButton(this.vc, idToCheck)
 
         return btnVc
     }
 
-    private static Vc(
+    private Vc(
         buttons:
             | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[]
             | undefined

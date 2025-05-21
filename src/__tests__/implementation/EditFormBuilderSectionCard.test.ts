@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { interactor } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionCardViewController, {
@@ -6,14 +6,15 @@ import EditFormBuilderSectionCardViewController, {
     SimpleSection,
 } from '../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 
+@suite()
 export default class EditFormBuilderSectionCardTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         sectionCard: EditFormBuilderSectionCardViewController,
     }
 
     @test('first field being select drops in empty choices', 0)
     @test('third field being select drops in empty choices', 2)
-    protected static async addingASelectFieldDropsInEmptyChoices(idx: number) {
+    protected async addingASelectFieldDropsInEmptyChoices(idx: number) {
         let passedValues: any
 
         //@ts-ignore
@@ -39,7 +40,7 @@ export default class EditFormBuilderSectionCardTest extends AbstractViewControll
         assert.isEqualDeep(passedValues.fields[idx].options?.choices, [])
     }
 
-    private static Vc(options: EditFormBuilderSectionOptions) {
+    private Vc(options: EditFormBuilderSectionOptions) {
         return this.Controller(
             //@ts-ignore
             'sectionCard',

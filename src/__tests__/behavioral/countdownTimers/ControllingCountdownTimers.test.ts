@@ -1,31 +1,32 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { CountdownTimer } from '../../../types/heartwood.types'
 import CountdownTimerViewController, {
     CountdownTimerViewControllerOptions,
 } from '../../../viewControllers/countdownTimer/CountdownTimer.vc'
 
+@suite()
 export default class ControllingCountdownTimersTest extends AbstractViewControllerTest {
-    private static vc: CountdownTimerViewController
-    private static model: CountdownTimer
-    protected static async beforeEach() {
+    private vc!: CountdownTimerViewController
+    private model!: CountdownTimer
+    protected async beforeEach() {
         await super.beforeEach()
         this.reload()
     }
 
     @test()
-    protected static async rendersSetStartHandler() {
+    protected async rendersSetStartHandler() {
         assert.isFunction(this.model.setStartHandler)
     }
 
     @test()
-    protected static async rendersItselfAsController() {
+    protected async rendersItselfAsController() {
         assert.isEqual(this.model.controller, this.vc)
     }
 
     @test('passes expected end 1', 1)
     @test('passes expected end 2', 2)
-    protected static async clickingStartOnTimerCallsHandler(toMs: number) {
+    protected async clickingStartOnTimerCallsHandler(toMs: number) {
         let wasHit = false
         let passedToMs: number | undefined
 
@@ -43,7 +44,7 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
     }
 
     @test()
-    protected static async onCompleteIsPassedThrough() {
+    protected async onCompleteIsPassedThrough() {
         const onComplete = () => {}
 
         this.reload({
@@ -56,7 +57,7 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
     @test(`passes end date ms through options to rendered model 1`, 0)
     @test(`passes end date ms through options to rendered model 2`, 1)
     @test(`passes end date ms through options to rendered model 3`, 2)
-    protected static async passesEndDateMsThroughOptionsToRenderedModel(
+    protected async passesEndDateMsThroughOptionsToRenderedModel(
         endDateMs: number
     ) {
         this.reload({ endDateMs })
@@ -64,12 +65,12 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
     }
 
     @test()
-    protected static async setStopHandlerIsAFunction() {
+    protected async setStopHandlerIsAFunction() {
         assert.isFunction(this.model.setStopHandler)
     }
 
     @test()
-    protected static async callingStopCallsStopHandler() {
+    protected async callingStopCallsStopHandler() {
         let wasHit = false
 
         this.model.setStopHandler(() => {
@@ -82,16 +83,14 @@ export default class ControllingCountdownTimersTest extends AbstractViewControll
     }
 
     @test()
-    protected static async returnsNullEndDateMsIfStopped() {
+    protected async returnsNullEndDateMsIfStopped() {
         this.vc.start(Date.now() + 1000)
         this.vc.stop()
         const model = this.render(this.vc)
         assert.isNull(model.endDateMs)
     }
 
-    private static reload(
-        options?: Partial<CountdownTimerViewControllerOptions>
-    ) {
+    private reload(options?: Partial<CountdownTimerViewControllerOptions>) {
         this.vc = this.Controller('countdown-timer', { ...options })
         this.model = this.render(this.vc)
     }

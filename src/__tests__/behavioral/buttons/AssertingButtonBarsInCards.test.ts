@@ -1,12 +1,13 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { ButtonBarViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class AssertingButtonBarsInCards extends AbstractViewControllerTest {
     @test()
-    protected static throwsWhenMissingParams() {
+    protected throwsWhenMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             vcAssert.assertCardRendersButtonBar()
@@ -17,7 +18,7 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canFindButtonBarInFirstSection() {
+    protected canFindButtonBarInFirstSection() {
         this.assertFindsButtonBar([
             {
                 buttonBar: this.renderButtonBar(),
@@ -26,13 +27,13 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
     }
 
     @test()
-    protected static throwsWithNoButtonBar() {
+    protected throwsWithNoButtonBar() {
         const cardVc = this.CardVc()
         assert.doesThrow(() => vcAssert.assertCardRendersButtonBar(cardVc))
     }
 
     @test()
-    protected static canFindButtonBarInSecionSection() {
+    protected canFindButtonBarInSecionSection() {
         this.assertFindsButtonBar([
             {},
             {
@@ -42,7 +43,7 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
     }
 
     @test()
-    protected static rendersButtonBar() {
+    protected rendersButtonBar() {
         const buttonBarVc = this.ButtonBarVc()
 
         const vc = this.assertFindsButtonBar([
@@ -54,13 +55,13 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
         assert.isEqual(vc, buttonBarVc)
     }
 
-    private static assertFindsButtonBar(sections: Section[]) {
+    private assertFindsButtonBar(sections: Section[]) {
         const cardVc = this.CardVc(sections)
 
         return vcAssert.assertCardRendersButtonBar(cardVc)
     }
 
-    private static CardVc(sections: Section[] = []) {
+    private CardVc(sections: Section[] = []) {
         return this.Controller('card', {
             body: {
                 sections,
@@ -68,11 +69,11 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
         })
     }
 
-    private static renderButtonBar(): ButtonBar {
+    private renderButtonBar(): ButtonBar {
         return this.ButtonBarVc().render()
     }
 
-    private static ButtonBarVc(): ButtonBarViewController {
+    private ButtonBarVc(): ButtonBarViewController {
         return this.Controller('buttonBar', {
             buttons: [],
         })

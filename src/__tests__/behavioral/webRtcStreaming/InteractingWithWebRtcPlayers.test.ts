@@ -1,12 +1,13 @@
-import { test, assert, errorAssert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
 import webRtcInteractor from '../../../tests/utilities/webRtcInteractor'
 import { WebRtcCropPoint } from '../../../types/heartwood.types'
 
+@suite()
 export default class InteractingWithWebRtcPlayersTest extends AbstractViewControllerTest {
     @test()
-    protected static async throwsWithMissing() {
+    protected async throwsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             webRtcInteractor.simulateCrop()
@@ -18,7 +19,7 @@ export default class InteractingWithWebRtcPlayersTest extends AbstractViewContro
     }
 
     @test()
-    protected static async passesWithRequired() {
+    protected async passesWithRequired() {
         let passedPoint: WebRtcCropPoint | undefined
         const vc = this.Controller('web-rtc-player', {
             onCrop: (point) => {

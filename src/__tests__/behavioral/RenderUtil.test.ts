@@ -1,9 +1,10 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class RenderUtilTest extends AbstractViewControllerTest {
     @test()
-    protected static async shouldMaintainInstancesOfClassesInCardBody() {
+    protected async shouldMaintainInstancesOfClassesInCardBody() {
         const card = this.Controller('card', {
             body: {
                 sections: [

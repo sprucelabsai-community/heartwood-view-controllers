@@ -1,12 +1,13 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 
+@suite()
 export default class FormValidationTest extends AbstractViewControllerTest {
     @test()
-    protected static async notSettingRequiredFieldInNestedSchemaDoesNotThrow() {
+    protected async notSettingRequiredFieldInNestedSchemaDoesNotThrow() {
         const formVc: FormViewController<NestedFieldTestSchema> =
             this.Controller(
                 'form',

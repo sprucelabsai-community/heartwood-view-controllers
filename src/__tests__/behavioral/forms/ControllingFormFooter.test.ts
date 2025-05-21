@@ -1,12 +1,13 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { FormViewController } from '../../../types/heartwood.types'
 
+@suite()
 export default class ControllingFormFooterTest extends AbstractViewControllerTest {
     @test()
-    protected static async canSetFooterRenderer() {
+    protected async canSetFooterRenderer() {
         const vc = this.Vc()
         let wasHit = false
 
@@ -19,7 +20,7 @@ export default class ControllingFormFooterTest extends AbstractViewControllerTes
         assert.isTrue(wasHit)
     }
 
-    private static Vc(): FormViewController<FormSchema> {
+    private Vc(): FormViewController<FormSchema> {
         return this.Controller(
             'form',
             buildForm({

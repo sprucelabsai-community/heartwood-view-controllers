@@ -1,15 +1,16 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ButtonGroupButton } from '../../../types/heartwood.types'
 import ButtonBarViewController from '../../../viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 
+@suite()
 export default class ControllingAButtonBarTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: ButtonBarViewController
+    protected controllerMap = {}
+    private vc!: ButtonBarViewController
 
     @test()
-    protected static async canCreateAButtonBar() {
+    protected async canCreateAButtonBar() {
         this.vc = this.ButtonBarWithButtons([])
         assert.isTruthy(this.vc)
         assert.isEqualDeep(this.renderedButtons, [])
@@ -17,7 +18,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static shouldRenderButtonsItsPassed() {
+    protected shouldRenderButtonsItsPassed() {
         this.setButtons([
             {
                 id: 'first',
@@ -30,7 +31,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static rendersButtonsUsingButtonGroup() {
+    protected rendersButtonsUsingButtonGroup() {
         this.setButtons([
             {
                 id: 'first',
@@ -47,7 +48,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async optionsPassedThroughToButtonGroup() {
+    protected async optionsPassedThroughToButtonGroup() {
         const buttons = [
             {
                 id: 'first',
@@ -94,7 +95,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async delegatesCallsToButtonGroup() {
+    protected async delegatesCallsToButtonGroup() {
         const id = `${new Date().getTime()}`
 
         const buttons = [
@@ -135,12 +136,12 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
         this.assertSelectedButtonGroupButtonsEqual(['third'])
     }
 
-    private static assertSelectedButtonGroupButtonsEqual(expected: string[]) {
+    private assertSelectedButtonGroupButtonsEqual(expected: string[]) {
         assert.isEqualDeep(this.buttonGroupVc.getSelectedButtons(), expected)
     }
 
     @test()
-    protected static async selectingButtonsTriggersOnChange() {
+    protected async selectingButtonsTriggersOnChange() {
         let wasHit = true
         const vc = this.Controller('buttonBar', {
             onSelectionChange: () => {
@@ -160,19 +161,19 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
         assert.isTrue(wasHit)
     }
 
-    private static setButtons(buttons: { id: string; label: string }[]) {
+    private setButtons(buttons: { id: string; label: string }[]) {
         this.vc = this.ButtonBarWithButtons(buttons)
     }
 
-    private static get buttonGroupVc() {
+    private get buttonGroupVc() {
         return this.vc.getButtonGroupVc()
     }
 
-    private static get renderedButtons() {
+    private get renderedButtons() {
         return this.render(this.vc).buttons
     }
 
-    private static ButtonBarWithButtons(buttons: ButtonGroupButton[]) {
+    private ButtonBarWithButtons(buttons: ButtonGroupButton[]) {
         return this.Controller('buttonBar', {
             buttons,
         })

@@ -1,4 +1,10 @@
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
@@ -7,26 +13,27 @@ import {
 } from '../../../types/heartwood.types'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
+@suite()
 export default class DeviceTest extends AbstractDeviceTest {
     @test()
-    protected static async canGetDevice() {
+    protected async canGetDevice() {
         this.vc.assertHasDeviceInstance()
     }
 
     @test()
-    protected static async deviceIsInstanceOfTestDevice() {
+    protected async deviceIsInstanceOfTestDevice() {
         assert.isTrue(this.device instanceof SpyDevice)
     }
 
     @test()
-    protected static async tracksTimesVibrateIsCalled() {
+    protected async tracksTimesVibrateIsCalled() {
         this.vc.assertVibrateCount(0)
         this.vc.vibrate()
         this.vc.assertVibrateCount(1)
     }
 
     @test()
-    protected static async canStoreToLocalCache() {
+    protected async canStoreToLocalCache() {
         const key = generateId()
         const value = generateId()
         this.vc.cacheValue(key, value)
@@ -35,7 +42,7 @@ export default class DeviceTest extends AbstractDeviceTest {
 
     @test('can get last url 1', {})
     @test('can get last url 2', { url: 'https://sprucebot.com' })
-    protected static async canGetLastCommandSent(payload: Record<string, any>) {
+    protected async canGetLastCommandSent(payload: Record<string, any>) {
         const command = generateId()
 
         this.sendCommand(command, payload)
@@ -45,7 +52,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async canGetAllCommandsWithoutPayloads() {
+    protected async canGetAllCommandsWithoutPayloads() {
         const commands = [generateId(), generateId(), generateId()]
 
         await Promise.all(commands.map((command) => this.sendCommand(command)))
@@ -57,7 +64,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async canGetAllCommandsWithPayloads() {
+    protected async canGetAllCommandsWithPayloads() {
         const commands = [
             { command: generateId(), payload: { a: 1 } },
             { command: generateId(), payload: { b: 2 } },
@@ -71,7 +78,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async canWorkWithKioskMode() {
+    protected async canWorkWithKioskMode() {
         assert.isNull(await this.getKioskModeSetting())
 
         this.setKioskMode(true)
@@ -89,7 +96,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     @test('can set kiosk-mode true', 'kiosk-mode', true)
     @test('can set kiosk-mode false', 'kiosk-mode', false)
     @test('can set load-url', 'load-url', generateId())
-    protected static async canSetTheatreSettingsUsingSpy(
+    protected async canSetTheatreSettingsUsingSpy(
         name: TheatreSettingName,
         value: TheaterSettingValueTypes[TheatreSettingName]
     ) {
@@ -99,31 +106,31 @@ export default class DeviceTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async turningTorchOnForSpySetsBrightnessToOneByDefault() {
+    protected async turningTorchOnForSpySetsBrightnessToOneByDefault() {
         this.turnTorchOn()
         this.assertBrightnessOnSpyEquals(1)
     }
 
     @test()
-    protected static async setDifferentBrightnessOnSpy() {
+    protected async setDifferentBrightnessOnSpy() {
         this.turnTorchOn(0.1)
         this.assertBrightnessOnSpyEquals(0.1)
     }
 
     @test()
-    protected static async brightenessOnSpyIsZeroWhenNotTurnedOnYet() {
+    protected async brightenessOnSpyIsZeroWhenNotTurnedOnYet() {
         this.assertBrightnessOnSpyEquals(0)
     }
 
     @test()
-    protected static async turningTorchOffOnSpySetsBrightnessToZero() {
+    protected async turningTorchOffOnSpySetsBrightnessToZero() {
         this.turnTorchOn()
         this.device.turnTorchOff()
         this.assertBrightnessOnSpyEquals(0)
     }
 
     @test()
-    protected static async throwsWhenBrighteness() {
+    protected async throwsWhenBrighteness() {
         this.assertThrowsWithBadBrightness(1.1)
         this.assertThrowsWithBadBrightness(1.2)
         this.assertThrowsWithBadBrightness(-0.1)
@@ -131,43 +138,43 @@ export default class DeviceTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async getsMockAudioDevice() {
+    protected async getsMockAudioDevice() {
         MockAudioController.beforeEach()
         const audio = this.device.AudioController()
         assert.isInstanceOf(audio, MockAudioController)
     }
 
-    private static assertThrowsWithBadBrightness(brightness: number) {
+    private assertThrowsWithBadBrightness(brightness: number) {
         const err = assert.doesThrow(() => this.device.turnTorchOn(brightness))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['brightness'],
         })
     }
 
-    private static assertBrightnessOnSpyEquals(expected: number) {
+    private assertBrightnessOnSpyEquals(expected: number) {
         assert.isEqual(this.device.getTorchBrightness(), expected)
     }
 
-    private static turnTorchOn(brightness?: number) {
+    private turnTorchOn(brightness?: number) {
         this.device.turnTorchOn(brightness)
     }
 
-    private static setKioskMode(on: boolean) {
+    private setKioskMode(on: boolean) {
         this.device.setTheatreSetting('kiosk-mode', on)
     }
 
-    private static async assertKioskModeIsOff() {
+    private async assertKioskModeIsOff() {
         assert.isFalse(
             await this.getKioskModeSetting(),
             'kiosk mode should be off'
         )
     }
 
-    private static async getKioskModeSetting() {
+    private async getKioskModeSetting() {
         return await this.device.getTheatreSetting('kiosk-mode')
     }
 
-    private static sendCommand(command: string, payload?: Record<string, any>) {
+    private sendCommand(command: string, payload?: Record<string, any>) {
         this.device.sendCommand(command, payload)
     }
 }

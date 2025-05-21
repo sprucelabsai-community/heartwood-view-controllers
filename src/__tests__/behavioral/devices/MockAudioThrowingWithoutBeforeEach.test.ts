@@ -1,16 +1,17 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import MockAudioController from '../../../tests/MockAudioController'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
+@suite()
 export default class MockAudioThrowingWithoutBeforeEachTest extends AbstractDeviceTest {
     @test()
-    protected static async cantConstructMockAudioControllerWithouCallingBeforeEach() {
+    protected async cantConstructMockAudioControllerWithouCallingBeforeEach() {
         assert.doesThrow(() => new MockAudioController())
         this.assertNoLastController()
     }
 
     @test()
-    protected static async beforeEachClearsLastController() {
+    protected async beforeEachClearsLastController() {
         MockAudioController.beforeEach()
         new MockAudioController()
         MockAudioController.beforeEach()
@@ -18,14 +19,14 @@ export default class MockAudioThrowingWithoutBeforeEachTest extends AbstractDevi
     }
 
     @test()
-    protected static async getLastControllerThrowsifNoControllerCreated() {
+    protected async getLastControllerThrowsifNoControllerCreated() {
         MockAudioController.beforeEach()
         assert.doesThrow(() => MockAudioController.getLastController())
         const audio = new MockAudioController()
         assert.isEqual(audio, MockAudioController.getLastController())
     }
 
-    private static assertNoLastController() {
+    private assertNoLastController() {
         //@ts-ignore
         assert.isFalsy(MockAudioController.lastController)
     }

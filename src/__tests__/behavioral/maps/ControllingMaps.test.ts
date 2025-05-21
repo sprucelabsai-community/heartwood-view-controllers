@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { MapPin, MapZoom } from '../../../types/heartwood.types'
@@ -7,16 +7,17 @@ import MapViewController, {
 } from '../../../viewControllers/Map.vc'
 import generatePinValues from './generatePinValues'
 
+@suite()
 export default class ControllingMapsTest extends AbstractViewControllerTest {
-    private static vc: MapViewController
+    private vc!: MapViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc()
     }
 
     @test()
-    protected static passesThroughModel() {
+    protected passesThroughModel() {
         const model = {
             center: this.generateRandomLatLng(),
             pins: [this.generatePinValues()],
@@ -29,7 +30,7 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetPins() {
+    protected async canGetPins() {
         const expected = [this.generatePinValues()]
         this.vc = this.Vc({
             pins: expected,
@@ -38,7 +39,7 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetPins() {
+    protected async canSetPins() {
         const expected = [this.generatePinValues()]
         this.setPins(expected)
         this.assertPinsEqual(expected)
@@ -46,13 +47,13 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingPinsTriggersRender() {
+    protected async settingPinsTriggersRender() {
         this.setPins([])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canAddOnePinAtTime() {
+    protected async canAddOnePinAtTime() {
         const pin = this.addPin()
         this.assertPinsEqual([pin])
         const pin2 = this.addPin()
@@ -60,13 +61,13 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async addingPinTriggersRender() {
+    protected async addingPinTriggersRender() {
         this.addPin()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canGetSetZoom() {
+    protected async canGetSetZoom() {
         this.assertSetsZoom('block')
         this.assertSetsZoom('house')
         vcAssert.assertTriggerRenderCount(this.vc, 2)
@@ -75,48 +76,46 @@ export default class ControllingMapsTest extends AbstractViewControllerTest {
         vcAssert.assertTriggerRenderCount(this.vc, 3)
     }
 
-    private static assertSetsZoom(zoom: MapZoom) {
+    private assertSetsZoom(zoom: MapZoom) {
         this.setZoom(zoom)
         assert.isEqual(this.render(this.vc).zoom, zoom)
         assert.isEqual(this.vc.getZoom(), zoom)
     }
 
-    private static setZoom(zoom: MapZoom) {
+    private setZoom(zoom: MapZoom) {
         this.vc.setZoom(zoom)
     }
 
-    private static addPin() {
+    private addPin() {
         const pin = this.generatePinValues()
         this.vc.addPin(pin)
         return pin
     }
 
-    private static setPins(expected: MapPin[]) {
+    private setPins(expected: MapPin[]) {
         this.vc.setPins(expected)
     }
 
-    private static assertPinsEqual(expected: MapPin[]) {
+    private assertPinsEqual(expected: MapPin[]) {
         assert.isEqualDeep(this.getPins(), expected)
     }
 
-    private static getPins() {
+    private getPins() {
         return this.vc.getPins()
     }
 
-    private static generateRandomLatLng() {
+    private generateRandomLatLng() {
         return {
             lat: Math.random(),
             lng: Math.random(),
         }
     }
 
-    private static generatePinValues(): MapPin {
+    private generatePinValues(): MapPin {
         return generatePinValues()
     }
 
-    private static Vc(
-        options?: Partial<MapViewControllerOptions>
-    ): MapViewController {
+    private Vc(options?: Partial<MapViewControllerOptions>): MapViewController {
         return this.Controller('map', { ...options })
     }
 }

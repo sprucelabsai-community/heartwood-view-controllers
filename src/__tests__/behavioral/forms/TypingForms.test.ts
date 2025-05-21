@@ -1,12 +1,13 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { FormViewController } from '../../../types/heartwood.types'
 
+@suite()
 export default class TypingFormsTest extends AbstractViewControllerTest {
     @test()
-    protected static async canCreateTypingForms() {
+    protected async canCreateTypingForms() {
         const vc = this.Controller(
             'form',
             buildForm({

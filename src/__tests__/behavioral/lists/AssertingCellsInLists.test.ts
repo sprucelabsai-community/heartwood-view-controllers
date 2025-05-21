@@ -1,12 +1,13 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class AssertingCellsInListsTest extends AbstractViewControllerTest {
     @test()
-    protected static throwsMissingParams() {
+    protected throwsMissingParams() {
         //@ts-ignore
         const err = assert.doesThrow(() => vcAssert.assertRowRendersCell())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -27,7 +28,7 @@ export default class AssertingCellsInListsTest extends AbstractViewControllerTes
         'third'
     )
     @test('passes when it can find a row 1 by idx cell 1 by id', 1, 'third')
-    protected static passesWhenFindingCell(
+    protected passesWhenFindingCell(
         rowIdxOrId: string | number,
         cellIdxOrId: string | number
     ) {
@@ -47,7 +48,7 @@ export default class AssertingCellsInListsTest extends AbstractViewControllerTes
     @test('fails when it cant find a cell "first" in row 0', 0, 'first', {
         rows: [{ id: 'first', cells: [{ id: 'notfirst' }] }],
     })
-    protected static failsWhenCouldntFindingCell(
+    protected failsWhenCouldntFindingCell(
         rowIdxOrId: string | number,
         cellIdxOrId: string | number,
         options?: Partial<ListViewControllerOptions>
@@ -60,7 +61,7 @@ export default class AssertingCellsInListsTest extends AbstractViewControllerTes
         assert.doesInclude(err.message, `Could not find Cell '${cellIdxOrId}'`)
     }
 
-    private static ListVc(options?: Partial<ListViewControllerOptions>) {
+    private ListVc(options?: Partial<ListViewControllerOptions>) {
         return this.Controller('list', {
             rows: [
                 {

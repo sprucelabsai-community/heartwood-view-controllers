@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
     AbstractAppController,
@@ -9,8 +9,8 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import CardViewController from '../../viewControllers/card/Card.vc'
 
 class DestroyViewController extends AbstractSkillViewController {
-    public cardVc: CardViewController
-    public cardVc2: CardViewController
+    public cardVc!: CardViewController
+    public cardVc2!: CardViewController
     public constructor(options: ViewControllerOptions) {
         super(options)
 
@@ -39,8 +39,8 @@ class NoChildrenViewController extends AbstractSkillViewController {
 
 class DestroyAppController extends AbstractAppController {
     public static id = 'destroy'
-    public cardVc: CardViewController
-    public cardVc2: CardViewController
+    public cardVc!: CardViewController
+    public cardVc2!: CardViewController
     public constructor(options: ViewControllerOptions) {
         super(options)
 
@@ -51,8 +51,8 @@ class DestroyAppController extends AbstractAppController {
 
 class NoChildrenAppController extends AbstractAppController {
     public static id = 'noChildren'
-    public cardVc: CardViewController
-    public cardVc2: CardViewController
+    public cardVc!: CardViewController
+    public cardVc2!: CardViewController
     public constructor(options: ViewControllerOptions) {
         super(options)
 
@@ -68,13 +68,14 @@ declare module '../../types/heartwood.types' {
     }
 }
 
+@suite()
 export default class DestroyingVcsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         destroy: DestroyViewController,
         noChildren: NoChildrenViewController,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.getFactory().setAppController(DestroyAppController)
         this.getFactory().setAppController(NoChildrenAppController)
@@ -82,7 +83,7 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 
     @test('view has destroy method', 'Controller')
     @test('app has destroy method', 'App')
-    protected static async factoryHasDestroy(method: Method) {
+    protected async factoryHasDestroy(method: Method) {
         //@ts-ignore
         const vc = this[method]('noChildren' as any, {})
 
@@ -95,7 +96,7 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 
     @test('view destroy calls destroy on children', 'Controller')
     @test('app destroy calls destroy on children', 'App')
-    protected static async destroyCallsDestroyOnChildren(method: Method) {
+    protected async destroyCallsDestroyOnChildren(method: Method) {
         //@ts-ignore
         const vc = this[method]('destroy', {})
 
@@ -114,14 +115,14 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
 
     @test('view destroy with no children does not crash', 'Controller')
     @test('app destroy with no children does not crash', 'App')
-    protected static async destroyWithNoChildren(method: Method) {
+    protected async destroyWithNoChildren(method: Method) {
         //@ts-ignore
         const vc = this[method]('noChildren', {})
         await vc.destroy()
     }
 
     @test()
-    protected static async destroysChildEvenWithoutLocalReference() {
+    protected async destroysChildEvenWithoutLocalReference() {
         const vc = this.Vc()
         const card = vc.cardVc
 
@@ -139,7 +140,7 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async callingDestroyTwiceThrows() {
+    protected async callingDestroyTwiceThrows() {
         const vc = this.Vc()
 
         await vc.destroy()
@@ -150,13 +151,13 @@ export default class DestroyingVcsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesNotDoubleDestroyChildren() {
+    protected async doesNotDoubleDestroyChildren() {
         const vc = this.Vc()
         await vc.cardVc.destroy()
         await vc.destroy()
     }
 
-    private static Vc() {
+    private Vc() {
         return this.Controller('destroy', {})
     }
 }

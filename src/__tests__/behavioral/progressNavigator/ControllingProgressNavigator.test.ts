@@ -1,12 +1,19 @@
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ProgressNavigatorViewControllerOptions } from '../../../viewControllers/progressNavigator/ProgressNavigator.vc'
 import AbstractProgressNavigatorTest from './AbstractProgressNavigatorTest'
 
+@suite()
 export default class ControllingProgressNavigatorTest extends AbstractProgressNavigatorTest {
     @test()
-    protected static async throwsWithMissingOptions() {
+    protected async throwsWithMissingOptions() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('progress-navigator', {})
@@ -18,7 +25,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async throwsWithNoSteps() {
+    protected async throwsWithNoSteps() {
         const err = assert.doesThrow(() =>
             this.Controller('progress-navigator', { steps: [] })
         )
@@ -29,14 +36,14 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canCreateWithRequiredOptions() {
+    protected async canCreateWithRequiredOptions() {
         this.Vc({
             steps: [this.generatRandomStep()],
         })
     }
 
     @test()
-    protected static rendersModel() {
+    protected rendersModel() {
         const step1 = this.generatRandomStep()
         const step2 = this.generatRandomStep()
 
@@ -52,7 +59,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async throwsWhenTryingToCompleteStepThatDoesNotExist() {
+    protected async throwsWhenTryingToCompleteStepThatDoesNotExist() {
         this.reload({
             steps: [this.generatRandomStep()],
         })
@@ -62,7 +69,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canCompleteStepThatDoesExist() {
+    protected async canCompleteStepThatDoesExist() {
         const { step1, step2 } = this.reloadWith2Steps()
 
         this.completeStep(step1.id)
@@ -75,7 +82,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async settingCurrentStepThrowsIfStepDoesNotExist() {
+    protected async settingCurrentStepThrowsIfStepDoesNotExist() {
         this.reload({
             steps: [this.generatRandomStep()],
         })
@@ -85,7 +92,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canSetCurrentStep() {
+    protected async canSetCurrentStep() {
         const { step1, step2 } = this.reloadWith2Steps()
 
         this.setCurrentStep(step1.id)
@@ -98,14 +105,14 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async defaultsFirstStepToCurrentStep() {
+    protected async defaultsFirstStepToCurrentStep() {
         const { step1 } = this.reloadWith2Steps()
 
         this.assertCurrentStep(step1.id)
     }
 
     @test()
-    protected static async throwsWhenStartingWithCurrentStepThatDoesNotExist() {
+    protected async throwsWhenStartingWithCurrentStepThatDoesNotExist() {
         const step1 = this.generatRandomStep()
         const step2 = this.generatRandomStep()
 
@@ -118,7 +125,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canOpenSteps() {
+    protected async canOpenSteps() {
         const { step1 } = this.reloadWith2Steps()
 
         this.assertActionThrowsInvalidStepId(() => this.openStep(generateId()))
@@ -128,7 +135,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static actuallyMarksStepAsNotIsComplete() {
+    protected actuallyMarksStepAsNotIsComplete() {
         const { step1, step2 } = this.reloadWith2Steps()
 
         this.completeStep(step1.id)
@@ -141,7 +148,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async openingTriggersRender() {
+    protected async openingTriggersRender() {
         const { step1 } = this.reloadWith2Steps()
         this.completeStep(step1.id)
         this.assertEpectedRenderCount(1)
@@ -150,7 +157,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canOpenStepAndEverythingAfter() {
+    protected async canOpenStepAndEverythingAfter() {
         const steps = this.reloadWithTotalSteps(4)
         const id = steps[0].id
 
@@ -174,7 +181,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async resetOpensAllSteps() {
+    protected async resetOpensAllSteps() {
         const steps = this.reloadWithTotalSteps(4)
 
         this.completeStep(steps[0].id)
@@ -191,7 +198,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async resetJumpsBackToFirstStep() {
+    protected async resetJumpsBackToFirstStep() {
         const steps = this.reloadWithTotalSteps(4)
 
         this.setCurrentStep(steps[3].id)
@@ -202,7 +209,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async openStepsAfterOnlyTriggersRenderOnce() {
+    protected async openStepsAfterOnlyTriggersRenderOnce() {
         const steps = this.reloadWithTotalSteps(4)
 
         this.completeStep(steps[0].id)
@@ -218,7 +225,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async resetTriggersRenderOnce() {
+    protected async resetTriggersRenderOnce() {
         const steps = this.reloadWithTotalSteps(4)
 
         this.completeStep(steps[0].id)
@@ -231,7 +238,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async canSetCurrentStepAndCompleteAllBefore() {
+    protected async canSetCurrentStepAndCompleteAllBefore() {
         const steps = this.reloadWithTotalSteps(4)
 
         const id = steps[3].id
@@ -252,7 +259,7 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
     }
 
     @test()
-    protected static async setCurrentStepAndCompleteAllBeforeTriggersRenderOnce() {
+    protected async setCurrentStepAndCompleteAllBeforeTriggersRenderOnce() {
         const steps = this.reloadWithTotalSteps(4)
 
         const id = steps[3].id
@@ -263,24 +270,24 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
         this.assertEpectedRenderCount(2)
     }
 
-    private static setCurrentStepAndCompletePrevious(id: string) {
+    private setCurrentStepAndCompletePrevious(id: string) {
         this.vc.setCurrentStepAndCompletePrevious(id)
     }
 
-    private static reset() {
+    private reset() {
         this.vc.reset()
     }
 
-    private static openStepAndAllAfter(id: any) {
+    private openStepAndAllAfter(id: any) {
         return this.vc.openStepAndAllAfter(id)
     }
 
-    private static reloadWith2Steps() {
+    private reloadWith2Steps() {
         const steps = this.reloadWithTotalSteps(2)
         return { step1: steps[0], step2: steps[1] }
     }
 
-    private static reloadWithTotalSteps(total: number) {
+    private reloadWithTotalSteps(total: number) {
         const steps = new Array(total)
             .fill(0)
             .map(() => this.generatRandomStep())
@@ -291,29 +298,26 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
         return steps
     }
 
-    private static assertOpenStepNotCompletedThrows(stepId: string) {
+    private assertOpenStepNotCompletedThrows(stepId: string) {
         this.assertThrowsStepNotComplete(() => this.openStep(stepId), stepId)
     }
 
-    private static assertThrowsStepNotComplete(
-        action: () => any,
-        stepId: string
-    ) {
+    private assertThrowsStepNotComplete(action: () => any, stepId: string) {
         const err = assert.doesThrow(action)
         errorAssert.assertError(err, 'STEP_NOT_COMPLETE', {
             stepId,
         })
     }
 
-    private static openStep(id: string): any {
+    private openStep(id: string): any {
         return this.vc.openStep(id)
     }
 
-    private static assertSettingCurrentStepThrows(id: string) {
+    private assertSettingCurrentStepThrows(id: string) {
         this.assertActionThrowsInvalidStepId(() => this.setCurrentStep(id))
     }
 
-    private static assertCurrentStep(id: string) {
+    private assertCurrentStep(id: string) {
         const model = this.renderVc()
         assert.isEqual(
             model.currentStepId,
@@ -323,14 +327,14 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
         assert.isEqual(this.vc.getCurrentStep(), id)
     }
 
-    private static assertStepAtIdxIsComplete(idx: number) {
+    private assertStepAtIdxIsComplete(idx: number) {
         let model = this.renderVc()
         const step = model.steps[idx]
         assert.isTrue(step.isComplete, `Step at ${idx} is not complete`)
         assert.isTrue(this.vc.isStepComplete(step.id))
     }
 
-    private static assertStepAtIdxIsNotComplete(idx: number) {
+    private assertStepAtIdxIsNotComplete(idx: number) {
         let model = this.renderVc()
         const step = model.steps[idx]
         assert.isFalsy(
@@ -340,20 +344,20 @@ export default class ControllingProgressNavigatorTest extends AbstractProgressNa
         assert.isFalse(this.vc.isStepComplete(step.id))
     }
 
-    private static renderVc() {
+    private renderVc() {
         return this.render(this.vc)
     }
 
-    private static assertEpectedRenderCount(expected: number) {
+    private assertEpectedRenderCount(expected: number) {
         vcAssert.assertTriggerRenderCount(this.vc, expected)
     }
 
-    private static assertCompleteStepThrowsInvalidStepId(stepId: string) {
+    private assertCompleteStepThrowsInvalidStepId(stepId: string) {
         const action = () => this.completeStep(stepId)
         this.assertActionThrowsInvalidStepId(action)
     }
 
-    private static assertActionThrowsInvalidStepId(action: () => any) {
+    private assertActionThrowsInvalidStepId(action: () => any) {
         const err = assert.doesThrow(action)
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['stepId'],

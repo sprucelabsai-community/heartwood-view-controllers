@@ -1,21 +1,22 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import interactor from '../../../tests/utilities/interactor'
 import AbstractNavigationTest from './AbstractNavigationTest'
 import HasNavSkillView from './HasNavSkillView'
 
+@suite()
 export default class InteractingWithNavigationTest extends AbstractNavigationTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         hasNav: HasNavSkillView,
     }
-    private static hasNavVc: HasNavSkillView
+    private hasNavVc!: HasNavSkillView
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.hasNavVc = this.Controller('hasNav' as any, {})
     }
 
     @test()
-    protected static async throwsWithoutButtonInNav() {
+    protected async throwsWithoutButtonInNav() {
         const vc = this.NavigationVc()
         await assert.doesThrowAsync(() =>
             interactor.clickButton(vc, generateId())
@@ -23,7 +24,7 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
     }
 
     @test()
-    protected static async canClickFirstButtonInNav() {
+    protected async canClickFirstButtonInNav() {
         let hitCount = 0
         const id = generateId()
         const vc = this.NavigationVc({
@@ -48,7 +49,7 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
     }
 
     @test()
-    protected static async throwsWhenCantFindButtonInNav() {
+    protected async throwsWhenCantFindButtonInNav() {
         await assert.doesThrowAsync(() =>
             interactor.clickNavButton(this.hasNavVc, generateId())
         )
@@ -56,7 +57,7 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
 
     @test(`can click nav directly from skill view 1`, 'test', 'test2', 'test')
     @test(`can click nav directly from skill view 2`, 'test', 'test2', 'test2')
-    protected static async canClickFirstButtonInNavOfSkillView(
+    protected async canClickFirstButtonInNavOfSkillView(
         id1: string,
         id2: string,
         idToClick: string
@@ -90,7 +91,7 @@ export default class InteractingWithNavigationTest extends AbstractNavigationTes
     }
 
     @test()
-    protected static async canClickDropdownButton() {
+    protected async canClickDropdownButton() {
         let hitCount = 0
         const id = generateId()
         const vc = this.NavigationVc({

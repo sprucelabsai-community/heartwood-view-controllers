@@ -1,20 +1,21 @@
 import { randomInt } from 'crypto'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { PolarAreaDataItem } from '../../../types/heartwood.types'
 import PolarAreaViewController from '../../../viewControllers/PolarAreaViewController.vc'
 
+@suite()
 export default class PolarAreaViewControllerTest extends AbstractViewControllerTest {
-    private static vc: PolarAreaViewController
+    private vc!: PolarAreaViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.reset([])
     }
 
     @test()
-    protected static async canCreatePolarAreaViewController() {
+    protected async canCreatePolarAreaViewController() {
         this.resetAndAssertRendersExpectedData([
             {
                 label: 'Red',
@@ -35,7 +36,7 @@ export default class PolarAreaViewControllerTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async canUpdateData() {
+    protected async canUpdateData() {
         const data = [
             {
                 label: generateId(),
@@ -48,30 +49,28 @@ export default class PolarAreaViewControllerTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async updatingDataTriggersRender() {
+    protected async updatingDataTriggersRender() {
         this.setData([])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static setData(data: PolarAreaDataItem[]) {
+    private setData(data: PolarAreaDataItem[]) {
         this.vc.setData(data)
     }
 
-    private static resetAndAssertRendersExpectedData(
-        data: PolarAreaDataItem[]
-    ) {
+    private resetAndAssertRendersExpectedData(data: PolarAreaDataItem[]) {
         this.reset(data)
 
         this.assertRenderedDataEquals(data)
     }
 
-    private static assertRenderedDataEquals(data: PolarAreaDataItem[]) {
+    private assertRenderedDataEquals(data: PolarAreaDataItem[]) {
         const model = this.render(this.vc)
         assert.isEqual(model.controller, this.vc)
         assert.isEqualDeep(model.data, data)
     }
 
-    private static reset(data: PolarAreaDataItem[]) {
+    private reset(data: PolarAreaDataItem[]) {
         this.vc = this.Controller('polar-area', {
             data,
         })

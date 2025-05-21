@@ -1,15 +1,16 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class InteractingWithSelectsInRowsTest extends AbstractViewControllerTest {
     @test()
-    protected static async hasInteractWithSelectFunction() {
+    protected async hasInteractWithSelectFunction() {
         assert.isFunction(interactor.selectChoiceInRow)
     }
 
     @test()
-    protected static async throwsWhenCantFindRow() {
+    protected async throwsWhenCantFindRow() {
         const vc = this.ListVc()
 
         await assert.doesThrowAsync(() =>
@@ -22,7 +23,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async doesNotThrowWhenFindingSelect() {
+    protected async doesNotThrowWhenFindingSelect() {
         const firstRowId = `${new Date().getTime()}`
 
         const vc = this.ListVc({ firstRowId })
@@ -34,7 +35,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async throwsIfCantFindSelectInFirstCell() {
+    protected async throwsIfCantFindSelectInFirstCell() {
         const middleRowId = `${new Date().getTime()}`
 
         const vc = this.ListVc({ middleRowId })
@@ -48,7 +49,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async doesNotThrowWhenFindingSelectInLaterCell() {
+    protected async doesNotThrowWhenFindingSelectInLaterCell() {
         const vc = this.ListVc()
         await interactor.selectChoiceInRow({
             vc,
@@ -58,7 +59,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async throwsWhenSelectingChoiceThatDoesNotExist() {
+    protected async throwsWhenSelectingChoiceThatDoesNotExist() {
         const vc = this.ListVc()
         await assert.doesThrowAsync(() =>
             interactor.selectChoiceInRow({
@@ -72,7 +73,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async setsValueOnList() {
+    protected async setsValueOnList() {
         const vc = this.ListVc()
         await interactor.selectChoiceInRow({
             vc,
@@ -85,7 +86,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async setsInLastRow() {
+    protected async setsInLastRow() {
         const vc = this.ListVc()
         await interactor.selectChoiceInRow({
             vc,
@@ -98,7 +99,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async throwsWhenSelectingByInputNameThatDoesNotExist() {
+    protected async throwsWhenSelectingByInputNameThatDoesNotExist() {
         const vc = this.ListVc()
         await assert.doesThrowAsync(() =>
             interactor.selectChoiceInRow({
@@ -111,7 +112,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async throwsWhenSelectingInvalidChoiceByInputName() {
+    protected async throwsWhenSelectingInvalidChoiceByInputName() {
         const vc = this.ListVc()
         await assert.doesThrowAsync(() =>
             interactor.selectChoiceInRow({
@@ -124,7 +125,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
     }
 
     @test()
-    protected static async setsWhenSelectingByInputNameThatExists() {
+    protected async setsWhenSelectingByInputNameThatExists() {
         const vc = this.ListVc()
 
         await interactor.selectChoiceInRow({
@@ -146,10 +147,7 @@ export default class InteractingWithSelectsInRowsTest extends AbstractViewContro
         assert.isEqual(row.getValue('favoriteFood'), 'pizza')
     }
 
-    private static ListVc(options?: {
-        firstRowId?: string
-        middleRowId?: string
-    }) {
+    private ListVc(options?: { firstRowId?: string; middleRowId?: string }) {
         return this.Controller('list', {
             rows: [
                 {

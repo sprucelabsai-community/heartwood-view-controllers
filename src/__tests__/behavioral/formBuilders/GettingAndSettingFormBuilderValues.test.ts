@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { FormBuilder } from '../../../types/heartwood.types'
@@ -6,12 +6,13 @@ import FormBuilderCardViewController, {
     FormBuilderCardViewControllerOptions,
 } from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
+@suite()
 export default class GettingFormBuilderValuesTest extends AbstractViewControllerTest {
-    protected static controllerMap: Record<string, any> = {
+    protected controllerMap: Record<string, any> = {
         'form-builder-card': FormBuilderCardViewController,
     }
 
-    private static readonly singlePageForm: FormBuilder = {
+    private readonly singlePageForm: FormBuilder = {
         title: 'Building your form',
         pages: [
             {
@@ -61,7 +62,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
         ],
     }
 
-    private static readonly multiPageForm: FormBuilder = {
+    private readonly multiPageForm: FormBuilder = {
         title: 'Building your form',
         pages: [
             {
@@ -152,19 +153,19 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
     }
 
     @test()
-    protected static canCreateGettingFormBuilderValues() {
+    protected canCreateGettingFormBuilderValues() {
         const vc = this.Vc()
         assert.isFunction(vc.getValues)
     }
 
     @test()
-    protected static getsGoodStartingValues() {
+    protected getsGoodStartingValues() {
         const values = this.Vc().getValues()
         assert.isEqualDeep(values, [{ field1: undefined }])
     }
 
     @test()
-    protected static async firstPageCanHaveMultipleFields() {
+    protected async firstPageCanHaveMultipleFields() {
         const vc = this.Vc()
         await vc.importObject(this.singlePageForm)
 
@@ -182,7 +183,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
     }
 
     @test('cant set bad values {object}', { waka: true })
-    protected static async cantSetBadValues(expected: any) {
+    protected async cantSetBadValues(expected: any) {
         const vc = this.Vc()
         await vc.importObject(this.singlePageForm)
 
@@ -193,7 +194,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
     }
 
     @test()
-    protected static async canSetGoodValuesToSinglePageForm() {
+    protected async canSetGoodValuesToSinglePageForm() {
         const vc = this.Vc()
         await vc.importObject(this.singlePageForm)
 
@@ -207,7 +208,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
     }
 
     @test()
-    protected static async canSetGoodValuesToMultiPageForm() {
+    protected async canSetGoodValuesToMultiPageForm() {
         const vc = this.Vc()
         await vc.importObject(this.multiPageForm)
 
@@ -222,7 +223,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
     }
 
     @test()
-    protected static async secondPageWorks() {
+    protected async secondPageWorks() {
         const vc = this.Vc()
         await vc.importObject(this.multiPageForm)
 
@@ -245,7 +246,7 @@ export default class GettingFormBuilderValuesTest extends AbstractViewController
         assert.isEqualDeep(values, [expected1, expected2])
     }
 
-    private static Vc(options?: FormBuilderCardViewControllerOptions) {
+    private Vc(options?: FormBuilderCardViewControllerOptions) {
         return this.Controller('form-builder-card', { ...options })
     }
 }

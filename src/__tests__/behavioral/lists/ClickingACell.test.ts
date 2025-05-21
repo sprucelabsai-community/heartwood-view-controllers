@@ -1,17 +1,18 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class ClickingACellTest extends AbstractViewControllerTest {
     @test()
-    protected static async hasClickCell() {
+    protected async hasClickCell() {
         assert.isFunction(interactor.clickCell)
     }
 
     @test()
-    protected static async cantClickACellWithoutOptions() {
+    protected async cantClickACellWithoutOptions() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => interactor.clickCell())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -20,7 +21,7 @@ export default class ClickingACellTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenClickingCellWithoutOnClick() {
+    protected async throwsWhenClickingCellWithoutOnClick() {
         const vc = this.ListVc({})
 
         const err = await assert.doesThrowAsync(() =>
@@ -33,7 +34,7 @@ export default class ClickingACellTest extends AbstractViewControllerTest {
     @test('can click cell in row 0 by name second', 0, 'second')
     @test('can click cell in row 1 by name square', 1, 'square')
     @test('can click cell in row panda by name square', 'panda', 'square')
-    protected static async canClickCellInRowById(
+    protected async canClickCellInRowById(
         rowIdOrIdx: string | number,
         cellId: string
     ) {
@@ -77,7 +78,7 @@ export default class ClickingACellTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClickCellInRowByIdx() {
+    protected async canClickCellInRowByIdx() {
         let wasHit = false
         const vc = this.ListVc({
             rows: [
@@ -105,7 +106,7 @@ export default class ClickingACellTest extends AbstractViewControllerTest {
 
     @test('throws when clicking cell with bad id', 'fifth')
     @test('throws when clicking cell with bad idx', '30')
-    protected static async throwsWhenClickingCellWithBadCellIdxOrId(
+    protected async throwsWhenClickingCellWithBadCellIdxOrId(
         cellIdxOrId: number | string
     ) {
         const vc = this.ListVc({})
@@ -116,7 +117,7 @@ export default class ClickingACellTest extends AbstractViewControllerTest {
         assert.doesInclude(err.message, 'Could not find Cell')
     }
 
-    protected static ListVc(options?: Partial<ListViewControllerOptions>) {
+    protected ListVc(options?: Partial<ListViewControllerOptions>) {
         return this.Controller('list', {
             rows: [
                 {

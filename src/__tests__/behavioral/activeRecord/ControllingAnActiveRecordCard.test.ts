@@ -4,7 +4,7 @@ import {
 } from '@sprucelabs/mercury-client'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import buildActiveRecordCard from '../../../builders/buildActiveRecordCard'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -15,10 +15,11 @@ import ActiveRecordCardViewController, {
     ActiveRecordCardViewControllerOptions,
 } from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
+@suite()
 export default class ControllingAnActiveRecordCardTest extends AbstractViewControllerTest {
-    private static organizations: Organization[] = []
+    private organizations: Organization[] = []
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         MercuryTestClient.setShouldRequireLocalListeners(true)
@@ -38,7 +39,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static creatingActiveRecordWithoutRequiredParamsThrows() {
+    protected creatingActiveRecordWithoutRequiredParamsThrows() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('activeRecordCard', {})
@@ -50,7 +51,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static rendersBusyCardToStart() {
+    protected rendersBusyCardToStart() {
         const vc = this.Vc()
 
         vcAssert.assertRendersValidCard(vc)
@@ -58,7 +59,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetCardHeader() {
+    protected async canSetCardHeader() {
         const header = {
             title: `${Math.random()}`,
         }
@@ -72,7 +73,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetCardFooter() {
+    protected async canSetCardFooter() {
         const footer = {
             buttons: [{ label: `${Math.random()}` }],
         }
@@ -87,7 +88,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static rendersList() {
+    protected rendersList() {
         const vc = this.Vc()
 
         const listVc = vcAssert.assertCardRendersList(vc)
@@ -97,13 +98,13 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('sets id on list 1', 'test')
     @test('sets id on list 2', 'waka')
-    protected static listIdIsSetBasedOnCardId(id: string) {
+    protected listIdIsSetBasedOnCardId(id: string) {
         const vc = this.Vc({ id })
         assert.isEqual(this.render(vc.getListVc()).id, id)
     }
 
     @test()
-    protected static async canSetIsBusyOnCard() {
+    protected async canSetIsBusyOnCard() {
         const vc = this.Vc({})
 
         assert.isFalse(vc.getIsLoaded())
@@ -126,20 +127,20 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async cantLoadTwice() {
+    protected async cantLoadTwice() {
         const vc = this.Vc({})
         await vc.load()
         await assert.doesThrowAsync(() => vc.load())
     }
 
     @test()
-    protected static async cantRefreshUntilLoaded() {
+    protected async cantRefreshUntilLoaded() {
         const vc = this.Vc({})
         await assert.doesThrowAsync(() => vc.refresh())
     }
 
     @test()
-    protected static async rendersNoResultsWhenNoResultsReturned() {
+    protected async rendersNoResultsWhenNoResultsReturned() {
         const vc = await this.fakeListOrgsNoResultsAndLoad({
             payload: {
                 shouldOnlyShowMine: true,
@@ -158,7 +159,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('can get/set payload 1', { test: true })
     @test('can get/set payload 2', { taco: 'bravo' })
-    protected static async canGetPayload(expected: any) {
+    protected async canGetPayload(expected: any) {
         const vc = this.Vc({
             payload: expected,
         })
@@ -167,7 +168,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canCustomizeEmptyRow() {
+    protected async canCustomizeEmptyRow() {
         const vc = await this.fakeListOrgsNoResultsAndLoad({
             payload: {
                 shouldOnlyShowMine: true,
@@ -191,7 +192,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canBeSetToThrow() {
+    protected async canBeSetToThrow() {
         ActiveRecordCardViewController.setShouldThrowOnResponseError(true)
 
         await assert.doesThrowAsync(() =>
@@ -205,7 +206,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async showsAnErrorRowOnError() {
+    protected async showsAnErrorRowOnError() {
         ActiveRecordCardViewController.setShouldThrowOnResponseError(false)
 
         const vc = await this.fakeListOrgsAndLoad(() => {
@@ -220,7 +221,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async listsMyOrganizations() {
+    protected async listsMyOrganizations() {
         const organizations = await this.seedOrganizations()
 
         const vc = this.Vc({
@@ -240,7 +241,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canRefreshToGetNewRecords() {
+    protected async canRefreshToGetNewRecords() {
         const vc = await this.VcLoaded({})
 
         const listVc = vc.getListVc()
@@ -290,7 +291,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('can delete row for org 0', 0)
     @test('can delete row for org 1', 1)
-    protected static async canDeleteRow(idx: number) {
+    protected async canDeleteRow(idx: number) {
         const organizations = await this.seedOrganizations()
         const organization = organizations[idx]
 
@@ -308,7 +309,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async listCallsTriggerRenderOnceForEntireLoad() {
+    protected async listCallsTriggerRenderOnceForEntireLoad() {
         const vc = this.Vc()
 
         await vc.load()
@@ -321,7 +322,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async usesRowTransformer() {
+    protected async usesRowTransformer() {
         const organization = await this.seedOrganization()
 
         const vc = this.Vc({
@@ -360,7 +361,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async throwsWithBadResponseKey() {
+    protected async throwsWithBadResponseKey() {
         const organization = await this.seedOrganization()
 
         const vc = this.Vc({
@@ -380,7 +381,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async typesEverything() {
+    protected async typesEverything() {
         buildActiveRecordCard({
             eventName: 'list-organizations::v2020_12_25',
             responseKey: 'organizations',
@@ -403,7 +404,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('can set column widths 1', ['fill', 'content'])
     @test('can set column widths 2', ['content', 'fill'])
-    protected static async passesThroughListProps(columnWidths: any[]) {
+    protected async passesThroughListProps(columnWidths: any[]) {
         const vc = this.Vc({
             columnWidths,
         })
@@ -417,7 +418,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('can set render dividers 1', true)
     @test('can set render dividers 2', false)
-    protected static async passesThroughShouldRenderDividers(
+    protected async passesThroughShouldRenderDividers(
         shouldRenderRowDividers: boolean
     ) {
         const vc = this.Vc({
@@ -435,7 +436,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static canGetTarget() {
+    protected canGetTarget() {
         const vc1 = this.Vc({
             target: {
                 hello: 'world',
@@ -446,7 +447,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static canSetTarget() {
+    protected canSetTarget() {
         const vc1 = this.Vc({
             target: {
                 hello: 'world',
@@ -461,7 +462,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canFilterResults() {
+    protected async canFilterResults() {
         const organizations = await this.seedOrganizations()
 
         const vc = this.Vc({
@@ -480,7 +481,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
 
     @test('can set to tall', 'tall')
     @test('can set to standard', 'standard')
-    protected static canSetDefaultRowHeight(height: any) {
+    protected canSetDefaultRowHeight(height: any) {
         const vc = this.Vc({
             defaultRowHeight: height,
         })
@@ -491,7 +492,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canGetRecordsBackAfterLoad() {
+    protected async canGetRecordsBackAfterLoad() {
         const { vc, organizations } = await this.seedAndGetVc()
 
         assert.doesThrow(() => vc.getRecords())
@@ -506,7 +507,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canUpdateRowDirectly() {
+    protected async canUpdateRowDirectly() {
         const { vc, organizations } = await this.seedAndGetVc()
 
         assert.doesThrow(() => vc.upsertRow(organizations[0].id, { cells: [] }))
@@ -543,7 +544,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
             },
         ],
     })
-    protected static async canAddRowDirectly(newRow: Record<string, any>) {
+    protected async canAddRowDirectly(newRow: Record<string, any>) {
         const vc = this.Vc({})
 
         vc.addRow(newRow as any)
@@ -554,7 +555,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async showsNoResultsIfFilterDropsTheRecords() {
+    protected async showsNoResultsIfFilterDropsTheRecords() {
         const { vc } = await this.seedAndGetVc({
             filter: () => false,
         })
@@ -566,7 +567,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async deletingLastRowShowsNoResults() {
+    protected async deletingLastRowShowsNoResults() {
         const {
             vc,
             organizations: [org1, org2],
@@ -583,28 +584,28 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async customRowsRemovedWhenNoResultsRendered() {
+    protected async customRowsRemovedWhenNoResultsRendered() {
         this.organizations = []
         const vc = this.Vc()
         await this.assertListLoadingClearsCustomRow(vc)
     }
 
     @test()
-    protected static async errorRemovesCustomRows() {
+    protected async errorRemovesCustomRows() {
         await this.eventFaker.fakeListOrganizations(() => assert.fail('nope'))
         const vc = this.Vc()
         await this.assertListLoadingClearsCustomRow(vc)
     }
 
     @test()
-    protected static async loadingRemovesCustomRows() {
+    protected async loadingRemovesCustomRows() {
         await this.seedOrganization()
         const vc = this.Vc()
         await this.assertListLoadingClearsCustomRow(vc)
     }
 
     @test()
-    protected static async canGetRowVCs() {
+    protected async canGetRowVCs() {
         await this.seedOrganization()
         await this.seedOrganization()
         const vc = this.Vc()
@@ -614,7 +615,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canGetValues() {
+    protected async canGetValues() {
         const vc = this.Vc()
 
         const expected = [
@@ -633,7 +634,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetHeaderTitle() {
+    protected async canSetHeaderTitle() {
         const title = generateId()
         const vc = this.Vc()
         vc.setHeaderTitle(title)
@@ -641,7 +642,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetHeaderSubtitle() {
+    protected async canSetHeaderSubtitle() {
         const title = generateId()
         const vc = this.Vc()
         vc.setHeaderSubtitle(title)
@@ -649,7 +650,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetFooter() {
+    protected async canSetFooter() {
         const vc = this.Vc()
         let passedFooter: CardFooter | undefined
         vc.getCardVc().setFooter = (footer: CardFooter) => {
@@ -665,7 +666,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canEnableDisableFooter() {
+    protected async canEnableDisableFooter() {
         const vc = this.Vc()
         vc.disableFooter()
         vcAssert.assertCardFooterIsDisabled(vc)
@@ -674,7 +675,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetCriticalError() {
+    protected async canSetCriticalError() {
         const vc = this.Vc()
         const error: CriticalError = {
             buttons: [
@@ -696,7 +697,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canSetPayload() {
+    protected async canSetPayload() {
         const vc = this.Vc({
             payload: {
                 hello: 'again',
@@ -721,7 +722,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async exposesRowSelectionMethods() {
+    protected async exposesRowSelectionMethods() {
         const [{ id: id1 }, { id: id2 }, { id: id3 }] =
             await this.seedOrganizations()
 
@@ -764,7 +765,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     @test()
-    protected static async canCheckIfRowExists() {
+    protected async canCheckIfRowExists() {
         await this.seedOrganization()
         const vc = this.Vc()
         await vc.load()
@@ -772,15 +773,13 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         assert.isTrue(vc.doesRowExist(this.organizations[0].id))
     }
 
-    private static async assertListLoadingClearsCustomRow(
-        vc: SpyActiveRecordCard
-    ) {
+    private async assertListLoadingClearsCustomRow(vc: SpyActiveRecordCard) {
         vc.addRow({ id: 'test', cells: [] })
         await vc.load()
         assert.isEqual(vc.getListVc().getTotalRows(), 1)
     }
 
-    private static async seedAndGetVc(
+    private async seedAndGetVc(
         options?: Partial<ActiveRecordCardViewControllerOptions> & {
             totalOrgs?: number
         }
@@ -796,7 +795,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         return { vc, organizations }
     }
 
-    private static async seedOrganizations(totalOrgs = 5) {
+    private async seedOrganizations(totalOrgs = 5) {
         let organizations = await Promise.all(
             new Array(totalOrgs).fill(0).map(() => this.seedOrganization())
         )
@@ -808,7 +807,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         return organizations
     }
 
-    private static async seedOrganization() {
+    private async seedOrganization() {
         const organization = {
             id: `${new Date().getTime() * Math.random()}`,
             name: 'New org ' + this.organizations.length,
@@ -821,7 +820,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         return organization
     }
 
-    private static Vc(
+    private Vc(
         options?: Partial<ActiveRecordCardViewControllerOptions>
     ): SpyActiveRecordCard {
         return this.Controller('active-record-card', {
@@ -845,7 +844,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         }) as SpyActiveRecordCard
     }
 
-    private static async fakeListOrgsNoResultsAndLoad(
+    private async fakeListOrgsNoResultsAndLoad(
         options?: Partial<ActiveRecordCardViewControllerOptions>
     ) {
         const cb = async () => {
@@ -858,7 +857,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         return vc
     }
 
-    private static async fakeListOrgsAndLoad(
+    private async fakeListOrgsAndLoad(
         cb: () => Promise<{ organizations: any[] }>,
         options?: Partial<ActiveRecordCardViewControllerOptions>
     ) {
@@ -870,7 +869,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
         return vc
     }
 
-    private static async VcLoaded(
+    private async VcLoaded(
         options?: Partial<ActiveRecordCardViewControllerOptions>
     ) {
         const vc = this.Vc(options)

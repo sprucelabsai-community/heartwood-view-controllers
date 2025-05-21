@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
@@ -8,16 +8,17 @@ import ButtonGroupViewController, {
     SelectionChangeHandler,
 } from '../../../viewControllers/ButtonGroup.vc'
 
+@suite()
 export default class InteractingWithButtonGroupsTest extends AbstractViewControllerTest {
-    private static vc: ButtonGroupViewController
+    private vc!: ButtonGroupViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.With3Buttons()
     }
 
     @test()
-    protected static async throwsWhenMissingParams() {
+    protected async throwsWhenMissingParams() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             interactor.clickButtonInGroup()
@@ -30,7 +31,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 
     @test('throws when cant find button 1', 'not-found', 'test')
     @test('throws when cant find button 2', 'test', 'not-found')
-    protected static async throwsWhenCantFindButtonById(
+    protected async throwsWhenCantFindButtonById(
         buttonId: string,
         lookupId: string
     ) {
@@ -49,12 +50,12 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
     }
 
     @test()
-    protected static async noErrorWhenFindingButton() {
+    protected async noErrorWhenFindingButton() {
         await this.clickButton('test')
     }
 
     @test()
-    protected static async setsValue() {
+    protected async setsValue() {
         await this.clickButton('test')
 
         this.assertSelected(['test'])
@@ -66,7 +67,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 
     @test('throws with bad 1', 10)
     @test('throws with bad 2', 5)
-    protected static async throwsWithBadNumberIndex(idx: number) {
+    protected async throwsWithBadNumberIndex(idx: number) {
         await assert.doesThrowAsync(
             () => this.clickButton(idx),
             `could not find`
@@ -75,12 +76,12 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
 
     @test('passes with good 1', 0)
     @test('passes with good 2', 1)
-    protected static async passesWithGoodIndex(idx: number) {
+    protected async passesWithGoodIndex(idx: number) {
         await this.clickButton(idx)
     }
 
     @test()
-    protected static async passesExpectedChangesToChangeHandler() {
+    protected async passesExpectedChangesToChangeHandler() {
         let passedChanged: any
 
         this.VcWithChangeHandler(
@@ -107,7 +108,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
     }
 
     @test()
-    protected static async passesDeselectedWithSelected() {
+    protected async passesDeselectedWithSelected() {
         let passedChanged: any
 
         this.VcWithChangeHandler(
@@ -133,7 +134,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
     }
 
     @test()
-    protected static async passesExpectedChangesWithMultiSelect() {
+    protected async passesExpectedChangesWithMultiSelect() {
         let passedChanged: any
 
         this.VcWithChangeHandler(
@@ -152,7 +153,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
         assert.isEqualDeep(passedChanged, { added: ['second'], removed: [] })
     }
 
-    private static VcWithChangeHandler(
+    private VcWithChangeHandler(
         changeHandler: SelectionChangeHandler,
         isMultiSelect = false
     ) {
@@ -173,16 +174,16 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
         })
     }
 
-    private static assertSelected(expected: string[]) {
+    private assertSelected(expected: string[]) {
         const selected = this.vc.getSelectedButtons()
         assert.isEqualDeep(selected, expected)
     }
 
-    private static clickButton(lookupId: string | number): any {
+    private clickButton(lookupId: string | number): any {
         return interactor.clickButtonInGroup(this.vc, lookupId)
     }
 
-    private static With3Buttons() {
+    private With3Buttons() {
         return this.Vc({
             buttons: [
                 { id: 'not-found' },
@@ -196,7 +197,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
         })
     }
 
-    private static Vc(options: ButtonGroupViewControllerOptions) {
+    private Vc(options: ButtonGroupViewControllerOptions) {
         return this.Controller('buttonGroup', { ...options })
     }
 }

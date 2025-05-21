@@ -1,11 +1,12 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class ClickingButtonHintsTest extends AbstractViewControllerTest {
     @test()
-    protected static async throwsWhenMissing() {
+    protected async throwsWhenMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             interactor.clickButtonHint()
@@ -16,7 +17,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async throwsWhenNotFindingButton() {
+    protected async throwsWhenNotFindingButton() {
         const cardVc = this.Controller('card', {})
         await assert.doesThrowAsync(
             () => interactor.clickButtonHint(cardVc, 'not-found'),
@@ -25,7 +26,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async throwsWhenNoHintListenerWasSet() {
+    protected async throwsWhenNoHintListenerWasSet() {
         const cardVc = this.Controller('card', {
             body: {
                 sections: [
@@ -42,7 +43,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async throwsWhenHintNotSetToTrue() {
+    protected async throwsWhenHintNotSetToTrue() {
         const cardVc = this.Controller('card', {
             body: {
                 sections: [
@@ -65,7 +66,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canClickFirstHintIcon() {
+    protected async canClickFirstHintIcon() {
         const cardVc = this.Controller('card', {
             body: {
                 sections: [
@@ -85,7 +86,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async clicksALaterButton() {
+    protected async clicksALaterButton() {
         const cardVc = this.Controller('card', {
             body: {
                 sections: [
@@ -107,7 +108,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async clicksButtonInFooter() {
+    protected async clicksButtonInFooter() {
         const cardVc = this.Controller('card', {
             footer: {
                 buttons: [
@@ -124,7 +125,7 @@ export default class ClickingButtonHintsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async triggersCallback() {
+    protected async triggersCallback() {
         let wasHit = false
         const cardVc = this.Controller('card', {
             body: {

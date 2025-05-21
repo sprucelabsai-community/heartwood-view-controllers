@@ -5,7 +5,7 @@ import {
     FieldDefinitions,
 } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import buildForm from '../../../builders/buildForm'
@@ -21,26 +21,27 @@ import {
 import { FormViewControllerOptions } from '../../../viewControllers/form/Form.vc'
 import { testFormOptions, TestFormSchema } from './testFormOptions'
 
+@suite()
 export default class UsingAFormViewControllerTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: FormViewController<TestFormSchema>
+    protected controllerMap = {}
+    private vc!: FormViewController<TestFormSchema>
 
-    private static readonly testForm = testFormOptions
+    private readonly testForm = testFormOptions
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.TestFormVc()
     }
 
     @test()
-    protected static canCreateUsingAFormViewController() {
+    protected canCreateUsingAFormViewController() {
         //@ts-ignore
         const vc = this.Controller('form', {})
         assert.isTruthy(vc)
     }
 
     @test()
-    protected static async badValuesDontMessAnythingUp() {
+    protected async badValuesDontMessAnythingUp() {
         const vc = this.Controller('form', {
             ...this.testForm,
             values: undefined,
@@ -50,20 +51,20 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static rendersValidForm() {
+    protected rendersValidForm() {
         const view = this.vc.render()
         validateSchemaValues(formSchema, view)
     }
 
     @test()
-    protected static formIsNotBusyToStart() {
+    protected formIsNotBusyToStart() {
         assert.isFalsy(this.vc.getIsBusy())
         const model = this.vc.render()
         assert.isFalsy(model.isBusy)
     }
 
     @test()
-    protected static canSetBusy() {
+    protected canSetBusy() {
         this.vc.setIsBusy(true)
         assert.isTrue(this.vc.getIsBusy())
         const model = this.vc.render()
@@ -71,7 +72,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canGetValues() {
+    protected canGetValues() {
         const actual = this.vc.getValues()
 
         assert.isEqualDeep(actual, {
@@ -83,7 +84,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canSetValue() {
+    protected async canSetValue() {
         await this.vc.setValue('first', 'tay')
         const actual = this.vc.getValues()
 
@@ -96,27 +97,27 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static errorsByFieldEmptyToStart() {
+    protected errorsByFieldEmptyToStart() {
         const errorsByField = this.vc.getErrorsByField()
         assert.isLength(Object.keys(errorsByField), 0)
         assert.isFalse(this.vc.hasErrors())
     }
 
     @test()
-    protected static errorsByFieldEmtyToStart() {
+    protected errorsByFieldEmtyToStart() {
         const errorsByField = this.vc.getErrorsByField()
         assert.isLength(Object.keys(errorsByField), 0)
         assert.isFalse(this.vc.hasErrors())
     }
 
     @test()
-    protected static validateShowsAllErrors() {
+    protected validateShowsAllErrors() {
         const errorsByField = this.vc.validate()
         assert.isLength(Object.keys(errorsByField), 2)
     }
 
     @test()
-    protected static async errorsByFieldShowsFirstDirtyField() {
+    protected async errorsByFieldShowsFirstDirtyField() {
         await this.vc.setValue('first', 'Tay')
         await this.vc.setValue('first', '')
 
@@ -127,21 +128,21 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async knowsIfDirty() {
+    protected async knowsIfDirty() {
         this.assertIsNotDirty()
         await this.setFirstToRandomValue()
         this.assertIsDirty()
     }
 
     @test()
-    protected static async dirtyResetsOnSubmit() {
+    protected async dirtyResetsOnSubmit() {
         await this.setFirstToRandomValue()
         await this.vc.submit()
         this.assertIsNotDirty()
     }
 
     @test()
-    protected static async canClearDirty() {
+    protected async canClearDirty() {
         await this.setFirstToRandomValue()
         this.assertIsDirty()
         this.vc.clearDirty()
@@ -152,7 +153,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async fieldErrorsRendered() {
+    protected async fieldErrorsRendered() {
         await this.vc.setValue('first', 'Test')
 
         let model = this.vc.render()
@@ -166,7 +167,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static settingErrorsSetsErrorsByField() {
+    protected settingErrorsSetsErrorsByField() {
         this.vc.setErrors([
             {
                 code: 'INVALID_PARAMETER',
@@ -181,7 +182,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static settingErrorsOverwritesLastErrorsByField() {
+    protected settingErrorsOverwritesLastErrorsByField() {
         this.vc.setErrors([
             {
                 code: 'INVALID_PARAMETER',
@@ -203,13 +204,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static submitControlsShowByDefault() {
+    protected submitControlsShowByDefault() {
         const model = this.vc.render()
         assert.isTrue(model.shouldShowSubmitControls)
     }
 
     @test()
-    protected static canHideAndShowSubmitControls() {
+    protected canHideAndShowSubmitControls() {
         this.vc.hideSubmitControls()
         assert.isFalse(this.vc.render().shouldShowSubmitControls)
         this.vc.getShowSubmitControls()
@@ -217,7 +218,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async onChangesReportAsExpected() {
+    protected async onChangesReportAsExpected() {
         let lastIsValid: any
         let lastErrorsByField: any
 
@@ -241,7 +242,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async resettingAFormClearsValuesAndErrors() {
+    protected async resettingAFormClearsValuesAndErrors() {
         await this.vc.setValue('first', 'Test')
 
         const errors = this.vc.validate()
@@ -256,7 +257,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async resettingFormCallsRender() {
+    protected async resettingFormCallsRender() {
         //@ts-ignore
         const count = this.vc.__renderInvocationCount
 
@@ -267,7 +268,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async resetValuesAreNotSetByRef() {
+    protected async resetValuesAreNotSetByRef() {
         await this.vc.reset()
         await this.vc.setValue('first', 'Tets')
         //@ts-ignore
@@ -275,7 +276,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canResetField() {
+    protected async canResetField() {
         const vc: FormViewController<(typeof testFormOptions)['schema']> =
             this.Controller(
                 'form',
@@ -297,7 +298,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async resetFieldsClearsItsErrors() {
+    protected async resetFieldsClearsItsErrors() {
         //@ts-ignore
         await this.vc.setValue('favoriteNumber', 'aoeu')
 
@@ -311,7 +312,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static throwsGettingBadSection() {
+    protected throwsGettingBadSection() {
         const err1 = assert.doesThrow(() => this.vc.getSection(-1))
 
         errorAssert.assertError(err1, 'INVALID_PARAMETERS', {
@@ -320,13 +321,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static cancelButtonDefaultsToShowing() {
+    protected cancelButtonDefaultsToShowing() {
         assert.isTrue(this.vc.getShouldShowCancelButton())
         assert.isTrue(this.render(this.vc).shouldShowCancelButton)
     }
 
     @test()
-    protected static canCheckIfCancelButtonIsShowing() {
+    protected canCheckIfCancelButtonIsShowing() {
         const vc = this.Controller('form', {
             ...this.testForm,
             shouldShowCancelButton: false,
@@ -339,7 +340,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static cancelButtonIsNotShowingIfSubmitControlsAreNotShowing() {
+    protected cancelButtonIsNotShowingIfSubmitControlsAreNotShowing() {
         const vc = this.Controller('form', {
             ...this.testForm,
             shouldShowSubmitControls: false,
@@ -349,13 +350,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static defaultSubmitButtonLabel() {
+    protected defaultSubmitButtonLabel() {
         assert.isEqual(this.vc.getSubmitButtonLabel(), 'Go!')
         assert.isEqual(this.render(this.vc).submitButtonLabel, 'Go!')
     }
 
     @test()
-    protected static canSetSubmitButtonLabel() {
+    protected canSetSubmitButtonLabel() {
         const vc = this.Controller('form', {
             ...this.testForm,
             submitButtonLabel: 'Waka',
@@ -366,20 +367,20 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static addingSectionShouldNotMutateModel() {
+    protected addingSectionShouldNotMutateModel() {
         this.vc.addSection({ title: 'go!', fields: [] })
         //test against original form schema to see if it was mutated
         assert.isLength(testFormOptions.sections, 3)
     }
 
     @test()
-    protected static addingSectionShouldTriggerRender() {
+    protected addingSectionShouldTriggerRender() {
         this.vc.addSection({ title: 'go!', fields: [] })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static cantAddWithoutSpecifyingFieldAndSection() {
+    protected cantAddWithoutSpecifyingFieldAndSection() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.addFields({}))
 
@@ -389,7 +390,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static cantAddFieldToSectionThatDoesNotExist() {
+    protected cantAddFieldToSectionThatDoesNotExist() {
         const err = assert.doesThrow(() =>
             this.vc.addFields({
                 sectionIdx: -1,
@@ -403,7 +404,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static addingAFieldToSectionAddsToSchemaAndSection() {
+    protected addingAFieldToSectionAddsToSchemaAndSection() {
         this.vc.addFields({
             sectionIdx: 0,
             fields: {
@@ -425,7 +426,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canAddMultipleFields() {
+    protected canAddMultipleFields() {
         this.vc.addFields({
             sectionIdx: 0,
             fields: {
@@ -480,7 +481,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static addingFieldsTriggersRender() {
+    protected addingFieldsTriggersRender() {
         this.vc.addFields({
             sectionIdx: 0,
             fields: {
@@ -498,7 +499,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static addingFieldsDoesNotMutateOriginalSchema() {
+    protected addingFieldsDoesNotMutateOriginalSchema() {
         const schema = this.vc.getSchema()
 
         this.vc.addFields({
@@ -518,12 +519,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static hasUpdateSectionMethod() {
+    protected hasUpdateSectionMethod() {
         assert.isFunction(this.vc.updateSection)
     }
 
     @test()
-    protected static validatesUpdate() {
+    protected validatesUpdate() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateSection())
 
@@ -533,7 +534,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static validatesUpdateForUpdates() {
+    protected validatesUpdateForUpdates() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateSection(0))
 
@@ -543,7 +544,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static throwsWithBadSectionOnUpdate() {
+    protected throwsWithBadSectionOnUpdate() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateSection(-1, {}))
 
@@ -553,7 +554,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateFirstSectionTitle() {
+    protected canUpdateFirstSectionTitle() {
         this.vc.updateSection(0, {
             title: 'Hey gang!',
         })
@@ -572,7 +573,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static updateSectionUpdatesEverything() {
+    protected updateSectionUpdatesEverything() {
         this.vc.updateSection(0, {
             title: 'Hey gang!',
             fields: ['first'],
@@ -594,7 +595,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static updatesTriggerRender() {
+    protected updatesTriggerRender() {
         this.vc.updateSection(0, {
             title: 'do-bee',
         })
@@ -603,7 +604,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static hidingSubmitControlsDoesNotImpactFooter() {
+    protected hidingSubmitControlsDoesNotImpactFooter() {
         const label = 'What the?'
         this.vc.setFooter({
             buttons: [
@@ -625,7 +626,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateSectionsAndTriggerRender() {
+    protected canUpdateSectionsAndTriggerRender() {
         this.vc.setSections([
             {
                 title: 'go team!',
@@ -642,7 +643,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateFooter() {
+    protected canUpdateFooter() {
         this.vc.setFooter({
             buttons: [
                 {
@@ -658,13 +659,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static updatingFooterTriggersRender() {
+    protected updatingFooterTriggersRender() {
         this.vc.setFooter({})
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static cantUpdateWhenMissingEverything() {
+    protected cantUpdateWhenMissingEverything() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateField())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -673,7 +674,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static cantUpdateWithouSupplyingUpdates() {
+    protected cantUpdateWithouSupplyingUpdates() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.updateField('test'))
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -683,7 +684,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test('cant update field with bad name deli', 'deli')
     @test('cant update field with bad name random', `${Math.random()}`)
-    protected static cantUpdateFieldThatDoesNotExist(name: any) {
+    protected cantUpdateFieldThatDoesNotExist(name: any) {
         const err = assert.doesThrow(() =>
             this.vc.updateField(name, {
                 //@ts-ignore
@@ -696,7 +697,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateFieldLabelDirectly() {
+    protected canUpdateFieldLabelDirectly() {
         this.vc.updateField('first', {
             fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
         })
@@ -713,7 +714,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async updatingFieldDefinitionDoesNotMutateOriginalSchema() {
+    protected async updatingFieldDefinitionDoesNotMutateOriginalSchema() {
         const schema = this.vc.getSchema()
         this.vc.updateField('first', {
             fieldDefinition: { type: 'text', label: 'Cheesy burrito' },
@@ -723,7 +724,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateFieldLabelWithRenderOptions() {
+    protected canUpdateFieldLabelWithRenderOptions() {
         this.vc.updateField('first', {
             renderOptions: { label: 'Cheesy burrito' },
         })
@@ -741,7 +742,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canUpdateLabelInFieldInNotFirstSection() {
+    protected canUpdateLabelInFieldInNotFirstSection() {
         this.vc.updateField('nickname', {
             renderOptions: { label: 'Cheesy burrito' },
         })
@@ -755,7 +756,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canRenameField() {
+    protected canRenameField() {
         this.vc.updateField('favoriteNumber', {
             newName: 'secondFavoriteNumber',
         })
@@ -771,7 +772,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canRenameWhileUpdatingDefinitionAndRenderOptions() {
+    protected canRenameWhileUpdatingDefinitionAndRenderOptions() {
         this.vc.updateField('favoriteNumber', {
             newName: 'secondFavoriteNumber',
             fieldDefinition: {
@@ -806,7 +807,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canDisableForm() {
+    protected canDisableForm() {
         this.vc.setIsBusy(false)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
 
@@ -829,7 +830,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async settingValuesTriggersOnChange() {
+    protected async settingValuesTriggersOnChange() {
         let wasHit = false
 
         const onChange = () => {
@@ -843,7 +844,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async settingValuesOnChangePassesExpectedPayload() {
+    protected async settingValuesOnChangePassesExpectedPayload() {
         const changeOptions: any[] = []
 
         const vc = this.FormWithOnChange((options) => {
@@ -859,7 +860,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test('will changes triggered with options 1', { firstName: 'Tay' })
     @test('will changes triggered with options 2', { lastName: 'Ro' })
-    protected static async willChangeIsTriggered(updates: any) {
+    protected async willChangeIsTriggered(updates: any) {
         let passedOptions: any
         let wasHit = false
         const vc = this.FormWithOnChange(
@@ -888,7 +889,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async cancellingWillStopsDidFromBeingHit() {
+    protected async cancellingWillStopsDidFromBeingHit() {
         let wasHit = false
         const vc = this.FormWithOnChange(
             () => {
@@ -904,7 +905,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async noOnChangeIfValueDidNotchange() {
+    protected async noOnChangeIfValueDidNotchange() {
         let hitCount = 0
         const vc = this.FormWithOnChange(() => {
             hitCount++
@@ -922,7 +923,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async cantSubmitIfNotEnabled() {
+    protected async cantSubmitIfNotEnabled() {
         let wasHit = false
 
         const vc = this.Controller(
@@ -954,13 +955,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static canStartOffDisabled() {
+    protected canStartOffDisabled() {
         const vc = this.DisabledForm()
         formAssert.formIsDisabled(vc)
     }
 
     @test()
-    protected static disablingFormDoesNotDisableEntireFooter() {
+    protected disablingFormDoesNotDisableEntireFooter() {
         const vc = this.DisabledForm()
         const { footer = {} } = this.render(vc) ?? { footer: {} }
         assert.isFalse('isEnabled' in footer!)
@@ -1003,7 +1004,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         [['num'], [{ name: 'name' }]],
         true
     )
-    protected static onlyValidatesFieldsThatAreVisible(
+    protected onlyValidatesFieldsThatAreVisible(
         values: any,
         fields: string[][],
         expected: boolean
@@ -1040,7 +1041,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test('on submit passes only name', { name: 'hey', num: '5' }, [['name']], {
         name: 'hey',
     })
-    protected static async onSubmitOnlyReturnsVisibleValues(
+    protected async onSubmitOnlyReturnsVisibleValues(
         values: any,
         fields: any,
         expected: any
@@ -1077,7 +1078,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canCancelChangeWithOnChangeReturningFalse() {
+    protected async canCancelChangeWithOnChangeReturningFalse() {
         const vc = this.Controller(
             'form',
             buildForm({
@@ -1116,7 +1117,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         'num',
         'doh'
     )
-    protected static async canKeepChangeWithOnChangeReturningFalse(
+    protected async canKeepChangeWithOnChangeReturningFalse(
         fieldName: any,
         value: string
     ) {
@@ -1165,7 +1166,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async settingValuesTriggersRender() {
+    protected async settingValuesTriggersRender() {
         const vc = this.Controller('form', {
             ...this.testForm,
         })
@@ -1175,7 +1176,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async formsHaveOnCancel() {
+    protected async formsHaveOnCancel() {
         let wasHit = false
         const vc = this.Controller('form', {
             ...this.testForm,
@@ -1191,7 +1192,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async getFieldIsTyped() {
+    protected async getFieldIsTyped() {
         const field = this.vc.getField('first')
         assert.isType<'text'>(field.type)
     }
@@ -1199,7 +1200,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test('bad section by id', 'twenty')
     @test('bad section by id 2', 'fiver')
     @test('bad section by idx 1', 10)
-    protected static async throwsWhenAddingFieldToBadSection(
+    protected async throwsWhenAddingFieldToBadSection(
         sectionIdOrIdx: string | number
     ) {
         const err = assert.doesThrow(() =>
@@ -1212,7 +1213,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async throwsWhenAddingFieldNameThatDoesNotExistOnSchema() {
+    protected async throwsWhenAddingFieldNameThatDoesNotExistOnSchema() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.vc.addFieldToSection('first', 'test')
@@ -1223,20 +1224,20 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canAddFieldByNameWithSectionIdx() {
+    protected async canAddFieldByNameWithSectionIdx() {
         this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
         this.vc.addFieldToSection(1, 'anotherField')
     }
 
     @test()
-    protected static async canAddFieldByNameWithSectionById() {
+    protected async canAddFieldByNameWithSectionById() {
         this.vc.addFieldToSection('first', 'fieldNotPartOfSection')
         this.vc.addFieldToSection('second', 'anotherField')
     }
 
     @test('can add field to section 0', 0)
     @test('can add field to section second', 'second')
-    protected static async actuallyAddsTheFieldToTheSection(
+    protected async actuallyAddsTheFieldToTheSection(
         sectionIdOrIdx: string | number
     ) {
         this.vc.addFieldToSection(sectionIdOrIdx, 'fieldNotPartOfSection')
@@ -1245,13 +1246,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async addingFieldBySectionTriggersRender() {
+    protected async addingFieldBySectionTriggersRender() {
         this.vc.addFieldToSection('first', 'fieldNotPartOfSection')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canAddFieldWithFieldOptions() {
+    protected async canAddFieldWithFieldOptions() {
         const added: FieldRenderOptions<Schema> = {
             //@ts-ignore
             name: 'fieldNotPartOfSection',
@@ -1264,7 +1265,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async throwsIfAddingFieldThatAlreadyIsRendering() {
+    protected async throwsIfAddingFieldThatAlreadyIsRendering() {
         assert.doesThrow(() => this.vc.addFieldToSection('first', 'first'))
         const err = assert.doesThrow(() =>
             this.vc.addFieldToSection('first', 'last')
@@ -1276,7 +1277,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canAddFieldsAtIndex() {
+    protected async canAddFieldsAtIndex() {
         this.vc.addFieldToSection('first', {
             name: 'fieldNotPartOfSection',
             atIndex: 0,
@@ -1300,7 +1301,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async removingFieldThrowsWithBadField() {
+    protected async removingFieldThrowsWithBadField() {
         const err = assert.doesThrow(() =>
             this.vc.removeField(generateId() as any)
         )
@@ -1311,7 +1312,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canRemoveFieldIfItExists() {
+    protected async canRemoveFieldIfItExists() {
         this.vc.addFieldToSection('first', {
             name: 'fieldNotPartOfSection',
         })
@@ -1336,13 +1337,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async removingFieldTriggersRender() {
+    protected async removingFieldTriggersRender() {
         this.vc.removeField('nickname')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async removingFieldDoesNotMutateSection() {
+    protected async removingFieldDoesNotMutateSection() {
         const section = this.vc.getSection('second')
         this.vc.removeField('nickname')
         assert.isNotEqual(section, this.vc.getSection('second'))
@@ -1350,7 +1351,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async knowsIfFieldIsNotBeingRendered() {
+    protected async knowsIfFieldIsNotBeingRendered() {
         this.assertIsNotRenderingField('fieldNotPartOfSection')
         this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
         this.assertIsRenderingField('fieldNotPartOfSection')
@@ -1360,7 +1361,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async sectionIsClonedWhenAddingFieldToSection() {
+    protected async sectionIsClonedWhenAddingFieldToSection() {
         const expected = this.vc.getSection(0)
         this.vc.addFieldToSection(0, 'fieldNotPartOfSection')
         const actual = this.vc.getSection(0)
@@ -1368,7 +1369,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canAddFieldDefinitionWhenAddingFieldToSection() {
+    protected async canAddFieldDefinitionWhenAddingFieldToSection() {
         this.assertAddingFieldWithDefinitionSetsToSchema({
             type: 'select',
             options: {
@@ -1386,7 +1387,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async addingFieldWithNewDefinitionDoesNotMutateOriginalSchema() {
+    protected async addingFieldWithNewDefinitionDoesNotMutateOriginalSchema() {
         const originalSchema = this.vc.getSchema()
         this.assertAddingFieldWithDefinitionSetsToSchema({
             type: 'select',
@@ -1401,7 +1402,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canSetCancelButtonLabel() {
+    protected async canSetCancelButtonLabel() {
         const label = generateId()
         this.vc = this.TestFormVc({
             cancelButtonLabel: label,
@@ -1412,7 +1413,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canGetFormId() {
+    protected async canGetFormId() {
         const expected = generateId()
         this.vc = this.TestFormVc({ id: expected })
         const { id } = this.render(this.vc)
@@ -1421,7 +1422,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async formDoesNotHonorFieldsNotPartOfSchema() {
+    protected async formDoesNotHonorFieldsNotPartOfSchema() {
         this.vc = this.TestFormVc({
             sections: [
                 {
@@ -1438,7 +1439,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async formDoesNotHonorFieldsNotPartOfSchemaUsingConstructor() {
+    protected async formDoesNotHonorFieldsNotPartOfSchemaUsingConstructor() {
         this.vc = this.TestFormVc({
             values: {
                 [generateId()]: generateId(),
@@ -1455,7 +1456,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async fieldsComeBackNormalized() {
+    protected async fieldsComeBackNormalized() {
         this.vc = this.TestFormVc({
             sections: [
                 {
@@ -1469,21 +1470,21 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async notSettingRequiredValuesDoesntThrow() {
+    protected async notSettingRequiredValuesDoesntThrow() {
         await this.vc.setValues({
             last: 'cheesey',
         })
     }
 
     @test()
-    protected static async hasSectionReturnsFalseIfSectionDoesNotExist() {
+    protected async hasSectionReturnsFalseIfSectionDoesNotExist() {
         const section = generateId()
         const hasSection = this.hasSection(section)
         assert.isFalse(hasSection)
     }
 
     @test()
-    protected static async hasSectionReturnsTrueIfSectionExists() {
+    protected async hasSectionReturnsTrueIfSectionExists() {
         const sectionId = generateId()
         this.vc.addSection({
             id: sectionId,
@@ -1494,7 +1495,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected static async cantAddTheSameSectionTwiceWithoutIndex() {
+    protected async cantAddTheSameSectionTwiceWithoutIndex() {
         const sectionId = generateId()
         this.vc.addSection({
             id: sectionId,
@@ -1511,11 +1512,11 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         })
     }
 
-    private static hasSection(section: string | number) {
+    private hasSection(section: string | number) {
         return this.vc.hasSection(section)
     }
 
-    private static assertAddingFieldWithDefinitionSetsToSchema(
+    private assertAddingFieldWithDefinitionSetsToSchema(
         definition: FieldDefinitions,
         fieldName = 'fieldNotPartOfSection'
     ) {
@@ -1532,34 +1533,34 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         )
     }
 
-    private static assertIsDirty() {
+    private assertIsDirty() {
         assert.isTrue(this.vc.getIsDirty())
     }
 
-    private static assertIsNotDirty() {
+    private assertIsNotDirty() {
         assert.isFalse(this.vc.getIsDirty())
     }
 
-    private static assertIsNotRenderingField(fieldName: string) {
+    private assertIsNotRenderingField(fieldName: string) {
         assert.isFalse(this.vc.isFieldRendering(fieldName as any))
     }
 
-    private static assertIsRenderingField(fieldName: string) {
+    private assertIsRenderingField(fieldName: string) {
         assert.isTrue(this.vc.isFieldRendering(fieldName as any))
     }
 
-    private static assertSectionFieldsEqual(
+    private assertSectionFieldsEqual(
         section: string,
         expected: (string | { name: string })[]
     ) {
         assert.isEqualDeep(this.getSection(section).fields, expected)
     }
 
-    private static getSection(sectionIdOrIdx: string | number) {
+    private getSection(sectionIdOrIdx: string | number) {
         return this.vc.getSection(sectionIdOrIdx)
     }
 
-    private static TestFormVc(
+    private TestFormVc(
         options?: Partial<FormViewControllerOptions<TestFormSchema>>
     ) {
         return this.Controller('form', {
@@ -1568,7 +1569,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         }) as FormViewController<TestFormSchema>
     }
 
-    private static FormWithOnChange(
+    private FormWithOnChange(
         onChange: (options: any) => void,
         onWillChange?: (options: any) => boolean
     ) {
@@ -1594,11 +1595,11 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         )
     }
 
-    private static async setFirstToRandomValue() {
+    private async setFirstToRandomValue() {
         await this.vc.setValue('first', generateId())
     }
 
-    private static DisabledForm() {
+    private DisabledForm() {
         return this.Controller(
             'form',
             buildForm({

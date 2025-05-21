@@ -1,5 +1,5 @@
 import { dateUtil, lunch } from '@sprucelabs/calendar-utils'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import calendarInteractor from '../../../tests/utilities/calendarInteractor'
@@ -8,11 +8,12 @@ import CalendarViewController, {
     CalendarViewControllerOptions,
 } from '../../../viewControllers/Calendar.vc'
 
+@suite()
 export class InteractingWithCalendarInMonthViewTest extends AbstractViewControllerTest {
-    private static vc: CalendarViewController
+    private vc!: CalendarViewController
 
     @test()
-    protected static async throwsWhenMissingVars() {
+    protected async throwsWhenMissingVars() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             calendarInteractor.clickMonthView()
@@ -23,7 +24,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async throwsWhenClickingCalendarInDayView() {
+    protected async throwsWhenClickingCalendarInDayView() {
         this.vc = this.Controller('calendar', {
             view: 'day',
         })
@@ -34,7 +35,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async canClickDayView() {
+    protected async canClickDayView() {
         this.vc = this.Vc({
             onClickView: () => {},
         })
@@ -43,7 +44,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async throwsIfMissingOnClick() {
+    protected async throwsIfMissingOnClick() {
         this.vc = this.Vc()
 
         await assert.doesThrowAsync(() =>
@@ -52,7 +53,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async callsOnClick() {
+    protected async callsOnClick() {
         let wasHit = false
         this.vc = this.Vc({
             onClickView: () => {
@@ -70,7 +71,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
         'passes expected payload for tomorrow',
         dateUtil.addDays(new Date().getTime(), 1)
     )
-    protected static async passesExpectedPayload(date: number) {
+    protected async passesExpectedPayload(date: number) {
         let passedOptions: any
         this.vc = this.Vc({
             onClickView: (options) => {
@@ -87,7 +88,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async currentMonthMatchesThatOfFirstSelectedDate() {
+    protected async currentMonthMatchesThatOfFirstSelectedDate() {
         const lunchInMonths = dateUtil.addMonths(lunch(), 2)
 
         this.vc = this.Vc({
@@ -102,7 +103,7 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async startDateRetained() {
+    protected async startDateRetained() {
         const startDate = new Date().getTime()
 
         this.vc = this.Vc({
@@ -114,14 +115,14 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async throwsWithMissingOnPress() {
+    protected async throwsWithMissingOnPress() {
         await assert.doesThrowAsync(() =>
             calendarInteractor.longPressThenDrop(this.vc)
         )
     }
 
     @test()
-    protected static async canSimulateLongPressDrop() {
+    protected async canSimulateLongPressDrop() {
         let passedOptions: ClickCalendarViewOptions | undefined
 
         this.vc = this.Vc({
@@ -136,12 +137,12 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
     }
 
     @test()
-    protected static async canSimulateTouch() {
+    protected async canSimulateTouch() {
         await assert.doesThrowAsync(() => calendarInteractor.tapView(this.vc))
     }
 
     @test()
-    protected static async tappingTriggersCallback() {
+    protected async tappingTriggersCallback() {
         let passedOptions: ClickCalendarViewOptions | undefined
 
         this.vc = this.Vc({
@@ -155,14 +156,14 @@ export class InteractingWithCalendarInMonthViewTest extends AbstractViewControll
         assert.isEqualDeep(passedOptions, options)
     }
 
-    private static generateClickOptions() {
+    private generateClickOptions() {
         return {
             dateTimeMs: new Date().getTime(),
             personId: generateId(),
         }
     }
 
-    protected static Vc(options?: CalendarViewControllerOptions) {
+    protected Vc(options?: CalendarViewControllerOptions) {
         return this.Controller('calendar', {
             view: 'month',
             ...options,

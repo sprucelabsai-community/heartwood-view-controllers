@@ -1,21 +1,22 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { renderUtil, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
+@suite()
 export default class ControllingTheToolBeltTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    protected static vc: ToolBeltViewController
+    protected controllerMap = {}
+    protected vc!: ToolBeltViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('tool-belt', {})
     }
 
     @test()
-    protected static async canCreateControllingTheToolBelt() {
+    protected async canCreateControllingTheToolBelt() {
         const vc = this.Controller('tool-belt', {})
         assert.isTruthy(vc)
     }
@@ -30,7 +31,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
             },
         ],
     })
-    protected static rendersToolBeltPassedToIt(model: any) {
+    protected rendersToolBeltPassedToIt(model: any) {
         const vc = this.Controller('tool-belt', model)
         const actual = renderUtil.render(vc)
         delete actual.controller
@@ -39,7 +40,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canAddTool() {
+    protected canAddTool() {
         assert.isFunction(this.vc.addTool)
 
         const tool = toolGenerator.generateTool()
@@ -51,7 +52,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canAdd2Tools() {
+    protected canAdd2Tools() {
         this.vc.addTool(toolGenerator.generateTool())
         this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
@@ -73,7 +74,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static cantAddToolWithSameSlugTwice() {
+    protected cantAddToolWithSameSlugTwice() {
         this.vc.addTool(toolGenerator.generateTool())
 
         const err = assert.doesThrow(() =>
@@ -88,7 +89,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static cantRemoveToolThatAlreadyExists() {
+    protected cantRemoveToolThatAlreadyExists() {
         const err = assert.doesThrow(() => this.vc.removeTool('map'))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['id'],
@@ -96,7 +97,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canRemoveTool() {
+    protected canRemoveTool() {
         this.vc.addTool(toolGenerator.generateTool())
 
         this.vc.removeTool('maps')
@@ -105,7 +106,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canRemoveAfterAddingTwo() {
+    protected canRemoveAfterAddingTwo() {
         this.vc.addTool(toolGenerator.generateTool())
         this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
@@ -116,7 +117,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static triggersRenderWhenAddingAndRemovingTool() {
+    protected triggersRenderWhenAddingAndRemovingTool() {
         this.vc.addTool({ id: 'go', card: {} as any, lineIcon: 'video' })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
         this.vc.removeTool('go')
@@ -124,19 +125,19 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static renderReturnsController() {
+    protected renderReturnsController() {
         const model = this.render(this.vc)
         assert.isTrue(model.controller === this.vc)
     }
 
     @test()
-    protected static allToolsIsEmptyToStart() {
+    protected allToolsIsEmptyToStart() {
         const tools = this.vc.getTools()
         assert.isLength(tools, 0)
     }
 
     @test()
-    protected static getsBackTools() {
+    protected getsBackTools() {
         this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
         const tools = this.vc.getTools()
@@ -145,7 +146,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canClearTools() {
+    protected canClearTools() {
         this.addTool('tool_1')
         this.addTool('tool_2')
         this.addTool('tool_3')
@@ -156,17 +157,17 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canSetOneTool() {
+    protected canSetOneTool() {
         this.assertCanSetTools(1)
     }
 
     @test()
-    protected static canSetTwoTools() {
+    protected canSetTwoTools() {
         this.assertCanSetTools(2)
     }
 
     @test()
-    protected static canGetToolBackById() {
+    protected canGetToolBackById() {
         this.vc.addTool(toolGenerator.generateTool('maps_2'))
 
         assert.isEqualDeep(
@@ -183,7 +184,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static returnsCopyOfArrayOfTools() {
+    protected returnsCopyOfArrayOfTools() {
         this.addTool()
 
         const tools1 = this.vc.getTools()
@@ -194,7 +195,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
     @test('cant find tool that does not exist 1', 'taco')
     @test('cant find tool that does not exist 1', 'taco-tuesday')
-    protected static cantFocusToolThatDoesNotExist(id: string) {
+    protected cantFocusToolThatDoesNotExist(id: string) {
         const err = assert.doesThrow(() => this.vc.focusTool(id))
         errorAssert.assertError(err, 'TOOL_NOT_FOUND', {
             id,
@@ -203,7 +204,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
 
     @test('can focus tool 1', 'testing')
     @test('can focus tool 2', 'testing-again')
-    protected static async invokesFocusHandler(id: string) {
+    protected async invokesFocusHandler(id: string) {
         let wasHit = false
         let passedId: any
 
@@ -222,7 +223,7 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async doesNotTriggerFocusHandlerForToolNotFound() {
+    protected async doesNotTriggerFocusHandlerForToolNotFound() {
         let wasHit = false
 
         //@ts-ignore
@@ -234,11 +235,11 @@ export default class ControllingTheToolBeltTest extends AbstractViewControllerTe
         assert.isFalse(wasHit)
     }
 
-    private static addTool(id = 'maps_2') {
+    private addTool(id = 'maps_2') {
         this.vc.addTool(toolGenerator.generateTool(id))
     }
 
-    private static assertCanSetTools(total: number) {
+    private assertCanSetTools(total: number) {
         const tools = toolGenerator.generateTools(total)
         this.vc.setTools(tools)
         assert.isEqualDeep(tools, this.vc.getTools())

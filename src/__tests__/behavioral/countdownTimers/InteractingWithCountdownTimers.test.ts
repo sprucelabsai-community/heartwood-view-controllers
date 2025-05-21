@@ -1,10 +1,11 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import countdownTimerInteractor from '../../../tests/utilities/countdownTimerInteractor'
 
+@suite()
 export default class InteractingWithCountdownTimersTest extends AbstractViewControllerTest {
     @test()
-    protected static async throwsWhenNoOnCompleteSet() {
+    protected async throwsWhenNoOnCompleteSet() {
         const vc = this.Controller('countdown-timer', {})
         await assert.doesThrowAsync(() =>
             countdownTimerInteractor.simulateOnComplete(vc)
@@ -12,7 +13,7 @@ export default class InteractingWithCountdownTimersTest extends AbstractViewCont
     }
 
     @test()
-    protected static async triggersOnComplete() {
+    protected async triggersOnComplete() {
         let wasHit = false
         const vc = this.Controller('countdown-timer', {
             onComplete: () => {

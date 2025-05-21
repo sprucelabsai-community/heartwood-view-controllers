@@ -1,5 +1,5 @@
 import { NumberFieldDefinition, Schema } from '@sprucelabs/schema'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { formBuilderFieldTypes } from '../../../constants'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
@@ -10,19 +10,20 @@ import {
 } from '../../../types/heartwood.types'
 import EditFormBuilderFieldCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 
+@suite()
 export default class AddingARatingsFieldTest extends AbstractViewControllerTest {
-    private static editFieldVc: EditFormBuilderFieldCardViewController
-    private static label: string
+    private editFieldVc!: EditFormBuilderFieldCardViewController
+    private label!: string
 
-    protected static controllerMap = {
+    protected controllerMap = {
         'edit-form-builder-field': EditFormBuilderFieldCardViewController,
     }
-    private static submittedField?: {
+    private submittedField?: {
         fieldDefinition: NumberFieldDefinition
         renderOptions: FieldRenderOptions<Schema>
     }
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.label = generateId()
@@ -32,17 +33,17 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async hasRatingsField() {
+    protected async hasRatingsField() {
         assert.isEqual(formBuilderFieldTypes.ratings, 'Ratings')
     }
 
     @test()
-    protected static async editFieldSelectExpectedType() {
+    protected async editFieldSelectExpectedType() {
         assert.isEqual(this.editFieldFormVc.getValue('type'), 'ratings')
     }
 
     @test()
-    protected static async editFormRendersExpectedFieldsWhenSelectingRating() {
+    protected async editFormRendersExpectedFieldsWhenSelectingRating() {
         formAssert.formRendersFields(this.editFieldFormVc, [
             'steps',
             'leftLabel',
@@ -53,7 +54,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async returnsRenderAsOptionsWhenSettingOnlySteps() {
+    protected async returnsRenderAsOptionsWhenSettingOnlySteps() {
         await this.setValue('steps', 5)
         await this.submitForm()
 
@@ -70,7 +71,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async passesBackCorrectLeftLabel() {
+    protected async passesBackCorrectLeftLabel() {
         const label = generateId()
         await this.setValue('leftLabel', label)
         await this.submitForm()
@@ -82,7 +83,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canSetABunchOfThingsAndGetBackExpectedRenderAs() {
+    protected async canSetABunchOfThingsAndGetBackExpectedRenderAs() {
         await this.setValue('steps', 10)
         await this.setValue('leftLabel', 'left')
         await this.setValue('rightLabel', 'right')
@@ -103,7 +104,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
 
     @test('can start with steps at 10', 10)
     @test('can start with steps at 20', 20)
-    protected static async renderAsOptionsPopulateForm(steps: number) {
+    protected async renderAsOptionsPopulateForm(steps: number) {
         this.editFieldVc = this.EditFieldVc({
             steps,
         })
@@ -112,7 +113,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canSetStartingLeftLabel() {
+    protected async canSetStartingLeftLabel() {
         const leftLabel = generateId()
         this.editFieldVc = this.EditFieldVc({
             leftLabel,
@@ -122,7 +123,7 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canSetMultipleToStart() {
+    protected async canSetMultipleToStart() {
         const leftLabel = generateId()
         const rightLabel = generateId()
         const middleLabel = generateId()
@@ -141,14 +142,14 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
         this.assertFieldEquals('icon', icon)
     }
 
-    private static assertFieldEquals(
+    private assertFieldEquals(
         field: keyof RatingsInputComponent,
         expected: number | string
     ) {
         assert.isEqual(this.editFieldFormVc.getValue(field), expected)
     }
 
-    private static EditFieldVc(
+    private EditFieldVc(
         renderAs?: Partial<RatingsInputComponent>
     ): EditFormBuilderFieldCardViewController {
         return this.Controller('edit-form-builder-field', {
@@ -173,11 +174,11 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
         })
     }
 
-    private static async submitForm() {
+    private async submitForm() {
         await interactor.submitForm(this.editFieldFormVc)
     }
 
-    private static assertRenderAs(renderAs: RatingsInputComponent) {
+    private assertRenderAs(renderAs: RatingsInputComponent) {
         assert.isEqualDeep(this.submittedField?.renderOptions, {
             //@ts-ignore
             name: 'test',
@@ -185,14 +186,14 @@ export default class AddingARatingsFieldTest extends AbstractViewControllerTest 
         })
     }
 
-    private static async setValue(
+    private async setValue(
         name: keyof RatingsInputComponent,
         value: number | string
     ) {
         await this.editFieldFormVc.setValue(name, value)
     }
 
-    private static get editFieldFormVc() {
+    private get editFieldFormVc() {
         return this.editFieldVc.getFormVc()
     }
 }

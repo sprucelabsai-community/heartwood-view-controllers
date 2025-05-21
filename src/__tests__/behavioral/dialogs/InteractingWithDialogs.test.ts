@@ -1,10 +1,11 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 
+@suite()
 export default class InteractingWithDialogsTest extends AbstractViewControllerTest {
     @test()
-    protected static async canCallDidHide() {
+    protected async canCallDidHide() {
         const cardVc = this.Controller('card', {})
 
         let wasHit = false
@@ -20,7 +21,7 @@ export default class InteractingWithDialogsTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async doesNotCrashIfNoDidHide() {
+    protected async doesNotCrashIfNoDidHide() {
         const cardVc = this.Controller('card', {})
         await interactor.hide(cardVc)
     }

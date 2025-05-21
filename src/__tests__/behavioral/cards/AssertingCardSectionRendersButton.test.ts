@@ -1,14 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
 type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 
+@suite()
 export default class AssertingCardSectionRendersButtonTest extends AbstractViewControllerTest {
     @test('does not find with no sections', [], 'test')
     @test('does not find with miss-matched id', [{ id: 'testing' }], 'test')
-    protected static throwsIfNoSection(sections: Section[], sectionId: string) {
+    protected throwsIfNoSection(sections: Section[], sectionId: string) {
         assert.doesThrow(
             () => this.assertFindsButtonInSectionById(sections, sectionId),
             'find a section'
@@ -30,7 +31,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         [{ id: 'testing', buttons: [{ id: 'button1' }] }, { id: 'test' }],
         1
     )
-    protected static throwsIfSectionMissingButton(
+    protected throwsIfSectionMissingButton(
         sections: Section[],
         sectionId: string
     ) {
@@ -106,10 +107,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         ] as Section[],
         1
     )
-    protected static passesInFirstSection(
-        sections: Section[],
-        lookupId: string
-    ) {
+    protected passesInFirstSection(sections: Section[], lookupId: string) {
         this.assertFindsButtonInSectionById(sections, lookupId)
     }
 
@@ -130,7 +128,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         'testing',
         'button2'
     )
-    protected static throwsIfSectionIsMissingButtonId(
+    protected throwsIfSectionIsMissingButtonId(
         sections: Section[],
         sectionId: string,
         buttonId: string
@@ -184,7 +182,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         'testing',
         'button3'
     )
-    protected static passesIfButtonIdIsInSection(
+    protected passesIfButtonIdIsInSection(
         sections: Section[],
         sectionId: string,
         buttonId: string
@@ -192,7 +190,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         this.assertFindsButtonInSectionById(sections, sectionId, buttonId)
     }
 
-    private static assertFindsButtonInSectionById(
+    private assertFindsButtonInSectionById(
         sections: Section[],
         sectionId: string,
         buttonId?: string
@@ -204,7 +202,7 @@ export default class AssertingCardSectionRendersButtonTest extends AbstractViewC
         )
     }
 
-    private static CardVc(sections?: Section[]) {
+    private CardVc(sections?: Section[]) {
         return this.Controller('card', { body: { sections } })
     }
 }

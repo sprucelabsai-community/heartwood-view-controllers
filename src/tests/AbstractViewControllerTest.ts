@@ -30,13 +30,13 @@ import listAssert from './utilities/listAssert'
 import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
-    protected static controllerMap: Record<string, any> = {}
-    protected static views?: ViewControllerFactory
-    private static mercuryFixture?: MercuryFixture
-    protected static client: MercuryClient
-    protected static eventFaker: EventFaker
+    protected controllerMap: Record<string, any> = {}
+    protected views?: ViewControllerFactory
+    private mercuryFixture?: MercuryFixture
+    protected client!: MercuryClient
+    protected eventFaker!: EventFaker
 
-    protected static get mercury() {
+    protected get mercury() {
         if (!this.mercuryFixture) {
             this.mercuryFixture = new MercuryFixture(this.cwd)
         }
@@ -44,7 +44,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         return this.mercuryFixture
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         delete ViewControllerFactory.Class
@@ -70,12 +70,12 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         this.eventFaker = new EventFaker(this.client)
     }
 
-    protected static async afterEach() {
+    protected async afterEach() {
         await super.afterEach()
         await this.mercuryFixture?.destroy()
     }
 
-    protected static Factory(options?: Partial<ViewControllerFactoryOptions>) {
+    protected Factory(options?: Partial<ViewControllerFactoryOptions>) {
         const mercury = this.mercury
 
         return ViewControllerFactory.Factory({
@@ -88,7 +88,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         })
     }
 
-    protected static getFactory() {
+    protected getFactory() {
         if (!this.views) {
             this.views = this.Factory()
         }
@@ -96,7 +96,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         return this.views
     }
 
-    protected static Controller<N extends keyof ViewControllerMap>(
+    protected Controller<N extends keyof ViewControllerMap>(
         name: N,
         options: ControllerOptions<N>
     ) {
@@ -107,21 +107,21 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         return vc
     }
 
-    protected static App<N extends AppControllerId>(
+    protected App<N extends AppControllerId>(
         name: N,
         options?: Partial<ControllerOptions<N>>
     ) {
         return this.getFactory().App<N>(name, options)
     }
 
-    protected static render<Vc extends ViewController<any>>(
+    protected render<Vc extends ViewController<any>>(
         vc: Vc,
         options?: RenderOptions
     ) {
         return renderUtil.render(vc, options)
     }
 
-    protected static click(
+    protected click(
         button?: {
             onClick?: (() => void | Promise<void>) | null | undefined
         } | null

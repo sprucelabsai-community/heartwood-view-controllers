@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -6,14 +6,15 @@ import StatsViewController, {
     StatsViewControllerOptions,
 } from '../../../viewControllers/reporting/Stats.vc'
 
+@suite()
 export default class ControllingStatsTest extends AbstractViewControllerTest {
-    private static vc: StatsViewController
-    protected static async beforeEach() {
+    private vc!: StatsViewController
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc()
     }
     @test()
-    protected static throwsIfMissingStats() {
+    protected throwsIfMissingStats() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.Controller('stats', {}))
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -43,27 +44,27 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
             label: 'go team!',
         },
     ])
-    protected static canRenderStats(stats: any) {
+    protected canRenderStats(stats: any) {
         this.vc = this.Vc({ stats })
         const model = this.renderStats()
         assert.isEqualDeep(model.stats, stats)
     }
 
     @test()
-    protected static defaultsTrueToFormatValues() {
+    protected defaultsTrueToFormatValues() {
         const model = this.renderStats()
         assert.isTrue(model.shouldFormatValues)
     }
 
     @test()
-    protected static canDisableFormatting() {
+    protected canDisableFormatting() {
         this.vc = this.Vc({ shouldFormatValues: false })
         const model = this.renderStats()
         assert.isFalse(model.shouldFormatValues)
     }
 
     @test()
-    protected static cantSetValueForBadIndex() {
+    protected cantSetValueForBadIndex() {
         assert.doesThrow(() => this.vc.setValue(-1, 0))
         this.vc.setValue(0, 0)
         assert.doesThrow(() => this.vc.setValue(4, 0))
@@ -75,7 +76,7 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
     @test('can set idx 2', 2, 100)
     @test('can set idx 2b', 2, 75)
     @test('can set idx 0 to strting', 0, 'hello')
-    protected static canHaveNoStatToStart(idx: number, value: number | string) {
+    protected canHaveNoStatToStart(idx: number, value: number | string) {
         const vc = this.Vc({
             stats: [
                 {
@@ -90,12 +91,12 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingValueTriggersRender() {
+    protected settingValueTriggersRender() {
         this.vc.setValue(0, 0)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static Vc(options?: Partial<StatsViewControllerOptions>) {
+    private Vc(options?: Partial<StatsViewControllerOptions>) {
         return this.Controller('stats', {
             stats: [
                 {
@@ -107,7 +108,7 @@ export default class ControllingStatsTest extends AbstractViewControllerTest {
         })
     }
 
-    private static renderStats() {
+    private renderStats() {
         const model = this.render(this.vc)
         return model
     }

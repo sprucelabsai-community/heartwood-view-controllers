@@ -10,10 +10,10 @@ import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 
 export default class AbstractPluginTest extends AbstractViewControllerTest {
-    protected static views: ViewControllerFactory
-    protected static expectedPlugins: ViewControllerPlugins = {}
+    protected views!: ViewControllerFactory
+    protected expectedPlugins: ViewControllerPlugins = {}
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.expectedPlugins = {}
@@ -22,13 +22,13 @@ export default class AbstractPluginTest extends AbstractViewControllerTest {
         this.views.setController('card', PluginTestViewController)
     }
 
-    protected static mixinPlugin(name = 'spy') {
+    protected mixinPlugin(name = 'spy') {
         this.views.importControllers([], {
             [name]: SpyPlugin,
         })
     }
 
-    protected static Vc() {
+    protected Vc() {
         return this.views.Controller(
             'card',
             {}

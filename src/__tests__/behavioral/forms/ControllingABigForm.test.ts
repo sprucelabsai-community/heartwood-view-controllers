@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
@@ -24,11 +24,12 @@ const testFormSchema = buildSchema({
 
 type TestFormSchema = typeof testFormSchema
 
+@suite()
 export default class ControllingABigFormTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: BigFormViewController<TestFormSchema>
+    protected controllerMap = {}
+    private vc!: BigFormViewController<TestFormSchema>
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Controller(
@@ -51,25 +52,25 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canGetVc() {
+    protected async canGetVc() {
         assert.isTruthy(this.vc)
     }
 
     @test()
-    protected static requiredFieldMissingInvalid() {
+    protected requiredFieldMissingInvalid() {
         const isValid = this.vc.isSlideValid(0)
         assert.isFalse(isValid)
     }
 
     @test()
-    protected static async failsWithInvalidPhoneNumber() {
+    protected async failsWithInvalidPhoneNumber() {
         await this.vc.setValue('phone', '12341234')
         const isValid = this.vc.isSlideValid(0)
         assert.isFalse(isValid)
     }
 
     @test()
-    protected static async passesWithValidNumber() {
+    protected async passesWithValidNumber() {
         await this.vc.setValue('phone', DEMO_NUMBER)
 
         const isValid = this.vc.isSlideValid(0)
@@ -79,30 +80,30 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static startsAtFirstSlide() {
+    protected startsAtFirstSlide() {
         assert.isEqual(this.vc.getPresentSlide(), 0)
     }
 
     @test()
-    protected static async canSetCurrentSlide() {
+    protected async canSetCurrentSlide() {
         await this.vc.jumpToSlide(1)
         assert.isEqual(this.vc.getPresentSlide(), 1)
     }
 
     @test()
-    protected static async settingNegativeSlideGoesToZero() {
+    protected async settingNegativeSlideGoesToZero() {
         await this.vc.jumpToSlide(-1)
         assert.isEqual(this.vc.getPresentSlide(), 0)
     }
 
     @test()
-    protected static async settingTooHighOfSlideSetsToLast() {
+    protected async settingTooHighOfSlideSetsToLast() {
         await this.vc.jumpToSlide(9999)
         assert.isEqual(this.vc.getPresentSlide(), 2)
     }
 
     @test()
-    protected static async settingCurrentSlideReplaysThatSlidesTalkingSprucebot() {
+    protected async settingCurrentSlideReplaysThatSlidesTalkingSprucebot() {
         let wasHit = false
         let whatWasHit = -1
 
@@ -118,7 +119,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async submittingLastSlideInvokesOnSubmitCallback() {
+    protected async submittingLastSlideInvokesOnSubmitCallback() {
         let onSubmitSlideCount = 0
         let onSubmitCount = 0
         let onSubmitSlideOptions: any | undefined
@@ -159,7 +160,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canCancelSubmitByReturningFalseFromSubmitSlide() {
+    protected async canCancelSubmitByReturningFalseFromSubmitSlide() {
         this.vc.setOnSubmitSlide(() => {
             if (this.vc.getIsLastSlide()) {
                 return false

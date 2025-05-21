@@ -1,13 +1,20 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 
+@suite()
 export default class RenderingInputsTest extends AbstractViewControllerTest {
-    private static vc: FormViewController<FormSchema>
+    private vc!: FormViewController<FormSchema>
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Controller(
@@ -29,7 +36,7 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenSettingRenderForBadField() {
+    protected async throwsWhenSettingRenderForBadField() {
         const err = assert.doesThrow(() => this.setTriggerRender(generateId()))
 
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -38,13 +45,13 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async setsForValidField() {
+    protected async setsForValidField() {
         this.setTriggerRender('firstName')
         this.setTriggerRender('lastName')
     }
 
     @test()
-    protected static async throwsWhenGettingRenderForBadField() {
+    protected async throwsWhenGettingRenderForBadField() {
         const err = assert.doesThrow(() => this.getTriggerRender(generateId()))
 
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -53,7 +60,7 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetRenderCallbackForInput() {
+    protected canGetRenderCallbackForInput() {
         this.assertSettingTriggerRenderGetsIt('firstName')
         this.assertSettingTriggerRenderGetsIt('lastName')
         const cb1 = this.getTriggerRender('firstName')
@@ -63,9 +70,7 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
 
     @test('triggers render for firstName', 'firstName')
     @test('triggers render for lastName', 'lastName')
-    protected static async settingValueTriggersRenderOnTheFieldOnly(
-        fieldName: any
-    ) {
+    protected async settingValueTriggersRenderOnTheFieldOnly(fieldName: any) {
         let wasHit = false
 
         this.setTriggerRender(fieldName, () => {
@@ -78,18 +83,18 @@ export default class RenderingInputsTest extends AbstractViewControllerTest {
         assert.isTrue(wasHit)
     }
 
-    private static assertSettingTriggerRenderGetsIt(name: string) {
+    private assertSettingTriggerRenderGetsIt(name: string) {
         const cb = () => {}
         this.setTriggerRender(name, cb)
         const actual = this.getTriggerRender(name)
         assert.isEqual(actual, cb)
     }
 
-    private static setTriggerRender(name: string, cb?: () => void) {
+    private setTriggerRender(name: string, cb?: () => void) {
         this.vc.setTriggerRenderForInput(name as any, cb ?? (() => {}))
     }
 
-    private static getTriggerRender(name: string) {
+    private getTriggerRender(name: string) {
         //@ts-ignore
         return this.vc.getTriggerRenderForInput(name as any)
     }

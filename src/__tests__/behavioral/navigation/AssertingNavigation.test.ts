@@ -1,6 +1,12 @@
 import { PermissionContractId } from '@sprucelabs/mercury-types'
 import { cloneDeep } from '@sprucelabs/schema'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
@@ -26,21 +32,22 @@ class NullNavigationSkillView extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingNavigationTest extends AbstractNavigationTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         noNav: NoNavigationSkillView,
         hasNav: HasNavSkillView,
         nullNav: NullNavigationSkillView,
     }
 
     @test()
-    protected static async throwsWhenNotFindingButtons() {
+    protected async throwsWhenNotFindingButtons() {
         const vc = this.NavigationVc()
         assert.doesThrow(() => navigationAssert.rendersButton(vc, 'test'))
     }
 
     @test()
-    protected static async doesNotFindIfNotFindingAllButtons() {
+    protected async doesNotFindIfNotFindingAllButtons() {
         const vc = this.NavigationVc({
             buttons: [{ id: 'test', lineIcon: 'tag' }],
         })
@@ -61,10 +68,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         [{ id: 'test' }, { id: 'test2' }],
         ['test', 'test2']
     )
-    protected static async canFindButtons(
-        buttons: NavigationButton[],
-        ids: string[]
-    ) {
+    protected async canFindButtons(buttons: NavigationButton[], ids: string[]) {
         const vc = this.NavigationVc({
             buttons,
         })
@@ -73,7 +77,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenNotRenderButtonLabels() {
+    protected async throwsWhenNotRenderButtonLabels() {
         const vc = this.NavigationVc({
             shouldRenderButtonLabels: false,
         })
@@ -82,7 +86,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async canFindRenderButtonLabels() {
+    protected async canFindRenderButtonLabels() {
         const vc = this.NavigationVc({
             shouldRenderButtonLabels: true,
         })
@@ -91,7 +95,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenNotRenderingNavigation() {
+    protected async throwsWhenNotRenderingNavigation() {
         const svc = this.Controller('noNav' as any, {})
         assert.doesThrow(() => navigationAssert.skillViewRendersNavigation(svc))
         assert.doesThrow(() =>
@@ -100,14 +104,14 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async nullNavCountsAsNotRenderingNav() {
+    protected async nullNavCountsAsNotRenderingNav() {
         const svc = this.Controller('nullNav' as any, {})
         assert.doesThrow(() => navigationAssert.skillViewRendersNavigation(svc))
         navigationAssert.skillViewDoesNotRenderNavigation(svc)
     }
 
     @test()
-    protected static async canPassIfFindingsNav() {
+    protected async canPassIfFindingsNav() {
         const { nav, svc } = this.getNavVc()
         assert.isEqual(nav, svc.nav)
         assert.doesThrow(() =>
@@ -116,7 +120,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenNotFindingDestination() {
+    protected async throwsWhenNotFindingDestination() {
         const destinationId = generateId() as SkillViewControllerId
         const vc = this.NavigationVc({
             buttons: [
@@ -173,7 +177,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async canCheckDestination() {
+    protected async canCheckDestination() {
         const args = {
             [generateId()]: generateId(),
         }
@@ -211,7 +215,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async assertViewPermissionContractFailsWithMissing() {
+    protected async assertViewPermissionContractFailsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             navigationAssert.buttonRequiresViewPermissions()
@@ -223,7 +227,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async assertPermissionsThrowsIfButtonNotFound() {
+    protected async assertPermissionsThrowsIfButtonNotFound() {
         const vc = this.NavigationVc({
             buttons: [{ id: generateId(), lineIcon: 'tag' }],
         })
@@ -249,7 +253,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         'a-check',
         'a-fail'
     )
-    protected static async assertPermissionsThrowsIfPermissionsDontMatch(
+    protected async assertPermissionsThrowsIfPermissionsDontMatch(
         buttonPermissionId: PermissionContractId,
         checkPermissionId: PermissionContractId
     ) {
@@ -285,7 +289,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
         'matches on chatbot-contract permission on first button',
         'chatbot-contract'
     )
-    protected static async assertPermissionsMatchesWhenPermissionsMatch(
+    protected async assertPermissionsMatchesWhenPermissionsMatch(
         permissionId: PermissionContractId
     ) {
         const id = generateId()
@@ -305,7 +309,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async canAssertPermissionOnSecondButton() {
+    protected async canAssertPermissionOnSecondButton() {
         const id = generateId()
         const vc = this.NavigationVc({
             buttons: [
@@ -327,7 +331,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static rendersButtonsThrowsWithMissing() {
+    protected rendersButtonsThrowsWithMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => navigationAssert.rendersButtons())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -336,7 +340,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async assertAdditionalRoutesThrowsWithMissing() {
+    protected async assertAdditionalRoutesThrowsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             navigationAssert.hasAdditionalValidRoutes()
@@ -348,7 +352,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenValidRoutesDoNotMatch() {
+    protected async throwsWhenValidRoutesDoNotMatch() {
         const vc = this.NavigationVc({
             buttons: [],
         })
@@ -367,7 +371,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async passesIfValidRoutesMatch() {
+    protected async passesIfValidRoutesMatch() {
         const actual: NavigationRoute[] = [
             {
                 destination: {
@@ -390,7 +394,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async canAssertButtonsNestedInDropdown() {
+    protected async canAssertButtonsNestedInDropdown() {
         const id = generateId()
         const id2 = generateId()
         const vc = this.NavigationVc({
@@ -419,7 +423,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenButtonNotInDropdown() {
+    protected async throwsWhenButtonNotInDropdown() {
         const vc = this.NavigationVc({
             buttons: [
                 {
@@ -441,7 +445,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async canFindDropdownOnSecondButton() {
+    protected async canFindDropdownOnSecondButton() {
         const id = generateId()
         const id2 = generateId()
         const vc = this.NavigationVc({
@@ -470,7 +474,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async isHiddenThrowsWithMissing() {
+    protected async isHiddenThrowsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             navigationAssert.isHidden()
@@ -482,7 +486,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenNavIsNotHidden() {
+    protected async throwsWhenNavIsNotHidden() {
         const navVc = this.NavigationVc()
         assert.doesThrow(
             () => navigationAssert.isHidden(navVc),
@@ -491,14 +495,14 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async isHiddenPassesWhenHidden() {
+    protected async isHiddenPassesWhenHidden() {
         const navVc = this.NavigationVc()
         navVc.hide()
         navigationAssert.isHidden(navVc)
     }
 
     @test()
-    protected static async isVisibleThrowsWithMissing() {
+    protected async isVisibleThrowsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             navigationAssert.isVisible()
@@ -510,7 +514,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async throwsWhenNavIsNotVisible() {
+    protected async throwsWhenNavIsNotVisible() {
         const navVc = this.NavigationVc()
         navVc.hide()
         assert.doesThrow(
@@ -520,12 +524,12 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
-    protected static async isVisiblePassesWhenVisible() {
+    protected async isVisiblePassesWhenVisible() {
         const navVc = this.NavigationVc()
         navigationAssert.isVisible(navVc)
     }
 
-    private static getNavVc() {
+    private getNavVc() {
         const svc = this.Controller('hasNav' as any, {})
         const nav = navigationAssert.skillViewRendersNavigation(svc)
         return { nav, svc }

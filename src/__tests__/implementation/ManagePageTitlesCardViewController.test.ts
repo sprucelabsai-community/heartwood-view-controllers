@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import interactor from '../../tests/utilities/interactor'
@@ -9,14 +9,15 @@ import ManagePageTitlesCardViewController, {
     ManagePageTitlesCardViewControllerOptions,
 } from '../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
+@suite()
 export default class ManagePageTitlesViewControllerTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'manage-page-titles': ManagePageTitlesCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
 
-    private static _vc: ManagePageTitlesCardViewController
-    private static get vc(): ManagePageTitlesCardViewController {
+    private _vc!: ManagePageTitlesCardViewController
+    private get vc(): ManagePageTitlesCardViewController {
         if (!this._vc) {
             this._vc = this.Controller('manage-page-titles', {
                 onDone: () => {
@@ -28,10 +29,10 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
 
         return this._vc
     }
-    private static wasOnDoneInvoked = false
-    private static formBuilderVc: FormBuilderCardViewController
+    private wasOnDoneInvoked = false
+    private formBuilderVc!: FormBuilderCardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         //@ts-ignore
@@ -41,7 +42,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static needsRequiredParams() {
+    protected needsRequiredParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('manage-page-titles', {})
@@ -52,31 +53,31 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static canCreateManageSectionsViewController() {
+    protected canCreateManageSectionsViewController() {
         assert.isTruthy(this.vc)
         assert.isTrue(this.vc instanceof AbstractViewController)
     }
 
     @test()
-    protected static rendersAValidCard() {
+    protected rendersAValidCard() {
         vcAssert.assertRendersValidCard(this.vc)
         vcAssert.assertCardRendersHeader(this.vc)
         vcAssert.assertCardRendersFooter(this.vc)
     }
 
     @test()
-    protected static async clickingFooterPrimaryTriggersOnDone() {
+    protected async clickingFooterPrimaryTriggersOnDone() {
         await interactor.clickPrimaryInFooter(this.vc)
         assert.isTrue(this.wasOnDoneInvoked)
     }
 
     @test()
-    protected static rendersList() {
+    protected rendersList() {
         vcAssert.assertCardRendersList(this.vc)
     }
 
     @test()
-    protected static async assertStartsWithAsManyRowsAsThereArePagesIntheForm() {
+    protected async assertStartsWithAsManyRowsAsThereArePagesIntheForm() {
         await this.formBuilderVc.addPage({ title: 'Page 2' })
         await this.formBuilderVc.addPage({ title: 'Page 3' })
 
@@ -89,7 +90,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static async updatingRowValueUpdatesPageTitle() {
+    protected async updatingRowValueUpdatesPageTitle() {
         await this.formBuilderVc.addPage({ title: 'Page 2' })
 
         const rowVc = this.vc.getListVc().getRowVc(1)
@@ -100,7 +101,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static async clickingDestructiveButtonInRowDeletesPage() {
+    protected async clickingDestructiveButtonInRowDeletesPage() {
         await this.formBuilderVc.addPage({ title: 'Page 2' })
         await this.formBuilderVc.addPage({ title: 'Page 3' })
         await this.formBuilderVc.addPage({ title: 'Page 4' })
@@ -124,7 +125,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static async clickingDestructiveButtonInRowAndCancellingDoesNothing() {
+    protected async clickingDestructiveButtonInRowAndCancellingDoesNothing() {
         await this.formBuilderVc.addPage({ title: 'Page 2' })
         await this.formBuilderVc.addPage({ title: 'Page 3' })
         await this.formBuilderVc.addPage({ title: 'Page 4' })
@@ -144,7 +145,7 @@ export default class ManagePageTitlesViewControllerTest extends AbstractViewCont
     }
 
     @test()
-    protected static async clickingSecondaryButtonInTheFooterAddsPage() {
+    protected async clickingSecondaryButtonInTheFooterAddsPage() {
         await interactor.clickSecondaryInFooter(this.vc)
         assert.isEqual(this.formBuilderVc.getTotalPages(), 2)
         vcAssert.assertTriggerRenderCount(this.vc, 1)

@@ -1,14 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
 type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
 
+@suite()
 export default class AssertingCardSectionsTest extends AbstractViewControllerTest {
     @test('does not find with no sections', [], 'test')
     @test('does not find with miss-matched id', [{ id: 'testing' }], 'test')
-    protected static throwsIfNoSection(sections: Section[], lookupId: string) {
+    protected throwsIfNoSection(sections: Section[], lookupId: string) {
         assert.doesThrow(
             () => this.assertRendersSection(sections, lookupId),
             'find a section'
@@ -45,10 +46,7 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
         ],
         'testing'
     )
-    protected static passesInFirstSection(
-        sections: Section[],
-        lookupId: string
-    ) {
+    protected passesInFirstSection(sections: Section[], lookupId: string) {
         this.assertRendersSection(sections, lookupId)
         assert.doesThrow(
             () => this.assertDoesNotRenderSection(sections, lookupId),
@@ -56,24 +54,18 @@ export default class AssertingCardSectionsTest extends AbstractViewControllerTes
         )
     }
 
-    private static assertRendersSection(
-        sections: Section[],
-        sectionId: string
-    ) {
+    private assertRendersSection(sections: Section[], sectionId: string) {
         vcAssert.assertCardRendersSection(this.CardVc(sections), sectionId)
     }
 
-    private static assertDoesNotRenderSection(
-        sections: Section[],
-        sectionId: string
-    ) {
+    private assertDoesNotRenderSection(sections: Section[], sectionId: string) {
         vcAssert.assertCardDoesNotRenderSection(
             this.CardVc(sections),
             sectionId
         )
     }
 
-    private static CardVc(sections?: Section[]) {
+    private CardVc(sections?: Section[]) {
         return this.Controller('card', { body: { sections } })
     }
 }

@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
     AbstractSkillViewController,
     ScopedBy,
@@ -46,14 +46,15 @@ class ScopeFlagVc extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingScopeTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         scope: Scope,
         scopeFlagVc: ScopeFlagVc,
     }
 
     @test()
-    protected static scopeMustBeValued() {
+    protected scopeMustBeValued() {
         assert.doesThrow(() =>
             vcAssert.assertSkillViewScopedBy(
                 this.Vc('organization'),
@@ -71,7 +72,7 @@ export default class AssertingScopeTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static scopeFlagMustBeValid() {
+    protected scopeFlagMustBeValid() {
         assert.doesThrow(() =>
             //@ts-ignore
             vcAssert.assertSkillViewScopedBy(this.FlagVc('organization'), [
@@ -89,18 +90,18 @@ export default class AssertingScopeTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static scopeIsDefaultToNone() {
+    protected scopeIsDefaultToNone() {
         vcAssert.assertSkillViewNotScoped(this.Vc())
     }
 
     @test()
-    protected static scopeFagDefaultsToNothing() {
+    protected scopeFagDefaultsToNothing() {
         vcAssert.assertSkillViewNotScoped(this.FlagVc())
     }
 
     @test('knows if scoped by location', 'location')
     @test('knows if scoped by organization', 'organization')
-    protected static knowsIfScopedBySomething(scope: ScopedBy) {
+    protected knowsIfScopedBySomething(scope: ScopedBy) {
         const vc = this.Vc(scope)
         assert.doesThrow(() => vcAssert.assertSkillViewNotScoped(vc))
         vcAssert.assertSkillViewScopedBy(vc, scope)
@@ -112,52 +113,52 @@ export default class AssertingScopeTest extends AbstractViewControllerTest {
         'organization',
         'employed',
     ])
-    protected static knowsIfScopedByFlag(scope: ScopeFlag[]) {
+    protected knowsIfScopedByFlag(scope: ScopeFlag[]) {
         const vc = this.FlagVc(scope)
         assert.doesThrow(() => vcAssert.assertSkillViewNotScoped(vc))
         vcAssert.assertSkillViewScopedBy(vc, scope)
     }
 
     @test()
-    protected static matchesOutOfOrder() {
+    protected matchesOutOfOrder() {
         const vc = this.FlagVc(['organization', 'employed'])
         assert.doesThrow(() => vcAssert.assertSkillViewNotScoped(vc))
         vcAssert.assertSkillViewScopedBy(vc, ['employed', 'organization'])
     }
 
     @test()
-    protected static scopeToNoneCountsAsNotScoped() {
+    protected scopeToNoneCountsAsNotScoped() {
         const vc = this.Vc('none')
         vcAssert.assertSkillViewNotScoped(vc)
     }
 
     @test()
-    protected static emptyFlagsCountsAsNone() {
+    protected emptyFlagsCountsAsNone() {
         const vc = this.FlagVc([])
         vcAssert.assertSkillViewNotScoped(vc)
     }
 
     @test()
-    protected static throwsIfScopedBySomethingElse() {
+    protected throwsIfScopedBySomethingElse() {
         const vc = this.Vc('organization')
         assert.doesThrow(() => vcAssert.assertSkillViewScopedBy(vc, 'location'))
     }
 
     @test()
-    protected static throwsIfScopedFlagsDontMatch() {
+    protected throwsIfScopedFlagsDontMatch() {
         const vc = this.FlagVc(['organization'])
         assert.doesThrow(() =>
             vcAssert.assertSkillViewScopedBy(vc, ['location'])
         )
     }
 
-    private static Vc(scope?: ScopedBy) {
+    private Vc(scope?: ScopedBy) {
         return this.Controller('scope' as any, {
             scope,
         }) as Scope
     }
 
-    private static FlagVc(scope?: ScopeFlag[]) {
+    private FlagVc(scope?: ScopeFlag[]) {
         return this.Controller('scopeFlagVc' as any, {
             scope,
         }) as ScopeFlagVc

@@ -1,6 +1,6 @@
 import { SelectChoice } from '@sprucelabs/schema'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { fieldTypeChoices } from '../../constants'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
@@ -12,14 +12,15 @@ import EditFormBuilderFieldCardViewController, {
 } from '../../viewControllers/formBuilder/EditFormBuilderFieldCard.vc'
 import FormBuilderCardViewController from '../../viewControllers/formBuilder/FormBuilderCard.vc'
 
+@suite()
 export default class EditFormBuilderFieldViewControllerTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         ['edit-form-builder-field']: EditFormBuilderFieldCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
 
     @test()
-    protected static async throwsWhenMissingParameters() {
+    protected async throwsWhenMissingParameters() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('edit-form-builder-field', {})
@@ -30,27 +31,27 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static canBuildWithGoodOptions() {
+    protected canBuildWithGoodOptions() {
         const vc = this.Vc()
         assert.isTruthy(vc)
     }
 
     @test()
-    protected static shouldRenderFormAccessibleFromGetter() {
+    protected shouldRenderFormAccessibleFromGetter() {
         const vc = this.Vc()
         const formVc = formAssert.cardRendersForm(vc)
         assert.isEqual(formVc, vc.getFormVc())
     }
 
     @test()
-    protected static shouldRenderNameLabelAndTypeAtLeast() {
+    protected shouldRenderNameLabelAndTypeAtLeast() {
         const formVc = this.Vc().getFormVc()
         this.assertRendersExpectedFields(formVc)
         formAssert.formDoesNotRenderField(formVc, 'selectOptions')
     }
 
     @test()
-    protected static async shouldRenderTextAreaForSelectOptionsWhenTypeIsDropdown() {
+    protected async shouldRenderTextAreaForSelectOptionsWhenTypeIsDropdown() {
         const formVc = this.Vc().getFormVc()
 
         await formVc.setValue('type', 'select')
@@ -63,7 +64,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static shouldShowSelectOptionsIfTheyArePassedByDefault() {
+    protected shouldShowSelectOptionsIfTheyArePassedByDefault() {
         const formVc = this.Vc({
             //@ts-ignore
             field: { type: 'select' },
@@ -96,7 +97,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
         },
         'hey\nHey too'
     )
-    protected static async setsFieldsPassedToConstructorAndBackFromSubmit(
+    protected async setsFieldsPassedToConstructorAndBackFromSubmit(
         initialValues: any,
         expectedSelectOptions: string
     ) {
@@ -125,7 +126,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static async retainsOptionsNotSupported() {
+    protected async retainsOptionsNotSupported() {
         let submittedResults: any
 
         const formVc = this.Vc({
@@ -156,7 +157,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static async retainsOptionsNotSupportedOnSelect() {
+    protected async retainsOptionsNotSupportedOnSelect() {
         let submittedResults: any
         const formVc = this.Vc({
             name: 'firstName2',
@@ -187,7 +188,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static async rendersRequiredField() {
+    protected async rendersRequiredField() {
         let submittedResults: any
         const formVc = this.Vc({
             name: 'firstName2',
@@ -213,7 +214,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
     }
 
     @test()
-    protected static async canUpdateFieldChoices() {
+    protected async canUpdateFieldChoices() {
         let passedChoices: SelectChoice[] | undefined
 
         const vc = this.Vc({
@@ -243,7 +244,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
         assert.isEqualDeep(passedChoices, expected)
     }
 
-    private static Vc(options?: Partial<EditFormBuilderFieldOptions>) {
+    private Vc(options?: Partial<EditFormBuilderFieldOptions>) {
         return this.Controller('edit-form-builder-field', {
             name: 'firstName',
             onDone: () => {},
@@ -256,9 +257,7 @@ export default class EditFormBuilderFieldViewControllerTest extends AbstractView
         })
     }
 
-    private static assertRendersExpectedFields(
-        formVc: FormViewController<any>
-    ) {
+    private assertRendersExpectedFields(formVc: FormViewController<any>) {
         formAssert.formRendersField(formVc, 'name')
         formAssert.formRendersField(formVc, 'label')
         formAssert.formRendersField(formVc, 'type', {

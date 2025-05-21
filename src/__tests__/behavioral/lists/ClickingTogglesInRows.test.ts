@@ -1,18 +1,19 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class ClickingTogglesInRowsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
+    protected controllerMap = {}
 
     @test()
-    protected static async canCreateClickingTogglesInRows() {
+    protected async canCreateClickingTogglesInRows() {
         assert.isFunction(interactor.clickToggleInRow)
     }
 
     @test()
-    protected static async throwsIfCantFindRow() {
+    protected async throwsIfCantFindRow() {
         const listVc = this.ListVc()
         await assert.doesThrowAsync(() =>
             interactor.clickToggleInRow(listVc, 'last')
@@ -20,7 +21,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async canClickToggle() {
+    protected async canClickToggle() {
         const toggleId = `${new Date().getTime()}`
         const listVc = this.ListVc({
             rows: [
@@ -44,7 +45,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async throwsIfCantFindToggleInput() {
+    protected async throwsIfCantFindToggleInput() {
         const listVc = this.ListVc({
             rows: [
                 {
@@ -60,7 +61,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async canFindInputInOtherCells() {
+    protected async canFindInputInOtherCells() {
         const listVc = this.ListVc({
             rows: [
                 {
@@ -85,7 +86,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async clickingTriggersOnChange() {
+    protected async clickingTriggersOnChange() {
         let wasHit = false
         let passedValue: boolean | undefined
         const listVc = this.ListVc({
@@ -117,7 +118,7 @@ export default class ClickingTogglesInRowsTest extends AbstractViewControllerTes
         assert.isFalse(passedValue)
     }
 
-    private static ListVc(options?: Partial<ListViewControllerOptions>) {
+    private ListVc(options?: Partial<ListViewControllerOptions>) {
         return this.Controller('list', {
             rows: [
                 {

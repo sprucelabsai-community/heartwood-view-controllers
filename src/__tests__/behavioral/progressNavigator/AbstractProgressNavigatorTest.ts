@@ -6,28 +6,28 @@ import ProgressNavigatorViewController, {
 } from '../../../viewControllers/progressNavigator/ProgressNavigator.vc'
 
 export default abstract class AbstractProgressNavigatorTest extends AbstractViewControllerTest {
-    protected static vc: ProgressNavigatorViewController
+    protected vc!: ProgressNavigatorViewController
 
-    protected static completeStep(stepId: string): any {
+    protected completeStep(stepId: string): any {
         return this.vc.completeStep(stepId)
     }
 
-    protected static reload(options: ProgressNavigatorViewControllerOptions) {
+    protected reload(options: ProgressNavigatorViewControllerOptions) {
         this.vc = this.Vc(options)
     }
 
-    protected static generatRandomStep(): ProgressNavigatorStep {
+    protected generatRandomStep(): ProgressNavigatorStep {
         return {
             id: generateId(),
             label: generateId(),
         }
     }
 
-    protected static Vc(options: ProgressNavigatorViewControllerOptions) {
+    protected Vc(options: ProgressNavigatorViewControllerOptions) {
         return this.Controller('progress-navigator', options)
     }
 
-    protected static setCurrentStep(stepId: string): any {
+    protected setCurrentStep(stepId: string): any {
         return this.vc.setCurrentStep(stepId)
     }
 }

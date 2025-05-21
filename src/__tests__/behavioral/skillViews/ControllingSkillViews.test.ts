@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -20,24 +20,25 @@ class TestVc extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class ControllingSkillViewsTest extends AbstractViewControllerTest {
-    protected static controllerMap: Record<string, any> = {
+    protected controllerMap: Record<string, any> = {
         titleVc: TestVc,
     }
-    private static vc: TestVc
+    private vc!: TestVc
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('titleVc' as any, {}) as TestVc
     }
 
     @test()
-    protected static async titleUndefinedToStart() {
+    protected async titleUndefinedToStart() {
         this.assertTitleUndefined()
     }
 
     @test()
-    protected static async canSetTitle() {
+    protected async canSetTitle() {
         this.setTitle('hello world!')
         this.assertTitleEquals('hello world!')
 
@@ -49,18 +50,18 @@ export default class ControllingSkillViewsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static settingTitleTriggersRender() {
+    protected settingTitleTriggersRender() {
         this.setTitle('go team!')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async subtitleUndefinedToStart() {
+    protected async subtitleUndefinedToStart() {
         this.assertSubtitleUndefined()
     }
 
     @test()
-    protected static canSetSubtitle() {
+    protected canSetSubtitle() {
         this.setSubtitle('hello again!')
         this.assertSubtitleEquals('hello again!')
 
@@ -72,32 +73,32 @@ export default class ControllingSkillViewsTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static settingSubtitleTriggersRender() {
+    protected settingSubtitleTriggersRender() {
         this.setSubtitle('go!')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static assertSubtitleUndefined() {
+    private assertSubtitleUndefined() {
         assert.isUndefined(this.vc.getSubtitle())
     }
 
-    private static assertSubtitleEquals(title: string) {
+    private assertSubtitleEquals(title: string) {
         assert.isEqual(this.vc.getSubtitle(), title)
     }
 
-    private static setSubtitle(title: string | null) {
+    private setSubtitle(title: string | null) {
         this.vc.setSubtitle(title)
     }
 
-    private static assertTitleUndefined() {
+    private assertTitleUndefined() {
         assert.isUndefined(this.vc.getTitle())
     }
 
-    private static assertTitleEquals(expected: string) {
+    private assertTitleEquals(expected: string) {
         assert.isEqual(this.vc.getTitle(), expected)
     }
 
-    private static setTitle(title: string | null) {
+    private setTitle(title: string | null) {
         this.vc.setTitle(title)
     }
 }

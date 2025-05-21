@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
     AbstractSkillViewController,
@@ -18,7 +18,7 @@ interface Options {
 }
 
 class SkillView extends AbstractSkillViewController {
-    private cards: Card[]
+    private cards!: Card[]
 
     public constructor(options: ViewControllerOptions & Options) {
         super(options)
@@ -35,12 +35,13 @@ class SkillView extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingSwipeViewsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         skillView: SkillView,
     }
     @test()
-    protected static throwsWhenMissingParams() {
+    protected throwsWhenMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             vcAssert.assertSkillViewRendersSwipeCard()
@@ -52,32 +53,32 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static findsSwipeView() {
+    protected findsSwipeView() {
         const vc = this.Vc([this.SwipeVc()])
 
         vcAssert.assertSkillViewRendersSwipeCard(vc)
     }
 
     @test()
-    protected static throwsWithNoSwipe() {
+    protected throwsWithNoSwipe() {
         const vc = this.Vc([])
         assert.doesThrow(() => vcAssert.assertSkillViewRendersSwipeCard(vc))
     }
 
     @test()
-    protected static throwsWhenFindingCard() {
+    protected throwsWhenFindingCard() {
         const vc = this.Vc([this.CardVc()])
         assert.doesThrow(() => vcAssert.assertSkillViewRendersSwipeCard(vc))
     }
 
     @test()
-    protected static findsSwipeInSecondLayout() {
+    protected findsSwipeInSecondLayout() {
         const vc = this.Vc([this.CardVc(), this.SwipeVc()])
         vcAssert.assertSkillViewRendersSwipeCard(vc)
     }
 
     @test()
-    protected static findsSwipeAFewCardsDeep() {
+    protected findsSwipeAFewCardsDeep() {
         const vc = this.Vc([
             this.CardVc(),
             this.CardVc(),
@@ -91,7 +92,7 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static returnsSwipeVc() {
+    protected returnsSwipeVc() {
         const swipeVc = this.SwipeVc()
         const vc = this.Vc([this.CardVc(), swipeVc])
         const match = vcAssert.assertSkillViewRendersSwipeCard(vc)
@@ -99,7 +100,7 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static knowsIfNotSwipeCard() {
+    protected knowsIfNotSwipeCard() {
         const vc = this.Controller('card', {})
 
         assert.doesThrow(
@@ -113,17 +114,17 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
         vcAssert.assertIsSwipeCard(vc)
     }
 
-    private static CardVc(): CardViewController {
+    private CardVc(): CardViewController {
         return this.Controller('card', {})
     }
 
-    private static SwipeVc() {
+    private SwipeVc() {
         return this.Controller('swipeCard', {
             slides: [],
         }) as SwipeCardViewController
     }
 
-    private static Vc(cards: Card[]): SkillView {
+    private Vc(cards: Card[]): SkillView {
         return this.Controller('skillView' as any, {
             cards,
         }) as any

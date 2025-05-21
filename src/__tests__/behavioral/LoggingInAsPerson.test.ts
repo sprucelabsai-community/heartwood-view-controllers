@@ -1,22 +1,23 @@
 import { Person } from '@sprucelabs/spruce-core-schemas'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
 import StubStorage from '../../tests/StubStorage'
 
+@suite()
 export default class AuthenticatorTest extends AbstractViewControllerTest {
-    protected static controllerMap: Record<string, any> = {}
-    private static storage: StubStorage
+    protected controllerMap: Record<string, any> = {}
+    private storage!: StubStorage
 
-    private static readonly person = {
+    private readonly person = {
         casualName: 'friend',
         id: '1234',
         dateCreated: 123,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.storage = new StubStorage()
@@ -29,7 +30,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantGetInstanceWithoutStorageBeingSet() {
+    protected cantGetInstanceWithoutStorageBeingSet() {
         Authenticator.setStorage(null)
 
         const err = assert.doesThrow(() => Authenticator.getInstance())
@@ -37,13 +38,13 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetAuthenticatorInstance() {
+    protected async canGetAuthenticatorInstance() {
         const authenticator = Authenticator.getInstance()
         assert.isTruthy(authenticator)
     }
 
     @test()
-    protected static async authenticatorInstanceTheSameOne() {
+    protected async authenticatorInstanceTheSameOne() {
         const auth = this.auth
         //@ts-ignore
         auth.__patched = true
@@ -53,13 +54,13 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async tokenAndPersonEmptyToStart() {
+    protected async tokenAndPersonEmptyToStart() {
         assert.isFalsy(this.auth.getSessionToken())
         assert.isFalsy(this.auth.getPerson())
     }
 
     @test()
-    protected static async canSetToken() {
+    protected async canSetToken() {
         this.auth.setSessionToken('1234abc', this.person)
 
         const token = this.auth.getSessionToken()
@@ -69,7 +70,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async setsLocalStorage() {
+    protected async setsLocalStorage() {
         const auth = this.auth
         auth.setSessionToken('123abc', this.person)
 
@@ -78,12 +79,12 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static isLoggedInIsFalseToStart() {
+    protected isLoggedInIsFalseToStart() {
         assert.isFalse(this.auth.isLoggedIn())
     }
 
     @test()
-    protected static isLoggedInIsTrueAfterTokenSet() {
+    protected isLoggedInIsTrueAfterTokenSet() {
         const auth = this.auth
         auth.setSessionToken('abc123', this.person)
 
@@ -91,7 +92,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClearToken() {
+    protected async canClearToken() {
         const auth = this.auth
 
         auth.setSessionToken('123abc', this.person)
@@ -105,7 +106,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emitsOnLoginWhenSettingToken() {
+    protected async emitsOnLoginWhenSettingToken() {
         const auth = this.auth
 
         let hit = false
@@ -126,7 +127,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emitsOnLogOut() {
+    protected async emitsOnLogOut() {
         const auth = this.auth
         let passedPerson: Person | undefined
 
@@ -143,7 +144,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async emitsWillLogoutBeforeActuallyClearingSession() {
+    protected async emitsWillLogoutBeforeActuallyClearingSession() {
         const auth = this.auth
         const token = generateId()
 
@@ -165,21 +166,21 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canBuildLoginVc() {
+    protected canBuildLoginVc() {
         const factory = this.Factory()
         const login = factory.Controller('login', {})
         assert.isTruthy(login)
     }
 
     @test()
-    protected static async passesTHroughId() {
+    protected async passesTHroughId() {
         const id = generateId()
         const vc = this.Factory().Controller('login', { id })
         assert.isEqual(this.render(vc).id, id)
     }
 
     @test()
-    protected static async entering4DigitPinTriggersSubmit() {
+    protected async entering4DigitPinTriggersSubmit() {
         const factory = this.Factory()
         const login = factory.Controller('login', {})
 
@@ -210,7 +211,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async loginVcClearsPinWhenSubmittingPhone() {
+    protected async loginVcClearsPinWhenSubmittingPhone() {
         const login = this.LoginVc()
 
         const form = login.getLoginForm()
@@ -228,7 +229,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async loginShowsAsBusyWhileSubmitting() {
+    protected async loginShowsAsBusyWhileSubmitting() {
         const loginVc = this.LoginVc()
 
         //@ts-ignore
@@ -260,7 +261,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async anErrorReturnsFalseOnSubmit() {
+    protected async anErrorReturnsFalseOnSubmit() {
         await this.client.on('request-pin::v2020_12_25', (() =>
             assert.fail('throw')) as any)
 
@@ -278,7 +279,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesNotEmitLogoutEventsIfClearingSessionAndNotLoggedIn() {
+    protected async doesNotEmitLogoutEventsIfClearingSessionAndNotLoggedIn() {
         let wasHit = false
         await this.auth.addEventListener('will-logout', () => {
             wasHit = true
@@ -287,11 +288,11 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         assert.isFalse(wasHit, 'Should not emit logout events if not logged in')
     }
 
-    private static get auth() {
+    private get auth() {
         return Authenticator.getInstance()
     }
 
-    private static LoginVc() {
+    private LoginVc() {
         const factory = this.Factory()
         const login = factory.Controller('login-card', {})
         return login

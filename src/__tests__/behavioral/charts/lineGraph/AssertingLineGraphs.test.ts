@@ -1,14 +1,15 @@
-import { test, assert, errorAssert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import chartAssert from '../../../../tests/utilities/chartAssert'
 import { CardViewController } from '../../../../types/heartwood.types'
 import AbstractChartAssertionTest from '../AbstractChartAssertionTest'
 
+@suite()
 export default class AssertingLineGraphsTest extends AbstractChartAssertionTest {
-    protected static vcName = 'line-graph' as const
-    protected static sectionKey = 'lineGraph' as const
+    protected vcName = 'line-graph' as const
+    protected sectionKey = 'lineGraph' as const
 
     @test()
-    protected static async canCreateAssertingBarCharts() {
+    protected async canCreateAssertingBarCharts() {
         //@ts-ignore
         const err = assert.doesThrow(() => chartAssert.cardRendersLineGraph())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -17,64 +18,61 @@ export default class AssertingLineGraphsTest extends AbstractChartAssertionTest 
     }
 
     @test()
-    protected static async throwsIfCardDoesNotRenderBarChart() {
+    protected async throwsIfCardDoesNotRenderBarChart() {
         this.assertNotRenderingChart([])
     }
 
     @test()
-    protected static async passesIfBarChartFound() {
+    protected async passesIfBarChartFound() {
         this.assertPassesIfChartInFirstSection()
     }
 
     @test()
-    protected static async throwsIfCardHasSectionWithoutBarChart() {
+    protected async throwsIfCardHasSectionWithoutBarChart() {
         this.assertNotRenderingChart([{}])
     }
 
     @test()
-    protected static async passesIfBarChartInSecondSection() {
+    protected async passesIfBarChartInSecondSection() {
         this.assertPassesIfChartInSecondSection()
     }
 
     @test()
-    protected static async passesIfTwoBarCharts() {
+    protected async passesIfTwoBarCharts() {
         this.assertPassesWithTwoCharts()
     }
 
     @test()
-    protected static async throwsIfIdDoesNotMatch() {
+    protected async throwsIfIdDoesNotMatch() {
         this.assertThrowsIfIdDoesNotMatch()
     }
 
     @test()
-    protected static async matchesIfFirstIdMatches() {
+    protected async matchesIfFirstIdMatches() {
         this.assertMatchesOnIdInFirstMatch()
     }
 
     @test()
-    protected static async matchesIfBarChartHasIdButNonePassed() {
+    protected async matchesIfBarChartHasIdButNonePassed() {
         this.assertIfChartHasIdButNotChecked()
     }
 
     @test()
-    protected static async assertRendersBarChartReturnsBarChart() {
+    protected async assertRendersBarChartReturnsBarChart() {
         this.assertReturnsChartVc()
     }
 
     @test()
-    protected static async returnsBarChartWhenMatchingId() {
+    protected async returnsBarChartWhenMatchingId() {
         this.assertReturnsChartVcWhenMatchingId()
     }
 
     @test()
-    protected static async matchesIfIdInSecondSection() {
+    protected async matchesIfIdInSecondSection() {
         this.assertMatchesIdInSecondSection()
     }
 
-    protected static assertCardRendersChart(
-        cardVc: CardViewController,
-        id?: string
-    ) {
+    protected assertCardRendersChart(cardVc: CardViewController, id?: string) {
         return chartAssert.cardRendersLineGraph(cardVc, id)
     }
 }

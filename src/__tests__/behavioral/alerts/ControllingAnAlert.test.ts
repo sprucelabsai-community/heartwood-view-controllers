@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import {
     AbstractAppController,
     AbstractSkillViewController,
@@ -46,15 +46,16 @@ class AlertAppController extends AbstractAppController {
     }
 }
 
+@suite()
 export default class ControllingAnAlertTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         alert: AlertSkillViewController,
     }
 
-    private static vc: AlertSkillViewController
-    private static app: AlertAppController
+    private vc!: AlertSkillViewController
+    private app!: AlertAppController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.getFactory().setAppController(AlertAppController)
         this.vc = this.Controller('alert' as any, {})
@@ -63,14 +64,14 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
     @test('view controllers have alert method', 'vc')
     @test('app controllers have alert method', 'app')
-    protected static async hasAlertMethod(prop: Prop) {
+    protected async hasAlertMethod(prop: Prop) {
         //@ts-ignore
         assert.isFunction(this[prop].alert)
     }
 
     @test('view invoking alert throws by default', 'vc')
     @test('app invoking alert throws by default', 'app')
-    protected static async invokingAlertThrowsByDefault(prop: Prop) {
+    protected async invokingAlertThrowsByDefault(prop: Prop) {
         vcAssert.patchAlertToThrow(this[prop])
         await assert.doesThrowAsync(() => this[prop].showAnAlert())
         //@ts-ignore
@@ -79,7 +80,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
     @test('view does not throw with other style alerts', 'vc')
     @test('app does not throw with other style alerts', 'app')
-    protected static async doesNotThrowWithOtherStyleAlerts(prop: Prop) {
+    protected async doesNotThrowWithOtherStyleAlerts(prop: Prop) {
         vcAssert.patchAlertToThrow(this[prop])
 
         //@ts-ignore
@@ -97,7 +98,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
     @test('view alert renders dialog', 'vc')
     @test('app alert renders dialog', 'app')
-    protected static async alertRendersDialog(prop: Prop) {
+    protected async alertRendersDialog(prop: Prop) {
         const title = `${new Date().getTime()}`
         const message = `${new Date().getTime() * Math.random()}`
 
@@ -116,7 +117,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async executionHoldsUntilAlertIsClosed() {
+    protected async executionHoldsUntilAlertIsClosed() {
         const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
             this.vc.showAnAlert()
         )
@@ -130,7 +131,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async alertingWithoutTitleDropsInDefault() {
+    protected async alertingWithoutTitleDropsInDefault() {
         const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
             //@ts-ignore
             this.vc.alert({
@@ -143,7 +144,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hasSingleFooterButtonThatIsDestructive() {
+    protected async hasSingleFooterButtonThatIsDestructive() {
         const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
             //@ts-ignore
             this.vc.alert({
@@ -155,7 +156,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingDestructiveButtonInFooterHidesDialog() {
+    protected async clickingDestructiveButtonInFooterHidesDialog() {
         const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
             this.vc.showAnAlert()
         )
@@ -170,7 +171,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async alertsCanReceiveTypeOfButton() {
+    protected async alertsCanReceiveTypeOfButton() {
         const dlgVc = await vcAssert.assertRendersDialog(this.vc, () =>
             //@ts-ignore
             this.vc.alert({
@@ -184,7 +185,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async successRendersPrimaryButton() {
+    protected async successRendersPrimaryButton() {
         const dlgVc = await this.assertAlertRendersDialog({
             title: 'hey',
             message: 'hey',
@@ -194,14 +195,14 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderingAnAlertVibratesTheDevice() {
+    protected async renderingAnAlertVibratesTheDevice() {
         deviceAssert.wasNotVibrated(this.vc)
         await vcAssert.assertRendersDialog(this.vc, () => this.vc.showAnAlert())
         deviceAssert.wasVibrated(this.vc)
     }
 
     @test()
-    protected static async theSameAlertDoesNotRenderMoreThanOnce() {
+    protected async theSameAlertDoesNotRenderMoreThanOnce() {
         const alert1: AlertOptions = {
             message: generateId(),
         }
@@ -230,7 +231,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetOkButton() {
+    protected async canSetOkButton() {
         const buttonLabel = generateId()
 
         const dlgVc = await this.assertAlertRendersDialog({
@@ -248,7 +249,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
 
     @test('renders to html if message is html', '<h1>hello</h1>')
     @test('renders to html if message is html', 'Hey there! <div>oh no</div>')
-    protected static async rendersToHtmlIfMessageIsHtml(message: string) {
+    protected async rendersToHtmlIfMessageIsHtml(message: string) {
         const dlgVc = await this.assertAlertRendersDialog({
             message,
         })
@@ -261,7 +262,7 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async rendersToContentWithErrorStack() {
+    protected async rendersToContentWithErrorStack() {
         const message = `Error: NOT_IMPLEMENTED: 1742988596907 and then more!
     at Object.listenerCb (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/packages/spruce-organization-skill/src/__tests__/behavioral/AddingAnOrganization.test.ts:60:19)
     at InternalEmitter.emitOne (/Users/taylorromero/Development/SpruceLabs/spruce-theatre/node_modules/@sprucelabs/mercury-event-emitter/build/AbstractEventEmitter.js:82:45)
@@ -289,13 +290,13 @@ export default class ControllingAnAlertTest extends AbstractViewControllerTest {
         )
     }
 
-    private static async assertAlertRendersDialog(alert: AlertOptions) {
+    private async assertAlertRendersDialog(alert: AlertOptions) {
         return await vcAssert.assertRendersDialog(this.vc, () =>
             this.vc.alert(alert)
         )
     }
 
-    private static async assertAlertDoesNotRenderDialog(alert: AlertOptions) {
+    private async assertAlertDoesNotRenderDialog(alert: AlertOptions) {
         return await vcAssert.assertDoesNotRenderDialog(this.vc, () =>
             this.vc.alert(alert)
         )

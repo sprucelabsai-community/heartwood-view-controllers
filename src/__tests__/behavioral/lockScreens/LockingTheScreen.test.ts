@@ -1,4 +1,4 @@
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import LockScreenSkillViewController, {
     LockScreenSkillViewControllerOptions,
@@ -12,13 +12,14 @@ import {
 } from '../../../types/heartwood.types'
 import AbstractAppController from '../../../viewControllers/Abstract.ac'
 
+@suite()
 export default class LockingTheScreenTest extends AbstractViewControllerTest {
-    private static wasHit: boolean
-    private static svc: LockingSkillView
-    private static passedOptions?: LockScreen
-    private static app?: SpyAppController
+    private wasHit!: boolean
+    private svc!: LockingSkillView
+    private passedOptions?: LockScreen
+    private app?: SpyAppController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         delete this.passedOptions
@@ -44,7 +45,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async callingOnSvcCallsHandlerPassedToFactory() {
+    protected async callingOnSvcCallsHandlerPassedToFactory() {
         this.callRenderLockScreen()
 
         assert.isTrue(
@@ -54,7 +55,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async callingRenderLockScreenWithoutPassingHandlerDoesNotThrow() {
+    protected async callingRenderLockScreenWithoutPassingHandlerDoesNotThrow() {
         this.views = this.Factory({})
         this.setLockingController()
 
@@ -63,12 +64,12 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async returnsLockScreenVc() {
+    protected async returnsLockScreenVc() {
         this.assertLockScreenInstanceReturnedFromRenderLockScreen()
     }
 
     @test()
-    protected static async lockScreenSvcIsRenderedIntoRenderLockScreenHandler() {
+    protected async lockScreenSvcIsRenderedIntoRenderLockScreenHandler() {
         SpyLockScreenSkillView.model = {
             id: generateId(),
             layouts: [],
@@ -79,7 +80,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async dialogSvcRendersSkillViewWithPassedOptionsInModel() {
+    protected async dialogSvcRendersSkillViewWithPassedOptionsInModel() {
         const vc = this.callRenderLockScreen()
         const model = this.render(vc)
         assert.isEqual(
@@ -90,7 +91,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async setsSkillViewControllerToInstanceOfSkillViewController() {
+    protected async setsSkillViewControllerToInstanceOfSkillViewController() {
         const model = this.renderLockScreen()
 
         vcAssert.assertControllerInstanceOf(
@@ -101,12 +102,12 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesThroughSkillViewControllerIfPassedToRender() {
+    protected async passesThroughSkillViewControllerIfPassedToRender() {
         this.assertPassesThroughSkillViewToLockScreen()
     }
 
     @test()
-    protected static async callingHideOnLockSvcCallsHideHandler() {
+    protected async callingHideOnLockSvcCallsHideHandler() {
         const vc = this.callRenderLockScreen()
 
         let wasHit = false
@@ -123,7 +124,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canLockScreenFromAppController() {
+    protected async canLockScreenFromAppController() {
         this.dropInApp()
         assert.isFalse(this.wasHit, `Called renderLockScreenHandler too soon`)
         this.callRenderLockScreen()
@@ -131,7 +132,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async lockScreenSvcIsRenderedIntoRenderLockScreenHandlerInApp() {
+    protected async lockScreenSvcIsRenderedIntoRenderLockScreenHandlerInApp() {
         SpyLockScreenSkillView.model = {
             id: generateId(),
             layouts: [],
@@ -143,19 +144,19 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async appReturnsLockScreenVc() {
+    protected async appReturnsLockScreenVc() {
         this.dropInApp()
         this.assertLockScreenInstanceReturnedFromRenderLockScreen()
     }
 
     @test()
-    protected static async passesThroughSkillViewControllerIfPassedToRenderInApp() {
+    protected async passesThroughSkillViewControllerIfPassedToRenderInApp() {
         this.dropInApp()
         this.assertPassesThroughSkillViewToLockScreen()
     }
 
     @test()
-    protected static async lockScreenKnowsIfHidden() {
+    protected async lockScreenKnowsIfHidden() {
         const vc = this.callRenderLockScreen()
         assert.isTrue(vc.getIsVisible(), `Lock screen should start visible`)
         await vc.hide()
@@ -163,7 +164,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async rendersModelPassedToRenderIfNotSkillViewBeingRendered() {
+    protected async rendersModelPassedToRenderIfNotSkillViewBeingRendered() {
         const actual = {
             id: generateId(),
             layouts: [],
@@ -173,7 +174,7 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
         assert.doesInclude(model, actual)
     }
 
-    private static assertPassesThroughSkillViewToLockScreen() {
+    private assertPassesThroughSkillViewToLockScreen() {
         const svc = this.Svc()
         const vc = this.callRenderLockScreen(svc.render())
         const model = vc.render()
@@ -184,18 +185,16 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
         )
     }
 
-    private static assertLockScreenInstanceReturnedFromRenderLockScreen() {
+    private assertLockScreenInstanceReturnedFromRenderLockScreen() {
         const vc = this.callRenderLockScreen()
         vcAssert.assertControllerInstanceOf(vc, LockScreenSkillViewController)
     }
 
-    private static dropInApp() {
+    private dropInApp() {
         this.app = this.views!.App('app' as any) as SpyAppController
     }
 
-    private static renderLockScreen(
-        options?: LockScreenSkillViewControllerOptions
-    ) {
+    private renderLockScreen(options?: LockScreenSkillViewControllerOptions) {
         const vc = this.callRenderLockScreen(options)
         const model = this.render(vc, {
             shouldStripControllers: false,
@@ -204,24 +203,24 @@ export default class LockingTheScreenTest extends AbstractViewControllerTest {
         return model
     }
 
-    private static callRenderLockScreen(
+    private callRenderLockScreen(
         options?: LockScreenSkillViewControllerOptions
     ) {
         return (this.app ?? this.svc).callRenderLockScreen(options ?? {})
     }
 
-    private static Svc() {
+    private Svc() {
         return this.Controller(
             'locking' as SkillViewControllerId,
             {}
         ) as LockingSkillView
     }
 
-    private static assertRenderLockScreenHandlerPassedExpected() {
+    private assertRenderLockScreenHandlerPassedExpected() {
         assert.isEqualDeep(this.passedOptions, SpyLockScreenSkillView.model)
     }
 
-    private static setLockingController() {
+    private setLockingController() {
         this.views?.setController('locking', LockingSkillView)
     }
 }

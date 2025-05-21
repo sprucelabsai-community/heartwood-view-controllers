@@ -1,14 +1,15 @@
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import * as constants from '../../../tests/constants'
 import ViewControllerExporter from '../../../viewControllers/ViewControllerExporter'
 import ViewControllerImporter from '../../../viewControllers/ViewControllerImporter'
 
+@suite()
 export default class ViewControllerImporterTest extends AbstractViewControllerTest {
-    protected static controllerMap: Record<string, any> = {}
-    private static importer: ViewControllerImporter
+    protected controllerMap: Record<string, any> = {}
+    private importer!: ViewControllerImporter
 
     public static async beforeAll() {
         await super.beforeAll()
@@ -33,32 +34,32 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         })
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.importer = ViewControllerImporter.Importer()
     }
 
     @test()
-    protected static canCreateViewControllerImporter() {
+    protected canCreateViewControllerImporter() {
         assert.isTruthy(this.importer)
     }
 
     @test('throws with syntax error', 'aosetuh')
     @test('throws with no object in response', '')
-    protected static importingInvalidScriptThrows(script: string) {
+    protected importingInvalidScriptThrows(script: string) {
         const err = assert.doesThrow(() => this.importer.import(script))
         errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
     }
 
     @test()
-    protected static throwsIfMissingPublicStaticIdOnVc() {
+    protected throwsIfMissingPublicStaticIdOnVc() {
         const err = assert.doesThrow(() => this.importControllers('NoIds'))
         errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_SOURCE')
         assert.doesInclude(err.message, 'public static readonly id =')
     }
 
     @test()
-    protected static importingValidScripts() {
+    protected importingValidScripts() {
         const { controllers } = this.importControllers()
 
         assert.isArray(controllers)
@@ -70,7 +71,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canInstantiateImportedController() {
+    protected canInstantiateImportedController() {
         const factory = this.importAndGetFactory()
 
         //@ts-ignore
@@ -87,21 +88,21 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static cantMessWithGlobalWindow() {
+    protected cantMessWithGlobalWindow() {
         this.importAndRenderVc()
         //@ts-ignore
         assert.isFalsy(global.window?.__hack)
     }
 
     @test()
-    protected static cantMessWithDocument() {
+    protected cantMessWithDocument() {
         this.importAndRenderVc()
         //@ts-ignore
         assert.isFalsy(global.document?.__hack)
     }
 
     @test()
-    protected static cantGetAnyGlobalVars() {
+    protected cantGetAnyGlobalVars() {
         //@ts-ignore
         global.__hack2 = true
         const model = this.importAndRenderVc()
@@ -110,7 +111,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canGetTimeoutFunctions() {
+    protected canGetTimeoutFunctions() {
         const model = this.importAndRenderVc()
 
         //@ts-ignore
@@ -124,7 +125,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static strangeVarNamesCantCrashIt() {
+    protected strangeVarNamesCantCrashIt() {
         const names = ['oh-not', '0', '0there', '1three7']
 
         names.forEach((n) => {
@@ -136,7 +137,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static constructorIsInvoked() {
+    protected constructorIsInvoked() {
         const factory = this.importAndGetFactory()
 
         //@ts-ignore
@@ -147,7 +148,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static canExtendViewControllerImport() {
+    protected canExtendViewControllerImport() {
         ViewControllerImporter.Class = SpyViewControllerImporter
         const instance = ViewControllerImporter.Importer()
         //@ts-ignore
@@ -155,7 +156,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canImportAppController() {
+    protected async canImportAppController() {
         const { App } = this.importControllers('App')
         assert.isTruthy(App)
         const app = new App({} as any)
@@ -163,7 +164,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         assert.isEqual(app.render(), 'go-team')
     }
 
-    private static importAndGetFactory(suffix?: ImportExportSuffix) {
+    private importAndGetFactory(suffix?: ImportExportSuffix) {
         const { controllers } = this.importControllers(suffix)
         const factory = this.Factory()
 
@@ -172,7 +173,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         return factory
     }
 
-    private static importAndRenderVc() {
+    private importAndRenderVc() {
         const factory = this.importAndGetFactory()
 
         //@ts-ignore
@@ -181,7 +182,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         return model
     }
 
-    private static importControllers(suffix: ImportExportSuffix = '') {
+    private importControllers(suffix: ImportExportSuffix = '') {
         const contents = diskUtil.readFile(
             //@ts-ignore
             constants[`importExportDestination${suffix}`]

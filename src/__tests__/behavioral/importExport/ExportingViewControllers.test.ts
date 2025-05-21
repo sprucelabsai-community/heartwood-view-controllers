@@ -3,6 +3,7 @@ import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import AbstractSpruceTest, {
     test,
+    suite,
     assert,
     generateId,
 } from '@sprucelabs/test-utils'
@@ -20,17 +21,18 @@ import ViewControllerExporter, {
     ExportOptions,
 } from '../../../viewControllers/ViewControllerExporter'
 
+@suite()
 export default class ViewControllerExporterTest extends AbstractSpruceTest {
-    private static readonly source = importExportSource
-    private static buildCwd = importExportCwd
-    private static destination: string
+    private readonly source = importExportSource
+    private buildCwd = importExportCwd
+    private destination!: string
 
-    private static exporter: SpyViewControllerExporter
-    private static didIncremntallyBuildCount: number
-    private static incrementalBuildError: Error | undefined
-    private static willIncremntallyBuildCount: number
+    private exporter!: SpyViewControllerExporter
+    private didIncremntallyBuildCount!: number
+    private incrementalBuildError!: Error | undefined
+    private willIncremntallyBuildCount!: number
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.destination = diskUtil.resolvePath(
@@ -45,34 +47,34 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         this.incrementalBuildError = undefined
     }
 
-    protected static async afterEach(): Promise<void> {
+    protected async afterEach(): Promise<void> {
         await super.beforeEach()
         await this.exporter.kill()
     }
 
     @test()
-    protected static throwsWhenMissingCwd() {
+    protected throwsWhenMissingCwd() {
         //@ts-ignore
         assert.doesThrow(() => ViewControllerExporter.Exporter())
     }
 
     @test()
-    protected static canGetPackager() {
+    protected canGetPackager() {
         assert.isTruthy(this.exporter)
     }
 
     @test()
-    protected static packagerCanGetCwd() {
+    protected packagerCanGetCwd() {
         assert.isEqual(this.exporter.getCwd(), this.buildCwd)
     }
 
     @test()
-    protected static packagerNeedsToBeAbsolutePath() {
+    protected packagerNeedsToBeAbsolutePath() {
         assert.isTrue(this.exporter.getCwd()[0] === pathUtil.sep)
     }
 
     @test()
-    protected static async packagerThrowsMissingParams() {
+    protected async packagerThrowsMissingParams() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() => this.exporter.export())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -81,7 +83,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async packagerThrowsMissingDestination() {
+    protected async packagerThrowsMissingDestination() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             this.exporter.export({ source: this.source })
@@ -92,7 +94,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async destinationMustBeAJsFile() {
+    protected async destinationMustBeAJsFile() {
         const err = await assert.doesThrowAsync(() =>
             this.exporter.export({
                 source: this.source,
@@ -106,7 +108,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async sourceFileMustExist() {
+    protected async sourceFileMustExist() {
         const err = await assert.doesThrowAsync(() =>
             this.exporter.export({
                 source: '../aoestuhasoetuh',
@@ -120,7 +122,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async throwsWithSyntaxError() {
+    protected async throwsWithSyntaxError() {
         const err = await assert.doesThrowAsync(async () => {
             await this.exporter.export({
                 source: importExportSourceSyntaxError,
@@ -133,7 +135,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async packagerPackages() {
+    protected async packagerPackages() {
         await this.export()
 
         assert.isTrue(diskUtil.doesFileExist(this.destination))
@@ -144,7 +146,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async canExportViewThatImportsSomethingFromNodeModules() {
+    protected async canExportViewThatImportsSomethingFromNodeModules() {
         const destination = diskUtil.resolvePath(
             __dirname,
             '..',
@@ -172,7 +174,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async profileStatsDestMustBeADirectory() {
+    protected async profileStatsDestMustBeADirectory() {
         const err = await assert.doesThrowAsync(() =>
             this.exporter.export({
                 source: this.source,
@@ -187,7 +189,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async canExportProfileStats() {
+    protected async canExportProfileStats() {
         const statsDestination = diskUtil.createRandomTempDir()
 
         await this.exporter.export({
@@ -204,7 +206,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async doesNotIncludeChalk() {
+    protected async doesNotIncludeChalk() {
         await this.export()
 
         const contents = diskUtil.readFile(this.destination)
@@ -212,7 +214,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async configNoopsGoogleLoggingUtils() {
+    protected async configNoopsGoogleLoggingUtils() {
         await this.export()
         const config = this.getConfig()
 
@@ -224,7 +226,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async exportCanBuildSourceMaps() {
+    protected async exportCanBuildSourceMaps() {
         await this.export({ shouldBuildSourceMaps: true })
         const config = this.getConfig()
         assert.isEqual(config.mode, 'development')
@@ -238,7 +240,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async noSourceMapsByDefault() {
+    protected async noSourceMapsByDefault() {
         await this.export()
         const config = this.getConfig()
         assert.isEqual(config.mode, 'production')
@@ -249,7 +251,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async haveNoopFileThatReturnsEmptyObject() {
+    protected async haveNoopFileThatReturnsEmptyObject() {
         const { default: noop } = require('../../../viewControllers/noop')
         assert.isEqualDeep(noop, {})
     }
@@ -261,7 +263,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         'process.env.TACO': JSON.stringify('salad'),
         'process.env.BURRITO': JSON.stringify('supreme'),
     })
-    protected static async canPassCustomWebpackDefinesToExporterConfig(
+    protected async canPassCustomWebpackDefinesToExporterConfig(
         definePlugin: any
     ) {
         await this.exporter.export({
@@ -291,7 +293,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         'WIZARDS_NAME',
         JSON.stringify('Merlin')
     )
-    protected static async exportedCustomDefinesAreReplaced(
+    protected async exportedCustomDefinesAreReplaced(
         key: string,
         value: string
     ) {
@@ -308,7 +310,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async watchIsTrueIfEnvIsSetToTrue() {
+    protected async watchIsTrueIfEnvIsSetToTrue() {
         const compiler = this.dropInSpyCompiler()
         await this.export()
         assert.isFalse(compiler.wasWatchHit)
@@ -316,7 +318,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async watchIsTrueIfEnvIsSetToFalse() {
+    protected async watchIsTrueIfEnvIsSetToFalse() {
         const compiler = this.dropInSpyCompiler()
         await this.export({ shouldWatch: true })
         assert.isTrue(compiler.wasWatchHit)
@@ -324,7 +326,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async watchingTriggersCallbackOnChanges() {
+    protected async watchingTriggersCallbackOnChanges() {
         await this.buildAndWatchSkillAtRandomDir()
 
         await this.replaceInBookSvc('go-team', 'stop-dude')
@@ -343,7 +345,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async incrementalBuildgetsErrors() {
+    protected async incrementalBuildgetsErrors() {
         await this.buildAndWatchSkillAtRandomDir()
         await this.replaceInBookSvc('go-team', "stop-dude'\n\naoeuaou")
 
@@ -355,30 +357,30 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
-    protected static async canSetSpyExporter() {
+    protected async canSetSpyExporter() {
         const exporter = this.Exporter()
         assert.isTrue(exporter instanceof SpyViewControllerExporter)
         assert.isEqual(exporter, SpyViewControllerExporter.instance)
     }
 
-    private static getConfig() {
+    private getConfig() {
         return this.exporter.getConfig()
     }
 
-    private static assertWillIncremntallyBuildHitCount(expected: number) {
+    private assertWillIncremntallyBuildHitCount(expected: number) {
         assert.isEqual(this.willIncremntallyBuildCount, expected)
     }
 
-    private static assertDidIncremntallyBuildHitCount(expected: number) {
+    private assertDidIncremntallyBuildHitCount(expected: number) {
         assert.isEqual(this.didIncremntallyBuildCount, expected)
     }
 
-    private static async buildAndWatchSkillAtRandomDir() {
+    private async buildAndWatchSkillAtRandomDir() {
         await this.setupSkillAtRandomDir()
         await this.exportAndWatch()
     }
 
-    private static async exportAndWatch() {
+    private async exportAndWatch() {
         await this.export({
             shouldWatch: true,
             onWillIncrementallyBuild: () => {
@@ -391,7 +393,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         })
     }
 
-    private static async setupSkillAtRandomDir() {
+    private async setupSkillAtRandomDir() {
         this.buildCwd = this.resolvePath(
             'build/__generated__/testDirsAndFiles',
             generateId()
@@ -401,7 +403,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         this.exporter = this.Exporter()
     }
 
-    private static dropInSpyCompiler() {
+    private dropInSpyCompiler() {
         const compiler = new SpyWebpackCompiler()
 
         //@ts-ignore
@@ -411,7 +413,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         return compiler
     }
 
-    private static async replaceInBookSvc(search: string, replace: string) {
+    private async replaceInBookSvc(search: string, replace: string) {
         const updatedFile = this.resolvePath(
             this.buildCwd,
             'src',
@@ -426,13 +428,13 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.wait(1000)
     }
 
-    private static Exporter(cwd?: string) {
+    private Exporter(cwd?: string) {
         return ViewControllerExporter.Exporter(
             cwd ?? this.buildCwd
         ) as SpyViewControllerExporter
     }
 
-    private static async export(options?: Partial<ExportOptions>) {
+    private async export(options?: Partial<ExportOptions>) {
         await this.exporter.export({
             source: this.source,
             destination: this.destination,

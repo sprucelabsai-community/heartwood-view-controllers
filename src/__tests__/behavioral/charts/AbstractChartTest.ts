@@ -8,19 +8,19 @@ import {
 } from '../../../types/heartwood.types'
 
 export default abstract class AbstractChartTest extends AbstractViewControllerTest {
-    protected static vc: ChartViewController<Charts>
+    protected vc!: ChartViewController<Charts>
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.setup()
     }
 
-    protected static assertRenderControllerAsInstanceOf(Class: any) {
+    protected assertRenderControllerAsInstanceOf(Class: any) {
         const model = this.render(this.vc)
         assert.isInstanceOf(model.controller, Class)
     }
 
-    protected static assertRendersAsExpectedWithModelPassedToConstructor() {
+    protected assertRendersAsExpectedWithModelPassedToConstructor() {
         this.assertConstructedWithRendersExpected({
             dataSets: [
                 {
@@ -45,23 +45,23 @@ export default abstract class AbstractChartTest extends AbstractViewControllerTe
         })
     }
 
-    private static assertConstructedWithRendersExpected(expected: Charts) {
+    private assertConstructedWithRendersExpected(expected: Charts) {
         this.setup(expected)
         this.assertRenderedEquals(expected)
     }
 
-    protected static setup(_options?: Record<string, any>) {
+    protected setup(_options?: Record<string, any>) {
         throw new Error(
             'You must implement setup(options: ViewModel) in your test.'
         )
     }
 
-    protected static assertRenderedEquals(expected: Charts) {
+    protected assertRenderedEquals(expected: Charts) {
         const actual = this.render(this.vc)
         assert.isEqualDeep(actual, { ...expected, controller: this.vc })
     }
 
-    protected static assertSettingDataSetsRendersAsExpected() {
+    protected assertSettingDataSetsRendersAsExpected() {
         this.assertSettingDataRendersAsExpected({
             dataSets: [
                 {
@@ -86,16 +86,16 @@ export default abstract class AbstractChartTest extends AbstractViewControllerTe
         })
     }
 
-    private static assertSettingDataRendersAsExpected(actual: Charts) {
+    private assertSettingDataRendersAsExpected(actual: Charts) {
         this.setDataSets(actual)
         this.assertRenderedEquals(actual)
     }
 
-    protected static setDataSets(actual: Charts) {
+    protected setDataSets(actual: Charts) {
         this.vc.setDataSets(actual.dataSets)
     }
 
-    protected static assertSettingDataTriggersRender() {
+    protected assertSettingDataTriggersRender() {
         this.setDataSets({
             dataSets: [],
         })
@@ -103,7 +103,7 @@ export default abstract class AbstractChartTest extends AbstractViewControllerTe
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    protected static assertRetainsId() {
+    protected assertRetainsId() {
         const id = generateId()
         this.setup({ id, dataSets: [] })
         this.setDataSets({ dataSets: [] })
@@ -111,7 +111,7 @@ export default abstract class AbstractChartTest extends AbstractViewControllerTe
         assert.isEqual(model.id, id)
     }
 
-    protected static assertSetDataSetsThrowsWhenMissingRequired() {
+    protected assertSetDataSetsThrowsWhenMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.setDataSets())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {

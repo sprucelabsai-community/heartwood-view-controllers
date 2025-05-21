@@ -1,4 +1,10 @@
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
 import { CardSection, CardViewController } from '../../../types/heartwood.types'
@@ -6,18 +12,19 @@ import PagerViewController, {
     PagerViewControllerOptions,
 } from '../../../viewControllers/pagers/Pager.vc'
 
+@suite()
 export default class AssertingPagersTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
-    private static pagerVc: PagerViewController
+    private vc!: CardViewController
+    private pagerVc!: PagerViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
         this.setupPager()
     }
 
     @test()
-    protected static async throwsWithMissingRequired() {
+    protected async throwsWithMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.cardRendersPager())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -26,24 +33,24 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfNoSectionRendered() {
+    protected async throwsIfNoSectionRendered() {
         this.asserthThrowsBecausePagerNotFound()
     }
 
     @test()
-    protected static async canFindPagerInFirstSection() {
+    protected async canFindPagerInFirstSection() {
         this.addSectionWithPager()
         this.assertCardRendersPager()
     }
 
     @test()
-    protected static async throwsIfSectionWithNoPagerRendered() {
+    protected async throwsIfSectionWithNoPagerRendered() {
         this.addSection({})
         this.asserthThrowsBecausePagerNotFound()
     }
 
     @test()
-    protected static async canFindPagerInSecondSection() {
+    protected async canFindPagerInSecondSection() {
         this.addSection({})
         this.addSectionWithPager()
         const vc = this.assertCardRendersPager()
@@ -51,14 +58,14 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfPagerIdDoesNotMatch() {
+    protected async throwsIfPagerIdDoesNotMatch() {
         this.setupPager({ id: generateId() })
         this.addSectionWithPager()
         this.asserthThrowsBecausePagerNotFound(generateId())
     }
 
     @test()
-    protected static async findsFirstPagerWithId() {
+    protected async findsFirstPagerWithId() {
         const id = generateId()
         this.setupPager({ id })
         this.addSectionWithPager()
@@ -66,7 +73,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async findsSecondPagerWithId() {
+    protected async findsSecondPagerWithId() {
         const id = generateId()
         this.addSectionWithPager()
         this.setupPager({ id })
@@ -76,7 +83,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async totalPagersThrowsIfMissingRequired() {
+    protected async totalPagersThrowsIfMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.totalPages())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -85,7 +92,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfTotalPagesDoesNotMatch() {
+    protected async throwsIfTotalPagesDoesNotMatch() {
         this.setupPager({ totalPages: 10 })
         this.assertTotalPagesThrows(11)
         this.setupPager({ totalPages: 11 })
@@ -93,13 +100,13 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async matchesOnTotalPages() {
+    protected async matchesOnTotalPages() {
         this.setupPager({ totalPages: 10 })
         this.assertTotalPages(10)
     }
 
     @test()
-    protected static async cardDoesNotRenderPagerThrowsWhenMissingRequired() {
+    protected async cardDoesNotRenderPagerThrowsWhenMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.cardDoesNotRenderPager())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -108,7 +115,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenPagerIsRendered() {
+    protected async throwsWhenPagerIsRendered() {
         this.addSectionWithPager()
         assert.doesThrow(
             () => pagerAssert.cardDoesNotRenderPager(this.vc),
@@ -117,7 +124,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canFindPageInFooter() {
+    protected async canFindPageInFooter() {
         this.vc.setFooter({
             pager: this.pagerVc.render(),
         })
@@ -126,7 +133,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsIfNotInFooter() {
+    protected throwsIfNotInFooter() {
         this.vc.setFooter({
             buttons: [],
         })
@@ -135,7 +142,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertCurrentPageThrowsIfMissingRequired() {
+    protected async assertCurrentPageThrowsIfMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.currentPage())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -144,7 +151,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfCurrentPageDoesNotMatch() {
+    protected async throwsIfCurrentPageDoesNotMatch() {
         this.setTotalPages(20)
         this.assertCurrentPageThrows(11)
         this.setCurrentPage(11)
@@ -152,7 +159,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async matchesOnCurrentPage() {
+    protected async matchesOnCurrentPage() {
         this.setTotalPages(20)
         this.setCurrentPage(5)
         this.assertCurrentPage(5)
@@ -163,7 +170,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertRouterNotConfiguredThrowsIfMissingRequired() {
+    protected async assertRouterNotConfiguredThrowsIfMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.pagerIsCleared())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -172,7 +179,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertRouterIsNotConfigured() {
+    protected async canAssertRouterIsNotConfigured() {
         this.setupPager({
             totalPages: 10,
         })
@@ -194,13 +201,13 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertRouterIsNotConfiguredOnCard() {
+    protected async canAssertRouterIsNotConfiguredOnCard() {
         this.setupPager({})
         this.assertPagerPagingIsNotConfigured()
     }
 
     @test()
-    protected static async isConfiguredThrowsIfMissingRequired() {
+    protected async isConfiguredThrowsIfMissingRequired() {
         //@ts-ignore
         const err = assert.doesThrow(() => pagerAssert.pagerIsConfigured())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -209,7 +216,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfTotalPagesNotConfigured() {
+    protected async throwsIfTotalPagesNotConfigured() {
         this.assertPagingConfiguredThrows()
         this.setupPager({
             currentPage: 0,
@@ -218,7 +225,7 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async passesIfConfigured() {
+    protected async passesIfConfigured() {
         this.setupPager({
             currentPage: 0,
             totalPages: 10,
@@ -227,54 +234,54 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
         this.assertPagingConfigured()
     }
 
-    private static assertPagingConfiguredThrows() {
+    private assertPagingConfiguredThrows() {
         assert.doesThrow(() => this.assertPagingConfigured(), 'configured')
     }
 
-    private static assertPagingConfigured(): any {
+    private assertPagingConfigured(): any {
         return pagerAssert.pagerIsConfigured(this.pagerVc)
     }
 
-    private static assertPagerOptionsNotSetThrows() {
+    private assertPagerOptionsNotSetThrows() {
         assert.doesThrow(() => this.assertPagerPagingIsNotConfigured(), 'clear')
     }
 
-    private static assertPagerPagingIsNotConfigured(): any {
+    private assertPagerPagingIsNotConfigured(): any {
         return pagerAssert.pagerIsCleared(this.pagerVc)
     }
 
-    private static assertCurrentPageThrows(expected: number) {
+    private assertCurrentPageThrows(expected: number) {
         assert.doesThrow(
             () => this.assertCurrentPage(expected),
             'setCurrentPage'
         )
     }
 
-    private static setCurrentPage(current: number) {
+    private setCurrentPage(current: number) {
         this.pagerVc.setCurrentPage(current)
     }
 
-    private static setTotalPages(pages: number) {
+    private setTotalPages(pages: number) {
         this.pagerVc.setTotalPages(pages)
     }
 
-    private static assertCurrentPage(expected: number): any {
+    private assertCurrentPage(expected: number): any {
         return pagerAssert.currentPage(this.pagerVc, expected)
     }
 
-    private static assertTotalPagesThrows(expected: number) {
+    private assertTotalPagesThrows(expected: number) {
         assert.doesThrow(() => this.assertTotalPages(expected), 'pages')
     }
 
-    private static assertTotalPages(expected: number): any {
+    private assertTotalPages(expected: number): any {
         return pagerAssert.totalPages(this.pagerVc, expected)
     }
 
-    private static setupPager(options?: PagerViewControllerOptions) {
+    private setupPager(options?: PagerViewControllerOptions) {
         this.pagerVc = this.Controller('pager', { ...options })
     }
 
-    private static asserthThrowsBecausePagerNotFound(id?: string) {
+    private asserthThrowsBecausePagerNotFound(id?: string) {
         assert.doesThrow(
             () => this.assertCardRendersPager(id),
             id ? 'id' : 'pager'
@@ -283,17 +290,17 @@ export default class AssertingPagersTest extends AbstractViewControllerTest {
         pagerAssert.cardDoesNotRenderPager(this.vc, id)
     }
 
-    private static addSection(section: CardSection) {
+    private addSection(section: CardSection) {
         this.vc.addSection(section)
     }
 
-    private static addSectionWithPager() {
+    private addSectionWithPager() {
         this.addSection({
             pager: this.pagerVc.render(),
         })
     }
 
-    private static assertCardRendersPager(id?: string) {
+    private assertCardRendersPager(id?: string) {
         return pagerAssert.cardRendersPager(this.vc, id)
     }
 }

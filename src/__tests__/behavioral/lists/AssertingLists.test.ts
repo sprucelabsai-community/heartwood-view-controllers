@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import listAssert from '../../../tests/utilities/listAssert'
@@ -18,7 +18,7 @@ import { TestFormSchema, testFormSchema } from '../forms/testFormOptions'
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class ListCard extends AbstractViewController<Card> {
-    public cardVc: CardViewController
+    public cardVc!: CardViewController
     public constructor(options: ViewControllerOptions & { listIds: string[] }) {
         super(options)
 
@@ -87,14 +87,15 @@ class ListCard extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingListsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         listVc: ListCard,
     }
-    private static vc: ListViewController
-    private static listId: string
+    private vc!: ListViewController
+    private listId!: string
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.listId = generateId()
         this.vc = this.Controller('list', {
@@ -103,7 +104,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsIfCantFindListWithId() {
+    protected throwsIfCantFindListWithId() {
         assert.doesThrow(() =>
             vcAssert.assertCardRendersList(this.Vc(['waka']), 'not-found')
         )
@@ -112,7 +113,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static findsOneById() {
+    protected findsOneById() {
         vcAssert.assertCardRendersList(this.Vc(['not-found']), 'not-found')
         assert.doesThrow(() =>
             vcAssert.assertCardDoesNotRenderList(
@@ -123,7 +124,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static findsByIdIfNotFirstSection() {
+    protected findsByIdIfNotFirstSection() {
         vcAssert.assertCardRendersList(
             this.Vc(['yes', 'no', 'not-found-2']),
             'not-found-2'
@@ -131,7 +132,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canTellIfRowIsEnabled() {
+    protected canTellIfRowIsEnabled() {
         this.addRow({
             id: 'first',
             isEnabled: false,
@@ -151,7 +152,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingEnabledTriggersRender() {
+    protected settingEnabledTriggersRender() {
         this.addRow({
             id: 'first',
         })
@@ -164,7 +165,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAssertRowStyle() {
+    protected canAssertRowStyle() {
         this.addRow({
             id: 'style',
             style: 'critical',
@@ -182,7 +183,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static assertsHasInput() {
+    protected assertsHasInput() {
         this.assertAssertingInputThrows('it does not exist')
         this.addRow({
             cells: [],
@@ -208,7 +209,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertInputIsNotInteractive() {
+    protected async canAssertInputIsNotInteractive() {
         const id = generateId()
         const inputName = generateId()
 
@@ -231,7 +232,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertInputIsInteractive() {
+    protected async canAssertInputIsInteractive() {
         const id = generateId()
         const inputName = generateId()
 
@@ -257,7 +258,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCheckInteractiveOnCellThatIsNotTheFirst() {
+    protected async canCheckInteractiveOnCellThatIsNotTheFirst() {
         const id = generateId()
         const inputName = generateId()
         const input2Name = generateId()
@@ -284,7 +285,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCheckOtherInputTypesForInteractive() {
+    protected async canCheckOtherInputTypesForInteractive() {
         const id = generateId()
         const inputName = generateId()
         const inputName2 = generateId()
@@ -317,7 +318,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfButtonIsEnabledOrDisabled() {
+    protected knowsIfButtonIsEnabledOrDisabled() {
         const enabledId = generateId()
         const disabledId = generateId()
         const secondDisabledId = generateId()
@@ -389,7 +390,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async buttonInRowIsDisabledThrowsWithBadRowsAndButtonIds() {
+    protected async buttonInRowIsDisabledThrowsWithBadRowsAndButtonIds() {
         const rowId = generateId()
         const buttonId = generateId()
 
@@ -415,7 +416,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertButtonWithIdWithoutPassingId() {
+    protected async canAssertButtonWithIdWithoutPassingId() {
         this.addRow({
             id: 'test',
             cells: [
@@ -434,7 +435,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     @test('can find list in section[0] formSection[0]', 0, 0)
     @test('can find list in section[0] formSection[1]', 0, 1)
     @test('can find list in section[1] formSection[0]', 1, 0)
-    protected static canAssertIfListRenderedInFormSection(
+    protected canAssertIfListRenderedInFormSection(
         sectionIdx: number,
         formSectionIdx: number
     ) {
@@ -451,7 +452,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertCardRendersListThrowsIfListInFormDoesNotMatchId() {
+    protected async assertCardRendersListThrowsIfListInFormDoesNotMatchId() {
         const vc = this.Vc([])
         vc.dropInFormWithList({
             sectionIdx: 0,
@@ -464,7 +465,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canMatchListInFormWithId() {
+    protected async canMatchListInFormWithId() {
         const vc = this.Vc([])
         vc.dropInFormWithList({
             sectionIdx: 0,
@@ -480,7 +481,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
     @test('can match list in second section of form', 'form')
     @test('can match list in second section of big form', 'bigForm')
-    protected static async canMatchListInSecondSectionOfSecondForm(
+    protected async canMatchListInSecondSectionOfSecondForm(
         type: 'form' | 'bigForm'
     ) {
         const vc = this.Vc([])
@@ -500,7 +501,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canFindListInTheSecondForm() {
+    protected async canFindListInTheSecondForm() {
         const vc = this.Vc([])
 
         vc.dropInFormWithList({
@@ -528,7 +529,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfNoControllerOnListInCard() {
+    protected async throwsIfNoControllerOnListInCard() {
         const cardVc = this.Controller('card', {
             body: {
                 sections: [
@@ -545,7 +546,7 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         assert.doesThrow(() => listAssert.cardRendersList(cardVc, this.listId))
     }
 
-    private static assertAssertingInputThrows(msg: string) {
+    private assertAssertingInputThrows(msg: string) {
         assert.doesThrow(
             () => listAssert.rowRendersInput(this.vc, 0, 'name'),
             msg
@@ -553,33 +554,33 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         listAssert.rowDoesNotRenderInput(this.vc, 0, 'name')
     }
 
-    private static assertRowStyle(row: number | string, style: RowStyle) {
+    private assertRowStyle(row: number | string, style: RowStyle) {
         listAssert.rowIsStyle(this.vc, row, style)
     }
 
-    private static getRow(row: number | string) {
+    private getRow(row: number | string) {
         return this.vc.getRowVc(row)
     }
 
-    private static enableRow(row: number | string) {
+    private enableRow(row: number | string) {
         this.vc.getRowVc(row).setIsEnabled(true)
     }
 
-    private static assertRowIsEnabled(row: string | number) {
+    private assertRowIsEnabled(row: string | number) {
         vcAssert.assertRowIsEnabled(this.vc, row)
         assert.doesThrow(() => vcAssert.assertRowIsDisabled(this.vc, 'first'))
     }
 
-    private static assertRowIsDisabled(row: string | number) {
+    private assertRowIsDisabled(row: string | number) {
         assert.doesThrow(() => vcAssert.assertRowIsEnabled(this.vc, row))
         vcAssert.assertRowIsDisabled(this.vc, row)
     }
 
-    private static addRow(view: Partial<ListRow>) {
+    private addRow(view: Partial<ListRow>) {
         this.vc.addRow({ cells: [], id: generateId(), ...view })
     }
 
-    protected static Vc(listIds: string[]): ListCard {
+    protected Vc(listIds: string[]): ListCard {
         //@ts-ignore
         return this.Controller('listVc', { listIds })
     }

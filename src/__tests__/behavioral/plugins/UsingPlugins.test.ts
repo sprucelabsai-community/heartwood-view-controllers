@@ -1,5 +1,5 @@
 import { buildLog } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
     ViewControllerPlugin,
     ViewControllerPluginOptions,
@@ -13,16 +13,17 @@ import AbstractPluginTest, {
 
 export class SpyPlugin2 implements ViewControllerPlugin {}
 
+@suite()
 export default class UsingPluginsTest extends AbstractPluginTest {
     @test()
-    protected static async canAddPluginToFactory() {
+    protected async canAddPluginToFactory() {
         this.addPlugin('test', {
             hello: 'world',
         })
     }
 
     @test()
-    protected static async pluginIsAvailableInTheViewController() {
+    protected async pluginIsAvailableInTheViewController() {
         this.addPluginAndAssertSetOnNewVc('test', {
             what: 'the!?',
         })
@@ -34,7 +35,7 @@ export default class UsingPluginsTest extends AbstractPluginTest {
     }
 
     @test()
-    protected static pluginGetsExpectedConstructorOptions() {
+    protected pluginGetsExpectedConstructorOptions() {
         //@ts-ignore
         this.views.log = buildLog('test')
 
@@ -89,7 +90,7 @@ export default class UsingPluginsTest extends AbstractPluginTest {
         'there',
         SpyPlugin
     )
-    protected static async canPassPluginsToFactoryConstructor(
+    protected async canPassPluginsToFactoryConstructor(
         pluginsByName: ViewControllerPluginsByName,
         key: string,
         Expected: any
@@ -104,7 +105,7 @@ export default class UsingPluginsTest extends AbstractPluginTest {
         assert.isInstanceOf(views.getPlugins()[key], Expected)
     }
 
-    private static addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
+    private addPluginAndAssertSetOnNewVc(name: string, plugin: any) {
         this.addPlugin(name, plugin)
         //@ts-ignore
         this.expectedPlugins[name] = plugin
@@ -113,7 +114,7 @@ export default class UsingPluginsTest extends AbstractPluginTest {
         assert.isEqualDeep(vc.getPlugins(), this.expectedPlugins)
     }
 
-    private static addPlugin(name: string, plugin: any) {
+    private addPlugin(name: string, plugin: any) {
         this.views.addPlugin(name, plugin)
     }
 }

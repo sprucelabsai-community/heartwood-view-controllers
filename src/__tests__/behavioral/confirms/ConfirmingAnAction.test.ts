@@ -1,31 +1,32 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ConfirmTestSkillViewController from '../../support/ConfirmTest.svc'
 
+@suite()
 export default class ConfirmingAnActionTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         confirmTest: ConfirmTestSkillViewController,
     }
-    private static svc: ConfirmTestSkillViewController
+    private svc!: ConfirmTestSkillViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.svc = this.Svc()
     }
 
     @test()
-    protected static renders() {
+    protected renders() {
         const model = this.svc.render()
         assert.isArray(model.layouts)
     }
 
     @test()
-    protected static canInvokeConfirmWithoutCrashing() {
+    protected canInvokeConfirmWithoutCrashing() {
         void this.svc.confirmShouldSave()
     }
 
     @test()
-    protected static dropInConfirmBody() {
+    protected dropInConfirmBody() {
         const section1 = {
             text: {
                 content: 'hey',
@@ -58,7 +59,7 @@ export default class ConfirmingAnActionTest extends AbstractViewControllerTest {
         assert.doesInclude(model.body?.sections?.[2], section2)
     }
 
-    private static Svc() {
+    private Svc() {
         return this.Factory().Controller('confirmTest', {})
     }
 }

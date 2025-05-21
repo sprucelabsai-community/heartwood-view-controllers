@@ -1,35 +1,36 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import MockAudioController from '../../../tests/MockAudioController'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
+@suite()
 export default class AssertingAudioTest extends AbstractDeviceTest {
-    private static audio: MockAudioController
-    protected static async beforeEach(): Promise<void> {
+    private audio!: MockAudioController
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         MockAudioController.beforeEach()
         this.audio = new MockAudioController()
     }
 
     @test()
-    protected static async knowsIfPlaying() {
+    protected async knowsIfPlaying() {
         this.play()
         assert.doesThrow(() => this.assertAudioNotPlaying())
         this.assertIsPlaying()
     }
 
     @test()
-    protected static async knowsIfNotPlaying() {
+    protected async knowsIfNotPlaying() {
         assert.doesThrow(() => this.assertIsPlaying())
         this.assertAudioNotPlaying()
     }
 
     @test()
-    protected static async pausingBeforePlayingThrows() {
+    protected async pausingBeforePlayingThrows() {
         assert.doesThrow(() => this.pause())
     }
 
     @test()
-    protected static async knowsIfPaused() {
+    protected async knowsIfPaused() {
         assert.doesThrow(() => this.assertIsPaused())
         this.play()
         assert.doesThrow(() => this.assertIsPaused())
@@ -38,18 +39,18 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async stopThrowsIfNotPayling() {
+    protected async stopThrowsIfNotPayling() {
         assert.doesThrow(() => this.stop())
     }
 
     @test()
-    protected static async canStopIfPlaying() {
+    protected async canStopIfPlaying() {
         this.play()
         this.stop()
     }
 
     @test()
-    protected static async knowsIfStopped() {
+    protected async knowsIfStopped() {
         assert.doesThrow(() => this.assertIsStopped())
         this.play()
         this.stop()
@@ -57,7 +58,7 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async tracksVolumeLevels() {
+    protected async tracksVolumeLevels() {
         this.setVolume(0.5)
         this.assertVolumeEquals(0.5)
         assert.doesThrow(() => this.assertVolumeEquals(0.1))
@@ -69,14 +70,14 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
 
     @test('can get volume 0.4', 0.4)
     @test('can get volume 0.5', 0.5)
-    protected static async getsVolumeFromTheatreSettings(expected: number) {
+    protected async getsVolumeFromTheatreSettings(expected: number) {
         this.setVolume(expected)
         const actual = await this.audio.getVolume()
         assert.isEqual(actual, expected)
     }
 
     @test()
-    protected static async knowsSourceUrl() {
+    protected async knowsSourceUrl() {
         const url = generateId()
         this.audio.setSourceUrl(url)
         this.assertSourceUrlSetTo(url)
@@ -84,48 +85,48 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
     }
 
     @test()
-    protected static async tracksLastAudioController() {
+    protected async tracksLastAudioController() {
         //@ts-ignore
         assert.isEqual(this.audio, MockAudioController.lastController)
     }
 
-    private static assertSourceUrlSetTo(url: string) {
+    private assertSourceUrlSetTo(url: string) {
         this.audio.assertSourceUrlSetTo(url)
     }
 
-    private static assertIsStopped() {
+    private assertIsStopped() {
         this.audio.assertIsStopped()
     }
 
-    private static stop() {
+    private stop() {
         this.audio.stop()
     }
 
-    private static assertIsPaused() {
+    private assertIsPaused() {
         this.audio.assertIsPaused()
     }
 
-    private static pause() {
+    private pause() {
         return this.audio.pause()
     }
 
-    private static play() {
+    private play() {
         this.audio.play()
     }
 
-    private static assertIsPlaying() {
+    private assertIsPlaying() {
         return this.audio.assertIsPlaying()
     }
 
-    private static assertAudioNotPlaying() {
+    private assertAudioNotPlaying() {
         this.audio.assertIsNotPlaying()
     }
 
-    private static assertVolumeEquals(expected: number) {
+    private assertVolumeEquals(expected: number) {
         this.audio.assertVolumeSetTo(expected)
     }
 
-    private static setVolume(volume: number) {
+    private setVolume(volume: number) {
         this.audio.setVolume(volume)
     }
 }

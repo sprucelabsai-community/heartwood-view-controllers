@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
@@ -12,7 +12,7 @@ import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOp
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class MockCardViewController implements ViewController<Card> {
-    private model: Card
+    private model!: Card
 
     public constructor(options: ViewControllerOptions & Card) {
         this.model = removeUniversalViewOptions(options)
@@ -28,19 +28,20 @@ class MockCardViewController implements ViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingStatsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         mockCard: MockCardViewController,
     }
 
     @test()
-    protected static throwsIfNotRenderingStats() {
+    protected throwsIfNotRenderingStats() {
         const vc = this.Card()
         assert.doesThrow(() => vcAssert.assertCardRendersStats(vc))
     }
 
     @test()
-    protected static knowsIfStatsAreInFirstSection() {
+    protected knowsIfStatsAreInFirstSection() {
         const vc = this.Card({
             body: {
                 sections: [
@@ -62,7 +63,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfStatsInAnotherSection() {
+    protected knowsIfStatsInAnotherSection() {
         const vc = this.Card({
             body: {
                 sections: [
@@ -86,7 +87,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static returnsController() {
+    protected returnsController() {
         const statsVc = this.Controller('stats', {
             stats: [
                 {
@@ -108,7 +109,7 @@ export default class AssertingStatsTest extends AbstractViewControllerTest {
         assert.isEqual(matchVc, statsVc)
     }
 
-    private static Card(options: Card = {}) {
+    private Card(options: Card = {}) {
         //@ts-ignore
         return this.Controller('mockCard', options) as MockCardViewController
     }

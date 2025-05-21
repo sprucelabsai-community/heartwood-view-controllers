@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -45,19 +45,20 @@ class SuccessAlertSkillViewController extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingAlertsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'success.root': SuccessAlertSkillViewController,
     }
-    private static vc: SuccessAlertSkillViewController
+    private vc!: SuccessAlertSkillViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc()
     }
 
     @test()
-    protected static async throwsWhenNothingRendered() {
+    protected async throwsWhenNothingRendered() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertRendersSuccessAlert(this.vc, () =>
                 this.vc.doNothing()
@@ -66,7 +67,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesNotThrowWhenSuccessRendered() {
+    protected async doesNotThrowWhenSuccessRendered() {
         await vcAssert.assertRendersSuccessAlert(this.vc, () =>
             this.vc.renderSuccess()
         )
@@ -77,7 +78,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenAnyOtherAlertStyleRendered() {
+    protected async throwsWhenAnyOtherAlertStyleRendered() {
         const style = 'info'
 
         await assert.doesThrowAsync(() =>
@@ -88,7 +89,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hidingSuccessDialogLetsHandlerComplete() {
+    protected async hidingSuccessDialogLetsHandlerComplete() {
         const vc = await vcAssert.assertRendersSuccessAlert(this.vc, () =>
             this.vc.operationAfterSuccess()
         )
@@ -99,7 +100,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hidingAlertLetsHandlerComplete() {
+    protected async hidingAlertLetsHandlerComplete() {
         const vc = await vcAssert.assertRendersAlert(this.vc, () =>
             this.vc.operationAfterAlert()
         )
@@ -110,7 +111,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenRenderingInfoWhenNotExpectingTo() {
+    protected async throwsWhenRenderingInfoWhenNotExpectingTo() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertDoesNotRenderAlert(
                 this.vc,
@@ -121,7 +122,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfAssertsAlertTwice() {
+    protected async throwsIfAssertsAlertTwice() {
         await vcAssert.assertRendersAlert(this.vc, () =>
             this.vc.operationAfterAlert()
         )
@@ -134,7 +135,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hidingAlertThrowsIfCodeAfterHidingThrows() {
+    protected async hidingAlertThrowsIfCodeAfterHidingThrows() {
         const alertVc = await vcAssert.assertRendersAlert(this.vc, () =>
             this.vc.alertThenThrow()
         )
@@ -142,7 +143,7 @@ export default class AssertingAlertsTest extends AbstractViewControllerTest {
         await assert.doesThrowAsync(() => alertVc.hide())
     }
 
-    private static Vc() {
+    private Vc() {
         return this.Controller(
             'success.root' as any,
             {}

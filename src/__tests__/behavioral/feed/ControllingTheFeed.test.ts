@@ -1,15 +1,22 @@
 import { FeedItem } from '@sprucelabs/spruce-core-schemas'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import feedAssert from '../../../tests/utilities/feedAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardSection } from '../../../types/heartwood.types'
 import FeedViewController from '../../../viewControllers/Feed.vc'
 
+@suite()
 export default class ControllingTheFeedTest extends AbstractViewControllerTest {
-    private static vc: FeedViewController
+    private vc!: FeedViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Controller('feed', {
@@ -18,7 +25,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAddItems() {
+    protected async canAddItems() {
         const item = this.addItem()
         this.assertItemsEqual([item])
         const item2 = this.addItem()
@@ -26,18 +33,18 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async addingItemTriggersRender() {
+    protected async addingItemTriggersRender() {
         this.addItem()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async throwsWhenRemovingItemThatDoesNotExist() {
+    protected async throwsWhenRemovingItemThatDoesNotExist() {
         this.assertThrowsWhenRemovingBadItemId()
     }
 
     @test()
-    protected static async canRemoveItems() {
+    protected async canRemoveItems() {
         const item = this.addItem()
         this.removeItem(item.id)
         this.assertItemsEqual([])
@@ -50,7 +57,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRemoveItemsInTheMiddle() {
+    protected async canRemoveItemsInTheMiddle() {
         const item1 = this.addItem()
         const item2 = this.addItem()
         const item3 = this.addItem()
@@ -62,14 +69,14 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static removingItemTriggersRender() {
+    protected removingItemTriggersRender() {
         const i = this.addItem()
         this.removeItem(i.id)
         vcAssert.assertTriggerRenderCount(this.vc, 2)
     }
 
     @test()
-    protected static async canSetItems() {
+    protected async canSetItems() {
         const [one, two, three] = [
             this.generateItemValues(),
             this.generateItemValues(),
@@ -83,13 +90,13 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingItemsTriggersRender() {
+    protected async settingItemsTriggersRender() {
         this.setItems([])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async assertingCardRendersFeedThrowsWithMissing() {
+    protected async assertingCardRendersFeedThrowsWithMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => feedAssert.cardRendersFeed())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -98,12 +105,12 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsIfDoesNotRenderCard() {
+    protected throwsIfDoesNotRenderCard() {
         this.assertDoesNotRenderFeed([])
     }
 
     @test()
-    protected static knowsIfFeedIsRenderedInFirstSection() {
+    protected knowsIfFeedIsRenderedInFirstSection() {
         this.assertCardRendersFeed([
             {
                 feed: this.vc.render(),
@@ -112,7 +119,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static knowsIfFeedIsRenderedInSecondSection() {
+    protected knowsIfFeedIsRenderedInSecondSection() {
         this.assertCardRendersFeed([
             {},
             {
@@ -122,7 +129,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cardRenderingFeedReturnsFeedVc() {
+    protected async cardRenderingFeedReturnsFeedVc() {
         const feedVc = this.assertCardRendersFeed([
             {
                 feed: this.vc.render(),
@@ -133,7 +140,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async feedWithoutControllerThrows() {
+    protected async feedWithoutControllerThrows() {
         this.assertDoesNotRenderFeed([
             {
                 feed: {
@@ -144,7 +151,7 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetItems() {
+    protected async canGetItems() {
         const item = this.addItem()
         assert.isEqualDeep(this.vc.getItems(), [item])
 
@@ -153,26 +160,26 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cantAddTheSameItemTwice() {
+    protected async cantAddTheSameItemTwice() {
         const item = this.generateItemValues()
         this.vc.addItem(item)
         this.vc.addItem(item)
         this.assertItemsEqual([item])
     }
 
-    private static assertDoesNotRenderFeed(sections: CardSection[]) {
+    private assertDoesNotRenderFeed(sections: CardSection[]) {
         assert.doesThrow(
             () => feedAssert.cardRendersFeed(this.CardVc(sections)),
             `does not render a feed`
         )
     }
 
-    private static assertCardRendersFeed(sections: CardSection[]) {
+    private assertCardRendersFeed(sections: CardSection[]) {
         const vc = this.CardVc(sections)
         return feedAssert.cardRendersFeed(vc)
     }
 
-    private static CardVc(sections: CardSection[]) {
+    private CardVc(sections: CardSection[]) {
         return this.Controller('card', {
             body: {
                 sections,
@@ -180,33 +187,33 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
         })
     }
 
-    private static setItems(items: FeedItem[]) {
+    private setItems(items: FeedItem[]) {
         this.vc.setItems(items)
     }
 
-    private static assertThrowsWhenRemovingBadItemId() {
+    private assertThrowsWhenRemovingBadItemId() {
         const err = assert.doesThrow(() => this.removeItem(generateId()))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['itemId'],
         })
     }
 
-    private static removeItem(id: string): any {
+    private removeItem(id: string): any {
         return this.vc.removeItem(id)
     }
 
-    private static assertItemsEqual(expected: FeedItem[]) {
+    private assertItemsEqual(expected: FeedItem[]) {
         const { items } = this.render(this.vc)
         assert.isEqualDeep(items, expected)
     }
 
-    private static addItem() {
+    private addItem() {
         const item = this.generateItemValues()
         this.vc.addItem(item)
         return item
     }
 
-    private static generateItemValues(): FeedItem {
+    private generateItemValues(): FeedItem {
         return {
             id: generateId(),
             message: generateId(),

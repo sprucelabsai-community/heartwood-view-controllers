@@ -1,4 +1,4 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import progressNavigatorAssert from '../../../tests/utilities/progressNavigatorAssert'
 import AbstractProgressNavigatorTest from './AbstractProgressNavigatorTest'
 import {
@@ -7,8 +7,9 @@ import {
     WithProgressWithoutControllerSkillView,
 } from './supportingSkillViews'
 
+@suite()
 export default class AssertingProgressNavigatorTest extends AbstractProgressNavigatorTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'no-progress': NoProgressSkillView,
         'with-progress': WithProgressSkillView,
         'with-progress-without-controller':
@@ -16,7 +17,7 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     }
 
     @test()
-    protected static async throwsIfSkillViewIsNotRenderingNavigator() {
+    protected async throwsIfSkillViewIsNotRenderingNavigator() {
         this.assertDoesNotRenderProgressNavigator('no-progress')
         this.assertDoesNotRenderProgressNavigator(
             'with-progress-without-controller'
@@ -24,19 +25,19 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     }
 
     @test()
-    protected static async passesIfFindsNavigator() {
+    protected async passesIfFindsNavigator() {
         this.assertRendersProgressNavigator('with-progress')
     }
 
     @test()
-    protected static async returnsProgressNavigatorController() {
+    protected async returnsProgressNavigatorController() {
         const vc = this.Controller('with-progress' as any, {})
         const navigator = this.assertSkillViewRendersProgressNavigator(vc)
         assert.isEqual(navigator, vc.progressNavigator)
     }
 
     @test()
-    protected static async throwsWhenStepNotComplete() {
+    protected async throwsWhenStepNotComplete() {
         const step1 = this.generatRandomStep()
         const step2 = this.generatRandomStep()
         const step3 = this.generatRandomStep()
@@ -49,7 +50,7 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     }
 
     @test()
-    protected static async passesWhenStepComplete() {
+    protected async passesWhenStepComplete() {
         const { step1, step2 } = this.NavigatorWith2Steps()
 
         this.completeStep(step1.id)
@@ -59,14 +60,14 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     }
 
     @test()
-    protected static async throwsWhenCurrentStepNotMatched() {
+    protected async throwsWhenCurrentStepNotMatched() {
         const { step2 } = this.NavigatorWith2Steps()
         this.assertAssertingCurrentStepThrows(generateId())
         this.assertAssertingCurrentStepThrows(step2.id)
     }
 
     @test()
-    protected static async passesWhenCurrentStepMatched() {
+    protected async passesWhenCurrentStepMatched() {
         const { step1, step2 } = this.NavigatorWith2Steps()
         this.assertCurrentStep(step1.id)
         this.setCurrentStep(step2.id)
@@ -74,14 +75,14 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     }
 
     @test()
-    protected static async throwsWhenNotRenderingStep() {
+    protected async throwsWhenNotRenderingStep() {
         this.NavigatorWith2Steps()
         assert.doesThrow(() => this.assertRendersStep(generateId()))
         this.assertingRenderStepsThrows([generateId()])
     }
 
     @test()
-    public static async passesWhenRenderingStep() {
+    public async passesWhenRenderingStep() {
         const { step1, step2 } = this.NavigatorWith2Steps()
 
         this.assertRendersStep(step1.id)
@@ -90,31 +91,31 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
         this.assertingRenderStepsThrows([step1.id, generateId()])
     }
 
-    private static assertingRenderStepsThrows(buttons: string[]) {
+    private assertingRenderStepsThrows(buttons: string[]) {
         assert.doesThrow(() => this.assertRendersSteps(buttons))
     }
 
-    protected static assertRendersStep(button: string) {
+    protected assertRendersStep(button: string) {
         return progressNavigatorAssert.rendersStep(this.vc, button)
     }
-    protected static assertRendersSteps(buttons: string[]) {
+    protected assertRendersSteps(buttons: string[]) {
         return progressNavigatorAssert.rendersSteps(this.vc, buttons)
     }
 
-    private static assertStepCompleteThrows(stepId: string) {
+    private assertStepCompleteThrows(stepId: string) {
         assert.doesThrow(() => this.assertStepIsComplete(stepId))
         progressNavigatorAssert.stepIsNotComplete(this.vc, stepId)
     }
 
-    private static assertAssertingCurrentStepThrows(id: string) {
+    private assertAssertingCurrentStepThrows(id: string) {
         assert.doesThrow(() => this.assertCurrentStep(id))
     }
 
-    private static assertCurrentStep(id: string): any {
+    private assertCurrentStep(id: string): any {
         progressNavigatorAssert.currentStep(this.vc, id)
     }
 
-    private static NavigatorWith2Steps() {
+    private NavigatorWith2Steps() {
         const step1 = this.generatRandomStep()
         const step2 = this.generatRandomStep()
 
@@ -124,23 +125,23 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
         return { step1, step2 }
     }
 
-    private static assertStepIsComplete(stepId: string) {
+    private assertStepIsComplete(stepId: string) {
         progressNavigatorAssert.stepIsComplete(this.vc, stepId)
         assert.doesThrow(() =>
             progressNavigatorAssert.stepIsNotComplete(this.vc, stepId)
         )
     }
 
-    private static assertDoesNotRenderProgressNavigator(id: string) {
+    private assertDoesNotRenderProgressNavigator(id: string) {
         const vc = this.Controller(id as any, {})
         assert.doesThrow(() => this.assertSkillViewRendersProgressNavigator(vc))
     }
 
-    private static assertSkillViewRendersProgressNavigator(vc: any): any {
+    private assertSkillViewRendersProgressNavigator(vc: any): any {
         return progressNavigatorAssert.skillViewRendersNavigator(vc)
     }
 
-    private static assertRendersProgressNavigator(id: string) {
+    private assertRendersProgressNavigator(id: string) {
         const vc = this.Controller(id as any, {})
         this.assertSkillViewRendersProgressNavigator(vc)
     }

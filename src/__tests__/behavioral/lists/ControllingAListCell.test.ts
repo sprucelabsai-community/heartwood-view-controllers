@@ -1,5 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import listCellSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -7,12 +7,13 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListCell, ListRow } from '../../../types/heartwood.types'
 import ListCellViewController from '../../../viewControllers/list/ListCell.vc'
 
+@suite()
 export default class ControllingARowCellTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
+    protected controllerMap = {}
 
     @test('cant get cell -1', -1)
     @test('cant get cell 1000', 100)
-    protected static cantGetACellVcFromBadIndex(cellIdx: number) {
+    protected cantGetACellVcFromBadIndex(cellIdx: number) {
         const err = assert.doesThrow(() => this.CellVc(cellIdx))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['cellIdx'],
@@ -20,19 +21,19 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static canGetGoodCell() {
+    protected canGetGoodCell() {
         const cellVc = this.CellVc(0)
         assert.isTrue(cellVc instanceof ListCellViewController)
     }
 
     @test()
-    protected static cellHasRender() {
+    protected cellHasRender() {
         const cellVc = this.CellVc(0)
         assert.isFunction(cellVc.render)
     }
 
     @test()
-    protected static rendersValidCell() {
+    protected rendersValidCell() {
         const cellVc = this.CellVc(0)
         const model = this.render(cellVc)
         validateSchemaValues(listCellSchema, model)
@@ -42,14 +43,14 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
     @test('renders expected 2', { text: { content: 'hey you!' } })
     @test('renders expected 3', { button: { label: 'hey you!' } })
     @test('renders expected 4', { [`${Math.random()}`]: { label: 'hey you!' } })
-    protected static rendersExpectedContent(cellModel: ListCell) {
+    protected rendersExpectedContent(cellModel: ListCell) {
         const cellVc = this.CellVc(0, cellModel)
         const model = this.render(cellVc)
         assert.isEqualDeep(model, { ...cellModel, controller: cellVc })
     }
 
     @test()
-    protected static listRendersCells() {
+    protected listRendersCells() {
         const listVc = this.ListVcWithSingleRow()
         const model = this.render(listVc)
         assert.isTrue(
@@ -58,7 +59,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static cellVcsReUsed() {
+    protected cellVcsReUsed() {
         const vc = this.ListVc([
             {
                 id: 'first',
@@ -163,7 +164,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
         },
         100
     )
-    protected static async settingValueOnInputSetsValueOnListAndTriggersRender(
+    protected async settingValueOnInputSetsValueOnListAndTriggersRender(
         cellModel: ListCell,
         value: any
     ) {
@@ -191,7 +192,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static knowsWhenDeleted() {
+    protected knowsWhenDeleted() {
         const listVc = this.ListVc([
             {
                 id: 'first',
@@ -211,7 +212,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
 
     @test('knows if date input by name exists', 'dateInput')
     @test('knows if text input by name exists', 'textInput')
-    protected static async knowsIfHasInput(input: 'dateInput' | 'textInput') {
+    protected async knowsIfHasInput(input: 'dateInput' | 'textInput') {
         const name = generateId()
         const name2 = generateId()
 
@@ -226,7 +227,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async knowsIfHasInputWithMultipleInputs() {
+    protected async knowsIfHasInputWithMultipleInputs() {
         const name = generateId()
         const name2 = generateId()
         const name3 = generateId()
@@ -248,7 +249,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
         assert.isTrue(cellVc.hasInput(name3))
     }
 
-    private static CellVc(idx: number, cellModel?: ListCell) {
+    private CellVc(idx: number, cellModel?: ListCell) {
         const listVc = this.ListVcWithSingleRow(cellModel)
 
         const rowVc = listVc.getRowVc(0)
@@ -257,7 +258,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
         return cell
     }
 
-    private static ListVcWithSingleRow(
+    private ListVcWithSingleRow(
         cellModel: ListCell = { text: { content: 'hey!' } }
     ) {
         const rows = [
@@ -269,7 +270,7 @@ export default class ControllingARowCellTest extends AbstractViewControllerTest 
         return this.ListVc(rows)
     }
 
-    private static ListVc(rows: ListRow[]) {
+    private ListVc(rows: ListRow[]) {
         return this.Controller('list', {
             rows,
         })

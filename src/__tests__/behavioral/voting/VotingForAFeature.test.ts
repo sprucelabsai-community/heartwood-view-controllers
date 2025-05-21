@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import {
     AbstractAppController,
     AbstractViewController,
@@ -20,24 +20,25 @@ class SpyAppController extends AbstractAppController {
     public static id = 'test-app-controller'
 }
 
+@suite()
 export default class VotingForAFeatureTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         vote: VotingForAFeature,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.getFactory().setAppController(SpyAppController)
     }
 
     @test()
-    protected static async askForVoteIsAFunctionOnViewController() {
+    protected async askForVoteIsAFunctionOnViewController() {
         const vc = this.VoteVc()
         assert.isFunction(vc.askForAVote)
     }
 
     @test()
-    protected static async askForVoteIsAFunctionOnAppController() {
+    protected async askForVoteIsAFunctionOnAppController() {
         const app = this.AppVc()
 
         //@ts-ignore
@@ -46,7 +47,7 @@ export default class VotingForAFeatureTest extends AbstractViewControllerTest {
 
     @test('invokes vote handler on view controller', 'VoteVc')
     @test('invokes vote handler on app controller', 'AppVc')
-    protected static async invokesVoteHandler(methodName: 'VoteVc' | 'AppVc') {
+    protected async invokesVoteHandler(methodName: 'VoteVc' | 'AppVc') {
         let wasHit = false
 
         const controller = this[methodName]({
@@ -61,14 +62,14 @@ export default class VotingForAFeatureTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAskForVoteWithoutHandler() {
+    protected async canAskForVoteWithoutHandler() {
         const vc = this.VoteVc()
         await vc.askForAVote()
     }
 
     @test('passes options to vote handler', 'VoteVc')
     @test('passes options to vote handler', 'AppVc')
-    protected static async passesOptions(methodName: 'VoteVc' | 'AppVc') {
+    protected async passesOptions(methodName: 'VoteVc' | 'AppVc') {
         const actual = {
             when: true,
             howCoolWouldItBeIf: generateId(),
@@ -89,7 +90,7 @@ export default class VotingForAFeatureTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canPassVoteHandlerThroughOnConstruction() {
+    protected canPassVoteHandlerThroughOnConstruction() {
         const voteHandler = async () => {}
         const vc = this.Controller('vote' as any, {
             voteHandler,
@@ -100,7 +101,7 @@ export default class VotingForAFeatureTest extends AbstractViewControllerTest {
 
     @test('vc waits for vote', 'VoteVc')
     @test('app waits for vote', 'AppVc')
-    protected static async waitsForVote(methodName: 'VoteVc' | 'AppVc') {
+    protected async waitsForVote(methodName: 'VoteVc' | 'AppVc') {
         let wasHit = false
         const vc = this[methodName]({
             voteHandler: async () => {
@@ -118,14 +119,14 @@ export default class VotingForAFeatureTest extends AbstractViewControllerTest {
         assert.isTrue(wasHit)
     }
 
-    private static AppVc(options?: Partial<ViewControllerOptions>) {
+    private AppVc(options?: Partial<ViewControllerOptions>) {
         return this.getFactory().App(
             'test-app-controller' as any,
             options
         ) as SpyAppController
     }
 
-    private static VoteVc(options?: Partial<ViewControllerOptions>) {
+    private VoteVc(options?: Partial<ViewControllerOptions>) {
         return this.Controller('vote' as any, { ...options })
     }
 }

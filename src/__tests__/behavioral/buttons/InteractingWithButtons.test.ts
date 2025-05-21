@@ -1,4 +1,4 @@
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, suite, test } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -7,10 +7,11 @@ import vcAssert from '../../../tests/utilities/vcAssert'
 import { SkillView, ViewControllerId } from '../../../types/heartwood.types'
 import { testFormSchema } from '../forms/testFormOptions'
 
+@suite()
 export default class InteractingWithButtonsTest extends AbstractViewControllerTest {
-    private static vc: ViewModelBasedSkillViewController
+    private vc!: ViewModelBasedSkillViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.getFactory().setController(
@@ -25,7 +26,7 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canReceiveButtonVcWithoutErroring() {
+    protected async canReceiveButtonVcWithoutErroring() {
         let wasHit = false
         const vc = this.Controller('card', {
             body: {
@@ -51,7 +52,7 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canClickButtonInForm() {
+    protected async canClickButtonInForm() {
         let wasHit = false
         const formVc = this.Controller(
             'form',
@@ -88,7 +89,7 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canClickButtonInFirstCardsFooterSkillView() {
+    protected async canClickButtonInFirstCardsFooterSkillView() {
         await this.clickButton(this.vc.layout1Card1Footer1)
         this.assertClicksEqual(['layout1Card1Footer1'])
         await this.clickButton(this.vc.layout1Card1Footer2)
@@ -96,22 +97,22 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
     }
 
     @test()
-    protected static async canClickButtonInSecondCardFooter() {
+    protected async canClickButtonInSecondCardFooter() {
         await this.clickButton(this.vc.layout1Card2Footer1)
         this.assertClicksEqual(['layout1Card2Footer1'])
     }
 
     @test()
-    protected static async canClickButtonInSecondLayout() {
+    protected async canClickButtonInSecondLayout() {
         await this.clickButton(this.vc.layout2Card1Footer1)
         this.assertClicksEqual(['layout2Card1Footer1'])
     }
 
-    private static async clickButton(id: string) {
+    private async clickButton(id: string) {
         await interactor.clickButton(this.vc, id)
     }
 
-    private static assertClicksEqual(expected: string[]) {
+    private assertClicksEqual(expected: string[]) {
         assert.isEqualDeep(this.vc.clicks, expected)
     }
 }

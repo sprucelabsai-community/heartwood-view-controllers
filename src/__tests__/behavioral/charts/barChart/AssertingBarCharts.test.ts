@@ -1,14 +1,21 @@
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import chartAssert from '../../../../tests/utilities/chartAssert'
 import { CardViewController } from '../../../../types/heartwood.types'
 import AbstractChartAssertionTest from '../AbstractChartAssertionTest'
 
+@suite()
 export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
-    protected static vcName = 'bar-chart' as const
-    protected static sectionKey = 'barChart' as const
+    protected vcName = 'bar-chart' as const
+    protected sectionKey = 'barChart' as const
 
     @test()
-    protected static async canCreateAssertingBarCharts() {
+    protected async canCreateAssertingBarCharts() {
         //@ts-ignore
         const err = assert.doesThrow(() => chartAssert.cardRendersBarChart())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -17,62 +24,62 @@ export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
     }
 
     @test()
-    protected static async throwsIfCardDoesNotRenderBarChart() {
+    protected async throwsIfCardDoesNotRenderBarChart() {
         this.assertNotRenderingChart([])
     }
 
     @test()
-    protected static async passesIfBarChartFound() {
+    protected async passesIfBarChartFound() {
         this.assertPassesIfChartInFirstSection()
     }
 
     @test()
-    protected static async throwsIfCardHasSectionWithoutBarChart() {
+    protected async throwsIfCardHasSectionWithoutBarChart() {
         this.assertNotRenderingChart([{}])
     }
 
     @test()
-    protected static async passesIfBarChartInSecondSection() {
+    protected async passesIfBarChartInSecondSection() {
         this.assertPassesIfChartInSecondSection()
     }
 
     @test()
-    protected static async passesIfTwoBarCharts() {
+    protected async passesIfTwoBarCharts() {
         this.assertPassesWithTwoCharts()
     }
 
     @test()
-    protected static async throwsIfIdDoesNotMatch() {
+    protected async throwsIfIdDoesNotMatch() {
         this.assertThrowsIfIdDoesNotMatch()
     }
 
     @test()
-    protected static async matchesIfFirstIdMatches() {
+    protected async matchesIfFirstIdMatches() {
         this.assertMatchesOnIdInFirstMatch()
     }
 
     @test()
-    protected static async matchesIfBarChartHasIdButNonePassed() {
+    protected async matchesIfBarChartHasIdButNonePassed() {
         this.assertIfChartHasIdButNotChecked()
     }
 
     @test()
-    protected static async assertRendersBarChartReturnsBarChart() {
+    protected async assertRendersBarChartReturnsBarChart() {
         this.assertReturnsChartVc()
     }
 
     @test()
-    protected static async returnsBarChartWhenMatchingId() {
+    protected async returnsBarChartWhenMatchingId() {
         this.assertReturnsChartVcWhenMatchingId()
     }
 
     @test()
-    protected static async matchesIfIdInSecondSection() {
+    protected async matchesIfIdInSecondSection() {
         this.assertMatchesIdInSecondSection()
     }
 
     @test()
-    protected static async throwsWhenCheckingDataSets() {
+    protected async throwsWhenCheckingDataSets() {
         //@ts-ignore
         const err = assert.doesThrow(() => chartAssert.dataSetsEqual())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -81,7 +88,7 @@ export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
     }
 
     @test()
-    protected static async throwsWhenDataSetsDoNotMatch() {
+    protected async throwsWhenDataSetsDoNotMatch() {
         const vc = this.Vc({
             dataSets: [{ dataPoints: [], label: generateId() }],
         })
@@ -90,7 +97,7 @@ export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
     }
 
     @test()
-    protected static async matchesOnFirstDataSet() {
+    protected async matchesOnFirstDataSet() {
         const label = generateId()
         const expected = [
             { dataPoints: [{ label: generateId(), value: 10 }], label },
@@ -103,7 +110,7 @@ export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
     }
 
     @test()
-    protected static async matchesOnSecondDataSet() {
+    protected async matchesOnSecondDataSet() {
         const label = generateId()
         const expected = [
             { dataPoints: [{ label: generateId(), value: 10 }], label },
@@ -116,10 +123,7 @@ export default class AssertingBarChartsTest extends AbstractChartAssertionTest {
         chartAssert.dataSetsEqual(vc, expected)
     }
 
-    protected static assertCardRendersChart(
-        cardVc: CardViewController,
-        id?: string
-    ) {
+    protected assertCardRendersChart(cardVc: CardViewController, id?: string) {
         return chartAssert.cardRendersBarChart(cardVc, id)
     }
 }

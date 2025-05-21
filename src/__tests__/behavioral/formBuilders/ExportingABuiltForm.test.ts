@@ -1,16 +1,17 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
+@suite()
 export default class ExportingABuiltFormTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'edit-form-builder-section': EditFormBuilderSectionCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
-    private static vc: FormBuilderCardViewController
+    private vc!: FormBuilderCardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Controller('form-builder-card', {
@@ -22,16 +23,13 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static hasToObject() {
+    protected hasToObject() {
         assert.isFunction(this.vc.toObject)
     }
 
     @test('header title set 1', 'My title', 'why now?')
     @test('header title set 1', 'My title!', 'why not?')
-    protected static async exportsBasicToStart(
-        title: string,
-        subtitle: string
-    ) {
+    protected async exportsBasicToStart(title: string, subtitle: string) {
         this.vc = this.Controller('form-builder-card', {
             header: {
                 title,
@@ -68,7 +66,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canExportNewPage() {
+    protected async canExportNewPage() {
         await this.vc.addPage()
         const exported = await this.vc.toObject()
 
@@ -115,7 +113,7 @@ export default class ExportingABuiltFormTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canExportNewSection() {
+    protected async canExportNewSection() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection()
 

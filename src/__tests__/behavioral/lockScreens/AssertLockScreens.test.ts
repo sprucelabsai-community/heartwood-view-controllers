@@ -1,4 +1,4 @@
-import { test, assert, errorAssert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../../skillViewControllers/Abstract.svc'
 import LockScreenSkillViewController, {
     LockScreenSkillViewControllerOptions,
@@ -8,10 +8,11 @@ import lockScreenAssert from '../../../tests/utilities/lockScreenAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { SkillView, ViewControllerId } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertLockScreensTest extends AbstractViewControllerTest {
-    private static rootSvc: LockingSkillView
+    private rootSvc!: LockingSkillView
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.views = this.Factory({})
 
@@ -29,7 +30,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesRenderThrowsWithMissing() {
+    protected async doesRenderThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             lockScreenAssert.actionRendersLockScreen()
@@ -41,7 +42,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesNotRenderThrowsWithMissing() {
+    protected async doesNotRenderThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             lockScreenAssert.actionDoesNotRenderLockScreen()
@@ -53,7 +54,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsIfActionDoesNotRenderLockScreen() {
+    protected async throwsIfActionDoesNotRenderLockScreen() {
         await assert.doesThrowAsync(
             () =>
                 lockScreenAssert.actionRendersLockScreen(
@@ -67,7 +68,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async doesNotThrowIfActionRendersLockScreen() {
+    protected async doesNotThrowIfActionRendersLockScreen() {
         await this.assertRendersLockScreen(() => {
             this.renderLockScreen()
         })
@@ -78,7 +79,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAssertRenderScreenRendersAsInstanceOf() {
+    protected async canAssertRenderScreenRendersAsInstanceOf() {
         const svc = this.Controller(
             'odin.lock' as ViewControllerId,
             {}
@@ -92,7 +93,7 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canStillAccessLockSvcFromRenderLockScreen() {
+    protected async canStillAccessLockSvcFromRenderLockScreen() {
         let returnedLockScreen: LockScreenSkillViewController | undefined
 
         const lockVc = await this.assertRendersLockScreen(() => {
@@ -106,20 +107,18 @@ export default class AssertLockScreensTest extends AbstractViewControllerTest {
         )
     }
 
-    private static async assertDoesNotRenderLockScreen(action: () => void) {
+    private async assertDoesNotRenderLockScreen(action: () => void) {
         await lockScreenAssert.actionDoesNotRenderLockScreen(
             this.rootSvc,
             action
         )
     }
 
-    private static renderLockScreen(
-        options?: LockScreenSkillViewControllerOptions
-    ) {
+    private renderLockScreen(options?: LockScreenSkillViewControllerOptions) {
         return this.rootSvc.callRenderLockScreen({ ...options })
     }
 
-    private static async assertRendersLockScreen(action: () => void) {
+    private async assertRendersLockScreen(action: () => void) {
         return await lockScreenAssert.actionRendersLockScreen(
             this.rootSvc,
             action

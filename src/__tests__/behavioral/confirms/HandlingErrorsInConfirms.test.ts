@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
@@ -18,13 +18,14 @@ class Confirm extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class HandlingErrorsInConfirmsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         confirmSvc: Confirm,
     }
 
     @test.skip('figure out how to test this')
-    protected static async shouldThrowUnhandledError() {
+    protected async shouldThrowUnhandledError() {
         //@ts-ignore
         const vc = this.Controller('confirmSvc', {}) as Confirm
         const confirmVc = await vcAssert.assertRendersConfirm(vc, () =>
@@ -35,5 +36,5 @@ export default class HandlingErrorsInConfirmsTest extends AbstractViewController
     }
 
     @test()
-    protected static needOneTestSoReporterShowsPassing() {}
+    protected needOneTestSoReporterShowsPassing() {}
 }

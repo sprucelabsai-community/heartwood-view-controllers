@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { AbstractSkillViewController, interactor, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
@@ -31,21 +31,22 @@ class TestSvc extends AbstractSkillViewController {
     }
 }
 
+@suite()
 export default class AssertingConfirmsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         testSvc: TestSvc,
     }
 
-    private static vc: TestSvc
+    private vc!: TestSvc
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         //@ts-ignore
         this.vc = this.Controller('testSvc', {}) as TestSvc
     }
 
     @test()
-    protected static async passesBackErrorInConfirm() {
+    protected async passesBackErrorInConfirm() {
         const err = await assert.doesThrowAsync(() =>
             vcAssert.assertRendersConfirm(this.vc, async () =>
                 interactor.clickRow(this.vc.getListVc(), 0)
@@ -56,7 +57,7 @@ export default class AssertingConfirmsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwingDoesNotCrashTests() {
+    protected async throwingDoesNotCrashTests() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertRendersConfirm(this.vc, async () =>
                 this.vc.throwsInsteadOfConfirm()
@@ -65,7 +66,7 @@ export default class AssertingConfirmsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwingAfterAcceptDoesNotThrowCrashTests() {
+    protected async throwingAfterAcceptDoesNotThrowCrashTests() {
         const confirmVc = await vcAssert.assertRendersConfirm(
             this.vc,
             async () => this.vc.throwsAfterConfirm()
@@ -75,7 +76,7 @@ export default class AssertingConfirmsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwingAfterDeclineDoesNotThrowCrashTests() {
+    protected async throwingAfterDeclineDoesNotThrowCrashTests() {
         const confirmVc = await vcAssert.assertRendersConfirm(
             this.vc,
             async () => this.vc.throwsAfterConfirm()

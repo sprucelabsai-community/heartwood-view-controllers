@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import mapAssert from '../../../tests/utilities/mapAssert'
@@ -11,23 +11,24 @@ import {
 import { CardViewControllerOptions } from '../../../viewControllers/card/Card.vc'
 import generatePinValues from './generatePinValues'
 
+@suite()
 export default class AssertingMapsTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
-    private static mapVc: MapViewController
+    private vc!: CardViewController
+    private mapVc!: MapViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.CardVc()
         this.mapVc = this.Controller('map', {})
     }
 
     @test()
-    protected static async canCreateAssertingMaps() {
+    protected async canCreateAssertingMaps() {
         assert.isFunction(mapAssert.assertCardRendersMap)
     }
 
     @test()
-    protected static async knowsIfDoesNotRenderMap() {
+    protected async knowsIfDoesNotRenderMap() {
         this.assertDoesNotRenderMap()
         this.addSection({})
         this.assertDoesNotRenderMap()
@@ -36,24 +37,24 @@ export default class AssertingMapsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfRendersMapInFirstSection() {
+    protected async knowsIfRendersMapInFirstSection() {
         this.addMapSection()
         this.assertRendersMap()
     }
 
     @test()
-    protected static async returnsMapController() {
+    protected async returnsMapController() {
         this.addMapSection()
         assert.isEqual(this.assertRendersMap(), this.mapVc)
     }
 
     @test()
-    protected static async knowsIfMapHasNoPins() {
+    protected async knowsIfMapHasNoPins() {
         this.assertDoesNotHavePin({})
     }
 
     @test()
-    protected static async canFindPinMatchingAnything() {
+    protected async canFindPinMatchingAnything() {
         const pin = generatePinValues()
         this.mapVc.addPin(pin)
 
@@ -62,38 +63,38 @@ export default class AssertingMapsTest extends AbstractViewControllerTest {
         this.assertHasPin({ address: pin.address })
     }
 
-    private static assertDoesNotHavePin(pin: Partial<MapPin>) {
+    private assertDoesNotHavePin(pin: Partial<MapPin>) {
         assert.doesThrow(
             () => this.assertHasPin(pin),
             'could not find that pin'
         )
     }
 
-    private static assertHasPin(pin: Partial<MapPin>) {
+    private assertHasPin(pin: Partial<MapPin>) {
         return mapAssert.assertMapHasPin(this.mapVc, pin)
     }
 
-    private static assertRendersMap() {
+    private assertRendersMap() {
         return mapAssert.assertCardRendersMap(this.vc)
     }
 
-    private static addMapSection() {
+    private addMapSection() {
         const section = { map: this.render(this.mapVc) }
         this.addSection(section)
     }
 
-    private static addSection(section: CardSection) {
+    private addSection(section: CardSection) {
         this.vc.addSection(section)
     }
 
-    private static assertDoesNotRenderMap() {
+    private assertDoesNotRenderMap() {
         assert.doesThrow(
             () => mapAssert.assertCardRendersMap(this.vc),
             'it does not'
         )
     }
 
-    private static CardVc(options?: CardViewControllerOptions) {
+    private CardVc(options?: CardViewControllerOptions) {
         return this.Controller('card', { ...options })
     }
 }

@@ -1,12 +1,13 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListCell, ListRow } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertingCalendarsInListsTest extends AbstractViewControllerTest {
     @test()
-    protected static throwsWithMissingParams() {
+    protected throwsWithMissingParams() {
         //@ts-ignore
         const err = assert.doesThrow(() => vcAssert.assertRowRendersCalendar())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -15,7 +16,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
     }
 
     @test()
-    protected static knowsIfRenderingInFirstRow() {
+    protected knowsIfRenderingInFirstRow() {
         const vc = this.Controller('list', {
             rows: [this.renderRowWithCalendar()],
         })
@@ -24,7 +25,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
     }
 
     @test()
-    protected static knowsIfRenderingInSecondRow() {
+    protected knowsIfRenderingInSecondRow() {
         const vc = this.Controller('list', {
             rows: [{ id: 'second', cells: [] }, this.renderRowWithCalendar()],
         })
@@ -33,7 +34,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
     }
 
     @test()
-    protected static knowsIfRenderingInSecondColl() {
+    protected knowsIfRenderingInSecondColl() {
         const vc = this.Controller('list', {
             rows: [
                 { id: 'second', cells: [{}, this.renderCellWithCalendar()] },
@@ -44,7 +45,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
     }
 
     @test()
-    protected static throwsIfCalendarIsInDayView() {
+    protected throwsIfCalendarIsInDayView() {
         const vc = this.Controller('list', {
             rows: [this.renderRowWithCalendar('day')],
         })
@@ -53,7 +54,7 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
     }
 
     @test()
-    protected static throwsIfNotFound() {
+    protected throwsIfNotFound() {
         const vc = this.Controller('list', {
             rows: [
                 {
@@ -72,18 +73,14 @@ export default class AssertingCalendarsInListsTest extends AbstractViewControlle
         assert.doesThrow(() => vcAssert.assertRowRendersCalendar(vc, 0))
     }
 
-    private static renderRowWithCalendar(
-        view: 'month' | 'day' = 'month'
-    ): ListRow {
+    private renderRowWithCalendar(view: 'month' | 'day' = 'month'): ListRow {
         return {
             id: 'first',
             cells: [this.renderCellWithCalendar(view)],
         }
     }
 
-    private static renderCellWithCalendar(
-        view: 'month' | 'day' = 'month'
-    ): ListCell {
+    private renderCellWithCalendar(view: 'month' | 'day' = 'month'): ListCell {
         return {
             calendar: this.Controller('calendar', {
                 view,

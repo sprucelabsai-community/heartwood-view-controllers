@@ -1,12 +1,13 @@
-import { assert, errorAssert, test } from '@sprucelabs/test-utils'
+import { assert, errorAssert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardFooter, CardViewController } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertingCardFootersTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
+    private vc!: CardViewController
     @test()
-    protected static knowsIfFooterIsDisabed() {
+    protected knowsIfFooterIsDisabed() {
         this.setFooter({
             isEnabled: false,
         })
@@ -16,7 +17,7 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static knowsIfFooterIsEnabled() {
+    protected knowsIfFooterIsEnabled() {
         this.setFooter({
             isEnabled: true,
         })
@@ -26,13 +27,13 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static enabledToStart() {
+    protected enabledToStart() {
         this.setFooter({})
         this.assertFooterIsEnabled()
     }
 
     @test()
-    protected static async assertFooterIsNotRenderedThrowsWithMissing() {
+    protected async assertFooterIsNotRenderedThrowsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             vcAssert.assertCardDoesNotRenderFooter()
@@ -44,7 +45,7 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async assertFooterThrowsIfRendersFooter() {
+    protected async assertFooterThrowsIfRendersFooter() {
         this.setFooter({})
         assert.doesThrow(
             () => vcAssert.assertCardDoesNotRenderFooter(this.vc),
@@ -53,33 +54,34 @@ export default class AssertingCardFootersTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async assertFooterNotRendered() {
+    protected async assertFooterNotRendered() {
         this.setFooter(null)
         vcAssert.assertCardDoesNotRenderFooter(this.vc)
     }
 
     @test()
-    protected static async assertFooterIsNotBusy() {
+    protected async assertFooterIsNotBusy() {
+        this.setFooter({})
         assert.doesThrow(() => vcAssert.assertCardFooterIsBusy(this.vc))
         vcAssert.assertCardFooterIsNotBusy(this.vc)
     }
 
     @test()
-    protected static async canAsserFooterIsBusy() {
+    protected async canAsserFooterIsBusy() {
         this.setFooter({ isBusy: true })
         assert.doesThrow(() => vcAssert.assertCardFooterIsNotBusy(this.vc))
         vcAssert.assertCardFooterIsBusy(this.vc)
     }
 
-    private static assertFooterIsDisabled() {
+    private assertFooterIsDisabled() {
         vcAssert.assertCardFooterIsDisabled(this.vc)
     }
 
-    private static assertFooterIsEnabled() {
+    private assertFooterIsEnabled() {
         vcAssert.assertCardFooterIsEnabled(this.vc)
     }
 
-    private static setFooter(footer: CardFooter | null) {
+    private setFooter(footer: CardFooter | null) {
         this.vc = this.Controller('card', {
             footer,
         })

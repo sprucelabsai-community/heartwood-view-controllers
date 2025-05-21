@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
     AbstractSkillViewController,
     AbstractViewController,
@@ -16,7 +16,7 @@ import FormViewController from '../../../viewControllers/form/Form.vc'
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
 class FancyCardViewController extends AbstractViewController<Card> {
-    public cardVc: any
+    public cardVc!: any
     public constructor(options: any) {
         super(options)
         this.cardVc = this.Controller('card', {})
@@ -28,7 +28,7 @@ class FancyCardViewController extends AbstractViewController<Card> {
 }
 
 class ActiveCard extends AbstractViewController<Card> {
-    private activeRecordVc: ActiveRecordCardViewController
+    private activeRecordVc!: ActiveRecordCardViewController
     public constructor(options: any) {
         super(options)
 
@@ -52,7 +52,7 @@ class ActiveCard extends AbstractViewController<Card> {
 }
 
 class ActiveRecordSkillViewController extends AbstractSkillViewController {
-    private activeCardVc: ActiveCard
+    private activeCardVc!: ActiveCard
     public constructor(options: any) {
         super(options)
         //@ts-ignore
@@ -71,7 +71,7 @@ class ActiveRecordSkillViewController extends AbstractSkillViewController {
 }
 
 class DialogSkillViewController extends AbstractSkillViewController {
-    private dialogCardVc: DialogCardViewController
+    private dialogCardVc!: DialogCardViewController
     public constructor(options: any) {
         super(options)
         this.dialogCardVc = this.Controller(
@@ -98,7 +98,7 @@ class DialogSkillViewController extends AbstractSkillViewController {
 }
 
 class DialogCardViewController extends AbstractViewController<Card> {
-    private cardVc: CardViewController
+    private cardVc!: CardViewController
     public constructor(options: any) {
         super(options)
         this.cardVc = this.Controller('card', {})
@@ -115,8 +115,9 @@ class NoControllerViewController extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingInstanceOfTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         fancy: FancyCardViewController,
         activeSvc: ActiveRecordSkillViewController,
         activeCard: ActiveCard,
@@ -126,12 +127,12 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static hasInstanceOf() {
+    protected hasInstanceOf() {
         assert.isFunction(vcAssert.assertControllerInstanceOf)
     }
 
     @test()
-    protected static throwsWhenPassedNoInstanceOf() {
+    protected throwsWhenPassedNoInstanceOf() {
         const vc = this.Controller('card', {})
         assert.doesThrow(() =>
             vcAssert.assertControllerInstanceOf(vc, FormViewController)
@@ -139,7 +140,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static throwsWhenPassedNull() {
+    protected throwsWhenPassedNull() {
         const err = assert.doesThrow(() =>
             vcAssert.assertControllerInstanceOf(null, FormViewController)
         )
@@ -147,13 +148,13 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static knowsWhenPassedCorrectClassReference() {
+    protected knowsWhenPassedCorrectClassReference() {
         const vc = this.Controller('card', {})
         vcAssert.assertControllerInstanceOf(vc, CardViewController)
     }
 
     @test()
-    protected static knowsWhenVcDelegatesRender() {
+    protected knowsWhenVcDelegatesRender() {
         //@ts-ignore
         const vc = this.Controller('fancy', {}) as any
 
@@ -161,7 +162,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static looksUp1ParentToCheckInstanceOf() {
+    protected looksUp1ParentToCheckInstanceOf() {
         //@ts-ignore
         const model = this.render(this.Controller('fancy', {}))
 
@@ -172,7 +173,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static canCheckIfRendersAsInstanceOf() {
+    protected canCheckIfRendersAsInstanceOf() {
         const vc = this.FancyVc()
 
         assert.doesThrow(() =>
@@ -196,14 +197,14 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static canGetCardFromSkillView() {
+    protected canGetCardFromSkillView() {
         const svc = this.Controller('activeSvc' as SkillViewControllerId, {})
         const match = vcAssert.assertSkillViewRendersCard(svc, 'active')
         vcAssert.assertRendersAsInstanceOf(match, ActiveCard)
     }
 
     @test()
-    protected static async canAssertDialogRendersAsInstanceOf() {
+    protected async canAssertDialogRendersAsInstanceOf() {
         const svc = this.Controller(
             'dialogSvc' as ViewControllerId,
             {}
@@ -216,7 +217,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async instanceOfKnowsIfNoControllerReturned() {
+    protected async instanceOfKnowsIfNoControllerReturned() {
         const vc = this.Controller(
             'noController' as any,
             {}
@@ -229,7 +230,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
     }
 
     @test()
-    protected static async canMatchInstanceOfSeveralLevelsDeep() {
+    protected async canMatchInstanceOfSeveralLevelsDeep() {
         const vc = this.FancyVc()
         vc.cardVc = vc.Controller('activeCard' as ViewControllerId, {})
         const match = vcAssert.assertRendersAsInstanceOf(
@@ -240,7 +241,7 @@ export default class AssertingInstanceOfTest extends AbstractViewControllerTest 
         assert.isEqual(match, vc)
     }
 
-    private static FancyVc() {
+    private FancyVc() {
         return this.Controller('fancy', {}) as FancyCardViewController
     }
 }

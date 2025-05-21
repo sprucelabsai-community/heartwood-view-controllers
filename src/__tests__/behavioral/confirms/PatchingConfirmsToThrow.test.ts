@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { AbstractViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import confirmTestPatcher from '../../../tests/utilities/confirmTestPatcher'
@@ -15,30 +15,31 @@ class ConfirmVc extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class PatchingConfirmsToThrowTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         confirmTest: ConfirmVc,
     }
-    private static vc: ConfirmVc
+    private vc!: ConfirmVc
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('confirmTest', {}) as any
         confirmTestPatcher.patchConfirmToThrow(this.vc)
     }
 
     @test()
-    protected static async patchingCausesConfirmsToThrow() {
+    protected async patchingCausesConfirmsToThrow() {
         await assert.doesThrowAsync(() => this.vc.goConfirm())
     }
 
     @test()
-    protected static async canStillAssertAConfirm() {
+    protected async canStillAssertAConfirm() {
         await vcAssert.assertRendersConfirm(this.vc, () => this.vc.goConfirm())
     }
 
     @test()
-    protected static async confirmHandlerCalledStill() {
+    protected async confirmHandlerCalledStill() {
         let wasHit = false
         //@ts-ignore
         this.vc.confirmHandler = () => {

@@ -1,32 +1,33 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import dialogTestPatcher from '../../../tests/utilities/dialogTestPatcher'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import DialogTestSkillViewController from '../../support/DialogTest.svc'
 
+@suite()
 export default class AssertingDialogsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         dialogTest: DialogTestSkillViewController,
     }
-    private static vc: DialogTestSkillViewController
+    private vc!: DialogTestSkillViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.PatchedVc()
     }
 
     @test()
-    protected static async canBePathedToThrowWhenRenderingDialog() {
+    protected async canBePathedToThrowWhenRenderingDialog() {
         await assert.doesThrowAsync(() => this.vc.renderInDialogAndGetDlgVc())
     }
 
     @test()
-    protected static async assertingDoesRenderWorksAsExpected() {
+    protected async assertingDoesRenderWorksAsExpected() {
         await this.assertRendersDialog()
     }
 
     @test()
-    protected static async callsOriginalDialogHandler() {
+    protected async callsOriginalDialogHandler() {
         let wasHit = false
         this.vc = this.PatchedVc()
 
@@ -41,7 +42,7 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderingMoreThanOneDialogPerAssertionThrows() {
+    protected async renderingMoreThanOneDialogPerAssertionThrows() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertRendersDialog(this.vc, async () => {
                 await Promise.all([
@@ -53,7 +54,7 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canTestMultipleTimesInOneTest() {
+    protected async canTestMultipleTimesInOneTest() {
         const dlg = await vcAssert.assertRendersDialog(this.vc, async () => {
             await this.vc.renderInDialogAndWait()
         })
@@ -65,14 +66,14 @@ export default class AssertingDialogsTest extends AbstractViewControllerTest {
         })
     }
 
-    private static async assertRendersDialog() {
+    private async assertRendersDialog() {
         await vcAssert.assertRendersDialog(
             this.vc,
             () => this.vc.renderInDialogAndGetDlgVc() as any
         )
     }
 
-    private static PatchedVc() {
+    private PatchedVc() {
         const vc = this.Controller('dialogTest', {})
         dialogTestPatcher.patchDialogToThrow(vc)
         return vc

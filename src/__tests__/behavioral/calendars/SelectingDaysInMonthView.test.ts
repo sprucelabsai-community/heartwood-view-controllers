@@ -1,14 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 
+@suite()
 export default class SelectingDaysInMonthViewTest extends AbstractViewControllerTest {
-    private static vc: CalendarViewController
+    private vc!: CalendarViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('calendar', {
             view: 'month',
@@ -16,7 +17,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static throwsWHenMissingVars() {
+    protected throwsWHenMissingVars() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.selectDate())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -25,7 +26,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static canSelectAndRenderDate() {
+    protected canSelectAndRenderDate() {
         this.vc.selectDate(2020, 1, 1)
         this.assertSelectedRendered([{ year: 2020, month: 1, day: 1 }])
 
@@ -37,7 +38,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static throwsWhenSelectingSameDateTwice() {
+    protected throwsWhenSelectingSameDateTwice() {
         this.vc.selectDate(2020, 1, 1)
 
         const err = assert.doesThrow(() => this.vc.selectDate(2020, 1, 1))
@@ -49,23 +50,23 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static noEventsSelectedRenderToStart() {
+    protected noEventsSelectedRenderToStart() {
         this.assertSelectedRendered(undefined)
     }
 
     @test()
-    protected static selectingEventTriggersRender() {
+    protected selectingEventTriggersRender() {
         this.vc.selectDate(1000, 10, 10)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static noSelectedDatesToStart() {
+    protected noSelectedDatesToStart() {
         assert.isEqualDeep(this.vc.getSelectedDates(), [])
     }
 
     @test()
-    protected static canGetSelectedDate() {
+    protected canGetSelectedDate() {
         this.vc.selectDate(2020, 10, 10)
         assert.isEqualDeep(this.vc.getSelectedDates(), [
             {
@@ -91,7 +92,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static canCheckIfSelected() {
+    protected canCheckIfSelected() {
         assert.isFalse(this.vc.isDateSelected(2020, 10, 10))
         this.vc.selectDate(2020, 10, 10)
         assert.isTrue(this.vc.isDateSelected(2020, 10, 10))
@@ -105,7 +106,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static deselectThrowsWhenMissing() {
+    protected deselectThrowsWhenMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.deselectDate())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -115,7 +116,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
 
     @test('cant deselect event not selected', 2020, 1, 1)
     @test('cant deselect event not selected', 2021, 1, 1)
-    protected static cantDeselectDateNotSelected(
+    protected cantDeselectDateNotSelected(
         year: number,
         month: number,
         day: number
@@ -131,7 +132,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static canDeselectDate() {
+    protected canDeselectDate() {
         this.vc.selectDate(2020, 10, 10)
         this.vc.deselectDate(2020, 10, 10)
         this.assertSelectedRendered([])
@@ -144,14 +145,14 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
     }
 
     @test()
-    protected static deselectingDateTriggersRender() {
+    protected deselectingDateTriggersRender() {
         this.vc.selectDate(2020, 1, 1)
         this.vc.deselectDate(2020, 1, 1)
         vcAssert.assertTriggerRenderCount(this.vc, 2)
     }
 
     @test()
-    protected static canClearSelectedDates() {
+    protected canClearSelectedDates() {
         this.vc.selectDate(2020, 1, 1)
         this.vc.clearSelectedDates()
         this.assertSelectedRendered([])
@@ -163,14 +164,14 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
         { year: 2021, month: 1, day: 1 },
         { year: 1992, month: 2, day: 2 },
     ])
-    protected static canSetAllSelectedDatesAtOnce(dates: any) {
+    protected canSetAllSelectedDatesAtOnce(dates: any) {
         this.vc.setSelectedDates(dates)
         this.assertSelectedRendered(dates)
         assert.isNotEqual(this.vc.getSelectedDates(), dates)
     }
 
     @test()
-    protected static selectingDateTriggersRender() {
+    protected selectingDateTriggersRender() {
         this.vc.setSelectedDates([
             {
                 year: 2020,
@@ -182,7 +183,7 @@ export default class SelectingDaysInMonthViewTest extends AbstractViewController
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static assertSelectedRendered(
+    private assertSelectedRendered(
         expected?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[]
     ) {
         assert.isEqualDeep(this.render(this.vc).selectedDates, expected)

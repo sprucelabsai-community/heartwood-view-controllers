@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import autocompleteAssert from '../../../tests/utilities/autocompleteAssert'
@@ -11,17 +11,18 @@ import AutocompleteInputViewController, {
 } from '../../../viewControllers/form/AutocompleteInput.vc'
 import FormViewController from '../../../viewControllers/form/Form.vc'
 
+@suite()
 export default class ControllingAnAutocompleteInputTest extends AbstractViewControllerTest {
-    private static vc: AutocompleteInputViewController
-    private static formVc: FormViewController<TestForm>
+    private vc!: AutocompleteInputViewController
+    private formVc!: FormViewController<TestForm>
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Vc()
     }
 
     @test()
-    protected static passesOptionsThroughToRender() {
+    protected passesOptionsThroughToRender() {
         const options: AutocompleteInputViewControllerOptions = {
             hint: generateId(),
             label: generateId(),
@@ -33,20 +34,20 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async canGetSetValue() {
+    protected async canGetSetValue() {
         await this.assertGetSetValue('testing')
         await this.assertGetSetValue('waka waka')
     }
 
     @test()
-    protected static async settingValueTriggersRender() {
+    protected async settingValueTriggersRender() {
         await this.setValue('waka')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test('change is triggered 1', 'oy')
     @test('change is triggered 2', 'doooo it')
-    protected static async onChangeIsTriggered(value: string) {
+    protected async onChangeIsTriggered(value: string) {
         let wasHit = false
         let passedValue: string | undefined
 
@@ -66,7 +67,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async hasFunctionsForHidingAndShowingDropdown() {
+    protected async hasFunctionsForHidingAndShowingDropdown() {
         assert.isFunction(this.vc.showSuggestions)
         assert.isFunction(this.vc.hideSuggestions)
 
@@ -76,7 +77,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
     @test('sets suggestions 1', [])
     @test('sets suggestions 2', [{ id: 'test', label: 'me' }])
-    protected static async setsSuggestionsToModel(
+    protected async setsSuggestionsToModel(
         suggestions: AutocompleteSuggestion[]
     ) {
         this.vc.showSuggestions(suggestions)
@@ -84,7 +85,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async assertShowThrowsWhenMissing() {
+    protected async assertShowThrowsWhenMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             autocompleteAssert.assertActionShowsSuggestions()
@@ -96,7 +97,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async assertHideThrowsWhenMissing() {
+    protected async assertHideThrowsWhenMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             autocompleteAssert.assertActionHidesSuggestions()
@@ -108,14 +109,14 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async assertingShowThrowsIfDropdownNotOpened() {
+    protected async assertingShowThrowsIfDropdownNotOpened() {
         await this.assertThrowsNotShowingSuggestionsError(() =>
             autocompleteAssert.actionShowsSuggestions(this.vc, () => {})
         )
     }
 
     @test()
-    protected static async assertingHideThrowsIfDropdownNotOpened() {
+    protected async assertingHideThrowsIfDropdownNotOpened() {
         await assert.doesThrowAsync(
             () =>
                 autocompleteAssert.assertActionHidesSuggestions(
@@ -127,12 +128,12 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async assertingShowPassesWhenSuggestionsShown() {
+    protected async assertingShowPassesWhenSuggestionsShown() {
         await this.assertShowsSuggestions()
     }
 
     @test()
-    protected static async assertingHidePassesWhenSuggestionsHidden() {
+    protected async assertingHidePassesWhenSuggestionsHidden() {
         await autocompleteAssert.assertActionHidesSuggestions(
             this.vc,
             async () => {
@@ -142,7 +143,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async assertionCallsOriginalShowSuggestions() {
+    protected async assertionCallsOriginalShowSuggestions() {
         let wasHit = false
         let passedSuggestions: AutocompleteSuggestion[] = []
 
@@ -163,7 +164,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
     @test("throws when showing suggestions don't match 1", ['one'], ['two'])
     @test("throws when showing suggestions don't match 1", ['two'], ['one'])
-    protected static async assertShowThrowsWhenSuggestionIdsDontMatch(
+    protected async assertShowThrowsWhenSuggestionIdsDontMatch(
         ids: string[],
         checks: string[]
     ) {
@@ -185,7 +186,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
         ['two', 'five'],
         ['five', 'two']
     )
-    protected static async passesWhenSuggestionIdsDoMatch(
+    protected async passesWhenSuggestionIdsDoMatch(
         ids: string[],
         checks: string[]
     ) {
@@ -194,47 +195,47 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async autocompleteRendersSelfAsController() {
+    protected async autocompleteRendersSelfAsController() {
         const model = this.render(this.vc)
         assert.isEqual(model.controller, this.vc)
     }
 
     @test()
-    protected static async settingValueWithRenderedValueUpdatesModel() {
+    protected async settingValueWithRenderedValueUpdatesModel() {
         const renderedValue = generateId()
         await this.setValue('hey', renderedValue)
         this.assertRenderedValueEquals(renderedValue)
     }
 
     @test()
-    protected static async canSetRenderedValueDirectly() {
+    protected async canSetRenderedValueDirectly() {
         const renderedValue = generateId()
         await this.setRenderedValue(renderedValue)
         this.assertRenderedValueEquals(renderedValue)
     }
 
     @test()
-    protected static async renderedValueTriggersRender() {
+    protected async renderedValueTriggersRender() {
         await this.vc.setRenderedValue('aeou')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async settingValueWithoutRenderedValueDoesNotClearRenderedValue() {
+    protected async settingValueWithoutRenderedValueDoesNotClearRenderedValue() {
         await this.setRenderedValue('yo')
         await this.setValue('hey')
         this.assertRenderedValueEquals('yo')
     }
 
     @test()
-    protected static async passingNullToSetValueClearsRenderedValue() {
+    protected async passingNullToSetValueClearsRenderedValue() {
         await this.setRenderedValue('yo')
         await this.setValue('hey', null)
         this.assertRenderedValueEquals(null)
     }
 
     @test()
-    protected static async changingRenderdValueTriggersOnChange() {
+    protected async changingRenderdValueTriggersOnChange() {
         let wasHit = false
         let passedValue: string | undefined
         this.vc = this.Vc({
@@ -254,7 +255,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async interactorThrowsWhenClickingSuggestionMissingRequired() {
+    protected async interactorThrowsWhenClickingSuggestionMissingRequired() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             autocompleteInteractor.clickSuggestion()
@@ -266,7 +267,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async interactorThrowsWhenSuggestionsNotShowing() {
+    protected async interactorThrowsWhenSuggestionsNotShowing() {
         await assert.doesThrowAsync(
             () => autocompleteInteractor.clickSuggestion(this.vc, 'test'),
             'showSuggestions'
@@ -274,7 +275,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async interactorThrowsWhenNoMatchOnSuggestions() {
+    protected async interactorThrowsWhenNoMatchOnSuggestions() {
         this.showSuggestions([
             {
                 id: 'whatever',
@@ -290,7 +291,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
     @test('throws when missing on click 1', 'test')
     @test('throws when missing on click 2', 'whatever')
-    protected static async throwsWhenMissingOnClick(id: string) {
+    protected async throwsWhenMissingOnClick(id: string) {
         this.showSuggestions([
             {
                 id: 'test',
@@ -309,7 +310,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async onClickInvoked() {
+    protected async onClickInvoked() {
         let passedId: string | undefined
         const id = generateId()
 
@@ -328,7 +329,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async throwsIfSuggestionIsShowingIsMissingParams() {
+    protected async throwsIfSuggestionIsShowingIsMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             autocompleteAssert.suggestionIsShowing()
@@ -339,7 +340,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async throwsIfSuggestionIsNotShowingIsMissingParams() {
+    protected async throwsIfSuggestionIsNotShowingIsMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             autocompleteAssert.suggestionIsNotShowing()
@@ -350,7 +351,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async knowsIfNotRenderingSuggestions() {
+    protected async knowsIfNotRenderingSuggestions() {
         await this.assertThrowsNotShowingSuggestionsError(() =>
             autocompleteAssert.suggestionIsShowing(this.vc, 'id')
         )
@@ -359,10 +360,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
 
     @test('throws if suggestion id not found 1', 'test', 'id')
     @test('throws if suggestion id not found 2', 'id', 'test')
-    protected static async throwsIfSuggestionIsMissing(
-        id: string,
-        lookup: string
-    ) {
+    protected async throwsIfSuggestionIsMissing(id: string, lookup: string) {
         this.showSuggestions([{ id, label: 'Hey!' }])
         assert.doesThrow(
             () => autocompleteAssert.suggestionIsShowing(this.vc, lookup),
@@ -373,14 +371,14 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async knowsIfRenderingSuggestion() {
+    protected async knowsIfRenderingSuggestion() {
         this.showSuggestions([{ id: 'test', label: 'Hey!' }])
         autocompleteAssert.suggestionIsShowing(this.vc, 'test')
         this.assertDoesNotShowSuggestionThrowsWhenFound('test')
     }
 
     @test()
-    protected static async settingRenderedValueToEmptyStringHidesSuggestions() {
+    protected async settingRenderedValueToEmptyStringHidesSuggestions() {
         this.showSuggestions([{ id: 'test', label: 'Hey!' }])
         await this.setRenderedValue('hey')
 
@@ -390,7 +388,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static canFindSuggestionsThatAreNotTheFirst() {
+    protected canFindSuggestionsThatAreNotTheFirst() {
         this.showSuggestions([
             { id: 'test', label: 'Hey!' },
             { id: 'test2', label: 'what the!?' },
@@ -400,7 +398,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async settingRenderedValueToNullIfRenderedValueIsAlreadyNullDoesNotSetRenderedValue() {
+    protected async settingRenderedValueToNullIfRenderedValueIsAlreadyNullDoesNotSetRenderedValue() {
         let hitCount = 0
         this.vc = this.Vc({
             onChangeRenderedValue: () => {
@@ -418,7 +416,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async settingValuesAlwaysOnlySetsRenderedValue() {
+    protected async settingValuesAlwaysOnlySetsRenderedValue() {
         const value = 'Tay'
         await this.setValueOnForm(value)
 
@@ -435,7 +433,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async throwsWhenManySuggestionsDontMatch() {
+    protected async throwsWhenManySuggestionsDontMatch() {
         assert.doesThrow(() => this.assertSuggestionsAreShowing(['test']))
         this.showSuggestions([{ id: 'wakawaka', label: 'Hey!' }])
         this.vc.hideSuggestions()
@@ -450,7 +448,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     @test()
-    protected static async canAssertManyOptionsWhenShowing() {
+    protected async canAssertManyOptionsWhenShowing() {
         this.showSuggestions([
             { id: 'test', label: 'Hey!' },
             { id: 'test2', label: 'what the!?' },
@@ -469,43 +467,41 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
         this.assertSuggestionsAreShowing([id])
     }
 
-    private static assertSuggestionsAreShowing(suggestions: string[]): any {
+    private assertSuggestionsAreShowing(suggestions: string[]): any {
         return autocompleteAssert.suggestionsAreShowing(this.vc, suggestions)
     }
 
-    protected static async setValueOnForm(value: string) {
+    protected async setValueOnForm(value: string) {
         const { setValue } = this.render(this.formVc)
         await setValue('firstName', value)
     }
 
-    private static assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
+    private assertDoesNotShowSuggestionThrowsWhenFound(id: string) {
         assert.doesThrow(
             () => autocompleteAssert.suggestionIsNotShowing(this.vc, id),
             `didn't expect to`
         )
     }
 
-    private static showSuggestions(suggestions: AutocompleteSuggestion[]) {
+    private showSuggestions(suggestions: AutocompleteSuggestion[]) {
         this.vc.showSuggestions(suggestions)
     }
 
-    private static async setRenderedValue(
-        renderedValue: string | undefined | null
-    ) {
+    private async setRenderedValue(renderedValue: string | undefined | null) {
         await this.vc.setRenderedValue(renderedValue)
     }
 
-    private static assertRenderedValueEquals(renderedValue: string | null) {
+    private assertRenderedValueEquals(renderedValue: string | null) {
         const model = this.render(this.vc)
         assert.isEqual(model.renderedValue, renderedValue)
     }
 
-    private static assertValueEquals(value?: string | null) {
+    private assertValueEquals(value?: string | null) {
         const model = this.render(this.vc)
         assert.isEqual(model.value, value)
     }
 
-    private static async assertShowsSuggestions(
+    private async assertShowsSuggestions(
         suggestions: AutocompleteSuggestion[] = [],
         expectedSuggestionIds?: string[]
     ) {
@@ -518,25 +514,23 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
         )
     }
 
-    private static async assertGetSetValue(value: string) {
+    private async assertGetSetValue(value: string) {
         await this.setValue(value)
         assert.isEqual(this.vc.getValue(), value)
     }
 
-    private static async setValue(
+    private async setValue(
         value: string | null,
         renderedValue?: string | null
     ) {
         await this.vc.setValue(value, renderedValue)
     }
 
-    private static renderVc() {
+    private renderVc() {
         return this.render(this.vc)
     }
 
-    private static Vc(
-        options?: Partial<AutocompleteInputViewControllerOptions>
-    ) {
+    private Vc(options?: Partial<AutocompleteInputViewControllerOptions>) {
         const autoCompelete = this.Controller('autocompleteInput', {
             ...options,
         })
@@ -558,7 +552,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
         return autoCompelete
     }
 
-    private static async assertThrowsNotShowingSuggestionsError(
+    private async assertThrowsNotShowingSuggestionsError(
         action: () => Promise<void> | void
     ) {
         await assert.doesThrowAsync(action, 'showSuggestions')

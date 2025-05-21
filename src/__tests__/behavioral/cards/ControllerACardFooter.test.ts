@@ -1,35 +1,36 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { CardViewController } from '../../../types/heartwood.types'
 
+@suite()
 export default class ControllingACardTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: CardViewController
+    protected controllerMap = {}
+    private vc!: CardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
     }
 
     @test()
-    protected static getIsFooterEnabledIsTrueToStart() {
+    protected getIsFooterEnabledIsTrueToStart() {
         this.assertFooterIsEnabled()
     }
 
     @test()
-    protected static usesValuePassedToFooter() {
+    protected usesValuePassedToFooter() {
         const vc = this.Controller('card', {
             footer: {
                 isEnabled: false,
             },
         })
-        ControllingACardTest.assertFooterIsDisabled(vc)
+        this.assertFooterIsDisabled(vc)
     }
 
     @test()
-    protected static canDisableAndEnableFooter() {
+    protected canDisableAndEnableFooter() {
         this.vc.disableFooter()
         this.assertFooterIsDisabled()
         this.vc.enableFooter()
@@ -42,7 +43,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     @test('disables footer 2', {
         shouldRenderBorder: false,
     })
-    protected static persistsFooterOnDisable(footer: Footer) {
+    protected persistsFooterOnDisable(footer: Footer) {
         this.vc = this.Controller('card', {
             footer,
         })
@@ -62,7 +63,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     @test('enables footer 2', {
         shouldRenderBorder: false,
     })
-    protected static persistsFooter(footer: Footer) {
+    protected persistsFooter(footer: Footer) {
         this.vc = this.Controller('card', {
             footer,
         })
@@ -76,23 +77,23 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static callingEnableDoesNotBlowUp() {
+    protected callingEnableDoesNotBlowUp() {
         this.vc.enableFooter()
     }
 
     @test()
-    protected static triggersRenderAsExpected() {
+    protected triggersRenderAsExpected() {
         this.vc.enableFooter()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
         this.vc.disableFooter()
         vcAssert.assertTriggerRenderCount(this.vc, 2)
     }
 
-    private static assertFooterIsEnabled() {
+    private assertFooterIsEnabled() {
         assert.isTrue(this.vc.getIsFooterEnabled())
     }
 
-    private static assertFooterIsDisabled(vc?: CardViewController) {
+    private assertFooterIsDisabled(vc?: CardViewController) {
         assert.isFalse((vc ?? this.vc).getIsFooterEnabled())
     }
 }

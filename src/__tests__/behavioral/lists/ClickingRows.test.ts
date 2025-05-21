@@ -1,11 +1,12 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { interactor } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { ListViewControllerOptions } from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class ClickingRowsTest extends AbstractViewControllerTest {
     @test()
-    protected static async canPassAnyRow() {
+    protected async canPassAnyRow() {
         let wasHit = false
         const vc = this.ListVc({
             rows: [
@@ -29,7 +30,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingOnDisabledRowThrows() {
+    protected async clickingOnDisabledRowThrows() {
         let wasHit = false
         const vc = this.ListVc({
             rows: [
@@ -53,7 +54,7 @@ export default class ClickingRowsTest extends AbstractViewControllerTest {
         assert.isFalse(wasHit)
     }
 
-    protected static ListVc(options?: Partial<ListViewControllerOptions>) {
+    protected ListVc(options?: Partial<ListViewControllerOptions>) {
         return this.Controller('list', {
             rows: [
                 {

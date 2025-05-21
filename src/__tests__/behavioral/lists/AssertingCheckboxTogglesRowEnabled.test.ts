@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -7,16 +7,17 @@ import ListViewController, {
     ListViewControllerOptions,
 } from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractViewControllerTest {
-    protected static vc: ListViewController
+    protected vc!: ListViewController
 
     @test()
-    protected static async hasFunction() {
+    protected async hasFunction() {
         assert.isFunction(vcAssert.assertCheckboxTogglesRowEnabled)
     }
 
     @test()
-    protected static async throwsWhenMissingParams() {
+    protected async throwsWhenMissingParams() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             vcAssert.assertCheckboxTogglesRowEnabled()
@@ -28,19 +29,19 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
     }
 
     @test()
-    protected static async throwsWhenNoCheckboxFound() {
+    protected async throwsWhenNoCheckboxFound() {
         this.vc = this.ListVc({ rows: [this.renderRow()] })
         await assert.doesThrowAsync(() => this.assertToggles(), 'first cell')
     }
 
     @test()
-    protected static async throwsWhenCheckboxDoesNotToggleEnabled() {
+    protected async throwsWhenCheckboxDoesNotToggleEnabled() {
         this.vc = this.ListVcWithCheckboxOnChange(() => {})
         await assert.doesThrowAsync(() => this.assertToggles(), 'toggle')
     }
 
     @test()
-    protected static async throwsWhenNoCheckbox() {
+    protected async throwsWhenNoCheckbox() {
         this.vc = this.ListVc({
             rows: [
                 this.renderRow([
@@ -54,7 +55,7 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
     }
 
     @test()
-    protected static async passesWhenListChangesRowEnabled() {
+    protected async passesWhenListChangesRowEnabled() {
         this.vc = this.ListVcWithCheckboxOnChange(() => {
             this.vc.getRowVc(0).setIsEnabled(false)
         })
@@ -63,7 +64,7 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
     }
 
     @test()
-    protected static async passesWhenCheckingSecondRow() {
+    protected async passesWhenCheckingSecondRow() {
         this.vc = this.ListVc({
             rows: [
                 { id: 'yay', cells: [] },
@@ -77,7 +78,7 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
     }
 
     @test()
-    protected static async passesWhenDisabledRowIsEnabled() {
+    protected async passesWhenDisabledRowIsEnabled() {
         this.vc = this.ListVcWithCheckboxOnChange(() => {
             this.vc.getRowVc(0).setIsEnabled(true)
         })
@@ -85,17 +86,17 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
         await this.assertToggles()
     }
 
-    private static assertToggles(row: string | number = 0) {
+    private assertToggles(row: string | number = 0) {
         return vcAssert.assertCheckboxTogglesRowEnabled(this.vc, row)
     }
 
-    private static ListVcWithCheckboxOnChange(onChange: () => void) {
+    private ListVcWithCheckboxOnChange(onChange: () => void) {
         return this.ListVc({
             rows: [this.renderRowWithCheckboxInFirstCell(onChange)],
         })
     }
 
-    private static renderRowWithCheckboxInFirstCell(
+    private renderRowWithCheckboxInFirstCell(
         onChange: () => void
     ): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow {
         return this.renderRow([
@@ -108,11 +109,11 @@ export default class AssertingCheckboxTogglesRowEnabledTest extends AbstractView
         ])
     }
 
-    private static renderRow(cells: Cell[] = []): Row {
+    private renderRow(cells: Cell[] = []): Row {
         return { id: generateId(), cells }
     }
 
-    private static ListVc(options?: ListViewControllerOptions) {
+    private ListVc(options?: ListViewControllerOptions) {
         return this.Controller('list', { ...options })
     }
 }

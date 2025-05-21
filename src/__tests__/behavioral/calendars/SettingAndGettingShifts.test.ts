@@ -1,18 +1,19 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import CalendarViewController from '../../../viewControllers/Calendar.vc'
 
+@suite()
 export default class SettingAndGettingShiftsTest extends AbstractViewControllerTest {
-    private static vc: CalendarViewController
-    protected static async beforeEach() {
+    private vc!: CalendarViewController
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('calendar', {})
     }
 
     @test()
-    protected static async noShiftsToStart() {
+    protected async noShiftsToStart() {
         assert.isFalsy(this.vc.getShifts())
     }
 
@@ -38,7 +39,7 @@ export default class SettingAndGettingShiftsTest extends AbstractViewControllerT
             endDateTimeMs: 123,
         },
     ])
-    protected static async canSetShifts(
+    protected async canSetShifts(
         expected: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[]
     ) {
         this.vc.setShifts(expected)
@@ -47,7 +48,7 @@ export default class SettingAndGettingShiftsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async settingShiftsTriggersRenders() {
+    protected async settingShiftsTriggersRenders() {
         this.vc.setShifts([])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }

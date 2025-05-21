@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { Card, ViewControllerOptions } from '../../../types/heartwood.types'
@@ -10,7 +10,7 @@ import DialogTestSkillViewController from '../../support/DialogTest.svc'
 
 class SpyDialogViewController extends AbstractViewController<Card> {
     public didHideWasHit = false
-    private cardVc: CardViewController
+    private cardVc!: CardViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
@@ -26,38 +26,39 @@ class SpyDialogViewController extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class RenderingInADialogTest extends AbstractViewControllerTest {
-    private static vc: DialogTestSkillViewController
-    protected static controllerMap = {
+    private vc!: DialogTestSkillViewController
+    protected controllerMap = {
         dialogTest: DialogTestSkillViewController,
         spyTest: SpyDialogViewController,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Svc()
     }
 
     @test()
-    protected static renders() {
+    protected renders() {
         const model = this.vc.render()
         assert.isArray(model.layouts)
     }
 
     @test()
-    protected static async doesntThrowWhenPresenting() {
+    protected async doesntThrowWhenPresenting() {
         await this.vc.showTermsOfService()
     }
 
     @test()
-    protected static getsBackDialogController() {
+    protected getsBackDialogController() {
         const dialog = this.vc.renderInDialogAndGetDlgVc()
         assert.isTruthy(dialog)
         assert.isFunction(dialog.hide)
     }
 
     @test()
-    protected static async canWaitUntilDialogIsClosed() {
+    protected async canWaitUntilDialogIsClosed() {
         const dialog = this.vc.renderInDialogAndGetDlgVc()
 
         let waited = false
@@ -73,7 +74,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async onCloseCallbackInvoked() {
+    protected async onCloseCallbackInvoked() {
         let wasHit = false
 
         const dialog = this.vc.invokesOnCloseCallback(() => {
@@ -86,7 +87,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static dialogProperlyUsesCardViewController() {
+    protected dialogProperlyUsesCardViewController() {
         const vc = this.Controller('dialog', {
             body: {
                 sections: [
@@ -106,7 +107,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetCardVcFromDialog() {
+    protected async canGetCardVcFromDialog() {
         const vc = this.Controller('dialog', {
             body: {
                 sections: [
@@ -123,7 +124,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
 
     @test('can get should show close button 1', false)
     @test('can get should show close button 2', true)
-    protected static canGetShowingCloseButton(expected: boolean) {
+    protected canGetShowingCloseButton(expected: boolean) {
         const vc = this.Controller('dialog', {
             shouldShowCloseButton: expected,
         })
@@ -132,7 +133,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderingInDialogGetsShouldShowCloseButtonWhenRenderingAsCard() {
+    protected async renderingInDialogGetsShouldShowCloseButtonWhenRenderingAsCard() {
         const dlg = this.vc.renderInDialogAndGetDlgVc({
             shouldShowCloseButton: false,
             ...this.Controller('card', {
@@ -147,7 +148,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetBusyOnDialog() {
+    protected async canSetBusyOnDialog() {
         const dlg = this.vc.renderInDialogAndGetDlgVc({})
 
         vcAssert.attachTriggerRenderCounter(dlg)
@@ -162,7 +163,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hidingDialogCallsDidHideOnVc() {
+    protected async hidingDialogCallsDidHideOnVc() {
         const cardVc = this.Controller('card', {})
         let wasHit = false
 
@@ -181,7 +182,7 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hidingDialogCallsDidHideDownTheModelTree() {
+    protected async hidingDialogCallsDidHideDownTheModelTree() {
         const spy = this.Controller(
             'spyTest' as any,
             {}
@@ -197,14 +198,14 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async shouldNotCallDidHideIfParentOfDialogIsNotRenderedInDialog() {
+    protected async shouldNotCallDidHideIfParentOfDialogIsNotRenderedInDialog() {
         const dlg = await this.vc.renderCardInDialog()
         await dlg.hide()
         assert.isFalse(this.vc.wasDidHideHit)
     }
 
     @test()
-    protected static async hidingDoesNotBlowUpIfDialogDoesNotHaveParentMethod() {
+    protected async hidingDoesNotBlowUpIfDialogDoesNotHaveParentMethod() {
         const dlg = await this.vc.renderCardInDialog()
 
         //@ts-ignore
@@ -213,21 +214,21 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
         await dlg.hide()
     }
 
-    private static assertDialogIsBusy(dlg: DialogViewController) {
+    private assertDialogIsBusy(dlg: DialogViewController) {
         const model = this.render(dlg)
         assert.isTrue(model.body?.isBusy)
     }
 
-    private static Svc() {
+    private Svc() {
         return this.Factory().Controller('dialogTest', {})
     }
 
-    private static assertDialogIsNotBusy(dlg: DialogViewController) {
+    private assertDialogIsNotBusy(dlg: DialogViewController) {
         const model = this.render(dlg)
         assert.isFalse(model.body?.isBusy)
     }
 
-    protected static assertSectionsHaveControllers(vc: DialogViewController) {
+    protected assertSectionsHaveControllers(vc: DialogViewController) {
         const model = this.render(vc)
         for (const section of model.body?.sections ?? []) {
             assert.isTruthy(section.controller)

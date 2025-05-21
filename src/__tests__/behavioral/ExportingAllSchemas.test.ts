@@ -1,11 +1,12 @@
 import pathUtil from 'path'
 import globby from '@sprucelabs/globby'
 import { diskUtil, HASH_SPRUCE_BUILD_DIR } from '@sprucelabs/spruce-skill-utils'
-import AbstractSpruceTest, { test, assert } from '@sprucelabs/test-utils'
+import AbstractSpruceTest, { test, suite, assert } from '@sprucelabs/test-utils'
 
+@suite()
 export default class ExportingAllSchemasTest extends AbstractSpruceTest {
     @test()
-    protected static async exportsAllSchemas() {
+    protected async exportsAllSchemas() {
         const builderPattern = this.resolvePath(
             HASH_SPRUCE_BUILD_DIR,
             'schemas',

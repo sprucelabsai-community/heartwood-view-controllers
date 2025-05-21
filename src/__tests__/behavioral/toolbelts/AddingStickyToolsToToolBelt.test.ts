@@ -1,26 +1,27 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { StickyTool, StickyToolPosition } from '../../../types/calendar.types'
 import ToolBeltViewController from '../../../viewControllers/ToolBelt.vc'
 
+@suite()
 export default class AddingStickyToolsToToolBeltTest extends AbstractViewControllerTest {
-    private static vc: ToolBeltViewController
+    private vc!: ToolBeltViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('tool-belt', {})
     }
 
     @test()
-    protected static hasAddStickTool() {
+    protected hasAddStickTool() {
         assert.isFunction(this.vc.setStickyTool)
     }
 
     @test()
-    protected static canAddStickTool() {
+    protected canAddStickTool() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.setStickyTool())
 
@@ -30,13 +31,13 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static canAddSticky() {
+    protected canAddSticky() {
         this.setStickyTool()
     }
 
     @test('renders tool 1', 'test', 'add')
     @test('renders tool 2', 'test-2', 'square')
-    protected static stickyToolGetsRendered(id: string, lineIcon: any) {
+    protected stickyToolGetsRendered(id: string, lineIcon: any) {
         const tool: Tool = {
             card: {} as any,
             id,
@@ -52,7 +53,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static stickyToolGoesToTop() {
+    protected stickyToolGoesToTop() {
         this.addTool()
 
         const tool = this.setStickyTool()
@@ -65,13 +66,13 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static noToolsInToolBeltToStart() {
+    protected noToolsInToolBeltToStart() {
         const tools = this.render(this.vc).tools
         assert.isLength(tools, 0)
     }
 
     @test()
-    protected static rendersExpectedToolsMoreThanOnce() {
+    protected rendersExpectedToolsMoreThanOnce() {
         this.setStickyTool()
 
         this.render(this.vc)
@@ -83,7 +84,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static canSetBottomStickyTool() {
+    protected canSetBottomStickyTool() {
         const tool = this.setStickyTool({
             position: 'bottom',
         })
@@ -98,9 +99,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
     @test(`can't remove bottom sticky if not found`, 'bottom')
     @test(`can't remove top sticky if not found`, 'top')
-    protected static removingStickyThrowsIfNotSet(
-        position: StickyToolPosition
-    ) {
+    protected removingStickyThrowsIfNotSet(position: StickyToolPosition) {
         const err = assert.doesThrow(() => this.vc.removeStickyTool(position))
         errorAssert.assertError(err, 'TOOL_NOT_FOUND', {
             id: position,
@@ -109,7 +108,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
 
     @test('can remove bottom sticky', 'bottom')
     @test('can remove top sticky', 'top')
-    protected static canRemoveSticky(position: StickyToolPosition) {
+    protected canRemoveSticky(position: StickyToolPosition) {
         this.setStickyTool({
             position,
         })
@@ -120,7 +119,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static clearsOnlyStickyTool() {
+    protected clearsOnlyStickyTool() {
         this.setStickyTool({
             position: 'top',
         })
@@ -134,14 +133,14 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
     }
 
     @test()
-    protected static removingStickyToolTriggersRender() {
+    protected removingStickyToolTriggersRender() {
         this.setStickyTool({ position: 'top' })
         this.vc.removeStickyTool('top')
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canClearStickTools() {
+    protected async canClearStickTools() {
         this.setStickyTool({ position: 'top' })
         this.setStickyTool({ position: 'bottom' })
         this.vc.clearStickyTools()
@@ -150,12 +149,12 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static assertRendersTotalTools(expected: number) {
+    private assertRendersTotalTools(expected: number) {
         const tools = this.render(this.vc).tools
         assert.isLength(tools, expected)
     }
 
-    private static assertToolsMatch(
+    private assertToolsMatch(
         tool: StickyTool,
         renderedTool: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool
     ) {
@@ -166,7 +165,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
         assert.isEqualDeep(renderedTool, tool)
     }
 
-    private static addTool() {
+    private addTool() {
         this.vc.addTool({
             id: 'zebra',
             card: {} as any,
@@ -174,7 +173,7 @@ export default class AddingStickyToolsToToolBeltTest extends AbstractViewControl
         })
     }
 
-    private static setStickyTool(tool?: Partial<StickyTool>) {
+    private setStickyTool(tool?: Partial<StickyTool>) {
         const built: StickyTool = {
             lineIcon: 'add-circle',
             position: 'top',

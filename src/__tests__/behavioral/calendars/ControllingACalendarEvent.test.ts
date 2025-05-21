@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { CalendarEvent, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -6,12 +6,13 @@ import calendarSeeder from '../../../tests/utilities/calendarSeeder'
 import { CalendarEventViewController } from '../../../types/calendar.types'
 import SpyCalendarVc from './SpyCalendarVc'
 
+@suite()
 export default class ControllingACalendarEvent extends AbstractViewControllerTest {
-    private static calendarVc: SpyCalendarVc
-    private static event: CalendarEvent
-    private static vc: CalendarEventViewController
+    private calendarVc!: SpyCalendarVc
+    private event!: CalendarEvent
+    private vc!: CalendarEventViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.getFactory().setController('calendar', SpyCalendarVc)
@@ -28,7 +29,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static throwWithoutGetterAndSetter() {
+    protected throwWithoutGetterAndSetter() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.Controller('calendar-event', {})
@@ -46,9 +47,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
 
     @test('can mixin updates 1', { style: 'blocked' })
     @test('can mixin updates 2', { startDateTimeMs: 100 })
-    protected static mixingInUpdatesUpdatesEvent(
-        changes: Partial<CalendarEvent>
-    ) {
+    protected mixingInUpdatesUpdatesEvent(changes: Partial<CalendarEvent>) {
         this.vc.mixinChanges(changes)
 
         const expected = {
@@ -71,7 +70,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static canSetIsBusy() {
+    protected canSetIsBusy() {
         assert.isFalse(this.vc.getIsBusy())
         this.vc.setIsBusy(true)
         assert.isTrue(this.vc.getIsBusy())
@@ -81,19 +80,19 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async mixingInChangesTriggersRender() {
+    protected async mixingInChangesTriggersRender() {
         this.vc.mixinChanges({ style: 'draft' })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async updatingAnEventOnCalendarTriggersRenderOnEvent() {
+    protected async updatingAnEventOnCalendarTriggersRenderOnEvent() {
         this.calendarVc.updateEvent(this.event.id, { style: 'draft' })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async eventKnowsIfBeenDeleted() {
+    protected async eventKnowsIfBeenDeleted() {
         assert.isFalse(this.vc.getIsOrphaned())
 
         await this.calendarVc.removeEvent(this.event.id)
@@ -102,7 +101,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async eventsRenderIsSelectedFalseByDefault() {
+    protected async eventsRenderIsSelectedFalseByDefault() {
         let event = this.addEvent()
 
         assert.isUndefined(this.getEvent(event.id).isSelected)
@@ -113,7 +112,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async havingASelectedEventDoesNotImpactNotSelectedEvents() {
+    protected async havingASelectedEventDoesNotImpactNotSelectedEvents() {
         const e1 = this.addEvent()
         const e2 = this.addEvent()
 
@@ -123,7 +122,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static selectingDeselectingTriggersRender() {
+    protected selectingDeselectingTriggersRender() {
         this.vc.select()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
         this.vc.deselect()
@@ -131,7 +130,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async eventVcsWithSameIdShareTriggerRenders() {
+    protected async eventVcsWithSameIdShareTriggerRenders() {
         let hitCount = 0
 
         this.vc.setTriggerRenderHandler(() => {
@@ -147,7 +146,7 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async calendarSelectedEventClearedBeforeDeselectOnEventVc() {
+    protected async calendarSelectedEventClearedBeforeDeselectOnEventVc() {
         this.vc.deselect = () => {
             assert.isFalsy(this.calendarVc.getSelectedEvent())
         }
@@ -156,11 +155,11 @@ export default class ControllingACalendarEvent extends AbstractViewControllerTes
         await this.calendarVc.deselectEvent()
     }
 
-    private static getEvent(eventId: string) {
+    private getEvent(eventId: string) {
         return this.calendarVc.getEvent(eventId)
     }
 
-    private static addEvent() {
+    private addEvent() {
         const event = calendarSeeder.generateEventValues()
         this.calendarVc.addEvent(event)
         return event

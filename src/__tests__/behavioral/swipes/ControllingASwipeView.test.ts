@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -7,15 +7,16 @@ import SwipeCardViewController, {
     SwipeViewControllerOptions,
 } from '../../../viewControllers/SwipeCard.vc'
 
+@suite()
 export default class SwipingThroughSlidesTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: SwipeCardViewController
-    private static slide1Id: string
-    private static slide2Id: string
-    private static slide3Id: string
-    private static changeHandlerHitCount = 0
+    protected controllerMap = {}
+    private vc!: SwipeCardViewController
+    private slide1Id!: string
+    private slide2Id!: string
+    private slide3Id!: string
+    private changeHandlerHitCount = 0
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.slide1Id = generateId()
@@ -55,23 +56,23 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canCreateSwipingThroughSlides() {
+    protected async canCreateSwipingThroughSlides() {
         assert.isTruthy(this.vc)
     }
 
     @test()
-    protected static async startsAtFirstSlide() {
+    protected async startsAtFirstSlide() {
         assert.isEqual(this.vc.getPresentSlide(), 0)
     }
 
     @test()
-    protected static async canJumpToFutureSlide() {
+    protected async canJumpToFutureSlide() {
         await this.vc.jumpToSlide(1)
         assert.isEqual(this.vc.getPresentSlide(), 1)
     }
 
     @test()
-    protected static async cantJumpPastLastSlide() {
+    protected async cantJumpPastLastSlide() {
         const vc = this.Vc({
             slides: [
                 {
@@ -86,7 +87,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async renders() {
+    protected async renders() {
         const model = this.render(this.vc)
 
         assert.isLength(model.body?.sections, 3)
@@ -96,7 +97,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async updatingBadSectionThrows() {
+    protected async updatingBadSectionThrows() {
         const err = assert.doesThrow(() =>
             this.vc.setSlide(10, { text: { content: 'Hey' } })
         )
@@ -108,7 +109,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
 
     @test('should break into cards true', true)
     @test('should break into cards false', false)
-    protected static async canSetBreakIntoCardsOnLandscape(
+    protected async canSetBreakIntoCardsOnLandscape(
         shouldBreakIntoCardsOnLandscape: boolean
     ) {
         let vc = this.Vc({
@@ -124,7 +125,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSetSlide() {
+    protected async canSetSlide() {
         const vc = this.Vc({
             slides: [
                 {
@@ -148,7 +149,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async throwsWhenSettingSlideThatDoesNotExist() {
+    protected async throwsWhenSettingSlideThatDoesNotExist() {
         const vc = this.Vc({
             slides: [
                 {
@@ -163,7 +164,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async canSetSlideById() {
+    protected async canSetSlideById() {
         const vc = this.Vc({
             slides: [
                 {
@@ -196,7 +197,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static updatingSectionThatDoesNotExistThrows() {
+    protected updatingSectionThatDoesNotExistThrows() {
         const vc = this.Vc({
             slides: [
                 {
@@ -211,7 +212,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static updatesIfFound() {
+    protected updatesIfFound() {
         const vc = this.Vc({
             slides: [
                 {
@@ -250,7 +251,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canUpdateSlideThatIsNotTheFirst() {
+    protected canUpdateSlideThatIsNotTheFirst() {
         const vc = this.Vc({
             slides: [
                 {
@@ -276,7 +277,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
         assert.isEqualDeep(section, { ...updates, id: 'next' })
     }
 
-    private static renderSection(vc: SwipeCardViewController, idx = 0) {
+    private renderSection(vc: SwipeCardViewController, idx = 0) {
         const model = this.render(vc)
         const section = model.body?.sections?.[idx]
         assert.isTruthy(section)
@@ -285,7 +286,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async cardSectionShouldNotCallRenderOnSwipeSlide() {
+    protected async cardSectionShouldNotCallRenderOnSwipeSlide() {
         let renderCount = 0
         const buttonGroupVc = this.Factory().Controller('buttonGroup', {
             buttons: [],
@@ -318,7 +319,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static throwsWhenMarkingBadSlideAsComplete() {
+    protected throwsWhenMarkingBadSlideAsComplete() {
         const err = assert.doesThrow(() => this.vc.markSlideAsComplete(-10))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['slide'],
@@ -326,7 +327,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canMarkSlideAsComplete() {
+    protected canMarkSlideAsComplete() {
         let model = this.render(this.vc)
         assert.isUndefined(model.body?.sections?.[0].isComplete)
 
@@ -337,7 +338,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async settingCurrentSlideTriggersSlideCallback() {
+    protected async settingCurrentSlideTriggersSlideCallback() {
         SwipeCardViewController.swipeDelay = 0
         let onSlideChangeSlide = -1
         let changeHitCount = 0
@@ -374,7 +375,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canUpdateFooter() {
+    protected canUpdateFooter() {
         this.vc = this.Vc({
             slides: [],
         })
@@ -386,7 +387,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static addingSlideTriggersRender() {
+    protected addingSlideTriggersRender() {
         this.vc.addSlide({ title: 'Go!' })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
 
@@ -396,7 +397,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static removingSlideTriggersRender() {
+    protected removingSlideTriggersRender() {
         this.vc.addSlide({ title: 'Go!' })
         this.vc.removeSlide(1)
 
@@ -404,13 +405,13 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async addingSlideAtIndexTriggersRender() {
+    protected async addingSlideAtIndexTriggersRender() {
         this.vc.addSlideAtIndex(0, { title: 'new' })
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async cantJumpToBadId() {
+    protected async cantJumpToBadId() {
         //@ts-ignore
         const err = await assert.doesThrowAsync(() =>
             this.vc.jumpToSlide('taco')
@@ -421,7 +422,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canGetTotalSlides() {
+    protected canGetTotalSlides() {
         const vc = this.Vc({
             slides: [],
         })
@@ -430,14 +431,14 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static tracksWhenAdding() {
+    protected tracksWhenAdding() {
         assert.isEqual(this.vc.getTotalSlides(), 3)
         this.vc.addSlide({ title: 'go' })
         assert.isEqual(this.vc.getTotalSlides(), 4)
     }
 
     @test()
-    protected static async callingTriggerRenderOnCardVcTriggersOnSwipeVc() {
+    protected async callingTriggerRenderOnCardVcTriggersOnSwipeVc() {
         let wasHit = false
         this.vc.triggerRender = () => {
             wasHit = true
@@ -450,7 +451,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canGetSlideById() {
+    protected canGetSlideById() {
         this.vc = this.Vc({
             slides: [
                 {
@@ -463,7 +464,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static canBeSetToRenderNull() {
+    protected canBeSetToRenderNull() {
         this.vc.setShouldRenderNull(true)
 
         const model = this.renderVc()
@@ -477,7 +478,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async restoresOriginalModelWhenNotNull() {
+    protected async restoresOriginalModelWhenNotNull() {
         const expected = this.renderVc()
 
         this.vc.setShouldRenderNull(true)
@@ -488,20 +489,20 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async sameFooterVcEverTime() {
+    protected async sameFooterVcEverTime() {
         const vc = this.renderAndGetFooterVc()
         const vc2 = this.renderAndGetFooterVc()
         assert.isEqual(vc, vc2)
     }
 
     @test()
-    protected static async throwsWhenGettingBadSlide() {
+    protected async throwsWhenGettingBadSlide() {
         const err = assert.doesThrow(() => this.vc.getSlide(generateId()))
         errorAssert.assertError(err, 'INVALID_PARAMETERS')
     }
 
     @test()
-    protected static async jumpToSlideWithBadIdThrows() {
+    protected async jumpToSlideWithBadIdThrows() {
         const err = await assert.doesThrowAsync(() =>
             this.vc.jumpToSlide(generateId())
         )
@@ -509,20 +510,20 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async jumpToSlideWithGoodId() {
+    protected async jumpToSlideWithGoodId() {
         await this.jumpToSlide(this.slide2Id)
         assert.isEqual(this.vc.getPresentSlide(), 1)
     }
 
     @test()
-    protected static async canGetPresentSlideId() {
+    protected async canGetPresentSlideId() {
         this.assertSelectedSlideId(this.slide1Id)
         await this.jumpToSlide(this.slide2Id)
         this.assertSelectedSlideId(this.slide2Id)
     }
 
     @test()
-    protected static async jumpingToSameSlideDoesNotSwipeToOnSwipeController() {
+    protected async jumpingToSameSlideDoesNotSwipeToOnSwipeController() {
         const model = this.renderVc()
         let hitCount = 0
         model.body?.swipeController?.({
@@ -538,7 +539,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     @test()
-    protected static async slideChangeHandlerDebounces() {
+    protected async slideChangeHandlerDebounces() {
         SwipeCardViewController.swipeDelay = 10
         await Promise.all([
             this.jumpToSlide(1),
@@ -556,37 +557,35 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
         this.assertChangeHandlerHitCount(3)
     }
 
-    private static assertChangeHandlerHitCount(expected: number) {
+    private assertChangeHandlerHitCount(expected: number) {
         assert.isEqual(this.changeHandlerHitCount, expected)
     }
 
-    private static async jumpToSlide(id: string | number) {
+    private async jumpToSlide(id: string | number) {
         await this.vc.jumpToSlide(id)
     }
 
-    private static assertSelectedSlideId(expected: string) {
+    private assertSelectedSlideId(expected: string) {
         assert.isEqual(this.vc.getPresentSlideId(), expected)
     }
 
-    private static renderAndGetFooterVc() {
+    private renderAndGetFooterVc() {
         const { controller } = this.render(this.vc)
         const footer = this.render(controller!)
         const vc = footer?.controller
         return vc
     }
 
-    private static renderVc() {
+    private renderVc() {
         return this.render(this.vc)
     }
 
-    private static cleanModel(model: Card) {
+    private cleanModel(model: Card) {
         delete model.controller
         return model
     }
 
-    private static Vc(
-        options: SwipeViewControllerOptions
-    ): SwipeCardViewController {
+    private Vc(options: SwipeViewControllerOptions): SwipeCardViewController {
         return this.Controller('swipeCard', options)
     }
 }

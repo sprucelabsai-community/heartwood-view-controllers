@@ -1,19 +1,20 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import toastAssert from '../../../tests/utilities/toastAssert'
 import { ToastOptions } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 
+@suite()
 export default class ToastTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
+    private vc!: CardViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
     }
 
     @test()
-    protected static async canCreateToast() {
+    protected async canCreateToast() {
         let wasHit = false
         let passedOptions: ToastOptions | undefined
         this.views = this.Factory({
@@ -37,7 +38,7 @@ export default class ToastTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenNotToasted() {
+    protected async throwsWhenNotToasted() {
         await assert.doesThrowAsync(
             () => toastAssert.rendersToast(this.vc, () => {}),
             'this.toast'
@@ -47,7 +48,7 @@ export default class ToastTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfToastIsRendered() {
+    protected async knowsIfToastIsRendered() {
         this.vc = this.Controller('card', {})
 
         await toastAssert.rendersToast(this.vc, () => this.renderToast())
@@ -61,7 +62,7 @@ export default class ToastTest extends AbstractViewControllerTest {
         )
     }
 
-    private static renderToast(): void | Promise<void> {
+    private renderToast(): void | Promise<void> {
         //@ts-ignore
         return this.vc.toast({ message: 'hi' })
     }

@@ -1,34 +1,35 @@
-import { assert, errorAssert, test } from '@sprucelabs/test-utils'
+import { assert, errorAssert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import PagerViewController, {
     PagerViewControllerOptions,
 } from '../../../viewControllers/pagers/Pager.vc'
 
+@suite()
 export default class ControllingAPagerTest extends AbstractViewControllerTest {
-    private static vc: PagerViewController
-    private static onChangePagePage?: number
+    private vc!: PagerViewController
+    private onChangePagePage?: number
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         delete this.onChangePagePage
         this.setup({})
     }
 
     @test()
-    protected static async canCreateControllingAPager() {
+    protected async canCreateControllingAPager() {
         this.Controller('pager', {})
     }
 
     @test()
-    protected static async rendersItselfAsController() {
+    protected async rendersItselfAsController() {
         this.setup({})
         assert.isEqual(this.model.controller, this.vc)
     }
 
     @test('passes through page options 1', 10, 5)
     @test('passes through page options 2', 11, 1)
-    protected static async passesThroughPageOptions(
+    protected async passesThroughPageOptions(
         totalPages: number,
         currentPage: number
     ) {
@@ -39,7 +40,7 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    public static settingTotalPagesUpdatesViewModel() {
+    public settingTotalPagesUpdatesViewModel() {
         this.setTotalPages(10)
         this.assertTotalPagesEquals(10)
 
@@ -48,58 +49,58 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static settingTotalPagesTriggersRender() {
+    protected settingTotalPagesTriggersRender() {
         this.setTotalPages(5)
         this.assertTriggerRenderCount(1)
     }
 
     @test()
-    protected static settingCurrentPageToNegativeThrows() {
+    protected settingCurrentPageToNegativeThrows() {
         this.setTotalPages(2)
         this.assertSetCurrentPageThrows(-1)
     }
 
     @test()
-    protected static async settingCurrentPageToHigherThanTotalPagesThrows() {
+    protected async settingCurrentPageToHigherThanTotalPagesThrows() {
         this.setTotalPages(2)
         this.assertSetCurrentPageThrows(3)
         this.assertSetCurrentPageThrows(2)
     }
 
     @test()
-    protected static canSetCurrentPage() {
+    protected canSetCurrentPage() {
         this.setTotalPages(2)
         this.setCurrentPage(1)
     }
 
     @test()
-    protected static async throwsIfTotalPagesNotSet() {
+    protected async throwsIfTotalPagesNotSet() {
         this.assertSetCurrentPageThrows(1)
     }
 
     @test()
-    protected static async setCurrentPageTriggersRender() {
+    protected async setCurrentPageTriggersRender() {
         this.setTotalPages(2)
         this.setCurrentPage(1)
         this.assertTriggerRenderCount(2)
     }
 
     @test()
-    protected static currentPageSetsCorrectly() {
+    protected currentPageSetsCorrectly() {
         this.setTotalPages(10)
         this.assertCurrentPageSetsCorrectly(1)
         this.assertCurrentPageSetsCorrectly(5)
     }
 
     @test()
-    protected static settingCurrentPageInvokesCallback() {
+    protected settingCurrentPageInvokesCallback() {
         this.setTotalPages(10)
         this.assertSetCurrentPageCallbackPassesPageThrough(5)
         this.assertSetCurrentPageCallbackPassesPageThrough(3)
     }
 
     @test()
-    protected static async canGetTotalpages() {
+    protected async canGetTotalpages() {
         this.setTotalPages(5)
         this.assertGetTotalPagesReturns(5)
 
@@ -108,7 +109,7 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetCurrentPage() {
+    protected async canGetCurrentPage() {
         this.setTotalPages(10)
         this.setCurrentPage(5)
 
@@ -119,17 +120,17 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async getTotalPagesReturnsNegativeOneIfNotSet() {
+    protected async getTotalPagesReturnsNegativeOneIfNotSet() {
         this.assertGetTotalPagesReturns(-1)
     }
 
     @test()
-    protected static async getCurrentPageReturnsNegativeOneIfNotSet() {
+    protected async getCurrentPageReturnsNegativeOneIfNotSet() {
         this.assertGetCurrentPageReturns(-1)
     }
 
     @test()
-    protected static async doesNotTriggerOnChangePageIfCurrentPageIsSetToSameValue() {
+    protected async doesNotTriggerOnChangePageIfCurrentPageIsSetToSameValue() {
         this.setTotalPages(2)
         this.setCurrentPage(1)
         delete this.onChangePagePage
@@ -138,7 +139,7 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canClearPagingSettings() {
+    protected canClearPagingSettings() {
         this.setTotalPages(10)
         this.setCurrentPage(5)
         this.clear()
@@ -147,35 +148,35 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static clearTriggerRender() {
+    protected clearTriggerRender() {
         this.clear()
         this.assertTriggerRenderCount(1)
     }
 
-    private static clear() {
+    private clear() {
         this.vc.clear()
     }
 
-    private static assertGetCurrentPageReturns(expected: number) {
+    private assertGetCurrentPageReturns(expected: number) {
         assert.isEqual(this.vc.getCurrentPage(), expected)
     }
 
-    private static assertGetTotalPagesReturns(expected: number) {
+    private assertGetTotalPagesReturns(expected: number) {
         assert.isEqual(this.vc.getTotalPages(), expected)
     }
 
-    private static assertSetCurrentPageCallbackPassesPageThrough(page: number) {
+    private assertSetCurrentPageCallbackPassesPageThrough(page: number) {
         this.model.setCurrentPage(page)
         assert.isEqual(this.onChangePagePage, page)
         this.assertCurrentPageEquals(page)
     }
 
-    private static assertCurrentPageSetsCorrectly(current: number) {
+    private assertCurrentPageSetsCorrectly(current: number) {
         this.setCurrentPage(current)
         this.assertCurrentPageEquals(current)
     }
 
-    private static assertCurrentPageEquals(current: number) {
+    private assertCurrentPageEquals(current: number) {
         assert.isEqual(
             this.model.currentPage,
             current,
@@ -183,34 +184,34 @@ export default class ControllingAPagerTest extends AbstractViewControllerTest {
         )
     }
 
-    private static assertTriggerRenderCount(expected: number) {
+    private assertTriggerRenderCount(expected: number) {
         vcAssert.assertTriggerRenderCount(this.vc, expected)
     }
 
-    private static assertSetCurrentPageThrows(current: number) {
+    private assertSetCurrentPageThrows(current: number) {
         const err = assert.doesThrow(() => this.setCurrentPage(current))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['currentPage'],
         })
     }
 
-    private static setCurrentPage(current: number): any {
+    private setCurrentPage(current: number): any {
         return this.vc.setCurrentPage(current)
     }
 
-    private static setTotalPages(pages: number) {
+    private setTotalPages(pages: number) {
         this.vc.setTotalPages(pages)
     }
 
-    private static assertTotalPagesEquals(totalPages: number) {
+    private assertTotalPagesEquals(totalPages: number) {
         assert.isEqual(this.model.totalPages, totalPages)
     }
 
-    private static get model() {
+    private get model() {
         return this.render(this.vc)
     }
 
-    private static setup(options: PagerViewControllerOptions) {
+    private setup(options: PagerViewControllerOptions) {
         this.vc = this.Controller('pager', {
             onChangePage: (page) => {
                 this.onChangePagePage = page

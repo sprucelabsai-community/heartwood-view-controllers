@@ -1,12 +1,13 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { ListCell, ListRow } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertingButtonBarsInListsTest extends AbstractViewControllerTest {
     @test()
-    protected static throwsMissingParams() {
+    protected throwsMissingParams() {
         //@ts-ignore
         const err = assert.doesThrow(() => vcAssert.assertRowRendersButtonBar())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -15,7 +16,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static passesWhenFindingButtonBar() {
+    protected passesWhenFindingButtonBar() {
         const vc = this.Controller('list', {
             rows: [this.renderRowWithButtonBar()],
         })
@@ -24,7 +25,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static async throwsWhenCantFindRow() {
+    protected async throwsWhenCantFindRow() {
         const vc = this.Controller('list', {
             rows: [],
         })
@@ -32,7 +33,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static wontFindIfInDifferentRow() {
+    protected wontFindIfInDifferentRow() {
         const vc = this.Controller('list', {
             rows: [this.renderRowWithButtonBar(), { id: 'waka', cells: [] }],
         })
@@ -41,7 +42,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static canFindInDifferentRow() {
+    protected canFindInDifferentRow() {
         const vc = this.Controller('list', {
             rows: [{ id: 'waka', cells: [] }, this.renderRowWithButtonBar()],
         })
@@ -50,7 +51,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static canFindButtonBarInDifferentCell() {
+    protected canFindButtonBarInDifferentCell() {
         const vc = this.Controller('list', {
             rows: [
                 {
@@ -67,7 +68,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
     }
 
     @test()
-    protected static returnsButtonBarController() {
+    protected returnsButtonBarController() {
         const buttonBarVc = this.Controller('buttonBar', {
             buttons: [
                 {
@@ -86,14 +87,14 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
         assert.isEqual(match, buttonBarVc)
     }
 
-    private static renderRowWithButtonBar(): ListRow {
+    private renderRowWithButtonBar(): ListRow {
         return {
             id: 'first',
             cells: [this.renderCellWithButtonBar()],
         }
     }
 
-    private static renderCellWithButtonBar(): ListCell {
+    private renderCellWithButtonBar(): ListCell {
         return {
             buttonBar: this.Controller('buttonBar', {
                 buttons: [

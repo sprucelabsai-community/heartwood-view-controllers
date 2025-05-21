@@ -1,5 +1,11 @@
 import { buildLog, Log } from '@sprucelabs/spruce-skill-utils'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
@@ -15,11 +21,12 @@ import CardViewController, {
 import NavigationViewController from '../../../viewControllers/navigation/Navigation.vc'
 import ViewControllerFactory from '../../../viewControllers/ViewControllerFactory'
 
+@suite()
 export default class UsingAppControllerTest extends AbstractViewControllerTest {
-    private static spyFactory: SpyViewFactory
-    private static app: SpyApp
+    private spyFactory!: SpyViewFactory
+    private app!: SpyApp
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         ViewControllerFactory.Class = SpyViewFactory
         this.spyFactory = this.getFactory() as SpyViewFactory
@@ -27,13 +34,13 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canBuildApp() {
+    protected async canBuildApp() {
         const app = this.App()
         assert.isInstanceOf(app, SpyApp)
     }
 
     @test()
-    protected static async constructsAppWithExpectedOptions() {
+    protected async constructsAppWithExpectedOptions() {
         this.spyFactory.log = buildLog('test')
         const app = this.App()
         const expected = this.spyFactory.getExpectedConstructorOptions()
@@ -41,7 +48,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async knowsIfHasApp() {
+    protected async knowsIfHasApp() {
         assert.isFalse(this.hasApp(generateId()))
 
         SpyApp.id = generateId()
@@ -52,7 +59,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async havingAnIdProperyOnAppThrows() {
+    protected async havingAnIdProperyOnAppThrows() {
         HasIdApp.id = generateId()
         this.spyFactory.setAppController(HasIdApp)
         //@ts-ignore
@@ -63,7 +70,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async attachesIdToAppInstance() {
+    protected async attachesIdToAppInstance() {
         SpyApp.id = generateId()
         this.spyFactory.setAppController(SpyApp)
         //@ts-ignore
@@ -73,7 +80,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async setsLocalProps() {
+    protected async setsLocalProps() {
         this.spyFactory.plugins = {}
         const app = this.App()
 
@@ -82,7 +89,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async toastSentToToastHandler() {
+    protected async toastSentToToastHandler() {
         let passedOptions: ToastOptions | undefined
         this.spyFactory.toastHandler = (options) => {
             passedOptions = options
@@ -100,21 +107,21 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRenderNavigation() {
+    protected async canRenderNavigation() {
         const app = this.App()
         navigationAssert.appRendersNavigation(app)
         assert.doesThrow(() => navigationAssert.appDoesNotRenderNavigation(app))
     }
 
     @test()
-    protected static async canAssertDoesNotRenderNavigation() {
+    protected async canAssertDoesNotRenderNavigation() {
         this.app.disableNavigation()
         navigationAssert.appDoesNotRenderNavigation(this.app)
         assert.doesThrow(() => navigationAssert.appRendersNavigation(this.app))
     }
 
     @test()
-    protected static async canGetOtherViewsFromApp() {
+    protected async canGetOtherViewsFromApp() {
         const options: CardViewControllerOptions = {
             header: {
                 title: generateId(),
@@ -126,24 +133,24 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canConnectToApi() {
+    protected async canConnectToApi() {
         assert.isEqual(
             this.app.getConnectToApi(),
             this.spyFactory.getConnectToApi()
         )
     }
 
-    private static hasApp(id: string): boolean | null | undefined {
+    private hasApp(id: string): boolean | null | undefined {
         return this.spyFactory.hasApp(id)
     }
 
-    protected static App() {
+    protected App() {
         return this.spyFactory.BuildApp(SpyApp)
     }
 }
 
 class SpyApp extends AbstractAppController {
-    public constructorOptions: ViewControllerOptions
+    public constructorOptions!: ViewControllerOptions
     private nav?: NavigationViewController
 
     public constructor(options: ViewControllerOptions) {

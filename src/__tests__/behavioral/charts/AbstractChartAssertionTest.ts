@@ -9,10 +9,10 @@ import { BarChartViewControllerOptions } from '../../../viewControllers/charts/B
 import { LineGraphViewControllerOptions } from '../../../viewControllers/charts/LineGraph.vc'
 
 export default abstract class AbstractChartAssertionTest extends AbstractViewControllerTest {
-    protected static vcName: 'bar-chart' | 'line-graph'
-    protected static sectionKey: 'barChart' | 'lineGraph'
+    protected vcName!: 'bar-chart' | 'line-graph'
+    protected sectionKey!: 'barChart' | 'lineGraph'
 
-    protected static assertCardRendersChart(
+    protected assertCardRendersChart(
         _cardVc: CardViewController,
         _id?: string
     ): ViewController<any> {
@@ -21,7 +21,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         )
     }
 
-    protected static Vc(options: Options) {
+    protected Vc(options: Options) {
         if (!this.vcName) {
             throw new Error(
                 "You must declare private vcName = 'controller-name' in your test class."
@@ -30,7 +30,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         return this.Controller(this.vcName, options)
     }
 
-    protected static CardVc(sections: CardSection[]) {
+    protected CardVc(sections: CardSection[]) {
         return this.Controller('card', {
             body: {
                 sections,
@@ -38,15 +38,12 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         })
     }
 
-    protected static assertNotRenderingChart(
-        sections: CardSection[],
-        id?: string
-    ) {
+    protected assertNotRenderingChart(sections: CardSection[], id?: string) {
         const cardVc = this.CardVc(sections)
         this.assertCardNotRenderingChart(cardVc, id)
     }
 
-    private static assertCardNotRenderingChart(
+    private assertCardNotRenderingChart(
         cardVc: CardViewController,
         id?: string
     ) {
@@ -56,12 +53,12 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         )
     }
 
-    protected static assertRendersGraph(sections: CardSection[], id?: string) {
+    protected assertRendersGraph(sections: CardSection[], id?: string) {
         const cardVc = this.CardVc(sections)
         return this.assertCardRendersChart(cardVc, id)
     }
 
-    protected static assertPassesIfChartInFirstSection() {
+    protected assertPassesIfChartInFirstSection() {
         const vc = this.Vc({})
         this.assertRendersGraph([
             {
@@ -70,7 +67,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         ])
     }
 
-    protected static assertPassesIfChartInSecondSection() {
+    protected assertPassesIfChartInSecondSection() {
         const vc = this.Vc({})
         this.assertRendersGraph([
             {},
@@ -80,7 +77,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         ])
     }
 
-    protected static assertPassesWithTwoCharts() {
+    protected assertPassesWithTwoCharts() {
         const vc = this.Vc({})
         const vc2 = this.Vc({})
         this.assertRendersGraph([
@@ -93,7 +90,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         ])
     }
 
-    protected static assertThrowsIfIdDoesNotMatch() {
+    protected assertThrowsIfIdDoesNotMatch() {
         const vc = this.Vc({ id: generateId() })
         this.assertNotRenderingChart(
             [
@@ -105,7 +102,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         )
     }
 
-    protected static assertMatchesOnIdInFirstMatch() {
+    protected assertMatchesOnIdInFirstMatch() {
         const id = generateId()
         const vc = this.Vc({ id })
         this.assertRendersGraph(
@@ -118,7 +115,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         )
     }
 
-    protected static assertIfChartHasIdButNotChecked() {
+    protected assertIfChartHasIdButNotChecked() {
         const vc = this.Vc({ id: generateId() })
         this.assertRendersGraph([
             {
@@ -127,7 +124,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         ])
     }
 
-    protected static assertReturnsChartVc() {
+    protected assertReturnsChartVc() {
         const vc = this.Vc({})
         const cardVc = this.CardVc([
             {
@@ -139,7 +136,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         assert.isEqual(barChart, vc)
     }
 
-    protected static assertReturnsChartVcWhenMatchingId() {
+    protected assertReturnsChartVcWhenMatchingId() {
         const id = generateId()
         const vc = this.Vc({ id })
         const vc2 = this.Vc({})
@@ -156,7 +153,7 @@ export default abstract class AbstractChartAssertionTest extends AbstractViewCon
         assert.isEqual(barChart, vc)
     }
 
-    protected static assertMatchesIdInSecondSection() {
+    protected assertMatchesIdInSecondSection() {
         const id = generateId()
         const vc = this.Vc({ id })
         const vc2 = this.Vc({})

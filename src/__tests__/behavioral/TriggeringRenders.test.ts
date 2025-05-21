@@ -1,12 +1,13 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { CardViewController } from '../../types/heartwood.types'
 
+@suite()
 export default class TriggeringRendersTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
-    private static hitCount: number
+    private vc!: CardViewController
+    private hitCount!: number
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
         this.hitCount = 0
@@ -14,14 +15,14 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetTriggerRenderHandler() {
+    protected async canSetTriggerRenderHandler() {
         this.assertHitCountEquals(0)
         this.triggerRender()
         this.assertHitCountEquals(1)
     }
 
     @test()
-    protected static async renderOnceLimitsToOneRender() {
+    protected async renderOnceLimitsToOneRender() {
         await this.vc.renderOnce(async () => {
             this.triggerRender()
             this.triggerRender()
@@ -32,7 +33,7 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderOnceSyncLimitsToOneRender() {
+    protected async renderOnceSyncLimitsToOneRender() {
         this.vc.renderOnceSync(async () => {
             this.triggerRender()
             this.triggerRender()
@@ -43,7 +44,7 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingTriggerRenderHandlerWhileRenderingOnceStillRendersOnce() {
+    protected async settingTriggerRenderHandlerWhileRenderingOnceStillRendersOnce() {
         await this.vc.renderOnce(async () => {
             this.setTriggerRenderHandler()
             this.triggerRender()
@@ -55,7 +56,7 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingTriggerRenderHandlerWhileRenderingOnceSyncStillRendersOnce() {
+    protected async settingTriggerRenderHandlerWhileRenderingOnceSyncStillRendersOnce() {
         this.vc.renderOnceSync(async () => {
             this.setTriggerRenderHandler()
             this.triggerRender()
@@ -67,7 +68,7 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async nestedRenderOnceStillLimitsToOneRender() {
+    protected async nestedRenderOnceStillLimitsToOneRender() {
         await this.vc.renderOnce(async () => {
             this.triggerRender()
             await this.vc.renderOnce(async () => {
@@ -81,7 +82,7 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async nestedRenderOnceSyncStillLimitsToOneRender() {
+    protected async nestedRenderOnceSyncStillLimitsToOneRender() {
         this.vc.renderOnceSync(async () => {
             this.triggerRender()
             this.vc.renderOnceSync(async () => {
@@ -94,17 +95,17 @@ export default class TriggeringRendersTest extends AbstractViewControllerTest {
         this.assertHitCountEquals(1)
     }
 
-    private static setTriggerRenderHandler() {
+    private setTriggerRenderHandler() {
         this.vc.setTriggerRenderHandler(() => {
             this.hitCount++
         })
     }
 
-    private static assertHitCountEquals(expected: number) {
+    private assertHitCountEquals(expected: number) {
         assert.isEqual(this.hitCount, expected)
     }
 
-    private static triggerRender() {
+    private triggerRender() {
         this.vc.triggerRender()
     }
 }

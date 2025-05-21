@@ -1,4 +1,4 @@
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
@@ -7,16 +7,17 @@ import {
     CriticalError,
 } from '../../../types/heartwood.types'
 
+@suite()
 export default class AssertingAndInteractingWithCriticalErrorsTest extends AbstractViewControllerTest {
-    private static vc: CardViewController
+    private vc!: CardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('card', {})
     }
 
     @test()
-    protected static async canCreateAssertingCriticalErrors() {
+    protected async canCreateAssertingCriticalErrors() {
         vcAssert.assertCardDoesNotRenderCriticalError(this.vc)
 
         assert.doesThrow(() => vcAssert.assertCardRendersCriticalError(this.vc))
@@ -30,12 +31,12 @@ export default class AssertingAndInteractingWithCriticalErrorsTest extends Abstr
     }
 
     @test()
-    protected static async throwsWhenButtonNotFoundInError() {
+    protected async throwsWhenButtonNotFoundInError() {
         await this.assertThrowsMatching('this.cardVc.setCriticalError(...)')
     }
 
     @test()
-    protected static async throwsWhenButtonNotFound() {
+    protected async throwsWhenButtonNotFound() {
         this.setError({
             buttons: [
                 {
@@ -48,7 +49,7 @@ export default class AssertingAndInteractingWithCriticalErrorsTest extends Abstr
     }
 
     @test()
-    protected static async throwsWhenMissingOnClick() {
+    protected async throwsWhenMissingOnClick() {
         this.setError({
             buttons: [
                 {
@@ -65,7 +66,7 @@ export default class AssertingAndInteractingWithCriticalErrorsTest extends Abstr
     }
 
     @test()
-    protected static async actuallyCallsTheCallback() {
+    protected async actuallyCallsTheCallback() {
         let wasHit = false
         this.setError({
             buttons: [
@@ -82,22 +83,19 @@ export default class AssertingAndInteractingWithCriticalErrorsTest extends Abstr
         assert.isTrue(wasHit)
     }
 
-    private static async throwsCantFindButton(buttonId?: string) {
+    private async throwsCantFindButton(buttonId?: string) {
         await this.assertThrowsMatching('not find the button', buttonId)
     }
 
-    private static async assertThrowsMatching(
-        message: string,
-        buttonId?: string
-    ) {
+    private async assertThrowsMatching(message: string, buttonId?: string) {
         await assert.doesThrowAsync(() => this.clickButton(buttonId), message)
     }
 
-    private static clickButton(buttonId = 'test') {
+    private clickButton(buttonId = 'test') {
         return interactor.clickCriticalErrorButton(this.vc, buttonId)
     }
 
-    private static setError(error: CriticalError = {}) {
+    private setError(error: CriticalError = {}) {
         this.vc.setCriticalError(error)
     }
 }

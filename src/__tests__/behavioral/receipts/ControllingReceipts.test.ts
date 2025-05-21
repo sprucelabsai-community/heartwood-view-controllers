@@ -1,9 +1,10 @@
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class ControllingReceiptsTest extends AbstractViewControllerTest {
     @test()
-    protected static async canCreateControllingReceipts() {
+    protected async canCreateControllingReceipts() {
         // const controllingReceipts = new ControllingReceipts()
         // assert.isTruthy(controllingReceipts)
     }

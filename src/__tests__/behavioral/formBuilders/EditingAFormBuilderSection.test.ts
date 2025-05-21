@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
@@ -9,25 +9,26 @@ import DialogViewController from '../../../viewControllers/Dialog.vc'
 import EditFormBuilderSectionCardViewController from '../../../viewControllers/formBuilder/EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from '../../../viewControllers/formBuilder/FormBuilderCard.vc'
 
+@suite()
 export default class EditingAFormBuilderSectionTest extends AbstractViewControllerTest {
-    private static formBuilderVc: FormBuilderCardViewController
-    protected static controllerMap = {
+    private formBuilderVc!: FormBuilderCardViewController
+    protected controllerMap = {
         'edit-form-builder-section': EditFormBuilderSectionCardViewController,
         'form-builder-card': FormBuilderCardViewController,
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.formBuilderVc = this.Controller('form-builder-card', {})
     }
 
     @test()
-    protected static handlesClickingEditSection() {
+    protected handlesClickingEditSection() {
         assert.isFunction(this.formBuilderVc.handleClickEditSection)
     }
 
     @test('cant click bad section -1', -1)
-    protected static async cantClickBadSection(sectionIdx: number) {
+    protected async cantClickBadSection(sectionIdx: number) {
         const err = await assert.doesThrowAsync(() =>
             this.formBuilderVc.handleClickEditSection(sectionIdx)
         )
@@ -39,7 +40,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
 
     @test('sets instructions 1', 'Some instructions.')
     @test('sets instructions 1', 'Some instructions 2.')
-    protected static async setsInstructionsSettings(text: string) {
+    protected async setsInstructionsSettings(text: string) {
         const pageVc = this.formBuilderVc.getPageVc(0)
 
         pageVc.setSection(0, {
@@ -63,7 +64,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async setsProperFormFieldsWhenEditClicked() {
+    protected async setsProperFormFieldsWhenEditClicked() {
         const pageVc = this.formBuilderVc.getPageVc(0)
 
         pageVc.setSectionTitle(0, 'My form section title')
@@ -116,7 +117,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async populatesRenderAsGrid() {
+    protected async populatesRenderAsGrid() {
         const pageVc = this.formBuilderVc.getPageVc(0)
         const section = pageVc.getSection(0)
         section.shouldRenderAsGrid = true
@@ -128,7 +129,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async savesChanges() {
+    protected async savesChanges() {
         const { formVc, dialogVc, builderSectionVc } =
             await this.simulateEditSectionClick(0)
 
@@ -163,7 +164,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async hittingTabOnLastInputOnNotLastRowDoesNothing() {
+    protected async hittingTabOnLastInputOnNotLastRowDoesNothing() {
         const { builderSectionVc } = await this.simulateEditSectionClick(0)
 
         const fieldList = builderSectionVc.getFieldListVc()
@@ -180,7 +181,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test('hitting T on last row does nothing', 'T')
-    protected static async hittingNonTabOnLastInputAddsRowWhenOnLastRow(
+    protected async hittingNonTabOnLastInputAddsRowWhenOnLastRow(
         char: KeyboardKey
     ) {
         const { builderSectionVc } = await this.simulateEditSectionClick(0)
@@ -197,7 +198,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async hittingTabOnLastInputAddsRowWhenOnLastRow() {
+    protected async hittingTabOnLastInputAddsRowWhenOnLastRow() {
         const { builderSectionVc } = await this.simulateEditSectionClick(0)
 
         const fieldList = builderSectionVc.getFieldListVc()
@@ -212,7 +213,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
     }
 
     @test()
-    protected static async showingEditSectionDoesNotLoseFieldOptions() {
+    protected async showingEditSectionDoesNotLoseFieldOptions() {
         const pageVc = this.formBuilderVc.getPageVc(0)
         //@ts-ignore
         pageVc.updateField('field1', {
@@ -245,7 +246,7 @@ export default class EditingAFormBuilderSectionTest extends AbstractViewControll
         })
     }
 
-    private static async simulateEditSectionClick(clickedSectionIdx = 0) {
+    private async simulateEditSectionClick(clickedSectionIdx = 0) {
         const dialogVc = await vcAssert.assertRendersDialog(
             this.formBuilderVc,
             () => this.formBuilderVc.handleClickEditSection(clickedSectionIdx)

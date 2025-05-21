@@ -1,41 +1,48 @@
 import { buildSchema } from '@sprucelabs/schema'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import formAssert from '../../../tests/utilities/formAssert'
 import { FormViewController } from '../../../types/heartwood.types'
 
+@suite()
 export default class AddingRemovingFormSectionsTest extends AbstractViewControllerTest {
-    private static vc: FormViewController<FormSchema>
-    private static sectionIds: string[]
+    private vc!: FormViewController<FormSchema>
+    private sectionIds!: string[]
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.sectionIds = [generateId(), generateId()]
         this.vc = this.Vc()
     }
 
     @test()
-    protected static async canRemoveFirstSectionById() {
+    protected async canRemoveFirstSectionById() {
         this.removeSection(0)
         this.assertDoesNotRenderSection(0)
         this.assertRendersSection(1)
     }
 
     @test()
-    protected static async canRemoveOtherSections() {
+    protected async canRemoveOtherSections() {
         this.removeSection(1)
         this.assertDoesNotRenderSection(1)
     }
 
     @test()
-    protected static async canRemoveByIdx() {
+    protected async canRemoveByIdx() {
         this.vc.removeSection(0)
         this.assertDoesNotRenderSection(0)
     }
 
     @test()
-    protected static throwsWhenTryingToRemoveBadSection() {
+    protected throwsWhenTryingToRemoveBadSection() {
         const err = assert.doesThrow(() => this.vc.removeSection(generateId()))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['sectionIdOrIdx'],
@@ -43,14 +50,14 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
     }
 
     @test()
-    protected static async canGetSectionByString() {
+    protected async canGetSectionByString() {
         const expected = this.vc.getSection(0)
         const actual = this.getSection(0)
         assert.isEqualDeep(actual, expected)
     }
 
     @test()
-    protected static canSectionByString() {
+    protected canSectionByString() {
         const section = {
             text: {
                 content: generateId(),
@@ -61,7 +68,7 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
         this.assertSettingSectionByStringSetsCorrectly(1, section)
     }
 
-    private static assertSettingSectionByStringSetsCorrectly(
+    private assertSettingSectionByStringSetsCorrectly(
         idx: number,
         section: { text: { content: string } }
     ) {
@@ -70,34 +77,34 @@ export default class AddingRemovingFormSectionsTest extends AbstractViewControll
         assert.isEqualDeep(actual, { ...section, id: this.sectionId(idx) })
     }
 
-    private static setSection(
+    private setSection(
         sectionIdx: number,
         section: { text: { content: string } }
     ) {
         this.vc.updateSection(this.sectionId(sectionIdx), section)
     }
 
-    private static assertRendersSection(idx: number) {
+    private assertRendersSection(idx: number) {
         formAssert.formRendersSection(this.vc, this.sectionId(idx))
     }
 
-    private static assertDoesNotRenderSection(idx: number) {
+    private assertDoesNotRenderSection(idx: number) {
         formAssert.formDoesNotRendersSection(this.vc, this.sectionId(idx))
     }
 
-    private static getSection(idx: number) {
+    private getSection(idx: number) {
         return this.vc.getSection(this.sectionId(idx))
     }
 
-    private static removeSection(idx: number) {
+    private removeSection(idx: number) {
         this.vc.removeSection(this.sectionId(idx))
     }
 
-    private static sectionId(idx: number): string {
+    private sectionId(idx: number): string {
         return this.sectionIds[idx]
     }
 
-    private static Vc(): FormViewController<FormSchema> {
+    private Vc(): FormViewController<FormSchema> {
         return this.Controller(
             'form',
             buildForm({

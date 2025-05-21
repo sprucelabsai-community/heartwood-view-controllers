@@ -1,4 +1,10 @@
-import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
+import {
+    assert,
+    errorAssert,
+    generateId,
+    test,
+    suite,
+} from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import MockRtcPeerConnection from '../../../tests/MockRtcPeerConnection'
 import generateCropPointValues from '../../../tests/utilities/generateCropPointValues'
@@ -23,11 +29,12 @@ class StubWebRtcStreamer implements WebRtcStreamer {
     public onTrack(_cb: (event: RTCTrackEvent) => void): void {}
 }
 
+@suite()
 export default class ControllingAWebRtcPlayerTest extends AbstractViewControllerTest {
-    private static vc: WebRtcPlayerViewController
-    private static streamer = new StubWebRtcStreamer()
+    private vc!: WebRtcPlayerViewController
+    private streamer = new StubWebRtcStreamer()
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         const options: Card = {}
 
@@ -39,7 +46,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async setStreamerThrowsWithMissing() {
+    protected async setStreamerThrowsWithMissing() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.setStreamer())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -48,24 +55,24 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async doesNotThrowWhenPassedStreamer() {
+    protected async doesNotThrowWhenPassedStreamer() {
         this.setStreamer()
     }
 
     @test()
-    protected static async returnsStreamerAfterIfSet() {
+    protected async returnsStreamerAfterIfSet() {
         this.setStreamer()
         this.assertReturnsStreamerInViewModel()
     }
 
     @test()
-    protected static async settingStreamerTriggersRender() {
+    protected async settingStreamerTriggersRender() {
         this.setStreamer()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async passesStreamerThroughConstructor() {
+    protected async passesStreamerThroughConstructor() {
         this.vc = this.Vc({
             streamer: this.streamer,
         })
@@ -79,7 +86,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         offerToReceiveAudio: false,
         offerToReceiveVideo: true,
     })
-    protected static async createOfferPassesThroughCreateOfferOptions(
+    protected async createOfferPassesThroughCreateOfferOptions(
         offerOptions: RTCOfferOptions
     ) {
         await this.createOffer(offerOptions)
@@ -88,20 +95,20 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async returnsCreatedOffer() {
+    protected async returnsCreatedOffer() {
         const offerSdp = await this.createOffer()
         this.peerConnection.assertCreatedOfferSdpEquals(offerSdp)
     }
 
     @test()
-    protected static async createOfferSetsStreamerToPlayer() {
+    protected async createOfferSetsStreamerToPlayer() {
         await this.createOffer()
         this.streamer = this.spyStreamerOnVc
         this.assertReturnsStreamerInViewModel()
     }
 
     @test()
-    protected static async settingAnswerBeforeOfferThrows() {
+    protected async settingAnswerBeforeOfferThrows() {
         const answer = generateId()
         const err = await assert.doesThrowAsync(() =>
             this.setAnswerOnVc(answer)
@@ -110,7 +117,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async canSetAnswerOnVc() {
+    protected async canSetAnswerOnVc() {
         await this.createOffer()
         const answer = generateId()
         await this.setAnswerOnVc(answer)
@@ -118,7 +125,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async rendersWebRtcConnectionToViewModel() {
+    protected async rendersWebRtcConnectionToViewModel() {
         WebRtcConnectionImpl.Class = SpyWebRtcConnection
         this.vc = this.Vc({})
         await this.createOffer()
@@ -131,14 +138,14 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async callingOnCropSetsOnVc() {
+    protected async callingOnCropSetsOnVc() {
         const actual: WebRtcCropPoint = await this.callOnCropInViewModel()
         const expected = this.vc.getCrop()
         assert.isEqualDeep(actual, expected, 'Crop point was not set')
     }
 
     @test()
-    protected static async stillCallsOnCropPassedToConstructor() {
+    protected async stillCallsOnCropPassedToConstructor() {
         let passedPoint: WebRtcCropPoint | undefined
 
         this.vc = this.Vc({
@@ -156,27 +163,27 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
     }
 
     @test()
-    protected static async settingCropTriggersRender() {
+    protected async settingCropTriggersRender() {
         const crop = generateCropPointValues()
         this.vc.setCrop(crop)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canEnableCropping() {
+    protected async canEnableCropping() {
         this.vc.enableCropping()
         this.assertShouldAllowCroppingEquals(true)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async canDisableCropping() {
+    protected async canDisableCropping() {
         this.vc.disableCropping()
         this.assertShouldAllowCroppingEquals(false)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    private static assertShouldAllowCroppingEquals(expected: boolean) {
+    private assertShouldAllowCroppingEquals(expected: boolean) {
         const model = this.render(this.vc)
         assert.isEqual(
             model.shouldAllowCropping,
@@ -185,30 +192,30 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         )
     }
 
-    private static async callOnCropInViewModel() {
+    private async callOnCropInViewModel() {
         const model = this.render(this.vc)
         const actual: WebRtcCropPoint = generateCropPointValues()
         await model.onCrop?.(actual)
         return actual
     }
 
-    private static get spyStreamerOnVc() {
+    private get spyStreamerOnVc() {
         return SpyWebRtcStreamer.instance
     }
 
-    private static setAnswerOnVc(answer: string): any {
+    private setAnswerOnVc(answer: string): any {
         return this.vc.setAnswer(answer)
     }
 
-    private static async createOffer(offerOptions?: RTCOfferOptions) {
+    private async createOffer(offerOptions?: RTCOfferOptions) {
         return await this.vc.createOffer(offerOptions ?? {})
     }
 
-    private static get peerConnection(): MockRtcPeerConnection {
+    private get peerConnection(): MockRtcPeerConnection {
         return MockRtcPeerConnection.instance
     }
 
-    private static assertReturnsStreamerInViewModel() {
+    private assertReturnsStreamerInViewModel() {
         const model = this.render(this.vc)
         assert.isEqual(
             model.streamer,
@@ -222,11 +229,11 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         )
     }
 
-    private static setStreamer() {
+    private setStreamer() {
         this.vc.setStreamer(this.streamer)
     }
 
-    private static Vc(options?: WebRtcPlayer): WebRtcPlayerViewController {
+    private Vc(options?: WebRtcPlayer): WebRtcPlayerViewController {
         return this.Controller('web-rtc-player', {
             ...options,
         })

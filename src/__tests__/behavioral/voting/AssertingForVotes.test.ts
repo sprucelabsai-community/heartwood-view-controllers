@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { AbstractViewController, vcAssert } from '../../..'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 
@@ -25,38 +25,39 @@ class AssertingForVotes extends AbstractViewController<Card> {
     }
 }
 
+@suite()
 export default class AssertingForVotesTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         vote: AssertingForVotes,
     }
 
-    private static vc: AssertingForVotes
+    private vc!: AssertingForVotes
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('vote' as any, {})
     }
 
     @test()
-    protected static async canCreateAssertingForVotes() {
+    protected async canCreateAssertingForVotes() {
         await assert.doesThrowAsync(() =>
             vcAssert.assertAsksForAVote(this.vc, () => this.vc.doNotVote())
         )
     }
 
     @test()
-    protected static async knowsWhenToVote() {
+    protected async knowsWhenToVote() {
         await this.vote()
     }
 
     @test()
-    protected static async getsBackVoteController() {
+    protected async getsBackVoteController() {
         const voteVc = await this.vote()
         assert.isFunction(voteVc.castVote)
     }
 
     @test()
-    protected static async waitsForVoteToBeCast() {
+    protected async waitsForVoteToBeCast() {
         const vc = await this.vote()
 
         assert.isFalse(this.vc.afterVote)
@@ -66,7 +67,7 @@ export default class AssertingForVotesTest extends AbstractViewControllerTest {
         assert.isTrue(this.vc.afterVote)
     }
 
-    private static async vote() {
+    private async vote() {
         return await vcAssert.assertAsksForAVote(this.vc, () => this.vc.vote())
     }
 }

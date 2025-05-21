@@ -1,6 +1,6 @@
 import { DateUtil, dateUtil } from '@sprucelabs/calendar-utils'
 import { AddressFieldValue } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
@@ -12,7 +12,7 @@ interface ViewModel {}
 
 export class TestViewController extends AbstractViewController<ViewModel> {
     public invocations = []
-    public constructorOptions: any
+    public constructorOptions!: any
     public constructor(options: any) {
         super(options)
         this.constructorOptions = options
@@ -32,7 +32,7 @@ export class TestViewController extends AbstractViewController<ViewModel> {
 export class TestViewControllerWithId extends AbstractViewController<ViewModel> {
     public id = 'throws'
     public invocations = []
-    public constructorOptions: any
+    public constructorOptions!: any
     public constructor(options: any) {
         super(options)
         this.constructorOptions = options
@@ -58,27 +58,28 @@ declare module '../../types/heartwood.types' {
     }
 }
 
+@suite()
 export default class BuildingViewControllersTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         test: TestViewController,
         testSkillView: TestSkillViewController,
     }
-    private static factory: ViewControllerFactory
-    private static vc: TestViewController
+    private factory!: ViewControllerFactory
+    private vc!: TestViewController
 
-    public static async beforeEach() {
+    public async beforeEach() {
         await super.beforeEach()
         this.factory = this.Factory()
         this.vc = this.factory.Controller('test', {})
     }
 
     @test()
-    protected static async canCreateBuildingViewControllers() {
+    protected async canCreateBuildingViewControllers() {
         assert.isTruthy(this.factory)
     }
 
     @test()
-    protected static async throwsWithoutSettingConnectToApiHandler() {
+    protected async throwsWithoutSettingConnectToApiHandler() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             ViewControllerFactory.Factory()
@@ -89,29 +90,29 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async throwsWithInvalidName() {
+    protected async throwsWithInvalidName() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.factory.Controller('bad_name'))
         errorAssert.assertError(err, 'INVALID_VIEW_CONTROLLER_NAME')
     }
 
     @test()
-    protected static hasController() {
+    protected hasController() {
         assert.isTrue(this.factory.hasController('test'))
     }
 
     @test()
-    protected static doesNotHaveController() {
+    protected doesNotHaveController() {
         assert.isFalse(this.factory.hasController('test-not-found'))
     }
 
     @test()
-    protected static async getsVcFactoryInConstructorOptions() {
+    protected async getsVcFactoryInConstructorOptions() {
         assert.isTruthy(this.vc.constructorOptions.vcFactory)
     }
 
     @test()
-    protected static async canGetVcFactory() {
+    protected async canGetVcFactory() {
         //@ts-ignore
         assert.isTruthy(this.vc.getVcFactory())
         //@ts-ignore
@@ -119,12 +120,12 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static builtVcGetsConnectToApiHandler() {
+    protected builtVcGetsConnectToApiHandler() {
         assert.isTruthy(this.vc.constructorOptions.connectToApi)
     }
 
     @test()
-    protected static canMixinControllers() {
+    protected canMixinControllers() {
         this.factory.mixinControllers({
             test2: TestViewController,
         })
@@ -137,25 +138,25 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static controllersGetIdsSet() {
+    protected controllersGetIdsSet() {
         //@ts-ignore
         assert.isEqual(this.vc.id, 'test')
     }
 
     @test()
-    protected static viewControllerGetTypesed() {
+    protected viewControllerGetTypesed() {
         const vc = this.factory.Controller('test', {})
         assert.isExactType<TestViewController, typeof vc>(true)
     }
 
     @test()
-    protected static skillViewControllerGetTyped() {
+    protected skillViewControllerGetTyped() {
         const vc = this.factory.Controller('testSkillView', {})
         assert.isExactType<TestSkillViewController, typeof vc>(true)
     }
 
     @test()
-    protected static throwsIfViewControllerSetsIdProperty() {
+    protected throwsIfViewControllerSetsIdProperty() {
         this.factory.mixinControllers({
             test3: TestViewControllerWithId,
         })
@@ -167,7 +168,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static controllerFactoryMethod() {
+    protected controllerFactoryMethod() {
         const vc = this.Controller('testSkillView', {})
         let wasHit = false
 
@@ -182,7 +183,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static canSetVoteHandler() {
+    protected canSetVoteHandler() {
         const handler = () => {}
 
         //@ts-ignore
@@ -196,19 +197,19 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
     @test('can get vc class 1', 'test', TestViewController)
     @test('can get vc class 2', 'testSkillView', TestSkillViewController)
-    protected static canGetVcClass(id: any, Class: any) {
+    protected canGetVcClass(id: any, Class: any) {
         const Actual = this.factory.getController(id)
         assert.isEqual(Actual, Class)
     }
 
     @test()
-    protected static async datesIsDateUtil() {
+    protected async datesIsDateUtil() {
         this.assertDatesInContructorOptions(dateUtil)
         this.assertDatesPropEquals(dateUtil)
     }
 
     @test()
-    protected static async canPassDateUtilToFactory() {
+    protected async canPassDateUtilToFactory() {
         const dates = {} as any
         this.factory = this.Factory({
             dates,
@@ -220,7 +221,7 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async passesThroughMapsUtil() {
+    protected async passesThroughMapsUtil() {
         const maps: MapUtil = {
             openNavigation(_options: { to: AddressFieldValue }): void {},
         }
@@ -235,18 +236,18 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async canSetDatesLater() {
+    protected async canSetDatesLater() {
         const d = generateId() as any
         this.factory.setDates(d)
         //@ts-ignore
         assert.isEqual(this.factory.dates, d)
     }
 
-    private static assertDatesPropEquals(expected: DateUtil) {
+    private assertDatesPropEquals(expected: DateUtil) {
         assert.isEqual(this.vc.getDates(), expected)
     }
 
-    private static assertDatesInContructorOptions(expected: DateUtil) {
+    private assertDatesInContructorOptions(expected: DateUtil) {
         assert.isEqual(this.vc.constructorOptions.dates, expected)
     }
 }

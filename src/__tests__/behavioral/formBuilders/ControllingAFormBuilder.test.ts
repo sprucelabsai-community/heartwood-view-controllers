@@ -3,7 +3,7 @@ import {
     functionDelegationUtil,
     namesUtil,
 } from '@sprucelabs/spruce-skill-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/card.schema'
 import formSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
@@ -17,46 +17,47 @@ import FormBuilderCardViewController from '../../../viewControllers/formBuilder/
 import { FormBuilderPageViewController } from '../../../viewControllers/formBuilder/FormBuilderPage.vc'
 import ManagePageTitlesCardViewController from '../../../viewControllers/formBuilder/ManagePageTitlesCard.vc'
 
+@suite()
 export default class BuildingAFormTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         'form-builder-card': FormBuilderCardViewController,
     }
-    private static vc: FormBuilderCardViewController
+    private vc!: FormBuilderCardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('form-builder-card', {})
     }
 
     @test()
-    protected static canBuildFormBuilder() {
+    protected canBuildFormBuilder() {
         assert.isTruthy(this.vc)
         //@ts-ignore
         assert.isTrue(this.vc.__isFormBuilder)
     }
 
     @test()
-    protected static startsWithBasicCard() {
+    protected startsWithBasicCard() {
         const viewModel = this.renderVc()
         assert.isString(viewModel.header?.title)
     }
 
     @test('set title once', 'go team')
     @test('set title twice', 'go again')
-    protected static async canSetHeaderTitle(title: string) {
+    protected async canSetHeaderTitle(title: string) {
         this.vc.setHeaderTitle(title)
         assert.isEqual(this.renderVc().header?.title, title)
     }
 
     @test('set title subtitle', 'oh boy')
     @test('set title subtitle again', 'get dooooown!')
-    protected static async canSetHeaderSubtitle(title: string) {
+    protected async canSetHeaderSubtitle(title: string) {
         this.vc.setHeaderSubtitle(title)
         assert.isEqual(this.renderVc().header?.subtitle, title)
     }
 
     @test()
-    protected static canSetShouldAllowEditing() {
+    protected canSetShouldAllowEditing() {
         this.vc = this.Controller('form-builder-card', {
             shouldAllowEditing: true,
         })
@@ -66,7 +67,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static shouldAllowEditingTrueByDefault() {
+    protected shouldAllowEditingTrueByDefault() {
         const model = this.render(this.vc)
         assert.isTrue(model.shouldAllowEditing)
         assert.isTrue(this.vc.getShouldAllowEditing())
@@ -75,7 +76,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canDisableFormEditing() {
+    protected canDisableFormEditing() {
         this.vc = this.Controller('form-builder-card', {
             shouldAllowEditing: false,
         })
@@ -85,14 +86,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static rendersValidModel() {
+    protected rendersValidModel() {
         const model = this.renderVc()
         delete model.shouldAllowEditing
         validateSchemaValues(cardSchema, model)
     }
 
     @test()
-    protected static has1FormPageToStart() {
+    protected has1FormPageToStart() {
         const model = this.renderVc()
 
         assert.isLength(model.body?.sections, 1)
@@ -101,12 +102,12 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static startsAtPageZero() {
+    protected startsAtPageZero() {
         assert.isEqual(this.vc.getPresentPage(), 0)
     }
 
     @test()
-    protected static async canAddMorePages() {
+    protected async canAddMorePages() {
         assert.isEqual(this.vc.getTotalPages(), 1)
 
         await this.vc.addPage()
@@ -123,7 +124,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRemovePages() {
+    protected async canRemovePages() {
         await this.vc.addPage() // 2 pages
         await this.vc.addPage() // 3 pages
         await this.vc.addPage() // 4 pages
@@ -145,7 +146,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async removingPageTriggersRender() {
+    protected async removingPageTriggersRender() {
         await this.vc.addPage()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
         await this.vc.removePage(0)
@@ -153,7 +154,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAddPageAtIndex() {
+    protected async canAddPageAtIndex() {
         await this.vc.addPage()
         await this.vc.addPage()
         await this.vc.addPage()
@@ -177,14 +178,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAddPageAndPassTitle() {
+    protected async canAddPageAndPassTitle() {
         await this.vc.addPage({ title: 'Page title' })
         const model = this.renderVc()
         assert.isEqual(model.body?.sections?.[1]?.title, 'Page title')
     }
 
     @test()
-    protected static pagesHave1SectionByDefault() {
+    protected pagesHave1SectionByDefault() {
         const model = this.renderVc()
         assert.isEqual(
             model.body?.sections?.[0].form?.sections?.[0].title,
@@ -193,7 +194,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetPageAtIndex() {
+    protected canGetPageAtIndex() {
         const pageVc = this.vc.getPageVc(0)
         assert.isTruthy(pageVc)
 
@@ -203,7 +204,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetTitleFromPageVc() {
+    protected async canGetTitleFromPageVc() {
         const pageVc = this.vc.getPageVc(0)
         assert.isEqual(pageVc.getTitle(), 'Page 1')
 
@@ -212,7 +213,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetTitle() {
+    protected async canSetTitle() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.setTitle('Page Waka')
 
@@ -224,7 +225,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async newPagesCanBeGot() {
+    protected async newPagesCanBeGot() {
         await this.vc.addPage()
 
         const pageVc = this.vc.getPageVc(1)
@@ -235,14 +236,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async addingPageTriggersRender() {
+    protected async addingPageTriggersRender() {
         vcAssert.assertTriggerRenderCount(this.vc, 0)
         await this.vc.addPage()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static addingASectionTitlesItWithNextSection() {
+    protected addingASectionTitlesItWithNextSection() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection()
 
@@ -252,7 +253,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetTitleWhenAddingSection() {
+    protected canSetTitleWhenAddingSection() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection({ title: 'Go team!' })
 
@@ -261,7 +262,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingSectionShouldAddTextField() {
+    protected addingSectionShouldAddTextField() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection()
 
@@ -281,7 +282,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingMultipleSectionsTitlesCorrectly() {
+    protected addingMultipleSectionsTitlesCorrectly() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection()
         pageVc.addSection()
@@ -291,14 +292,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static sectionComesWith1FieldToStart() {
+    protected sectionComesWith1FieldToStart() {
         const pageVc = this.vc.getPageVc(0)
         const section = pageVc.getSection(0)
         assert.isLength(section.fields, 1)
     }
 
     @test()
-    protected static newSectionsComeWith1FieldToStart() {
+    protected newSectionsComeWith1FieldToStart() {
         const pageVc = this.vc.getPageVc(0)
 
         pageVc.addSection()
@@ -313,20 +314,20 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static formSchemaHasFieldToStart() {
+    protected formSchemaHasFieldToStart() {
         const pageVc = this.vc.getPageVc(0)
         this.assertFirstFieldConfiguredCorrectly(pageVc)
     }
 
     @test()
-    protected static async newPageAddsFieldsToStart() {
+    protected async newPageAddsFieldsToStart() {
         await this.vc.addPage()
         const pageVc = this.vc.getPageVc(1)
         this.assertFirstFieldConfiguredCorrectly(pageVc)
     }
 
     @test()
-    protected static canAddFieldToFirstSectionOfFirstPage() {
+    protected canAddFieldToFirstSectionOfFirstPage() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addField(0)
 
@@ -341,7 +342,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingASecondFieldIncrementsName() {
+    protected addingASecondFieldIncrementsName() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addField(0)
         pageVc.addField(0)
@@ -356,7 +357,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddFieldToNewSection() {
+    protected canAddFieldToNewSection() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection()
         pageVc.addField(1)
@@ -368,7 +369,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static hasAddPageButtonInFooter() {
+    protected hasAddPageButtonInFooter() {
         const model = this.render(this.vc)
 
         assert.doesInclude(model.footer?.buttons?.[0], { label: 'Add page' })
@@ -376,7 +377,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingAddPageInFooterAddsAPage() {
+    protected async clickingAddPageInFooterAddsAPage() {
         const model = this.render(this.vc)
 
         await vcAssert.assertRendersDialog(
@@ -396,14 +397,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static doesNotHaveRemovePageButtonInFooterToStart() {
+    protected doesNotHaveRemovePageButtonInFooterToStart() {
         const model = this.render(this.vc)
         assert.isArray(model.footer?.buttons)
         assert.doesNotInclude(model.footer?.buttons, { label: 'Remove page' })
     }
 
     @test()
-    protected static async hasRemovePageButtonAfterPageHasBeenAdded() {
+    protected async hasRemovePageButtonAfterPageHasBeenAdded() {
         await this.vc.addPage()
         const model = this.render(this.vc)
 
@@ -412,7 +413,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async removeButtonIsRemovedWhenDownToOnePage() {
+    protected async removeButtonIsRemovedWhenDownToOnePage() {
         await this.vc.addPage()
         await this.vc.removePage(0)
 
@@ -423,7 +424,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async hittingRemoveRemovesSecondPageAndSwipesToFirst() {
+    protected async hittingRemoveRemovesSecondPageAndSwipesToFirst() {
         await this.vc.addPage()
 
         const model = this.render(this.vc)
@@ -442,7 +443,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRemovePresentPageDirectly() {
+    protected async canRemovePresentPageDirectly() {
         await this.vc.addPage()
         await this.vc.addPage()
         await this.vc.addPage()
@@ -460,14 +461,14 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static formsShouldNotIncludeActionButtons() {
+    protected formsShouldNotIncludeActionButtons() {
         const pageVc = this.vc.getPageVc(0)
         const model = this.render(pageVc)
         assert.isFalse(model.shouldShowSubmitControls)
     }
 
     @test()
-    protected static canSetHeaderDuringCostruction() {
+    protected canSetHeaderDuringCostruction() {
         const vc = this.Controller('form-builder-card', {
             header: { title: 'Hey', subtitle: 'Hey2' },
         })
@@ -477,13 +478,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static renderedFormBuilderReturnsFormBuilderAsController() {
+    protected renderedFormBuilderReturnsFormBuilderAsController() {
         const model = this.vc.render()
         assert.isTrue(model.controller instanceof FormBuilderCardViewController)
     }
 
     @test()
-    protected static async formBuilderPassesCallsToSwipeVc() {
+    protected async formBuilderPassesCallsToSwipeVc() {
         const { controller } = this.vc.render()
         assert.isTruthy(controller)
 
@@ -522,7 +523,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddTextSection() {
+    protected canAddTextSection() {
         const pageVc = this.vc.getPageVc(0)
 
         pageVc.addSection({
@@ -540,7 +541,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetCurrentPages() {
+    protected async canGetCurrentPages() {
         let pageVc = this.vc.getPresentPageVc()
         assert.isEqual(pageVc.getIndex(), 0)
 
@@ -552,7 +553,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetAllPageVcs() {
+    protected async canGetAllPageVcs() {
         let vcs = this.vc.getPageVcs()
 
         assert.isArray(vcs)
@@ -570,7 +571,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async deletesPageWhenConfirmingOnClickDeletePage() {
+    protected async deletesPageWhenConfirmingOnClickDeletePage() {
         assert.isFunction(this.vc.handleClickDeletePage)
 
         const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
@@ -584,7 +585,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cancelsDeletingPageWhenConfirmingOnClickDeletePage() {
+    protected async cancelsDeletingPageWhenConfirmingOnClickDeletePage() {
         assert.isFunction(this.vc.handleClickDeletePage)
 
         const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
@@ -598,7 +599,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async showsAddDialogWhenHandlingClickAddPage() {
+    protected async showsAddDialogWhenHandlingClickAddPage() {
         assert.isFunction(this.vc.handleClickAddPage)
 
         const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
@@ -616,7 +617,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async submittingAddFormAddsPage() {
+    protected async submittingAddFormAddsPage() {
         const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
             this.vc.handleClickAddPage()
         )
@@ -632,7 +633,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canAddSectionToPageAtIndex() {
+    protected async canAddSectionToPageAtIndex() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection({ atIndex: 0, title: 'Now the first!' })
 
@@ -642,7 +643,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingSectionToIndexThatIsTooHighJustAddsToEnd() {
+    protected addingSectionToIndexThatIsTooHighJustAddsToEnd() {
         const pageVc = this.vc.getPageVc(0)
         pageVc.addSection({ atIndex: 100, title: 'Now the last!' })
 
@@ -652,7 +653,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static gettingABadSectionFails() {
+    protected gettingABadSectionFails() {
         const err = assert.doesThrow(() => this.vc.getPageVc(0).getSection(-1))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['sectionIdOrIdx'],
@@ -660,13 +661,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetSection() {
+    protected canGetSection() {
         const section = this.vc.getPageVc(0).getSection(0)
         assert.isTruthy(section)
     }
 
     @test()
-    protected static byDefaultSectionHasField1() {
+    protected byDefaultSectionHasField1() {
         const section = this.vc.getPageVc(0).getSection(0)
 
         assert.isEqualDeep(section, {
@@ -679,7 +680,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async handlesClickingPageTitles() {
+    protected async handlesClickingPageTitles() {
         assert.isFunction(this.vc.handleClickPageTitles)
 
         await vcAssert.assertRendersDialog(
@@ -700,7 +701,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async throwsWhenPassingBadParamsToUpdateField() {
+    protected async throwsWhenPassingBadParamsToUpdateField() {
         const pageVc = this.vc.getPageVc(0)
         //@ts-ignore
         const err = assert.doesThrow(() => pageVc.updateField())
@@ -727,7 +728,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
             name: 'taco3',
         },
     ])
-    protected static async handlesClickingEditFieldAndClosing(
+    protected async handlesClickingEditFieldAndClosing(
         oldFieldName: string,
         newFieldName: string,
         sectionIdx = 0,
@@ -752,7 +753,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canUpdateSelectOptions() {
+    protected async canUpdateSelectOptions() {
         const pageVc = this.vc.getPageVc(0)
 
         pageVc.addField(0)
@@ -783,7 +784,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canCustomizeFooterButtons() {
+    protected canCustomizeFooterButtons() {
         const footer = {
             footer: {
                 buttons: [
@@ -814,7 +815,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canStartIsBusy() {
+    protected canStartIsBusy() {
         this.vc = this.Controller('form-builder-card', {
             isBusy: true,
         })
@@ -823,11 +824,11 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static startsNotBusy() {
+    protected startsNotBusy() {
         vcAssert.assertCardIsNotBusy(this.vc)
     }
 
-    private static async updateFieldThroughEditFieldVcAndRenderPage(options: {
+    private async updateFieldThroughEditFieldVcAndRenderPage(options: {
         oldFieldName: string
         newFieldName?: string
         selectOptions?: string[] | null
@@ -897,7 +898,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
         return model
     }
 
-    private static assertFirstFieldConfiguredCorrectly(
+    private assertFirstFieldConfiguredCorrectly(
         pageVc: FormBuilderPageViewController
     ) {
         const model = this.render(pageVc)
@@ -916,7 +917,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
         ])
     }
 
-    private static renderVc() {
+    private renderVc() {
         return renderUtil.render(this.vc)
     }
 }

@@ -1,25 +1,26 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 
+@suite()
 export default class AssertingTogglesInListsTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
+    protected controllerMap = {}
 
     @test()
-    protected static hasAssertListRendersToggle() {
+    protected hasAssertListRendersToggle() {
         assert.isFunction(vcAssert.assertRowRendersToggle)
         assert.isFunction(vcAssert.assertRowDoesNotRenderToggle)
     }
 
     @test()
-    protected static knowsIfRowNotFound() {
+    protected knowsIfRowNotFound() {
         const listVc = this.ListVc()
         assert.doesThrow(() => vcAssert.assertRowRendersToggle(listVc, 'edit'))
         vcAssert.assertRowDoesNotRenderToggle(listVc, 'edit')
     }
 
     @test()
-    protected static canFindToggle() {
+    protected canFindToggle() {
         const listVc = this.ListVc()
         vcAssert.assertRowRendersToggle(listVc, 'save')
         assert.doesThrow(() =>
@@ -28,7 +29,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static throwsIfToggleByNameNotFound() {
+    protected throwsIfToggleByNameNotFound() {
         const listVc = this.ListVc()
         assert.doesThrow(() =>
             vcAssert.assertRowRendersToggle(listVc, 'save', 'taco')
@@ -37,7 +38,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static canFindToggleByName() {
+    protected canFindToggleByName() {
         const listVc = this.ListVc({ rowId: 'create', toggleName: 'test' })
         vcAssert.assertRowRendersToggle(listVc, 'create', 'test')
         assert.doesThrow(() =>
@@ -46,7 +47,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static canFindToggleInLaterRows() {
+    protected canFindToggleInLaterRows() {
         const listVc = this.ListVc({ rowId: 'create', toggleName2: 'testing' })
         vcAssert.assertRowRendersToggle(listVc, 'create', 'testing')
         assert.doesThrow(() =>
@@ -55,7 +56,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
     }
 
     @test()
-    protected static async knowsIfNoToggleIsRender() {
+    protected async knowsIfNoToggleIsRender() {
         const listVc = this.ListVc()
 
         assert.doesThrow(() =>
@@ -64,7 +65,7 @@ export default class AssertingTogglesInListsTest extends AbstractViewControllerT
         vcAssert.assertRowDoesNotRenderToggle(listVc, 'editing')
     }
 
-    private static ListVc(options?: {
+    private ListVc(options?: {
         rowId?: string
         toggleName?: string
         toggleName2?: string

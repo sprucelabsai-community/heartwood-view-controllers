@@ -1,26 +1,27 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import ConfirmViewController, {
     ConfirmViewControllerOptions,
 } from '../../../viewControllers/Confirm.vc'
 
+@suite()
 export default class ControllingAConfirmationDialogTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    private static vc: ConfirmViewController
+    protected controllerMap = {}
+    private vc!: ConfirmViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.vc = this.Confirm()
     }
 
     @test()
-    protected static canCreateConfirmationDialog() {
+    protected canCreateConfirmationDialog() {
         assert.isTruthy(this.vc)
     }
 
     @test()
-    protected static notPassingMessageDoesNotRenderBody() {
+    protected notPassingMessageDoesNotRenderBody() {
         const vc = this.Confirm()
 
         const model = this.render(vc)
@@ -29,7 +30,7 @@ export default class ControllingAConfirmationDialogTest extends AbstractViewCont
     }
 
     @test()
-    protected static settingMessageSetsBody() {
+    protected settingMessageSetsBody() {
         const vc = this.Confirm({ message: 'Hey!' })
         const model = this.render(vc)
 
@@ -37,7 +38,7 @@ export default class ControllingAConfirmationDialogTest extends AbstractViewCont
     }
 
     @test()
-    protected static canSetAsDescructive() {
+    protected canSetAsDescructive() {
         const vc = this.Confirm({ message: 'Hey!', isDestructive: true })
         const model = this.render(vc)
 
@@ -45,14 +46,14 @@ export default class ControllingAConfirmationDialogTest extends AbstractViewCont
     }
 
     @test()
-    protected static actionButtonIsPrimaryByDefault() {
+    protected actionButtonIsPrimaryByDefault() {
         const vc = this.Confirm({ message: 'Hey!' })
         const model = this.render(vc)
 
         assert.isEqual(model.footer?.buttons?.[1].type, 'primary')
     }
 
-    private static Confirm(options?: Partial<ConfirmViewControllerOptions>) {
+    private Confirm(options?: Partial<ConfirmViewControllerOptions>) {
         return this.Controller('confirm', {
             onAccept: () => {},
             onDecline: () => {},

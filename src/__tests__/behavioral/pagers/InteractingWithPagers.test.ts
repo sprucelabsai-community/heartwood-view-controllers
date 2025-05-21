@@ -1,4 +1,4 @@
-import { test, assert, errorAssert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor, { PagerButton } from '../../../tests/utilities/interactor'
 import pagerAssert from '../../../tests/utilities/pagerAssert'
@@ -6,17 +6,18 @@ import PagerViewController, {
     PagerViewControllerOptions,
 } from '../../../viewControllers/pagers/Pager.vc'
 
+@suite()
 export default class InteractingWithPagersTest extends AbstractViewControllerTest {
-    private static vc: PagerViewController
+    private vc!: PagerViewController
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         const options = {}
         this.setupVc(options)
     }
 
     @test()
-    protected static async interactorThrowsWithMissing() {
+    protected async interactorThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             interactor.clickPagerButton()
@@ -28,7 +29,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async throwsIfPagerNotConfigured() {
+    protected async throwsIfPagerNotConfigured() {
         await assert.doesThrowAsync(
             () => this.clickButton('next'),
             'configured'
@@ -36,7 +37,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async failsIfClickingPreviouOnFirstPage() {
+    protected async failsIfClickingPreviouOnFirstPage() {
         this.setupVc({
             currentPage: 0,
             totalPages: 10,
@@ -46,7 +47,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async clickingNextIncrementsPage() {
+    protected async clickingNextIncrementsPage() {
         this.setupVc({
             currentPage: 0,
             totalPages: 10,
@@ -59,7 +60,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async clickingNextPastLastPageThrows() {
+    protected async clickingNextPastLastPageThrows() {
         this.setupVc({
             currentPage: 9,
             totalPages: 10,
@@ -69,7 +70,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async clickingNextThrowsWithDifferentPages() {
+    protected async clickingNextThrowsWithDifferentPages() {
         this.setupVc({
             currentPage: 5,
             totalPages: 6,
@@ -79,7 +80,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async clickingPreviousDecrementsPage() {
+    protected async clickingPreviousDecrementsPage() {
         this.setupVc({
             currentPage: 5,
             totalPages: 6,
@@ -92,7 +93,7 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
     }
 
     @test()
-    protected static async canJumpToSpecificPage() {
+    protected async canJumpToSpecificPage() {
         this.setupVc({
             currentPage: 5,
             totalPages: 6,
@@ -105,27 +106,27 @@ export default class InteractingWithPagersTest extends AbstractViewControllerTes
         this.assertCurrentPage(4)
     }
 
-    private static async assertClickNextThrows() {
+    private async assertClickNextThrows() {
         await assert.doesThrowAsync(() => this.clickNext(), 'last page')
     }
 
-    private static clickPrevious(): any {
+    private clickPrevious(): any {
         return this.clickButton('previous')
     }
 
-    private static async clickNext() {
+    private async clickNext() {
         await this.clickButton('next')
     }
 
-    private static assertCurrentPage(expected: number) {
+    private assertCurrentPage(expected: number) {
         pagerAssert.currentPage(this.vc, expected)
     }
 
-    private static clickButton(button: PagerButton) {
+    private clickButton(button: PagerButton) {
         return interactor.clickPagerButton(this.vc, button)
     }
 
-    private static setupVc(options: PagerViewControllerOptions) {
+    private setupVc(options: PagerViewControllerOptions) {
         this.vc = this.Controller('pager', options ?? {})
     }
 }

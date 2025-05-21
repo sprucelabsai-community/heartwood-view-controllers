@@ -5,11 +5,11 @@ import ViewControllerFactory from '../../../viewControllers/ViewControllerFactor
 import ViewControllerImporter from '../../../viewControllers/ViewControllerImporter'
 
 export default abstract class AbstractExportAndImportTest extends AbstractViewControllerTest {
-    private static destination: string
-    private static importer: ViewControllerImporter
-    protected static views: ViewControllerFactory
+    private destination!: string
+    private importer!: ViewControllerImporter
+    protected views!: ViewControllerFactory
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.views = this.Factory()
 
@@ -21,7 +21,7 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
         this.importer = ViewControllerImporter.Importer()
     }
 
-    protected static import() {
+    protected import() {
         const contents = diskUtil.readFile(this.destination)
         const { controllers, plugins, App } = this.importer.import(contents)
         this.views.importControllers(controllers, plugins)
@@ -30,7 +30,7 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
         }
     }
 
-    protected static async export(sourcePath: string) {
+    protected async export(sourcePath: string) {
         const pwd = this.resolvePath(sourcePath, '../../')
         const exporter = ViewControllerExporter.Exporter(pwd)
         await exporter.export({
@@ -39,7 +39,7 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
         })
     }
 
-    protected static async exportAndThenImport(sourcePath: string) {
+    protected async exportAndThenImport(sourcePath: string) {
         await this.export(sourcePath)
         this.import()
     }

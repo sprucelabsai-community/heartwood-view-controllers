@@ -1,4 +1,4 @@
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { Card, Layout, LayoutStyle } from '../../types/heartwood.types'
 import buildSkillViewLayout from '../../utilities/buildSkillViewLayout'
@@ -14,6 +14,7 @@ function buildLayout(totalCards: number) {
     }
 }
 
+@suite()
 export default class SplittingCardsIntoLayoutsTest extends AbstractViewControllerTest {
     @test('cards to layout 1', 2, buildCards(1), [buildLayout(1)])
     @test('cards to layout 2', 2, buildCards(2), [
@@ -25,7 +26,7 @@ export default class SplittingCardsIntoLayoutsTest extends AbstractViewControlle
         buildLayout(7),
         buildLayout(6),
     ])
-    protected static async movedFromOtherModule_ReturnsExpected(
+    protected async movedFromOtherModule_ReturnsExpected(
         totalLayouts: number,
         cards: Card[],
         expected: Layout[]
@@ -40,13 +41,13 @@ export default class SplittingCardsIntoLayoutsTest extends AbstractViewControlle
     @test('throws out of range at 4', 4)
     @test('throws out of range at 56', 56)
     @test('throws out of range at -3', -3)
-    protected static cantSetOutOfRange(total: number) {
+    protected cantSetOutOfRange(total: number) {
         assert.doesThrow(() => splitCardsIntoLayouts([], total))
     }
 
     @test('can build skill view layout big-left', 'big-left')
     @test('can build skill view layout big-right', 'big-right')
-    protected static async canBuildSkillViewLayout(layout: LayoutStyle) {
+    protected async canBuildSkillViewLayout(layout: LayoutStyle) {
         const expected = {
             bottomCards: [],
             leftCards: [],

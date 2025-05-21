@@ -1,6 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import Authenticator from '../../../auth/Authenticator'
 import buildBigForm from '../../../builders/buildBigForm'
@@ -17,7 +17,7 @@ import LoginViewController from '../../../viewControllers/Login.vc'
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
 class GoodSkillViewController implements SkillViewController {
-    private model: SkillView
+    private model!: SkillView
     public constructor(model: SkillView) {
         this.model = model
     }
@@ -37,24 +37,25 @@ class GoodSkillViewController implements SkillViewController {
     }
 }
 
+@suite()
 export default class InteractorTest extends AbstractViewControllerTest {
-    protected static controllerMap = {
+    protected controllerMap = {
         good: GoodSkillViewController,
     }
-    private static loginVc: LoginViewController
+    private loginVc!: LoginViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.loginVc = this.LoginVc()
     }
 
     @test()
-    protected static async canCreateinteractor() {
+    protected async canCreateinteractor() {
         assert.isTruthy(interactor)
     }
 
     @test()
-    protected static async loginGoesBackToFirstSlideError() {
+    protected async loginGoesBackToFirstSlideError() {
         await this.client.on(
             'request-pin::v2020_12_25',
             () => assert.fail('Noo!') as any
@@ -69,7 +70,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
 
     @test(`can login with ${DEMO_NUMBER}`, DEMO_NUMBER)
     @test(`can login with ${DEMO_NUMBER2}`, DEMO_NUMBER2)
-    protected static async loginPassesWithGoodDemoNumber(phone: string) {
+    protected async loginPassesWithGoodDemoNumber(phone: string) {
         const challenge = generateId()
 
         await this.eventFaker.fakeRequestPin(challenge)
@@ -99,7 +100,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cantClickFooterActionInFormWithoutOne() {
+    protected async cantClickFooterActionInFormWithoutOne() {
         const formVc = this.Controller('form', {
             shouldShowSubmitControls: false,
             schema: {
@@ -115,7 +116,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async submitsFormIfThereIsASubmitButton() {
+    protected async submitsFormIfThereIsASubmitButton() {
         const formVc = this.Controller('form', {
             schema: {
                 id: 'test',
@@ -146,7 +147,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
             fields: ['third'],
         },
     ])
-    protected static async canSubmitBigFormAllAtOnce(sections: any) {
+    protected async canSubmitBigFormAllAtOnce(sections: any) {
         let wasHit = false
 
         const bigFormVc = this.Controller(
@@ -180,7 +181,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClickButtonInRow() {
+    protected async canClickButtonInRow() {
         const vc = this.Controller('list', {
             rows: [
                 {
@@ -235,7 +236,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingButtonInRowTriggersCallback() {
+    protected async clickingButtonInRowTriggersCallback() {
         let wasHit = false
         const vc = this.Controller('list', {
             rows: [
@@ -261,7 +262,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClickButtonsInCard() {
+    protected async canClickButtonsInCard() {
         const badButton = `${new Date().getTime() * Math.random()}`
         const button1Id = `${new Date().getTime() * Math.random()}`
         const button2Id = `${new Date().getTime() * Math.random()}`
@@ -313,7 +314,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async clickingButtonWaitsUntilFinished() {
+    protected async clickingButtonWaitsUntilFinished() {
         const button1Id = `${new Date().getTime() * Math.random()}`
         let wasHit = false
         let lateHit = false
@@ -349,7 +350,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async submittingFormThatIsDisabledThrows() {
+    protected async submittingFormThatIsDisabledThrows() {
         const formVc = this.Controller(
             'form',
             buildForm({
@@ -366,7 +367,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
         await assert.doesThrowAsync(() => interactor.submitForm(formVc))
     }
 
-    private static LoginVc() {
+    private LoginVc() {
         return this.Controller('login', {})
     }
 }

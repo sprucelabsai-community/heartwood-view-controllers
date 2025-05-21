@@ -1,13 +1,14 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import buttonAssert from '../../../tests/utilities/buttonAssert'
 
+@suite()
 export default class AssertingButtonBars extends AbstractViewControllerTest {
-    protected static controllerMap = {}
+    protected controllerMap = {}
 
     @test()
-    protected static throwsWhenMissingParams() {
+    protected throwsWhenMissingParams() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             buttonAssert.buttonBarRendersButton()
@@ -20,7 +21,7 @@ export default class AssertingButtonBars extends AbstractViewControllerTest {
 
     @test('finds first button', 'first')
     @test('finds second button', 'second')
-    protected static findsButton(buttonId: string) {
+    protected findsButton(buttonId: string) {
         const buttons = [
             {
                 id: 'first',
@@ -36,7 +37,7 @@ export default class AssertingButtonBars extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static thowsWhenNoButton() {
+    protected thowsWhenNoButton() {
         const vc = this.ButtonBarVc([
             {
                 id: 'first',
@@ -50,7 +51,7 @@ export default class AssertingButtonBars extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async assertRendersButtonPassesIfButtonGroupRendersButton() {
+    protected async assertRendersButtonPassesIfButtonGroupRendersButton() {
         const id = generateId()
 
         const vc = this.ButtonBarVc([
@@ -73,7 +74,7 @@ export default class AssertingButtonBars extends AbstractViewControllerTest {
         buttonAssert.cardRendersButton(cardVc, id)
     }
 
-    private static ButtonBarVc(buttons: { id: string; label: string }[]) {
+    private ButtonBarVc(buttons: { id: string; label: string }[]) {
         return this.Controller('buttonBar', {
             buttons,
         })

@@ -1,11 +1,12 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { calendarSeeder } from '../..'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 
+@suite()
 export default class CalendarSeederTest extends AbstractViewControllerTest {
     @test()
-    protected static async eventsAreNotAllTheSame() {
+    protected async eventsAreNotAllTheSame() {
         const events = calendarSeeder.generateEventsValues(10)
         const startDateTimes: Record<string, boolean> = {}
         const subtitles: Record<string, boolean> = {}
@@ -25,7 +26,7 @@ export default class CalendarSeederTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async allEventsIn9To5OnTheCurrentDay() {
+    protected async allEventsIn9To5OnTheCurrentDay() {
         const earliest = dateUtil.setTimeOfDay(new Date().getTime(), 9, 0, 0, 0)
         const latest = dateUtil.setTimeOfDay(new Date().getTime(), 18)
         const events = calendarSeeder.generateEventsValues(10)

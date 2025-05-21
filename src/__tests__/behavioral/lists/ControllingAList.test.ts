@@ -1,5 +1,5 @@
 import { validateSchemaValues } from '@sprucelabs/schema'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert, generateId } from '@sprucelabs/test-utils'
 import listSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 import { interactor, ListColumnWidth } from '../../..'
@@ -7,35 +7,36 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import vcAssert from '../../../tests/utilities/vcAssert'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
+@suite()
 export default class ControllingAListTest extends AbstractViewControllerTest {
-    protected static controllerMap = {}
-    protected static vc: ListViewController
+    protected controllerMap = {}
+    protected vc!: ListViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.Controller('list', {})
     }
 
     @test()
-    protected static canCreateList() {
+    protected canCreateList() {
         assert.isTruthy(this.vc)
     }
 
     @test()
-    protected static mixesInOptionsToModel() {
+    protected mixesInOptionsToModel() {
         //@ts-ignore
         const model = this.render(this.Controller('list', { taco: 'bravo' }))
         assert.doesInclude(model, { taco: 'bravo' })
     }
 
     @test()
-    protected static rendersValidModel() {
+    protected rendersValidModel() {
         const model = this.render(this.vc)
         validateSchemaValues(listSchema, model)
     }
 
     @test()
-    protected static async startsWithNoRows() {
+    protected async startsWithNoRows() {
         const rows = this.vc.getRows()
         assert.isLength(rows, 0)
 
@@ -46,7 +47,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cantAddEmptyRow() {
+    protected async cantAddEmptyRow() {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.addRow())
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -57,7 +58,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     @test(`Can't add row with cells = true`, true)
     @test(`Can't add row with cells = {}`, {})
     @test(`Can't add row with cells = []`, {})
-    protected static cantAddBadRow(cells: any) {
+    protected cantAddBadRow(cells: any) {
         //@ts-ignore
         const err = assert.doesThrow(() => this.vc.addRow({ cells }))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -66,7 +67,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddRow() {
+    protected canAddRow() {
         this.vc.addRow({
             id: 'can-add',
             cells: [
@@ -98,7 +99,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static addingRowTriggersRender() {
+    protected addingRowTriggersRender() {
         this.vc.addRow({
             id: 'add-triggers',
             cells: [
@@ -114,7 +115,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddRowAtIndex() {
+    protected canAddRowAtIndex() {
         this.vc.addRow({
             id: 'can-add-at-index-1',
             cells: [
@@ -171,7 +172,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddATextInputToARow() {
+    protected canAddATextInputToARow() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -186,7 +187,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canAddASelectinputToARow() {
+    protected canAddASelectinputToARow() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -211,7 +212,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantGetRowVcFromBadRow() {
+    protected cantGetRowVcFromBadRow() {
         const err = assert.doesThrow(() => this.vc.getRowVc(0))
 
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
@@ -220,7 +221,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetGoodRowVc() {
+    protected canGetGoodRowVc() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -235,7 +236,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cantSetValueOnRowFieldByNameDoesNotExist() {
+    protected async cantSetValueOnRowFieldByNameDoesNotExist() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -256,7 +257,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    public static rowVcHasNoValuesToStart() {
+    public rowVcHasNoValuesToStart() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -271,7 +272,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetValueOnGoodFieldName() {
+    protected async canSetValueOnGoodFieldName() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -303,13 +304,13 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static emptyValuesOnListToStart() {
+    protected emptyValuesOnListToStart() {
         const values = this.vc.getValues()
         assert.isEqualDeep(values, [])
     }
 
     @test()
-    protected static async settingValuesOnRowVcSetsValues() {
+    protected async settingValuesOnRowVcSetsValues() {
         const rowId = generateId()
         this.vc.addRow({
             id: rowId,
@@ -332,7 +333,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingValuesOnRowVcSetsValuesWithMultipleCells() {
+    protected async settingValuesOnRowVcSetsValuesWithMultipleCells() {
         const rowId = generateId()
         this.vc.addRow({
             id: rowId,
@@ -370,7 +371,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canGetValuesOnList() {
+    protected async canGetValuesOnList() {
         const rowId = generateId()
         this.vc.addRow({
             id: rowId,
@@ -424,7 +425,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async renderingRendersValueOnInputs() {
+    protected async renderingRendersValueOnInputs() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -464,7 +465,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetValueOnSetValueOfField() {
+    protected async canSetValueOnSetValueOfField() {
         const rowId = generateId()
         this.vc.addRow({
             id: rowId,
@@ -513,7 +514,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetRowsDuringConstruction() {
+    protected canSetRowsDuringConstruction() {
         const vc = this.Controller('list', {
             rows: [
                 {
@@ -531,7 +532,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingValueOnRowTriggersRender() {
+    protected async settingValueOnRowTriggersRender() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -569,7 +570,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async onChangeOnInputFiredWhenChanged() {
+    protected async onChangeOnInputFiredWhenChanged() {
         let onChangeInputValue: string | undefined
         let onChangeSelectValue: string | undefined
 
@@ -613,7 +614,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static gettingBadValueOnRowThrows() {
+    protected gettingBadValueOnRowThrows() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -647,7 +648,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetRowsDirectly() {
+    protected canSetRowsDirectly() {
         this.vc.setRows([
             {
                 id: generateId(),
@@ -684,7 +685,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantDeleteBadRow() {
+    protected cantDeleteBadRow() {
         const err = assert.doesThrow(() => this.vc.deleteRow(-1))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['rowIdx'],
@@ -692,7 +693,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canDeleteRow() {
+    protected canDeleteRow() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -730,7 +731,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canDeleteRow2() {
+    protected async canDeleteRow2() {
         this.add2Rows()
 
         const rowVc1 = this.vc.getRowVc(0)
@@ -752,7 +753,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static rowsVcsKnowIfTheyAreTheLastRow() {
+    protected rowsVcsKnowIfTheyAreTheLastRow() {
         this.vc.addRow({
             id: generateId(),
             cells: [
@@ -771,7 +772,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantGetRowByIdThatIsntFound() {
+    protected cantGetRowByIdThatIsntFound() {
         const err = assert.doesThrow(() => this.vc.getRowVc('test'))
         errorAssert.assertError(err, 'INVALID_PARAMETERS', {
             parameters: ['rowId'],
@@ -779,7 +780,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsWhenInstantiatingVcWithDuplicateRowIds() {
+    protected throwsWhenInstantiatingVcWithDuplicateRowIds() {
         const err = assert.doesThrow(() =>
             this.Controller('list', {
                 rows: [
@@ -813,7 +814,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static throwsWhenInstantiatingVcWithDuplicateRowIds2() {
+    protected throwsWhenInstantiatingVcWithDuplicateRowIds2() {
         const err = assert.doesThrow(() =>
             this.Controller('list', {
                 rows: [
@@ -857,7 +858,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static cantAddRowsWithIdsThatExist() {
+    protected cantAddRowsWithIdsThatExist() {
         const err = assert.doesThrow(() =>
             this.vc.addRows([
                 {
@@ -889,7 +890,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static blocksDuplicateRowsWhenAddingRowsOneAtATime() {
+    protected blocksDuplicateRowsWhenAddingRowsOneAtATime() {
         this.vc.addRows([
             {
                 id: 'test',
@@ -927,7 +928,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canGetRowsById() {
+    protected canGetRowsById() {
         this.vc.addRows([
             {
                 id: 'test',
@@ -976,7 +977,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canUpsertRowToUpdate() {
+    protected canUpsertRowToUpdate() {
         this.vc.addRows([
             {
                 id: 'test1',
@@ -1024,7 +1025,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async upsertingRowRendersIt() {
+    protected async upsertingRowRendersIt() {
         this.vc.upsertRow('taco', {
             cells: [],
         })
@@ -1036,7 +1037,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async cantDeleteRowIfNoIdFound() {
+    protected async cantDeleteRowIfNoIdFound() {
         const err = await assert.doesThrowAsync(() =>
             this.vc.deleteRow('aoeuaoeuaoeuaoeu')
         )
@@ -1046,7 +1047,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canRemoveRowById() {
+    protected async canRemoveRowById() {
         this.add3Rows()
 
         this.vc.deleteRow('test2')
@@ -1062,7 +1063,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async deletingAllRowsTriggersRenderAndResetsRowVcs() {
+    protected async deletingAllRowsTriggersRenderAndResetsRowVcs() {
         this.add3Rows()
         const startingRenderCount = 3
 
@@ -1078,7 +1079,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async returningFalseFromOnChangeStopsItFromChangingValues() {
+    protected async returningFalseFromOnChangeStopsItFromChangingValues() {
         this.vc.addRow({
             id: 'my-row',
             cells: [
@@ -1099,7 +1100,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static canSetRowHeight() {
+    protected canSetRowHeight() {
         this.vc.addRow({
             id: 'my-row',
             height: 'content',
@@ -1118,7 +1119,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canClickOnRow() {
+    protected async canClickOnRow() {
         let wasHit = false
 
         this.vc.addRow({
@@ -1136,7 +1137,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canEnableAndDisableRow() {
+    protected async canEnableAndDisableRow() {
         this.vc.addRow({
             id: generateId(),
             cells: [],
@@ -1157,7 +1158,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async settingValueToSameValueHasNoEffect() {
+    protected async settingValueToSameValueHasNoEffect() {
         let hitCount = 0
 
         this.vc.addRow({
@@ -1182,19 +1183,19 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canSetColumnWidths() {
+    protected async canSetColumnWidths() {
         this.assertSettingColumnWidthsRendersExpected(['content', 'fill'])
         this.assertSettingColumnWidthsRendersExpected(['fill'])
     }
 
     @test()
-    protected static settingColmunWidthsTriggersRender() {
+    protected settingColmunWidthsTriggersRender() {
         this.setColumnWidths(['content', 'fill'])
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async valuesAreUpdatedInOnChange() {
+    protected async valuesAreUpdatedInOnChange() {
         let onChangedValue: string | undefined
         let listValue: string | undefined
 
@@ -1222,7 +1223,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected static async canCheckIfRowExistsByIdx() {
+    protected async canCheckIfRowExistsByIdx() {
         this.vc.addRow({
             id: generateId(),
             cells: [],
@@ -1232,18 +1233,18 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
         assert.isFalse(this.vc.doesRowExist(1))
     }
 
-    private static assertSettingColumnWidthsRendersExpected(
+    private assertSettingColumnWidthsRendersExpected(
         widths: ListColumnWidth[]
     ) {
         this.setColumnWidths(widths)
         assert.isEqualDeep(this.render(this.vc).columnWidths, widths)
     }
 
-    private static setColumnWidths(widths: ListColumnWidth[]) {
+    private setColumnWidths(widths: ListColumnWidth[]) {
         this.vc.setColumnWidths(widths)
     }
 
-    private static add3Rows() {
+    private add3Rows() {
         this.vc.addRows([
             {
                 id: 'test1',
@@ -1278,7 +1279,7 @@ export default class ControllingAListTest extends AbstractViewControllerTest {
         ])
     }
 
-    private static add2Rows() {
+    private add2Rows() {
         this.vc.addRows([
             {
                 id: generateId(),

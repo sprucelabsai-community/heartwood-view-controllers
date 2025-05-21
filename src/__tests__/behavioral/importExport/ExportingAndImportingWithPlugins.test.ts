@@ -1,12 +1,13 @@
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import {
     importExportSourcePlugins1,
     importExportSourcePlugins2,
 } from '../../../tests/constants'
 import AbstractExportAndImportTest from './AbstractExportAndImportTest'
 
+@suite()
 export default class ExportingAndImportingWithPluginsTest extends AbstractExportAndImportTest {
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         process.env.PLUGIN_1_VALUE = generateId()
@@ -15,7 +16,7 @@ export default class ExportingAndImportingWithPluginsTest extends AbstractExport
     }
 
     @test()
-    protected static async canExportAndImportPlugins1() {
+    protected async canExportAndImportPlugins1() {
         await this.exportAndThenImport(importExportSourcePlugins1)
 
         const pluginsFromVc = this.getPluginsFrom()
@@ -28,7 +29,7 @@ export default class ExportingAndImportingWithPluginsTest extends AbstractExport
     }
 
     @test()
-    protected static async canExportAndImportPlugins2() {
+    protected async canExportAndImportPlugins2() {
         await this.exportAndThenImport(importExportSourcePlugins2)
         const pluginsFromVc = this.getPluginsFrom('reserve-card')
 
@@ -43,7 +44,7 @@ export default class ExportingAndImportingWithPluginsTest extends AbstractExport
         )
     }
 
-    private static getPluginsFrom(id: any = 'reserve') {
+    private getPluginsFrom(id: any = 'reserve') {
         const vc = this.views.Controller(id, {})
         const pluginsFromVc = vc.getPlugins()
         return pluginsFromVc
