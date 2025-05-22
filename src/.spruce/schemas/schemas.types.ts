@@ -1008,6 +1008,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'warningColor1Inverse'?: string | undefined | null
 				
 				'calendarEvents'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColors | undefined | null
+				/** Footer Icon Url. The url of the icon to show in the footer. Must be publically served in some way */
+				'footerIconUrl'?: string | undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -1188,6 +1190,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'calendarEvents': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorsSchema,}
+			            },
+			            /** Footer Icon Url. The url of the icon to show in the footer. Must be publically served in some way */
+			            'footerIconUrl': {
+			                label: 'Footer Icon Url',
+			                type: 'text',
+			                hint: 'The url of the icon to show in the footer. Must be publically served in some way',
+			                options: undefined
 			            },
 			    }
 		}

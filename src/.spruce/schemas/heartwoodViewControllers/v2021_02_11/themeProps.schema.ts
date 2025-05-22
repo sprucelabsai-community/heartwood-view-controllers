@@ -182,6 +182,13 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'schema',
 	                options: {schema: calendarEventColorsSchema_v2021_02_11,}
 	            },
+	            /** Footer Icon Url. The url of the icon to show in the footer. Must be publically served in some way */
+	            'footerIconUrl': {
+	                label: 'Footer Icon Url',
+	                type: 'text',
+	                hint: 'The url of the icon to show in the footer. Must be publically served in some way',
+	                options: undefined
+	            },
 	    }
 }
 

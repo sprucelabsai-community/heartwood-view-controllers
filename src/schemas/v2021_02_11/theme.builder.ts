@@ -154,6 +154,11 @@ export default buildSchema({
                                 schema: calendarEventColorsBuilder,
                             },
                         },
+                        footerIconUrl: {
+                            type: 'text',
+                            label: 'Footer Icon Url',
+                            hint: 'The url of the icon to show in the footer. Must be publically served in some way',
+                        },
                     },
                 },
             },
