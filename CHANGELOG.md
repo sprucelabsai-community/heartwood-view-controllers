@@ -1,3 +1,16 @@
+## [119.4.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.2...v119.4.3) (2025-05-22)
+
+## [119.4.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.1...v119.4.2) (2025-05-22)
+
+## [119.4.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.0...v119.4.1) (2025-05-22)
+
+# [119.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.3.1...v119.4.0) (2025-05-21)
+
+
+### Features
+
+* state change emitted for fail ([1572681](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1572681))
+
 ## [119.3.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.3.0...v119.3.1) (2025-05-19)
 
 # [119.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.2.1...v119.3.0) (2025-05-16)
