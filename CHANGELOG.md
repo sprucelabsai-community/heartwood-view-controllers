@@ -1,3 +1,10 @@
+# [119.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.3...v119.5.0) (2025-05-22)
+
+
+### Features
+
+* theme's now have footer icons! ([3ece660](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3ece660))
+
 ## [119.4.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.2...v119.4.3) (2025-05-22)
 
 ## [119.4.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.4.1...v119.4.2) (2025-05-22)
