@@ -94,12 +94,12 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 1)
-        this.assertHeaderTriggerRenderCount(0)
+        this.assertHeaderTriggerRenderCountEquals(0)
     }
 
     @test()
     protected canUpdateHeaderTitleBeforeRender() {
-        this.vc.setHeaderTitle('you got this')
+        this.setHeaderTitle('you got this')
 
         const model = this.renderCard()
 
@@ -112,19 +112,19 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     protected canUpdateHeaderTitleAfterRender() {
         this.renderCard()
 
-        this.vc.setHeaderTitle('you got this')
+        this.setHeaderTitle('you got this')
 
         const model = this.renderCard()
 
         assert.isEqual(model.header?.title, 'you got this')
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 0)
-        this.assertHeaderTriggerRenderCount(1)
+        this.assertHeaderTriggerRenderCountEquals(1)
     }
 
     @test()
     protected canClearTitle() {
-        this.vc.setHeaderTitle(null)
+        this.setHeaderTitle(null)
         const model = this.renderCard()
         assert.isFalsy(model.header)
     }
@@ -148,7 +148,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 0)
-        this.assertHeaderTriggerRenderCount(0)
+        this.assertHeaderTriggerRenderCountEquals(0)
         assert.isEqual(this.sectionTriggerRenderCounts[0], 1)
         assert.isUndefined(this.sectionTriggerRenderCounts[1])
     }
@@ -168,7 +168,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected setHeaderSubtitle() {
+    protected canSetHeaderSubtitle() {
         this.vc.setHeaderSubtitle('Waka waka')
         let model = this.renderCard()
         assert.isEqual(model.header?.subtitle, 'Waka waka')
@@ -187,7 +187,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
     @test()
     protected canRemoveHeaderImage() {
-        this.vc.setHeaderTitle(null)
+        this.setHeaderTitle(null)
         this.setHeaderImage('test.jpg')
         this.setHeaderImage(null)
         const model = this.renderCard()
@@ -238,9 +238,9 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     @test()
     protected async canGetHeaderTitle() {
         assert.isEqual(this.vc.getHeaderTitle(), 'A header')
-        this.vc.setHeaderTitle('A header again')
+        this.setHeaderTitle('A header again')
         assert.isEqual(this.vc.getHeaderTitle(), 'A header again')
-        this.vc.setHeaderTitle(null)
+        this.setHeaderTitle(null)
         assert.isEqual(this.vc.getHeaderTitle(), undefined)
     }
 
@@ -370,7 +370,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         vc.setHeader({ title: 'wha!?' })
 
-        this.assertHeaderTriggerRenderCount(1)
+        this.assertHeaderTriggerRenderCountEquals(1)
         assert.isEqual(this.cardTriggerRenderCount, 0)
     }
 
@@ -385,7 +385,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.renderCard(vc)
         vc.setHeader(null)
 
-        this.assertHeaderTriggerRenderCount(0)
+        this.assertHeaderTriggerRenderCountEquals(0)
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
@@ -398,7 +398,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
             title: 'hey',
         })
 
-        this.assertHeaderTriggerRenderCount(0)
+        this.assertHeaderTriggerRenderCountEquals(0)
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
@@ -528,18 +528,43 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.setHeaderImage(generateId())
 
         assert.isEqual(this.cardTriggerRenderCount, 0)
-        this.assertHeaderTriggerRenderCount(1)
+        this.assertHeaderTriggerRenderCountEquals(1)
 
         this.setHeaderImage(null)
-        this.assertHeaderTriggerRenderCount(2)
+        this.assertHeaderTriggerRenderCountEquals(2)
+    }
+
+    @test()
+    protected async settingHeaderTitleTriggersRenderOnCardIfNoHeaderPreviously() {
+        this.vc = this.Vc({})
+        this.beginTrackingHeaderRender()
+        this.setHeaderTitle(generateId())
+        this.assertTriggerRenderCountEquals(1)
+        this.assertHeaderTriggerRenderCountEquals(0)
+    }
+
+    private assertTriggerRenderCountEquals(expected: number) {
+        assert.isEqual(
+            this.cardTriggerRenderCount,
+            expected,
+            'Trigger render count missmatch'
+        )
+    }
+
+    private setHeaderTitle(title: null | string) {
+        this.vc.setHeaderTitle(title)
     }
 
     private setHeaderImage(image: string | null) {
         this.vc.setHeaderImage(image)
     }
 
-    private assertHeaderTriggerRenderCount(expected: number) {
-        assert.isEqual(this.headerTriggerRenderCount, expected)
+    private assertHeaderTriggerRenderCountEquals(expected: number) {
+        assert.isEqual(
+            this.headerTriggerRenderCount,
+            expected,
+            'trigger header render count missmatch'
+        )
     }
 
     private setVcWith3Sections() {

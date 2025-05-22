@@ -129,6 +129,8 @@ export default class CardViewController<V extends ViewModel = ViewModel>
             return
         }
 
+        const hasHeader = !!this.model.header
+
         this.model = {
             ...this.model,
             header: {
@@ -137,7 +139,11 @@ export default class CardViewController<V extends ViewModel = ViewModel>
             },
         }
 
-        this.triggerRenderHeader?.()
+        if (hasHeader) {
+            this.triggerRenderHeader?.()
+        } else {
+            this.triggerRender()
+        }
     }
 
     public setHeaderSubtitle(subtitle: string | null) {
