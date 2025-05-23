@@ -1,5 +1,6 @@
-import { test, suite, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import { ButtonGroupButton } from '../../../types/heartwood.types'
 import ButtonBarViewController from '../../../viewControllers/ButtonBar.vc'
 import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
@@ -8,6 +9,11 @@ import ButtonGroupViewController from '../../../viewControllers/ButtonGroup.vc'
 export default class ControllingAButtonBarTest extends AbstractViewControllerTest {
     protected controllerMap = {}
     private vc!: ButtonBarViewController
+
+    protected async beforeEach() {
+        await super.beforeEach()
+        this.vc = this.ButtonBarWithButtons([])
+    }
 
     @test()
     protected async canCreateAButtonBar() {
@@ -19,7 +25,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 
     @test()
     protected shouldRenderButtonsItsPassed() {
-        this.setButtons([
+        this.setButtonsOnNewBar([
             {
                 id: 'first',
                 label: 'what the?',
@@ -32,7 +38,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 
     @test()
     protected rendersButtonsUsingButtonGroup() {
-        this.setButtons([
+        this.setButtonsOnNewBar([
             {
                 id: 'first',
                 label: 'what the?',
@@ -113,7 +119,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
             },
         ]
 
-        this.setButtons(buttons)
+        this.setButtonsOnNewBar(buttons)
 
         assert.isEqual(
             this.vc.getSelectedButtons(),
@@ -134,10 +140,6 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
 
         await this.vc.setSelectedButtons(['third'])
         this.assertSelectedButtonGroupButtonsEqual(['third'])
-    }
-
-    private assertSelectedButtonGroupButtonsEqual(expected: string[]) {
-        assert.isEqualDeep(this.buttonGroupVc.getSelectedButtons(), expected)
     }
 
     @test()
@@ -161,7 +163,32 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
         assert.isTrue(wasHit)
     }
 
-    private setButtons(buttons: { id: string; label: string }[]) {
+    @test()
+    protected async canSetButtonsOnBar() {
+        const id = generateId()
+        this.setButtons([
+            {
+                id,
+            },
+        ])
+        assert.isEqual(this.renderedButtons[0].id, id)
+    }
+
+    @test()
+    protected async settingButtonsTriggersRender() {
+        this.setButtons([])
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    private setButtons(buttons: { id: string }[]) {
+        this.vc.setButtons(buttons)
+    }
+
+    private assertSelectedButtonGroupButtonsEqual(expected: string[]) {
+        assert.isEqualDeep(this.buttonGroupVc.getSelectedButtons(), expected)
+    }
+
+    private setButtonsOnNewBar(buttons: { id: string; label: string }[]) {
         this.vc = this.ButtonBarWithButtons(buttons)
     }
 

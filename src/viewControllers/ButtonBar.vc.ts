@@ -1,5 +1,8 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { ViewControllerOptions } from '../types/heartwood.types'
+import {
+    ButtonGroupButton,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 import ButtonGroupViewController, {
     ButtonGroupViewControllerOptions,
@@ -40,6 +43,11 @@ export default class ButtonBarViewController extends AbstractViewController<Butt
      */
     public async selectButtons(ids: string[]) {
         await this.setSelectedButtons(ids)
+    }
+
+    public setButtons(buttons: ButtonGroupButton[]) {
+        this.buttonGroupVc.setButtons(buttons)
+        this.triggerRender()
     }
 
     public async deselectButton(id: string) {
