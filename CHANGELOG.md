@@ -1,3 +1,10 @@
+# [119.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.5.2...v119.6.0) (2025-05-23)
+
+
+### Features
+
+* can setButtons on button bar ([5cf77a3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/5cf77a3))
+
 ## [119.5.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.5.1...v119.5.2) (2025-05-22)
 
 ## [119.5.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.5.0...v119.5.1) (2025-05-22)
