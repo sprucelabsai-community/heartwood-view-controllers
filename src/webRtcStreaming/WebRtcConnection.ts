@@ -57,12 +57,13 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
             )
             if (connection.connectionState === 'failed') {
                 const stats = await connection.getStats()
+                const messages: string[] = []
+                stats.forEach((report) => {
+                    messages.push(`[${report.type}] ID: ${report.id}`, report)
+                })
                 this.log.error(
-                    `RTCPeerConnection failed with stats: ${JSON.stringify(
-                        stats,
-                        null,
-                        2
-                    )}`
+                    `RTCPeerConnection failed with stats:\n\n`,
+                    messages.join('\n')
                 )
                 await this.emitStateChange('error', { stats })
             }
