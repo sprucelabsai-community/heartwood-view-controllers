@@ -355,7 +355,7 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test('passes through connection stats to fail event 1', [])
-    @test('passes through connection stats to fail event 2', { go: 'team' })
+    @test('passes through connection stats to fail event 2', [{ go: 'team' }])
     protected async failedPassesThroughConnectionStats(stats: RTCStatsReport) {
         await this.createOffer()
 
