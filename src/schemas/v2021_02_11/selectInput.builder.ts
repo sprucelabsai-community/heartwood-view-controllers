@@ -28,8 +28,11 @@ export default buildSchema({
                     id: 'selectInputChoice',
                     fields: {
                         value: {
-                            type: 'text',
+                            type: 'raw',
                             isRequired: true,
+                            options: {
+                                valueType: 'string | number',
+                            },
                         },
                         label: {
                             type: 'text',

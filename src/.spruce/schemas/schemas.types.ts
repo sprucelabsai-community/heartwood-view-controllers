@@ -5604,7 +5604,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SelectInputChoice {
 			
 				
-				'value': string
+				'value': (string | number)
 				
 				'label': string
 		}
@@ -5618,9 +5618,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    fields: {
 			            /** . */
 			            'value': {
-			                type: 'text',
+			                type: 'raw',
 			                isRequired: true,
-			                options: undefined
+			                options: {valueType: `string | number`,}
 			            },
 			            /** . */
 			            'label': {

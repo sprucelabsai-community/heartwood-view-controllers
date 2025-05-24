@@ -12,9 +12,9 @@ const selectInputChoiceSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_1
 	    fields: {
 	            /** . */
 	            'value': {
-	                type: 'text',
+	                type: 'raw',
 	                isRequired: true,
-	                options: undefined
+	                options: {valueType: `string | number`,}
 	            },
 	            /** . */
 	            'label': {
