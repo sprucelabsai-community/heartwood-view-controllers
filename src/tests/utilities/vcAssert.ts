@@ -748,7 +748,9 @@ const vcAssert = {
             for (const id of expected) {
                 const match = cards.find((c) => getViewId(c) === id)
                 if (!match) {
-                    assert.fail(`I could not find a card with the id of ${id}!`)
+                    assert.fail(
+                        `I could not find a card with the id of ${id}! Make sure you are rendering it in your skill view and it's id matches: this.Controller('card', { id }).`
+                    )
                 } else {
                     matches.push(match)
                 }
