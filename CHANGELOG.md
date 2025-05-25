@@ -1,3 +1,10 @@
+# [119.8.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.7.2...v119.8.0) (2025-05-25)
+
+
+### Features
+
+* can pass through icerestart to WebRtcConnection, but now defaults to true ([1539f5c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1539f5c))
+
 ## [119.7.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.7.1...v119.7.2) (2025-05-25)
 
 ## [119.7.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.7.0...v119.7.1) (2025-05-25)
