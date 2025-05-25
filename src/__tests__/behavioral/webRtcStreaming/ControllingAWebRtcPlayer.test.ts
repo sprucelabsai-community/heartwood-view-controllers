@@ -38,11 +38,11 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         await super.beforeEach()
         const options: Card = {}
 
-        this.vc = this.Vc(options)
-
         delete WebRtcConnectionImpl.Class
         WebRtcConnectionImpl.RTCPeerConnection = MockRtcPeerConnection
         WebRtcStreamerImpl.Class = SpyWebRtcStreamer
+
+        this.vc = this.Vc(options)
     }
 
     @test()
@@ -132,7 +132,7 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         const model = this.render(this.vc)
         assert.isEqual(
             model.connection,
-            SpyWebRtcConnection.instance,
+            this.spyWebRtcConnection,
             'Did not return connection from render'
         )
     }
@@ -181,6 +181,31 @@ export default class ControllingAWebRtcPlayerTest extends AbstractViewController
         this.vc.disableCropping()
         this.assertShouldAllowCroppingEquals(false)
         vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test()
+    protected async canHookIntoStateChangeEvents() {
+        WebRtcConnectionImpl.Class = SpyWebRtcConnection
+
+        const stateChangeHandler = () => {}
+
+        this.vc = this.Vc({
+            onStateChange: stateChangeHandler,
+        })
+
+        assert.isEqual(
+            this.spyWebRtcConnection.stateChangeListeners[0],
+            stateChangeHandler,
+            'Did not register state change listener'
+        )
+    }
+
+    private get spyWebRtcConnection() {
+        assert.isTruthy(
+            SpyWebRtcConnection.instance,
+            'Make sure you set WebRtcConnectionImpl.Class = SpyWebRtcConnection before constructing the vc'
+        )
+        return SpyWebRtcConnection.instance
     }
 
     private assertShouldAllowCroppingEquals(expected: boolean) {
@@ -257,6 +282,8 @@ class SpyWebRtcStreamer implements WebRtcStreamer {
 
 class SpyWebRtcConnection implements WebRtcConnection {
     public static instance: SpyWebRtcConnection
+    public stateChangeListeners: WebRtcStateChangeHandler[] = []
+
     public constructor() {
         SpyWebRtcConnection.instance = this
     }
@@ -274,6 +301,8 @@ class SpyWebRtcConnection implements WebRtcConnection {
             streamer: new SpyWebRtcStreamer(),
         }
     }
-    public onStateChange(_cb: WebRtcStateChangeHandler): void {}
+    public onStateChange(cb: WebRtcStateChangeHandler): void {
+        this.stateChangeListeners.push(cb)
+    }
     public offStateChange(_listener: WebRtcStateChangeHandler): void {}
 }

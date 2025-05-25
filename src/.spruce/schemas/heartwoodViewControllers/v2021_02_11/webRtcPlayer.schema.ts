@@ -31,6 +31,11 @@ const webRtcPlayerSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Web
 	                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
 	            },
 	            /** . */
+	            'onStateChange': {
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.WebRtcStateChangeHandler`,}
+	            },
+	            /** . */
 	            'crop': {
 	                type: 'schema',
 	                options: {schema: webRtcCropPointSchema_v2021_02_11,}

@@ -104,9 +104,9 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         }
     }
 
-    private async emitStateChange(
-        state: WebRtcConnectionState,
-        event?: WebRtcStateChangeEvent
+    private async emitStateChange<State extends WebRtcConnectionState>(
+        state: State,
+        event?: WebRtcStateChangeEvent<State>
     ) {
         for (const handler of this.stateChangeListeners) {
             await handler(state, event)
@@ -132,18 +132,22 @@ export interface WebRtcVcPluginCreateOfferOptions {
 }
 
 export interface WebRtcStateEventMap {
-    createdOffer: RTCTrackEvent
-    suppliedAnswer: RTCTrackEvent
+    createdOffer: undefined
+    suppliedAnswer: undefined
     trackAdded: RTCTrackEvent
     error: WebRtcErrorEvent
 }
 
 export type WebRtcConnectionState = keyof WebRtcStateEventMap
-export type WebRtcStateChangeEvent = RTCTrackEvent | WebRtcErrorEvent
+export type WebRtcStateChangeEvent<
+    State extends WebRtcConnectionState = WebRtcConnectionState,
+> = WebRtcStateEventMap[State]
 
-export type WebRtcStateChangeHandler = (
-    state: WebRtcConnectionState,
-    event?: WebRtcStateChangeEvent
+export type WebRtcStateChangeHandler<
+    State extends WebRtcConnectionState = WebRtcConnectionState,
+> = (
+    state: State,
+    event?: WebRtcStateChangeEvent<State>
 ) => void | Promise<void>
 
 export interface WebRtcErrorEvent {

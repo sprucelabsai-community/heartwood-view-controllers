@@ -771,6 +771,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onCrop'?: (HeartwoodTypes.WebRtcPlayerCropHandler) | undefined | null
 				
+				'onStateChange'?: (HeartwoodTypes.WebRtcStateChangeHandler) | undefined | null
+				
 				'crop'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPoint | undefined | null
 				
 				'connection'?: (HeartwoodTypes.WebRtcConnection) | undefined | null
@@ -804,6 +806,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'onCrop': {
 			                type: 'raw',
 			                options: {valueType: `HeartwoodTypes.WebRtcPlayerCropHandler`,}
+			            },
+			            /** . */
+			            'onStateChange': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.WebRtcStateChangeHandler`,}
 			            },
 			            /** . */
 			            'crop': {

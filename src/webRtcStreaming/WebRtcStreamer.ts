@@ -13,17 +13,17 @@ export default class WebRtcStreamerImpl implements WebRtcStreamer {
 
     protected constructor(
         connection: RTCPeerConnection,
-        stateChangeHandler?: WebRtcStateChangeListener
+        onSetAnswer?: WebRtcStateChangeListener
     ) {
         this.connection = connection
-        this.setAnwserHandler = stateChangeHandler
+        this.setAnwserHandler = onSetAnswer
     }
 
     public static Streamer(
         connection: RTCPeerConnection,
-        stateChangeHandler?: WebRtcStateChangeListener
+        onSetAnswer?: WebRtcStateChangeListener
     ) {
-        return new (this.Class ?? this)(connection, stateChangeHandler)
+        return new (this.Class ?? this)(connection, onSetAnswer)
     }
 
     public async setAnswer(answerSdp: string) {

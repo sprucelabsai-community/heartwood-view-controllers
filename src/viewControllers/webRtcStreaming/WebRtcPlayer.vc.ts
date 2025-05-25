@@ -20,10 +20,17 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
     public constructor(options: ViewControllerOptions & WebRtcPlayerOptions) {
         super(options)
 
+        const { onStateChange, ...model } = removeUniversalViewOptions(options)
+
         this.connection = WebRtcConnectionImpl.Connection()
+        if (onStateChange) {
+            this.connection.onStateChange(onStateChange)
+        }
+
         this.model = {
             connection: this.connection,
-            ...removeUniversalViewOptions(options),
+            onStateChange,
+            ...model,
             controller: this,
         }
     }

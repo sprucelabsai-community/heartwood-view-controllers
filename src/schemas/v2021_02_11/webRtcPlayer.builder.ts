@@ -22,6 +22,12 @@ export default buildSchema({
                 valueType: 'HeartwoodTypes.WebRtcPlayerCropHandler',
             },
         },
+        onStateChange: {
+            type: 'raw',
+            options: {
+                valueType: 'HeartwoodTypes.WebRtcStateChangeHandler',
+            },
+        },
         crop: {
             type: 'schema',
             options: {
