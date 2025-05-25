@@ -1,3 +1,10 @@
+# [119.7.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.6.9...v119.7.0) (2025-05-25)
+
+
+### Features
+
+* new rtc interactions and ability to hook into state change on player ([e832412](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e832412))
+
 ## [119.6.9](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.6.8...v119.6.9) (2025-05-25)
 
 ## [119.6.8](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.6.7...v119.6.8) (2025-05-25)
