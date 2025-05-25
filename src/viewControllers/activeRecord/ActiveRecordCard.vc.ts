@@ -604,6 +604,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         this.cardVc.enableFooter()
     }
 
+    // @deprecated - this is dangerous to use and will break when paging is enabled. Check the MockActiveCard or your ActiveRecordCard for a better solution. If one does not exist, report it here: https://docs.google.com/forms/d/e/1FAIpQLSdqNm0tkmBhzl7L8yuRpXYOWuke9CzKvbPzpUIsIYxB0zDmIQ/viewform
     public getListVc() {
         const listVc = this.listVc?.getListVc() ?? this.listVcs[0]
         if (!listVc || this.listVcs.length > 1) {
