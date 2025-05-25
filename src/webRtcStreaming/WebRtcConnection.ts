@@ -168,7 +168,6 @@ export interface WebRtcStateEventMap {
     connecting: WebRtcEvent
     connected: WebRtcEvent
     disconnected: WebRtcEvent
-    failed: WebRtcEvent
     trackAdded: RTCTrackEvent
     error: WebRtcErrorEvent
 }
