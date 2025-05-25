@@ -567,11 +567,11 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
         )
     }
 
-    public async setValue(rowId: string, name: string, value: any) {
+    public async setValue(rowId: string | number, name: string, value: any) {
         await this.getRowVc(rowId).setValue(name, value)
     }
 
-    public getValue(rowId: string, name: string) {
+    public getValue(rowId: string | number, name: string) {
         return this.getRowVc(rowId).getValue(name)
     }
 
