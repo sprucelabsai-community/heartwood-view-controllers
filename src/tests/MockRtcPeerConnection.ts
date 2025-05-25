@@ -21,6 +21,7 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     }
     private tranceiverAndDataChannelCalls: string[] = []
     private stats: RTCStatsReport = [] as unknown as RTCStatsReport
+    private lastCreateOfferOptions?: RTCOfferOptions
 
     public constructor(options?: RTCConfiguration) {
         MockRtcPeerConnection.instance = this
@@ -123,6 +124,14 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
         )
     }
 
+    public assertCreateOfferOptionsEqual(expected: RTCOfferOptions) {
+        assert.isEqualDeep(
+            this.lastCreateOfferOptions,
+            expected,
+            'Did not pass expected options to createOffer'
+        )
+    }
+
     public static onCreateOffer(cb?: () => void) {
         this.onCreateOfferHandler = cb
     }
@@ -221,8 +230,9 @@ export default class MockRtcPeerConnection implements RTCPeerConnection {
     }
 
     //@ts-ignore
-    public async createOffer(_options?: RTCOfferOptions) {
+    public async createOffer(options?: RTCOfferOptions) {
         MockRtcPeerConnection.onCreateOfferHandler?.()
+        this.lastCreateOfferOptions = options
         return this.offer as any
     }
 

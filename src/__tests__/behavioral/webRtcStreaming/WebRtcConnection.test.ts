@@ -94,6 +94,27 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
     }
 
     @test()
+    protected async passingIceRestartToOfferPassesThroughToConnection() {
+        const expected = {
+            iceRestart: false,
+        }
+
+        await this.createOffer({
+            offerOptions: expected,
+        })
+
+        this.assertOfferOptionsEquals(expected)
+    }
+
+    @test()
+    protected async defaultsToIceRestartTrueWhenCreatingOffer() {
+        await this.createOffer()
+        this.assertOfferOptionsEquals({
+            iceRestart: true,
+        })
+    }
+
+    @test()
     protected async callsEverythingInTheExpectedOrderWhenCreatingOffer() {
         const expected = {
             offerToReceiveVideo: true,
@@ -400,6 +421,10 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
 
     private setConnectionState(state: RTCPeerConnectionState) {
         this.peerConnection.connectionState = state
+    }
+
+    private assertOfferOptionsEquals(expected: { iceRestart: boolean }) {
+        this.peerConnection.assertCreateOfferOptionsEqual(expected)
     }
 
     private get peerConnection(): MockRtcPeerConnection {

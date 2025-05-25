@@ -53,7 +53,11 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
         this.addStateChangeListener()
 
-        const { offerToReceiveAudio, offerToReceiveVideo } = offerOptions
+        const {
+            offerToReceiveAudio,
+            offerToReceiveVideo,
+            ...restOfferOptions
+        } = offerOptions
 
         if (offerToReceiveAudio) {
             connection.addTransceiver('audio', { direction: 'recvonly' })
@@ -67,7 +71,10 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         //stays the default behavior
         connection.createDataChannel('dataSendChannel')
 
-        const offer = await connection.createOffer({})
+        const offer = await connection.createOffer({
+            iceRestart: true,
+            ...restOfferOptions,
+        })
         await connection.setLocalDescription(offer)
 
         void this.emitStateChange('createdOffer')
@@ -159,6 +166,7 @@ export interface WebRtcVcPluginCreateOfferOptions {
     offerOptions: {
         offerToReceiveAudio?: boolean
         offerToReceiveVideo?: boolean
+        iceRestart?: boolean
     }
 }
 

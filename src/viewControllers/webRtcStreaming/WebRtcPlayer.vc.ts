@@ -8,7 +8,9 @@ import {
     WebRtcPlayer,
 } from '../../types/heartwood.types'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
-import WebRtcConnectionImpl from '../../webRtcStreaming/WebRtcConnection'
+import WebRtcConnectionImpl, {
+    WebRtcVcPluginCreateOfferOptions,
+} from '../../webRtcStreaming/WebRtcConnection'
 import { WebRtcStreamer } from '../../webRtcStreaming/WebRtcStreamer'
 import AbstractViewController from '../Abstract.vc'
 
@@ -41,7 +43,9 @@ export default class WebRtcPlayerViewController extends AbstractViewController<W
         this.triggerRender()
     }
 
-    public async createOffer(offerOptions: RTCOfferOptions) {
+    public async createOffer(
+        offerOptions: WebRtcVcPluginCreateOfferOptions['offerOptions'] = {}
+    ) {
         const { offerSdp, streamer } = await this.connection.createOffer({
             offerOptions,
         })
