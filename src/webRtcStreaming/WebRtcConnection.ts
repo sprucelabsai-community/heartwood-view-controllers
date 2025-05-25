@@ -51,23 +51,7 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
 
         this.rtcPeerConnection = connection as RTCPeerConnection
 
-        connection.addEventListener('connectionstatechange', async () => {
-            this.log.info(
-                `RTCPeerConnection state changed to ${connection.connectionState}`
-            )
-            if (connection.connectionState === 'failed') {
-                const stats = await connection.getStats()
-                const messages: string[] = []
-                stats.forEach((report) => {
-                    messages.push(`[${report.type}] ID: ${report.id}`, report)
-                })
-                this.log.error(
-                    `RTCPeerConnection failed with stats:\n\n`,
-                    messages.join('\n')
-                )
-                await this.emitStateChange('error', { stats })
-            }
-        })
+        this.addStateChangeListener()
 
         const { offerToReceiveAudio, offerToReceiveVideo } = offerOptions
 
@@ -104,6 +88,53 @@ export default class WebRtcConnectionImpl implements WebRtcConnection {
         }
     }
 
+    private addStateChangeListener() {
+        this.rtcPeerConnection?.addEventListener(
+            'connectionstatechange',
+            async () => {
+                this.log.info(
+                    `RTCPeerConnection state changed to ${this.rtcPeerConnection?.connectionState}`
+                )
+                const state = this.rtcPeerConnection?.connectionState
+                if (state === 'failed') {
+                    await this.handleStatusFailed()
+                } else {
+                    await this.emitStateChange(state as WebRtcConnectionState, {
+                        connection: this.rtcPeerConnection!,
+                    })
+                }
+            }
+        )
+    }
+
+    private async handleStatusFailed() {
+        const connection = this.rtcPeerConnection
+        if (!connection) {
+            return
+        }
+        const stats = await connection.getStats()
+        this.logStatsReport(stats)
+
+        await this.emitStateChange('error', {
+            stats,
+            connection,
+        })
+    }
+
+    private logStatsReport(stats: RTCStatsReport) {
+        const messages: string[] = []
+        stats.forEach((report) => {
+            messages.push(
+                `[${report.type}] ID: ${report.id}`,
+                JSON.stringify(report, null, 2)
+            )
+        })
+        this.log.error(
+            `RTCPeerConnection failed with stats:\n\n`,
+            messages.join('\n')
+        )
+    }
+
     private async emitStateChange<State extends WebRtcConnectionState>(
         state: State,
         event?: WebRtcStateChangeEvent<State>
@@ -134,8 +165,16 @@ export interface WebRtcVcPluginCreateOfferOptions {
 export interface WebRtcStateEventMap {
     createdOffer: undefined
     suppliedAnswer: undefined
+    connecting: WebRtcEvent
+    connected: WebRtcEvent
+    disconnected: WebRtcEvent
+    failed: WebRtcEvent
     trackAdded: RTCTrackEvent
     error: WebRtcErrorEvent
+}
+
+interface WebRtcEvent {
+    connection: RTCPeerConnection
 }
 
 export type WebRtcConnectionState = keyof WebRtcStateEventMap
@@ -152,6 +191,7 @@ export type WebRtcStateChangeHandler<
 
 export interface WebRtcErrorEvent {
     stats: RTCStatsReport
+    connection: RTCPeerConnection
 }
 
 export interface WebRtcConnection {

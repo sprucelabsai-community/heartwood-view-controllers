@@ -105,6 +105,7 @@ export default class InteractingWithWebRtcPlayersTest extends AbstractViewContro
     protected async canSimulateStateChangeWithEvent() {
         const event = {
             stats: new StubRtcStatsReport(),
+            connection: new MockRtcPeerConnection({}) as RTCPeerConnection,
         }
         await this.simulateStateChange('error', event)
         assert.isEqual(

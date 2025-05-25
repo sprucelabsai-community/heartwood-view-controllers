@@ -368,8 +368,33 @@ export default class WebRtcVcPluginTest extends AbstractViewControllerTest {
         const lastEvent = this.stateChangeEvents.pop()
         assert.isEqualDeep(
             lastEvent,
-            { stats },
+            { stats, connection: this.peerConnection as RTCPeerConnection },
             'Stats were not passed through'
+        )
+    }
+
+    @test('passes through connecting event', 'connecting')
+    @test('passes through connected event', 'connected')
+    @test('passes through disconnected event', 'disconnected')
+    protected async passesThroughPeerConnectionEvents(
+        state: RTCPeerConnectionState
+    ) {
+        await this.createOffer()
+        this.setConnectionState(state)
+        await this.emitConnectionEvent('connectionstatechange')
+        assert.isEqualDeep(
+            this.stateChanges,
+            ['createdOffer', state],
+            'Did not emit the correct events'
+        )
+
+        assert.isEqualDeep(
+            this.stateChangeEvents,
+            [
+                undefined,
+                { connection: this.peerConnection as RTCPeerConnection },
+            ],
+            'Did not pass through the expected events'
         )
     }
 
