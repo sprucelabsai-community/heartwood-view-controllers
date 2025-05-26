@@ -396,6 +396,9 @@ export type Form<S extends Schema = any> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<S>
 export type WebRtcPlayer =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcPlayer
+export type StatusIndicator =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicator
+export type StatusIndicatorStatus = NonNullable<StatusIndicator['status']>
 
 export type NavigationRoute =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute

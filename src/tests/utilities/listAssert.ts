@@ -8,6 +8,7 @@ import {
     ListCell,
     RowStyle,
     SkillViewController,
+    StatusIndicatorStatus,
     SwipeCardViewController,
     ViewController,
 } from '../../types/heartwood.types'
@@ -75,6 +76,7 @@ const listAssert = {
             } in row '${row}' and I didn't expect to!`
         )
     },
+
     rowRendersCheckBox(
         listVc: ViewController<List>,
         row: string | number,
@@ -97,6 +99,31 @@ const listAssert = {
             assert.isTruthy(
                 checkbox,
                 `I could not find a checkbox in row '${row}'!`
+            )
+        }
+    },
+
+    rowRendersStatusIndicator(
+        listVc: ViewController<List>,
+        row: string | number,
+        expectedStatus?: StatusIndicatorStatus
+    ) {
+        assertOptions({ listVc, row }, ['listVc', 'row'])
+
+        const rowVc = getListVc(listVc).getRowVc(row)
+        const model = renderUtil.render(rowVc)
+        const match = model.cells.find((c) => c.statusIndicator)
+
+        assert.isTruthy(
+            match,
+            `I could not find a status indicator in row '${row}'!`
+        )
+
+        if (expectedStatus) {
+            assert.isEqual(
+                match.statusIndicator?.status,
+                expectedStatus,
+                'The status indicator is does not right!'
             )
         }
     },

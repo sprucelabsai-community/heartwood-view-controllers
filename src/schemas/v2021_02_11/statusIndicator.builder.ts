@@ -13,6 +13,7 @@ export default buildSchema({
         status: {
             type: 'select',
             label: 'Status',
+            isRequired: true,
             options: {
                 choices,
             },
