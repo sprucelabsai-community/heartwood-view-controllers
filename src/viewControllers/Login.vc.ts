@@ -55,6 +55,8 @@ export default class LoginViewController
         this.loginHandler = options.onLogin
         this.loginFailedHandler = options.onLoginFailed
         this.loginForm = this.BigForm()
+
+        this.device.sendCommand('attemptingLogin')
     }
 
     private BigForm(): BigFormViewController<LoginSchema> {

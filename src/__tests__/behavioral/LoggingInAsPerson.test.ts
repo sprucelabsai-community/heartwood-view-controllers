@@ -4,7 +4,9 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../auth/Authenticator'
 import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
+import SpyDevice from '../../tests/SpyDevice'
 import StubStorage from '../../tests/StubStorage'
+import LoginViewController from '../../viewControllers/Login.vc'
 
 @suite()
 export default class AuthenticatorTest extends AbstractViewControllerTest {
@@ -288,6 +290,15 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         assert.isFalse(wasHit, 'Should not emit logout events if not logged in')
     }
 
+    @test()
+    protected async sendsAttemptingLoginCommandToDevice() {
+        const factory = this.Factory()
+        factory.setController('login', SpyLogin)
+        const login = factory.Controller('login', {}) as SpyLogin
+        const device = login.getDevice() as SpyDevice
+        assert.isEqual(device.lastCommand, 'attemptingLogin')
+    }
+
     private get auth() {
         return Authenticator.getInstance()
     }
@@ -296,5 +307,11 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         const factory = this.Factory()
         const login = factory.Controller('login-card', {})
         return login
+    }
+}
+
+class SpyLogin extends LoginViewController {
+    public getDevice() {
+        return this.device
     }
 }
