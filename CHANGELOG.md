@@ -1,3 +1,10 @@
+# [119.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.8.4...v119.9.0) (2025-05-26)
+
+
+### Features
+
+* status indicators ([d2918bf](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d2918bf))
+
 ## [119.8.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.8.3...v119.8.4) (2025-05-26)
 
 ## [119.8.3](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.8.2...v119.8.3) (2025-05-26)
