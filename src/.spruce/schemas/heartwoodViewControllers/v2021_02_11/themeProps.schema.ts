@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import calendarEventColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
+import statusIndicatorColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicatorColors.schema'
 
 const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema  = {
 	id: 'themeProps',
@@ -188,6 +189,11 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'text',
 	                hint: 'The url of the icon to show in the footer. Must be publicly served in some way',
 	                options: undefined
+	            },
+	            /** . */
+	            'statusIndicators': {
+	                type: 'schema',
+	                options: {schema: statusIndicatorColorsSchema_v2021_02_11,}
 	            },
 	    }
 }

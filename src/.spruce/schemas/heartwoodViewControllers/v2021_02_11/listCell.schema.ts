@@ -10,6 +10,7 @@ import listDateInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewContro
 import listSelectInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
 import listToggleInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listToggleInput.schema'
 import listRatingsInputSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listRatingsInput.schema'
+import statusIndicatorSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicator.schema'
 
 const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellSchema  = {
 	id: 'listCell',
@@ -118,6 +119,12 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                label: 'Ratings input',
 	                type: 'schema',
 	                options: {schema: listRatingsInputSchema_v2021_02_11,}
+	            },
+	            /** Status indicator. */
+	            'statusIndicator': {
+	                label: 'Status indicator',
+	                type: 'schema',
+	                options: {schema: statusIndicatorSchema_v2021_02_11,}
 	            },
 	    }
 }

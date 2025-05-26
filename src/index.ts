@@ -165,6 +165,8 @@ export { default as polarAreaDataItemSchema } from '#spruce/schemas/heartwoodVie
 export { default as pagerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/pager.schema'
 export { default as webRtcPlayerSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcPlayer.schema'
 export { default as webRtcCropPointSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcCropPoint.schema'
+export { default as statusIndicatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicator.schema'
+export { default as statusIndicatorColorsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicatorColors.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'

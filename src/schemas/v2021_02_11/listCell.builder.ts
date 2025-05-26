@@ -10,6 +10,7 @@ import ratingsInputBuilder from './forms/ratingsInput.builder'
 import textInputBuilder from './forms/textInput.builder'
 import toggleInputBuilder from './forms/toggleInput.builder'
 import selectInputBuilder from './selectInput.builder'
+import statusIndicatorBuilder from './statusIndicator.builder'
 import textBuilder from './text.builder'
 
 const cellInputFields = {
@@ -238,6 +239,13 @@ export default buildSchema({
                         },
                     },
                 },
+            },
+        },
+        statusIndicator: {
+            type: 'schema',
+            label: 'Status indicator',
+            options: {
+                schema: statusIndicatorBuilder,
             },
         },
     },

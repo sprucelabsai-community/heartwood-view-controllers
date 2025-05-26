@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import calendarEventColorsBuilder from './calendarEventColors.builder'
+import statusIndicatorColorsBuilder from './statusIndicatorColors.builder'
 
 export default buildSchema({
     id: 'theme',
@@ -158,6 +159,12 @@ export default buildSchema({
                             type: 'text',
                             label: 'Footer Icon Url',
                             hint: 'The url of the icon to show in the footer. Must be publicly served in some way',
+                        },
+                        statusIndicators: {
+                            type: 'schema',
+                            options: {
+                                schema: statusIndicatorColorsBuilder,
+                            },
                         },
                     },
                 },
