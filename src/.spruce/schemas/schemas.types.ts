@@ -5415,7 +5415,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface StatusIndicator {
 			
 				/** Status. */
-				'status'?: ("status1" | "status2" | "status3" | "status4" | "status5") | undefined | null
+				'status'?: (1 | 2 | 3 | 4 | 5) | undefined | null
 				/** Hint. */
 				'hint'?: string | undefined | null
 		}
@@ -5431,7 +5431,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'status': {
 			                label: 'Status',
 			                type: 'select',
-			                options: {choices: [{"value":"status1","label":"Status 1"},{"value":"status2","label":"Status 2"},{"value":"status3","label":"Status 3"},{"value":"status4","label":"Status 4"},{"value":"status5","label":"Status 5"}],}
+			                options: {choices: [{"value":1,"label":"Status 1"},{"value":2,"label":"Status 2"},{"value":3,"label":"Status 3"},{"value":4,"label":"Status 4"},{"value":5,"label":"Status 5"}],}
 			            },
 			            /** Hint. */
 			            'hint': {
