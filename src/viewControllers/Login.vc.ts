@@ -73,7 +73,7 @@ export default class LoginViewController
         )
     }
 
-    private async handleSubmitSlide({
+    protected async handleSubmitSlide({
         values,
         presentSlide,
     }: {
@@ -96,13 +96,13 @@ export default class LoginViewController
         return response
     }
 
-    private async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
+    protected async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
         if (options.values.code?.length === 4) {
             await this.loginForm.submit()
         }
     }
 
-    private async handleSubmitPhone(phone: string) {
+    protected async handleSubmitPhone(phone: string) {
         try {
             await this.loginForm.resetField('code')
 
