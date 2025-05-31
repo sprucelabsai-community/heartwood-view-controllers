@@ -105,5 +105,5 @@ export type DialogOptions =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
         SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
 
-export type Dialog = DialogOptions
+type Dialog = DialogOptions
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>
