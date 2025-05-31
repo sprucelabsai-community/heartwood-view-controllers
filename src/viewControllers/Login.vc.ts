@@ -61,7 +61,7 @@ export default class LoginViewController
 
     private BigForm(): BigFormViewController<LoginSchema> {
         return this.Controller(
-            'bigForm',
+            'big-form',
             buildBigForm({
                 onChange: this.handleOnChange.bind(this),
                 onSubmitSlide: this.handleSubmitSlide.bind(this),
