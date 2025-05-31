@@ -6,7 +6,7 @@ import AbstractViewController from './Abstract.vc'
 export default class DialogViewController extends AbstractViewController<Dialog> {
     private closeResolver?: () => void
     private closePromise?: Promise<unknown>
-    private onCloseHandler?: Dialog['onClose']
+    private onCloseHandler?: DialogOptions['onClose']
     private transitionOutHandler?: () => Promise<void>
     private isVisible = false
     private cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
