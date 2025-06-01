@@ -1,3 +1,10 @@
+# [119.10.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.9.6...v119.10.0) (2025-06-01)
+
+
+### Features
+
+* talkingSprucebotInteractor ([7fe7ee8](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7fe7ee8))
+
 ## [119.9.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.9.5...v119.9.6) (2025-06-01)
 
 ## [119.9.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.9.4...v119.9.5) (2025-06-01)
