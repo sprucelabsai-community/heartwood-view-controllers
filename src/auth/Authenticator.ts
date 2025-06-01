@@ -54,7 +54,7 @@ export default class AuthenticatorImpl implements Authenticator {
         return this.storage.getItem('sessionToken') ?? null
     }
 
-    public getPerson() {
+    public getPerson(): Person | null {
         const person = this.storage.getItem('person')
         return person ? JSON.parse(person) : null
     }

@@ -401,17 +401,13 @@ export type StatusIndicator =
 export type StatusIndicatorStatus = NonNullable<StatusIndicator['status']>
 export type TalkingSprucebot =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
-
 export type NavigationRoute =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute
-
 export type LayoutStyle = NonNullable<
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
 >
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
-
 export type TriggerRender = () => void
-
 export type TriggerRenderHandler = () => void
 
 export { WebRtcStreamer } from '../webRtcStreaming/WebRtcStreamer'
