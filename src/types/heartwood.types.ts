@@ -399,6 +399,8 @@ export type WebRtcPlayer =
 export type StatusIndicator =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicator
 export type StatusIndicatorStatus = NonNullable<StatusIndicator['status']>
+export type TalkingSprucebot =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
 
 export type NavigationRoute =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute

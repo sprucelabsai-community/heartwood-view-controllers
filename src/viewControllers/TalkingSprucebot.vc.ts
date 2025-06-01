@@ -1,13 +1,17 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
-import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    TalkingSprucebot,
+    ViewController,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
 export default class TalkingSprucebotViewController
-    extends AbstractViewController<ViewModel>
-    implements ViewController<ViewModel>
+    extends AbstractViewController<TalkingSprucebot>
+    implements ViewController<TalkingSprucebot>
 {
-    private model: ViewModel
+    private model: TalkingSprucebot
     private playResolver?: () => void
 
     public constructor(
@@ -19,6 +23,8 @@ export default class TalkingSprucebotViewController
             throw new SchemaError({
                 code: 'MISSING_PARAMETERS',
                 parameters: ['sentences'],
+                friendlyMessage:
+                    'You must provide at least one sentence with words for the Talking Sprucebot.',
             })
         }
 
@@ -66,16 +72,13 @@ export default class TalkingSprucebotViewController
         this.triggerRender()
     }
 
-    public render(): ViewModel {
-        //@ts-ignore
+    public render(): TalkingSprucebot {
         return { ...this.model, controller: this }
     }
 }
 
-type ViewModel =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot
-
 export type Sentence =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence
 
-export interface TalkingSprucebotViewControllerOptions extends ViewModel {}
+export interface TalkingSprucebotViewControllerOptions
+    extends TalkingSprucebot {}

@@ -177,7 +177,7 @@ export { default as SpyDevice } from './tests/SpyDevice'
 
 export { default as ViewControllerError } from './errors/SpruceError'
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
-export { default as feedInteractor } from './tests/utilities/feedInteractor'
+
 export { default as feedAssert } from './tests/utilities/feedAssert'
 export { default as vcAssertUtil } from './tests/utilities/vcAssert.utility'
 export { default as vcAssert } from './tests/utilities/vcAssert'
@@ -194,8 +194,10 @@ export { default as autocompleteAssert } from './tests/utilities/autocompleteAss
 export { default as formAssert } from './tests/utilities/formAssert'
 export { default as webRtcAssert } from './tests/utilities/webRtcAssert'
 export * from './tests/utilities/webRtcAssert'
-export { default as webRtcInteractor } from './tests/utilities/webRtcInteractor'
+
 export { default as generateCropPointValues } from './tests/utilities/generateCropPointValues'
+export { default as progressNavigatorAssert } from './tests/utilities/progressNavigatorAssert'
+export { default as chartAssert } from './tests/utilities/chartAssert'
 
 export { default as autocompleteInteractor } from './tests/utilities/autocompleteInteractor'
 export { normalizeScopeFromVc } from './tests/utilities/vcAssert'
@@ -203,8 +205,9 @@ export { default as interactor } from './tests/utilities/interactor'
 export { default as calendarInteractor } from './tests/utilities/calendarInteractor'
 export { default as countdownTimerAssert } from './tests/utilities/countdownTimerAssert'
 export { default as countdownTimerInteractor } from './tests/utilities/countdownTimerInteractor'
-export { default as progressNavigatorAssert } from './tests/utilities/progressNavigatorAssert'
-export { default as chartAssert } from './tests/utilities/chartAssert'
+export { default as feedInteractor } from './tests/utilities/feedInteractor'
+export { default as webRtcInteractor } from './tests/utilities/webRtcInteractor'
+export { default as talkingSprucebotInteractor } from './tests/utilities/talkingSprucebotInteractor'
 
 export { default as interactionUtil } from './tests/utilities/interaction.utility'
 export { default as calendarSeeder } from './tests/utilities/calendarSeeder'
