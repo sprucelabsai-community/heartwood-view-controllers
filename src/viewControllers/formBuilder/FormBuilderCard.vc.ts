@@ -85,11 +85,16 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
         }
 
         const buttons: Button[] = [
-            { label: 'Add page', onClick: this.handleClickAddPage.bind(this) },
+            {
+                id: 'add-page',
+                label: 'Add page',
+                onClick: this.handleClickAddPage.bind(this),
+            },
         ]
 
         if (this.getTotalPages() > 1) {
             buttons.push({
+                id: 'remove-page',
                 label: 'Remove page',
                 onClick: this.removePresentPage.bind(this),
             })
@@ -186,8 +191,12 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
         await this.removePage(idx)
     }
 
+    public getPage(idx: number) {
+        return this.swipeVc.getSlide(idx)
+    }
+
     public getPageVc(idx: number): FormBuilderPageViewController {
-        const slide = this.swipeVc.getSlide(idx)
+        const slide = this.getPage(idx)
         const formVc = slide.form?.controller
 
         if (!formVc) {

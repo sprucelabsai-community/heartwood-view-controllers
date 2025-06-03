@@ -427,19 +427,13 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     protected async hittingRemoveRemovesSecondPageAndSwipesToFirst() {
         await this.vc.addPage()
 
-        const model = this.render(this.vc)
-
-        await this.click(model.footer?.buttons?.[1])
+        await interactor.clickButton(this.vc, 'remove-page')
 
         assert.isEqual(this.vc.getTotalPages(), 1)
-
-        const updatedModel = this.render(this.vc)
-        const sections = updatedModel.body?.sections
-
-        assert.isArray(sections)
-        assert.isLength(sections, 1)
-        assert.isEqual(sections[0].title, 'Page 2')
         assert.isEqual(this.vc.getPresentPage(), 0)
+
+        const page = this.vc.getPage(0)
+        assert.isEqual(page.title, 'Page 2')
     }
 
     @test()

@@ -1,6 +1,8 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { SchemaError } from '@sprucelabs/schema'
 import {
+    Card,
+    CardBody,
+    CardHeader,
     CardSection,
     CriticalError,
     TriggerRenderHandler,
@@ -10,14 +12,7 @@ import {
 import AbstractViewController from '../Abstract.vc'
 import sectionIdOrIdxToIdx from './sectionIdOrIdxToIdx'
 
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-export type CardViewControllerOptions = ViewModel
-
-type Section = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection
-type Body = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody
-type Header = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader
-
-export default class CardViewController<V extends ViewModel = ViewModel>
+export default class CardViewController<V extends Card = Card>
     extends AbstractViewController<V>
     implements ViewController<V>
 {
@@ -25,7 +20,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
     private triggerRenderFooter?: () => void
     private triggerRenderHeader?: () => void
     private triggerRenderSections: (() => void)[] = []
-    private sectionVcs: ViewController<Section>[] = []
+    private sectionVcs: ViewController<CardSection>[] = []
 
     public constructor(options: V & ViewControllerOptions) {
         super(options)
@@ -56,10 +51,10 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         this.triggerRender()
     }
 
-    private buildSectionVcs(): Section[] {
+    private buildSectionVcs(): CardSection[] {
         return this.model.body?.sections?.map?.((_, idx) => ({
             controller: this.buildSectionVc(idx),
-        })) as Section[]
+        })) as CardSection[]
     }
 
     public getSectionVc(section: string | number) {
@@ -76,9 +71,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
                 },
                 render: () => {
                     this.triggerRenderSections[idx] = sectionVc.triggerRender
-
                     const section = this.model.body?.sections?.[idx]
-
                     return { ...section, controller: this.getSectionVc(idx) }
                 },
             }
@@ -202,7 +195,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
     }
 
     public getSection(idOrIdx: number | string) {
-        let idx: number = this.sectionIdOrIdxToIdx(idOrIdx)
+        const idx = this.sectionIdOrIdxToIdx(idOrIdx)
         const section = this.getSections()?.[idx]
 
         if (!section) {
@@ -222,7 +215,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
     public updateSection(
         idOrIdx: number | string,
-        updates: Partial<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>
+        updates: Partial<CardSection>
     ) {
         let idx: number = this.assertValidIdOrIdx(idOrIdx)
         if (this.model.body?.sections?.[idx]) {
@@ -232,19 +225,37 @@ export default class CardViewController<V extends ViewModel = ViewModel>
             }
         }
 
-        const vc = this.getSectionVc(idx)
-        vc.triggerRender()
-
-        if (updates.controller) {
-            this.sectionVcs[idx] = updates.controller
-            this.triggerRender()
+        const controller = updates.controller
+        const didUpdate = this.optionallySwapSlideControllerAtIndex(
+            idx,
+            controller
+        )
+        if (!didUpdate) {
+            const vc = this.getSectionVc(idx)
+            vc.triggerRender()
         }
     }
 
-    public setSection(idOrIdx: number | string, section: Section) {
-        this.assertSectionsExist()
+    private optionallySwapSlideControllerAtIndex(
+        idOrIdx: number | string,
+        controller: ViewController<CardSection> | null | undefined
+    ) {
+        if (controller) {
+            const idx = this.sectionIdOrIdxToIdx(idOrIdx)
+            this.sectionVcs[idx] = controller
+            this.triggerRender()
+            return true
+        }
+
+        return false
+    }
+
+    public setSection(idOrIdx: number | string, section: CardSection) {
+        this.ensureSectionsExist()
 
         let idx: number = this.assertValidIdOrIdx(idOrIdx)
+
+        this.optionallySwapSlideControllerAtIndex(idOrIdx, section.controller)
 
         if (this.model.body?.sections) {
             const existingId = this.model.body?.sections?.[idx]?.id
@@ -268,16 +279,21 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         return idx
     }
 
-    public setSections(sections: Section[]) {
-        this.assertSectionsExist()
+    public setSections(sections: CardSection[]) {
+        this.ensureSectionsExist()
+
         if (this.model.body) {
             this.model.body.sections = [...sections]
         }
 
+        this.sectionVcs = sections.map(
+            (section) => section.controller as ViewController<CardSection>
+        )
+
         this.triggerRender()
     }
 
-    private assertSectionsExist() {
+    private ensureSectionsExist() {
         if (!this.model.body) {
             this.model.body = {}
         }
@@ -287,12 +303,15 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         }
     }
 
-    public addSection(section: Section) {
-        this.assertSectionsExist()
+    public addSection(section: CardSection) {
+        this.ensureSectionsExist()
+
         const sections = this.model.body?.sections
         if (sections) {
             sections.push(section)
         }
+
+        this.sectionVcs.push(section.controller as ViewController<CardSection>)
 
         this.triggerRender()
     }
@@ -303,14 +322,16 @@ export default class CardViewController<V extends ViewModel = ViewModel>
 
     public removeSection(idx: number) {
         this.model.body?.sections?.splice(idx, 1)
+        this.sectionVcs.splice(idx, 1)
         this.triggerRender()
     }
 
-    public addSectionAtIndex(idx: number, section: Section) {
+    public addSectionAtIndex(idx: number, section: CardSection) {
         const sections = this.getSections() ?? []
         sections.splice(idx, 0, section)
+        this.optionallySwapSlideControllerAtIndex(idx, section.controller)
 
-        this.assertSectionsExist()
+        this.ensureSectionsExist()
 
         if (this.model.body?.sections) {
             this.model.body.sections = sections
@@ -368,7 +389,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         }
     }
 
-    public setBody(body: Body | null | undefined) {
+    public setBody(body: CardBody | null | undefined) {
         this.model.body = body ? { ...body } : body
         this.triggerRender()
     }
@@ -380,7 +401,7 @@ export default class CardViewController<V extends ViewModel = ViewModel>
     //monkey patched by view
     public payAttentionToMe() {}
 
-    public setHeader(header: Header | null | undefined) {
+    public setHeader(header: CardHeader | null | undefined) {
         const oldHeader = this.model.header
         this.model.header = header
 
@@ -416,3 +437,5 @@ export default class CardViewController<V extends ViewModel = ViewModel>
         return model
     }
 }
+
+export type CardViewControllerOptions = Card
