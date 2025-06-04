@@ -317,7 +317,9 @@ export default class CardViewController<V extends Card = Card>
         this.model.body?.sections?.splice(idx, 1)
         this.sectionVcs.splice(idx, 1)
         this.sectionVcs.forEach((vc, i) => {
-            vc.idx = i
+            if (vc) {
+                vc.idx = i
+            }
         })
         this.triggerRender()
     }

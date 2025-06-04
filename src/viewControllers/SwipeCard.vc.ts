@@ -50,14 +50,17 @@ export default class SwipeCardViewController extends AbstractViewController<Card
         }
     }
 
-    private CardVc(rest: SwipeViewControllerOptions & ViewControllerOptions) {
+    private CardVc(
+        options: SwipeViewControllerOptions & ViewControllerOptions
+    ) {
+        const { slides, isBusy, ...rest } = options
         return this.Controller('card', {
             ...rest,
             body: {
-                isBusy: rest.isBusy,
-                sections: rest.slides,
+                isBusy,
+                sections: slides,
                 shouldSwipeBreakIntoCardsOnLandscape:
-                    rest.shouldBreakIntoCardsOnLandscape,
+                    options.shouldBreakIntoCardsOnLandscape,
                 swipeController: (controller) =>
                     (this.swipeController = controller),
                 onSelectSlideTitle: this.jumpToSlide.bind(this),
