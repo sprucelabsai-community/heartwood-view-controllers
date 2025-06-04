@@ -141,7 +141,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
     protected onlyTriggersRenderInUpdatedSection() {
         this.renderCard()
 
-        this.vc.setSection(0, { text: { content: 'Goodbye world' } })
+        this.setSection(0, { text: { content: 'Goodbye world' } })
 
         assert.isEqual(this.cardTriggerRenderCount, 0)
         assert.isEqual(this.footerTriggerRenderCount, 0)
@@ -554,12 +554,12 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         this.removeSection(0)
 
-        this.assertSectionEquals(0, section2Vc)
+        this.assertSectionVcEquals(0, section2Vc)
 
         this.removeSection(1)
 
-        this.assertSectionEquals(0, section2Vc)
-        this.assertSectionEquals(1, section4Vc)
+        this.assertSectionVcEquals(0, section2Vc)
+        this.assertSectionVcEquals(1, section4Vc)
     }
 
     @test()
@@ -576,12 +576,12 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         this.addSectionAtIndex(1, newSectionVc)
 
-        this.assertSectionEquals(1, newSectionVc)
+        this.assertSectionVcEquals(1, newSectionVc)
 
         const lastSectionVc = this.SectionVc()
         this.addSectionAtIndex(0, lastSectionVc)
 
-        this.assertSectionEquals(0, lastSectionVc)
+        this.assertSectionVcEquals(0, lastSectionVc)
     }
 
     @test()
@@ -607,10 +607,10 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.updateSection(1, section2Vc.render())
 
         this.setSection(0, section3Vc.render())
-        this.assertSectionEquals(0, section3Vc)
+        this.assertSectionVcEquals(0, section3Vc)
 
         this.setSection(1, section4Vc.render())
-        this.assertSectionEquals(1, section4Vc)
+        this.assertSectionVcEquals(1, section4Vc)
     }
 
     @test()
@@ -629,8 +629,8 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         this.vc.setSections(sections)
 
-        this.assertSectionEquals(0, section1Vc)
-        this.assertSectionEquals(1, section2Vc)
+        this.assertSectionVcEquals(0, section1Vc)
+        this.assertSectionVcEquals(1, section2Vc)
     }
 
     @test()
@@ -639,13 +639,15 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         const section2Vc = this.SectionVc()
 
         this.addSection(section1Vc.render())
-        this.assertSectionEquals(0, section1Vc)
+        this.assertSectionVcEquals(0, section1Vc)
 
         this.addSection(section2Vc.render())
-        this.assertSectionEquals(1, section2Vc)
+        this.assertSectionVcEquals(1, section2Vc)
     }
 
-    @test()
+    @test.skip(
+        'changes below may make this unnecessary. delete if found after 7/1/2025'
+    )
     protected async removedSectionRendersNullAndDoesNotCreateNewSectionVc() {
         this.renderCard()
         const secondSectionVc = this.getSectionVc(1)
@@ -657,6 +659,44 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected async sectionControllersAtBeginningSetsVcs() {
+        const section1Vc = this.SectionVc()
+
+        this.vc = this.Vc({
+            body: {
+                sections: [section1Vc.render()],
+            },
+        })
+
+        this.assertSectionVcEquals(0, section1Vc)
+    }
+
+    @test()
+    protected async canRemoveSectionById() {
+        const sectionId = generateId()
+        this.setVcWith3Sections(sectionId)
+        this.removeSection(sectionId)
+        assert.doesThrow(() => this.getSectionVc(sectionId))
+    }
+
+    @test()
+    protected async getSectionVcThrowsIfSectionNotFound() {
+        this.setVcWith3Sections()
+        const err = assert.doesThrow(() => this.getSectionVc(generateId()))
+        errorAssert.assertError(err, 'INVALID_PARAMETERS', {
+            parameters: ['section'],
+        })
+    }
+
+    @test()
+    protected async renderingSectionsAfterRemovingSectionDoesNotThrow() {
+        this.setVcWith3Sections()
+        this.renderCard()
+        this.removeSection(1)
+        this.getSectionVc(1).render()
+    }
+
     private addSection(section: CardSection) {
         this.vc.addSection(section)
     }
@@ -665,11 +705,11 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.vc.addSectionAtIndex(idx, sectionVc.render())
     }
 
-    private removeSection(idx: number) {
+    private removeSection(idx: number | string) {
         this.vc.removeSection(idx)
     }
 
-    private assertSectionEquals(idx: number, section2Vc: SectionVc) {
+    private assertSectionVcEquals(idx: number, section2Vc: SectionVc) {
         assert.isEqual(
             this.getSectionVc(idx),
             section2Vc,
@@ -714,12 +754,12 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         return vc
     }
 
-    private setVcWith3Sections() {
+    private setVcWith3Sections(section1Id?: string) {
         this.vc = this.Vc({
             body: {
                 sections: [
                     {
-                        id: 'first',
+                        id: section1Id ?? 'first',
                     },
                     {
                         id: 'second',

@@ -37,30 +37,11 @@ export default class SwipeCardViewController extends AbstractViewController<Card
     ) {
         super(options)
 
-        const {
-            slides,
-            onSlideChange,
-            shouldBreakIntoCardsOnLandscape,
-            isBusy,
-            ...rest
-        } = options
+        const { onSlideChange, ...rest } = options
 
         this.slideChangeHandler = onSlideChange
 
-        this.cardVc = this.Controller('card', {
-            ...rest,
-            body: {
-                isBusy,
-                sections: slides,
-                shouldSwipeBreakIntoCardsOnLandscape:
-                    shouldBreakIntoCardsOnLandscape,
-                swipeController: (controller) =>
-                    (this.swipeController = controller),
-                onSelectSlideTitle: this.jumpToSlide.bind(this),
-                onChangeSlide: this.handleSlideChange.bind(this),
-                shouldEnableSectionSwiping: true,
-            },
-        })
+        this.cardVc = this.CardVc(rest)
 
         functionDelegationUtil.delegateFunctionCalls(this, this.cardVc)
 
@@ -69,10 +50,28 @@ export default class SwipeCardViewController extends AbstractViewController<Card
         }
     }
 
+    private CardVc(rest: SwipeViewControllerOptions & ViewControllerOptions) {
+        return this.Controller('card', {
+            ...rest,
+            body: {
+                isBusy: rest.isBusy,
+                sections: rest.slides,
+                shouldSwipeBreakIntoCardsOnLandscape:
+                    rest.shouldBreakIntoCardsOnLandscape,
+                swipeController: (controller) =>
+                    (this.swipeController = controller),
+                onSelectSlideTitle: this.jumpToSlide.bind(this),
+                onChangeSlide: this.handleSlideChange.bind(this),
+                shouldEnableSectionSwiping: true,
+            },
+        })
+    }
+
     public async jumpToSlide(slide: number | string) {
         if (slide === this.getPresentSlide()) {
             return
         }
+
         const normalized = sectionIdOrIdxToIdx(this.getSlides(), slide)
 
         if (normalized === -1 && typeof slide !== 'number') {
@@ -91,9 +90,11 @@ export default class SwipeCardViewController extends AbstractViewController<Card
 
     private async handleSlideChange(slide: number) {
         if (this.presentSlide !== slide) {
-            clearTimeout(this.timeout!)
+            clearTimeout(this.timeout)
+
             this.didChangeResolve?.()
             this.presentSlide = slide
+
             await new Promise<void>((resolve) => {
                 this.didChangeResolve = resolve
                 this.timeout = setTimeout(async () => {
@@ -145,8 +146,8 @@ export default class SwipeCardViewController extends AbstractViewController<Card
         return this.cardVc.getSections()
     }
 
-    public removeSlide(idx: number) {
-        return this.cardVc.removeSection(idx)
+    public removeSlide(idOrIdx: number | string) {
+        return this.cardVc.removeSection(idOrIdx)
     }
 
     public addSlideAtIndex(idx: number, slide: Slide) {

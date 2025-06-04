@@ -20,7 +20,7 @@ export default class CardViewController<V extends Card = Card>
     private triggerRenderFooter?: () => void
     private triggerRenderHeader?: () => void
     private triggerRenderSections: (() => void)[] = []
-    private sectionVcs: ViewController<CardSection>[] = []
+    private sectionVcs: SectionVc[] = []
 
     public constructor(options: V & ViewControllerOptions) {
         super(options)
@@ -53,39 +53,43 @@ export default class CardViewController<V extends Card = Card>
 
     private buildSectionVcs(): CardSection[] {
         return this.model.body?.sections?.map?.((_, idx) => ({
-            controller: this.buildSectionVc(idx),
+            controller: this.getSectionVc(idx),
         })) as CardSection[]
     }
 
     public getSectionVc(section: string | number) {
-        let idx: number = this.sectionIdOrIdxToIdx(section)
-        return this.buildSectionVc(idx)
-    }
-
-    private buildSectionVc(idx: number) {
+        let idx: number = this.assertValidIdOrIdx(section)
+        if (this.model.body?.sections?.[idx]?.controller) {
+            return this.model.body.sections[idx]
+                .controller as ViewController<CardSection>
+        }
         if (!this.sectionVcs[idx]) {
-            const sectionVc: ViewController<CardSection> & {
-                hasBeenRemoved: boolean
-            } = {
-                triggerRender: () => {},
-                hasBeenRemoved: false,
-                setTriggerRenderHandler(handler: TriggerRenderHandler) {
-                    this.triggerRender = handler
-                },
-                render: () => {
-                    if (sectionVc.hasBeenRemoved) {
-                        return null as any
-                    }
-                    this.triggerRenderSections[idx] = sectionVc.triggerRender
-                    const section = this.model.body?.sections?.[idx]
-                    return { ...section, controller: this.getSectionVc(idx) }
-                },
-            }
-
+            const sectionVc = this.SectionVc(idx)
             this.sectionVcs[idx] = sectionVc
         }
 
         return this.sectionVcs[idx]
+    }
+
+    private SectionVc(idx: number): ViewController<CardSection> {
+        const sectionVc: SectionVc = {
+            triggerRender: () => {},
+            idx,
+            setTriggerRenderHandler(handler: TriggerRenderHandler) {
+                this.triggerRender = handler
+            },
+            render: () => {
+                const idx = sectionVc.idx!
+                this.triggerRenderSections[idx] = sectionVc.triggerRender
+                const section = this.model.body?.sections?.[idx]
+                return {
+                    ...section,
+                    controller: this.getSectionVc(idx),
+                }
+            },
+        }
+
+        return sectionVc
     }
 
     private buildFooterVc() {
@@ -232,36 +236,18 @@ export default class CardViewController<V extends Card = Card>
         }
 
         const controller = updates.controller
-        const didUpdate = this.optionallySwapSlideControllerAtIndex(
-            idx,
-            controller
-        )
-        if (!didUpdate) {
+        if (controller) {
+            this.triggerRender()
+        } else {
             const vc = this.getSectionVc(idx)
             vc.triggerRender()
         }
-    }
-
-    private optionallySwapSlideControllerAtIndex(
-        idOrIdx: number | string,
-        controller: ViewController<CardSection> | null | undefined
-    ) {
-        if (controller) {
-            const idx = this.sectionIdOrIdxToIdx(idOrIdx)
-            this.sectionVcs[idx] = controller
-            this.triggerRender()
-            return true
-        }
-
-        return false
     }
 
     public setSection(idOrIdx: number | string, section: CardSection) {
         this.ensureSectionsExist()
 
         let idx: number = this.assertValidIdOrIdx(idOrIdx)
-
-        this.optionallySwapSlideControllerAtIndex(idOrIdx, section.controller)
 
         if (this.model.body?.sections) {
             const existingId = this.model.body?.sections?.[idx]?.id
@@ -326,18 +312,19 @@ export default class CardViewController<V extends Card = Card>
         return this.model.body?.sections
     }
 
-    public removeSection(idx: number) {
+    public removeSection(idOrIdx: number | string) {
+        const idx = this.assertValidIdOrIdx(idOrIdx)
         this.model.body?.sections?.splice(idx, 1)
-        //@ts-ignore
-        this.getSectionVc(idx).hasBeenRemoved = true
         this.sectionVcs.splice(idx, 1)
+        this.sectionVcs.forEach((vc, i) => {
+            vc.idx = i
+        })
         this.triggerRender()
     }
 
     public addSectionAtIndex(idx: number, section: CardSection) {
         const sections = this.getSections() ?? []
         sections.splice(idx, 0, section)
-        this.optionallySwapSlideControllerAtIndex(idx, section.controller)
 
         this.ensureSectionsExist()
 
@@ -447,3 +434,7 @@ export default class CardViewController<V extends Card = Card>
 }
 
 export type CardViewControllerOptions = Card
+
+type SectionVc = ViewController<CardSection> & {
+    idx?: number
+}

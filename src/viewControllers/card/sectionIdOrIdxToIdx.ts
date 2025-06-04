@@ -1,7 +1,7 @@
-import { SpruceSchemas } from '#spruce/schemas/schemas.types'
+import { CardSection } from '../../types/heartwood.types'
 
 function getSectionIdxFromId(
-    sections: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[],
+    sections: CardSection[],
     id: string
 ) {
     return sections?.findIndex((s) => s.id === id) ?? -1
@@ -9,7 +9,7 @@ function getSectionIdxFromId(
 
 export default function sectionIdOrIdxToIdx(
     sections:
-        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[]
+        | CardSection[]
         | null
         | undefined,
     idOrIdx: string | number
