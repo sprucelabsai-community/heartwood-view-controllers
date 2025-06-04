@@ -64,12 +64,18 @@ export default class CardViewController<V extends Card = Card>
 
     private buildSectionVc(idx: number) {
         if (!this.sectionVcs[idx]) {
-            const sectionVc: ViewController<CardSection> = {
+            const sectionVc: ViewController<CardSection> & {
+                hasBeenRemoved: boolean
+            } = {
                 triggerRender: () => {},
+                hasBeenRemoved: false,
                 setTriggerRenderHandler(handler: TriggerRenderHandler) {
                     this.triggerRender = handler
                 },
                 render: () => {
+                    if (sectionVc.hasBeenRemoved) {
+                        return null as any
+                    }
                     this.triggerRenderSections[idx] = sectionVc.triggerRender
                     const section = this.model.body?.sections?.[idx]
                     return { ...section, controller: this.getSectionVc(idx) }
@@ -322,6 +328,8 @@ export default class CardViewController<V extends Card = Card>
 
     public removeSection(idx: number) {
         this.model.body?.sections?.splice(idx, 1)
+        //@ts-ignore
+        this.getSectionVc(idx).hasBeenRemoved = true
         this.sectionVcs.splice(idx, 1)
         this.triggerRender()
     }

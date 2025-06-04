@@ -645,6 +645,18 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.assertSectionEquals(1, section2Vc)
     }
 
+    @test()
+    protected async removedSectionRendersNullAndDoesNotCreateNewSectionVc() {
+        this.renderCard()
+        const secondSectionVc = this.getSectionVc(1)
+        this.removeSection(1)
+        const results = secondSectionVc.render()
+        assert.isNull(
+            results,
+            'Section vc should have rendered null because it was removed'
+        )
+    }
+
     private addSection(section: CardSection) {
         this.vc.addSection(section)
     }
