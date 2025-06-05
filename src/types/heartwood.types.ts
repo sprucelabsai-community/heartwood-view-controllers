@@ -902,7 +902,7 @@ export interface Device {
     getTheatreSetting<N extends TheatreSettingName>(
         name: N
     ): Promise<TheaterSettingValueTypes[N] | null>
-    AudioController(): AudioController
+    AudioController(audioFileUrl: string): AudioController
 }
 
 export interface AudioController {
@@ -911,7 +911,6 @@ export interface AudioController {
     stop(): void
     setVolume(volume: number): void
     getVolume(): Promise<number | null>
-    setSourceUrl(url: string): void
 }
 
 export interface AuthorizerCanOptions<

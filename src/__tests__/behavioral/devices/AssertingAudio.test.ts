@@ -4,11 +4,13 @@ import AbstractDeviceTest from './AbstractDeviceTest'
 
 @suite()
 export default class AssertingAudioTest extends AbstractDeviceTest {
+    private audioFileUrl = generateId()
     private audio!: MockAudioController
+
     protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         MockAudioController.beforeEach()
-        this.audio = new MockAudioController()
+        this.audio = new MockAudioController(this.audioFileUrl)
     }
 
     @test()
@@ -78,9 +80,7 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
 
     @test()
     protected async knowsSourceUrl() {
-        const url = generateId()
-        this.audio.setSourceUrl(url)
-        this.assertSourceUrlSetTo(url)
+        this.assertSourceUrlSetTo(this.audioFileUrl)
         assert.doesThrow(() => this.assertSourceUrlSetTo(generateId()))
     }
 

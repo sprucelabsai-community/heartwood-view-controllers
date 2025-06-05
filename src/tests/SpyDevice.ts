@@ -83,8 +83,8 @@ export default class SpyDevice implements Device {
         this.brightness = 0
     }
 
-    public AudioController(): MockAudioController {
-        return new MockAudioController()
+    public AudioController(audioFileUrl: string): MockAudioController {
+        return new MockAudioController(audioFileUrl)
     }
 }
 

@@ -9,12 +9,13 @@ export default class MockAudioController implements AudioController {
     private static lastController?: MockAudioController
     private static didCallBeforeEach = false
 
-    public constructor() {
+    public constructor(audioFileUrl: string) {
         assert.isTrue(
             MockAudioController.didCallBeforeEach,
             `You must call MockAudioController.beforeEach() in your beforeEach() before working with audio.`
         )
         MockAudioController.lastController = this
+        this.sourceUrl = audioFileUrl
     }
 
     public setVolume(volume: number): void {
@@ -31,10 +32,6 @@ export default class MockAudioController implements AudioController {
             expected,
             `Volume was not set to expected. Try audio.setVolume(${expected})`
         )
-    }
-
-    public setSourceUrl(url: string): void {
-        this.sourceUrl = url
     }
 
     public assertSourceUrlSetTo(expected: string) {
