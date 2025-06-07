@@ -1,3 +1,10 @@
+# [120.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.10.12...v120.0.0) (2025-06-07)
+
+
+### Breaking Changes
+
+* removed deprecated vc ids and login card has smsDisclaimer option ([3bba220](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3bba220))
+
 ## [119.10.12](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.10.11...v119.10.12) (2025-06-06)
 
 ## [119.10.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v119.10.10...v119.10.11) (2025-06-06)
