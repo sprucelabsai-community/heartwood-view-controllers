@@ -348,7 +348,7 @@ export default class InteractingWithABigFormTest extends AbstractViewControllerT
         options?: Partial<BigFormViewControllerOptions<TestFormSchema>>
     ) {
         return this.Controller(
-            'bigForm',
+            'big-form',
             buildBigForm({
                 schema: testFormSchema,
                 sections: [

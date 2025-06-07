@@ -75,7 +75,7 @@ export default class AssertingButtonBars extends AbstractViewControllerTest {
     }
 
     private ButtonBarVc(buttons: { id: string; label: string }[]) {
-        return this.Controller('buttonBar', {
+        return this.Controller('button-bar', {
             buttons,
         })
     }

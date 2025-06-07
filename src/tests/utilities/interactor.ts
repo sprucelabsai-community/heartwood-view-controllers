@@ -16,7 +16,7 @@ import FormViewController from '../../viewControllers/form/Form.vc'
 import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
-import LoginViewController from '../../viewControllers/Login.vc'
+import LoginCardViewController from '../../viewControllers/LoginCard.vc'
 import { getVcName } from './assertSupport'
 import { pluckButtons } from './buttonAssert'
 import { ButtonViewController } from './ButtonViewController'
@@ -284,7 +284,7 @@ const interactor = {
         }
     },
 
-    async submitLoginForm(vc: LoginViewController, demoNumber: string) {
+    async submitLoginForm(vc: LoginCardViewController, demoNumber: string) {
         if (demoNumber) {
             const formVc = vc.getLoginForm()
 

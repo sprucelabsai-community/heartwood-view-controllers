@@ -35,7 +35,7 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
         buttonId: string,
         lookupId: string
     ) {
-        this.vc = this.Controller('buttonGroup', {
+        this.vc = this.Controller('button-group', {
             buttons: [
                 {
                     id: buttonId,
@@ -198,6 +198,6 @@ export default class InteractingWithButtonGroupsTest extends AbstractViewControl
     }
 
     private Vc(options: ButtonGroupViewControllerOptions) {
-        return this.Controller('buttonGroup', { ...options })
+        return this.Controller('button-group', { ...options })
     }
 }

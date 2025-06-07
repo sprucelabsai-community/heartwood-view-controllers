@@ -33,7 +33,7 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
         await super.beforeEach()
 
         this.vc = this.Controller(
-            'bigForm',
+            'big-form',
             buildBigForm({
                 schema: testFormSchema,
                 sections: [

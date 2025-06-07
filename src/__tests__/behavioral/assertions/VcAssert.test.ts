@@ -1,5 +1,6 @@
 import { buildSchema, validateSchemaValues } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { test, suite, assert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import skillViewSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
@@ -815,9 +816,9 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         }
     }
 
-    @test('can assert rending forms', 'form')
-    @test('can assert rending bigForms', 'bigForm')
-    protected knowsHowManyFormsBeingRendered(vcId: 'form' | 'bigForm') {
+    @test('can assert rendering forms', 'form')
+    @test('can assert rendering bigForms', 'big-form')
+    protected knowsHowManyFormsBeingRendered(vcId: 'form' | 'big-form') {
         const cardVc = this.Controller('card', {})
         assert.doesThrow(() => formAssert.cardRendersForms(cardVc, 1))
         assert.doesThrow(() => formAssert.cardRendersForm(cardVc))
@@ -826,7 +827,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
         cardVc.addSection({
             title: 'hey!',
-            [vcId]: formVc1.render(),
+            [namesUtil.toCamel(vcId)]: formVc1.render(),
         })
 
         formAssert.cardRendersForms(cardVc, 1)
@@ -838,7 +839,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
         cardVc.addSection({
             title: 'hey!',
-            [vcId]: formVc.render(),
+            [namesUtil.toCamel(vcId)]: formVc.render(),
         })
         const forms = formAssert.cardRendersForms(cardVc, 2)
         assert.isEqual(forms[1], formVc)
@@ -1293,7 +1294,7 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
     @test()
     protected async knowsIfRenderingTalkingSprucebot() {
-        const expected = this.Controller('talkingSprucebot', {
+        const expected = this.Controller('talking-sprucebot', {
             sentences: [
                 {
                     words: 'hey',
@@ -1418,11 +1419,11 @@ export default class VcAssertTest extends AbstractViewControllerTest {
         return this.Controller('good', model) as GoodSkillViewController
     }
 
-    private renderEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+    private renderEmptyForm(vcId: 'form' | 'big-form' = 'form') {
         return this.buildEmptyForm(vcId).render()
     }
 
-    private buildEmptyForm(vcId: 'form' | 'bigForm' = 'form') {
+    private buildEmptyForm(vcId: 'form' | 'big-form' = 'form') {
         return this.Controller(vcId, {
             schema: {
                 fields: {},

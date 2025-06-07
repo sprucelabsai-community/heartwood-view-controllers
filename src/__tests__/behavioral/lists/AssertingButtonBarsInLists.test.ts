@@ -69,7 +69,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 
     @test()
     protected returnsButtonBarController() {
-        const buttonBarVc = this.Controller('buttonBar', {
+        const buttonBarVc = this.Controller('button-bar', {
             buttons: [
                 {
                     id: 'first',
@@ -96,7 +96,7 @@ export default class AssertingButtonBarsInListsTest extends AbstractViewControll
 
     private renderCellWithButtonBar(): ListCell {
         return {
-            buttonBar: this.Controller('buttonBar', {
+            buttonBar: this.Controller('button-bar', {
                 buttons: [
                     {
                         id: 'first',

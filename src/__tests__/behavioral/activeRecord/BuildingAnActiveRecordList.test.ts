@@ -26,7 +26,7 @@ export default class BuildingAnActiveRecordListTest extends AbstractViewControll
 
     @test()
     protected async undefinedTargetAndPayloadIfNeitherAreDefined() {
-        const vc = this.Controller('activeRecordList', this.buildOptions())
+        const vc = this.Controller('active-record-card', this.buildOptions())
         //@ts-ignore
         assert.isUndefined(vc.fetcher.buildTargetAndPayload())
     }

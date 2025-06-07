@@ -119,7 +119,7 @@ export default class AssertingSwipeViewsTest extends AbstractViewControllerTest 
     }
 
     private SwipeVc() {
-        return this.Controller('swipeCard', {
+        return this.Controller('swipe-card', {
             slides: [],
         }) as SwipeCardViewController
     }

@@ -22,7 +22,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     @test()
     protected mustPassAtLeastOneSentence() {
         const err = assert.doesThrow(() =>
-            this.Controller('talkingSprucebot', {
+            this.Controller('talking-sprucebot', {
                 sentences: [],
             })
         )
@@ -32,14 +32,14 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
         })
 
         //@ts-ignore
-        assert.doesThrow(() => this.Controller('talkingSprucebot', {}))
+        assert.doesThrow(() => this.Controller('talking-sprucebot', {}))
     }
 
     @test()
     protected passesThroughAllOptionsToModel() {
         const key = `${Math.random()}`
 
-        this.vc = this.Controller('talkingSprucebot', {
+        this.vc = this.Controller('talking-sprucebot', {
             sentences: [{ words: 'yay' }],
             [key]: true,
         })
@@ -257,7 +257,7 @@ export default class ControllingATalkingSprucebotTest extends AbstractViewContro
     private TalkingSprucebot(
         options?: TalkingSprucebotViewControllerOptions
     ): TalkingSprucebotViewController {
-        return this.Controller('talkingSprucebot', {
+        return this.Controller('talking-sprucebot', {
             sentences: [
                 {
                     words: 'how in the world are you?',

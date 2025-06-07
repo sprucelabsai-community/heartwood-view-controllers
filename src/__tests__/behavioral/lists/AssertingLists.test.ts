@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { namesUtil } from '@sprucelabs/spruce-skill-utils'
 import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -40,7 +41,7 @@ class ListCard extends AbstractViewController<Card> {
 
     public dropInFormWithList(
         options: DropInFormOptions,
-        type: 'form' | 'bigForm' = 'form'
+        type: 'form' | 'big-form' = 'form'
     ) {
         const formSections = this.buildFormSections(options)
 
@@ -55,7 +56,7 @@ class ListCard extends AbstractViewController<Card> {
         const { sectionIdx } = options
         const cardSections = Array.from({ length: sectionIdx + 1 }, () => ({}))
         cardSections[sectionIdx] = {
-            [type]: formVc.render(),
+            [namesUtil.toCamel(type)]: formVc.render(),
         }
 
         this.cardVc.setSections(cardSections)
@@ -480,9 +481,9 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
     }
 
     @test('can match list in second section of form', 'form')
-    @test('can match list in second section of big form', 'bigForm')
+    @test('can match list in second section of big form', 'big-form')
     protected async canMatchListInSecondSectionOfSecondForm(
-        type: 'form' | 'bigForm'
+        type: 'form' | 'big-form'
     ) {
         const vc = this.Vc([])
         vc.dropInFormWithList(

@@ -32,7 +32,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     @test()
     protected throwsIfButtonsHaveNoIds() {
         assert.doesThrow(() =>
-            this.Controller('buttonGroup', {
+            this.Controller('button-group', {
                 buttons: [
                     //@ts-ignore
                     {
@@ -184,7 +184,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     @test()
     protected async canCancelChangeToCancelChange() {
         let wasHit = false
-        const vc = this.Factory().Controller('buttonGroup', {
+        const vc = this.Factory().Controller('button-group', {
             onWillChangeSelection: () => {
                 return false
             },
@@ -208,7 +208,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     @test()
     protected async canCancelChangeDeselect() {
         let wasHit = false
-        const vc = this.Factory().Controller('buttonGroup', {
+        const vc = this.Factory().Controller('button-group', {
             selected: ['first'],
             onWillChangeSelection: () => {
                 return false
@@ -392,7 +392,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     private MultiSelectVc(
         options?: Partial<ButtonGroupViewControllerOptions>
     ): ButtonGroupViewController {
-        return this.Factory().Controller('buttonGroup', {
+        return this.Factory().Controller('button-group', {
             shouldAllowMultiSelect: true,
             onSelectionChange: (selected) => {
                 this.onSelectInvocations.push(selected)
@@ -426,7 +426,7 @@ export default class UsingAButtonGroupTest extends AbstractViewControllerTest {
     private SingleSelectVc(
         options?: Partial<ButtonGroupViewControllerOptions>
     ): ButtonGroupViewController {
-        return this.Controller('buttonGroup', {
+        return this.Controller('button-group', {
             onSelectionChange: (selected) => {
                 this.onSelectInvocations.push(selected)
             },

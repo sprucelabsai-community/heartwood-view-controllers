@@ -288,7 +288,7 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     @test()
     protected async cardSectionShouldNotCallRenderOnSwipeSlide() {
         let renderCount = 0
-        const buttonGroupVc = this.Factory().Controller('buttonGroup', {
+        const buttonGroupVc = this.Factory().Controller('button-group', {
             buttons: [],
         })
 
@@ -586,6 +586,6 @@ export default class SwipingThroughSlidesTest extends AbstractViewControllerTest
     }
 
     private Vc(options: SwipeViewControllerOptions): SwipeCardViewController {
-        return this.Controller('swipeCard', options)
+        return this.Controller('swipe-card', options)
     }
 }

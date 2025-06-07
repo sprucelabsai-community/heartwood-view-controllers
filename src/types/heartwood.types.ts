@@ -85,9 +85,9 @@ import ListViewController, {
     ListViewControllerOptions,
 } from '../viewControllers/list/List.vc'
 import ListRowViewController from '../viewControllers/list/ListRow.vc'
-import LoginViewController, {
-    LoginViewControllerOptions,
-} from '../viewControllers/Login.vc'
+import LoginCardViewController, {
+    LoginCardViewControllerOptions,
+} from '../viewControllers/LoginCard.vc'
 import MapViewController, {
     MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
@@ -495,130 +495,73 @@ export interface ButtonController {
 }
 
 export interface ViewControllerMap {
-    form: FormViewController<any>
-    /**
-     * @deprecated 'login' -> 'login-card'
-     */
-    login: LoginViewController
-    'login-card': LoginViewController
-    /**
-     * @deprecated 'swipeCard' -> 'swipe-card'
-     */
-    swipeCard: SwipeCardViewController
-    'swipe-card': SwipeCardViewController
-    /**
-     * @deprecated 'buttonGroup' -> 'button-group'
-     */
-    buttonGroup: ButtonGroupViewController
-    'button-group': ButtonGroupViewController
-    card: CardViewController
-    dialog: DialogViewController
-    /**
-     * @deprecated 'bigForm' -> 'big-form'
-     */
-    bigForm: BigFormViewController<any>
-    'big-form': BigFormViewController<any>
-    confirm: ConfirmViewController
-    /**
-     * @deprecated 'form-builder-card' -> 'form-builder-card'
-     */
-    formBuilderCard: FormBuilderCardViewController
-    'form-builder-card': FormBuilderCardViewController
-    list: ListViewController
-    toolBelt: ToolBeltViewController
-    /**
-     * @deprecated 'toolBelt' -> 'tool-belt'
-     */
-    'tool-belt': ToolBeltViewController
-    calendar: CalendarViewController
-
-    'calendar-event': CalendarEventViewController
-    /**
-     * @deprecated 'buttonBar' -> 'button-bar'
-     */
-    buttonBar: ButtonBarViewController
-    'button-bar': ButtonBarViewController
-    /**
-     * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
-     */
-    talkingSprucebot: TalkingSprucebotViewController
-    'talking-sprucebot': TalkingSprucebotViewController
-    /**
-     * @deprecated 'activeRecordCard' -> 'activeRecordCard'
-     */
-    activeRecordCard: ActiveRecordCardViewController
     'active-record-card': ActiveRecordCardViewController
-
-    /**
-     * @deprecated 'activeRecordList' -> 'active-record-list'
-     */
-    activeRecordList: ActiveRecordListViewController
     'active-record-list': ActiveRecordListViewController
-    stats: StatsViewController
-    progress: ProgressViewController
-    ratings: RatingsViewController
-    /**
-     * @deprecated 'autocompleteInput' -> 'autocomplete-input'
-     */
-    autocompleteInput: AutocompleteInputViewController
     'autocomplete-input': AutocompleteInputViewController
-    map: MapViewController
-    feed: FeedViewController
-    navigation: NavigationViewController
-    'countdown-timer': CountdownTimerViewController
-    'progress-navigator': ProgressNavigatorViewController
-    'polar-area': PolarAreaViewController
-    pager: PagerViewController
     'bar-chart': BarChartViewController
+    'big-form': BigFormViewController<any>
+    'button-bar': ButtonBarViewController
+    'button-group': ButtonGroupViewController
+    'calendar-event': CalendarEventViewController
+    'countdown-timer': CountdownTimerViewController
+    'form-builder-card': FormBuilderCardViewController
     'line-graph': LineGraphViewController
     'lock-screen': LockScreenSkillViewController
+    'login-card': LoginCardViewController
+    'polar-area': PolarAreaViewController
+    'progress-navigator': ProgressNavigatorViewController
+    'swipe-card': SwipeCardViewController
+    'talking-sprucebot': TalkingSprucebotViewController
+    'tool-belt': ToolBeltViewController
     'web-rtc-player': WebRtcPlayerViewController
+    calendar: CalendarViewController
+    card: CardViewController
+    confirm: ConfirmViewController
+    dialog: DialogViewController
+    feed: FeedViewController
+    form: FormViewController<any>
+    list: ListViewController
+    map: MapViewController
+    navigation: NavigationViewController
+    pager: PagerViewController
+    progress: ProgressViewController
+    ratings: RatingsViewController
+    stats: StatsViewController
 }
 
 export interface ViewControllerOptionsMap {
-    form: FormViewControllerOptions<any>
-    login: LoginViewControllerOptions
-    'login-card': LoginViewControllerOptions
-    swipeCard: SwipeViewControllerOptions
-    'swipe-card': SwipeViewControllerOptions
-    buttonGroup: ButtonGroupViewControllerOptions
-    'button-group': ButtonGroupViewControllerOptions
-    card: CardViewControllerOptions
-    dialog: DialogViewControllerOptions
-    bigForm: BigFormViewControllerOptions<Schema>
-    'big-form': BigFormViewControllerOptions<Schema>
-    confirm: ConfirmViewControllerOptions
-    formBuilderCard: FormBuilderCardViewControllerOptions
-    'form-builder-card': FormBuilderCardViewControllerOptions
-    list: ListViewControllerOptions
-    toolBelt: ToolBeltViewControllerOptions
-    'tool-belt': ToolBeltViewControllerOptions
-    calendar: CalendarViewControllerOptions
-    'calendar-event': CalendarEventOptions
-    buttonBar: ButtonBarViewControllerOptions
-    'button-bar': ButtonBarViewControllerOptions
-    talkingSprucebot: TalkingSprucebotViewControllerOptions
-    'talking-sprucebot': TalkingSprucebotViewControllerOptions
-    activeRecordCard: ActiveRecordCardViewControllerOptions
     'active-record-card': ActiveRecordCardViewControllerOptions
-    activeRecordList: ActiveRecordListViewControllerOptions
     'active-record-list': ActiveRecordListViewControllerOptions
-    stats: StatsViewControllerOptions
-    progress: ProgressViewControllerOptions
-    ratings: RatingsViewControllerOptions
-    autocompleteInput: AutocompleteInputViewControllerOptions
     'autocomplete-input': AutocompleteInputViewControllerOptions
-    map: MapViewControllerOptions
-    feed: FeedViewControllerOptions
-    navigation: Navigation
-    'countdown-timer': CountdownTimerViewControllerOptions
-    'progress-navigator': ProgressNavigatorViewControllerOptions
-    'polar-area': PolarAreaViewControllerOptions
-    pager: PagerViewControllerOptions
     'bar-chart': BarChartViewControllerOptions
+    'big-form': BigFormViewControllerOptions<Schema>
+    'button-bar': ButtonBarViewControllerOptions
+    'button-group': ButtonGroupViewControllerOptions
+    'calendar-event': CalendarEventOptions
+    'countdown-timer': CountdownTimerViewControllerOptions
+    'form-builder-card': FormBuilderCardViewControllerOptions
     'line-graph': LineGraphViewControllerOptions
     'lock-screen': LockScreenSkillViewControllerOptions
+    'login-card': LoginCardViewControllerOptions
+    'polar-area': PolarAreaViewControllerOptions
+    'progress-navigator': ProgressNavigatorViewControllerOptions
+    'swipe-card': SwipeViewControllerOptions
+    'talking-sprucebot': TalkingSprucebotViewControllerOptions
+    'tool-belt': ToolBeltViewControllerOptions
     'web-rtc-player': WebRtcPlayerOptions
+    calendar: CalendarViewControllerOptions
+    card: CardViewControllerOptions
+    confirm: ConfirmViewControllerOptions
+    dialog: DialogViewControllerOptions
+    feed: FeedViewControllerOptions
+    form: FormViewControllerOptions<any>
+    list: ListViewControllerOptions
+    map: MapViewControllerOptions
+    navigation: Navigation
+    pager: PagerViewControllerOptions
+    progress: ProgressViewControllerOptions
+    ratings: RatingsViewControllerOptions
+    stats: StatsViewControllerOptions
 }
 
 export interface SkillViewControllerMap {}

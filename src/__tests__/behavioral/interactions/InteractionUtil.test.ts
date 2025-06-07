@@ -12,7 +12,7 @@ import {
     SkillViewController,
     TriggerRenderHandler,
 } from '../../../types/heartwood.types'
-import LoginViewController from '../../../viewControllers/Login.vc'
+import LoginCardViewController from '../../../viewControllers/LoginCard.vc'
 
 type SkillView = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView
 
@@ -42,7 +42,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     protected controllerMap = {
         good: GoodSkillViewController,
     }
-    private loginVc!: LoginViewController
+    private loginVc!: LoginCardViewController
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -151,7 +151,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
         let wasHit = false
 
         const bigFormVc = this.Controller(
-            'bigForm',
+            'big-form',
             buildBigForm({
                 onSubmit: () => {
                     wasHit = true
@@ -368,6 +368,6 @@ export default class InteractorTest extends AbstractViewControllerTest {
     }
 
     private LoginVc() {
-        return this.Controller('login', {})
+        return this.Controller('login-card', {})
     }
 }

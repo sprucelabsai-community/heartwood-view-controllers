@@ -531,7 +531,7 @@ export default class ControllingAnAutocompleteInputTest extends AbstractViewCont
     }
 
     private Vc(options?: Partial<AutocompleteInputViewControllerOptions>) {
-        const autoCompelete = this.Controller('autocompleteInput', {
+        const autoCompelete = this.Controller('autocomplete-input', {
             ...options,
         })
 

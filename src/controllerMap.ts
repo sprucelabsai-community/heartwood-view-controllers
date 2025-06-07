@@ -16,7 +16,7 @@ import FeedViewController from './viewControllers/Feed.vc'
 import AutocompleteInputViewController from './viewControllers/form/AutocompleteInput.vc'
 import FormViewController from './viewControllers/form/Form.vc'
 import ListViewController from './viewControllers/list/List.vc'
-import LoginViewController from './viewControllers/Login.vc'
+import LoginCardViewController from './viewControllers/LoginCard.vc'
 import MapViewController from './viewControllers/Map.vc'
 import NavigationViewController from './viewControllers/navigation/Navigation.vc'
 import PolarAreaViewController from './viewControllers/PolarAreaViewController.vc'
@@ -31,67 +31,24 @@ import WebRtcPlayerViewController from './viewControllers/webRtcStreaming/WebRtc
 
 export const CORE_CONTROLLER_MAP = {
     form: FormViewController,
-    /**
-     * @deprecated 'login' -> 'login-card'
-     */
-    login: LoginViewController,
-    'login-card': LoginViewController,
-    /**
-     * @deprecated 'swipeCard' -> 'swipe-card'
-     */
-    swipeCard: SwipeCardViewController,
+    'login-card': LoginCardViewController,
     'swipe-card': SwipeCardViewController,
-    /**
-     * @deprecated 'buttonGroup' -> 'button-group'
-     */
-    buttonGroup: ButtonGroupViewController,
     'button-group': ButtonGroupViewController,
     card: CardViewController,
     dialog: DialogViewController,
-    /**
-     * @deprecated 'bigForm' -> 'big-form'
-     */
-    bigForm: BigFormViewController,
     'big-form': BigFormViewController,
     confirm: ConfirmViewController,
     list: ListViewController,
-    /**
-     * @deprecated 'toolBelt' -> 'tool-belt'
-     */
-    toolBelt: ToolBeltViewController,
     'tool-belt': ToolBeltViewController,
     calendar: CalendarViewController,
-
     'calendar-event': CalendarEventViewController,
-
-    /**
-     * @deprecated 'buttonBar' -> 'button-bar'
-     */
-    buttonBar: ButtonBarViewController,
     'button-bar': ButtonBarViewController,
-    /**
-     * @deprecated 'talkingSprucebot' -> 'talking-sprucebot'
-     */
-    talkingSprucebot: TalkingSprucebotViewController,
     'talking-sprucebot': TalkingSprucebotViewController,
-    /**
-     * @deprecated 'activeRecordCard' -> 'activeRecordCard'
-     */
-    activeRecordCard: ActiveRecordCardViewController,
     'active-record-card': ActiveRecordCardViewController,
-
-    /**
-     * @deprecated 'activeRecordList' -> 'active-record-list'
-     */
-    activeRecordList: ActiveRecordListViewController,
     'active-record-list': ActiveRecordListViewController,
     stats: StatsViewController,
     progress: ProgressViewController,
     ratings: RatingsViewController,
-    /**
-     * @deprecated 'autocompleteInput' -> 'autocomplete-input'
-     */
-    autocompleteInput: AutocompleteInputViewController,
     'autocomplete-input': AutocompleteInputViewController,
     map: MapViewController,
     feed: FeedViewController,

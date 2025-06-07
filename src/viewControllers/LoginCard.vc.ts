@@ -11,26 +11,30 @@ import {
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
-export default class LoginViewController
+export default class LoginCardViewController
     extends AbstractViewController<ViewModel>
     implements ViewController<ViewModel>
 {
-    private sections: Section<LoginSchema>[]
     private static _id = 0
+
+    protected loginForm: BigFormViewController<LoginSchema>
+
+    private sections: Section<LoginSchema>[]
     private _id: string
     private loginHandler?: LoginHandler
     private currentSlide = 0
-    private loginForm: BigFormViewController<LoginSchema>
     private userChallenge?: string
     private loginFailedHandler?: (err: Error) => void
 
     public constructor(
-        options: LoginViewControllerOptions & ViewControllerOptions
+        options: LoginCardViewControllerOptions & ViewControllerOptions
     ) {
         super(options)
 
-        this._id = options.id ?? `${LoginViewController._id}`
-        LoginViewController._id++
+        this._id = options.id ?? `${LoginCardViewController._id}`
+        LoginCardViewController._id++
+
+        const { onLogin, onLoginFailed, smsDisclaimer } = options
 
         this.sections = [
             {
@@ -39,7 +43,7 @@ export default class LoginViewController
                     'Gimme a number to text.',
                     'What is your number 👇',
                 ]),
-                fields: ['phone'],
+                fields: [{ name: 'phone', hint: smsDisclaimer }],
             },
             {
                 title: randomUtil.rand([
@@ -52,8 +56,8 @@ export default class LoginViewController
             },
         ]
 
-        this.loginHandler = options.onLogin
-        this.loginFailedHandler = options.onLoginFailed
+        this.loginHandler = onLogin
+        this.loginFailedHandler = onLoginFailed
         this.loginForm = this.BigForm()
 
         this.device.sendCommand('attemptingLogin')
@@ -225,10 +229,11 @@ type Section<S extends Schema> =
 
 export type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 
-export interface LoginViewControllerOptions {
+export interface LoginCardViewControllerOptions {
     onLogin?: LoginHandler
     onLoginFailed?: (err: Error) => void
     id?: string | null
+    smsDisclaimer?: string
 }
 
 const loginSchema = buildSchema({

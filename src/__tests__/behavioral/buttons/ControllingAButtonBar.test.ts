@@ -69,7 +69,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
         const selectionHandler = () => {}
         const clickHandler = () => {}
 
-        const vc = this.Controller('buttonBar', {
+        const vc = this.Controller('button-bar', {
             onSelectionChange: selectionHandler,
             shouldAllowMultiSelect: true,
             onClickHintIcon: clickHandler,
@@ -145,7 +145,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     @test()
     protected async selectingButtonsTriggersOnChange() {
         let wasHit = true
-        const vc = this.Controller('buttonBar', {
+        const vc = this.Controller('button-bar', {
             onSelectionChange: () => {
                 wasHit = true
             },
@@ -201,7 +201,7 @@ export default class ControllingAButtonBarTest extends AbstractViewControllerTes
     }
 
     private ButtonBarWithButtons(buttons: ButtonGroupButton[]) {
-        return this.Controller('buttonBar', {
+        return this.Controller('button-bar', {
             buttons,
         })
     }

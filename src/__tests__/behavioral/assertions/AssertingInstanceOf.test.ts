@@ -33,7 +33,7 @@ class ActiveCard extends AbstractViewController<Card> {
         super(options)
 
         this.activeRecordVc = this.Controller(
-            'activeRecordCard',
+            'active-record-card',
             buildActiveRecordCard({
                 id: 'active',
                 eventName: 'list-skills::v2020_12_25',

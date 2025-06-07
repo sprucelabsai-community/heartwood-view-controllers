@@ -67,7 +67,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
             | null
             | undefined
     ): SwipeCardViewController {
-        return this.Controller('swipeCard', {
+        return this.Controller('swipe-card', {
             id,
             isBusy,
             header: {

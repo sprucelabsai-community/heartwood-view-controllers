@@ -42,7 +42,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     protected creatingActiveRecordWithoutRequiredParamsThrows() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
-            this.Controller('activeRecordCard', {})
+            this.Controller('active-record-card', {})
         )
 
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {

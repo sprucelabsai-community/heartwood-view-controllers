@@ -6,7 +6,9 @@ import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../tests/constants'
 import SpyDevice from '../../tests/SpyDevice'
 import StubStorage from '../../tests/StubStorage'
-import LoginViewController from '../../viewControllers/Login.vc'
+import LoginCardViewController, {
+    LoginCardViewControllerOptions,
+} from '../../viewControllers/LoginCard.vc'
 
 @suite()
 export default class AuthenticatorTest extends AbstractViewControllerTest {
@@ -168,23 +170,28 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected canBuildLoginVc() {
-        const factory = this.Factory()
-        const login = factory.Controller('login', {})
-        assert.isTruthy(login)
-    }
-
-    @test()
     protected async passesTHroughId() {
         const id = generateId()
-        const vc = this.Factory().Controller('login', { id })
+        const vc = this.LoginVc({ id })
         assert.isEqual(this.render(vc).id, id)
     }
 
     @test()
+    protected async canPassThroughSmsDisclaimer() {
+        const smsDisclaimer = generateId()
+        const vc = this.LoginVc({
+            smsDisclaimer,
+        })
+
+        const formVc = vc.getBigForm()
+        const model = this.render(formVc)
+        //@ts-ignore
+        assert.isEqual(model.sections[0]?.fields?.[0]?.hint, smsDisclaimer)
+    }
+
+    @test()
     protected async entering4DigitPinTriggersSubmit() {
-        const factory = this.Factory()
-        const login = factory.Controller('login', {})
+        const login = this.LoginVc()
 
         //@ts-ignore
         const form = login.loginForm
@@ -215,7 +222,6 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected async loginVcClearsPinWhenSubmittingPhone() {
         const login = this.LoginVc()
-
         const form = login.getLoginForm()
 
         await form.setValue('phone', DEMO_NUMBER)
@@ -292,9 +298,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected async sendsAttemptingLoginCommandToDevice() {
-        const factory = this.Factory()
-        factory.setController('login', SpyLogin)
-        const login = factory.Controller('login', {}) as SpyLogin
+        const login = this.LoginVc()
         const device = login.getDevice() as SpyDevice
         assert.isEqual(device.lastCommand, 'attemptingLogin')
     }
@@ -303,15 +307,20 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         return Authenticator.getInstance()
     }
 
-    private LoginVc() {
+    private LoginVc(options?: LoginCardViewControllerOptions) {
         const factory = this.Factory()
-        const login = factory.Controller('login-card', {})
-        return login
+        factory.setController('login-card', SpyLogin)
+        const login = factory.Controller('login-card', { ...options })
+        return login as SpyLogin
     }
 }
 
-class SpyLogin extends LoginViewController {
+class SpyLogin extends LoginCardViewController {
     public getDevice() {
         return this.device
+    }
+
+    public getBigForm() {
+        return this.loginForm
     }
 }

@@ -74,7 +74,7 @@ export default class AssertingButtonBarsInCards extends AbstractViewControllerTe
     }
 
     private ButtonBarVc(): ButtonBarViewController {
-        return this.Controller('buttonBar', {
+        return this.Controller('button-bar', {
             buttons: [],
         })
     }

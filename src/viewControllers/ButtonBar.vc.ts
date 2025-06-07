@@ -17,7 +17,7 @@ export default class ButtonBarViewController extends AbstractViewController<Butt
     public constructor(options: ButtonBar & ViewControllerOptions) {
         super(options)
 
-        this.buttonGroupVc = this.Controller('buttonGroup', {
+        this.buttonGroupVc = this.Controller('button-group', {
             ...options,
         })
     }
