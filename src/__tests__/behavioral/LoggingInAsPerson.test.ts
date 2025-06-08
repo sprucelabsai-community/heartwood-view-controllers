@@ -190,6 +190,21 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
+    protected async passingNullSmsDisclaimerLeavesOriginal() {
+        const vc = this.LoginVc({
+            smsDisclaimer: null,
+        })
+
+        const formVc = vc.getBigForm()
+        const model = this.render(formVc)
+        assert.isEqual(
+            //@ts-ignore
+            model.sections[0]?.fields?.[0]?.hint,
+            "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
+        )
+    }
+
+    @test()
     protected async entering4DigitPinTriggersSubmit() {
         const login = this.LoginVc()
 

@@ -43,7 +43,12 @@ export default class LoginCardViewController
                     'Gimme a number to text.',
                     'What is your number 👇',
                 ]),
-                fields: [{ name: 'phone', hint: smsDisclaimer }],
+                fields: [
+                    {
+                        name: 'phone',
+                        hint: smsDisclaimer ?? loginSchema.fields.phone.hint,
+                    },
+                ],
             },
             {
                 title: randomUtil.rand([
@@ -233,7 +238,7 @@ export interface LoginCardViewControllerOptions {
     onLogin?: LoginHandler
     onLoginFailed?: (err: Error) => void
     id?: string | null
-    smsDisclaimer?: string
+    smsDisclaimer?: string | null
 }
 
 const loginSchema = buildSchema({
