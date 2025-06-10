@@ -1392,25 +1392,29 @@ const vcAssert = {
 
     assertRendersAsInstanceOf<Controller extends ViewController<any>>(
         vc: ViewController<any>,
-        Class: new (...args: any[]) => Controller
+        Class: new (...args: any[]) => Controller,
+        errorMessage?: string
     ): Controller {
         if (vc instanceof DialogViewController) {
             vc = vc.getCardVc()
             assert.isTruthy(
                 vc,
-                `Your dialog is not rendering a card! Try 'this.renderDialog(cardVc.render())'`
+                errorMessage ??
+                    `Your dialog is not rendering a card! Try 'this.renderDialog(cardVc.render())'`
             )
         } else if (vc instanceof LockScreenSkillViewController) {
             vc = vc.getSkillViewVc() as ViewController<any>
             assert.isTruthy(
                 vc,
-                `Your LockScreen is not rendering a skill view! Try 'this.renderLockScreen(lockSvc.render())'`
+                errorMessage ??
+                    `Your LockScreen is not rendering a skill view! Try 'this.renderLockScreen(lockSvc.render())'`
             )
         }
 
         assert.isTruthy(
             vc,
-            `The view you sent me is missing a controller. It may help to check your render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
+            errorMessage ??
+                `The view you sent me is missing a controller. It may help to check your render method to ensure you're properly returning a controller. Here are a few examples of how to do this:
 
 1. Render your card into the dialog:
 
@@ -1435,7 +1439,8 @@ const vcAssert = {
         const model = renderUtil.render(vc)
         assert.isTruthy(
             model.controller,
-            `Your view controller does not return a controller. Make sure you return 'controller:this' from render() or that you're rending a built in view with 'render() { return this.cardVc.render() }'.`
+            errorMessage ??
+                `Your view controller does not return a controller. Make sure you return 'controller:this' from render() or that you're rending a built in view with 'render() { return this.cardVc.render() }'.`
         )
 
         try {
@@ -1445,12 +1450,13 @@ const vcAssert = {
             )
         } catch {
             assert.fail(
-                `Expected your ${
-                    Object.getPrototypeOf(vc)?.constructor?.name ??
-                    'view controller'
-                } to render a controller that is an instance of ${
-                    Class.name
-                }, but it didn't! Make sure the view you're expecting is rendering itself as the controller (or another view controller). e.g.
+                errorMessage ??
+                    `Expected your ${
+                        Object.getPrototypeOf(vc)?.constructor?.name ??
+                        'view controller'
+                    } to render a controller that is an instance of ${
+                        Class.name
+                    }, but it didn't! Make sure the view you're expecting is rendering itself as the controller (or another view controller). e.g.
 
 1. Render your card into the dialog:
 
