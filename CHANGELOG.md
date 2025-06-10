@@ -1,3 +1,10 @@
+# [121.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.1.1...v121.0.0) (2025-06-10)
+
+
+### Breaking Changes
+
+* jest upgrade ([3cc674b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3cc674b))
+
 ## [120.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.1.0...v120.1.1) (2025-06-10)
 
 # [120.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.0.2...v120.1.0) (2025-06-10)
