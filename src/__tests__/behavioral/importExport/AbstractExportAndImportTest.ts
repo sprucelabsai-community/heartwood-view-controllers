@@ -36,6 +36,17 @@ export default abstract class AbstractExportAndImportTest extends AbstractViewCo
         await exporter.export({
             source: sourcePath,
             destination: this.destination,
+            defines: {
+                'process.env.PLUGIN_1_VALUE': JSON.stringify(
+                    process.env.PLUGIN_1_VALUE!
+                ),
+                'process.env.PLUGIN_2_VALUE': JSON.stringify(
+                    process.env.PLUGIN_2_VALUE!
+                ),
+                'process.env.PLUGIN_3_VALUE': JSON.stringify(
+                    process.env.PLUGIN_3_VALUE!
+                ),
+            },
         })
     }
 
