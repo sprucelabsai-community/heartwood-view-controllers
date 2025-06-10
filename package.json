@@ -60,7 +60,7 @@
     "rebuild": "yarn run clean.all && yarn install && yarn run build.dev",
     "release": "semantic-release",
     "resolve-paths.lint": "yarn run build.resolve-paths ; yarn run lint",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles",
+    "test": "NODE_OPTIONS=--trace-deprecation jest --detectOpenHandles",
     "update.dependencies": "yarn run clean.dependencies && yarn",
     "upgrade.packages": "yarn-upgrade-all && rm -f yarn.lock ; yarn ; yarn fix.lint ; true",
     "upgrade.packages.all": "yarn install && yarn upgrade.packages",
@@ -130,6 +130,9 @@
     "maxWorkers": 6,
     "testTimeout": 120000,
     "testEnvironment": "node",
+    "testEnvironmentOptions": {
+      "globalsCleanup": "off"
+    },
     "testPathIgnorePatterns": [
       "<rootDir>/tmp/",
       "<rootDir>/src/",
