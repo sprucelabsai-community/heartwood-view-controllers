@@ -61,6 +61,7 @@ export { default as AbstractInputViewController } from './viewControllers/form/A
 export { default as buildActiveRecordCard } from './builders/buildActiveRecordCard'
 export { default as buildActiveRecordList } from './builders/buildActiveRecordList'
 export { default as activeRecordCardAssert } from './tests/utilities/activeRecordCardAssert'
+export { default as activeRecordListAssert } from './tests/utilities/activeRecordListAssert'
 export { default as MockActiveRecordCard } from './tests/MockActiveRecordCard'
 export { default as lockScreenAssert } from './tests/utilities/lockScreenAssert'
 export { default as SpyViewControllerExporter } from './tests/SpyViewControllerExporter'

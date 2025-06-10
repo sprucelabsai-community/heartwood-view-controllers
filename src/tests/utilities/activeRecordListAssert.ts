@@ -9,7 +9,7 @@ import ActiveRecordListViewController from '../../viewControllers/activeRecord/A
 import { pluckAllFromView } from './assertSupport'
 import vcAssert from './vcAssert'
 
-const activeListAssert = {
+const activeRecordListAssert = {
     cardRendersActiveRecordList(vc: ViewController<Card>, id?: string) {
         const model = renderUtil.render(vc)
 
@@ -48,4 +48,4 @@ const activeListAssert = {
     },
 }
 
-export default activeListAssert
+export default activeRecordListAssert

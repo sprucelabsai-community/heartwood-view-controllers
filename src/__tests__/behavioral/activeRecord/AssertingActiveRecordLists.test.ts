@@ -1,7 +1,7 @@
 import { EventName } from '@sprucelabs/mercury-types'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import activeListAssert from '../../../tests/utilities/activeListAssert'
+import activeRecordListAssert from '../../../tests/utilities/activeRecordListAssert'
 import { ListRow } from '../../../types/heartwood.types'
 import ActiveRecordListViewController from '../../../viewControllers/activeRecord/ActiveRecordList.vc'
 
@@ -11,7 +11,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
     protected async cardRendersActiveRecordListThrowsIfMissing() {
         const vc = this.Controller('card', {})
         assert.doesThrow(
-            () => activeListAssert.cardRendersActiveRecordList(vc),
+            () => activeRecordListAssert.cardRendersActiveRecordList(vc),
             'could not find'
         )
     }
@@ -20,14 +20,14 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
     protected async doesNotThrowIfActiveRecordListInFirstSection() {
         const vc = this.Vc()
 
-        activeListAssert.cardRendersActiveRecordList(vc)
+        activeRecordListAssert.cardRendersActiveRecordList(vc)
     }
 
     @test()
     protected async doesNotThrowIfActiveRecordListInSecondSection() {
         const vc = this.VcWithListOnSecondSection()
 
-        activeListAssert.cardRendersActiveRecordList(vc)
+        activeRecordListAssert.cardRendersActiveRecordList(vc)
     }
 
     @test()
@@ -37,7 +37,8 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
         const wrongId = generateId()
 
         assert.doesThrow(
-            () => activeListAssert.cardRendersActiveRecordList(vc, wrongId),
+            () =>
+                activeRecordListAssert.cardRendersActiveRecordList(vc, wrongId),
             `${wrongId}`
         )
     }
@@ -47,7 +48,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
         const id = generateId()
         const vc = this.Vc(id)
 
-        activeListAssert.cardRendersActiveRecordList(vc, id)
+        activeRecordListAssert.cardRendersActiveRecordList(vc, id)
     }
 
     @test()
@@ -66,7 +67,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
             },
         })
 
-        activeListAssert.cardRendersActiveRecordList(vc, id)
+        activeRecordListAssert.cardRendersActiveRecordList(vc, id)
     }
 
     @test()
@@ -74,14 +75,14 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
         const id = generateId()
         const vc = this.VcWithListOnSecondSection(id)
 
-        activeListAssert.cardRendersActiveRecordList(vc, id)
+        activeRecordListAssert.cardRendersActiveRecordList(vc, id)
     }
 
     @test()
     protected async cardRendersActiveRecordListReturnsActiveRecordList() {
         const vc = this.Vc()
 
-        const list = activeListAssert.cardRendersActiveRecordList(vc)
+        const list = activeRecordListAssert.cardRendersActiveRecordList(vc)
         assert.isInstanceOf(list, ActiveRecordListViewController)
     }
 
@@ -89,7 +90,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
     protected async cardDoesNotRenderActiveRecordListThrowsIfMissing() {
         const vc = this.Vc()
         assert.doesThrow(
-            () => activeListAssert.cardDoesNotRendersActiveRecordList(vc),
+            () => activeRecordListAssert.cardDoesNotRendersActiveRecordList(vc),
             'I found'
         )
     }
@@ -97,14 +98,14 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
     @test()
     protected async cardDoesNotRenderActiveRecordListDoesNotThrowIfMissing() {
         const vc = this.Controller('card', {})
-        activeListAssert.cardDoesNotRendersActiveRecordList(vc)
+        activeRecordListAssert.cardDoesNotRendersActiveRecordList(vc)
     }
 
     @test()
     protected async cardDoesNotRenderActiveRecordListThrowIfMissing() {
         const vc = this.VcWithListOnSecondSection()
         assert.doesThrow(
-            () => activeListAssert.cardDoesNotRendersActiveRecordList(vc),
+            () => activeRecordListAssert.cardDoesNotRendersActiveRecordList(vc),
             'I found'
         )
     }
@@ -124,7 +125,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
             },
         })
 
-        activeListAssert.cardDoesNotRendersActiveRecordList(vc)
+        activeRecordListAssert.cardDoesNotRendersActiveRecordList(vc)
     }
 
     @test()
@@ -132,7 +133,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
         const vc = this.VcWithList()
 
         assert.doesThrow(
-            () => activeListAssert.cardRendersActiveRecordList(vc),
+            () => activeRecordListAssert.cardRendersActiveRecordList(vc),
             'I could not find an active record list'
         )
     }
@@ -140,7 +141,7 @@ export default class AssertingActiveRecordListsTest extends AbstractViewControll
     @test()
     protected async doesNotRenderActiveRecordListIgnoresStandardList() {
         const vc = this.VcWithList()
-        activeListAssert.cardDoesNotRendersActiveRecordList(vc)
+        activeRecordListAssert.cardDoesNotRendersActiveRecordList(vc)
     }
 
     private VcWithList() {
