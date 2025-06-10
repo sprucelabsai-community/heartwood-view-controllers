@@ -1,3 +1,10 @@
+# [120.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.0.2...v120.1.0) (2025-06-10)
+
+
+### Features
+
+* active list assert ([9f8cf51](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9f8cf51))
+
 ## [120.0.2](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.0.1...v120.0.2) (2025-06-08)
 
 ## [120.0.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v120.0.0...v120.0.1) (2025-06-07)
