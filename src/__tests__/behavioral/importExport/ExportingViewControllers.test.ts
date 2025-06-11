@@ -330,12 +330,19 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.buildAndWatchSkillAtRandomDir()
 
         await this.replaceInBookSvc('go-team', 'stop-dude')
+
+        let tries = 0
+        while (this.didIncremntallyBuildCount === 0 && tries < 100) {
+            await this.wait(100)
+            tries++
+        }
+
         this.assertDidIncremntallyBuildHitCount(1)
         this.assertWillIncremntallyBuildHitCount(1)
 
         await this.replaceInBookSvc('stop-dude', 'what-the')
 
-        let tries = 0
+        tries = 0
         while (this.didIncremntallyBuildCount === 1 && tries < 100) {
             await this.wait(100)
         }
@@ -424,7 +431,6 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         const contents = diskUtil.readFile(updatedFile)
         const updated = contents.replace(search, replace)
         diskUtil.writeFile(updatedFile, updated)
-
         await this.wait(1000)
     }
 
@@ -436,7 +442,13 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
     private async export(options?: Partial<ExportOptions>) {
         await this.exporter.export({
-            source: this.source,
+            source: this.resolvePath(
+                this.buildCwd,
+                'src',
+                '.spruce',
+                'views',
+                'views.ts'
+            ),
             destination: this.destination,
             ...options,
         })

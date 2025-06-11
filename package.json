@@ -20,8 +20,6 @@
       "sync.schemas": "--shouldFetchCoreSchemas false --moduleToImportFromWhenRemote @sprucelabs/heartwood-view-controllers"
     },
     "upgradeIgnoreList": [
-      "terser-webpack-plugin",
-      "webpack",
       "@sprucelabs/spruce-test-fixtures",
       "@sprucelabs/spruce-event-plugin",
       "@sprucelabs/spruce-skill-booter",
@@ -95,9 +93,9 @@
     "dotenv": "^16.5.0",
     "esbuild": "^0.25.5",
     "object-set": "^1.0.1",
-    "terser-webpack-plugin": "5.3.1",
+    "terser-webpack-plugin": "^5.3.14",
     "uglify-js": "^3.19.3",
-    "webpack": "5.70.0"
+    "webpack": "^5.99.9"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^7.0.0",

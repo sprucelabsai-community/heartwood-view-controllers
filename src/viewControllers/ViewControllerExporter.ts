@@ -1,9 +1,27 @@
+import fs from 'fs'
 import pathUtil from 'path'
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
 import { Compiler, Configuration, DefinePlugin, Stats, webpack } from 'webpack'
 import SpruceError from '../errors/SpruceError'
+const graceful = require('graceful-fs')
+
+graceful.lstat = (
+    path: string,
+    cb: (err: Error | null, stats: any) => void
+) => {
+    fs.lstat(path, (err: Error | null, stats: any) => {
+        if (err) {
+            cb(err, stats)
+            return
+        }
+        stats.ctime = stats.ctimeMs
+        stats.mtime = stats.mtimeMs
+
+        cb(null, stats)
+    })
+}
 
 export default class ViewControllerExporter {
     public static Class?: typeof ViewControllerExporter
