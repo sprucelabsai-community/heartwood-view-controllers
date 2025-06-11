@@ -216,7 +216,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     @test()
     protected async configNoopsGoogleLoggingUtils() {
         await this.export()
-        const config = this.getConfig()
+        const config = this.config
 
         assert.isEqual(
             //@ts-ignore
@@ -228,7 +228,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     @test()
     protected async exportCanBuildSourceMaps() {
         await this.export({ shouldBuildSourceMaps: true })
-        const config = this.getConfig()
+        const config = this.config
         assert.isEqual(config.mode, 'development')
         assert.isEqual(config.devtool, 'inline-source-map')
         assert.isFalse(config.optimization?.minimize)
@@ -242,7 +242,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     @test()
     protected async noSourceMapsByDefault() {
         await this.export()
-        const config = this.getConfig()
+        const config = this.config
         assert.isEqual(config.mode, 'production')
         assert.isFalsy(config.devtool)
         assert.isTrue(config.optimization?.minimize)
@@ -272,7 +272,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
             defines: definePlugin,
         })
 
-        const config = this.getConfig()
+        const config = this.config
         assert.doesInclude(config, {
             plugins: [{ definitions: definePlugin }],
         })
@@ -315,6 +315,41 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.export()
         assert.isFalse(compiler.wasWatchHit)
         assert.isTrue(compiler.wasRunHit)
+    }
+
+    @test()
+    protected async passesExpectedResolveFallbacks() {
+        await this.export()
+        assert.isEqualDeep(this.config.resolve?.fallback, {
+            'fs-extra': false,
+            'mongodb-client-encryption': false,
+            assert: false,
+            aws4: false,
+            buffer: false,
+            child_process: false,
+            constants: false,
+            crypto: false,
+            dns: false,
+            fs: false,
+            https: false,
+            inspector: false,
+            module: false,
+            mongodb: false,
+            net: false,
+            os: false,
+            path: false,
+            process: false,
+            querystring: false,
+            stream: false,
+            timers: false,
+            tls: false,
+            tty: false,
+            url: false,
+            util: false,
+            vm: false,
+            worker_threads: false,
+            zlib: false,
+        })
     }
 
     @test()
@@ -370,7 +405,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         assert.isEqual(exporter, SpyViewControllerExporter.instance)
     }
 
-    private getConfig() {
+    private get config() {
         return this.exporter.getConfig()
     }
 
