@@ -213,6 +213,7 @@ export default class ViewControllerExporter {
                     crypto: false,
                     dns: false,
                     fs: false,
+                    http: false,
                     https: false,
                     inspector: false,
                     module: false,
