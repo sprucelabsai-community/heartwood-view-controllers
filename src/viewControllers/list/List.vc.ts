@@ -331,6 +331,10 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         this._rowVcs = []
     }
 
+    public getIsDragAndDropSortingEnabled(): boolean {
+        return !!this.model.shouldAllowDragAndDropSorting
+    }
+
     private handleDragAndDropSort = async (newRowIds: string[]) => {
         const response = await this.dragAndDropSortHandler?.(newRowIds)
         if (response === false) {
