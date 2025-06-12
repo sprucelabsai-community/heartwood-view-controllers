@@ -230,14 +230,6 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
         )
     }
 
-    private assertIsDragAndDropReturnsFalse() {
-        assert.isFalse(this.vc.getIsDragAndDropSortingEnabled())
-    }
-
-    private assertIsDragAndDropReturnsTrue() {
-        assert.isTrue(this.vc.getIsDragAndDropSortingEnabled())
-    }
-
     @test('can enable drag and drop sorting on active record list', true)
     @test('can disable drag and drop sorting on active record list', false)
     protected async canEnableDragAndDropSortingOnActiveRecordList(
@@ -264,6 +256,31 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
             location2.id,
             location1.id,
         ])
+    }
+
+    @test('drag and drop returns false', false)
+    @test('drag and drop returns true', true)
+    protected async dropHandlerReturnsActualResponse(
+        dragAndDropResponse: boolean
+    ) {
+        this.dragAndDropResponse = dragAndDropResponse
+        const rowId1 = generateId()
+        this.setRows([{ id: rowId1, cells: [] }])
+        const { onDragAndDropSort } = this.render(this.vc)
+        const response = await onDragAndDropSort?.([rowId1])
+        assert.isEqual(
+            response,
+            this.dragAndDropResponse,
+            'Expected response to match drag and drop response'
+        )
+    }
+
+    private assertIsDragAndDropReturnsFalse() {
+        assert.isFalse(this.vc.getIsDragAndDropSortingEnabled())
+    }
+
+    private assertIsDragAndDropReturnsTrue() {
+        assert.isTrue(this.vc.getIsDragAndDropSortingEnabled())
     }
 
     private setupActiveRecordList(shouldEnable = true) {
