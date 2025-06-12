@@ -5081,6 +5081,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controller'?: (HeartwoodTypes.ListViewController) | undefined | null
 				/** Render row dividers. */
 				'shouldRenderRowDividers'?: boolean | undefined | null
+				/** Allow drag and drop sorting. */
+				'shouldAllowDragAndDropSorting'?: boolean | undefined | null
+				/** Drag and drop sort handler. */
+				'onDragAndDropSort'?: ((rowIds: string[]) => boolean | Promise<boolean | void> | void) | undefined | null
 				/** Column widths. */
 				'columnWidths'?: (number | 'fill' | 'content')[] | undefined | null
 				/** Row height. */
@@ -5112,6 +5116,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Render row dividers',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** Allow drag and drop sorting. */
+			            'shouldAllowDragAndDropSorting': {
+			                label: 'Allow drag and drop sorting',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Drag and drop sort handler. */
+			            'onDragAndDropSort': {
+			                label: 'Drag and drop sort handler',
+			                type: 'raw',
+			                options: {valueType: `(rowIds: string[]) => boolean | Promise<boolean | void> | void`,}
 			            },
 			            /** Column widths. */
 			            'columnWidths': {

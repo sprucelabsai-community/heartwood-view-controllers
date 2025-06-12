@@ -2,6 +2,7 @@ import { SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
 import {
+    DragAndDropListSortHandler,
     List,
     ListColumnWidth,
     ListRow,
@@ -16,6 +17,10 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         rows: [],
     }
     private _rowVcs: ListRowViewController[] = []
+    private dragAndDropSortHandler:
+        | DragAndDropListSortHandler
+        | null
+        | undefined
 
     public constructor(options: Partial<List> & ViewControllerOptions) {
         super(options)
@@ -33,9 +38,13 @@ export default class ListViewController extends AbstractViewController<SpruceSch
             }
         }
 
+        const { onDragAndDropSort, rows, ...rest } = options
+
+        this.dragAndDropSortHandler = onDragAndDropSort
+
         this.model = {
-            ...options,
-            rows: options.rows ?? [],
+            ...rest,
+            rows: rows ?? [],
         }
     }
 
@@ -322,11 +331,26 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         this._rowVcs = []
     }
 
+    private handleDragAndDropSort = async (newRowIds: string[]) => {
+        const response = await this.dragAndDropSortHandler?.(newRowIds)
+        if (response === false) {
+            return
+        }
+        this._rowVcs = []
+        const newRows: ListRow[] = newRowIds.map(
+            (id) => this.model.rows.find((r) => r.id === id)!
+        )
+        this.model.rows = newRows
+    }
+
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {
         return {
             ...this.model,
             controller: this,
             rows: this.getRowVcs().map((vc) => vc.render()),
+            onDragAndDropSort: this.dragAndDropSortHandler
+                ? this.handleDragAndDropSort
+                : undefined,
         }
     }
 }

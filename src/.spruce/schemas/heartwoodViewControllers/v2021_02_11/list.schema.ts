@@ -27,6 +27,18 @@ const listSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListSchema 
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Allow drag and drop sorting. */
+	            'shouldAllowDragAndDropSorting': {
+	                label: 'Allow drag and drop sorting',
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** Drag and drop sort handler. */
+	            'onDragAndDropSort': {
+	                label: 'Drag and drop sort handler',
+	                type: 'raw',
+	                options: {valueType: `(rowIds: string[]) => boolean | Promise<boolean | void> | void`,}
+	            },
 	            /** Column widths. */
 	            'columnWidths': {
 	                label: 'Column widths',

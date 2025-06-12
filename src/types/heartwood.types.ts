@@ -407,6 +407,8 @@ export type LayoutStyle = NonNullable<
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
 >
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
+export type DragAndDropListSortHandler = NonNullable<List['onDragAndDropSort']>
+
 export type TriggerRender = () => void
 export type TriggerRenderHandler = () => void
 

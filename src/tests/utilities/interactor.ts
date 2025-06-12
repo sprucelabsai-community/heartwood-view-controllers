@@ -473,6 +473,39 @@ const interactor = {
         await model.onClick?.()
     },
 
+    async dragAndDropListRow(listVc: ListViewController, newRowIds: string[]) {
+        assertOptions({ listVc, newRowIds }, ['listVc', 'newRowIds'])
+
+        const { rows, onDragAndDropSort, shouldAllowDragAndDropSorting } =
+            renderUtil.render(listVc)
+
+        assert.isTrue(
+            shouldAllowDragAndDropSorting,
+            `You tried to drag and drop rows, but your list does not have 'shouldAllowDragAndDropSorting' set to true.`
+        )
+
+        assert.isTruthy(
+            onDragAndDropSort,
+            `You tried to drag and drop rows, but your list does not have 'onDragAndDropSort' set.`
+        )
+
+        assert.isLength(
+            newRowIds,
+            rows.length,
+            `You tried to drag and drop ${newRowIds.length} row${newRowIds.length === 1 ? '' : 's'}, but your list has ${rows.length} row${rows.length === 1 ? '' : 's'}. The number of rows must match!`
+        )
+
+        for (const newRowId of newRowIds) {
+            const match = rows.find((r) => r.id === newRowId)
+            assert.isTruthy(
+                match,
+                `You can't drag and drop row ${newRowId} because it is not in your list.`
+            )
+        }
+
+        await onDragAndDropSort(newRowIds)
+    },
+
     async clickCell(
         listVc: ListViewController,
         rowIdxOrId: number | string,

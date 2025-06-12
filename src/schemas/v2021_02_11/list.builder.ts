@@ -37,6 +37,18 @@ export default buildSchema({
             type: 'boolean',
             label: 'Render row dividers',
         },
+        shouldAllowDragAndDropSorting: {
+            type: 'boolean',
+            label: 'Allow drag and drop sorting',
+        },
+        onDragAndDropSort: {
+            type: 'raw',
+            label: 'Drag and drop sort handler',
+            options: {
+                valueType:
+                    '(rowIds: string[]) => boolean | Promise<boolean | void> | void',
+            },
+        },
         ...columnWidthFields,
         defaultRowHeight: {
             type: 'select',
