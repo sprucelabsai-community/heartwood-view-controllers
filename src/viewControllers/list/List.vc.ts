@@ -343,6 +343,16 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         this.model.rows = newRows
     }
 
+    public disableDragAndDropSorting() {
+        this.model.shouldAllowDragAndDropSorting = false
+        this.triggerRender()
+    }
+
+    public enableDragAndDropSorting() {
+        this.model.shouldAllowDragAndDropSorting = true
+        this.triggerRender()
+    }
+
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List {
         return {
             ...this.model,

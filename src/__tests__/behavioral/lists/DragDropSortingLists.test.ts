@@ -7,6 +7,7 @@ import {
 } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 @suite()
@@ -197,6 +198,27 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
         const expected = [rowId2, rowId1]
         await this.dragAndDrop(expected)
         this.assertRenderedRowOrderEquals([rowId1, rowId2])
+    }
+
+    @test()
+    protected async canEnableAndDisableDragAndDropSorting() {
+        this.setRows([{ id: generateId(), cells: [] }])
+        this.vc.disableDragAndDropSorting()
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+        const model = this.render(this.vc)
+        assert.isFalse(
+            model.shouldAllowDragAndDropSorting,
+            'Expected shouldAllowDragAndDropSorting to be false'
+        )
+
+        this.vc.enableDragAndDropSorting()
+        vcAssert.assertTriggerRenderCount(this.vc, 2)
+
+        const model2 = this.render(this.vc)
+        assert.isTrue(
+            model2.shouldAllowDragAndDropSorting,
+            'Expected shouldAllowDragAndDropSorting to be true'
+        )
     }
 
     private assertRenderedRowOrderEquals(expected: string[]) {
