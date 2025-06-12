@@ -6,6 +6,7 @@ import {
     SpruceSchemas,
 } from '@sprucelabs/mercury-types'
 import { Schema, SchemaValues } from '@sprucelabs/schema'
+import { DragAndDropListSortHandler } from '../types/heartwood.types'
 import { ActiveRecordCardViewControllerOptions } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 type List = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List
@@ -38,6 +39,8 @@ export type ActiveRecordListBuilder<Contract extends EventContract> = <
     target?: SchemaValues<EmitSchema>['target']
     columnWidths?: List['columnWidths']
     shouldRenderRowDividers?: boolean
+    shouldAllowDragAndDropSorting?: boolean
+    onDragAndDropSort?: DragAndDropListSortHandler
     filter?: (record: Response[ResponseKey][number]) => boolean
     defaultRowHeight?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List['defaultRowHeight']
 }) => ActiveRecordCardViewControllerOptions

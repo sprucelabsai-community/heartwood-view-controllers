@@ -31,32 +31,44 @@ export default class ActiveRecordListViewController extends AbstractViewControll
     ) {
         super(options)
 
-        const { noResultsRow, onWillFetch, onDidFetch, rowTransformer } =
-            assertOptions(options, [
-                'eventName',
-                'rowTransformer',
-                'responseKey',
-            ])
+        const {
+            onWillFetch,
+            onDidFetch,
+            rowTransformer,
+            noResultsRow,
+            eventName,
+            responseKey,
+            payload,
+            target,
+            filter,
+            connectToApi,
+            ...listOptions
+        } = assertOptions(options, [
+            'eventName',
+            'rowTransformer',
+            'responseKey',
+        ])
 
-        this.fetcher = ActiveRecordFetcherImpl.Fetcher(options)
+        this.fetcher = ActiveRecordFetcherImpl.Fetcher({
+            eventName,
+            responseKey,
+            payload,
+            target,
+            filter,
+            connectToApi,
+        })
 
         this.noResultsRow = noResultsRow
         this.rowTransformer = rowTransformer
         this.willFetchHandler = onWillFetch
         this.didFetchHandler = onDidFetch
 
-        this.listVc = this.ListVc(options)
+        this.listVc = this.ListVc(listOptions)
     }
 
     private ListVc(options: Omit<List, 'rows'>): ListViewController {
-        const { id, columnWidths, shouldRenderRowDividers, defaultRowHeight } =
-            options
-
         return this.Controller('list', {
-            id,
-            columnWidths,
-            defaultRowHeight,
-            shouldRenderRowDividers,
+            ...options,
         })
     }
 

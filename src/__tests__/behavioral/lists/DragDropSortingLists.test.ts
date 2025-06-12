@@ -5,9 +5,11 @@ import {
     errorAssert,
     generateId,
 } from '@sprucelabs/test-utils'
+import buildActiveRecordList from '../../../builders/buildActiveRecordList'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import ActiveRecordListViewController from '../../../viewControllers/activeRecord/ActiveRecordList.vc'
 import ListViewController from '../../../viewControllers/list/List.vc'
 
 @suite()
@@ -16,6 +18,7 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
     private didCallDragAndDropSortHandler = false
     private newRowIds?: string[]
     private dragAndDropResponse: boolean | undefined
+    private activeListVc!: ActiveRecordListViewController
 
     @test()
     protected async passesThroughDragAndDropSort() {
@@ -218,6 +221,53 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
         assert.isTrue(
             model2.shouldAllowDragAndDropSorting,
             'Expected shouldAllowDragAndDropSorting to be true'
+        )
+    }
+
+    @test('can enable drag and drop sorting on active record list', true)
+    @test('can disable drag and drop sorting on active record list', false)
+    protected async canEnableDragAndDropSortingOnActiveRecordList(
+        shouldEnable: boolean
+    ) {
+        this.setupActiveRecordList(shouldEnable)
+
+        const model = this.render(this.activeListVc)
+        assert.isEqual(
+            model.shouldAllowDragAndDropSorting,
+            shouldEnable,
+            'shouldAllowDragAndDropSorting does not match expected value'
+        )
+    }
+
+    @test()
+    protected async activeRecordListCallsHandlerOnDragAndDrop() {
+        const location1 = this.eventFaker.generateLocationValues()
+        const location2 = this.eventFaker.generateLocationValues()
+        await this.eventFaker.fakeListLocations(() => [location1, location2])
+        this.setupActiveRecordList()
+        await this.activeListVc.load()
+        await interactor.dragAndDropListRow(this.activeListVc, [
+            location2.id,
+            location1.id,
+        ])
+    }
+
+    private setupActiveRecordList(shouldEnable = true) {
+        this.activeListVc = this.Controller(
+            'active-record-list',
+            buildActiveRecordList({
+                eventName: 'list-locations::v2020_12_25',
+                responseKey: 'locations',
+                shouldAllowDragAndDropSorting: shouldEnable,
+                onDragAndDropSort: async (newRowIds: string[]) => {
+                    this.didCallDragAndDropSortHandler = true
+                    this.newRowIds = newRowIds
+                },
+                rowTransformer: (location) => ({
+                    id: location.id,
+                    cells: [],
+                }),
+            })
         )
     }
 

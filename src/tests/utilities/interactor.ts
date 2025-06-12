@@ -5,6 +5,7 @@ import {
     ClickCalendarViewOptions,
     DropEventOptions,
     KeyboardKey,
+    List,
     Navigation,
     Pager,
     SkillViewController,
@@ -473,7 +474,10 @@ const interactor = {
         await model.onClick?.()
     },
 
-    async dragAndDropListRow(listVc: ListViewController, newRowIds: string[]) {
+    async dragAndDropListRow(
+        listVc: ViewController<List>,
+        newRowIds: string[]
+    ) {
         assertOptions({ listVc, newRowIds }, ['listVc', 'newRowIds'])
 
         const { rows, onDragAndDropSort, shouldAllowDragAndDropSorting } =
