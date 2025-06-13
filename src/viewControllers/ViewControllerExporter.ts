@@ -213,6 +213,7 @@ export default class ViewControllerExporter {
                     'fs-extra': false,
                     'mongodb-client-encryption': false,
                     assert: false,
+                    dotenv: false,
                     aws4: false,
                     buffer: false,
                     child_process: false,
@@ -308,17 +309,13 @@ export default class ViewControllerExporter {
                         if (
                             resolved.endsWith('.ts') ||
                             resolved.endsWith('.js') ||
-                            resolved.endsWith('.json')
+                            resolved.endsWith('.json') ||
+                            resolved.endsWith('.mjs') ||
+                            !pathUtil.extname(resolved)
                         ) {
                             return false
                         }
 
-                        // don't ignore if no extension
-                        if (!pathUtil.extname(resolved)) {
-                            return false
-                        }
-
-                        debugger
                         return true
                     },
                 }),

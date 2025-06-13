@@ -1,3 +1,5 @@
+import { name } from './another.mjs'
+
 export default class BookSkillViewController {
     public static id = 'book'
 
@@ -5,6 +7,10 @@ export default class BookSkillViewController {
 
     public constructor() {
         this.setInConstructor = 'set!'
+    }
+
+    public getMjsName() {
+        return name
     }
 
     public getValueSetInConstructor() {

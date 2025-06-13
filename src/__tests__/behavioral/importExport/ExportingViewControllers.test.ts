@@ -137,12 +137,13 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     @test()
     protected async packagerPackages() {
         await this.export()
+        this.assertBuiltBundleIncludes('go-team')
+    }
 
-        assert.isTrue(diskUtil.doesFileExist(this.destination))
-        assert.isAbove(fsUtil.statSync(this.destination).size, 0)
-
-        const contents = diskUtil.readFile(this.destination)
-        assert.doesInclude(contents, 'go-team')
+    @test()
+    protected async doesNotBundleDotEnv() {
+        await this.export()
+        this.assertBuiltBundleDoesNotInclude('dotenv')
     }
 
     @test()
@@ -155,6 +156,8 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
             source: importExportSourceNodeModulesImport,
             destination: this.destination,
         })
+
+        this.assertBuiltBundleIncludes(`the mjs was loaded`)
     }
 
     @test()
@@ -388,6 +391,16 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         assert.isEqual(exporter, SpyViewControllerExporter.instance)
     }
 
+    private assertBuiltBundleIncludes(lookup: string) {
+        assert.isTrue(diskUtil.doesFileExist(this.destination))
+        assert.isAbove(fsUtil.statSync(this.destination).size, 0)
+
+        debugger
+
+        const contents = diskUtil.readFile(this.destination)
+        assert.doesInclude(contents, lookup)
+    }
+
     private get config() {
         return this.exporter.getConfig()
     }
@@ -450,6 +463,15 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         const updated = contents.replace(search, replace)
         diskUtil.writeFile(updatedFile, updated)
         await this.wait(1000)
+    }
+
+    private assertBuiltBundleDoesNotInclude(search: string) {
+        const contents = diskUtil.readFile(this.destination)
+        assert.doesNotInclude(
+            contents,
+            search,
+            `The bundle should not have included "${search}"`
+        )
     }
 
     private Exporter(cwd?: string) {

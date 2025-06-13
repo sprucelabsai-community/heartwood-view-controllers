@@ -1,0 +1,1 @@
+export const name = 'the mjs was loaded';
