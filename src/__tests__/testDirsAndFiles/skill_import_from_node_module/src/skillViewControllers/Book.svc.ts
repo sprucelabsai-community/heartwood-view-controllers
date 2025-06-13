@@ -1,4 +1,5 @@
 import { name } from './another.mjs'
+import { taco } from './hello.cjs'
 
 export default class BookSkillViewController {
     public static id = 'book'
@@ -11,6 +12,10 @@ export default class BookSkillViewController {
 
     public getMjsName() {
         return name
+    }
+
+    public getJcsTaco() {
+        return taco
     }
 
     public getValueSetInConstructor() {

@@ -158,6 +158,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         })
 
         this.assertBuiltBundleIncludes(`the mjs was loaded`)
+        this.assertBuiltBundleIncludes(`the cjs was loaded`)
     }
 
     @test()
