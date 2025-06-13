@@ -268,5 +268,41 @@ export default buildSchema({
                 ],
             },
         },
+        style: {
+            type: 'select',
+            label: 'Style',
+            options: {
+                choices: [
+                    {
+                        value: 'standard',
+                        label: 'Standard',
+                    },
+                    {
+                        value: 'primary',
+                        label: 'Primary',
+                    },
+                    {
+                        value: 'secondary',
+                        label: 'Secondary',
+                    },
+                ],
+            },
+        },
+        layout: {
+            type: 'select',
+            label: 'Layout',
+            options: {
+                choices: [
+                    {
+                        value: 'vertical',
+                        label: 'Vertical',
+                    },
+                    {
+                        value: 'horizontal',
+                        label: 'Horizontal',
+                    },
+                ],
+            },
+        },
     },
 })

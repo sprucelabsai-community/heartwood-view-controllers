@@ -49,6 +49,31 @@ const cardSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSchema 
 	                defaultValue: true,
 	                options: undefined
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"standard","label":"Standard"},{"value":"informational","label":"Informational"},{"value":"visual","label":"Visual"},{"value":"heading","label":"Heading"}],}
+	            },
+	            /** Background image. The URL of an image to use as the background of the card. */
+	            'backgroundImage': {
+	                label: 'Background image',
+	                type: 'text',
+	                hint: 'The URL of an image to use as the background of the card.',
+	                options: undefined
+	            },
+	            /** Background image size. */
+	            'backgroundImageSize': {
+	                label: 'Background image size',
+	                type: 'select',
+	                options: {choices: [{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],}
+	            },
+	            /** Click handler. */
+	            'onClick': {
+	                label: 'Click handler',
+	                type: 'raw',
+	                options: {valueType: `() => Promise<any> | any`,}
+	            },
 	            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 	            'body': {
 	                label: 'Body',

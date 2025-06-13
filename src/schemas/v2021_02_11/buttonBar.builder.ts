@@ -24,6 +24,7 @@ export default buildSchema({
                         ...dropFields(buttonFields, [
                             'onClick',
                             'onClickHintIcon',
+                            'style',
                         ]),
                         id: {
                             type: 'id',

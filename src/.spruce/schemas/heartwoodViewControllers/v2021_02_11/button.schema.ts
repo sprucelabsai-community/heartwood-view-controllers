@@ -108,6 +108,12 @@ const buttonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSch
 	                type: 'raw',
 	                options: {valueType: `() => Promise<any> | any`,}
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+	            },
 	            /** Dropdown. */
 	            'dropdown': {
 	                label: 'Dropdown',

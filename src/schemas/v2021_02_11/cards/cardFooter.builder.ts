@@ -51,5 +51,15 @@ export default buildSchema({
             label: 'Show border',
             defaultValue: true,
         },
+        layout: {
+            type: 'select',
+            label: 'Layout',
+            options: {
+                choices: [
+                    { value: 'vertical', label: 'Vertical' },
+                    { value: 'horizontal', label: 'Horizontal' },
+                ],
+            },
+        },
     },
 })

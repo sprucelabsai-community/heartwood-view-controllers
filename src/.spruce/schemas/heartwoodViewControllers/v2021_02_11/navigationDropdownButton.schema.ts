@@ -109,6 +109,12 @@ const navigationDropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v20
 	                type: 'raw',
 	                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+	            },
 	            /** . */
 	            'viewPermissionContract': {
 	                type: 'schema',

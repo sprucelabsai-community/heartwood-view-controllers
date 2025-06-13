@@ -108,6 +108,12 @@ const listCellButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.L
 	                type: 'raw',
 	                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>`,}
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+	            },
 	            /** Cell button key down handler. */
 	            'onKeyDown': {
 	                label: 'Cell button key down handler',

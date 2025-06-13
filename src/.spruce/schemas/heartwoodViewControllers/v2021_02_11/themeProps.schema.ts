@@ -1,8 +1,12 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
+import fontSettingSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontSetting.schema'
 import calendarEventColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
 import statusIndicatorColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicatorColors.schema'
+import fontFamilySchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontFamily.schema'
+import themeFontsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/themeFonts.schema'
+import cardStylesSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardStyles.schema'
 
 const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema  = {
 	id: 'themeProps',
@@ -150,6 +154,13 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'The background color of the tool belts.',
 	                options: undefined
 	            },
+	            /** Control bar font. The font used in the control bar. */
+	            'controlBarFont': {
+	                label: 'Control bar font',
+	                type: 'schema',
+	                hint: 'The font used in the control bar.',
+	                options: {schema: fontSettingSchema_v2021_02_11,}
+	            },
 	            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 	            'errorColor1': {
 	                label: 'Error color 1',
@@ -194,6 +205,22 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	            'statusIndicators': {
 	                type: 'schema',
 	                options: {schema: statusIndicatorColorsSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'fontFamilies': {
+	                type: 'schema',
+	                isArray: true,
+	                options: {schema: fontFamilySchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'fonts': {
+	                type: 'schema',
+	                options: {schema: themeFontsSchema_v2021_02_11,}
+	            },
+	            /** . */
+	            'cardStyles': {
+	                type: 'schema',
+	                options: {schema: cardStylesSchema_v2021_02_11,}
 	            },
 	    }
 }

@@ -963,6 +963,320 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Theme {
+			
+				
+				'name': string
+				
+				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
+		}
+
+		interface ThemeSchema extends SpruceSchema.Schema {
+			id: 'theme',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Theme',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'props': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema,}
+			            },
+			    }
+		}
+
+		interface ThemeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardStyle {
+			
+				/** Card Background Color. The background color of the card. */
+				'backgroundColor'?: string | undefined | null
+				/** Card Foreground Color. The color of the text of the card. */
+				'foregroundColor'?: string | undefined | null
+				/** Header Background Color. The background color of the card's header. */
+				'headerBackgroundColor'?: string | undefined | null
+				/** Header Foreground Color. The color of the text in the card's header. */
+				'headerForegroundColor'?: string | undefined | null
+				/** Footer Background Color. The background color of the card's footer. */
+				'footerBackgroundColor'?: string | undefined | null
+				/** Footer Foreground Color. The color of the text in the card's footer. */
+				'footerForegroundColor'?: string | undefined | null
+				/** Fonts. The fonts used in the card. */
+				'fonts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFonts | undefined | null
+		}
+
+		interface CardStyleSchema extends SpruceSchema.Schema {
+			id: 'cardStyle',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Card Background Color. The background color of the card. */
+			            'backgroundColor': {
+			                label: 'Card Background Color',
+			                type: 'text',
+			                hint: 'The background color of the card.',
+			                options: undefined
+			            },
+			            /** Card Foreground Color. The color of the text of the card. */
+			            'foregroundColor': {
+			                label: 'Card Foreground Color',
+			                type: 'text',
+			                hint: 'The color of the text of the card.',
+			                options: undefined
+			            },
+			            /** Header Background Color. The background color of the card's header. */
+			            'headerBackgroundColor': {
+			                label: 'Header Background Color',
+			                type: 'text',
+			                hint: 'The background color of the card\'s header.',
+			                options: undefined
+			            },
+			            /** Header Foreground Color. The color of the text in the card's header. */
+			            'headerForegroundColor': {
+			                label: 'Header Foreground Color',
+			                type: 'text',
+			                hint: 'The color of the text in the card\'s header.',
+			                options: undefined
+			            },
+			            /** Footer Background Color. The background color of the card's footer. */
+			            'footerBackgroundColor': {
+			                label: 'Footer Background Color',
+			                type: 'text',
+			                hint: 'The background color of the card\'s footer.',
+			                options: undefined
+			            },
+			            /** Footer Foreground Color. The color of the text in the card's footer. */
+			            'footerForegroundColor': {
+			                label: 'Footer Foreground Color',
+			                type: 'text',
+			                hint: 'The color of the text in the card\'s footer.',
+			                options: undefined
+			            },
+			            /** Fonts. The fonts used in the card. */
+			            'fonts': {
+			                label: 'Fonts',
+			                type: 'schema',
+			                hint: 'The fonts used in the card.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFontsSchema,}
+			            },
+			    }
+		}
+
+		interface CardStyleEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface CardStyles {
+			
+				
+				'informational'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
+				
+				'graphical'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
+				
+				'heading'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
+		}
+
+		interface CardStylesSchema extends SpruceSchema.Schema {
+			id: 'cardStyles',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'informational': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
+			            },
+			            /** . */
+			            'graphical': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
+			            },
+			            /** . */
+			            'heading': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
+			            },
+			    }
+		}
+
+		interface CardStylesEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStylesSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface FontFamily {
+			
+				/** Name. What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme. */
+				'name'?: string | undefined | null
+				/** Source. The URL to the font file (otf, ttf, etc.). Must be publicly accessible. */
+				'src': string
+		}
+
+		interface FontFamilySchema extends SpruceSchema.Schema {
+			id: 'fontFamily',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Name. What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme. */
+			            'name': {
+			                label: 'Name',
+			                type: 'text',
+			                hint: 'What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme.',
+			                options: undefined
+			            },
+			            /** Source. The URL to the font file (otf, ttf, etc.). Must be publicly accessible. */
+			            'src': {
+			                label: 'Source',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'The URL to the font file (otf, ttf, etc.). Must be publicly accessible.',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface FontFamilyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontFamilySchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface FontSetting {
+			
+				/** Font Family. The name of the font family to use. This should match the name you set in the font families section of the theme. */
+				'fontFamily'?: string | undefined | null
+				/** Font Size. The size of the font. e.g. "16px" or "1em". */
+				'fontSize'?: string | undefined | null
+		}
+
+		interface FontSettingSchema extends SpruceSchema.Schema {
+			id: 'fontSetting',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Font Family. The name of the font family to use. This should match the name you set in the font families section of the theme. */
+			            'fontFamily': {
+			                label: 'Font Family',
+			                type: 'text',
+			                hint: 'The name of the font family to use. This should match the name you set in the font families section of the theme.',
+			                options: undefined
+			            },
+			            /** Font Size. The size of the font. e.g. "16px" or "1em". */
+			            'fontSize': {
+			                label: 'Font Size',
+			                type: 'text',
+			                hint: 'The size of the font. e.g. "16px" or "1em".',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface FontSettingEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ThemeFonts {
+			
+				/** Header One Font. The font used for the largest headers. */
+				'headerOneFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Header One Font. The font used for the largest headers. */
+				'headerTwoFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Header One Font. The font used for the largest headers. */
+				'headerThreeFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Header One Font. The font used for the largest headers. */
+				'bodyFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Header One Font. The font used for the largest headers. */
+				'footerFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+		}
+
+		interface ThemeFontsSchema extends SpruceSchema.Schema {
+			id: 'themeFonts',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Header One Font. The font used for the largest headers. */
+			            'headerOneFont': {
+			                label: 'Header One Font',
+			                type: 'schema',
+			                hint: 'The font used for the largest headers.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Header One Font. The font used for the largest headers. */
+			            'headerTwoFont': {
+			                label: 'Header One Font',
+			                type: 'schema',
+			                hint: 'The font used for the largest headers.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Header One Font. The font used for the largest headers. */
+			            'headerThreeFont': {
+			                label: 'Header One Font',
+			                type: 'schema',
+			                hint: 'The font used for the largest headers.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Header One Font. The font used for the largest headers. */
+			            'bodyFont': {
+			                label: 'Header One Font',
+			                type: 'schema',
+			                hint: 'The font used for the largest headers.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Header One Font. The font used for the largest headers. */
+			            'footerFont': {
+			                label: 'Header One Font',
+			                type: 'schema',
+			                hint: 'The font used for the largest headers.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			    }
+		}
+
+		interface ThemeFontsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFontsSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface StatusIndicatorColors {
 			
 				/** Color 1. */
@@ -1067,6 +1381,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controlBarColor2'?: string | undefined | null
 				/** Tool belt color 2. The background color of the tool belts. */
 				'toolBeltColor2'?: string | undefined | null
+				/** Control bar font. The font used in the control bar. */
+				'controlBarFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
 				/** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 				'errorColor1'?: string | undefined | null
 				/** Error color 2. The background used when rendering errors. */
@@ -1081,6 +1397,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'footerIconUrl'?: string | undefined | null
 				
 				'statusIndicators'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicatorColors | undefined | null
+				
+				'fontFamilies'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontFamily[] | undefined | null
+				
+				'fonts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFonts | undefined | null
+				
+				'cardStyles'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyles | undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -1229,6 +1551,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'The background color of the tool belts.',
 			                options: undefined
 			            },
+			            /** Control bar font. The font used in the control bar. */
+			            'controlBarFont': {
+			                label: 'Control bar font',
+			                type: 'schema',
+			                hint: 'The font used in the control bar.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
 			            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 			            'errorColor1': {
 			                label: 'Error color 1',
@@ -1274,48 +1603,26 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicatorColorsSchema,}
 			            },
+			            /** . */
+			            'fontFamilies': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontFamilySchema,}
+			            },
+			            /** . */
+			            'fonts': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFontsSchema,}
+			            },
+			            /** . */
+			            'cardStyles': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStylesSchema,}
+			            },
 			    }
 		}
 
 		interface ThemePropsEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Theme {
-			
-				
-				'name': string
-				
-				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
-		}
-
-		interface ThemeSchema extends SpruceSchema.Schema {
-			id: 'theme',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Theme',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'name': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'props': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema,}
-			            },
-			    }
-		}
-
-		interface ThemeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema> {}
 
 	}
 
@@ -1789,51 +2096,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface NavigationButtonDropdown {
-			
-				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
-				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
-				
-				'card'?: (HeartwoodTypes.Card) | undefined | null
-		}
-
-		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
-			id: 'navigationButtonDropdown',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.Card`,}
-			            },
-			    }
-		}
-
-		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface RouterDestination {
 			
 				
@@ -2124,6 +2386,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
 				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
+				/** Style. */
+				'style'?: ("button" | "link") | undefined | null
 				
 				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				/** Destination skill view controller. */
@@ -2234,6 +2498,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
 			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+			            },
 			            /** . */
 			            'viewPermissionContract': {
 			                type: 'schema',
@@ -2249,6 +2519,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface NavigationDropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface NavigationButtonDropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
+				
+				'card'?: (HeartwoodTypes.Card) | undefined | null
+		}
+
+		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
+			id: 'navigationButtonDropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
 
 	}
 
@@ -2301,6 +2616,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError | undefined | null
 				/** Fade in. */
 				'shouldFadeIn'?: boolean | undefined | null
+				/** Style. */
+				'style'?: ("standard" | "informational" | "visual" | "heading") | undefined | null
+				/** Background image. The URL of an image to use as the background of the card. */
+				'backgroundImage'?: string | undefined | null
+				/** Background image size. */
+				'backgroundImageSize'?: ("cover" | "contain") | undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
@@ -2349,6 +2672,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"informational","label":"Informational"},{"value":"visual","label":"Visual"},{"value":"heading","label":"Heading"}],}
+			            },
+			            /** Background image. The URL of an image to use as the background of the card. */
+			            'backgroundImage': {
+			                label: 'Background image',
+			                type: 'text',
+			                hint: 'The URL of an image to use as the background of the card.',
+			                options: undefined
+			            },
+			            /** Background image size. */
+			            'backgroundImageSize': {
+			                label: 'Background image size',
+			                type: 'select',
+			                options: {choices: [{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],}
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 			            'body': {
@@ -2716,102 +3064,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface CardBody {
-			
-				/** Show section separators. This will make each section render with a border. */
-				'shouldShowSectionSeparators'?: boolean | undefined | null
-				/** Busy. */
-				'isBusy'?: boolean | undefined | null
-				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void) | undefined | null
-				/** Swipe. */
-				'shouldEnableSectionSwiping'?: boolean | undefined | null
-				/** Swipe break into cards on landscape. */
-				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean | undefined | null
-				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void) | undefined | null
-				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void) | undefined | null
-				/** Render sections as grid. */
-				'shouldRenderSectionsAsGrid'?: boolean | undefined | null
-				/** Sections. */
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[] | undefined | null
-		}
-
-		interface CardBodySchema extends SpruceSchema.Schema {
-			id: 'cardBody',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Show section separators. This will make each section render with a border. */
-			            'shouldShowSectionSeparators': {
-			                label: 'Show section separators',
-			                type: 'boolean',
-			                hint: 'This will make each section render with a border.',
-			                options: undefined
-			            },
-			            /** Busy. */
-			            'isBusy': {
-			                label: 'Busy',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe controller. */
-			            'swipeController': {
-			                label: 'Swipe controller',
-			                type: 'raw',
-			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
-			            },
-			            /** Swipe. */
-			            'shouldEnableSectionSwiping': {
-			                label: 'Swipe',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Swipe break into cards on landscape. */
-			            'shouldSwipeBreakIntoCardsOnLandscape': {
-			                label: 'Swipe break into cards on landscape',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Select slide title handler. */
-			            'onSelectSlideTitle': {
-			                label: 'Select slide title handler',
-			                type: 'raw',
-			                options: {valueType: `(id: number) => void`,}
-			            },
-			            /** Slide change callback. */
-			            'onChangeSlide': {
-			                label: 'Slide change callback',
-			                type: 'raw',
-			                options: {valueType: `(slide: number) => void`,}
-			            },
-			            /** Render sections as grid. */
-			            'shouldRenderSectionsAsGrid': {
-			                label: 'Render sections as grid',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Sections. */
-			            'sections': {
-			                label: 'Sections',
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
-			            },
-			    }
-		}
-
-		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface Dialog {
 			
 				
@@ -2826,6 +3078,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'criticalError'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CriticalError | undefined | null
 				/** Fade in. */
 				'shouldFadeIn'?: boolean | undefined | null
+				/** Style. */
+				'style'?: ("standard" | "informational" | "visual" | "heading") | undefined | null
+				/** Background image. The URL of an image to use as the background of the card. */
+				'backgroundImage'?: string | undefined | null
+				/** Background image size. */
+				'backgroundImageSize'?: ("cover" | "contain") | undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any) | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
@@ -2884,6 +3144,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"informational","label":"Informational"},{"value":"visual","label":"Visual"},{"value":"heading","label":"Heading"}],}
+			            },
+			            /** Background image. The URL of an image to use as the background of the card. */
+			            'backgroundImage': {
+			                label: 'Background image',
+			                type: 'text',
+			                hint: 'The URL of an image to use as the background of the card.',
+			                options: undefined
+			            },
+			            /** Background image size. */
+			            'backgroundImageSize': {
+			                label: 'Background image size',
+			                type: 'select',
+			                options: {choices: [{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],}
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
 			            },
 			            /** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 			            'body': {
@@ -3025,6 +3310,52 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface Feed {
+			
+				
+				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				
+				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler) | undefined | null
+				
+				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>) | undefined | null
+		}
+
+		interface FeedSchema extends SpruceSchema.Schema {
+			id: 'feed',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Feed',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . */
+			            'onSubmitMessage': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
+			            },
+			    }
+		}
+
+		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface CardSection {
 			
 				
@@ -3091,6 +3422,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'webRtcPlayer'?: (HeartwoodTypes.WebRtcPlayer) | undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right") | undefined | null
+				/** Style. */
+				'style'?: ("standard" | "primary" | "secondary") | undefined | null
+				/** Layout. */
+				'layout'?: ("vertical" | "horizontal") | undefined | null
 		}
 
 		interface CardSectionSchema extends SpruceSchema.Schema {
@@ -3297,6 +3632,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                defaultValue: "left",
 			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
 			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"}],}
+			            },
+			            /** Layout. */
+			            'layout': {
+			                label: 'Layout',
+			                type: 'select',
+			                options: {choices: [{"value":"vertical","label":"Vertical"},{"value":"horizontal","label":"Horizontal"}],}
+			            },
 			    }
 		}
 
@@ -3308,45 +3655,95 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface Feed {
+		interface CardBody {
 			
-				
-				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
-				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler) | undefined | null
-				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>) | undefined | null
+				/** Show section separators. This will make each section render with a border. */
+				'shouldShowSectionSeparators'?: boolean | undefined | null
+				/** Busy. */
+				'isBusy'?: boolean | undefined | null
+				/** Swipe controller. */
+				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void) | undefined | null
+				/** Swipe. */
+				'shouldEnableSectionSwiping'?: boolean | undefined | null
+				/** Swipe break into cards on landscape. */
+				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean | undefined | null
+				/** Select slide title handler. */
+				'onSelectSlideTitle'?: ((id: number) => void) | undefined | null
+				/** Slide change callback. */
+				'onChangeSlide'?: ((slide: number) => void) | undefined | null
+				/** Render sections as grid. */
+				'shouldRenderSectionsAsGrid'?: boolean | undefined | null
+				/** Sections. */
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection[] | undefined | null
 		}
 
-		interface FeedSchema extends SpruceSchema.Schema {
-			id: 'feed',
+		interface CardBodySchema extends SpruceSchema.Schema {
+			id: 'cardBody',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
-			name: 'Feed',
+			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** . */
-			            'items': {
+			            /** Show section separators. This will make each section render with a border. */
+			            'shouldShowSectionSeparators': {
+			                label: 'Show section separators',
+			                type: 'boolean',
+			                hint: 'This will make each section render with a border.',
+			                options: undefined
+			            },
+			            /** Busy. */
+			            'isBusy': {
+			                label: 'Busy',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe controller. */
+			            'swipeController': {
+			                label: 'Swipe controller',
+			                type: 'raw',
+			                options: {valueType: `(controller: HeartwoodTypes.SwipeController) => void`,}
+			            },
+			            /** Swipe. */
+			            'shouldEnableSectionSwiping': {
+			                label: 'Swipe',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Swipe break into cards on landscape. */
+			            'shouldSwipeBreakIntoCardsOnLandscape': {
+			                label: 'Swipe break into cards on landscape',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Select slide title handler. */
+			            'onSelectSlideTitle': {
+			                label: 'Select slide title handler',
+			                type: 'raw',
+			                options: {valueType: `(id: number) => void`,}
+			            },
+			            /** Slide change callback. */
+			            'onChangeSlide': {
+			                label: 'Slide change callback',
+			                type: 'raw',
+			                options: {valueType: `(slide: number) => void`,}
+			            },
+			            /** Render sections as grid. */
+			            'shouldRenderSectionsAsGrid': {
+			                label: 'Render sections as grid',
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Sections. */
+			            'sections': {
+			                label: 'Sections',
 			                type: 'schema',
-			                isRequired: true,
 			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
-			            },
-			            /** . */
-			            'onSubmitMessage': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.OnSubmitFeedMessageHandler`,}
-			            },
-			            /** . */
-			            'controller': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>`,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSectionSchema,}
 			            },
 			    }
 		}
 
-		interface FeedEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema> {}
+		interface CardBodyEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBodySchema> {}
 
 	}
 
@@ -3490,51 +3887,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface Receipt {
-			
-				
-				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader | undefined | null
-				
-				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[] | undefined | null
-				
-				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[] | undefined | null
-		}
-
-		interface ReceiptSchema extends SpruceSchema.Schema {
-			id: 'receipt',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Receipt',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'header': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
-			            },
-			            /** . */
-			            'sections': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
-			            },
-			            /** . */
-			            'totals': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
-			            },
-			    }
-		}
-
-		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface ReceiptLineItem {
 			
 				
@@ -3661,6 +4013,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ReceiptHeaderEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Receipt {
+			
+				
+				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeader | undefined | null
+				
+				'sections'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSection[] | undefined | null
+				
+				'totals'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotal[] | undefined | null
+		}
+
+		interface ReceiptSchema extends SpruceSchema.Schema {
+			id: 'receipt',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Receipt',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'header': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptHeaderSchema,}
+			            },
+			            /** . */
+			            'sections': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSectionSchema,}
+			            },
+			            /** . */
+			            'totals': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptTotalSchema,}
+			            },
+			    }
+		}
+
+		interface ReceiptEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ReceiptSchema> {}
 
 	}
 
@@ -4875,6 +5272,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
 				'onClick'?: (() => Promise<any> | any) | undefined | null
+				/** Style. */
+				'style'?: ("button" | "link") | undefined | null
 		}
 
 		interface CardFooterButtonSchema extends SpruceSchema.Schema {
@@ -4981,6 +5380,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => Promise<any> | any`,}
 			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+			            },
 			    }
 		}
 
@@ -5008,6 +5413,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager | undefined | null
 				/** Show border. */
 				'shouldRenderBorder'?: boolean | undefined | null
+				/** Layout. */
+				'layout'?: ("vertical" | "horizontal") | undefined | null
 		}
 
 		interface CardFooterSchema extends SpruceSchema.Schema {
@@ -5061,6 +5468,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** Layout. */
+			            'layout': {
+			                label: 'Layout',
+			                type: 'select',
+			                options: {choices: [{"value":"vertical","label":"Vertical"},{"value":"horizontal","label":"Horizontal"}],}
 			            },
 			    }
 		}
@@ -6324,6 +6737,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Cell button click handler. */
 				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>) | undefined | null
+				/** Style. */
+				'style'?: ("button" | "link") | undefined | null
 				/** Cell button key down handler. */
 				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
 				/** Dropdown. */
@@ -6434,6 +6849,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `(options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>`,}
 			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+			            },
 			            /** Cell button key down handler. */
 			            'onKeyDown': {
 			                label: 'Cell button key down handler',
@@ -6495,6 +6916,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'ratingsInput'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRatingsInput | undefined | null
 				/** Status indicator. */
 				'statusIndicator'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicator | undefined | null
+				/** Vertical alignment. */
+				'vAlignment'?: ("left" | "center" | "right") | undefined | null
+				/** Horizontal alignment. */
+				'hAlignment'?: ("top" | "bottom" | "center") | undefined | null
 		}
 
 		interface ListCellSchema extends SpruceSchema.Schema {
@@ -6610,6 +7035,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Status indicator',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicatorSchema,}
+			            },
+			            /** Vertical alignment. */
+			            'vAlignment': {
+			                label: 'Vertical alignment',
+			                type: 'select',
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+			            },
+			            /** Horizontal alignment. */
+			            'hAlignment': {
+			                label: 'Horizontal alignment',
+			                type: 'select',
+			                options: {choices: [{"value":"top","label":"Top"},{"value":"bottom","label":"Bottom"},{"value":"center","label":"Center"}],}
 			            },
 			    }
 		}
@@ -7891,6 +8328,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
 				'onClick'?: (() => Promise<any> | any) | undefined | null
+				/** Style. */
+				'style'?: ("button" | "link") | undefined | null
 				/** Dropdown. */
 				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown | undefined | null
 		}
@@ -7999,6 +8438,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `() => Promise<any> | any`,}
 			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
+			            },
 			            /** Dropdown. */
 			            'dropdown': {
 			                label: 'Dropdown',
@@ -8050,6 +8495,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'lineIconPosition'?: ("left" | "bottom") | undefined | null
 				/** Click handler. */
 				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
+				/** Style. */
+				'style'?: ("button" | "link") | undefined | null
 		}
 
 		interface DropdownButtonSchema extends SpruceSchema.Schema {
@@ -8155,6 +8602,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Click handler',
 			                type: 'raw',
 			                options: {valueType: `(dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void`,}
+			            },
+			            /** Style. */
+			            'style': {
+			                label: 'Style',
+			                type: 'select',
+			                options: {choices: [{"value":"button","label":"Button"},{"value":"link","label":"Link"}],}
 			            },
 			    }
 		}

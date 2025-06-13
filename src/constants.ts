@@ -574,6 +574,16 @@ export const buttonFields: SchemaFieldsByName = {
             valueType: '() => Promise<any> | any',
         },
     },
+    style: {
+        type: 'select',
+        label: 'Style',
+        options: {
+            choices: [
+                { value: 'button', label: 'Button' },
+                { value: 'link', label: 'Link' },
+            ],
+        },
+    },
 }
 
 export const formBuilderFieldTypes = {

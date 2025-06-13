@@ -118,6 +118,11 @@ export { default as listCellButtonSchema } from '#spruce/schemas/heartwoodViewCo
 export { default as listSelectInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listSelectInput.schema'
 export { default as listTextInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listTextInput.schema'
 export { default as portalSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/portal.schema'
+export { default as cardStyleSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardStyle.schema'
+export { default as cardStylesSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/cardStyles.schema'
+export { default as fontFamilySchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontFamily.schema'
+export { default as fontSettingSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontSetting.schema'
+export { default as themeFontsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/themeFonts.schema'
 
 export { default as calendarEventColorOverrideSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColorOverride.schema'
 

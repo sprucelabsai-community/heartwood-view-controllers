@@ -56,6 +56,12 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	                defaultValue: true,
 	                options: undefined
 	            },
+	            /** Layout. */
+	            'layout': {
+	                label: 'Layout',
+	                type: 'select',
+	                options: {choices: [{"value":"vertical","label":"Vertical"},{"value":"horizontal","label":"Horizontal"}],}
+	            },
 	    }
 }
 

@@ -226,6 +226,18 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                defaultValue: "left",
 	                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
 	            },
+	            /** Style. */
+	            'style': {
+	                label: 'Style',
+	                type: 'select',
+	                options: {choices: [{"value":"standard","label":"Standard"},{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"}],}
+	            },
+	            /** Layout. */
+	            'layout': {
+	                label: 'Layout',
+	                type: 'select',
+	                options: {choices: [{"value":"vertical","label":"Vertical"},{"value":"horizontal","label":"Horizontal"}],}
+	            },
 	    }
 }
 

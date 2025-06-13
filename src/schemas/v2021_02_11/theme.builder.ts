@@ -2,6 +2,129 @@ import { buildSchema } from '@sprucelabs/schema'
 import calendarEventColorsBuilder from './calendarEventColors.builder'
 import statusIndicatorColorsBuilder from './statusIndicatorColors.builder'
 
+const fontSettingSchema = buildSchema({
+    id: 'fontSetting',
+    fields: {
+        fontFamily: {
+            type: 'text',
+            label: 'Font Family',
+            hint: 'The name of the font family to use. This should match the name you set in the font families section of the theme.',
+        },
+        fontSize: {
+            type: 'text',
+            label: 'Font Size',
+            hint: 'The size of the font. e.g. "16px" or "1em".',
+        },
+    },
+})
+
+const themeFontsSchema = buildSchema({
+    id: 'themeFonts',
+    fields: {
+        headerOneFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Header One Font',
+            hint: 'The font used for the largest headers.',
+        },
+        headerTwoFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Header One Font',
+            hint: 'The font used for the largest headers.',
+        },
+        headerThreeFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Header One Font',
+            hint: 'The font used for the largest headers.',
+        },
+        bodyFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Header One Font',
+            hint: 'The font used for the largest headers.',
+        },
+        footerFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Header One Font',
+            hint: 'The font used for the largest headers.',
+        },
+    },
+})
+
+const cardStyleSchema = buildSchema({
+    id: 'cardStyle',
+    fields: {
+        backgroundColor: {
+            type: 'text',
+            label: 'Card Background Color',
+            hint: 'The background color of the card.',
+        },
+        foregroundColor: {
+            type: 'text',
+            label: 'Card Foreground Color',
+            hint: 'The color of the text of the card.',
+        },
+        headerBackgroundColor: {
+            type: 'text',
+            label: 'Header Background Color',
+            hint: "The background color of the card's header.",
+        },
+        headerForegroundColor: {
+            type: 'text',
+            label: 'Header Foreground Color',
+            hint: "The color of the text in the card's header.",
+        },
+        footerBackgroundColor: {
+            type: 'text',
+            label: 'Footer Background Color',
+            hint: "The background color of the card's footer.",
+        },
+        footerForegroundColor: {
+            type: 'text',
+            label: 'Footer Foreground Color',
+            hint: "The color of the text in the card's footer.",
+        },
+        fonts: {
+            type: 'schema',
+            options: {
+                schema: themeFontsSchema,
+            },
+            label: 'Fonts',
+            hint: 'The fonts used in the card.',
+        },
+    },
+})
+
+const fontFamilySchema = buildSchema({
+    id: 'fontFamily',
+    fields: {
+        name: {
+            type: 'text',
+            label: 'Name',
+            hint: 'What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme.',
+        },
+        src: {
+            type: 'text',
+            isRequired: true,
+            label: 'Source',
+            hint: 'The URL to the font file (otf, ttf, etc.). Must be publicly accessible.',
+        },
+    },
+})
+
 export default buildSchema({
     id: 'theme',
     name: 'Theme',
@@ -129,6 +252,14 @@ export default buildSchema({
                             label: 'Tool belt color 2',
                             hint: 'The background color of the tool belts.',
                         },
+                        controlBarFont: {
+                            type: 'schema',
+                            options: {
+                                schema: fontSettingSchema,
+                            },
+                            label: 'Control bar font',
+                            hint: 'The font used in the control bar.',
+                        },
                         errorColor1: {
                             type: 'text',
                             label: 'Error color 1',
@@ -164,6 +295,47 @@ export default buildSchema({
                             type: 'schema',
                             options: {
                                 schema: statusIndicatorColorsBuilder,
+                            },
+                        },
+                        fontFamilies: {
+                            type: 'schema',
+                            isArray: true,
+                            options: {
+                                schema: fontFamilySchema,
+                            },
+                        },
+                        fonts: {
+                            type: 'schema',
+                            options: {
+                                schema: themeFontsSchema,
+                            },
+                        },
+                        cardStyles: {
+                            type: 'schema',
+                            options: {
+                                schema: buildSchema({
+                                    id: 'cardStyles',
+                                    fields: {
+                                        informational: {
+                                            type: 'schema',
+                                            options: {
+                                                schema: cardStyleSchema,
+                                            },
+                                        },
+                                        graphical: {
+                                            type: 'schema',
+                                            options: {
+                                                schema: cardStyleSchema,
+                                            },
+                                        },
+                                        heading: {
+                                            type: 'schema',
+                                            options: {
+                                                schema: cardStyleSchema,
+                                            },
+                                        },
+                                    },
+                                }),
                             },
                         },
                     },

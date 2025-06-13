@@ -248,5 +248,27 @@ export default buildSchema({
                 schema: statusIndicatorBuilder,
             },
         },
+        vAlignment: {
+            type: 'select',
+            label: 'Vertical alignment',
+            options: {
+                choices: [
+                    { value: 'left', label: 'Left' },
+                    { value: 'center', label: 'Center' },
+                    { value: 'right', label: 'Right' },
+                ],
+            },
+        },
+        hAlignment: {
+            type: 'select',
+            label: 'Horizontal alignment',
+            options: {
+                choices: [
+                    { value: 'top', label: 'Top' },
+                    { value: 'bottom', label: 'Bottom' },
+                    { value: 'center', label: 'Center' },
+                ],
+            },
+        },
     },
 })
