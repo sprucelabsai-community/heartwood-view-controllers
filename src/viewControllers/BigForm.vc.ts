@@ -83,6 +83,7 @@ export default class BigFormViewController<
             await this.goForward()
         } else {
             this.setErrorsByField(errorsByField)
+            this.triggerRender()
         }
     }
 

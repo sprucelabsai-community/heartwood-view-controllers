@@ -3,6 +3,7 @@ import { test, suite, assert } from '@sprucelabs/test-utils'
 import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
+import vcAssert from '../../../tests/utilities/vcAssert'
 import BigFormViewController from '../../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({
@@ -180,10 +181,37 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
             pin: 123,
         })
 
-        await this.vc.submit()
-        await this.vc.submit()
-        await this.vc.submit()
+        await this.submit()
+        await this.submit()
+        await this.submit()
 
         assert.isFalse(wasHit)
+    }
+
+    @test()
+    protected async passesErrorsToForm() {
+        await this.submit()
+        const errors = this.vc.getErrorsByField()
+        assert.isEqual(errors.phone?.[0].code, 'MISSING_PARAMETER')
+        assert.isEqual(errors.pin?.[0].code, 'MISSING_PARAMETER')
+    }
+
+    @test()
+    protected async doesNotReturnErrorIfFieldIsFilledOut() {
+        await this.vc.setValue('phone', DEMO_NUMBER)
+        await this.submit()
+
+        const errors = this.vc.getErrorsByField()
+        assert.isEqual(errors.pin, undefined)
+    }
+
+    @test()
+    protected async triggersRenderEvenOnInvalidSubmit() {
+        await this.submit()
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    private async submit() {
+        await this.vc.submit()
     }
 }
