@@ -1,4 +1,6 @@
+//@ts-ignore
 import { name } from './another.mjs'
+//@ts-ignore
 import { taco } from './hello.cjs'
 
 export default class BookSkillViewController {
