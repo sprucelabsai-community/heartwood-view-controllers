@@ -3,7 +3,14 @@ import pathUtil from 'path'
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import TerserPlugin from 'terser-webpack-plugin'
-import { Compiler, Configuration, DefinePlugin, Stats, webpack } from 'webpack'
+import {
+    Compiler,
+    Configuration,
+    DefinePlugin,
+    IgnorePlugin,
+    Stats,
+    webpack,
+} from 'webpack'
 import SpruceError from '../errors/SpruceError'
 const graceful = require('graceful-fs')
 
@@ -291,6 +298,29 @@ export default class ViewControllerExporter {
             plugins: [
                 new DefinePlugin({
                     ...defines,
+                }),
+                new IgnorePlugin({
+                    checkResource: (resource, context) => {
+                        const resolved = require.resolve(resource, {
+                            paths: [context],
+                        })
+
+                        if (
+                            resolved.endsWith('.ts') ||
+                            resolved.endsWith('.js') ||
+                            resolved.endsWith('.json')
+                        ) {
+                            return false
+                        }
+
+                        // don't ignore if no extension
+                        if (!pathUtil.extname(resolved)) {
+                            return false
+                        }
+
+                        debugger
+                        return true
+                    },
                 }),
             ],
         }

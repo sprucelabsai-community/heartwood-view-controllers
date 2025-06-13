@@ -147,22 +147,6 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
 
     @test()
     protected async canExportViewThatImportsSomethingFromNodeModules() {
-        const destination = diskUtil.resolvePath(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            'src',
-            '__tests__',
-            'testDirsAndFiles',
-            'skill_import_from_node_module',
-            'node_modules',
-            'test.ts'
-        )
-        const contents = `export type Test = 'test'`
-
-        diskUtil.writeFile(destination, contents)
-
         this.exporter = ViewControllerExporter.Exporter(
             buildCwdNodeModulesImport
         ) as SpyViewControllerExporter
@@ -273,9 +257,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         })
 
         const config = this.config
-        assert.doesInclude(config, {
-            plugins: [{ definitions: definePlugin }],
-        })
+        assert.doesInclude(config.plugins, { definitions: definePlugin })
     }
 
     @test(
