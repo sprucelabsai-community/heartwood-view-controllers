@@ -32,6 +32,7 @@ graceful.lstat = (
 
 export default class ViewControllerExporter {
     public static Class?: typeof ViewControllerExporter
+    public static require = require
 
     private cwd: string
     private compiler?: Compiler
@@ -212,6 +213,8 @@ export default class ViewControllerExporter {
                 fallback: {
                     'fs-extra': false,
                     'mongodb-client-encryption': false,
+                    '@swc/wasm': false,
+                    '@swc/core': false,
                     assert: false,
                     aws4: false,
                     buffer: false,
@@ -302,22 +305,30 @@ export default class ViewControllerExporter {
                 }),
                 new IgnorePlugin({
                     checkResource: (resource, context) => {
-                        const resolved = require.resolve(resource, {
-                            paths: [context],
-                        })
+                        try {
+                            const resolved =
+                                ViewControllerExporter.require.resolve(
+                                    resource,
+                                    {
+                                        paths: [context],
+                                    }
+                                )
 
-                        if (
-                            resolved.endsWith('.ts') ||
-                            resolved.endsWith('.js') ||
-                            resolved.endsWith('.json') ||
-                            resolved.endsWith('.mjs') ||
-                            resolved.endsWith('.cjs') ||
-                            !pathUtil.extname(resolved)
-                        ) {
+                            if (
+                                resolved.endsWith('.ts') ||
+                                resolved.endsWith('.js') ||
+                                resolved.endsWith('.json') ||
+                                resolved.endsWith('.mjs') ||
+                                resolved.endsWith('.cjs') ||
+                                !pathUtil.extname(resolved)
+                            ) {
+                                return false
+                            }
+
+                            return true
+                        } catch {
                             return false
                         }
-
-                        return true
                     },
                 }),
             ],

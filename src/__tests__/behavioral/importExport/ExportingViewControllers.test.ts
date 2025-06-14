@@ -45,6 +45,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         this.didIncremntallyBuildCount = 0
         this.willIncremntallyBuildCount = 0
         this.incrementalBuildError = undefined
+        ViewControllerExporter.require = require
     }
 
     protected async afterEach(): Promise<void> {
@@ -239,6 +240,18 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     }
 
     @test()
+    protected async requireResolveThrowingStillWorks() {
+        ViewControllerExporter.require = {
+            //@ts-ignore
+            resolve: () => {
+                throw new Error('test error')
+            },
+        }
+
+        await this.export()
+    }
+
+    @test()
     protected async haveNoopFileThatReturnsEmptyObject() {
         const { default: noop } = require('../../../viewControllers/noop')
         assert.isEqualDeep(noop, {})
@@ -309,6 +322,8 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         assert.isEqualDeep(this.config.resolve?.fallback, {
             'fs-extra': false,
             'mongodb-client-encryption': false,
+            '@swc/wasm': false,
+            '@swc/core': false,
             assert: false,
             aws4: false,
             buffer: false,
@@ -395,8 +410,6 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
     private assertBuiltBundleIncludes(lookup: string) {
         assert.isTrue(diskUtil.doesFileExist(this.destination))
         assert.isAbove(fsUtil.statSync(this.destination).size, 0)
-
-        debugger
 
         const contents = diskUtil.readFile(this.destination)
         assert.doesInclude(contents, lookup)
