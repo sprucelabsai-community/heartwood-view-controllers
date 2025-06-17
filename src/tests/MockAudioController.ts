@@ -8,12 +8,15 @@ export default class MockAudioController implements AudioController {
 
     private static lastController?: MockAudioController
     private static didCallBeforeEach = false
+    private static controllers: MockAudioController[] = []
 
     public constructor(audioFileUrl: string) {
         assert.isTrue(
             MockAudioController.didCallBeforeEach,
             `You must call MockAudioController.beforeEach() in your beforeEach() before working with audio.`
         )
+
+        MockAudioController.controllers.push(this)
         MockAudioController.lastController = this
         this.sourceUrl = audioFileUrl
     }
@@ -103,11 +106,16 @@ export default class MockAudioController implements AudioController {
             `No audio controller created yet. Try 'this.device.AudioController()'`
         )
 
-        return this.lastController!
+        return this.lastController
+    }
+
+    public static getAllControllers() {
+        return this.controllers
     }
 
     public static beforeEach() {
         MockAudioController.didCallBeforeEach = true
         MockAudioController.lastController = undefined
+        MockAudioController.controllers = []
     }
 }

@@ -86,8 +86,16 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
 
     @test()
     protected async tracksLastAudioController() {
-        //@ts-ignore
-        assert.isEqual(this.audio, MockAudioController.lastController)
+        assert.isEqual(this.audio, MockAudioController.getLastController())
+    }
+
+    @test()
+    protected async tracksAllAudioControllers() {
+        const audioFileUrl2 = generateId()
+        const audio2 = new MockAudioController(audioFileUrl2)
+
+        const controllers = MockAudioController.getAllControllers()
+        assert.isEqualDeep(controllers, [this.audio, audio2])
     }
 
     private assertSourceUrlSetTo(url: string) {
