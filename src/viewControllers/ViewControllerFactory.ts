@@ -37,16 +37,15 @@ export default class ViewControllerFactory {
     protected log?: Log
     protected plugins: ViewControllerPlugins = {}
     protected toastHandler: ToastHandler
-
-    private controllerMap: Record<string, any>
-    private renderInDialogHandler: RenderInDialogHandler
-    private confirmHandler: ConfirmHandler
-    private voteHandler: VoteHandler
-    private device: Device
-    private dates: DateUtil
-    private maps: MapUtil
-    private AppMap: Record<string, AppControllerConstructor> = {}
-    private renderLockScreenHandler: RenderLockScreenHandler
+    protected controllerMap: Record<string, any>
+    protected renderInDialogHandler: RenderInDialogHandler
+    protected confirmHandler: ConfirmHandler
+    protected voteHandler: VoteHandler
+    protected device: Device
+    protected dates: DateUtil
+    protected maps: MapUtil
+    protected AppMap: Record<string, AppControllerConstructor> = {}
+    protected renderLockScreenHandler: RenderLockScreenHandler
 
     public constructor(options: ViewControllerFactoryConstructorOptions) {
         const {
