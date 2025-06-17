@@ -180,6 +180,7 @@ export { default as ViewControllerFactory } from './viewControllers/ViewControll
 
 export { default as StubStorage } from './tests/StubStorage'
 export { default as SpyDevice } from './tests/SpyDevice'
+export { default as MockAudioController } from './tests/MockAudioController'
 
 export { default as ViewControllerError } from './errors/SpruceError'
 export { default as normalizeFormSectionFieldNamesUtil } from './utilities/normalizeFieldNames.utility'
