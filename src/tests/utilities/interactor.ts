@@ -12,6 +12,7 @@ import {
     ViewController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
+import ActiveRecordListViewController from '../../viewControllers/activeRecord/ActiveRecordList.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import listUtil from '../../viewControllers/list/list.utility'
@@ -185,10 +186,7 @@ const interactor = {
         await this.click(button)
     },
 
-    async clickDestructiveInRow(
-        listVc: ListViewController,
-        rowIdxOrId: number | string
-    ) {
+    async clickDestructiveInRow(listVc: ListVc, rowIdxOrId: number | string) {
         const vc =
             typeof rowIdxOrId === 'number'
                 ? listVc.getRowVc(rowIdxOrId)
@@ -313,7 +311,7 @@ const interactor = {
     },
 
     async clickButtonInRow(
-        vc: ListViewController,
+        vc: ListVc,
         rowIdxOrId: number | string,
         buttonId: string
     ) {
@@ -371,11 +369,7 @@ const interactor = {
         await element.onKeyDown({ key, rowVc: vc })
     },
 
-    async clickCheckboxInRow(
-        vc: ListViewController,
-        row: string | number,
-        name?: string
-    ) {
+    async clickCheckboxInRow(vc: ListVc, row: string | number, name?: string) {
         const rowVc = vc.getRowVc(row)
         const model = renderUtil.render(rowVc)
         const checkboxInput = model.cells.find((c) =>
@@ -393,7 +387,7 @@ const interactor = {
         await rowVc.setValue(checkboxInput.name, !current)
     },
 
-    async clickToggleInRow(vc: ListViewController, row: string | number) {
+    async clickToggleInRow(vc: ListVc, row: string | number) {
         const rowVc = vc.getRowVc(row)
         const model = renderUtil.render(rowVc)
 
@@ -409,7 +403,7 @@ const interactor = {
     },
 
     async selectChoiceInRow(options: {
-        vc: ListViewController
+        vc: ListVc
         row: string | number
         newChoice: string
         name?: string
@@ -450,7 +444,7 @@ const interactor = {
         )
     },
 
-    async clickRow(listVc: ListViewController, row: number | string) {
+    async clickRow(listVc: ListVc, row: number | string) {
         assertOptions(
             { listVc, row },
             ['listVc', 'row'],
@@ -511,7 +505,7 @@ const interactor = {
     },
 
     async clickCell(
-        listVc: ListViewController,
+        listVc: ListVc,
         rowIdxOrId: number | string,
         cellIdxOrId: number | string
     ) {
@@ -688,3 +682,5 @@ type FormVc = FormViewController<any> | BigFormViewController<any>
 type NavVc = ViewController<Navigation>
 
 export type PagerButton = 'previous' | 'next' | number
+
+type ListVc = ListViewController | ActiveRecordListViewController
