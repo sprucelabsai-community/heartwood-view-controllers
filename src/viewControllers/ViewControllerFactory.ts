@@ -29,6 +29,7 @@ import {
     AppControllerMap,
     RenderLockScreenHandler,
 } from '../types/heartwood.types'
+import DialogViewController from './Dialog.vc'
 
 export default class ViewControllerFactory {
     public static Class?: typeof ViewControllerFactory
@@ -116,7 +117,11 @@ export default class ViewControllerFactory {
             toastHandler: toastHandler ?? (() => {}),
             confirmHandler: confirmHandler ?? (async () => false),
             voteHandler: voteHandler ?? (async () => {}),
-            renderInDialogHandler: renderInDialogHandler ?? (() => {}),
+            renderInDialogHandler:
+                renderInDialogHandler ??
+                (() => {
+                    return {} as DialogViewController
+                }),
             renderLockScreenHandler: renderLockScreenHandler ?? (() => {}),
         })
     }

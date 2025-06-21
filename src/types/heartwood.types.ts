@@ -23,17 +23,14 @@ import {
 } from '@sprucelabs/schema'
 import { personSchema } from '@sprucelabs/spruce-core-schemas'
 import { Log } from '@sprucelabs/spruce-skill-utils'
-import {
-    BarChartViewController,
-    CalendarEventOptions,
-    PagerViewController,
-} from '..'
 import { fancyIcons, lineIcons } from '../constants'
 import mapUtil from '../maps/map.utility'
 import LockScreenSkillViewController, {
     LockScreenSkillViewControllerOptions,
 } from '../skillViewControllers/LockScreen.svc'
 import { UniversalViewOptionFields } from '../utilities/removeUniversalViewOptions'
+import { CalendarEventOptions } from '../viewControllers/AbstractCalendarEvent.vc'
+import AbstractController from '../viewControllers/AbstractController'
 import ActiveRecordCardViewController, {
     ActiveRecordCardViewControllerOptions,
 } from '../viewControllers/activeRecord/ActiveRecordCard.vc'
@@ -56,7 +53,9 @@ import CalendarEventViewController from '../viewControllers/CalendarEvent.vc'
 import CardViewControllerImpl, {
     CardViewControllerOptions,
 } from '../viewControllers/card/Card.vc'
-import { BarChartViewControllerOptions } from '../viewControllers/charts/BarChart.vc'
+import BarChartViewController, {
+    BarChartViewControllerOptions,
+} from '../viewControllers/charts/BarChart.vc'
 import LineGraphViewController, {
     LineGraphViewControllerOptions,
 } from '../viewControllers/charts/LineGraph.vc'
@@ -92,7 +91,9 @@ import MapViewController, {
     MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
 import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
-import { PagerViewControllerOptions } from '../viewControllers/pagers/Pager.vc'
+import PagerViewController, {
+    PagerViewControllerOptions,
+} from '../viewControllers/pagers/Pager.vc'
 import PolarAreaViewController, {
     PolarAreaViewControllerOptions,
 } from '../viewControllers/PolarAreaViewController.vc'
@@ -595,8 +596,9 @@ export interface OnRenderHandler {
 
 export type RenderInDialogHandler = (
     options: DialogViewControllerOptions
-) => void
+) => DialogViewController
 
+export type AlertHandler = AbstractController['alert']
 export type RenderLockScreenHandler = (options: LockScreen) => void
 
 export interface ConfirmOptions {
