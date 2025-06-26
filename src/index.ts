@@ -74,7 +74,6 @@ export * from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
-export * from './builders/buildSkillView'
 
 export {
     WebRtcStreamer,
@@ -230,6 +229,7 @@ export { default as mapInteractor } from './tests/utilities/mapInteractor'
 export { default as listUtil } from './viewControllers/list/list.utility'
 export { default as splitCardsIntoLayouts } from './utilities/splitCardsIntoLayouts'
 export { default as buildSkillViewLayout } from './utilities/buildSkillViewLayout'
+export * from './utilities/buildSkillViewLayout'
 export { default as removeUniversalViewOptions } from './utilities/removeUniversalViewOptions'
 export { default as ToolBeltStateMachine } from './toolBelts/ToolBeltStateMachine'
 export { default as navigationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigation.schema'
