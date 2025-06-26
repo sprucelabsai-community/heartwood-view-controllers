@@ -2,6 +2,7 @@ import { test, suite, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
+    LayoutStyle,
     SkillView,
     SkillViewController,
     TriggerRenderHandler,
@@ -62,7 +63,7 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
         const { cardVc: cardVc6, id: id6 } = this.CardVc()
 
         this.vc = this.SkillView(
-            buildSkillViewLayout('big-right', {
+            buildSkillViewLayout('big-right' as LayoutStyle, {
                 leftCards: [cardVc.render(), cardVc2.render()],
                 rightCards: [cardVc3.render(), cardVc4.render()],
                 topCards: [cardVc5.render()],

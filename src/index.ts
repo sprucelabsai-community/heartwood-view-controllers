@@ -74,6 +74,7 @@ export * from './auth/Authenticator'
 export { default as buildBigForm } from './builders/buildBigForm'
 export { default as buildForm } from './builders/buildForm'
 export { default as buildSkillView } from './builders/buildSkillView'
+export * from './builders/buildSkillView'
 
 export {
     WebRtcStreamer,
