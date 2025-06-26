@@ -664,6 +664,7 @@ export type RenderAsInputComponentType =
     | 'signature'
     | 'password'
     | 'search'
+    | 'slider'
 
 export type RenderAsInputComponent =
     | RenderAsInputComponentType
