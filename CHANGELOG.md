@@ -1,3 +1,10 @@
+# [121.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.2.33...v121.3.0) (2025-06-26)
+
+
+### Features
+
+* renderAsSlider ([436de54](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/436de54))
+
 ## [121.2.33](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.2.32...v121.2.33) (2025-06-26)
 
 ## [121.2.32](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.2.31...v121.2.32) (2025-06-25)
