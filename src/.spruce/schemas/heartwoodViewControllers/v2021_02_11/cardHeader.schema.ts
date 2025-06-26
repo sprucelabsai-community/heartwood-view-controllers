@@ -16,17 +16,23 @@ const cardHeaderSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardH
 	                type: 'text',
 	                options: undefined
 	            },
-	            /** Controller. */
-	            'controller': {
-	                label: 'Controller',
-	                type: 'raw',
-	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>`,}
-	            },
 	            /** Subtitle. */
 	            'subtitle': {
 	                label: 'Subtitle',
 	                type: 'text',
 	                options: undefined
+	            },
+	            /** Alt title. */
+	            'altTitle': {
+	                label: 'Alt title',
+	                type: 'text',
+	                options: undefined
+	            },
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>`,}
 	            },
 	            /** Icon. */
 	            'icon': {

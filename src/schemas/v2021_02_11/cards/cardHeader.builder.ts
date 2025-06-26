@@ -9,6 +9,14 @@ export default buildSchema({
             type: 'text',
             label: 'Title',
         },
+        subtitle: {
+            type: 'text',
+            label: 'Subtitle',
+        },
+        altTitle: {
+            type: 'text',
+            label: 'Alt title',
+        },
         controller: {
             type: 'raw',
             label: 'Controller',
@@ -17,10 +25,7 @@ export default buildSchema({
                     'HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>',
             },
         },
-        subtitle: {
-            type: 'text',
-            label: 'Subtitle',
-        },
+
         icon: {
             type: 'select',
             label: 'Icon',
