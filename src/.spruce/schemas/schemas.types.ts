@@ -1132,7 +1132,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface FontFamily {
 			
 				/** Name. What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme. */
-				'name'?: string | undefined | null
+				'name': string
 				/** Source. The URL to the font file (otf, ttf, etc.). Must be publicly accessible. */
 				'src': string
 		}
@@ -1148,6 +1148,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'name': {
 			                label: 'Name',
 			                type: 'text',
+			                isRequired: true,
 			                hint: 'What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme.',
 			                options: undefined
 			            },

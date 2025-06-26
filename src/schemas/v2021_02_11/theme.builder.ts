@@ -113,6 +113,7 @@ const fontFamilySchema = buildSchema({
     fields: {
         name: {
             type: 'text',
+            isRequired: true,
             label: 'Name',
             hint: 'What is the name of the font family? e.g. "Arial" or "Headers". This will be the name you can apply to different parts of the theme.',
         },
