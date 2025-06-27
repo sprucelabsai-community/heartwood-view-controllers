@@ -1215,13 +1215,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				/** Header One Font. The font used for the largest headers. */
 				'headerOneFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
-				/** Header One Font. The font used for the largest headers. */
+				/** Alternative Header Font. The font used for the alternative headers. These are rendered next to the header one font, but are usually smaller. */
+				'altHeaderFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Header Two Font. The font used for the second largest headers. */
 				'headerTwoFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
-				/** Header One Font. The font used for the largest headers. */
+				/** Header Three Font. The font used for third largest headers. */
 				'headerThreeFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
-				/** Header One Font. The font used for the largest headers. */
+				/** Body Font. The font used for the body text on all cards, toolbelt, etc. */
 				'bodyFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
-				/** Header One Font. The font used for the largest headers. */
+				/** Footer Font. The font used for footers (but can be overriden by card footer styles). */
 				'footerFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
 		}
 
@@ -1239,32 +1241,39 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'The font used for the largest headers.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
-			            /** Header One Font. The font used for the largest headers. */
+			            /** Alternative Header Font. The font used for the alternative headers. These are rendered next to the header one font, but are usually smaller. */
+			            'altHeaderFont': {
+			                label: 'Alternative Header Font',
+			                type: 'schema',
+			                hint: 'The font used for the alternative headers. These are rendered next to the header one font, but are usually smaller.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Header Two Font. The font used for the second largest headers. */
 			            'headerTwoFont': {
-			                label: 'Header One Font',
+			                label: 'Header Two Font',
 			                type: 'schema',
-			                hint: 'The font used for the largest headers.',
+			                hint: 'The font used for the second largest headers.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
-			            /** Header One Font. The font used for the largest headers. */
+			            /** Header Three Font. The font used for third largest headers. */
 			            'headerThreeFont': {
-			                label: 'Header One Font',
+			                label: 'Header Three Font',
 			                type: 'schema',
-			                hint: 'The font used for the largest headers.',
+			                hint: 'The font used for third largest headers.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
-			            /** Header One Font. The font used for the largest headers. */
+			            /** Body Font. The font used for the body text on all cards, toolbelt, etc. */
 			            'bodyFont': {
-			                label: 'Header One Font',
+			                label: 'Body Font',
 			                type: 'schema',
-			                hint: 'The font used for the largest headers.',
+			                hint: 'The font used for the body text on all cards, toolbelt, etc.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
-			            /** Header One Font. The font used for the largest headers. */
+			            /** Footer Font. The font used for footers (but can be overriden by card footer styles). */
 			            'footerFont': {
-			                label: 'Header One Font',
+			                label: 'Footer Font',
 			                type: 'schema',
-			                hint: 'The font used for the largest headers.',
+			                hint: 'The font used for footers (but can be overriden by card footer styles).',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
 			    }

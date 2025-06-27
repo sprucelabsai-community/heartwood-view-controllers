@@ -29,37 +29,45 @@ const themeFontsSchema = buildSchema({
             label: 'Header One Font',
             hint: 'The font used for the largest headers.',
         },
+        altHeaderFont: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Alternative Header Font',
+            hint: 'The font used for the alternative headers. These are rendered next to the header one font, but are usually smaller.',
+        },
         headerTwoFont: {
             type: 'schema',
             options: {
                 schema: fontSettingSchema,
             },
-            label: 'Header One Font',
-            hint: 'The font used for the largest headers.',
+            label: 'Header Two Font',
+            hint: 'The font used for the second largest headers.',
         },
         headerThreeFont: {
             type: 'schema',
             options: {
                 schema: fontSettingSchema,
             },
-            label: 'Header One Font',
-            hint: 'The font used for the largest headers.',
+            label: 'Header Three Font',
+            hint: 'The font used for third largest headers.',
         },
         bodyFont: {
             type: 'schema',
             options: {
                 schema: fontSettingSchema,
             },
-            label: 'Header One Font',
-            hint: 'The font used for the largest headers.',
+            label: 'Body Font',
+            hint: 'The font used for the body text on all cards, toolbelt, etc.',
         },
         footerFont: {
             type: 'schema',
             options: {
                 schema: fontSettingSchema,
             },
-            label: 'Header One Font',
-            hint: 'The font used for the largest headers.',
+            label: 'Footer Font',
+            hint: 'The font used for footers (but can be overriden by card footer styles).',
         },
     },
 })
