@@ -11,6 +11,15 @@ import { testFormSchema } from '../forms/testFormOptions'
 @suite()
 export default class AssertingButtonsTest extends AbstractViewControllerTest {
     private vc!: CardViewController
+
+    protected async beforeEach(): Promise<void> {
+        await super.beforeEach()
+        this.vc = this.Controller('card', {
+            body: {},
+            footer: {},
+        })
+    }
+
     @test()
     protected assertCardRendersButtonsThrowsWhenMissing() {
         //@ts-ignore
@@ -255,6 +264,175 @@ export default class AssertingButtonsTest extends AbstractViewControllerTest {
         buttonAssert.buttonGroupIsMultiSelect(
             this.ButtonGroup({ shouldAllowMultiSelect: true })
         )
+    }
+
+    @test()
+    protected async throwsIfHasButtonInFooterButHasCriticalErrorWithoutButton() {
+        this.vc = this.Controller('card', {
+            body: {},
+            footer: {
+                buttons: [{ id: 'test' }],
+            },
+        })
+
+        this.vc.setCriticalError({
+            title: 'Oh no',
+        })
+
+        assert.doesThrow(() => buttonAssert.cardRendersButton(this.vc, 'test'))
+    }
+
+    @test()
+    protected async passesIfFindsButtonInCriticalError() {
+        const id = generateId()
+        this.vc.setCriticalError({
+            title: 'Oh no',
+            buttons: [
+                {
+                    id,
+                    label: 'Go!',
+                },
+            ],
+        })
+
+        buttonAssert.cardRendersButton(this.vc, id)
+    }
+
+    @test()
+    protected async throwsIfCantFindAllButtonsInCriticalError() {
+        const id = generateId()
+        const id2 = generateId()
+        this.vc.setCriticalError({
+            title: 'Oh no',
+            buttons: [
+                {
+                    id,
+                    label: 'Go!',
+                },
+            ],
+        })
+
+        assert.doesThrow(
+            () => buttonAssert.cardRendersButtons(this.vc, [id, id2]),
+            id2
+        )
+    }
+
+    @test()
+    protected async passesIfFindsAllButtonsInCriticalError() {
+        const id = generateId()
+        const id2 = generateId()
+        this.vc.setCriticalError({
+            title: 'Oh no',
+            buttons: [
+                {
+                    id,
+                    label: 'Go!',
+                },
+                {
+                    id: id2,
+                    label: 'Stop!',
+                },
+            ],
+        })
+
+        buttonAssert.cardRendersButtons(this.vc, [id, id2])
+    }
+
+    @test()
+    protected async canHandleButtonsSentInDifferentOrderToCriticalError() {
+        const id = generateId()
+        const id2 = generateId()
+        this.vc.setCriticalError({
+            title: 'Oh no',
+            buttons: [
+                {
+                    id: id2,
+                    label: 'Stop!',
+                },
+                {
+                    id,
+                    label: 'Go!',
+                },
+            ],
+        })
+
+        buttonAssert.cardRendersButtons(this.vc, [id, id2])
+    }
+
+    @test()
+    protected async throwsIfCriticalButtonsAreMissingButAreInBody() {
+        const id = generateId()
+        this.vc = this.Controller('card', {
+            body: {
+                sections: [
+                    {
+                        buttons: [{ id }],
+                    },
+                ],
+            },
+        })
+
+        this.vc.setCriticalError({
+            title: 'Oh no',
+        })
+
+        assert.doesThrow(() => buttonAssert.cardRendersButton(this.vc, id))
+    }
+
+    @test()
+    protected async throwsIfCriticalButtonsAreMissingButAreInButtonBar() {
+        const id = generateId()
+        const buttonBarVc = this.Controller('button-bar', {
+            buttons: [{ id }],
+        })
+        this.vc = this.Controller('card', {
+            body: {
+                sections: [
+                    {
+                        buttonBar: buttonBarVc.render(),
+                    },
+                ],
+            },
+        })
+
+        this.vc.setCriticalError({
+            title: 'Oh no',
+        })
+
+        assert.doesThrow(() => buttonAssert.cardRendersButton(this.vc, id))
+    }
+
+    @test()
+    protected async throwsIfCriticalButtonsAreMissingButAreInForm() {
+        const id = generateId()
+        const formVc = this.Controller('form', {
+            schema: testFormSchema,
+            sections: [
+                {
+                    fields: ['testField'],
+                },
+            ],
+            footer: {
+                buttons: [{ id }],
+            },
+        })
+
+        this.vc = this.Controller('card', {
+            body: {
+                sections: [
+                    {
+                        form: formVc.render(),
+                    },
+                ],
+            },
+        })
+
+        this.vc.setCriticalError({
+            title: 'Oh no',
+        })
+
+        assert.doesThrow(() => buttonAssert.cardRendersButton(this.vc, id))
     }
 
     private ButtonGroup(options?: Partial<ButtonGroupViewControllerOptions>) {

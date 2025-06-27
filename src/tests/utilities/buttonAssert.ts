@@ -253,28 +253,34 @@ function pluckButtonsFromViewModel(
         | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<any>,
     ids: string[]
 ) {
+    const cardModel = model as Card
+    const criticalError = cardModel.criticalError
+
     const buttons = [
-        //@ts-ignore
-        ...(model.criticalError?.buttons ?? model.footer?.buttons ?? []),
+        ...(criticalError
+            ? (criticalError.buttons ?? [])
+            : (cardModel.footer?.buttons ?? [])),
     ]
 
     if ((model as Navigation).buttons) {
         buttons.push(...(model as Navigation).buttons!)
     }
 
-    pluckAllFromView(model as any, 'buttons').forEach((b) => {
-        if (b) {
-            buttons.push(...b)
-        }
-    })
+    if (!criticalError) {
+        pluckAllFromView(model as any, 'buttons').forEach((b) => {
+            if (b) {
+                buttons.push(...b)
+            }
+        })
 
-    pluckAllFromView(model as any, 'form').forEach((f) => {
-        buttons.push(...(f?.footer?.buttons ?? []))
-    })
+        pluckAllFromView(model as any, 'form').forEach((f) => {
+            buttons.push(...(f?.footer?.buttons ?? []))
+        })
 
-    pluckAllFromView(model as any, 'buttonBar').forEach((f) => {
-        buttons.push(...(f?.buttons ?? []))
-    })
+        pluckAllFromView(model as any, 'buttonBar').forEach((f) => {
+            buttons.push(...(f?.buttons ?? []))
+        })
+    }
 
     const missing: string[] = []
     const found: string[] = []
