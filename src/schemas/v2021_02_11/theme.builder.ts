@@ -326,18 +326,21 @@ export default buildSchema({
                                     id: 'cardStyles',
                                     fields: {
                                         informational: {
+                                            label: 'Informational',
                                             type: 'schema',
                                             options: {
                                                 schema: cardStyleSchema,
                                             },
                                         },
                                         graphical: {
+                                            label: 'Graphical',
                                             type: 'schema',
                                             options: {
                                                 schema: cardStyleSchema,
                                             },
                                         },
                                         heading: {
+                                            label: 'Heading',
                                             type: 'schema',
                                             options: {
                                                 schema: cardStyleSchema,
