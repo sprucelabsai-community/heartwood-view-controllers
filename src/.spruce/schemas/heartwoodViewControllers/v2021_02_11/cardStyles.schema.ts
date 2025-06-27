@@ -10,18 +10,21 @@ const cardStylesSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardS
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
-	            /** . */
+	            /** Informational. */
 	            'informational': {
+	                label: 'Informational',
 	                type: 'schema',
 	                options: {schema: cardStyleSchema_v2021_02_11,}
 	            },
-	            /** . */
+	            /** Graphical. */
 	            'graphical': {
+	                label: 'Graphical',
 	                type: 'schema',
 	                options: {schema: cardStyleSchema_v2021_02_11,}
 	            },
-	            /** . */
+	            /** Heading. */
 	            'heading': {
+	                label: 'Heading',
 	                type: 'schema',
 	                options: {schema: cardStyleSchema_v2021_02_11,}
 	            },

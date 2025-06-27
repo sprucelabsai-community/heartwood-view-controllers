@@ -1088,11 +1088,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface CardStyles {
 			
-				
+				/** Informational. */
 				'informational'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
-				
+				/** Graphical. */
 				'graphical'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
-				
+				/** Heading. */
 				'heading'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyle | undefined | null
 		}
 
@@ -1103,18 +1103,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** . */
+			            /** Informational. */
 			            'informational': {
+			                label: 'Informational',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
 			            },
-			            /** . */
+			            /** Graphical. */
 			            'graphical': {
+			                label: 'Graphical',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
 			            },
-			            /** . */
+			            /** Heading. */
 			            'heading': {
+			                label: 'Heading',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyleSchema,}
 			            },
