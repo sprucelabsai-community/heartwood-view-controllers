@@ -1,3 +1,10 @@
+# [122.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.3.22...v122.0.0) (2025-07-03)
+
+
+### Breaking Changes
+
+* control bar theme changes ([6ef8688](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/6ef8688))
+
 ## [121.3.22](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.3.21...v121.3.22) (2025-07-03)
 
 ## [121.3.21](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v121.3.20...v121.3.21) (2025-07-03)
