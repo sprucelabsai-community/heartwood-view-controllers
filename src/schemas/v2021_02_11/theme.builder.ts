@@ -134,6 +134,46 @@ const fontFamilySchema = buildSchema({
     },
 })
 
+const controlBarSchema = buildSchema({
+    id: 'controlBar',
+    fields: {
+        foregroundColor: {
+            type: 'text',
+            label: 'Control bar color 1',
+            hint: 'The foreground color of the control bar.',
+        },
+        backgroundColor: {
+            type: 'text',
+            label: 'Control bar color 2',
+            hint: 'The background color of the control bar.',
+        },
+        font: {
+            type: 'schema',
+            options: {
+                schema: fontSettingSchema,
+            },
+            label: 'Control bar font',
+            hint: 'The font used in the control bar.',
+        },
+        size: {
+            type: 'select',
+            label: 'Control bar size',
+            options: {
+                choices: [
+                    {
+                        value: 'medium',
+                        label: 'Standard',
+                    },
+                    {
+                        value: 'large',
+                        label: 'Large',
+                    },
+                ],
+            },
+        },
+    },
+})
+
 export default buildSchema({
     id: 'theme',
     name: 'Theme',
@@ -246,28 +286,16 @@ export default buildSchema({
                             label: 'Color 4 (inverse, compliment)',
                             hint: 'Background for buttons and menu items',
                         },
-                        controlBarColor1: {
-                            type: 'text',
-                            label: 'Control bar color 1',
-                            hint: 'The foreground color of the control bar.',
-                        },
-                        controlBarColor2: {
-                            type: 'text',
-                            label: 'Control bar color 2',
-                            hint: 'The background color of the control bar.',
+                        controlBar: {
+                            type: 'schema',
+                            options: {
+                                schema: controlBarSchema,
+                            },
                         },
                         toolBeltColor2: {
                             type: 'text',
                             label: 'Tool belt color 2',
                             hint: 'The background color of the tool belts.',
-                        },
-                        controlBarFont: {
-                            type: 'schema',
-                            options: {
-                                schema: fontSettingSchema,
-                            },
-                            label: 'Control bar font',
-                            hint: 'The font used in the control bar.',
                         },
                         errorColor1: {
                             type: 'text',

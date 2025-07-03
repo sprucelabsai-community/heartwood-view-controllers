@@ -85,6 +85,7 @@ export { default as WebRtcConnectionImpl } from './webRtcStreaming/WebRtcConnect
 export * from './webRtcStreaming/WebRtcConnection'
 
 export { default as calendarEventColorsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
+export { default as controlBarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/controlBar.schema'
 export { default as bigFormSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
 export { default as skillViewSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/skillView.schema'
 export { default as selectInputSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/selectInput.schema'

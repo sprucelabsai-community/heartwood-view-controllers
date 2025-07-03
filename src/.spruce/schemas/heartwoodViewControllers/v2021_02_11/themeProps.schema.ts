@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import fontSettingSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontSetting.schema'
+import controlBarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/controlBar.schema'
 import calendarEventColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColors.schema'
 import statusIndicatorColorsSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicatorColors.schema'
 import fontFamilySchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/fontFamily.schema'
@@ -133,19 +133,10 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                hint: 'Background for buttons and menu items',
 	                options: undefined
 	            },
-	            /** Control bar color 1. The foreground color of the control bar. */
-	            'controlBarColor1': {
-	                label: 'Control bar color 1',
-	                type: 'text',
-	                hint: 'The foreground color of the control bar.',
-	                options: undefined
-	            },
-	            /** Control bar color 2. The background color of the control bar. */
-	            'controlBarColor2': {
-	                label: 'Control bar color 2',
-	                type: 'text',
-	                hint: 'The background color of the control bar.',
-	                options: undefined
+	            /** . */
+	            'controlBar': {
+	                type: 'schema',
+	                options: {schema: controlBarSchema_v2021_02_11,}
 	            },
 	            /** Tool belt color 2. The background color of the tool belts. */
 	            'toolBeltColor2': {
@@ -153,13 +144,6 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'text',
 	                hint: 'The background color of the tool belts.',
 	                options: undefined
-	            },
-	            /** Control bar font. The font used in the control bar. */
-	            'controlBarFont': {
-	                label: 'Control bar font',
-	                type: 'schema',
-	                hint: 'The font used in the control bar.',
-	                options: {schema: fontSettingSchema_v2021_02_11,}
 	            },
 	            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 	            'errorColor1': {

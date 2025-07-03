@@ -1290,6 +1290,63 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface ControlBar {
+			
+				/** Control bar color 1. The foreground color of the control bar. */
+				'foregroundColor'?: string | undefined | null
+				/** Control bar color 2. The background color of the control bar. */
+				'backgroundColor'?: string | undefined | null
+				/** Control bar font. The font used in the control bar. */
+				'font'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Control bar size. */
+				'size'?: ("medium" | "large") | undefined | null
+		}
+
+		interface ControlBarSchema extends SpruceSchema.Schema {
+			id: 'controlBar',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Control bar color 1. The foreground color of the control bar. */
+			            'foregroundColor': {
+			                label: 'Control bar color 1',
+			                type: 'text',
+			                hint: 'The foreground color of the control bar.',
+			                options: undefined
+			            },
+			            /** Control bar color 2. The background color of the control bar. */
+			            'backgroundColor': {
+			                label: 'Control bar color 2',
+			                type: 'text',
+			                hint: 'The background color of the control bar.',
+			                options: undefined
+			            },
+			            /** Control bar font. The font used in the control bar. */
+			            'font': {
+			                label: 'Control bar font',
+			                type: 'schema',
+			                hint: 'The font used in the control bar.',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Control bar size. */
+			            'size': {
+			                label: 'Control bar size',
+			                type: 'select',
+			                options: {choices: [{"value":"medium","label":"Standard"},{"value":"large","label":"Large"}],}
+			            },
+			    }
+		}
+
+		interface ControlBarEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ControlBarSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface StatusIndicatorColors {
 			
 				/** Color 1. */
@@ -1388,14 +1445,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'color4Inverse'?: string | undefined | null
 				/** Color 4 (inverse, compliment). Background for buttons and menu items */
 				'color4InverseCompliment'?: string | undefined | null
-				/** Control bar color 1. The foreground color of the control bar. */
-				'controlBarColor1'?: string | undefined | null
-				/** Control bar color 2. The background color of the control bar. */
-				'controlBarColor2'?: string | undefined | null
+				
+				'controlBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ControlBar | undefined | null
 				/** Tool belt color 2. The background color of the tool belts. */
 				'toolBeltColor2'?: string | undefined | null
-				/** Control bar font. The font used in the control bar. */
-				'controlBarFont'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
 				/** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 				'errorColor1'?: string | undefined | null
 				/** Error color 2. The background used when rendering errors. */
@@ -1543,19 +1596,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                hint: 'Background for buttons and menu items',
 			                options: undefined
 			            },
-			            /** Control bar color 1. The foreground color of the control bar. */
-			            'controlBarColor1': {
-			                label: 'Control bar color 1',
-			                type: 'text',
-			                hint: 'The foreground color of the control bar.',
-			                options: undefined
-			            },
-			            /** Control bar color 2. The background color of the control bar. */
-			            'controlBarColor2': {
-			                label: 'Control bar color 2',
-			                type: 'text',
-			                hint: 'The background color of the control bar.',
-			                options: undefined
+			            /** . */
+			            'controlBar': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ControlBarSchema,}
 			            },
 			            /** Tool belt color 2. The background color of the tool belts. */
 			            'toolBeltColor2': {
@@ -1563,13 +1607,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'The background color of the tool belts.',
 			                options: undefined
-			            },
-			            /** Control bar font. The font used in the control bar. */
-			            'controlBarFont': {
-			                label: 'Control bar font',
-			                type: 'schema',
-			                hint: 'The font used in the control bar.',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
 			            },
 			            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 			            'errorColor1': {
