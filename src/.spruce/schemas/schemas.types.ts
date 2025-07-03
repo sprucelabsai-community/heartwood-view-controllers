@@ -2259,6 +2259,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				/** Destination skill view controller. */
 				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
+				/** Is spacer. This will act as a spacer and spread buttons out evenly. */
+				'isSpacer'?: boolean | undefined | null
 				/** Selected. */
 				'isEnabled'?: boolean | undefined | null
 				/** Label. */
@@ -2299,6 +2301,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Destination skill view controller',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
+			            },
+			            /** Is spacer. This will act as a spacer and spread buttons out evenly. */
+			            'isSpacer': {
+			                label: 'Is spacer',
+			                type: 'boolean',
+			                hint: 'This will act as a spacer and spread buttons out evenly.',
+			                options: undefined
 			            },
 			            /** Selected. */
 			            'isEnabled': {
