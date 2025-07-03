@@ -17,6 +17,7 @@ import {
     List,
     RowStyle,
     AlertOptions,
+    SimpleViewControllerFactory,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
@@ -1735,25 +1736,30 @@ export function getViewId(c: ViewController<any>) {
 
 export function pullCardsFromSkillView(
     vc: SkillViewController<Record<string, any>>,
-    factory: any
+    factory: SimpleViewControllerFactory
 ) {
     const model = renderUtil.render(vc)
-    const cards: CardViewController[] = [
-        ...(model.topCards?.map((c) => c.controller!) ?? []),
-        ...(model.leftCards?.map((c) => c.controller!) ?? []),
-        ...(model.rightCards?.map((c) => c.controller!) ?? []),
-        ...(model.bottomCards?.map((c) => c.controller!) ?? []),
-        ...(model.cards?.map((c) => c.controller!) ?? []),
-    ]
+    const cards: Card[] = []
+
     for (const layout of model?.layouts ?? []) {
-        for (const card of layout.cards ?? []) {
-            if (card) {
-                //@ts-ignore
-                cards.push(card.controller ?? factory.Controller('card', card))
-            }
+        cards.push(
+            ...(layout.topCards ?? []),
+            ...(layout.leftCards ?? []),
+            ...(layout.rightCards ?? []),
+            ...(layout.bottomCards ?? []),
+            ...(layout.cards ?? [])
+        )
+
+        if (layout.headerCard) {
+            cards.push(layout.headerCard)
         }
     }
-    return cards
+
+    return cards.map(
+        (c) =>
+            (c.controller ??
+                factory.Controller('card', c)) as CardViewController
+    )
 }
 
 function renderScopeMarkup(expectedAsArray: ScopedBy[] | ScopeFlag[]) {

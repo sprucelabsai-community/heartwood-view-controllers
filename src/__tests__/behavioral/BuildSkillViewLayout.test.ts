@@ -1,17 +1,12 @@
 import AbstractSpruceTest, { test, suite, assert } from '@sprucelabs/test-utils'
-import buildSkillViewLayout, {
-    BigLeftLayout,
-    BigRightLayout,
-    BigTopLayout,
-    BigTopLeftLayout,
-    GridLayout,
-} from '../../utilities/buildSkillViewLayout'
+import { SkillViewLayout } from '../../types/heartwood.types'
+import buildSkillViewLayout from '../../utilities/buildSkillViewLayout'
 
 @suite()
 export default class BuildSkillViewLayoutTest extends AbstractSpruceTest {
     @test()
     protected honorsBigLeftTyping() {
-        assert.isType<BigLeftLayout>(
+        assert.isType<SkillViewLayout>(
             buildSkillViewLayout('big-left', {
                 leftCards: [],
                 rightCards: [],
@@ -21,7 +16,7 @@ export default class BuildSkillViewLayoutTest extends AbstractSpruceTest {
 
     @test()
     protected honorsBigRightTyping() {
-        assert.isType<BigRightLayout>(
+        assert.isType<SkillViewLayout>(
             buildSkillViewLayout('big-right', {
                 leftCards: [],
                 rightCards: [],
@@ -31,7 +26,7 @@ export default class BuildSkillViewLayoutTest extends AbstractSpruceTest {
 
     @test()
     protected honorsBigTopTyping() {
-        assert.isType<BigTopLayout>(
+        assert.isType<SkillViewLayout>(
             buildSkillViewLayout('big-top', {
                 topCards: [],
                 bottomCards: [],
@@ -41,7 +36,7 @@ export default class BuildSkillViewLayoutTest extends AbstractSpruceTest {
 
     @test()
     protected honorsBigTopLeftTyping() {
-        assert.isType<BigTopLeftLayout>(
+        assert.isType<SkillViewLayout>(
             buildSkillViewLayout('big-top-left', {
                 leftCards: [],
                 rightCards: [],
@@ -52,7 +47,7 @@ export default class BuildSkillViewLayoutTest extends AbstractSpruceTest {
 
     @test()
     protected honorsGridTyping() {
-        assert.isType<GridLayout>(
+        assert.isType<SkillViewLayout>(
             buildSkillViewLayout('grid', {
                 cards: [],
             })

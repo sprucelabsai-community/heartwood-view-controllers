@@ -3,7 +3,6 @@ import { assert, test, suite } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import {
     AbstractSkillViewController,
-    splitCardsIntoLayouts,
     vcAssert,
     ViewControllerOptions,
 } from '../../..'
@@ -27,10 +26,12 @@ class SkillView extends AbstractSkillViewController {
 
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
         return {
-            layouts: splitCardsIntoLayouts(
-                this.cards.map((c) => c.render()),
-                3
-            ),
+            layouts: [
+                {
+                    style: 'one-col',
+                    cards: this.cards.map((card) => card.render()),
+                },
+            ],
         }
     }
 }

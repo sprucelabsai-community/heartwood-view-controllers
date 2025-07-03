@@ -333,7 +333,8 @@ export type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
 export type ToolBelt =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt
 export type Feed = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed
-export type Layout = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Layout
+export type SkillViewLayout =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout
 export type SimpleViewControllerFactory = Pick<
     ViewControllerFactory,
     'Controller' | 'setController'
@@ -405,8 +406,9 @@ export type TalkingSprucebot =
 export type NavigationRoute =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute
 export type LayoutStyle = NonNullable<
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView['layout']
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout['style']
 >
+export type LayoutColumn = Card[]
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 export type DragAndDropListSortHandler = NonNullable<List['onDragAndDropSort']>
 

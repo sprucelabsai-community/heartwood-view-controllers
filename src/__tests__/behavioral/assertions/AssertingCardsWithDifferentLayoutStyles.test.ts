@@ -5,6 +5,7 @@ import {
     LayoutStyle,
     SkillView,
     SkillViewController,
+    SkillViewLayout,
     TriggerRenderHandler,
 } from '../../../types/heartwood.types'
 import buildSkillViewLayout from '../../../utilities/buildSkillViewLayout'
@@ -25,29 +26,35 @@ class GoodSkillViewController implements SkillViewController {
 }
 
 @suite()
-export default class AssertingCardsInLayoutsTest extends AbstractViewControllerTest {
+export default class AssertingCardsWithDifferentStylesTest extends AbstractViewControllerTest {
     protected controllerMap = {
         good: GoodSkillViewController,
     }
     private vc!: GoodSkillViewController
 
-    @test()
-    protected async canGetCardsInLeft() {
+    @test('can get cards in left in layout 0', 0)
+    @test('can get cards in left in layout 1', 1)
+    protected async canGetCardsInLeft(layoutIdx: number) {
         const { cardVc, id } = this.CardVc()
 
         this.vc = this.SkillView(
-            buildSkillViewLayout('big-left', { leftCards: [cardVc.render()] })
+            buildSkillViewLayout('big-left', { leftCards: [cardVc.render()] }),
+            layoutIdx
         )
 
         this.assertRendersCard(id)
     }
 
-    @test()
-    protected async canGetCardInRight() {
+    @test('cat get cards in right in layout 0', 0)
+    @test('cat get cards in right in layout 1', 1)
+    protected async canGetCardInRight(layoutIdx: number) {
         const { cardVc, id } = this.CardVc()
 
         this.vc = this.SkillView(
-            buildSkillViewLayout('big-right', { rightCards: [cardVc.render()] })
+            buildSkillViewLayout('big-right', {
+                rightCards: [cardVc.render()],
+            }),
+            layoutIdx
         )
 
         this.assertRendersCard(id)
@@ -91,13 +98,38 @@ export default class AssertingCardsInLayoutsTest extends AbstractViewControllerT
         this.assertRendersCard(id)
     }
 
+    @test('can get header card in layout 0', 0)
+    @test('can get header card in layout 1', 1)
+    protected async cancheckForCardInHeader(layoutIdx: number) {
+        const { cardVc, id } = this.CardVc()
+        this.vc = this.SkillView(
+            buildSkillViewLayout('grid', {
+                headerCard: cardVc.render(),
+                cards: [],
+            }),
+            layoutIdx
+        )
+
+        this.assertRendersCard(id)
+    }
+
     private assertRendersCard(id: string) {
         vcAssert.assertSkillViewRendersCard(this.vc, id)
     }
 
-    private SkillView(options: Partial<SkillView>): GoodSkillViewController {
+    private SkillView(
+        layout: SkillViewLayout,
+        layoutIdx = 0
+    ): GoodSkillViewController {
+        const layouts: SkillViewLayout[] = Array.from(
+            { length: layoutIdx + 1 },
+            () => ({})
+        )
+
+        layouts[layoutIdx] = layout
+
         return this.Controller('good', {
-            ...options,
+            layouts,
         }) as any
     }
 

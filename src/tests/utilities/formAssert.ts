@@ -15,6 +15,7 @@ import {
     FormViewController,
     InputButton,
     RenderAsInputComponent,
+    SimpleViewControllerFactory,
     SkillViewController,
     ViewController,
 } from '../../types/heartwood.types'
@@ -22,13 +23,12 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import renderUtil from '../../utilities/render.utility'
 import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
-import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import { pluckAllFromView } from './assertSupport'
 import { getViewId, pullCardsFromSkillView } from './vcAssert'
 
 const formAssert = {
-    views: {} as SimpleFactory,
-    _setVcFactory(views: SimpleFactory) {
+    views: {} as SimpleViewControllerFactory,
+    _setVcFactory(views: SimpleViewControllerFactory) {
         this.views = views
     },
 
@@ -389,7 +389,7 @@ this.Controller(
 }
 
 function BuildFormVc(
-    views: SimpleFactory,
+    views: SimpleViewControllerFactory,
     inputVc: FormInputViewController
 ): FormViewController<FormSchema> {
     return views.Controller(
@@ -425,5 +425,4 @@ const formSchema = buildSchema({
 
 type FormSchema = typeof formSchema
 
-type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>
 export type FormVc = FormViewController<any> | BigFormViewController<any>

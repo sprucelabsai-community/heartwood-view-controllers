@@ -1,5 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
-import layoutBuilder from './layout.builder'
+import layoutBuilder from './skillViewLayout.builder'
 
 export default buildSchema({
     id: 'skillView',
@@ -41,82 +41,6 @@ export default buildSchema({
             isArray: true,
             options: {
                 schema: layoutBuilder,
-            },
-        },
-        leftCards: {
-            type: 'schema',
-            minArrayLength: 0,
-            isArray: true,
-            options: {
-                schemaId: {
-                    id: 'card',
-                },
-            },
-        },
-        rightCards: {
-            type: 'schema',
-            isArray: true,
-            minArrayLength: 0,
-            options: {
-                schemaId: {
-                    id: 'card',
-                },
-            },
-        },
-        topCards: {
-            type: 'schema',
-            isArray: true,
-            minArrayLength: 0,
-            options: {
-                schemaId: {
-                    id: 'card',
-                },
-            },
-        },
-        cards: {
-            type: 'schema',
-            isArray: true,
-            minArrayLength: 0,
-            options: {
-                schemaId: {
-                    id: 'card',
-                },
-            },
-        },
-        bottomCards: {
-            type: 'schema',
-            isArray: true,
-            options: {
-                schemaId: {
-                    id: 'card',
-                },
-            },
-        },
-        layout: {
-            type: 'select',
-            options: {
-                choices: [
-                    {
-                        value: 'big-left',
-                        label: 'Big left',
-                    },
-                    {
-                        value: 'big-right',
-                        label: 'Big right',
-                    },
-                    {
-                        value: 'big-top',
-                        label: 'Big top',
-                    },
-                    {
-                        value: 'big-top-left',
-                        label: 'Big top left',
-                    },
-                    {
-                        value: 'grid',
-                        label: 'Grid',
-                    },
-                ],
             },
         },
     },

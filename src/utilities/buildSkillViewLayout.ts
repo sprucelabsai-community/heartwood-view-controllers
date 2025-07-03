@@ -1,16 +1,23 @@
-import { Card, LayoutStyle } from '../types/heartwood.types'
+import { Card, LayoutStyle, SkillViewLayout } from '../types/heartwood.types'
 
-export default function buildSkillViewLayout<L extends LayoutStyle>(
-    layout: L,
-    cards: SkillViewLayoutMap[L]
-) {
+export default function buildSkillViewLayout<Style extends LayoutStyle>(
+    style: Style,
+    cards: SkillViewLayoutMap[Style]
+): SkillViewLayout {
     return {
-        layout,
+        style,
         ...cards,
     }
 }
 
+interface WithHeaderCard {
+    headerCard?: Card
+}
+
 export interface SkillViewLayoutMap {
+    ['one-col']: ColumnBasedLayout
+    ['two-col']: ColumnBasedLayout
+    ['three-col']: ColumnBasedLayout
     ['big-left']: BigLeftLayout
     ['big-right']: BigRightLayout
     ['big-top']: BigTopLayout
@@ -26,27 +33,31 @@ export interface SkillViewLayoutCards {
     bottomCards?: Card[]
 }
 
-export interface BigLeftLayout {
+export interface ColumnBasedLayout extends WithHeaderCard {
+    cards: Card[]
+}
+
+export interface BigLeftLayout extends WithHeaderCard {
     leftCards: Card[]
     rightCards?: Card[]
 }
 
-export interface BigRightLayout {
+export interface BigRightLayout extends WithHeaderCard {
     leftCards?: Card[]
     rightCards: Card[]
 }
 
-export interface BigTopLayout {
+export interface BigTopLayout extends WithHeaderCard {
     topCards: Card[]
     bottomCards?: Card[]
 }
 
-export interface BigTopLeftLayout {
+export interface BigTopLeftLayout extends WithHeaderCard {
     leftCards: Card[]
     rightCards?: Card[]
     bottomCards?: Card[]
 }
 
-export interface GridLayout {
+export interface GridLayout extends WithHeaderCard {
     cards: Card[]
 }

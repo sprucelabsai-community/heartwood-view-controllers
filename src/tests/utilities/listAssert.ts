@@ -7,6 +7,7 @@ import {
     List,
     ListCell,
     RowStyle,
+    SimpleViewControllerFactory,
     SkillViewController,
     StatusIndicatorStatus,
     SwipeCardViewController,
@@ -18,7 +19,6 @@ import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
 import ListRowViewController from '../../viewControllers/list/ListRow.vc'
 import SwipeCardViewControllerImp from '../../viewControllers/SwipeCard.vc'
-import ViewControllerFactory from '../../viewControllers/ViewControllerFactory'
 import {
     getVcName,
     pluckAllFromView,
@@ -28,8 +28,8 @@ import interactor from './interactor'
 import { pullCardsFromSkillView } from './vcAssert'
 
 const listAssert = {
-    views: {} as SimpleFactory,
-    _setVcFactory(views: SimpleFactory) {
+    views: {} as SimpleViewControllerFactory,
+    _setVcFactory(views: SimpleViewControllerFactory) {
         this.views = views
     },
     listRendersRows(
@@ -706,5 +706,3 @@ function getListVc(listVc: ViewController<List>): ListViewController {
     )
     return controller
 }
-
-type SimpleFactory = Pick<ViewControllerFactory, 'Controller'>
