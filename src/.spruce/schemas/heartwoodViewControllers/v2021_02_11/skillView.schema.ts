@@ -50,6 +50,13 @@ const skillViewSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillV
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Width. */
+	            'width': {
+	                label: 'Width',
+	                type: 'select',
+	                defaultValue: "tight",
+	                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
+	            },
 	            /** Layout. */
 	            'layouts': {
 	                label: 'Layout',

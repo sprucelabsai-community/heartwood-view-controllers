@@ -1773,6 +1773,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'subtitle'?: string | undefined | null
 				
 				'description'?: string | undefined | null
+				/** Width. */
+				'width'?: ("wide" | "tight" | "full") | undefined | null
 				/** Layout. */
 				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout[] | undefined | null
 		}
@@ -1823,6 +1825,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'description': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** Width. */
+			            'width': {
+			                label: 'Width',
+			                type: 'select',
+			                defaultValue: "tight",
+			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
 			            },
 			            /** Layout. */
 			            'layouts': {
@@ -2595,6 +2604,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'subtitle'?: string | undefined | null
 				
 				'description'?: string | undefined | null
+				/** Width. */
+				'width'?: ("wide" | "tight" | "full") | undefined | null
 				/** Layout. */
 				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout[] | undefined | null
 				/** Card controller. */
@@ -2647,6 +2658,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'description': {
 			                type: 'text',
 			                options: undefined
+			            },
+			            /** Width. */
+			            'width': {
+			                label: 'Width',
+			                type: 'select',
+			                defaultValue: "tight",
+			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
 			            },
 			            /** Layout. */
 			            'layouts': {
@@ -2808,8 +2826,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'bottomCards'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card[] | undefined | null
 				
 				'style'?: ("one-col" | "two-col" | "three-col" | "big-left" | "big-right" | "big-top" | "big-top-left" | "grid") | undefined | null
-				/** Width. */
-				'width'?: ("wide" | "tight" | "full") | undefined | null
 		}
 
 		interface SkillViewLayoutSchema extends SpruceSchema.Schema {
@@ -2862,13 +2878,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'style': {
 			                type: 'select',
 			                options: {choices: [{"value":"one-col","label":"One column"},{"value":"two-col","label":"Two columns"},{"value":"three-col","label":"Three columns"},{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
-			            },
-			            /** Width. */
-			            'width': {
-			                label: 'Width',
-			                type: 'select',
-			                defaultValue: "tight",
-			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
 			            },
 			    }
 		}

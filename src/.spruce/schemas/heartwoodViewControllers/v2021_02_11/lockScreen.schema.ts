@@ -50,6 +50,13 @@ const lockScreenSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockS
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Width. */
+	            'width': {
+	                label: 'Width',
+	                type: 'select',
+	                defaultValue: "tight",
+	                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
+	            },
 	            /** Layout. */
 	            'layouts': {
 	                label: 'Layout',

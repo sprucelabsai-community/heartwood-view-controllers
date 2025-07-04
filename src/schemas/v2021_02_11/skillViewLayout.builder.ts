@@ -102,26 +102,5 @@ export default buildSchema({
                 ],
             },
         },
-        width: {
-            type: 'select',
-            label: 'Width',
-            defaultValue: 'tight',
-            options: {
-                choices: [
-                    {
-                        value: 'wide',
-                        label: 'Wide',
-                    },
-                    {
-                        value: 'tight',
-                        label: 'Tight',
-                    },
-                    {
-                        value: 'full',
-                        label: 'Full width',
-                    },
-                ],
-            },
-        },
     },
 })

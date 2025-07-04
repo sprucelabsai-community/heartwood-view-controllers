@@ -54,13 +54,6 @@ const skillViewLayoutSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.
 	                type: 'select',
 	                options: {choices: [{"value":"one-col","label":"One column"},{"value":"two-col","label":"Two columns"},{"value":"three-col","label":"Three columns"},{"value":"big-left","label":"Big left"},{"value":"big-right","label":"Big right"},{"value":"big-top","label":"Big top"},{"value":"big-top-left","label":"Big top left"},{"value":"grid","label":"Grid"}],}
 	            },
-	            /** Width. */
-	            'width': {
-	                label: 'Width',
-	                type: 'select',
-	                defaultValue: "tight",
-	                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
-	            },
 	    }
 }
 
