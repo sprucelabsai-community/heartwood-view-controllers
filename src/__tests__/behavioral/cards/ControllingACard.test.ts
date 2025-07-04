@@ -697,6 +697,23 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.getSectionVc(1).render()
     }
 
+    @test()
+    protected async canSetCardsBackgroundImage() {
+        const image = generateId()
+        this.setBackgroundImage(image)
+        const model = this.renderCard()
+        assert.isEqual(model.backgroundImage, image)
+    }
+
+    @test()
+    protected async settingBackgroundImageTriggersRender() {
+        this.setBackgroundImage(generateId())
+        assert.isEqual(this.cardTriggerRenderCount, 1)
+    }
+
+    private setBackgroundImage(image: string) {
+        this.vc.setBackgroundImage(image)
+    }
     private addSection(section: CardSection) {
         this.vc.addSection(section)
     }

@@ -195,6 +195,11 @@ export default class CardViewController<V extends Card = Card>
         this.triggerRenderHeader?.()
     }
 
+    public setBackgroundImage(image: string) {
+        this.model.backgroundImage = image
+        this.triggerRender()
+    }
+
     private unsetHeaderField(key: string) {
         //@ts-ignore
         delete this.model.header?.[key]
