@@ -295,7 +295,7 @@ export type InputButton =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton
 
 export interface ThemeManager {
-    setTheme(theme: Theme, shouldAnimate?: boolean): void
+    setTheme(theme: Theme): void
     getTheme(): Theme
 }
 
