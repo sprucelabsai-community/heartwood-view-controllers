@@ -16,9 +16,9 @@ const cardStylesSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardS
 	                type: 'schema',
 	                options: {schema: cardStyleSchema_v2021_02_11,}
 	            },
-	            /** Graphical. */
-	            'graphical': {
-	                label: 'Graphical',
+	            /** Visual. */
+	            'visual': {
+	                label: 'Visual',
 	                type: 'schema',
 	                options: {schema: cardStyleSchema_v2021_02_11,}
 	            },

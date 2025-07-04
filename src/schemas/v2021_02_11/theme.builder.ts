@@ -360,8 +360,8 @@ export default buildSchema({
                                                 schema: cardStyleSchema,
                                             },
                                         },
-                                        graphical: {
-                                            label: 'Graphical',
+                                        visual: {
+                                            label: 'Visual',
                                             type: 'schema',
                                             options: {
                                                 schema: cardStyleSchema,
