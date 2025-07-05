@@ -130,13 +130,13 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	            'vAlignment': {
 	                label: 'Vertical alignment',
 	                type: 'select',
-	                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+	                options: {choices: [{"value":"top","label":"Top"},{"value":"bottom","label":"Bottom"},{"value":"center","label":"Center"}],}
 	            },
 	            /** Horizontal alignment. */
 	            'hAlignment': {
 	                label: 'Horizontal alignment',
 	                type: 'select',
-	                options: {choices: [{"value":"top","label":"Top"},{"value":"bottom","label":"Bottom"},{"value":"center","label":"Center"}],}
+	                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
 	            },
 	    }
 }

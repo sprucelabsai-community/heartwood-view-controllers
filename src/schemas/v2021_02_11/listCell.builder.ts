@@ -253,9 +253,9 @@ export default buildSchema({
             label: 'Vertical alignment',
             options: {
                 choices: [
-                    { value: 'left', label: 'Left' },
+                    { value: 'top', label: 'Top' },
+                    { value: 'bottom', label: 'Bottom' },
                     { value: 'center', label: 'Center' },
-                    { value: 'right', label: 'Right' },
                 ],
             },
         },
@@ -264,9 +264,9 @@ export default buildSchema({
             label: 'Horizontal alignment',
             options: {
                 choices: [
-                    { value: 'top', label: 'Top' },
-                    { value: 'bottom', label: 'Bottom' },
+                    { value: 'left', label: 'Left' },
                     { value: 'center', label: 'Center' },
+                    { value: 'right', label: 'Right' },
                 ],
             },
         },

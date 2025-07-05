@@ -6922,9 +6922,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Status indicator. */
 				'statusIndicator'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicator | undefined | null
 				/** Vertical alignment. */
-				'vAlignment'?: ("left" | "center" | "right") | undefined | null
+				'vAlignment'?: ("top" | "bottom" | "center") | undefined | null
 				/** Horizontal alignment. */
-				'hAlignment'?: ("top" | "bottom" | "center") | undefined | null
+				'hAlignment'?: ("left" | "center" | "right") | undefined | null
 		}
 
 		interface ListCellSchema extends SpruceSchema.Schema {
@@ -7045,13 +7045,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'vAlignment': {
 			                label: 'Vertical alignment',
 			                type: 'select',
-			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+			                options: {choices: [{"value":"top","label":"Top"},{"value":"bottom","label":"Bottom"},{"value":"center","label":"Center"}],}
 			            },
 			            /** Horizontal alignment. */
 			            'hAlignment': {
 			                label: 'Horizontal alignment',
 			                type: 'select',
-			                options: {choices: [{"value":"top","label":"Top"},{"value":"bottom","label":"Bottom"},{"value":"center","label":"Center"}],}
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
 			            },
 			    }
 		}
