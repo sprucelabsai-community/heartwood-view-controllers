@@ -1003,10 +1003,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface CardStyle {
 			
-				/** Card Background Color. The background color of the card. */
-				'backgroundColor'?: string | undefined | null
-				/** Card Foreground Color. The color of the text of the card. */
-				'foregroundColor'?: string | undefined | null
+				/** Card Body Background Color. The background color of the body of the card. */
+				'bodyBackgroundColor'?: string | undefined | null
+				/** Card Body Foreground Color. The color of the text of the body of the card. */
+				'bodyForegroundColor'?: string | undefined | null
 				/** Header Background Color. The background color of the card's header. */
 				'headerBackgroundColor'?: string | undefined | null
 				/** Header Foreground Color. The color of the text in the card's header. */
@@ -1026,18 +1026,18 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** Card Background Color. The background color of the card. */
-			            'backgroundColor': {
-			                label: 'Card Background Color',
+			            /** Card Body Background Color. The background color of the body of the card. */
+			            'bodyBackgroundColor': {
+			                label: 'Card Body Background Color',
 			                type: 'text',
-			                hint: 'The background color of the card.',
+			                hint: 'The background color of the body of the card.',
 			                options: undefined
 			            },
-			            /** Card Foreground Color. The color of the text of the card. */
-			            'foregroundColor': {
-			                label: 'Card Foreground Color',
+			            /** Card Body Foreground Color. The color of the text of the body of the card. */
+			            'bodyForegroundColor': {
+			                label: 'Card Body Foreground Color',
 			                type: 'text',
-			                hint: 'The color of the text of the card.',
+			                hint: 'The color of the text of the body of the card.',
 			                options: undefined
 			            },
 			            /** Header Background Color. The background color of the card's header. */

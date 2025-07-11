@@ -75,15 +75,15 @@ const themeFontsSchema = buildSchema({
 const cardStyleSchema = buildSchema({
     id: 'cardStyle',
     fields: {
-        backgroundColor: {
+        bodyBackgroundColor: {
             type: 'text',
-            label: 'Card Background Color',
-            hint: 'The background color of the card.',
+            label: 'Card Body Background Color',
+            hint: 'The background color of the body of the card.',
         },
-        foregroundColor: {
+        bodyForegroundColor: {
             type: 'text',
-            label: 'Card Foreground Color',
-            hint: 'The color of the text of the card.',
+            label: 'Card Body Foreground Color',
+            hint: 'The color of the text of the body of the card.',
         },
         headerBackgroundColor: {
             type: 'text',
