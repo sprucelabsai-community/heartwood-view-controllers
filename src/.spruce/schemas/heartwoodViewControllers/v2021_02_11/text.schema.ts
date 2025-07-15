@@ -22,6 +22,12 @@ const textSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TextSchema 
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** Markdown. */
+	            'markdown': {
+	                label: 'Markdown',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Align. */
 	            'align': {
 	                label: 'Align',

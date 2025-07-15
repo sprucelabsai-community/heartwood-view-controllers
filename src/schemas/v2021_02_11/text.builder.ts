@@ -13,6 +13,10 @@ export default buildSchema({
             type: 'text',
             label: 'Html',
         },
+        markdown: {
+            type: 'text',
+            label: 'Markdown',
+        },
         align: {
             type: 'select',
             label: 'Align',

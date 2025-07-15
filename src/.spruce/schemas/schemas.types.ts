@@ -8121,6 +8121,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'content'?: string | undefined | null
 				/** Html. */
 				'html'?: string | undefined | null
+				/** Markdown. */
+				'markdown'?: string | undefined | null
 				/** Align. */
 				'align'?: ("left" | "right" | "center") | undefined | null
 		}
@@ -8141,6 +8143,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Html. */
 			            'html': {
 			                label: 'Html',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Markdown. */
+			            'markdown': {
+			                label: 'Markdown',
 			                type: 'text',
 			                options: undefined
 			            },
