@@ -1,3 +1,10 @@
+# [122.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.0.19...v122.1.0) (2025-07-15)
+
+
+### Features
+
+* markdown in text in cards ([67433a1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/67433a1))
+
 ## [122.0.19](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.0.18...v122.0.19) (2025-07-15)
 
 ## [122.0.18](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.0.17...v122.0.18) (2025-07-15)
