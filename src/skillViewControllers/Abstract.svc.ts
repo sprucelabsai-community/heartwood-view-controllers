@@ -4,7 +4,6 @@ import {
     SkillView,
     SkillViewController,
     SkillViewControllerLoadOptions,
-    ToolBelt,
     ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from '../viewControllers/Abstract.vc'
@@ -47,10 +46,6 @@ export default abstract class AbstractSkillViewController<
 
     public getSubtitle() {
         return this.subtitle
-    }
-
-    public renderToolBelt(): ToolBelt | null {
-        return null
     }
 
     protected renderLockScreen(options: LockScreenSkillViewControllerOptions) {
