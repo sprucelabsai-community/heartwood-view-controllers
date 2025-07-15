@@ -135,6 +135,7 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     private assertDoesNotRenderProgressNavigator(id: string) {
         const vc = this.Controller(id as any, {})
         assert.doesThrow(() => this.assertSkillViewRendersProgressNavigator(vc))
+        progressNavigatorAssert.skillViewDoesNotRenderNavigator(vc)
     }
 
     private assertSkillViewRendersProgressNavigator(vc: any): any {
@@ -144,5 +145,8 @@ export default class AssertingProgressNavigatorTest extends AbstractProgressNavi
     private assertRendersProgressNavigator(id: string) {
         const vc = this.Controller(id as any, {})
         this.assertSkillViewRendersProgressNavigator(vc)
+        assert.doesThrow(() =>
+            progressNavigatorAssert.skillViewDoesNotRenderNavigator(vc)
+        )
     }
 }

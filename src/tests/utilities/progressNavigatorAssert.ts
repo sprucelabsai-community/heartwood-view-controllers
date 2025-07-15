@@ -28,6 +28,19 @@ const progressNavigatorAssert = {
         return navigator.controller
     },
 
+    skillViewDoesNotRenderNavigator(vc: SkillViewController) {
+        try {
+            this.skillViewRendersNavigator(vc)
+        } catch {
+            // If it throws, it means it does not render the navigator
+            return
+        }
+
+        assert.fail(
+            `Your skill view is rendering a progress navigator! Make sure public renderProgressNavigator() is not implemented or returns null.`
+        )
+    },
+
     stepIsComplete(vc: ViewController<ProgressNavigator>, stepId: string) {
         const step = getStep(vc, stepId)
 
