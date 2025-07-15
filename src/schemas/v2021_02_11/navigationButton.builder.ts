@@ -30,11 +30,6 @@ export default buildSchema({
                 schema: routerDestinationBuilder,
             },
         },
-        isSpacer: {
-            type: 'boolean',
-            label: 'Is spacer',
-            hint: 'This will act as a spacer and spread buttons out evenly.',
-        },
         ...pickFields(buttonFields, ['isEnabled', 'label', 'onClick', 'image']),
         dropdown: {
             type: 'schema',

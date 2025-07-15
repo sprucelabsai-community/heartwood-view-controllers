@@ -4,6 +4,7 @@ import { assert } from '@sprucelabs/test-utils'
 import {
     AppController,
     Navigation,
+    NavigationButton,
     NavigationRoute,
     SkillViewController,
     SkillViewControllerId,
@@ -167,8 +168,12 @@ export function getButtonFromNav(vc: ViewController<Navigation>, id: string) {
     const model = renderUtil.render(vc)
 
     const buttons = model.buttons?.reduce((acc, b) => {
-        if (b.dropdown) {
-            return [...acc, b, ...(b?.dropdown?.items ?? [])]
+        if ((b as NavigationButton).dropdown) {
+            return [
+                ...acc,
+                b,
+                ...((b as NavigationButton)?.dropdown?.items ?? []),
+            ]
         }
         return [...acc, b]
     }, [] as any[])

@@ -374,6 +374,12 @@ export type Navigation =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
 export type NavigationButton =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
+
+export type NavigationItem = NavigationButton | NavigationSpacer
+
+export interface NavigationSpacer {
+    isSpacer: true
+}
 export type CountdownTimer =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
 export type ProgressNavigator =

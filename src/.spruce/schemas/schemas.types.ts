@@ -2104,6 +2104,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface NavigationButtonDropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
+				
+				'card'?: (HeartwoodTypes.Card) | undefined | null
+		}
+
+		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
+			id: 'navigationButtonDropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface RouterDestination {
 			
 				
@@ -2170,43 +2215,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface NavigationRoute {
-			
-				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
-				
-				'destination': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination
-		}
-
-		interface NavigationRouteSchema extends SpruceSchema.Schema {
-			id: 'navigationRoute',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** . */
-			            'viewPermissionContract': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
-			            },
-			            /** . */
-			            'destination': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
-			            },
-			    }
-		}
-
-		interface NavigationRouteEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface NavigationButton {
 			
 				/** Line icon. */
@@ -2217,8 +2225,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				/** Destination skill view controller. */
 				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
-				/** Is spacer. This will act as a spacer and spread buttons out evenly. */
-				'isSpacer'?: boolean | undefined | null
 				/** Selected. */
 				'isEnabled'?: boolean | undefined | null
 				/** Label. */
@@ -2262,13 +2268,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
 			            },
-			            /** Is spacer. This will act as a spacer and spread buttons out evenly. */
-			            'isSpacer': {
-			                label: 'Is spacer',
-			                type: 'boolean',
-			                hint: 'This will act as a spacer and spread buttons out evenly.',
-			                options: undefined
-			            },
 			            /** Selected. */
 			            'isEnabled': {
 			                label: 'Selected',
@@ -2304,72 +2303,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface NavigationButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface Navigation {
-			
-				/** Render button labels. Should the button labels be rendered? */
-				'shouldRenderButtonLabels'?: boolean | undefined | null
-				/** Is visible. Should the navigation be visible? Defaults to true. */
-				'isVisible'?: boolean | undefined | null
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>) | undefined | null
-				
-				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton[] | undefined | null
-				
-				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[] | undefined | null
-		}
-
-		interface NavigationSchema extends SpruceSchema.Schema {
-			id: 'navigation',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Navigation',
-			importsWhenRemote: ['import * as MercuryTypes from \'@sprucelabs/mercury-types\'',],
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Render button labels. Should the button labels be rendered? */
-			            'shouldRenderButtonLabels': {
-			                label: 'Render button labels',
-			                type: 'boolean',
-			                hint: 'Should the button labels be rendered?',
-			                options: undefined
-			            },
-			            /** Is visible. Should the navigation be visible? Defaults to true. */
-			            'isVisible': {
-			                label: 'Is visible',
-			                type: 'boolean',
-			                hint: 'Should the navigation be visible? Defaults to true.',
-			                options: undefined
-			            },
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>`,}
-			            },
-			            /** . */
-			            'buttons': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema,}
-			            },
-			            /** . */
-			            'additionalValidRoutes': {
-			                type: 'schema',
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema,}
-			            },
-			    }
-		}
-
-		interface NavigationEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationSchema> {}
 
 	}
 
@@ -2551,44 +2484,102 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface NavigationButtonDropdown {
+		interface NavigationRoute {
 			
-				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
 				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
 				
-				'card'?: (HeartwoodTypes.Card) | undefined | null
+				'destination': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination
 		}
 
-		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
-			id: 'navigationButtonDropdown',
+		interface NavigationRouteSchema extends SpruceSchema.Schema {
+			id: 'navigationRoute',
 			version: 'v2021_02_11',
 			namespace: 'HeartwoodViewControllers',
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
-			            },
 			            /** . */
-			            'items': {
+			            'viewPermissionContract': {
 			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
 			            },
 			            /** . */
-			            'card': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.Card`,}
+			            'destination': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
 			            },
 			    }
 		}
 
-		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
+		interface NavigationRouteEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Navigation {
+			
+				/** Render button labels. Should the button labels be rendered? */
+				'shouldRenderButtonLabels'?: boolean | undefined | null
+				/** Is visible. Should the navigation be visible? Defaults to true. */
+				'isVisible'?: boolean | undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>) | undefined | null
+				
+				'buttons'?: (HeartwoodTypes.NavigationItem)[] | undefined | null
+				
+				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[] | undefined | null
+		}
+
+		interface NavigationSchema extends SpruceSchema.Schema {
+			id: 'navigation',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Navigation',
+			importsWhenRemote: ['import * as MercuryTypes from \'@sprucelabs/mercury-types\'',],
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Render button labels. Should the button labels be rendered? */
+			            'shouldRenderButtonLabels': {
+			                label: 'Render button labels',
+			                type: 'boolean',
+			                hint: 'Should the button labels be rendered?',
+			                options: undefined
+			            },
+			            /** Is visible. Should the navigation be visible? Defaults to true. */
+			            'isVisible': {
+			                label: 'Is visible',
+			                type: 'boolean',
+			                hint: 'Should the navigation be visible? Defaults to true.',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>`,}
+			            },
+			            /** . */
+			            'buttons': {
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `HeartwoodTypes.NavigationItem`,}
+			            },
+			            /** . */
+			            'additionalValidRoutes': {
+			                type: 'schema',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRouteSchema,}
+			            },
+			    }
+		}
+
+		interface NavigationEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationSchema> {}
 
 	}
 

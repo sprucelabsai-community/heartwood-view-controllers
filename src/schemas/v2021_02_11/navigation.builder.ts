@@ -1,5 +1,4 @@
 import { buildSchema } from '@sprucelabs/schema'
-import navigationButtonBuilder from './navigationButton.builder'
 import permissionContractReferenceBuilder from './permissionContractReference.builder'
 import routerDestinationBuilder from './routerDestination.builder'
 
@@ -32,10 +31,10 @@ export default buildSchema({
             },
         },
         buttons: {
-            type: 'schema',
+            type: 'raw',
             isArray: true,
             options: {
-                schema: navigationButtonBuilder,
+                valueType: 'HeartwoodTypes.NavigationItem',
             },
         },
         additionalValidRoutes: {

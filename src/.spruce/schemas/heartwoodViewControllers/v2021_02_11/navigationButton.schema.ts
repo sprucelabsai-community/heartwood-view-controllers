@@ -36,13 +36,6 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'schema',
 	                options: {schema: routerDestinationSchema_v2021_02_11,}
 	            },
-	            /** Is spacer. This will act as a spacer and spread buttons out evenly. */
-	            'isSpacer': {
-	                label: 'Is spacer',
-	                type: 'boolean',
-	                hint: 'This will act as a spacer and spread buttons out evenly.',
-	                options: undefined
-	            },
 	            /** Selected. */
 	            'isEnabled': {
 	                label: 'Selected',

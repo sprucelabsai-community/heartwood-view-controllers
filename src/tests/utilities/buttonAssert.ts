@@ -6,6 +6,7 @@ import {
     Card,
     FormViewController,
     Navigation,
+    NavigationButton,
     SkillViewController,
     TriggerRenderHandler,
     ViewController,
@@ -263,7 +264,7 @@ function pluckButtonsFromViewModel(
     ]
 
     if ((model as Navigation).buttons) {
-        buttons.push(...(model as Navigation).buttons!)
+        buttons.push(...((model as Navigation).buttons as NavigationButton[]))
     }
 
     if (!criticalError) {
