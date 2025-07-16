@@ -56,6 +56,12 @@ const cardFooterSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardF
 	                defaultValue: true,
 	                options: undefined
 	            },
+	            /** Horizontal alignment. */
+	            'hAlignment': {
+	                label: 'Horizontal alignment',
+	                type: 'select',
+	                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
+	            },
 	            /** Layout. */
 	            'layout': {
 	                label: 'Layout',

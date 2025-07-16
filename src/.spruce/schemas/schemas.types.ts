@@ -5425,6 +5425,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'pager'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager | undefined | null
 				/** Show border. */
 				'shouldRenderBorder'?: boolean | undefined | null
+				/** Horizontal alignment. */
+				'hAlignment'?: ("left" | "center" | "right") | undefined | null
 				/** Layout. */
 				'layout'?: ("vertical" | "horizontal") | undefined | null
 		}
@@ -5480,6 +5482,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
+			            },
+			            /** Horizontal alignment. */
+			            'hAlignment': {
+			                label: 'Horizontal alignment',
+			                type: 'select',
+			                options: {choices: [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],}
 			            },
 			            /** Layout. */
 			            'layout': {

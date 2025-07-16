@@ -51,6 +51,17 @@ export default buildSchema({
             label: 'Show border',
             defaultValue: true,
         },
+        hAlignment: {
+            type: 'select',
+            label: 'Horizontal alignment',
+            options: {
+                choices: [
+                    { value: 'left', label: 'Left' },
+                    { value: 'center', label: 'Center' },
+                    { value: 'right', label: 'Right' },
+                ],
+            },
+        },
         layout: {
             type: 'select',
             label: 'Layout',
