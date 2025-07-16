@@ -4202,6 +4202,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'id'?: string | undefined | null
 				/** Title. Rendered in the center of the circle indicator! */
 				'title'?: string | undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ProgressViewController) | undefined | null
 				/** Percent complete. A number from zero to 1 */
 				'percentComplete'?: number | undefined | null
 				/** Details. */
@@ -4226,6 +4228,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'text',
 			                hint: 'Rendered in the center of the circle indicator!',
 			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ProgressViewController`,}
 			            },
 			            /** Percent complete. A number from zero to 1 */
 			            'percentComplete': {

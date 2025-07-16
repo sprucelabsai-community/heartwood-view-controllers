@@ -22,6 +22,12 @@ const progressSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Progres
 	                hint: 'Rendered in the center of the circle indicator!',
 	                options: undefined
 	            },
+	            /** Controller. */
+	            'controller': {
+	                label: 'Controller',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.ProgressViewController`,}
+	            },
 	            /** Percent complete. A number from zero to 1 */
 	            'percentComplete': {
 	                label: 'Percent complete',

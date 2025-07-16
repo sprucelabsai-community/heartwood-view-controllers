@@ -12,6 +12,13 @@ export default buildSchema({
             label: 'Title',
             hint: 'Rendered in the center of the circle indicator!',
         },
+        controller: {
+            type: 'raw',
+            label: 'Controller',
+            options: {
+                valueType: 'HeartwoodTypes.ProgressViewController',
+            },
+        },
         percentComplete: {
             type: 'number',
             label: 'Percent complete',
