@@ -309,12 +309,27 @@ export default class FormViewController<
             return
         }
 
+        if (!this.getWasConstructedWithValues()) {
+            this.originalValues = {
+                ...values,
+            }
+        }
+
         this.model.values = this.normalizeValues(values)
         const errorsByField = this.validateDirtyFields()
 
         await this.emitOnChange(errorsByField)
 
         this.triggerRender()
+    }
+
+    private getWasConstructedWithValues() {
+        return Object.keys(this.originalValues).find(
+            (k) =>
+                k in this.originalValues &&
+                typeof this.originalValues[k as SchemaFieldNames<S>] !==
+                    'undefined'
+        )
     }
 
     private normalizeValues(
