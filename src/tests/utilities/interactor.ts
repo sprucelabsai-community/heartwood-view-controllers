@@ -501,7 +501,7 @@ const interactor = {
             )
         }
 
-        await onDragAndDropSort(newRowIds)
+        return await onDragAndDropSort(newRowIds)
     },
 
     async clickCell(

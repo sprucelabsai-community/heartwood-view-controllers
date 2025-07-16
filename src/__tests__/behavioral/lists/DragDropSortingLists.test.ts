@@ -275,6 +275,25 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
         )
     }
 
+    @test('interactor returns response from drag and drop handler (true)', true)
+    @test(
+        'interactor returns response from drag and drop handler (false)',
+        false
+    )
+    protected async interactorReturnsResponseFromDragAndDropHandler(
+        response: boolean
+    ) {
+        this.dragAndDropResponse = response
+        const rowId1 = generateId()
+        this.setRows([{ id: rowId1, cells: [] }])
+        const actual = await this.dragAndDrop([rowId1])
+        assert.isEqual(
+            actual,
+            response,
+            'Expected response to match drag and drop response'
+        )
+    }
+
     private assertIsDragAndDropReturnsFalse() {
         assert.isFalse(this.vc.getIsDragAndDropSortingEnabled())
     }
@@ -326,7 +345,7 @@ export default class DragDropSortingListsTest extends AbstractViewControllerTest
     }
 
     private async dragAndDrop(newRowIds: string[]) {
-        await interactor.dragAndDropListRow(this.vc, newRowIds)
+        return await interactor.dragAndDropListRow(this.vc, newRowIds)
     }
 
     private setRows(rows: { id: string; cells: never[] }[]) {
