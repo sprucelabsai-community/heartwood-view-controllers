@@ -378,6 +378,11 @@ export default buildSchema({
                                 }),
                             },
                         },
+                        stylesheetUrl: {
+                            type: 'text',
+                            label: 'Stylesheet Url',
+                            hint: 'The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets.',
+                        },
                     },
                 },
             },

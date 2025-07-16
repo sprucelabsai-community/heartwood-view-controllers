@@ -1469,6 +1469,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'fonts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeFonts | undefined | null
 				
 				'cardStyles'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStyles | undefined | null
+				/** Stylesheet Url. The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets. */
+				'stylesheetUrl'?: string | undefined | null
 		}
 
 		interface ThemePropsSchema extends SpruceSchema.Schema {
@@ -1668,6 +1670,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'cardStyles': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardStylesSchema,}
+			            },
+			            /** Stylesheet Url. The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets. */
+			            'stylesheetUrl': {
+			                label: 'Stylesheet Url',
+			                type: 'text',
+			                hint: 'The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets.',
+			                options: undefined
 			            },
 			    }
 		}

@@ -206,6 +206,13 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'schema',
 	                options: {schema: cardStylesSchema_v2021_02_11,}
 	            },
+	            /** Stylesheet Url. The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets. */
+	            'stylesheetUrl': {
+	                label: 'Stylesheet Url',
+	                type: 'text',
+	                hint: 'The url of the stylesheet to apply to the theme. Must be publicly served in some way and will be loaded after the core stylesheets.',
+	                options: undefined
+	            },
 	    }
 }
 
