@@ -1,3 +1,10 @@
+# [122.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.1.5...v122.2.0) (2025-07-16)
+
+
+### Features
+
+* card footer alignment ([d10678c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d10678c))
+
 ## [122.1.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.1.4...v122.1.5) (2025-07-16)
 
 ## [122.1.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.1.3...v122.1.4) (2025-07-16)
