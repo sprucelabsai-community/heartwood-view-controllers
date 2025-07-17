@@ -154,7 +154,7 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	                options: {schema: talkingSprucebotSchema_v2021_02_11,}
 	            },
 	            /** . Where should the status render? By default it is at the top of each slide. */
-	            'statusRenderPosition': {
+	            'labelRenderPosition': {
 	                type: 'select',
 	                hint: 'Where should the status render? By default it is at the top of each slide.',
 	                defaultValue: "topOfSlide",

@@ -47,7 +47,7 @@ export default buildSchema({
                 },
             },
         },
-        statusRenderPosition: {
+        labelRenderPosition: {
             type: 'select',
             options: {
                 choices: [

@@ -4724,7 +4724,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot | undefined | null
 				/** . Where should the status render? By default it is at the top of each slide. */
-				'statusRenderPosition'?: ("topOfSlide" | "headerAltTitle") | undefined | null
+				'labelRenderPosition'?: ("topOfSlide" | "headerAltTitle") | undefined | null
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number | undefined | null
 				/** Submit handler. */
@@ -4879,7 +4879,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
 			            },
 			            /** . Where should the status render? By default it is at the top of each slide. */
-			            'statusRenderPosition': {
+			            'labelRenderPosition': {
 			                type: 'select',
 			                hint: 'Where should the status render? By default it is at the top of each slide.',
 			                defaultValue: "topOfSlide",
