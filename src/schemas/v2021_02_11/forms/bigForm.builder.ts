@@ -47,7 +47,7 @@ export default buildSchema({
                 },
             },
         },
-        labelRenderPosition: {
+        slideTitleRenderPosition: {
             type: 'select',
             options: {
                 choices: [
@@ -58,7 +58,7 @@ export default buildSchema({
                     },
                 ],
             },
-            hint: 'Where should the status render? By default it is at the top of each slide.',
+            hint: 'Where should the slide title render? By default it is at the top of each slide using a Talking Sprucebot. If you set to "Header alternative title", it will render in the header as an alternative title.',
             defaultValue: 'topOfSlide',
         },
         controller: {

@@ -1,7 +1,7 @@
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
 import {
     BigForm,
-    BigFormLabelRenderPosition,
+    BigFormSlideTitleRenderPosition,
     BigFormOnSubmitOptions,
 } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
@@ -11,8 +11,10 @@ export default class BigFormViewController<
     S extends Schema,
     V extends ViewModel<S> = ViewModel<S>,
 > extends FormViewController<S, V> {
-    public setLabelRenderPosition(position: BigFormLabelRenderPosition) {
-        this.model.labelRenderPosition = position
+    public setSlideTitleRenderPosition(
+        position: BigFormSlideTitleRenderPosition
+    ) {
+        this.model.slideTitleRenderPosition = position
         this.triggerRender()
     }
 

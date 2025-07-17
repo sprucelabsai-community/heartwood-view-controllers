@@ -383,8 +383,8 @@ export interface NavigationSpacer {
 
 export type BigForm<S extends Schema> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
-export type BigFormLabelRenderPosition = NonNullable<
-    BigForm<Schema>['labelRenderPosition']
+export type BigFormSlideTitleRenderPosition = NonNullable<
+    BigForm<Schema>['slideTitleRenderPosition']
 >
 
 export type CountdownTimer =

@@ -4,7 +4,7 @@ import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { BigFormLabelRenderPosition } from '../../../types/heartwood.types'
+import { BigFormSlideTitleRenderPosition } from '../../../types/heartwood.types'
 import BigFormViewController from '../../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({
@@ -225,17 +225,20 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
-    @test('can set labelRenderPosition to headerAltTitle', 'headerAltTitle')
-    @test('can set labelRenderPosition to topOfSlide', 'topOfSlide')
-    protected async canSetLabelRenderPosition(
-        expected: BigFormLabelRenderPosition
+    @test(
+        'can set slideTitleRenderPosition to headerAltTitle',
+        'headerAltTitle'
+    )
+    @test('can set slideTitleRenderPosition to topOfSlide', 'topOfSlide')
+    protected async canSetSlideTitleRenderPosition(
+        expected: BigFormSlideTitleRenderPosition
     ) {
-        this.vc.setLabelRenderPosition(expected)
+        this.vc.setSlideTitleRenderPosition(expected)
         const model = this.renderForm()
         assert.isEqual(
-            model.labelRenderPosition,
+            model.slideTitleRenderPosition,
             expected,
-            'Did not set labelRenderPosition properly'
+            'Did not set slideTitleRenderPosition properly'
         )
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
