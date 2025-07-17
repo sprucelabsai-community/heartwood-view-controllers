@@ -1,3 +1,10 @@
+# [122.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.2.1...v122.3.0) (2025-07-17)
+
+
+### Features
+
+* big form has option to render status is it is now (top of slide) and also in alt header ([18c6869](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/18c6869))
+
 ## [122.2.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.2.0...v122.2.1) (2025-07-16)
 
 # [122.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v122.1.5...v122.2.0) (2025-07-16)
