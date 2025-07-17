@@ -47,6 +47,20 @@ export default buildSchema({
                 },
             },
         },
+        statusRenderPosition: {
+            type: 'select',
+            options: {
+                choices: [
+                    { value: 'topOfSlide', label: 'Top of slide' },
+                    {
+                        value: 'headerAltTitle',
+                        label: 'Header alternative title',
+                    },
+                ],
+            },
+            hint: 'Where should the status render? By default it is at the top of each slide.',
+            defaultValue: 'topOfSlide',
+        },
         controller: {
             type: 'raw',
             label: 'Controller',
