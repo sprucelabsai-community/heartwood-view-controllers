@@ -366,6 +366,7 @@ export type CalendarPerson =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson
 export type CardFooter =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter
+export type CardFooterLayout = NonNullable<CardFooter['layout']>
 export type FormBuilder<S extends Schema = Schema> =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportObject<S>
 export type FormBuilderPage =

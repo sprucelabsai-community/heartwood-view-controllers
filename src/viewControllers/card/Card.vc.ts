@@ -2,6 +2,8 @@ import { SchemaError } from '@sprucelabs/schema'
 import {
     Card,
     CardBody,
+    CardFooter,
+    CardFooterLayout,
     CardHeader,
     CardSection,
     CriticalError,
@@ -21,6 +23,7 @@ export default class CardViewController<V extends Card = Card>
     private triggerRenderHeader?: () => void
     private triggerRenderSections: (() => void)[] = []
     private sectionVcs: SectionVc[] = []
+    private footerLayout?: CardFooterLayout
 
     public constructor(options: V & ViewControllerOptions) {
         super(options)
@@ -30,6 +33,9 @@ export default class CardViewController<V extends Card = Card>
     public setFooter(footer: V['footer']) {
         const hadFooter = !!this.model.footer
         this.model.footer = footer
+        if (this.model.footer) {
+            this.model.footer.layout = this.footerLayout
+        }
         if (!footer || !hadFooter) {
             this.triggerRender()
         } else {
@@ -92,7 +98,7 @@ export default class CardViewController<V extends Card = Card>
         return sectionVc
     }
 
-    private buildFooterVc() {
+    private buildFooterVc(): CardFooter {
         const footerVc = {
             triggerRender: () => {},
             render: () => {
@@ -412,6 +418,15 @@ export default class CardViewController<V extends Card = Card>
         } else {
             this.triggerRender()
         }
+    }
+
+    public setFooterLayout(layout: CardFooterLayout) {
+        this.footerLayout = layout
+        if (this.model.footer) {
+            this.model.footer.layout = layout
+        }
+
+        this.triggerRenderFooter?.()
     }
 
     public render(): V {

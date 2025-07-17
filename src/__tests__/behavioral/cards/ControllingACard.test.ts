@@ -5,6 +5,8 @@ import cardSchema from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/car
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
+    CardFooter,
+    CardFooterLayout,
     CardSection,
     CriticalError,
     TriggerRenderHandler,
@@ -74,7 +76,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
 
         assert.isEqual(model.footer?.buttons?.[0].label, 'Stop team!')
         assert.isEqual(this.cardTriggerRenderCount, 0)
-        assert.isEqual(this.footerTriggerRenderCount, 0)
+        this.assertFooterTriggerRenderCountEquals(0)
     }
 
     @test()
@@ -711,6 +713,52 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         assert.isEqual(this.cardTriggerRenderCount, 1)
     }
 
+    @test('can set footer layout to vertical', 'vertical')
+    @test('can set footer layout to horizontal', 'horizontal')
+    protected async canSetFooterLayout(layout: CardFooterLayout) {
+        this.setFooter({})
+        this.setFooterLayout(layout)
+        this.assertFooterLayoutEquals(layout)
+    }
+
+    @test()
+    protected async settingFooterLayoutTriggersRender() {
+        this.setFooter({})
+        this.renderCard()
+        this.setFooterLayout('vertical')
+        this.assertFooterTriggerRenderCountEquals(1)
+    }
+
+    @test('can set footer layout to vertical before setting footer', 'vertical')
+    @test(
+        'can set footer layout to horizontal before setting footer',
+        'horizontal'
+    )
+    protected async canSetFooterLayoutBeforeSettingFooter(
+        layout: CardFooterLayout
+    ) {
+        this.setFooterLayout(layout)
+        this.setFooter({ buttons: [] })
+        this.assertFooterLayoutEquals(layout)
+    }
+
+    private setFooter(footer: CardFooter) {
+        this.vc.setFooter(footer)
+    }
+
+    private setFooterLayout(layout: CardFooterLayout) {
+        this.vc.setFooterLayout(layout)
+    }
+
+    private assertFooterLayoutEquals(layout: string) {
+        const model = this.renderCard()
+        assert.isEqual(
+            model.footer?.layout,
+            layout,
+            'Footer layout should match'
+        )
+    }
+
     private setBackgroundImage(image: string) {
         this.vc.setBackgroundImage(image)
     }
@@ -795,6 +843,10 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         vc.triggerRenderFooter = () => {
             this.footerTriggerRenderCount++
         }
+    }
+
+    private assertFooterTriggerRenderCountEquals(expected: number) {
+        assert.isEqual(this.footerTriggerRenderCount, expected)
     }
 
     private beginTrackingHeaderRender(vc = this.vc) {
