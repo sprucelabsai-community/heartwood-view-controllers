@@ -376,10 +376,17 @@ export type Navigation =
 export type NavigationButton =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
 
-export type NavigationItem = NavigationButton | NavigationSpacer
+export type NavigationItem =
+    | NavigationButton
+    | NavigationSpacer
+    | NavigationImage
 
 export interface NavigationSpacer {
     isSpacer: true
+}
+
+export interface NavigationImage {
+    image: string
 }
 
 export type BigForm<S extends Schema> =

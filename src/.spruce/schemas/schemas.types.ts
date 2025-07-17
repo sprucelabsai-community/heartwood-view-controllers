@@ -2240,8 +2240,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'label'?: string | undefined | null
 				/** Click handler. */
 				'onClick'?: (() => Promise<any> | any) | undefined | null
-				/** Image. */
-				'image'?: string | undefined | null
 				/** Dropdown. */
 				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown | undefined | null
 		}
@@ -2295,12 +2293,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Click handler',
 			                type: 'raw',
 			                options: {valueType: `() => Promise<any> | any`,}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
 			            },
 			            /** Dropdown. */
 			            'dropdown': {
