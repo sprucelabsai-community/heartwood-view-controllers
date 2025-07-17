@@ -4723,8 +4723,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'shouldRenderFirstFieldsLabel'?: boolean | undefined | null
 				
 				'talkingSprucebot'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebot | undefined | null
-				/** . Where should the slide title render? By default it is at the top of each slide using a Talking Sprucebot. If you set to "Header alternative title", it will render in the header as an alternative title. */
-				'slideTitleRenderPosition'?: ("topOfSlide" | "headerAltTitle") | undefined | null
+				/** Render slide titles. */
+				'shouldRenderSlideTitles'?: boolean | undefined | null
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number | undefined | null
 				/** Submit handler. */
@@ -4878,12 +4878,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TalkingSprucebotSchema,}
 			            },
-			            /** . Where should the slide title render? By default it is at the top of each slide using a Talking Sprucebot. If you set to "Header alternative title", it will render in the header as an alternative title. */
-			            'slideTitleRenderPosition': {
-			                type: 'select',
-			                hint: 'Where should the slide title render? By default it is at the top of each slide using a Talking Sprucebot. If you set to "Header alternative title", it will render in the header as an alternative title.',
-			                defaultValue: "topOfSlide",
-			                options: {choices: [{"value":"topOfSlide","label":"Top of slide"},{"value":"headerAltTitle","label":"Header alternative title"}],}
+			            /** Render slide titles. */
+			            'shouldRenderSlideTitles': {
+			                label: 'Render slide titles',
+			                type: 'boolean',
+			                options: undefined
 			            },
 			            /** Present slide. The slide showing now! */
 			            'presentSlide': {

@@ -1,9 +1,5 @@
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
-import {
-    BigForm,
-    BigFormSlideTitleRenderPosition,
-    BigFormOnSubmitOptions,
-} from '../types/heartwood.types'
+import { BigForm, BigFormOnSubmitOptions } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
@@ -11,10 +7,8 @@ export default class BigFormViewController<
     S extends Schema,
     V extends ViewModel<S> = ViewModel<S>,
 > extends FormViewController<S, V> {
-    public setSlideTitleRenderPosition(
-        position: BigFormSlideTitleRenderPosition
-    ) {
-        this.model.slideTitleRenderPosition = position
+    public setShouldRenderSlideTitles(shouldRender: boolean) {
+        this.model.shouldRenderSlideTitles = shouldRender
         this.triggerRender()
     }
 

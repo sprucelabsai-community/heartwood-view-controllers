@@ -47,19 +47,9 @@ export default buildSchema({
                 },
             },
         },
-        slideTitleRenderPosition: {
-            type: 'select',
-            options: {
-                choices: [
-                    { value: 'topOfSlide', label: 'Top of slide' },
-                    {
-                        value: 'headerAltTitle',
-                        label: 'Header alternative title',
-                    },
-                ],
-            },
-            hint: 'Where should the slide title render? By default it is at the top of each slide using a Talking Sprucebot. If you set to "Header alternative title", it will render in the header as an alternative title.',
-            defaultValue: 'topOfSlide',
+        shouldRenderSlideTitles: {
+            type: 'boolean',
+            label: 'Render slide titles',
         },
         controller: {
             type: 'raw',
