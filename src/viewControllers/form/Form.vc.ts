@@ -68,8 +68,8 @@ export default class FormViewController<
         this.willChangeHandler = onWillChange ?? undefined
 
         this.model = {
-            shouldShowSubmitControls: true,
-            shouldShowCancelButton: true,
+            shouldRenderSubmitControls: true,
+            shouldRenderCancelButton: true,
             submitButtonLabel: defaultSubmitButtonLabel,
             ...modelCopy,
             values: {
@@ -479,56 +479,24 @@ export default class FormViewController<
     }
 
     public hideSubmitControls() {
-        this.model.shouldShowSubmitControls = false
+        this.model.shouldRenderSubmitControls = false
         this.triggerRender()
     }
 
-    public getShowSubmitControls() {
-        this.model.shouldShowSubmitControls = true
+    public showSubmitControls() {
+        this.model.shouldRenderSubmitControls = true
         this.triggerRender()
-    }
-
-    /**
-     * @deprecated getShouldShowSubmitControls() -> getShouldRenderSubmitControls()
-     */
-    public getShouldShowSubmitControls() {
-        return this.getShouldRenderSubmitControls()
     }
 
     public getShouldRenderSubmitControls() {
-        return this.model.shouldShowSubmitControls ?? true
-    }
-
-    /**
-     * @deprecated getShouldShowCancelButton() -> getShouldRenderCancelButton()
-     */
-    public getShouldShowCancelButton() {
-        return this.getShouldRenderCancelButton()
+        return this.model.shouldRenderSubmitControls ?? true
     }
 
     public getShouldRenderCancelButton() {
         return (
-            (this.model.shouldShowCancelButton ?? true) &&
-            this.getShouldShowSubmitControls()
+            (this.model.shouldRenderCancelButton ?? true) &&
+            this.getShouldRenderSubmitControls()
         )
-    }
-
-    public showSubmitControls() {
-        return this.getShowSubmitControls()
-    }
-
-    /**
-     * @deprecated shouldShowSubmitControls -> getShouldShowSubmitControls
-     */
-    public shouldShowSubmitControls() {
-        return this.getShouldShowSubmitControls()
-    }
-
-    /**
-     * @deprecated shouldShowCancelButton -> getShouldShowCancelButton
-     */
-    public shouldShowCancelButton() {
-        return this.getShouldShowCancelButton()
     }
 
     public getSubmitButtonLabel() {
@@ -971,8 +939,8 @@ export type FormViewControllerOptions<S extends Schema> = Pick<
     | 'onChange'
     | 'onCancel'
     | 'onWillChange'
-    | 'shouldShowCancelButton'
-    | 'shouldShowSubmitControls'
+    | 'shouldRenderCancelButton'
+    | 'shouldRenderSubmitControls'
     | 'submitButtonLabel'
     | 'cancelButtonLabel'
     | 'values'

@@ -4,6 +4,7 @@ import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { BigFormLabelRenderPosition } from '../../../types/heartwood.types'
 import BigFormViewController from '../../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({
@@ -209,6 +210,42 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
     protected async triggersRenderEvenOnInvalidSubmit() {
         await this.submit()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test('can set shouldRenderFirstFieldsLabel to false', false)
+    @test('can set shouldRenderFirstFieldsLabel to true', true)
+    protected async canSetShouldRenderFirstFieldsLabel(expected: boolean) {
+        this.setShouldRenderFirstFieldsLabel(expected)
+        const model = this.renderForm()
+        assert.isEqual(
+            model.shouldRenderFirstFieldsLabel,
+            expected,
+            'Did not set shouldRenderFirstFieldsLabel properly'
+        )
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test('can set labelRenderPosition to headerAltTitle', 'headerAltTitle')
+    @test('can set labelRenderPosition to topOfSlide', 'topOfSlide')
+    protected async canSetLabelRenderPosition(
+        expected: BigFormLabelRenderPosition
+    ) {
+        this.vc.setLabelRenderPosition(expected)
+        const model = this.renderForm()
+        assert.isEqual(
+            model.labelRenderPosition,
+            expected,
+            'Did not set labelRenderPosition properly'
+        )
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    private renderForm() {
+        return this.render(this.vc)
+    }
+
+    private setShouldRenderFirstFieldsLabel(should: boolean) {
+        this.vc.setShouldRenderFirstFieldsLabel(should)
     }
 
     private async submit() {

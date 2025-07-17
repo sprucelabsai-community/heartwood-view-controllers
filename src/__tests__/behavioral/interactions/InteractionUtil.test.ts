@@ -102,7 +102,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     @test()
     protected async cantClickFooterActionInFormWithoutOne() {
         const formVc = this.Controller('form', {
-            shouldShowSubmitControls: false,
+            shouldRenderSubmitControls: false,
             schema: {
                 id: 'test',
                 fields: {},
@@ -354,7 +354,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
         const formVc = this.Controller(
             'form',
             buildForm({
-                shouldShowSubmitControls: false,
+                shouldRenderSubmitControls: false,
                 isEnabled: false,
                 schema: {
                     id: 'test',

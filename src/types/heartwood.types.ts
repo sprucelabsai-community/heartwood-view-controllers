@@ -380,6 +380,13 @@ export type NavigationItem = NavigationButton | NavigationSpacer
 export interface NavigationSpacer {
     isSpacer: true
 }
+
+export type BigForm<S extends Schema> =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
+export type BigFormLabelRenderPosition = NonNullable<
+    BigForm<Schema>['labelRenderPosition']
+>
+
 export type CountdownTimer =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CountdownTimer
 export type ProgressNavigator =

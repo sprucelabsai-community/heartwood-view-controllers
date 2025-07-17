@@ -40,7 +40,7 @@ export default buildSchema({
                     id: 'bigFormSection',
                     fields: {
                         ...formSectionBuilder.fields,
-                        shouldShowSubmitButton: {
+                        shouldRenderSubmitButton: {
                             type: 'boolean',
                         },
                     },

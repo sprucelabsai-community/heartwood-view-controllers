@@ -1,6 +1,9 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
-import { BigFormOnSubmitOptions } from '../types/heartwood.types'
+import {
+    BigForm,
+    BigFormLabelRenderPosition,
+    BigFormOnSubmitOptions,
+} from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
 
@@ -8,6 +11,11 @@ export default class BigFormViewController<
     S extends Schema,
     V extends ViewModel<S> = ViewModel<S>,
 > extends FormViewController<S, V> {
+    public setLabelRenderPosition(position: BigFormLabelRenderPosition) {
+        this.model.labelRenderPosition = position
+        this.triggerRender()
+    }
+
     public isSlideValid(idx: number) {
         const slide = this.model.sections[idx]
         if (slide) {
@@ -108,6 +116,11 @@ export default class BigFormViewController<
         return this.isSlideValid(this.getPresentSlide())
     }
 
+    public setShouldRenderFirstFieldsLabel(should: boolean) {
+        this.model.shouldRenderFirstFieldsLabel = should
+        this.triggerRender()
+    }
+
     public render(): V {
         const view: V = {
             ...this.model,
@@ -118,8 +131,7 @@ export default class BigFormViewController<
     }
 }
 
-type ViewModel<S extends Schema> =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigForm<S>
+type ViewModel<S extends Schema> = BigForm<S>
 
 export type BigFormViewControllerOptions<S extends Schema> =
     FormViewControllerOptions<S> & {

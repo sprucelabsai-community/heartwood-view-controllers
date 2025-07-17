@@ -84,12 +84,12 @@ export default buildSchema({
                 valueType: 'HeartwoodTypes.FormErrorsByField<S>',
             },
         },
-        shouldShowSubmitControls: {
+        shouldRenderSubmitControls: {
             type: 'boolean',
             label: 'Show submit controls',
             defaultValue: true,
         },
-        shouldShowCancelButton: {
+        shouldRenderCancelButton: {
             type: 'boolean',
             label: 'Show cancel button',
             defaultValue: true,

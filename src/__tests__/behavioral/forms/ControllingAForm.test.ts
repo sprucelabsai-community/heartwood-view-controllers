@@ -206,15 +206,15 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test()
     protected submitControlsShowByDefault() {
         const model = this.vc.render()
-        assert.isTrue(model.shouldShowSubmitControls)
+        assert.isTrue(model.shouldRenderSubmitControls)
     }
 
     @test()
     protected canHideAndShowSubmitControls() {
         this.vc.hideSubmitControls()
-        assert.isFalse(this.vc.render().shouldShowSubmitControls)
-        this.vc.getShowSubmitControls()
-        assert.isTrue(this.vc.render().shouldShowSubmitControls)
+        assert.isFalse(this.vc.render().shouldRenderSubmitControls)
+        this.vc.showSubmitControls()
+        assert.isTrue(this.vc.render().shouldRenderSubmitControls)
     }
 
     @test()
@@ -322,31 +322,31 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test()
     protected cancelButtonDefaultsToShowing() {
-        assert.isTrue(this.vc.getShouldShowCancelButton())
-        assert.isTrue(this.render(this.vc).shouldShowCancelButton)
+        assert.isTrue(this.vc.getShouldRenderCancelButton())
+        assert.isTrue(this.render(this.vc).shouldRenderCancelButton)
     }
 
     @test()
     protected canCheckIfCancelButtonIsShowing() {
         const vc = this.Controller('form', {
             ...this.testForm,
-            shouldShowCancelButton: false,
+            shouldRenderCancelButton: false,
         })
 
-        assert.isFalse(vc.getShouldShowCancelButton())
+        assert.isFalse(vc.getShouldRenderCancelButton())
         const model = this.render(vc)
 
-        assert.isFalse(model.shouldShowCancelButton)
+        assert.isFalse(model.shouldRenderCancelButton)
     }
 
     @test()
     protected cancelButtonIsNotShowingIfSubmitControlsAreNotShowing() {
         const vc = this.Controller('form', {
             ...this.testForm,
-            shouldShowSubmitControls: false,
+            shouldRenderSubmitControls: false,
         })
 
-        assert.isFalse(vc.getShouldShowCancelButton())
+        assert.isFalse(vc.getShouldRenderCancelButton())
     }
 
     @test()

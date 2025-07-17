@@ -458,7 +458,10 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
     protected formsShouldNotIncludeActionButtons() {
         const pageVc = this.vc.getPageVc(0)
         const model = this.render(pageVc)
-        assert.isFalse(model.shouldShowSubmitControls)
+        assert.isFalse(
+            model.shouldRenderSubmitControls,
+            'Should not render submit controls'
+        )
     }
 
     @test()
@@ -603,7 +606,7 @@ export default class BuildingAFormTest extends AbstractViewControllerTest {
         const formVc = formAssert.cardRendersForm(dialogVc)
         const schema = formVc.getSchema()
 
-        assert.isFalse(formVc.getShouldShowCancelButton())
+        assert.isFalse(formVc.getShouldRenderCancelButton())
         assert.doesInclude(schema.fields.title, {
             type: 'text',
             isRequired: true,

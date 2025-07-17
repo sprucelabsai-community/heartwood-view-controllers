@@ -133,7 +133,7 @@ export default class AddingAFormBuilderSectionTest extends AbstractViewControlle
     @test()
     protected footerShouldHaveAddFieldAndSaveButtons() {
         const model = this.render(this.formVc)
-        assert.isFalse(model.shouldShowCancelButton)
+        assert.isFalse(model.shouldRenderCancelButton)
         assert.doesInclude(model.footer?.buttons?.[0].label, 'Add field')
         assert.isEqual(model.submitButtonLabel, 'Done')
     }

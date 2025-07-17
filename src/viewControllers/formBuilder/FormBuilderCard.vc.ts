@@ -120,7 +120,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
         options?: Partial<FormBuilderPage>
     ): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<Schema> {
         return this.Controller('form', {
-            shouldShowSubmitControls: false,
+            shouldRenderSubmitControls: false,
             schema: options?.schema ?? {
                 id: `formBuilder${this.getTotalPages() + 1}`,
                 fields: {
@@ -271,7 +271,7 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
                         ],
                     },
                 ],
-                shouldShowCancelButton: false,
+                shouldRenderCancelButton: false,
                 submitButtonLabel: 'Add page',
                 onSubmit: async ({ values }) => {
                     if (values.title) {

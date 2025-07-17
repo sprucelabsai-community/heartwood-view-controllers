@@ -77,14 +77,14 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
 	            },
 	            /** Show submit controls. */
-	            'shouldShowSubmitControls': {
+	            'shouldRenderSubmitControls': {
 	                label: 'Show submit controls',
 	                type: 'boolean',
 	                defaultValue: true,
 	                options: undefined
 	            },
 	            /** Show cancel button. */
-	            'shouldShowCancelButton': {
+	            'shouldRenderCancelButton': {
 	                label: 'Show cancel button',
 	                type: 'boolean',
 	                defaultValue: true,

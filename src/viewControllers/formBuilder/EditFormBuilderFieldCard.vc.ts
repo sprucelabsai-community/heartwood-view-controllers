@@ -65,7 +65,7 @@ export default class EditFormBuilderFieldCardViewController extends CardViewCont
             buildForm({
                 schema: editFieldFormSchema,
                 onChange: this.handleFormChange.bind(this),
-                shouldShowCancelButton: false,
+                shouldRenderCancelButton: false,
                 submitButtonLabel: 'Save',
                 values,
                 onSubmit: async ({ values }) => {

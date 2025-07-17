@@ -57,7 +57,7 @@ const bigFormSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.B
 	                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 	            },
 	            /** . */
-	            'shouldShowSubmitButton': {
+	            'shouldRenderSubmitButton': {
 	                type: 'boolean',
 	                options: undefined
 	            },

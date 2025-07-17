@@ -4522,7 +4522,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
 				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[] | undefined | null
 				
-				'shouldShowSubmitButton'?: boolean | undefined | null
+				'shouldRenderSubmitButton'?: boolean | undefined | null
 		}
 
 		interface BigFormSectionSchema extends SpruceSchema.Schema {
@@ -4578,7 +4578,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>`,}
 			            },
 			            /** . */
-			            'shouldShowSubmitButton': {
+			            'shouldRenderSubmitButton': {
 			                type: 'boolean',
 			                options: undefined
 			            },
@@ -4700,9 +4700,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Errors by field. */
 				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
 				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean | undefined | null
+				'shouldRenderSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean | undefined | null
+				'shouldRenderCancelButton'?: boolean | undefined | null
 				/** Submit button label. */
 				'submitButtonLabel'?: string | undefined | null
 				/** Cancel button label. */
@@ -4802,14 +4802,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
 			            },
 			            /** Show submit controls. */
-			            'shouldShowSubmitControls': {
+			            'shouldRenderSubmitControls': {
 			                label: 'Show submit controls',
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
 			            },
 			            /** Show cancel button. */
-			            'shouldShowCancelButton': {
+			            'shouldRenderCancelButton': {
 			                label: 'Show cancel button',
 			                type: 'boolean',
 			                defaultValue: true,
@@ -5717,9 +5717,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Errors by field. */
 				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
 				/** Show submit controls. */
-				'shouldShowSubmitControls'?: boolean | undefined | null
+				'shouldRenderSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
-				'shouldShowCancelButton'?: boolean | undefined | null
+				'shouldRenderCancelButton'?: boolean | undefined | null
 				/** Submit button label. */
 				'submitButtonLabel'?: string | undefined | null
 				/** Cancel button label. */
@@ -5807,14 +5807,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `HeartwoodTypes.FormErrorsByField<S>`,}
 			            },
 			            /** Show submit controls. */
-			            'shouldShowSubmitControls': {
+			            'shouldRenderSubmitControls': {
 			                label: 'Show submit controls',
 			                type: 'boolean',
 			                defaultValue: true,
 			                options: undefined
 			            },
 			            /** Show cancel button. */
-			            'shouldShowCancelButton': {
+			            'shouldRenderCancelButton': {
 			                label: 'Show cancel button',
 			                type: 'boolean',
 			                defaultValue: true,

@@ -57,7 +57,7 @@ export default class LoginCardViewController
                     'Time for pin.',
                 ]),
                 fields: [{ name: 'code', renderAs: 'number' }],
-                shouldShowSubmitButton: false,
+                shouldRenderSubmitButton: false,
             },
         ]
 

@@ -155,7 +155,7 @@ const interactor = {
         )
 
         //@ts-ignore
-        if (!primary && model.shouldShowSubmitControls) {
+        if (!primary && model.shouldRenderSubmitControls) {
             //@ts-ignore
             await this.submitForm(vc)
             return

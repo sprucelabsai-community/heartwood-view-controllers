@@ -113,7 +113,7 @@ export default class EditFormBuilderSectionCardViewController extends CardViewCo
             buildForm({
                 values,
                 schema: addSectionSchema,
-                shouldShowCancelButton: false,
+                shouldRenderCancelButton: false,
                 submitButtonLabel: 'Done',
                 sections: this.buildFormSections(values.type),
                 footer: this.buildFooter(values.type),
