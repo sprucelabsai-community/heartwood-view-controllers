@@ -685,6 +685,7 @@ export type RenderAsInputComponentType =
     | 'password'
     | 'search'
     | 'slider'
+    | 'markdownInput'
 
 export type RenderAsInputComponent =
     | RenderAsInputComponentType
