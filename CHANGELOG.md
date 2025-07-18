@@ -1,3 +1,10 @@
+# [123.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.1.1...v123.2.0) (2025-07-18)
+
+
+### Features
+
+* cardVc now has getFooterLayout ([2af96ec](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2af96ec))
+
 ## [123.1.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.1.0...v123.1.1) (2025-07-18)
 
 # [123.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.0.8...v123.1.0) (2025-07-18)
