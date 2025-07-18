@@ -1,3 +1,10 @@
+# [123.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.0.8...v123.1.0) (2025-07-18)
+
+
+### Features
+
+* tertiary button type ([eb4e767](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/eb4e767))
+
 ## [123.0.8](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.0.7...v123.0.8) (2025-07-18)
 
 ## [123.0.7](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.0.6...v123.0.7) (2025-07-18)
