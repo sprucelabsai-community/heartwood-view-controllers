@@ -727,6 +727,7 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.renderCard()
         this.setFooterLayout('vertical')
         this.assertFooterTriggerRenderCountEquals(1)
+        this.assertTriggerRenderCountEquals(1)
     }
 
     @test('can set footer layout to vertical before setting footer', 'vertical')
@@ -755,6 +756,13 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         })
 
         this.assertFooterLayoutEquals(layout)
+    }
+
+    @test()
+    protected async settingFooterLayoutWithoutFooterRendersTheCard() {
+        this.renderCard()
+        this.setFooterLayout('vertical')
+        this.assertTriggerRenderCountEquals(1)
     }
 
     private setFooter(footer: CardFooter) {

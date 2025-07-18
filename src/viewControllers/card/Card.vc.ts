@@ -429,9 +429,10 @@ export default class CardViewController<V extends Card = Card>
         this.footerLayout = layout
         if (this.model.footer) {
             this.model.footer.layout = layout
+            this.triggerRenderFooter?.()
+        } else {
+            this.triggerRender()
         }
-
-        this.triggerRenderFooter?.()
     }
 
     public render(): V {
