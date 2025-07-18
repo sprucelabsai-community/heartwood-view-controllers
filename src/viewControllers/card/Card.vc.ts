@@ -23,7 +23,7 @@ export default class CardViewController<V extends Card = Card>
     private triggerRenderHeader?: () => void
     private triggerRenderSections: (() => void)[] = []
     private sectionVcs: SectionVc[] = []
-    private footerLayout?: CardFooterLayout
+    private footerLayout?: CardFooterLayout | null
 
     public constructor(options: V & ViewControllerOptions) {
         super(options)
@@ -177,6 +177,10 @@ export default class CardViewController<V extends Card = Card>
 
     public getFooter() {
         return this.model.footer
+    }
+
+    public getFooterLayout() {
+        return this.footerLayout
     }
 
     public getHeaderSubtitle(): string | undefined {

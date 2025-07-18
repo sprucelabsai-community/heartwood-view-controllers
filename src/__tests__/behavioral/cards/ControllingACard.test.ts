@@ -757,6 +757,11 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
             layout,
             'Footer layout should match'
         )
+        assert.isEqual(
+            this.vc.getFooterLayout(),
+            layout,
+            'Footer layout should match from vc.getFooterLayout()'
+        )
     }
 
     private setBackgroundImage(image: string) {
