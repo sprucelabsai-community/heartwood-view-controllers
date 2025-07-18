@@ -77,7 +77,7 @@
     "@sprucelabs/calendar-utils": "^43.0.52",
     "@sprucelabs/error": "^7.0.25",
     "@sprucelabs/globby": "^2.0.506",
-    "@sprucelabs/mercury-core-events": "^27.0.46",
+    "@sprucelabs/mercury-core-events": "^27.0.47",
     "@sprucelabs/mercury-types": "^48.0.41",
     "@sprucelabs/schema": "^32.0.41",
     "@sprucelabs/spruce-core-schemas": "^41.0.40",
