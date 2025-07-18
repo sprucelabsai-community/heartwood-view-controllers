@@ -30,7 +30,7 @@ export default buildSchema({
                 schema: routerDestinationBuilder,
             },
         },
-        ...pickFields(buttonFields, ['isEnabled', 'label', 'onClick']),
+        ...pickFields(buttonFields, ['isEnabled', 'label', 'onClick', 'image']),
         dropdown: {
             type: 'schema',
             label: 'Dropdown',
