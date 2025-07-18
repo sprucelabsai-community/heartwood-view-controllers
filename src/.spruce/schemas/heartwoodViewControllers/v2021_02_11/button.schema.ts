@@ -69,7 +69,7 @@ const buttonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonSch
 	                label: 'Type',
 	                type: 'select',
 	                defaultValue: "secondary",
-	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 	            },
 	            /** Image. */
 	            'image': {

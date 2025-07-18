@@ -522,6 +522,10 @@ export const buttonFields: SchemaFieldsByName = {
                     label: 'Secondary',
                 },
                 {
+                    value: 'tertiary',
+                    label: 'Tertiary',
+                },
+                {
                     value: 'destructive',
                     label: 'Destructive',
                 },

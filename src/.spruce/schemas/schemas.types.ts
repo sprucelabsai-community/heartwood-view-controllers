@@ -2332,7 +2332,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -2418,7 +2418,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {
@@ -5280,7 +5280,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -5362,7 +5362,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {
@@ -6753,7 +6753,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -6839,7 +6839,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {
@@ -8214,7 +8214,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -8287,7 +8287,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {
@@ -8352,7 +8352,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -8436,7 +8436,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {
@@ -8519,7 +8519,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
-				'type'?: ("primary" | "secondary" | "destructive") | undefined | null
+				'type'?: ("primary" | "secondary" | "tertiary" | "destructive") | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -8601,7 +8601,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Type',
 			                type: 'select',
 			                defaultValue: "secondary",
-			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+			                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 			            },
 			            /** Image. */
 			            'image': {

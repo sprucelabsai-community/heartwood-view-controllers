@@ -70,7 +70,7 @@ const navigationDropdownButtonSchema: SpruceSchemas.HeartwoodViewControllers.v20
 	                label: 'Type',
 	                type: 'select',
 	                defaultValue: "secondary",
-	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"destructive","label":"Destructive"}],}
+	                options: {choices: [{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"},{"value":"destructive","label":"Destructive"}],}
 	            },
 	            /** Image. */
 	            'image': {
