@@ -28,6 +28,7 @@ export default class CardViewController<V extends Card = Card>
     public constructor(options: V & ViewControllerOptions) {
         super(options)
         this.model = options
+        this.footerLayout = this.model.footer?.layout ?? null
     }
 
     public setFooter(footer: V['footer']) {

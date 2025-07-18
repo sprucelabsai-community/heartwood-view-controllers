@@ -742,6 +742,21 @@ export default class ControllingACardTest extends AbstractViewControllerTest {
         this.assertFooterLayoutEquals(layout)
     }
 
+    @test('can set footer layout in card constructor', 'horizontal')
+    @test('can set footer layout in card constructor', 'vertical')
+    protected async canSetFooterLayoutInCardConstructor(
+        layout: CardFooterLayout
+    ) {
+        this.vc = this.Vc({
+            footer: {
+                layout,
+                buttons: [],
+            },
+        })
+
+        this.assertFooterLayoutEquals(layout)
+    }
+
     private setFooter(footer: CardFooter) {
         this.vc.setFooter(footer)
     }
