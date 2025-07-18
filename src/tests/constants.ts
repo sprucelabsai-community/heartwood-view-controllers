@@ -1,7 +1,7 @@
 import pathUtil from 'path'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 const dotenv = require('dotenv')
-dotenv.config()
+dotenv.config({ silent: true })
 
 export const DEMO_NUMBER = process.env.DEMO_NUMBER ?? '**MISSING**'
 export const DEMO_NUMBER2 = process.env.DEMO_NUMBER2 ?? '**MISSING**'

@@ -117,6 +117,9 @@
     "typescript": "^5.8.3",
     "yarn-upgrade-all": "^0.7.5"
   },
+  "resolutions": {
+    "@pkgr/core": "0.2.9"
+  },
   "jest": {
     "testRunner": "jest-circus/runner",
     "setupFilesAfterEnv": [
