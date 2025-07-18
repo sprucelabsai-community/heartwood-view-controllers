@@ -55,6 +55,12 @@ const navigationButtonSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11
 	                type: 'raw',
 	                options: {valueType: `() => Promise<any> | any`,}
 	            },
+	            /** Image. */
+	            'image': {
+	                label: 'Image',
+	                type: 'text',
+	                options: undefined
+	            },
 	            /** Dropdown. */
 	            'dropdown': {
 	                label: 'Dropdown',
