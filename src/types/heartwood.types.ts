@@ -871,7 +871,7 @@ export interface Device {
     getTheatreSetting<N extends TheatreSettingName>(
         name: N
     ): Promise<TheaterSettingValueTypes[N] | null>
-    AudioController(audioFileUrl: string): AudioController
+    AudioController(audioFileUrl: string): Promise<AudioController>
 }
 
 export interface AudioController {

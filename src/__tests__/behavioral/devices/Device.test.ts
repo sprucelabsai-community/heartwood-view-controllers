@@ -140,7 +140,7 @@ export default class DeviceTest extends AbstractDeviceTest {
     @test()
     protected async getsMockAudioDevice() {
         MockAudioController.beforeEach()
-        const audio = this.device.AudioController(generateId())
+        const audio = await this.device.AudioController(generateId())
         assert.isInstanceOf(audio, MockAudioController)
     }
 
