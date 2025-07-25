@@ -1,6 +1,6 @@
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import SpyDevice from '../../../tests/SpyDevice'
-import MockDeviceVc from './MockDeviceVc'
+import MockDeviceVc from './MockDeviceCardVc'
 
 export default class AbstractDeviceTest extends AbstractViewControllerTest {
     protected controllerMap = {

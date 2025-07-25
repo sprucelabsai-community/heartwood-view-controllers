@@ -1,8 +1,11 @@
 import { assert } from '@sprucelabs/test-utils'
-import { AudioController } from '../types/heartwood.types'
+import {
+    AudioController,
+    AudioControllerStatus,
+} from '../types/heartwood.types'
 
 export default class MockAudioController implements AudioController {
-    private status: 'pending' | 'stopped' | 'playing' | 'paused' = 'pending'
+    private status: AudioControllerStatus = 'pending'
     private volume = 0
     private sourceUrl?: string
 
@@ -86,18 +89,22 @@ export default class MockAudioController implements AudioController {
         assert.isEqual(
             this.status,
             'stopped',
-            `Audio was not stopped. Try audio.stope()`
+            `Audio was not stopped. Try audio.stop()`
         )
     }
 
     public stop(): void {
-        assert.isEqual(
+        assert.doesInclude(
+            ['playing', 'paused'],
             this.status,
-            'playing',
-            "Audio is not playing so you can't stop it."
+            "Audio is not playing or paused so you can't stop it."
         )
 
         this.status = 'stopped'
+    }
+
+    public getStatus(): AudioControllerStatus {
+        return this.status
     }
 
     public static getLastController(): MockAudioController {

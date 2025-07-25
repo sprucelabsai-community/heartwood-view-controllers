@@ -1,5 +1,6 @@
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import MockAudioController from '../../../tests/MockAudioController'
+import { AudioControllerStatus } from '../../../types/heartwood.types'
 import AbstractDeviceTest from './AbstractDeviceTest'
 
 @suite()
@@ -96,6 +97,21 @@ export default class AssertingAudioTest extends AbstractDeviceTest {
 
         const controllers = MockAudioController.getAllControllers()
         assert.isEqualDeep(controllers, [this.audio, audio2])
+    }
+
+    @test()
+    protected async knowsStatus() {
+        this.assertAudioStatusEquals('pending')
+        this.play()
+        this.assertAudioStatusEquals('playing')
+        this.pause()
+        this.assertAudioStatusEquals('paused')
+        this.stop()
+        this.assertAudioStatusEquals('stopped')
+    }
+
+    private assertAudioStatusEquals(expected: AudioControllerStatus) {
+        assert.isEqual(this.audio.getStatus(), expected)
     }
 
     private assertSourceUrlSetTo(url: string) {

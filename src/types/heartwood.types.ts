@@ -874,12 +874,15 @@ export interface Device {
     AudioController(audioFileUrl: string): Promise<AudioController>
 }
 
+export type AudioControllerStatus = 'pending' | 'stopped' | 'playing' | 'paused'
+
 export interface AudioController {
     play(): void
     pause(): void
     stop(): void
     setVolume(volume: number): void
     getVolume(): Promise<number | null>
+    getStatus(): AudioControllerStatus
 }
 
 export interface AuthorizerCanOptions<
