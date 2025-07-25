@@ -1,3 +1,10 @@
+# [124.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.2.5...v124.0.0) (2025-07-25)
+
+
+### Breaking Changes
+
+* audio controller status ([a36ae78](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a36ae78))
+
 ## [123.2.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.2.4...v123.2.5) (2025-07-23)
 
 ## [123.2.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v123.2.3...v123.2.4) (2025-07-21)
