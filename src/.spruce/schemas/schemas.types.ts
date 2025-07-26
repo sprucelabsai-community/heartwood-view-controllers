@@ -3099,6 +3099,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isVisible'?: boolean | undefined | null
 				/** Show close button. */
 				'shouldShowCloseButton'?: boolean | undefined | null
+				/** Width. */
+				'width'?: ("wide" | "tight" | "full") | undefined | null
 				/** Card controller. */
 				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>) | undefined | null
 				/** Close callback. Called when the dialog is closed */
@@ -3199,6 +3201,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Show close button',
 			                type: 'boolean',
 			                options: undefined
+			            },
+			            /** Width. */
+			            'width': {
+			                label: 'Width',
+			                type: 'select',
+			                defaultValue: "tight",
+			                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
 			            },
 			            /** Card controller. */
 			            'cardController': {

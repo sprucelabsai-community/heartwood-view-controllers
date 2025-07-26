@@ -1,5 +1,6 @@
 import { buildSchema } from '@sprucelabs/schema'
 import cardBuilder from './cards/card.builder'
+import skillViewBuilder from './skillView.builder'
 
 export default buildSchema({
     id: 'dialog',
@@ -15,6 +16,7 @@ export default buildSchema({
             type: 'boolean',
             label: 'Show close button',
         },
+        width: skillViewBuilder.fields.width,
         controller: {
             type: 'raw',
             label: 'Controller',

@@ -99,6 +99,13 @@ const dialogSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DialogSch
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Width. */
+	            'width': {
+	                label: 'Width',
+	                type: 'select',
+	                defaultValue: "tight",
+	                options: {choices: [{"value":"wide","label":"Wide"},{"value":"tight","label":"Tight"},{"value":"full","label":"Full width"}],}
+	            },
 	            /** Card controller. */
 	            'cardController': {
 	                label: 'Card controller',
