@@ -91,10 +91,11 @@ export default class DialogViewController extends AbstractViewController<Dialog>
         await this.closePromise
     }
 
-    public render(): Dialog {
+    public render(): DialogOptions {
         return {
             ...this.cardVc.render(),
             width: this.width,
+            //@ts-ignore
             controller: this,
             cardController: this.cardVc,
             isVisible: this.isVisible,
