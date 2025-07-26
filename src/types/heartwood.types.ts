@@ -66,6 +66,7 @@ import CountdownTimerViewController, {
     CountdownTimerViewControllerOptions,
 } from '../viewControllers/countdownTimer/CountdownTimer.vc'
 import DialogViewController, {
+    DialogOptions,
     DialogViewControllerOptions,
 } from '../viewControllers/Dialog.vc'
 import FeedViewController, {
@@ -616,7 +617,7 @@ export interface OnRenderHandler {
 }
 
 export type RenderInDialogHandler = (
-    options: DialogViewControllerOptions
+    options: DialogOptions
 ) => DialogViewController
 
 export type AlertHandler = AbstractController['alert']
