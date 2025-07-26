@@ -1,3 +1,10 @@
+# [124.1.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.0.5...v124.1.0) (2025-07-26)
+
+
+### Features
+
+* dialog width ([20aa0ff](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/20aa0ff))
+
 ## [124.0.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.0.4...v124.0.5) (2025-07-26)
 
 ## [124.0.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.0.3...v124.0.4) (2025-07-26)
