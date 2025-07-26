@@ -18,6 +18,7 @@ import {
     RowStyle,
     AlertOptions,
     SimpleViewControllerFactory,
+    Dialog,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import ButtonBarViewController from '../../viewControllers/ButtonBar.vc'
@@ -874,7 +875,7 @@ const vcAssert = {
      * @deprecated vcAssert.assertFooterRendersButtonWithType(...) -> buttonAssert.footerRendersButtonWithType(...)
      */
     assertFooterRendersButtonWithType(
-        vc: ViewController<Card>,
+        vc: ViewController<Card | Dialog>,
         type?: Button['type']
     ) {
         return buttonAssert.footerRendersButtonWithType(vc, type)

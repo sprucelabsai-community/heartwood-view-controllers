@@ -1,6 +1,10 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { CardViewControllerImpl } from '..'
-import { ViewController, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    LayoutWidth,
+    ViewController,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 
 export default class DialogViewController extends AbstractViewController<Dialog> {
@@ -11,12 +15,14 @@ export default class DialogViewController extends AbstractViewController<Dialog>
     private isVisible = false
     private cardVc: ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>
     private shouldShowCloseButton: boolean
+    private width?: LayoutWidth | null
 
     public constructor(
-        options: ViewControllerOptions & Omit<Dialog, 'closeHandler'>
+        options: ViewControllerOptions & Omit<DialogOptions, 'closeHandler'>
     ) {
         super(options)
 
+        this.width = options.width
         this.shouldShowCloseButton = options.shouldShowCloseButton !== false
         this.cardVc = options.controller ?? this.Controller('card', options)
         this.onCloseHandler = options.onClose
@@ -88,7 +94,7 @@ export default class DialogViewController extends AbstractViewController<Dialog>
     public render(): Dialog {
         return {
             ...this.cardVc.render(),
-            //@ts-ignore
+            width: this.width,
             controller: this,
             cardController: this.cardVc,
             isVisible: this.isVisible,
@@ -105,5 +111,5 @@ export type DialogOptions =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card &
         SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
 
-type Dialog = DialogOptions
+type Dialog = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
 export type DialogViewControllerOptions = Omit<Dialog, 'closeHandler'>

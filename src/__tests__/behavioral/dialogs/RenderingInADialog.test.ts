@@ -2,7 +2,11 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, suite, assert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { Card, ViewControllerOptions } from '../../../types/heartwood.types'
+import {
+    Card,
+    LayoutWidth,
+    ViewControllerOptions,
+} from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 import DialogViewController from '../../../viewControllers/Dialog.vc'
@@ -212,6 +216,14 @@ export default class RenderingInADialogTest extends AbstractViewControllerTest {
         delete dlg.getParent
 
         await dlg.hide()
+    }
+
+    @test('dialog maintains width wide', 'wide')
+    @test('dialog maintains width narrow', 'tight')
+    protected async maintainsWidth(expected: LayoutWidth) {
+        const dlg = await this.vc.renderCardInDialog(expected)
+        const model = this.render(dlg)
+        assert.isEqual(model.width, expected)
     }
 
     private assertDialogIsBusy(dlg: DialogViewController) {

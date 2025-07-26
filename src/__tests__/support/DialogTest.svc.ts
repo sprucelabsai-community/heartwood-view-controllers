@@ -1,5 +1,8 @@
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
-import { SkillViewControllerLoadOptions } from '../../types/heartwood.types'
+import {
+    LayoutWidth,
+    SkillViewControllerLoadOptions,
+} from '../../types/heartwood.types'
 import DialogVc, { DialogOptions } from '../../viewControllers/Dialog.vc'
 
 declare module '../../types/heartwood.types' {
@@ -30,9 +33,9 @@ export default class DialogTestSkillViewController extends AbstractSkillViewCont
         return controller
     }
 
-    public async renderCardInDialog() {
+    public async renderCardInDialog(width?: LayoutWidth) {
         const controller = this.Controller('card', {})
-        return this.renderInDialog({ ...controller.render() })
+        return this.renderInDialog({ width, ...controller.render() })
     }
 
     public async renderInDialogAndWait() {

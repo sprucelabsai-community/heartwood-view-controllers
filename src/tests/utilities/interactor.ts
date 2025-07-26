@@ -14,6 +14,7 @@ import {
 import renderUtil from '../../utilities/render.utility'
 import ActiveRecordListViewController from '../../viewControllers/activeRecord/ActiveRecordList.vc'
 import BigFormViewController from '../../viewControllers/BigForm.vc'
+import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewController from '../../viewControllers/form/Form.vc'
 import listUtil from '../../viewControllers/list/list.utility'
 import ListViewController from '../../viewControllers/list/List.vc'
@@ -146,7 +147,7 @@ const interactor = {
     },
 
     async clickInFooterWithType(
-        vc: CardVc | FormVc,
+        vc: CardVc | FormVc | DialogViewController,
         type: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button['type']
     ) {
         const model = renderUtil.render(vc)
@@ -177,7 +178,7 @@ const interactor = {
         return this.clickInFooterWithType(vc, 'secondary')
     },
 
-    async clickDestructiveInFooter(vc: CardVc | FormVc) {
+    async clickDestructiveInFooter(vc: VcWithFooter) {
         return this.clickInFooterWithType(vc, 'destructive')
     },
 
@@ -662,6 +663,7 @@ function pluckButtonFromView(
 function pluckErrorAndFooterButtons(
     model:
         | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+        | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog
         | SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any>
 ) {
     //@ts-ignore
@@ -684,3 +686,5 @@ type NavVc = ViewController<Navigation>
 export type PagerButton = 'previous' | 'next' | number
 
 type ListVc = ListViewController | ActiveRecordListViewController
+
+type VcWithFooter = CardVc | FormVc | DialogViewController

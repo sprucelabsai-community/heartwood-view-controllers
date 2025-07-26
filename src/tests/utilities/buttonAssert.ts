@@ -4,6 +4,7 @@ import { assert } from '@sprucelabs/test-utils'
 import {
     Button,
     Card,
+    Dialog,
     FormViewController,
     Navigation,
     NavigationButton,
@@ -113,7 +114,7 @@ const buttonAssert = {
     },
 
     footerRendersButtonWithType(
-        vc: ViewController<Card>,
+        vc: ViewController<Card | Dialog>,
         type?: Button['type']
     ) {
         const model = renderUtil.render(vc)

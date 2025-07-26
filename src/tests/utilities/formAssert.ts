@@ -9,6 +9,7 @@ import buildForm from '../../builders/buildForm'
 import {
     BigFormViewController,
     Card,
+    Dialog,
     Form,
     FormBuilderCardViewController,
     FormInputViewController,
@@ -21,7 +22,6 @@ import {
 } from '../../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNames.utility'
 import renderUtil from '../../utilities/render.utility'
-import DialogViewController from '../../viewControllers/Dialog.vc'
 import FormViewControllerImpl from '../../viewControllers/form/Form.vc'
 import { pluckAllFromView } from './assertSupport'
 import { getViewId, pullCardsFromSkillView } from './vcAssert'
@@ -175,11 +175,11 @@ const formAssert = {
     },
 
     cardRendersForm(
-        vc: ViewController<Card> | DialogViewController,
+        vc: ViewController<Card | Dialog>,
         id?: string,
         errorMessage?: string
     ) {
-        const model = renderUtil.render(vc)
+        const model = renderUtil.render(vc) as Card
 
         const bigForms = pluckAllFromView(model, 'bigForm')
         const forms =

@@ -375,6 +375,7 @@ export type Navigation =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navigation
 export type NavigationButton =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButton
+export type LayoutWidth = NonNullable<SkillView['width']>
 
 export type NavigationItem =
     | NavigationButton
