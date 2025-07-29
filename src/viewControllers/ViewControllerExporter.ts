@@ -35,7 +35,7 @@ export default class ViewControllerExporter {
     public static require = require
 
     private cwd: string
-    private compiler?: Compiler
+    private compiler?: Compiler | null
     private isWatching: boolean | undefined = false
     private willIncrementallyBuildHandler?: WillIncrementallyBuildHandler
     private didIncrementallyBuildHandler?: DidIncrementallyBuildHandler
