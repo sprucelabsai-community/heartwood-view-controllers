@@ -692,12 +692,20 @@ export type RenderAsInputComponentType =
 export type RenderAsInputComponent =
     | RenderAsInputComponentType
     | RatingsInputComponent
+    | MediaInputComponent
 
 export type RatingsInputComponent = Pick<
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings,
     'steps' | 'leftLabel' | 'rightLabel' | 'middleLabel' | 'icon'
 > & {
     type: 'ratings'
+}
+
+type MediaInputMedia = 'image' | 'video' | 'audio'
+
+export interface MediaInputComponent {
+    type: 'media'
+    supportedMedia: MediaInputMedia[]
 }
 
 export interface InputComponent {
