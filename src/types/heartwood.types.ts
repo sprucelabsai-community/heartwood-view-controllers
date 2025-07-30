@@ -688,6 +688,7 @@ export type RenderAsInputComponentType =
     | 'search'
     | 'slider'
     | 'markdownInput'
+    | 'media'
 
 export type RenderAsInputComponent =
     | RenderAsInputComponentType
