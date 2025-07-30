@@ -701,11 +701,8 @@ export type RatingsInputComponent = Pick<
     type: 'ratings'
 }
 
-export type SupportedMedia = 'image' | 'video' | 'audio'
-
 export interface MediaInputComponent {
     type: 'media'
-    supportedMedia: SupportedMedia[]
 }
 
 export interface InputComponent {
