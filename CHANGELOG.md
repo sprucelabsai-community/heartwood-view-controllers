@@ -1,3 +1,10 @@
+# [124.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.1.6...v124.2.0) (2025-07-30)
+
+
+### Features
+
+* media input component ([3d4053a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3d4053a))
+
 ## [124.1.6](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.1.5...v124.1.6) (2025-07-30)
 
 ## [124.1.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.1.4...v124.1.5) (2025-07-30)
