@@ -1,3 +1,10 @@
+# [125.0.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.2.5...v125.0.0) (2025-07-31)
+
+
+### Breaking Changes
+
+* setPowerBehavior on device ([7ae5df7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7ae5df7))
+
 ## [124.2.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.2.4...v124.2.5) (2025-07-31)
 
 ## [124.2.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v124.2.3...v124.2.4) (2025-07-31)
