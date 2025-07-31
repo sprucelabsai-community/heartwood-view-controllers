@@ -1,4 +1,4 @@
-import { Schema, SchemaError } from '@sprucelabs/schema'
+import { buildSchema, Schema, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { functionDelegationUtil } from '@sprucelabs/spruce-skill-utils'
 import buildForm from '../../builders/buildForm'
@@ -247,20 +247,22 @@ export default class FormBuilderCardViewController extends AbstractViewControlle
     }
 
     public async handleClickAddPage() {
+        const schema = buildSchema({
+            id: 'addPage',
+            fields: {
+                title: {
+                    label: 'Page name',
+                    type: 'text',
+                    isRequired: true,
+                },
+            },
+        })
+
         const addPageForm = this.Controller(
             'form',
             buildForm({
                 id: 'addPageForm',
-                schema: {
-                    id: 'addPage',
-                    fields: {
-                        title: {
-                            label: 'Page name',
-                            type: 'text',
-                            isRequired: true,
-                        },
-                    },
-                },
+                schema,
                 sections: [
                     {
                         fields: [

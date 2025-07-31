@@ -1071,32 +1071,34 @@ export default class VcAssertTest extends AbstractViewControllerTest {
 
     @test()
     protected knowsIfFieldsBeingRendered() {
+        const testSchema1 = buildSchema({
+            id: 'test',
+            fields: {
+                one: {
+                    type: 'text',
+                },
+                two: {
+                    type: 'text',
+                },
+                three: {
+                    type: 'text',
+                },
+                four: {
+                    type: 'text',
+                },
+                five: {
+                    type: 'text',
+                },
+                six: {
+                    type: 'text',
+                },
+            },
+        })
+
         const formVc = this.Controller(
             'form',
             buildForm({
-                schema: buildSchema({
-                    id: 'test',
-                    fields: {
-                        one: {
-                            type: 'text',
-                        },
-                        two: {
-                            type: 'text',
-                        },
-                        three: {
-                            type: 'text',
-                        },
-                        four: {
-                            type: 'text',
-                        },
-                        five: {
-                            type: 'text',
-                        },
-                        six: {
-                            type: 'text',
-                        },
-                    },
-                }),
+                schema: testSchema1,
                 sections: [
                     {
                         fields: ['four', 'five'],
