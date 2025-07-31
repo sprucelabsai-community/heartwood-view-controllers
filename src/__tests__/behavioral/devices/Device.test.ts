@@ -8,6 +8,7 @@ import {
 import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
+    PowerBehaviorOptions,
     TheaterSettingValueTypes,
     TheatreSettingName,
 } from '../../../types/heartwood.types'
@@ -142,6 +143,42 @@ export default class DeviceTest extends AbstractDeviceTest {
         MockAudioController.beforeEach()
         const audio = await this.device.AudioController(generateId())
         assert.isInstanceOf(audio, MockAudioController)
+    }
+
+    @test()
+    protected async canSetAndGetDevicePowerBehavior() {
+        this.setPowerBehavior({
+            shouldKeepScreenOn: true,
+        })
+        this.assertLastPowerBehaviorOptionsEqual({
+            shouldKeepScreenOn: true,
+        })
+
+        this.setPowerBehavior({
+            shouldKeepScreenOn: true,
+            shouldAllowCpuSleep: true,
+            shouldOptimizeForBattery: true,
+        })
+
+        this.assertLastPowerBehaviorOptionsEqual({
+            shouldKeepScreenOn: true,
+            shouldAllowCpuSleep: true,
+            shouldOptimizeForBattery: true,
+        })
+    }
+
+    private setPowerBehavior(options: PowerBehaviorOptions) {
+        this.device.setPowerBehavior(options)
+    }
+
+    private assertLastPowerBehaviorOptionsEqual(
+        expected: PowerBehaviorOptions
+    ) {
+        assert.isEqualDeep(
+            this.device.lastPowerBehaviorOptions,
+            expected,
+            'last power behavior options should match'
+        )
     }
 
     private assertThrowsWithBadBrightness(brightness: number) {

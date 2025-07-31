@@ -880,6 +880,7 @@ export interface Device {
         name: N
     ): Promise<TheaterSettingValueTypes[N] | null>
     AudioController(audioFileUrl: string): Promise<AudioController>
+    setPowerBehavior(options: PowerBehaviorOptions): void
 }
 
 export type AudioControllerStatus = 'pending' | 'stopped' | 'playing' | 'paused'
@@ -891,6 +892,38 @@ export interface AudioController {
     setVolume(volume: number): void
     getVolume(): Promise<number | null>
     getStatus(): AudioControllerStatus
+}
+
+export interface PowerBehaviorOptions {
+    /**
+     * Prevent screen from turning off or dimming due to inactivity.
+     * Supported on: iOS, Android
+     */
+    shouldKeepScreenOn?: boolean
+
+    /**
+     * Prevent CPU from sleeping even if the screen is off.
+     * Supported on: Android only
+     */
+    shouldAllowCpuSleep?: boolean
+
+    /**
+     * Hint to the OS that this session should be battery-optimized (e.g., reduce brightness or refresh rate).
+     * Supported on: Android (limited support), iOS (no-op or indirect via Low Power Mode)
+     */
+    shouldOptimizeForBattery?: boolean
+
+    /**
+     * Request to disable Low Power Mode if applicable.
+     * Supported on: iOS only (no-op on Android)
+     */
+    shouldAllowLowPowerMode?: boolean
+
+    /**
+     * Allow execution in the background where possible (e.g., audio playback, location, etc.).
+     * Supported on: iOS, Android (platform-specific constraints and permissions apply)
+     */
+    shouldAllowBackgroundExecution?: boolean
 }
 
 export interface AuthorizerCanOptions<

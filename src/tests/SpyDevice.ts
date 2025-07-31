@@ -2,6 +2,7 @@ import { SchemaError } from '@sprucelabs/schema'
 import {
     CachedValue,
     Device,
+    PowerBehaviorOptions,
     TheaterSettingValueTypes,
     TheatreSettingName,
 } from '../types/heartwood.types'
@@ -19,6 +20,7 @@ export default class SpyDevice implements Device {
         Record<TheatreSettingName, TheaterSettingValueTypes[TheatreSettingName]>
     > = {}
     private brightness = 0
+    public lastPowerBehaviorOptions?: PowerBehaviorOptions
 
     public setCachedValue(key: string, value: CachedValue): void {
         this.cachedValues[key] = value
@@ -87,6 +89,10 @@ export default class SpyDevice implements Device {
         audioFileUrl: string
     ): Promise<MockAudioController> {
         return new MockAudioController(audioFileUrl)
+    }
+
+    public setPowerBehavior(options: PowerBehaviorOptions): void {
+        this.lastPowerBehaviorOptions = options
     }
 }
 
