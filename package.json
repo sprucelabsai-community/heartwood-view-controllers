@@ -92,7 +92,7 @@
     "object-set": "^1.0.1",
     "terser-webpack-plugin": "^5.3.14",
     "uglify-js": "^3.19.3",
-    "webpack": "^5.101.0"
+    "webpack": "^5.101.1"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^7.0.22",
