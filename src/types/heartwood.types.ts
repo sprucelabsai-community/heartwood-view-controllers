@@ -428,6 +428,7 @@ export type NavigationRoute =
 export type LayoutStyle = NonNullable<
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout['style']
 >
+export type Video = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Video
 export type LayoutColumn = Card[]
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 export type DragAndDropListSortHandler = NonNullable<List['onDragAndDropSort']>
