@@ -12,6 +12,7 @@ import toggleInputBuilder from './forms/toggleInput.builder'
 import selectInputBuilder from './selectInput.builder'
 import statusIndicatorBuilder from './statusIndicator.builder'
 import textBuilder from './text.builder'
+import videoBuilder from './video.builder'
 
 const cellInputFields = {
     onKeyDown: {
@@ -65,6 +66,12 @@ export default buildSchema({
         image: {
             type: 'text',
             label: 'Image url',
+        },
+        video: {
+            type: 'schema',
+            options: {
+                schema: videoBuilder,
+            },
         },
         avatars: {
             type: 'raw',

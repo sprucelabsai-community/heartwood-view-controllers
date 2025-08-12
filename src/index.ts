@@ -105,6 +105,7 @@ export { default as skillViewLayoutSchema } from '#spruce/schemas/heartwoodViewC
 export { default as listSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/list.schema'
 export { default as listRowSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listRow.schema'
 export { default as listCellSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCell.schema'
+export { default as videoSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/video.schema'
 export { default as formBuilderImportExportObjectSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/formBuilderImportExportObject.schema'
 export { default as sprucebotAvatarSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/sprucebotAvatar.schema'
 export { default as talkingSprucebotSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'

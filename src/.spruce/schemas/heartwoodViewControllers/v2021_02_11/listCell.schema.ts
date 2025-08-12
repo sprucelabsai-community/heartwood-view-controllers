@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/text.schema'
+import videoSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/video.schema'
 import listCellButtonSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/listCellButton.schema'
 import calendarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendar.schema'
 import buttonBarSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/buttonBar.schema'
@@ -54,6 +55,11 @@ const listCellSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCel
 	                label: 'Image url',
 	                type: 'text',
 	                options: undefined
+	            },
+	            /** . */
+	            'video': {
+	                type: 'schema',
+	                options: {schema: videoSchema_v2021_02_11,}
 	            },
 	            /** Avatars. */
 	            'avatars': {

@@ -2,6 +2,7 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import textSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/text.schema'
+import videoSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/video.schema'
 import formSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/form.schema'
 import talkingSprucebotSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/talkingSprucebot.schema'
 import bigFormSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/bigForm.schema'
@@ -79,6 +80,11 @@ const cardSectionSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 	                label: 'Image',
 	                type: 'text',
 	                options: undefined
+	            },
+	            /** . */
+	            'video': {
+	                type: 'schema',
+	                options: {schema: videoSchema_v2021_02_11,}
 	            },
 	            /** Avatar. */
 	            'avatar': {

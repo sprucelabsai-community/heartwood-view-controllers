@@ -18,6 +18,7 @@ import receiptBuilder from '../receipt.builder'
 import statsBuilder from '../stats.builder'
 import talkingSprucebotBuilder from '../talkingSprucebot.builder'
 import textBuilder from '../text.builder'
+import videoBuilder from '../video.builder'
 
 export default buildSchema({
     id: 'cardSection',
@@ -63,6 +64,12 @@ export default buildSchema({
         image: {
             type: 'text',
             label: 'Image',
+        },
+        video: {
+            type: 'schema',
+            options: {
+                schema: videoBuilder,
+            },
         },
         avatar: {
             type: 'text',
