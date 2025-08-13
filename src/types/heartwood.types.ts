@@ -873,6 +873,7 @@ export interface Device {
     sendCommand(command: string, payload?: Record<string, any>): void
     turnTorchOn(brightness?: number): void
     turnTorchOff(): void
+    sendFeedback(options: FeedbackOptions): void
     setTheatreSetting<N extends TheatreSettingName>(
         name: N,
         value: TheaterSettingValueTypes[N]
@@ -882,6 +883,13 @@ export interface Device {
     ): Promise<TheaterSettingValueTypes[N] | null>
     AudioController(audioFileUrl: string): Promise<AudioController>
     setPowerBehavior(options: PowerBehaviorOptions): void
+}
+
+export interface FeedbackOptions {
+    message: string
+    fromPhone?: string
+    fromEmail?: string
+    fromPersonId?: string
 }
 
 export type AudioControllerStatus = 'pending' | 'stopped' | 'playing' | 'paused'
