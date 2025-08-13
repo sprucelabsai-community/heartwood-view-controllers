@@ -886,7 +886,8 @@ export interface Device {
 }
 
 export interface FeedbackOptions {
-    message: string
+    feedback: string
+    context?: Record<string, any>
     fromPhone?: string
     fromEmail?: string
     fromPersonId?: string
