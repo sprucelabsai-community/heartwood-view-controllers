@@ -176,7 +176,7 @@ export default class DeviceTest extends AbstractDeviceTest {
             fromPhone: generateId(),
             context: {},
         }
-        this.device.sendFeedback(feedback)
+        this.device.submitFeedback(feedback)
         assert.isEqualDeep(
             this.device.lastFeedbackOptions,
             feedback,

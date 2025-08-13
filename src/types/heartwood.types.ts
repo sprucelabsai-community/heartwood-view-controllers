@@ -873,7 +873,7 @@ export interface Device {
     sendCommand(command: string, payload?: Record<string, any>): void
     turnTorchOn(brightness?: number): void
     turnTorchOff(): void
-    sendFeedback(options: FeedbackOptions): void
+    submitFeedback(options: SubmitFeedbackOptions): void
     setTheatreSetting<N extends TheatreSettingName>(
         name: N,
         value: TheaterSettingValueTypes[N]
@@ -885,7 +885,7 @@ export interface Device {
     setPowerBehavior(options: PowerBehaviorOptions): void
 }
 
-export interface FeedbackOptions {
+export interface SubmitFeedbackOptions {
     feedback: string
     context?: Record<string, any>
     fromPhone?: string

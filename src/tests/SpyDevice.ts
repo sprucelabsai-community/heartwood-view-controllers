@@ -2,7 +2,7 @@ import { SchemaError } from '@sprucelabs/schema'
 import {
     CachedValue,
     Device,
-    FeedbackOptions,
+    SubmitFeedbackOptions,
     PowerBehaviorOptions,
     TheaterSettingValueTypes,
     TheatreSettingName,
@@ -22,7 +22,7 @@ export default class SpyDevice implements Device {
     > = {}
     private brightness = 0
     public lastPowerBehaviorOptions?: PowerBehaviorOptions
-    public lastFeedbackOptions?: FeedbackOptions
+    public lastFeedbackOptions?: SubmitFeedbackOptions
 
     public setCachedValue(key: string, value: CachedValue): void {
         this.cachedValues[key] = value
@@ -97,7 +97,7 @@ export default class SpyDevice implements Device {
         this.lastPowerBehaviorOptions = options
     }
 
-    public sendFeedback(options: FeedbackOptions): void {
+    public submitFeedback(options: SubmitFeedbackOptions): void {
         this.lastFeedbackOptions = options
     }
 }
