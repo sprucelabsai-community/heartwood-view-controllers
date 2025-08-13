@@ -167,6 +167,23 @@ export default class DeviceTest extends AbstractDeviceTest {
         })
     }
 
+    @test()
+    protected async canCheckForLastFeedback() {
+        const feedback = {
+            feedback: generateId(),
+            fromEmail: generateId(),
+            fromPersonId: generateId(),
+            fromPhone: generateId(),
+            context: {},
+        }
+        this.device.sendFeedback(feedback)
+        assert.isEqualDeep(
+            this.device.lastFeedbackOptions,
+            feedback,
+            'Feedback options not tracked'
+        )
+    }
+
     private setPowerBehavior(options: PowerBehaviorOptions) {
         this.device.setPowerBehavior(options)
     }
