@@ -77,6 +77,27 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
     }
 
     @test()
+    protected async cannotFindButton() {
+        const buttonId = generateId()
+        const vc = this.NavigationVc({
+            buttons: [{ id: buttonId, lineIcon: 'tag' }],
+        })
+        assert.doesThrow(() =>
+            navigationAssert.doesNotRendersButton(vc, buttonId)
+        )
+    }
+
+    @test()
+    protected async doesNotThrowsIfButtonNotFound() {
+        const buttonId = generateId()
+        const vc = this.NavigationVc({
+            buttons: [{ id: buttonId, lineIcon: 'tag' }],
+        })
+
+        navigationAssert.doesNotRendersButton(vc, generateId())
+    }
+
+    @test()
     protected async throwsWhenNotRenderButtonLabels() {
         const vc = this.NavigationVc({
             shouldRenderButtonLabels: false,

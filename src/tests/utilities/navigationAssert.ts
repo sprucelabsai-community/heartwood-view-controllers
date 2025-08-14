@@ -56,6 +56,30 @@ const navigationAssert = {
         ids.forEach((id) => this.rendersButton(vc, id))
     },
 
+    doesNotRendersButton(vc: ViewController<Navigation>, id: string) {
+        assertOptions({ vc, buttons: id }, ['vc', 'buttons'])
+
+        const model = renderUtil.render(vc)
+
+        const buttons = model.buttons?.reduce((acc, b) => {
+            if ((b as NavigationButton).dropdown) {
+                return [
+                    ...acc,
+                    b,
+                    ...((b as NavigationButton)?.dropdown?.items ?? []),
+                ]
+            }
+            return [...acc, b]
+        }, [] as any[])
+
+        const button = buttons?.find((b) => b.id === id)
+
+        assert.isFalsy(
+            button,
+            `I found a button with the id "${id}" in your navigation but I should not have!`
+        )
+    },
+
     rendersButtonLabels(vc: ViewController<Navigation>) {
         const model = renderUtil.render(vc)
         assert.isTrue(
