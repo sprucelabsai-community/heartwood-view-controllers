@@ -68,13 +68,13 @@
     "lint.tsc": "tsc -p . --noEmit"
   },
   "dependencies": {
-    "@babel/core": "^7.28.0",
+    "@babel/core": "^7.28.3",
     "@babel/plugin-transform-class-properties": "^7.27.1",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
+    "@babel/plugin-transform-runtime": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
-    "@babel/runtime": "^7.28.2",
-    "@sprucelabs/calendar-utils": "^43.0.90",
+    "@babel/runtime": "^7.28.3",
+    "@sprucelabs/calendar-utils": "^43.0.91",
     "@sprucelabs/error": "^7.1.0",
     "@sprucelabs/globby": "^2.0.506",
     "@sprucelabs/mercury-core-events": "^27.0.81",
@@ -92,13 +92,13 @@
     "object-set": "^1.0.1",
     "terser-webpack-plugin": "^5.3.14",
     "uglify-js": "^3.19.3",
-    "webpack": "^5.101.1"
+    "webpack": "^5.101.2"
   },
   "devDependencies": {
     "@sprucelabs/esm-postbuild": "^7.0.22",
     "@sprucelabs/jest-json-reporter": "^9.0.35",
-    "@sprucelabs/mercury-client": "^43.0.88",
-    "@sprucelabs/mercury-event-emitter": "^43.0.88",
+    "@sprucelabs/mercury-client": "^43.0.89",
+    "@sprucelabs/mercury-event-emitter": "^43.0.89",
     "@sprucelabs/resolve-path-aliases": "^3.0.18",
     "@sprucelabs/semantic-release": "^5.0.2",
     "@sprucelabs/test": "^10.0.14",
