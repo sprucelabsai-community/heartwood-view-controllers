@@ -56,7 +56,7 @@ const navigationAssert = {
         ids.forEach((id) => this.rendersButton(vc, id))
     },
 
-    doesNotRendersButton(vc: ViewController<Navigation>, id: string) {
+    doesNotRenderButton(vc: ViewController<Navigation>, id: string) {
         assertOptions({ vc, buttons: id }, ['vc', 'buttons'])
 
         const model = renderUtil.render(vc)

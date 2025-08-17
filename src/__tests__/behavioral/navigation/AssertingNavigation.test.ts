@@ -83,7 +83,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
             buttons: [{ id: buttonId, lineIcon: 'tag' }],
         })
         assert.doesThrow(() =>
-            navigationAssert.doesNotRendersButton(vc, buttonId)
+            navigationAssert.doesNotRenderButton(vc, buttonId)
         )
     }
 
@@ -94,7 +94,7 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
             buttons: [{ id: buttonId, lineIcon: 'tag' }],
         })
 
-        navigationAssert.doesNotRendersButton(vc, generateId())
+        navigationAssert.doesNotRenderButton(vc, generateId())
     }
 
     @test()
