@@ -14,6 +14,9 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     public static async beforeAll() {
         await super.beforeAll()
 
+        //@ts-ignore
+        global.fetch = () => 'fetching!'
+
         const exporter = ViewControllerExporter.Exporter(
             constants.importExportCwd
         )
@@ -122,6 +125,14 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         assert.isEqual(model.clearTimeout, clearTimeout)
         //@ts-ignore
         assert.isEqual(model.clearInterval, clearInterval)
+    }
+
+    @test()
+    protected canGetFetch() {
+        const model = this.importAndRenderVc()
+
+        //@ts-ignore
+        assert.isEqual(model.fetch, global.fetch)
     }
 
     @test()

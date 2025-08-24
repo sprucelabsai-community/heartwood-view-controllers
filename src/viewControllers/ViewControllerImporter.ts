@@ -25,10 +25,12 @@ export default class ViewControllerImporter {
                 .filter(
                     (name) =>
                         [
+                            'global',
                             'setTimeout',
                             'clearTimeout',
                             'setInterval',
                             'clearInterval',
+                            'fetch',
                         ].indexOf(name) === -1
                 )
                 .filter((name) => this.shouldOverideGlobalNamed(name))

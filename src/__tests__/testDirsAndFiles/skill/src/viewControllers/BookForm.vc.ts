@@ -29,6 +29,7 @@ export default class BookFormViewController extends AbstractSkillViewController 
             clearTimeout,
             setInterval,
             clearInterval,
+            fetch: fetch,
         }
     }
 }
