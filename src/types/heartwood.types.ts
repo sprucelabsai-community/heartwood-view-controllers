@@ -874,7 +874,6 @@ export interface Device {
     turnTorchOn(brightness?: number): void
     turnTorchOff(): void
     submitFeedback(options: SubmitFeedbackOptions): void
-    askForAVote(options: AskForAVoteCommandOptions): void
     setTheatreSetting<N extends TheatreSettingName>(
         name: N,
         value: TheaterSettingValueTypes[N]
@@ -892,11 +891,6 @@ export interface SubmitFeedbackOptions {
     fromPhone?: string
     fromEmail?: string
     fromPersonId?: string
-}
-
-export interface AskForAVoteCommandOptions {
-    featureKey: string
-    skillNamespace: string
 }
 
 export type AudioControllerStatus = 'pending' | 'stopped' | 'playing' | 'paused'
