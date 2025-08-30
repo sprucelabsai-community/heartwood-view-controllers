@@ -48,6 +48,7 @@ export { default as CalendarViewController } from './viewControllers/Calendar.vc
 export * from './viewControllers/Calendar.vc'
 export { default as ButtonBarViewController } from './viewControllers/ButtonBar.vc'
 export { default as TalkingSprucebotViewController } from './viewControllers/TalkingSprucebot.vc'
+export * from './viewControllers/TalkingSprucebot.vc'
 export { default as ActiveRecordCardViewController } from './viewControllers/activeRecord/ActiveRecordCard.vc'
 export { default as ActiveRecordListViewController } from './viewControllers/activeRecord/ActiveRecordList.vc'
 export { default as FeedViewController } from './viewControllers/Feed.vc'
