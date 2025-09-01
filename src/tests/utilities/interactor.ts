@@ -97,6 +97,19 @@ const interactor = {
         await this.click(match)
     },
 
+    async clickCard(vc: CardVc) {
+        assertOptions({ vc }, ['vc'])
+
+        const model = renderUtil.render(vc)
+        const { onClick } = model
+        assert.isTruthy(
+            onClick,
+            `onClick is not set, please set add onClick: ()=>{} in your card to make the it clickable`
+        )
+
+        await onClick()
+    },
+
     async clickButtonInGroup(
         buttonGroupVc: ButtonGroupVc,
         buttonIdOrIdx: string | number
