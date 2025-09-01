@@ -1,3 +1,10 @@
+# [126.2.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.1.22...v126.2.0) (2025-09-01)
+
+
+### Features
+
+* clickingCard feature ([b050603](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b050603))
+
 ## [126.1.22](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.1.21...v126.1.22) (2025-08-30)
 
 ## [126.1.21](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.1.20...v126.1.21) (2025-08-30)
