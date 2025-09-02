@@ -10,7 +10,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
     ToastHandler,
-    ToastOptions,
+    ToastMessage,
     ViewControllerOptions,
     ViewControllerPlugins,
 } from '../../../types/heartwood.types'
@@ -90,7 +90,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
 
     @test()
     protected async toastSentToToastHandler() {
-        let passedOptions: ToastOptions | undefined
+        let passedOptions: ToastMessage | undefined
         this.spyFactory.toastHandler = (options) => {
             passedOptions = options
         }
@@ -163,7 +163,7 @@ class SpyApp extends AbstractAppController {
         delete this.nav
     }
 
-    public toast(options: ToastOptions) {
+    public toast(options: ToastMessage) {
         super.toast(options)
     }
 

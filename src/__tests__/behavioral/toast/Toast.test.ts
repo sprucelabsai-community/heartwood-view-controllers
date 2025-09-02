@@ -1,7 +1,7 @@
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import toastAssert from '../../../tests/utilities/toastAssert'
-import { ToastOptions } from '../../../types/heartwood.types'
+import { ToastMessage } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/card/Card.vc'
 
 @suite()
@@ -16,7 +16,7 @@ export default class ToastTest extends AbstractViewControllerTest {
     @test()
     protected async canCreateToast() {
         let wasHit = false
-        let passedOptions: ToastOptions | undefined
+        let passedOptions: ToastMessage | undefined
         this.views = this.Factory({
             toastHandler: (options) => {
                 passedOptions = options

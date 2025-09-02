@@ -638,12 +638,11 @@ export type VoteOptions =
         howCoolWouldItBeIf: string
     }
 
-export interface ToastOptions {
-    message: string
-}
+export type ToastMessage =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToastMessage
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
-export type ToastHandler = (options: ToastOptions) => void
+export type ToastHandler = (options: ToastMessage) => void
 
 export interface FormInputHandlers<View> {
     getValue: () => any

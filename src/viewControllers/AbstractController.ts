@@ -7,7 +7,7 @@ import {
     Device,
     RenderInDialogHandler,
     ToastHandler,
-    ToastOptions,
+    ToastMessage,
     ViewController,
     ViewControllerId,
     ViewControllerMap,
@@ -90,7 +90,7 @@ export default abstract class AbstractController {
         this.views.mixinControllers(map as any)
     }
 
-    protected toast(options: ToastOptions) {
+    protected toast(options: ToastMessage) {
         this.toastHandler(options)
     }
 

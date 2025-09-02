@@ -249,5 +249,6 @@ export { default as navigationButtonDropdownSchema } from '#spruce/schemas/heart
 export { default as navigationDropdownButtonSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationDropdownButton.schema'
 export { default as routerDestinationSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
 export { default as navigationRouteSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationRoute.schema'
+export { default as toastMessageSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toastMessage.schema'
 
 export * from './toolBelts/ToolBeltStateMachine'
