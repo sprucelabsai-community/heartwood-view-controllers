@@ -1,3 +1,10 @@
+# [126.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.2.5...v126.3.0) (2025-09-02)
+
+
+### Features
+
+* toast message enhancements ([d1ec5cb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d1ec5cb))
+
 ## [126.2.5](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.2.4...v126.2.5) (2025-09-02)
 
 ## [126.2.4](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.2.3...v126.2.4) (2025-09-02)
