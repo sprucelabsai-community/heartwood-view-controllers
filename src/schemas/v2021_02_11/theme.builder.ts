@@ -297,6 +297,16 @@ export default buildSchema({
                             label: 'Tool belt color 2',
                             hint: 'The background color of the tool belts.',
                         },
+                        successColor1: {
+                            type: 'text',
+                            label: 'Success color 1',
+                            hint: 'Success messages overlayed on a background colored with successColor1Inverse.',
+                        },
+                        successColor1Inverse: {
+                            type: 'text',
+                            label: 'Success color 2',
+                            hint: 'The background used when rendering success messages.',
+                        },
                         errorColor1: {
                             type: 'text',
                             label: 'Error color 1',

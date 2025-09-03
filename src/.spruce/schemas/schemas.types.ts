@@ -1371,6 +1371,10 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'controlBar'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ControlBar | undefined | null
 				/** Tool belt color 2. The background color of the tool belts. */
 				'toolBeltColor2'?: string | undefined | null
+				/** Success color 1. Success messages overlayed on a background colored with successColor1Inverse. */
+				'successColor1'?: string | undefined | null
+				/** Success color 2. The background used when rendering success messages. */
+				'successColor1Inverse'?: string | undefined | null
 				/** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
 				'errorColor1'?: string | undefined | null
 				/** Error color 2. The background used when rendering errors. */
@@ -1530,6 +1534,20 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Tool belt color 2',
 			                type: 'text',
 			                hint: 'The background color of the tool belts.',
+			                options: undefined
+			            },
+			            /** Success color 1. Success messages overlayed on a background colored with successColor1Inverse. */
+			            'successColor1': {
+			                label: 'Success color 1',
+			                type: 'text',
+			                hint: 'Success messages overlayed on a background colored with successColor1Inverse.',
+			                options: undefined
+			            },
+			            /** Success color 2. The background used when rendering success messages. */
+			            'successColor1Inverse': {
+			                label: 'Success color 2',
+			                type: 'text',
+			                hint: 'The background used when rendering success messages.',
 			                options: undefined
 			            },
 			            /** Error color 1. Errors overlayed on a background colored with errorColor1Inverse. */
