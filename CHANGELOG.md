@@ -1,3 +1,10 @@
+# [126.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.3.1...v126.4.0) (2025-09-03)
+
+
+### Features
+
+* succes scolor ([9b059fb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9b059fb))
+
 ## [126.3.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.3.0...v126.3.1) (2025-09-02)
 
 # [126.3.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.2.5...v126.3.0) (2025-09-02)
