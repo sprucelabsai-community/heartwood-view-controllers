@@ -1,3 +1,10 @@
+# [126.6.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.5.0...v126.6.0) (2025-09-04)
+
+
+### Features
+
+* toast destination ([b5f904c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b5f904c))
+
 # [126.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.4.1...v126.5.0) (2025-09-04)
 
 
