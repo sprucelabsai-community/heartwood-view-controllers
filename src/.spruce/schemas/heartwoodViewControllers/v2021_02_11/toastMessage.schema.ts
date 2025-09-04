@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import routerDestinationSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/routerDestination.schema'
 
 const toastMessageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToastMessageSchema  = {
 	id: 'toastMessage',
@@ -22,6 +22,11 @@ const toastMessageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Toa
 	                label: 'Style',
 	                type: 'select',
 	                options: {choices: [{"value":"info","label":"info"},{"value":"success","label":"success"},{"value":"warning","label":"warning"},{"value":"critical","label":"critical"}],}
+	            },
+	            /** . */
+	            'destination': {
+	                type: 'schema',
+	                options: {schema: routerDestinationSchema_v2021_02_11,}
 	            },
 	            /** Is Sticky. */
 	            'isSticky': {

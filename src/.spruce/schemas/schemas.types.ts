@@ -844,6 +844,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'content': string
 				/** Style. */
 				'style'?: ("info" | "success" | "warning" | "critical") | undefined | null
+				
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
 				/** Is Sticky. */
 				'isSticky'?: boolean | undefined | null
 		}
@@ -867,6 +869,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Style',
 			                type: 'select',
 			                options: {choices: [{"value":"info","label":"info"},{"value":"success","label":"success"},{"value":"warning","label":"warning"},{"value":"critical","label":"critical"}],}
+			            },
+			            /** . */
+			            'destination': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
 			            },
 			            /** Is Sticky. */
 			            'isSticky': {

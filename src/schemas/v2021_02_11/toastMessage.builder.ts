@@ -1,4 +1,5 @@
 import { buildSchema } from '@sprucelabs/schema'
+import routerDestinationBuilder from './routerDestination.builder'
 
 export default buildSchema({
     id: 'toastMessage',
@@ -19,6 +20,12 @@ export default buildSchema({
                     { value: 'warning', label: 'warning' },
                     { value: 'critical', label: 'critical' },
                 ],
+            },
+        },
+        destination: {
+            type: 'schema',
+            options: {
+                schema: routerDestinationBuilder,
             },
         },
         isSticky: {
