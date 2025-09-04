@@ -1,3 +1,10 @@
+# [126.5.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.4.1...v126.5.0) (2025-09-04)
+
+
+### Features
+
+* add ToastMessageStyle type for improved styling options ([8fc6f54](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8fc6f54))
+
 ## [126.4.1](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.4.0...v126.4.1) (2025-09-04)
 
 # [126.4.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.3.1...v126.4.0) (2025-09-03)
