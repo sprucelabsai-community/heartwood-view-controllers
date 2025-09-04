@@ -10,9 +10,9 @@ const toastMessageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Toa
 	name: 'Toast message',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
-	            /** Message. */
-	            'message': {
-	                label: 'Message',
+	            /** Content. */
+	            'content': {
+	                label: 'Content',
 	                type: 'text',
 	                isRequired: true,
 	                options: undefined

@@ -840,8 +840,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface ToastMessage {
 			
-				/** Message. */
-				'message': string
+				/** Content. */
+				'content': string
 				/** Style. */
 				'style'?: ("info" | "success" | "warning" | "critical") | undefined | null
 				/** Is Sticky. */
@@ -855,9 +855,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Toast message',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
-			            /** Message. */
-			            'message': {
-			                label: 'Message',
+			            /** Content. */
+			            'content': {
+			                label: 'Content',
 			                type: 'text',
 			                isRequired: true,
 			                options: undefined

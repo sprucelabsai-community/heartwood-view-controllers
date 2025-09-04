@@ -16,25 +16,25 @@ export default class ToastTest extends AbstractViewControllerTest {
     @test()
     protected async canCreateToast() {
         let wasHit = false
-        let passedOptions: ToastMessage | undefined
+        let toastMessage: ToastMessage | undefined
         this.views = this.Factory({
             toastHandler: (options) => {
-                passedOptions = options
+                toastMessage = options
                 wasHit = true
             },
         })
 
         const vc = this.views.Controller('card', {})
 
-        const expected = {
-            message: generateId(),
+        const expected: ToastMessage = {
+            content: generateId(),
         }
 
         //@ts-ignore
         vc.toast(expected)
 
         assert.isEqual(wasHit, true)
-        assert.isEqualDeep(passedOptions, expected)
+        assert.isEqualDeep(toastMessage, expected)
     }
 
     @test()

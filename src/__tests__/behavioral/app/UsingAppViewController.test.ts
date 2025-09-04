@@ -95,8 +95,8 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
             passedOptions = options
         }
         const app = this.App()
-        const expected = {
-            message: generateId(),
+        const expected: ToastMessage = {
+            content: generateId(),
         }
         app.toast(expected)
         assert.isEqual(
@@ -163,8 +163,8 @@ class SpyApp extends AbstractAppController {
         delete this.nav
     }
 
-    public toast(options: ToastMessage) {
-        super.toast(options)
+    public toast(message: ToastMessage) {
+        super.toast(message)
     }
 
     public renderNavigation() {

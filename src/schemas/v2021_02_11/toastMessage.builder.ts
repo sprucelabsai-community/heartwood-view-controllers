@@ -4,9 +4,9 @@ export default buildSchema({
     id: 'toastMessage',
     name: 'Toast message',
     fields: {
-        message: {
+        content: {
             type: 'text',
-            label: 'Message',
+            label: 'Content',
             isRequired: true,
         },
         style: {
