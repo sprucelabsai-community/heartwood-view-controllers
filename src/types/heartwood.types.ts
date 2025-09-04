@@ -640,6 +640,7 @@ export type VoteOptions =
 
 export type ToastMessage =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToastMessage
+export type ToastMessageStyle = NonNullable<ToastMessage['style']>
 
 export type VoteHandler = (options: VoteOptions) => Promise<void>
 export type ToastHandler = (options: ToastMessage) => void
