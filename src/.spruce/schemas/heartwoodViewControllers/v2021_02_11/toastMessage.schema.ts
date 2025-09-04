@@ -28,6 +28,12 @@ const toastMessageSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Toa
 	                type: 'schema',
 	                options: {schema: routerDestinationSchema_v2021_02_11,}
 	            },
+	            /** Click handler. */
+	            'onClick': {
+	                label: 'Click handler',
+	                type: 'raw',
+	                options: {valueType: `() => Promise<void> | void`,}
+	            },
 	            /** Is Sticky. */
 	            'isSticky': {
 	                label: 'Is Sticky',

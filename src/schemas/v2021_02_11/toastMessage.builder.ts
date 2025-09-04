@@ -28,6 +28,13 @@ export default buildSchema({
                 schema: routerDestinationBuilder,
             },
         },
+        onClick: {
+            type: 'raw',
+            label: 'Click handler',
+            options: {
+                valueType: '() => Promise<void> | void',
+            },
+        },
         isSticky: {
             type: 'boolean',
             label: 'Is Sticky',

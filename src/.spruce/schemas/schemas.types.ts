@@ -846,6 +846,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'style'?: ("info" | "success" | "warning" | "critical") | undefined | null
 				
 				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<void> | void) | undefined | null
 				/** Is Sticky. */
 				'isSticky'?: boolean | undefined | null
 		}
@@ -874,6 +876,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'destination': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void> | void`,}
 			            },
 			            /** Is Sticky. */
 			            'isSticky': {
