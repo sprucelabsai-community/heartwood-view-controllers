@@ -695,7 +695,7 @@ type ListVc = ListViewController | ActiveRecordListViewController
 
 type VcWithFooter = CardVc | FormVc | DialogViewController
 
-interface Clickable {
+export interface Clickable {
     onClick?: ((options?: any) => void | Promise<void>) | null | undefined
     id?: string | null
 }
