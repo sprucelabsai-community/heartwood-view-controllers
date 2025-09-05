@@ -7,6 +7,7 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test-utils'
+import MockToastMessageHandler from '../__tests__/behavioral/toast/MockToastMessageHandler'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -55,6 +56,9 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         formAssert._setVcFactory(this.Factory())
         listAssert._setVcFactory(this.Factory())
 
+        const toastHandler = MockToastMessageHandler.Handler()
+        MockToastMessageHandler.setInstance(toastHandler)
+
         SchemaRegistry.getInstance().forgetAllSchemas()
         this.mercuryFixture = undefined
         SwipeCardViewController.swipeDelay = 0
@@ -81,6 +85,8 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
         return ViewControllerFactory.Factory({
             controllerMap: this.controllerMap,
             device: new SpyDevice(),
+            toastHandler: (message) =>
+                MockToastMessageHandler.getInstance().handleMessage(message),
             connectToApi: () => {
                 return mercury.connectToApi()
             },

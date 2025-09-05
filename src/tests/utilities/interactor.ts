@@ -31,16 +31,7 @@ import vcAssert from './vcAssert'
 
 const interactor = {
     async click(
-        button?:
-            | ButtonViewController
-            | {
-                  onClick?:
-                      | ((options?: any) => void | Promise<void>)
-                      | null
-                      | undefined
-                  id?: string | null
-              }
-            | null,
+        button?: ButtonViewController | Clickable | null,
         onClickOptions?: Record<string, any>
     ) {
         const btnVc = button as ButtonViewController
@@ -52,7 +43,9 @@ const interactor = {
 
         assert.isFunction(
             onClick,
-            `Clicking failed because the button '${id}' does not have onClick set.`
+            id
+                ? `Clicking failed because the button '${id}' does not have onClick set.`
+                : `Clicking failed because the button you passed does not have onClick set.`
         )
         //@ts-ignore
         await onClick(
@@ -701,3 +694,8 @@ export type PagerButton = 'previous' | 'next' | number
 type ListVc = ListViewController | ActiveRecordListViewController
 
 type VcWithFooter = CardVc | FormVc | DialogViewController
+
+interface Clickable {
+    onClick?: ((options?: any) => void | Promise<void>) | null | undefined
+    id?: string | null
+}
