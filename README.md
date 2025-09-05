@@ -17,5 +17,6 @@ Spruce XP Documentation
 <p align="center">
 <a href="https://developer.spruce.ai/#/"><img width="250" src="https://raw.githubusercontent.com/sprucelabsai/heartwood-view-contrhollers/master/docs/images/read-full-docs.png" /></a>
 </p>
+
 ### Dependencies
 [Arkit diagram here](docs/dependencies.md).
