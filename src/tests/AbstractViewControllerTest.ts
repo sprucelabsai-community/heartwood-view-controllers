@@ -7,7 +7,6 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test-utils'
-import MockToastMessageHandler from '../__tests__/behavioral/toast/MockToastMessageHandler'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -28,6 +27,7 @@ import { Vc } from './utilities/assertSupport'
 import formAssert from './utilities/formAssert'
 import interactor from './utilities/interactor'
 import listAssert from './utilities/listAssert'
+import MockToastMessageHandler from './utilities/MockToastMessageHandler'
 import vcAssert from './utilities/vcAssert'
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {

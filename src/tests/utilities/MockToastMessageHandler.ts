@@ -1,6 +1,6 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import { ToastMessage } from '../../../types/heartwood.types'
+import { ToastMessage } from '../../types/heartwood.types'
 
 export default class MockToastMessageHandler {
     private static instance?: MockToastMessageHandler

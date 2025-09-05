@@ -7,6 +7,9 @@ import {
 } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
+import MockToastMessageHandler, {
+    ERROR_MESSAGE_NO_TOAST_HANDLER_INSTANCE_SET,
+} from '../../../tests/utilities/MockToastMessageHandler'
 import toastAssert from '../../../tests/utilities/toastAssert'
 import {
     Card,
@@ -16,9 +19,6 @@ import {
     ToastMessageStyle,
 } from '../../../types/heartwood.types'
 import AbstractViewController from '../../../viewControllers/Abstract.vc'
-import MockToastMessageHandler, {
-    ERROR_MESSAGE_NO_TOAST_HANDLER_INSTANCE_SET,
-} from './MockToastMessageHandler'
 
 @suite()
 export default class ToastTest extends AbstractViewControllerTest {

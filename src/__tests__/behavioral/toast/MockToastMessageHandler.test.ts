@@ -6,8 +6,8 @@ import {
     generateId,
 } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import MockToastMessageHandler from '../../../tests/utilities/MockToastMessageHandler'
 import { ToastMessage } from '../../../types/heartwood.types'
-import MockToastMessageHandler from './MockToastMessageHandler'
 
 @suite()
 export default class MockToastMessageHandlerTest extends AbstractViewControllerTest {

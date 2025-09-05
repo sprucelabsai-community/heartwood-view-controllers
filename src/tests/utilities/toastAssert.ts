@@ -1,7 +1,7 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import MockToastMessageHandler from '../../__tests__/behavioral/toast/MockToastMessageHandler'
 import { ToastMessage } from '../../types/heartwood.types'
+import MockToastMessageHandler from './MockToastMessageHandler'
 
 const toastAssert = {
     async rendersToast(cb: () => any | Promise<any>) {
