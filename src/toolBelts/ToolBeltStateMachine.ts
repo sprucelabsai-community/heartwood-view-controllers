@@ -4,7 +4,12 @@ import {
     buildEventContract,
     MercuryAggregateResponse,
 } from '@sprucelabs/mercury-types'
-import { assertOptions, buildSchema, cloneDeep } from '@sprucelabs/schema'
+import {
+    assertOptions,
+    buildSchema,
+    cloneDeep,
+    ValuesWithPaths,
+} from '@sprucelabs/schema'
 import { eventResponseUtil } from '@sprucelabs/spruce-event-utils'
 import { isEqual } from '@sprucelabs/spruce-skill-utils'
 import SpruceError from '../errors/SpruceError'
@@ -19,6 +24,9 @@ const set = require('object-set')
 
 export default class ToolBeltStateMachine<
     Context extends Record<string, any> = Record<string, any>,
+    ContextWithDotKeys extends ValuesWithPaths<
+        Partial<Context>
+    > = ValuesWithPaths<Partial<Context>>,
 > extends AbstractEventEmitter<EventContract> {
     private state?: ToolBeltState
     private toolBeltVc: ToolBeltViewController
@@ -62,7 +70,7 @@ export default class ToolBeltStateMachine<
         return this.vcFactory
     }
 
-    public getContext(updatesToMixin?: Partial<Context>): Context {
+    public getContext(updatesToMixin?: ContextWithDotKeys): Context {
         return updatesToMixin && Object.keys(updatesToMixin).length > 0
             ? (this.getContextMixingInUpdates(updatesToMixin)
                   .newContext as Context)
@@ -85,12 +93,14 @@ export default class ToolBeltStateMachine<
         await this.updateContextPromise
     }
 
-    public async updateContext(updates: Partial<Context>) {
+    public async updateContext(updates: ContextWithDotKeys) {
         this.updateContextPromise = this._updateContext(updates)
         return this.updateContextPromise
     }
 
-    private async _updateContext(updates: Partial<Context>): Promise<boolean> {
+    private async _updateContext(
+        updates: ContextWithDotKeys
+    ): Promise<boolean> {
         let { newContext, expandedUpdates } =
             this.getContextMixingInUpdates(updates)
 
@@ -145,9 +155,9 @@ export default class ToolBeltStateMachine<
         return true
     }
 
-    private getContextMixingInUpdates(updates: Partial<Context>): {
+    private getContextMixingInUpdates(updates: ContextWithDotKeys): {
         newContext: Context
-        clonedUpdates: Partial<Context>
+        clonedUpdates: ContextWithDotKeys
         expandedUpdates: Partial<Context>
     } {
         let clonedUpdates = clone(updates)
@@ -167,7 +177,11 @@ export default class ToolBeltStateMachine<
             }
         }
 
-        return { newContext, clonedUpdates, expandedUpdates }
+        return {
+            newContext,
+            clonedUpdates: clonedUpdates as ContextWithDotKeys,
+            expandedUpdates,
+        }
     }
 
     private assertNoErrorsInResponse(results: MercuryAggregateResponse<any>) {

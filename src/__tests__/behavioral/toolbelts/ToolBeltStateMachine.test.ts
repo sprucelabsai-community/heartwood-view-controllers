@@ -1,4 +1,4 @@
-import { cloneDeep } from '@sprucelabs/schema'
+import { cloneDeep, ValuesWithPaths } from '@sprucelabs/schema'
 import { test, suite, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
@@ -10,7 +10,7 @@ const set = require('object-set')
 
 @suite()
 export default class ToolBeltStateMachineTest extends AbstractViewControllerTest {
-    private sm!: ToolBeltStateMachine
+    private sm!: ToolBeltStateMachine<Context>
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -112,7 +112,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
     @test()
     protected async canSetStateDuringInstantiating() {
-        const context = { hello: 'world' }
+        const context: Context = { hello: 'world' }
 
         this.sm = this.StateMachine({ context })
 
@@ -205,10 +205,6 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
     @test()
     protected async copiesContextDeep() {
-        class Test {
-            public test = 'true'
-        }
-
         const instance = new Test()
 
         const hello = {
@@ -230,7 +226,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
         const actual = this.sm.getContext()
 
-        assert.isNotEqual(hello, actual.hello)
+        assert.isNotEqual(hello, actual.hello as any)
         assert.isNotEqual(hello, passedChanges.hello)
         assert.isEqual(instance, actual.instance)
     }
@@ -504,6 +500,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         })
 
         await this.updateContext({
+            //@ts-ignore
             'hey.stuff[0].title': 'mike',
         })
 
@@ -511,6 +508,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         this.assertFirstElementInArraysTitleEquals('mike')
 
         await this.updateContext({
+            //@ts-ignore
             'hey.stuff[0].title': 'spike',
         })
 
@@ -520,7 +518,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
     private assertFirstElementInArraysTitleEquals(expected: string) {
         const context = this.getContext()
-        assert.isEqual(context.hey.stuff[0].title, expected)
+        assert.isEqual(context.hey?.stuff?.[0].title, expected)
     }
 
     private async mixIntoContextDuringWillUpdate(mixin: Record<string, any>) {
@@ -533,13 +531,14 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
 
     private async assertSettingContextThenUpdatingEquals(
         starting: Record<string, any>,
-        updates: Record<string, any>,
+        updates: ValuesWithPaths<Context>,
         expected: Record<string, any>
     ) {
         await this.updateContext(starting)
         let expectedUpdates = {}
         for (const key of Object.keys(updates)) {
             if (key.includes('.')) {
+                //@ts-ignore
                 set(expectedUpdates, key, updates[key])
             } else {
                 //@ts-ignore
@@ -570,7 +569,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         }
     }
 
-    private async updateContext(context: any) {
+    private async updateContext(context: ValuesWithPaths<Partial<Context>>) {
         await this.sm.updateContext(context)
     }
 
@@ -579,7 +578,7 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
     }
 
     private StateMachine(options?: Partial<ToolBeltStateMachineOptions>) {
-        return new ToolBeltStateMachine({
+        return new ToolBeltStateMachine<Context>({
             toolBeltVc: this.Controller('tool-belt', {}),
             vcFactory: this.getFactory(),
             connectToApi: this.mercury.getApiClientFactory(),
@@ -609,4 +608,26 @@ export default class ToolBeltStateMachineTest extends AbstractViewControllerTest
         const response = await this.sm.updateContext(updates)
         assert.isFalse(response)
     }
+}
+
+interface Context {
+    hello?:
+        | string
+        | boolean
+        | {
+              hello?: string
+              world?: boolean | boolean
+              test?: string
+          }
+    test?: boolean | { one?: string }
+    world?: string | boolean
+    yes?: string
+    instance?: Test
+    what?: { the?: boolean }
+    hey?: { you?: string; yes?: string; stuff?: { title?: string }[] }
+    actual?: { hello?: any }
+}
+
+class Test {
+    public test = 'true'
 }
