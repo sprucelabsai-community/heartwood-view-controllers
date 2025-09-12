@@ -4,6 +4,7 @@ import { SpruceSchemas } from '../../schemas.types'
 import calendarEventTargetSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/calendarEventTarget.schema'
 import eventTimeBlockSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/eventTimeBlock.schema'
 import eventExclusionDateSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/eventExclusionDate.schema'
+import venueSchema_v2021_05_19 from '#spruce/schemas/calendarUtils/v2021_05_19/venue.schema'
 import calendarEventColorOverrideSchema_v2021_02_11 from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/calendarEventColorOverride.schema'
 
 const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventSchema  = {
@@ -133,6 +134,11 @@ const calendarEventSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ca
 	            'meta': {
 	                type: 'raw',
 	                options: {valueType: `Record<string, any>`,}
+	            },
+	            /** . */
+	            'venue': {
+	                type: 'schema',
+	                options: {schema: venueSchema_v2021_05_19,}
 	            },
 	            /** . */
 	            'error': {
