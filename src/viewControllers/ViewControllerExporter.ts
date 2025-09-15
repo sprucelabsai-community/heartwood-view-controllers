@@ -215,6 +215,8 @@ export default class ViewControllerExporter {
                     'mongodb-client-encryption': false,
                     '@swc/wasm': false,
                     '@swc/core': false,
+                    'node:http': false,
+                    'node:https': false,
                     assert: false,
                     aws4: false,
                     buffer: false,
