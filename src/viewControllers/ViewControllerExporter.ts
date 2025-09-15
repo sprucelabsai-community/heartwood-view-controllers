@@ -217,6 +217,7 @@ export default class ViewControllerExporter {
                     '@swc/core': false,
                     'node:http': false,
                     'node:https': false,
+                    'node:buffer': false,
                     assert: false,
                     aws4: false,
                     buffer: false,
