@@ -7,7 +7,6 @@ import { DEMO_NUMBER } from '../../../tests/constants'
 import SpyDevice from '../../../tests/SpyDevice'
 import StubStorage from '../../../tests/StubStorage'
 import buttonAssert from '../../../tests/utilities/buttonAssert'
-import formAssert from '../../../tests/utilities/formAssert'
 import LoginCardViewController, {
     LoginCardViewControllerOptions,
 } from '../../../viewControllers/LoginCard.vc'
@@ -214,7 +213,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         const login = this.LoginVc()
 
         //@ts-ignore
-        const form = login.loginForm
+        const form = login.bigFormVc
         await form.setValue('phone', DEMO_NUMBER)
 
         await form.submit()
@@ -346,6 +345,6 @@ class SpyLogin extends LoginCardViewController {
     }
 
     public getBigForm() {
-        return this.loginForm
+        return this.bigFormVc
     }
 }

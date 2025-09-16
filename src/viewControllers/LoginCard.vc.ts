@@ -5,26 +5,22 @@ import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
 import {
     BigFormViewController,
+    Card,
     FormOnChangeOptions,
-    ViewController,
     ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
+import CardViewController from './card/Card.vc'
 
-export default class LoginCardViewController
-    extends AbstractViewController<ViewModel>
-    implements ViewController<ViewModel>
-{
+export default class LoginCardViewController extends AbstractViewController<Card> {
     private static _id = 0
-
-    protected loginForm: BigFormViewController<LoginSchema>
-
-    private sections: Section<LoginSchema>[]
+    protected bigFormVc: BigFormViewController<LoginSchema>
     private _id: string
     private loginHandler?: LoginHandler
     private currentSlide = 0
     private userChallenge?: string
     private loginFailedHandler?: (err: Error) => void
+    private cardVc: CardViewController
 
     public constructor(
         options: LoginCardViewControllerOptions & ViewControllerOptions
@@ -36,160 +32,10 @@ export default class LoginCardViewController
 
         const { onLogin, onLoginFailed, smsDisclaimer } = options
 
-        this.sections = [
-            {
-                title: randomUtil.rand([
-                    'What is your cell?',
-                    'Gimme a number to text.',
-                    'What is your number 👇',
-                ]),
-                fields: [
-                    {
-                        name: 'phone',
-                        hint: smsDisclaimer ?? loginSchema.fields.phone.hint,
-                    },
-                ],
-            },
-            {
-                title: randomUtil.rand([
-                    'Now the pin! 👇',
-                    'The pin is next!',
-                    'Time for pin.',
-                ]),
-                fields: [{ name: 'code', renderAs: 'number' }],
-                shouldRenderSubmitButton: false,
-            },
-        ]
-
         this.loginHandler = onLogin
         this.loginFailedHandler = onLoginFailed
-        this.loginForm = this.BigForm()
-
-        this.device.sendCommand('attemptingLogin')
-    }
-
-    private BigForm(): BigFormViewController<LoginSchema> {
-        return this.Controller(
-            'big-form',
-            buildBigForm({
-                onChange: this.handleOnChange.bind(this),
-                onSubmitSlide: this.handleSubmitSlide.bind(this),
-                isBusy: false,
-                id: this._id,
-                schema: loginSchema,
-                sections: this.sections,
-            })
-        )
-    }
-
-    protected async handleSubmitSlide({
-        values,
-        presentSlide,
-    }: {
-        values: SchemaPartialValues<LoginSchema>
-        presentSlide: number
-    }) {
-        this.loginForm.setIsBusy(true)
-
-        let response = true
-
-        if (presentSlide === 0 && values.phone) {
-            response = await this.handleSubmitPhone(values.phone)
-        } else if (presentSlide === 1 && values.code) {
-            await this.handleSubmitPin(values.code)
-            response = false
-        }
-
-        this.loginForm.setIsBusy(false)
-
-        return response
-    }
-
-    protected async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
-        if (options.values.code?.length === 4) {
-            await this.loginForm.submit()
-        }
-    }
-
-    protected async handleSubmitPhone(phone: string) {
-        try {
-            await this.loginForm.resetField('code')
-
-            const client = await this.connectToApi()
-            const [{ challenge }] = await client.emitAndFlattenResponses(
-                'request-pin::v2020_12_25',
-                {
-                    payload: {
-                        phone,
-                    },
-                }
-            )
-
-            this.userChallenge = challenge
-        } catch (err: any) {
-            this.loginForm.setErrors([
-                {
-                    code: 'INVALID_PARAMETER',
-                    name: 'phone',
-                    friendlyMessage: err.message,
-                },
-            ])
-
-            return false
-        }
-
-        return true
-    }
-
-    public getIsBusy() {
-        return this.loginForm.getIsBusy()
-    }
-
-    private async handleSubmitPin(pin: string) {
-        this.setIsBusy(true)
-
-        try {
-            const client = await this.connectToApi()
-            const [{ person, token }] = await client.emitAndFlattenResponses(
-                'confirm-pin::v2020_12_25',
-                {
-                    payload: {
-                        challenge: this.userChallenge as string,
-                        pin,
-                    },
-                }
-            )
-
-            Authenticator.getInstance().setSessionToken(token, person)
-
-            await this.loginHandler?.({ person })
-        } catch (err: any) {
-            this.loginForm.setErrors([
-                {
-                    code: 'INVALID_PARAMETER',
-                    name: 'code',
-                    friendlyMessage: "That pin doesn't look right, try again!",
-                },
-            ])
-
-            this.loginFailedHandler?.(err)
-        }
-
-        this.setIsBusy(false)
-    }
-
-    private setIsBusy(isBusy: boolean) {
-        this.loginForm.setIsBusy(isBusy)
-    }
-
-    public getLoginForm() {
-        return this.loginForm
-    }
-
-    public render(): ViewModel {
-        return {
-            //@ts-ignore
-            controller: this,
+        this.bigFormVc = this.BigForm(smsDisclaimer)
+        this.cardVc = this.Controller('card', {
             id: this._id,
             header: {
                 title:
@@ -220,7 +66,7 @@ export default class LoginCardViewController
             body: {
                 sections: [
                     {
-                        bigForm: this.loginForm.render() as any,
+                        bigForm: this.bigFormVc.render(),
                     },
                 ],
             },
@@ -233,13 +79,159 @@ export default class LoginCardViewController
                     },
                 ],
             },
+        })
+
+        this.device.sendCommand('attemptingLogin')
+    }
+
+    private BigForm(
+        smsDisclaimer?: string | null
+    ): BigFormViewController<LoginSchema> {
+        return this.Controller(
+            'big-form',
+            buildBigForm({
+                onChange: this.handleOnChange.bind(this),
+                onSubmitSlide: this.handleSubmitSlide.bind(this),
+                isBusy: false,
+                id: this._id,
+                schema: loginSchema,
+                sections: [
+                    {
+                        title: randomUtil.rand([
+                            'What is your cell?',
+                            'Gimme a number to text.',
+                            'What is your number 👇',
+                        ]),
+                        fields: [
+                            {
+                                name: 'phone',
+                                hint:
+                                    smsDisclaimer ??
+                                    loginSchema.fields.phone.hint,
+                            },
+                        ],
+                    },
+                    {
+                        title: randomUtil.rand([
+                            'Now the pin! 👇',
+                            'The pin is next!',
+                            'Time for pin.',
+                        ]),
+                        fields: [{ name: 'code', renderAs: 'number' }],
+                    },
+                ],
+            })
+        )
+    }
+
+    protected async handleSubmitSlide({
+        values,
+        presentSlide,
+    }: {
+        values: SchemaPartialValues<LoginSchema>
+        presentSlide: number
+    }) {
+        this.bigFormVc.setIsBusy(true)
+
+        let response = true
+
+        if (presentSlide === 0 && values.phone) {
+            response = await this.handleSubmitPhone(values.phone)
+        } else if (presentSlide === 1 && values.code) {
+            await this.handleSubmitPin(values.code)
+            response = false
+        }
+
+        this.bigFormVc.setIsBusy(false)
+
+        return response
+    }
+
+    protected async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
+        if (options.values.code?.length === 4) {
+            await this.bigFormVc.submit()
         }
     }
-}
 
-type ViewModel = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
-type Section<S extends Schema> =
-    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>
+    protected async handleSubmitPhone(phone: string) {
+        try {
+            await this.bigFormVc.resetField('code')
+
+            const client = await this.connectToApi()
+            const [{ challenge }] = await client.emitAndFlattenResponses(
+                'request-pin::v2020_12_25',
+                {
+                    payload: {
+                        phone,
+                    },
+                }
+            )
+
+            this.userChallenge = challenge
+        } catch (err: any) {
+            this.bigFormVc.setErrors([
+                {
+                    code: 'INVALID_PARAMETER',
+                    name: 'phone',
+                    friendlyMessage: err.message,
+                },
+            ])
+
+            return false
+        }
+
+        return true
+    }
+
+    public getIsBusy() {
+        return this.bigFormVc.getIsBusy()
+    }
+
+    private async handleSubmitPin(pin: string) {
+        this.setIsBusy(true)
+
+        try {
+            const client = await this.connectToApi()
+            const [{ person, token }] = await client.emitAndFlattenResponses(
+                'confirm-pin::v2020_12_25',
+                {
+                    payload: {
+                        challenge: this.userChallenge as string,
+                        pin,
+                    },
+                }
+            )
+
+            Authenticator.getInstance().setSessionToken(token, person)
+
+            await this.loginHandler?.({ person })
+        } catch (err: any) {
+            this.bigFormVc.setErrors([
+                {
+                    code: 'INVALID_PARAMETER',
+                    name: 'code',
+                    friendlyMessage: "That pin doesn't look right, try again!",
+                },
+            ])
+
+            this.loginFailedHandler?.(err)
+        }
+
+        this.setIsBusy(false)
+    }
+
+    private setIsBusy(isBusy: boolean) {
+        this.bigFormVc.setIsBusy(isBusy)
+    }
+
+    public getLoginForm() {
+        return this.bigFormVc
+    }
+
+    public render(): Card {
+        return this.cardVc.render()
+    }
+}
 
 export type LoginHandler = (options: OnLoginOptions) => Promise<void> | void
 
