@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import 'gcp-metadata'
 import AbstractSkillViewController from '../../../../../skillViewControllers/Abstract.svc'
 
 export default class BookFormViewController extends AbstractSkillViewController {

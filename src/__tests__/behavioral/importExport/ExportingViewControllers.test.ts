@@ -146,6 +146,11 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.export()
         this.assertBuiltBundleDoesNotInclude('dotenv')
     }
+    @test()
+    protected async doesNotBundleGcpMetadata() {
+        await this.export()
+        this.assertBuiltBundleDoesNotInclude('gcp-metadata')
+    }
 
     @test()
     protected async canExportViewThatImportsSomethingFromNodeModules() {
@@ -324,9 +329,6 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
             'mongodb-client-encryption': false,
             '@swc/wasm': false,
             '@swc/core': false,
-            'node:http': false,
-            'node:https': false,
-            'node:buffer': false,
             assert: false,
             aws4: false,
             buffer: false,

@@ -128,6 +128,17 @@ export default class ViewControllerExporter {
                 }
                 isFirst = false
 
+                if (stats && profilerStatsDestination) {
+                    const contents = JSON.stringify(stats.toJson())
+                    diskUtil.writeFile(
+                        diskUtil.resolvePath(
+                            profilerStatsDestination,
+                            'stats.json'
+                        ),
+                        contents
+                    )
+                }
+
                 if (err) {
                     reject(err)
                     return
@@ -151,17 +162,6 @@ export default class ViewControllerExporter {
                         })
                     )
                     return
-                }
-
-                if (profilerStatsDestination) {
-                    const contents = JSON.stringify(stats.toJson())
-                    diskUtil.writeFile(
-                        diskUtil.resolvePath(
-                            profilerStatsDestination,
-                            'stats.json'
-                        ),
-                        contents
-                    )
                 }
 
                 resolve(this.compiler)
@@ -215,9 +215,6 @@ export default class ViewControllerExporter {
                     'mongodb-client-encryption': false,
                     '@swc/wasm': false,
                     '@swc/core': false,
-                    'node:http': false,
-                    'node:https': false,
-                    'node:buffer': false,
                     assert: false,
                     aws4: false,
                     buffer: false,
@@ -252,6 +249,7 @@ export default class ViewControllerExporter {
                         'noop.js'
                     ),
                     dotenv: pathUtil.resolve(__dirname, 'noop.js'),
+                    'gcp-metadata': pathUtil.resolve(__dirname, 'noop.js'),
                 },
             },
             output: {
