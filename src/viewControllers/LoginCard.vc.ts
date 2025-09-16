@@ -224,6 +224,15 @@ export default class LoginCardViewController
                     },
                 ],
             },
+            footer: {
+                buttons: [
+                    {
+                        id: 'login-with-email',
+                        label: 'Use email instead',
+                        style: 'link',
+                    },
+                ],
+            },
         }
     }
 }

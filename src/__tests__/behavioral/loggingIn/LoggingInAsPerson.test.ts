@@ -1,19 +1,22 @@
 import { Person } from '@sprucelabs/spruce-core-schemas'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import Authenticator from '../../auth/Authenticator'
-import AbstractViewControllerTest from '../../tests/AbstractViewControllerTest'
-import { DEMO_NUMBER } from '../../tests/constants'
-import SpyDevice from '../../tests/SpyDevice'
-import StubStorage from '../../tests/StubStorage'
+import Authenticator from '../../../auth/Authenticator'
+import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
+import { DEMO_NUMBER } from '../../../tests/constants'
+import SpyDevice from '../../../tests/SpyDevice'
+import StubStorage from '../../../tests/StubStorage'
+import buttonAssert from '../../../tests/utilities/buttonAssert'
+import formAssert from '../../../tests/utilities/formAssert'
 import LoginCardViewController, {
     LoginCardViewControllerOptions,
-} from '../../viewControllers/LoginCard.vc'
+} from '../../../viewControllers/LoginCard.vc'
 
 @suite()
 export default class AuthenticatorTest extends AbstractViewControllerTest {
     protected controllerMap: Record<string, any> = {}
     private storage!: StubStorage
+    private loginVc!: SpyLogin
 
     private readonly person = {
         casualName: 'friend',
@@ -31,6 +34,8 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
         await this.eventFaker.fakeRequestPin()
         await this.eventFaker.fakeConfirmPin()
+
+        this.loginVc = this.LoginVc()
     }
 
     @test()
@@ -170,7 +175,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected async passesTHroughId() {
+    protected async passesThroughViewId() {
         const id = generateId()
         const vc = this.LoginVc({ id })
         assert.isEqual(this.render(vc).id, id)
@@ -316,6 +321,11 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         const login = this.LoginVc()
         const device = login.getDevice() as SpyDevice
         assert.isEqual(device.lastCommand, 'attemptingLogin')
+    }
+
+    @test()
+    protected async rendersLoginWithEmailButton() {
+        buttonAssert.cardRendersButton(this.loginVc, 'login-with-email')
     }
 
     private get auth() {
