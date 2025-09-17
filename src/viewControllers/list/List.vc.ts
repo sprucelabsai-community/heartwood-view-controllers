@@ -1,4 +1,4 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
 import {
@@ -216,18 +216,14 @@ export default class ListViewController extends AbstractViewController<SpruceSch
     }
 
     public async setValue(row: string | number, name: string, value: any) {
-        if (row === undefined || name === undefined || value === undefined) {
-            throw new Error('Options must have a row, name, and value.')
-        }
+        assertOptions({ row, name, value }, ['row', 'name', 'value'])
 
         const rowVc = this.getRowVc(row)
         await rowVc.setValue(name, value)
     }
 
     public getValue(row: string | number, name: string) {
-        if (row === undefined || name === undefined) {
-            throw new Error('Row and name are required.')
-        }
+        assertOptions({ row, name }, ['row', 'name'])
         const rowVc = this.getRowVc(row)
         return rowVc.getValue(name)
     }

@@ -1,4 +1,4 @@
-import { test, suite, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { RowValues } from '../../../types/heartwood.types'
@@ -24,11 +24,13 @@ export default class GettingValuesFromAListTest extends AbstractViewControllerTe
 
     @test()
     protected async throwsIfSetValueIsMissingParams() {
-        await assert.doesThrowAsync(
+        const err = await assert.doesThrowAsync(
             //@ts-ignore
-            () => this.vc.setValue(),
-            'Options must have a row, name, and value.'
+            () => this.vc.setValue()
         )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['row', 'name', 'value'],
+        })
     }
 
     @test()
@@ -41,8 +43,13 @@ export default class GettingValuesFromAListTest extends AbstractViewControllerTe
 
     @test()
     protected async throwIfGetValuesMissingParams() {
-        //@ts-ignore
-        assert.doesThrow(() => this.vc.getValue(), 'Row and name are required.')
+        const err = await assert.doesThrowAsync(
+            //@ts-ignore
+            () => this.vc.getValue()
+        )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['row', 'name'],
+        })
     }
 
     @test()
