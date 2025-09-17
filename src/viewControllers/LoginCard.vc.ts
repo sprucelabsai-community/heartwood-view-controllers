@@ -66,11 +66,6 @@ export default class LoginCardViewController extends AbstractViewController<Card
                     },
                 ],
             },
-            footer: this.shouldAllowEmailLogin
-                ? {
-                      buttons: [this.renderLoginWithEmailButton()],
-                  }
-                : null,
         })
     }
 
@@ -89,7 +84,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
             fields: ['email'],
         })
 
-        this.cardVc.setFooter({
+        this.bigFormVc.setFooter({
             buttons: [this.renderLoginWithPhoneButton()],
         })
     }
@@ -105,7 +100,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
 
     private async handleClickLoginWithPhone() {
         this.bigFormVc.updateSection(0, this.renderPhoneSection())
-        this.cardVc.setFooter({
+        this.bigFormVc.setFooter({
             buttons: [this.renderLoginWithEmailButton()],
         })
     }
@@ -155,6 +150,11 @@ export default class LoginCardViewController extends AbstractViewController<Card
                         fields: [{ name: 'code', renderAs: 'number' }],
                     },
                 ],
+                footer: this.shouldAllowEmailLogin
+                    ? {
+                          buttons: [this.renderLoginWithEmailButton()],
+                      }
+                    : null,
             })
         )
     }

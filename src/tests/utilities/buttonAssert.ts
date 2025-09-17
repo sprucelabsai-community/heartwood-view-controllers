@@ -279,6 +279,10 @@ function pluckButtonsFromViewModel(
             buttons.push(...(f?.footer?.buttons ?? []))
         })
 
+        pluckAllFromView(model as any, 'bigForm').forEach((f) => {
+            buttons.push(...(f?.footer?.buttons ?? []))
+        })
+
         pluckAllFromView(model as any, 'buttonBar').forEach((f) => {
             buttons.push(...(f?.buttons ?? []))
         })
