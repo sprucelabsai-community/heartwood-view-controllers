@@ -1,12 +1,15 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { buildSchema, Schema, SchemaPartialValues } from '@sprucelabs/schema'
+import { buildSchema, SchemaPartialValues } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
 import {
+    BigFormSlideChangeOptions,
     BigFormViewController,
+    Button,
     Card,
     FormOnChangeOptions,
+    FormSection,
     ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
@@ -17,51 +20,44 @@ export default class LoginCardViewController extends AbstractViewController<Card
     protected bigFormVc: BigFormViewController<LoginSchema>
     private _id: string
     private loginHandler?: LoginHandler
-    private currentSlide = 0
     private userChallenge?: string
     private loginFailedHandler?: (err: Error) => void
     private cardVc: CardViewController
+    private shouldAllowEmailLogin: boolean
+    private smsDisclaimer?: string | null
 
     public constructor(
         options: LoginCardViewControllerOptions & ViewControllerOptions
     ) {
         super(options)
 
-        this._id = options.id ?? `${LoginCardViewController._id}`
+        const {
+            id,
+            onLogin,
+            onLoginFailed,
+            smsDisclaimer,
+            shouldAllowEmailLogin,
+        } = options
+
+        this._id = id ?? `${LoginCardViewController._id}`
         LoginCardViewController._id++
 
-        const { onLogin, onLoginFailed, smsDisclaimer } = options
-
+        this.shouldAllowEmailLogin = shouldAllowEmailLogin ?? false
         this.loginHandler = onLogin
         this.loginFailedHandler = onLoginFailed
-        this.bigFormVc = this.BigForm(smsDisclaimer)
-        this.cardVc = this.Controller('card', {
+        this.smsDisclaimer = smsDisclaimer
+        this.bigFormVc = this.BigForm()
+        this.cardVc = this.CardVc()
+
+        this.device.sendCommand('attemptingLogin')
+    }
+
+    private CardVc() {
+        return this.Controller('card', {
             id: this._id,
             header: {
-                title:
-                    this.currentSlide === 0
-                        ? randomUtil.rand([
-                              'Get started',
-                              `Time to log in!`,
-                              `Let's do this! 💪`,
-                          ])
-                        : randomUtil.rand([
-                              'Almost there!',
-                              'Enter your pin below!',
-                              'Last step!',
-                          ]),
-                subtitle:
-                    this.currentSlide === 0
-                        ? randomUtil.rand([
-                              'Login or signup below!',
-                              "One text and one pin and you're in!",
-                              "I'm so excited!",
-                          ])
-                        : randomUtil.rand([
-                              'Last step!',
-                              `So close I can taste it!`,
-                              `You got this!`,
-                          ]),
+                title: this.renderLoginTitle(),
+                subtitle: this.renderLoginSubtitle(),
             },
             body: {
                 sections: [
@@ -70,47 +66,86 @@ export default class LoginCardViewController extends AbstractViewController<Card
                     },
                 ],
             },
-            footer: {
-                buttons: [
-                    {
-                        id: 'login-with-email',
-                        label: 'Use email instead',
-                        style: 'link',
-                    },
-                ],
-            },
+            footer: this.shouldAllowEmailLogin
+                ? {
+                      buttons: [this.renderLoginWithEmailButton()],
+                  }
+                : null,
         })
-
-        this.device.sendCommand('attemptingLogin')
     }
 
-    private BigForm(
-        smsDisclaimer?: string | null
-    ): BigFormViewController<LoginSchema> {
+    private renderLoginWithEmailButton(): Button {
+        return {
+            id: 'login-with-email',
+            label: 'Use email instead',
+            style: 'link',
+            onClick: this.handleClickLoginWithEmail.bind(this),
+        }
+    }
+
+    private async handleClickLoginWithEmail() {
+        this.bigFormVc.updateSection(0, {
+            title: this.renderEmailSlideTitle(),
+            fields: ['email'],
+        })
+
+        this.cardVc.setFooter({
+            buttons: [this.renderLoginWithPhoneButton()],
+        })
+    }
+
+    private renderLoginWithPhoneButton(): Button {
+        return {
+            id: 'login-with-phone',
+            label: 'Use phone instead',
+            style: 'link',
+            onClick: this.handleClickLoginWithPhone.bind(this),
+        }
+    }
+
+    private async handleClickLoginWithPhone() {
+        this.bigFormVc.updateSection(0, this.renderPhoneSection())
+        this.cardVc.setFooter({
+            buttons: [this.renderLoginWithEmailButton()],
+        })
+    }
+
+    private renderEmailSlideTitle() {
+        return randomUtil.rand([
+            'What is your email?',
+            'Gimme an email to send to.',
+            'What is your email 👇',
+        ])
+    }
+
+    private renderLoginSubtitle() {
+        return randomUtil.rand([
+            'Login or signup below!',
+            "I'll send you a pin and you're in!",
+            "I'm so excited!",
+        ])
+    }
+
+    private renderLoginTitle() {
+        return randomUtil.rand([
+            'Get started',
+            `Time to log in!`,
+            `Let's do this! 💪`,
+        ])
+    }
+
+    private BigForm(): BigFormViewController<LoginSchema> {
         return this.Controller(
             'big-form',
             buildBigForm({
-                onChange: this.handleOnChange.bind(this),
+                onChange: this.handleOnChangeBigForm.bind(this),
                 onSubmitSlide: this.handleSubmitSlide.bind(this),
                 isBusy: false,
                 id: this._id,
                 schema: loginSchema,
+                onSlideChange: this.handleSlideChange.bind(this),
                 sections: [
-                    {
-                        title: randomUtil.rand([
-                            'What is your cell?',
-                            'Gimme a number to text.',
-                            'What is your number 👇',
-                        ]),
-                        fields: [
-                            {
-                                name: 'phone',
-                                hint:
-                                    smsDisclaimer ??
-                                    loginSchema.fields.phone.hint,
-                            },
-                        ],
-                    },
+                    this.renderPhoneSection(),
                     {
                         title: randomUtil.rand([
                             'Now the pin! 👇',
@@ -124,6 +159,37 @@ export default class LoginCardViewController extends AbstractViewController<Card
         )
     }
 
+    private renderPhoneSection(): FormSection<LoginSchema> {
+        return {
+            title: this.renderPhoneSlideTitle(),
+            fields: [
+                {
+                    name: 'phone',
+                    hint: this.smsDisclaimer ?? loginSchema.fields.phone.hint,
+                },
+            ],
+        }
+    }
+
+    private renderPhoneSlideTitle(): string | null | undefined {
+        return randomUtil.rand([
+            'What is your cell?',
+            'Gimme a number to text.',
+            'What is your number 👇',
+        ])
+    }
+
+    private handleSlideChange(options: BigFormSlideChangeOptions) {
+        const { toSlide: to } = options
+        if (to === 0) {
+            this.cardVc.setHeaderTitle(this.renderLoginTitle())
+            this.cardVc.setHeaderSubtitle(this.renderLoginSubtitle())
+        } else {
+            this.cardVc.setHeaderTitle(this.renderPinTitle())
+            this.cardVc.setHeaderSubtitle(this.renderPinSubitle())
+        }
+    }
+
     protected async handleSubmitSlide({
         values,
         presentSlide,
@@ -133,12 +199,14 @@ export default class LoginCardViewController extends AbstractViewController<Card
     }) {
         this.bigFormVc.setIsBusy(true)
 
+        const { phone, email, code } = values
+
         let response = true
 
-        if (presentSlide === 0 && values.phone) {
-            response = await this.handleSubmitPhone(values.phone)
-        } else if (presentSlide === 1 && values.code) {
-            await this.handleSubmitPin(values.code)
+        if (presentSlide === 0 && (phone || email)) {
+            response = await this.requestPin({ phone, email })
+        } else if (presentSlide === 1 && code) {
+            await this.handleSubmitPin(code)
             response = false
         }
 
@@ -147,13 +215,36 @@ export default class LoginCardViewController extends AbstractViewController<Card
         return response
     }
 
-    protected async handleOnChange(options: FormOnChangeOptions<LoginSchema>) {
-        if (options.values.code?.length === 4) {
+    private renderPinSubitle(): string {
+        return randomUtil.rand([
+            'Last step!',
+            `So close I can taste it!`,
+            `You got this!`,
+        ])
+    }
+
+    private renderPinTitle() {
+        return randomUtil.rand([
+            'Almost there!',
+            'Enter your pin below!',
+            'Last step!',
+        ])
+    }
+
+    protected async handleOnChangeBigForm(
+        options: FormOnChangeOptions<LoginSchema>
+    ) {
+        const { values } = options
+        const { code } = values
+        if (code?.length === 4) {
             await this.bigFormVc.submit()
         }
     }
 
-    protected async handleSubmitPhone(phone: string) {
+    protected async requestPin(values: {
+        phone?: string | null
+        email?: string | null
+    }) {
         try {
             await this.bigFormVc.resetField('code')
 
@@ -161,9 +252,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
             const [{ challenge }] = await client.emitAndFlattenResponses(
                 'request-pin::v2020_12_25',
                 {
-                    payload: {
-                        phone,
-                    },
+                    payload: values,
                 }
             )
 
@@ -240,6 +329,7 @@ export interface LoginCardViewControllerOptions {
     onLoginFailed?: (err: Error) => void
     id?: string | null
     smsDisclaimer?: string | null
+    shouldAllowEmailLogin?: boolean
 }
 
 const loginSchema = buildSchema({
@@ -250,6 +340,11 @@ const loginSchema = buildSchema({
             isRequired: true,
             label: 'Phone',
             hint: "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply.",
+        },
+        email: {
+            type: 'email',
+            isRequired: true,
+            label: 'Email',
         },
         code: {
             type: 'text',

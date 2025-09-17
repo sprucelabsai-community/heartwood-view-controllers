@@ -71,5 +71,12 @@ export default buildSchema({
                 valueType: 'HeartwoodTypes.SubmitSlideHandler<S>',
             },
         },
+        onSlideChange: {
+            type: 'raw',
+            label: 'Slide change handler',
+            options: {
+                valueType: 'HeartwoodTypes.BigFormSlideChangeHandler',
+            },
+        },
     },
 })

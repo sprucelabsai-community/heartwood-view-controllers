@@ -39,21 +39,26 @@ export default class BigFormViewController<
     }
 
     public async jumpToSlide(idx: number) {
-        this.model.presentSlide = Math.min(
-            this.getTotalSlides() - 1,
-            Math.max(0, idx)
-        )
+        const from = this.getPresentSlide()
+        const to = Math.min(this.getTotalSlides() - 1, Math.max(0, idx))
+        this.model.presentSlide = to
 
         this.triggerRender()
 
         const firstFieldOfSection = normalizeFormSectionFieldNamesUtil.toNames(
             this.model.sections[idx]?.fields ?? []
         )[0]
+
         if (firstFieldOfSection) {
             this.focusInput(firstFieldOfSection)
         }
 
         this.replaySlideHeading(this.getPresentSlide())
+
+        this.model.onSlideChange?.({
+            fromSlide: from,
+            toSlide: to,
+        })
     }
 
     public getTotalSlides() {
@@ -132,6 +137,7 @@ type ViewModel<S extends Schema> = BigForm<S>
 export type BigFormViewControllerOptions<S extends Schema> =
     FormViewControllerOptions<S> & {
         onSubmitSlide?: ViewModel<S>['onSubmitSlide']
+        onSlideChange?: ViewModel<S>['onSlideChange']
     } & Pick<
             ViewModel<S>,
             | 'shouldRenderFirstFieldsLabel'

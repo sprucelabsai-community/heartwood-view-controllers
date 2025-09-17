@@ -173,6 +173,12 @@ const bigFormSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormS
 	                type: 'raw',
 	                options: {valueType: `HeartwoodTypes.SubmitSlideHandler<S>`,}
 	            },
+	            /** Slide change handler. */
+	            'onSlideChange': {
+	                label: 'Slide change handler',
+	                type: 'raw',
+	                options: {valueType: `HeartwoodTypes.BigFormSlideChangeHandler`,}
+	            },
 	    }
 }
 

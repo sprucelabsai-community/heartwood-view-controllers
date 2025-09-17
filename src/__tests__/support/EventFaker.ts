@@ -37,10 +37,12 @@ export default class EventFaker {
         }
     }
 
-    public async fakeRequestPin(challenge?: string) {
-        await this.client.on('request-pin::v2020_12_25', () => {
+    public async fakeRequestPin(
+        cb?: (targetAndPayload: RequestPinTargetAndPayload) => string | void
+    ) {
+        await this.client.on('request-pin::v2020_12_25', (targetAndPayload) => {
             return {
-                challenge: challenge ?? generateId(),
+                challenge: cb?.(targetAndPayload) ?? generateId(),
             }
         })
     }
@@ -104,3 +106,6 @@ export type ListOrganizationsTargetAndPayload =
     SpruceSchemas.Mercury.v2020_12_25.ListOrganizationsEmitTargetAndPayload
 
 export type ListPerson = SpruceSchemas.Mercury.v2020_12_25.ListPerson
+
+export type RequestPinTargetAndPayload =
+    SpruceSchemas.Mercury.v2020_12_25.RequestPinEmitTargetAndPayload

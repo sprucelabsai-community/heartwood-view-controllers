@@ -264,6 +264,15 @@ export type SubmitSlideHandler<S extends Schema = Schema> = (
     options: BigFormOnSubmitOptions<S>
 ) => Promise<OnSubmitResponse> | OnSubmitResponse
 
+export type BigFormSlideChangeHandler = (
+    options: BigFormSlideChangeOptions
+) => void | Promise<void>
+
+export interface BigFormSlideChangeOptions {
+    fromSlide: number
+    toSlide: number
+}
+
 export interface SwipeController {
     swipeTo(idx: number): void
 }

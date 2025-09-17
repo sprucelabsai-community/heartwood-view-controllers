@@ -4,6 +4,7 @@ import buildBigForm from '../../../builders/buildBigForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
 import vcAssert from '../../../tests/utilities/vcAssert'
+import { BigFormSlideChangeOptions } from '../../../types/heartwood.types'
 import BigFormViewController from '../../../viewControllers/BigForm.vc'
 
 const testFormSchema = buildSchema({
@@ -29,6 +30,7 @@ type TestFormSchema = typeof testFormSchema
 export default class ControllingABigFormTest extends AbstractViewControllerTest {
     protected controllerMap = {}
     private vc!: BigFormViewController<TestFormSchema>
+    private lastOnSlideChangeOptions?: BigFormSlideChangeOptions
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -37,6 +39,9 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
             'big-form',
             buildBigForm({
                 schema: testFormSchema,
+                onSlideChange: (options) => {
+                    this.lastOnSlideChangeOptions = options
+                },
                 sections: [
                     {
                         fields: ['phone'],
@@ -235,6 +240,36 @@ export default class ControllingABigFormTest extends AbstractViewControllerTest 
             'Did not set shouldRenderSlideTitles properly'
         )
         vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test()
+    protected async triggersOnSlideChangeWhenSlideChanges() {
+        await this.goForward()
+        this.assertLastJumpToSlideOptionsEqual({
+            fromSlide: 0,
+            toSlide: 1,
+        })
+    }
+
+    @test()
+    protected async onSlideChangeHandlesGoingBackwards() {
+        await this.goForward()
+        await this.vc.goBack()
+        this.assertLastJumpToSlideOptionsEqual({
+            fromSlide: 1,
+            toSlide: 0,
+        })
+    }
+
+    private async goForward() {
+        await this.vc.goForward()
+    }
+
+    private assertLastJumpToSlideOptionsEqual(expected: {
+        fromSlide: number
+        toSlide: number
+    }) {
+        assert.isEqualDeep(this.lastOnSlideChangeOptions, expected)
     }
 
     private renderForm() {

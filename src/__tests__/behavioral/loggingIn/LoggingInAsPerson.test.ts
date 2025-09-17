@@ -7,21 +7,69 @@ import { DEMO_NUMBER } from '../../../tests/constants'
 import SpyDevice from '../../../tests/SpyDevice'
 import StubStorage from '../../../tests/StubStorage'
 import buttonAssert from '../../../tests/utilities/buttonAssert'
+import formAssert from '../../../tests/utilities/formAssert'
+import interactor from '../../../tests/utilities/interactor'
 import LoginCardViewController, {
     LoginCardViewControllerOptions,
 } from '../../../viewControllers/LoginCard.vc'
+import { RequestPinTargetAndPayload } from '../../support/EventFaker'
 
 @suite()
 export default class AuthenticatorTest extends AbstractViewControllerTest {
     protected controllerMap: Record<string, any> = {}
     private storage!: StubStorage
     private loginVc!: SpyLogin
+    private smsDisclaimer = generateId()
+    private shouldAllowEmailLogin = true
+
+    private loginCardTitles = [
+        'Get started',
+        `Time to log in!`,
+        `Let's do this! 💪`,
+    ]
+
+    private loginCardSubtitles = [
+        'Login or signup below!',
+        "I'll send you a pin and you're in!",
+        "I'm so excited!",
+    ]
+
+    private pinCardTitles = [
+        'Almost there!',
+        'Enter your pin below!',
+        'Last step!',
+    ]
+
+    private pinCardSubtitles = [
+        'Last step!',
+        `So close I can taste it!`,
+        `You got this!`,
+    ]
+
+    private phoneSlideTitles = [
+        'What is your cell?',
+        'Gimme a number to text.',
+        'What is your number 👇',
+    ]
+
+    private pinSlideTitles = [
+        'Now the pin! 👇',
+        'The pin is next!',
+        'Time for pin.',
+    ]
+
+    private emailSlideTitles = [
+        'What is your email?',
+        'Gimme an email to send to.',
+        'What is your email 👇',
+    ]
 
     private readonly person = {
         casualName: 'friend',
         id: '1234',
         dateCreated: 123,
     }
+    private lastRequestPinPayload?: RequestPinTargetAndPayload['payload']
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -31,7 +79,9 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         Authenticator.reset()
         Authenticator.setStorage(this.storage)
 
-        await this.eventFaker.fakeRequestPin()
+        await this.eventFaker.fakeRequestPin(({ payload }) => {
+            this.lastRequestPinPayload = payload
+        })
         await this.eventFaker.fakeConfirmPin()
 
         this.loginVc = this.LoginVc()
@@ -182,30 +232,25 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     @test()
     protected async canPassThroughSmsDisclaimer() {
-        const smsDisclaimer = generateId()
-        const vc = this.LoginVc({
-            smsDisclaimer,
-        })
+        this.setupWithDisclaimer()
+        this.assertRendersDisclaimer()
+    }
 
-        const formVc = vc.getBigForm()
-        const model = this.render(formVc)
-        //@ts-ignore
-        assert.isEqual(model.sections[0]?.fields?.[0]?.hint, smsDisclaimer)
+    @test()
+    protected async rendersDisclaimerWhenGoingToEmailAndBack() {
+        this.setupWithDisclaimer()
+        await this.clickLoginWithEmail()
+        await this.clickLoginWithPhone()
+        this.assertRendersDisclaimer()
     }
 
     @test()
     protected async passingNullSmsDisclaimerLeavesOriginal() {
-        const vc = this.LoginVc({
+        this.loginVc = this.LoginVc({
             smsDisclaimer: null,
         })
 
-        const formVc = vc.getBigForm()
-        const model = this.render(formVc)
-        assert.isEqual(
-            //@ts-ignore
-            model.sections[0]?.fields?.[0]?.hint,
-            "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
-        )
+        this.assertRendersDefaultPhoneHint()
     }
 
     @test()
@@ -219,7 +264,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         await form.submit()
 
         const slide = form.getPresentSlide()
-        assert.isEqual(slide, 1)
+        assert.isEqual(slide, 1, 'Did not move to pin slide')
 
         let wasHit = false
 
@@ -327,6 +372,234 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         buttonAssert.cardRendersButton(this.loginVc, 'login-with-email')
     }
 
+    @test()
+    protected async cardTitlesRendersOneOfExpectedForPhoneSlide() {
+        this.assertRendersLoginTitles()
+    }
+
+    @test()
+    protected async pinSlideRendersPinTitles() {
+        await this.enterPhoneAndSubmit()
+        this.assertRendersPinTitles()
+    }
+
+    @test()
+    protected async goingBackAfterEnteringPhoneRendersPhoneTitle() {
+        this.renderCardTitle()
+        await this.enterPhoneAndSubmit()
+        await this.bigFormVc.goBack()
+        this.assertRendersLoginTitles()
+    }
+
+    @test()
+    protected async rendersExpectedSlideTitles() {
+        const model = this.render(this.bigFormVc)
+
+        this.assertRendersPhoneSlideTitle()
+
+        assert.doesInclude(
+            this.pinSlideTitles,
+            model.sections[1].title,
+            'Pin slide title not one of expected'
+        )
+    }
+
+    @test()
+    protected async clickingLoginWithEmailRendersEmailField() {
+        await this.clickLoginWithEmail()
+        formAssert.formRendersField(this.bigFormVc, 'email')
+    }
+
+    @test()
+    protected async doesNotRenderEmailButtonIfOptionIsNotSet() {
+        this.shouldAllowEmailLogin = false
+        this.loginVc = this.LoginVc()
+        this.assertDoesNotRenderButton('login-with-email')
+    }
+
+    @test()
+    protected async clickingLoginWithEmailSetsExpectedSectionTitle() {
+        await this.clickLoginWithEmail()
+        const model = this.render(this.bigFormVc)
+        assert.doesInclude(
+            this.emailSlideTitles,
+            model.sections[0].title,
+            'Email slide title not one of expected'
+        )
+    }
+
+    @test()
+    protected async clickingLoginWithEmailRendersLoginWithPhoneButton() {
+        await this.clickLoginWithEmail()
+        this.assertRendersButton('login-with-phone')
+        this.assertDoesNotRenderButton('login-with-email')
+    }
+
+    @test()
+    protected async clickingBackToPhoneRendersEmailButton() {
+        await this.clickLoginWithEmail()
+        await this.clickLoginWithPhone()
+        this.assertRendersButton('login-with-email')
+        this.assertDoesNotRenderButton('login-with-phone')
+        await this.clickLoginWithEmail()
+        this.assertRendersButton('login-with-phone')
+    }
+
+    @test()
+    protected async clickingBackToPhoneRendersPhoneField() {
+        await this.clickLoginWithEmail()
+        await this.clickLoginWithPhone()
+        formAssert.formRendersField(this.bigFormVc, 'phone')
+        this.assertRendersPhoneSlideTitle()
+    }
+
+    @test('can request pin with email test@test.com', 'test@test.com')
+    @test('can request pin with email test2@test.com', 'test2@ing.com')
+    protected async submittingEmailSendsEmailToRequestPin(email: string) {
+        await this.clickLoginWithEmail()
+        await this.fillOutEmail(email)
+        await this.submit()
+        assert.isEqualDeep(this.lastRequestPinPayload, {
+            email,
+            phone: undefined,
+        })
+    }
+
+    @test()
+    protected async doesNotRequestPinIfSubmittingPin() {
+        await this.clickLoginWithEmail()
+        await this.fillOutEmail('taco@bell.com')
+        await this.submit()
+        delete this.lastRequestPinPayload
+        await this.bigFormVc.setValue('code', '1111')
+        assert.isFalsy(
+            this.lastRequestPinPayload,
+            'Should not have requested pin again'
+        )
+    }
+
+    private async fillOutEmail(email: string) {
+        await this.formVc.setValue('email', email)
+    }
+
+    private assertRendersDefaultPhoneHint() {
+        const model = this.render(this.bigFormVc)
+        assert.isEqual(
+            //@ts-ignore
+            model.sections[0]?.fields?.[0]?.hint,
+            "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
+        )
+    }
+
+    private assertRendersDisclaimer() {
+        const model = this.render(this.bigFormVc)
+        assert.isEqual(
+            //@ts-ignore
+            model.sections[0]?.fields?.[0]?.hint,
+            this.smsDisclaimer,
+            'Disclaimer not rendered correctly'
+        )
+    }
+
+    private setupWithDisclaimer() {
+        this.loginVc = this.LoginVc({
+            smsDisclaimer: this.smsDisclaimer,
+        })
+    }
+
+    private assertRendersPhoneSlideTitle() {
+        assert.doesInclude(
+            this.phoneSlideTitles,
+            this.render(this.bigFormVc).sections[0].title,
+            'Phone slide title not one of expected'
+        )
+    }
+
+    private async clickLoginWithPhone() {
+        await this.clickButton('login-with-phone')
+    }
+
+    private assertRendersButton(button: string) {
+        buttonAssert.cardRendersButton(this.loginVc, button)
+    }
+
+    private assertDoesNotRenderButton(button: string) {
+        buttonAssert.cardDoesNotRenderButton(this.loginVc, button)
+    }
+
+    private async clickLoginWithEmail() {
+        await this.clickButton('login-with-email')
+    }
+
+    private async clickButton(button: string) {
+        await interactor.clickButton(this.loginVc, button)
+    }
+
+    private assertRendersPinTitles() {
+        const title = this.renderCardTitle()
+        assert.doesInclude(
+            this.pinCardTitles,
+            title,
+            `Pin titles should be one of: ${this.pinCardTitles.join(', ')}`
+        )
+
+        const subtitle = this.renderCardSubtitle()
+        assert.doesInclude(
+            this.pinCardSubtitles,
+            subtitle,
+            `Pin Subtitle should be one of: ${this.pinCardSubtitles.join(', ')}`
+        )
+    }
+
+    private assertRendersLoginTitles() {
+        const title = this.renderCardTitle()
+        assert.doesInclude(
+            this.loginCardTitles,
+            title,
+            `Login Title should be one of: ${this.loginCardTitles.join(', ')}`
+        )
+
+        const subtitle = this.renderCardSubtitle()
+        assert.doesInclude(
+            this.loginCardSubtitles,
+            subtitle,
+            `Login Subtitle should be one of: ${this.loginCardSubtitles.join(', ')}`
+        )
+    }
+
+    private renderCardSubtitle() {
+        return this.renderHeader()?.subtitle
+    }
+
+    private get bigFormVc() {
+        return this.loginVc.getLoginForm()
+    }
+
+    private async enterPhoneAndSubmit() {
+        await this.fillOutPhone(DEMO_NUMBER)
+        await this.submit()
+    }
+
+    private renderCardTitle() {
+        return this.renderHeader()?.title
+    }
+
+    private renderHeader() {
+        return this.render(this.loginVc).header
+    }
+
+    private async fillOutPhone(value: string) {
+        await this.formVc.setValue('phone', value)
+    }
+
+    private async submit() {
+        await this.formVc.submit()
+    }
+
+    private get formVc() {
+        return this.loginVc.getLoginForm()
+    }
+
     private get auth() {
         return Authenticator.getInstance()
     }
@@ -334,7 +607,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     private LoginVc(options?: LoginCardViewControllerOptions) {
         const factory = this.Factory()
         factory.setController('login-card', SpyLogin)
-        const login = factory.Controller('login-card', { ...options })
+        const login = factory.Controller('login-card', {
+            shouldAllowEmailLogin: this.shouldAllowEmailLogin,
+            ...options,
+        })
         return login as SpyLogin
     }
 }

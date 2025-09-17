@@ -73,7 +73,7 @@ export default class InteractorTest extends AbstractViewControllerTest {
     protected async loginPassesWithGoodDemoNumber(phone: string) {
         const challenge = generateId()
 
-        await this.eventFaker.fakeRequestPin(challenge)
+        await this.eventFaker.fakeRequestPin(() => challenge)
 
         let passedChallenge: string | undefined
 
