@@ -55,7 +55,7 @@ export default class BigFormViewController<
 
         this.replaySlideHeading(this.getPresentSlide())
 
-        this.model.onSlideChange?.({
+        await this.model.onSlideChange?.({
             fromSlide: from,
             toSlide: to,
         })
