@@ -1,4 +1,4 @@
-import { SchemaError } from '@sprucelabs/schema'
+import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../../errors/SpruceError'
 import {
@@ -116,7 +116,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
                 },
                 setValue: async (name: string, value: any) => {
                     const idx = this.getIdxForId(id)
-                    await this.setValue({ rowIdx: idx, name, value })
+                    await this._setValue({ rowIdx: idx, name, value })
                 },
                 getValues: () => {
                     const idx = this.getIdxForId(id)
@@ -169,7 +169,7 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         return values
     }
 
-    private async setValue(options: {
+    private async _setValue(options: {
         rowIdx: number
         name: string
         value: any
@@ -213,6 +213,19 @@ export default class ListViewController extends AbstractViewController<SpruceSch
         }
 
         return values
+    }
+
+    public async setValue(row: string | number, name: string, value: any) {
+        assertOptions({ row, name, value }, ['row', 'name', 'value'])
+
+        const rowVc = this.getRowVc(row)
+        await rowVc.setValue(name, value)
+    }
+
+    public getValue(row: string | number, name: string) {
+        assertOptions({ row, name }, ['row', 'name'])
+        const rowVc = this.getRowVc(row)
+        return rowVc.getValue(name)
     }
 
     public setRows(rows: ListRow[]) {

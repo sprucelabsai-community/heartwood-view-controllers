@@ -658,6 +658,52 @@ const listAssert = {
             `You row is the wrong style! I expected it to be '${style}', but found '${actual}'!`
         )
     },
+
+    valueEquals(options: {
+        listVc: ViewController<List>
+        row: string | number
+        name: string
+        value: any
+    }) {
+        const { listVc, row, name, value } = assertOptions(options, [
+            'listVc',
+            'row',
+            'name',
+            'value',
+        ])
+
+        const rowVc = getListVc(listVc).getRowVc(row)
+        const actual = rowVc.getValue(name)
+
+        assert.isEqual(
+            actual,
+            value,
+            `The value of '${name}' in row '${row}' does not equal the expected value.`
+        )
+    },
+
+    valueDoesNotEqual(options: {
+        listVc: ViewController<List>
+        row: string | number
+        name: string
+        value: any
+    }) {
+        const { listVc, row, name, value } = assertOptions(options, [
+            'listVc',
+            'row',
+            'name',
+            'value',
+        ])
+
+        const rowVc = getListVc(listVc).getRowVc(row)
+        const actual = rowVc.getValue(name)
+
+        assert.isNotEqual(
+            actual,
+            value,
+            `The value of '${name}' in row '${row}' equals the expected value when it should not.`
+        )
+    },
 }
 
 export default listAssert

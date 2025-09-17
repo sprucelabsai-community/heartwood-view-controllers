@@ -1,6 +1,12 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { namesUtil } from '@sprucelabs/spruce-skill-utils'
-import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
+import {
+    assert,
+    generateId,
+    test,
+    suite,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import buildForm from '../../../builders/buildForm'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import listAssert from '../../../tests/utilities/listAssert'
@@ -531,7 +537,82 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
 
     @test()
     protected async throwsIfNoControllerOnListInCard() {
-        const cardVc = this.Controller('card', {
+        const cardVc = this.CardVc()
+
+        assert.doesThrow(() => listAssert.cardRendersList(cardVc, this.listId))
+    }
+
+    @test()
+    protected async throwIfValueEqualsIsMissingParams() {
+        //@ts-ignore
+        const err = await assert.doesThrowAsync(() => listAssert.valueEquals())
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['listVc', 'row', 'name', 'value'],
+        })
+    }
+
+    @test()
+    protected async canAssertIfValueEquals() {
+        const { rowId, name, value } = this.addRowWithValues()
+
+        listAssert.valueEquals({ listVc: this.vc, row: rowId, name, value })
+    }
+
+    @test()
+    protected async throwsIfValueDoesNotEqual() {
+        const { rowId, name } = this.addRowWithValues()
+        assert.doesThrow(
+            () =>
+                listAssert.valueEquals({
+                    listVc: this.vc,
+                    row: rowId,
+                    name,
+                    value: generateId(),
+                }),
+            `The value of '${name}' in row '${rowId}' does not equal the expected value.`
+        )
+    }
+
+    @test()
+    protected async throwsIfValueDoesNotEqualIsMissingParams() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            listAssert.valueDoesNotEqual()
+        )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['listVc', 'row', 'name', 'value'],
+        })
+    }
+
+    @test()
+    protected async canAssertIfValueDoesNotEqual() {
+        const { rowId, name } = this.addRowWithValues()
+        listAssert.valueDoesNotEqual({
+            listVc: this.vc,
+            row: rowId,
+            name,
+            value: generateId(),
+        })
+    }
+
+    @test()
+    protected async throwsIfValueEqualsWhenItShouldNot() {
+        const { rowId, name, value } = this.addRowWithValues()
+
+        assert.doesThrow(
+            () =>
+                listAssert.valueDoesNotEqual({
+                    listVc: this.vc,
+                    row: rowId,
+                    name,
+                    value,
+                }),
+            `The value of '${name}' in row '${rowId}' equals the expected value when it should not.`
+        )
+    }
+
+    private CardVc() {
+        return this.Controller('card', {
             body: {
                 sections: [
                     {
@@ -543,8 +624,24 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
                 ],
             },
         })
+    }
 
-        assert.doesThrow(() => listAssert.cardRendersList(cardVc, this.listId))
+    private addRowWithValues() {
+        const rowId = generateId()
+        const name = generateId()
+        const value = generateId()
+        this.addRow({
+            id: rowId,
+            cells: [
+                {
+                    textInput: {
+                        name,
+                        value,
+                    },
+                },
+            ],
+        })
+        return { rowId, name, value }
     }
 
     private assertAssertingInputThrows(msg: string) {
