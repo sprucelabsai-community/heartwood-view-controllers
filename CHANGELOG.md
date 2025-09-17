@@ -1,3 +1,10 @@
+# [126.8.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.7.24...v126.8.0) (2025-09-17)
+
+
+### Features
+
+* can login with email ([a182b04](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a182b04))
+
 ## [126.7.24](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.7.23...v126.7.24) (2025-09-16)
 
 ## [126.7.23](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.7.22...v126.7.23) (2025-09-15)
