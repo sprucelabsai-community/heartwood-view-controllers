@@ -72,7 +72,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
     private renderLoginWithEmailButton(): Button {
         return {
             id: 'login-with-email',
-            label: 'Use email instead',
+            label: 'Use Email Instead',
             style: 'link',
             onClick: this.handleClickLoginWithEmail.bind(this),
         }
@@ -92,7 +92,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
     private renderLoginWithPhoneButton(): Button {
         return {
             id: 'login-with-phone',
-            label: 'Use phone instead',
+            label: 'Back to Phone',
             style: 'link',
             onClick: this.handleClickLoginWithPhone.bind(this),
         }
