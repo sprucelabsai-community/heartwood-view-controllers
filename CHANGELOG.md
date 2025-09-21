@@ -1,3 +1,10 @@
+# [126.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.8.12...v126.9.0) (2025-09-21)
+
+
+### Features
+
+* control bar style (standard or floating) ([a883ffa](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a883ffa))
+
 ## [126.8.12](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.8.11...v126.8.12) (2025-09-21)
 
 ## [126.8.11](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.8.10...v126.8.11) (2025-09-20)
