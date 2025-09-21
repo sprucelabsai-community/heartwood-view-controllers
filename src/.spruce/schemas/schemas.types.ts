@@ -1235,6 +1235,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'backgroundColor'?: string | undefined | null
 				/** Control bar font. The font used in the control bar. */
 				'font'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSetting | undefined | null
+				/** Control bar style. Should the control bar span the full width of the screen or the width of the buttons and float in the center? */
+				'style'?: ("standard" | "floating") | undefined | null
 				/** Control bar size. */
 				'size'?: ("medium" | "large") | undefined | null
 		}
@@ -1266,6 +1268,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'schema',
 			                hint: 'The font used in the control bar.',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontSettingSchema,}
+			            },
+			            /** Control bar style. Should the control bar span the full width of the screen or the width of the buttons and float in the center? */
+			            'style': {
+			                label: 'Control bar style',
+			                type: 'select',
+			                hint: 'Should the control bar span the full width of the screen or the width of the buttons and float in the center?',
+			                options: {choices: [{"value":"standard","label":"Standard"},{"value":"floating","label":"Floating"}],}
 			            },
 			            /** Control bar size. */
 			            'size': {

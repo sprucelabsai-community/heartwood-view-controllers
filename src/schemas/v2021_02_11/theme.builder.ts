@@ -155,6 +155,23 @@ const controlBarSchema = buildSchema({
             label: 'Control bar font',
             hint: 'The font used in the control bar.',
         },
+        style: {
+            type: 'select',
+            label: 'Control bar style',
+            hint: 'Should the control bar span the full width of the screen or the width of the buttons and float in the center?',
+            options: {
+                choices: [
+                    {
+                        value: 'standard',
+                        label: 'Standard',
+                    },
+                    {
+                        value: 'floating',
+                        label: 'Floating',
+                    },
+                ],
+            },
+        },
         size: {
             type: 'select',
             label: 'Control bar size',

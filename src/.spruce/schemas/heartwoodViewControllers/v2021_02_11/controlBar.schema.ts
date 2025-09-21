@@ -31,6 +31,13 @@ const controlBarSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Contr
 	                hint: 'The font used in the control bar.',
 	                options: {schema: fontSettingSchema_v2021_02_11,}
 	            },
+	            /** Control bar style. Should the control bar span the full width of the screen or the width of the buttons and float in the center? */
+	            'style': {
+	                label: 'Control bar style',
+	                type: 'select',
+	                hint: 'Should the control bar span the full width of the screen or the width of the buttons and float in the center?',
+	                options: {choices: [{"value":"standard","label":"Standard"},{"value":"floating","label":"Floating"}],}
+	            },
 	            /** Control bar size. */
 	            'size': {
 	                label: 'Control bar size',
