@@ -1,6 +1,7 @@
-import { test, suite, assert } from '@sprucelabs/test-utils'
+import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { Navigation } from '../../../types/heartwood.types'
+import { Navigation, NavigationButton } from '../../../types/heartwood.types'
 import NavigationViewController from '../../../viewControllers/navigation/Navigation.vc'
 import AbstractNavigationTest from './AbstractNavigationTest'
 
@@ -71,6 +72,53 @@ export default class ControllingNavigationTest extends AbstractNavigationTest {
         vcAssert.assertTriggerRenderCount(this.vc, 1)
         this.setShouldRenderButtonLabels(false)
         vcAssert.assertTriggerRenderCount(this.vc, 2)
+    }
+
+    @test()
+    protected async canSetbuttons() {
+        const buttons: NavigationButton[] = [
+            { id: 'go', label: 'team', lineIcon: 'add' },
+        ]
+
+        this.setButtons(buttons)
+        this.assertRenderedButtonsEqual(buttons)
+    }
+
+    @test()
+    protected async canSetDifferentButtons() {
+        const buttons: NavigationButton[] = [
+            { id: 'more', label: 'then', lineIcon: 'add-square' },
+            { id: 'go2', label: 'team2', lineIcon: 'add' },
+        ]
+
+        this.setButtons(buttons)
+        this.assertRenderedButtonsEqual(buttons)
+    }
+
+    @test()
+    protected async settingButtonsTriggersRender() {
+        const buttons: NavigationButton[] = [
+            { id: generateId(), label: generateId(), lineIcon: 'alarm' },
+        ]
+
+        this.setButtons(buttons)
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+
+        this.setButtons(buttons)
+        vcAssert.assertTriggerRenderCount(this.vc, 2)
+    }
+
+    private assertRenderedButtonsEqual(buttons: NavigationButton[]) {
+        const model = this.render(this.vc)
+        assert.isEqualDeep(
+            model.buttons,
+            buttons,
+            'Did not set buttons correctly'
+        )
+    }
+
+    private setButtons(buttons: NavigationButton[]) {
+        this.vc.setButtons(buttons)
     }
 
     private setShouldRenderButtonLabels(shouldRender: boolean) {

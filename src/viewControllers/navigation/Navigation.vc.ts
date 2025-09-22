@@ -1,4 +1,8 @@
-import { Navigation, ViewControllerOptions } from '../../types/heartwood.types'
+import {
+    Navigation,
+    NavigationButton,
+    ViewControllerOptions,
+} from '../../types/heartwood.types'
 import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptions'
 import AbstractViewController from '../Abstract.vc'
 
@@ -16,6 +20,11 @@ export default class NavigationViewController extends AbstractViewController<Nav
 
     public show() {
         this.model.isVisible = true
+        this.triggerRender()
+    }
+
+    public setButtons(buttons: NavigationButton[]) {
+        this.model.buttons = buttons
         this.triggerRender()
     }
 
