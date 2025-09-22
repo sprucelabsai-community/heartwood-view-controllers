@@ -1,4 +1,3 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import vcAssert from '../../../tests/utilities/vcAssert'
 import { Navigation, NavigationButton } from '../../../types/heartwood.types'
