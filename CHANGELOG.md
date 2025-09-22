@@ -1,3 +1,10 @@
+# [126.10.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.9.0...v126.10.0) (2025-09-22)
+
+
+### Features
+
+* can enable/disable label redering ([5af7dc0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/5af7dc0))
+
 # [126.9.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.8.12...v126.9.0) (2025-09-21)
 
 
