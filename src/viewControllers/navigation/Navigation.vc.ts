@@ -19,6 +19,11 @@ export default class NavigationViewController extends AbstractViewController<Nav
         this.triggerRender()
     }
 
+    public setShouldRenderButtonLabels(shouldRender: boolean) {
+        this.model.shouldRenderButtonLabels = shouldRender
+        this.triggerRender()
+    }
+
     public render(): Navigation {
         return { controller: this, ...this.model }
     }

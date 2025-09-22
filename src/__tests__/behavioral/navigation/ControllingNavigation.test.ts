@@ -6,6 +6,13 @@ import AbstractNavigationTest from './AbstractNavigationTest'
 
 @suite()
 export default class ControllingNavigationTest extends AbstractNavigationTest {
+    private vc!: NavigationViewController
+
+    protected async beforeEach() {
+        await super.beforeEach()
+        this.vc = this.NavigationVc()
+    }
+
     @test()
     protected async canCreateNavigation() {
         this.NavigationVc()
@@ -40,6 +47,42 @@ export default class ControllingNavigationTest extends AbstractNavigationTest {
         const vc = this.NavigationVc({ isVisible: false })
         vc.show()
         this.assertNavIsVisible(vc, true)
+    }
+
+    @test()
+    protected async canToggleButtonLabels() {
+        this.assertDoesNotRenderButtonLabels()
+
+        this.setShouldRenderButtonLabels(true)
+
+        const updatedModel = this.render(this.vc)
+        assert.isTrue(
+            updatedModel.shouldRenderButtonLabels,
+            'button labels should be rendered'
+        )
+
+        this.setShouldRenderButtonLabels(false)
+        this.assertDoesNotRenderButtonLabels()
+    }
+
+    @test()
+    protected async settingShouldRenderButtonLabelsTriggersRender() {
+        this.setShouldRenderButtonLabels(true)
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+        this.setShouldRenderButtonLabels(false)
+        vcAssert.assertTriggerRenderCount(this.vc, 2)
+    }
+
+    private setShouldRenderButtonLabels(shouldRender: boolean) {
+        this.vc.setShouldRenderButtonLabels(shouldRender)
+    }
+
+    private assertDoesNotRenderButtonLabels() {
+        const model = this.render(this.vc)
+        assert.isFalsy(
+            model.shouldRenderButtonLabels,
+            'button labels should not be rendered'
+        )
     }
 
     private assertNavIsVisible(
