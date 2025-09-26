@@ -1,8 +1,9 @@
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
-import { test, suite, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import * as constants from '../../../tests/constants'
+import { ViewControllerId } from '../../../types/heartwood.types'
 import ViewControllerExporter from '../../../viewControllers/ViewControllerExporter'
 import ViewControllerImporter from '../../../viewControllers/ViewControllerImporter'
 
@@ -13,6 +14,8 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
     public static async beforeAll() {
         await super.beforeAll()
+
+        process.env.TACO = generateId()
 
         //@ts-ignore
         global.fetch = () => 'fetching!'
@@ -34,6 +37,11 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         await exporter.export({
             source: constants.importExportSourceApp,
             destination: constants.importExportDestinationApp,
+        })
+        await exporter.export({
+            source: constants.importExportSourceWithDefines,
+            destination: constants.importExportDestinationWithDefines,
+            defines: { 'process.env.TACO': `"${process.env.TACO}"` },
         })
     }
 
@@ -151,8 +159,7 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
     protected constructorIsInvoked() {
         const factory = this.importAndGetFactory()
 
-        //@ts-ignore
-        const vc = factory.Controller('book', {})
+        const vc = factory.Controller('book' as ViewControllerId, {})
 
         //@ts-ignore
         assert.isEqual(vc.getValueSetInConstructor(), 'set!')
@@ -173,6 +180,14 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
         const app = new App({} as any)
         //@ts-ignore
         assert.isEqual(app.render(), 'go-team')
+    }
+
+    @test()
+    protected async importWithEnvs() {
+        const factory = this.importAndGetFactory('WithDefines')
+        const vc = factory.Controller('book' as ViewControllerId, {})
+        const str = vc.render()
+        assert.isEqual(str, `${process.env.TACO}'s are good`)
     }
 
     private importAndGetFactory(suffix?: ImportExportSuffix) {
@@ -207,4 +222,4 @@ export default class ViewControllerImporterTest extends AbstractViewControllerTe
 
 class SpyViewControllerImporter extends ViewControllerImporter {}
 
-type ImportExportSuffix = '' | 'NoIds' | 'Plugins1' | 'App'
+type ImportExportSuffix = '' | 'NoIds' | 'Plugins1' | 'App' | 'WithDefines'

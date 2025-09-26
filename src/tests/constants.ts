@@ -75,6 +75,11 @@ export const importExportDestinationNoIds = diskUtil.resolvePath(
     'bundle.js'
 )
 
+export const importExportDestinationWithDefines = diskUtil.resolvePath(
+    diskUtil.createRandomTempDir(),
+    'bundle.js'
+)
+
 export const importExportSourceSyntaxError = diskUtil.resolvePath(
     __dirname,
     '..',

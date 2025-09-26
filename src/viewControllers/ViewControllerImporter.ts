@@ -31,6 +31,7 @@ export default class ViewControllerImporter {
                             'setInterval',
                             'clearInterval',
                             'fetch',
+                            'console',
                         ].indexOf(name) === -1
                 )
                 .filter((name) => this.shouldOverideGlobalNamed(name))
@@ -42,9 +43,17 @@ export default class ViewControllerImporter {
 ${resets}
 var utils = {
 	setTimeout,
-	clearTimeout
+	clearTimeout,
 }
-var global = {}
+var console = {
+    log() {},
+    info() {},
+    warn() {},
+    error() {}
+}
+var process = { env: {} }
+var global = {
+}
 var globalThis = {}
 function heartwood(...args) {
     const { vcs, pluginsByName, App } = args[0].vcs ? args[0] : { vcs: args[0], pluginsByName: args[1] }
@@ -53,7 +62,6 @@ function heartwood(...args) {
 	exports = vcs
 	plugins = pluginsByName || {}
 }
-
 
 ${script}`
 
