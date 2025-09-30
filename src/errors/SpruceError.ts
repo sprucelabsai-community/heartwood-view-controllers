@@ -107,6 +107,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = `You have to generate an offer before setting an answer for streaming!`
                 break
 
+            case 'INVALID_LOGIN_CONFIGURATION':
+                message = 'A Invalid login configuration just happened!'
+                break
+
             default:
                 message = super.friendlyMessage()
         }

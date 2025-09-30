@@ -3,11 +3,13 @@ import { buildSchema, SchemaPartialValues } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import Authenticator from '../auth/Authenticator'
 import buildBigForm from '../builders/buildBigForm'
+import SpruceError from '../errors/SpruceError'
 import {
     BigFormSlideChangeOptions,
     BigFormViewController,
     Button,
     Card,
+    CardFooter,
     FormOnChangeOptions,
     FormSection,
     ViewControllerOptions,
@@ -24,6 +26,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
     private loginFailedHandler?: (err: Error) => void
     private cardVc: CardViewController
     private shouldAllowEmailLogin: boolean
+    private shouldAllowPhoneLogin: boolean
     private smsDisclaimer?: string | null
 
     public constructor(
@@ -37,11 +40,19 @@ export default class LoginCardViewController extends AbstractViewController<Card
             onLoginFailed,
             smsDisclaimer,
             shouldAllowEmailLogin,
+            shouldAllowPhoneLogin = true,
         } = options
 
         this._id = id ?? `${LoginCardViewController._id}`
         LoginCardViewController._id++
 
+        if (!shouldAllowPhoneLogin && !shouldAllowEmailLogin) {
+            throw new SpruceError({
+                code: 'INVALID_LOGIN_CONFIGURATION',
+            })
+        }
+
+        this.shouldAllowPhoneLogin = shouldAllowPhoneLogin
         this.shouldAllowEmailLogin = shouldAllowEmailLogin ?? false
         this.loginHandler = onLogin
         this.loginFailedHandler = onLoginFailed
@@ -79,14 +90,18 @@ export default class LoginCardViewController extends AbstractViewController<Card
     }
 
     private async handleClickLoginWithEmail() {
-        this.bigFormVc.updateSection(0, {
-            title: this.renderEmailSlideTitle(),
-            fields: ['email'],
-        })
+        this.bigFormVc.updateSection(0, this.renderEmailSection())
 
         this.bigFormVc.setFooter({
             buttons: [this.renderLoginWithPhoneButton()],
         })
+    }
+
+    private renderEmailSection(): FormSection<LoginSchema> {
+        return {
+            title: this.renderEmailSlideTitle(),
+            fields: ['email'],
+        }
     }
 
     private renderLoginWithPhoneButton(): Button {
@@ -139,24 +154,37 @@ export default class LoginCardViewController extends AbstractViewController<Card
                 id: this._id,
                 schema: loginSchema,
                 onSlideChange: this.handleSlideChange.bind(this),
-                sections: [
-                    this.renderPhoneSection(),
-                    {
-                        title: randomUtil.rand([
-                            'Now the pin! 👇',
-                            'The pin is next!',
-                            'Time for pin.',
-                        ]),
-                        fields: [{ name: 'code', renderAs: 'number' }],
-                    },
-                ],
-                footer: this.shouldAllowEmailLogin
-                    ? {
-                          buttons: [this.renderLoginWithEmailButton()],
-                      }
-                    : null,
+                sections: [this.renderFirstSection(), this.renderPinSection()],
+                footer: this.renderFooter(),
             })
         )
+    }
+
+    private renderFirstSection() {
+        if (!this.shouldAllowPhoneLogin) {
+            return this.renderEmailSection()
+        }
+
+        return this.renderPhoneSection()
+    }
+
+    private renderPinSection(): FormSection<LoginSchema> {
+        return {
+            title: randomUtil.rand([
+                'Now the pin! 👇',
+                'The pin is next!',
+                'Time for pin.',
+            ]),
+            fields: [{ name: 'code', renderAs: 'number' }],
+        }
+    }
+
+    private renderFooter(): CardFooter | null {
+        return this.shouldAllowEmailLogin && this.shouldAllowPhoneLogin
+            ? {
+                  buttons: [this.renderLoginWithEmailButton()],
+              }
+            : null
     }
 
     private renderPhoneSection(): FormSection<LoginSchema> {
@@ -330,6 +358,7 @@ export interface LoginCardViewControllerOptions {
     id?: string | null
     smsDisclaimer?: string | null
     shouldAllowEmailLogin?: boolean
+    shouldAllowPhoneLogin?: boolean
 }
 
 const loginSchema = buildSchema({

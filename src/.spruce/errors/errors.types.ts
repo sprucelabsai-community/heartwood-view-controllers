@@ -26,6 +26,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
@@ -335,6 +336,27 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type InvalidSkillViewControllerEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidSkillViewControllerSchema>
+
+}
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface InvalidLoginConfiguration {
+		
+	}
+
+	export interface InvalidLoginConfigurationSchema extends SpruceSchema.Schema {
+		id: 'invalidLoginConfiguration',
+		namespace: 'HeartwoodViewControllers',
+		name: 'Invalid login configuration',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		    }
+	}
+
+	export type InvalidLoginConfigurationEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.InvalidLoginConfigurationSchema>
 
 }
 

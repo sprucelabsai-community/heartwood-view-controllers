@@ -70,6 +70,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         dateCreated: 123,
     }
     private lastRequestPinPayload?: RequestPinTargetAndPayload['payload']
+    private shouldAllowPhoneLogin?: boolean
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -407,7 +408,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected async clickingLoginWithEmailRendersEmailField() {
         await this.clickLoginWithEmail()
-        formAssert.formRendersField(this.bigFormVc, 'email')
+        this.assertRendersEmailField()
     }
 
     @test()
@@ -420,12 +421,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected async clickingLoginWithEmailSetsExpectedSectionTitle() {
         await this.clickLoginWithEmail()
-        const model = this.render(this.bigFormVc)
-        assert.doesInclude(
-            this.emailSlideTitles,
-            model.sections[0].title,
-            'Email slide title not one of expected'
-        )
+        this.assertRendersEmailSlideTitles()
     }
 
     @test()
@@ -449,7 +445,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     protected async clickingBackToPhoneRendersPhoneField() {
         await this.clickLoginWithEmail()
         await this.clickLoginWithPhone()
-        formAssert.formRendersField(this.bigFormVc, 'phone')
+        this.assertRendersPhoneField()
         this.assertRendersPhoneSlideTitle()
     }
 
@@ -478,6 +474,46 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected async disablingPhoneLoginWithoutEnablingEmailThrows() {
+        this.shouldAllowEmailLogin = false
+        this.shouldAllowPhoneLogin = false
+        const err = assert.doesThrow(() => this.LoginVc({}))
+        errorAssert.assertError(err, 'INVALID_LOGIN_CONFIGURATION')
+    }
+
+    @test()
+    protected async disablingPhoneLoginWorksAndDoesNotRenderLoginWithEmailButton() {
+        this.setupWithEmailOnlyLogin()
+        this.assertDoesNotRenderButton('login-with-email')
+    }
+
+    @test()
+    protected async loginWithEmailOnlyRendersEmailFieldRightAway() {
+        this.setupWithEmailOnlyLogin()
+        this.assertDoesNotRenderPhone()
+        this.assertRendersEmailSlideTitles()
+    }
+
+    private assertRendersEmailSlideTitles() {
+        const model = this.render(this.bigFormVc)
+        assert.doesInclude(
+            this.emailSlideTitles,
+            model.sections[0].title,
+            'Email slide title not one of expected'
+        )
+    }
+
+    private assertDoesNotRenderPhone() {
+        formAssert.formDoesNotRenderField(this.bigFormVc, 'phone')
+    }
+
+    private setupWithEmailOnlyLogin() {
+        this.shouldAllowPhoneLogin = false
+        this.shouldAllowEmailLogin = true
+        this.loginVc = this.LoginVc()
+    }
+
     private async fillOutEmail(email: string) {
         await this.formVc.setValue('email', email)
     }
@@ -489,6 +525,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
             model.sections[0]?.fields?.[0]?.hint,
             "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
         )
+    }
+
+    private assertRendersPhoneField() {
+        formAssert.formRendersField(this.bigFormVc, 'phone')
     }
 
     private assertRendersDisclaimer() {
@@ -604,11 +644,16 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         return Authenticator.getInstance()
     }
 
+    private assertRendersEmailField() {
+        formAssert.formRendersField(this.bigFormVc, 'email')
+    }
+
     private LoginVc(options?: LoginCardViewControllerOptions) {
         const factory = this.Factory()
         factory.setController('login-card', SpyLogin)
         const login = factory.Controller('login-card', {
             shouldAllowEmailLogin: this.shouldAllowEmailLogin,
+            shouldAllowPhoneLogin: this.shouldAllowPhoneLogin,
             ...options,
         })
         return login as SpyLogin
