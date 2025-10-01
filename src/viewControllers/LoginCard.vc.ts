@@ -49,7 +49,8 @@ export default class LoginCardViewController extends AbstractViewController<Card
         if (!shouldAllowPhoneLogin && !shouldAllowEmailLogin) {
             throw new SpruceError({
                 code: 'INVALID_LOGIN_CONFIGURATION',
-                friendlyMessage: 'You have to allow phone or email login.',
+                friendlyMessage:
+                    "You have to allow phone or email login. You can't disable both.",
             })
         }
 
