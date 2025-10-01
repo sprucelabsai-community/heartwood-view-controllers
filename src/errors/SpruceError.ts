@@ -115,6 +115,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = super.friendlyMessage()
         }
 
+        if (options?.friendlyMessage) {
+            message = options.friendlyMessage
+        }
+
         return message
     }
 }
