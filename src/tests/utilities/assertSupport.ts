@@ -1,7 +1,6 @@
 import { SelectChoice } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { assert } from '@sprucelabs/test-utils'
-import AppController from '../../__tests__/testDirsAndFiles/skill_with_app/src/App.ac'
 import AbstractSkillViewController from '../../skillViewControllers/Abstract.svc'
 import {
     ConfirmOptions,
@@ -11,6 +10,7 @@ import {
     Card,
     TriggerRenderHandler,
     RouterDestination,
+    AppController,
 } from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import AbstractAppController from '../../viewControllers/Abstract.ac'
