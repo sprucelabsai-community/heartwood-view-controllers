@@ -214,9 +214,11 @@ export default class LoginCardViewController extends AbstractViewController<Card
         if (to === 0) {
             this.cardVc.setHeaderTitle(this.renderLoginTitle())
             this.cardVc.setHeaderSubtitle(this.renderLoginSubtitle())
+            this.bigFormVc.setFooter(this.renderFooter())
         } else {
             this.cardVc.setHeaderTitle(this.renderPinTitle())
             this.cardVc.setHeaderSubtitle(this.renderPinSubitle())
+            this.bigFormVc.setFooter(null)
         }
     }
 

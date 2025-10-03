@@ -388,7 +388,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     protected async goingBackAfterEnteringPhoneRendersPhoneTitle() {
         this.renderCardTitle()
         await this.enterPhoneAndSubmit()
-        await this.bigFormVc.goBack()
+        await this.clickBack()
         this.assertRendersLoginTitles()
     }
 
@@ -432,10 +432,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     @test()
-    protected async clickingBackToPhoneRendersEmailButton() {
+    protected async clickingEmailThenPhoneRendersEmailButton() {
         await this.clickLoginWithEmail()
         await this.clickLoginWithPhone()
-        this.assertRendersButton('login-with-email')
+        this.assertRendersLoginWithEmail()
         this.assertDoesNotRenderButton('login-with-phone')
         await this.clickLoginWithEmail()
         this.assertRendersButton('login-with-phone')
@@ -493,6 +493,29 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         this.setupWithEmailOnlyLogin()
         this.assertDoesNotRenderPhone()
         this.assertRendersEmailSlideTitles()
+    }
+
+    @test()
+    protected async enteringPhoneHidesLoginWithEmailButton() {
+        this.assertRendersLoginWithEmail()
+        await this.fillOutPhoneAndSubmit()
+        this.assertDoesNotRenderButton('login-with-email')
+    }
+
+    @test()
+    protected async dropsBackInEmailButtonWhenGoingBackToPhoneSlide() {
+        await this.fillOutPhoneAndSubmit()
+        await this.clickBack()
+        this.assertRendersLoginWithEmail()
+    }
+
+    private assertRendersLoginWithEmail() {
+        this.assertRendersButton('login-with-email')
+    }
+
+    private async fillOutPhoneAndSubmit() {
+        await this.fillOutPhone()
+        await this.submit()
     }
 
     private assertRendersEmailSlideTitles() {
@@ -607,6 +630,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         )
     }
 
+    private async clickBack() {
+        await this.bigFormVc.goBack()
+    }
+
     private renderCardSubtitle() {
         return this.renderHeader()?.subtitle
     }
@@ -628,12 +655,12 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         return this.render(this.loginVc).header
     }
 
-    private async fillOutPhone(value: string) {
+    private async fillOutPhone(value: string = DEMO_NUMBER) {
         await this.formVc.setValue('phone', value)
     }
 
     private async submit() {
-        await this.formVc.submit()
+        await interactor.submitBigFormSlide(this.bigFormVc)
     }
 
     private get formVc() {
