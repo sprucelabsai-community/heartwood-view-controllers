@@ -568,6 +568,10 @@ export const buttonFields: SchemaFieldsByName = {
                     value: 'bottom',
                     label: 'Bottom',
                 },
+                {
+                    value: 'right',
+                    label: 'Right',
+                },
             ],
         },
     },
