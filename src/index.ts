@@ -26,6 +26,7 @@ export { default as LineGraphViewController } from './viewControllers/charts/Lin
 export * from './viewControllers/ToolBelt.vc'
 export * from './viewControllers/form/Form.vc'
 export { default as LoginViewController } from './viewControllers/LoginCard.vc'
+export { default as LoginCardViewController } from './viewControllers/LoginCard.vc'
 export * from './viewControllers/LoginCard.vc'
 export { default as FormBuilderCardViewControllerImpl } from './viewControllers/formBuilder/FormBuilderCard.vc'
 export { default as CountdownTimerViewController } from './viewControllers/countdownTimer/CountdownTimer.vc'
