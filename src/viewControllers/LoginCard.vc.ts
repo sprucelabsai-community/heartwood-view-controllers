@@ -20,14 +20,15 @@ import CardViewController from './card/Card.vc'
 export default class LoginCardViewController extends AbstractViewController<Card> {
     private static _id = 0
     protected bigFormVc: BigFormViewController<LoginSchema>
+    protected loginHandler?: LoginHandler
+    protected loginFailedHandler?: (err: Error) => void
+    protected shouldAllowPhoneLogin: boolean
+    protected smsDisclaimer?: string | null
+    protected shouldAllowEmailLogin: boolean
+
     private _id: string
-    private loginHandler?: LoginHandler
     private userChallenge?: string
-    private loginFailedHandler?: (err: Error) => void
     private cardVc: CardViewController
-    private shouldAllowEmailLogin: boolean
-    private shouldAllowPhoneLogin: boolean
-    private smsDisclaimer?: string | null
 
     public constructor(
         options: LoginCardViewControllerOptions & ViewControllerOptions
