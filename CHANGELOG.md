@@ -1,3 +1,10 @@
+# [126.12.0](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.11.18...v126.12.0) (2025-10-09)
+
+
+### Features
+
+* can update first level button on navigation ([a08be91](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a08be91))
+
 ## [126.11.18](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.11.17...v126.11.18) (2025-10-07)
 
 ## [126.11.17](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.11.16...v126.11.17) (2025-10-07)
