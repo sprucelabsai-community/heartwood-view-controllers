@@ -5,7 +5,6 @@
   },
   "files": [
     "build/**/*",
-    "tsconfig.json"
   ],
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
