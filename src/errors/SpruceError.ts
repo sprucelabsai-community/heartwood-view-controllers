@@ -111,6 +111,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = 'A Invalid login configuration just happened!'
                 break
 
+            case 'BUTTON_NOT_FOUND':
+                message = `I could not find a button with the id '${options.id}'!`
+                break
+
             default:
                 message = super.friendlyMessage()
         }

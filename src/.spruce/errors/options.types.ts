@@ -67,10 +67,13 @@ export interface DateAlreadySelectedErrorOptions extends SpruceErrors.HeartwoodV
 export interface CellDeletedErrorOptions extends SpruceErrors.HeartwoodViewControllers.CellDeleted, ISpruceErrorOptions {
 	code: 'CELL_DELETED'
 }
+export interface ButtonNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.ButtonNotFound, ISpruceErrorOptions {
+	code: 'BUTTON_NOT_FOUND'
+}
 export interface AppNotFoundErrorOptions extends SpruceErrors.HeartwoodViewControllers.AppNotFound, ISpruceErrorOptions {
 	code: 'APP_NOT_FOUND'
 }
 
-type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | InvalidLoginConfigurationErrorOptions  | InvalidAppControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DidNotGenerateOfferErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | AppNotFoundErrorOptions 
+type ErrorOptions =  | ViewAlreadyDestroyedErrorOptions  | ToolNotFoundErrorOptions  | StepNotCompleteErrorOptions  | SlideNotFoundErrorOptions  | RowDeletedErrorOptions  | PersonNotFoundErrorOptions  | NoFieldVcSetErrorOptions  | MissingStorageErrorOptions  | InvalidViewControllerSourceErrorOptions  | InvalidViewControllerNameErrorOptions  | InvalidSkillViewControllerErrorOptions  | InvalidLoginConfigurationErrorOptions  | InvalidAppControllerErrorOptions  | ExportFailedErrorOptions  | EventNotFoundErrorOptions  | DuplicateToolIdErrorOptions  | DuplicateRowIdErrorOptions  | DuplicateEventIdErrorOptions  | DidNotGenerateOfferErrorOptions  | DateNotSelectedErrorOptions  | DateAlreadySelectedErrorOptions  | CellDeletedErrorOptions  | ButtonNotFoundErrorOptions  | AppNotFoundErrorOptions 
 
 export default ErrorOptions

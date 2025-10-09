@@ -27,6 +27,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.HeartwoodViewControllers {
 
 	
@@ -655,6 +656,35 @@ export declare namespace SpruceErrors.HeartwoodViewControllers {
 	}
 
 	export type CellDeletedEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.CellDeletedSchema>
+
+}
+
+
+export declare namespace SpruceErrors.HeartwoodViewControllers {
+
+	
+	export interface ButtonNotFound {
+		
+			
+			'id': string
+	}
+
+	export interface ButtonNotFoundSchema extends SpruceSchema.Schema {
+		id: 'buttonNotFound',
+		namespace: 'HeartwoodViewControllers',
+		name: 'button not found',
+		moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type ButtonNotFoundEntity = SchemaEntity<SpruceErrors.HeartwoodViewControllers.ButtonNotFoundSchema>
 
 }
 
