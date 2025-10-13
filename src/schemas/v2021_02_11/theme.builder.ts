@@ -75,6 +75,11 @@ const themeFontsSchema = buildSchema({
 const cardStyleSchema = buildSchema({
     id: 'cardStyle',
     fields: {
+        cardBackgroundColor: {
+            type: 'text',
+            label: 'Card Background Color',
+            hint: 'The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent.',
+        },
         bodyBackgroundColor: {
             type: 'text',
             label: 'Card Body Background Color',

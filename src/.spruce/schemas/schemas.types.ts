@@ -940,6 +940,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface CardStyle {
 			
+				/** Card Background Color. The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent. */
+				'cardBackgroundColor'?: string | undefined | null
 				/** Card Body Background Color. The background color of the body of the card. */
 				'bodyBackgroundColor'?: string | undefined | null
 				/** Card Body Foreground Color. The color of the text of the body of the card. */
@@ -963,6 +965,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: '',
 			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 			    fields: {
+			            /** Card Background Color. The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent. */
+			            'cardBackgroundColor': {
+			                label: 'Card Background Color',
+			                type: 'text',
+			                hint: 'The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent.',
+			                options: undefined
+			            },
 			            /** Card Body Background Color. The background color of the body of the card. */
 			            'bodyBackgroundColor': {
 			                label: 'Card Body Background Color',

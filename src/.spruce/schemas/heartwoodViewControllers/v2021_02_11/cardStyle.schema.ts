@@ -10,6 +10,13 @@ const cardStyleSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSt
 	name: '',
 	moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
 	    fields: {
+	            /** Card Background Color. The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent. */
+	            'cardBackgroundColor': {
+	                label: 'Card Background Color',
+	                type: 'text',
+	                hint: 'The background color of the card. This color will show through any transparency in the header, body, or footer colors. It defaults to transparent.',
+	                options: undefined
+	            },
 	            /** Card Body Background Color. The background color of the body of the card. */
 	            'bodyBackgroundColor': {
 	                label: 'Card Body Background Color',
