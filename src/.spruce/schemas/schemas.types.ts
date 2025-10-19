@@ -29,7 +29,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: boolean | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -39,13 +39,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>) | undefined | null
+				'onChange'?: (value: boolean) => void | boolean | Promise<void | boolean> | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
@@ -153,7 +153,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -163,13 +163,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
@@ -284,7 +284,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: number | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -294,13 +294,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: number) => any | Promise<any>) | undefined | null
+				'onChange'?: (value: number) => any | Promise<any> | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Can be changed. */
@@ -316,7 +316,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
 				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings> | undefined | null
 		}
 
 		interface RatingsInputSchema extends SpruceSchema.Schema {
@@ -466,9 +466,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'name': string
 				
-				'value'?: (any) | undefined | null
+				'value'?: any | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -478,13 +478,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
@@ -589,9 +589,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'name': string
 				
-				'value'?: (any) | undefined | null
+				'value'?: any | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -601,13 +601,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
@@ -765,19 +765,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<HeartwoodTypes.WebRtcPlayer> | undefined | null
 				
 				'shouldAllowCropping'?: boolean | undefined | null
 				
-				'onCrop'?: (HeartwoodTypes.WebRtcPlayerCropHandler) | undefined | null
+				'onCrop'?: HeartwoodTypes.WebRtcPlayerCropHandler | undefined | null
 				
-				'onStateChange'?: (HeartwoodTypes.WebRtcStateChangeHandler) | undefined | null
+				'onStateChange'?: HeartwoodTypes.WebRtcStateChangeHandler | undefined | null
 				
 				'crop'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.WebRtcCropPoint | undefined | null
 				
-				'connection'?: (HeartwoodTypes.WebRtcConnection) | undefined | null
+				'connection'?: HeartwoodTypes.WebRtcConnection | undefined | null
 				
-				'streamer'?: (HeartwoodTypes.WebRtcStreamer) | undefined | null
+				'streamer'?: HeartwoodTypes.WebRtcStreamer | undefined | null
 		}
 
 		interface WebRtcPlayerSchema extends SpruceSchema.Schema {
@@ -847,7 +847,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<void> | void) | undefined | null
+				'onClick'?: () => Promise<void> | void | undefined | null
 				/** Is Sticky. */
 				'isSticky'?: boolean | undefined | null
 		}
@@ -1744,7 +1744,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.SkillViewController) | undefined | null
+				'controller'?: HeartwoodTypes.SkillViewController | undefined | null
 				/** Center vertically. */
 				'shouldCenterVertically'?: boolean | undefined | null
 				/** Full screen. */
@@ -1840,9 +1840,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'name': string
 				
-				'value'?: (any) | undefined | null
+				'value'?: any | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -1852,13 +1852,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
@@ -2035,7 +2035,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<HeartwoodTypes.ProgressNavigator> | undefined | null
 				
 				'steps': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ProgressNavigatorStep[]
 		}
@@ -2093,7 +2093,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
 				
-				'card'?: (HeartwoodTypes.Card) | undefined | null
+				'card'?: HeartwoodTypes.Card | undefined | null
 		}
 
 		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
@@ -2134,9 +2134,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface RouterDestination {
 			
 				
-				'id': (HeartwoodTypes.SkillViewControllerId)
+				'id': HeartwoodTypes.SkillViewControllerId
 				
-				'args'?: (Record<string, any>) | undefined | null
+				'args'?: Record<string, any> | undefined | null
 		}
 
 		interface RouterDestinationSchema extends SpruceSchema.Schema {
@@ -2171,7 +2171,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PermissionContractReference {
 			
 				
-				'id'?: (MercuryTypes.PermissionContractId) | undefined | null
+				'id'?: MercuryTypes.PermissionContractId | undefined | null
 		}
 
 		interface PermissionContractReferenceSchema extends SpruceSchema.Schema {
@@ -2212,7 +2212,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Image. */
 				'image'?: string | undefined | null
 				/** Avatar. */
@@ -2307,7 +2307,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -2317,7 +2317,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
+				'onClickHintIcon'?: () => Promise<any> | any | undefined | null
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
@@ -2333,7 +2333,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon position. */
 				'lineIconPosition'?: ("left" | "bottom" | "right") | undefined | null
 				/** Click handler. */
-				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
+				'onClick'?: (dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void | undefined | null
 				/** Style. */
 				'style'?: ("button" | "link") | undefined | null
 				
@@ -2518,9 +2518,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Is visible. Should the navigation be visible? Defaults to true. */
 				'isVisible'?: boolean | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Navigation>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<HeartwoodTypes.Navigation> | undefined | null
 				
-				'buttons'?: (HeartwoodTypes.NavigationItem)[] | undefined | null
+				'buttons'?: HeartwoodTypes.NavigationItem[] | undefined | null
 				
 				'additionalValidRoutes'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationRoute[] | undefined | null
 		}
@@ -2582,7 +2582,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockScreen>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.LockScreen> | undefined | null
 				/** Center vertically. */
 				'shouldCenterVertically'?: boolean | undefined | null
 				/** Full screen. */
@@ -2598,7 +2598,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Layout. */
 				'layouts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillViewLayout[] | undefined | null
 				/** Card controller. */
-				'skillViewController'?: (HeartwoodTypes.SkillViewController) | undefined | null
+				'skillViewController'?: HeartwoodTypes.SkillViewController | undefined | null
 		}
 
 		interface LockScreenSchema extends SpruceSchema.Schema {
@@ -2686,7 +2686,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.CardViewController) | undefined | null
+				'controller'?: HeartwoodTypes.CardViewController | undefined | null
 				/** Header. */
 				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader | undefined | null
 				/** Critical error. */
@@ -2700,7 +2700,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Background image size. */
 				'backgroundImageSize'?: ("cover" | "contain") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
@@ -2851,13 +2851,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ToolBelt {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ToolBeltViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ToolBeltViewController | undefined | null
 				/** Icon. */
 				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
 				
 				'shouldRenderAllToolsAtOnce'?: boolean | undefined | null
 				
-				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler) | undefined | null
+				'onCloseToolBelt'?: HeartwoodTypes.ToolBeltCloseHandler | undefined | null
 				
 				'iconLabel'?: string | undefined | null
 				
@@ -3040,9 +3040,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Page title. */
 				'title': string
 				/** Schema. */
-				'schema': (SpruceSchema.Schema)
+				'schema': SpruceSchema.Schema
 				/** Sections. */
-				'sections': (SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>)[]
+				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>[]
 		}
 
 		interface FormBuilderImportExportPageSchema extends SpruceSchema.Schema {
@@ -3093,7 +3093,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Subtitle. */
 				'subtitle'?: string | undefined | null
 				/** Pages. */
-				'pages': (SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>)[]
+				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormBuilderImportExportPage<S>[]
 		}
 
 		interface FormBuilderImportExportObjectSchema extends SpruceSchema.Schema {
@@ -3182,7 +3182,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dialog> | undefined | null
 				/** Header. */
 				'header'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader | undefined | null
 				/** Critical error. */
@@ -3196,7 +3196,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Background image size. */
 				'backgroundImageSize'?: ("cover" | "contain") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Body. Card bodies are comprised of sections. You will want at least 1 to get started. */
 				'body'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBody | undefined | null
 				/** Footer. */
@@ -3208,11 +3208,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Width. */
 				'width'?: ("wide" | "tight" | "full") | undefined | null
 				/** Card controller. */
-				'cardController'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card>) | undefined | null
+				'cardController'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card> | undefined | null
 				/** Close callback. Called when the dialog is closed */
-				'onClose'?: (() => Promise<void | boolean> | void | boolean) | undefined | null
+				'onClose'?: () => Promise<void | boolean> | void | boolean | undefined | null
 				/** Close handler. Called to actually close the dialog */
-				'closeHandler'?: (() => Promise<void | boolean> | void | boolean) | undefined | null
+				'closeHandler'?: () => Promise<void | boolean> | void | boolean | undefined | null
 		}
 
 		interface DialogSchema extends SpruceSchema.Schema {
@@ -3389,7 +3389,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ChartViewController<HeartwoodTypes.LineGraph>) | undefined | null
+				'controller'?: HeartwoodTypes.ChartViewController<HeartwoodTypes.LineGraph> | undefined | null
 				
 				'dataSets': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataSet[]
 		}
@@ -3435,9 +3435,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
 				
-				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler) | undefined | null
+				'onSubmitMessage'?: HeartwoodTypes.OnSubmitFeedMessageHandler | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Feed> | undefined | null
 		}
 
 		interface FeedSchema extends SpruceSchema.Schema {
@@ -3485,7 +3485,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Complete. When being rendered as a slide, this will signify the step is complete. */
 				'isComplete'?: boolean | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardSection> | undefined | null
 				/** Padding. */
 				'shouldBePadded'?: boolean | undefined | null
 				/** Center content. */
@@ -3541,7 +3541,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** . Will render content in an iframe in the body of the card. */
 				'portal'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Portal | undefined | null
 				
-				'webRtcPlayer'?: (HeartwoodTypes.WebRtcPlayer) | undefined | null
+				'webRtcPlayer'?: HeartwoodTypes.WebRtcPlayer | undefined | null
 				/** Alignment. */
 				'alignment'?: ("left" | "center" | "right") | undefined | null
 				/** Style. */
@@ -3789,15 +3789,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Busy. */
 				'isBusy'?: boolean | undefined | null
 				/** Swipe controller. */
-				'swipeController'?: ((controller: HeartwoodTypes.SwipeController) => void) | undefined | null
+				'swipeController'?: (controller: HeartwoodTypes.SwipeController) => void | undefined | null
 				/** Swipe. */
 				'shouldEnableSectionSwiping'?: boolean | undefined | null
 				/** Swipe break into cards on landscape. */
 				'shouldSwipeBreakIntoCardsOnLandscape'?: boolean | undefined | null
 				/** Select slide title handler. */
-				'onSelectSlideTitle'?: ((id: number) => void) | undefined | null
+				'onSelectSlideTitle'?: (id: number) => void | undefined | null
 				/** Slide change callback. */
-				'onChangeSlide'?: ((slide: number) => void) | undefined | null
+				'onChangeSlide'?: (slide: number) => void | undefined | null
 				/** Render sections as grid. */
 				'shouldRenderSectionsAsGrid'?: boolean | undefined | null
 				/** Sections. */
@@ -3921,7 +3921,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.PolarAreaViewController) | undefined | null
+				'controller'?: HeartwoodTypes.PolarAreaViewController | undefined | null
 				
 				'data': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PolarAreaDataItem[]
 		}
@@ -4199,7 +4199,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Can be changed. */
 				'canBeChanged'?: boolean | undefined | null
 				/** Callback. */
-				'onChange'?: ((value: number) => any) | undefined | null
+				'onChange'?: (value: number) => any | undefined | null
 				/** Steps. How many choices does a person have? Defaults to 5. */
 				'steps'?: number | undefined | null
 				/** Left Label. The label on the left side of the ratings. Usually assocatiated with the lowest rating. */
@@ -4211,7 +4211,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
 				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings> | undefined | null
 		}
 
 		interface RatingsSchema extends SpruceSchema.Schema {
@@ -4334,7 +4334,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Title. Rendered in the center of the circle indicator! */
 				'title'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ProgressViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ProgressViewController | undefined | null
 				/** Percent complete. A number from zero to 1 */
 				'percentComplete'?: number | undefined | null
 				/** Details. */
@@ -4393,7 +4393,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface StatsStat {
 			
 				
-				'value'?: (number | string) | undefined | null
+				'value'?: number | string | undefined | null
 				
 				'label'?: string | undefined | null
 		}
@@ -4433,7 +4433,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Format values. Add commas to numbers. */
 				'shouldFormatValues'?: boolean | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Stats> | undefined | null
 				/** Stats. */
 				'stats': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatsStat[]
 		}
@@ -4583,7 +4583,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'pins'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.MapPin[] | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.MapViewController) | undefined | null
+				'controller'?: HeartwoodTypes.MapViewController | undefined | null
 		}
 
 		interface MapSchema extends SpruceSchema.Schema {
@@ -4777,9 +4777,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Playing. */
 				'isPlaying'?: boolean | undefined | null
 				/** Completion handler. */
-				'onComplete'?: (() => Promise<void> | void) | undefined | null
+				'onComplete'?: () => Promise<void> | void | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.TalkingSprucebotViewController) | undefined | null
+				'controller'?: HeartwoodTypes.TalkingSprucebotViewController | undefined | null
 		}
 
 		interface TalkingSprucebotSchema extends SpruceSchema.Schema {
@@ -4911,21 +4911,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormViewController<S>) | undefined | null
+				'controller'?: HeartwoodTypes.FormViewController<S> | undefined | null
 				
-				'schema': (S)
+				'schema': S
 				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>) | undefined | null
+				'onSubmit'?: HeartwoodTypes.SubmitHandler<S> | undefined | null
 				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>) | undefined | null
+				'onCancel'?: () => void | Promise<void> | undefined | null
 				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined) | undefined | null
+				'onWillChange'?: (options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined | undefined | null
 				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void) | undefined | null
+				'onChange'?: (options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void | undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>) | undefined | null
+				'values'?: SpruceSchema.SchemaPartialValues<S> | undefined | null
 				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
+				'errorsByField'?: HeartwoodTypes.FormErrorsByField<S> | undefined | null
 				/** Show submit controls. */
 				'shouldRenderSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
@@ -4939,7 +4939,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Enabled. */
 				'isEnabled'?: boolean | undefined | null
 				/** Set value handler. */
-				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
+				'setValue': (name: SpruceSchema.SchemaFieldNames<S>, value: any) => void
 				/** Form sections. */
 				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<S>[]
 				/** Footer. */
@@ -5098,7 +5098,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Alt title. */
 				'altTitle'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardHeader> | undefined | null
 				/** Icon. */
 				'icon'?: ("accesibility" | "add" | "address_book" | "administrator" | "airbrush" | "airplane" | "alarm" | "alien" | "american_express" | "analysis" | "analysis_1" | "archive" | "art_palette" | "artificial_intelligence" | "artificial_intelligence_1" | "at" | "atm" | "attachment" | "audio" | "audio_knob" | "auricular_phone" | "back" | "backup" | "balance" | "band_aid" | "bank" | "barcode" | "basketball" | "battery" | "beer" | "bell" | "bicycle" | "bill" | "binoculars" | "birthday" | "bitcoin" | "blog" | "bluetooth" | "bomb" | "book" | "bookmark" | "box" | "brain" | "brainstorm" | "briefcase" | "briefcase_money" | "broken_heart" | "broken_link" | "brush_tip" | "bus" | "cake" | "calculator" | "calendar" | "car" | "cat" | "certificate" | "champagne" | "chat" | "chat_1" | "check" | "check_1" | "chip" | "cirrus" | "city" | "city_1" | "citybank" | "clicker" | "clip" | "clipboard" | "clock" | "cloud" | "cloud_1" | "cloud_computing" | "cloud_computing_1" | "cloudy" | "cocktail" | "code" | "coffee_cup" | "coin_dollar" | "coin_pound" | "coins" | "coinstack" | "collaboration" | "command" | "company" | "compass" | "compose" | "computer_graphics" | "connection" | "contract" | "contract_1" | "contrast" | "control" | "control_game" | "copy" | "costumer" | "coupon" | "crash" | "creative" | "credit_card" | "credit_card1" | "credit_card_2" | "cross" | "cursor" | "dashboard" | "database" | "delete" | "dentistry" | "diary" | "diet" | "digital_campaing" | "digital_key" | "diners_club" | "disc" | "discount" | "dish" | "dish_1" | "dislike" | "divider" | "doctor" | "dog" | "dollar_coin" | "dollar_sign" | "dowload" | "down_arrow" | "download" | "edit" | "edit_file" | "editor" | "education" | "eject" | "emergency" | "employed" | "encrypted_database" | "encrypted_folder" | "encrypted_internet_conection" | "encrypted_mail" | "encryption" | "encypted_terminal" | "enterprice" | "equal" | "erase_file" | "erase_sabe" | "error_database" | "error_search" | "error_terminal" | "euro_sign" | "exit" | "external_link" | "facebook" | "feedback" | "file" | "fill" | "finger_print" | "firewall" | "flag" | "flash" | "flash_auto" | "flash_red_eye" | "flashlight" | "folder_gallery" | "folder" | "football" | "forbidden" | "french_fries" | "funnel" | "gallery" | "game_control" | "games_card_clubs" | "games_card_diamonds" | "games_card_hearts" | "games_card_spades" | "gift" | "girl" | "gmail" | "gold" | "graduated" | "group" | "hamburguer" | "hand" | "hand_note" | "hand_point" | "hand_shake" | "headphones" | "heart" | "heart_1" | "help" | "hide" | "high_five" | "hold" | "home" | "homework" | "hotel" | "hourglass" | "house" | "icon" | "id_card" | "idea" | "infinity" | "info" | "information" | "innovation" | "instagram" | "internet" | "internet_1" | "internet_error" | "key" | "key_1" | "kiss" | "lamp" | "laptop" | "layers" | "layers_1" | "layout" | "left_arrow" | "light_bulb" | "like" | "like_1" | "line_chart" | "link" | "linkeding" | "list" | "local_network" | "location" | "locked" | "magazine" | "magic_wand" | "magnet" | "mail" | "mail_account" | "mail_error" | "map_location" | "maps" | "marker" | "master_data" | "mastercard" | "medicine" | "menu" | "mic" | "microphone" | "microphone_1" | "microscope" | "money_bag" | "money" | "money_1" | "money_report" | "money_report_1" | "monitor" | "more" | "multiple_user" | "multiple_users" | "music_library" | "music_player" | "music_volume_high" | "music_volume_low" | "music_volume_medium" | "music_volume_mute" | "musical_note" | "mute_mic" | "network" | "newspaper" | "note" | "notebook" | "notification" | "old_phone" | "online_pay" | "open_book" | "open_box" | "open_hand" | "p2p" | "pallete" | "paper_plane" | "paper_plane_1" | "passage_of_time" | "pause" | "payment" | "paypal" | "pen_drive" | "perspective" | "pet_paw_print" | "phone_book" | "phone_receiver" | "photo_camera" | "picture" | "pie_chart" | "piggy_bank" | "pinterest" | "piracy" | "pizza" | "placeholder" | "plan" | "plane" | "play_buttom" | "plus" | "police_car" | "power_on_off" | "presentation" | "preview" | "preview_1" | "previous" | "price_tag" | "print_fax" | "project_management" | "project_management_1" | "promotion" | "purse" | "quality" | "radar" | "radioactive" | "rainy" | "rating" | "receipt" | "recluitment" | "recognition" | "record" | "recycle" | "red_eye" | "reload" | "reload_1" | "repair" | "report" | "research" | "responsive" | "restaurant" | "resume" | "reunion" | "right_arrow" | "risk" | "rotate" | "route" | "runner_man" | "sabe" | "sabe_error" | "safety_box_open" | "satellite" | "school" | "scissors" | "screw" | "search" | "send" | "send_file" | "send_file_1" | "send_money" | "send_package" | "server" | "settings" | "settings_1" | "share" | "shield" | "ship" | "shipped" | "shop" | "shopping" | "shopping_bag" | "shopping_car" | "shuffle" | "sign" | "sketch" | "sketch_1" | "skip" | "smartphone" | "snapchat" | "sniffer" | "social_media" | "spam" | "speech_bubble" | "spray" | "star" | "start_up" | "stats_line_chart" | "stethoscope" | "stop" | "stop_watch" | "storage" | "street" | "student" | "study" | "sun_glasses" | "suppport" | "switch" | "tablet" | "tabs" | "tap_gesture" | "target" | "telephone_call" | "television" | "terminal" | "terminal_2" | "think" | "toast" | "toast_1" | "tools" | "traffic_light" | "transfer_data" | "trash" | "treasure_chest" | "trojan" | "twitter" | "two_players" | "university" | "unlock" | "up_arrow" | "upload" | "vector" | "view" | "vintage_phone" | "visa" | "volume_control" | "wallet" | "wallet_1" | "warning" | "warning_briefcase" | "warning_chemistry" | "warning_database" | "warning_dowload" | "warning_folder" | "warning_location" | "warning_mail" | "warning_package" | "warning_search" | "warning_shipped" | "warning_terminal" | "warning_trash" | "web_design" | "web_domain_registration" | "web_search" | "web_search_1" | "website" | "weight" | "whatsapp" | "wheelchair" | "wifi" | "windows" | "wine_cup" | "wordpress" | "worldwide" | "youtube" | "zcash" | "zipped_folder" | "zoom_in" | "zoom_out" | "loading") | undefined | null
 				/** Image. The absolute url to any image you want shown in the header. */
@@ -5108,7 +5108,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Form. */
 				'form'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Form<any> | undefined | null
 				/** Close handler. Meant for use inside React components directly. */
-				'closeHandler'?: (() => Promise<void> | void) | undefined | null
+				'closeHandler'?: () => Promise<void> | void | undefined | null
 		}
 
 		interface CardHeaderSchema extends SpruceSchema.Schema {
@@ -5191,7 +5191,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Pager {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Pager> | undefined | null
 				
 				'id'?: string | undefined | null
 				
@@ -5199,9 +5199,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'currentPage'?: number | undefined | null
 				
-				'onChangePage'?: ((page: number) => Promise<any> | any) | undefined | null
+				'onChangePage'?: (page: number) => Promise<any> | any | undefined | null
 				
-				'setCurrentPage': ((page: number) => Promise<any> | any)
+				'setCurrentPage': (page: number) => Promise<any> | any
 		}
 
 		interface PagerSchema extends SpruceSchema.Schema {
@@ -5261,7 +5261,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -5271,7 +5271,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
+				'onClickHintIcon'?: () => Promise<any> | any | undefined | null
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
@@ -5287,7 +5287,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon position. */
 				'lineIconPosition'?: ("left" | "bottom" | "right") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Style. */
 				'style'?: ("button" | "link") | undefined | null
 		}
@@ -5416,7 +5416,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface CardFooter {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter> | undefined | null
 				/** Buttons. */
 				'buttons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooterButton[] | undefined | null
 				/** Loading. */
@@ -5513,9 +5513,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListRow {
 			
 				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[] | undefined | null
+				'columnWidths'?: number | 'fill' | 'content'[] | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListRowViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ListRowViewController | undefined | null
 				/** Row height. */
 				'height'?: ("standard" | "tall" | "content") | undefined | null
 				/** Enabled. */
@@ -5523,7 +5523,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Id. */
 				'id': string
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Style. */
@@ -5613,15 +5613,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ListViewController | undefined | null
 				/** Render row dividers. */
 				'shouldRenderRowDividers'?: boolean | undefined | null
 				/** Allow drag and drop sorting. */
 				'shouldAllowDragAndDropSorting'?: boolean | undefined | null
 				/** Drag and drop sort handler. */
-				'onDragAndDropSort'?: ((rowIds: string[]) => boolean | Promise<boolean | void> | void) | undefined | null
+				'onDragAndDropSort'?: (rowIds: string[]) => boolean | Promise<boolean | void> | void | undefined | null
 				/** Column widths. */
-				'columnWidths'?: (number | 'fill' | 'content')[] | undefined | null
+				'columnWidths'?: number | 'fill' | 'content'[] | undefined | null
 				/** Row height. */
 				'defaultRowHeight'?: ("standard" | "tall" | "content") | undefined | null
 				/** Rows. */
@@ -5712,7 +5712,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** List. */
 				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List | undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[] | undefined | null
+				'fields'?: SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>[] | undefined | null
 				
 				'shouldRenderSubmitButton'?: boolean | undefined | null
 		}
@@ -5792,21 +5792,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'className'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.BigFormViewController<S>) | undefined | null
+				'controller'?: HeartwoodTypes.BigFormViewController<S> | undefined | null
 				
-				'schema': (S)
+				'schema': S
 				/** Submit handler. */
-				'onSubmit'?: (HeartwoodTypes.SubmitHandler<S>) | undefined | null
+				'onSubmit'?: HeartwoodTypes.SubmitHandler<S> | undefined | null
 				/** Cancel handler. */
-				'onCancel'?: (() => void | Promise<void>) | undefined | null
+				'onCancel'?: () => void | Promise<void> | undefined | null
 				/** Will change handler. */
-				'onWillChange'?: ((options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined) | undefined | null
+				'onWillChange'?: (options: HeartwoodTypes.FormWillChangeOptions<S>) => Promise<boolean | void | undefined> | boolean | void | undefined | undefined | null
 				/** Change handler. */
-				'onChange'?: ((options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void) | undefined | null
+				'onChange'?: (options: HeartwoodTypes.FormOnChangeOptions<S>) => Promise<void> | void | undefined | null
 				/** Values. The values you want the form to have. Control is given to the FormViewController after render. */
-				'values'?: (SpruceSchema.SchemaPartialValues<S>) | undefined | null
+				'values'?: SpruceSchema.SchemaPartialValues<S> | undefined | null
 				/** Errors by field. */
-				'errorsByField'?: (HeartwoodTypes.FormErrorsByField<S>) | undefined | null
+				'errorsByField'?: HeartwoodTypes.FormErrorsByField<S> | undefined | null
 				/** Show submit controls. */
 				'shouldRenderSubmitControls'?: boolean | undefined | null
 				/** Show cancel button. */
@@ -5820,7 +5820,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Enabled. */
 				'isEnabled'?: boolean | undefined | null
 				/** Set value handler. */
-				'setValue': ((name: SpruceSchema.SchemaFieldNames<S>, value: any) => void)
+				'setValue': (name: SpruceSchema.SchemaFieldNames<S>, value: any) => void
 				/** Form sections. */
 				'sections': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BigFormSection<S>[]
 				/** Footer. */
@@ -5836,9 +5836,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Present slide. The slide showing now! */
 				'presentSlide'?: number | undefined | null
 				/** Submit handler. */
-				'onSubmitSlide'?: (HeartwoodTypes.SubmitSlideHandler<S>) | undefined | null
+				'onSubmitSlide'?: HeartwoodTypes.SubmitSlideHandler<S> | undefined | null
 				/** Slide change handler. */
-				'onSlideChange'?: (HeartwoodTypes.BigFormSlideChangeHandler) | undefined | null
+				'onSlideChange'?: HeartwoodTypes.BigFormSlideChangeHandler | undefined | null
 		}
 
 		interface BigFormSchema extends SpruceSchema.Schema {
@@ -6040,7 +6040,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** List. */
 				'list'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.List | undefined | null
 				/** Form fields. Put any fields from the schema you provided to be shown in this section. Can be array of field names or objects with a key of name. */
-				'fields'?: (SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>)[] | undefined | null
+				'fields'?: SpruceSchema.SchemaFieldNames<S> | HeartwoodTypes.FieldRenderOptions<S>[] | undefined | null
 		}
 
 		interface FormSectionSchema extends SpruceSchema.Schema {
@@ -6154,7 +6154,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: number | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -6164,13 +6164,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: number) => any | Promise<any>) | undefined | null
+				'onChange'?: (value: number) => any | Promise<any> | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Can be changed. */
@@ -6186,11 +6186,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Style. How should I render the ratings? Defaults to 'Star'. */
 				'icon'?: ("star" | "radio") | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Ratings> | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				
-				'setValue'?: ((name: string, value: number) => Promise<any> | any) | undefined | null
+				'setValue'?: (name: string, value: number) => Promise<any> | any | undefined | null
 		}
 
 		interface ListRatingsInputSchema extends SpruceSchema.Schema {
@@ -6353,7 +6353,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: boolean | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -6363,19 +6363,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: boolean) => void | boolean | Promise<void | boolean>) | undefined | null
+				'onChange'?: (value: boolean) => void | boolean | Promise<void | boolean> | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				
-				'setValue'?: ((name: string, value: boolean) => Promise<any> | any) | undefined | null
+				'setValue'?: (name: string, value: boolean) => Promise<any> | any | undefined | null
 		}
 
 		interface ListToggleInputSchema extends SpruceSchema.Schema {
@@ -6486,7 +6486,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface SelectInputChoice {
 			
 				
-				'value': (string | number)
+				'value': string | number
 				
 				'label': string
 		}
@@ -6528,9 +6528,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'name': string
 				
-				'value'?: (any) | undefined | null
+				'value'?: any | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -6540,13 +6540,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
@@ -6554,9 +6554,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'choices': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SelectInputChoice[]
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				
-				'setValue'?: ((name: string, value: string) => Promise<any> | any) | undefined | null
+				'setValue'?: (name: string, value: string) => Promise<any> | any | undefined | null
 		}
 
 		interface ListSelectInputSchema extends SpruceSchema.Schema {
@@ -6685,7 +6685,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -6695,21 +6695,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
 				'placeholder'?: string | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				
-				'setValue'?: ((name: string, value: number) => Promise<any> | any) | undefined | null
+				'setValue'?: (name: string, value: number) => Promise<any> | any | undefined | null
 		}
 
 		interface ListDateInputSchema extends SpruceSchema.Schema {
@@ -6831,7 +6831,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -6841,21 +6841,21 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
 				'placeholder'?: string | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				
-				'setValue'?: ((name: string, value: string) => Promise<any> | any) | undefined | null
+				'setValue'?: (name: string, value: string) => Promise<any> | any | undefined | null
 		}
 
 		interface ListTextInputSchema extends SpruceSchema.Schema {
@@ -6975,7 +6975,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -6985,7 +6985,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
+				'onClickHintIcon'?: () => Promise<any> | any | undefined | null
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
@@ -7001,11 +7001,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon position. */
 				'lineIconPosition'?: ("left" | "bottom" | "right") | undefined | null
 				/** Cell button click handler. */
-				'onClick'?: ((options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any>) | undefined | null
+				'onClick'?: (options: { rowVc: HeartwoodTypes.ListRowViewController }) => any | Promise<any> | undefined | null
 				/** Style. */
 				'style'?: ("button" | "link") | undefined | null
 				/** Cell button key down handler. */
-				'onKeyDown'?: ((options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any>) | undefined | null
+				'onKeyDown'?: (options: HeartwoodTypes.CellInputKeyDownOptions) => any | Promise<any> | undefined | null
 				/** Dropdown. */
 				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Dropdown | undefined | null
 		}
@@ -7268,13 +7268,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ListCell {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ListCellViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ListCellViewController | undefined | null
 				
 				'id'?: string | undefined | null
 				/** Text. */
 				'text'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Subtext. */
 				'subText'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Image url. */
@@ -7282,7 +7282,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'video'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Video | undefined | null
 				/** Avatars. */
-				'avatars'?: (string | null | undefined)[] | undefined | null
+				'avatars'?: string | null | undefined[] | undefined | null
 				/** Button. */
 				'button'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListCellButton | undefined | null
 				/** Line icon. */
@@ -7458,15 +7458,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<HeartwoodTypes.CountdownTimer> | undefined | null
 				
-				'onComplete'?: (() => void | Promise<void>) | undefined | null
+				'onComplete'?: () => void | Promise<void> | undefined | null
 				
 				'endDateMs'?: SpruceSchema.DateTimeFieldValue | undefined | null
 				
-				'setStartHandler': ((handler: (to: number) => void) => void)
+				'setStartHandler': (handler: (to: number) => void) => void
 				
-				'setStopHandler': ((handler: () => void) => void)
+				'setStopHandler': (handler: () => void) => void
 		}
 
 		interface CountdownTimerSchema extends SpruceSchema.Schema {
@@ -7788,7 +7788,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Calendar {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar>) | undefined | null
+				'controller'?: HeartwoodTypes.ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Calendar> | undefined | null
 				/** People. */
 				'people'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarPerson[] | undefined | null
 				/** Minimum time. The earliest time to show in the calendar. */
@@ -7816,31 +7816,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Render header. */
 				'shouldRenderHeader'?: boolean | undefined | null
 				
-				'onChangeStartDate'?: ((date: number) => void | Promise<void>) | undefined | null
+				'onChangeStartDate'?: (date: number) => void | Promise<void> | undefined | null
 				
-				'onClickView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
+				'onClickView'?: (options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void> | undefined | null
 				
-				'onLongPressViewDrop'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
+				'onLongPressViewDrop'?: (options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void> | undefined | null
 				
-				'onTapView'?: ((options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void>) | undefined | null
+				'onTapView'?: (options: HeartwoodTypes.ClickCalendarViewOptions) => void | Promise<void> | undefined | null
 				
-				'onClickEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>) | undefined | null
+				'onClickEvent'?: (options: HeartwoodTypes.ClickEventOptions) => void | Promise<void> | undefined | null
 				
-				'onLongPressEvent'?: ((options: HeartwoodTypes.ClickEventOptions) => void | Promise<void>) | undefined | null
+				'onLongPressEvent'?: (options: HeartwoodTypes.ClickEventOptions) => void | Promise<void> | undefined | null
 				
-				'onDropEvent'?: ((options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean>) | undefined | null
+				'onDropEvent'?: (options: HeartwoodTypes.DropEventOptions) => void | boolean | Promise<void | boolean> | undefined | null
 				
-				'onDeselectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>) | undefined | null
+				'onDeselectEvent'?: (options: HeartwoodTypes.CalendarEvent) => void | Promise<void> | undefined | null
 				
-				'onSelectEvent'?: ((options: HeartwoodTypes.CalendarEvent) => void | Promise<void>) | undefined | null
+				'onSelectEvent'?: (options: HeartwoodTypes.CalendarEvent) => void | Promise<void> | undefined | null
 				
-				'onLongPressView'?: (() => void | boolean) | undefined | null
+				'onLongPressView'?: () => void | boolean | undefined | null
 				
 				'shifts'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarShift[] | undefined | null
 				/** . Enable the ability to swipe to change days. Only works when viewing a single person. */
 				'shouldEnableSwipeNav'?: boolean | undefined | null
 				
-				'onSwipe'?: ((options: HeartwoodTypes.SwipeOptions) => void | Promise<void>) | undefined | null
+				'onSwipe'?: (options: HeartwoodTypes.SwipeOptions) => void | Promise<void> | undefined | null
 				
 				'enabledDays'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarSelectedDate[] | undefined | null
 		}
@@ -8113,17 +8113,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'totalInRepeating'?: number | undefined | null
 				
-				'meta'?: (Record<string, any>) | undefined | null
+				'meta'?: Record<string, any> | undefined | null
 				
 				'venue'?: SpruceSchemas.CalendarUtils.v2021_05_19.Venue | undefined | null
 				
-				'error'?: (Error) | undefined | null
+				'error'?: Error | undefined | null
 				
 				'isSelected'?: boolean | undefined | null
 				
 				'colors'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CalendarEventColorOverride | undefined | null
 				
-				'controller'?: (HeartwoodTypes.CalendarEventViewController) | undefined | null
+				'controller'?: HeartwoodTypes.CalendarEventViewController | undefined | null
 		}
 
 		interface CalendarEventSchema extends SpruceSchema.Schema {
@@ -8377,7 +8377,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface ButtonBar {
 			
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.ButtonBarViewController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonBarViewController | undefined | null
 				/** Buttons. */
 				'buttons': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton[]
 		}
@@ -8476,7 +8476,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -8612,7 +8612,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -8622,7 +8622,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
+				'onClickHintIcon'?: () => Promise<any> | any | undefined | null
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
@@ -8638,7 +8638,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon position. */
 				'lineIconPosition'?: ("left" | "bottom" | "right") | undefined | null
 				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
+				'onClick'?: () => Promise<any> | any | undefined | null
 				/** Style. */
 				'style'?: ("button" | "link") | undefined | null
 				/** Dropdown. */
@@ -8779,7 +8779,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Label. */
 				'label'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ButtonController) | undefined | null
+				'controller'?: HeartwoodTypes.ButtonController | undefined | null
 				/** Selected. */
 				'isSelected'?: boolean | undefined | null
 				/** Selected. */
@@ -8789,7 +8789,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Show hint icon. */
 				'shouldShowHintIcon'?: boolean | undefined | null
 				/** Click handler for hint icon. */
-				'onClickHintIcon'?: (() => Promise<any> | any) | undefined | null
+				'onClickHintIcon'?: () => Promise<any> | any | undefined | null
 				
 				'hint'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Text | undefined | null
 				/** Type. */
@@ -8805,7 +8805,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon position. */
 				'lineIconPosition'?: ("left" | "bottom" | "right") | undefined | null
 				/** Click handler. */
-				'onClick'?: ((dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void) | undefined | null
+				'onClick'?: (dropdown: HeartwoodTypes.DropdownController ) => Promise<void> | void | undefined | null
 				/** Style. */
 				'style'?: ("button" | "link") | undefined | null
 		}
@@ -8938,7 +8938,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.DropdownButton[] | undefined | null
 				
-				'card'?: (HeartwoodTypes.Card) | undefined | null
+				'card'?: HeartwoodTypes.Card | undefined | null
 		}
 
 		interface DropdownSchema extends SpruceSchema.Schema {
@@ -8981,7 +8981,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id'?: string | undefined | null
 				
-				'controller'?: (HeartwoodTypes.ChartViewController<HeartwoodTypes.BarChart>) | undefined | null
+				'controller'?: HeartwoodTypes.ChartViewController<HeartwoodTypes.BarChart> | undefined | null
 				
 				'dataSets': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ChartDataSet[]
 		}
@@ -9105,7 +9105,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'label': string
 				/** On click handler. */
-				'onClick'?: ((id: string) => void | Promise<void>) | undefined | null
+				'onClick'?: (id: string) => void | Promise<void> | undefined | null
 		}
 
 		interface AutocompleteSuggestionSchema extends SpruceSchema.Schema {
@@ -9151,7 +9151,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				/** Line icon. */
 				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
 				/** Click handler. */
-				'onClick': (() => Promise<any> | any)
+				'onClick': () => Promise<any> | any
 		}
 
 		interface InputButtonSchema extends SpruceSchema.Schema {
@@ -9198,7 +9198,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'value'?: string | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -9208,19 +9208,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 				/** Placeholder. */
 				'placeholder'?: string | undefined | null
 				/** Controller. */
-				'controller'?: (HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput>) | undefined | null
+				'controller'?: HeartwoodTypes.FormInputViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteInput> | undefined | null
 				
 				'suggestions'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.AutocompleteSuggestion[] | undefined | null
 		}
@@ -9337,9 +9337,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'name': string
 				
-				'value'?: (any) | undefined | null
+				'value'?: any | undefined | null
 				/** . If you need the text input to render a value other than what is stored (a person's name vs. their id). */
-				'renderedValue'?: (any) | undefined | null
+				'renderedValue'?: any | undefined | null
 				/** Label. */
 				'label'?: string | undefined | null
 				/** Hint. */
@@ -9349,13 +9349,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'isInteractive'?: boolean | undefined | null
 				/** On change handler. */
-				'onChange'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChange'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On changed rendered value handler. */
-				'onChangeRenderedValue'?: ((value: any) => void | Promise<void | boolean> | boolean) | undefined | null
+				'onChangeRenderedValue'?: (value: any) => void | Promise<void | boolean> | boolean | undefined | null
 				/** On focus handler. */
-				'onFocus'?: (() => void | Promise<void>) | undefined | null
+				'onFocus'?: () => void | Promise<void> | undefined | null
 				/** On blur handler. */
-				'onBlur'?: (() => void | Promise<void>) | undefined | null
+				'onBlur'?: () => void | Promise<void> | undefined | null
 				
 				'rightButtons'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.InputButton[] | undefined | null
 		}
