@@ -25,6 +25,11 @@ export default buildSchema({
             type: 'boolean',
             label: 'Swipe',
         },
+        shouldRenderSwipePagination: {
+            type: 'boolean',
+            label: 'Render swipe pagination',
+            hint: 'If true, will show pagination dots when swiping between sections. Defaults to true when the card\'s style is "visual".',
+        },
         shouldSwipeBreakIntoCardsOnLandscape: {
             type: 'boolean',
             label: 'Swipe break into cards on landscape',

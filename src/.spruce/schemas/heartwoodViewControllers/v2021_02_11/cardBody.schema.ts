@@ -35,6 +35,13 @@ const cardBodySchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardBod
 	                type: 'boolean',
 	                options: undefined
 	            },
+	            /** Render swipe pagination. If true, will show pagination dots when swiping between sections. Defaults to true when the card's style is "visual". */
+	            'shouldRenderSwipePagination': {
+	                label: 'Render swipe pagination',
+	                type: 'boolean',
+	                hint: 'If true, will show pagination dots when swiping between sections. Defaults to true when the card\'s style is "visual".',
+	                options: undefined
+	            },
 	            /** Swipe break into cards on landscape. */
 	            'shouldSwipeBreakIntoCardsOnLandscape': {
 	                label: 'Swipe break into cards on landscape',

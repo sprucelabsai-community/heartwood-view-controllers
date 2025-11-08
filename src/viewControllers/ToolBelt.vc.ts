@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { assertOptions, SchemaError } from '@sprucelabs/schema'
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import SpruceError from '../errors/SpruceError'
@@ -124,7 +125,7 @@ export default class ToolBeltViewController extends AbstractViewController<ViewM
 
     public close() {}
 
-    public open(_options?: OpenToolBeltOptions) {}
+    public open(options?: OpenToolBeltOptions) {}
 
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBelt {
         return { ...this.model, controller: this, tools: this.renderTools() }
