@@ -1,3 +1,9 @@
+## 126.13.0 (2025-11-08)
+
+* Automated CI/CD permissions update ([378248f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/378248f))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([ff21a65](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ff21a65))
+* minor: swiper pagination ([8c39bb9](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8c39bb9))
+
 ## [126.12.46](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.12.45...v126.12.46) (2025-10-31)
 
 ## [126.12.45](https://github.com/sprucelabsai-community/heartwood-view-controllers/compare/v126.12.44...v126.12.45) (2025-10-31)
