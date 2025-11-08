@@ -1,3 +1,8 @@
+## <small>126.13.1 (2025-11-08)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([78ab604](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/78ab604))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([400bea6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/400bea6))
+
 ## 126.13.0 (2025-11-08)
 
 * Automated CI/CD permissions update ([378248f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/378248f))
