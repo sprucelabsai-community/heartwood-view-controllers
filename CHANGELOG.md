@@ -1,3 +1,7 @@
+## <small>127.0.1 (2025-11-09)</small>
+
+* patch: upgrade ([15b9634](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/15b9634))
+
 ## 127.0.0 (2025-11-09)
 
 * major: upgrade ([17e1d88](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/17e1d88))
