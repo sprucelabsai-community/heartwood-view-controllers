@@ -301,11 +301,11 @@ export interface SkillViewControllerLoadOptions<
     dependencyLoader: DependencyLoader
 }
 
-interface DependencyLoader {
+export interface DependencyLoader {
     load<T>(dependency: TrustedDependency): Promise<T>
 }
 
-type TrustedDependency = '@zoom/videosdk'
+export type TrustedDependency = '@zoom/videosdk'
 
 export type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 export type InputButton =
