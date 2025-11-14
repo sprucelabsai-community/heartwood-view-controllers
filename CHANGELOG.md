@@ -1,3 +1,8 @@
+## 128.0.0 (2025-11-14)
+
+* patch: missed exported types ([b6e7f9e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b6e7f9e))
+* major: DependencyLoader in LoadOptions ([5e3b281](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/5e3b281))
+
 ## <small>127.0.12 (2025-11-14)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([2dd617e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2dd617e))
