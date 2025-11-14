@@ -35,7 +35,6 @@ export { default as ProgressNavigatorViewController } from './viewControllers/pr
 export * from './viewControllers/progressNavigator/ProgressNavigator.vc'
 export { default as PagerViewController } from './viewControllers/pagers/Pager.vc'
 export * from './viewControllers/pagers/Pager.vc'
-export { AssertConfirmViewController } from './tests/utilities/assertSupport'
 export { default as WebRtcPlayerViewController } from './viewControllers/webRtcStreaming/WebRtcPlayer.vc'
 export * from './viewControllers/webRtcStreaming/WebRtcPlayer.vc'
 
@@ -252,5 +251,6 @@ export { default as routerDestinationSchema } from '#spruce/schemas/heartwoodVie
 export { default as navigationRouteSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/navigationRoute.schema'
 export { default as toastMessageSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/toastMessage.schema'
 export { default as MockToastMessageHandler } from './tests/utilities/MockToastMessageHandler'
+export * from './tests/utilities/assertSupport'
 
 export * from './toolBelts/ToolBeltStateMachine'
