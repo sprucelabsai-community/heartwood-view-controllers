@@ -1078,6 +1078,7 @@ export interface AppControllerLoadOptions {
     locale: ILocale
     scope: Scope
     themes: ThemeManager
+    dependencyLoader: DependencyLoader
 }
 
 export interface ChartViewController<ViewModel extends Record<string, any>>
