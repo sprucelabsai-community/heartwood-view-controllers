@@ -298,7 +298,14 @@ export interface SkillViewControllerLoadOptions<
     locale: ILocale
     scope: Scope
     themes: ThemeManager
+    dependencyLoader: DependencyLoader
 }
+
+interface DependencyLoader {
+    load<T>(dependency: TrustedDependency): Promise<T>
+}
+
+type TrustedDependency = '@zoom/videosdk'
 
 export type Theme = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 export type InputButton =
