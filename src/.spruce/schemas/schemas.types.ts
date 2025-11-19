@@ -7172,10 +7172,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'hasControls'?: boolean | undefined | null
 				/** Play inline. Use inline playback on mobile (playsInline) */
 				'shouldPlayInline'?: boolean | undefined | null
-				/** Start time (s). */
-				'startTime'?: number | undefined | null
-				/** End time (s). */
-				'endTime'?: number | undefined | null
 		}
 
 		interface VideoSchema extends SpruceSchema.Schema {
@@ -7241,18 +7237,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                label: 'Play inline',
 			                type: 'boolean',
 			                hint: 'Use inline playback on mobile (playsInline)',
-			                options: undefined
-			            },
-			            /** Start time (s). */
-			            'startTime': {
-			                label: 'Start time (s)',
-			                type: 'number',
-			                options: undefined
-			            },
-			            /** End time (s). */
-			            'endTime': {
-			                label: 'End time (s)',
-			                type: 'number',
 			                options: undefined
 			            },
 			    }

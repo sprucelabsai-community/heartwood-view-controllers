@@ -51,13 +51,5 @@ export default buildSchema({
             label: 'Play inline',
             hint: 'Use inline playback on mobile (playsInline)',
         },
-        startTime: {
-            type: 'number',
-            label: 'Start time (s)',
-        },
-        endTime: {
-            type: 'number',
-            label: 'End time (s)',
-        },
     },
 })

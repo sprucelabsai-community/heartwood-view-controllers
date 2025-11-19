@@ -68,18 +68,6 @@ const videoSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.VideoSchem
 	                hint: 'Use inline playback on mobile (playsInline)',
 	                options: undefined
 	            },
-	            /** Start time (s). */
-	            'startTime': {
-	                label: 'Start time (s)',
-	                type: 'number',
-	                options: undefined
-	            },
-	            /** End time (s). */
-	            'endTime': {
-	                label: 'End time (s)',
-	                type: 'number',
-	                options: undefined
-	            },
 	    }
 }
 
