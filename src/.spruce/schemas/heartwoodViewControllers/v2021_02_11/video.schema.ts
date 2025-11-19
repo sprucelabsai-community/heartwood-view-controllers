@@ -54,12 +54,6 @@ const videoSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.VideoSchem
 	                type: 'boolean',
 	                options: undefined
 	            },
-	            /** Restart on buffer (non-standard). */
-	            'shouldRestartOnBuffer': {
-	                label: 'Restart on buffer (non-standard)',
-	                type: 'boolean',
-	                options: undefined
-	            },
 	            /** Show controls. */
 	            'hasControls': {
 	                label: 'Show controls',

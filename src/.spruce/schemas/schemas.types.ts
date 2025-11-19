@@ -7168,8 +7168,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'isMuted'?: boolean | undefined | null
 				/** Loop video. */
 				'shouldLoop'?: boolean | undefined | null
-				/** Restart on buffer (non-standard). */
-				'shouldRestartOnBuffer'?: boolean | undefined | null
 				/** Show controls. */
 				'hasControls'?: boolean | undefined | null
 				/** Play inline. Use inline playback on mobile (playsInline) */
@@ -7228,12 +7226,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** Loop video. */
 			            'shouldLoop': {
 			                label: 'Loop video',
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** Restart on buffer (non-standard). */
-			            'shouldRestartOnBuffer': {
-			                label: 'Restart on buffer (non-standard)',
 			                type: 'boolean',
 			                options: undefined
 			            },

@@ -41,10 +41,6 @@ export default buildSchema({
             type: 'boolean',
             label: 'Loop video',
         },
-        shouldRestartOnBuffer: {
-            type: 'boolean',
-            label: 'Restart on buffer (non-standard)',
-        },
         hasControls: {
             type: 'boolean',
             label: 'Show controls',
