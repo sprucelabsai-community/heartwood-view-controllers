@@ -1,3 +1,9 @@
+## <small>128.0.9 (2025-11-19)</small>
+
+* patch: no shouldRestartOnBuffer on video. AI made it up ([dea3e8a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/dea3e8a))
+* patch: removed unneeded video propertsie ([e5c9f2a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e5c9f2a))
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([d0fd25c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d0fd25c))
+
 ## <small>128.0.8 (2025-11-19)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([27e024c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/27e024c))
