@@ -1,6 +1,7 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import {
+    AppController,
     Card,
     SkillViewController,
     StickyToolPosition,
@@ -15,7 +16,7 @@ import { assertToolInstanceOf, getVcName, wait } from './assertSupport'
 
 const toolBeltAssert = {
     async actionFocusesTool(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         toolId: string,
         action: () => Promise<any> | any
     ) {
@@ -44,7 +45,7 @@ const toolBeltAssert = {
     },
 
     async actionOpensToolBelt(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         action: () => Promise<any> | any,
         options?: OpenToolBeltOptions
     ) {
@@ -71,7 +72,7 @@ const toolBeltAssert = {
     },
 
     async actionDoesNotOpenToolBelt(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         action: () => Promise<any> | any
     ) {
         try {
@@ -86,7 +87,7 @@ const toolBeltAssert = {
     },
 
     async actionClosesToolBelt(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         action: () => Promise<any> | any
     ) {
         const toolBeltVc = this.rendersToolBelt(svcOrToolBelt, false)
@@ -105,7 +106,7 @@ const toolBeltAssert = {
     },
 
     async actionDoesNotCloseToolBelt(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         action: () => Promise<any> | any
     ) {
         try {
@@ -120,7 +121,7 @@ const toolBeltAssert = {
     },
 
     rendersToolBelt(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         assertHasAtLeast1Tool = true
     ) {
         let toolBelt: ToolBelt | undefined | null
@@ -219,7 +220,7 @@ const toolBeltAssert = {
     },
 
     toolBeltRendersTool(
-        svcOrToolBelt: SkillViewController | ToolBeltViewController,
+        svcOrToolBelt: Controller | ToolBeltViewController,
         toolId: string
     ) {
         const toolBeltVc = this.rendersToolBelt(svcOrToolBelt)
@@ -235,7 +236,7 @@ const toolBeltAssert = {
         return tool.card.controller as ViewController<Card>
     },
 
-    doesNotRenderToolBelt(svc: SkillViewController) {
+    doesNotRenderToolBelt(svc: Controller) {
         try {
             this.rendersToolBelt(svc)
         } catch {
@@ -246,6 +247,16 @@ const toolBeltAssert = {
             `Your skill view should not be rendering a toolbelt with tools`
         )
     },
+
+    hidesToolBelt(svc: Controller) {
+        const toolBelt = svc.renderToolBelt?.()
+        assert.isNull(
+            toolBelt,
+            `I expected renderToolbelt() to return null, but it did not.`
+        )
+    },
 }
 
 export default toolBeltAssert
+
+type Controller = SkillViewController | AppController

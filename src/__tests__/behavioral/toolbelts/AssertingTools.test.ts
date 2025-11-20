@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import { test, suite, assert } from '@sprucelabs/test-utils'
 import {
+    AbstractSkillViewController,
     AbstractViewController,
     TriggerRenderHandler,
     toolBeltAssert,
@@ -9,6 +10,7 @@ import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTes
 import vcAssert from '../../../tests/utilities/vcAssert'
 import {
     SkillViewController,
+    SkillViewControllerId,
     ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import CardViewController from '../../../viewControllers/card/Card.vc'
@@ -27,6 +29,7 @@ declare module '../../../types/heartwood.types' {
         toolBeltSvc: ToolBeltSkillViewController
         fancy: FancyCard
         tool: FancyTool
+        empty: EmptySkillViewController
     }
     interface ViewControllerOptionsMap {
         toolBeltSvc: { toolBelt?: ToolBelt | null }
@@ -128,6 +131,12 @@ class FancyCard extends AbstractViewController<Card> {
     }
 }
 
+class EmptySkillViewController extends AbstractSkillViewController {
+    public render(): SkillView {
+        return {}
+    }
+}
+
 @suite()
 export default class AssertingToolsTest extends AbstractViewControllerTest {
     private swipeVc!: SwipeCardViewController
@@ -138,6 +147,7 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
         good: GoodSkillViewController,
         fancy: FancyCard,
         tool: FancyTool,
+        empty: EmptySkillViewController,
     }
 
     @test()
@@ -484,6 +494,24 @@ export default class AssertingToolsTest extends AbstractViewControllerTest {
             () => vcAssert.assertToolBeltDoesNotRenderStickyTools(vc),
             'renders sticky'
         )
+    }
+
+    @test('assert hiding toolbelt throws if renders toolbelt', 'toolBeltSvc')
+    @test('assert hiding toolbelt throws if renders nothing', 'empty')
+    protected async hidesToolBeltThrowsIfRendersToolBelt(
+        id: SkillViewControllerId
+    ) {
+        const vc = this.Controller(id, {
+            //@ts-ignore
+            toolBelt: {},
+        })
+        assert.doesThrow(() => toolBeltAssert.hidesToolBelt(vc), 'null')
+    }
+
+    @test()
+    protected async hidesToolBeltPassesIfRendersNull() {
+        const vc = this.Controller('good', {})
+        toolBeltAssert.hidesToolBelt(vc)
     }
 
     private assertToolRendersCard(
