@@ -1,3 +1,7 @@
+## 128.1.0 (2025-11-20)
+
+* minor: can assert toolbelt hides ([198ed28](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/198ed28))
+
 ## <small>128.0.9 (2025-11-19)</small>
 
 * patch: no shouldRestartOnBuffer on video. AI made it up ([dea3e8a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/dea3e8a))
