@@ -611,6 +611,33 @@ export default class AssertingListsTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected async rendersContentChecksMarkdownAlso() {
+        this.addRow({
+            cells: [
+                {
+                    text: {
+                        markdown: 'Waka waka',
+                    },
+                },
+            ],
+        })
+
+        this.addRow({
+            cells: [{ subText: { markdown: 'cheesy cheese' } }],
+        })
+
+        listAssert.rowRendersContent(this.vc, 0, 'Waka waka')
+        assert.doesThrow(() =>
+            listAssert.rowDoesNotRenderContent(this.vc, 0, 'waka waka')
+        )
+
+        listAssert.rowRendersContent(this.vc, 1, 'cheesy cheese')
+        assert.doesThrow(() =>
+            listAssert.rowDoesNotRenderContent(this.vc, 1, 'cheesy cheese')
+        )
+    }
+
     private CardVc() {
         return this.Controller('card', {
             body: {

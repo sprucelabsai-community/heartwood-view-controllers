@@ -741,7 +741,9 @@ function renderCellContent(cell: ListCell) {
 				${cell.subText?.html ?? ''}
 				${cell.text?.content ?? ''}
 				${cell.text?.html ?? ''}
-			${cell.button?.label ?? ''}`
+			${cell.button?.label ?? ''} 
+            ${cell.text?.markdown ?? ''}
+            ${cell.subText?.markdown ?? ''}`
 }
 
 function getListVc(listVc: ViewController<List>): ListViewController {
