@@ -1,3 +1,8 @@
+## <small>128.1.1 (2025-11-27)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([b16ac29](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b16ac29))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([b8733a3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b8733a3))
+
 ## 128.1.0 (2025-11-20)
 
 * minor: can assert toolbelt hides ([198ed28](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/198ed28))
