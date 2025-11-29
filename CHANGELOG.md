@@ -1,3 +1,12 @@
+## 128.2.0 (2025-11-29)
+
+* patch: alias webpack test ([7916a90](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7916a90))
+* patch: lint fix ([02b0207](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/02b0207))
+* patch: lock webpack test ([a27866c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a27866c))
+* patch: tweaks ([acac972](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/acac972))
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([773ff38](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/773ff38))
+* minor: feed scroll mode ([c0d1f81](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c0d1f81))
+
 ## <small>128.1.8 (2025-11-29)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([a63553e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a63553e))
