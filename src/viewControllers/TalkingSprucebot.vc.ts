@@ -80,5 +80,4 @@ export default class TalkingSprucebotViewController
 export type Sentence =
     SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SprucebotTypedMessageSentence
 
-export interface TalkingSprucebotViewControllerOptions
-    extends TalkingSprucebot {}
+export interface TalkingSprucebotViewControllerOptions extends TalkingSprucebot {}

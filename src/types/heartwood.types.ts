@@ -668,8 +668,9 @@ export interface FormInputHandlers<View> {
     getModel: () => View
 }
 
-export interface FormInputViewController<View extends Record<string, any> = any>
-    extends ViewController<View> {
+export interface FormInputViewController<
+    View extends Record<string, any> = any,
+> extends ViewController<View> {
     setHandlers(options: FormInputHandlers<View>): void
     setValue(value: any, renderedValue?: any): Promise<void>
     getValue(): any
@@ -1081,7 +1082,8 @@ export interface AppControllerLoadOptions {
     dependencyLoader: DependencyLoader
 }
 
-export interface ChartViewController<ViewModel extends Record<string, any>>
-    extends ViewController<ViewModel> {
+export interface ChartViewController<
+    ViewModel extends Record<string, any>,
+> extends ViewController<ViewModel> {
     setDataSets(dataSets: ChartDataSet[]): void
 }
