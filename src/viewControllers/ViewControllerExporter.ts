@@ -250,6 +250,7 @@ export default class ViewControllerExporter {
                     ),
                     dotenv: pathUtil.resolve(__dirname, 'noop.js'),
                     'gcp-metadata': pathUtil.resolve(__dirname, 'noop.js'),
+                    webpack: pathUtil.resolve(__dirname, 'noop.js'),
                 },
             },
             output: {

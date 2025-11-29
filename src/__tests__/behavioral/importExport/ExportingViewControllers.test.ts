@@ -146,6 +146,7 @@ export default class ViewControllerExporterTest extends AbstractSpruceTest {
         await this.export()
         this.assertBuiltBundleDoesNotInclude('dotenv')
     }
+
     @test()
     protected async doesNotBundleGcpMetadata() {
         await this.export()
