@@ -632,8 +632,7 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     }
 }
 
-export interface ActiveRecordCardViewControllerOptions
-    extends ActiveRecordListViewControllerOptions {
+export interface ActiveRecordCardViewControllerOptions extends ActiveRecordListViewControllerOptions {
     header?: Card['header']
     footer?: Card['footer']
     criticalError?: Card['criticalError']

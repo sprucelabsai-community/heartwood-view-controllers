@@ -14,18 +14,18 @@ type Row = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow
 
 export type ActiveRecordListBuilder<Contract extends EventContract> = <
     EventName extends EventNames<Contract> = EventNames<Contract>,
-    IEventSignature extends
-        EventSignature = Contract['eventSignatures'][EventName],
-    EmitSchema extends
-        Schema = IEventSignature['emitPayloadSchema'] extends Schema
-        ? IEventSignature['emitPayloadSchema']
-        : never,
-    ResponseSchema extends
-        Schema = IEventSignature['responsePayloadSchema'] extends Schema
-        ? IEventSignature['responsePayloadSchema']
-        : never,
-    Response extends
-        SchemaValues<ResponseSchema> = SchemaValues<ResponseSchema>,
+    IEventSignature extends EventSignature =
+        Contract['eventSignatures'][EventName],
+    EmitSchema extends Schema =
+        IEventSignature['emitPayloadSchema'] extends Schema
+            ? IEventSignature['emitPayloadSchema']
+            : never,
+    ResponseSchema extends Schema =
+        IEventSignature['responsePayloadSchema'] extends Schema
+            ? IEventSignature['responsePayloadSchema']
+            : never,
+    Response extends SchemaValues<ResponseSchema> =
+        SchemaValues<ResponseSchema>,
     ResponseKey extends keyof Response = keyof Response,
 >(options: {
     id?: string

@@ -40,8 +40,7 @@ export interface SwipeOptions {
     direction: CalendarSwipeDirection
 }
 
-export interface CalendarEventViewController
-    extends ViewController<CalendarEvent> {
+export interface CalendarEventViewController extends ViewController<CalendarEvent> {
     getIsOrphaned(): boolean
     mixinChanges(changes: Partial<CalendarEvent>): void
     setIsBusy(isBusy: boolean): void
