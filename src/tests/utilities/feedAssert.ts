@@ -1,6 +1,11 @@
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
-import { Card, ViewController } from '../../types/heartwood.types'
+import {
+    Card,
+    Feed,
+    ScrollMode,
+    ViewController,
+} from '../../types/heartwood.types'
 import renderUtil from '../../utilities/render.utility'
 import FeedViewController from '../../viewControllers/Feed.vc'
 import { pluckFirstFromCard } from './assertSupport'
@@ -18,6 +23,15 @@ const feedAssert = {
         )
 
         return feed.controller as FeedViewController
+    },
+
+    scrollModeEquals(vc: ViewController<Feed>, expected: ScrollMode) {
+        const { scrollMode } = renderUtil.render(vc)
+        assert.isEqual(
+            scrollMode,
+            expected,
+            `Expected scroll mode to be "${expected}" but it was "${scrollMode}"`
+        )
     },
 }
 

@@ -1,6 +1,10 @@
 import { SchemaError } from '@sprucelabs/schema'
 import { FeedItem } from '@sprucelabs/spruce-core-schemas'
-import { Feed, ViewControllerOptions } from '../types/heartwood.types'
+import {
+    Feed,
+    ScrollMode,
+    ViewControllerOptions,
+} from '../types/heartwood.types'
 import removeUniversalViewOptions from '../utilities/removeUniversalViewOptions'
 import AbstractViewController from './Abstract.vc'
 
@@ -10,7 +14,10 @@ export default class FeedViewController extends AbstractViewController<Feed> {
         options: ViewControllerOptions & FeedViewControllerOptions
     ) {
         super(options)
-        this.model = removeUniversalViewOptions(options)
+        this.model = {
+            scrollMode: 'fullView',
+            ...removeUniversalViewOptions(options),
+        }
     }
 
     public addItem(item: FeedItem) {
@@ -47,6 +54,11 @@ export default class FeedViewController extends AbstractViewController<Feed> {
 
     private getTotalItems() {
         return this.model.items.length
+    }
+
+    public setScrollMode(mode: ScrollMode) {
+        this.model.scrollMode = mode
+        this.triggerRender()
     }
 
     public render(): Feed {

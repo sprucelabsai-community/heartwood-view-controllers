@@ -9,7 +9,7 @@ import {
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import feedAssert from '../../../tests/utilities/feedAssert'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { CardSection } from '../../../types/heartwood.types'
+import { CardSection, ScrollMode } from '../../../types/heartwood.types'
 import FeedViewController from '../../../viewControllers/Feed.vc'
 
 @suite()
@@ -165,6 +165,57 @@ export default class ControllingTheFeedTest extends AbstractViewControllerTest {
         this.vc.addItem(item)
         this.vc.addItem(item)
         this.assertItemsEqual([item])
+    }
+
+    @test()
+    protected async canSetScrollModeInConstructor() {
+        this.vc = this.Controller('feed', {
+            scrollMode: 'inline',
+            items: [],
+        })
+
+        this.assertScrollModeEquals('inline')
+    }
+
+    @test()
+    protected async canSetScrollMode() {
+        const mode: ScrollMode = 'fullView'
+        this.setScrollMode(mode)
+        this.assertScrollModeEquals('fullView')
+
+        this.setScrollMode('inline')
+        this.assertScrollModeEquals('inline')
+    }
+
+    @test()
+    protected async scrollModeTriggersRender() {
+        this.setScrollMode('fullView')
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+
+        this.setScrollMode('inline')
+        vcAssert.assertTriggerRenderCount(this.vc, 2)
+    }
+
+    @test()
+    protected async defaultsToScrollToView() {
+        this.assertScrollModeEquals('fullView')
+    }
+
+    @test()
+    protected async canAssertScrollMode() {
+        assert.doesThrow(() => feedAssert.scrollModeEquals(this.vc, 'inline'))
+        this.setScrollMode('inline')
+        feedAssert.scrollModeEquals(this.vc, 'inline')
+    }
+
+    private setScrollMode(mode: ScrollMode) {
+        this.vc.setScrollMode(mode)
+    }
+
+    private assertScrollModeEquals(expected: ScrollMode) {
+        const { scrollMode } = this.render(this.vc)
+        assert.isEqual(scrollMode, expected, 'Scoll mode is not set properly')
+        feedAssert.scrollModeEquals(this.vc, expected)
     }
 
     private assertDoesNotRenderFeed(sections: CardSection[]) {

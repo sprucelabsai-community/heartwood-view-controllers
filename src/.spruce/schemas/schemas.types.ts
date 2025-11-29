@@ -3434,6 +3434,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'items': SpruceSchemas.Spruce.v2020_07_22.FeedItem[]
+				/** . Determines how the feed should handle scrolling. Inline will scroll within the feed area, while Full View delegates scrolling to the entire view. */
+				'scrollMode'?: ("inline" | "fullView") | undefined | null
 				
 				'onSubmitMessage'?: (HeartwoodTypes.OnSubmitFeedMessageHandler) | undefined | null
 				
@@ -3454,6 +3456,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                isArray: true,
 			                minArrayLength: 0,
 			                options: {schema: SpruceSchemas.Spruce.v2020_07_22.FeedItemSchema,}
+			            },
+			            /** . Determines how the feed should handle scrolling. Inline will scroll within the feed area, while Full View delegates scrolling to the entire view. */
+			            'scrollMode': {
+			                type: 'select',
+			                hint: 'Determines how the feed should handle scrolling. Inline will scroll within the feed area, while Full View delegates scrolling to the entire view.',
+			                options: {choices: [{"value":"inline","label":"Inline Scroll"},{"value":"fullView","label":"Full View"}],}
 			            },
 			            /** . */
 			            'onSubmitMessage': {
