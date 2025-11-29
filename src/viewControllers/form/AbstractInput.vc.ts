@@ -8,8 +8,8 @@ import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptio
 import AbstractViewController from '../Abstract.vc'
 
 export default abstract class AbstractInputViewController<
-        Model extends ViewModel = ViewModel,
-    >
+    Model extends ViewModel = ViewModel,
+>
     extends AbstractViewController<Model>
     implements FormInputViewController<Model>
 {

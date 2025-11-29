@@ -9,9 +9,7 @@ import normalizeFormSectionFieldNamesUtil from '../../utilities/normalizeFieldNa
 import { SimpleRow, SimpleSection } from './EditFormBuilderSectionCard.vc'
 import FormBuilderCardViewController from './FormBuilderCard.vc'
 
-export class FormBuilderPageViewControllerImpl
-    implements FormBuilderPageViewControllerEnhancements
-{
+export class FormBuilderPageViewControllerImpl implements FormBuilderPageViewControllerEnhancements {
     private formVc: FormViewController<Schema>
     private fieldBuilder: FieldBuilder
     public index: number
