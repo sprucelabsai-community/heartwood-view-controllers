@@ -34,9 +34,9 @@ import removeUniversalViewOptions from '../../utilities/removeUniversalViewOptio
 import AbstractViewController from '../Abstract.vc'
 
 export default class FormViewController<
-    S extends Schema,
-    V extends ViewModel<S> = ViewModel<S>,
->
+        S extends Schema,
+        V extends ViewModel<S> = ViewModel<S>,
+    >
     extends AbstractViewController<V>
     implements ViewController<V>
 {

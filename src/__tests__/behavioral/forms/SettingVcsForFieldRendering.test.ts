@@ -21,7 +21,9 @@ import SpyTextFieldInput from './SpyTextFieldInput'
 class EmailSpyTextFieldInput extends SpyTextFieldInput {}
 
 //@ts-ignore
-class NoRenderedValueValueMethods implements FormInputViewController<TextInput> {
+class NoRenderedValueValueMethods
+    implements FormInputViewController<TextInput>
+{
     public model!: FormInputOptions
     private getValueHandler!: () => any
     private setValueHandler!: (value: any) => Promise<void>

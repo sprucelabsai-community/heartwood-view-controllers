@@ -18,16 +18,16 @@ import { ActiveRecordCardViewControllerOptions } from '../viewControllers/active
 type ActiveRecordCardBuilder<Contract extends EventContract> = <
     Fqen extends EventName<Contract> = EventName<Contract>,
     IEventSignature extends EventSignature = Contract['eventSignatures'][Fqen],
-    EmitSchema extends Schema =
-        IEventSignature['emitPayloadSchema'] extends Schema
-            ? IEventSignature['emitPayloadSchema']
-            : never,
-    ResponseSchema extends Schema =
-        IEventSignature['responsePayloadSchema'] extends Schema
-            ? IEventSignature['responsePayloadSchema']
-            : never,
-    Response extends SchemaValues<ResponseSchema> =
-        SchemaValues<ResponseSchema>,
+    EmitSchema extends
+        Schema = IEventSignature['emitPayloadSchema'] extends Schema
+        ? IEventSignature['emitPayloadSchema']
+        : never,
+    ResponseSchema extends
+        Schema = IEventSignature['responsePayloadSchema'] extends Schema
+        ? IEventSignature['responsePayloadSchema']
+        : never,
+    Response extends
+        SchemaValues<ResponseSchema> = SchemaValues<ResponseSchema>,
     ResponseKey extends keyof Response = keyof Response,
 >(options: {
     id?: string

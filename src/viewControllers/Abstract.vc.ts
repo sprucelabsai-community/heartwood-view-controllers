@@ -12,8 +12,8 @@ import {
 import AbstractController from './AbstractController'
 
 export default abstract class AbstractViewController<
-    ViewModel extends Record<string, any>,
->
+        ViewModel extends Record<string, any>,
+    >
     extends AbstractController
     implements ViewController<ViewModel>
 {

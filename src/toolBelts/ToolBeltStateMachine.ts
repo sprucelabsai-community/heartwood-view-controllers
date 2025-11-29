@@ -24,8 +24,9 @@ const set = require('object-set')
 
 export default class ToolBeltStateMachine<
     Context extends Record<string, any> = Record<string, any>,
-    ContextWithDotKeys extends ValuesWithPaths<Partial<Context>> =
-        ValuesWithPaths<Partial<Context>>,
+    ContextWithDotKeys extends ValuesWithPaths<
+        Partial<Context>
+    > = ValuesWithPaths<Partial<Context>>,
 > extends AbstractEventEmitter<EventContract> {
     private state?: ToolBeltState
     private toolBeltVc: ToolBeltViewController
