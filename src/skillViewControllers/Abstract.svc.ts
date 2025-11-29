@@ -10,9 +10,9 @@ import AbstractViewController from '../viewControllers/Abstract.vc'
 import { LockScreenSkillViewControllerOptions } from './LockScreen.svc'
 
 export default abstract class AbstractSkillViewController<
-        Args extends Record<string, any> = Record<string, any>,
-        ViewModel extends Record<string, any> = SkillView,
-    >
+    Args extends Record<string, any> = Record<string, any>,
+    ViewModel extends Record<string, any> = SkillView,
+>
     extends AbstractViewController<ViewModel>
     implements SkillViewController
 {

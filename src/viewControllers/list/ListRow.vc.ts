@@ -10,10 +10,7 @@ import {
 import listUtil from './list.utility'
 import ListCellViewController from './ListCell.vc'
 
-export default class ListRowViewController
-    implements
-        ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow>
-{
+export default class ListRowViewController implements ViewController<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ListRow> {
     private cellVcs: ListCellViewController[] = []
     private get model() {
         return this.getModelHandler()
