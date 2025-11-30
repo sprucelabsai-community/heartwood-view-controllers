@@ -1,3 +1,8 @@
+## 128.3.0 (2025-11-30)
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([54e735f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/54e735f))
+* minor: feed now supports agent name override (defaults to Sprucebot) ([53a58ce](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/53a58ce))
+
 ## 128.2.0 (2025-11-29)
 
 * patch: alias webpack test ([7916a90](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7916a90))
