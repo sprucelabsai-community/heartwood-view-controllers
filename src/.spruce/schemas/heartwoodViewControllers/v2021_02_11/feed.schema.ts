@@ -24,6 +24,13 @@ const feedSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FeedSchema 
 	                hint: 'Determines how the feed should handle scrolling. Inline will scroll within the feed area, while Full View delegates scrolling to the entire view.',
 	                options: {choices: [{"value":"inline","label":"Inline Scroll"},{"value":"fullView","label":"Full View"}],}
 	            },
+	            /** Agent Name. The name of the agent associated with this feed. Defaults to "Sprucebot" */
+	            'agentName': {
+	                label: 'Agent Name',
+	                type: 'text',
+	                hint: 'The name of the agent associated with this feed. Defaults to "Sprucebot"',
+	                options: undefined
+	            },
 	            /** . */
 	            'onSubmitMessage': {
 	                type: 'raw',

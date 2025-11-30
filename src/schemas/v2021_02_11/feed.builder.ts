@@ -22,6 +22,11 @@ export default buildSchema({
             },
             hint: 'Determines how the feed should handle scrolling. Inline will scroll within the feed area, while Full View delegates scrolling to the entire view.',
         },
+        agentName: {
+            type: 'text',
+            label: 'Agent Name',
+            hint: 'The name of the agent associated with this feed. Defaults to "Sprucebot"',
+        },
         onSubmitMessage: {
             type: 'raw',
             options: {
