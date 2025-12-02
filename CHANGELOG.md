@@ -1,3 +1,18 @@
+## <small>128.3.2 (2025-12-02)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([9dcf74f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9dcf74f))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([39458be](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/39458be))
+
+## <small>128.3.1 (2025-12-01)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([1213c06](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1213c06))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([b7e780b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b7e780b))
+
+## 128.3.0 (2025-11-30)
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([54e735f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/54e735f))
+* minor: feed now supports agent name override (defaults to Sprucebot) ([53a58ce](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/53a58ce))
+
 ## 128.2.0 (2025-11-29)
 
 * patch: alias webpack test ([7916a90](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7916a90))
