@@ -366,6 +366,11 @@ export default buildSchema({
                                 schema: statusIndicatorColorsBuilder,
                             },
                         },
+                        talkingSprucebotColor: {
+                            type: 'text',
+                            label: 'Talking Sprucebot Color',
+                            hint: 'The color of the talking sprucebot animation that appears when Sprucebot is speaking.',
+                        },
                         fontFamilies: {
                             type: 'schema',
                             isArray: true,

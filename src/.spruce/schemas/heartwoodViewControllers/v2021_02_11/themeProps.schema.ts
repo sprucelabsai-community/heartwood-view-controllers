@@ -204,6 +204,13 @@ const themePropsSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme
 	                type: 'schema',
 	                options: {schema: statusIndicatorColorsSchema_v2021_02_11,}
 	            },
+	            /** Talking Sprucebot Color. The color of the talking sprucebot animation that appears when Sprucebot is speaking. */
+	            'talkingSprucebotColor': {
+	                label: 'Talking Sprucebot Color',
+	                type: 'text',
+	                hint: 'The color of the talking sprucebot animation that appears when Sprucebot is speaking.',
+	                options: undefined
+	            },
 	            /** . */
 	            'fontFamilies': {
 	                type: 'schema',

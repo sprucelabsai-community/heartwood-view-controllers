@@ -1422,6 +1422,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'footerIconUrl'?: string | undefined | null
 				
 				'statusIndicators'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicatorColors | undefined | null
+				/** Talking Sprucebot Color. The color of the talking sprucebot animation that appears when Sprucebot is speaking. */
+				'talkingSprucebotColor'?: string | undefined | null
 				
 				'fontFamilies'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FontFamily[] | undefined | null
 				
@@ -1627,6 +1629,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'statusIndicators': {
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.StatusIndicatorColorsSchema,}
+			            },
+			            /** Talking Sprucebot Color. The color of the talking sprucebot animation that appears when Sprucebot is speaking. */
+			            'talkingSprucebotColor': {
+			                label: 'Talking Sprucebot Color',
+			                type: 'text',
+			                hint: 'The color of the talking sprucebot animation that appears when Sprucebot is speaking.',
+			                options: undefined
 			            },
 			            /** . */
 			            'fontFamilies': {
