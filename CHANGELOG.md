@@ -1,3 +1,8 @@
+## <small>128.5.2 (2025-12-03)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([2eafbac](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2eafbac))
+* patch: revert to setErrorsByField ([85e9bae](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/85e9bae))
+
 ## <small>128.5.1 (2025-12-03)</small>
 
 * Merge branches 'master' and 'master' of github.com:sprucelabsai/heartwood-view-controllers ([e1eb2df](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e1eb2df))
