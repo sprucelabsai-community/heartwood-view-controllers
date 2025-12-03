@@ -377,7 +377,7 @@ export default class FormViewController<
         this.setErrorsByField(errorsByField)
     }
 
-    protected setErrorsByField(errorsByField: FormErrorsByField<S>) {
+    public setErrorsByField(errorsByField: FormErrorsByField<S>) {
         this.model.errorsByField = errorsByField
     }
 
