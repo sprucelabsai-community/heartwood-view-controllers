@@ -216,6 +216,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
                 renderAs: 'checkbox',
                 hint,
             })
+            fields[0].hint = null
         } else {
             fields[0].hint = hint
         }

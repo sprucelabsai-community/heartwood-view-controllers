@@ -540,7 +540,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
             smsDisclaimer: this.smsDisclaimer,
         })
 
-        this.assertHintForFieldEquals(0, undefined)
+        this.assertHintForFieldEquals(0, null)
         this.assertHintForFieldEquals(1, this.smsDisclaimer)
     }
 
@@ -624,10 +624,11 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
     private assertHintForFieldEquals(
         fieldIdx: number,
-        expected: string | undefined,
+        expected: string | null,
         shouldBeMarkdown = true
     ) {
         const model = this.render(this.bigFormVc)
+
         //@ts-ignore
         let hint = model.sections[0]?.fields?.[fieldIdx]?.hint
 
