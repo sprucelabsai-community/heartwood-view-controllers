@@ -533,6 +533,17 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         this.assertFirstSlideNotValid()
     }
 
+    @test()
+    protected async smsDisclaimRendersUnderSmsOptInCheckbox() {
+        this.loginVc = this.LoginVc({
+            shouldRequireCheckboxForSmsOptIn: true,
+            smsDisclaimer: this.smsDisclaimer,
+        })
+
+        this.assertHintForFieldEquals(0, undefined)
+        this.assertHintForFieldEquals(1, this.smsDisclaimer)
+    }
+
     private assertFirstSlideValid() {
         assert.isTrue(
             this.isFirstSlideValid,
@@ -594,11 +605,10 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     private assertRendersDefaultPhoneHint() {
-        const model = this.render(this.bigFormVc)
-        assert.isEqual(
-            //@ts-ignore
-            model.sections[0]?.fields?.[0]?.hint,
-            "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
+        this.assertHintForFieldEquals(
+            0,
+            "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply.",
+            false
         )
     }
 
@@ -607,12 +617,28 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     }
 
     private assertRendersDisclaimer() {
+        const fieldIdx = 0
+        const expected = this.smsDisclaimer
+        this.assertHintForFieldEquals(fieldIdx, expected)
+    }
+
+    private assertHintForFieldEquals(
+        fieldIdx: number,
+        expected: string | undefined,
+        shouldBeMarkdown = true
+    ) {
         const model = this.render(this.bigFormVc)
+        //@ts-ignore
+        let hint = model.sections[0]?.fields?.[fieldIdx]?.hint
+
+        if (hint && typeof hint === 'object' && shouldBeMarkdown) {
+            hint = hint.markdown
+        }
+
         assert.isEqual(
-            //@ts-ignore
-            model.sections[0]?.fields?.[0]?.hint,
-            this.smsDisclaimer,
-            'Disclaimer not rendered correctly'
+            hint,
+            expected,
+            `Disclaimer not rendered correctly for field index ${fieldIdx}`
         )
     }
 

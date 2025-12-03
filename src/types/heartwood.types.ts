@@ -739,7 +739,7 @@ export interface FieldRenderOptions<S extends Schema> {
     renderHintAs?: 'subtitle' | 'tooltip'
     placeholder?: string | null
     label?: string | null
-    hint?: string | null
+    hint?: string | null | { markdown?: string }
     vc?: FormInputViewController
     fieldDefinition?: FieldDefinitions
     rightButtons?: InputButton[]

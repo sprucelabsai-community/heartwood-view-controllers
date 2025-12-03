@@ -10,12 +10,16 @@ import {
     Button,
     Card,
     CardFooter,
+    FieldRenderOptions,
     FormOnChangeOptions,
     FormSection,
     ViewControllerOptions,
 } from '../types/heartwood.types'
 import AbstractViewController from './Abstract.vc'
 import CardViewController from './card/Card.vc'
+
+const defaultPhoneHint =
+    "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply."
 
 export default class LoginCardViewController extends AbstractViewController<Card> {
     private static _id = 0
@@ -194,10 +198,15 @@ export default class LoginCardViewController extends AbstractViewController<Card
     }
 
     private renderPhoneSection(): FormSection<LoginSchema> {
-        const fields: FormSection<LoginSchema>['fields'] = [
+        const hint = this.smsDisclaimer
+            ? {
+                  markdown: this.smsDisclaimer,
+              }
+            : defaultPhoneHint
+
+        const fields: FieldRenderOptions<LoginSchema>[] = [
             {
                 name: 'phone',
-                hint: this.smsDisclaimer ?? loginSchema.fields.phone.hint,
             },
         ]
 
@@ -205,7 +214,10 @@ export default class LoginCardViewController extends AbstractViewController<Card
             fields.push({
                 name: 'smsOptIn',
                 renderAs: 'checkbox',
+                hint,
             })
+        } else {
+            fields[0].hint = hint
         }
 
         return {
@@ -397,7 +409,7 @@ const loginSchema = buildSchema({
             type: 'phone',
             isRequired: true,
             label: 'Phone',
-            hint: "I'm gonna send you a pin. By entering your number, you agree to receive mobile messages at the phone number provided. Messages frequency varies. Message and data rates may apply.",
+            hint: defaultPhoneHint,
         },
         email: {
             type: 'email',
