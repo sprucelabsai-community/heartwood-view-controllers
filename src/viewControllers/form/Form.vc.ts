@@ -377,7 +377,7 @@ export default class FormViewController<
         this.setErrorsByField(errorsByField)
     }
 
-    public setErrorsByField(errorsByField: FormErrorsByField<S>) {
+    protected setErrorsByField(errorsByField: FormErrorsByField<S>) {
         this.model.errorsByField = errorsByField
     }
 
@@ -406,9 +406,24 @@ export default class FormViewController<
     }
 
     public isValid() {
-        return areSchemaValuesValid(this.model.schema, this.model.values, {
-            fields: this.getVisibleFields(),
-        })
+        const visibleFields = this.getVisibleFields()
+        let isValid = this._isValidForFields(visibleFields)
+
+        return isValid
+    }
+
+    protected _isValidForFields(visibleFields: SchemaFieldNames<S>[]) {
+        let isValid = true
+        if (Object.keys(this.getErrorsByField()).length > 0) {
+            isValid = false
+        }
+
+        isValid =
+            isValid &&
+            areSchemaValuesValid(this.model.schema, this.model.values, {
+                fields: visibleFields,
+            })
+        return isValid
     }
 
     private getVisibleFields(): SchemaFieldNames<S>[] {

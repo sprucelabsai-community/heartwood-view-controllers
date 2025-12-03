@@ -1,4 +1,4 @@
-import { areSchemaValuesValid, Schema } from '@sprucelabs/schema'
+import { Schema } from '@sprucelabs/schema'
 import { BigForm, BigFormOnSubmitOptions } from '../types/heartwood.types'
 import normalizeFormSectionFieldNamesUtil from '../utilities/normalizeFieldNames.utility'
 import FormViewController, { FormViewControllerOptions } from './form/Form.vc'
@@ -18,9 +18,7 @@ export default class BigFormViewController<
             const fields = normalizeFormSectionFieldNamesUtil.toNames(
                 slide.fields
             )
-            return areSchemaValuesValid(this.model.schema, this.model.values, {
-                fields,
-            })
+            return this._isValidForFields(fields)
         }
 
         return false

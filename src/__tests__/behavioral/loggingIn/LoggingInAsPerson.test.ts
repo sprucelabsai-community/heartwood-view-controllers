@@ -519,19 +519,25 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     @test()
     protected async formIsDisabledUntilSmsOptInChecked() {
         this.setupWithSmsCheckbox()
+
         await this.fillOutPhone()
+
         this.assertFirstSlideNotValid()
 
         await this.setSmsOptIn(true)
 
-        assert.isTrue(
-            this.isFirstSlideValid,
-            'Form should be valid when checkbox is checked'
-        )
+        this.assertFirstSlideValid()
 
         await this.setSmsOptIn(false)
 
         this.assertFirstSlideNotValid()
+    }
+
+    private assertFirstSlideValid() {
+        assert.isTrue(
+            this.isFirstSlideValid,
+            'Form should be valid when checkbox is checked'
+        )
     }
 
     private assertFirstSlideNotValid() {

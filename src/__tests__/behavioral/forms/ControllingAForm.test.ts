@@ -87,7 +87,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test()
     protected async canSetValue() {
-        await this.vc.setValue('first', 'tay')
+        await this.setValue('first', 'tay')
         const actual = this.vc.getValues()
 
         assert.isEqualDeep(actual, {
@@ -120,8 +120,8 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test()
     protected async errorsByFieldShowsFirstDirtyField() {
-        await this.vc.setValue('first', 'Tay')
-        await this.vc.setValue('first', '')
+        await this.setValue('first', 'Tay')
+        await this.setValue('first', '')
 
         const errorsByField = this.vc.getErrorsByField()
         assert.isLength(Object.keys(errorsByField), 1)
@@ -156,13 +156,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test()
     protected async fieldErrorsRendered() {
-        await this.vc.setValue('first', 'Test')
+        await this.setValue('first', 'Test')
 
         let model = this.vc.render()
 
         assert.isLength(Object.keys(model.errorsByField ?? {}), 0)
 
-        await this.vc.setValue('first', '')
+        await this.setValue('first', '')
 
         model = this.vc.render()
         assert.isLength(Object.keys(model.errorsByField ?? {}), 1)
@@ -206,18 +206,26 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     @test()
-    protected async errorsSetManuallyMustBeClearedManually() {
+    protected async errorsSetManuallyAreClearedOnChange() {
         this.vc = this.TestFormVc({
             sections: [
                 {
-                    fields: ['first', 'last', 'nickname', 'agreeToTerms'],
+                    fields: ['first', 'agreeToTerms'],
                 },
             ],
         })
+
+        this.assertFormIsNotValid()
+
+        await this.setValue('first', 'Tay')
+        await this.setValue('agreeToTerms', true)
+
+        this.assertFormIsValid()
+
         this.vc.setErrors([
             {
                 code: 'INVALID_PARAMETER',
-                name: 'nickname',
+                name: 'agreeToTerms',
                 friendlyMessage:
                     'This is not the nickname your are looking for.',
             },
@@ -225,10 +233,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
         this.assertFormIsNotValid()
 
-        await this.vc.setValue('nickname', 'tayro')
-        await this.vc.setValue('agreeToTerms', true)
+        await this.setValue('agreeToTerms', false)
 
-        this.assertFormIsNotValid()
+        this.assertFormIsValid()
+
+        await this.setValue('agreeToTerms', true)
+
+        this.assertFormIsValid()
     }
 
     @test()
@@ -258,12 +269,12 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
             },
         }) as any
 
-        await this.vc.setValue('first', 'Tay')
+        await this.setValue('first', 'Tay')
 
         assert.isFalse(lastIsValid)
         assert.isLength(Object.keys(lastErrorsByField), 0)
 
-        await this.vc.setValue('first', '')
+        await this.setValue('first', '')
 
         assert.isFalse(lastIsValid)
         assert.isArray(lastErrorsByField.first)
@@ -271,10 +282,11 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     @test()
     protected async resettingAFormClearsValuesAndErrors() {
-        await this.vc.setValue('first', 'Test')
+        await this.setValue('first', 'Test')
 
         const errors = this.vc.validate()
 
+        //@ts-ignore
         this.vc.setErrorsByField(errors)
         assert.isTrue(this.vc.hasErrors())
 
@@ -298,7 +310,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test()
     protected async resetValuesAreNotSetByRef() {
         await this.vc.reset()
-        await this.vc.setValue('first', 'Tets')
+        await this.setValue('first', 'Tets')
         //@ts-ignore
         assert.isFalsy(this.vc.originalValues.first)
     }
@@ -328,7 +340,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     @test()
     protected async resetFieldsClearsItsErrors() {
         //@ts-ignore
-        await this.vc.setValue('favoriteNumber', 'aoeu')
+        await this.setValue('favoriteNumber', 'aoeu')
 
         let errs = this.vc.getErrorsByField()
         assert.isTruthy(errs.favoriteNumber)
@@ -1493,7 +1505,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
             ],
         })
 
-        await this.vc.setValue('favoriteNumber', '5' as any)
+        await this.setValue('favoriteNumber', '5' as any)
         assert.isEqualDeep(this.vc.getValues(), { favoriteNumber: 5 })
     }
 
@@ -1632,7 +1644,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
     }
 
     private async setFirstToRandomValue() {
-        await this.vc.setValue('first', generateId())
+        await this.setValue('first', generateId())
     }
 
     public async setValue<N extends SchemaFieldNames<TestFormSchema>>(
