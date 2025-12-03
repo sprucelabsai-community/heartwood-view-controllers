@@ -1,3 +1,8 @@
+## 128.4.0 (2025-12-02)
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([2be0a7a](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2be0a7a))
+* minor: talking sprucebot color ([3f777bf](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/3f777bf))
+
 ## <small>128.3.2 (2025-12-02)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([9dcf74f](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9dcf74f))
