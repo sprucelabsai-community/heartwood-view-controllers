@@ -1,3 +1,8 @@
+## <small>128.5.1 (2025-12-03)</small>
+
+* Merge branches 'master' and 'master' of github.com:sprucelabsai/heartwood-view-controllers ([e1eb2df](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e1eb2df))
+* patch: sms opt in as checkbox ([d2a7acc](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d2a7acc))
+
 ## 128.5.0 (2025-12-03)
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([9f76745](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9f76745))
