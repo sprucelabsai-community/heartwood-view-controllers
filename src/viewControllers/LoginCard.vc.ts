@@ -204,6 +204,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
         if (this.shouldRequireCheckboxForSmsOptIn) {
             fields.push({
                 name: 'smsOptIn',
+                renderAs: 'checkbox',
             })
         }
 
