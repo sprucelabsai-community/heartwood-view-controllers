@@ -1,3 +1,8 @@
+## <small>128.6.1 (2025-12-03)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([8a1c8e6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8a1c8e6))
+* patch: field hint type ([7af2689](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7af2689))
+
 ## 128.6.0 (2025-12-03)
 
 * minor: can set hint as markdown. sms opt in hondls hint in login card if sms login is set ([236f125](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/236f125))
