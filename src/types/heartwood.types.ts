@@ -733,13 +733,20 @@ export type RatingsInputComponentIcon = NonNullable<
     RatingsInputComponent['icon']
 >
 
+export type FieldHint =
+    | string
+    | null
+    | {
+          markdown?: string
+      }
+
 export interface FieldRenderOptions<S extends Schema> {
     name: SchemaFieldNames<S>
     renderAs?: RenderAsInputComponent
     renderHintAs?: 'subtitle' | 'tooltip'
     placeholder?: string | null
     label?: string | null
-    hint?: string | null | { markdown?: string }
+    hint?: FieldHint
     vc?: FormInputViewController
     fieldDefinition?: FieldDefinitions
     rightButtons?: InputButton[]
