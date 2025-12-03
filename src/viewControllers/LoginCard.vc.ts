@@ -29,6 +29,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
     private _id: string
     private userChallenge?: string
     private cardVc: CardViewController
+    private shouldRequireCheckboxForSmsOptIn: boolean
 
     public constructor(
         options: LoginCardViewControllerOptions & ViewControllerOptions
@@ -42,6 +43,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
             smsDisclaimer,
             shouldAllowEmailLogin,
             shouldAllowPhoneLogin = true,
+            shouldRequireCheckboxForSmsOptIn = false,
         } = options
 
         this._id = id ?? `${LoginCardViewController._id}`
@@ -55,6 +57,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
             })
         }
 
+        this.shouldRequireCheckboxForSmsOptIn = shouldRequireCheckboxForSmsOptIn
         this.shouldAllowPhoneLogin = shouldAllowPhoneLogin
         this.shouldAllowEmailLogin = shouldAllowEmailLogin ?? false
         this.loginHandler = onLogin
@@ -191,14 +194,22 @@ export default class LoginCardViewController extends AbstractViewController<Card
     }
 
     private renderPhoneSection(): FormSection<LoginSchema> {
+        const fields: FormSection<LoginSchema>['fields'] = [
+            {
+                name: 'phone',
+                hint: this.smsDisclaimer ?? loginSchema.fields.phone.hint,
+            },
+        ]
+
+        if (this.shouldRequireCheckboxForSmsOptIn) {
+            fields.push({
+                name: 'smsOptIn',
+            })
+        }
+
         return {
             title: this.renderPhoneSlideTitle(),
-            fields: [
-                {
-                    name: 'phone',
-                    hint: this.smsDisclaimer ?? loginSchema.fields.phone.hint,
-                },
-            ],
+            fields,
         }
     }
 
@@ -268,9 +279,20 @@ export default class LoginCardViewController extends AbstractViewController<Card
         options: FormOnChangeOptions<LoginSchema>
     ) {
         const { values } = options
-        const { code } = values
+        const { code, smsOptIn } = values
         if (code?.length === 4) {
             await this.bigFormVc.submit()
+        }
+
+        if (this.shouldRequireCheckboxForSmsOptIn && smsOptIn === false) {
+            this.bigFormVc.setErrors([
+                {
+                    code: 'INVALID_PARAMETER',
+                    friendlyMessage: 'You must agree to receive SMS messages.',
+                    label: 'I agree to receive SMS messages.',
+                    name: 'smsOptIn',
+                },
+            ])
         }
     }
 
@@ -364,6 +386,7 @@ export interface LoginCardViewControllerOptions {
     smsDisclaimer?: string | null
     shouldAllowEmailLogin?: boolean
     shouldAllowPhoneLogin?: boolean
+    shouldRequireCheckboxForSmsOptIn?: boolean
 }
 
 const loginSchema = buildSchema({
@@ -385,6 +408,11 @@ const loginSchema = buildSchema({
             isRequired: true,
             label: 'Pin',
             options: {},
+        },
+        smsOptIn: {
+            type: 'boolean',
+            label: 'I agree to receive SMS messages.',
+            isRequired: true,
         },
     },
 })

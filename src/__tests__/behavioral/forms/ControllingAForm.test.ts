@@ -3,6 +3,8 @@ import {
     buildSchema,
     Schema,
     FieldDefinitions,
+    SchemaFieldNames,
+    SchemaPartialValues,
 } from '@sprucelabs/schema'
 import { locationSchema } from '@sprucelabs/spruce-core-schemas'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
@@ -201,6 +203,32 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         assert.isLength(Object.keys(errorsByField), 1)
         assert.isFalsy(errorsByField.first)
         assert.isLength(errorsByField.last, 1)
+    }
+
+    @test()
+    protected async errorsSetManuallyMustBeClearedManually() {
+        this.vc = this.TestFormVc({
+            sections: [
+                {
+                    fields: ['first', 'last', 'nickname', 'agreeToTerms'],
+                },
+            ],
+        })
+        this.vc.setErrors([
+            {
+                code: 'INVALID_PARAMETER',
+                name: 'nickname',
+                friendlyMessage:
+                    'This is not the nickname your are looking for.',
+            },
+        ])
+
+        this.assertFormIsNotValid()
+
+        await this.vc.setValue('nickname', 'tayro')
+        await this.vc.setValue('agreeToTerms', true)
+
+        this.assertFormIsNotValid()
     }
 
     @test()
@@ -1434,7 +1462,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         await this.vc.setValues({
             [generateId()]: generateId(),
         })
-        assert.isTrue(this.vc.isValid())
+        this.assertFormIsValid()
         this.vc.validate()
     }
 
@@ -1451,7 +1479,7 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
             ],
         })
 
-        assert.isTrue(this.vc.isValid())
+        this.assertFormIsValid()
         this.vc.validate()
     }
 
@@ -1533,6 +1561,14 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         )
     }
 
+    private assertFormIsValid() {
+        assert.isTrue(this.vc.isValid(), 'Form is not valid and should be')
+    }
+
+    private assertFormIsNotValid() {
+        assert.isFalse(this.vc.isValid(), 'Form should not be valid')
+    }
+
     private assertIsDirty() {
         assert.isTrue(this.vc.getIsDirty())
     }
@@ -1597,6 +1633,13 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
 
     private async setFirstToRandomValue() {
         await this.vc.setValue('first', generateId())
+    }
+
+    public async setValue<N extends SchemaFieldNames<TestFormSchema>>(
+        name: N,
+        value: SchemaPartialValues<TestFormSchema>[N]
+    ) {
+        return this.vc.setValue(name, value)
     }
 
     private DisabledForm() {

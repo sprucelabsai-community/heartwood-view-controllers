@@ -509,6 +509,52 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
         this.assertRendersLoginWithEmail()
     }
 
+    @test()
+    protected async rendersCheckboxForSmsOptInWhenOptionIsSet() {
+        this.setupWithSmsCheckbox()
+        this.assertRendersPhoneField()
+        formAssert.formRendersField(this.bigFormVc, 'smsOptIn')
+    }
+
+    @test()
+    protected async formIsDisabledUntilSmsOptInChecked() {
+        this.setupWithSmsCheckbox()
+        await this.fillOutPhone()
+        this.assertFirstSlideNotValid()
+
+        await this.setSmsOptIn(true)
+
+        assert.isTrue(
+            this.isFirstSlideValid,
+            'Form should be valid when checkbox is checked'
+        )
+
+        await this.setSmsOptIn(false)
+
+        this.assertFirstSlideNotValid()
+    }
+
+    private assertFirstSlideNotValid() {
+        assert.isFalse(
+            this.isFirstSlideValid,
+            'Form should be invalid when checkbox not checked'
+        )
+    }
+
+    private async setSmsOptIn(value: boolean) {
+        await this.formVc.setValue('smsOptIn', value)
+    }
+
+    private get isFirstSlideValid() {
+        return this.bigFormVc.isSlideValid(0)
+    }
+
+    private setupWithSmsCheckbox() {
+        this.loginVc = this.LoginVc({
+            shouldRequireCheckboxForSmsOptIn: true,
+        })
+    }
+
     private assertRendersLoginWithEmail() {
         this.assertRendersButton('login-with-email')
     }

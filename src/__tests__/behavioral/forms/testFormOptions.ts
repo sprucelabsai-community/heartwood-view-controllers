@@ -24,6 +24,10 @@ export const testFormSchema = buildSchema({
         anotherField: {
             type: 'id',
         },
+        agreeToTerms: {
+            type: 'boolean',
+            isRequired: true,
+        },
     },
 })
 
