@@ -710,6 +710,15 @@ export default class FormViewController<
     }
 
     public setSections(sections: Section<S>[]) {
+        for (const section of sections) {
+            const fields = (section.fields ?? []) as FieldRenderOptions<S>[]
+            for (const field of fields) {
+                if (field?.fieldDefinition) {
+                    this.updateField(field.name, field)
+                }
+            }
+        }
+
         this.model.sections = sections
         this.triggerRender()
     }

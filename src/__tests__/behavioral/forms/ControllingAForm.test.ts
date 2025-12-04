@@ -1552,6 +1552,95 @@ export default class UsingAFormViewControllerTest extends AbstractViewController
         })
     }
 
+    @test()
+    protected async settingFirstFieldDefinitionOnFirstSectionUpdatesSchema() {
+        this.vc.setSections([
+            {
+                fields: [
+                    {
+                        name: 'first',
+                        fieldDefinition: {
+                            type: 'raw',
+                            options: {
+                                valueType: 'string',
+                            },
+                        },
+                    },
+                ],
+            },
+        ])
+
+        this.assertFormSchemaFieldDefinitionsEquals('first', {
+            type: 'raw',
+            options: {
+                valueType: 'string',
+            },
+        })
+    }
+
+    @test()
+    protected async settingSecondFieldDefinitionOnFirstSectionUpdatesSchema() {
+        this.vc.setSections([
+            {
+                fields: [
+                    'first',
+                    {
+                        name: 'last',
+                        fieldDefinition: {
+                            type: 'address',
+                        },
+                    },
+                ],
+            },
+        ])
+
+        this.assertFormSchemaFieldDefinitionsEquals('last', {
+            type: 'address',
+        })
+    }
+
+    @test()
+    protected async settingFirstFieldDefinitionOnSecondSectionUpdatesSchema() {
+        this.vc.setSections([
+            {
+                fields: ['first'],
+            },
+            {
+                fields: [
+                    {
+                        name: 'nickname',
+                        fieldDefinition: {
+                            type: 'text',
+                            options: {
+                                maxLength: 50,
+                            },
+                        },
+                    },
+                ],
+            },
+        ])
+
+        this.assertFormSchemaFieldDefinitionsEquals('nickname', {
+            type: 'text',
+            options: {
+                maxLength: 50,
+            },
+        })
+    }
+
+    private assertFormSchemaFieldDefinitionsEquals(
+        fieldName: string,
+        expected: FieldDefinitions
+    ) {
+        const schema = this.vc.getSchema()
+        assert.isEqualDeep(
+            //@ts-ignore
+            schema.fields[fieldName],
+            expected,
+            'Did not update schema with field definition'
+        )
+    }
+
     private hasSection(section: string | number) {
         return this.vc.hasSection(section)
     }
