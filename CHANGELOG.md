@@ -1,3 +1,8 @@
+## <small>128.6.3 (2025-12-04)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([a6b28f1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a6b28f1))
+* patch: set sections cleanup ([8ef3824](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8ef3824))
+
 ## <small>128.6.2 (2025-12-03)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([fc752b6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fc752b6))
