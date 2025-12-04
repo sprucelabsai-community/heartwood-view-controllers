@@ -1,3 +1,8 @@
+## <small>128.6.2 (2025-12-03)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([fc752b6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fc752b6))
+* patch: login hint fix ([a57918b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a57918b))
+
 ## <small>128.6.1 (2025-12-03)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([8a1c8e6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8a1c8e6))
