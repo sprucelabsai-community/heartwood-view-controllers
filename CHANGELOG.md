@@ -1,3 +1,7 @@
+## 128.7.0 (2025-12-06)
+
+* minor: static has storage check on authenticator ([b22d6f3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b22d6f3))
+
 ## <small>128.6.3 (2025-12-04)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([a6b28f1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a6b28f1))
