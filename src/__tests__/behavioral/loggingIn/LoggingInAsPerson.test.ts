@@ -2,6 +2,7 @@ import { Person } from '@sprucelabs/spruce-core-schemas'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import Authenticator from '../../../auth/Authenticator'
+import AuthenticatorImpl from '../../../auth/Authenticator'
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import { DEMO_NUMBER } from '../../../tests/constants'
 import SpyDevice from '../../../tests/SpyDevice'
@@ -135,6 +136,21 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
 
         const token = this.storage.getItem('sessionToken')
         assert.isEqual(token, '123abc')
+    }
+
+    @test()
+    protected async knowsIfStorageIsSet() {
+        AuthenticatorImpl.setStorage(null)
+        assert.isFalse(
+            AuthenticatorImpl.hasStorage(),
+            'Expected not to have storage'
+        )
+
+        AuthenticatorImpl.setStorage(this.storage)
+        assert.isTrue(
+            AuthenticatorImpl.hasStorage(),
+            'Expected to have storage'
+        )
     }
 
     @test()

@@ -44,6 +44,10 @@ export default class AuthenticatorImpl implements Authenticator {
         this.storage = storage
     }
 
+    public static hasStorage() {
+        return !!this.storage
+    }
+
     public setSessionToken(token: string, person: Person) {
         this.storage.setItem('sessionToken', token)
         this.storage.setItem('person', JSON.stringify(person))
