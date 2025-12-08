@@ -1,3 +1,8 @@
+## <small>128.7.1 (2025-12-08)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([b123063](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b123063))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([d1a7479](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d1a7479))
+
 ## 128.7.0 (2025-12-06)
 
 * minor: static has storage check on authenticator ([b22d6f3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b22d6f3))
