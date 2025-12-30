@@ -73,7 +73,7 @@
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/runtime": "^7.28.4",
-    "@sprucelabs/calendar-utils": "^44.0.34",
+    "@sprucelabs/calendar-utils": "^44.0.35",
     "@sprucelabs/error": "^8.0.14",
     "@sprucelabs/globby": "^2.0.515",
     "@sprucelabs/mercury-core-events": "^28.1.7",
