@@ -1,3 +1,7 @@
+## 128.8.0 (2026-01-07)
+
+* feat: add exports field for proper ESM support in Node.js ([1cec671](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/1cec671))
+
 ## <small>128.7.10 (2026-01-07)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([0da5917](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/0da5917))
