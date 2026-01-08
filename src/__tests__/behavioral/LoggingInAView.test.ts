@@ -20,6 +20,10 @@ export default class LoggingInAViewTest extends AbstractViewControllerTest {
                 info: () => '',
                 warn: () => '',
                 prefix: generateId(),
+                stopTrackingHistory: () => {},
+                getIsTrackingHistory: () => false,
+                getHistoryLimit: () => 0,
+                startTrackingHistory: () => {},
             },
         })
 
