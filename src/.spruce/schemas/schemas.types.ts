@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/order */
 
-export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types'
 
 import { default as SchemaEntity } from '@sprucelabs/schema'
 
