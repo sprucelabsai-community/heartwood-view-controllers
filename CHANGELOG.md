@@ -1,3 +1,9 @@
+## 129.0.0 (2026-01-08)
+
+* major: upgrade dependencies ([b5c0034](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b5c0034))
+* major: upgrade dependencies ([c32180b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c32180b))
+* major: upgrade dependencies ([23adef7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/23adef7))
+
 ## <small>128.8.1 (2026-01-07)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([6915a83](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/6915a83))
