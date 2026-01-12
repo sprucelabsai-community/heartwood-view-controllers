@@ -24,6 +24,9 @@ export default class LoggingInAViewTest extends AbstractViewControllerTest {
                 getIsTrackingHistory: () => false,
                 getHistoryLimit: () => 0,
                 startTrackingHistory: () => {},
+                getHistory(): string[] {
+                    return []
+                },
             },
         })
 
