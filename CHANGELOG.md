@@ -1,3 +1,8 @@
+## <small>129.0.2 (2026-01-12)</small>
+
+* patch: dotenv ([449918d](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/449918d))
+* fix: silence dotenv v17 logging during tests ([0c4df99](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/0c4df99))
+
 ## <small>129.0.1 (2026-01-08)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([cdcd081](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/cdcd081))
