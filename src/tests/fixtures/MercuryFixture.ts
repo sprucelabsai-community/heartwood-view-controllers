@@ -9,7 +9,8 @@ import {
 } from '@sprucelabs/spruce-event-utils'
 import { diskUtil } from '@sprucelabs/spruce-skill-utils'
 import { DEMO_NUMBER } from '../constants'
-import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config({ quiet: true })
 
 const TEST_HOST = process.env.TEST_HOST ?? process.env.HOST
 
