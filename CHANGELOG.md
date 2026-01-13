@@ -1,3 +1,7 @@
+## <small>129.0.4 (2026-01-13)</small>
+
+* patch: upgrade ([a5a05e0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a5a05e0))
+
 ## <small>129.0.3 (2026-01-13)</small>
 
 * patch: ai training enabled ([61fce01](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/61fce01))
