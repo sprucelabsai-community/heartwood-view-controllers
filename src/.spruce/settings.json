@@ -24,5 +24,9 @@
   ],
   "events": {
     "lastSync": {}
+  },
+  "regressionproof": {
+    "enabled": true,
+    "projectName": "heartwood-view-controllers"
   }
 }

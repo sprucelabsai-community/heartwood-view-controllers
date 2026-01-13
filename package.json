@@ -106,6 +106,8 @@
     "webpack": "^5.104.1"
   },
   "devDependencies": {
+    "@regressionproof/cli": "^0.3.4",
+    "@regressionproof/jest-reporter": "^0.3.4",
     "@sprucelabs/esm-postbuild": "^9.0.13",
     "@sprucelabs/jest-json-reporter": "^10.0.19",
     "@sprucelabs/mercury-client": "^46.0.1",
@@ -150,6 +152,10 @@
     ],
     "moduleNameMapper": {
       "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-    }
+    },
+    "reporters": [
+      "default",
+      "@regressionproof/jest-reporter"
+    ]
   }
 }
