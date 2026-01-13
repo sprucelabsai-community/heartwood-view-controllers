@@ -1,3 +1,8 @@
+## <small>129.0.3 (2026-01-13)</small>
+
+* patch: ai training enabled ([61fce01](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/61fce01))
+* patch: upgrade test ([b47efab](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b47efab))
+
 ## <small>129.0.2 (2026-01-12)</small>
 
 * patch: dotenv ([449918d](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/449918d))
