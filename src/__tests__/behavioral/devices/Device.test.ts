@@ -13,6 +13,7 @@ import {
     TheatreSettingName,
 } from '../../../types/heartwood.types'
 import AbstractDeviceTest from './AbstractDeviceTest'
+import fakeStorage from './fakeStorage'
 
 @suite()
 export default class DeviceTest extends AbstractDeviceTest {
@@ -176,12 +177,23 @@ export default class DeviceTest extends AbstractDeviceTest {
             fromPhone: generateId(),
             context: {},
         }
+
         this.device.submitFeedback(feedback)
+
         assert.isEqualDeep(
             this.device.lastFeedbackOptions,
             feedback,
             'Feedback options not tracked'
         )
+    }
+
+    @test()
+    protected async deviceKnowsIfNativeTrue() {
+        let device = new SpyDevice(fakeStorage, { isNative: true })
+        assert.isTrue(device.isNative, 'Device should be native=true')
+
+        device = new SpyDevice(fakeStorage, { isNative: false })
+        assert.isFalse(device.isNative, 'Device should be native=false')
     }
 
     private setPowerBehavior(options: PowerBehaviorOptions) {

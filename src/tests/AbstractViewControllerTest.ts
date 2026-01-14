@@ -7,6 +7,7 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test-utils'
+import fakeStorage from '../__tests__/behavioral/devices/fakeStorage'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -84,7 +85,7 @@ export default abstract class AbstractViewControllerTest extends AbstractSpruceT
 
         return ViewControllerFactory.Factory({
             controllerMap: this.controllerMap,
-            device: new SpyDevice(),
+            device: new SpyDevice(fakeStorage),
             toastHandler: (message) =>
                 MockToastMessageHandler.getInstance().handleMessage(message),
             connectToApi: () => {

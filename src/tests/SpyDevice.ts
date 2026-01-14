@@ -6,6 +6,7 @@ import {
     PowerBehaviorOptions,
     TheaterSettingValueTypes,
     TheatreSettingName,
+    DeviceOptions,
 } from '../types/heartwood.types'
 import MockAudioController from './MockAudioController'
 
@@ -23,6 +24,12 @@ export default class SpyDevice implements Device {
     private brightness = 0
     public lastPowerBehaviorOptions?: PowerBehaviorOptions
     public lastFeedbackOptions?: SubmitFeedbackOptions
+    public isNative = true
+
+    public constructor(_storage: Storage, options?: DeviceOptions) {
+        const { isNative = true } = options || {}
+        this.isNative = isNative
+    }
 
     public setCachedValue(key: string, value: CachedValue): void {
         this.cachedValues[key] = value

@@ -889,6 +889,15 @@ export interface TheaterSettingValueTypes {
 
 export type TheatreSettingName = keyof TheaterSettingValueTypes
 
+export type DeviceConstructor = new (
+    storage: Storage,
+    options?: DeviceOptions
+) => Device
+
+export interface DeviceOptions {
+    isNative?: boolean
+}
+
 export interface Device {
     openUrl(url: string): void
     vibrate(): void
