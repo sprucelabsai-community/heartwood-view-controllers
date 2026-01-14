@@ -106,12 +106,12 @@
     "webpack": "^5.104.1"
   },
   "devDependencies": {
-    "@regressionproof/cli": "^0.5.0",
-    "@regressionproof/jest-reporter": "^0.5.0",
+    "@regressionproof/cli": "^0.5.2",
+    "@regressionproof/jest-reporter": "^0.5.2",
     "@sprucelabs/esm-postbuild": "^9.0.13",
     "@sprucelabs/jest-json-reporter": "^10.0.19",
-    "@sprucelabs/mercury-client": "^46.0.1",
-    "@sprucelabs/mercury-event-emitter": "^46.0.1",
+    "@sprucelabs/mercury-client": "^46.1.0",
+    "@sprucelabs/mercury-event-emitter": "^46.1.0",
     "@sprucelabs/resolve-path-aliases": "^4.0.13",
     "@sprucelabs/semantic-release": "^6.0.0",
     "@sprucelabs/test": "^11.1.0",
