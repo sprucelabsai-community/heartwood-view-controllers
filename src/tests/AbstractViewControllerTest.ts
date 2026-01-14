@@ -7,7 +7,6 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test-utils'
-import FakeStorage from './FakeStorage'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -21,6 +20,7 @@ import SwipeCardViewController from '../viewControllers/SwipeCard.vc'
 import ViewControllerFactory, {
     ViewControllerFactoryOptions,
 } from '../viewControllers/ViewControllerFactory'
+import FakeStorage from './FakeStorage'
 import MercuryFixture from './fixtures/MercuryFixture'
 import SpyDevice from './SpyDevice'
 import StubStorage from './StubStorage'
