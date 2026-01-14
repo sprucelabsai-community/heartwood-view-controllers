@@ -1,3 +1,11 @@
+## 129.2.0 (2026-01-14)
+
+* patch: device refactor ([273cf96](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/273cf96))
+* patch: fake storage changes ([e027ba2](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e027ba2))
+* patch: import reorder ([63957b5](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/63957b5))
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([b17d403](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b17d403))
+* minor: fake storage ([7c854ae](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7c854ae))
+
 ## <small>129.1.1 (2026-01-14)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([901a4da](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/901a4da))
