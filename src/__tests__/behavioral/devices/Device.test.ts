@@ -9,6 +9,7 @@ import FakeStorage from '../../../tests/FakeStorage'
 import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
+    DeviceOptions,
     PowerBehaviorOptions,
     TheaterSettingValueTypes,
     TheatreSettingName,
@@ -191,17 +192,21 @@ export default class DeviceTest extends AbstractDeviceTest {
 
     @test()
     protected async deviceKnowsIfNativeTrue() {
-        let device = new SpyDevice(this.fakeStorage, { isNative: true })
+        let device = this.SpyDevice({ isNative: true })
         assert.isTrue(device.isNative, 'Device should be native=true')
 
-        device = new SpyDevice(this.fakeStorage, { isNative: false })
+        device = this.SpyDevice({ isNative: false })
         assert.isFalse(device.isNative, 'Device should be native=false')
     }
 
     @test()
     protected async deviceShouldNotBeNativeByDefault() {
-        const device = new SpyDevice(this.fakeStorage)
+        const device = this.SpyDevice({})
         assert.isFalse(device.isNative, 'Device should be native by default')
+    }
+
+    private SpyDevice(options: DeviceOptions) {
+        return new SpyDevice(this.fakeStorage, options)
     }
 
     private setPowerBehavior(options: PowerBehaviorOptions) {
