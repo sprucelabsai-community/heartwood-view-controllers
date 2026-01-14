@@ -196,6 +196,12 @@ export default class DeviceTest extends AbstractDeviceTest {
         assert.isFalse(device.isNative, 'Device should be native=false')
     }
 
+    @test()
+    protected async deviceShouldNotBeNativeByDefault() {
+        const device = new SpyDevice(fakeStorage)
+        assert.isFalse(device.isNative, 'Device should be native by default')
+    }
+
     private setPowerBehavior(options: PowerBehaviorOptions) {
         this.device.setPowerBehavior(options)
     }

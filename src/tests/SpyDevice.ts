@@ -24,11 +24,11 @@ export default class SpyDevice implements Device {
     private brightness = 0
     public lastPowerBehaviorOptions?: PowerBehaviorOptions
     public lastFeedbackOptions?: SubmitFeedbackOptions
-    public isNative = true
+    public isNative: boolean
 
     public constructor(_storage: Storage, options?: DeviceOptions) {
-        const { isNative = true } = options || {}
-        this.isNative = isNative
+        const { isNative } = options || {}
+        this.isNative = isNative ?? false
     }
 
     public setCachedValue(key: string, value: CachedValue): void {
