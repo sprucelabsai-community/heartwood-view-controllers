@@ -5,6 +5,7 @@ import {
     generateId,
     errorAssert,
 } from '@sprucelabs/test-utils'
+import fakeStorage from '../../../tests/FakeStorageRenamedForCaseChange'
 import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
@@ -13,7 +14,6 @@ import {
     TheatreSettingName,
 } from '../../../types/heartwood.types'
 import AbstractDeviceTest from './AbstractDeviceTest'
-import fakeStorage from './fakeStorage'
 
 @suite()
 export default class DeviceTest extends AbstractDeviceTest {
