@@ -1,3 +1,8 @@
+## <small>129.1.1 (2026-01-14)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([901a4da](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/901a4da))
+* patch: spy device should be not be native by default ([84161f5](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/84161f5))
+
 ## 129.1.0 (2026-01-14)
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([b10c637](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b10c637))
