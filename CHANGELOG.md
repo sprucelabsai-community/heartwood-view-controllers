@@ -1,3 +1,7 @@
+## <small>129.0.5 (2026-01-14)</small>
+
+* patch: upgrade ([f1aabf7](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/f1aabf7))
+
 ## <small>129.0.4 (2026-01-13)</small>
 
 * patch: upgrade ([a5a05e0](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/a5a05e0))
