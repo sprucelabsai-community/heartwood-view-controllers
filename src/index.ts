@@ -67,6 +67,7 @@ export { default as activeRecordListAssert } from './tests/utilities/activeRecor
 export { default as MockActiveRecordCard } from './tests/MockActiveRecordCard'
 export { default as lockScreenAssert } from './tests/utilities/lockScreenAssert'
 export { default as SpyViewControllerExporter } from './tests/SpyViewControllerExporter'
+export { default as FakeStorage } from './tests/FakeStorage'
 
 export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'
 

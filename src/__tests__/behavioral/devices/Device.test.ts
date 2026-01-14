@@ -5,7 +5,7 @@ import {
     generateId,
     errorAssert,
 } from '@sprucelabs/test-utils'
-import fakeStorage from '../../../tests/FakeStorageRenamedForCaseChange'
+import FakeStorage from '../../../tests/FakeStorage'
 import MockAudioController from '../../../tests/MockAudioController'
 import SpyDevice from '../../../tests/SpyDevice'
 import {
@@ -17,6 +17,8 @@ import AbstractDeviceTest from './AbstractDeviceTest'
 
 @suite()
 export default class DeviceTest extends AbstractDeviceTest {
+    private fakeStorage = new FakeStorage()
+
     @test()
     protected async canGetDevice() {
         this.vc.assertHasDeviceInstance()
@@ -189,16 +191,16 @@ export default class DeviceTest extends AbstractDeviceTest {
 
     @test()
     protected async deviceKnowsIfNativeTrue() {
-        let device = new SpyDevice(fakeStorage, { isNative: true })
+        let device = new SpyDevice(this.fakeStorage, { isNative: true })
         assert.isTrue(device.isNative, 'Device should be native=true')
 
-        device = new SpyDevice(fakeStorage, { isNative: false })
+        device = new SpyDevice(this.fakeStorage, { isNative: false })
         assert.isFalse(device.isNative, 'Device should be native=false')
     }
 
     @test()
     protected async deviceShouldNotBeNativeByDefault() {
-        const device = new SpyDevice(fakeStorage)
+        const device = new SpyDevice(this.fakeStorage)
         assert.isFalse(device.isNative, 'Device should be native by default')
     }
 

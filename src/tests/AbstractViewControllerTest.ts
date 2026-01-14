@@ -7,7 +7,7 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { eventContractUtil } from '@sprucelabs/spruce-event-utils'
 import AbstractSpruceTest from '@sprucelabs/test-utils'
-import fakeStorage from './FakeStorageRenamedForCaseChange'
+import FakeStorage from './FakeStorage'
 import EventFaker from '../__tests__/support/EventFaker'
 import Authenticator from '../auth/Authenticator'
 import {
@@ -30,6 +30,8 @@ import interactor from './utilities/interactor'
 import listAssert from './utilities/listAssert'
 import MockToastMessageHandler from './utilities/MockToastMessageHandler'
 import vcAssert from './utilities/vcAssert'
+
+const fakeStorage = new FakeStorage()
 
 export default abstract class AbstractViewControllerTest extends AbstractSpruceTest {
     protected controllerMap: Record<string, any> = {}
