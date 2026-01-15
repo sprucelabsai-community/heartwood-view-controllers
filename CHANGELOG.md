@@ -1,3 +1,7 @@
+## 129.3.0 (2026-01-15)
+
+* minor: mock active record card can assert checkboxes now ([b70e5d4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b70e5d4))
+
 ## <small>129.2.1 (2026-01-15)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([859bb54](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/859bb54))
