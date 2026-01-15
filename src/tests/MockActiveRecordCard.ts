@@ -146,6 +146,23 @@ export default class MockActiveRecordCard extends ActiveRecordCardViewController
         )
     }
 
+    public assertRowRendersCheckbox(id: string, checkboxName?: string) {
+        this.assertRendersRow(id)
+
+        for (const listVc of this.normalizedListVcs) {
+            try {
+                listAssert.rowRendersCheckBox(listVc, id, checkboxName)
+                return
+            } catch {}
+        }
+
+        assert.fail(
+            `I could not find a list that renders row "${id}" with the checkbox "${
+                checkboxName ?? 'any name'
+            }" in your ActiveRecordCard (${getViewId(this)})!`
+        )
+    }
+
     public assertRowDoesNotRenderButton(row: string, buttonId?: string) {
         let foundRow = false
         for (const listVc of this.normalizedListVcs) {

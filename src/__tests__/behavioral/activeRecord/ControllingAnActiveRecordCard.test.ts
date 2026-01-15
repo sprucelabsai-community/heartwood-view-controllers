@@ -808,13 +808,7 @@ export default class ControllingAnActiveRecordCardTest extends AbstractViewContr
     }
 
     private async seedOrganization() {
-        const organization = {
-            id: `${new Date().getTime() * Math.random()}`,
-            name: 'New org ' + this.organizations.length,
-            slug: 'new-org-' + this.organizations.length,
-            dateCreated: new Date().getTime(),
-        }
-
+        const organization = this.eventFaker.generateOrganizationValues()
         this.organizations.push(organization)
 
         return organization

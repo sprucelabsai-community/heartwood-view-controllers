@@ -20,7 +20,7 @@ export default class EventFaker {
         })
     }
 
-    public generateLocationValues() {
+    public generateLocationValues(): Location {
         return {
             id: generateId(),
             dateCreated: Date.now(),
@@ -34,6 +34,18 @@ export default class EventFaker {
                 street1: generateId(),
                 zip: generateId(),
             },
+        }
+    }
+
+    public generateOrganizationValues(
+        values?: Partial<Organization>
+    ): Organization {
+        return {
+            id: generateId(),
+            dateCreated: Date.now(),
+            name: generateId(),
+            slug: generateId(),
+            ...values,
         }
     }
 

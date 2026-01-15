@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { Organization } from '@sprucelabs/spruce-core-schemas'
 import {
     test,
     suite,
@@ -16,7 +17,9 @@ import {
     ViewControllerOptions,
 } from '../../../types/heartwood.types'
 import removeUniversalViewOptions from '../../../utilities/removeUniversalViewOptions'
-import ActiveRecordCardViewController from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
+import ActiveRecordCardViewController, {
+    ActiveRecordCardViewControllerOptions,
+} from '../../../viewControllers/activeRecord/ActiveRecordCard.vc'
 
 class GenericSkillView extends AbstractSkillViewController {
     private model!: SkillView
@@ -34,6 +37,7 @@ class GenericSkillView extends AbstractSkillViewController {
 @suite()
 export default class AssertingActiveRecordCardsTest extends AbstractViewControllerTest {
     private cardVc!: MockActiveRecordCard
+    private organizations: Organization[] = []
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -45,6 +49,10 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
             MockActiveRecordCard
         )
         this.cardVc = this.ActiveRecordCard() as MockActiveRecordCard
+
+        await this.eventFaker.fakeListOrganizations(() => {
+            return this.organizations
+        })
     }
 
     @test()
@@ -184,13 +192,13 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
     @test()
     protected async canAssertHasBeenLoaded() {
         assert.doesThrow(() => this.cardVc.assertIsLoaded())
-        await this.cardVc.load()
+        await this.load()
         this.cardVc.assertIsLoaded()
     }
 
     @test()
     protected async canAssertReloadCount() {
-        await this.cardVc.load()
+        await this.load()
         assert.doesThrow(() => this.cardVc.assertRefreshCount(1))
         await this.refresh()
         this.cardVc.assertRefreshCount(1)
@@ -199,8 +207,80 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
         this.cardVc.assertRefreshCount(2)
     }
 
+    @test()
+    protected async canAssertRowHasCheckbox() {
+        const organization = this.seedOrganization()
+        const checkboxName = generateId()
+
+        this.cardVc = this.ActiveRecordCardWithCheckboxNamed(checkboxName)
+
+        await this.load()
+
+        this.assertRowRendersCheckbox(organization.id)
+        this.assertDoesNotRenderCheckbox(generateId())
+        this.assertDoesNotRenderCheckbox(organization.id, generateId())
+        this.assertRowRendersCheckbox(organization.id, checkboxName)
+    }
+
+    @test()
+    protected async canAssertIfSecondListWithPagingHasCheckbox() {
+        this.seedOrganization()
+        const secondOrganization = this.seedOrganization()
+
+        const checkboxName = generateId()
+        this.cardVc = this.ActiveRecordCardWithCheckboxNamed(checkboxName, {
+            pageSize: 1,
+            shouldPageClientSide: true,
+        })
+
+        await this.load()
+
+        this.assertRowRendersCheckbox(secondOrganization.id, checkboxName)
+    }
+
+    private ActiveRecordCardWithCheckboxNamed(
+        checkboxName: string,
+        pagingOptions?: ActiveRecordPagingOptions
+    ): MockActiveRecordCard {
+        return this.ActiveRecordCard(generateId(), {
+            paging: pagingOptions,
+            rowTransformer(record) {
+                return {
+                    id: record.id,
+                    cells: [
+                        {
+                            checkboxInput: {
+                                name: checkboxName,
+                            },
+                        },
+                    ],
+                }
+            },
+        })
+    }
+
+    private seedOrganization() {
+        const organization = this.eventFaker.generateOrganizationValues()
+        this.organizations.push(organization)
+        return organization
+    }
+
+    private assertDoesNotRenderCheckbox(rowId: string, checkboxName?: string) {
+        assert.doesThrow(() =>
+            this.assertRowRendersCheckbox(rowId, checkboxName)
+        )
+    }
+
+    private assertRowRendersCheckbox(rowId: string, checkboxName?: string) {
+        this.cardVc.assertRowRendersCheckbox(rowId, checkboxName)
+    }
+
     private async refresh() {
         await this.cardVc.refresh()
+    }
+
+    private async load() {
+        await this.cardVc.load()
     }
 
     private setupPagingAndAssertEqualExpected(
@@ -213,7 +293,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
     }
 
     private setupCardWithPaging(expected: ActiveRecordPagingOptions) {
-        this.cardVc = this.ActiveRecordCard(generateId(), expected)
+        this.cardVc = this.ActiveRecordCard(generateId(), { paging: expected })
     }
 
     private assertPagingOptionsEqualThrows(expected: {
@@ -240,7 +320,7 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
 
     private ActiveRecordCard(
         id?: string,
-        pagingOptions?: ActiveRecordPagingOptions
+        options?: Partial<ActiveRecordCardViewControllerOptions>
     ) {
         return this.Controller(
             'active-record-card',
@@ -248,8 +328,11 @@ export default class AssertingActiveRecordCardsTest extends AbstractViewControll
                 id,
                 eventName: 'list-organizations::v2020_12_25',
                 responseKey: 'organizations',
-                rowTransformer: (o) => ({ id: o.id, cells: [] }),
-                paging: pagingOptions,
+                rowTransformer: (o: Record<string, any>) => ({
+                    id: o.id,
+                    cells: [],
+                }),
+                ...options,
             })
         ) as MockActiveRecordCard
     }
