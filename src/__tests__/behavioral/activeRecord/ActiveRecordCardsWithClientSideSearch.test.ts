@@ -213,6 +213,14 @@ export default class ActiveRecordCardsWithClientSideSearchTest extends AbstractC
         this.assertRendersRow(this.locations[1].id)
     }
 
+    @test()
+    protected async canEnableSearchWithoutPaging() {
+        this.setupCardVc({
+            search: { shouldSearchClientSide: true },
+        })
+        this.assertRendersSearchForm()
+    }
+
     private async assertSearchCanMatchSecondRow() {
         await this.fakeLocationsAndLoad(2)
         await this.setSearchValueAndWait(this.locations[1].name)

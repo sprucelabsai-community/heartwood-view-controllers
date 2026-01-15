@@ -237,7 +237,10 @@ export default class ActiveRecordCardViewController extends AbstractViewControll
     ): CardViewController {
         const { header, footer, id } = options
         const model: CardViewControllerOptions = {
-            header,
+            header: {
+                ...header,
+                form: this.searchFormVc?.render(),
+            },
             footer,
             body: {
                 isBusy: true,
