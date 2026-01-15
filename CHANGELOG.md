@@ -1,3 +1,8 @@
+## <small>129.2.1 (2026-01-15)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([859bb54](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/859bb54))
+* patch: can add search form without paging ([205631e](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/205631e))
+
 ## 129.2.0 (2026-01-14)
 
 * patch: device refactor ([273cf96](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/273cf96))

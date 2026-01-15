@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "description": "All the power of Heartwood in one, convenient package.",
-  "version": "129.2.0",
+  "version": "129.2.1",
   "skill": {
     "namespace": "HeartwoodViewControllers",
     "commandOverrides": {
