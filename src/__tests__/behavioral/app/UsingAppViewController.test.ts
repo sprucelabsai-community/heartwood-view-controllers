@@ -26,7 +26,6 @@ import ViewControllerFactory from '../../../viewControllers/ViewControllerFactor
 export default class UsingAppControllerTest extends AbstractViewControllerTest {
     private spyFactory!: SpyViewFactory
     private app!: SpyApp
-    private didCallConfirm = false
     private lastConfirmOptions?: ConfirmOptions
 
     protected async beforeEach(): Promise<void> {
@@ -34,7 +33,6 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         ViewControllerFactory.Class = SpyViewFactory
         this.spyFactory = this.Factory({
             confirmHandler: async (options) => {
-                this.didCallConfirm = true
                 this.lastConfirmOptions = options
                 return true
             },
@@ -158,7 +156,7 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
             subtitle: generateId(),
         }
         await this.app.confirm(options)
-        assert.isTrue(this.didCallConfirm, 'Confirm handler was not called')
+
         assert.isEqualDeep(
             this.lastConfirmOptions,
             options,
