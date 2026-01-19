@@ -1,3 +1,8 @@
+## 129.4.0 (2026-01-19)
+
+* patch: removed reduntant assertion ([8829fc4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8829fc4))
+* minor: can confirm from app ([afe3e7c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/afe3e7c))
+
 ## 129.3.0 (2026-01-15)
 
 * minor: mock active record card can assert checkboxes now ([b70e5d4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/b70e5d4))
