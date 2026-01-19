@@ -1,3 +1,8 @@
+## <small>129.4.1 (2026-01-19)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([c4583d4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c4583d4))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([fe6645c](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/fe6645c))
+
 ## 129.4.0 (2026-01-19)
 
 * patch: removed reduntant assertion ([8829fc4](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8829fc4))
