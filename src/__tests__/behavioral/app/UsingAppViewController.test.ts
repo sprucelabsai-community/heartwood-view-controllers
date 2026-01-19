@@ -9,6 +9,7 @@ import {
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import navigationAssert from '../../../tests/utilities/navigationAssert'
 import {
+    ConfirmOptions,
     ToastHandler,
     ToastMessage,
     ViewControllerOptions,
@@ -25,11 +26,19 @@ import ViewControllerFactory from '../../../viewControllers/ViewControllerFactor
 export default class UsingAppControllerTest extends AbstractViewControllerTest {
     private spyFactory!: SpyViewFactory
     private app!: SpyApp
+    private didCallConfirm = false
+    private lastConfirmOptions?: ConfirmOptions
 
     protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         ViewControllerFactory.Class = SpyViewFactory
-        this.spyFactory = this.getFactory() as SpyViewFactory
+        this.spyFactory = this.Factory({
+            confirmHandler: async (options) => {
+                this.didCallConfirm = true
+                this.lastConfirmOptions = options
+                return true
+            },
+        }) as SpyViewFactory
         this.app = this.App()
     }
 
@@ -140,6 +149,23 @@ export default class UsingAppControllerTest extends AbstractViewControllerTest {
         )
     }
 
+    @test()
+    protected async canConfirmFromApp() {
+        const options: ConfirmOptions = {
+            isDestructive: true,
+            message: generateId(),
+            title: generateId(),
+            subtitle: generateId(),
+        }
+        await this.app.confirm(options)
+        assert.isTrue(this.didCallConfirm, 'Confirm handler was not called')
+        assert.isEqualDeep(
+            this.lastConfirmOptions,
+            options,
+            'Confirm options do not match'
+        )
+    }
+
     private hasApp(id: string): boolean | null | undefined {
         return this.spyFactory.hasApp(id)
     }
@@ -165,6 +191,10 @@ class SpyApp extends AbstractAppController {
 
     public toast(message: ToastMessage) {
         super.toast(message)
+    }
+
+    public async confirm(options: ConfirmOptions) {
+        return await super.confirm(options)
     }
 
     public renderNavigation() {

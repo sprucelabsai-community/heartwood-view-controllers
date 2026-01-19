@@ -1,10 +1,8 @@
 import { DateUtil } from '@sprucelabs/calendar-utils'
 import { Log } from '@sprucelabs/spruce-skill-utils'
 import {
-    ConfirmHandler,
     ViewController,
     ViewControllerOptions,
-    ConfirmOptions,
     MapUtil,
     ViewControllerPlugins,
     TriggerRenderHandler,
@@ -21,7 +19,6 @@ export default abstract class AbstractViewController<
 
     protected dates: DateUtil
     protected maps: MapUtil
-    private confirmHandler: ConfirmHandler
 
     private suspendRenderCount = 0
     protected plugins: ViewControllerPlugins = {}
@@ -31,9 +28,8 @@ export default abstract class AbstractViewController<
     public constructor(options: ViewControllerOptions) {
         super(options)
 
-        const { confirmHandler, dates, maps, log, plugins } = options
+        const { dates, maps, log, plugins } = options
 
-        this.confirmHandler = confirmHandler
         this.dates = dates
         this.maps = maps
         this.log = log
@@ -81,10 +77,6 @@ export default abstract class AbstractViewController<
 
         this.restoreRendering()
         this.triggerRender()
-    }
-
-    protected async confirm(options: ConfirmOptions) {
-        return this.confirmHandler(options)
     }
 
     protected getDevice() {

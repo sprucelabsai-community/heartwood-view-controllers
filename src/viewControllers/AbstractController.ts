@@ -3,6 +3,8 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import SpruceError from '../errors/SpruceError'
 import {
     AlertOptions,
+    ConfirmHandler,
+    ConfirmOptions,
     ControllerOptions,
     Device,
     RenderInDialogHandler,
@@ -26,6 +28,7 @@ export default abstract class AbstractController {
     private toastHandler: ToastHandler
     private activeAlert?: AlertOptions
     private wasDestroyed = false
+    private confirmHandler: ConfirmHandler
 
     protected device: Device
     protected connectToApi: () => Promise<MercuryClient>
@@ -39,8 +42,10 @@ export default abstract class AbstractController {
             voteHandler,
             vcFactory,
             device,
+            confirmHandler,
         } = options
 
+        this.confirmHandler = confirmHandler
         this.renderInDialogHandler = renderInDialogHandler
         this.connectToApi = connectToApi
         this.voteHandler = voteHandler
@@ -145,6 +150,10 @@ export default abstract class AbstractController {
         this.device.vibrate()
         await dlg.wait()
         this.activeAlert = undefined
+    }
+
+    protected async confirm(options: ConfirmOptions) {
+        return this.confirmHandler(options)
     }
 
     public async destroy() {
