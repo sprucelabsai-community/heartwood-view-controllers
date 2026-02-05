@@ -3,6 +3,8 @@
 <h1 align="center">
 Spruce XP Documentation
 </h1>
+
+[![AI TDD Contributor](https://regressionproof.ai/badge.svg)](https://regressionproof.ai)
 <h3 align="center">Spruce XP is an Experience Platform built to create unforgettable experiences and long-lasting relationships.
 </h3>
 <p align="center">
@@ -20,5 +22,3 @@ Spruce XP Documentation
 
 ### Dependencies
 [Arkit diagram here](docs/dependencies.md).
-
-[![AI TDD Contributor](https://regressionproof.ai/badge.svg)](https://regressionproof.ai)
