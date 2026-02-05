@@ -1,3 +1,7 @@
+## <small>129.4.4 (2026-02-05)</small>
+
+* docs: move AI TDD Contributor badge to top of README ([bf26ef1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/bf26ef1))
+
 ## <small>129.4.3 (2026-02-05)</small>
 
 * docs: add AI TDD contributor badge ([7626bcb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7626bcb))
