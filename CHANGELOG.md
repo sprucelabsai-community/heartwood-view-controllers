@@ -1,3 +1,7 @@
+## <small>129.4.3 (2026-02-05)</small>
+
+* docs: add AI TDD contributor badge ([7626bcb](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/7626bcb))
+
 ## <small>129.4.2 (2026-01-27)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([782a646](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/782a646))
