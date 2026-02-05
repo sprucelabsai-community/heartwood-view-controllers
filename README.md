@@ -20,3 +20,5 @@ Spruce XP Documentation
 
 ### Dependencies
 [Arkit diagram here](docs/dependencies.md).
+
+[![AI TDD Contributor](https://regressionproof.ai/badge.svg)](https://regressionproof.ai)
