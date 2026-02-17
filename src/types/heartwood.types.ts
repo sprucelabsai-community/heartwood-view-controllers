@@ -91,7 +91,9 @@ import LoginCardViewController, {
 import MapViewController, {
     MapViewControllerOptions,
 } from '../viewControllers/Map.vc'
-import NavigationViewController from '../viewControllers/navigation/Navigation.vc'
+import NavigationViewController, {
+    NavigationViewControllerOptions,
+} from '../viewControllers/navigation/Navigation.vc'
 import PagerViewController, {
     PagerViewControllerOptions,
 } from '../viewControllers/pagers/Pager.vc'
@@ -600,7 +602,7 @@ export interface ViewControllerOptionsMap {
     form: FormViewControllerOptions<any>
     list: ListViewControllerOptions
     map: MapViewControllerOptions
-    navigation: Navigation
+    navigation: NavigationViewControllerOptions
     pager: PagerViewControllerOptions
     progress: ProgressViewControllerOptions
     ratings: RatingsViewControllerOptions
@@ -1104,3 +1106,5 @@ export interface ChartViewController<
 > extends ViewController<ViewModel> {
     setDataSets(dataSets: ChartDataSet[]): void
 }
+
+export type RefreshNavigationPermissionsHandler = () => void | Promise<void>

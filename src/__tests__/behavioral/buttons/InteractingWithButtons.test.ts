@@ -4,7 +4,11 @@ import AbstractSkillViewController from '../../../skillViewControllers/Abstract.
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
 import interactor from '../../../tests/utilities/interactor'
 import vcAssert from '../../../tests/utilities/vcAssert'
-import { SkillView, ViewControllerId } from '../../../types/heartwood.types'
+import {
+    SkillView,
+    ViewController,
+    ViewControllerId,
+} from '../../../types/heartwood.types'
 import { testFormSchema } from '../forms/testFormOptions'
 
 @suite()
@@ -109,7 +113,10 @@ export default class InteractingWithButtonsTest extends AbstractViewControllerTe
     }
 
     private async clickButton(id: string) {
-        await interactor.clickButton(this.vc, id)
+        await interactor.clickButton(
+            this.vc as ViewController<Record<string, any>>,
+            id
+        )
     }
 
     private assertClicksEqual(expected: string[]) {

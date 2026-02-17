@@ -14,6 +14,7 @@ import {
     NavigationRoute,
     SkillViewControllerId,
 } from '../../../types/heartwood.types'
+import NavigationViewController from '../../../viewControllers/navigation/Navigation.vc'
 import AbstractNavigationTest from './AbstractNavigationTest'
 import HasNavSkillView from './HasNavSkillView'
 
@@ -34,16 +35,22 @@ class NullNavigationSkillView extends AbstractSkillViewController {
 
 @suite()
 export default class AssertingNavigationTest extends AbstractNavigationTest {
+    private vc!: NavigationViewController
+
     protected controllerMap = {
         noNav: NoNavigationSkillView,
         hasNav: HasNavSkillView,
         nullNav: NullNavigationSkillView,
     }
 
+    protected async beforeEach() {
+        await super.beforeEach()
+        this.vc = this.NavigationVc()
+    }
+
     @test()
     protected async throwsWhenNotFindingButtons() {
-        const vc = this.NavigationVc()
-        assert.doesThrow(() => navigationAssert.rendersButton(vc, 'test'))
+        assert.doesThrow(() => navigationAssert.rendersButton(this.vc, 'test'))
     }
 
     @test()
@@ -508,18 +515,16 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
     @test()
     protected async throwsWhenNavIsNotHidden() {
-        const navVc = this.NavigationVc()
         assert.doesThrow(
-            () => navigationAssert.isHidden(navVc),
+            () => navigationAssert.isHidden(this.vc),
             'navigationVc.hide()'
         )
     }
 
     @test()
     protected async isHiddenPassesWhenHidden() {
-        const navVc = this.NavigationVc()
-        navVc.hide()
-        navigationAssert.isHidden(navVc)
+        this.vc.hide()
+        navigationAssert.isHidden(this.vc)
     }
 
     @test()
@@ -536,18 +541,75 @@ export default class AssertingNavigationTest extends AbstractNavigationTest {
 
     @test()
     protected async throwsWhenNavIsNotVisible() {
-        const navVc = this.NavigationVc()
-        navVc.hide()
+        this.vc.hide()
         assert.doesThrow(
-            () => navigationAssert.isVisible(navVc),
+            () => navigationAssert.isVisible(this.vc),
             'navigationVc.show()'
         )
     }
 
     @test()
     protected async isVisiblePassesWhenVisible() {
-        const navVc = this.NavigationVc()
-        navigationAssert.isVisible(navVc)
+        navigationAssert.isVisible(this.vc)
+    }
+
+    @test()
+    protected async didNotRefreshAssertionThrowWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            navigationAssert.assertActionDoesNotRefreshPermissions()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'action'],
+        })
+    }
+
+    @test()
+    protected async didRefrehAssertionThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            navigationAssert.assertActionRefreshesPermissions()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['vc', 'action'],
+        })
+    }
+
+    @test()
+    protected async knowsWhenDidntRefreshPermissions() {
+        await this.assertAuctionDoesNotRefreshPermissions(() => {})
+
+        await assert.doesThrowAsync(() =>
+            this.assertActionRefreshesPermissions(() => {})
+        )
+    }
+
+    @test()
+    protected async knowsWhenDidRefreshPermissions() {
+        await this.assertActionRefreshesPermissions(() =>
+            this.vc.refreshPermissions()
+        )
+
+        await assert.doesThrowAsync(() =>
+            this.assertAuctionDoesNotRefreshPermissions(() =>
+                this.vc.refreshPermissions()
+            )
+        )
+    }
+
+    private async assertActionRefreshesPermissions(
+        cb: () => void
+    ): Promise<void> {
+        return navigationAssert.assertActionRefreshesPermissions(this.vc, cb)
+    }
+
+    private async assertAuctionDoesNotRefreshPermissions(cb: () => void) {
+        await navigationAssert.assertActionDoesNotRefreshPermissions(
+            this.vc,
+            cb
+        )
     }
 
     private getNavVc() {

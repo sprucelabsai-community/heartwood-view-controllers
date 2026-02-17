@@ -37,6 +37,14 @@ const navigationSchema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Navig
 	                isArray: true,
 	                options: {valueType: `HeartwoodTypes.NavigationItem`,}
 	            },
+	            /** Set refresh permissions handler. The handler you pass here will be called when the navigation asks to refresh permissions. */
+	            'setRefreshPermissionsHandler': {
+	                label: 'Set refresh permissions handler',
+	                type: 'raw',
+	                isRequired: true,
+	                hint: 'The handler you pass here will be called when the navigation asks to refresh permissions.',
+	                options: {valueType: `(cb: HeartwoodTypes.RefreshNavigationPermissionsHandler) => void`,}
+	            },
 	            /** . */
 	            'additionalValidRoutes': {
 	                type: 'schema',

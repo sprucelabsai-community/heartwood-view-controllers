@@ -42,7 +42,15 @@ export default class ControllingNavigationTest extends AbstractNavigationTest {
         const vc = this.NavigationVc(options)
         const { controller, ...rest } = vc.render()
         assert.isEqual(controller, vc)
-        assert.isEqualDeep(rest, options)
+
+        //@ts-ignore not suited for comparison
+        delete rest.setRefreshPermissionsHandler
+
+        assert.isEqualDeep(
+            rest,
+            options,
+            'options should be passed through the model'
+        )
     }
 
     @test()
@@ -196,6 +204,28 @@ export default class ControllingNavigationTest extends AbstractNavigationTest {
         this.updateButton(id, updated)
 
         this.assertRenderedButtonsEqual([{ id, ...updated }])
+    }
+
+    @test()
+    protected async refreshPermissionsInvokesCallback() {
+        let wasHit = false
+        const model = this.render(this.vc)
+
+        model.setRefreshPermissionsHandler(() => {
+            wasHit = true
+        })
+
+        assert.isFalse(
+            wasHit,
+            'refresh permissions handler was hit before calling nav.refreshPermissions()'
+        )
+
+        await this.vc.refreshPermissions()
+
+        assert.isTrue(
+            wasHit,
+            'refresh permissions handler was not called when calling nav.refreshPermissions()'
+        )
     }
 
     private updateButton(id: string, updates: Partial<NavigationItem>) {

@@ -634,7 +634,7 @@ const interactor = {
                   vc as SkillViewController
               )
             : vc
-        const match = getButtonFromNav(navVc, buttonId)
+        const match = getButtonFromNav(navVc as NavVc, buttonId)
 
         return this.click(match)
     },

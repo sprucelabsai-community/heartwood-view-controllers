@@ -185,6 +185,43 @@ const navigationAssert = {
             `Your navigation should be visible! Try calling 'this.navigationVc.show()'.`
         )
     },
+
+    async assertActionDoesNotRefreshPermissions(
+        vc: ViewController<Navigation>,
+        action: () => Promise<void> | void
+    ) {
+        assertOptions({ vc, action }, ['vc', 'action'])
+
+        try {
+            await this.assertActionRefreshesPermissions(vc, action)
+        } catch (err) {
+            return
+        }
+
+        assert.fail(
+            'I expected the action to not refresh permissions but it did! Make sure you are calling the "setRefreshPermissionsHandler" function in your navigation\'s view model and that you call the provided function to trigger a permissions refresh.'
+        )
+    },
+
+    async assertActionRefreshesPermissions(
+        vc: ViewController<Navigation>,
+        action: () => Promise<void> | void
+    ) {
+        assertOptions({ vc, action }, ['vc', 'action'])
+        const model = renderUtil.render(vc)
+        let didRefresh = false
+
+        model.setRefreshPermissionsHandler(() => {
+            didRefresh = true
+        })
+
+        await action()
+
+        assert.isTrue(
+            didRefresh,
+            `I expected the action to refresh permissions but it did not! Make sure you are calling the 'setRefreshPermissionsHandler' function in your navigation's view model and that you call the provided function to trigger a permissions refresh.`
+        )
+    },
 }
 
 export default navigationAssert

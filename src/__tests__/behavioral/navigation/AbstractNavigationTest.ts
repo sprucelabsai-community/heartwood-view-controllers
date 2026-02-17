@@ -1,8 +1,8 @@
 import AbstractViewControllerTest from '../../../tests/AbstractViewControllerTest'
-import { Navigation } from '../../../types/heartwood.types'
+import { NavigationViewControllerOptions } from '../../../viewControllers/navigation/Navigation.vc'
 
 export default abstract class AbstractNavigationTest extends AbstractViewControllerTest {
-    protected NavigationVc(navigation?: Navigation) {
+    protected NavigationVc(navigation?: NavigationViewControllerOptions) {
         return this.Controller('navigation', { ...navigation })
     }
 }

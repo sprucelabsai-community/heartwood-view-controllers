@@ -37,6 +37,16 @@ export default buildSchema({
                 valueType: 'HeartwoodTypes.NavigationItem',
             },
         },
+        setRefreshPermissionsHandler: {
+            type: 'raw',
+            label: 'Set refresh permissions handler',
+            hint: 'The handler you pass here will be called when the navigation asks to refresh permissions.',
+            isRequired: true,
+            options: {
+                valueType:
+                    '(cb: HeartwoodTypes.RefreshNavigationPermissionsHandler) => void',
+            },
+        },
         additionalValidRoutes: {
             type: 'schema',
             isArray: true,
