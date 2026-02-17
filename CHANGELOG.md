@@ -1,3 +1,7 @@
+## 129.5.0 (2026-02-17)
+
+* minor: navigation view controller has refresh permissions ([8b2b705](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8b2b705))
+
 ## <small>129.4.4 (2026-02-05)</small>
 
 * docs: move AI TDD Contributor badge to top of README ([bf26ef1](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/bf26ef1))
