@@ -1,3 +1,8 @@
+## <small>129.5.2 (2026-02-18)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([8d42e07](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8d42e07))
+* patch: missed export ([696414b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/696414b))
+
 ## <small>129.5.1 (2026-02-18)</small>
 
 * patch: upgrade dependencies and fix lint errors ([ee44656](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ee44656))
