@@ -194,7 +194,7 @@ const navigationAssert = {
 
         try {
             await this.assertActionRefreshesPermissions(vc, action)
-        } catch (err) {
+        } catch {
             return
         }
 

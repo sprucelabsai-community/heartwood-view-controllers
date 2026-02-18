@@ -204,6 +204,7 @@ export type SwipeViewControllerOptions = {
     isBusy?: boolean
 } & Omit<Card, 'body'>
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PASSTHROUGH_METHODS = [
     'setHeaderTitle',
     'setHeaderSubtitle',

@@ -145,12 +145,14 @@ export default class BuildingViewControllersTest extends AbstractViewControllerT
 
     @test()
     protected viewControllerGetTypesed() {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const vc = this.factory.Controller('test', {})
         assert.isExactType<TestViewController, typeof vc>(true)
     }
 
     @test()
     protected skillViewControllerGetTyped() {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const vc = this.factory.Controller('testSkillView', {})
         assert.isExactType<TestSkillViewController, typeof vc>(true)
     }
