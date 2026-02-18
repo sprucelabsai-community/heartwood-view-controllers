@@ -1,3 +1,7 @@
+## <small>129.5.1 (2026-02-18)</small>
+
+* patch: upgrade dependencies and fix lint errors ([ee44656](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ee44656))
+
 ## 129.5.0 (2026-02-17)
 
 * minor: navigation view controller has refresh permissions ([8b2b705](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/8b2b705))
