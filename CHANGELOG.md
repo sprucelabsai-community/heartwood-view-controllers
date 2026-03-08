@@ -1,3 +1,8 @@
+## <small>129.5.10 (2026-03-08)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([0c73ddd](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/0c73ddd))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([24e9630](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/24e9630))
+
 ## <small>129.5.9 (2026-02-23)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([eb6f14b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/eb6f14b))
