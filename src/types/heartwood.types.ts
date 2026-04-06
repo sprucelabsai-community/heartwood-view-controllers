@@ -128,7 +128,9 @@ import '@sprucelabs/mercury-core-events'
 import WebRtcPlayerViewController, {
     WebRtcPlayerOptions,
 } from '../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
-import TreeViewController, { TreeViewControllerOptions } from '../viewControllers/trees/Tree.vc'
+import TreeViewController, {
+    TreeViewControllerOptions,
+} from '../viewControllers/trees/Tree.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
@@ -450,7 +452,8 @@ export type LayoutStyle = NonNullable<
 >
 export type Video = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Video
 export type Tree = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Tree
-export type TreeNode = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeNode
+export type TreeNode =
+    SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeNode
 export type LayoutColumn = Card[]
 export type ListColumnWidth = NonNullable<List['columnWidths']>[number]
 export type DragAndDropListSortHandler = NonNullable<List['onDragAndDropSort']>
