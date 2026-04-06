@@ -122,15 +122,16 @@ import TalkingSprucebotViewController, {
 import ToolBeltViewController, {
     ToolBeltViewControllerOptions,
 } from '../viewControllers/ToolBelt.vc'
+import TreeViewController, {
+    TreeViewControllerOptions,
+} from '../viewControllers/trees/Tree.vc'
 import ViewControllerFactory from '../viewControllers/ViewControllerFactory'
 export * from './calendar.types'
+
 import '@sprucelabs/mercury-core-events'
 import WebRtcPlayerViewController, {
     WebRtcPlayerOptions,
 } from '../viewControllers/webRtcStreaming/WebRtcPlayer.vc'
-import TreeViewController, {
-    TreeViewControllerOptions,
-} from '../viewControllers/trees/Tree.vc'
 
 export { default as MapViewController } from '../viewControllers/Map.vc'
 
