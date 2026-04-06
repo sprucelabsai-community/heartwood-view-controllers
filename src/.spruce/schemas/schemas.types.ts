@@ -838,6 +838,215 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
+		interface TreeNode {
+			
+				
+				'id': string
+				
+				'label': string
+				
+				'childrenIds'?: string[] | undefined | null
+				
+				'isSelected'?: boolean | undefined | null
+				/** Delete click handler. */
+				'onClickDelete'?: (() => void | Promise<void>) | undefined | null
+				/** Node click handler. */
+				'onClick'?: (() => void | Promise<void>) | undefined | null
+		}
+
+		interface TreeNodeSchema extends SpruceSchema.Schema {
+			id: 'treeNode',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'label': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'childrenIds': {
+			                type: 'id',
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: undefined
+			            },
+			            /** . */
+			            'isSelected': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** Delete click handler. */
+			            'onClickDelete': {
+			                label: 'Delete click handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			            /** Node click handler. */
+			            'onClick': {
+			                label: 'Node click handler',
+			                type: 'raw',
+			                options: {valueType: `() => void | Promise<void>`,}
+			            },
+			    }
+		}
+
+		interface TreeNodeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeNodeSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface Tree {
+			
+				
+				'id'?: string | undefined | null
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ViewController<HeartwoodTypes.Tree>) | undefined | null
+				/** Node click handler. */
+				'onClickNode'?: ((nodeId: string) => void | Promise<void>) | undefined | null
+				/** Delete node click handler. */
+				'onClickDeleteNode'?: ((nodeId: string) => void | Promise<void>) | undefined | null
+				
+				'nodes': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeNode[]
+		}
+
+		interface TreeSchema extends SpruceSchema.Schema {
+			id: 'tree',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Tree',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ViewController<HeartwoodTypes.Tree>`,}
+			            },
+			            /** Node click handler. */
+			            'onClickNode': {
+			                label: 'Node click handler',
+			                type: 'raw',
+			                options: {valueType: `(nodeId: string) => void | Promise<void>`,}
+			            },
+			            /** Delete node click handler. */
+			            'onClickDeleteNode': {
+			                label: 'Delete node click handler',
+			                type: 'raw',
+			                options: {valueType: `(nodeId: string) => void | Promise<void>`,}
+			            },
+			            /** . */
+			            'nodes': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeNodeSchema,}
+			            },
+			    }
+		}
+
+		interface TreeEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.TreeSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface ToolBelt {
+			
+				/** Controller. */
+				'controller'?: (HeartwoodTypes.ToolBeltViewController) | undefined | null
+				/** Icon. */
+				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "bookmark-filled" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
+				
+				'shouldRenderAllToolsAtOnce'?: boolean | undefined | null
+				
+				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler) | undefined | null
+				
+				'iconLabel'?: string | undefined | null
+				
+				'renderAs'?: ("default" | "icon") | undefined | null
+				/** Tools. */
+				'tools': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
+		}
+
+		interface ToolBeltSchema extends SpruceSchema.Schema {
+			id: 'toolBelt',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Tool belt',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Controller. */
+			            'controller': {
+			                label: 'Controller',
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ToolBeltViewController`,}
+			            },
+			            /** Icon. */
+			            'lineIcon': {
+			                label: 'Icon',
+			                type: 'select',
+			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"bookmark-filled","label":"bookmark-filled"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"cube","label":"cube"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"fav-heart-filled","label":"fav-heart-filled"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"bar-graph","label":"bar-graph"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"logout","label":"logout"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"pie-chart","label":"pie-chart"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
+			            },
+			            /** . */
+			            'shouldRenderAllToolsAtOnce': {
+			                type: 'boolean',
+			                options: undefined
+			            },
+			            /** . */
+			            'onCloseToolBelt': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.ToolBeltCloseHandler`,}
+			            },
+			            /** . */
+			            'iconLabel': {
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'renderAs': {
+			                type: 'select',
+			                options: {choices: [{"value":"default","label":"Default"},{"value":"icon","label":"Icon"}],}
+			            },
+			            /** Tools. */
+			            'tools': {
+			                label: 'Tools',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltToolSchema,}
+			            },
+			    }
+		}
+
+		interface ToolBeltEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
 		interface ToastMessage {
 			
 				/** Content. */
@@ -2095,51 +2304,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
 
 		
-		interface NavigationButtonDropdown {
-			
-				/** Position. */
-				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
-				
-				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
-				
-				'card'?: (HeartwoodTypes.Card) | undefined | null
-		}
-
-		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
-			id: 'navigationButtonDropdown',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: '',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Position. */
-			            'position': {
-			                label: 'Position',
-			                type: 'select',
-			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
-			            },
-			            /** . */
-			            'items': {
-			                type: 'schema',
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
-			            },
-			            /** . */
-			            'card': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.Card`,}
-			            },
-			    }
-		}
-
-		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
 		interface RouterDestination {
 			
 				
@@ -2199,109 +2363,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface PermissionContractReferenceEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface NavigationButton {
-			
-				/** Line icon. */
-				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "bookmark-filled" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
-				
-				'id': string
-				
-				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
-				/** Destination skill view controller. */
-				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
-				/** Selected. */
-				'isEnabled'?: boolean | undefined | null
-				/** Label. */
-				'label'?: string | undefined | null
-				/** Click handler. */
-				'onClick'?: (() => Promise<any> | any) | undefined | null
-				/** Image. */
-				'image'?: string | undefined | null
-				/** Avatar. */
-				'avatar'?: string | undefined | null
-				/** Dropdown. */
-				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown | undefined | null
-		}
-
-		interface NavigationButtonSchema extends SpruceSchema.Schema {
-			id: 'navigationButton',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Navigation button',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Line icon. */
-			            'lineIcon': {
-			                label: 'Line icon',
-			                type: 'select',
-			                isRequired: true,
-			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"bookmark-filled","label":"bookmark-filled"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"cube","label":"cube"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"fav-heart-filled","label":"fav-heart-filled"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"bar-graph","label":"bar-graph"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"logout","label":"logout"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"pie-chart","label":"pie-chart"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
-			            },
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'viewPermissionContract': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
-			            },
-			            /** Destination skill view controller. */
-			            'destination': {
-			                label: 'Destination skill view controller',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
-			            },
-			            /** Selected. */
-			            'isEnabled': {
-			                label: 'Selected',
-			                type: 'boolean',
-			                defaultValue: true,
-			                options: undefined
-			            },
-			            /** Label. */
-			            'label': {
-			                label: 'Label',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Click handler. */
-			            'onClick': {
-			                label: 'Click handler',
-			                type: 'raw',
-			                options: {valueType: `() => Promise<any> | any`,}
-			            },
-			            /** Image. */
-			            'image': {
-			                label: 'Image',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Avatar. */
-			            'avatar': {
-			                label: 'Avatar',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Dropdown. */
-			            'dropdown': {
-			                label: 'Dropdown',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema,}
-			            },
-			    }
-		}
-
-		interface NavigationButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema> {}
 
 	}
 
@@ -2476,6 +2537,154 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface NavigationDropdownButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface NavigationButtonDropdown {
+			
+				/** Position. */
+				'position'?: ("top" | "right" | "bottom" | "left") | undefined | null
+				
+				'items'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButton[] | undefined | null
+				
+				'card'?: (HeartwoodTypes.Card) | undefined | null
+		}
+
+		interface NavigationButtonDropdownSchema extends SpruceSchema.Schema {
+			id: 'navigationButtonDropdown',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: '',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Position. */
+			            'position': {
+			                label: 'Position',
+			                type: 'select',
+			                options: {choices: [{"label":"Top","value":"top"},{"label":"Right","value":"right"},{"label":"Bottom","value":"bottom"},{"label":"Left","value":"left"}],}
+			            },
+			            /** . */
+			            'items': {
+			                type: 'schema',
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationDropdownButtonSchema,}
+			            },
+			            /** . */
+			            'card': {
+			                type: 'raw',
+			                options: {valueType: `HeartwoodTypes.Card`,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonDropdownEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
+
+		
+		interface NavigationButton {
+			
+				/** Line icon. */
+				'lineIcon': ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "bookmark-filled" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out")
+				
+				'id': string
+				
+				'viewPermissionContract'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReference | undefined | null
+				/** Destination skill view controller. */
+				'destination'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestination | undefined | null
+				/** Selected. */
+				'isEnabled'?: boolean | undefined | null
+				/** Label. */
+				'label'?: string | undefined | null
+				/** Click handler. */
+				'onClick'?: (() => Promise<any> | any) | undefined | null
+				/** Image. */
+				'image'?: string | undefined | null
+				/** Avatar. */
+				'avatar'?: string | undefined | null
+				/** Dropdown. */
+				'dropdown'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdown | undefined | null
+		}
+
+		interface NavigationButtonSchema extends SpruceSchema.Schema {
+			id: 'navigationButton',
+			version: 'v2021_02_11',
+			namespace: 'HeartwoodViewControllers',
+			name: 'Navigation button',
+			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
+			    fields: {
+			            /** Line icon. */
+			            'lineIcon': {
+			                label: 'Line icon',
+			                type: 'select',
+			                isRequired: true,
+			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"bookmark-filled","label":"bookmark-filled"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"cube","label":"cube"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"fav-heart-filled","label":"fav-heart-filled"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"bar-graph","label":"bar-graph"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"logout","label":"logout"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"pie-chart","label":"pie-chart"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
+			            },
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'viewPermissionContract': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.PermissionContractReferenceSchema,}
+			            },
+			            /** Destination skill view controller. */
+			            'destination': {
+			                label: 'Destination skill view controller',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.RouterDestinationSchema,}
+			            },
+			            /** Selected. */
+			            'isEnabled': {
+			                label: 'Selected',
+			                type: 'boolean',
+			                defaultValue: true,
+			                options: undefined
+			            },
+			            /** Label. */
+			            'label': {
+			                label: 'Label',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Click handler. */
+			            'onClick': {
+			                label: 'Click handler',
+			                type: 'raw',
+			                options: {valueType: `() => Promise<any> | any`,}
+			            },
+			            /** Image. */
+			            'image': {
+			                label: 'Image',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Avatar. */
+			            'avatar': {
+			                label: 'Avatar',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Dropdown. */
+			            'dropdown': {
+			                label: 'Dropdown',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonDropdownSchema,}
+			            },
+			    }
+		}
+
+		interface NavigationButtonEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.NavigationButtonSchema> {}
 
 	}
 
@@ -2860,82 +3069,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface ToolBeltToolEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltToolSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodViewControllers.v2021_02_11 {
-
-		
-		interface ToolBelt {
-			
-				/** Controller. */
-				'controller'?: (HeartwoodTypes.ToolBeltViewController) | undefined | null
-				/** Icon. */
-				'lineIcon'?: ("add-circle" | "add-square" | "add" | "alarm" | "arrow-back" | "arrow-down-circle" | "arrow-down" | "arrow-next" | "arrow-up-circle" | "arrow-up" | "attachment" | "award-badge" | "binoculars" | "bolt" | "book-open" | "book" | "bookmark" | "bookmark-filled" | "calendar-add" | "calendar" | "camera" | "cellphone" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "clipboard" | "clock" | "close-circle" | "close-square" | "close" | "code" | "coffee" | "command" | "corner-down-left" | "corner-down-right" | "corner-left-down" | "corner-left-up" | "corner-right-down" | "corner-right-up" | "corner-up-left" | "corner-up-right" | "crop" | "cube" | "delete" | "document-blank" | "document-new" | "document-text" | "download-cloud" | "download" | "edit-box" | "edit-line" | "email" | "emoji-happy" | "emoji-sad" | "external-link" | "fav-heart" | "fav-heart-filled" | "flag" | "flip-01" | "flip-02" | "folder" | "globe" | "hash-tag" | "headphones" | "help-buoy" | "help-circle" | "home" | "info" | "jump" | "layers" | "bar-graph" | "link-angle" | "link-flat" | "loader" | "location-pin" | "lock" | "logout" | "map" | "message-circle" | "message-square" | "mic-off" | "mic-on" | "minus-circle" | "minus-square" | "money-sign" | "more-horizontal" | "more-vertical" | "notification-off" | "notification-on" | "object" | "pause-circle" | "phone-unavailable" | "phone" | "photo" | "picked" | "pie-chart" | "play-circle" | "present" | "refresh-circle" | "refresh" | "repeat" | "restricted" | "rotate" | "search-no" | "search" | "selector-checked" | "selector-circle-filled" | "selector-circle" | "send" | "settings-filled" | "settings" | "share" | "shopping-bag" | "shopping-cart" | "sort-filter-down" | "sort-filter-up" | "sound-off" | "sound-on" | "sprucebot" | "star-filled" | "star" | "sun" | "tag" | "time" | "tool" | "trending-down" | "trending-up" | "triangle" | "unlock" | "upload-cloud" | "upload" | "user-add" | "user-delete" | "user" | "users" | "video-off" | "video" | "warning" | "wifi" | "zoom-in" | "zoom-out") | undefined | null
-				
-				'shouldRenderAllToolsAtOnce'?: boolean | undefined | null
-				
-				'onCloseToolBelt'?: (HeartwoodTypes.ToolBeltCloseHandler) | undefined | null
-				
-				'iconLabel'?: string | undefined | null
-				
-				'renderAs'?: ("default" | "icon") | undefined | null
-				/** Tools. */
-				'tools': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltTool[]
-		}
-
-		interface ToolBeltSchema extends SpruceSchema.Schema {
-			id: 'toolBelt',
-			version: 'v2021_02_11',
-			namespace: 'HeartwoodViewControllers',
-			name: 'Tool belt',
-			moduleToImportFromWhenRemote: '@sprucelabs/heartwood-view-controllers',
-			    fields: {
-			            /** Controller. */
-			            'controller': {
-			                label: 'Controller',
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ToolBeltViewController`,}
-			            },
-			            /** Icon. */
-			            'lineIcon': {
-			                label: 'Icon',
-			                type: 'select',
-			                options: {choices: [{"value":"add-circle","label":"add-circle"},{"value":"add-square","label":"add-square"},{"value":"add","label":"add"},{"value":"alarm","label":"alarm"},{"value":"arrow-back","label":"arrow-back"},{"value":"arrow-down-circle","label":"arrow-down-circle"},{"value":"arrow-down","label":"arrow-down"},{"value":"arrow-next","label":"arrow-next"},{"value":"arrow-up-circle","label":"arrow-up-circle"},{"value":"arrow-up","label":"arrow-up"},{"value":"attachment","label":"attachment"},{"value":"award-badge","label":"award-badge"},{"value":"binoculars","label":"binoculars"},{"value":"bolt","label":"bolt"},{"value":"book-open","label":"book-open"},{"value":"book","label":"book"},{"value":"bookmark","label":"bookmark"},{"value":"bookmark-filled","label":"bookmark-filled"},{"value":"calendar-add","label":"calendar-add"},{"value":"calendar","label":"calendar"},{"value":"camera","label":"camera"},{"value":"cellphone","label":"cellphone"},{"value":"checkmark","label":"checkmark"},{"value":"chevron-down","label":"chevron-down"},{"value":"chevron-left","label":"chevron-left"},{"value":"chevron-right","label":"chevron-right"},{"value":"chevron-up","label":"chevron-up"},{"value":"clipboard","label":"clipboard"},{"value":"clock","label":"clock"},{"value":"close-circle","label":"close-circle"},{"value":"close-square","label":"close-square"},{"value":"close","label":"close"},{"value":"code","label":"code"},{"value":"coffee","label":"coffee"},{"value":"command","label":"command"},{"value":"corner-down-left","label":"corner-down-left"},{"value":"corner-down-right","label":"corner-down-right"},{"value":"corner-left-down","label":"corner-left-down"},{"value":"corner-left-up","label":"corner-left-up"},{"value":"corner-right-down","label":"corner-right-down"},{"value":"corner-right-up","label":"corner-right-up"},{"value":"corner-up-left","label":"corner-up-left"},{"value":"corner-up-right","label":"corner-up-right"},{"value":"crop","label":"crop"},{"value":"cube","label":"cube"},{"value":"delete","label":"delete"},{"value":"document-blank","label":"document-blank"},{"value":"document-new","label":"document-new"},{"value":"document-text","label":"document-text"},{"value":"download-cloud","label":"download-cloud"},{"value":"download","label":"download"},{"value":"edit-box","label":"edit-box"},{"value":"edit-line","label":"edit-line"},{"value":"email","label":"email"},{"value":"emoji-happy","label":"emoji-happy"},{"value":"emoji-sad","label":"emoji-sad"},{"value":"external-link","label":"external-link"},{"value":"fav-heart","label":"fav-heart"},{"value":"fav-heart-filled","label":"fav-heart-filled"},{"value":"flag","label":"flag"},{"value":"flip-01","label":"flip-01"},{"value":"flip-02","label":"flip-02"},{"value":"folder","label":"folder"},{"value":"globe","label":"globe"},{"value":"hash-tag","label":"hash-tag"},{"value":"headphones","label":"headphones"},{"value":"help-buoy","label":"help-buoy"},{"value":"help-circle","label":"help-circle"},{"value":"home","label":"home"},{"value":"info","label":"info"},{"value":"jump","label":"jump"},{"value":"layers","label":"layers"},{"value":"bar-graph","label":"bar-graph"},{"value":"link-angle","label":"link-angle"},{"value":"link-flat","label":"link-flat"},{"value":"loader","label":"loader"},{"value":"location-pin","label":"location-pin"},{"value":"lock","label":"lock"},{"value":"logout","label":"logout"},{"value":"map","label":"map"},{"value":"message-circle","label":"message-circle"},{"value":"message-square","label":"message-square"},{"value":"mic-off","label":"mic-off"},{"value":"mic-on","label":"mic-on"},{"value":"minus-circle","label":"minus-circle"},{"value":"minus-square","label":"minus-square"},{"value":"money-sign","label":"money-sign"},{"value":"more-horizontal","label":"more-horizontal"},{"value":"more-vertical","label":"more-vertical"},{"value":"notification-off","label":"notification-off"},{"value":"notification-on","label":"notification-on"},{"value":"object","label":"object"},{"value":"pause-circle","label":"pause-circle"},{"value":"phone-unavailable","label":"phone-unavailable"},{"value":"phone","label":"phone"},{"value":"photo","label":"photo"},{"value":"picked","label":"picked"},{"value":"pie-chart","label":"pie-chart"},{"value":"play-circle","label":"play-circle"},{"value":"present","label":"present"},{"value":"refresh-circle","label":"refresh-circle"},{"value":"refresh","label":"refresh"},{"value":"repeat","label":"repeat"},{"value":"restricted","label":"restricted"},{"value":"rotate","label":"rotate"},{"value":"search-no","label":"search-no"},{"value":"search","label":"search"},{"value":"selector-checked","label":"selector-checked"},{"value":"selector-circle-filled","label":"selector-circle-filled"},{"value":"selector-circle","label":"selector-circle"},{"value":"send","label":"send"},{"value":"settings-filled","label":"settings-filled"},{"value":"settings","label":"settings"},{"value":"share","label":"share"},{"value":"shopping-bag","label":"shopping-bag"},{"value":"shopping-cart","label":"shopping-cart"},{"value":"sort-filter-down","label":"sort-filter-down"},{"value":"sort-filter-up","label":"sort-filter-up"},{"value":"sound-off","label":"sound-off"},{"value":"sound-on","label":"sound-on"},{"value":"sprucebot","label":"sprucebot"},{"value":"star-filled","label":"star-filled"},{"value":"star","label":"star"},{"value":"sun","label":"sun"},{"value":"tag","label":"tag"},{"value":"time","label":"time"},{"value":"tool","label":"tool"},{"value":"trending-down","label":"trending-down"},{"value":"trending-up","label":"trending-up"},{"value":"triangle","label":"triangle"},{"value":"unlock","label":"unlock"},{"value":"upload-cloud","label":"upload-cloud"},{"value":"upload","label":"upload"},{"value":"user-add","label":"user-add"},{"value":"user-delete","label":"user-delete"},{"value":"user","label":"user"},{"value":"users","label":"users"},{"value":"video-off","label":"video-off"},{"value":"video","label":"video"},{"value":"warning","label":"warning"},{"value":"wifi","label":"wifi"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"}],}
-			            },
-			            /** . */
-			            'shouldRenderAllToolsAtOnce': {
-			                type: 'boolean',
-			                options: undefined
-			            },
-			            /** . */
-			            'onCloseToolBelt': {
-			                type: 'raw',
-			                options: {valueType: `HeartwoodTypes.ToolBeltCloseHandler`,}
-			            },
-			            /** . */
-			            'iconLabel': {
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'renderAs': {
-			                type: 'select',
-			                options: {choices: [{"value":"default","label":"Default"},{"value":"icon","label":"Icon"}],}
-			            },
-			            /** Tools. */
-			            'tools': {
-			                label: 'Tools',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltToolSchema,}
-			            },
-			    }
-		}
-
-		interface ToolBeltEntity extends SchemaEntity<SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ToolBeltSchema> {}
 
 	}
 

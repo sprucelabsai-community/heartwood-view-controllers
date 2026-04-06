@@ -69,8 +69,9 @@ export { default as MockActiveRecordCard } from './tests/MockActiveRecordCard'
 export { default as lockScreenAssert } from './tests/utilities/lockScreenAssert'
 export { default as SpyViewControllerExporter } from './tests/SpyViewControllerExporter'
 export { default as FakeStorage } from './tests/FakeStorage'
-
 export { default as PolarAreaViewController } from './viewControllers/PolarAreaViewController.vc'
+export { default as TreeViewController } from './viewControllers/trees/Tree.vc'
+export * from './viewControllers/trees/Tree.vc'
 
 export { default as AuthenticatorImpl } from './auth/Authenticator'
 export * from './auth/Authenticator'
@@ -178,6 +179,8 @@ export { default as webRtcPlayerSchema } from '#spruce/schemas/heartwoodViewCont
 export { default as webRtcCropPointSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/webRtcCropPoint.schema'
 export { default as statusIndicatorSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicator.schema'
 export { default as statusIndicatorColorsSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/statusIndicatorColors.schema'
+export { default as treeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/tree.schema'
+export { default as treeNodeSchema } from '#spruce/schemas/heartwoodViewControllers/v2021_02_11/treeNode.schema'
 
 export { default as ViewControllerExporter } from './viewControllers/ViewControllerExporter'
 export { default as ViewControllerImporter } from './viewControllers/ViewControllerImporter'
