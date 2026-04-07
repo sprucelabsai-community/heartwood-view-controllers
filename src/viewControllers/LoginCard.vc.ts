@@ -229,7 +229,7 @@ export default class LoginCardViewController extends AbstractViewController<Card
 
     private renderPhoneSlideTitle(): string | null | undefined {
         return randomUtil.rand([
-            'What is your cell?',
+            'What is your mobile number?',
             'Gimme a number to text.',
             'What is your number 👇',
         ])
