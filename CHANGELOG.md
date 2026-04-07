@@ -1,3 +1,9 @@
+## <small>129.5.20 (2026-04-07)</small>
+
+* patch: cell -> mobile ([c043346](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c043346))
+* patch: test fix ([2698faf](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/2698faf))
+* Merge branch 'master' of github.com:sprucelabsai/heartwood-view-controllers ([9b113f3](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/9b113f3))
+
 ## <small>129.5.19 (2026-04-06)</small>
 
 * patch: lint fix ([e3a3ea6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e3a3ea6))
