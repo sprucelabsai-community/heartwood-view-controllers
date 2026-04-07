@@ -1,3 +1,9 @@
+## <small>129.5.19 (2026-04-06)</small>
+
+* patch: lint fix ([e3a3ea6](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/e3a3ea6))
+* patch: tree progress ([d55e5d2](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/d55e5d2))
+* patch: type fix ([84ee265](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/84ee265))
+
 ## <small>129.5.18 (2026-03-13)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([814ae1b](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/814ae1b))
