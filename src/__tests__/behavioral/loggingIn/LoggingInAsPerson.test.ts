@@ -48,7 +48,7 @@ export default class AuthenticatorTest extends AbstractViewControllerTest {
     ]
 
     private phoneSlideTitles = [
-        'What is your cell?',
+        'What is your mobile number?',
         'Gimme a number to text.',
         'What is your number 👇',
     ]
