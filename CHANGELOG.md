@@ -1,3 +1,7 @@
+## <small>129.5.21 (2026-04-08)</small>
+
+* chore: add rootDir and types to tsconfig for TypeScript 6 compatibility ([ce079b8](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/ce079b8))
+
 ## <small>129.5.20 (2026-04-07)</small>
 
 * patch: cell -> mobile ([c043346](https://github.com/sprucelabsai-community/heartwood-view-controllers/commit/c043346))
